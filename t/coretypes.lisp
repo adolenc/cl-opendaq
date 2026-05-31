@@ -31,9 +31,6 @@
   (setf *coretypes-procedure-called* t)
   0)
 
-(defun %daq-string-value (string)
-  (cffi:foreign-string-to-lisp (daq:string/get-char-ptr string)))
-
 (test coretypes-base-object
   (daq:with-daq-objects (obj)
     (setf obj (daq:base-object/create))

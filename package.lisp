@@ -1,7 +1,8 @@
 (defpackage #:opendaq
   (:nicknames #:daq)
   (:use #:cl)
-  (:export #:ensure-opendaq-loaded
+  (:export #:clear-error-info
+           #:ensure-opendaq-loaded
            #:make-daq-string
            #:native-library-directory
            #:opendaq-error

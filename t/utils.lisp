@@ -11,9 +11,16 @@
   :in opendaq-suite
   :description "Direct ports of the portable subset of bindings/c/tests/coretypes.")
 
+(def-suite coreobjects-suite
+  :in opendaq-suite
+  :description "Direct ports of the portable subset of bindings/c/tests/coreobjects.")
+
 (def-suite smoke-suite
   :in opendaq-suite
   :description "Low-level smoke coverage for generated wrappers and simulator access.")
+
+(defun %daq-string-value (string)
+  (cffi:foreign-string-to-lisp (daq:string/get-char-ptr string)))
 
 (defun run-test-suite ()
   (let ((*print-names* t)

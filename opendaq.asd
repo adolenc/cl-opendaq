@@ -18,6 +18,7 @@
                (:file "t/utils")
                (:file "t/compile")
                (:file "t/coretypes")
+               (:file "t/coreobjects")
                (:file "t/smoke"))
   :perform (test-op (operation component)
              (declare (ignore operation component))

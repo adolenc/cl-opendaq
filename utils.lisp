@@ -1,5 +1,7 @@
 (in-package #:opendaq)
 
+(cffi:defcfun ("daqClearErrorInfo" %daq-clear-error-info) :void)
+
 (defun %release-object (pointer)
   (when (and pointer (not (cffi:null-pointer-p pointer)))
     (base-object/release-ref pointer))
@@ -11,6 +13,11 @@
          (progn ,@body)
        ,@(loop for object in (reverse objects)
                collect `(%release-object ,object)))))
+
+(defun clear-error-info ()
+  (ensure-opendaq-loaded)
+  (%daq-clear-error-info)
+  nil)
 
 (defun make-daq-string (value)
   (cffi:with-foreign-string (cstring value)
