@@ -16,12 +16,6 @@
 (defvar *loaded-native-directory* nil)
 (defvar *loaded-library-paths* nil)
 
-(defun %system-root ()
-  (or (ignore-errors (asdf:system-source-directory "opendaq"))
-      (when *load-pathname*
-        (uiop:pathname-directory-pathname *load-pathname*))
-      (error "Unable to determine the open-daq system root.")))
-
 (defun %directory-if-exists (path)
   (let ((directory (uiop:ensure-directory-pathname path)))
     (when (probe-file directory)
@@ -40,11 +34,7 @@
   (remove nil
           (list (%directory-if-exists
                  (asdf:system-relative-pathname "opendaq" "bin/"))
-                (%environment-native-directory)
-                (%directory-if-exists
-                 (asdf:system-relative-pathname "opendaq" "native/"))
-                (%directory-if-exists
-                 (merge-pathnames "../build/bin/" (%system-root))))))
+                (%environment-native-directory))))
 
 (defun %shared-library-pattern (stem)
   #+linux
@@ -73,8 +63,7 @@
        (mapcar #'namestring
                (remove nil
                        (list (ignore-errors (asdf:system-relative-pathname "opendaq" "bin/"))
-                             (ignore-errors (asdf:system-relative-pathname "opendaq" "native/"))
-                             (ignore-errors (merge-pathnames "../build/bin/" (%system-root))))))
+                             (ignore-errors (%environment-native-directory)))))
        +native-directory-env-var+)))
 
 (defun %load-native-library (path)
