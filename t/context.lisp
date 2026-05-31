@@ -5,12 +5,12 @@
 (in-suite opendaq-context-suite)
 
 (test opendaq-context
-  (daq:with-daq-objects (context out-logger out-type-manager out-options out-discovery-servers)
+  (daq.ll:with-daq-objects (context out-logger out-type-manager out-options out-discovery-servers)
     (setf context (%make-test-context))
-    (setf out-logger (daq:context/get-logger context))
-    (setf out-type-manager (daq:context/get-type-manager context))
-    (setf out-options (daq:context/get-options context))
-    (setf out-discovery-servers (daq:context/get-discovery-servers context))
+    (setf out-logger (daq.ll:context/get-logger context))
+    (setf out-type-manager (daq.ll:context/get-type-manager context))
+    (setf out-options (daq.ll:context/get-options context))
+    (setf out-discovery-servers (daq.ll:context/get-discovery-servers context))
     (is (not (cffi:null-pointer-p out-logger))
         "opendaq/context logger lookup returned null")
     (is (not (cffi:null-pointer-p out-type-manager))

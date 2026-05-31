@@ -55,26 +55,30 @@
   :in opendaq-suite
   :description "Low-level smoke coverage for generated wrappers and simulator access.")
 
+(def-suite high-level-suite
+  :in opendaq-suite
+  :description "High-level wrapper coverage for the generated ratio slice.")
+
 (defun %daq-string-value (string)
-  (cffi:foreign-string-to-lisp (daq:string/get-char-ptr string)))
+  (cffi:foreign-string-to-lisp (daq.ll:string/get-char-ptr string)))
 
 (defun %release-daq-object (object)
   (when (and object (not (cffi:null-pointer-p object)))
-    (daq:base-object/release-ref object))
+    (daq.ll:base-object/release-ref object))
   nil)
 
 (defun %make-test-context (&optional (scheduler (cffi:null-pointer)))
   (let ((context nil))
-    (daq:with-daq-objects (sinks sink logger type-manager options discovery-servers)
-      (setf sinks (daq:list/create-list))
-      (setf sink (daq:logger-sink/create-std-err-logger-sink))
-      (daq:list/push-back sinks sink)
-      (setf logger (daq:logger/create-logger sinks :daq-log-level-debug))
-      (setf type-manager (daq:type-manager/create-type-manager))
-      (setf options (daq:dict/create-dict))
-      (setf discovery-servers (daq:dict/create-dict))
+    (daq.ll:with-daq-objects (sinks sink logger type-manager options discovery-servers)
+      (setf sinks (daq.ll:list/create-list))
+      (setf sink (daq.ll:logger-sink/create-std-err-logger-sink))
+      (daq.ll:list/push-back sinks sink)
+      (setf logger (daq.ll:logger/create-logger sinks :daq-log-level-debug))
+      (setf type-manager (daq.ll:type-manager/create-type-manager))
+      (setf options (daq.ll:dict/create-dict))
+      (setf discovery-servers (daq.ll:dict/create-dict))
       (setf context
-            (daq:context/create-context
+            (daq.ll:context/create-context
              scheduler
              logger
              type-manager
@@ -88,7 +92,7 @@
   (let ((context (%make-test-context))
         (instance nil))
     (unwind-protect
-        (setf instance (daq:instance/create-instance context (cffi:null-pointer)))
+        (setf instance (daq.ll:instance/create-instance context (cffi:null-pointer)))
       (%release-daq-object context))
     instance))
 
