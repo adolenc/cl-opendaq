@@ -7,11 +7,11 @@
 (defparameter +native-directory-env-var+ "OPENDAQ_LISP_NATIVE_DIR")
 (defparameter +modules-directory-env-var+ "OPENDAQ_MODULES_PATH")
 
-(defparameter +linux-library-stems+
-  '("libdaqcoretypes"
-    "libdaqcoreobjects"
-    "libopendaq"
-    "libcopendaq"))
+(defparameter +native-library-base-names+
+  '("daqcoretypes"
+    "daqcoreobjects"
+    "opendaq"
+    "copendaq"))
 
 (defvar *loaded-native-directory* nil)
 (defvar *loaded-library-paths* nil)
@@ -32,40 +32,125 @@
            +native-directory-env-var+
            value)))))
 
-(defun %candidate-native-directories ()
-  (remove nil
-          (list (%directory-if-exists
-                 (asdf:system-relative-pathname "opendaq" "bin/"))
-                (%environment-native-directory))))
+(defun %system-native-directory ()
+  (ignore-errors (asdf:system-relative-pathname "opendaq" "bin/")))
 
-(defun %shared-library-pattern (stem)
-  #+linux
-  (format nil "~A*.so" stem)
-  #-linux
-  (error "Only Linux shared libraries are implemented in this milestone."))
+(defun %current-platform-os ()
+  (let ((value (string-downcase (software-type))))
+    (cond
+      ((search "linux" value) "linux")
+      ((or (search "darwin" value)
+           (search "mac" value))
+       "darwin")
+      ((search "win" value) "windows")
+      (t
+       (error "Unsupported operating system for openDAQ native libraries: ~A"
+              (software-type))))))
+
+(defun %current-platform-architecture ()
+  (let ((value (string-downcase (machine-type))))
+    (cond
+      ((member value '("x86-64" "x86_64" "amd64") :test #'string=) "x64")
+      ((member value '("aarch64" "arm64") :test #'string=) "arm64")
+      ((or (string= value "x86")
+           (search "i386" value)
+           (search "i686" value))
+       "x86")
+      ((search "arm" value) "arm")
+      (t value))))
+
+(defun %current-platform-os-aliases ()
+  (let ((os (%current-platform-os)))
+    (cond
+      ((string= os "darwin") '("darwin" "macos"))
+      ((string= os "windows") '("windows" "win32"))
+      (t (list os)))))
+
+(defun %current-platform-directory-names ()
+  (let ((architecture (%current-platform-architecture)))
+    (remove-duplicates
+     (append (mapcar (lambda (os)
+                       (format nil "~A-~A" os architecture))
+                     (%current-platform-os-aliases))
+             (%current-platform-os-aliases))
+     :test #'string=)))
+
+(defun %native-search-paths-for-root (root)
+  (let ((directory (uiop:ensure-directory-pathname root)))
+    (append (mapcar (lambda (name)
+                      (merge-pathnames (format nil "~A/" name) directory))
+                    (%current-platform-directory-names))
+            (list directory))))
+
+(defun %candidate-native-directories-for-root (root)
+  (remove nil
+          (mapcar #'%directory-if-exists
+                  (%native-search-paths-for-root root))))
+
+(defun %candidate-native-directories ()
+  (remove-duplicates
+   (mapcan #'%candidate-native-directories-for-root
+           (remove nil
+                   (list (%environment-native-directory)
+                         (%system-native-directory))))
+   :test #'equal
+   :key #'namestring))
+
+(defun %configured-native-search-paths ()
+  (remove-duplicates
+   (mapcan #'%native-search-paths-for-root
+           (remove nil
+                   (list (%environment-native-directory)
+                         (%system-native-directory))))
+   :test #'equal
+   :key #'namestring))
+
+(defun %shared-library-patterns (base-name)
+  (let ((os (%current-platform-os)))
+    (cond
+      ((string= os "linux")
+       (list (format nil "lib~A*.so" base-name)))
+      ((string= os "darwin")
+       (list (format nil "lib~A*.dylib" base-name)
+             (format nil "lib~A*.so" base-name)))
+      ((string= os "windows")
+       (list (format nil "~A*.dll" base-name)
+             (format nil "lib~A*.dll" base-name)))
+      (t
+       (error "Unsupported operating system for openDAQ native libraries: ~A"
+              os)))))
 
 (defun %sort-pathnames (pathnames)
   (sort (copy-list pathnames) #'string< :key #'namestring))
 
-(defun %resolve-library-path (directory stem)
-  (let* ((pattern (merge-pathnames (%shared-library-pattern stem) directory))
-         (matches (%sort-pathnames (directory pattern))))
+(defun %resolve-library-path (directory base-name)
+  (let* ((matches
+          (%sort-pathnames
+           (remove-duplicates
+            (mapcan (lambda (pattern)
+                      (directory (merge-pathnames pattern directory)))
+                    (%shared-library-patterns base-name))
+            :test #'equal
+            :key #'namestring)))
+        (patterns (%shared-library-patterns base-name)))
     (or (first matches)
-        (if (string= stem "libcopendaq")
-            (error
-             "Could not find ~A in ~A. Build openDAQ with OPENDAQ_GENERATE_C_BINDINGS=ON so the C wrapper library is produced."
-             stem
-             (namestring directory))
-            (error "Could not find ~A in ~A." stem (namestring directory))))))
+       (if (string= base-name "copendaq")
+           (error
+            "Could not find ~A in ~A matching any of ~{~A~^, ~}. Build openDAQ with OPENDAQ_GENERATE_C_BINDINGS=ON so the C wrapper library is produced."
+            base-name
+            (namestring directory)
+            patterns)
+           (error
+            "Could not find ~A in ~A matching any of ~{~A~^, ~}."
+            base-name
+            (namestring directory)
+            patterns)))))
 
 (defun native-library-directory ()
   (or (first (%candidate-native-directories))
       (error
        "Unable to locate openDAQ native libraries. Checked ~{~A~^, ~}. Set ~A to override the search path."
-       (mapcar #'namestring
-               (remove nil
-                       (list (ignore-errors (asdf:system-relative-pathname "opendaq" "bin/"))
-                             (ignore-errors (%environment-native-directory)))))
+       (mapcar #'namestring (%configured-native-search-paths))
        +native-directory-env-var+)))
 
 (defun %load-native-library (path)
@@ -95,10 +180,10 @@
       (t
        (%configure-modules-directory resolved-directory)
        (setf *loaded-library-paths*
-             (mapcar (lambda (stem)
+             (mapcar (lambda (base-name)
                        (%load-native-library
-                        (%resolve-library-path resolved-directory stem)))
-                     +linux-library-stems+)
+                        (%resolve-library-path resolved-directory base-name)))
+                     +native-library-base-names+)
              *loaded-native-directory* resolved-directory
              *autoload-error* nil)))))
 
@@ -107,37 +192,37 @@
     (with-output-to-string (stream)
       (princ condition stream))))
 
+(defun %healthcheck-candidate-entries (source root)
+  (when root
+    (mapcar (lambda (path)
+             (list :source source
+                   :path (namestring path)
+                   :exists (not (null (%directory-if-exists path)))))
+           (%native-search-paths-for-root root))))
+
 (defun %healthcheck-candidates ()
-  (let* ((system-path (ignore-errors (asdf:system-relative-pathname "opendaq" "bin/")))
-        (system-directory (and system-path (%directory-if-exists system-path)))
-        (environment-value (uiop:getenv +native-directory-env-var+))
-        (environment-directory
-          (and environment-value
-               (plusp (length environment-value))
-               (%directory-if-exists environment-value))))
-    (remove nil
-           (list
-            (when system-path
-              (list :source :system-bin
-                    :path (namestring (uiop:ensure-directory-pathname system-path))
-                    :exists (not (null system-directory))))
-            (when (and environment-value (plusp (length environment-value)))
-              (list :source :environment
-                    :path environment-value
-                    :exists (not (null environment-directory))))))))
+  (let ((environment-value (uiop:getenv +native-directory-env-var+)))
+    (append (%healthcheck-candidate-entries
+            :environment
+            (and environment-value
+                 (plusp (length environment-value))
+                 (uiop:ensure-directory-pathname environment-value)))
+           (%healthcheck-candidate-entries
+            :system-bin
+            (%system-native-directory)))))
 
 (defun %healthcheck-library-status (directory)
   (when directory
-    (mapcar (lambda (stem)
+    (mapcar (lambda (base-name)
              (handler-case
-                 (list :stem stem
+                 (list :stem base-name
                        :ok t
-                       :path (namestring (%resolve-library-path directory stem)))
+                       :path (namestring (%resolve-library-path directory base-name)))
                (error (condition)
-                 (list :stem stem
+                 (list :stem base-name
                        :ok nil
                        :error (%condition-string condition)))))
-           +linux-library-stems+)))
+           +native-library-base-names+)))
 
 (defun healthcheck (&optional (stream *standard-output*))
   (let* ((resolved-directory

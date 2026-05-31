@@ -2,6 +2,28 @@
 
 (in-suite smoke-suite)
 
+(defun %temporary-test-directory ()
+  (let ((directory
+          (merge-pathnames
+           (format nil "opendaq-loader-~D-~D/"
+                   (get-universal-time)
+                   (random 1000000))
+           (uiop:temporary-directory))))
+    (ensure-directories-exist directory)
+    directory))
+
+(defun %call-with-temporary-test-directory (thunk)
+  (let ((directory (%temporary-test-directory)))
+    (unwind-protect
+         (funcall thunk directory)
+      (when (probe-file directory)
+        (uiop:delete-directory-tree directory :validate t)))))
+
+(defmacro with-temporary-test-directory ((directory) &body body)
+  `(%call-with-temporary-test-directory
+    (lambda (,directory)
+      ,@body)))
+
 (defun %probe-low-level-simulator ()
   (daq.ll:with-daq-objects (builder module-path instance root-device connection-string device signals signal reader)
     (setf builder (daq.ll:instance-builder/create-instance-builder))
@@ -53,6 +75,45 @@
         "Library should autoload during system load.")
     (is (not (null (getf report :loaded-native-directory)))
         "Healthcheck did not report a loaded native directory.")))
+
+(test native-directory-prefers-platform-subdirectory
+  (with-temporary-test-directory (root)
+    (let* ((platform-directory-name
+             (first (opendaq::%current-platform-directory-names)))
+           (platform-directory
+             (merge-pathnames (format nil "~A/" platform-directory-name) root))
+           (candidates nil))
+      (ensure-directories-exist platform-directory)
+      (setf candidates (opendaq::%candidate-native-directories-for-root root))
+      (is (string= (namestring platform-directory)
+                   (namestring (first candidates)))
+          "Platform-specific directories should be preferred over the bin root.")
+      (is (member (namestring root)
+                  (mapcar #'namestring candidates)
+                  :test #'string=)
+          "The bin root should still remain as a fallback candidate."))))
+
+(test native-directory-honors-environment-override
+  (with-temporary-test-directory (root)
+    (let* ((platform-directory-name
+             (first (opendaq::%current-platform-directory-names)))
+           (platform-directory
+             (merge-pathnames (format nil "~A/" platform-directory-name) root))
+           (previous (uiop:getenv opendaq::+native-directory-env-var+)))
+      (ensure-directories-exist platform-directory)
+      (unwind-protect
+           (progn
+             #+sbcl
+             (sb-posix:setenv opendaq::+native-directory-env-var+ (namestring root) 1)
+             #-sbcl
+             (error "These tests expect SBCL for environment overrides.")
+             (is (string= (namestring platform-directory)
+                          (namestring (daq:native-library-directory)))
+                 "The OPENDAQ_LISP_NATIVE_DIR override should take precedence over the bundled bin directory."))
+        #+sbcl
+        (if previous
+            (sb-posix:setenv opendaq::+native-directory-env-var+ previous 1)
+            (sb-posix:unsetenv opendaq::+native-directory-env-var+))))))
 
 (test simulator-probe
   (is (plusp (%probe-low-level-simulator))
