@@ -28,6 +28,7 @@ class ClassOverride:
 class FunctionOverride:
     specializer: str | None = None
     optional_defaults: tuple[tuple[str, str], ...] = ()
+    receiver_coercion: str | None = None
 
 
 @dataclass(frozen=True)
@@ -44,6 +45,7 @@ class MethodSpec:
     name: str
     specializer: str
     optional_defaults: tuple[tuple[str, str], ...] = ()
+    receiver_coercion: str | None = None
 
 
 TARGET_FUNCTIONS = (
@@ -59,11 +61,20 @@ TARGET_FUNCTIONS = (
     "instance-builder/build",
     "instance/get-root-device",
     "device/add-device",
+    "device/get-signals",
+    "device/get-signals-recursive",
+    "function-block/get-signals",
+    "function-block/get-signals-recursive",
     "component/find-component",
+    "list/get-item-at",
     "property-object/get-property-value",
     "property-object/set-property-value",
     "stream-reader/create-stream-reader",
 )
+
+CLASS_NAME_OVERRIDES = {
+    "list": "object-list",
+}
 
 CLASS_OVERRIDES = {
     "instance": ClassOverride(
@@ -91,20 +102,36 @@ FUNCTION_OVERRIDES = {
         optional_defaults=(("flag", "t"),)
     ),
     "device/add-device": FunctionOverride(optional_defaults=(("config", "nil"),)),
+    "device/get-signals": FunctionOverride(optional_defaults=(("search-filter", "nil"),)),
+    "device/get-signals-recursive": FunctionOverride(
+        optional_defaults=(("search-filter", "nil"),)
+    ),
+    "function-block/get-signals": FunctionOverride(
+        specializer="managed-object",
+        optional_defaults=(("search-filter", "nil"),),
+    ),
+    "function-block/get-signals-recursive": FunctionOverride(
+        specializer="managed-object",
+        optional_defaults=(("search-filter", "nil"),),
+    ),
     "component/find-component": FunctionOverride(specializer="managed-object"),
     "property-object/get-property-value": FunctionOverride(specializer="managed-object"),
     "property-object/set-property-value": FunctionOverride(specializer="managed-object"),
 }
 
 
+def canonical_class_name(name: str) -> str:
+    return CLASS_NAME_OVERRIDES.get(name, name)
+
+
 def class_name_for_type(type_name: str) -> str | None:
     if type_name.startswith("daq-"):
-        return type_name[4:]
+        return canonical_class_name(type_name[4:])
     return None
 
 
 def receiver_name(function: FunctionInfo) -> str:
-    return function.public_lisp_name.partition("/")[0]
+    return canonical_class_name(function.public_lisp_name.partition("/")[0])
 
 
 def method_name(function: FunctionInfo) -> str:
@@ -388,6 +415,30 @@ def emit_result_form(function: FunctionInfo, value_form: str) -> str:
     return value_form
 
 
+def indent_lines(lines: list[str], prefix: str) -> list[str]:
+    return [f"{prefix}{line}" if line else line for line in lines]
+
+
+def receiver_form(spec: MethodSpec) -> str:
+    if spec.receiver_coercion is not None:
+        return "receiver-pointer"
+    return "(%require-live-pointer object)"
+
+
+def wrap_receiver_coercion(spec: MethodSpec, body_lines: list[str]) -> list[str]:
+    if spec.receiver_coercion is None:
+        return body_lines
+    return [
+        "  (multiple-value-bind (receiver-pointer cleanup-receiver)",
+        "      (%coerce-interface-pointer"
+        f" object #'{LOW_LEVEL_PACKAGE}:{spec.receiver_coercion}/get-interface-id"
+        f' "{LOW_LEVEL_PACKAGE}:{spec.function.public_lisp_name}")',
+        "    (unwind-protect",
+        *indent_lines(body_lines, "      "),
+        "      (%cleanup-coerced-argument cleanup-receiver)))",
+    ]
+
+
 def emit_reader(spec: MethodSpec) -> list[str]:
     parameters = input_parameters(spec.function)[1:]
     lambda_tail = lambda_list(parameters, spec.optional_defaults)
@@ -396,7 +447,7 @@ def emit_reader(spec: MethodSpec) -> list[str]:
         f"((object {spec.specializer}){(' ' + lambda_tail) if lambda_tail else ''})"
     )
     call_form = (
-        f"({LOW_LEVEL_PACKAGE}:{spec.function.public_lisp_name} (%require-live-pointer object)"
+        f"({LOW_LEVEL_PACKAGE}:{spec.function.public_lisp_name} {receiver_form(spec)}"
         + "".join(f" coerced-{parameter.lisp_name}" for parameter in parameters)
         + ")"
     )
@@ -404,13 +455,12 @@ def emit_reader(spec: MethodSpec) -> list[str]:
         f"(defgeneric {spec.name} (object{(' ' + generic_tail) if generic_tail else ''}))",
         f"(defmethod {spec.name} {method_tail}",
     ]
-    lines.extend(
-        emit_coerced_call(
-            parameters,
-            emit_result_form(spec.function, call_form),
-            indent="  ",
-        )
+    body_lines = emit_coerced_call(
+        parameters,
+        emit_result_form(spec.function, call_form),
+        indent="" if spec.receiver_coercion is not None else "  ",
     )
+    lines.extend(wrap_receiver_coercion(spec, body_lines))
     lines.extend([")", ""])
     return lines
 
@@ -426,9 +476,8 @@ def emit_writer(spec: MethodSpec) -> list[str]:
         + "".join(f" {parameter.lisp_name}" for parameter in accessor_parameters)
         + ")"
     )
-    call_parameters = accessor_parameters + (value_parameter,)
     call_form = (
-        f"({LOW_LEVEL_PACKAGE}:{spec.function.public_lisp_name} (%require-live-pointer object)"
+        f"({LOW_LEVEL_PACKAGE}:{spec.function.public_lisp_name} {receiver_form(spec)}"
         + "".join(
             f" coerced-{parameter.lisp_name}"
             for parameter in accessor_parameters
@@ -453,7 +502,12 @@ def emit_writer(spec: MethodSpec) -> list[str]:
             pointee_kind=value_parameter.pointee_kind,
         ),
     )
-    lines.extend(emit_coerced_call(coerced_parameters, call_form, indent="  "))
+    body_lines = emit_coerced_call(
+        coerced_parameters,
+        call_form,
+        indent="" if spec.receiver_coercion is not None else "  ",
+    )
+    lines.extend(wrap_receiver_coercion(spec, body_lines))
     lines.extend(["  new-value)", ""])
     return lines
 
@@ -466,7 +520,7 @@ def emit_method(spec: MethodSpec) -> list[str]:
         f"((object {spec.specializer}){(' ' + lambda_tail) if lambda_tail else ''})"
     )
     call_form = (
-        f"({LOW_LEVEL_PACKAGE}:{spec.function.public_lisp_name} (%require-live-pointer object)"
+        f"({LOW_LEVEL_PACKAGE}:{spec.function.public_lisp_name} {receiver_form(spec)}"
         + "".join(f" coerced-{parameter.lisp_name}" for parameter in parameters)
         + ")"
     )
@@ -474,13 +528,12 @@ def emit_method(spec: MethodSpec) -> list[str]:
         f"(defgeneric {spec.name} (object{(' ' + generic_tail) if generic_tail else ''}))",
         f"(defmethod {spec.name} {method_tail}",
     ]
-    lines.extend(
-        emit_coerced_call(
-            parameters,
-            emit_result_form(spec.function, call_form),
-            indent="  ",
-        )
+    body_lines = emit_coerced_call(
+        parameters,
+        emit_result_form(spec.function, call_form),
+        indent="" if spec.receiver_coercion is not None else "  ",
     )
+    lines.extend(wrap_receiver_coercion(spec, body_lines))
     lines.extend([")", ""])
     return lines
 
@@ -560,6 +613,7 @@ def build_specs(functions: dict[str, FunctionInfo]) -> tuple[list[ClassSpec], li
                 name=exposed_name(function, kind),
                 specializer=override.specializer or receiver,
                 optional_defaults=override.optional_defaults,
+                receiver_coercion=override.receiver_coercion,
             )
         )
 

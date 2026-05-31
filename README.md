@@ -13,10 +13,10 @@ the high-level device-reading example:
 (ql:quickload :opendaq)
 
 (defparameter *instance* (make-instance 'daq:instance))
-(daq:add-device (daq:root-device *instance*) "daqref://device0")
 
-(let* ((channel (daq:find-component *instance* "/openDAQDevice/Dev/RefDev0/IO/AI/RefCh0"))
-       (signal (daq:find-component *instance* "/openDAQDevice/Dev/RefDev0/IO/AI/RefCh0/Sig/AI0"))
+(let* ((device (daq:add-device (daq:root-device *instance*) "daqref://device0"))
+       (channel (daq:find-component device "IO/AI/RefCh0"))
+       (signal (daq:item-at (daq:signals-recursive channel) 0))
        (reader (make-instance 'daq:stream-reader :signal signal)))
   (setf (daq:property-value channel "Frequency") 0.5d0)
   (sleep 0.05)

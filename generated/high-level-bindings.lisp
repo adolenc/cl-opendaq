@@ -97,6 +97,22 @@
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
     (make-instance 'instance-builder :pointer pointer)))
 
+(defclass object-list (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object object-list)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "OBJECT-LIST requires :POINTER.")))
+
+(defun wrap-object-list (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'object-list :pointer pointer)))
+
 (defclass ratio (managed-object)
   (
    (%numerator-initarg :initarg :numerator :initform nil)
@@ -234,6 +250,42 @@
       (%cleanup-coerced-argument cleanup-connection-string)))
 )
 
+(defgeneric signals (object &optional search-filter))
+(defmethod signals ((object device) &optional (search-filter nil))
+  (multiple-value-bind (coerced-search-filter cleanup-search-filter)
+      (%coerce-argument search-filter :managed-pointer)
+    (unwind-protect
+        (wrap-object-list (opendaq:device/get-signals (%require-live-pointer object) coerced-search-filter))
+      (%cleanup-coerced-argument cleanup-search-filter)))
+)
+
+(defgeneric signals-recursive (object &optional search-filter))
+(defmethod signals-recursive ((object device) &optional (search-filter nil))
+  (multiple-value-bind (coerced-search-filter cleanup-search-filter)
+      (%coerce-argument search-filter :managed-pointer)
+    (unwind-protect
+        (wrap-object-list (opendaq:device/get-signals-recursive (%require-live-pointer object) coerced-search-filter))
+      (%cleanup-coerced-argument cleanup-search-filter)))
+)
+
+(defgeneric signals (object &optional search-filter))
+(defmethod signals ((object managed-object) &optional (search-filter nil))
+  (multiple-value-bind (coerced-search-filter cleanup-search-filter)
+      (%coerce-argument search-filter :managed-pointer)
+    (unwind-protect
+        (wrap-object-list (opendaq:function-block/get-signals (%require-live-pointer object) coerced-search-filter))
+      (%cleanup-coerced-argument cleanup-search-filter)))
+)
+
+(defgeneric signals-recursive (object &optional search-filter))
+(defmethod signals-recursive ((object managed-object) &optional (search-filter nil))
+  (multiple-value-bind (coerced-search-filter cleanup-search-filter)
+      (%coerce-argument search-filter :managed-pointer)
+    (unwind-protect
+        (wrap-object-list (opendaq:function-block/get-signals-recursive (%require-live-pointer object) coerced-search-filter))
+      (%cleanup-coerced-argument cleanup-search-filter)))
+)
+
 (defgeneric find-component (object id))
 (defmethod find-component ((object managed-object) id)
   (multiple-value-bind (coerced-id cleanup-id)
@@ -241,6 +293,13 @@
     (unwind-protect
         (wrap-component (opendaq:component/find-component (%require-live-pointer object) coerced-id))
       (%cleanup-coerced-argument cleanup-id)))
+)
+
+(defgeneric item-at (object index))
+(defmethod item-at ((object object-list) index)
+  (let ((coerced-index index))
+    (wrap-base-object (opendaq:list/get-item-at (%require-live-pointer object) coerced-index))
+  )
 )
 
 (defgeneric property-value (object property-name))
@@ -303,14 +362,18 @@
          find-component
          instance
          instance-builder
+         item-at
          module-path
          numerator
+         object-list
          property-value
          ratio
          raw-pointer
          read-samples
          release
          root-device
+         signals
+         signals-recursive
          simplify
          stream-reader
          wrap-base-object
@@ -318,6 +381,7 @@
          wrap-device
          wrap-instance
          wrap-instance-builder
+         wrap-object-list
          wrap-ratio
          wrap-stream-reader
          ))

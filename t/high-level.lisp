@@ -81,18 +81,20 @@
         (daq:release instance)))))
 
 (test high-level-simulator-read-samples
-  (let (instance root-device device channel signal reader samples)
+  (let (instance device channel signals signal reader samples)
     (unwind-protect
         (progn
           (setf instance (make-instance 'daq:instance))
-          (setf root-device (daq:root-device instance))
-          (setf device (daq:add-device root-device "daqref://device0"))
-          (setf channel (daq:find-component instance "/openDAQDevice/Dev/RefDev0/IO/AI/RefCh0"))
-          (setf signal (daq:find-component instance "/openDAQDevice/Dev/RefDev0/IO/AI/RefCh0/Sig/AI0"))
+          (setf device (daq:add-device (daq:root-device instance) "daqref://device0"))
+          (setf channel (daq:find-component device "IO/AI/RefCh0"))
+          (setf signals (daq:signals-recursive channel))
+          (setf signal (daq:item-at signals 0))
           (setf (daq:property-value channel "Frequency") 0.5d0)
           (setf reader (make-instance 'daq:stream-reader :signal signal))
           (sleep 0.05)
           (setf samples (daq:read-samples reader 100))
+          (is (typep signals 'daq:object-list)
+              "Signal discovery should return a wrapped high-level list.")
           (is (= 100 (length samples))
               "High-level stream reader should return the requested number of samples.")
           (is (every #'numberp samples)
@@ -103,11 +105,11 @@
         (daq:release reader))
       (when signal
         (daq:release signal))
+      (when signals
+        (daq:release signals))
       (when channel
         (daq:release channel))
       (when device
         (daq:release device))
-      (when root-device
-        (daq:release root-device))
       (when instance
         (daq:release instance)))))
