@@ -4,6 +4,9 @@ Common Lisp bindings for openDAQ.
 
 ## Quickstart
 
+Install the library as a Quicklisp local project by cloning it into `~/quicklisp/local-projects/opendaq/`.
+Then, load it in your REPL and try reading some samples from the reference device:
+
 ```lisp
 (ql:quickload :opendaq)
 
@@ -39,36 +42,28 @@ Common Lisp bindings for openDAQ.
 
   (sleep 0.05)
 
-  (setf sample-count 100)
-  (cffi:with-foreign-object (samples :double sample-count)
-    (loop with total = 0
-          while (< total sample-count)
-          do (multiple-value-bind (count status)
-                 (daq:stream-reader/read
-                  reader
-                  (cffi:inc-pointer samples (* total (cffi:foreign-type-size :double)))
-                  (- sample-count total)
-                  1000)
-               (declare (ignore status))
-               (if (zerop count)
-                   (sleep 0.01)
-                   (incf total count)))
-          finally (return
-                    (loop for i below sample-count
-                          collect (cffi:mem-aref samples :double i))))))
+  (let ((sample-count 100))
+    (cffi:with-foreign-object (samples :double sample-count)
+      (loop with total = 0
+            while (< total sample-count)
+            do (multiple-value-bind (count status)
+                   (daq:stream-reader/read
+                    reader
+                    (cffi:inc-pointer samples (* total (cffi:foreign-type-size :double)))
+                    (- sample-count total)
+                    1000)
+                 (declare (ignore status))
+                 (if (zerop count)
+                     (sleep 0.01)
+                     (incf total count)))
+            finally (return
+                      (loop for i below sample-count
+                            collect (cffi:mem-aref samples :double i)))))))
 ```
 
-## Install
+This should give you an output of 100 samples from the reference device, which is a sine wave at 0.5Hz.
 
-Install it as a Quicklisp local project by cloning this directory in `~/quicklisp/local-projects/opendaq/`.
-Then, load it in your REPL with:
-
-```lisp
-(ql:quickload :opendaq)
-```
-
-The system loads the native libraries automatically when `:opendaq` is loaded. If that fails, run:
-
+If that fails, run a healthcheck to verify that the library can find and load the native openDAQ libraries correctly:
 ```lisp
 (daq:healthcheck)
 ```
