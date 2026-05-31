@@ -7,7 +7,8 @@
   :components ((:file "package")
                (:file "generated/bindings")
                (:file "loader")
-               (:file "errors"))
+               (:file "errors")
+               (:file "utils"))
   :in-order-to ((test-op (test-op "opendaq/tests"))))
 
 (asdf:defsystem "opendaq/tests"

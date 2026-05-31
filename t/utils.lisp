@@ -15,18 +15,6 @@
   :in opendaq-suite
   :description "Low-level smoke coverage for generated wrappers and simulator access.")
 
-(defun %release (pointer)
-  (when (and pointer (not (cffi:null-pointer-p pointer)))
-    (opendaq:base-object/release-ref pointer))
-  nil)
-
-(defmacro with-daq-objects ((&rest objects) &body body)
-  `(let ,(mapcar (lambda (object) `(,object nil)) objects)
-     (unwind-protect
-         (progn ,@body)
-       ,@(loop for object in (reverse objects)
-               collect `(%release ,object)))))
-
 (defun run-test-suite ()
   (let ((*print-names* t)
         (*on-error* :backtrace)
