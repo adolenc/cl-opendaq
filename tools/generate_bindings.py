@@ -113,6 +113,7 @@ IN_OUT_PARAMETER_OVERRIDES: dict[str, dict[str, str]] = {
     "daqBlockReader_read": {"count": "in-out"},
     "daqBlockReader_readWithDomain": {"count": "in-out"},
     "daqConnectionInternal_dequeueUpTo": {"count": "in-out"},
+    "daqFunction_call": {"result": "in-out"},
     "daqMultiReader_read": {"count": "in-out"},
     "daqMultiReader_readWithDomain": {"count": "in-out"},
     "daqMultiReader_skipSamples": {"count": "in-out"},

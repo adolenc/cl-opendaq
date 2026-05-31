@@ -8692,9 +8692,10 @@
   (result (:pointer daq-base-object))
   )
 
-(defun function/call (self params)
+(defun function/call (self params result)
   (ensure-opendaq-loaded)
   (cffi:with-foreign-object (result-slot 'daq-base-object)
+    (setf (cffi:mem-ref result-slot 'daq-base-object) result)
     (%check-error (%daq-function-call self params result-slot) "daqFunction_call")
     (cffi:mem-ref result-slot 'daq-base-object)
   )

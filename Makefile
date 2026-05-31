@@ -24,16 +24,17 @@ bindings:
 	cp -a $(OPENDAQ_BUILD_DIR)/bin/*.so $(LISP_BIN_DIR)/
 	$(PYTHON) $(CURDIR)/tools/generate_bindings.py --include-dir $(OPENDAQ_HEADERS_DIR) --output $(GENERATED_BINDINGS)
 
-repl: bindings
+repl:
 	OPENDAQ_MODULES_PATH=$(LISP_BIN_DIR) $(SBCL) --noinform \
 	  --eval '(require :asdf)' \
 	  --eval '(asdf:load-asd (truename "opendaq.asd"))' \
 	  --eval '(asdf:load-system :opendaq)' \
 	  --eval '(in-package #:opendaq)'
 
-test: bindings
+test:
 	OPENDAQ_MODULES_PATH=$(LISP_BIN_DIR) $(SBCL) --noinform --non-interactive \
 	  --eval '(require :asdf)' \
+	  --eval '(ql:quickload :fiveam :silent t)' \
 	  --eval '(asdf:load-asd (truename "opendaq.asd"))' \
 	  --eval '(asdf:test-system :opendaq)'
 

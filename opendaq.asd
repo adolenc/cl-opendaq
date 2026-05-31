@@ -11,9 +11,13 @@
   :in-order-to ((test-op (test-op "opendaq/tests"))))
 
 (asdf:defsystem "opendaq/tests"
-  :depends-on ("opendaq")
+  :depends-on ("opendaq" "fiveam")
   :serial t
-  :components ((:file "tests/smoke"))
+  :components ((:file "t/package")
+               (:file "t/utils")
+               (:file "t/test_compile")
+               (:file "t/test_ccoretypes")
+               (:file "t/smoke"))
   :perform (test-op (operation component)
              (declare (ignore operation component))
-             (uiop:symbol-call :opendaq.tests :run-smoke-tests)))
+             (uiop:symbol-call :opendaq.tests :run-test-suite)))

@@ -5,7 +5,3 @@
            #:opendaq-error
            #:opendaq-error-code
            #:opendaq-error-operation))
-
-(defpackage #:opendaq.tests
-  (:use #:cl)
-  (:export #:run-smoke-tests))
