@@ -1,0 +1,180 @@
+name: Build native binaries
+
+'on':
+  workflow_dispatch:
+    inputs:
+      opendaq_ref:
+        description: "openDAQ ref to build. Leave empty to use OPENDAQ_REF from Makefile."
+        required: false
+        type: string
+      artifact_retention_days:
+        description: "Artifact retention in days"
+        required: false
+        default: 7
+        type: number
+
+permissions:
+  contents: read
+
+env:
+  OPENDAQ_SOURCE_DIR: tmp/openDAQ
+  OPENDAQ_BUILD_DIR: tmp/build
+  OPENDAQ_CMAKE_ARGS: >-
+    -DOPENDAQ_GENERATE_C_BINDINGS=ON
+    -DOPENDAQ_GENERATE_PYTHON_BINDINGS=OFF
+    -DOPENDAQ_GENERATE_DELPHI_BINDINGS=OFF
+    -DOPENDAQ_GENERATE_CSHARP_BINDINGS=OFF
+    -DDAQMODULES_REF_DEVICE_MODULE=ON
+    -DOPENDAQ_ENABLE_TESTS=OFF
+    -DOPENDAQ_ENABLE_TEST_UTILS=OFF
+    -DOPENDAQ_ENABLE_ACCESS_CONTROL=OFF
+    -DOPENDAQ_ENABLE_NATIVE_STREAMING=ON
+    -DDAQMODULES_OPENDAQ_CLIENT_MODULE=ON
+    -DBOOST_LOCALE_ENABLE_ICU=OFF
+
+jobs:
+  build:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Linux x64
+            runner: ubuntu-latest
+            runtime_triple: linux-x64
+            cmake_generator: Ninja
+            cmake_build_type: Release
+            cmake_extra_args: ""
+          - name: macOS x64
+            runner: macos-15-intel
+            runtime_triple: darwin-x64
+            cmake_generator: Ninja
+            cmake_build_type: Release
+            cmake_extra_args: "-DCMAKE_OSX_DEPLOYMENT_TARGET=10.15"
+          - name: Windows x64
+            runner: windows-2022
+            runtime_triple: windows-x64
+            cmake_generator: Visual Studio 17 2022
+            cmake_build_type: Release
+            cmake_extra_args: ""
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up CMake
+        uses: jwlawson/actions-setup-cmake@v2
+
+      - name: Set up Ninja
+        if: matrix.cmake_generator == 'Ninja'
+        uses: seanmiddleditch/gha-setup-ninja@v6
+
+      - name: Resolve openDAQ ref
+        id: resolve-ref
+        shell: bash
+        env:
+          INPUT_OPENDAQ_REF: ${{ inputs.opendaq_ref }}
+        run: |
+          if [ -n "$INPUT_OPENDAQ_REF" ]; then
+            ref="$INPUT_OPENDAQ_REF"
+          else
+            ref="$(awk '/^OPENDAQ_REF[[:space:]]*\?=/{print $3; exit}' Makefile)"
+          fi
+          if [ -z "$ref" ]; then
+            echo "Failed to resolve OPENDAQ_REF from workflow input or Makefile." >&2
+            exit 1
+          fi
+          echo "value=$ref" >> "$GITHUB_OUTPUT"
+
+      - name: Clone openDAQ
+        shell: bash
+        run: |
+          rm -rf "$OPENDAQ_SOURCE_DIR" "$OPENDAQ_BUILD_DIR"
+          mkdir -p "$(dirname "$OPENDAQ_SOURCE_DIR")" "$(dirname "$OPENDAQ_BUILD_DIR")"
+          git clone https://github.com/openDAQ/openDAQ.git "$OPENDAQ_SOURCE_DIR"
+          git -C "$OPENDAQ_SOURCE_DIR" checkout --force "${{ steps.resolve-ref.outputs.value }}"
+
+      - name: Install Linux dependencies
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            ninja-build \
+            $(tr '\n' ' ' < "$OPENDAQ_SOURCE_DIR/.github/packages/apt.txt")
+
+      - name: Install macOS dependencies
+        if: runner.os == 'macOS'
+        shell: bash
+        run: HOMEBREW_NO_AUTO_UPDATE=1 brew install mono ninja
+
+      - name: Configure build
+        shell: bash
+        run: |
+          cmake -S "$OPENDAQ_SOURCE_DIR" -B "$OPENDAQ_BUILD_DIR" \
+            -G "${{ matrix.cmake_generator }}" \
+            -DCMAKE_BUILD_TYPE="${{ matrix.cmake_build_type }}" \
+            $OPENDAQ_CMAKE_ARGS \
+            ${{ matrix.cmake_extra_args }}
+
+      - name: Build binaries
+        shell: bash
+        run: cmake --build "$OPENDAQ_BUILD_DIR" --config "${{ matrix.cmake_build_type }}"
+
+      - name: Stage artifact
+        id: stage
+        shell: bash
+        run: |
+          stage_root="artifacts"
+          rm -rf "$stage_root"
+          stage_dir="$stage_root/bin/${{ matrix.runtime_triple }}"
+          mkdir -p "$stage_dir"
+
+          case "${{ matrix.runtime_triple }}" in
+            linux-*)
+              extension_regex='\.so$'
+              ;;
+            darwin-*)
+              extension_regex='(\.dylib|\.so)$'
+              ;;
+            windows-*)
+              extension_regex='\.dll$'
+              ;;
+            *)
+              echo "Unsupported runtime triple: ${{ matrix.runtime_triple }}" >&2
+              exit 1
+              ;;
+          esac
+
+          library_list="tmp/runtime-library-list.txt"
+          find "$OPENDAQ_BUILD_DIR" -type f -path '*/bin/*' \
+            ! -name 'opendaq.cpython*' \
+            ! -name '*_test_dll.so' \
+            | grep -E "$extension_regex" > "$library_list" || true
+
+          if [ ! -s "$library_list" ]; then
+            echo "No runtime libraries were found under $OPENDAQ_BUILD_DIR." >&2
+            exit 1
+          fi
+
+          while IFS= read -r library; do
+            cp "$library" "$stage_dir/"
+          done < "$library_list"
+
+          for stem in daqcoretypes daqcoreobjects opendaq copendaq; do
+            if ! find "$stage_dir" -maxdepth 1 -type f -name "*${stem}*" | grep -q .; then
+              echo "Missing expected runtime library matching *${stem}* in $stage_dir." >&2
+              exit 1
+            fi
+          done
+
+          echo "artifact-root=$stage_root" >> "$GITHUB_OUTPUT"
+          find "$stage_root" -maxdepth 3 -type f | sort
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: opendaq-native-${{ matrix.runtime_triple }}
+          path: ${{ steps.stage.outputs.artifact-root }}
+          retention-days: ${{ inputs.artifact_retention_days }}
