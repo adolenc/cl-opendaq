@@ -14,7 +14,7 @@ name: Build native binaries
         type: number
 
 permissions:
-  contents: read
+  contents: write
 
 env:
   OPENDAQ_SOURCE_DIR: tmp/openDAQ
@@ -33,9 +33,37 @@ env:
     -DBOOST_LOCALE_ENABLE_ICU=OFF
 
 jobs:
+  resolve-ref:
+    name: Resolve openDAQ ref
+    runs-on: ubuntu-latest
+    outputs:
+      value: ${{ steps.resolve-ref.outputs.value }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve openDAQ ref
+        id: resolve-ref
+        shell: bash
+        env:
+          INPUT_OPENDAQ_REF: ${{ inputs.opendaq_ref }}
+        run: |
+          if [ -n "$INPUT_OPENDAQ_REF" ]; then
+            ref="$INPUT_OPENDAQ_REF"
+          else
+            ref="$(awk '/^OPENDAQ_REF[[:space:]]*\?=/{print $3; exit}' Makefile)"
+          fi
+          if [ -z "$ref" ]; then
+            echo "Failed to resolve OPENDAQ_REF from workflow input or Makefile." >&2
+            exit 1
+          fi
+          echo "value=$ref" >> "$GITHUB_OUTPUT"
+
   build:
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.runner }}
+    needs: resolve-ref
     strategy:
       fail-fast: false
       matrix:
@@ -70,30 +98,13 @@ jobs:
         if: matrix.cmake_generator == 'Ninja'
         uses: seanmiddleditch/gha-setup-ninja@v6
 
-      - name: Resolve openDAQ ref
-        id: resolve-ref
-        shell: bash
-        env:
-          INPUT_OPENDAQ_REF: ${{ inputs.opendaq_ref }}
-        run: |
-          if [ -n "$INPUT_OPENDAQ_REF" ]; then
-            ref="$INPUT_OPENDAQ_REF"
-          else
-            ref="$(awk '/^OPENDAQ_REF[[:space:]]*\?=/{print $3; exit}' Makefile)"
-          fi
-          if [ -z "$ref" ]; then
-            echo "Failed to resolve OPENDAQ_REF from workflow input or Makefile." >&2
-            exit 1
-          fi
-          echo "value=$ref" >> "$GITHUB_OUTPUT"
-
       - name: Clone openDAQ
         shell: bash
         run: |
           rm -rf "$OPENDAQ_SOURCE_DIR" "$OPENDAQ_BUILD_DIR"
           mkdir -p "$(dirname "$OPENDAQ_SOURCE_DIR")" "$(dirname "$OPENDAQ_BUILD_DIR")"
           git clone https://github.com/openDAQ/openDAQ.git "$OPENDAQ_SOURCE_DIR"
-          git -C "$OPENDAQ_SOURCE_DIR" checkout --force "${{ steps.resolve-ref.outputs.value }}"
+          git -C "$OPENDAQ_SOURCE_DIR" checkout --force "${{ needs.resolve-ref.outputs.value }}"
 
       - name: Install Linux dependencies
         if: runner.os == 'Linux'
@@ -178,3 +189,54 @@ jobs:
           name: opendaq-native-${{ matrix.runtime_triple }}
           path: ${{ steps.stage.outputs.artifact-root }}
           retention-days: ${{ inputs.artifact_retention_days }}
+
+  publish:
+    name: Publish binaries
+    runs-on: ubuntu-latest
+    needs:
+      - resolve-ref
+      - build
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: opendaq-native-*
+          merge-multiple: true
+          path: staged-artifacts
+
+      - name: Commit binaries
+        shell: bash
+        run: |
+          if [ ! -d staged-artifacts/bin ]; then
+            echo "Downloaded artifacts did not contain a bin/ directory." >&2
+            exit 1
+          fi
+
+          for runtime_dir in linux-x64 darwin-x64 windows-x64; do
+            if [ ! -d "staged-artifacts/bin/$runtime_dir" ]; then
+              echo "Missing downloaded runtime directory bin/$runtime_dir." >&2
+              exit 1
+            fi
+          done
+
+          rm -rf bin/linux-x64 bin/darwin-x64 bin/windows-x64
+          mkdir -p bin
+          cp -a staged-artifacts/bin/. bin/
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A bin/linux-x64 bin/darwin-x64 bin/windows-x64
+
+          if git diff --cached --quiet; then
+            echo "No binary changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Update bundled native binaries for ${{ needs.resolve-ref.outputs.value }}"
+          git push origin "HEAD:${{ github.ref_name }}"

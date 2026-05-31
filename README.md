@@ -57,7 +57,7 @@ The repository also includes a manual GitHub Actions workflow at `.github/workfl
 - `bin/darwin-x64/`
 - `bin/windows-x64/`
 
-Each artifact already contains a `bin/<platform>/` directory tree, so you can download it and copy the extracted `bin/` contents straight into this repository.
+After all three builds finish, the workflow also refreshes those `bin/<platform>/` directories in the repository and pushes a commit back to the branch you ran it on. The artifacts are still uploaded as `opendaq-native-*` downloads in case you want to inspect them before or after the commit.
 
 ### Folder structure
 
