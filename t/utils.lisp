@@ -59,6 +59,58 @@
   :in opendaq-suite
   :description "High-level wrapper coverage for the generated bindings layer.")
 
+(def-suite high-level-compile-suite
+  :in high-level-suite
+  :description "High-level coverage mirroring the compile-and-run smoke check.")
+
+(def-suite high-level-coretypes-suite
+  :in high-level-suite
+  :description "High-level coverage mirroring the core types suite.")
+
+(def-suite high-level-coreobjects-suite
+  :in high-level-suite
+  :description "High-level coverage mirroring the core objects suite.")
+
+(def-suite high-level-runtime-suite
+  :in high-level-suite
+  :description "High-level coverage mirroring the runtime suite.")
+
+(def-suite high-level-opendaq-api-suite
+  :in high-level-runtime-suite
+  :description "High-level coverage mirroring the openDAQ API suite.")
+
+(def-suite high-level-context-suite
+  :in high-level-runtime-suite
+  :description "High-level coverage mirroring the context suite.")
+
+(def-suite high-level-logger-suite
+  :in high-level-runtime-suite
+  :description "High-level coverage mirroring the logger suite.")
+
+(def-suite high-level-device-suite
+  :in high-level-runtime-suite
+  :description "High-level coverage mirroring the device suite.")
+
+(def-suite high-level-component-suite
+  :in high-level-runtime-suite
+  :description "High-level coverage mirroring the component suite.")
+
+(def-suite high-level-streaming-suite
+  :in high-level-runtime-suite
+  :description "High-level coverage mirroring the streaming suite.")
+
+(def-suite high-level-server-suite
+  :in high-level-runtime-suite
+  :description "High-level coverage mirroring the server suite.")
+
+(def-suite high-level-signal-suite
+  :in high-level-runtime-suite
+  :description "High-level coverage mirroring the signal suite.")
+
+(def-suite high-level-smoke-suite
+  :in high-level-suite
+  :description "High-level smoke coverage for generated wrappers and simulator access.")
+
 (defun %daq-string-value (string)
   (cffi:foreign-string-to-lisp (daq.ll:string/get-char-ptr string)))
 
@@ -66,6 +118,15 @@
   (when (and object (not (cffi:null-pointer-p object)))
     (daq.ll:base-object/release-ref object))
   nil)
+
+(defun %boxed-string-value (object)
+  (%daq-string-value (daq:raw-pointer object)))
+
+(defun %boxed-integer-value (object)
+  (daq.ll:integer/get-value (daq:raw-pointer object)))
+
+(defun %boxed-boolean-value (object)
+  (not (zerop (daq.ll:boolean/get-value (daq:raw-pointer object)))))
 
 (defun %make-test-context (&optional (scheduler (cffi:null-pointer)))
   (let ((context nil))
