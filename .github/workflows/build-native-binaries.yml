@@ -202,6 +202,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
+          lfs: true
+
+      - name: Set up Git LFS
+        shell: bash
+        run: git lfs install --local
 
       - name: Download artifacts
         uses: actions/download-artifact@v4
@@ -232,6 +237,18 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A bin/linux-x64 bin/darwin-x64 bin/windows-x64
+
+          staged_binaries="$(git diff --cached --name-only --diff-filter=AM -- \
+            bin/linux-x64 bin/darwin-x64 bin/windows-x64 | grep -E '\.(so|dll|dylib)$' || true)"
+
+          if [ -n "$staged_binaries" ]; then
+            printf '%s\n' "$staged_binaries" | while IFS= read -r binary; do
+              if ! git cat-file -p ":$binary" | grep -q '^version https://git-lfs.github.com/spec/v1$'; then
+                echo "Staged binary is not stored as a Git LFS pointer: $binary" >&2
+                exit 1
+              fi
+            done
+          fi
 
           if git diff --cached --quiet; then
             echo "No binary changes to commit."
