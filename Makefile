@@ -38,6 +38,7 @@ bindings:
 repl:
 	OPENDAQ_MODULES_PATH=$$(if [ -d "$(OPENDAQ_RUNTIME_DIR)" ]; then printf %s "$(OPENDAQ_RUNTIME_DIR)"; else printf %s "$(LISP_BIN_DIR)"; fi) sbcl --noinform \
 	  --eval '(require :asdf)' \
+	  --eval '(ql:quickload :cffi :silent t)' \
 	  --eval '(ql:quickload :trivial-garbage :silent t)' \
 	  --eval '(asdf:load-asd (truename "opendaq.asd"))' \
 	  --eval '(asdf:load-system :opendaq)' \
@@ -46,6 +47,7 @@ repl:
 test:
 	OPENDAQ_MODULES_PATH=$$(if [ -d "$(OPENDAQ_RUNTIME_DIR)" ]; then printf %s "$(OPENDAQ_RUNTIME_DIR)"; else printf %s "$(LISP_BIN_DIR)"; fi) sbcl --noinform --non-interactive \
 	  --eval '(require :asdf)' \
+	  --eval '(ql:quickload :cffi :silent t)' \
 	  --eval '(ql:quickload :fiveam :silent t)' \
 	  --eval '(ql:quickload :trivial-garbage :silent t)' \
 	  --eval '(asdf:load-asd (truename "opendaq.asd"))' \

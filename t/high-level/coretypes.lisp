@@ -137,19 +137,28 @@
     (is (not (null *high-level-coretypes-event-called*))
         "High-level event handlers should invoke the supplied callback.")))
 
+(defun %probe-ratio-finalization ()
+  (eval
+   '(let* ((release-state (list nil))
+          (weak-pointer
+            (let ((ratio (make-instance 'daq:ratio
+                                        :numerator 14
+                                        :denominator 21
+                                        :release-hook (lambda ()
+                                                        (setf (car release-state) t)))))
+              (trivial-garbage:make-weak-pointer ratio))))
+      (loop repeat 200
+           until (and (car release-state)
+                      (null (trivial-garbage:weak-pointer-value weak-pointer)))
+           do (trivial-garbage:gc :full t)
+              (sleep 0.05))
+      (values (car release-state)
+             (null (trivial-garbage:weak-pointer-value weak-pointer))))))
+
 (test high-level-ratio-automatic-release
-  (let ((released nil)
-        (weak-pointer nil))
-    (let ((ratio (make-instance 'daq:ratio
-                                :numerator 14
-                                :denominator 21
-                                :release-hook (lambda () (setf released t)))))
-      (setf weak-pointer (trivial-garbage:make-weak-pointer ratio)))
-    (loop repeat 20
-          until released
-          do (trivial-garbage:gc :full t)
-             (sleep 0.01))
+  (multiple-value-bind (released wrapper-reclaimed-p)
+      (%probe-ratio-finalization)
     (is (not (null released))
         "High-level wrappers should release their native pointer when reclaimed by GC.")
-    (is (null (trivial-garbage:weak-pointer-value weak-pointer))
+    (is (not (null wrapper-reclaimed-p))
         "High-level wrapper objects should themselves remain reclaimable after native cleanup.")))
