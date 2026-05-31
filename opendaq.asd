@@ -16,8 +16,8 @@
   :serial t
   :components ((:file "t/package")
                (:file "t/utils")
-               (:file "t/test_compile")
-               (:file "t/test_ccoretypes")
+               (:file "t/compile")
+               (:file "t/coretypes")
                (:file "t/smoke"))
   :perform (test-op (operation component)
              (declare (ignore operation component))

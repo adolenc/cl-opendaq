@@ -7,9 +7,9 @@
   :in opendaq-suite
   :description "Direct ports of bindings/c/tests/compile_and_run.")
 
-(def-suite ccoretypes-suite
+(def-suite coretypes-suite
   :in opendaq-suite
-  :description "Direct ports of the portable subset of bindings/c/tests/ccoretypes.")
+  :description "Direct ports of the portable subset of bindings/c/tests/coretypes.")
 
 (def-suite smoke-suite
   :in opendaq-suite

@@ -1,85 +1,85 @@
 (in-package #:opendaq.tests)
 
-;; Direct port of the subset of bindings/c/tests/ccoretypes/test_ccoretypes.cpp
-;; that is currently expressible through the generated low-level Lisp bindings.
+;; Direct port of the currently supported upstream coretypes coverage
+;; that is expressible through the generated low-level Lisp bindings.
 ;; Tests that depend on daqBaseObject_borrowInterface remain pending until the
 ;; generator supports daqIntfID-by-value signatures.
 
-(in-suite ccoretypes-suite)
+(in-suite coretypes-suite)
 
-(defparameter *ccoretypes-event-called* nil)
-(defparameter *ccoretypes-function-called* nil)
-(defparameter *ccoretypes-procedure-called* nil)
+(defparameter *coretypes-event-called* nil)
+(defparameter *coretypes-function-called* nil)
+(defparameter *coretypes-procedure-called* nil)
 
-(cffi:defcallback %ccoretypes-on-event :void
+(cffi:defcallback %coretypes-on-event :void
     ((sender daq::daq-base-object)
      (args daq::daq-base-object))
-  (setf *ccoretypes-event-called* t)
+  (setf *coretypes-event-called* t)
   (daq:base-object/release-ref sender)
   (daq:base-object/release-ref args))
 
-(cffi:defcallback %ccoretypes-func-call daq::daq-err-code
+(cffi:defcallback %coretypes-func-call daq::daq-err-code
     ((params daq::daq-base-object)
      (result (:pointer daq::daq-base-object)))
   (declare (ignore params result))
-  (setf *ccoretypes-function-called* t)
+  (setf *coretypes-function-called* t)
   0)
 
-(cffi:defcallback %ccoretypes-proc-call daq::daq-err-code
+(cffi:defcallback %coretypes-proc-call daq::daq-err-code
     ((params daq::daq-base-object))
   (declare (ignore params))
-  (setf *ccoretypes-procedure-called* t)
+  (setf *coretypes-procedure-called* t)
   0)
 
 (defun %daq-string-value (string)
   (cffi:foreign-string-to-lisp (daq:string/get-char-ptr string)))
 
-(test ccoretypes-base-object
+(test coretypes-base-object
   (daq:with-daq-objects (obj)
     (setf obj (daq:base-object/create))
     (is (not (cffi:null-pointer-p obj))
-        "ccoretypes/BaseObject returned a null object")
+        "coretypes/BaseObject returned a null object")
     (is (= 0 (daq:base-object/release-ref obj))
-        "ccoretypes/BaseObject release refcount mismatch")
+        "coretypes/BaseObject release refcount mismatch")
     (setf obj nil)))
 
-(test ccoretypes-binary-data
+(test coretypes-binary-data
   (daq:with-daq-objects (binary-data)
     (setf binary-data (daq:binary-data/create-binary-data 10))
     (cffi:with-foreign-object (data-slot :pointer)
       (daq:binary-data/get-address binary-data data-slot)
       (is (not (cffi:null-pointer-p (cffi:mem-ref data-slot :pointer)))
-          "ccoretypes/Binarydata returned a null data pointer"))
+          "coretypes/Binarydata returned a null data pointer"))
     (is (= 10 (daq:binary-data/get-size binary-data))
-        "ccoretypes/Binarydata size mismatch")))
+        "coretypes/Binarydata size mismatch")))
 
-(test ccoretypes-boolean
+(test coretypes-boolean
   (daq:with-daq-objects (boolean)
     (setf boolean (daq:boolean/create-boolean 0))
     (is (= 0 (daq:boolean/get-value boolean))
-        "ccoretypes/Boolean value mismatch")))
+        "coretypes/Boolean value mismatch")))
 
-(test ccoretypes-complex-number
+(test coretypes-complex-number
   (daq:with-daq-objects (complex-number)
     (setf complex-number (daq:complex-number/create-complex-number 1.0d0 2.0d0))
     (is (= 1.0d0 (daq:complex-number/get-real complex-number))
-        "ccoretypes/ComplexNumber real mismatch")
+        "coretypes/ComplexNumber real mismatch")
     (is (= 2.0d0 (daq:complex-number/get-imaginary complex-number))
-        "ccoretypes/ComplexNumber imaginary mismatch")))
+        "coretypes/ComplexNumber imaginary mismatch")))
 
-(test ccoretypes-dictobject
+(test coretypes-dictobject
   (daq:with-daq-objects (dict dict-key dict-value dict-value-copy)
     (setf dict-key (daq:make-daq-string "key"))
     (setf dict-value (daq:make-daq-string "value"))
     (setf dict (daq:dict/create-dict))
     (daq:dict/set dict dict-key dict-value)
     (is (= 1 (daq:dict/get-count dict))
-        "ccoretypes/Dictobject count mismatch")
+        "coretypes/Dictobject count mismatch")
     (setf dict-value-copy (daq:dict/get dict dict-key))
     (is (string= "value" (%daq-string-value dict-value-copy))
-        "ccoretypes/Dictobject value mismatch")))
+        "coretypes/Dictobject value mismatch")))
 
-(test ccoretypes-enumerations
+(test coretypes-enumerations
   (daq:with-daq-objects (enumerators enum-one enum-two enum-one-name enum-two-name enum-type-name enum-type enum-value)
     (setf enumerators (daq:dict/create-dict))
     (setf enum-one (daq:integer/create-integer 1))
@@ -94,60 +94,60 @@
            enum-type-name
            enumerators))
     (is (= 2 (daq:enumeration-type/get-count enum-type))
-        "ccoretypes/Enumerations count mismatch")
+        "coretypes/Enumerations count mismatch")
     (setf enum-value (daq:enumeration/create-enumeration-with-type enum-type enum-two-name))
     (is (= 2 (daq:enumeration/get-int-value enum-value))
-        "ccoretypes/Enumerations value mismatch")))
+        "coretypes/Enumerations value mismatch")))
 
-(test ccoretypes-event
+(test coretypes-event
   (daq:with-daq-objects (event)
     (setf event (daq:event/create-event))
     (is (= 0 (daq:event/get-subscriber-count event))
-        "ccoretypes/Event subscriber count mismatch")))
+        "coretypes/Event subscriber count mismatch")))
 
-(test ccoretypes-event-args
+(test coretypes-event-args
   (daq:with-daq-objects (event-name event-args event-name-copy)
     (setf event-name (daq:make-daq-string "test_event"))
     (setf event-args (daq:event-args/create-event-args 10 event-name))
     (is (= 10 (daq:event-args/get-event-id event-args))
-        "ccoretypes/EventArgs id mismatch")
+        "coretypes/EventArgs id mismatch")
     (setf event-name-copy (daq:event-args/get-event-name event-args))
     (is (string= "test_event" (%daq-string-value event-name-copy))
-        "ccoretypes/EventArgs name mismatch")))
+        "coretypes/EventArgs name mismatch")))
 
-(test ccoretypes-event-handler
+(test coretypes-event-handler
   (daq:with-daq-objects (event-sender event-handler-args event-handler)
-    (setf *ccoretypes-event-called* nil)
+    (setf *coretypes-event-called* nil)
     (setf event-sender (daq:base-object/create))
     (setf event-handler-args (daq:base-object/create))
-    (setf event-handler (daq:event-handler/create-event-handler (cffi:callback %ccoretypes-on-event)))
+    (setf event-handler (daq:event-handler/create-event-handler (cffi:callback %coretypes-on-event)))
     (daq:event-handler/handle-event event-handler event-sender event-handler-args)
-    (is (not (null *ccoretypes-event-called*))
-        "ccoretypes/EventHandler callback was not invoked")))
+    (is (not (null *coretypes-event-called*))
+        "coretypes/EventHandler callback was not invoked")))
 
-(test ccoretypes-float
+(test coretypes-float
   (daq:with-daq-objects (float-object)
     (setf float-object (daq:float-object/create-float 1.0d0))
     (is (= 1.0d0 (daq:float-object/get-value float-object))
-        "ccoretypes/Float value mismatch")))
+        "coretypes/Float value mismatch")))
 
-(test ccoretypes-function
+(test coretypes-function
   (daq:with-daq-objects (function-object function-params function-result)
-    (setf *ccoretypes-function-called* nil)
-    (setf function-object (daq:function/create-function (cffi:callback %ccoretypes-func-call)))
+    (setf *coretypes-function-called* nil)
+    (setf function-object (daq:function/create-function (cffi:callback %coretypes-func-call)))
     (setf function-params (daq:base-object/create))
     (setf function-result (daq:base-object/create))
     (setf function-result (daq:function/call function-object function-params function-result))
-    (is (not (null *ccoretypes-function-called*))
-        "ccoretypes/Function callback was not invoked")))
+    (is (not (null *coretypes-function-called*))
+        "coretypes/Function callback was not invoked")))
 
-(test ccoretypes-integer
+(test coretypes-integer
   (daq:with-daq-objects (integer)
     (setf integer (daq:integer/create-integer 1))
     (is (= 1 (daq:integer/get-value integer))
-        "ccoretypes/Integer value mismatch")))
+        "coretypes/Integer value mismatch")))
 
-(test ccoretypes-listobject
+(test coretypes-listobject
   (daq:with-daq-objects (list list-i1 list-i2 list-i3 list-front list-removed)
     (setf list (daq:list/create-list))
     (setf list-i1 (daq:integer/create-integer 1))
@@ -157,48 +157,48 @@
     (daq:list/push-back list list-i2)
     (daq:list/push-back list list-i3)
     (is (= 3 (daq:list/get-count list))
-        "ccoretypes/Listobject count mismatch")
+        "coretypes/Listobject count mismatch")
     (setf list-front (daq:list/pop-front list))
     (is (= 1 (daq:integer/get-value list-front))
-        "ccoretypes/Listobject pop-front mismatch")
+        "coretypes/Listobject pop-front mismatch")
     (setf list-front nil)
     (setf list-removed (daq:list/remove-at list 1))
     (is (= 3 (daq:integer/get-value list-removed))
-        "ccoretypes/Listobject remove-at mismatch")
+        "coretypes/Listobject remove-at mismatch")
     (setf list-removed nil)
     (daq:list/clear list)
     (is (= 0 (daq:list/get-count list))
-        "ccoretypes/Listobject clear mismatch")))
+        "coretypes/Listobject clear mismatch")))
 
-(test ccoretypes-procedure
+(test coretypes-procedure
   (daq:with-daq-objects (procedure-object)
-    (setf *ccoretypes-procedure-called* nil)
-    (setf procedure-object (daq:procedure/create-procedure (cffi:callback %ccoretypes-proc-call)))
+    (setf *coretypes-procedure-called* nil)
+    (setf procedure-object (daq:procedure/create-procedure (cffi:callback %coretypes-proc-call)))
     (daq:procedure/dispatch procedure-object (cffi:null-pointer))
-    (is (not (null *ccoretypes-procedure-called*))
-        "ccoretypes/Procedure callback was not invoked")))
+    (is (not (null *coretypes-procedure-called*))
+        "coretypes/Procedure callback was not invoked")))
 
-(test ccoretypes-ratio
+(test coretypes-ratio
   (daq:with-daq-objects (ratio)
     (setf ratio (daq:ratio/create-ratio 1 2))
     (is (= 1 (daq:ratio/get-numerator ratio))
-        "ccoretypes/Ratio numerator mismatch")
+        "coretypes/Ratio numerator mismatch")
     (is (= 2 (daq:ratio/get-denominator ratio))
-        "ccoretypes/Ratio denominator mismatch")))
+        "coretypes/Ratio denominator mismatch")))
 
-(test ccoretypes-simple-type
+(test coretypes-simple-type
   (daq:with-daq-objects (simple-type)
     (setf simple-type (daq:simple-type/create-simple-type :daq-ct-bool))
     (is (not (cffi:null-pointer-p simple-type))
-        "ccoretypes/SimpleType returned a null object")))
+        "coretypes/SimpleType returned a null object")))
 
-(test ccoretypes-stringobject
+(test coretypes-stringobject
   (daq:with-daq-objects (string-object)
     (setf string-object (daq:make-daq-string "Hello"))
     (is (string= "Hello" (%daq-string-value string-object))
-        "ccoretypes/Stringobject value mismatch")))
+        "coretypes/Stringobject value mismatch")))
 
-(test ccoretypes-struct
+(test coretypes-struct
   (daq:with-daq-objects (field-names field-types field-name field-simple-type field-value struct-type-name
                          struct-type type-manager struct-builder struct-object field-value-copy)
     (setf field-names (daq:list/create-list))
@@ -221,9 +221,9 @@
     (setf struct-object (daq:struct-builder/build struct-builder))
     (setf field-value-copy (daq:struct/get struct-object field-name))
     (is (= 10 (daq:integer/get-value field-value-copy))
-        "ccoretypes/Struct field mismatch")))
+        "coretypes/Struct field mismatch")))
 
-(test ccoretypes-type-manager
+(test coretypes-type-manager
   (daq:with-daq-objects (field-names field-types field-name field-simple-type struct-type-name struct-type type-manager)
     (setf field-names (daq:list/create-list))
     (setf field-types (daq:list/create-list))
@@ -241,12 +241,12 @@
     (daq:type-manager/add-type type-manager struct-type)
     (finishes (daq:type-manager/remove-type type-manager struct-type-name))))
 
-(test ccoretypes-version-info
+(test coretypes-version-info
   (daq:with-daq-objects (version-info)
     (setf version-info (daq:version-info/create-version-info 1 2 3))
     (is (= 1 (daq:version-info/get-major version-info))
-        "ccoretypes/VersionInfo major mismatch")
+        "coretypes/VersionInfo major mismatch")
     (is (= 2 (daq:version-info/get-minor version-info))
-        "ccoretypes/VersionInfo minor mismatch")
+        "coretypes/VersionInfo minor mismatch")
     (is (= 3 (daq:version-info/get-patch version-info))
-        "ccoretypes/VersionInfo patch mismatch")))
+        "coretypes/VersionInfo patch mismatch")))
