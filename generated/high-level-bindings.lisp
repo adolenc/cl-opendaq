@@ -3,6 +3,1660 @@
 
 (in-package #:opendaq.high-level)
 
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (shadow '(
+            accepts-object
+            accepts-signals
+            active
+            active-streaming-source
+            add
+            add-address
+            add-address-info
+            add-child-manager
+            add-component
+            add-config-provider
+            add-configuration-connection-status
+            add-connected-client
+            add-connection-string
+            add-device
+            add-device-remapping
+            add-devices
+            add-discovery-server
+            add-function-block
+            add-handler
+            add-input
+            add-input-port
+            add-input-ports
+            add-interface
+            add-item
+            add-logger-sink
+            add-module
+            add-module-path
+            add-network-inteface
+            add-parameter
+            add-property
+            add-ref
+            add-related-signal
+            add-server
+            add-server-capability
+            add-signal
+            add-signals
+            add-standard-servers
+            add-status
+            add-status-with-message
+            add-streaming
+            add-streaming-connection-status
+            add-streaming-source
+            add-type
+            address
+            address-info
+            address-info-address
+            address-info-builder
+            address-info-builder-address
+            address-info-builder-interface-id
+            address-info-builder-type
+            address-info-create-address-info-from-builder
+            address-info-interface-id
+            address-info-private
+            address-info-private-interface-id
+            address-info-type
+            addresses
+            all-properties
+            allocate
+            allocator
+            allocator-create-malloc-allocator
+            allocator-interface-id
+            allow
+            allow-different-sampling-rates
+            allowed
+            argument-info
+            argument-info-create-dict-argument-info
+            argument-info-create-list-argument-info
+            argument-info-interface-id
+            argument-info-type
+            arguments
+            as-dictionary
+            asset-id
+            assign
+            assigned
+            authenticate
+            authenticate-anonymous
+            authenticated-only
+            authentication-provider
+            authentication-provider-create-json-file-authentication-provider
+            authentication-provider-create-json-string-authentication-provider
+            authentication-provider-create-static-authentication-provider
+            authentication-provider-interface-id
+            available-count
+            available-device-types
+            available-devices
+            available-function-block-types
+            available-operation-modes
+            available-samples
+            available-server-types
+            available-streaming-types
+            awaitable
+            awaitable-interface-id
+            base-object
+            base-object-create
+            begin-update
+            binary-data
+            binary-data-address
+            binary-data-interface-id
+            block-reader
+            block-reader-builder
+            block-reader-builder-interface-id
+            block-reader-builder-signal
+            block-reader-create-block-reader-from-existing
+            block-reader-create-block-reader-from-port
+            block-reader-interface-id
+            block-reader-read
+            block-reader-read-with-domain
+            block-reader-status
+            block-reader-status-interface-id
+            block-reader-status-read-samples
+            block-size
+            build
+            call
+            call-custom-proc
+            callable-info
+            callable-info-interface-id
+            callable-info-no-lock
+            cancel
+            change-ip-config
+            channel
+            channel-interface-id
+            channels
+            channels-recursive
+            char-ptr
+            check-for-references
+            check-for-references-no-lock
+            child-device-options
+            class-name
+            class-on-property-value-read
+            class-on-property-value-write
+            clear
+            clear-domain-signal-without-notification
+            clear-property-value
+            clear-property-value-no-lock
+            clear-property-values
+            clear-protected-property-value
+            clear-protected-property-values
+            clear-related-signals
+            clear-server-streaming-capabilities
+            client-to-device-streaming-enabled
+            client-type-name
+            clone-with-owner
+            cloneable
+            cloneable-clone
+            cloneable-interface-id
+            coerce
+            coerce-no-lock
+            coercer
+            coercer-interface-id
+            coercer-no-lock
+            common-sample-rate
+            comparable
+            comparable-interface-id
+            compare-to
+            complete
+            complete-device-capabilities
+            complete-server-capability
+            complex-number
+            complex-number-interface-id
+            component
+            component-config
+            component-deserialize-context
+            component-deserialize-context-clone
+            component-deserialize-context-create-component-deserialize-context
+            component-deserialize-context-interface-id
+            component-holder
+            component-holder-component
+            component-holder-create-component-holder-with-ids
+            component-holder-interface-id
+            component-interface-id
+            component-log-level
+            component-private
+            component-private-interface-id
+            component-status-container
+            component-status-container-interface-id
+            component-status-container-private
+            component-status-container-private-interface-id
+            component-type
+            component-type-builder
+            component-type-builder-create-device-type-builder
+            component-type-builder-create-function-block-type-builder
+            component-type-builder-create-server-type-builder
+            component-type-builder-create-streaming-type-builder
+            component-type-builder-interface-id
+            component-type-interface-id
+            component-type-private
+            component-type-private-interface-id
+            component-update-context
+            component-update-context-interface-id
+            component-update-context-signal
+            components
+            components-log-level
+            config-provider
+            config-provider-create-env-config-provider
+            config-provider-create-json-config-provider
+            config-provider-interface-id
+            configuration-connection-info
+            connect
+            connect-signal-scheduler-notification
+            connected
+            connected-client-info
+            connected-client-info-address
+            connected-client-info-create-connected-client-info-with-params
+            connected-client-info-interface-id
+            connected-clients-info
+            connection
+            connection-interface-id
+            connection-internal
+            connection-internal-interface-id
+            connection-signal
+            connection-status
+            connection-status-container
+            connection-status-container-private
+            connection-status-container-private-interface-id
+            connection-string
+            connection-string-prefix
+            connection-strings
+            connection-type
+            connections
+            const-char-ptr
+            contains
+            context
+            context-interface-id
+            context-internal
+            context-internal-interface-id
+            convertible
+            convertible-interface-id
+            core-event-args
+            core-event-args-create-core-event-args-property-added
+            core-event-args-create-core-event-args-property-object-update-end
+            core-event-args-create-core-event-args-property-order-changed
+            core-event-args-create-core-event-args-property-removed
+            core-event-args-create-core-event-args-property-value-changed
+            core-event-args-create-core-event-args-type-added
+            core-event-args-create-core-event-args-type-removed
+            core-event-args-interface-id
+            core-event-callback
+            core-event-trigger
+            core-events-enabled
+            core-type
+            count
+            create-default-add-device-config
+            create-default-config
+            create-default-configuration
+            create-device
+            create-devices
+            create-end-iterator
+            create-function-block
+            create-server
+            create-start-iterator
+            create-streaming
+            current
+            current-item-type
+            custom-components
+            custom-data
+            custom-info-property-names
+            daq-boolean
+            daq-boolean-create-boolean
+            daq-boolean-interface-id
+            daq-function
+            daq-integer
+            daq-integer-interface-id
+            daq-number
+            daq-number-interface-id
+            daq-string-object
+            daq-string-object-create-string-n
+            daq-string-object-interface-id
+            daq-type
+            daq-type-interface-id
+            data
+            data-descriptor
+            data-descriptor-builder
+            data-descriptor-builder-create-data-descriptor-builder-from-existing
+            data-descriptor-builder-interface-id
+            data-descriptor-interface-id
+            data-packet
+            data-packet-create-constant-data-packet-with-domain
+            data-packet-create-data-packet-with-domain
+            data-packet-create-data-packet-with-external-memory
+            data-packet-interface-id
+            data-packet-last-value
+            data-packet-offset
+            data-rule
+            data-rule-builder
+            data-rule-builder-create-data-rule-builder-from-existing
+            data-rule-builder-interface-id
+            data-rule-builder-type
+            data-rule-create-constant-data-rule
+            data-rule-create-data-rule-from-builder
+            data-rule-create-explicit-data-rule
+            data-rule-create-explicit-domain-data-rule
+            data-rule-create-linear-data-rule
+            data-rule-interface-id
+            data-rule-type
+            data-size
+            deactivate-streaming
+            default-config
+            default-root-device-info
+            default-root-device-local-id
+            default-value
+            default-value-no-lock
+            default-value-unresolved
+            delete-at
+            delete-item
+            delete-memory
+            deleter
+            deleter-interface-id
+            denied
+            denominator
+            deny
+            dequeue
+            dequeue-all
+            dequeue-up-to
+            description
+            description-no-lock
+            description-unresolved
+            descriptor
+            deserialize
+            deserialize-component
+            deserialize-component-interface-id
+            deserialize-values
+            deserialized-parameter
+            deserializer
+            deserializer-update
+            device
+            device-class
+            device-config
+            device-domain
+            device-domain-create-device-domain-with-reference-domain-info
+            device-domain-interface-id
+            device-info
+            device-info-config
+            device-info-config-create-device-info-config-with-custom-sdk-version
+            device-info-config-interface-id
+            device-info-interface-id
+            device-info-internal
+            device-info-internal-interface-id
+            device-interface-id
+            device-lock
+            device-manual
+            device-network-config
+            device-network-config-interface-id
+            device-private
+            device-private-interface-id
+            device-private-lock
+            device-private-unlock
+            device-revision
+            device-signals
+            device-type
+            device-type-interface-id
+            device-unlock
+            device-update-options
+            device-update-options-interface-id
+            device-update-options-with-local-id-or-null
+            devices
+            dict
+            dict-element-type
+            dict-element-type-interface-id
+            dict-interface-id
+            dict-remove
+            dimension
+            dimension-builder
+            dimension-builder-create-dimension-builder-from-existing
+            dimension-builder-interface-id
+            dimension-create-dimension-from-builder
+            dimension-interface-id
+            dimension-rule
+            dimension-rule-builder
+            dimension-rule-builder-create-dimension-rule-builder-from-existing
+            dimension-rule-builder-interface-id
+            dimension-rule-builder-type
+            dimension-rule-create-dimension-rule-from-builder
+            dimension-rule-create-linear-dimension-rule
+            dimension-rule-create-list-dimension-rule
+            dimension-rule-create-logarithmic-dimension-rule
+            dimension-rule-interface-id
+            dimension-rule-type
+            dimensions
+            disable-core-event-trigger
+            disable-discovery
+            disconnect
+            disconnect-without-signal-notification
+            disconnected
+            discovery-info
+            discovery-server
+            discovery-server-interface-id
+            discovery-server-root-device
+            discovery-servers
+            dispatch
+            dispose
+            domain
+            domain-packet
+            domain-read-type
+            domain-signal
+            domain-signal-reference-removed
+            domain-signal-reference-set
+            domain-transform-function
+            dump
+            element-interface-id
+            empty
+            enable-core-event-trigger
+            enable-discovery
+            enable-keep-last-value
+            enable-standard-providers
+            encoding
+            end-list
+            end-object
+            end-update
+            end-update-event-args
+            end-update-event-args-interface-id
+            end-update-event-args-properties
+            enqueue
+            enqueue-and-steal-ref
+            enqueue-last-descriptor
+            enqueue-multiple
+            enqueue-multiple-and-steal-ref
+            enqueue-on-this-thread
+            enqueue-with-scheduler
+            enumeration
+            enumeration-create-enumeration-with-int-value
+            enumeration-create-enumeration-with-int-value-and-type
+            enumeration-create-enumeration-with-type
+            enumeration-interface-id
+            enumeration-type
+            enumeration-type-create-enumeration-type-with-values
+            enumeration-type-interface-id
+            enumerator-int-value
+            enumerator-names
+            equals
+            equals-value
+            error-info
+            eval
+            eval-value
+            eval-value-create-eval-value-args
+            eval-value-create-eval-value-func
+            eval-value-interface-id
+            event
+            event-args
+            event-args-interface-id
+            event-handler
+            event-handler-interface-id
+            event-id
+            event-interface-id
+            event-name
+            event-packet
+            event-packet-create-data-descriptor-changed-event-packet
+            event-packet-create-implicit-domain-gap-detected-event-packet
+            event-packet-interface-id
+            event-packets
+            execute
+            extend
+            external-listener
+            field-default-values
+            field-names
+            field-types
+            field-values
+            file-line
+            file-name
+            find-component
+            find-properties
+            find-user
+            float-object
+            float-object-create-float
+            float-object-interface-id
+            float-value
+            flush
+            flush-on-level
+            folder
+            folder-config
+            folder-config-create-io-folder
+            folder-config-interface-id
+            folder-interface-id
+            force-unlock
+            free
+            freezable
+            freezable-interface-id
+            freeze
+            function-block
+            function-block-input-ports
+            function-block-interface-id
+            function-block-signals
+            function-block-type
+            function-block-type-interface-id
+            function-blocks
+            gap-checking-enabled
+            get
+            global-id
+            global-log-level
+            graph-visualization
+            graph-visualization-interface-id
+            groups
+            handle-event
+            hardware-revision
+            has-completed
+            has-event-packet
+            has-field
+            has-gap-packet
+            has-item
+            has-key
+            has-on-get-selection-values-listeners
+            has-on-get-suggested-values-listeners
+            has-on-read-listeners
+            has-property
+            has-scaling-calc
+            has-server-capability
+            has-type
+            has-user-read-access
+            hash-code
+            high-value
+            history-size
+            host-name
+            id
+            imaginary
+            info
+            inherit
+            inherited
+            input-data-type
+            input-port
+            input-port-accepts-signal
+            input-port-config
+            input-port-config-interface-id
+            input-port-connection
+            input-port-connections
+            input-port-interface-id
+            input-port-notification-method
+            input-port-notification-methods
+            input-port-notifications
+            input-port-notifications-accepts-signal
+            input-port-notifications-interface-id
+            input-port-private
+            input-port-private-interface-id
+            input-port-signal
+            input-sample-type
+            input-used
+            inputs-outputs-folder
+            insert-at
+            inspectable
+            instance
+            instance-builder
+            instance-builder-interface-id
+            instance-builder-root-device
+            instance-create-instance
+            instance-interface-id
+            instance-root-device
+            int-value
+            interfaces
+            internal-state
+            intf-id
+            io-folder-config
+            io-folder-config-interface-id
+            is-anonymous
+            is-anonymous-allowed
+            is-authorized
+            is-complete
+            is-const
+            is-empty
+            is-frozen
+            is-integer-value-selection
+            is-locked
+            is-locked-internal
+            is-main-loop-set
+            is-multi-threaded
+            is-parent-updating
+            is-recording
+            is-referenced
+            is-referenced-no-lock
+            is-remote
+            is-removed
+            is-root
+            is-synchronized
+            is-updating
+            is-valid
+            item
+            item-at
+            item-type
+            item-type-no-lock
+            items
+            iterable
+            iterable-interface-id
+            iterator
+            iterator-interface-id
+            keep-last-value
+            key
+            key-interface-id
+            key-list
+            key-raw
+            key-str
+            key-type
+            key-type-no-lock
+            keys
+            labels
+            last-message
+            last-message-logger-sink-private
+            last-message-logger-sink-private-interface-id
+            last-modified
+            last-value
+            length
+            level
+            license-config
+            license-loaded
+            list
+            list-element-type
+            list-element-type-interface-id
+            listener
+            listener-connected
+            listener-connected-scheduled
+            listener-disconnected
+            load-authenticated-modules-only
+            load-configuration
+            load-license
+            load-module
+            load-modules
+            local-active
+            local-id
+            local-path
+            location
+            lock-all-attributes
+            lock-attributes
+            lock-guard
+            lock-guard-interface-id
+            locked-attributes
+            locking-strategy
+            log
+            log-file-info
+            log-file-info-builder
+            log-file-info-builder-interface-id
+            log-file-info-interface-id
+            log-file-infos
+            logger
+            logger-component
+            logger-component-interface-id
+            logger-interface-id
+            logger-sink
+            logger-sink-create-rotating-file-logger-sink
+            logger-sink-create-std-err-logger-sink
+            logger-sink-create-std-out-logger-sink
+            logger-sink-create-win-debug-logger-sink
+            logger-sinks
+            logger-thread-pool
+            logger-thread-pool-interface-id
+            low-value
+            mac-address
+            main-descriptor
+            major
+            manager
+            manufacturer
+            manufacturer-uri
+            mark-as-invalid
+            max-value
+            max-value-no-lock
+            max-value-unresolved
+            message
+            metadata
+            min-read-count
+            min-value
+            min-value-no-lock
+            min-value-unresolved
+            minor
+            mirrored-data-descriptor
+            mirrored-device
+            mirrored-device-config
+            mirrored-device-config-interface-id
+            mirrored-device-interface-id
+            mirrored-device-type
+            mirrored-domain-signal
+            mirrored-input-port-config
+            mirrored-input-port-config-interface-id
+            mirrored-signal-config
+            mirrored-signal-config-interface-id
+            mirrored-signal-private
+            mirrored-signal-private-interface-id
+            model
+            module
+            module-authenticator
+            module-info
+            module-info-interface-id
+            module-interface-id
+            module-manager
+            module-manager-create-module-manager-multiple-paths
+            module-manager-interface-id
+            module-manager-utils
+            module-manager-utils-interface-id
+            module-options
+            module-path
+            module-paths-list
+            modules
+            move-back
+            move-front
+            move-module-manager
+            move-next
+            multi-reader
+            multi-reader-builder
+            multi-reader-builder-interface-id
+            multi-reader-create-multi-reader-ex
+            multi-reader-create-multi-reader-from-existing
+            multi-reader-interface-id
+            multi-reader-offset
+            multi-reader-read
+            multi-reader-read-with-domain
+            multi-reader-status
+            multi-reader-status-interface-id
+            mute
+            mute-listener
+            mutex
+            mutex-owner
+            name
+            network-configuration-enabled
+            network-interface
+            network-interface-interface-id
+            network-interface-names
+            network-interfaces
+            new-connection-string
+            new-manufacturer
+            new-serial-number
+            notification-method
+            notify-packet-enqueued
+            notify-packet-enqueued-on-this-thread
+            notify-packet-enqueued-with-scheduler
+            numerator
+            object-list
+            object-list-interface-id
+            old-block-reader
+            old-value
+            on-any-property-value-read
+            on-any-property-value-write
+            on-component-core-event
+            on-core-event
+            on-data-available
+            on-end-update
+            on-packet-destroyed
+            on-property-value-read
+            on-property-value-write
+            on-selection-values-read
+            on-subscribe-complete
+            on-suggested-values-read
+            on-unsubscribe-complete
+            operation-mode
+            operation-mode-recursive
+            options
+            or-add-component
+            origin
+            output
+            output-data-type
+            output-sample-type
+            overlap
+            override-default-value
+            override-state
+            ownable
+            ownable-interface-id
+            owner
+            owner-device-remote-id
+            packet
+            packet-count
+            packet-destruct-callback
+            packet-destruct-callback-interface-id
+            packet-id
+            packet-interface-id
+            packet-reader
+            packet-reader-create-packet-reader-from-port
+            packet-reader-interface-id
+            packet-reader-read
+            packet-received
+            packet-type
+            parameters
+            parent
+            parent-active
+            parent-global-id
+            parent-mac-address
+            parent-name
+            parse-error-code
+            password-hash
+            patch
+            path
+            pattern
+            peek
+            permission-manager
+            permission-manager-interface-id
+            permission-manager-internal
+            permission-manager-internal-interface-id
+            permission-mask-builder
+            permission-mask-builder-create-permission-mask-builder-from-mask
+            permission-mask-builder-interface-id
+            permission-mask-builder-read
+            permissions
+            permissions-builder
+            permissions-builder-interface-id
+            permissions-interface-id
+            permissions-internal
+            permissions-internal-interface-id
+            platform
+            pop-back
+            pop-front
+            populate-options
+            port
+            position
+            post-scaling
+            prefix
+            procedure
+            product-code
+            product-instance-uri
+            property
+            property-builder
+            property-builder-create-bool-property-builder
+            property-builder-create-dict-property-builder
+            property-builder-create-enumeration-property-builder
+            property-builder-create-float-property-builder
+            property-builder-create-function-property-builder
+            property-builder-create-int-property-builder
+            property-builder-create-list-property-builder
+            property-builder-create-object-property-builder
+            property-builder-create-ratio-property-builder
+            property-builder-create-reference-property-builder
+            property-builder-create-selection-property-builder
+            property-builder-create-sparse-selection-property-builder
+            property-builder-create-string-property-builder
+            property-builder-create-struct-property-builder
+            property-builder-interface-id
+            property-builder-on-property-value-read
+            property-builder-on-property-value-write
+            property-create-dict-property
+            property-create-enumeration-property
+            property-create-float-property
+            property-create-function-property
+            property-create-int-property
+            property-create-list-property
+            property-create-object-property
+            property-create-ratio-property
+            property-create-reference-property
+            property-create-selection-property
+            property-create-sparse-selection-property
+            property-create-string-property
+            property-create-struct-property
+            property-event-type
+            property-interface-id
+            property-internal
+            property-internal-clone
+            property-internal-interface-id
+            property-object
+            property-object-class
+            property-object-class-builder
+            property-object-class-builder-create-property-object-class-builder-with-manager
+            property-object-class-builder-interface-id
+            property-object-class-builder-properties
+            property-object-class-interface-id
+            property-object-class-internal
+            property-object-class-internal-clone
+            property-object-class-internal-interface-id
+            property-object-class-properties
+            property-object-class-property
+            property-object-create-property-object-with-class-and-manager
+            property-object-interface-id
+            property-object-internal
+            property-object-internal-clone
+            property-object-internal-interface-id
+            property-object-on-property-value-read
+            property-object-on-property-value-write
+            property-object-property
+            property-object-protected
+            property-object-protected-interface-id
+            property-on-property-value-read
+            property-on-property-value-write
+            property-order
+            property-references
+            property-selection-value
+            property-selection-value-no-lock
+            property-type
+            property-value
+            property-value-event-args
+            property-value-event-args-property
+            property-value-no-lock
+            protected-property-selection-value
+            protected-property-value
+            protected-property-value-no-lock
+            protocol-id
+            protocol-name
+            protocol-type
+            protocol-version
+            public
+            push-back
+            push-front
+            quantity
+            query
+            range
+            range-interface-id
+            ratio
+            ratio-interface-id
+            raw-data
+            raw-data-size
+            raw-last-value
+            raw-pointer
+            raw-sample-size
+            raw-value-by-index
+            reachability-status
+            reachability-status-private
+            read-all
+            read-mode
+            read-only
+            read-only-no-lock
+            read-only-unresolved
+            read-samples
+            read-status
+            read-timeout-type
+            reader
+            reader-config
+            reader-config-input-ports
+            reader-config-interface-id
+            reader-interface-id
+            reader-status
+            reader-status-interface-id
+            reader-status-offset
+            real
+            recorder
+            recorder-interface-id
+            recursive-lock-guard
+            recursive-search
+            recursive-search-interface-id
+            ref-count
+            reference-domain-id
+            reference-domain-info
+            reference-domain-info-builder
+            reference-domain-info-builder-create-reference-domain-info-builder-from-existing
+            reference-domain-info-builder-interface-id
+            reference-domain-info-interface-id
+            reference-domain-offset
+            reference-time-protocol
+            referenced-property
+            referenced-property-no-lock
+            referenced-property-unresolved
+            register-service
+            related-signals
+            release
+            release-ref
+            remap-input-port-connections
+            remote-id
+            removable
+            removable-interface-id
+            removable-remove
+            remove-all-input-ports
+            remove-all-signals
+            remove-at
+            remove-child-manager
+            remove-component
+            remove-connected-client
+            remove-device
+            remove-function-block
+            remove-handler
+            remove-input
+            remove-input-port-connection
+            remove-input-ports
+            remove-interface
+            remove-item
+            remove-item-with-local-id
+            remove-parameter
+            remove-property
+            remove-related-signal
+            remove-server
+            remove-server-capability
+            remove-signals
+            remove-streaming-connection-status
+            remove-streaming-source
+            remove-type
+            replace
+            request-current-configuration
+            request-ip-config
+            required-common-sample-rate
+            requires-signal
+            reset
+            result
+            result-no-lock
+            retrieve-network-configuration
+            return-type
+            reusable-data-packet
+            reusable-data-packet-interface-id
+            reuse
+            revision-counter
+            root
+            root-component
+            root-device
+            root-device-config
+            rule
+            rule-private
+            rule-private-interface-id
+            run-main-loop
+            run-main-loop-iteration
+            runtime-class-name
+            sample-count
+            sample-reader
+            sample-reader-interface-id
+            sample-size
+            sample-type
+            samples-until-next-descriptor
+            samples-until-next-event-packet
+            samples-until-next-gap-packet
+            save-configuration
+            scale-data
+            scale-data-output
+            scaling
+            scaling-builder
+            scaling-builder-create-scaling-builder-from-existing
+            scaling-builder-interface-id
+            scaling-calc-private
+            scaling-calc-private-interface-id
+            scaling-create-linear-scaling
+            scaling-create-scaling-from-builder
+            scaling-interface-id
+            scaling-type
+            schedule-function
+            schedule-graph
+            schedule-work
+            schedule-work-on-main-loop
+            scheduler
+            scheduler-create-scheduler-with-main-loop
+            scheduler-interface-id
+            scheduler-worker-num
+            sdk-version
+            search-filter
+            search-filter-create-any-search-filter
+            search-filter-create-custom-search-filter
+            search-filter-create-excluded-tags-search-filter
+            search-filter-create-local-id-search-filter
+            search-filter-create-not-search-filter
+            search-filter-create-or-search-filter
+            search-filter-create-recursive-search-filter
+            search-filter-create-required-tags-search-filter
+            search-filter-create-visible-search-filter
+            search-filter-interface-id
+            selected-source
+            selection-values
+            selection-values-no-lock
+            selection-values-unresolved
+            send-packet
+            send-packet-and-steal-ref
+            send-packet-recursive-lock
+            send-packets
+            send-packets-and-steal-ref
+            serial-number
+            serializable
+            serializable-interface-id
+            serialize
+            serialize-for-update
+            serialize-id
+            serialized-list
+            serialized-list-interface-id
+            serialized-list-read-bool
+            serialized-list-read-float
+            serialized-list-read-int
+            serialized-list-read-list
+            serialized-list-read-object
+            serialized-list-read-serialized-list
+            serialized-list-read-serialized-object
+            serialized-list-read-string
+            serialized-object
+            serialized-object-interface-id
+            serialized-object-read-bool
+            serialized-object-read-float
+            serialized-object-read-int
+            serialized-object-read-list
+            serialized-object-read-object
+            serialized-object-read-serialized-list
+            serialized-object-read-serialized-object
+            serialized-object-read-string
+            serialized-object-type
+            serializer
+            server
+            server-capabilities
+            server-capability
+            server-capability-config
+            server-capability-config-interface-id
+            server-capability-interface-id
+            server-interface-id
+            server-signals
+            server-type
+            server-type-interface-id
+            servers
+            set
+            set-as-root
+            should-log
+            signal
+            signal-config
+            signal-config-create-signal-with-descriptor
+            signal-config-interface-id
+            signal-dependency
+            signal-events
+            signal-events-interface-id
+            signal-interface-id
+            signal-last-value
+            signal-private
+            signal-private-interface-id
+            signal-serialize-id
+            signals-recursive
+            simple-type
+            simple-type-interface-id
+            simplify
+            sink-log-level
+            size
+            skip-events
+            skip-samples
+            software-revision
+            source
+            source-components
+            start-list
+            start-object
+            start-on-full-unit-of-domain
+            start-recording
+            start-tagged-object
+            status
+            status-container
+            status-message
+            status-signal
+            status-with-message
+            statuses
+            stop
+            stop-main-loop
+            stop-recording
+            stream-reader
+            stream-reader-builder
+            stream-reader-builder-interface-id
+            stream-reader-builder-signal
+            stream-reader-create-stream-reader-from-existing
+            stream-reader-create-stream-reader-from-port
+            stream-reader-interface-id
+            stream-reader-read
+            stream-reader-read-with-domain
+            streamed
+            streaming
+            streaming-connection-string
+            streaming-interface-id
+            streaming-sources
+            streaming-type
+            streaming-type-interface-id
+            struct
+            struct-builder
+            struct-builder-create-struct-builder-from-struct
+            struct-builder-interface-id
+            struct-create-struct-from-builder
+            struct-fields
+            struct-interface-id
+            struct-type
+            struct-type-create-struct-type-no-defaults
+            struct-type-interface-id
+            struct-type-no-lock
+            submit-configuration
+            submit-network-configuration
+            subscribe-completed
+            subscribe-for-destruct-notification
+            subscriber-count
+            subscribers
+            subscription-event-args
+            subscription-event-args-interface-id
+            subscription-event-type
+            sufficient-history
+            suggested-values
+            suggested-values-no-lock
+            suggested-values-unresolved
+            symbol
+            sync-component
+            sync-component-interface-id
+            sync-component-private
+            sync-component-private-interface-id
+            sync-locked
+            system-type
+            system-uuid
+            tags
+            tags-interface-id
+            tags-private
+            tags-private-interface-id
+            tags-private-remove
+            tail-reader
+            tail-reader-builder
+            tail-reader-builder-interface-id
+            tail-reader-builder-signal
+            tail-reader-create-tail-reader-from-existing
+            tail-reader-create-tail-reader-from-port
+            tail-reader-interface-id
+            tail-reader-read
+            tail-reader-read-with-domain
+            tail-reader-status
+            tail-reader-status-interface-id
+            task
+            task-graph
+            task-graph-interface-id
+            task-interface-id
+            then
+            tick-offset-tolerance
+            tick-resolution
+            ticks-since-origin
+            to-bool
+            to-float
+            to-int
+            to-json
+            to-string
+            trigger
+            trigger-component-core-event
+            trigger-core-event
+            trigger-event
+            type
+            type-manager
+            type-manager-interface-id
+            type-manager-private
+            type-manager-private-interface-id
+            type-manager-type
+            type-sort
+            types
+            unit
+            unit-builder
+            unit-builder-create-unit-builder-from-existing
+            unit-builder-interface-id
+            unit-interface-id
+            unit-no-lock
+            unit-unresolved
+            unlock-all-attributes
+            unlock-attributes
+            unmute
+            unmute-listener
+            unregister-service
+            unsubscribe-completed
+            unsubscribe-completed-no-lock
+            updatable
+            updatable-interface-id
+            updatable-update
+            update-connection-status
+            update-connection-status-with-message
+            update-ended
+            update-inherited-permissions
+            update-internal
+            update-mode
+            update-operation-mode
+            update-parameters
+            update-parameters-interface-id
+            updating
+            user
+            user-interface-id
+            user-internal
+            user-internal-interface-id
+            user-lock
+            user-lock-interface-id
+            user-lock-lock
+            user-lock-unlock
+            user-name
+            username
+            uses-offset
+            using-scheduler-main-loop
+            valid
+            validate
+            validate-no-lock
+            validator
+            validator-interface-id
+            validator-no-lock
+            value
+            value-by-index
+            value-interface-id
+            value-list
+            value-protected
+            value-range
+            value-read-type
+            value-transform-function
+            value-type
+            value-type-no-lock
+            value-type-unresolved
+            values
+            vendor-keys
+            verify-parameters
+            version
+            version-info
+            version-info-interface-id
+            visible
+            visible-no-lock
+            visible-properties
+            visible-unresolved
+            visit-children
+            wait
+            wait-all
+            wait-for-message
+            work
+            work-interface-id
+            wrap-address-info
+            wrap-address-info-builder
+            wrap-address-info-private
+            wrap-allocator
+            wrap-argument-info
+            wrap-authentication-provider
+            wrap-awaitable
+            wrap-base-object
+            wrap-binary-data
+            wrap-block-reader
+            wrap-block-reader-builder
+            wrap-block-reader-status
+            wrap-callable-info
+            wrap-channel
+            wrap-char-ptr
+            wrap-cloneable
+            wrap-coercer
+            wrap-comparable
+            wrap-complex-number
+            wrap-component
+            wrap-component-deserialize-context
+            wrap-component-holder
+            wrap-component-private
+            wrap-component-status-container
+            wrap-component-status-container-private
+            wrap-component-type
+            wrap-component-type-builder
+            wrap-component-type-private
+            wrap-component-update-context
+            wrap-config-provider
+            wrap-connected-client-info
+            wrap-connection
+            wrap-connection-internal
+            wrap-connection-status-container-private
+            wrap-const-char-ptr
+            wrap-context
+            wrap-context-internal
+            wrap-convertible
+            wrap-core-event-args
+            wrap-core-type
+            wrap-daq-boolean
+            wrap-daq-function
+            wrap-daq-integer
+            wrap-daq-number
+            wrap-daq-string-object
+            wrap-daq-type
+            wrap-data-descriptor
+            wrap-data-descriptor-builder
+            wrap-data-packet
+            wrap-data-rule
+            wrap-data-rule-builder
+            wrap-deleter
+            wrap-deserialize-component
+            wrap-deserializer
+            wrap-device
+            wrap-device-domain
+            wrap-device-info
+            wrap-device-info-config
+            wrap-device-info-internal
+            wrap-device-network-config
+            wrap-device-private
+            wrap-device-type
+            wrap-device-update-options
+            wrap-dict
+            wrap-dict-element-type
+            wrap-dimension
+            wrap-dimension-builder
+            wrap-dimension-rule
+            wrap-dimension-rule-builder
+            wrap-discovery-server
+            wrap-end-update-event-args
+            wrap-enumeration
+            wrap-enumeration-type
+            wrap-error-info
+            wrap-eval-value
+            wrap-event
+            wrap-event-args
+            wrap-event-handler
+            wrap-event-packet
+            wrap-float-object
+            wrap-folder
+            wrap-folder-config
+            wrap-freezable
+            wrap-function-block
+            wrap-function-block-type
+            wrap-graph-visualization
+            wrap-input-port
+            wrap-input-port-config
+            wrap-input-port-notifications
+            wrap-input-port-private
+            wrap-inspectable
+            wrap-instance
+            wrap-instance-builder
+            wrap-io-folder-config
+            wrap-iterable
+            wrap-iterator
+            wrap-last-message-logger-sink-private
+            wrap-list-element-type
+            wrap-lock-guard
+            wrap-log-file-info
+            wrap-log-file-info-builder
+            wrap-logger
+            wrap-logger-component
+            wrap-logger-sink
+            wrap-logger-thread-pool
+            wrap-mirrored-device
+            wrap-mirrored-device-config
+            wrap-mirrored-input-port-config
+            wrap-mirrored-signal-config
+            wrap-mirrored-signal-private
+            wrap-module
+            wrap-module-authenticator
+            wrap-module-info
+            wrap-module-manager
+            wrap-module-manager-utils
+            wrap-multi-reader
+            wrap-multi-reader-builder
+            wrap-multi-reader-status
+            wrap-mutex
+            wrap-network-interface
+            wrap-object-list
+            wrap-ownable
+            wrap-packet
+            wrap-packet-destruct-callback
+            wrap-packet-reader
+            wrap-permission-manager
+            wrap-permission-manager-internal
+            wrap-permission-mask-builder
+            wrap-permissions
+            wrap-permissions-builder
+            wrap-permissions-internal
+            wrap-procedure
+            wrap-property
+            wrap-property-builder
+            wrap-property-internal
+            wrap-property-object
+            wrap-property-object-class
+            wrap-property-object-class-builder
+            wrap-property-object-class-internal
+            wrap-property-object-internal
+            wrap-property-object-protected
+            wrap-property-value-event-args
+            wrap-range
+            wrap-ratio
+            wrap-reader
+            wrap-reader-config
+            wrap-reader-status
+            wrap-recorder
+            wrap-recursive-search
+            wrap-reference-domain-info
+            wrap-reference-domain-info-builder
+            wrap-removable
+            wrap-reusable-data-packet
+            wrap-rule-private
+            wrap-sample-reader
+            wrap-scaling
+            wrap-scaling-builder
+            wrap-scaling-calc-private
+            wrap-scheduler
+            wrap-search-filter
+            wrap-serializable
+            wrap-serialized-list
+            wrap-serialized-object
+            wrap-serializer
+            wrap-server
+            wrap-server-capability
+            wrap-server-capability-config
+            wrap-server-type
+            wrap-signal
+            wrap-signal-config
+            wrap-signal-events
+            wrap-signal-private
+            wrap-simple-type
+            wrap-stream-reader
+            wrap-stream-reader-builder
+            wrap-streaming
+            wrap-streaming-type
+            wrap-struct
+            wrap-struct-builder
+            wrap-struct-type
+            wrap-subscription-event-args
+            wrap-sync-component
+            wrap-sync-component-private
+            wrap-tags
+            wrap-tags-private
+            wrap-tail-reader
+            wrap-tail-reader-builder
+            wrap-tail-reader-status
+            wrap-task
+            wrap-task-graph
+            wrap-type-manager
+            wrap-type-manager-private
+            wrap-unit
+            wrap-unit-builder
+            wrap-updatable
+            wrap-update-parameters
+            wrap-user
+            wrap-user-internal
+            wrap-user-lock
+            wrap-validator
+            wrap-version-info
+            wrap-work
+            write
+            write-bool
+            write-float
+            write-int
+            write-null
+            write-string
+            ))
+  )
+
+
+(defclass address-info (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object address-info)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:address-info/create-address-info))
+      )))
+
+(defun wrap-address-info (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'address-info :pointer pointer)))
+
+(defclass address-info-builder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object address-info-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:address-info-builder/create-address-info-builder))
+      )))
+
+(defun wrap-address-info-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'address-info-builder :pointer pointer)))
+
+(defclass address-info-private (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object address-info-private)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "ADDRESS-INFO-PRIVATE requires :POINTER.")))
+
+(defun wrap-address-info-private (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'address-info-private :pointer pointer)))
+
+(defclass allocator (managed-object)
+  (
+   (%data-initarg :initarg :data :initform nil)
+   (%deleter-initarg :initarg :deleter :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object allocator)
+                                       &key (pointer nil pointer-p)
+                                            (data nil data-p)
+                                            (deleter nil deleter-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or data-p deleter-p)
+        (error "ALLOCATOR cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and data-p deleter-p)
+      (let ((coerced-data data))
+        (multiple-value-bind (coerced-deleter cleanup-deleter)
+            (%coerce-argument deleter :managed-pointer)
+          (unwind-protect
+              (%adopt-pointer object (opendaq:allocator/create-external-allocator coerced-data coerced-deleter))
+            (%cleanup-coerced-argument cleanup-deleter)))
+      )
+      )
+    (t
+      (error "ALLOCATOR requires either :POINTER or :DATA and :DELETER."))))
+
+(defun wrap-allocator (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'allocator :pointer pointer)))
+
+(defclass argument-info (managed-object)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%type-initarg :initarg :type :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object argument-info)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (type nil type-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or name-p type-p)
+        (error "ARGUMENT-INFO cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and name-p type-p)
+      (multiple-value-bind (coerced-name cleanup-name)
+          (%coerce-argument name :daq-string)
+        (unwind-protect
+            (let ((coerced-type type))
+              (%adopt-pointer object (opendaq:argument-info/create-argument-info coerced-name coerced-type))
+            )
+          (%cleanup-coerced-argument cleanup-name)))
+      )
+    (t
+      (error "ARGUMENT-INFO requires either :POINTER or :NAME and :TYPE."))))
+
+(defun wrap-argument-info (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'argument-info :pointer pointer)))
+
+(defclass authentication-provider (managed-object)
+  (
+   (%allow-anonymous-initarg :initarg :allow-anonymous :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object authentication-provider)
+                                       &key (pointer nil pointer-p)
+                                            (allow-anonymous nil allow-anonymous-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or allow-anonymous-p)
+        (error "AUTHENTICATION-PROVIDER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and allow-anonymous-p)
+      (multiple-value-bind (coerced-allow-anonymous cleanup-allow-anonymous)
+          (%coerce-argument allow-anonymous :daq-bool)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:authentication-provider/create-authentication-provider coerced-allow-anonymous))
+          (%cleanup-coerced-argument cleanup-allow-anonymous)))
+      )
+    (t
+      (error "AUTHENTICATION-PROVIDER requires either :POINTER or :ALLOW-ANONYMOUS."))))
+
+(defun wrap-authentication-provider (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'authentication-provider :pointer pointer)))
+
+(defclass awaitable (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object awaitable)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "AWAITABLE requires :POINTER.")))
+
+(defun wrap-awaitable (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'awaitable :pointer pointer)))
+
 (defclass base-object (managed-object)
   (
    ))
@@ -19,37 +1673,2144 @@
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
     (make-instance 'base-object :pointer pointer)))
 
+(defclass binary-data (managed-object)
+  (
+   (%size-initarg :initarg :size :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object binary-data)
+                                       &key (pointer nil pointer-p)
+                                            (size nil size-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or size-p)
+        (error "BINARY-DATA cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and size-p)
+      (let ((coerced-size size))
+        (%adopt-pointer object (opendaq:binary-data/create-binary-data coerced-size))
+      )
+      )
+    (t
+      (error "BINARY-DATA requires either :POINTER or :SIZE."))))
+
+(defun wrap-binary-data (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'binary-data :pointer pointer)))
+
+(defclass block-reader (managed-object)
+  (
+   (%signal-initarg :initarg :signal :initform nil)
+   (%block-size-initarg :initarg :block-size :initform nil)
+   (%value-read-type-initarg :initarg :value-read-type :initform nil)
+   (%domain-read-type-initarg :initarg :domain-read-type :initform nil)
+   (%mode-initarg :initarg :mode :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object block-reader)
+                                       &key (pointer nil pointer-p)
+                                            (signal nil signal-p)
+                                            (block-size nil block-size-p)
+                                            (value-read-type nil value-read-type-p)
+                                            (domain-read-type nil domain-read-type-p)
+                                            (mode nil mode-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or signal-p block-size-p value-read-type-p domain-read-type-p mode-p)
+        (error "BLOCK-READER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and signal-p block-size-p value-read-type-p domain-read-type-p mode-p)
+      (multiple-value-bind (coerced-signal cleanup-signal)
+          (%coerce-argument signal :managed-pointer)
+        (unwind-protect
+            (let ((coerced-block-size block-size))
+              (let ((coerced-value-read-type value-read-type))
+                (let ((coerced-domain-read-type domain-read-type))
+                  (let ((coerced-mode mode))
+                    (%adopt-pointer object (opendaq:block-reader/create-block-reader coerced-signal coerced-block-size coerced-value-read-type coerced-domain-read-type coerced-mode))
+                  )
+                )
+              )
+            )
+          (%cleanup-coerced-argument cleanup-signal)))
+      )
+    (t
+      (error "BLOCK-READER requires either :POINTER or :SIGNAL and :BLOCK-SIZE and :VALUE-READ-TYPE and :DOMAIN-READ-TYPE and :MODE."))))
+
+(defun wrap-block-reader (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'block-reader :pointer pointer)))
+
+(defclass block-reader-builder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object block-reader-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:block-reader-builder/create-block-reader-builder))
+      )))
+
+(defun wrap-block-reader-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'block-reader-builder :pointer pointer)))
+
+(defclass block-reader-status (managed-object)
+  (
+   (%event-packet-initarg :initarg :event-packet :initform nil)
+   (%valid-initarg :initarg :valid :initform nil)
+   (%offset-initarg :initarg :offset :initform nil)
+   (%read-samples-initarg :initarg :read-samples :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object block-reader-status)
+                                       &key (pointer nil pointer-p)
+                                            (event-packet nil event-packet-p)
+                                            (valid nil valid-p)
+                                            (offset nil offset-p)
+                                            (read-samples nil read-samples-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or event-packet-p valid-p offset-p read-samples-p)
+        (error "BLOCK-READER-STATUS cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and event-packet-p valid-p offset-p read-samples-p)
+      (multiple-value-bind (coerced-event-packet cleanup-event-packet)
+          (%coerce-argument event-packet :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-valid cleanup-valid)
+                (%coerce-argument valid :daq-bool)
+              (unwind-protect
+                  (multiple-value-bind (coerced-offset cleanup-offset)
+                      (%coerce-argument offset :managed-pointer)
+                    (unwind-protect
+                        (let ((coerced-read-samples read-samples))
+                          (%adopt-pointer object (opendaq:block-reader-status/create-block-reader-status coerced-event-packet coerced-valid coerced-offset coerced-read-samples))
+                        )
+                      (%cleanup-coerced-argument cleanup-offset)))
+                (%cleanup-coerced-argument cleanup-valid)))
+          (%cleanup-coerced-argument cleanup-event-packet)))
+      )
+    (t
+      (error "BLOCK-READER-STATUS requires either :POINTER or :EVENT-PACKET and :VALID and :OFFSET and :READ-SAMPLES."))))
+
+(defun wrap-block-reader-status (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'block-reader-status :pointer pointer)))
+
+(defclass callable-info (managed-object)
+  (
+   (%argument-info-initarg :initarg :argument-info :initform nil)
+   (%return-type-initarg :initarg :return-type :initform nil)
+   (%const-flag-initarg :initarg :const-flag :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object callable-info)
+                                       &key (pointer nil pointer-p)
+                                            (argument-info nil argument-info-p)
+                                            (return-type nil return-type-p)
+                                            (const-flag nil const-flag-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or argument-info-p return-type-p const-flag-p)
+        (error "CALLABLE-INFO cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and argument-info-p return-type-p const-flag-p)
+      (multiple-value-bind (coerced-argument-info cleanup-argument-info)
+          (%coerce-argument argument-info :managed-pointer)
+        (unwind-protect
+            (let ((coerced-return-type return-type))
+              (multiple-value-bind (coerced-const-flag cleanup-const-flag)
+                  (%coerce-argument const-flag :daq-bool)
+                (unwind-protect
+                    (%adopt-pointer object (opendaq:callable-info/create-callable-info coerced-argument-info coerced-return-type coerced-const-flag))
+                  (%cleanup-coerced-argument cleanup-const-flag)))
+            )
+          (%cleanup-coerced-argument cleanup-argument-info)))
+      )
+    (t
+      (error "CALLABLE-INFO requires either :POINTER or :ARGUMENT-INFO and :RETURN-TYPE and :CONST-FLAG."))))
+
+(defun wrap-callable-info (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'callable-info :pointer pointer)))
+
+(defclass channel (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object channel)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "CHANNEL requires :POINTER.")))
+
+(defun wrap-channel (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'channel :pointer pointer)))
+
+(defclass char-ptr (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object char-ptr)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "CHAR-PTR requires :POINTER.")))
+
+(defun wrap-char-ptr (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'char-ptr :pointer pointer)))
+
+(defclass cloneable (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object cloneable)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "CLONEABLE requires :POINTER.")))
+
+(defun wrap-cloneable (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'cloneable :pointer pointer)))
+
+(defclass coercer (managed-object)
+  (
+   (%eval-initarg :initarg :eval :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object coercer)
+                                       &key (pointer nil pointer-p)
+                                            (eval nil eval-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or eval-p)
+        (error "COERCER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and eval-p)
+      (multiple-value-bind (coerced-eval cleanup-eval)
+          (%coerce-argument eval :daq-string)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:coercer/create-coercer coerced-eval))
+          (%cleanup-coerced-argument cleanup-eval)))
+      )
+    (t
+      (error "COERCER requires either :POINTER or :EVAL."))))
+
+(defun wrap-coercer (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'coercer :pointer pointer)))
+
+(defclass comparable (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object comparable)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "COMPARABLE requires :POINTER.")))
+
+(defun wrap-comparable (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'comparable :pointer pointer)))
+
+(defclass complex-number (managed-object)
+  (
+   (%real-initarg :initarg :real :initform nil)
+   (%imaginary-initarg :initarg :imaginary :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object complex-number)
+                                       &key (pointer nil pointer-p)
+                                            (real nil real-p)
+                                            (imaginary nil imaginary-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or real-p imaginary-p)
+        (error "COMPLEX-NUMBER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and real-p imaginary-p)
+      (let ((coerced-real real))
+        (let ((coerced-imaginary imaginary))
+          (%adopt-pointer object (opendaq:complex-number/create-complex-number coerced-real coerced-imaginary))
+        )
+      )
+      )
+    (t
+      (error "COMPLEX-NUMBER requires either :POINTER or :REAL and :IMAGINARY."))))
+
+(defun wrap-complex-number (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'complex-number :pointer pointer)))
+
 (defclass component (managed-object)
   (
+   (%context-initarg :initarg :context :initform nil)
+   (%parent-initarg :initarg :parent :initform nil)
+   (%local-id-initarg :initarg :local-id :initform nil)
+   (%class-name-initarg :initarg :class-name :initform nil)
    ))
 
 
 (defmethod initialize-instance :after ((object component)
                                        &key (pointer nil pointer-p)
+                                            (context nil context-p)
+                                            (parent nil parent-p)
+                                            (local-id nil local-id-p)
+                                            (class-name nil class-name-p)
                                        &allow-other-keys)
-  (if pointer-p
-      (%adopt-pointer object pointer)
-      (error "COMPONENT requires :POINTER.")))
+  (cond
+    (pointer-p
+      (when (or context-p parent-p local-id-p class-name-p)
+        (error "COMPONENT cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and context-p parent-p local-id-p class-name-p)
+      (multiple-value-bind (coerced-context cleanup-context)
+          (%coerce-argument context :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-parent cleanup-parent)
+                (%coerce-argument parent :managed-pointer)
+              (unwind-protect
+                  (multiple-value-bind (coerced-local-id cleanup-local-id)
+                      (%coerce-argument local-id :daq-string)
+                    (unwind-protect
+                        (multiple-value-bind (coerced-class-name cleanup-class-name)
+                            (%coerce-argument class-name :daq-string)
+                          (unwind-protect
+                              (%adopt-pointer object (opendaq:component/create-component coerced-context coerced-parent coerced-local-id coerced-class-name))
+                            (%cleanup-coerced-argument cleanup-class-name)))
+                      (%cleanup-coerced-argument cleanup-local-id)))
+                (%cleanup-coerced-argument cleanup-parent)))
+          (%cleanup-coerced-argument cleanup-context)))
+      )
+    (t
+      (error "COMPONENT requires either :POINTER or :CONTEXT and :PARENT and :LOCAL-ID and :CLASS-NAME."))))
 
 (defun wrap-component (pointer)
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
     (make-instance 'component :pointer pointer)))
 
+(defclass component-deserialize-context (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object component-deserialize-context)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "COMPONENT-DESERIALIZE-CONTEXT requires :POINTER.")))
+
+(defun wrap-component-deserialize-context (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'component-deserialize-context :pointer pointer)))
+
+(defclass component-holder (managed-object)
+  (
+   (%component-initarg :initarg :component :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object component-holder)
+                                       &key (pointer nil pointer-p)
+                                            (component nil component-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or component-p)
+        (error "COMPONENT-HOLDER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and component-p)
+      (multiple-value-bind (coerced-component cleanup-component)
+          (%coerce-argument component :managed-pointer)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:component-holder/create-component-holder coerced-component))
+          (%cleanup-coerced-argument cleanup-component)))
+      )
+    (t
+      (error "COMPONENT-HOLDER requires either :POINTER or :COMPONENT."))))
+
+(defun wrap-component-holder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'component-holder :pointer pointer)))
+
+(defclass component-private (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object component-private)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "COMPONENT-PRIVATE requires :POINTER.")))
+
+(defun wrap-component-private (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'component-private :pointer pointer)))
+
+(defclass component-status-container (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object component-status-container)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:component-status-container/create-component-status-container))
+      )))
+
+(defun wrap-component-status-container (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'component-status-container :pointer pointer)))
+
+(defclass component-status-container-private (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object component-status-container-private)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "COMPONENT-STATUS-CONTAINER-PRIVATE requires :POINTER.")))
+
+(defun wrap-component-status-container-private (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'component-status-container-private :pointer pointer)))
+
+(defclass component-type (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object component-type)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "COMPONENT-TYPE requires :POINTER.")))
+
+(defun wrap-component-type (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'component-type :pointer pointer)))
+
+(defclass component-type-builder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object component-type-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:component-type-builder/create-component-type-builder))
+      )))
+
+(defun wrap-component-type-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'component-type-builder :pointer pointer)))
+
+(defclass component-type-private (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object component-type-private)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "COMPONENT-TYPE-PRIVATE requires :POINTER.")))
+
+(defun wrap-component-type-private (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'component-type-private :pointer pointer)))
+
+(defclass component-update-context (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object component-update-context)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "COMPONENT-UPDATE-CONTEXT requires :POINTER.")))
+
+(defun wrap-component-update-context (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'component-update-context :pointer pointer)))
+
+(defclass config-provider (managed-object)
+  (
+   (%cmd-line-args-initarg :initarg :cmd-line-args :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object config-provider)
+                                       &key (pointer nil pointer-p)
+                                            (cmd-line-args nil cmd-line-args-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or cmd-line-args-p)
+        (error "CONFIG-PROVIDER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and cmd-line-args-p)
+      (multiple-value-bind (coerced-cmd-line-args cleanup-cmd-line-args)
+          (%coerce-argument cmd-line-args :managed-pointer)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:config-provider/create-cmd-line-args-config-provider coerced-cmd-line-args))
+          (%cleanup-coerced-argument cleanup-cmd-line-args)))
+      )
+    (t
+      (error "CONFIG-PROVIDER requires either :POINTER or :CMD-LINE-ARGS."))))
+
+(defun wrap-config-provider (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'config-provider :pointer pointer)))
+
+(defclass connected-client-info (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object connected-client-info)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:connected-client-info/create-connected-client-info))
+      )))
+
+(defun wrap-connected-client-info (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'connected-client-info :pointer pointer)))
+
+(defclass connection (managed-object)
+  (
+   (%input-port-initarg :initarg :input-port :initform nil)
+   (%signal-initarg :initarg :signal :initform nil)
+   (%context-initarg :initarg :context :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object connection)
+                                       &key (pointer nil pointer-p)
+                                            (input-port nil input-port-p)
+                                            (signal nil signal-p)
+                                            (context nil context-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or input-port-p signal-p context-p)
+        (error "CONNECTION cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and input-port-p signal-p context-p)
+      (multiple-value-bind (coerced-input-port cleanup-input-port)
+          (%coerce-argument input-port :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-signal cleanup-signal)
+                (%coerce-argument signal :managed-pointer)
+              (unwind-protect
+                  (multiple-value-bind (coerced-context cleanup-context)
+                      (%coerce-argument context :managed-pointer)
+                    (unwind-protect
+                        (%adopt-pointer object (opendaq:connection/create-connection coerced-input-port coerced-signal coerced-context))
+                      (%cleanup-coerced-argument cleanup-context)))
+                (%cleanup-coerced-argument cleanup-signal)))
+          (%cleanup-coerced-argument cleanup-input-port)))
+      )
+    (t
+      (error "CONNECTION requires either :POINTER or :INPUT-PORT and :SIGNAL and :CONTEXT."))))
+
+(defun wrap-connection (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'connection :pointer pointer)))
+
+(defclass connection-internal (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object connection-internal)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "CONNECTION-INTERNAL requires :POINTER.")))
+
+(defun wrap-connection-internal (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'connection-internal :pointer pointer)))
+
+(defclass connection-status-container-private (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object connection-status-container-private)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "CONNECTION-STATUS-CONTAINER-PRIVATE requires :POINTER.")))
+
+(defun wrap-connection-status-container-private (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'connection-status-container-private :pointer pointer)))
+
+(defclass const-char-ptr (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object const-char-ptr)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "CONST-CHAR-PTR requires :POINTER.")))
+
+(defun wrap-const-char-ptr (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'const-char-ptr :pointer pointer)))
+
+(defclass context (managed-object)
+  (
+   (%scheduler-initarg :initarg :scheduler :initform nil)
+   (%logger-initarg :initarg :logger :initform nil)
+   (%type-manager-initarg :initarg :type-manager :initform nil)
+   (%module-manager-initarg :initarg :module-manager :initform nil)
+   (%authentication-provider-initarg :initarg :authentication-provider :initform nil)
+   (%options-initarg :initarg :options :initform nil)
+   (%discovery-servers-initarg :initarg :discovery-servers :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object context)
+                                       &key (pointer nil pointer-p)
+                                            (scheduler nil scheduler-p)
+                                            (logger nil logger-p)
+                                            (type-manager nil type-manager-p)
+                                            (module-manager nil module-manager-p)
+                                            (authentication-provider nil authentication-provider-p)
+                                            (options nil options-p)
+                                            (discovery-servers nil discovery-servers-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or scheduler-p logger-p type-manager-p module-manager-p authentication-provider-p options-p discovery-servers-p)
+        (error "CONTEXT cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and scheduler-p logger-p type-manager-p module-manager-p authentication-provider-p options-p discovery-servers-p)
+      (multiple-value-bind (coerced-scheduler cleanup-scheduler)
+          (%coerce-argument scheduler :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-logger cleanup-logger)
+                (%coerce-argument logger :managed-pointer)
+              (unwind-protect
+                  (multiple-value-bind (coerced-type-manager cleanup-type-manager)
+                      (%coerce-argument type-manager :managed-pointer)
+                    (unwind-protect
+                        (multiple-value-bind (coerced-module-manager cleanup-module-manager)
+                            (%coerce-argument module-manager :managed-pointer)
+                          (unwind-protect
+                              (multiple-value-bind (coerced-authentication-provider cleanup-authentication-provider)
+                                  (%coerce-argument authentication-provider :managed-pointer)
+                                (unwind-protect
+                                    (multiple-value-bind (coerced-options cleanup-options)
+                                        (%coerce-argument options :managed-pointer)
+                                      (unwind-protect
+                                          (multiple-value-bind (coerced-discovery-servers cleanup-discovery-servers)
+                                              (%coerce-argument discovery-servers :managed-pointer)
+                                            (unwind-protect
+                                                (%adopt-pointer object (opendaq:context/create-context coerced-scheduler coerced-logger coerced-type-manager coerced-module-manager coerced-authentication-provider coerced-options coerced-discovery-servers))
+                                              (%cleanup-coerced-argument cleanup-discovery-servers)))
+                                        (%cleanup-coerced-argument cleanup-options)))
+                                  (%cleanup-coerced-argument cleanup-authentication-provider)))
+                            (%cleanup-coerced-argument cleanup-module-manager)))
+                      (%cleanup-coerced-argument cleanup-type-manager)))
+                (%cleanup-coerced-argument cleanup-logger)))
+          (%cleanup-coerced-argument cleanup-scheduler)))
+      )
+    (t
+      (error "CONTEXT requires either :POINTER or :SCHEDULER and :LOGGER and :TYPE-MANAGER and :MODULE-MANAGER and :AUTHENTICATION-PROVIDER and :OPTIONS and :DISCOVERY-SERVERS."))))
+
+(defun wrap-context (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'context :pointer pointer)))
+
+(defclass context-internal (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object context-internal)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "CONTEXT-INTERNAL requires :POINTER.")))
+
+(defun wrap-context-internal (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'context-internal :pointer pointer)))
+
+(defclass convertible (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object convertible)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "CONVERTIBLE requires :POINTER.")))
+
+(defun wrap-convertible (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'convertible :pointer pointer)))
+
+(defclass core-event-args (managed-object)
+  (
+   (%event-id-initarg :initarg :event-id :initform nil)
+   (%event-name-initarg :initarg :event-name :initform nil)
+   (%parameters-initarg :initarg :parameters :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args)
+                                       &key (pointer nil pointer-p)
+                                            (event-id nil event-id-p)
+                                            (event-name nil event-name-p)
+                                            (parameters nil parameters-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or event-id-p event-name-p parameters-p)
+        (error "CORE-EVENT-ARGS cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and event-id-p event-name-p parameters-p)
+      (let ((coerced-event-id event-id))
+        (multiple-value-bind (coerced-event-name cleanup-event-name)
+            (%coerce-argument event-name :daq-string)
+          (unwind-protect
+              (multiple-value-bind (coerced-parameters cleanup-parameters)
+                  (%coerce-argument parameters :managed-pointer)
+                (unwind-protect
+                    (%adopt-pointer object (opendaq:core-event-args/create-core-event-args coerced-event-id coerced-event-name coerced-parameters))
+                  (%cleanup-coerced-argument cleanup-parameters)))
+            (%cleanup-coerced-argument cleanup-event-name)))
+      )
+      )
+    (t
+      (error "CORE-EVENT-ARGS requires either :POINTER or :EVENT-ID and :EVENT-NAME and :PARAMETERS."))))
+
+(defun wrap-core-event-args (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'core-event-args :pointer pointer)))
+
+(defclass core-type (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object core-type)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "CORE-TYPE requires :POINTER.")))
+
+(defun wrap-core-type (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'core-type :pointer pointer)))
+
+(defclass daq-boolean (managed-object)
+  (
+   (%value-initarg :initarg :value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object daq-boolean)
+                                       &key (pointer nil pointer-p)
+                                            (value nil value-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or value-p)
+        (error "DAQ-BOOLEAN cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and value-p)
+      (multiple-value-bind (coerced-value cleanup-value)
+          (%coerce-argument value :daq-bool)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:boolean/create-bool-object coerced-value))
+          (%cleanup-coerced-argument cleanup-value)))
+      )
+    (t
+      (error "DAQ-BOOLEAN requires either :POINTER or :VALUE."))))
+
+(defun wrap-daq-boolean (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'daq-boolean :pointer pointer)))
+
+(defclass daq-function (managed-object)
+  (
+   (%value-initarg :initarg :value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object daq-function)
+                                       &key (pointer nil pointer-p)
+                                            (value nil value-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or value-p)
+        (error "DAQ-FUNCTION cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and value-p)
+      (let ((coerced-value value))
+        (%adopt-pointer object (opendaq:function/create-function coerced-value))
+      )
+      )
+    (t
+      (error "DAQ-FUNCTION requires either :POINTER or :VALUE."))))
+
+(defun wrap-daq-function (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'daq-function :pointer pointer)))
+
+(defclass daq-integer (managed-object)
+  (
+   (%value-initarg :initarg :value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object daq-integer)
+                                       &key (pointer nil pointer-p)
+                                            (value nil value-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or value-p)
+        (error "DAQ-INTEGER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and value-p)
+      (let ((coerced-value value))
+        (%adopt-pointer object (opendaq:integer/create-integer coerced-value))
+      )
+      )
+    (t
+      (error "DAQ-INTEGER requires either :POINTER or :VALUE."))))
+
+(defun wrap-daq-integer (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'daq-integer :pointer pointer)))
+
+(defclass daq-number (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object daq-number)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "DAQ-NUMBER requires :POINTER.")))
+
+(defun wrap-daq-number (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'daq-number :pointer pointer)))
+
+(defclass daq-string-object (managed-object)
+  (
+   (%str-initarg :initarg :str :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object daq-string-object)
+                                       &key (pointer nil pointer-p)
+                                            (str nil str-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or str-p)
+        (error "DAQ-STRING-OBJECT cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and str-p)
+      (let ((coerced-str str))
+        (%adopt-pointer object (opendaq:string/create-string coerced-str))
+      )
+      )
+    (t
+      (error "DAQ-STRING-OBJECT requires either :POINTER or :STR."))))
+
+(defun wrap-daq-string-object (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'daq-string-object :pointer pointer)))
+
+(defclass daq-type (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object daq-type)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "DAQ-TYPE requires :POINTER.")))
+
+(defun wrap-daq-type (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'daq-type :pointer pointer)))
+
+(defclass data-descriptor (managed-object)
+  (
+   (%builder-initarg :initarg :builder :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object data-descriptor)
+                                       &key (pointer nil pointer-p)
+                                            (builder nil builder-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or builder-p)
+        (error "DATA-DESCRIPTOR cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and builder-p)
+      (multiple-value-bind (coerced-builder cleanup-builder)
+          (%coerce-argument builder :managed-pointer)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:data-descriptor/create-data-descriptor-from-builder coerced-builder))
+          (%cleanup-coerced-argument cleanup-builder)))
+      )
+    (t
+      (error "DATA-DESCRIPTOR requires either :POINTER or :BUILDER."))))
+
+(defun wrap-data-descriptor (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'data-descriptor :pointer pointer)))
+
+(defclass data-descriptor-builder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object data-descriptor-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:data-descriptor-builder/create-data-descriptor-builder))
+      )))
+
+(defun wrap-data-descriptor-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'data-descriptor-builder :pointer pointer)))
+
+(defclass data-packet (managed-object)
+  (
+   (%descriptor-initarg :initarg :descriptor :initform nil)
+   (%sample-count-initarg :initarg :sample-count :initform nil)
+   (%offset-initarg :initarg :offset :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object data-packet)
+                                       &key (pointer nil pointer-p)
+                                            (descriptor nil descriptor-p)
+                                            (sample-count nil sample-count-p)
+                                            (offset nil offset-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or descriptor-p sample-count-p offset-p)
+        (error "DATA-PACKET cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and descriptor-p sample-count-p offset-p)
+      (multiple-value-bind (coerced-descriptor cleanup-descriptor)
+          (%coerce-argument descriptor :managed-pointer)
+        (unwind-protect
+            (let ((coerced-sample-count sample-count))
+              (multiple-value-bind (coerced-offset cleanup-offset)
+                  (%coerce-argument offset :managed-pointer)
+                (unwind-protect
+                    (%adopt-pointer object (opendaq:data-packet/create-data-packet coerced-descriptor coerced-sample-count coerced-offset))
+                  (%cleanup-coerced-argument cleanup-offset)))
+            )
+          (%cleanup-coerced-argument cleanup-descriptor)))
+      )
+    (t
+      (error "DATA-PACKET requires either :POINTER or :DESCRIPTOR and :SAMPLE-COUNT and :OFFSET."))))
+
+(defun wrap-data-packet (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'data-packet :pointer pointer)))
+
+(defclass data-rule (managed-object)
+  (
+   (%rule-type-initarg :initarg :rule-type :initform nil)
+   (%parameters-initarg :initarg :parameters :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object data-rule)
+                                       &key (pointer nil pointer-p)
+                                            (rule-type nil rule-type-p)
+                                            (parameters nil parameters-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or rule-type-p parameters-p)
+        (error "DATA-RULE cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and rule-type-p parameters-p)
+      (let ((coerced-rule-type rule-type))
+        (multiple-value-bind (coerced-parameters cleanup-parameters)
+            (%coerce-argument parameters :managed-pointer)
+          (unwind-protect
+              (%adopt-pointer object (opendaq:data-rule/create-data-rule coerced-rule-type coerced-parameters))
+            (%cleanup-coerced-argument cleanup-parameters)))
+      )
+      )
+    (t
+      (error "DATA-RULE requires either :POINTER or :RULE-TYPE and :PARAMETERS."))))
+
+(defun wrap-data-rule (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'data-rule :pointer pointer)))
+
+(defclass data-rule-builder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object data-rule-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:data-rule-builder/create-data-rule-builder))
+      )))
+
+(defun wrap-data-rule-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'data-rule-builder :pointer pointer)))
+
+(defclass deleter (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object deleter)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "DELETER requires :POINTER.")))
+
+(defun wrap-deleter (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'deleter :pointer pointer)))
+
+(defclass deserialize-component (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object deserialize-component)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "DESERIALIZE-COMPONENT requires :POINTER.")))
+
+(defun wrap-deserialize-component (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'deserialize-component :pointer pointer)))
+
+(defclass deserializer (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object deserializer)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "DESERIALIZER requires :POINTER.")))
+
+(defun wrap-deserializer (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'deserializer :pointer pointer)))
+
 (defclass device (managed-object)
   (
+   (%ctx-initarg :initarg :ctx :initform nil)
+   (%local-id-initarg :initarg :local-id :initform nil)
+   (%default-device-info-initarg :initarg :default-device-info :initform nil)
+   (%parent-initarg :initarg :parent :initform nil)
    ))
 
 
 (defmethod initialize-instance :after ((object device)
                                        &key (pointer nil pointer-p)
+                                            (ctx nil ctx-p)
+                                            (local-id nil local-id-p)
+                                            (default-device-info nil default-device-info-p)
+                                            (parent nil parent-p)
                                        &allow-other-keys)
-  (if pointer-p
-      (%adopt-pointer object pointer)
-      (error "DEVICE requires :POINTER.")))
+  (cond
+    (pointer-p
+      (when (or ctx-p local-id-p default-device-info-p parent-p)
+        (error "DEVICE cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and ctx-p local-id-p default-device-info-p parent-p)
+      (multiple-value-bind (coerced-ctx cleanup-ctx)
+          (%coerce-argument ctx :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-local-id cleanup-local-id)
+                (%coerce-argument local-id :daq-string)
+              (unwind-protect
+                  (multiple-value-bind (coerced-default-device-info cleanup-default-device-info)
+                      (%coerce-argument default-device-info :managed-pointer)
+                    (unwind-protect
+                        (multiple-value-bind (coerced-parent cleanup-parent)
+                            (%coerce-argument parent :managed-pointer)
+                          (unwind-protect
+                              (%adopt-pointer object (opendaq:device/create-client coerced-ctx coerced-local-id coerced-default-device-info coerced-parent))
+                            (%cleanup-coerced-argument cleanup-parent)))
+                      (%cleanup-coerced-argument cleanup-default-device-info)))
+                (%cleanup-coerced-argument cleanup-local-id)))
+          (%cleanup-coerced-argument cleanup-ctx)))
+      )
+    (t
+      (error "DEVICE requires either :POINTER or :CTX and :LOCAL-ID and :DEFAULT-DEVICE-INFO and :PARENT."))))
 
 (defun wrap-device (pointer)
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
     (make-instance 'device :pointer pointer)))
+
+(defclass device-domain (managed-object)
+  (
+   (%tick-resolution-initarg :initarg :tick-resolution :initform nil)
+   (%origin-initarg :initarg :origin :initform nil)
+   (%unit-initarg :initarg :unit :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object device-domain)
+                                       &key (pointer nil pointer-p)
+                                            (tick-resolution nil tick-resolution-p)
+                                            (origin nil origin-p)
+                                            (unit nil unit-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or tick-resolution-p origin-p unit-p)
+        (error "DEVICE-DOMAIN cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and tick-resolution-p origin-p unit-p)
+      (multiple-value-bind (coerced-tick-resolution cleanup-tick-resolution)
+          (%coerce-argument tick-resolution :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-origin cleanup-origin)
+                (%coerce-argument origin :daq-string)
+              (unwind-protect
+                  (multiple-value-bind (coerced-unit cleanup-unit)
+                      (%coerce-argument unit :managed-pointer)
+                    (unwind-protect
+                        (%adopt-pointer object (opendaq:device-domain/create-device-domain coerced-tick-resolution coerced-origin coerced-unit))
+                      (%cleanup-coerced-argument cleanup-unit)))
+                (%cleanup-coerced-argument cleanup-origin)))
+          (%cleanup-coerced-argument cleanup-tick-resolution)))
+      )
+    (t
+      (error "DEVICE-DOMAIN requires either :POINTER or :TICK-RESOLUTION and :ORIGIN and :UNIT."))))
+
+(defun wrap-device-domain (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'device-domain :pointer pointer)))
+
+(defclass device-info (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object device-info)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "DEVICE-INFO requires :POINTER.")))
+
+(defun wrap-device-info (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'device-info :pointer pointer)))
+
+(defclass device-info-config (managed-object)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%connection-string-initarg :initarg :connection-string :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object device-info-config)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (connection-string nil connection-string-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or name-p connection-string-p)
+        (error "DEVICE-INFO-CONFIG cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and name-p connection-string-p)
+      (multiple-value-bind (coerced-name cleanup-name)
+          (%coerce-argument name :daq-string)
+        (unwind-protect
+            (multiple-value-bind (coerced-connection-string cleanup-connection-string)
+                (%coerce-argument connection-string :daq-string)
+              (unwind-protect
+                  (%adopt-pointer object (opendaq:device-info-config/create-device-info-config coerced-name coerced-connection-string))
+                (%cleanup-coerced-argument cleanup-connection-string)))
+          (%cleanup-coerced-argument cleanup-name)))
+      )
+    (t
+      (error "DEVICE-INFO-CONFIG requires either :POINTER or :NAME and :CONNECTION-STRING."))))
+
+(defun wrap-device-info-config (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'device-info-config :pointer pointer)))
+
+(defclass device-info-internal (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object device-info-internal)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "DEVICE-INFO-INTERNAL requires :POINTER.")))
+
+(defun wrap-device-info-internal (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'device-info-internal :pointer pointer)))
+
+(defclass device-network-config (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object device-network-config)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "DEVICE-NETWORK-CONFIG requires :POINTER.")))
+
+(defun wrap-device-network-config (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'device-network-config :pointer pointer)))
+
+(defclass device-private (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object device-private)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "DEVICE-PRIVATE requires :POINTER.")))
+
+(defun wrap-device-private (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'device-private :pointer pointer)))
+
+(defclass device-type (managed-object)
+  (
+   (%id-initarg :initarg :id :initform nil)
+   (%name-initarg :initarg :name :initform nil)
+   (%description-initarg :initarg :description :initform nil)
+   (%default-config-initarg :initarg :default-config :initform nil)
+   (%prefix-initarg :initarg :prefix :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object device-type)
+                                       &key (pointer nil pointer-p)
+                                            (id nil id-p)
+                                            (name nil name-p)
+                                            (description nil description-p)
+                                            (default-config nil default-config-p)
+                                            (prefix nil prefix-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or id-p name-p description-p default-config-p prefix-p)
+        (error "DEVICE-TYPE cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and id-p name-p description-p default-config-p prefix-p)
+      (multiple-value-bind (coerced-id cleanup-id)
+          (%coerce-argument id :daq-string)
+        (unwind-protect
+            (multiple-value-bind (coerced-name cleanup-name)
+                (%coerce-argument name :daq-string)
+              (unwind-protect
+                  (multiple-value-bind (coerced-description cleanup-description)
+                      (%coerce-argument description :daq-string)
+                    (unwind-protect
+                        (multiple-value-bind (coerced-default-config cleanup-default-config)
+                            (%coerce-argument default-config :managed-pointer)
+                          (unwind-protect
+                              (multiple-value-bind (coerced-prefix cleanup-prefix)
+                                  (%coerce-argument prefix :daq-string)
+                                (unwind-protect
+                                    (%adopt-pointer object (opendaq:device-type/create-device-type coerced-id coerced-name coerced-description coerced-default-config coerced-prefix))
+                                  (%cleanup-coerced-argument cleanup-prefix)))
+                            (%cleanup-coerced-argument cleanup-default-config)))
+                      (%cleanup-coerced-argument cleanup-description)))
+                (%cleanup-coerced-argument cleanup-name)))
+          (%cleanup-coerced-argument cleanup-id)))
+      )
+    (t
+      (error "DEVICE-TYPE requires either :POINTER or :ID and :NAME and :DESCRIPTION and :DEFAULT-CONFIG and :PREFIX."))))
+
+(defun wrap-device-type (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'device-type :pointer pointer)))
+
+(defclass device-update-options (managed-object)
+  (
+   (%setup-string-initarg :initarg :setup-string :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object device-update-options)
+                                       &key (pointer nil pointer-p)
+                                            (setup-string nil setup-string-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or setup-string-p)
+        (error "DEVICE-UPDATE-OPTIONS cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and setup-string-p)
+      (multiple-value-bind (coerced-setup-string cleanup-setup-string)
+          (%coerce-argument setup-string :daq-string)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:device-update-options/create-device-update-options coerced-setup-string))
+          (%cleanup-coerced-argument cleanup-setup-string)))
+      )
+    (t
+      (error "DEVICE-UPDATE-OPTIONS requires either :POINTER or :SETUP-STRING."))))
+
+(defun wrap-device-update-options (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'device-update-options :pointer pointer)))
+
+(defclass dict (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object dict)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:dict/create-dict))
+      )))
+
+(defun wrap-dict (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'dict :pointer pointer)))
+
+(defclass dict-element-type (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object dict-element-type)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "DICT-ELEMENT-TYPE requires :POINTER.")))
+
+(defun wrap-dict-element-type (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'dict-element-type :pointer pointer)))
+
+(defclass dimension (managed-object)
+  (
+   (%rule-initarg :initarg :rule :initform nil)
+   (%unit-initarg :initarg :unit :initform nil)
+   (%name-initarg :initarg :name :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object dimension)
+                                       &key (pointer nil pointer-p)
+                                            (rule nil rule-p)
+                                            (unit nil unit-p)
+                                            (name nil name-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or rule-p unit-p name-p)
+        (error "DIMENSION cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and rule-p unit-p name-p)
+      (multiple-value-bind (coerced-rule cleanup-rule)
+          (%coerce-argument rule :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-unit cleanup-unit)
+                (%coerce-argument unit :managed-pointer)
+              (unwind-protect
+                  (multiple-value-bind (coerced-name cleanup-name)
+                      (%coerce-argument name :daq-string)
+                    (unwind-protect
+                        (%adopt-pointer object (opendaq:dimension/create-dimension coerced-rule coerced-unit coerced-name))
+                      (%cleanup-coerced-argument cleanup-name)))
+                (%cleanup-coerced-argument cleanup-unit)))
+          (%cleanup-coerced-argument cleanup-rule)))
+      )
+    (t
+      (error "DIMENSION requires either :POINTER or :RULE and :UNIT and :NAME."))))
+
+(defun wrap-dimension (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'dimension :pointer pointer)))
+
+(defclass dimension-builder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object dimension-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:dimension-builder/create-dimension-builder))
+      )))
+
+(defun wrap-dimension-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'dimension-builder :pointer pointer)))
+
+(defclass dimension-rule (managed-object)
+  (
+   (%type-initarg :initarg :type :initform nil)
+   (%parameters-initarg :initarg :parameters :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object dimension-rule)
+                                       &key (pointer nil pointer-p)
+                                            (type nil type-p)
+                                            (parameters nil parameters-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or type-p parameters-p)
+        (error "DIMENSION-RULE cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and type-p parameters-p)
+      (let ((coerced-type type))
+        (multiple-value-bind (coerced-parameters cleanup-parameters)
+            (%coerce-argument parameters :managed-pointer)
+          (unwind-protect
+              (%adopt-pointer object (opendaq:dimension-rule/create-dimension-rule coerced-type coerced-parameters))
+            (%cleanup-coerced-argument cleanup-parameters)))
+      )
+      )
+    (t
+      (error "DIMENSION-RULE requires either :POINTER or :TYPE and :PARAMETERS."))))
+
+(defun wrap-dimension-rule (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'dimension-rule :pointer pointer)))
+
+(defclass dimension-rule-builder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object dimension-rule-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:dimension-rule-builder/create-dimension-rule-builder))
+      )))
+
+(defun wrap-dimension-rule-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'dimension-rule-builder :pointer pointer)))
+
+(defclass discovery-server (managed-object)
+  (
+   (%logger-initarg :initarg :logger :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object discovery-server)
+                                       &key (pointer nil pointer-p)
+                                            (logger nil logger-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or logger-p)
+        (error "DISCOVERY-SERVER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and logger-p)
+      (multiple-value-bind (coerced-logger cleanup-logger)
+          (%coerce-argument logger :managed-pointer)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:discovery-server/create-mdns-discovery-server coerced-logger))
+          (%cleanup-coerced-argument cleanup-logger)))
+      )
+    (t
+      (error "DISCOVERY-SERVER requires either :POINTER or :LOGGER."))))
+
+(defun wrap-discovery-server (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'discovery-server :pointer pointer)))
+
+(defclass end-update-event-args (managed-object)
+  (
+   (%properties-initarg :initarg :properties :initform nil)
+   (%is-parent-updating-initarg :initarg :is-parent-updating :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object end-update-event-args)
+                                       &key (pointer nil pointer-p)
+                                            (properties nil properties-p)
+                                            (is-parent-updating nil is-parent-updating-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or properties-p is-parent-updating-p)
+        (error "END-UPDATE-EVENT-ARGS cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and properties-p is-parent-updating-p)
+      (multiple-value-bind (coerced-properties cleanup-properties)
+          (%coerce-argument properties :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-is-parent-updating cleanup-is-parent-updating)
+                (%coerce-argument is-parent-updating :daq-bool)
+              (unwind-protect
+                  (%adopt-pointer object (opendaq:end-update-event-args/create-end-update-event-args coerced-properties coerced-is-parent-updating))
+                (%cleanup-coerced-argument cleanup-is-parent-updating)))
+          (%cleanup-coerced-argument cleanup-properties)))
+      )
+    (t
+      (error "END-UPDATE-EVENT-ARGS requires either :POINTER or :PROPERTIES and :IS-PARENT-UPDATING."))))
+
+(defun wrap-end-update-event-args (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'end-update-event-args :pointer pointer)))
+
+(defclass enumeration (managed-object)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%value-initarg :initarg :value :initform nil)
+   (%type-manager-initarg :initarg :type-manager :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object enumeration)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (value nil value-p)
+                                            (type-manager nil type-manager-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or name-p value-p type-manager-p)
+        (error "ENUMERATION cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and name-p value-p type-manager-p)
+      (multiple-value-bind (coerced-name cleanup-name)
+          (%coerce-argument name :daq-string)
+        (unwind-protect
+            (multiple-value-bind (coerced-value cleanup-value)
+                (%coerce-argument value :daq-string)
+              (unwind-protect
+                  (multiple-value-bind (coerced-type-manager cleanup-type-manager)
+                      (%coerce-argument type-manager :managed-pointer)
+                    (unwind-protect
+                        (%adopt-pointer object (opendaq:enumeration/create-enumeration coerced-name coerced-value coerced-type-manager))
+                      (%cleanup-coerced-argument cleanup-type-manager)))
+                (%cleanup-coerced-argument cleanup-value)))
+          (%cleanup-coerced-argument cleanup-name)))
+      )
+    (t
+      (error "ENUMERATION requires either :POINTER or :NAME and :VALUE and :TYPE-MANAGER."))))
+
+(defun wrap-enumeration (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'enumeration :pointer pointer)))
+
+(defclass enumeration-type (managed-object)
+  (
+   (%type-name-initarg :initarg :type-name :initform nil)
+   (%enumerator-names-initarg :initarg :enumerator-names :initform nil)
+   (%first-enumerator-int-value-initarg :initarg :first-enumerator-int-value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object enumeration-type)
+                                       &key (pointer nil pointer-p)
+                                            (type-name nil type-name-p)
+                                            (enumerator-names nil enumerator-names-p)
+                                            (first-enumerator-int-value nil first-enumerator-int-value-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or type-name-p enumerator-names-p first-enumerator-int-value-p)
+        (error "ENUMERATION-TYPE cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and type-name-p enumerator-names-p first-enumerator-int-value-p)
+      (multiple-value-bind (coerced-type-name cleanup-type-name)
+          (%coerce-argument type-name :daq-string)
+        (unwind-protect
+            (multiple-value-bind (coerced-enumerator-names cleanup-enumerator-names)
+                (%coerce-argument enumerator-names :managed-pointer)
+              (unwind-protect
+                  (let ((coerced-first-enumerator-int-value first-enumerator-int-value))
+                    (%adopt-pointer object (opendaq:enumeration-type/create-enumeration-type coerced-type-name coerced-enumerator-names coerced-first-enumerator-int-value))
+                  )
+                (%cleanup-coerced-argument cleanup-enumerator-names)))
+          (%cleanup-coerced-argument cleanup-type-name)))
+      )
+    (t
+      (error "ENUMERATION-TYPE requires either :POINTER or :TYPE-NAME and :ENUMERATOR-NAMES and :FIRST-ENUMERATOR-INT-VALUE."))))
+
+(defun wrap-enumeration-type (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'enumeration-type :pointer pointer)))
+
+(defclass error-info (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object error-info)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:error-info/create-error-info))
+      )))
+
+(defun wrap-error-info (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'error-info :pointer pointer)))
+
+(defclass eval-value (managed-object)
+  (
+   (%eval-initarg :initarg :eval :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object eval-value)
+                                       &key (pointer nil pointer-p)
+                                            (eval nil eval-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or eval-p)
+        (error "EVAL-VALUE cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and eval-p)
+      (multiple-value-bind (coerced-eval cleanup-eval)
+          (%coerce-argument eval :daq-string)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:eval-value/create-eval-value coerced-eval))
+          (%cleanup-coerced-argument cleanup-eval)))
+      )
+    (t
+      (error "EVAL-VALUE requires either :POINTER or :EVAL."))))
+
+(defun wrap-eval-value (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'eval-value :pointer pointer)))
+
+(defclass event (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object event)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:event/create-event))
+      )))
+
+(defun wrap-event (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'event :pointer pointer)))
+
+(defclass event-args (managed-object)
+  (
+   (%event-id-initarg :initarg :event-id :initform nil)
+   (%event-name-initarg :initarg :event-name :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object event-args)
+                                       &key (pointer nil pointer-p)
+                                            (event-id nil event-id-p)
+                                            (event-name nil event-name-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or event-id-p event-name-p)
+        (error "EVENT-ARGS cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and event-id-p event-name-p)
+      (let ((coerced-event-id event-id))
+        (multiple-value-bind (coerced-event-name cleanup-event-name)
+            (%coerce-argument event-name :daq-string)
+          (unwind-protect
+              (%adopt-pointer object (opendaq:event-args/create-event-args coerced-event-id coerced-event-name))
+            (%cleanup-coerced-argument cleanup-event-name)))
+      )
+      )
+    (t
+      (error "EVENT-ARGS requires either :POINTER or :EVENT-ID and :EVENT-NAME."))))
+
+(defun wrap-event-args (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'event-args :pointer pointer)))
+
+(defclass event-handler (managed-object)
+  (
+   (%call-initarg :initarg :call :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object event-handler)
+                                       &key (pointer nil pointer-p)
+                                            (call nil call-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or call-p)
+        (error "EVENT-HANDLER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and call-p)
+      (let ((coerced-call call))
+        (%adopt-pointer object (opendaq:event-handler/create-event-handler coerced-call))
+      )
+      )
+    (t
+      (error "EVENT-HANDLER requires either :POINTER or :CALL."))))
+
+(defun wrap-event-handler (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'event-handler :pointer pointer)))
+
+(defclass event-packet (managed-object)
+  (
+   (%id-initarg :initarg :id :initform nil)
+   (%params-initarg :initarg :params :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object event-packet)
+                                       &key (pointer nil pointer-p)
+                                            (id nil id-p)
+                                            (params nil params-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or id-p params-p)
+        (error "EVENT-PACKET cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and id-p params-p)
+      (multiple-value-bind (coerced-id cleanup-id)
+          (%coerce-argument id :daq-string)
+        (unwind-protect
+            (multiple-value-bind (coerced-params cleanup-params)
+                (%coerce-argument params :managed-pointer)
+              (unwind-protect
+                  (%adopt-pointer object (opendaq:event-packet/create-event-packet coerced-id coerced-params))
+                (%cleanup-coerced-argument cleanup-params)))
+          (%cleanup-coerced-argument cleanup-id)))
+      )
+    (t
+      (error "EVENT-PACKET requires either :POINTER or :ID and :PARAMS."))))
+
+(defun wrap-event-packet (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'event-packet :pointer pointer)))
+
+(defclass float-object (managed-object)
+  (
+   (%value-initarg :initarg :value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object float-object)
+                                       &key (pointer nil pointer-p)
+                                            (value nil value-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or value-p)
+        (error "FLOAT-OBJECT cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and value-p)
+      (let ((coerced-value value))
+        (%adopt-pointer object (opendaq:float-object/create-float-object coerced-value))
+      )
+      )
+    (t
+      (error "FLOAT-OBJECT requires either :POINTER or :VALUE."))))
+
+(defun wrap-float-object (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'float-object :pointer pointer)))
+
+(defclass folder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object folder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "FOLDER requires :POINTER.")))
+
+(defun wrap-folder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'folder :pointer pointer)))
+
+(defclass folder-config (managed-object)
+  (
+   (%context-initarg :initarg :context :initform nil)
+   (%parent-initarg :initarg :parent :initform nil)
+   (%local-id-initarg :initarg :local-id :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object folder-config)
+                                       &key (pointer nil pointer-p)
+                                            (context nil context-p)
+                                            (parent nil parent-p)
+                                            (local-id nil local-id-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or context-p parent-p local-id-p)
+        (error "FOLDER-CONFIG cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and context-p parent-p local-id-p)
+      (multiple-value-bind (coerced-context cleanup-context)
+          (%coerce-argument context :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-parent cleanup-parent)
+                (%coerce-argument parent :managed-pointer)
+              (unwind-protect
+                  (multiple-value-bind (coerced-local-id cleanup-local-id)
+                      (%coerce-argument local-id :daq-string)
+                    (unwind-protect
+                        (%adopt-pointer object (opendaq:folder-config/create-folder coerced-context coerced-parent coerced-local-id))
+                      (%cleanup-coerced-argument cleanup-local-id)))
+                (%cleanup-coerced-argument cleanup-parent)))
+          (%cleanup-coerced-argument cleanup-context)))
+      )
+    (t
+      (error "FOLDER-CONFIG requires either :POINTER or :CONTEXT and :PARENT and :LOCAL-ID."))))
+
+(defun wrap-folder-config (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'folder-config :pointer pointer)))
+
+(defclass freezable (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object freezable)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "FREEZABLE requires :POINTER.")))
+
+(defun wrap-freezable (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'freezable :pointer pointer)))
+
+(defclass function-block (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object function-block)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "FUNCTION-BLOCK requires :POINTER.")))
+
+(defun wrap-function-block (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'function-block :pointer pointer)))
+
+(defclass function-block-type (managed-object)
+  (
+   (%id-initarg :initarg :id :initform nil)
+   (%name-initarg :initarg :name :initform nil)
+   (%description-initarg :initarg :description :initform nil)
+   (%default-config-initarg :initarg :default-config :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object function-block-type)
+                                       &key (pointer nil pointer-p)
+                                            (id nil id-p)
+                                            (name nil name-p)
+                                            (description nil description-p)
+                                            (default-config nil default-config-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or id-p name-p description-p default-config-p)
+        (error "FUNCTION-BLOCK-TYPE cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and id-p name-p description-p default-config-p)
+      (multiple-value-bind (coerced-id cleanup-id)
+          (%coerce-argument id :daq-string)
+        (unwind-protect
+            (multiple-value-bind (coerced-name cleanup-name)
+                (%coerce-argument name :daq-string)
+              (unwind-protect
+                  (multiple-value-bind (coerced-description cleanup-description)
+                      (%coerce-argument description :daq-string)
+                    (unwind-protect
+                        (multiple-value-bind (coerced-default-config cleanup-default-config)
+                            (%coerce-argument default-config :managed-pointer)
+                          (unwind-protect
+                              (%adopt-pointer object (opendaq:function-block-type/create-function-block-type coerced-id coerced-name coerced-description coerced-default-config))
+                            (%cleanup-coerced-argument cleanup-default-config)))
+                      (%cleanup-coerced-argument cleanup-description)))
+                (%cleanup-coerced-argument cleanup-name)))
+          (%cleanup-coerced-argument cleanup-id)))
+      )
+    (t
+      (error "FUNCTION-BLOCK-TYPE requires either :POINTER or :ID and :NAME and :DESCRIPTION and :DEFAULT-CONFIG."))))
+
+(defun wrap-function-block-type (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'function-block-type :pointer pointer)))
+
+(defclass graph-visualization (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object graph-visualization)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "GRAPH-VISUALIZATION requires :POINTER.")))
+
+(defun wrap-graph-visualization (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'graph-visualization :pointer pointer)))
+
+(defclass input-port (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object input-port)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "INPUT-PORT requires :POINTER.")))
+
+(defun wrap-input-port (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'input-port :pointer pointer)))
+
+(defclass input-port-config (managed-object)
+  (
+   (%context-initarg :initarg :context :initform nil)
+   (%parent-initarg :initarg :parent :initform nil)
+   (%local-id-initarg :initarg :local-id :initform nil)
+   (%gap-checking-initarg :initarg :gap-checking :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object input-port-config)
+                                       &key (pointer nil pointer-p)
+                                            (context nil context-p)
+                                            (parent nil parent-p)
+                                            (local-id nil local-id-p)
+                                            (gap-checking nil gap-checking-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or context-p parent-p local-id-p gap-checking-p)
+        (error "INPUT-PORT-CONFIG cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and context-p parent-p local-id-p gap-checking-p)
+      (multiple-value-bind (coerced-context cleanup-context)
+          (%coerce-argument context :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-parent cleanup-parent)
+                (%coerce-argument parent :managed-pointer)
+              (unwind-protect
+                  (multiple-value-bind (coerced-local-id cleanup-local-id)
+                      (%coerce-argument local-id :daq-string)
+                    (unwind-protect
+                        (multiple-value-bind (coerced-gap-checking cleanup-gap-checking)
+                            (%coerce-argument gap-checking :daq-bool)
+                          (unwind-protect
+                              (%adopt-pointer object (opendaq:input-port-config/create-input-port coerced-context coerced-parent coerced-local-id coerced-gap-checking))
+                            (%cleanup-coerced-argument cleanup-gap-checking)))
+                      (%cleanup-coerced-argument cleanup-local-id)))
+                (%cleanup-coerced-argument cleanup-parent)))
+          (%cleanup-coerced-argument cleanup-context)))
+      )
+    (t
+      (error "INPUT-PORT-CONFIG requires either :POINTER or :CONTEXT and :PARENT and :LOCAL-ID and :GAP-CHECKING."))))
+
+(defun wrap-input-port-config (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'input-port-config :pointer pointer)))
+
+(defclass input-port-notifications (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object input-port-notifications)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "INPUT-PORT-NOTIFICATIONS requires :POINTER.")))
+
+(defun wrap-input-port-notifications (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'input-port-notifications :pointer pointer)))
+
+(defclass input-port-private (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object input-port-private)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "INPUT-PORT-PRIVATE requires :POINTER.")))
+
+(defun wrap-input-port-private (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'input-port-private :pointer pointer)))
+
+(defclass inspectable (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object inspectable)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "INSPECTABLE requires :POINTER.")))
+
+(defun wrap-inspectable (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'inspectable :pointer pointer)))
 
 (defclass instance (managed-object)
   (
@@ -90,12 +3851,654 @@
     (pointer-p
       (%adopt-pointer object pointer))
     (t
-      (%adopt-pointer object (opendaq:instance-builder/create-instance-builder ))
+      (%adopt-pointer object (opendaq:instance-builder/create-instance-builder))
       )))
 
 (defun wrap-instance-builder (pointer)
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
     (make-instance 'instance-builder :pointer pointer)))
+
+(defclass io-folder-config (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object io-folder-config)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "IO-FOLDER-CONFIG requires :POINTER.")))
+
+(defun wrap-io-folder-config (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'io-folder-config :pointer pointer)))
+
+(defclass iterable (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object iterable)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "ITERABLE requires :POINTER.")))
+
+(defun wrap-iterable (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'iterable :pointer pointer)))
+
+(defclass iterator (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object iterator)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "ITERATOR requires :POINTER.")))
+
+(defun wrap-iterator (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'iterator :pointer pointer)))
+
+(defclass last-message-logger-sink-private (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object last-message-logger-sink-private)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "LAST-MESSAGE-LOGGER-SINK-PRIVATE requires :POINTER.")))
+
+(defun wrap-last-message-logger-sink-private (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'last-message-logger-sink-private :pointer pointer)))
+
+(defclass list-element-type (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object list-element-type)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "LIST-ELEMENT-TYPE requires :POINTER.")))
+
+(defun wrap-list-element-type (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'list-element-type :pointer pointer)))
+
+(defclass lock-guard (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object lock-guard)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "LOCK-GUARD requires :POINTER.")))
+
+(defun wrap-lock-guard (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'lock-guard :pointer pointer)))
+
+(defclass log-file-info (managed-object)
+  (
+   (%builder-initarg :initarg :builder :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object log-file-info)
+                                       &key (pointer nil pointer-p)
+                                            (builder nil builder-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or builder-p)
+        (error "LOG-FILE-INFO cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and builder-p)
+      (multiple-value-bind (coerced-builder cleanup-builder)
+          (%coerce-argument builder :managed-pointer)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:log-file-info/create-log-file-info-from-builder coerced-builder))
+          (%cleanup-coerced-argument cleanup-builder)))
+      )
+    (t
+      (error "LOG-FILE-INFO requires either :POINTER or :BUILDER."))))
+
+(defun wrap-log-file-info (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'log-file-info :pointer pointer)))
+
+(defclass log-file-info-builder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object log-file-info-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:log-file-info-builder/create-log-file-info-builder))
+      )))
+
+(defun wrap-log-file-info-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'log-file-info-builder :pointer pointer)))
+
+(defclass logger (managed-object)
+  (
+   (%sinks-initarg :initarg :sinks :initform nil)
+   (%level-initarg :initarg :level :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object logger)
+                                       &key (pointer nil pointer-p)
+                                            (sinks nil sinks-p)
+                                            (level nil level-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or sinks-p level-p)
+        (error "LOGGER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and sinks-p level-p)
+      (multiple-value-bind (coerced-sinks cleanup-sinks)
+          (%coerce-argument sinks :managed-pointer)
+        (unwind-protect
+            (let ((coerced-level level))
+              (%adopt-pointer object (opendaq:logger/create-logger coerced-sinks coerced-level))
+            )
+          (%cleanup-coerced-argument cleanup-sinks)))
+      )
+    (t
+      (error "LOGGER requires either :POINTER or :SINKS and :LEVEL."))))
+
+(defun wrap-logger (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'logger :pointer pointer)))
+
+(defclass logger-component (managed-object)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%sinks-initarg :initarg :sinks :initform nil)
+   (%thread-pool-initarg :initarg :thread-pool :initform nil)
+   (%level-initarg :initarg :level :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object logger-component)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (sinks nil sinks-p)
+                                            (thread-pool nil thread-pool-p)
+                                            (level nil level-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or name-p sinks-p thread-pool-p level-p)
+        (error "LOGGER-COMPONENT cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and name-p sinks-p thread-pool-p level-p)
+      (multiple-value-bind (coerced-name cleanup-name)
+          (%coerce-argument name :daq-string)
+        (unwind-protect
+            (multiple-value-bind (coerced-sinks cleanup-sinks)
+                (%coerce-argument sinks :managed-pointer)
+              (unwind-protect
+                  (multiple-value-bind (coerced-thread-pool cleanup-thread-pool)
+                      (%coerce-argument thread-pool :managed-pointer)
+                    (unwind-protect
+                        (let ((coerced-level level))
+                          (%adopt-pointer object (opendaq:logger-component/create-logger-component coerced-name coerced-sinks coerced-thread-pool coerced-level))
+                        )
+                      (%cleanup-coerced-argument cleanup-thread-pool)))
+                (%cleanup-coerced-argument cleanup-sinks)))
+          (%cleanup-coerced-argument cleanup-name)))
+      )
+    (t
+      (error "LOGGER-COMPONENT requires either :POINTER or :NAME and :SINKS and :THREAD-POOL and :LEVEL."))))
+
+(defun wrap-logger-component (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'logger-component :pointer pointer)))
+
+(defclass logger-sink (managed-object)
+  (
+   (%file-name-initarg :initarg :file-name :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object logger-sink)
+                                       &key (pointer nil pointer-p)
+                                            (file-name nil file-name-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or file-name-p)
+        (error "LOGGER-SINK cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and file-name-p)
+      (multiple-value-bind (coerced-file-name cleanup-file-name)
+          (%coerce-argument file-name :daq-string)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:logger-sink/create-basic-file-logger-sink coerced-file-name))
+          (%cleanup-coerced-argument cleanup-file-name)))
+      )
+    (t
+      (error "LOGGER-SINK requires either :POINTER or :FILE-NAME."))))
+
+(defun wrap-logger-sink (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'logger-sink :pointer pointer)))
+
+(defclass logger-thread-pool (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object logger-thread-pool)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:logger-thread-pool/create-logger-thread-pool))
+      )))
+
+(defun wrap-logger-thread-pool (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'logger-thread-pool :pointer pointer)))
+
+(defclass mirrored-device (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object mirrored-device)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "MIRRORED-DEVICE requires :POINTER.")))
+
+(defun wrap-mirrored-device (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'mirrored-device :pointer pointer)))
+
+(defclass mirrored-device-config (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object mirrored-device-config)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "MIRRORED-DEVICE-CONFIG requires :POINTER.")))
+
+(defun wrap-mirrored-device-config (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'mirrored-device-config :pointer pointer)))
+
+(defclass mirrored-input-port-config (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object mirrored-input-port-config)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "MIRRORED-INPUT-PORT-CONFIG requires :POINTER.")))
+
+(defun wrap-mirrored-input-port-config (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'mirrored-input-port-config :pointer pointer)))
+
+(defclass mirrored-signal-config (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object mirrored-signal-config)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "MIRRORED-SIGNAL-CONFIG requires :POINTER.")))
+
+(defun wrap-mirrored-signal-config (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'mirrored-signal-config :pointer pointer)))
+
+(defclass mirrored-signal-private (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object mirrored-signal-private)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "MIRRORED-SIGNAL-PRIVATE requires :POINTER.")))
+
+(defun wrap-mirrored-signal-private (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'mirrored-signal-private :pointer pointer)))
+
+(defclass module (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object module)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "MODULE requires :POINTER.")))
+
+(defun wrap-module (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'module :pointer pointer)))
+
+(defclass module-authenticator (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object module-authenticator)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "MODULE-AUTHENTICATOR requires :POINTER.")))
+
+(defun wrap-module-authenticator (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'module-authenticator :pointer pointer)))
+
+(defclass module-info (managed-object)
+  (
+   (%version-info-initarg :initarg :version-info :initform nil)
+   (%name-initarg :initarg :name :initform nil)
+   (%id-initarg :initarg :id :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object module-info)
+                                       &key (pointer nil pointer-p)
+                                            (version-info nil version-info-p)
+                                            (name nil name-p)
+                                            (id nil id-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or version-info-p name-p id-p)
+        (error "MODULE-INFO cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and version-info-p name-p id-p)
+      (multiple-value-bind (coerced-version-info cleanup-version-info)
+          (%coerce-argument version-info :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-name cleanup-name)
+                (%coerce-argument name :daq-string)
+              (unwind-protect
+                  (multiple-value-bind (coerced-id cleanup-id)
+                      (%coerce-argument id :daq-string)
+                    (unwind-protect
+                        (%adopt-pointer object (opendaq:module-info/create-module-info coerced-version-info coerced-name coerced-id))
+                      (%cleanup-coerced-argument cleanup-id)))
+                (%cleanup-coerced-argument cleanup-name)))
+          (%cleanup-coerced-argument cleanup-version-info)))
+      )
+    (t
+      (error "MODULE-INFO requires either :POINTER or :VERSION-INFO and :NAME and :ID."))))
+
+(defun wrap-module-info (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'module-info :pointer pointer)))
+
+(defclass module-manager (managed-object)
+  (
+   (%path-initarg :initarg :path :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object module-manager)
+                                       &key (pointer nil pointer-p)
+                                            (path nil path-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or path-p)
+        (error "MODULE-MANAGER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and path-p)
+      (multiple-value-bind (coerced-path cleanup-path)
+          (%coerce-argument path :daq-string)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:module-manager/create-module-manager coerced-path))
+          (%cleanup-coerced-argument cleanup-path)))
+      )
+    (t
+      (error "MODULE-MANAGER requires either :POINTER or :PATH."))))
+
+(defun wrap-module-manager (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'module-manager :pointer pointer)))
+
+(defclass module-manager-utils (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object module-manager-utils)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "MODULE-MANAGER-UTILS requires :POINTER.")))
+
+(defun wrap-module-manager-utils (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'module-manager-utils :pointer pointer)))
+
+(defclass multi-reader (managed-object)
+  (
+   (%signals-initarg :initarg :signals :initform nil)
+   (%value-read-type-initarg :initarg :value-read-type :initform nil)
+   (%domain-read-type-initarg :initarg :domain-read-type :initform nil)
+   (%mode-initarg :initarg :mode :initform nil)
+   (%timeout-type-initarg :initarg :timeout-type :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object multi-reader)
+                                       &key (pointer nil pointer-p)
+                                            (signals nil signals-p)
+                                            (value-read-type nil value-read-type-p)
+                                            (domain-read-type nil domain-read-type-p)
+                                            (mode nil mode-p)
+                                            (timeout-type nil timeout-type-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or signals-p value-read-type-p domain-read-type-p mode-p timeout-type-p)
+        (error "MULTI-READER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and signals-p value-read-type-p domain-read-type-p mode-p timeout-type-p)
+      (multiple-value-bind (coerced-signals cleanup-signals)
+          (%coerce-argument signals :managed-pointer)
+        (unwind-protect
+            (let ((coerced-value-read-type value-read-type))
+              (let ((coerced-domain-read-type domain-read-type))
+                (let ((coerced-mode mode))
+                  (let ((coerced-timeout-type timeout-type))
+                    (%adopt-pointer object (opendaq:multi-reader/create-multi-reader coerced-signals coerced-value-read-type coerced-domain-read-type coerced-mode coerced-timeout-type))
+                  )
+                )
+              )
+            )
+          (%cleanup-coerced-argument cleanup-signals)))
+      )
+    (t
+      (error "MULTI-READER requires either :POINTER or :SIGNALS and :VALUE-READ-TYPE and :DOMAIN-READ-TYPE and :MODE and :TIMEOUT-TYPE."))))
+
+(defun wrap-multi-reader (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'multi-reader :pointer pointer)))
+
+(defclass multi-reader-builder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object multi-reader-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:multi-reader-builder/create-multi-reader-builder))
+      )))
+
+(defun wrap-multi-reader-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'multi-reader-builder :pointer pointer)))
+
+(defclass multi-reader-status (managed-object)
+  (
+   (%main-descriptor-initarg :initarg :main-descriptor :initform nil)
+   (%event-packets-initarg :initarg :event-packets :initform nil)
+   (%valid-initarg :initarg :valid :initform nil)
+   (%offset-initarg :initarg :offset :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object multi-reader-status)
+                                       &key (pointer nil pointer-p)
+                                            (main-descriptor nil main-descriptor-p)
+                                            (event-packets nil event-packets-p)
+                                            (valid nil valid-p)
+                                            (offset nil offset-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or main-descriptor-p event-packets-p valid-p offset-p)
+        (error "MULTI-READER-STATUS cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and main-descriptor-p event-packets-p valid-p offset-p)
+      (multiple-value-bind (coerced-main-descriptor cleanup-main-descriptor)
+          (%coerce-argument main-descriptor :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-event-packets cleanup-event-packets)
+                (%coerce-argument event-packets :managed-pointer)
+              (unwind-protect
+                  (multiple-value-bind (coerced-valid cleanup-valid)
+                      (%coerce-argument valid :daq-bool)
+                    (unwind-protect
+                        (multiple-value-bind (coerced-offset cleanup-offset)
+                            (%coerce-argument offset :managed-pointer)
+                          (unwind-protect
+                              (%adopt-pointer object (opendaq:multi-reader-status/create-multi-reader-status coerced-main-descriptor coerced-event-packets coerced-valid coerced-offset))
+                            (%cleanup-coerced-argument cleanup-offset)))
+                      (%cleanup-coerced-argument cleanup-valid)))
+                (%cleanup-coerced-argument cleanup-event-packets)))
+          (%cleanup-coerced-argument cleanup-main-descriptor)))
+      )
+    (t
+      (error "MULTI-READER-STATUS requires either :POINTER or :MAIN-DESCRIPTOR and :EVENT-PACKETS and :VALID and :OFFSET."))))
+
+(defun wrap-multi-reader-status (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'multi-reader-status :pointer pointer)))
+
+(defclass mutex (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object mutex)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "MUTEX requires :POINTER.")))
+
+(defun wrap-mutex (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'mutex :pointer pointer)))
+
+(defclass network-interface (managed-object)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%owner-device-manufacturer-name-initarg :initarg :owner-device-manufacturer-name :initform nil)
+   (%owner-device-serial-number-initarg :initarg :owner-device-serial-number :initform nil)
+   (%module-manager-initarg :initarg :module-manager :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object network-interface)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (owner-device-manufacturer-name nil owner-device-manufacturer-name-p)
+                                            (owner-device-serial-number nil owner-device-serial-number-p)
+                                            (module-manager nil module-manager-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or name-p owner-device-manufacturer-name-p owner-device-serial-number-p module-manager-p)
+        (error "NETWORK-INTERFACE cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and name-p owner-device-manufacturer-name-p owner-device-serial-number-p module-manager-p)
+      (multiple-value-bind (coerced-name cleanup-name)
+          (%coerce-argument name :daq-string)
+        (unwind-protect
+            (multiple-value-bind (coerced-owner-device-manufacturer-name cleanup-owner-device-manufacturer-name)
+                (%coerce-argument owner-device-manufacturer-name :daq-string)
+              (unwind-protect
+                  (multiple-value-bind (coerced-owner-device-serial-number cleanup-owner-device-serial-number)
+                      (%coerce-argument owner-device-serial-number :daq-string)
+                    (unwind-protect
+                        (multiple-value-bind (coerced-module-manager cleanup-module-manager)
+                            (%coerce-argument module-manager :daq-base-object)
+                          (unwind-protect
+                              (%adopt-pointer object (opendaq:network-interface/create-network-interface coerced-name coerced-owner-device-manufacturer-name coerced-owner-device-serial-number coerced-module-manager))
+                            (%cleanup-coerced-argument cleanup-module-manager)))
+                      (%cleanup-coerced-argument cleanup-owner-device-serial-number)))
+                (%cleanup-coerced-argument cleanup-owner-device-manufacturer-name)))
+          (%cleanup-coerced-argument cleanup-name)))
+      )
+    (t
+      (error "NETWORK-INTERFACE requires either :POINTER or :NAME and :OWNER-DEVICE-MANUFACTURER-NAME and :OWNER-DEVICE-SERIAL-NUMBER and :MODULE-MANAGER."))))
+
+(defun wrap-network-interface (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'network-interface :pointer pointer)))
 
 (defclass object-list (managed-object)
   (
@@ -105,13 +4508,532 @@
 (defmethod initialize-instance :after ((object object-list)
                                        &key (pointer nil pointer-p)
                                        &allow-other-keys)
-  (if pointer-p
-      (%adopt-pointer object pointer)
-      (error "OBJECT-LIST requires :POINTER.")))
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:list/create-list))
+      )))
 
 (defun wrap-object-list (pointer)
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
     (make-instance 'object-list :pointer pointer)))
+
+(defclass ownable (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object ownable)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "OWNABLE requires :POINTER.")))
+
+(defun wrap-ownable (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'ownable :pointer pointer)))
+
+(defclass packet (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object packet)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "PACKET requires :POINTER.")))
+
+(defun wrap-packet (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'packet :pointer pointer)))
+
+(defclass packet-destruct-callback (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object packet-destruct-callback)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "PACKET-DESTRUCT-CALLBACK requires :POINTER.")))
+
+(defun wrap-packet-destruct-callback (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'packet-destruct-callback :pointer pointer)))
+
+(defclass packet-reader (managed-object)
+  (
+   (%signal-initarg :initarg :signal :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object packet-reader)
+                                       &key (pointer nil pointer-p)
+                                            (signal nil signal-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or signal-p)
+        (error "PACKET-READER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and signal-p)
+      (multiple-value-bind (coerced-signal cleanup-signal)
+          (%coerce-argument signal :managed-pointer)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:packet-reader/create-packet-reader coerced-signal))
+          (%cleanup-coerced-argument cleanup-signal)))
+      )
+    (t
+      (error "PACKET-READER requires either :POINTER or :SIGNAL."))))
+
+(defun wrap-packet-reader (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'packet-reader :pointer pointer)))
+
+(defclass permission-manager (managed-object)
+  (
+   (%parent-initarg :initarg :parent :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object permission-manager)
+                                       &key (pointer nil pointer-p)
+                                            (parent nil parent-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or parent-p)
+        (error "PERMISSION-MANAGER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and parent-p)
+      (multiple-value-bind (coerced-parent cleanup-parent)
+          (%coerce-argument parent :managed-pointer)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:permission-manager/create-permission-manager coerced-parent))
+          (%cleanup-coerced-argument cleanup-parent)))
+      )
+    (t
+      (error "PERMISSION-MANAGER requires either :POINTER or :PARENT."))))
+
+(defun wrap-permission-manager (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'permission-manager :pointer pointer)))
+
+(defclass permission-manager-internal (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object permission-manager-internal)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "PERMISSION-MANAGER-INTERNAL requires :POINTER.")))
+
+(defun wrap-permission-manager-internal (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'permission-manager-internal :pointer pointer)))
+
+(defclass permission-mask-builder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object permission-mask-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:permission-mask-builder/create-permission-mask-builder))
+      )))
+
+(defun wrap-permission-mask-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'permission-mask-builder :pointer pointer)))
+
+(defclass permissions (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object permissions)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "PERMISSIONS requires :POINTER.")))
+
+(defun wrap-permissions (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'permissions :pointer pointer)))
+
+(defclass permissions-builder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object permissions-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:permissions-builder/create-permissions-builder))
+      )))
+
+(defun wrap-permissions-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'permissions-builder :pointer pointer)))
+
+(defclass permissions-internal (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object permissions-internal)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "PERMISSIONS-INTERNAL requires :POINTER.")))
+
+(defun wrap-permissions-internal (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'permissions-internal :pointer pointer)))
+
+(defclass procedure (managed-object)
+  (
+   (%value-initarg :initarg :value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object procedure)
+                                       &key (pointer nil pointer-p)
+                                            (value nil value-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or value-p)
+        (error "PROCEDURE cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and value-p)
+      (let ((coerced-value value))
+        (%adopt-pointer object (opendaq:procedure/create-procedure coerced-value))
+      )
+      )
+    (t
+      (error "PROCEDURE requires either :POINTER or :VALUE."))))
+
+(defun wrap-procedure (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'procedure :pointer pointer)))
+
+(defclass property (managed-object)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   (%visible-initarg :initarg :visible :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                            (visible nil visible-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or name-p default-value-p visible-p)
+        (error "PROPERTY cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and name-p default-value-p visible-p)
+      (multiple-value-bind (coerced-name cleanup-name)
+          (%coerce-argument name :daq-string)
+        (unwind-protect
+            (multiple-value-bind (coerced-default-value cleanup-default-value)
+                (%coerce-argument default-value :managed-pointer)
+              (unwind-protect
+                  (multiple-value-bind (coerced-visible cleanup-visible)
+                      (%coerce-argument visible :managed-pointer)
+                    (unwind-protect
+                        (%adopt-pointer object (opendaq:property/create-bool-property coerced-name coerced-default-value coerced-visible))
+                      (%cleanup-coerced-argument cleanup-visible)))
+                (%cleanup-coerced-argument cleanup-default-value)))
+          (%cleanup-coerced-argument cleanup-name)))
+      )
+    (t
+      (error "PROPERTY requires either :POINTER or :NAME and :DEFAULT-VALUE and :VISIBLE."))))
+
+(defun wrap-property (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'property :pointer pointer)))
+
+(defclass property-builder (managed-object)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-builder)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or name-p)
+        (error "PROPERTY-BUILDER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and name-p)
+      (multiple-value-bind (coerced-name cleanup-name)
+          (%coerce-argument name :daq-string)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:property-builder/create-property-builder coerced-name))
+          (%cleanup-coerced-argument cleanup-name)))
+      )
+    (t
+      (error "PROPERTY-BUILDER requires either :POINTER or :NAME."))))
+
+(defun wrap-property-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'property-builder :pointer pointer)))
+
+(defclass property-internal (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object property-internal)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "PROPERTY-INTERNAL requires :POINTER.")))
+
+(defun wrap-property-internal (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'property-internal :pointer pointer)))
+
+(defclass property-object (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object property-object)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:property-object/create-property-object))
+      )))
+
+(defun wrap-property-object (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'property-object :pointer pointer)))
+
+(defclass property-object-class (managed-object)
+  (
+   (%builder-initarg :initarg :builder :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-object-class)
+                                       &key (pointer nil pointer-p)
+                                            (builder nil builder-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or builder-p)
+        (error "PROPERTY-OBJECT-CLASS cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and builder-p)
+      (multiple-value-bind (coerced-builder cleanup-builder)
+          (%coerce-argument builder :managed-pointer)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:property-object-class/create-property-object-class-from-builder coerced-builder))
+          (%cleanup-coerced-argument cleanup-builder)))
+      )
+    (t
+      (error "PROPERTY-OBJECT-CLASS requires either :POINTER or :BUILDER."))))
+
+(defun wrap-property-object-class (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'property-object-class :pointer pointer)))
+
+(defclass property-object-class-builder (managed-object)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-object-class-builder)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or name-p)
+        (error "PROPERTY-OBJECT-CLASS-BUILDER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and name-p)
+      (multiple-value-bind (coerced-name cleanup-name)
+          (%coerce-argument name :daq-string)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:property-object-class-builder/create-property-object-class-builder coerced-name))
+          (%cleanup-coerced-argument cleanup-name)))
+      )
+    (t
+      (error "PROPERTY-OBJECT-CLASS-BUILDER requires either :POINTER or :NAME."))))
+
+(defun wrap-property-object-class-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'property-object-class-builder :pointer pointer)))
+
+(defclass property-object-class-internal (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object property-object-class-internal)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "PROPERTY-OBJECT-CLASS-INTERNAL requires :POINTER.")))
+
+(defun wrap-property-object-class-internal (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'property-object-class-internal :pointer pointer)))
+
+(defclass property-object-internal (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object property-object-internal)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "PROPERTY-OBJECT-INTERNAL requires :POINTER.")))
+
+(defun wrap-property-object-internal (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'property-object-internal :pointer pointer)))
+
+(defclass property-object-protected (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object property-object-protected)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "PROPERTY-OBJECT-PROTECTED requires :POINTER.")))
+
+(defun wrap-property-object-protected (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'property-object-protected :pointer pointer)))
+
+(defclass property-value-event-args (managed-object)
+  (
+   (%prop-initarg :initarg :prop :initform nil)
+   (%value-initarg :initarg :value :initform nil)
+   (%old-value-initarg :initarg :old-value :initform nil)
+   (%type-initarg :initarg :type :initform nil)
+   (%is-updating-initarg :initarg :is-updating :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-value-event-args)
+                                       &key (pointer nil pointer-p)
+                                            (prop nil prop-p)
+                                            (value nil value-p)
+                                            (old-value nil old-value-p)
+                                            (type nil type-p)
+                                            (is-updating nil is-updating-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or prop-p value-p old-value-p type-p is-updating-p)
+        (error "PROPERTY-VALUE-EVENT-ARGS cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and prop-p value-p old-value-p type-p is-updating-p)
+      (multiple-value-bind (coerced-prop cleanup-prop)
+          (%coerce-argument prop :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-value cleanup-value)
+                (%coerce-argument value :daq-base-object)
+              (unwind-protect
+                  (multiple-value-bind (coerced-old-value cleanup-old-value)
+                      (%coerce-argument old-value :daq-base-object)
+                    (unwind-protect
+                        (let ((coerced-type type))
+                          (multiple-value-bind (coerced-is-updating cleanup-is-updating)
+                              (%coerce-argument is-updating :daq-bool)
+                            (unwind-protect
+                                (%adopt-pointer object (opendaq:property-value-event-args/create-property-value-event-args coerced-prop coerced-value coerced-old-value coerced-type coerced-is-updating))
+                              (%cleanup-coerced-argument cleanup-is-updating)))
+                        )
+                      (%cleanup-coerced-argument cleanup-old-value)))
+                (%cleanup-coerced-argument cleanup-value)))
+          (%cleanup-coerced-argument cleanup-prop)))
+      )
+    (t
+      (error "PROPERTY-VALUE-EVENT-ARGS requires either :POINTER or :PROP and :VALUE and :OLD-VALUE and :TYPE and :IS-UPDATING."))))
+
+(defun wrap-property-value-event-args (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'property-value-event-args :pointer pointer)))
+
+(defclass range (managed-object)
+  (
+   (%low-value-initarg :initarg :low-value :initform nil)
+   (%high-value-initarg :initarg :high-value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object range)
+                                       &key (pointer nil pointer-p)
+                                            (low-value nil low-value-p)
+                                            (high-value nil high-value-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or low-value-p high-value-p)
+        (error "RANGE cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and low-value-p high-value-p)
+      (multiple-value-bind (coerced-low-value cleanup-low-value)
+          (%coerce-argument low-value :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-high-value cleanup-high-value)
+                (%coerce-argument high-value :managed-pointer)
+              (unwind-protect
+                  (%adopt-pointer object (opendaq:range/create-range coerced-low-value coerced-high-value))
+                (%cleanup-coerced-argument cleanup-high-value)))
+          (%cleanup-coerced-argument cleanup-low-value)))
+      )
+    (t
+      (error "RANGE requires either :POINTER or :LOW-VALUE and :HIGH-VALUE."))))
+
+(defun wrap-range (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'range :pointer pointer)))
 
 (defclass ratio (managed-object)
   (
@@ -143,6 +5065,684 @@
 (defun wrap-ratio (pointer)
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
     (make-instance 'ratio :pointer pointer)))
+
+(defclass reader (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object reader)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "READER requires :POINTER.")))
+
+(defun wrap-reader (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'reader :pointer pointer)))
+
+(defclass reader-config (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object reader-config)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "READER-CONFIG requires :POINTER.")))
+
+(defun wrap-reader-config (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'reader-config :pointer pointer)))
+
+(defclass reader-status (managed-object)
+  (
+   (%event-packet-initarg :initarg :event-packet :initform nil)
+   (%valid-initarg :initarg :valid :initform nil)
+   (%offset-initarg :initarg :offset :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object reader-status)
+                                       &key (pointer nil pointer-p)
+                                            (event-packet nil event-packet-p)
+                                            (valid nil valid-p)
+                                            (offset nil offset-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or event-packet-p valid-p offset-p)
+        (error "READER-STATUS cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and event-packet-p valid-p offset-p)
+      (multiple-value-bind (coerced-event-packet cleanup-event-packet)
+          (%coerce-argument event-packet :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-valid cleanup-valid)
+                (%coerce-argument valid :daq-bool)
+              (unwind-protect
+                  (multiple-value-bind (coerced-offset cleanup-offset)
+                      (%coerce-argument offset :managed-pointer)
+                    (unwind-protect
+                        (%adopt-pointer object (opendaq:reader-status/create-reader-status coerced-event-packet coerced-valid coerced-offset))
+                      (%cleanup-coerced-argument cleanup-offset)))
+                (%cleanup-coerced-argument cleanup-valid)))
+          (%cleanup-coerced-argument cleanup-event-packet)))
+      )
+    (t
+      (error "READER-STATUS requires either :POINTER or :EVENT-PACKET and :VALID and :OFFSET."))))
+
+(defun wrap-reader-status (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'reader-status :pointer pointer)))
+
+(defclass recorder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object recorder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "RECORDER requires :POINTER.")))
+
+(defun wrap-recorder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'recorder :pointer pointer)))
+
+(defclass recursive-search (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object recursive-search)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "RECURSIVE-SEARCH requires :POINTER.")))
+
+(defun wrap-recursive-search (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'recursive-search :pointer pointer)))
+
+(defclass reference-domain-info (managed-object)
+  (
+   (%builder-initarg :initarg :builder :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object reference-domain-info)
+                                       &key (pointer nil pointer-p)
+                                            (builder nil builder-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or builder-p)
+        (error "REFERENCE-DOMAIN-INFO cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and builder-p)
+      (multiple-value-bind (coerced-builder cleanup-builder)
+          (%coerce-argument builder :managed-pointer)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:reference-domain-info/create-reference-domain-info-from-builder coerced-builder))
+          (%cleanup-coerced-argument cleanup-builder)))
+      )
+    (t
+      (error "REFERENCE-DOMAIN-INFO requires either :POINTER or :BUILDER."))))
+
+(defun wrap-reference-domain-info (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'reference-domain-info :pointer pointer)))
+
+(defclass reference-domain-info-builder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object reference-domain-info-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:reference-domain-info-builder/create-reference-domain-info-builder))
+      )))
+
+(defun wrap-reference-domain-info-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'reference-domain-info-builder :pointer pointer)))
+
+(defclass removable (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object removable)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "REMOVABLE requires :POINTER.")))
+
+(defun wrap-removable (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'removable :pointer pointer)))
+
+(defclass reusable-data-packet (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object reusable-data-packet)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "REUSABLE-DATA-PACKET requires :POINTER.")))
+
+(defun wrap-reusable-data-packet (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'reusable-data-packet :pointer pointer)))
+
+(defclass rule-private (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object rule-private)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "RULE-PRIVATE requires :POINTER.")))
+
+(defun wrap-rule-private (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'rule-private :pointer pointer)))
+
+(defclass sample-reader (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object sample-reader)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "SAMPLE-READER requires :POINTER.")))
+
+(defun wrap-sample-reader (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'sample-reader :pointer pointer)))
+
+(defclass scaling (managed-object)
+  (
+   (%input-data-type-initarg :initarg :input-data-type :initform nil)
+   (%output-data-type-initarg :initarg :output-data-type :initform nil)
+   (%scaling-type-initarg :initarg :scaling-type :initform nil)
+   (%parameters-initarg :initarg :parameters :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object scaling)
+                                       &key (pointer nil pointer-p)
+                                            (input-data-type nil input-data-type-p)
+                                            (output-data-type nil output-data-type-p)
+                                            (scaling-type nil scaling-type-p)
+                                            (parameters nil parameters-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or input-data-type-p output-data-type-p scaling-type-p parameters-p)
+        (error "SCALING cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and input-data-type-p output-data-type-p scaling-type-p parameters-p)
+      (let ((coerced-input-data-type input-data-type))
+        (let ((coerced-output-data-type output-data-type))
+          (let ((coerced-scaling-type scaling-type))
+            (multiple-value-bind (coerced-parameters cleanup-parameters)
+                (%coerce-argument parameters :managed-pointer)
+              (unwind-protect
+                  (%adopt-pointer object (opendaq:scaling/create-scaling coerced-input-data-type coerced-output-data-type coerced-scaling-type coerced-parameters))
+                (%cleanup-coerced-argument cleanup-parameters)))
+          )
+        )
+      )
+      )
+    (t
+      (error "SCALING requires either :POINTER or :INPUT-DATA-TYPE and :OUTPUT-DATA-TYPE and :SCALING-TYPE and :PARAMETERS."))))
+
+(defun wrap-scaling (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'scaling :pointer pointer)))
+
+(defclass scaling-builder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object scaling-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:scaling-builder/create-scaling-builder))
+      )))
+
+(defun wrap-scaling-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'scaling-builder :pointer pointer)))
+
+(defclass scaling-calc-private (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object scaling-calc-private)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "SCALING-CALC-PRIVATE requires :POINTER.")))
+
+(defun wrap-scaling-calc-private (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'scaling-calc-private :pointer pointer)))
+
+(defclass scheduler (managed-object)
+  (
+   (%logger-initarg :initarg :logger :initform nil)
+   (%num-workers-initarg :initarg :num-workers :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object scheduler)
+                                       &key (pointer nil pointer-p)
+                                            (logger nil logger-p)
+                                            (num-workers nil num-workers-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or logger-p num-workers-p)
+        (error "SCHEDULER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and logger-p num-workers-p)
+      (multiple-value-bind (coerced-logger cleanup-logger)
+          (%coerce-argument logger :managed-pointer)
+        (unwind-protect
+            (let ((coerced-num-workers num-workers))
+              (%adopt-pointer object (opendaq:scheduler/create-scheduler coerced-logger coerced-num-workers))
+            )
+          (%cleanup-coerced-argument cleanup-logger)))
+      )
+    (t
+      (error "SCHEDULER requires either :POINTER or :LOGGER and :NUM-WORKERS."))))
+
+(defun wrap-scheduler (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'scheduler :pointer pointer)))
+
+(defclass search-filter (managed-object)
+  (
+   (%left-initarg :initarg :left :initform nil)
+   (%right-initarg :initarg :right :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object search-filter)
+                                       &key (pointer nil pointer-p)
+                                            (left nil left-p)
+                                            (right nil right-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or left-p right-p)
+        (error "SEARCH-FILTER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and left-p right-p)
+      (multiple-value-bind (coerced-left cleanup-left)
+          (%coerce-argument left :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-right cleanup-right)
+                (%coerce-argument right :managed-pointer)
+              (unwind-protect
+                  (%adopt-pointer object (opendaq:search-filter/create-and-search-filter coerced-left coerced-right))
+                (%cleanup-coerced-argument cleanup-right)))
+          (%cleanup-coerced-argument cleanup-left)))
+      )
+    (t
+      (error "SEARCH-FILTER requires either :POINTER or :LEFT and :RIGHT."))))
+
+(defun wrap-search-filter (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'search-filter :pointer pointer)))
+
+(defclass serializable (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object serializable)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "SERIALIZABLE requires :POINTER.")))
+
+(defun wrap-serializable (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'serializable :pointer pointer)))
+
+(defclass serialized-list (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object serialized-list)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "SERIALIZED-LIST requires :POINTER.")))
+
+(defun wrap-serialized-list (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'serialized-list :pointer pointer)))
+
+(defclass serialized-object (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object serialized-object)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "SERIALIZED-OBJECT requires :POINTER.")))
+
+(defun wrap-serialized-object (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'serialized-object :pointer pointer)))
+
+(defclass serializer (managed-object)
+  (
+   (%pretty-initarg :initarg :pretty :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object serializer)
+                                       &key (pointer nil pointer-p)
+                                            (pretty nil pretty-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or pretty-p)
+        (error "SERIALIZER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and pretty-p)
+      (multiple-value-bind (coerced-pretty cleanup-pretty)
+          (%coerce-argument pretty :daq-bool)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:serializer/create-json-serializer coerced-pretty))
+          (%cleanup-coerced-argument cleanup-pretty)))
+      )
+    (t
+      (error "SERIALIZER requires either :POINTER or :PRETTY."))))
+
+(defun wrap-serializer (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'serializer :pointer pointer)))
+
+(defclass server (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object server)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "SERVER requires :POINTER.")))
+
+(defun wrap-server (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'server :pointer pointer)))
+
+(defclass server-capability (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object server-capability)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "SERVER-CAPABILITY requires :POINTER.")))
+
+(defun wrap-server-capability (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'server-capability :pointer pointer)))
+
+(defclass server-capability-config (managed-object)
+  (
+   (%protocol-id-initarg :initarg :protocol-id :initform nil)
+   (%protocol-name-initarg :initarg :protocol-name :initform nil)
+   (%protocol-type-initarg :initarg :protocol-type :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object server-capability-config)
+                                       &key (pointer nil pointer-p)
+                                            (protocol-id nil protocol-id-p)
+                                            (protocol-name nil protocol-name-p)
+                                            (protocol-type nil protocol-type-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or protocol-id-p protocol-name-p protocol-type-p)
+        (error "SERVER-CAPABILITY-CONFIG cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and protocol-id-p protocol-name-p protocol-type-p)
+      (multiple-value-bind (coerced-protocol-id cleanup-protocol-id)
+          (%coerce-argument protocol-id :daq-string)
+        (unwind-protect
+            (multiple-value-bind (coerced-protocol-name cleanup-protocol-name)
+                (%coerce-argument protocol-name :daq-string)
+              (unwind-protect
+                  (let ((coerced-protocol-type protocol-type))
+                    (%adopt-pointer object (opendaq:server-capability-config/create-server-capability coerced-protocol-id coerced-protocol-name coerced-protocol-type))
+                  )
+                (%cleanup-coerced-argument cleanup-protocol-name)))
+          (%cleanup-coerced-argument cleanup-protocol-id)))
+      )
+    (t
+      (error "SERVER-CAPABILITY-CONFIG requires either :POINTER or :PROTOCOL-ID and :PROTOCOL-NAME and :PROTOCOL-TYPE."))))
+
+(defun wrap-server-capability-config (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'server-capability-config :pointer pointer)))
+
+(defclass server-type (managed-object)
+  (
+   (%id-initarg :initarg :id :initform nil)
+   (%name-initarg :initarg :name :initform nil)
+   (%description-initarg :initarg :description :initform nil)
+   (%default-config-initarg :initarg :default-config :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object server-type)
+                                       &key (pointer nil pointer-p)
+                                            (id nil id-p)
+                                            (name nil name-p)
+                                            (description nil description-p)
+                                            (default-config nil default-config-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or id-p name-p description-p default-config-p)
+        (error "SERVER-TYPE cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and id-p name-p description-p default-config-p)
+      (multiple-value-bind (coerced-id cleanup-id)
+          (%coerce-argument id :daq-string)
+        (unwind-protect
+            (multiple-value-bind (coerced-name cleanup-name)
+                (%coerce-argument name :daq-string)
+              (unwind-protect
+                  (multiple-value-bind (coerced-description cleanup-description)
+                      (%coerce-argument description :daq-string)
+                    (unwind-protect
+                        (multiple-value-bind (coerced-default-config cleanup-default-config)
+                            (%coerce-argument default-config :managed-pointer)
+                          (unwind-protect
+                              (%adopt-pointer object (opendaq:server-type/create-server-type coerced-id coerced-name coerced-description coerced-default-config))
+                            (%cleanup-coerced-argument cleanup-default-config)))
+                      (%cleanup-coerced-argument cleanup-description)))
+                (%cleanup-coerced-argument cleanup-name)))
+          (%cleanup-coerced-argument cleanup-id)))
+      )
+    (t
+      (error "SERVER-TYPE requires either :POINTER or :ID and :NAME and :DESCRIPTION and :DEFAULT-CONFIG."))))
+
+(defun wrap-server-type (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'server-type :pointer pointer)))
+
+(defclass signal (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object signal)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "SIGNAL requires :POINTER.")))
+
+(defun wrap-signal (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'signal :pointer pointer)))
+
+(defclass signal-config (managed-object)
+  (
+   (%context-initarg :initarg :context :initform nil)
+   (%parent-initarg :initarg :parent :initform nil)
+   (%local-id-initarg :initarg :local-id :initform nil)
+   (%class-name-initarg :initarg :class-name :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object signal-config)
+                                       &key (pointer nil pointer-p)
+                                            (context nil context-p)
+                                            (parent nil parent-p)
+                                            (local-id nil local-id-p)
+                                            (class-name nil class-name-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or context-p parent-p local-id-p class-name-p)
+        (error "SIGNAL-CONFIG cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and context-p parent-p local-id-p class-name-p)
+      (multiple-value-bind (coerced-context cleanup-context)
+          (%coerce-argument context :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-parent cleanup-parent)
+                (%coerce-argument parent :managed-pointer)
+              (unwind-protect
+                  (multiple-value-bind (coerced-local-id cleanup-local-id)
+                      (%coerce-argument local-id :daq-string)
+                    (unwind-protect
+                        (multiple-value-bind (coerced-class-name cleanup-class-name)
+                            (%coerce-argument class-name :daq-string)
+                          (unwind-protect
+                              (%adopt-pointer object (opendaq:signal-config/create-signal coerced-context coerced-parent coerced-local-id coerced-class-name))
+                            (%cleanup-coerced-argument cleanup-class-name)))
+                      (%cleanup-coerced-argument cleanup-local-id)))
+                (%cleanup-coerced-argument cleanup-parent)))
+          (%cleanup-coerced-argument cleanup-context)))
+      )
+    (t
+      (error "SIGNAL-CONFIG requires either :POINTER or :CONTEXT and :PARENT and :LOCAL-ID and :CLASS-NAME."))))
+
+(defun wrap-signal-config (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'signal-config :pointer pointer)))
+
+(defclass signal-events (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object signal-events)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "SIGNAL-EVENTS requires :POINTER.")))
+
+(defun wrap-signal-events (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'signal-events :pointer pointer)))
+
+(defclass signal-private (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object signal-private)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "SIGNAL-PRIVATE requires :POINTER.")))
+
+(defun wrap-signal-private (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'signal-private :pointer pointer)))
+
+(defclass simple-type (managed-object)
+  (
+   (%core-type-initarg :initarg :core-type :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object simple-type)
+                                       &key (pointer nil pointer-p)
+                                            (core-type nil core-type-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or core-type-p)
+        (error "SIMPLE-TYPE cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and core-type-p)
+      (let ((coerced-core-type core-type))
+        (%adopt-pointer object (opendaq:simple-type/create-simple-type coerced-core-type))
+      )
+      )
+    (t
+      (error "SIMPLE-TYPE requires either :POINTER or :CORE-TYPE."))))
+
+(defun wrap-simple-type (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'simple-type :pointer pointer)))
 
 (defclass stream-reader (managed-object)
   (
@@ -189,53 +5789,4126 @@
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
     (make-instance 'stream-reader :pointer pointer)))
 
-(defgeneric numerator (object))
-(defmethod numerator ((object ratio))
-  (opendaq:ratio/get-numerator (%require-live-pointer object))
+(defclass stream-reader-builder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object stream-reader-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:stream-reader-builder/create-stream-reader-builder))
+      )))
+
+(defun wrap-stream-reader-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'stream-reader-builder :pointer pointer)))
+
+(defclass streaming (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object streaming)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "STREAMING requires :POINTER.")))
+
+(defun wrap-streaming (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'streaming :pointer pointer)))
+
+(defclass streaming-type (managed-object)
+  (
+   (%id-initarg :initarg :id :initform nil)
+   (%name-initarg :initarg :name :initform nil)
+   (%description-initarg :initarg :description :initform nil)
+   (%prefix-initarg :initarg :prefix :initform nil)
+   (%default-config-initarg :initarg :default-config :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object streaming-type)
+                                       &key (pointer nil pointer-p)
+                                            (id nil id-p)
+                                            (name nil name-p)
+                                            (description nil description-p)
+                                            (prefix nil prefix-p)
+                                            (default-config nil default-config-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or id-p name-p description-p prefix-p default-config-p)
+        (error "STREAMING-TYPE cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and id-p name-p description-p prefix-p default-config-p)
+      (multiple-value-bind (coerced-id cleanup-id)
+          (%coerce-argument id :daq-string)
+        (unwind-protect
+            (multiple-value-bind (coerced-name cleanup-name)
+                (%coerce-argument name :daq-string)
+              (unwind-protect
+                  (multiple-value-bind (coerced-description cleanup-description)
+                      (%coerce-argument description :daq-string)
+                    (unwind-protect
+                        (multiple-value-bind (coerced-prefix cleanup-prefix)
+                            (%coerce-argument prefix :daq-string)
+                          (unwind-protect
+                              (multiple-value-bind (coerced-default-config cleanup-default-config)
+                                  (%coerce-argument default-config :managed-pointer)
+                                (unwind-protect
+                                    (%adopt-pointer object (opendaq:streaming-type/create-streaming-type coerced-id coerced-name coerced-description coerced-prefix coerced-default-config))
+                                  (%cleanup-coerced-argument cleanup-default-config)))
+                            (%cleanup-coerced-argument cleanup-prefix)))
+                      (%cleanup-coerced-argument cleanup-description)))
+                (%cleanup-coerced-argument cleanup-name)))
+          (%cleanup-coerced-argument cleanup-id)))
+      )
+    (t
+      (error "STREAMING-TYPE requires either :POINTER or :ID and :NAME and :DESCRIPTION and :PREFIX and :DEFAULT-CONFIG."))))
+
+(defun wrap-streaming-type (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'streaming-type :pointer pointer)))
+
+(defclass struct (managed-object)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%fields-initarg :initarg :fields :initform nil)
+   (%type-manager-initarg :initarg :type-manager :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object struct)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (fields nil fields-p)
+                                            (type-manager nil type-manager-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or name-p fields-p type-manager-p)
+        (error "STRUCT cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and name-p fields-p type-manager-p)
+      (multiple-value-bind (coerced-name cleanup-name)
+          (%coerce-argument name :daq-string)
+        (unwind-protect
+            (multiple-value-bind (coerced-fields cleanup-fields)
+                (%coerce-argument fields :managed-pointer)
+              (unwind-protect
+                  (multiple-value-bind (coerced-type-manager cleanup-type-manager)
+                      (%coerce-argument type-manager :managed-pointer)
+                    (unwind-protect
+                        (%adopt-pointer object (opendaq:struct/create-struct coerced-name coerced-fields coerced-type-manager))
+                      (%cleanup-coerced-argument cleanup-type-manager)))
+                (%cleanup-coerced-argument cleanup-fields)))
+          (%cleanup-coerced-argument cleanup-name)))
+      )
+    (t
+      (error "STRUCT requires either :POINTER or :NAME and :FIELDS and :TYPE-MANAGER."))))
+
+(defun wrap-struct (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'struct :pointer pointer)))
+
+(defclass struct-builder (managed-object)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%type-manager-initarg :initarg :type-manager :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object struct-builder)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (type-manager nil type-manager-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or name-p type-manager-p)
+        (error "STRUCT-BUILDER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and name-p type-manager-p)
+      (multiple-value-bind (coerced-name cleanup-name)
+          (%coerce-argument name :daq-string)
+        (unwind-protect
+            (multiple-value-bind (coerced-type-manager cleanup-type-manager)
+                (%coerce-argument type-manager :managed-pointer)
+              (unwind-protect
+                  (%adopt-pointer object (opendaq:struct-builder/create-struct-builder coerced-name coerced-type-manager))
+                (%cleanup-coerced-argument cleanup-type-manager)))
+          (%cleanup-coerced-argument cleanup-name)))
+      )
+    (t
+      (error "STRUCT-BUILDER requires either :POINTER or :NAME and :TYPE-MANAGER."))))
+
+(defun wrap-struct-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'struct-builder :pointer pointer)))
+
+(defclass struct-type (managed-object)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%names-initarg :initarg :names :initform nil)
+   (%default-values-initarg :initarg :default-values :initform nil)
+   (%types-initarg :initarg :types :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object struct-type)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (names nil names-p)
+                                            (default-values nil default-values-p)
+                                            (types nil types-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or name-p names-p default-values-p types-p)
+        (error "STRUCT-TYPE cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and name-p names-p default-values-p types-p)
+      (multiple-value-bind (coerced-name cleanup-name)
+          (%coerce-argument name :daq-string)
+        (unwind-protect
+            (multiple-value-bind (coerced-names cleanup-names)
+                (%coerce-argument names :managed-pointer)
+              (unwind-protect
+                  (multiple-value-bind (coerced-default-values cleanup-default-values)
+                      (%coerce-argument default-values :managed-pointer)
+                    (unwind-protect
+                        (multiple-value-bind (coerced-types cleanup-types)
+                            (%coerce-argument types :managed-pointer)
+                          (unwind-protect
+                              (%adopt-pointer object (opendaq:struct-type/create-struct-type coerced-name coerced-names coerced-default-values coerced-types))
+                            (%cleanup-coerced-argument cleanup-types)))
+                      (%cleanup-coerced-argument cleanup-default-values)))
+                (%cleanup-coerced-argument cleanup-names)))
+          (%cleanup-coerced-argument cleanup-name)))
+      )
+    (t
+      (error "STRUCT-TYPE requires either :POINTER or :NAME and :NAMES and :DEFAULT-VALUES and :TYPES."))))
+
+(defun wrap-struct-type (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'struct-type :pointer pointer)))
+
+(defclass subscription-event-args (managed-object)
+  (
+   (%streaming-connection-string-initarg :initarg :streaming-connection-string :initform nil)
+   (%type-initarg :initarg :type :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object subscription-event-args)
+                                       &key (pointer nil pointer-p)
+                                            (streaming-connection-string nil streaming-connection-string-p)
+                                            (type nil type-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or streaming-connection-string-p type-p)
+        (error "SUBSCRIPTION-EVENT-ARGS cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and streaming-connection-string-p type-p)
+      (multiple-value-bind (coerced-streaming-connection-string cleanup-streaming-connection-string)
+          (%coerce-argument streaming-connection-string :daq-string)
+        (unwind-protect
+            (let ((coerced-type type))
+              (%adopt-pointer object (opendaq:subscription-event-args/create-subscription-event-args coerced-streaming-connection-string coerced-type))
+            )
+          (%cleanup-coerced-argument cleanup-streaming-connection-string)))
+      )
+    (t
+      (error "SUBSCRIPTION-EVENT-ARGS requires either :POINTER or :STREAMING-CONNECTION-STRING and :TYPE."))))
+
+(defun wrap-subscription-event-args (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'subscription-event-args :pointer pointer)))
+
+(defclass sync-component (managed-object)
+  (
+   (%context-initarg :initarg :context :initform nil)
+   (%parse-failed-exception-initarg :initarg :parse-failed-exception :initform nil)
+   (%local-id-initarg :initarg :local-id :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object sync-component)
+                                       &key (pointer nil pointer-p)
+                                            (context nil context-p)
+                                            (parse-failed-exception nil parse-failed-exception-p)
+                                            (local-id nil local-id-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or context-p parse-failed-exception-p local-id-p)
+        (error "SYNC-COMPONENT cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and context-p parse-failed-exception-p local-id-p)
+      (multiple-value-bind (coerced-context cleanup-context)
+          (%coerce-argument context :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-parse-failed-exception cleanup-parse-failed-exception)
+                (%coerce-argument parse-failed-exception :managed-pointer)
+              (unwind-protect
+                  (multiple-value-bind (coerced-local-id cleanup-local-id)
+                      (%coerce-argument local-id :daq-string)
+                    (unwind-protect
+                        (%adopt-pointer object (opendaq:sync-component/create-sync-component coerced-context coerced-parse-failed-exception coerced-local-id))
+                      (%cleanup-coerced-argument cleanup-local-id)))
+                (%cleanup-coerced-argument cleanup-parse-failed-exception)))
+          (%cleanup-coerced-argument cleanup-context)))
+      )
+    (t
+      (error "SYNC-COMPONENT requires either :POINTER or :CONTEXT and :PARSE-FAILED-EXCEPTION and :LOCAL-ID."))))
+
+(defun wrap-sync-component (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'sync-component :pointer pointer)))
+
+(defclass sync-component-private (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object sync-component-private)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "SYNC-COMPONENT-PRIVATE requires :POINTER.")))
+
+(defun wrap-sync-component-private (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'sync-component-private :pointer pointer)))
+
+(defclass tags (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object tags)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:tags/create-tags))
+      )))
+
+(defun wrap-tags (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'tags :pointer pointer)))
+
+(defclass tags-private (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object tags-private)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "TAGS-PRIVATE requires :POINTER.")))
+
+(defun wrap-tags-private (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'tags-private :pointer pointer)))
+
+(defclass tail-reader (managed-object)
+  (
+   (%signal-initarg :initarg :signal :initform nil)
+   (%history-size-initarg :initarg :history-size :initform nil)
+   (%value-read-type-initarg :initarg :value-read-type :initform nil)
+   (%domain-read-type-initarg :initarg :domain-read-type :initform nil)
+   (%mode-initarg :initarg :mode :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object tail-reader)
+                                       &key (pointer nil pointer-p)
+                                            (signal nil signal-p)
+                                            (history-size nil history-size-p)
+                                            (value-read-type nil value-read-type-p)
+                                            (domain-read-type nil domain-read-type-p)
+                                            (mode nil mode-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or signal-p history-size-p value-read-type-p domain-read-type-p mode-p)
+        (error "TAIL-READER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and signal-p history-size-p value-read-type-p domain-read-type-p mode-p)
+      (multiple-value-bind (coerced-signal cleanup-signal)
+          (%coerce-argument signal :managed-pointer)
+        (unwind-protect
+            (let ((coerced-history-size history-size))
+              (let ((coerced-value-read-type value-read-type))
+                (let ((coerced-domain-read-type domain-read-type))
+                  (let ((coerced-mode mode))
+                    (%adopt-pointer object (opendaq:tail-reader/create-tail-reader coerced-signal coerced-history-size coerced-value-read-type coerced-domain-read-type coerced-mode))
+                  )
+                )
+              )
+            )
+          (%cleanup-coerced-argument cleanup-signal)))
+      )
+    (t
+      (error "TAIL-READER requires either :POINTER or :SIGNAL and :HISTORY-SIZE and :VALUE-READ-TYPE and :DOMAIN-READ-TYPE and :MODE."))))
+
+(defun wrap-tail-reader (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'tail-reader :pointer pointer)))
+
+(defclass tail-reader-builder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object tail-reader-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:tail-reader-builder/create-tail-reader-builder))
+      )))
+
+(defun wrap-tail-reader-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'tail-reader-builder :pointer pointer)))
+
+(defclass tail-reader-status (managed-object)
+  (
+   (%event-packet-initarg :initarg :event-packet :initform nil)
+   (%valid-initarg :initarg :valid :initform nil)
+   (%offset-initarg :initarg :offset :initform nil)
+   (%sufficient-history-initarg :initarg :sufficient-history :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object tail-reader-status)
+                                       &key (pointer nil pointer-p)
+                                            (event-packet nil event-packet-p)
+                                            (valid nil valid-p)
+                                            (offset nil offset-p)
+                                            (sufficient-history nil sufficient-history-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or event-packet-p valid-p offset-p sufficient-history-p)
+        (error "TAIL-READER-STATUS cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and event-packet-p valid-p offset-p sufficient-history-p)
+      (multiple-value-bind (coerced-event-packet cleanup-event-packet)
+          (%coerce-argument event-packet :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-valid cleanup-valid)
+                (%coerce-argument valid :daq-bool)
+              (unwind-protect
+                  (multiple-value-bind (coerced-offset cleanup-offset)
+                      (%coerce-argument offset :managed-pointer)
+                    (unwind-protect
+                        (multiple-value-bind (coerced-sufficient-history cleanup-sufficient-history)
+                            (%coerce-argument sufficient-history :daq-bool)
+                          (unwind-protect
+                              (%adopt-pointer object (opendaq:tail-reader-status/create-tail-reader-status coerced-event-packet coerced-valid coerced-offset coerced-sufficient-history))
+                            (%cleanup-coerced-argument cleanup-sufficient-history)))
+                      (%cleanup-coerced-argument cleanup-offset)))
+                (%cleanup-coerced-argument cleanup-valid)))
+          (%cleanup-coerced-argument cleanup-event-packet)))
+      )
+    (t
+      (error "TAIL-READER-STATUS requires either :POINTER or :EVENT-PACKET and :VALID and :OFFSET and :SUFFICIENT-HISTORY."))))
+
+(defun wrap-tail-reader-status (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'tail-reader-status :pointer pointer)))
+
+(defclass task (managed-object)
+  (
+   (%work-initarg :initarg :work :initform nil)
+   (%name-initarg :initarg :name :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object task)
+                                       &key (pointer nil pointer-p)
+                                            (work nil work-p)
+                                            (name nil name-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or work-p name-p)
+        (error "TASK cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and work-p name-p)
+      (multiple-value-bind (coerced-work cleanup-work)
+          (%coerce-argument work :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-name cleanup-name)
+                (%coerce-argument name :daq-string)
+              (unwind-protect
+                  (%adopt-pointer object (opendaq:task/create-task coerced-work coerced-name))
+                (%cleanup-coerced-argument cleanup-name)))
+          (%cleanup-coerced-argument cleanup-work)))
+      )
+    (t
+      (error "TASK requires either :POINTER or :WORK and :NAME."))))
+
+(defun wrap-task (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'task :pointer pointer)))
+
+(defclass task-graph (managed-object)
+  (
+   (%work-initarg :initarg :work :initform nil)
+   (%name-initarg :initarg :name :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object task-graph)
+                                       &key (pointer nil pointer-p)
+                                            (work nil work-p)
+                                            (name nil name-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or work-p name-p)
+        (error "TASK-GRAPH cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and work-p name-p)
+      (multiple-value-bind (coerced-work cleanup-work)
+          (%coerce-argument work :managed-pointer)
+        (unwind-protect
+            (multiple-value-bind (coerced-name cleanup-name)
+                (%coerce-argument name :daq-string)
+              (unwind-protect
+                  (%adopt-pointer object (opendaq:task-graph/create-task-graph coerced-work coerced-name))
+                (%cleanup-coerced-argument cleanup-name)))
+          (%cleanup-coerced-argument cleanup-work)))
+      )
+    (t
+      (error "TASK-GRAPH requires either :POINTER or :WORK and :NAME."))))
+
+(defun wrap-task-graph (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'task-graph :pointer pointer)))
+
+(defclass type-manager (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object type-manager)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:type-manager/create-type-manager))
+      )))
+
+(defun wrap-type-manager (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'type-manager :pointer pointer)))
+
+(defclass type-manager-private (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object type-manager-private)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "TYPE-MANAGER-PRIVATE requires :POINTER.")))
+
+(defun wrap-type-manager-private (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'type-manager-private :pointer pointer)))
+
+(defclass unit (managed-object)
+  (
+   (%id-initarg :initarg :id :initform nil)
+   (%symbol-initarg :initarg :symbol :initform nil)
+   (%name-initarg :initarg :name :initform nil)
+   (%quantity-initarg :initarg :quantity :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object unit)
+                                       &key (pointer nil pointer-p)
+                                            (id nil id-p)
+                                            (symbol nil symbol-p)
+                                            (name nil name-p)
+                                            (quantity nil quantity-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or id-p symbol-p name-p quantity-p)
+        (error "UNIT cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and id-p symbol-p name-p quantity-p)
+      (let ((coerced-id id))
+        (multiple-value-bind (coerced-symbol cleanup-symbol)
+            (%coerce-argument symbol :daq-string)
+          (unwind-protect
+              (multiple-value-bind (coerced-name cleanup-name)
+                  (%coerce-argument name :daq-string)
+                (unwind-protect
+                    (multiple-value-bind (coerced-quantity cleanup-quantity)
+                        (%coerce-argument quantity :daq-string)
+                      (unwind-protect
+                          (%adopt-pointer object (opendaq:unit/create-unit coerced-id coerced-symbol coerced-name coerced-quantity))
+                        (%cleanup-coerced-argument cleanup-quantity)))
+                  (%cleanup-coerced-argument cleanup-name)))
+            (%cleanup-coerced-argument cleanup-symbol)))
+      )
+      )
+    (t
+      (error "UNIT requires either :POINTER or :ID and :SYMBOL and :NAME and :QUANTITY."))))
+
+(defun wrap-unit (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'unit :pointer pointer)))
+
+(defclass unit-builder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object unit-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:unit-builder/create-unit-builder))
+      )))
+
+(defun wrap-unit-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'unit-builder :pointer pointer)))
+
+(defclass updatable (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object updatable)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "UPDATABLE requires :POINTER.")))
+
+(defun wrap-updatable (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'updatable :pointer pointer)))
+
+(defclass update-parameters (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object update-parameters)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:update-parameters/create-update-parameters))
+      )))
+
+(defun wrap-update-parameters (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'update-parameters :pointer pointer)))
+
+(defclass user (managed-object)
+  (
+   (%username-initarg :initarg :username :initform nil)
+   (%password-hash-initarg :initarg :password-hash :initform nil)
+   (%groups-initarg :initarg :groups :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object user)
+                                       &key (pointer nil pointer-p)
+                                            (username nil username-p)
+                                            (password-hash nil password-hash-p)
+                                            (groups nil groups-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or username-p password-hash-p groups-p)
+        (error "USER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and username-p password-hash-p groups-p)
+      (multiple-value-bind (coerced-username cleanup-username)
+          (%coerce-argument username :daq-string)
+        (unwind-protect
+            (multiple-value-bind (coerced-password-hash cleanup-password-hash)
+                (%coerce-argument password-hash :daq-string)
+              (unwind-protect
+                  (multiple-value-bind (coerced-groups cleanup-groups)
+                      (%coerce-argument groups :managed-pointer)
+                    (unwind-protect
+                        (%adopt-pointer object (opendaq:user/create-user coerced-username coerced-password-hash coerced-groups))
+                      (%cleanup-coerced-argument cleanup-groups)))
+                (%cleanup-coerced-argument cleanup-password-hash)))
+          (%cleanup-coerced-argument cleanup-username)))
+      )
+    (t
+      (error "USER requires either :POINTER or :USERNAME and :PASSWORD-HASH and :GROUPS."))))
+
+(defun wrap-user (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'user :pointer pointer)))
+
+(defclass user-internal (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object user-internal)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "USER-INTERNAL requires :POINTER.")))
+
+(defun wrap-user-internal (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'user-internal :pointer pointer)))
+
+(defclass user-lock (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object user-lock)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:user-lock/create-user-lock))
+      )))
+
+(defun wrap-user-lock (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'user-lock :pointer pointer)))
+
+(defclass validator (managed-object)
+  (
+   (%eval-initarg :initarg :eval :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object validator)
+                                       &key (pointer nil pointer-p)
+                                            (eval nil eval-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or eval-p)
+        (error "VALIDATOR cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and eval-p)
+      (multiple-value-bind (coerced-eval cleanup-eval)
+          (%coerce-argument eval :daq-string)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:validator/create-validator coerced-eval))
+          (%cleanup-coerced-argument cleanup-eval)))
+      )
+    (t
+      (error "VALIDATOR requires either :POINTER or :EVAL."))))
+
+(defun wrap-validator (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'validator :pointer pointer)))
+
+(defclass version-info (managed-object)
+  (
+   (%major-initarg :initarg :major :initform nil)
+   (%minor-initarg :initarg :minor :initform nil)
+   (%patch-initarg :initarg :patch :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object version-info)
+                                       &key (pointer nil pointer-p)
+                                            (major nil major-p)
+                                            (minor nil minor-p)
+                                            (patch nil patch-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or major-p minor-p patch-p)
+        (error "VERSION-INFO cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and major-p minor-p patch-p)
+      (let ((coerced-major major))
+        (let ((coerced-minor minor))
+          (let ((coerced-patch patch))
+            (%adopt-pointer object (opendaq:version-info/create-version-info coerced-major coerced-minor coerced-patch))
+          )
+        )
+      )
+      )
+    (t
+      (error "VERSION-INFO requires either :POINTER or :MAJOR and :MINOR and :PATCH."))))
+
+(defun wrap-version-info (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'version-info :pointer pointer)))
+
+(defclass work (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object work)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "WORK requires :POINTER.")))
+
+(defun wrap-work (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'work :pointer pointer)))
+
+(defgeneric build (object))
+(defmethod build ((object address-info-builder))
+  (wrap-address-info (opendaq:address-info-builder/build (%require-live-pointer object)))
 )
 
-(defgeneric denominator (object))
-(defmethod denominator ((object ratio))
-  (opendaq:ratio/get-denominator (%require-live-pointer object))
+(defgeneric address-info-builder-address (object))
+(defmethod address-info-builder-address ((object address-info-builder))
+  (%daq-string-to-lisp-and-release (opendaq:address-info-builder/get-address (%require-live-pointer object)))
 )
 
-(defgeneric simplify (object))
-(defmethod simplify ((object ratio))
-  (wrap-ratio (opendaq:ratio/simplify (%require-live-pointer object)))
+(defgeneric connection-string (object))
+(defmethod connection-string ((object address-info-builder))
+  (%daq-string-to-lisp-and-release (opendaq:address-info-builder/get-connection-string (%require-live-pointer object)))
 )
 
-(defgeneric module-path (object))
-(defmethod module-path ((object instance-builder))
-  (%daq-string-to-lisp-and-release (opendaq:instance-builder/get-module-path (%require-live-pointer object)))
+(defun address-info-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:address-info-builder/get-interface-id intf-id-slot)
+    nil
+  )
 )
 
-(defgeneric (setf module-path) (new-value object))
-(defmethod (setf module-path) (new-value (object instance-builder))
+(defgeneric reachability-status (object))
+(defmethod reachability-status ((object address-info-builder))
+  (opendaq:address-info-builder/get-reachability-status (%require-live-pointer object))
+)
+
+(defgeneric address-info-builder-type (object))
+(defmethod address-info-builder-type ((object address-info-builder))
+  (%daq-string-to-lisp-and-release (opendaq:address-info-builder/get-type (%require-live-pointer object)))
+)
+
+(defgeneric (setf address) (new-value object))
+(defmethod (setf address) (new-value (object address-info-builder))
   (multiple-value-bind (coerced-new-value cleanup-new-value)
       (%coerce-argument new-value :daq-string)
     (unwind-protect
-        (opendaq:instance-builder/set-module-path (%require-live-pointer object) coerced-new-value)
+        (opendaq:address-info-builder/set-address (%require-live-pointer object) coerced-new-value)
       (%cleanup-coerced-argument cleanup-new-value)))
   new-value)
 
-(defgeneric enable-standard-providers (object &optional flag))
-(defmethod enable-standard-providers ((object instance-builder) &optional (flag t))
-  (multiple-value-bind (coerced-flag cleanup-flag)
-      (%coerce-argument flag :daq-bool)
+(defgeneric (setf connection-string) (new-value object))
+(defmethod (setf connection-string) (new-value (object address-info-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
     (unwind-protect
-        (opendaq:instance-builder/enable-standard-providers (%require-live-pointer object) coerced-flag)
-      (%cleanup-coerced-argument cleanup-flag)))
+        (opendaq:address-info-builder/set-connection-string (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf reachability-status) (new-value object))
+(defmethod (setf reachability-status) (new-value (object address-info-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:address-info-builder/set-reachability-status (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf type) (new-value object))
+(defmethod (setf type) (new-value (object address-info-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:address-info-builder/set-type (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defun address-info-private-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:address-info-private/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric (setf reachability-status-private) (new-value object))
+(defmethod (setf reachability-status-private) (new-value (object address-info-private))
+  (let ((coerced-new-value new-value))
+    (opendaq:address-info-private/set-reachability-status-private (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defun address-info-create-address-info-from-builder (builder)
+  (multiple-value-bind (coerced-builder cleanup-builder)
+      (%coerce-argument builder :managed-pointer)
+    (unwind-protect
+        (wrap-address-info (opendaq:address-info/create-address-info-from-builder coerced-builder))
+      (%cleanup-coerced-argument cleanup-builder)))
+)
+
+(defgeneric address-info-address (object))
+(defmethod address-info-address ((object address-info))
+  (%daq-string-to-lisp-and-release (opendaq:address-info/get-address (%require-live-pointer object)))
+)
+
+(defgeneric connection-string (object))
+(defmethod connection-string ((object address-info))
+  (%daq-string-to-lisp-and-release (opendaq:address-info/get-connection-string (%require-live-pointer object)))
+)
+
+(defun address-info-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:address-info/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric reachability-status (object))
+(defmethod reachability-status ((object address-info))
+  (opendaq:address-info/get-reachability-status (%require-live-pointer object))
+)
+
+(defgeneric address-info-type (object))
+(defmethod address-info-type ((object address-info))
+  (%daq-string-to-lisp-and-release (opendaq:address-info/get-type (%require-live-pointer object)))
+)
+
+(defgeneric allocate (object descriptor bytes align address))
+(defmethod allocate ((object allocator) descriptor bytes align address)
+  (multiple-value-bind (coerced-descriptor cleanup-descriptor)
+      (%coerce-argument descriptor :managed-pointer)
+    (unwind-protect
+        (let ((coerced-bytes bytes))
+          (let ((coerced-align align))
+            (let ((coerced-address address))
+              (opendaq:allocator/allocate (%require-live-pointer object) coerced-descriptor coerced-bytes coerced-align coerced-address)
+            )
+          )
+        )
+      (%cleanup-coerced-argument cleanup-descriptor)))
+)
+
+(defun allocator-create-malloc-allocator ()
+  (wrap-allocator (opendaq:allocator/create-malloc-allocator))
+)
+
+(defgeneric free (object address))
+(defmethod free ((object allocator) address)
+  (let ((coerced-address address))
+    (opendaq:allocator/free (%require-live-pointer object) coerced-address)
+  )
+)
+
+(defun allocator-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:allocator/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defun argument-info-create-dict-argument-info (name key-type item-type)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (let ((coerced-key-type key-type))
+          (let ((coerced-item-type item-type))
+            (wrap-argument-info (opendaq:argument-info/create-dict-argument-info coerced-name coerced-key-type coerced-item-type))
+          )
+        )
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun argument-info-create-list-argument-info (name item-type)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (let ((coerced-item-type item-type))
+          (wrap-argument-info (opendaq:argument-info/create-list-argument-info coerced-name coerced-item-type))
+        )
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun argument-info-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:argument-info/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric item-type (object))
+(defmethod item-type ((object argument-info))
+  (opendaq:argument-info/get-item-type (%require-live-pointer object))
+)
+
+(defgeneric key-type (object))
+(defmethod key-type ((object argument-info))
+  (opendaq:argument-info/get-key-type (%require-live-pointer object))
+)
+
+(defgeneric name (object))
+(defmethod name ((object argument-info))
+  (%daq-string-to-lisp-and-release (opendaq:argument-info/get-name (%require-live-pointer object)))
+)
+
+(defgeneric argument-info-type (object))
+(defmethod argument-info-type ((object argument-info))
+  (opendaq:argument-info/get-type (%require-live-pointer object))
+)
+
+(defgeneric authenticate (object username password))
+(defmethod authenticate ((object authentication-provider) username password)
+  (multiple-value-bind (coerced-username cleanup-username)
+      (%coerce-argument username :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-password cleanup-password)
+            (%coerce-argument password :daq-string)
+          (unwind-protect
+              (wrap-user (opendaq:authentication-provider/authenticate (%require-live-pointer object) coerced-username coerced-password))
+            (%cleanup-coerced-argument cleanup-password)))
+      (%cleanup-coerced-argument cleanup-username)))
+)
+
+(defgeneric authenticate-anonymous (object))
+(defmethod authenticate-anonymous ((object authentication-provider))
+  (wrap-user (opendaq:authentication-provider/authenticate-anonymous (%require-live-pointer object)))
+)
+
+(defun authentication-provider-create-json-file-authentication-provider (filename)
+  (multiple-value-bind (coerced-filename cleanup-filename)
+      (%coerce-argument filename :daq-string)
+    (unwind-protect
+        (wrap-authentication-provider (opendaq:authentication-provider/create-json-file-authentication-provider coerced-filename))
+      (%cleanup-coerced-argument cleanup-filename)))
+)
+
+(defun authentication-provider-create-json-string-authentication-provider (json-string)
+  (multiple-value-bind (coerced-json-string cleanup-json-string)
+      (%coerce-argument json-string :daq-string)
+    (unwind-protect
+        (wrap-authentication-provider (opendaq:authentication-provider/create-json-string-authentication-provider coerced-json-string))
+      (%cleanup-coerced-argument cleanup-json-string)))
+)
+
+(defun authentication-provider-create-static-authentication-provider (allow-anonymous user-list)
+  (multiple-value-bind (coerced-allow-anonymous cleanup-allow-anonymous)
+      (%coerce-argument allow-anonymous :daq-bool)
+    (unwind-protect
+        (multiple-value-bind (coerced-user-list cleanup-user-list)
+            (%coerce-argument user-list :managed-pointer)
+          (unwind-protect
+              (wrap-authentication-provider (opendaq:authentication-provider/create-static-authentication-provider coerced-allow-anonymous coerced-user-list))
+            (%cleanup-coerced-argument cleanup-user-list)))
+      (%cleanup-coerced-argument cleanup-allow-anonymous)))
+)
+
+(defgeneric find-user (object username))
+(defmethod find-user ((object authentication-provider) username)
+  (multiple-value-bind (coerced-username cleanup-username)
+      (%coerce-argument username :daq-string)
+    (unwind-protect
+        (wrap-user (opendaq:authentication-provider/find-user (%require-live-pointer object) coerced-username))
+      (%cleanup-coerced-argument cleanup-username)))
+)
+
+(defun authentication-provider-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:authentication-provider/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric is-anonymous-allowed (object))
+(defmethod is-anonymous-allowed ((object authentication-provider))
+  (not (zerop (opendaq:authentication-provider/is-anonymous-allowed (%require-live-pointer object))))
+)
+
+(defgeneric cancel (object))
+(defmethod cancel ((object awaitable))
+  (not (zerop (opendaq:awaitable/cancel (%require-live-pointer object))))
+)
+
+(defun awaitable-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:awaitable/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric result (object))
+(defmethod result ((object awaitable))
+  (wrap-base-object (opendaq:awaitable/get-result (%require-live-pointer object)))
+)
+
+(defgeneric has-completed (object))
+(defmethod has-completed ((object awaitable))
+  (not (zerop (opendaq:awaitable/has-completed (%require-live-pointer object))))
+)
+
+(defgeneric wait (object))
+(defmethod wait ((object awaitable))
+  (opendaq:awaitable/wait (%require-live-pointer object))
+)
+
+(defgeneric add-ref (object))
+(defmethod add-ref ((object base-object))
+  (opendaq:base-object/add-ref (%require-live-pointer object))
+)
+
+(defun base-object-create ()
+  (wrap-base-object (opendaq:base-object/create))
+)
+
+(defgeneric dispose (object))
+(defmethod dispose ((object base-object))
+  (opendaq:base-object/dispose (%require-live-pointer object))
+)
+
+(defgeneric equals (object other))
+(defmethod equals ((object base-object) other)
+  (multiple-value-bind (coerced-other cleanup-other)
+      (%coerce-argument other :daq-base-object)
+    (unwind-protect
+        (not (zerop (opendaq:base-object/equals (%require-live-pointer object) coerced-other)))
+      (%cleanup-coerced-argument cleanup-other)))
+)
+
+(defgeneric hash-code (object))
+(defmethod hash-code ((object base-object))
+  (opendaq:base-object/get-hash-code (%require-live-pointer object))
+)
+
+(defgeneric release-ref (object))
+(defmethod release-ref ((object base-object))
+  (opendaq:base-object/release-ref (%require-live-pointer object))
+)
+
+(defgeneric to-string (object))
+(defmethod to-string ((object base-object))
+  (wrap-char-ptr (opendaq:base-object/to-string (%require-live-pointer object)))
+)
+
+(defgeneric binary-data-address (object data))
+(defmethod binary-data-address ((object binary-data) data)
+  (let ((coerced-data data))
+    (opendaq:binary-data/get-address (%require-live-pointer object) coerced-data)
+  )
+)
+
+(defun binary-data-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:binary-data/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric size (object))
+(defmethod size ((object binary-data))
+  (opendaq:binary-data/get-size (%require-live-pointer object))
 )
 
 (defgeneric build (object))
-(defmethod build ((object instance-builder))
-  (wrap-instance (opendaq:instance-builder/build (%require-live-pointer object)))
+(defmethod build ((object block-reader-builder))
+  (wrap-block-reader (opendaq:block-reader-builder/build (%require-live-pointer object)))
 )
 
-(defgeneric root-device (object))
-(defmethod root-device ((object instance))
-  (wrap-device (opendaq:instance/get-root-device (%require-live-pointer object)))
+(defgeneric block-size (object))
+(defmethod block-size ((object block-reader-builder))
+  (opendaq:block-reader-builder/get-block-size (%require-live-pointer object))
 )
+
+(defgeneric domain-read-type (object))
+(defmethod domain-read-type ((object block-reader-builder))
+  (opendaq:block-reader-builder/get-domain-read-type (%require-live-pointer object))
+)
+
+(defgeneric input-port (object))
+(defmethod input-port ((object block-reader-builder))
+  (wrap-input-port (opendaq:block-reader-builder/get-input-port (%require-live-pointer object)))
+)
+
+(defun block-reader-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:block-reader-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric old-block-reader (object))
+(defmethod old-block-reader ((object block-reader-builder))
+  (wrap-block-reader (opendaq:block-reader-builder/get-old-block-reader (%require-live-pointer object)))
+)
+
+(defgeneric overlap (object))
+(defmethod overlap ((object block-reader-builder))
+  (opendaq:block-reader-builder/get-overlap (%require-live-pointer object))
+)
+
+(defgeneric read-mode (object))
+(defmethod read-mode ((object block-reader-builder))
+  (opendaq:block-reader-builder/get-read-mode (%require-live-pointer object))
+)
+
+(defgeneric block-reader-builder-signal (object))
+(defmethod block-reader-builder-signal ((object block-reader-builder))
+  (wrap-signal (opendaq:block-reader-builder/get-signal (%require-live-pointer object)))
+)
+
+(defgeneric skip-events (object))
+(defmethod skip-events ((object block-reader-builder))
+  (not (zerop (opendaq:block-reader-builder/get-skip-events (%require-live-pointer object))))
+)
+
+(defgeneric value-read-type (object))
+(defmethod value-read-type ((object block-reader-builder))
+  (opendaq:block-reader-builder/get-value-read-type (%require-live-pointer object))
+)
+
+(defgeneric (setf block-size) (new-value object))
+(defmethod (setf block-size) (new-value (object block-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:block-reader-builder/set-block-size (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf domain-read-type) (new-value object))
+(defmethod (setf domain-read-type) (new-value (object block-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:block-reader-builder/set-domain-read-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf input-port) (new-value object))
+(defmethod (setf input-port) (new-value (object block-reader-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:block-reader-builder/set-input-port (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf old-block-reader) (new-value object))
+(defmethod (setf old-block-reader) (new-value (object block-reader-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:block-reader-builder/set-old-block-reader (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf overlap) (new-value object))
+(defmethod (setf overlap) (new-value (object block-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:block-reader-builder/set-overlap (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf read-mode) (new-value object))
+(defmethod (setf read-mode) (new-value (object block-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:block-reader-builder/set-read-mode (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf signal) (new-value object))
+(defmethod (setf signal) (new-value (object block-reader-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:block-reader-builder/set-signal (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf skip-events) (new-value object))
+(defmethod (setf skip-events) (new-value (object block-reader-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:block-reader-builder/set-skip-events (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf value-read-type) (new-value object))
+(defmethod (setf value-read-type) (new-value (object block-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:block-reader-builder/set-value-read-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defun block-reader-status-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:block-reader-status/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric block-reader-status-read-samples (object))
+(defmethod block-reader-status-read-samples ((object block-reader-status))
+  (opendaq:block-reader-status/get-read-samples (%require-live-pointer object))
+)
+
+(defun block-reader-create-block-reader-from-existing (invalidated-reader value-read-type domain-read-type block-size)
+  (multiple-value-bind (coerced-invalidated-reader cleanup-invalidated-reader)
+      (%coerce-argument invalidated-reader :managed-pointer)
+    (unwind-protect
+        (let ((coerced-value-read-type value-read-type))
+          (let ((coerced-domain-read-type domain-read-type))
+            (let ((coerced-block-size block-size))
+              (wrap-block-reader (opendaq:block-reader/create-block-reader-from-existing coerced-invalidated-reader coerced-value-read-type coerced-domain-read-type coerced-block-size))
+            )
+          )
+        )
+      (%cleanup-coerced-argument cleanup-invalidated-reader)))
+)
+
+(defun block-reader-create-block-reader-from-port (port block-size value-read-type domain-read-type mode)
+  (multiple-value-bind (coerced-port cleanup-port)
+      (%coerce-argument port :managed-pointer)
+    (unwind-protect
+        (let ((coerced-block-size block-size))
+          (let ((coerced-value-read-type value-read-type))
+            (let ((coerced-domain-read-type domain-read-type))
+              (let ((coerced-mode mode))
+                (wrap-block-reader (opendaq:block-reader/create-block-reader-from-port coerced-port coerced-block-size coerced-value-read-type coerced-domain-read-type coerced-mode))
+              )
+            )
+          )
+        )
+      (%cleanup-coerced-argument cleanup-port)))
+)
+
+(defgeneric block-size (object))
+(defmethod block-size ((object block-reader))
+  (opendaq:block-reader/get-block-size (%require-live-pointer object))
+)
+
+(defun block-reader-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:block-reader/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric overlap (object))
+(defmethod overlap ((object block-reader))
+  (opendaq:block-reader/get-overlap (%require-live-pointer object))
+)
+
+(defgeneric block-reader-read (object blocks count timeout-ms))
+(defmethod block-reader-read ((object block-reader) blocks count timeout-ms)
+  (let ((coerced-blocks blocks))
+    (let ((coerced-count count))
+      (let ((coerced-timeout-ms timeout-ms))
+        (multiple-value-bind (value-0 value-1)
+            (opendaq:block-reader/read (%require-live-pointer object) coerced-blocks coerced-count coerced-timeout-ms)
+          (cl:values
+            value-0
+            (wrap-block-reader-status value-1)))
+      )
+    )
+  )
+)
+
+(defgeneric block-reader-read-with-domain (object data-blocks domain-blocks count timeout-ms))
+(defmethod block-reader-read-with-domain ((object block-reader) data-blocks domain-blocks count timeout-ms)
+  (let ((coerced-data-blocks data-blocks))
+    (let ((coerced-domain-blocks domain-blocks))
+      (let ((coerced-count count))
+        (let ((coerced-timeout-ms timeout-ms))
+          (multiple-value-bind (value-0 value-1)
+              (opendaq:block-reader/read-with-domain (%require-live-pointer object) coerced-data-blocks coerced-domain-blocks coerced-count coerced-timeout-ms)
+            (cl:values
+              value-0
+              (wrap-block-reader-status value-1)))
+        )
+      )
+    )
+  )
+)
+
+(defun daq-boolean-create-boolean (value)
+  (multiple-value-bind (coerced-value cleanup-value)
+      (%coerce-argument value :daq-bool)
+    (unwind-protect
+        (wrap-daq-boolean (opendaq:boolean/create-boolean coerced-value))
+      (%cleanup-coerced-argument cleanup-value)))
+)
+
+(defgeneric equals-value (object value))
+(defmethod equals-value ((object daq-boolean) value)
+  (multiple-value-bind (coerced-value cleanup-value)
+      (%coerce-argument value :daq-bool)
+    (unwind-protect
+        (not (zerop (opendaq:boolean/equals-value (%require-live-pointer object) coerced-value)))
+      (%cleanup-coerced-argument cleanup-value)))
+)
+
+(defun daq-boolean-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:boolean/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric value (object))
+(defmethod value ((object daq-boolean))
+  (not (zerop (opendaq:boolean/get-value (%require-live-pointer object))))
+)
+
+(defgeneric arguments (object))
+(defmethod arguments ((object callable-info))
+  (wrap-object-list (opendaq:callable-info/get-arguments (%require-live-pointer object)))
+)
+
+(defun callable-info-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:callable-info/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric return-type (object))
+(defmethod return-type ((object callable-info))
+  (opendaq:callable-info/get-return-type (%require-live-pointer object))
+)
+
+(defgeneric is-const (object))
+(defmethod is-const ((object callable-info))
+  (not (zerop (opendaq:callable-info/is-const (%require-live-pointer object))))
+)
+
+(defun channel-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:channel/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric cloneable-clone (object))
+(defmethod cloneable-clone ((object cloneable))
+  (wrap-base-object (opendaq:cloneable/clone (%require-live-pointer object)))
+)
+
+(defun cloneable-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:cloneable/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric coerce (object prop-obj value))
+(defmethod coerce ((object coercer) prop-obj value)
+  (multiple-value-bind (coerced-prop-obj cleanup-prop-obj)
+      (%coerce-argument prop-obj :daq-base-object)
+    (unwind-protect
+        (multiple-value-bind (coerced-value cleanup-value)
+            (%coerce-argument value :daq-base-object)
+          (unwind-protect
+              (wrap-base-object (opendaq:coercer/coerce (%require-live-pointer object) coerced-prop-obj coerced-value))
+            (%cleanup-coerced-argument cleanup-value)))
+      (%cleanup-coerced-argument cleanup-prop-obj)))
+)
+
+(defgeneric coerce-no-lock (object prop-obj value))
+(defmethod coerce-no-lock ((object coercer) prop-obj value)
+  (multiple-value-bind (coerced-prop-obj cleanup-prop-obj)
+      (%coerce-argument prop-obj :daq-base-object)
+    (unwind-protect
+        (multiple-value-bind (coerced-value cleanup-value)
+            (%coerce-argument value :daq-base-object)
+          (unwind-protect
+              (wrap-base-object (opendaq:coercer/coerce-no-lock (%require-live-pointer object) coerced-prop-obj coerced-value))
+            (%cleanup-coerced-argument cleanup-value)))
+      (%cleanup-coerced-argument cleanup-prop-obj)))
+)
+
+(defgeneric eval (object))
+(defmethod eval ((object coercer))
+  (%daq-string-to-lisp-and-release (opendaq:coercer/get-eval (%require-live-pointer object)))
+)
+
+(defun coercer-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:coercer/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric compare-to (object obj))
+(defmethod compare-to ((object comparable) obj)
+  (multiple-value-bind (coerced-obj cleanup-obj)
+      (%coerce-argument obj :daq-base-object)
+    (unwind-protect
+        (opendaq:comparable/compare-to (%require-live-pointer object) coerced-obj)
+      (%cleanup-coerced-argument cleanup-obj)))
+)
+
+(defun comparable-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:comparable/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric imaginary (object))
+(defmethod imaginary ((object complex-number))
+  (opendaq:complex-number/get-imaginary (%require-live-pointer object))
+)
+
+(defun complex-number-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:complex-number/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric real (object))
+(defmethod real ((object complex-number))
+  (opendaq:complex-number/get-real (%require-live-pointer object))
+)
+
+(defgeneric component-deserialize-context-clone (object new-parent new-local-id new-trigger-core-event))
+(defmethod component-deserialize-context-clone ((object component-deserialize-context) new-parent new-local-id new-trigger-core-event)
+  (multiple-value-bind (coerced-new-parent cleanup-new-parent)
+      (%coerce-argument new-parent :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-new-local-id cleanup-new-local-id)
+            (%coerce-argument new-local-id :daq-string)
+          (unwind-protect
+              (multiple-value-bind (coerced-new-trigger-core-event cleanup-new-trigger-core-event)
+                  (%coerce-argument new-trigger-core-event :managed-pointer)
+                (unwind-protect
+                    (cffi:with-foreign-object (new-component-deserialize-context-slot 'opendaq::daq-component-deserialize-context)
+                      (cffi:with-foreign-object (new-intf-id-slot 'opendaq::daq-intf-id)
+                        (opendaq:component-deserialize-context/clone (%require-live-pointer object) coerced-new-parent coerced-new-local-id new-component-deserialize-context-slot new-intf-id-slot coerced-new-trigger-core-event)
+                        (cl:values
+                          (wrap-component-deserialize-context (cffi:mem-ref new-component-deserialize-context-slot 'opendaq::daq-component-deserialize-context))
+                          (cffi:mem-ref new-intf-id-slot 'opendaq::daq-intf-id))
+                      )
+                    )
+                  (%cleanup-coerced-argument cleanup-new-trigger-core-event)))
+            (%cleanup-coerced-argument cleanup-new-local-id)))
+      (%cleanup-coerced-argument cleanup-new-parent)))
+)
+
+(defun component-deserialize-context-create-component-deserialize-context (context root parent local-id trigger-core-event)
+  (multiple-value-bind (coerced-context cleanup-context)
+      (%coerce-argument context :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-root cleanup-root)
+            (%coerce-argument root :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-parent cleanup-parent)
+                  (%coerce-argument parent :managed-pointer)
+                (unwind-protect
+                    (multiple-value-bind (coerced-local-id cleanup-local-id)
+                        (%coerce-argument local-id :daq-string)
+                      (unwind-protect
+                          (multiple-value-bind (coerced-trigger-core-event cleanup-trigger-core-event)
+                              (%coerce-argument trigger-core-event :managed-pointer)
+                            (unwind-protect
+                                (cffi:with-foreign-object (obj-slot 'opendaq::daq-component-deserialize-context)
+                                  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+                                    (opendaq:component-deserialize-context/create-component-deserialize-context obj-slot coerced-context coerced-root coerced-parent coerced-local-id intf-id-slot coerced-trigger-core-event)
+                                    (cl:values
+                                      (wrap-component-deserialize-context (cffi:mem-ref obj-slot 'opendaq::daq-component-deserialize-context))
+                                      (cffi:mem-ref intf-id-slot 'opendaq::daq-intf-id))
+                                  )
+                                )
+                              (%cleanup-coerced-argument cleanup-trigger-core-event)))
+                        (%cleanup-coerced-argument cleanup-local-id)))
+                  (%cleanup-coerced-argument cleanup-parent)))
+            (%cleanup-coerced-argument cleanup-root)))
+      (%cleanup-coerced-argument cleanup-context)))
+)
+
+(defgeneric context (object))
+(defmethod context ((object component-deserialize-context))
+  (wrap-context (opendaq:component-deserialize-context/get-context (%require-live-pointer object)))
+)
+
+(defun component-deserialize-context-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:component-deserialize-context/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric intf-id (object))
+(defmethod intf-id ((object component-deserialize-context))
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:component-deserialize-context/get-intf-id (%require-live-pointer object) intf-id-slot)
+    (cffi:mem-ref intf-id-slot 'opendaq::daq-intf-id)
+  )
+)
+
+(defgeneric local-id (object))
+(defmethod local-id ((object component-deserialize-context))
+  (%daq-string-to-lisp-and-release (opendaq:component-deserialize-context/get-local-id (%require-live-pointer object)))
+)
+
+(defgeneric parent (object))
+(defmethod parent ((object component-deserialize-context))
+  (wrap-component (opendaq:component-deserialize-context/get-parent (%require-live-pointer object)))
+)
+
+(defgeneric root (object))
+(defmethod root ((object component-deserialize-context))
+  (wrap-component (opendaq:component-deserialize-context/get-root (%require-live-pointer object)))
+)
+
+(defgeneric trigger-core-event (object))
+(defmethod trigger-core-event ((object component-deserialize-context))
+  (wrap-procedure (opendaq:component-deserialize-context/get-trigger-core-event (%require-live-pointer object)))
+)
+
+(defun component-holder-create-component-holder-with-ids (id parent-global-id component)
+  (multiple-value-bind (coerced-id cleanup-id)
+      (%coerce-argument id :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-parent-global-id cleanup-parent-global-id)
+            (%coerce-argument parent-global-id :daq-string)
+          (unwind-protect
+              (multiple-value-bind (coerced-component cleanup-component)
+                  (%coerce-argument component :managed-pointer)
+                (unwind-protect
+                    (wrap-component-holder (opendaq:component-holder/create-component-holder-with-ids coerced-id coerced-parent-global-id coerced-component))
+                  (%cleanup-coerced-argument cleanup-component)))
+            (%cleanup-coerced-argument cleanup-parent-global-id)))
+      (%cleanup-coerced-argument cleanup-id)))
+)
+
+(defgeneric component-holder-component (object))
+(defmethod component-holder-component ((object component-holder))
+  (wrap-component (opendaq:component-holder/get-component (%require-live-pointer object)))
+)
+
+(defun component-holder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:component-holder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric local-id (object))
+(defmethod local-id ((object component-holder))
+  (%daq-string-to-lisp-and-release (opendaq:component-holder/get-local-id (%require-live-pointer object)))
+)
+
+(defgeneric parent-global-id (object))
+(defmethod parent-global-id ((object component-holder))
+  (%daq-string-to-lisp-and-release (opendaq:component-holder/get-parent-global-id (%require-live-pointer object)))
+)
+
+(defgeneric component-config (object))
+(defmethod component-config ((object component-private))
+  (wrap-property-object (opendaq:component-private/get-component-config (%require-live-pointer object)))
+)
+
+(defun component-private-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:component-private/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric lock-all-attributes (object))
+(defmethod lock-all-attributes ((object component-private))
+  (opendaq:component-private/lock-all-attributes (%require-live-pointer object))
+)
+
+(defgeneric lock-attributes (object attributes))
+(defmethod lock-attributes ((object component-private) attributes)
+  (multiple-value-bind (coerced-attributes cleanup-attributes)
+      (%coerce-argument attributes :managed-pointer)
+    (unwind-protect
+        (opendaq:component-private/lock-attributes (%require-live-pointer object) coerced-attributes)
+      (%cleanup-coerced-argument cleanup-attributes)))
+)
+
+(defgeneric (setf component-config) (new-value object))
+(defmethod (setf component-config) (new-value (object component-private))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:component-private/set-component-config (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf parent-active) (new-value object))
+(defmethod (setf parent-active) (new-value (object component-private))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:component-private/set-parent-active (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric trigger-component-core-event (object args))
+(defmethod trigger-component-core-event ((object component-private) args)
+  (multiple-value-bind (coerced-args cleanup-args)
+      (%coerce-argument args :managed-pointer)
+    (unwind-protect
+        (opendaq:component-private/trigger-component-core-event (%require-live-pointer object) coerced-args)
+      (%cleanup-coerced-argument cleanup-args)))
+)
+
+(defgeneric unlock-all-attributes (object))
+(defmethod unlock-all-attributes ((object component-private))
+  (opendaq:component-private/unlock-all-attributes (%require-live-pointer object))
+)
+
+(defgeneric unlock-attributes (object attributes))
+(defmethod unlock-attributes ((object component-private) attributes)
+  (multiple-value-bind (coerced-attributes cleanup-attributes)
+      (%coerce-argument attributes :managed-pointer)
+    (unwind-protect
+        (opendaq:component-private/unlock-attributes (%require-live-pointer object) coerced-attributes)
+      (%cleanup-coerced-argument cleanup-attributes)))
+)
+
+(defgeneric update-operation-mode (object mode-type))
+(defmethod update-operation-mode ((object component-private) mode-type)
+  (let ((coerced-mode-type mode-type))
+    (opendaq:component-private/update-operation-mode (%require-live-pointer object) coerced-mode-type)
+  )
+)
+
+(defgeneric add-status (object name initial-value))
+(defmethod add-status ((object component-status-container-private) name initial-value)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-initial-value cleanup-initial-value)
+            (%coerce-argument initial-value :managed-pointer)
+          (unwind-protect
+              (opendaq:component-status-container-private/add-status (%require-live-pointer object) coerced-name coerced-initial-value)
+            (%cleanup-coerced-argument cleanup-initial-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric add-status-with-message (object name initial-value message))
+(defmethod add-status-with-message ((object component-status-container-private) name initial-value message)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-initial-value cleanup-initial-value)
+            (%coerce-argument initial-value :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-message cleanup-message)
+                  (%coerce-argument message :daq-string)
+                (unwind-protect
+                    (opendaq:component-status-container-private/add-status-with-message (%require-live-pointer object) coerced-name coerced-initial-value coerced-message)
+                  (%cleanup-coerced-argument cleanup-message)))
+            (%cleanup-coerced-argument cleanup-initial-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun component-status-container-private-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:component-status-container-private/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric (setf status) (new-value object name))
+(defmethod (setf status) (new-value (object component-status-container-private) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-new-value cleanup-new-value)
+            (%coerce-argument new-value :managed-pointer)
+          (unwind-protect
+              (opendaq:component-status-container-private/set-status (%require-live-pointer object) coerced-name coerced-new-value)
+            (%cleanup-coerced-argument cleanup-new-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+  new-value)
+
+(defgeneric (setf status-with-message) (new-value object name value))
+(defmethod (setf status-with-message) (new-value (object component-status-container-private) name value)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-value cleanup-value)
+            (%coerce-argument value :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-new-value cleanup-new-value)
+                  (%coerce-argument new-value :daq-string)
+                (unwind-protect
+                    (opendaq:component-status-container-private/set-status-with-message (%require-live-pointer object) coerced-name coerced-value coerced-new-value)
+                  (%cleanup-coerced-argument cleanup-new-value)))
+            (%cleanup-coerced-argument cleanup-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+  new-value)
+
+(defun component-status-container-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:component-status-container/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric status (object name))
+(defmethod status ((object component-status-container) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (wrap-enumeration (opendaq:component-status-container/get-status (%require-live-pointer object) coerced-name))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric status-message (object name))
+(defmethod status-message ((object component-status-container) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (%daq-string-to-lisp-and-release (opendaq:component-status-container/get-status-message (%require-live-pointer object) coerced-name))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric statuses (object))
+(defmethod statuses ((object component-status-container))
+  (wrap-dict (opendaq:component-status-container/get-statuses (%require-live-pointer object)))
+)
+
+(defgeneric build (object))
+(defmethod build ((object component-type-builder))
+  (wrap-component-type (opendaq:component-type-builder/build (%require-live-pointer object)))
+)
+
+(defun component-type-builder-create-device-type-builder ()
+  (wrap-component-type-builder (opendaq:component-type-builder/create-device-type-builder))
+)
+
+(defun component-type-builder-create-function-block-type-builder ()
+  (wrap-component-type-builder (opendaq:component-type-builder/create-function-block-type-builder))
+)
+
+(defun component-type-builder-create-server-type-builder ()
+  (wrap-component-type-builder (opendaq:component-type-builder/create-server-type-builder))
+)
+
+(defun component-type-builder-create-streaming-type-builder ()
+  (wrap-component-type-builder (opendaq:component-type-builder/create-streaming-type-builder))
+)
+
+(defgeneric connection-string-prefix (object))
+(defmethod connection-string-prefix ((object component-type-builder))
+  (%daq-string-to-lisp-and-release (opendaq:component-type-builder/get-connection-string-prefix (%require-live-pointer object)))
+)
+
+(defgeneric default-config (object))
+(defmethod default-config ((object component-type-builder))
+  (wrap-property-object (opendaq:component-type-builder/get-default-config (%require-live-pointer object)))
+)
+
+(defgeneric description (object))
+(defmethod description ((object component-type-builder))
+  (%daq-string-to-lisp-and-release (opendaq:component-type-builder/get-description (%require-live-pointer object)))
+)
+
+(defgeneric id (object))
+(defmethod id ((object component-type-builder))
+  (%daq-string-to-lisp-and-release (opendaq:component-type-builder/get-id (%require-live-pointer object)))
+)
+
+(defun component-type-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:component-type-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric name (object))
+(defmethod name ((object component-type-builder))
+  (%daq-string-to-lisp-and-release (opendaq:component-type-builder/get-name (%require-live-pointer object)))
+)
+
+(defgeneric type-sort (object))
+(defmethod type-sort ((object component-type-builder))
+  (opendaq:component-type-builder/get-type-sort (%require-live-pointer object))
+)
+
+(defgeneric (setf connection-string-prefix) (new-value object))
+(defmethod (setf connection-string-prefix) (new-value (object component-type-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:component-type-builder/set-connection-string-prefix (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf default-config) (new-value object))
+(defmethod (setf default-config) (new-value (object component-type-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:component-type-builder/set-default-config (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf description) (new-value object))
+(defmethod (setf description) (new-value (object component-type-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:component-type-builder/set-description (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf id) (new-value object))
+(defmethod (setf id) (new-value (object component-type-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:component-type-builder/set-id (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf name) (new-value object))
+(defmethod (setf name) (new-value (object component-type-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:component-type-builder/set-name (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf type-sort) (new-value object))
+(defmethod (setf type-sort) (new-value (object component-type-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:component-type-builder/set-type-sort (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defun component-type-private-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:component-type-private/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric (setf module-info) (new-value object))
+(defmethod (setf module-info) (new-value (object component-type-private))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:component-type-private/set-module-info (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric create-default-config (object))
+(defmethod create-default-config ((object component-type))
+  (wrap-property-object (opendaq:component-type/create-default-config (%require-live-pointer object)))
+)
+
+(defgeneric description (object))
+(defmethod description ((object component-type))
+  (%daq-string-to-lisp-and-release (opendaq:component-type/get-description (%require-live-pointer object)))
+)
+
+(defgeneric id (object))
+(defmethod id ((object component-type))
+  (%daq-string-to-lisp-and-release (opendaq:component-type/get-id (%require-live-pointer object)))
+)
+
+(defun component-type-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:component-type/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric module-info (object))
+(defmethod module-info ((object component-type))
+  (wrap-module-info (opendaq:component-type/get-module-info (%require-live-pointer object)))
+)
+
+(defgeneric name (object))
+(defmethod name ((object component-type))
+  (%daq-string-to-lisp-and-release (opendaq:component-type/get-name (%require-live-pointer object)))
+)
+
+(defgeneric add-device-remapping (object original-device-id new-device-id))
+(defmethod add-device-remapping ((object component-update-context) original-device-id new-device-id)
+  (multiple-value-bind (coerced-original-device-id cleanup-original-device-id)
+      (%coerce-argument original-device-id :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-new-device-id cleanup-new-device-id)
+            (%coerce-argument new-device-id :daq-string)
+          (unwind-protect
+              (opendaq:component-update-context/add-device-remapping (%require-live-pointer object) coerced-original-device-id coerced-new-device-id)
+            (%cleanup-coerced-argument cleanup-new-device-id)))
+      (%cleanup-coerced-argument cleanup-original-device-id)))
+)
+
+(defgeneric device-update-options-with-local-id-or-null (object local-id))
+(defmethod device-update-options-with-local-id-or-null ((object component-update-context) local-id)
+  (multiple-value-bind (coerced-local-id cleanup-local-id)
+      (%coerce-argument local-id :daq-string)
+    (unwind-protect
+        (wrap-device-update-options (opendaq:component-update-context/get-device-update-options-with-local-id-or-null (%require-live-pointer object) coerced-local-id))
+      (%cleanup-coerced-argument cleanup-local-id)))
+)
+
+(defgeneric input-port-connections (object parent-id))
+(defmethod input-port-connections ((object component-update-context) parent-id)
+  (multiple-value-bind (coerced-parent-id cleanup-parent-id)
+      (%coerce-argument parent-id :daq-string)
+    (unwind-protect
+        (wrap-dict (opendaq:component-update-context/get-input-port-connections (%require-live-pointer object) coerced-parent-id))
+      (%cleanup-coerced-argument cleanup-parent-id)))
+)
+
+(defun component-update-context-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:component-update-context/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric internal-state (object))
+(defmethod internal-state ((object component-update-context))
+  (wrap-dict (opendaq:component-update-context/get-internal-state (%require-live-pointer object)))
+)
+
+(defgeneric root-component (object))
+(defmethod root-component ((object component-update-context))
+  (wrap-component (opendaq:component-update-context/get-root-component (%require-live-pointer object)))
+)
+
+(defgeneric component-update-context-signal (object parent-id port-id))
+(defmethod component-update-context-signal ((object component-update-context) parent-id port-id)
+  (multiple-value-bind (coerced-parent-id cleanup-parent-id)
+      (%coerce-argument parent-id :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-port-id cleanup-port-id)
+            (%coerce-argument port-id :daq-string)
+          (unwind-protect
+              (wrap-signal (opendaq:component-update-context/get-signal (%require-live-pointer object) coerced-parent-id coerced-port-id))
+            (%cleanup-coerced-argument cleanup-port-id)))
+      (%cleanup-coerced-argument cleanup-parent-id)))
+)
+
+(defgeneric update-parameters (object))
+(defmethod update-parameters ((object component-update-context))
+  (wrap-update-parameters (opendaq:component-update-context/get-update-parameters (%require-live-pointer object)))
+)
+
+(defgeneric override-state (object update-context))
+(defmethod override-state ((object component-update-context) update-context)
+  (multiple-value-bind (coerced-update-context cleanup-update-context)
+      (%coerce-argument update-context :managed-pointer)
+    (unwind-protect
+        (opendaq:component-update-context/override-state (%require-live-pointer object) coerced-update-context)
+      (%cleanup-coerced-argument cleanup-update-context)))
+)
+
+(defgeneric remap-input-port-connections (object))
+(defmethod remap-input-port-connections ((object component-update-context))
+  (opendaq:component-update-context/remap-input-port-connections (%require-live-pointer object))
+)
+
+(defgeneric remove-input-port-connection (object parent-id))
+(defmethod remove-input-port-connection ((object component-update-context) parent-id)
+  (multiple-value-bind (coerced-parent-id cleanup-parent-id)
+      (%coerce-argument parent-id :daq-string)
+    (unwind-protect
+        (opendaq:component-update-context/remove-input-port-connection (%require-live-pointer object) coerced-parent-id)
+      (%cleanup-coerced-argument cleanup-parent-id)))
+)
+
+(defgeneric (setf input-port-connection) (new-value object parent-id port-id))
+(defmethod (setf input-port-connection) (new-value (object component-update-context) parent-id port-id)
+  (multiple-value-bind (coerced-parent-id cleanup-parent-id)
+      (%coerce-argument parent-id :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-port-id cleanup-port-id)
+            (%coerce-argument port-id :daq-string)
+          (unwind-protect
+              (multiple-value-bind (coerced-new-value cleanup-new-value)
+                  (%coerce-argument new-value :daq-string)
+                (unwind-protect
+                    (opendaq:component-update-context/set-input-port-connection (%require-live-pointer object) coerced-parent-id coerced-port-id coerced-new-value)
+                  (%cleanup-coerced-argument cleanup-new-value)))
+            (%cleanup-coerced-argument cleanup-port-id)))
+      (%cleanup-coerced-argument cleanup-parent-id)))
+  new-value)
+
+(defgeneric (setf root-component) (new-value object))
+(defmethod (setf root-component) (new-value (object component-update-context))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:component-update-context/set-root-component (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf signal-dependency) (new-value object signal-id))
+(defmethod (setf signal-dependency) (new-value (object component-update-context) signal-id)
+  (multiple-value-bind (coerced-signal-id cleanup-signal-id)
+      (%coerce-argument signal-id :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-new-value cleanup-new-value)
+            (%coerce-argument new-value :daq-string)
+          (unwind-protect
+              (opendaq:component-update-context/set-signal-dependency (%require-live-pointer object) coerced-signal-id coerced-new-value)
+            (%cleanup-coerced-argument cleanup-new-value)))
+      (%cleanup-coerced-argument cleanup-signal-id)))
+  new-value)
+
+(defgeneric find-component (object id))
+(defmethod find-component ((object managed-object) id)
+  (multiple-value-bind (coerced-id cleanup-id)
+      (%coerce-argument id :daq-string)
+    (unwind-protect
+        (wrap-component (opendaq:component/find-component (%require-live-pointer object) coerced-id))
+      (%cleanup-coerced-argument cleanup-id)))
+)
+
+(defgeneric active (object))
+(defmethod active ((object component))
+  (not (zerop (opendaq:component/get-active (%require-live-pointer object))))
+)
+
+(defgeneric context (object))
+(defmethod context ((object component))
+  (wrap-context (opendaq:component/get-context (%require-live-pointer object)))
+)
+
+(defgeneric description (object))
+(defmethod description ((object component))
+  (%daq-string-to-lisp-and-release (opendaq:component/get-description (%require-live-pointer object)))
+)
+
+(defgeneric global-id (object))
+(defmethod global-id ((object component))
+  (%daq-string-to-lisp-and-release (opendaq:component/get-global-id (%require-live-pointer object)))
+)
+
+(defun component-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:component/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric local-active (object))
+(defmethod local-active ((object component))
+  (not (zerop (opendaq:component/get-local-active (%require-live-pointer object))))
+)
+
+(defgeneric local-id (object))
+(defmethod local-id ((object component))
+  (%daq-string-to-lisp-and-release (opendaq:component/get-local-id (%require-live-pointer object)))
+)
+
+(defgeneric locked-attributes (object))
+(defmethod locked-attributes ((object component))
+  (wrap-object-list (opendaq:component/get-locked-attributes (%require-live-pointer object)))
+)
+
+(defgeneric name (object))
+(defmethod name ((object component))
+  (%daq-string-to-lisp-and-release (opendaq:component/get-name (%require-live-pointer object)))
+)
+
+(defgeneric on-component-core-event (object))
+(defmethod on-component-core-event ((object component))
+  (wrap-event (opendaq:component/get-on-component-core-event (%require-live-pointer object)))
+)
+
+(defgeneric operation-mode (object))
+(defmethod operation-mode ((object component))
+  (opendaq:component/get-operation-mode (%require-live-pointer object))
+)
+
+(defgeneric parent (object))
+(defmethod parent ((object component))
+  (wrap-component (opendaq:component/get-parent (%require-live-pointer object)))
+)
+
+(defgeneric parent-active (object))
+(defmethod parent-active ((object component))
+  (not (zerop (opendaq:component/get-parent-active (%require-live-pointer object))))
+)
+
+(defgeneric status-container (object))
+(defmethod status-container ((object component))
+  (wrap-component-status-container (opendaq:component/get-status-container (%require-live-pointer object)))
+)
+
+(defgeneric tags (object))
+(defmethod tags ((object component))
+  (wrap-tags (opendaq:component/get-tags (%require-live-pointer object)))
+)
+
+(defgeneric visible (object))
+(defmethod visible ((object component))
+  (not (zerop (opendaq:component/get-visible (%require-live-pointer object))))
+)
+
+(defgeneric (setf active) (new-value object))
+(defmethod (setf active) (new-value (object component))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:component/set-active (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf description) (new-value object))
+(defmethod (setf description) (new-value (object component))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:component/set-description (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf name) (new-value object))
+(defmethod (setf name) (new-value (object component))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:component/set-name (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf visible) (new-value object))
+(defmethod (setf visible) (new-value (object component))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:component/set-visible (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defun config-provider-create-env-config-provider ()
+  (wrap-config-provider (opendaq:config-provider/create-env-config-provider))
+)
+
+(defun config-provider-create-json-config-provider (filename)
+  (multiple-value-bind (coerced-filename cleanup-filename)
+      (%coerce-argument filename :daq-string)
+    (unwind-protect
+        (wrap-config-provider (opendaq:config-provider/create-json-config-provider coerced-filename))
+      (%cleanup-coerced-argument cleanup-filename)))
+)
+
+(defun config-provider-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:config-provider/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric populate-options (object options))
+(defmethod populate-options ((object config-provider) options)
+  (multiple-value-bind (coerced-options cleanup-options)
+      (%coerce-argument options :managed-pointer)
+    (unwind-protect
+        (opendaq:config-provider/populate-options (%require-live-pointer object) coerced-options)
+      (%cleanup-coerced-argument cleanup-options)))
+)
+
+(defun connected-client-info-create-connected-client-info-with-params (address protocol-type protocol-name client-type host-name)
+  (multiple-value-bind (coerced-address cleanup-address)
+      (%coerce-argument address :daq-string)
+    (unwind-protect
+        (let ((coerced-protocol-type protocol-type))
+          (multiple-value-bind (coerced-protocol-name cleanup-protocol-name)
+              (%coerce-argument protocol-name :daq-string)
+            (unwind-protect
+                (multiple-value-bind (coerced-client-type cleanup-client-type)
+                    (%coerce-argument client-type :daq-string)
+                  (unwind-protect
+                      (multiple-value-bind (coerced-host-name cleanup-host-name)
+                          (%coerce-argument host-name :daq-string)
+                        (unwind-protect
+                            (wrap-connected-client-info (opendaq:connected-client-info/create-connected-client-info-with-params coerced-address coerced-protocol-type coerced-protocol-name coerced-client-type coerced-host-name))
+                          (%cleanup-coerced-argument cleanup-host-name)))
+                    (%cleanup-coerced-argument cleanup-client-type)))
+              (%cleanup-coerced-argument cleanup-protocol-name)))
+        )
+      (%cleanup-coerced-argument cleanup-address)))
+)
+
+(defgeneric connected-client-info-address (object))
+(defmethod connected-client-info-address ((object connected-client-info))
+  (%daq-string-to-lisp-and-release (opendaq:connected-client-info/get-address (%require-live-pointer object)))
+)
+
+(defgeneric client-type-name (object))
+(defmethod client-type-name ((object connected-client-info))
+  (%daq-string-to-lisp-and-release (opendaq:connected-client-info/get-client-type-name (%require-live-pointer object)))
+)
+
+(defgeneric host-name (object))
+(defmethod host-name ((object connected-client-info))
+  (%daq-string-to-lisp-and-release (opendaq:connected-client-info/get-host-name (%require-live-pointer object)))
+)
+
+(defun connected-client-info-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:connected-client-info/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric protocol-name (object))
+(defmethod protocol-name ((object connected-client-info))
+  (%daq-string-to-lisp-and-release (opendaq:connected-client-info/get-protocol-name (%require-live-pointer object)))
+)
+
+(defgeneric protocol-type (object))
+(defmethod protocol-type ((object connected-client-info))
+  (opendaq:connected-client-info/get-protocol-type (%require-live-pointer object))
+)
+
+(defgeneric dequeue-up-to (object count))
+(defmethod dequeue-up-to ((object connection-internal) count)
+  (let ((coerced-count count))
+    (multiple-value-bind (value-0 value-1)
+        (opendaq:connection-internal/dequeue-up-to (%require-live-pointer object) coerced-count)
+      (cl:values
+        (wrap-packet value-0)
+        value-1))
+  )
+)
+
+(defgeneric enqueue-last-descriptor (object))
+(defmethod enqueue-last-descriptor ((object connection-internal))
+  (opendaq:connection-internal/enqueue-last-descriptor (%require-live-pointer object))
+)
+
+(defun connection-internal-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:connection-internal/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric add-configuration-connection-status (object connection-string initial-value))
+(defmethod add-configuration-connection-status ((object connection-status-container-private) connection-string initial-value)
+  (multiple-value-bind (coerced-connection-string cleanup-connection-string)
+      (%coerce-argument connection-string :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-initial-value cleanup-initial-value)
+            (%coerce-argument initial-value :managed-pointer)
+          (unwind-protect
+              (opendaq:connection-status-container-private/add-configuration-connection-status (%require-live-pointer object) coerced-connection-string coerced-initial-value)
+            (%cleanup-coerced-argument cleanup-initial-value)))
+      (%cleanup-coerced-argument cleanup-connection-string)))
+)
+
+(defgeneric add-streaming-connection-status (object connection-string initial-value streaming-object))
+(defmethod add-streaming-connection-status ((object connection-status-container-private) connection-string initial-value streaming-object)
+  (multiple-value-bind (coerced-connection-string cleanup-connection-string)
+      (%coerce-argument connection-string :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-initial-value cleanup-initial-value)
+            (%coerce-argument initial-value :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-streaming-object cleanup-streaming-object)
+                  (%coerce-argument streaming-object :managed-pointer)
+                (unwind-protect
+                    (opendaq:connection-status-container-private/add-streaming-connection-status (%require-live-pointer object) coerced-connection-string coerced-initial-value coerced-streaming-object)
+                  (%cleanup-coerced-argument cleanup-streaming-object)))
+            (%cleanup-coerced-argument cleanup-initial-value)))
+      (%cleanup-coerced-argument cleanup-connection-string)))
+)
+
+(defun connection-status-container-private-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:connection-status-container-private/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric remove-streaming-connection-status (object connection-string))
+(defmethod remove-streaming-connection-status ((object connection-status-container-private) connection-string)
+  (multiple-value-bind (coerced-connection-string cleanup-connection-string)
+      (%coerce-argument connection-string :daq-string)
+    (unwind-protect
+        (opendaq:connection-status-container-private/remove-streaming-connection-status (%require-live-pointer object) coerced-connection-string)
+      (%cleanup-coerced-argument cleanup-connection-string)))
+)
+
+(defgeneric update-connection-status (object connection-string value streaming-object))
+(defmethod update-connection-status ((object connection-status-container-private) connection-string value streaming-object)
+  (multiple-value-bind (coerced-connection-string cleanup-connection-string)
+      (%coerce-argument connection-string :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-value cleanup-value)
+            (%coerce-argument value :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-streaming-object cleanup-streaming-object)
+                  (%coerce-argument streaming-object :managed-pointer)
+                (unwind-protect
+                    (opendaq:connection-status-container-private/update-connection-status (%require-live-pointer object) coerced-connection-string coerced-value coerced-streaming-object)
+                  (%cleanup-coerced-argument cleanup-streaming-object)))
+            (%cleanup-coerced-argument cleanup-value)))
+      (%cleanup-coerced-argument cleanup-connection-string)))
+)
+
+(defgeneric update-connection-status-with-message (object connection-string value streaming-object message))
+(defmethod update-connection-status-with-message ((object connection-status-container-private) connection-string value streaming-object message)
+  (multiple-value-bind (coerced-connection-string cleanup-connection-string)
+      (%coerce-argument connection-string :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-value cleanup-value)
+            (%coerce-argument value :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-streaming-object cleanup-streaming-object)
+                  (%coerce-argument streaming-object :managed-pointer)
+                (unwind-protect
+                    (multiple-value-bind (coerced-message cleanup-message)
+                        (%coerce-argument message :daq-string)
+                      (unwind-protect
+                          (opendaq:connection-status-container-private/update-connection-status-with-message (%require-live-pointer object) coerced-connection-string coerced-value coerced-streaming-object coerced-message)
+                        (%cleanup-coerced-argument cleanup-message)))
+                  (%cleanup-coerced-argument cleanup-streaming-object)))
+            (%cleanup-coerced-argument cleanup-value)))
+      (%cleanup-coerced-argument cleanup-connection-string)))
+)
+
+(defgeneric dequeue (object))
+(defmethod dequeue ((object connection))
+  (wrap-packet (opendaq:connection/dequeue (%require-live-pointer object)))
+)
+
+(defgeneric dequeue-all (object))
+(defmethod dequeue-all ((object connection))
+  (wrap-object-list (opendaq:connection/dequeue-all (%require-live-pointer object)))
+)
+
+(defgeneric enqueue (object packet))
+(defmethod enqueue ((object connection) packet)
+  (multiple-value-bind (coerced-packet cleanup-packet)
+      (%coerce-argument packet :managed-pointer)
+    (unwind-protect
+        (opendaq:connection/enqueue (%require-live-pointer object) coerced-packet)
+      (%cleanup-coerced-argument cleanup-packet)))
+)
+
+(defgeneric enqueue-and-steal-ref (object packet))
+(defmethod enqueue-and-steal-ref ((object connection) packet)
+  (multiple-value-bind (coerced-packet cleanup-packet)
+      (%coerce-argument packet :managed-pointer)
+    (unwind-protect
+        (opendaq:connection/enqueue-and-steal-ref (%require-live-pointer object) coerced-packet)
+      (%cleanup-coerced-argument cleanup-packet)))
+)
+
+(defgeneric enqueue-multiple (object packets))
+(defmethod enqueue-multiple ((object connection) packets)
+  (multiple-value-bind (coerced-packets cleanup-packets)
+      (%coerce-argument packets :managed-pointer)
+    (unwind-protect
+        (opendaq:connection/enqueue-multiple (%require-live-pointer object) coerced-packets)
+      (%cleanup-coerced-argument cleanup-packets)))
+)
+
+(defgeneric enqueue-multiple-and-steal-ref (object packets))
+(defmethod enqueue-multiple-and-steal-ref ((object connection) packets)
+  (multiple-value-bind (coerced-packets cleanup-packets)
+      (%coerce-argument packets :managed-pointer)
+    (unwind-protect
+        (opendaq:connection/enqueue-multiple-and-steal-ref (%require-live-pointer object) coerced-packets)
+      (%cleanup-coerced-argument cleanup-packets)))
+)
+
+(defgeneric enqueue-on-this-thread (object packet))
+(defmethod enqueue-on-this-thread ((object connection) packet)
+  (multiple-value-bind (coerced-packet cleanup-packet)
+      (%coerce-argument packet :managed-pointer)
+    (unwind-protect
+        (opendaq:connection/enqueue-on-this-thread (%require-live-pointer object) coerced-packet)
+      (%cleanup-coerced-argument cleanup-packet)))
+)
+
+(defgeneric enqueue-with-scheduler (object packet))
+(defmethod enqueue-with-scheduler ((object connection) packet)
+  (multiple-value-bind (coerced-packet cleanup-packet)
+      (%coerce-argument packet :managed-pointer)
+    (unwind-protect
+        (opendaq:connection/enqueue-with-scheduler (%require-live-pointer object) coerced-packet)
+      (%cleanup-coerced-argument cleanup-packet)))
+)
+
+(defgeneric available-samples (object samples))
+(defmethod available-samples ((object connection) samples)
+  (let ((coerced-samples samples))
+    (opendaq:connection/get-available-samples (%require-live-pointer object) coerced-samples)
+  )
+)
+
+(defgeneric input-port (object))
+(defmethod input-port ((object connection))
+  (wrap-input-port (opendaq:connection/get-input-port (%require-live-pointer object)))
+)
+
+(defun connection-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:connection/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric packet-count (object))
+(defmethod packet-count ((object connection))
+  (opendaq:connection/get-packet-count (%require-live-pointer object))
+)
+
+(defgeneric samples-until-next-descriptor (object samples))
+(defmethod samples-until-next-descriptor ((object connection) samples)
+  (let ((coerced-samples samples))
+    (opendaq:connection/get-samples-until-next-descriptor (%require-live-pointer object) coerced-samples)
+  )
+)
+
+(defgeneric samples-until-next-event-packet (object samples))
+(defmethod samples-until-next-event-packet ((object connection) samples)
+  (let ((coerced-samples samples))
+    (opendaq:connection/get-samples-until-next-event-packet (%require-live-pointer object) coerced-samples)
+  )
+)
+
+(defgeneric samples-until-next-gap-packet (object samples))
+(defmethod samples-until-next-gap-packet ((object connection) samples)
+  (let ((coerced-samples samples))
+    (opendaq:connection/get-samples-until-next-gap-packet (%require-live-pointer object) coerced-samples)
+  )
+)
+
+(defgeneric connection-signal (object))
+(defmethod connection-signal ((object connection))
+  (wrap-signal (opendaq:connection/get-signal (%require-live-pointer object)))
+)
+
+(defgeneric has-event-packet (object))
+(defmethod has-event-packet ((object connection))
+  (not (zerop (opendaq:connection/has-event-packet (%require-live-pointer object))))
+)
+
+(defgeneric has-gap-packet (object))
+(defmethod has-gap-packet ((object connection))
+  (not (zerop (opendaq:connection/has-gap-packet (%require-live-pointer object))))
+)
+
+(defgeneric is-remote (object))
+(defmethod is-remote ((object connection))
+  (not (zerop (opendaq:connection/is-remote (%require-live-pointer object))))
+)
+
+(defgeneric peek (object))
+(defmethod peek ((object connection))
+  (wrap-packet (opendaq:connection/peek (%require-live-pointer object)))
+)
+
+(defun context-internal-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:context-internal/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric move-module-manager (object))
+(defmethod move-module-manager ((object context-internal))
+  (wrap-module-manager (opendaq:context-internal/move-module-manager (%require-live-pointer object)))
+)
+
+(defgeneric authentication-provider (object))
+(defmethod authentication-provider ((object context))
+  (wrap-authentication-provider (opendaq:context/get-authentication-provider (%require-live-pointer object)))
+)
+
+(defgeneric discovery-servers (object))
+(defmethod discovery-servers ((object context))
+  (wrap-dict (opendaq:context/get-discovery-servers (%require-live-pointer object)))
+)
+
+(defun context-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:context/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric logger (object))
+(defmethod logger ((object context))
+  (wrap-logger (opendaq:context/get-logger (%require-live-pointer object)))
+)
+
+(defgeneric module-manager (object))
+(defmethod module-manager ((object context))
+  (wrap-base-object (opendaq:context/get-module-manager (%require-live-pointer object)))
+)
+
+(defgeneric module-options (object module-id))
+(defmethod module-options ((object context) module-id)
+  (multiple-value-bind (coerced-module-id cleanup-module-id)
+      (%coerce-argument module-id :daq-string)
+    (unwind-protect
+        (wrap-dict (opendaq:context/get-module-options (%require-live-pointer object) coerced-module-id))
+      (%cleanup-coerced-argument cleanup-module-id)))
+)
+
+(defgeneric on-core-event (object))
+(defmethod on-core-event ((object context))
+  (wrap-event (opendaq:context/get-on-core-event (%require-live-pointer object)))
+)
+
+(defgeneric options (object))
+(defmethod options ((object context))
+  (wrap-dict (opendaq:context/get-options (%require-live-pointer object)))
+)
+
+(defgeneric scheduler (object))
+(defmethod scheduler ((object context))
+  (wrap-scheduler (opendaq:context/get-scheduler (%require-live-pointer object)))
+)
+
+(defgeneric type-manager (object))
+(defmethod type-manager ((object context))
+  (wrap-type-manager (opendaq:context/get-type-manager (%require-live-pointer object)))
+)
+
+(defun convertible-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:convertible/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric to-bool (object))
+(defmethod to-bool ((object convertible))
+  (not (zerop (opendaq:convertible/to-bool (%require-live-pointer object))))
+)
+
+(defgeneric to-float (object))
+(defmethod to-float ((object convertible))
+  (opendaq:convertible/to-float (%require-live-pointer object))
+)
+
+(defgeneric to-int (object))
+(defmethod to-int ((object convertible))
+  (opendaq:convertible/to-int (%require-live-pointer object))
+)
+
+(defun core-event-args-create-core-event-args-property-added (prop-owner prop path)
+  (multiple-value-bind (coerced-prop-owner cleanup-prop-owner)
+      (%coerce-argument prop-owner :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-prop cleanup-prop)
+            (%coerce-argument prop :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-path cleanup-path)
+                  (%coerce-argument path :daq-string)
+                (unwind-protect
+                    (wrap-core-event-args (opendaq:core-event-args/create-core-event-args-property-added coerced-prop-owner coerced-prop coerced-path))
+                  (%cleanup-coerced-argument cleanup-path)))
+            (%cleanup-coerced-argument cleanup-prop)))
+      (%cleanup-coerced-argument cleanup-prop-owner)))
+)
+
+(defun core-event-args-create-core-event-args-property-object-update-end (prop-owner updated-properties path)
+  (multiple-value-bind (coerced-prop-owner cleanup-prop-owner)
+      (%coerce-argument prop-owner :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-updated-properties cleanup-updated-properties)
+            (%coerce-argument updated-properties :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-path cleanup-path)
+                  (%coerce-argument path :daq-string)
+                (unwind-protect
+                    (wrap-core-event-args (opendaq:core-event-args/create-core-event-args-property-object-update-end coerced-prop-owner coerced-updated-properties coerced-path))
+                  (%cleanup-coerced-argument cleanup-path)))
+            (%cleanup-coerced-argument cleanup-updated-properties)))
+      (%cleanup-coerced-argument cleanup-prop-owner)))
+)
+
+(defun core-event-args-create-core-event-args-property-order-changed (prop-owner property-order path)
+  (multiple-value-bind (coerced-prop-owner cleanup-prop-owner)
+      (%coerce-argument prop-owner :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-property-order cleanup-property-order)
+            (%coerce-argument property-order :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-path cleanup-path)
+                  (%coerce-argument path :daq-string)
+                (unwind-protect
+                    (wrap-core-event-args (opendaq:core-event-args/create-core-event-args-property-order-changed coerced-prop-owner coerced-property-order coerced-path))
+                  (%cleanup-coerced-argument cleanup-path)))
+            (%cleanup-coerced-argument cleanup-property-order)))
+      (%cleanup-coerced-argument cleanup-prop-owner)))
+)
+
+(defun core-event-args-create-core-event-args-property-removed (prop-owner prop-name path)
+  (multiple-value-bind (coerced-prop-owner cleanup-prop-owner)
+      (%coerce-argument prop-owner :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-prop-name cleanup-prop-name)
+            (%coerce-argument prop-name :daq-string)
+          (unwind-protect
+              (multiple-value-bind (coerced-path cleanup-path)
+                  (%coerce-argument path :daq-string)
+                (unwind-protect
+                    (wrap-core-event-args (opendaq:core-event-args/create-core-event-args-property-removed coerced-prop-owner coerced-prop-name coerced-path))
+                  (%cleanup-coerced-argument cleanup-path)))
+            (%cleanup-coerced-argument cleanup-prop-name)))
+      (%cleanup-coerced-argument cleanup-prop-owner)))
+)
+
+(defun core-event-args-create-core-event-args-property-value-changed (prop-owner prop-name value path)
+  (multiple-value-bind (coerced-prop-owner cleanup-prop-owner)
+      (%coerce-argument prop-owner :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-prop-name cleanup-prop-name)
+            (%coerce-argument prop-name :daq-string)
+          (unwind-protect
+              (multiple-value-bind (coerced-value cleanup-value)
+                  (%coerce-argument value :daq-base-object)
+                (unwind-protect
+                    (multiple-value-bind (coerced-path cleanup-path)
+                        (%coerce-argument path :daq-string)
+                      (unwind-protect
+                          (wrap-core-event-args (opendaq:core-event-args/create-core-event-args-property-value-changed coerced-prop-owner coerced-prop-name coerced-value coerced-path))
+                        (%cleanup-coerced-argument cleanup-path)))
+                  (%cleanup-coerced-argument cleanup-value)))
+            (%cleanup-coerced-argument cleanup-prop-name)))
+      (%cleanup-coerced-argument cleanup-prop-owner)))
+)
+
+(defun core-event-args-create-core-event-args-type-added (type)
+  (multiple-value-bind (coerced-type cleanup-type)
+      (%coerce-argument type :managed-pointer)
+    (unwind-protect
+        (wrap-core-event-args (opendaq:core-event-args/create-core-event-args-type-added coerced-type))
+      (%cleanup-coerced-argument cleanup-type)))
+)
+
+(defun core-event-args-create-core-event-args-type-removed (type-name)
+  (multiple-value-bind (coerced-type-name cleanup-type-name)
+      (%coerce-argument type-name :daq-string)
+    (unwind-protect
+        (wrap-core-event-args (opendaq:core-event-args/create-core-event-args-type-removed coerced-type-name))
+      (%cleanup-coerced-argument cleanup-type-name)))
+)
+
+(defun core-event-args-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:core-event-args/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric parameters (object))
+(defmethod parameters ((object core-event-args))
+  (wrap-dict (opendaq:core-event-args/get-parameters (%require-live-pointer object)))
+)
+
+(defgeneric core-type (object))
+(defmethod core-type ((object core-type))
+  (opendaq:core-type/get-core-type (%require-live-pointer object))
+)
+
+(defgeneric build (object))
+(defmethod build ((object data-descriptor-builder))
+  (wrap-data-descriptor (opendaq:data-descriptor-builder/build (%require-live-pointer object)))
+)
+
+(defun data-descriptor-builder-create-data-descriptor-builder-from-existing (descriptor-to-copy)
+  (multiple-value-bind (coerced-descriptor-to-copy cleanup-descriptor-to-copy)
+      (%coerce-argument descriptor-to-copy :managed-pointer)
+    (unwind-protect
+        (wrap-data-descriptor-builder (opendaq:data-descriptor-builder/create-data-descriptor-builder-from-existing coerced-descriptor-to-copy))
+      (%cleanup-coerced-argument cleanup-descriptor-to-copy)))
+)
+
+(defgeneric dimensions (object))
+(defmethod dimensions ((object data-descriptor-builder))
+  (wrap-object-list (opendaq:data-descriptor-builder/get-dimensions (%require-live-pointer object)))
+)
+
+(defun data-descriptor-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:data-descriptor-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric metadata (object))
+(defmethod metadata ((object data-descriptor-builder))
+  (wrap-dict (opendaq:data-descriptor-builder/get-metadata (%require-live-pointer object)))
+)
+
+(defgeneric name (object))
+(defmethod name ((object data-descriptor-builder))
+  (%daq-string-to-lisp-and-release (opendaq:data-descriptor-builder/get-name (%require-live-pointer object)))
+)
+
+(defgeneric origin (object))
+(defmethod origin ((object data-descriptor-builder))
+  (%daq-string-to-lisp-and-release (opendaq:data-descriptor-builder/get-origin (%require-live-pointer object)))
+)
+
+(defgeneric post-scaling (object))
+(defmethod post-scaling ((object data-descriptor-builder))
+  (wrap-scaling (opendaq:data-descriptor-builder/get-post-scaling (%require-live-pointer object)))
+)
+
+(defgeneric reference-domain-info (object))
+(defmethod reference-domain-info ((object data-descriptor-builder))
+  (wrap-reference-domain-info (opendaq:data-descriptor-builder/get-reference-domain-info (%require-live-pointer object)))
+)
+
+(defgeneric rule (object))
+(defmethod rule ((object data-descriptor-builder))
+  (wrap-data-rule (opendaq:data-descriptor-builder/get-rule (%require-live-pointer object)))
+)
+
+(defgeneric sample-type (object))
+(defmethod sample-type ((object data-descriptor-builder))
+  (opendaq:data-descriptor-builder/get-sample-type (%require-live-pointer object))
+)
+
+(defgeneric struct-fields (object))
+(defmethod struct-fields ((object data-descriptor-builder))
+  (wrap-object-list (opendaq:data-descriptor-builder/get-struct-fields (%require-live-pointer object)))
+)
+
+(defgeneric tick-resolution (object))
+(defmethod tick-resolution ((object data-descriptor-builder))
+  (wrap-ratio (opendaq:data-descriptor-builder/get-tick-resolution (%require-live-pointer object)))
+)
+
+(defgeneric unit (object))
+(defmethod unit ((object data-descriptor-builder))
+  (wrap-unit (opendaq:data-descriptor-builder/get-unit (%require-live-pointer object)))
+)
+
+(defgeneric value-range (object))
+(defmethod value-range ((object data-descriptor-builder))
+  (wrap-range (opendaq:data-descriptor-builder/get-value-range (%require-live-pointer object)))
+)
+
+(defgeneric (setf dimensions) (new-value object))
+(defmethod (setf dimensions) (new-value (object data-descriptor-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:data-descriptor-builder/set-dimensions (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf metadata) (new-value object))
+(defmethod (setf metadata) (new-value (object data-descriptor-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:data-descriptor-builder/set-metadata (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf name) (new-value object))
+(defmethod (setf name) (new-value (object data-descriptor-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:data-descriptor-builder/set-name (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf origin) (new-value object))
+(defmethod (setf origin) (new-value (object data-descriptor-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:data-descriptor-builder/set-origin (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf post-scaling) (new-value object))
+(defmethod (setf post-scaling) (new-value (object data-descriptor-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:data-descriptor-builder/set-post-scaling (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf reference-domain-info) (new-value object))
+(defmethod (setf reference-domain-info) (new-value (object data-descriptor-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:data-descriptor-builder/set-reference-domain-info (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf rule) (new-value object))
+(defmethod (setf rule) (new-value (object data-descriptor-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:data-descriptor-builder/set-rule (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf sample-type) (new-value object))
+(defmethod (setf sample-type) (new-value (object data-descriptor-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:data-descriptor-builder/set-sample-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf struct-fields) (new-value object))
+(defmethod (setf struct-fields) (new-value (object data-descriptor-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:data-descriptor-builder/set-struct-fields (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf tick-resolution) (new-value object))
+(defmethod (setf tick-resolution) (new-value (object data-descriptor-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:data-descriptor-builder/set-tick-resolution (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf unit) (new-value object))
+(defmethod (setf unit) (new-value (object data-descriptor-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:data-descriptor-builder/set-unit (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf value-range) (new-value object))
+(defmethod (setf value-range) (new-value (object data-descriptor-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:data-descriptor-builder/set-value-range (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric dimensions (object))
+(defmethod dimensions ((object data-descriptor))
+  (wrap-object-list (opendaq:data-descriptor/get-dimensions (%require-live-pointer object)))
+)
+
+(defun data-descriptor-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:data-descriptor/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric metadata (object))
+(defmethod metadata ((object data-descriptor))
+  (wrap-dict (opendaq:data-descriptor/get-metadata (%require-live-pointer object)))
+)
+
+(defgeneric name (object))
+(defmethod name ((object data-descriptor))
+  (%daq-string-to-lisp-and-release (opendaq:data-descriptor/get-name (%require-live-pointer object)))
+)
+
+(defgeneric origin (object))
+(defmethod origin ((object data-descriptor))
+  (%daq-string-to-lisp-and-release (opendaq:data-descriptor/get-origin (%require-live-pointer object)))
+)
+
+(defgeneric post-scaling (object))
+(defmethod post-scaling ((object data-descriptor))
+  (wrap-scaling (opendaq:data-descriptor/get-post-scaling (%require-live-pointer object)))
+)
+
+(defgeneric raw-sample-size (object))
+(defmethod raw-sample-size ((object data-descriptor))
+  (opendaq:data-descriptor/get-raw-sample-size (%require-live-pointer object))
+)
+
+(defgeneric reference-domain-info (object))
+(defmethod reference-domain-info ((object data-descriptor))
+  (wrap-reference-domain-info (opendaq:data-descriptor/get-reference-domain-info (%require-live-pointer object)))
+)
+
+(defgeneric rule (object))
+(defmethod rule ((object data-descriptor))
+  (wrap-data-rule (opendaq:data-descriptor/get-rule (%require-live-pointer object)))
+)
+
+(defgeneric sample-size (object))
+(defmethod sample-size ((object data-descriptor))
+  (opendaq:data-descriptor/get-sample-size (%require-live-pointer object))
+)
+
+(defgeneric sample-type (object))
+(defmethod sample-type ((object data-descriptor))
+  (opendaq:data-descriptor/get-sample-type (%require-live-pointer object))
+)
+
+(defgeneric struct-fields (object))
+(defmethod struct-fields ((object data-descriptor))
+  (wrap-object-list (opendaq:data-descriptor/get-struct-fields (%require-live-pointer object)))
+)
+
+(defgeneric tick-resolution (object))
+(defmethod tick-resolution ((object data-descriptor))
+  (wrap-ratio (opendaq:data-descriptor/get-tick-resolution (%require-live-pointer object)))
+)
+
+(defgeneric unit (object))
+(defmethod unit ((object data-descriptor))
+  (wrap-unit (opendaq:data-descriptor/get-unit (%require-live-pointer object)))
+)
+
+(defgeneric value-range (object))
+(defmethod value-range ((object data-descriptor))
+  (wrap-range (opendaq:data-descriptor/get-value-range (%require-live-pointer object)))
+)
+
+(defun data-packet-create-constant-data-packet-with-domain (domain-packet descriptor sample-count initial-value other-values other-value-count)
+  (multiple-value-bind (coerced-domain-packet cleanup-domain-packet)
+      (%coerce-argument domain-packet :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-descriptor cleanup-descriptor)
+            (%coerce-argument descriptor :managed-pointer)
+          (unwind-protect
+              (let ((coerced-sample-count sample-count))
+                (let ((coerced-initial-value initial-value))
+                  (let ((coerced-other-values other-values))
+                    (let ((coerced-other-value-count other-value-count))
+                      (wrap-data-packet (opendaq:data-packet/create-constant-data-packet-with-domain coerced-domain-packet coerced-descriptor coerced-sample-count coerced-initial-value coerced-other-values coerced-other-value-count))
+                    )
+                  )
+                )
+              )
+            (%cleanup-coerced-argument cleanup-descriptor)))
+      (%cleanup-coerced-argument cleanup-domain-packet)))
+)
+
+(defun data-packet-create-data-packet-with-domain (domain-packet descriptor sample-count offset)
+  (multiple-value-bind (coerced-domain-packet cleanup-domain-packet)
+      (%coerce-argument domain-packet :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-descriptor cleanup-descriptor)
+            (%coerce-argument descriptor :managed-pointer)
+          (unwind-protect
+              (let ((coerced-sample-count sample-count))
+                (multiple-value-bind (coerced-offset cleanup-offset)
+                    (%coerce-argument offset :managed-pointer)
+                  (unwind-protect
+                      (wrap-data-packet (opendaq:data-packet/create-data-packet-with-domain coerced-domain-packet coerced-descriptor coerced-sample-count coerced-offset))
+                    (%cleanup-coerced-argument cleanup-offset)))
+              )
+            (%cleanup-coerced-argument cleanup-descriptor)))
+      (%cleanup-coerced-argument cleanup-domain-packet)))
+)
+
+(defun data-packet-create-data-packet-with-external-memory (domain-packet descriptor sample-count offset external-memory deleter buffer-size)
+  (multiple-value-bind (coerced-domain-packet cleanup-domain-packet)
+      (%coerce-argument domain-packet :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-descriptor cleanup-descriptor)
+            (%coerce-argument descriptor :managed-pointer)
+          (unwind-protect
+              (let ((coerced-sample-count sample-count))
+                (multiple-value-bind (coerced-offset cleanup-offset)
+                    (%coerce-argument offset :managed-pointer)
+                  (unwind-protect
+                      (let ((coerced-external-memory external-memory))
+                        (multiple-value-bind (coerced-deleter cleanup-deleter)
+                            (%coerce-argument deleter :managed-pointer)
+                          (unwind-protect
+                              (let ((coerced-buffer-size buffer-size))
+                                (wrap-data-packet (opendaq:data-packet/create-data-packet-with-external-memory coerced-domain-packet coerced-descriptor coerced-sample-count coerced-offset coerced-external-memory coerced-deleter coerced-buffer-size))
+                              )
+                            (%cleanup-coerced-argument cleanup-deleter)))
+                      )
+                    (%cleanup-coerced-argument cleanup-offset)))
+              )
+            (%cleanup-coerced-argument cleanup-descriptor)))
+      (%cleanup-coerced-argument cleanup-domain-packet)))
+)
+
+(defgeneric data (object address))
+(defmethod data ((object data-packet) address)
+  (let ((coerced-address address))
+    (opendaq:data-packet/get-data (%require-live-pointer object) coerced-address)
+  )
+)
+
+(defgeneric data-descriptor (object))
+(defmethod data-descriptor ((object data-packet))
+  (wrap-data-descriptor (opendaq:data-packet/get-data-descriptor (%require-live-pointer object)))
+)
+
+(defgeneric data-size (object))
+(defmethod data-size ((object data-packet))
+  (opendaq:data-packet/get-data-size (%require-live-pointer object))
+)
+
+(defgeneric domain-packet (object))
+(defmethod domain-packet ((object data-packet))
+  (wrap-data-packet (opendaq:data-packet/get-domain-packet (%require-live-pointer object)))
+)
+
+(defun data-packet-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:data-packet/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric data-packet-last-value (object type-manager))
+(defmethod data-packet-last-value ((object data-packet) type-manager)
+  (multiple-value-bind (coerced-type-manager cleanup-type-manager)
+      (%coerce-argument type-manager :managed-pointer)
+    (unwind-protect
+        (wrap-base-object (opendaq:data-packet/get-last-value (%require-live-pointer object) coerced-type-manager))
+      (%cleanup-coerced-argument cleanup-type-manager)))
+)
+
+(defgeneric data-packet-offset (object))
+(defmethod data-packet-offset ((object data-packet))
+  (wrap-daq-number (opendaq:data-packet/get-offset (%require-live-pointer object)))
+)
+
+(defgeneric packet-id (object))
+(defmethod packet-id ((object data-packet))
+  (opendaq:data-packet/get-packet-id (%require-live-pointer object))
+)
+
+(defgeneric raw-data (object address))
+(defmethod raw-data ((object data-packet) address)
+  (let ((coerced-address address))
+    (opendaq:data-packet/get-raw-data (%require-live-pointer object) coerced-address)
+  )
+)
+
+(defgeneric raw-data-size (object))
+(defmethod raw-data-size ((object data-packet))
+  (opendaq:data-packet/get-raw-data-size (%require-live-pointer object))
+)
+
+(defgeneric raw-last-value (object value))
+(defmethod raw-last-value ((object data-packet) value)
+  (let ((coerced-value value))
+    (opendaq:data-packet/get-raw-last-value (%require-live-pointer object) coerced-value)
+  )
+)
+
+(defgeneric raw-value-by-index (object value index))
+(defmethod raw-value-by-index ((object data-packet) value index)
+  (let ((coerced-value value))
+    (let ((coerced-index index))
+      (opendaq:data-packet/get-raw-value-by-index (%require-live-pointer object) coerced-value coerced-index)
+    )
+  )
+)
+
+(defgeneric sample-count (object))
+(defmethod sample-count ((object data-packet))
+  (opendaq:data-packet/get-sample-count (%require-live-pointer object))
+)
+
+(defgeneric value-by-index (object index type-manager))
+(defmethod value-by-index ((object data-packet) index type-manager)
+  (let ((coerced-index index))
+    (multiple-value-bind (coerced-type-manager cleanup-type-manager)
+        (%coerce-argument type-manager :managed-pointer)
+      (unwind-protect
+          (wrap-base-object (opendaq:data-packet/get-value-by-index (%require-live-pointer object) coerced-index coerced-type-manager))
+        (%cleanup-coerced-argument cleanup-type-manager)))
+  )
+)
+
+(defgeneric add-parameter (object name parameter))
+(defmethod add-parameter ((object data-rule-builder) name parameter)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-parameter cleanup-parameter)
+            (%coerce-argument parameter :daq-base-object)
+          (unwind-protect
+              (opendaq:data-rule-builder/add-parameter (%require-live-pointer object) coerced-name coerced-parameter)
+            (%cleanup-coerced-argument cleanup-parameter)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric build (object))
+(defmethod build ((object data-rule-builder))
+  (wrap-data-rule (opendaq:data-rule-builder/build (%require-live-pointer object)))
+)
+
+(defun data-rule-builder-create-data-rule-builder-from-existing (rule-to-copy)
+  (multiple-value-bind (coerced-rule-to-copy cleanup-rule-to-copy)
+      (%coerce-argument rule-to-copy :managed-pointer)
+    (unwind-protect
+        (wrap-data-rule-builder (opendaq:data-rule-builder/create-data-rule-builder-from-existing coerced-rule-to-copy))
+      (%cleanup-coerced-argument cleanup-rule-to-copy)))
+)
+
+(defun data-rule-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:data-rule-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric parameters (object))
+(defmethod parameters ((object data-rule-builder))
+  (wrap-dict (opendaq:data-rule-builder/get-parameters (%require-live-pointer object)))
+)
+
+(defgeneric data-rule-builder-type (object))
+(defmethod data-rule-builder-type ((object data-rule-builder))
+  (opendaq:data-rule-builder/get-type (%require-live-pointer object))
+)
+
+(defgeneric remove-parameter (object name))
+(defmethod remove-parameter ((object data-rule-builder) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (opendaq:data-rule-builder/remove-parameter (%require-live-pointer object) coerced-name)
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric (setf parameters) (new-value object))
+(defmethod (setf parameters) (new-value (object data-rule-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:data-rule-builder/set-parameters (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf type) (new-value object))
+(defmethod (setf type) (new-value (object data-rule-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:data-rule-builder/set-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defun data-rule-create-constant-data-rule ()
+  (wrap-data-rule (opendaq:data-rule/create-constant-data-rule))
+)
+
+(defun data-rule-create-data-rule-from-builder (builder)
+  (multiple-value-bind (coerced-builder cleanup-builder)
+      (%coerce-argument builder :managed-pointer)
+    (unwind-protect
+        (wrap-data-rule (opendaq:data-rule/create-data-rule-from-builder coerced-builder))
+      (%cleanup-coerced-argument cleanup-builder)))
+)
+
+(defun data-rule-create-explicit-data-rule ()
+  (wrap-data-rule (opendaq:data-rule/create-explicit-data-rule))
+)
+
+(defun data-rule-create-explicit-domain-data-rule (min-expected-delta max-expected-delta)
+  (multiple-value-bind (coerced-min-expected-delta cleanup-min-expected-delta)
+      (%coerce-argument min-expected-delta :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-max-expected-delta cleanup-max-expected-delta)
+            (%coerce-argument max-expected-delta :managed-pointer)
+          (unwind-protect
+              (wrap-data-rule (opendaq:data-rule/create-explicit-domain-data-rule coerced-min-expected-delta coerced-max-expected-delta))
+            (%cleanup-coerced-argument cleanup-max-expected-delta)))
+      (%cleanup-coerced-argument cleanup-min-expected-delta)))
+)
+
+(defun data-rule-create-linear-data-rule (delta start)
+  (multiple-value-bind (coerced-delta cleanup-delta)
+      (%coerce-argument delta :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-start cleanup-start)
+            (%coerce-argument start :managed-pointer)
+          (unwind-protect
+              (wrap-data-rule (opendaq:data-rule/create-linear-data-rule coerced-delta coerced-start))
+            (%cleanup-coerced-argument cleanup-start)))
+      (%cleanup-coerced-argument cleanup-delta)))
+)
+
+(defun data-rule-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:data-rule/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric parameters (object))
+(defmethod parameters ((object data-rule))
+  (wrap-dict (opendaq:data-rule/get-parameters (%require-live-pointer object)))
+)
+
+(defgeneric data-rule-type (object))
+(defmethod data-rule-type ((object data-rule))
+  (opendaq:data-rule/get-type (%require-live-pointer object))
+)
+
+(defgeneric delete-memory (object address))
+(defmethod delete-memory ((object deleter) address)
+  (let ((coerced-address address))
+    (opendaq:deleter/delete-memory (%require-live-pointer object) coerced-address)
+  )
+)
+
+(defun deleter-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:deleter/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric complete (object))
+(defmethod complete ((object deserialize-component))
+  (opendaq:deserialize-component/complete (%require-live-pointer object))
+)
+
+(defgeneric deserialize-values (object serialized-object context callback-factory))
+(defmethod deserialize-values ((object deserialize-component) serialized-object context callback-factory)
+  (multiple-value-bind (coerced-serialized-object cleanup-serialized-object)
+      (%coerce-argument serialized-object :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-context cleanup-context)
+            (%coerce-argument context :daq-base-object)
+          (unwind-protect
+              (multiple-value-bind (coerced-callback-factory cleanup-callback-factory)
+                  (%coerce-argument callback-factory :managed-pointer)
+                (unwind-protect
+                    (opendaq:deserialize-component/deserialize-values (%require-live-pointer object) coerced-serialized-object coerced-context coerced-callback-factory)
+                  (%cleanup-coerced-argument cleanup-callback-factory)))
+            (%cleanup-coerced-argument cleanup-context)))
+      (%cleanup-coerced-argument cleanup-serialized-object)))
+)
+
+(defgeneric deserialized-parameter (object parameter))
+(defmethod deserialized-parameter ((object deserialize-component) parameter)
+  (multiple-value-bind (coerced-parameter cleanup-parameter)
+      (%coerce-argument parameter :daq-string)
+    (unwind-protect
+        (wrap-base-object (opendaq:deserialize-component/get-deserialized-parameter (%require-live-pointer object) coerced-parameter))
+      (%cleanup-coerced-argument cleanup-parameter)))
+)
+
+(defun deserialize-component-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:deserialize-component/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric call-custom-proc (object custom-deserialize serialized))
+(defmethod call-custom-proc ((object deserializer) custom-deserialize serialized)
+  (multiple-value-bind (coerced-custom-deserialize cleanup-custom-deserialize)
+      (%coerce-argument custom-deserialize :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-serialized cleanup-serialized)
+            (%coerce-argument serialized :daq-string)
+          (unwind-protect
+              (opendaq:deserializer/call-custom-proc (%require-live-pointer object) coerced-custom-deserialize coerced-serialized)
+            (%cleanup-coerced-argument cleanup-serialized)))
+      (%cleanup-coerced-argument cleanup-custom-deserialize)))
+)
+
+(defgeneric deserialize (object serialized context factory-callback))
+(defmethod deserialize ((object deserializer) serialized context factory-callback)
+  (multiple-value-bind (coerced-serialized cleanup-serialized)
+      (%coerce-argument serialized :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-context cleanup-context)
+            (%coerce-argument context :daq-base-object)
+          (unwind-protect
+              (multiple-value-bind (coerced-factory-callback cleanup-factory-callback)
+                  (%coerce-argument factory-callback :managed-pointer)
+                (unwind-protect
+                    (wrap-base-object (opendaq:deserializer/deserialize (%require-live-pointer object) coerced-serialized coerced-context coerced-factory-callback))
+                  (%cleanup-coerced-argument cleanup-factory-callback)))
+            (%cleanup-coerced-argument cleanup-context)))
+      (%cleanup-coerced-argument cleanup-serialized)))
+)
+
+(defgeneric deserializer-update (object updatable serialized config))
+(defmethod deserializer-update ((object deserializer) updatable serialized config)
+  (multiple-value-bind (coerced-updatable cleanup-updatable)
+      (%coerce-argument updatable :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-serialized cleanup-serialized)
+            (%coerce-argument serialized :daq-string)
+          (unwind-protect
+              (multiple-value-bind (coerced-config cleanup-config)
+                  (%coerce-argument config :daq-base-object)
+                (unwind-protect
+                    (opendaq:deserializer/update (%require-live-pointer object) coerced-updatable coerced-serialized coerced-config)
+                  (%cleanup-coerced-argument cleanup-config)))
+            (%cleanup-coerced-argument cleanup-serialized)))
+      (%cleanup-coerced-argument cleanup-updatable)))
+)
+
+(defun device-domain-create-device-domain-with-reference-domain-info (tick-resolution origin unit reference-domain-info)
+  (multiple-value-bind (coerced-tick-resolution cleanup-tick-resolution)
+      (%coerce-argument tick-resolution :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-origin cleanup-origin)
+            (%coerce-argument origin :daq-string)
+          (unwind-protect
+              (multiple-value-bind (coerced-unit cleanup-unit)
+                  (%coerce-argument unit :managed-pointer)
+                (unwind-protect
+                    (multiple-value-bind (coerced-reference-domain-info cleanup-reference-domain-info)
+                        (%coerce-argument reference-domain-info :managed-pointer)
+                      (unwind-protect
+                          (wrap-device-domain (opendaq:device-domain/create-device-domain-with-reference-domain-info coerced-tick-resolution coerced-origin coerced-unit coerced-reference-domain-info))
+                        (%cleanup-coerced-argument cleanup-reference-domain-info)))
+                  (%cleanup-coerced-argument cleanup-unit)))
+            (%cleanup-coerced-argument cleanup-origin)))
+      (%cleanup-coerced-argument cleanup-tick-resolution)))
+)
+
+(defun device-domain-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:device-domain/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric origin (object))
+(defmethod origin ((object device-domain))
+  (%daq-string-to-lisp-and-release (opendaq:device-domain/get-origin (%require-live-pointer object)))
+)
+
+(defgeneric reference-domain-info (object))
+(defmethod reference-domain-info ((object device-domain))
+  (wrap-reference-domain-info (opendaq:device-domain/get-reference-domain-info (%require-live-pointer object)))
+)
+
+(defgeneric tick-resolution (object))
+(defmethod tick-resolution ((object device-domain))
+  (wrap-ratio (opendaq:device-domain/get-tick-resolution (%require-live-pointer object)))
+)
+
+(defgeneric unit (object))
+(defmethod unit ((object device-domain))
+  (wrap-unit (opendaq:device-domain/get-unit (%require-live-pointer object)))
+)
+
+(defun device-info-config-create-device-info-config-with-custom-sdk-version (name connection-string sdk-version)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-connection-string cleanup-connection-string)
+            (%coerce-argument connection-string :daq-string)
+          (unwind-protect
+              (multiple-value-bind (coerced-sdk-version cleanup-sdk-version)
+                  (%coerce-argument sdk-version :daq-string)
+                (unwind-protect
+                    (wrap-device-info-config (opendaq:device-info-config/create-device-info-config-with-custom-sdk-version coerced-name coerced-connection-string coerced-sdk-version))
+                  (%cleanup-coerced-argument cleanup-sdk-version)))
+            (%cleanup-coerced-argument cleanup-connection-string)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun device-info-config-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:device-info-config/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric (setf asset-id) (new-value object))
+(defmethod (setf asset-id) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-asset-id (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf connection-string) (new-value object))
+(defmethod (setf connection-string) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-connection-string (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf device-class) (new-value object))
+(defmethod (setf device-class) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-device-class (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf device-manual) (new-value object))
+(defmethod (setf device-manual) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-device-manual (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf device-revision) (new-value object))
+(defmethod (setf device-revision) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-device-revision (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf device-type) (new-value object))
+(defmethod (setf device-type) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:device-info-config/set-device-type (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf hardware-revision) (new-value object))
+(defmethod (setf hardware-revision) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-hardware-revision (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf location) (new-value object))
+(defmethod (setf location) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-location (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf mac-address) (new-value object))
+(defmethod (setf mac-address) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-mac-address (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf manufacturer) (new-value object))
+(defmethod (setf manufacturer) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-manufacturer (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf manufacturer-uri) (new-value object))
+(defmethod (setf manufacturer-uri) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-manufacturer-uri (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf model) (new-value object))
+(defmethod (setf model) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-model (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf name) (new-value object))
+(defmethod (setf name) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-name (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf parent-mac-address) (new-value object))
+(defmethod (setf parent-mac-address) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-parent-mac-address (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf platform) (new-value object))
+(defmethod (setf platform) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-platform (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf position) (new-value object))
+(defmethod (setf position) (new-value (object device-info-config))
+  (let ((coerced-new-value new-value))
+    (opendaq:device-info-config/set-position (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf product-code) (new-value object))
+(defmethod (setf product-code) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-product-code (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf product-instance-uri) (new-value object))
+(defmethod (setf product-instance-uri) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-product-instance-uri (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf revision-counter) (new-value object))
+(defmethod (setf revision-counter) (new-value (object device-info-config))
+  (let ((coerced-new-value new-value))
+    (opendaq:device-info-config/set-revision-counter (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf serial-number) (new-value object))
+(defmethod (setf serial-number) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-serial-number (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf software-revision) (new-value object))
+(defmethod (setf software-revision) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-software-revision (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf system-type) (new-value object))
+(defmethod (setf system-type) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-system-type (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf system-uuid) (new-value object))
+(defmethod (setf system-uuid) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-system-uuid (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf user-name) (new-value object))
+(defmethod (setf user-name) (new-value (object device-info-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-info-config/set-user-name (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric add-connected-client (object client-info))
+(defmethod add-connected-client ((object device-info-internal) client-info)
+  (multiple-value-bind (coerced-client-info cleanup-client-info)
+      (%coerce-argument client-info :managed-pointer)
+    (unwind-protect
+        (opendaq:device-info-internal/add-connected-client (%require-live-pointer object) coerced-client-info)
+      (%cleanup-coerced-argument cleanup-client-info)))
+)
+
+(defgeneric add-network-inteface (object name network-interface))
+(defmethod add-network-inteface ((object device-info-internal) name network-interface)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-network-interface cleanup-network-interface)
+            (%coerce-argument network-interface :managed-pointer)
+          (unwind-protect
+              (opendaq:device-info-internal/add-network-inteface (%require-live-pointer object) coerced-name coerced-network-interface)
+            (%cleanup-coerced-argument cleanup-network-interface)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric add-server-capability (object server-capability))
+(defmethod add-server-capability ((object device-info-internal) server-capability)
+  (multiple-value-bind (coerced-server-capability cleanup-server-capability)
+      (%coerce-argument server-capability :managed-pointer)
+    (unwind-protect
+        (opendaq:device-info-internal/add-server-capability (%require-live-pointer object) coerced-server-capability)
+      (%cleanup-coerced-argument cleanup-server-capability)))
+)
+
+(defgeneric clear-server-streaming-capabilities (object))
+(defmethod clear-server-streaming-capabilities ((object device-info-internal))
+  (opendaq:device-info-internal/clear-server-streaming-capabilities (%require-live-pointer object))
+)
+
+(defun device-info-internal-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:device-info-internal/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric remove-connected-client (object client-number))
+(defmethod remove-connected-client ((object device-info-internal) client-number)
+  (let ((coerced-client-number client-number))
+    (opendaq:device-info-internal/remove-connected-client (%require-live-pointer object) coerced-client-number)
+  )
+)
+
+(defgeneric remove-server-capability (object protocol-id))
+(defmethod remove-server-capability ((object device-info-internal) protocol-id)
+  (multiple-value-bind (coerced-protocol-id cleanup-protocol-id)
+      (%coerce-argument protocol-id :daq-string)
+    (unwind-protect
+        (opendaq:device-info-internal/remove-server-capability (%require-live-pointer object) coerced-protocol-id)
+      (%cleanup-coerced-argument cleanup-protocol-id)))
+)
+
+(defgeneric asset-id (object))
+(defmethod asset-id ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-asset-id (%require-live-pointer object)))
+)
+
+(defgeneric configuration-connection-info (object))
+(defmethod configuration-connection-info ((object device-info))
+  (wrap-server-capability (opendaq:device-info/get-configuration-connection-info (%require-live-pointer object)))
+)
+
+(defgeneric connected-clients-info (object))
+(defmethod connected-clients-info ((object device-info))
+  (wrap-object-list (opendaq:device-info/get-connected-clients-info (%require-live-pointer object)))
+)
+
+(defgeneric connection-string (object))
+(defmethod connection-string ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-connection-string (%require-live-pointer object)))
+)
+
+(defgeneric custom-info-property-names (object))
+(defmethod custom-info-property-names ((object device-info))
+  (wrap-object-list (opendaq:device-info/get-custom-info-property-names (%require-live-pointer object)))
+)
+
+(defgeneric device-class (object))
+(defmethod device-class ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-device-class (%require-live-pointer object)))
+)
+
+(defgeneric device-manual (object))
+(defmethod device-manual ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-device-manual (%require-live-pointer object)))
+)
+
+(defgeneric device-revision (object))
+(defmethod device-revision ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-device-revision (%require-live-pointer object)))
+)
+
+(defgeneric device-type (object))
+(defmethod device-type ((object device-info))
+  (wrap-device-type (opendaq:device-info/get-device-type (%require-live-pointer object)))
+)
+
+(defgeneric hardware-revision (object))
+(defmethod hardware-revision ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-hardware-revision (%require-live-pointer object)))
+)
+
+(defun device-info-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:device-info/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric location (object))
+(defmethod location ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-location (%require-live-pointer object)))
+)
+
+(defgeneric mac-address (object))
+(defmethod mac-address ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-mac-address (%require-live-pointer object)))
+)
+
+(defgeneric manufacturer (object))
+(defmethod manufacturer ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-manufacturer (%require-live-pointer object)))
+)
+
+(defgeneric manufacturer-uri (object))
+(defmethod manufacturer-uri ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-manufacturer-uri (%require-live-pointer object)))
+)
+
+(defgeneric model (object))
+(defmethod model ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-model (%require-live-pointer object)))
+)
+
+(defgeneric name (object))
+(defmethod name ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-name (%require-live-pointer object)))
+)
+
+(defgeneric network-interface (object interface-name))
+(defmethod network-interface ((object device-info) interface-name)
+  (multiple-value-bind (coerced-interface-name cleanup-interface-name)
+      (%coerce-argument interface-name :daq-string)
+    (unwind-protect
+        (wrap-network-interface (opendaq:device-info/get-network-interface (%require-live-pointer object) coerced-interface-name))
+      (%cleanup-coerced-argument cleanup-interface-name)))
+)
+
+(defgeneric network-interfaces (object))
+(defmethod network-interfaces ((object device-info))
+  (wrap-dict (opendaq:device-info/get-network-interfaces (%require-live-pointer object)))
+)
+
+(defgeneric parent-mac-address (object))
+(defmethod parent-mac-address ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-parent-mac-address (%require-live-pointer object)))
+)
+
+(defgeneric platform (object))
+(defmethod platform ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-platform (%require-live-pointer object)))
+)
+
+(defgeneric position (object))
+(defmethod position ((object device-info))
+  (opendaq:device-info/get-position (%require-live-pointer object))
+)
+
+(defgeneric product-code (object))
+(defmethod product-code ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-product-code (%require-live-pointer object)))
+)
+
+(defgeneric product-instance-uri (object))
+(defmethod product-instance-uri ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-product-instance-uri (%require-live-pointer object)))
+)
+
+(defgeneric revision-counter (object))
+(defmethod revision-counter ((object device-info))
+  (opendaq:device-info/get-revision-counter (%require-live-pointer object))
+)
+
+(defgeneric sdk-version (object))
+(defmethod sdk-version ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-sdk-version (%require-live-pointer object)))
+)
+
+(defgeneric serial-number (object))
+(defmethod serial-number ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-serial-number (%require-live-pointer object)))
+)
+
+(defgeneric server-capabilities (object))
+(defmethod server-capabilities ((object device-info))
+  (wrap-object-list (opendaq:device-info/get-server-capabilities (%require-live-pointer object)))
+)
+
+(defgeneric server-capability (object protocol-id))
+(defmethod server-capability ((object device-info) protocol-id)
+  (multiple-value-bind (coerced-protocol-id cleanup-protocol-id)
+      (%coerce-argument protocol-id :daq-string)
+    (unwind-protect
+        (wrap-server-capability (opendaq:device-info/get-server-capability (%require-live-pointer object) coerced-protocol-id))
+      (%cleanup-coerced-argument cleanup-protocol-id)))
+)
+
+(defgeneric software-revision (object))
+(defmethod software-revision ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-software-revision (%require-live-pointer object)))
+)
+
+(defgeneric system-type (object))
+(defmethod system-type ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-system-type (%require-live-pointer object)))
+)
+
+(defgeneric system-uuid (object))
+(defmethod system-uuid ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-system-uuid (%require-live-pointer object)))
+)
+
+(defgeneric user-name (object))
+(defmethod user-name ((object device-info))
+  (%daq-string-to-lisp-and-release (opendaq:device-info/get-user-name (%require-live-pointer object)))
+)
+
+(defgeneric has-server-capability (object protocol-id))
+(defmethod has-server-capability ((object device-info) protocol-id)
+  (multiple-value-bind (coerced-protocol-id cleanup-protocol-id)
+      (%coerce-argument protocol-id :daq-string)
+    (unwind-protect
+        (not (zerop (opendaq:device-info/has-server-capability (%require-live-pointer object) coerced-protocol-id)))
+      (%cleanup-coerced-argument cleanup-protocol-id)))
+)
+
+(defun device-network-config-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:device-network-config/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric network-configuration-enabled (object))
+(defmethod network-configuration-enabled ((object device-network-config))
+  (not (zerop (opendaq:device-network-config/get-network-configuration-enabled (%require-live-pointer object))))
+)
+
+(defgeneric network-interface-names (object))
+(defmethod network-interface-names ((object device-network-config))
+  (wrap-object-list (opendaq:device-network-config/get-network-interface-names (%require-live-pointer object)))
+)
+
+(defgeneric retrieve-network-configuration (object iface-name))
+(defmethod retrieve-network-configuration ((object device-network-config) iface-name)
+  (multiple-value-bind (coerced-iface-name cleanup-iface-name)
+      (%coerce-argument iface-name :daq-string)
+    (unwind-protect
+        (wrap-property-object (opendaq:device-network-config/retrieve-network-configuration (%require-live-pointer object) coerced-iface-name))
+      (%cleanup-coerced-argument cleanup-iface-name)))
+)
+
+(defgeneric submit-network-configuration (object iface-name config))
+(defmethod submit-network-configuration ((object device-network-config) iface-name config)
+  (multiple-value-bind (coerced-iface-name cleanup-iface-name)
+      (%coerce-argument iface-name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-config cleanup-config)
+            (%coerce-argument config :managed-pointer)
+          (unwind-protect
+              (opendaq:device-network-config/submit-network-configuration (%require-live-pointer object) coerced-iface-name coerced-config)
+            (%cleanup-coerced-argument cleanup-config)))
+      (%cleanup-coerced-argument cleanup-iface-name)))
+)
+
+(defgeneric force-unlock (object))
+(defmethod force-unlock ((object device-private))
+  (opendaq:device-private/force-unlock (%require-live-pointer object))
+)
+
+(defgeneric device-config (object))
+(defmethod device-config ((object device-private))
+  (wrap-property-object (opendaq:device-private/get-device-config (%require-live-pointer object)))
+)
+
+(defun device-private-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:device-private/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric is-locked-internal (object))
+(defmethod is-locked-internal ((object device-private))
+  (not (zerop (opendaq:device-private/is-locked-internal (%require-live-pointer object))))
+)
+
+(defgeneric device-private-lock (object user))
+(defmethod device-private-lock ((object device-private) user)
+  (multiple-value-bind (coerced-user cleanup-user)
+      (%coerce-argument user :managed-pointer)
+    (unwind-protect
+        (opendaq:device-private/lock (%require-live-pointer object) coerced-user)
+      (%cleanup-coerced-argument cleanup-user)))
+)
+
+(defgeneric set-as-root (object))
+(defmethod set-as-root ((object device-private))
+  (opendaq:device-private/set-as-root (%require-live-pointer object))
+)
+
+(defgeneric (setf device-config) (new-value object))
+(defmethod (setf device-config) (new-value (object device-private))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:device-private/set-device-config (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric device-private-unlock (object user))
+(defmethod device-private-unlock ((object device-private) user)
+  (multiple-value-bind (coerced-user cleanup-user)
+      (%coerce-argument user :managed-pointer)
+    (unwind-protect
+        (opendaq:device-private/unlock (%require-live-pointer object) coerced-user)
+      (%cleanup-coerced-argument cleanup-user)))
+)
+
+(defgeneric connection-string-prefix (object))
+(defmethod connection-string-prefix ((object device-type))
+  (%daq-string-to-lisp-and-release (opendaq:device-type/get-connection-string-prefix (%require-live-pointer object)))
+)
+
+(defun device-type-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:device-type/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric child-device-options (object))
+(defmethod child-device-options ((object device-update-options))
+  (wrap-object-list (opendaq:device-update-options/get-child-device-options (%require-live-pointer object)))
+)
+
+(defgeneric connection-string (object))
+(defmethod connection-string ((object device-update-options))
+  (%daq-string-to-lisp-and-release (opendaq:device-update-options/get-connection-string (%require-live-pointer object)))
+)
+
+(defun device-update-options-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:device-update-options/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric local-id (object))
+(defmethod local-id ((object device-update-options))
+  (%daq-string-to-lisp-and-release (opendaq:device-update-options/get-local-id (%require-live-pointer object)))
+)
+
+(defgeneric manufacturer (object))
+(defmethod manufacturer ((object device-update-options))
+  (%daq-string-to-lisp-and-release (opendaq:device-update-options/get-manufacturer (%require-live-pointer object)))
+)
+
+(defgeneric new-connection-string (object))
+(defmethod new-connection-string ((object device-update-options))
+  (%daq-string-to-lisp-and-release (opendaq:device-update-options/get-new-connection-string (%require-live-pointer object)))
+)
+
+(defgeneric new-manufacturer (object))
+(defmethod new-manufacturer ((object device-update-options))
+  (%daq-string-to-lisp-and-release (opendaq:device-update-options/get-new-manufacturer (%require-live-pointer object)))
+)
+
+(defgeneric new-serial-number (object))
+(defmethod new-serial-number ((object device-update-options))
+  (%daq-string-to-lisp-and-release (opendaq:device-update-options/get-new-serial-number (%require-live-pointer object)))
+)
+
+(defgeneric serial-number (object))
+(defmethod serial-number ((object device-update-options))
+  (%daq-string-to-lisp-and-release (opendaq:device-update-options/get-serial-number (%require-live-pointer object)))
+)
+
+(defgeneric update-mode (object))
+(defmethod update-mode ((object device-update-options))
+  (opendaq:device-update-options/get-update-mode (%require-live-pointer object))
+)
+
+(defgeneric (setf new-connection-string) (new-value object))
+(defmethod (setf new-connection-string) (new-value (object device-update-options))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-update-options/set-new-connection-string (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf new-manufacturer) (new-value object))
+(defmethod (setf new-manufacturer) (new-value (object device-update-options))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-update-options/set-new-manufacturer (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf new-serial-number) (new-value object))
+(defmethod (setf new-serial-number) (new-value (object device-update-options))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:device-update-options/set-new-serial-number (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf update-mode) (new-value object))
+(defmethod (setf update-mode) (new-value (object device-update-options))
+  (let ((coerced-new-value new-value))
+    (opendaq:device-update-options/set-update-mode (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
 
 (defgeneric add-device (object connection-string &optional config))
 (defmethod add-device ((object device) connection-string &optional (config nil))
@@ -250,8 +9923,182 @@
       (%cleanup-coerced-argument cleanup-connection-string)))
 )
 
-(defgeneric signals (object &optional search-filter))
-(defmethod signals ((object device) &optional (search-filter nil))
+(defgeneric add-devices (object connection-args err-codes error-infos))
+(defmethod add-devices ((object device) connection-args err-codes error-infos)
+  (multiple-value-bind (coerced-connection-args cleanup-connection-args)
+      (%coerce-argument connection-args :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-err-codes cleanup-err-codes)
+            (%coerce-argument err-codes :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-error-infos cleanup-error-infos)
+                  (%coerce-argument error-infos :managed-pointer)
+                (unwind-protect
+                    (wrap-dict (opendaq:device/add-devices (%require-live-pointer object) coerced-connection-args coerced-err-codes coerced-error-infos))
+                  (%cleanup-coerced-argument cleanup-error-infos)))
+            (%cleanup-coerced-argument cleanup-err-codes)))
+      (%cleanup-coerced-argument cleanup-connection-args)))
+)
+
+(defgeneric add-function-block (object type-id config))
+(defmethod add-function-block ((object device) type-id config)
+  (multiple-value-bind (coerced-type-id cleanup-type-id)
+      (%coerce-argument type-id :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-config cleanup-config)
+            (%coerce-argument config :managed-pointer)
+          (unwind-protect
+              (wrap-function-block (opendaq:device/add-function-block (%require-live-pointer object) coerced-type-id coerced-config))
+            (%cleanup-coerced-argument cleanup-config)))
+      (%cleanup-coerced-argument cleanup-type-id)))
+)
+
+(defgeneric add-server (object type-id config))
+(defmethod add-server ((object device) type-id config)
+  (multiple-value-bind (coerced-type-id cleanup-type-id)
+      (%coerce-argument type-id :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-config cleanup-config)
+            (%coerce-argument config :managed-pointer)
+          (unwind-protect
+              (wrap-server (opendaq:device/add-server (%require-live-pointer object) coerced-type-id coerced-config))
+            (%cleanup-coerced-argument cleanup-config)))
+      (%cleanup-coerced-argument cleanup-type-id)))
+)
+
+(defgeneric add-streaming (object connection-string config))
+(defmethod add-streaming ((object device) connection-string config)
+  (multiple-value-bind (coerced-connection-string cleanup-connection-string)
+      (%coerce-argument connection-string :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-config cleanup-config)
+            (%coerce-argument config :managed-pointer)
+          (unwind-protect
+              (wrap-streaming (opendaq:device/add-streaming (%require-live-pointer object) coerced-connection-string coerced-config))
+            (%cleanup-coerced-argument cleanup-config)))
+      (%cleanup-coerced-argument cleanup-connection-string)))
+)
+
+(defgeneric create-default-add-device-config (object))
+(defmethod create-default-add-device-config ((object device))
+  (wrap-property-object (opendaq:device/create-default-add-device-config (%require-live-pointer object)))
+)
+
+(defgeneric available-device-types (object))
+(defmethod available-device-types ((object device))
+  (wrap-dict (opendaq:device/get-available-device-types (%require-live-pointer object)))
+)
+
+(defgeneric available-devices (object))
+(defmethod available-devices ((object device))
+  (wrap-object-list (opendaq:device/get-available-devices (%require-live-pointer object)))
+)
+
+(defgeneric available-function-block-types (object))
+(defmethod available-function-block-types ((object device))
+  (wrap-dict (opendaq:device/get-available-function-block-types (%require-live-pointer object)))
+)
+
+(defgeneric available-operation-modes (object))
+(defmethod available-operation-modes ((object device))
+  (wrap-object-list (opendaq:device/get-available-operation-modes (%require-live-pointer object)))
+)
+
+(defgeneric channels (object search-filter))
+(defmethod channels ((object device) search-filter)
+  (multiple-value-bind (coerced-search-filter cleanup-search-filter)
+      (%coerce-argument search-filter :managed-pointer)
+    (unwind-protect
+        (wrap-object-list (opendaq:device/get-channels (%require-live-pointer object) coerced-search-filter))
+      (%cleanup-coerced-argument cleanup-search-filter)))
+)
+
+(defgeneric channels-recursive (object search-filter))
+(defmethod channels-recursive ((object device) search-filter)
+  (multiple-value-bind (coerced-search-filter cleanup-search-filter)
+      (%coerce-argument search-filter :managed-pointer)
+    (unwind-protect
+        (wrap-object-list (opendaq:device/get-channels-recursive (%require-live-pointer object) coerced-search-filter))
+      (%cleanup-coerced-argument cleanup-search-filter)))
+)
+
+(defgeneric connection-status-container (object))
+(defmethod connection-status-container ((object device))
+  (wrap-component-status-container (opendaq:device/get-connection-status-container (%require-live-pointer object)))
+)
+
+(defgeneric custom-components (object))
+(defmethod custom-components ((object device))
+  (wrap-object-list (opendaq:device/get-custom-components (%require-live-pointer object)))
+)
+
+(defgeneric devices (object search-filter))
+(defmethod devices ((object device) search-filter)
+  (multiple-value-bind (coerced-search-filter cleanup-search-filter)
+      (%coerce-argument search-filter :managed-pointer)
+    (unwind-protect
+        (wrap-object-list (opendaq:device/get-devices (%require-live-pointer object) coerced-search-filter))
+      (%cleanup-coerced-argument cleanup-search-filter)))
+)
+
+(defgeneric domain (object domain))
+(defmethod domain ((object device) domain)
+  (let ((coerced-domain domain))
+    (opendaq:device/get-domain (%require-live-pointer object) coerced-domain)
+  )
+)
+
+(defgeneric function-blocks (object search-filter))
+(defmethod function-blocks ((object device) search-filter)
+  (multiple-value-bind (coerced-search-filter cleanup-search-filter)
+      (%coerce-argument search-filter :managed-pointer)
+    (unwind-protect
+        (wrap-object-list (opendaq:device/get-function-blocks (%require-live-pointer object) coerced-search-filter))
+      (%cleanup-coerced-argument cleanup-search-filter)))
+)
+
+(defgeneric info (object))
+(defmethod info ((object device))
+  (wrap-device-info (opendaq:device/get-info (%require-live-pointer object)))
+)
+
+(defgeneric inputs-outputs-folder (object))
+(defmethod inputs-outputs-folder ((object device))
+  (wrap-folder (opendaq:device/get-inputs-outputs-folder (%require-live-pointer object)))
+)
+
+(defun device-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:device/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric log (object id size offset))
+(defmethod log ((object device) id size offset)
+  (multiple-value-bind (coerced-id cleanup-id)
+      (%coerce-argument id :daq-string)
+    (unwind-protect
+        (let ((coerced-size size))
+          (let ((coerced-offset offset))
+            (%daq-string-to-lisp-and-release (opendaq:device/get-log (%require-live-pointer object) coerced-id coerced-size coerced-offset))
+          )
+        )
+      (%cleanup-coerced-argument cleanup-id)))
+)
+
+(defgeneric log-file-infos (object))
+(defmethod log-file-infos ((object device))
+  (wrap-object-list (opendaq:device/get-log-file-infos (%require-live-pointer object)))
+)
+
+(defgeneric servers (object))
+(defmethod servers ((object device))
+  (wrap-object-list (opendaq:device/get-servers (%require-live-pointer object)))
+)
+
+(defgeneric device-signals (object &optional search-filter))
+(defmethod device-signals ((object device) &optional (search-filter nil))
   (multiple-value-bind (coerced-search-filter cleanup-search-filter)
       (%coerce-argument search-filter :managed-pointer)
     (unwind-protect
@@ -268,8 +10115,1065 @@
       (%cleanup-coerced-argument cleanup-search-filter)))
 )
 
-(defgeneric signals (object &optional search-filter))
-(defmethod signals ((object managed-object) &optional (search-filter nil))
+(defgeneric sync-component (object))
+(defmethod sync-component ((object device))
+  (wrap-sync-component (opendaq:device/get-sync-component (%require-live-pointer object)))
+)
+
+(defgeneric ticks-since-origin (object))
+(defmethod ticks-since-origin ((object device))
+  (opendaq:device/get-ticks-since-origin (%require-live-pointer object))
+)
+
+(defgeneric is-locked (object))
+(defmethod is-locked ((object device))
+  (not (zerop (opendaq:device/is-locked (%require-live-pointer object))))
+)
+
+(defgeneric load-configuration (object configuration config))
+(defmethod load-configuration ((object device) configuration config)
+  (multiple-value-bind (coerced-configuration cleanup-configuration)
+      (%coerce-argument configuration :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-config cleanup-config)
+            (%coerce-argument config :managed-pointer)
+          (unwind-protect
+              (opendaq:device/load-configuration (%require-live-pointer object) coerced-configuration coerced-config)
+            (%cleanup-coerced-argument cleanup-config)))
+      (%cleanup-coerced-argument cleanup-configuration)))
+)
+
+(defgeneric device-lock (object))
+(defmethod device-lock ((object device))
+  (opendaq:device/lock (%require-live-pointer object))
+)
+
+(defgeneric remove-device (object device))
+(defmethod remove-device ((object device) device)
+  (multiple-value-bind (coerced-device cleanup-device)
+      (%coerce-argument device :managed-pointer)
+    (unwind-protect
+        (opendaq:device/remove-device (%require-live-pointer object) coerced-device)
+      (%cleanup-coerced-argument cleanup-device)))
+)
+
+(defgeneric remove-function-block (object function-block))
+(defmethod remove-function-block ((object device) function-block)
+  (multiple-value-bind (coerced-function-block cleanup-function-block)
+      (%coerce-argument function-block :managed-pointer)
+    (unwind-protect
+        (opendaq:device/remove-function-block (%require-live-pointer object) coerced-function-block)
+      (%cleanup-coerced-argument cleanup-function-block)))
+)
+
+(defgeneric remove-server (object server))
+(defmethod remove-server ((object device) server)
+  (multiple-value-bind (coerced-server cleanup-server)
+      (%coerce-argument server :managed-pointer)
+    (unwind-protect
+        (opendaq:device/remove-server (%require-live-pointer object) coerced-server)
+      (%cleanup-coerced-argument cleanup-server)))
+)
+
+(defgeneric save-configuration (object))
+(defmethod save-configuration ((object device))
+  (%daq-string-to-lisp-and-release (opendaq:device/save-configuration (%require-live-pointer object)))
+)
+
+(defgeneric (setf operation-mode) (new-value object))
+(defmethod (setf operation-mode) (new-value (object device))
+  (let ((coerced-new-value new-value))
+    (opendaq:device/set-operation-mode (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf operation-mode-recursive) (new-value object))
+(defmethod (setf operation-mode-recursive) (new-value (object device))
+  (let ((coerced-new-value new-value))
+    (opendaq:device/set-operation-mode-recursive (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric device-unlock (object))
+(defmethod device-unlock ((object device))
+  (opendaq:device/unlock (%require-live-pointer object))
+)
+
+(defun dict-element-type-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:dict-element-type/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric key-interface-id (object))
+(defmethod key-interface-id ((object dict-element-type))
+  (cffi:with-foreign-object (id-slot 'opendaq::daq-intf-id)
+    (opendaq:dict-element-type/get-key-interface-id (%require-live-pointer object) id-slot)
+    (cffi:mem-ref id-slot 'opendaq::daq-intf-id)
+  )
+)
+
+(defgeneric value-interface-id (object))
+(defmethod value-interface-id ((object dict-element-type))
+  (cffi:with-foreign-object (id-slot 'opendaq::daq-intf-id)
+    (opendaq:dict-element-type/get-value-interface-id (%require-live-pointer object) id-slot)
+    (cffi:mem-ref id-slot 'opendaq::daq-intf-id)
+  )
+)
+
+(defgeneric clear (object))
+(defmethod clear ((object dict))
+  (opendaq:dict/clear (%require-live-pointer object))
+)
+
+(defgeneric delete-item (object key))
+(defmethod delete-item ((object dict) key)
+  (multiple-value-bind (coerced-key cleanup-key)
+      (%coerce-argument key :daq-base-object)
+    (unwind-protect
+        (opendaq:dict/delete-item (%require-live-pointer object) coerced-key)
+      (%cleanup-coerced-argument cleanup-key)))
+)
+
+(defgeneric get (object key))
+(defmethod get ((object dict) key)
+  (multiple-value-bind (coerced-key cleanup-key)
+      (%coerce-argument key :daq-base-object)
+    (unwind-protect
+        (wrap-base-object (opendaq:dict/get (%require-live-pointer object) coerced-key))
+      (%cleanup-coerced-argument cleanup-key)))
+)
+
+(defgeneric count (object))
+(defmethod count ((object dict))
+  (opendaq:dict/get-count (%require-live-pointer object))
+)
+
+(defun dict-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:dict/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric key-list (object))
+(defmethod key-list ((object dict))
+  (wrap-object-list (opendaq:dict/get-key-list (%require-live-pointer object)))
+)
+
+(defgeneric keys (object))
+(defmethod keys ((object dict))
+  (wrap-iterable (opendaq:dict/get-keys (%require-live-pointer object)))
+)
+
+(defgeneric value-list (object values))
+(defmethod value-list ((object dict) values)
+  (let ((coerced-values values))
+    (opendaq:dict/get-value-list (%require-live-pointer object) coerced-values)
+  )
+)
+
+(defgeneric values (object))
+(defmethod values ((object dict))
+  (wrap-iterable (opendaq:dict/get-values (%require-live-pointer object)))
+)
+
+(defgeneric has-key (object key))
+(defmethod has-key ((object dict) key)
+  (multiple-value-bind (coerced-key cleanup-key)
+      (%coerce-argument key :daq-base-object)
+    (unwind-protect
+        (not (zerop (opendaq:dict/has-key (%require-live-pointer object) coerced-key)))
+      (%cleanup-coerced-argument cleanup-key)))
+)
+
+(defgeneric dict-remove (object key))
+(defmethod dict-remove ((object dict) key)
+  (multiple-value-bind (coerced-key cleanup-key)
+      (%coerce-argument key :daq-base-object)
+    (unwind-protect
+        (wrap-base-object (opendaq:dict/remove (%require-live-pointer object) coerced-key))
+      (%cleanup-coerced-argument cleanup-key)))
+)
+
+(defgeneric set (object key value))
+(defmethod set ((object dict) key value)
+  (multiple-value-bind (coerced-key cleanup-key)
+      (%coerce-argument key :daq-base-object)
+    (unwind-protect
+        (multiple-value-bind (coerced-value cleanup-value)
+            (%coerce-argument value :daq-base-object)
+          (unwind-protect
+              (opendaq:dict/set (%require-live-pointer object) coerced-key coerced-value)
+            (%cleanup-coerced-argument cleanup-value)))
+      (%cleanup-coerced-argument cleanup-key)))
+)
+
+(defgeneric build (object))
+(defmethod build ((object dimension-builder))
+  (wrap-dimension (opendaq:dimension-builder/build (%require-live-pointer object)))
+)
+
+(defun dimension-builder-create-dimension-builder-from-existing (dimension-to-copy)
+  (multiple-value-bind (coerced-dimension-to-copy cleanup-dimension-to-copy)
+      (%coerce-argument dimension-to-copy :managed-pointer)
+    (unwind-protect
+        (wrap-dimension-builder (opendaq:dimension-builder/create-dimension-builder-from-existing coerced-dimension-to-copy))
+      (%cleanup-coerced-argument cleanup-dimension-to-copy)))
+)
+
+(defun dimension-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:dimension-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric name (object))
+(defmethod name ((object dimension-builder))
+  (%daq-string-to-lisp-and-release (opendaq:dimension-builder/get-name (%require-live-pointer object)))
+)
+
+(defgeneric rule (object))
+(defmethod rule ((object dimension-builder))
+  (wrap-dimension-rule (opendaq:dimension-builder/get-rule (%require-live-pointer object)))
+)
+
+(defgeneric unit (object))
+(defmethod unit ((object dimension-builder))
+  (wrap-unit (opendaq:dimension-builder/get-unit (%require-live-pointer object)))
+)
+
+(defgeneric (setf name) (new-value object))
+(defmethod (setf name) (new-value (object dimension-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:dimension-builder/set-name (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf rule) (new-value object))
+(defmethod (setf rule) (new-value (object dimension-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:dimension-builder/set-rule (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf unit) (new-value object))
+(defmethod (setf unit) (new-value (object dimension-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:dimension-builder/set-unit (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric add-parameter (object name parameter))
+(defmethod add-parameter ((object dimension-rule-builder) name parameter)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-parameter cleanup-parameter)
+            (%coerce-argument parameter :daq-base-object)
+          (unwind-protect
+              (opendaq:dimension-rule-builder/add-parameter (%require-live-pointer object) coerced-name coerced-parameter)
+            (%cleanup-coerced-argument cleanup-parameter)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric build (object))
+(defmethod build ((object dimension-rule-builder))
+  (wrap-dimension-rule (opendaq:dimension-rule-builder/build (%require-live-pointer object)))
+)
+
+(defun dimension-rule-builder-create-dimension-rule-builder-from-existing (rule-to-copy)
+  (multiple-value-bind (coerced-rule-to-copy cleanup-rule-to-copy)
+      (%coerce-argument rule-to-copy :managed-pointer)
+    (unwind-protect
+        (wrap-dimension-rule-builder (opendaq:dimension-rule-builder/create-dimension-rule-builder-from-existing coerced-rule-to-copy))
+      (%cleanup-coerced-argument cleanup-rule-to-copy)))
+)
+
+(defun dimension-rule-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:dimension-rule-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric parameters (object))
+(defmethod parameters ((object dimension-rule-builder))
+  (wrap-dict (opendaq:dimension-rule-builder/get-parameters (%require-live-pointer object)))
+)
+
+(defgeneric dimension-rule-builder-type (object))
+(defmethod dimension-rule-builder-type ((object dimension-rule-builder))
+  (opendaq:dimension-rule-builder/get-type (%require-live-pointer object))
+)
+
+(defgeneric remove-parameter (object name))
+(defmethod remove-parameter ((object dimension-rule-builder) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (opendaq:dimension-rule-builder/remove-parameter (%require-live-pointer object) coerced-name)
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric (setf parameters) (new-value object))
+(defmethod (setf parameters) (new-value (object dimension-rule-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:dimension-rule-builder/set-parameters (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf type) (new-value object))
+(defmethod (setf type) (new-value (object dimension-rule-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:dimension-rule-builder/set-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defun dimension-rule-create-dimension-rule-from-builder (builder)
+  (multiple-value-bind (coerced-builder cleanup-builder)
+      (%coerce-argument builder :managed-pointer)
+    (unwind-protect
+        (wrap-dimension-rule (opendaq:dimension-rule/create-dimension-rule-from-builder coerced-builder))
+      (%cleanup-coerced-argument cleanup-builder)))
+)
+
+(defun dimension-rule-create-linear-dimension-rule (delta start size)
+  (multiple-value-bind (coerced-delta cleanup-delta)
+      (%coerce-argument delta :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-start cleanup-start)
+            (%coerce-argument start :managed-pointer)
+          (unwind-protect
+              (let ((coerced-size size))
+                (wrap-dimension-rule (opendaq:dimension-rule/create-linear-dimension-rule coerced-delta coerced-start coerced-size))
+              )
+            (%cleanup-coerced-argument cleanup-start)))
+      (%cleanup-coerced-argument cleanup-delta)))
+)
+
+(defun dimension-rule-create-list-dimension-rule (list)
+  (multiple-value-bind (coerced-list cleanup-list)
+      (%coerce-argument list :managed-pointer)
+    (unwind-protect
+        (wrap-dimension-rule (opendaq:dimension-rule/create-list-dimension-rule coerced-list))
+      (%cleanup-coerced-argument cleanup-list)))
+)
+
+(defun dimension-rule-create-logarithmic-dimension-rule (delta start base size)
+  (multiple-value-bind (coerced-delta cleanup-delta)
+      (%coerce-argument delta :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-start cleanup-start)
+            (%coerce-argument start :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-base cleanup-base)
+                  (%coerce-argument base :managed-pointer)
+                (unwind-protect
+                    (let ((coerced-size size))
+                      (wrap-dimension-rule (opendaq:dimension-rule/create-logarithmic-dimension-rule coerced-delta coerced-start coerced-base coerced-size))
+                    )
+                  (%cleanup-coerced-argument cleanup-base)))
+            (%cleanup-coerced-argument cleanup-start)))
+      (%cleanup-coerced-argument cleanup-delta)))
+)
+
+(defun dimension-rule-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:dimension-rule/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric parameters (object))
+(defmethod parameters ((object dimension-rule))
+  (wrap-dict (opendaq:dimension-rule/get-parameters (%require-live-pointer object)))
+)
+
+(defgeneric dimension-rule-type (object))
+(defmethod dimension-rule-type ((object dimension-rule))
+  (opendaq:dimension-rule/get-type (%require-live-pointer object))
+)
+
+(defun dimension-create-dimension-from-builder (builder)
+  (multiple-value-bind (coerced-builder cleanup-builder)
+      (%coerce-argument builder :managed-pointer)
+    (unwind-protect
+        (wrap-dimension (opendaq:dimension/create-dimension-from-builder coerced-builder))
+      (%cleanup-coerced-argument cleanup-builder)))
+)
+
+(defun dimension-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:dimension/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric labels (object))
+(defmethod labels ((object dimension))
+  (wrap-object-list (opendaq:dimension/get-labels (%require-live-pointer object)))
+)
+
+(defgeneric name (object))
+(defmethod name ((object dimension))
+  (%daq-string-to-lisp-and-release (opendaq:dimension/get-name (%require-live-pointer object)))
+)
+
+(defgeneric rule (object))
+(defmethod rule ((object dimension))
+  (wrap-dimension-rule (opendaq:dimension/get-rule (%require-live-pointer object)))
+)
+
+(defgeneric size (object))
+(defmethod size ((object dimension))
+  (opendaq:dimension/get-size (%require-live-pointer object))
+)
+
+(defgeneric unit (object))
+(defmethod unit ((object dimension))
+  (wrap-unit (opendaq:dimension/get-unit (%require-live-pointer object)))
+)
+
+(defun discovery-server-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:discovery-server/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric register-service (object id config device-info))
+(defmethod register-service ((object discovery-server) id config device-info)
+  (multiple-value-bind (coerced-id cleanup-id)
+      (%coerce-argument id :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-config cleanup-config)
+            (%coerce-argument config :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-device-info cleanup-device-info)
+                  (%coerce-argument device-info :managed-pointer)
+                (unwind-protect
+                    (opendaq:discovery-server/register-service (%require-live-pointer object) coerced-id coerced-config coerced-device-info)
+                  (%cleanup-coerced-argument cleanup-device-info)))
+            (%cleanup-coerced-argument cleanup-config)))
+      (%cleanup-coerced-argument cleanup-id)))
+)
+
+(defgeneric (setf discovery-server-root-device) (new-value object))
+(defmethod (setf discovery-server-root-device) (new-value (object discovery-server))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:discovery-server/set-root-device (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric unregister-service (object id))
+(defmethod unregister-service ((object discovery-server) id)
+  (multiple-value-bind (coerced-id cleanup-id)
+      (%coerce-argument id :daq-string)
+    (unwind-protect
+        (opendaq:discovery-server/unregister-service (%require-live-pointer object) coerced-id)
+      (%cleanup-coerced-argument cleanup-id)))
+)
+
+(defun end-update-event-args-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:end-update-event-args/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric is-parent-updating (object))
+(defmethod is-parent-updating ((object end-update-event-args))
+  (not (zerop (opendaq:end-update-event-args/get-is-parent-updating (%require-live-pointer object))))
+)
+
+(defgeneric end-update-event-args-properties (object))
+(defmethod end-update-event-args-properties ((object end-update-event-args))
+  (wrap-object-list (opendaq:end-update-event-args/get-properties (%require-live-pointer object)))
+)
+
+(defun enumeration-type-create-enumeration-type-with-values (type-name enumerators)
+  (multiple-value-bind (coerced-type-name cleanup-type-name)
+      (%coerce-argument type-name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-enumerators cleanup-enumerators)
+            (%coerce-argument enumerators :managed-pointer)
+          (unwind-protect
+              (wrap-enumeration-type (opendaq:enumeration-type/create-enumeration-type-with-values coerced-type-name coerced-enumerators))
+            (%cleanup-coerced-argument cleanup-enumerators)))
+      (%cleanup-coerced-argument cleanup-type-name)))
+)
+
+(defgeneric as-dictionary (object))
+(defmethod as-dictionary ((object enumeration-type))
+  (wrap-dict (opendaq:enumeration-type/get-as-dictionary (%require-live-pointer object)))
+)
+
+(defgeneric count (object))
+(defmethod count ((object enumeration-type))
+  (opendaq:enumeration-type/get-count (%require-live-pointer object))
+)
+
+(defgeneric enumerator-int-value (object name))
+(defmethod enumerator-int-value ((object enumeration-type) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (opendaq:enumeration-type/get-enumerator-int-value (%require-live-pointer object) coerced-name)
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric enumerator-names (object))
+(defmethod enumerator-names ((object enumeration-type))
+  (wrap-object-list (opendaq:enumeration-type/get-enumerator-names (%require-live-pointer object)))
+)
+
+(defun enumeration-type-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:enumeration-type/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defun enumeration-create-enumeration-with-int-value (name value type-manager)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-value cleanup-value)
+            (%coerce-argument value :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-type-manager cleanup-type-manager)
+                  (%coerce-argument type-manager :managed-pointer)
+                (unwind-protect
+                    (wrap-enumeration (opendaq:enumeration/create-enumeration-with-int-value coerced-name coerced-value coerced-type-manager))
+                  (%cleanup-coerced-argument cleanup-type-manager)))
+            (%cleanup-coerced-argument cleanup-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun enumeration-create-enumeration-with-int-value-and-type (type value)
+  (multiple-value-bind (coerced-type cleanup-type)
+      (%coerce-argument type :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-value cleanup-value)
+            (%coerce-argument value :managed-pointer)
+          (unwind-protect
+              (wrap-enumeration (opendaq:enumeration/create-enumeration-with-int-value-and-type coerced-type coerced-value))
+            (%cleanup-coerced-argument cleanup-value)))
+      (%cleanup-coerced-argument cleanup-type)))
+)
+
+(defun enumeration-create-enumeration-with-type (type value)
+  (multiple-value-bind (coerced-type cleanup-type)
+      (%coerce-argument type :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-value cleanup-value)
+            (%coerce-argument value :daq-string)
+          (unwind-protect
+              (wrap-enumeration (opendaq:enumeration/create-enumeration-with-type coerced-type coerced-value))
+            (%cleanup-coerced-argument cleanup-value)))
+      (%cleanup-coerced-argument cleanup-type)))
+)
+
+(defgeneric enumeration-type (object))
+(defmethod enumeration-type ((object enumeration))
+  (wrap-enumeration-type (opendaq:enumeration/get-enumeration-type (%require-live-pointer object)))
+)
+
+(defgeneric int-value (object))
+(defmethod int-value ((object enumeration))
+  (opendaq:enumeration/get-int-value (%require-live-pointer object))
+)
+
+(defun enumeration-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:enumeration/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric value (object))
+(defmethod value ((object enumeration))
+  (%daq-string-to-lisp-and-release (opendaq:enumeration/get-value (%require-live-pointer object)))
+)
+
+(defgeneric file-line (object))
+(defmethod file-line ((object error-info))
+  (opendaq:error-info/get-file-line (%require-live-pointer object))
+)
+
+(defgeneric file-name (object))
+(defmethod file-name ((object error-info))
+  (wrap-const-char-ptr (opendaq:error-info/get-file-name (%require-live-pointer object)))
+)
+
+(defgeneric message (object))
+(defmethod message ((object error-info))
+  (%daq-string-to-lisp-and-release (opendaq:error-info/get-message (%require-live-pointer object)))
+)
+
+(defgeneric source (object))
+(defmethod source ((object error-info))
+  (%daq-string-to-lisp-and-release (opendaq:error-info/get-source (%require-live-pointer object)))
+)
+
+(defgeneric (setf file-line) (new-value object))
+(defmethod (setf file-line) (new-value (object error-info))
+  (let ((coerced-new-value new-value))
+    (opendaq:error-info/set-file-line (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf file-name) (new-value object))
+(defmethod (setf file-name) (new-value (object error-info))
+  (let ((coerced-new-value new-value))
+    (opendaq:error-info/set-file-name (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf message) (new-value object))
+(defmethod (setf message) (new-value (object error-info))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:error-info/set-message (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf source) (new-value object))
+(defmethod (setf source) (new-value (object error-info))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:error-info/set-source (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric clone-with-owner (object owner))
+(defmethod clone-with-owner ((object eval-value) owner)
+  (multiple-value-bind (coerced-owner cleanup-owner)
+      (%coerce-argument owner :managed-pointer)
+    (unwind-protect
+        (wrap-eval-value (opendaq:eval-value/clone-with-owner (%require-live-pointer object) coerced-owner))
+      (%cleanup-coerced-argument cleanup-owner)))
+)
+
+(defun eval-value-create-eval-value-args (eval args)
+  (multiple-value-bind (coerced-eval cleanup-eval)
+      (%coerce-argument eval :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-args cleanup-args)
+            (%coerce-argument args :managed-pointer)
+          (unwind-protect
+              (wrap-eval-value (opendaq:eval-value/create-eval-value-args coerced-eval coerced-args))
+            (%cleanup-coerced-argument cleanup-args)))
+      (%cleanup-coerced-argument cleanup-eval)))
+)
+
+(defun eval-value-create-eval-value-func (eval func)
+  (multiple-value-bind (coerced-eval cleanup-eval)
+      (%coerce-argument eval :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-func cleanup-func)
+            (%coerce-argument func :managed-pointer)
+          (unwind-protect
+              (wrap-eval-value (opendaq:eval-value/create-eval-value-func coerced-eval coerced-func))
+            (%cleanup-coerced-argument cleanup-func)))
+      (%cleanup-coerced-argument cleanup-eval)))
+)
+
+(defgeneric eval (object))
+(defmethod eval ((object eval-value))
+  (%daq-string-to-lisp-and-release (opendaq:eval-value/get-eval (%require-live-pointer object)))
+)
+
+(defun eval-value-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:eval-value/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric parse-error-code (object))
+(defmethod parse-error-code ((object eval-value))
+  (opendaq:eval-value/get-parse-error-code (%require-live-pointer object))
+)
+
+(defgeneric property-references (object))
+(defmethod property-references ((object eval-value))
+  (wrap-object-list (opendaq:eval-value/get-property-references (%require-live-pointer object)))
+)
+
+(defgeneric result (object))
+(defmethod result ((object eval-value))
+  (wrap-base-object (opendaq:eval-value/get-result (%require-live-pointer object)))
+)
+
+(defgeneric result-no-lock (object))
+(defmethod result-no-lock ((object eval-value))
+  (wrap-base-object (opendaq:eval-value/get-result-no-lock (%require-live-pointer object)))
+)
+
+(defgeneric event-id (object))
+(defmethod event-id ((object event-args))
+  (opendaq:event-args/get-event-id (%require-live-pointer object))
+)
+
+(defgeneric event-name (object))
+(defmethod event-name ((object event-args))
+  (%daq-string-to-lisp-and-release (opendaq:event-args/get-event-name (%require-live-pointer object)))
+)
+
+(defun event-args-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:event-args/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defun event-handler-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:event-handler/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric handle-event (object sender event-args))
+(defmethod handle-event ((object event-handler) sender event-args)
+  (multiple-value-bind (coerced-sender cleanup-sender)
+      (%coerce-argument sender :daq-base-object)
+    (unwind-protect
+        (multiple-value-bind (coerced-event-args cleanup-event-args)
+            (%coerce-argument event-args :managed-pointer)
+          (unwind-protect
+              (opendaq:event-handler/handle-event (%require-live-pointer object) coerced-sender coerced-event-args)
+            (%cleanup-coerced-argument cleanup-event-args)))
+      (%cleanup-coerced-argument cleanup-sender)))
+)
+
+(defun event-packet-create-data-descriptor-changed-event-packet (data-descriptor domain-data-descriptor)
+  (multiple-value-bind (coerced-data-descriptor cleanup-data-descriptor)
+      (%coerce-argument data-descriptor :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-domain-data-descriptor cleanup-domain-data-descriptor)
+            (%coerce-argument domain-data-descriptor :managed-pointer)
+          (unwind-protect
+              (wrap-event-packet (opendaq:event-packet/create-data-descriptor-changed-event-packet coerced-data-descriptor coerced-domain-data-descriptor))
+            (%cleanup-coerced-argument cleanup-domain-data-descriptor)))
+      (%cleanup-coerced-argument cleanup-data-descriptor)))
+)
+
+(defun event-packet-create-implicit-domain-gap-detected-event-packet (diff)
+  (multiple-value-bind (coerced-diff cleanup-diff)
+      (%coerce-argument diff :managed-pointer)
+    (unwind-protect
+        (wrap-event-packet (opendaq:event-packet/create-implicit-domain-gap-detected-event-packet coerced-diff))
+      (%cleanup-coerced-argument cleanup-diff)))
+)
+
+(defgeneric event-id (object))
+(defmethod event-id ((object event-packet))
+  (%daq-string-to-lisp-and-release (opendaq:event-packet/get-event-id (%require-live-pointer object)))
+)
+
+(defun event-packet-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:event-packet/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric parameters (object))
+(defmethod parameters ((object event-packet))
+  (wrap-dict (opendaq:event-packet/get-parameters (%require-live-pointer object)))
+)
+
+(defgeneric add-handler (object event-handler))
+(defmethod add-handler ((object event) event-handler)
+  (multiple-value-bind (coerced-event-handler cleanup-event-handler)
+      (%coerce-argument event-handler :managed-pointer)
+    (unwind-protect
+        (opendaq:event/add-handler (%require-live-pointer object) coerced-event-handler)
+      (%cleanup-coerced-argument cleanup-event-handler)))
+)
+
+(defgeneric clear (object))
+(defmethod clear ((object event))
+  (opendaq:event/clear (%require-live-pointer object))
+)
+
+(defun event-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:event/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric subscriber-count (object))
+(defmethod subscriber-count ((object event))
+  (opendaq:event/get-subscriber-count (%require-live-pointer object))
+)
+
+(defgeneric subscribers (object))
+(defmethod subscribers ((object event))
+  (wrap-object-list (opendaq:event/get-subscribers (%require-live-pointer object)))
+)
+
+(defgeneric mute (object))
+(defmethod mute ((object event))
+  (opendaq:event/mute (%require-live-pointer object))
+)
+
+(defgeneric mute-listener (object event-handler))
+(defmethod mute-listener ((object event) event-handler)
+  (multiple-value-bind (coerced-event-handler cleanup-event-handler)
+      (%coerce-argument event-handler :managed-pointer)
+    (unwind-protect
+        (opendaq:event/mute-listener (%require-live-pointer object) coerced-event-handler)
+      (%cleanup-coerced-argument cleanup-event-handler)))
+)
+
+(defgeneric remove-handler (object event-handler))
+(defmethod remove-handler ((object event) event-handler)
+  (multiple-value-bind (coerced-event-handler cleanup-event-handler)
+      (%coerce-argument event-handler :managed-pointer)
+    (unwind-protect
+        (opendaq:event/remove-handler (%require-live-pointer object) coerced-event-handler)
+      (%cleanup-coerced-argument cleanup-event-handler)))
+)
+
+(defgeneric trigger (object sender args))
+(defmethod trigger ((object event) sender args)
+  (multiple-value-bind (coerced-sender cleanup-sender)
+      (%coerce-argument sender :daq-base-object)
+    (unwind-protect
+        (multiple-value-bind (coerced-args cleanup-args)
+            (%coerce-argument args :managed-pointer)
+          (unwind-protect
+              (opendaq:event/trigger (%require-live-pointer object) coerced-sender coerced-args)
+            (%cleanup-coerced-argument cleanup-args)))
+      (%cleanup-coerced-argument cleanup-sender)))
+)
+
+(defgeneric unmute (object))
+(defmethod unmute ((object event))
+  (opendaq:event/unmute (%require-live-pointer object))
+)
+
+(defgeneric unmute-listener (object event-handler))
+(defmethod unmute-listener ((object event) event-handler)
+  (multiple-value-bind (coerced-event-handler cleanup-event-handler)
+      (%coerce-argument event-handler :managed-pointer)
+    (unwind-protect
+        (opendaq:event/unmute-listener (%require-live-pointer object) coerced-event-handler)
+      (%cleanup-coerced-argument cleanup-event-handler)))
+)
+
+(defun float-object-create-float (value)
+  (let ((coerced-value value))
+    (wrap-float-object (opendaq:float-object/create-float coerced-value))
+  )
+)
+
+(defgeneric equals-value (object value))
+(defmethod equals-value ((object float-object) value)
+  (let ((coerced-value value))
+    (not (zerop (opendaq:float-object/equals-value (%require-live-pointer object) coerced-value)))
+  )
+)
+
+(defun float-object-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:float-object/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric value (object))
+(defmethod value ((object float-object))
+  (opendaq:float-object/get-value (%require-live-pointer object))
+)
+
+(defgeneric add-item (object item))
+(defmethod add-item ((object folder-config) item)
+  (multiple-value-bind (coerced-item cleanup-item)
+      (%coerce-argument item :managed-pointer)
+    (unwind-protect
+        (opendaq:folder-config/add-item (%require-live-pointer object) coerced-item)
+      (%cleanup-coerced-argument cleanup-item)))
+)
+
+(defgeneric clear (object))
+(defmethod clear ((object folder-config))
+  (opendaq:folder-config/clear (%require-live-pointer object))
+)
+
+(defun folder-config-create-io-folder (context parent local-id)
+  (multiple-value-bind (coerced-context cleanup-context)
+      (%coerce-argument context :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-parent cleanup-parent)
+            (%coerce-argument parent :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-local-id cleanup-local-id)
+                  (%coerce-argument local-id :daq-string)
+                (unwind-protect
+                    (wrap-folder-config (opendaq:folder-config/create-io-folder coerced-context coerced-parent coerced-local-id))
+                  (%cleanup-coerced-argument cleanup-local-id)))
+            (%cleanup-coerced-argument cleanup-parent)))
+      (%cleanup-coerced-argument cleanup-context)))
+)
+
+(defun folder-config-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:folder-config/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric remove-item (object item))
+(defmethod remove-item ((object folder-config) item)
+  (multiple-value-bind (coerced-item cleanup-item)
+      (%coerce-argument item :managed-pointer)
+    (unwind-protect
+        (opendaq:folder-config/remove-item (%require-live-pointer object) coerced-item)
+      (%cleanup-coerced-argument cleanup-item)))
+)
+
+(defgeneric remove-item-with-local-id (object local-id))
+(defmethod remove-item-with-local-id ((object folder-config) local-id)
+  (multiple-value-bind (coerced-local-id cleanup-local-id)
+      (%coerce-argument local-id :daq-string)
+    (unwind-protect
+        (opendaq:folder-config/remove-item-with-local-id (%require-live-pointer object) coerced-local-id)
+      (%cleanup-coerced-argument cleanup-local-id)))
+)
+
+(defun folder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:folder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric item (object local-id))
+(defmethod item ((object folder) local-id)
+  (multiple-value-bind (coerced-local-id cleanup-local-id)
+      (%coerce-argument local-id :daq-string)
+    (unwind-protect
+        (wrap-component (opendaq:folder/get-item (%require-live-pointer object) coerced-local-id))
+      (%cleanup-coerced-argument cleanup-local-id)))
+)
+
+(defgeneric items (object search-filter))
+(defmethod items ((object folder) search-filter)
+  (multiple-value-bind (coerced-search-filter cleanup-search-filter)
+      (%coerce-argument search-filter :managed-pointer)
+    (unwind-protect
+        (wrap-object-list (opendaq:folder/get-items (%require-live-pointer object) coerced-search-filter))
+      (%cleanup-coerced-argument cleanup-search-filter)))
+)
+
+(defgeneric has-item (object local-id))
+(defmethod has-item ((object folder) local-id)
+  (multiple-value-bind (coerced-local-id cleanup-local-id)
+      (%coerce-argument local-id :daq-string)
+    (unwind-protect
+        (not (zerop (opendaq:folder/has-item (%require-live-pointer object) coerced-local-id)))
+      (%cleanup-coerced-argument cleanup-local-id)))
+)
+
+(defgeneric is-empty (object))
+(defmethod is-empty ((object folder))
+  (not (zerop (opendaq:folder/is-empty (%require-live-pointer object))))
+)
+
+(defgeneric freeze (object))
+(defmethod freeze ((object freezable))
+  (opendaq:freezable/freeze (%require-live-pointer object))
+)
+
+(defun freezable-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:freezable/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric is-frozen (object))
+(defmethod is-frozen ((object freezable))
+  (not (zerop (opendaq:freezable/is-frozen (%require-live-pointer object))))
+)
+
+(defun function-block-type-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:function-block-type/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric add-function-block (object type-id config))
+(defmethod add-function-block ((object function-block) type-id config)
+  (multiple-value-bind (coerced-type-id cleanup-type-id)
+      (%coerce-argument type-id :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-config cleanup-config)
+            (%coerce-argument config :managed-pointer)
+          (unwind-protect
+              (wrap-function-block (opendaq:function-block/add-function-block (%require-live-pointer object) coerced-type-id coerced-config))
+            (%cleanup-coerced-argument cleanup-config)))
+      (%cleanup-coerced-argument cleanup-type-id)))
+)
+
+(defgeneric available-function-block-types (object))
+(defmethod available-function-block-types ((object function-block))
+  (wrap-dict (opendaq:function-block/get-available-function-block-types (%require-live-pointer object)))
+)
+
+(defgeneric function-block-type (object))
+(defmethod function-block-type ((object function-block))
+  (wrap-function-block-type (opendaq:function-block/get-function-block-type (%require-live-pointer object)))
+)
+
+(defgeneric function-blocks (object search-filter))
+(defmethod function-blocks ((object function-block) search-filter)
+  (multiple-value-bind (coerced-search-filter cleanup-search-filter)
+      (%coerce-argument search-filter :managed-pointer)
+    (unwind-protect
+        (wrap-object-list (opendaq:function-block/get-function-blocks (%require-live-pointer object) coerced-search-filter))
+      (%cleanup-coerced-argument cleanup-search-filter)))
+)
+
+(defgeneric function-block-input-ports (object search-filter))
+(defmethod function-block-input-ports ((object function-block) search-filter)
+  (multiple-value-bind (coerced-search-filter cleanup-search-filter)
+      (%coerce-argument search-filter :managed-pointer)
+    (unwind-protect
+        (wrap-object-list (opendaq:function-block/get-input-ports (%require-live-pointer object) coerced-search-filter))
+      (%cleanup-coerced-argument cleanup-search-filter)))
+)
+
+(defun function-block-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:function-block/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric function-block-signals (object &optional search-filter))
+(defmethod function-block-signals ((object managed-object) &optional (search-filter nil))
   (multiple-value-bind (coerced-search-filter cleanup-search-filter)
       (%coerce-argument search-filter :managed-pointer)
     (unwind-protect
@@ -286,13 +11190,749 @@
       (%cleanup-coerced-argument cleanup-search-filter)))
 )
 
-(defgeneric find-component (object id))
-(defmethod find-component ((object managed-object) id)
-  (multiple-value-bind (coerced-id cleanup-id)
-      (%coerce-argument id :daq-string)
+(defgeneric status-signal (object))
+(defmethod status-signal ((object function-block))
+  (wrap-signal (opendaq:function-block/get-status-signal (%require-live-pointer object)))
+)
+
+(defgeneric remove-function-block (object function-block))
+(defmethod remove-function-block ((object function-block) function-block)
+  (multiple-value-bind (coerced-function-block cleanup-function-block)
+      (%coerce-argument function-block :managed-pointer)
     (unwind-protect
-        (wrap-component (opendaq:component/find-component (%require-live-pointer object) coerced-id))
-      (%cleanup-coerced-argument cleanup-id)))
+        (opendaq:function-block/remove-function-block (%require-live-pointer object) coerced-function-block)
+      (%cleanup-coerced-argument cleanup-function-block)))
+)
+
+(defgeneric call (object params result))
+(defmethod call ((object daq-function) params result)
+  (multiple-value-bind (coerced-params cleanup-params)
+      (%coerce-argument params :daq-base-object)
+    (unwind-protect
+        (multiple-value-bind (coerced-result cleanup-result)
+            (%coerce-argument result :daq-base-object)
+          (unwind-protect
+              (wrap-base-object (opendaq:function/call (%require-live-pointer object) coerced-params coerced-result))
+            (%cleanup-coerced-argument cleanup-result)))
+      (%cleanup-coerced-argument cleanup-params)))
+)
+
+(defgeneric dump (object))
+(defmethod dump ((object graph-visualization))
+  (%daq-string-to-lisp-and-release (opendaq:graph-visualization/dump (%require-live-pointer object)))
+)
+
+(defun graph-visualization-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:graph-visualization/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric custom-data (object))
+(defmethod custom-data ((object input-port-config))
+  (wrap-base-object (opendaq:input-port-config/get-custom-data (%require-live-pointer object)))
+)
+
+(defgeneric gap-checking-enabled (object))
+(defmethod gap-checking-enabled ((object input-port-config))
+  (not (zerop (opendaq:input-port-config/get-gap-checking-enabled (%require-live-pointer object))))
+)
+
+(defun input-port-config-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:input-port-config/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric listener (object))
+(defmethod listener ((object input-port-config))
+  (wrap-input-port-notifications (opendaq:input-port-config/get-listener (%require-live-pointer object)))
+)
+
+(defgeneric notification-method (object))
+(defmethod notification-method ((object input-port-config))
+  (opendaq:input-port-config/get-notification-method (%require-live-pointer object))
+)
+
+(defgeneric notify-packet-enqueued (object queue-was-empty))
+(defmethod notify-packet-enqueued ((object input-port-config) queue-was-empty)
+  (multiple-value-bind (coerced-queue-was-empty cleanup-queue-was-empty)
+      (%coerce-argument queue-was-empty :daq-bool)
+    (unwind-protect
+        (opendaq:input-port-config/notify-packet-enqueued (%require-live-pointer object) coerced-queue-was-empty)
+      (%cleanup-coerced-argument cleanup-queue-was-empty)))
+)
+
+(defgeneric notify-packet-enqueued-on-this-thread (object))
+(defmethod notify-packet-enqueued-on-this-thread ((object input-port-config))
+  (opendaq:input-port-config/notify-packet-enqueued-on-this-thread (%require-live-pointer object))
+)
+
+(defgeneric notify-packet-enqueued-with-scheduler (object))
+(defmethod notify-packet-enqueued-with-scheduler ((object input-port-config))
+  (opendaq:input-port-config/notify-packet-enqueued-with-scheduler (%require-live-pointer object))
+)
+
+(defgeneric (setf custom-data) (new-value object))
+(defmethod (setf custom-data) (new-value (object input-port-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-base-object)
+    (unwind-protect
+        (opendaq:input-port-config/set-custom-data (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf listener) (new-value object))
+(defmethod (setf listener) (new-value (object input-port-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:input-port-config/set-listener (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf notification-method) (new-value object))
+(defmethod (setf notification-method) (new-value (object input-port-config))
+  (let ((coerced-new-value new-value))
+    (opendaq:input-port-config/set-notification-method (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf requires-signal) (new-value object))
+(defmethod (setf requires-signal) (new-value (object input-port-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:input-port-config/set-requires-signal (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric input-port-notifications-accepts-signal (object port signal))
+(defmethod input-port-notifications-accepts-signal ((object input-port-notifications) port signal)
+  (multiple-value-bind (coerced-port cleanup-port)
+      (%coerce-argument port :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-signal cleanup-signal)
+            (%coerce-argument signal :managed-pointer)
+          (unwind-protect
+              (not (zerop (opendaq:input-port-notifications/accepts-signal (%require-live-pointer object) coerced-port coerced-signal)))
+            (%cleanup-coerced-argument cleanup-signal)))
+      (%cleanup-coerced-argument cleanup-port)))
+)
+
+(defgeneric connected (object port))
+(defmethod connected ((object input-port-notifications) port)
+  (multiple-value-bind (coerced-port cleanup-port)
+      (%coerce-argument port :managed-pointer)
+    (unwind-protect
+        (opendaq:input-port-notifications/connected (%require-live-pointer object) coerced-port)
+      (%cleanup-coerced-argument cleanup-port)))
+)
+
+(defgeneric disconnected (object port))
+(defmethod disconnected ((object input-port-notifications) port)
+  (multiple-value-bind (coerced-port cleanup-port)
+      (%coerce-argument port :managed-pointer)
+    (unwind-protect
+        (opendaq:input-port-notifications/disconnected (%require-live-pointer object) coerced-port)
+      (%cleanup-coerced-argument cleanup-port)))
+)
+
+(defun input-port-notifications-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:input-port-notifications/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric packet-received (object port))
+(defmethod packet-received ((object input-port-notifications) port)
+  (multiple-value-bind (coerced-port cleanup-port)
+      (%coerce-argument port :managed-pointer)
+    (unwind-protect
+        (opendaq:input-port-notifications/packet-received (%require-live-pointer object) coerced-port)
+      (%cleanup-coerced-argument cleanup-port)))
+)
+
+(defgeneric connect-signal-scheduler-notification (object signal))
+(defmethod connect-signal-scheduler-notification ((object input-port-private) signal)
+  (multiple-value-bind (coerced-signal cleanup-signal)
+      (%coerce-argument signal :managed-pointer)
+    (unwind-protect
+        (opendaq:input-port-private/connect-signal-scheduler-notification (%require-live-pointer object) coerced-signal)
+      (%cleanup-coerced-argument cleanup-signal)))
+)
+
+(defgeneric disconnect-without-signal-notification (object))
+(defmethod disconnect-without-signal-notification ((object input-port-private))
+  (opendaq:input-port-private/disconnect-without-signal-notification (%require-live-pointer object))
+)
+
+(defun input-port-private-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:input-port-private/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric input-port-accepts-signal (object signal))
+(defmethod input-port-accepts-signal ((object input-port) signal)
+  (multiple-value-bind (coerced-signal cleanup-signal)
+      (%coerce-argument signal :managed-pointer)
+    (unwind-protect
+        (not (zerop (opendaq:input-port/accepts-signal (%require-live-pointer object) coerced-signal)))
+      (%cleanup-coerced-argument cleanup-signal)))
+)
+
+(defgeneric accepts-signals (object signals))
+(defmethod accepts-signals ((object input-port) signals)
+  (multiple-value-bind (coerced-signals cleanup-signals)
+      (%coerce-argument signals :managed-pointer)
+    (unwind-protect
+        (wrap-object-list (opendaq:input-port/accepts-signals (%require-live-pointer object) coerced-signals))
+      (%cleanup-coerced-argument cleanup-signals)))
+)
+
+(defgeneric connect (object signal))
+(defmethod connect ((object input-port) signal)
+  (multiple-value-bind (coerced-signal cleanup-signal)
+      (%coerce-argument signal :managed-pointer)
+    (unwind-protect
+        (opendaq:input-port/connect (%require-live-pointer object) coerced-signal)
+      (%cleanup-coerced-argument cleanup-signal)))
+)
+
+(defgeneric disconnect (object))
+(defmethod disconnect ((object input-port))
+  (opendaq:input-port/disconnect (%require-live-pointer object))
+)
+
+(defgeneric connection (object))
+(defmethod connection ((object input-port))
+  (wrap-connection (opendaq:input-port/get-connection (%require-live-pointer object)))
+)
+
+(defun input-port-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:input-port/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric public (object))
+(defmethod public ((object input-port))
+  (not (zerop (opendaq:input-port/get-public (%require-live-pointer object))))
+)
+
+(defgeneric requires-signal (object))
+(defmethod requires-signal ((object input-port))
+  (not (zerop (opendaq:input-port/get-requires-signal (%require-live-pointer object))))
+)
+
+(defgeneric input-port-signal (object))
+(defmethod input-port-signal ((object input-port))
+  (wrap-signal (opendaq:input-port/get-signal (%require-live-pointer object)))
+)
+
+(defgeneric (setf public) (new-value object))
+(defmethod (setf public) (new-value (object input-port))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:input-port/set-public (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric runtime-class-name (object))
+(defmethod runtime-class-name ((object inspectable))
+  (%daq-string-to-lisp-and-release (opendaq:inspectable/get-runtime-class-name (%require-live-pointer object)))
+)
+
+(defgeneric add-config-provider (object config-provider))
+(defmethod add-config-provider ((object instance-builder) config-provider)
+  (multiple-value-bind (coerced-config-provider cleanup-config-provider)
+      (%coerce-argument config-provider :managed-pointer)
+    (unwind-protect
+        (opendaq:instance-builder/add-config-provider (%require-live-pointer object) coerced-config-provider)
+      (%cleanup-coerced-argument cleanup-config-provider)))
+)
+
+(defgeneric add-discovery-server (object server-name))
+(defmethod add-discovery-server ((object instance-builder) server-name)
+  (multiple-value-bind (coerced-server-name cleanup-server-name)
+      (%coerce-argument server-name :daq-string)
+    (unwind-protect
+        (opendaq:instance-builder/add-discovery-server (%require-live-pointer object) coerced-server-name)
+      (%cleanup-coerced-argument cleanup-server-name)))
+)
+
+(defgeneric add-logger-sink (object sink))
+(defmethod add-logger-sink ((object instance-builder) sink)
+  (multiple-value-bind (coerced-sink cleanup-sink)
+      (%coerce-argument sink :managed-pointer)
+    (unwind-protect
+        (opendaq:instance-builder/add-logger-sink (%require-live-pointer object) coerced-sink)
+      (%cleanup-coerced-argument cleanup-sink)))
+)
+
+(defgeneric add-module-path (object path))
+(defmethod add-module-path ((object instance-builder) path)
+  (multiple-value-bind (coerced-path cleanup-path)
+      (%coerce-argument path :daq-string)
+    (unwind-protect
+        (opendaq:instance-builder/add-module-path (%require-live-pointer object) coerced-path)
+      (%cleanup-coerced-argument cleanup-path)))
+)
+
+(defgeneric build (object))
+(defmethod build ((object instance-builder))
+  (wrap-instance (opendaq:instance-builder/build (%require-live-pointer object)))
+)
+
+(defgeneric enable-standard-providers (object &optional flag))
+(defmethod enable-standard-providers ((object instance-builder) &optional (flag t))
+  (multiple-value-bind (coerced-flag cleanup-flag)
+      (%coerce-argument flag :daq-bool)
+    (unwind-protect
+        (opendaq:instance-builder/enable-standard-providers (%require-live-pointer object) coerced-flag)
+      (%cleanup-coerced-argument cleanup-flag)))
+)
+
+(defgeneric authentication-provider (object))
+(defmethod authentication-provider ((object instance-builder))
+  (wrap-authentication-provider (opendaq:instance-builder/get-authentication-provider (%require-live-pointer object)))
+)
+
+(defgeneric components-log-level (object))
+(defmethod components-log-level ((object instance-builder))
+  (wrap-dict (opendaq:instance-builder/get-components-log-level (%require-live-pointer object)))
+)
+
+(defgeneric context (object))
+(defmethod context ((object instance-builder))
+  (wrap-context (opendaq:instance-builder/get-context (%require-live-pointer object)))
+)
+
+(defgeneric default-root-device-info (object))
+(defmethod default-root-device-info ((object instance-builder))
+  (wrap-device-info (opendaq:instance-builder/get-default-root-device-info (%require-live-pointer object)))
+)
+
+(defgeneric default-root-device-local-id (object))
+(defmethod default-root-device-local-id ((object instance-builder))
+  (%daq-string-to-lisp-and-release (opendaq:instance-builder/get-default-root-device-local-id (%require-live-pointer object)))
+)
+
+(defgeneric discovery-servers (object))
+(defmethod discovery-servers ((object instance-builder))
+  (wrap-object-list (opendaq:instance-builder/get-discovery-servers (%require-live-pointer object)))
+)
+
+(defgeneric global-log-level (object))
+(defmethod global-log-level ((object instance-builder))
+  (opendaq:instance-builder/get-global-log-level (%require-live-pointer object))
+)
+
+(defun instance-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:instance-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric load-authenticated-modules-only (object))
+(defmethod load-authenticated-modules-only ((object instance-builder))
+  (not (zerop (opendaq:instance-builder/get-load-authenticated-modules-only (%require-live-pointer object))))
+)
+
+(defgeneric logger (object))
+(defmethod logger ((object instance-builder))
+  (wrap-logger (opendaq:instance-builder/get-logger (%require-live-pointer object)))
+)
+
+(defgeneric logger-sinks (object))
+(defmethod logger-sinks ((object instance-builder))
+  (wrap-object-list (opendaq:instance-builder/get-logger-sinks (%require-live-pointer object)))
+)
+
+(defgeneric module-authenticator (object))
+(defmethod module-authenticator ((object instance-builder))
+  (wrap-module-authenticator (opendaq:instance-builder/get-module-authenticator (%require-live-pointer object)))
+)
+
+(defgeneric module-manager (object))
+(defmethod module-manager ((object instance-builder))
+  (wrap-module-manager (opendaq:instance-builder/get-module-manager (%require-live-pointer object)))
+)
+
+(defgeneric module-path (object))
+(defmethod module-path ((object instance-builder))
+  (%daq-string-to-lisp-and-release (opendaq:instance-builder/get-module-path (%require-live-pointer object)))
+)
+
+(defgeneric module-paths-list (object))
+(defmethod module-paths-list ((object instance-builder))
+  (wrap-object-list (opendaq:instance-builder/get-module-paths-list (%require-live-pointer object)))
+)
+
+(defgeneric options (object))
+(defmethod options ((object instance-builder))
+  (wrap-dict (opendaq:instance-builder/get-options (%require-live-pointer object)))
+)
+
+(defgeneric root-device (object))
+(defmethod root-device ((object instance-builder))
+  (%daq-string-to-lisp-and-release (opendaq:instance-builder/get-root-device (%require-live-pointer object)))
+)
+
+(defgeneric root-device-config (object))
+(defmethod root-device-config ((object instance-builder))
+  (wrap-property-object (opendaq:instance-builder/get-root-device-config (%require-live-pointer object)))
+)
+
+(defgeneric scheduler (object))
+(defmethod scheduler ((object instance-builder))
+  (wrap-scheduler (opendaq:instance-builder/get-scheduler (%require-live-pointer object)))
+)
+
+(defgeneric scheduler-worker-num (object))
+(defmethod scheduler-worker-num ((object instance-builder))
+  (opendaq:instance-builder/get-scheduler-worker-num (%require-live-pointer object))
+)
+
+(defgeneric using-scheduler-main-loop (object))
+(defmethod using-scheduler-main-loop ((object instance-builder))
+  (not (zerop (opendaq:instance-builder/get-using-scheduler-main-loop (%require-live-pointer object))))
+)
+
+(defgeneric (setf authentication-provider) (new-value object))
+(defmethod (setf authentication-provider) (new-value (object instance-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:instance-builder/set-authentication-provider (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf component-log-level) (new-value object component))
+(defmethod (setf component-log-level) (new-value (object instance-builder) component)
+  (multiple-value-bind (coerced-component cleanup-component)
+      (%coerce-argument component :daq-string)
+    (unwind-protect
+        (let ((coerced-new-value new-value))
+          (opendaq:instance-builder/set-component-log-level (%require-live-pointer object) coerced-component coerced-new-value)
+        )
+      (%cleanup-coerced-argument cleanup-component)))
+  new-value)
+
+(defgeneric (setf context) (new-value object))
+(defmethod (setf context) (new-value (object instance-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:instance-builder/set-context (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf default-root-device-info) (new-value object))
+(defmethod (setf default-root-device-info) (new-value (object instance-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:instance-builder/set-default-root-device-info (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf default-root-device-local-id) (new-value object))
+(defmethod (setf default-root-device-local-id) (new-value (object instance-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:instance-builder/set-default-root-device-local-id (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf global-log-level) (new-value object))
+(defmethod (setf global-log-level) (new-value (object instance-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:instance-builder/set-global-log-level (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf load-authenticated-modules-only) (new-value object))
+(defmethod (setf load-authenticated-modules-only) (new-value (object instance-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:instance-builder/set-load-authenticated-modules-only (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf logger) (new-value object))
+(defmethod (setf logger) (new-value (object instance-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:instance-builder/set-logger (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf module-authenticator) (new-value object))
+(defmethod (setf module-authenticator) (new-value (object instance-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:instance-builder/set-module-authenticator (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf module-manager) (new-value object))
+(defmethod (setf module-manager) (new-value (object instance-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:instance-builder/set-module-manager (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf module-path) (new-value object))
+(defmethod (setf module-path) (new-value (object instance-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:instance-builder/set-module-path (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf instance-builder-root-device) (new-value object connection-string))
+(defmethod (setf instance-builder-root-device) (new-value (object instance-builder) connection-string)
+  (multiple-value-bind (coerced-connection-string cleanup-connection-string)
+      (%coerce-argument connection-string :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-new-value cleanup-new-value)
+            (%coerce-argument new-value :managed-pointer)
+          (unwind-protect
+              (opendaq:instance-builder/set-root-device (%require-live-pointer object) coerced-connection-string coerced-new-value)
+            (%cleanup-coerced-argument cleanup-new-value)))
+      (%cleanup-coerced-argument cleanup-connection-string)))
+  new-value)
+
+(defgeneric (setf scheduler) (new-value object))
+(defmethod (setf scheduler) (new-value (object instance-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:instance-builder/set-scheduler (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf scheduler-worker-num) (new-value object))
+(defmethod (setf scheduler-worker-num) (new-value (object instance-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:instance-builder/set-scheduler-worker-num (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf sink-log-level) (new-value object sink))
+(defmethod (setf sink-log-level) (new-value (object instance-builder) sink)
+  (multiple-value-bind (coerced-sink cleanup-sink)
+      (%coerce-argument sink :managed-pointer)
+    (unwind-protect
+        (let ((coerced-new-value new-value))
+          (opendaq:instance-builder/set-sink-log-level (%require-live-pointer object) coerced-sink coerced-new-value)
+        )
+      (%cleanup-coerced-argument cleanup-sink)))
+  new-value)
+
+(defgeneric (setf using-scheduler-main-loop) (new-value object))
+(defmethod (setf using-scheduler-main-loop) (new-value (object instance-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:instance-builder/set-using-scheduler-main-loop (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric add-standard-servers (object))
+(defmethod add-standard-servers ((object instance))
+  (wrap-object-list (opendaq:instance/add-standard-servers (%require-live-pointer object)))
+)
+
+(defun instance-create-instance (context local-id)
+  (multiple-value-bind (coerced-context cleanup-context)
+      (%coerce-argument context :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-local-id cleanup-local-id)
+            (%coerce-argument local-id :daq-string)
+          (unwind-protect
+              (wrap-instance (opendaq:instance/create-instance coerced-context coerced-local-id))
+            (%cleanup-coerced-argument cleanup-local-id)))
+      (%cleanup-coerced-argument cleanup-context)))
+)
+
+(defgeneric available-server-types (object))
+(defmethod available-server-types ((object instance))
+  (wrap-dict (opendaq:instance/get-available-server-types (%require-live-pointer object)))
+)
+
+(defun instance-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:instance/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric module-manager (object))
+(defmethod module-manager ((object instance))
+  (wrap-module-manager (opendaq:instance/get-module-manager (%require-live-pointer object)))
+)
+
+(defgeneric root-device (object))
+(defmethod root-device ((object instance))
+  (wrap-device (opendaq:instance/get-root-device (%require-live-pointer object)))
+)
+
+(defgeneric (setf instance-root-device) (new-value object connection-string))
+(defmethod (setf instance-root-device) (new-value (object instance) connection-string)
+  (multiple-value-bind (coerced-connection-string cleanup-connection-string)
+      (%coerce-argument connection-string :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-new-value cleanup-new-value)
+            (%coerce-argument new-value :managed-pointer)
+          (unwind-protect
+              (opendaq:instance/set-root-device (%require-live-pointer object) coerced-connection-string coerced-new-value)
+            (%cleanup-coerced-argument cleanup-new-value)))
+      (%cleanup-coerced-argument cleanup-connection-string)))
+  new-value)
+
+(defgeneric equals-value (object value))
+(defmethod equals-value ((object daq-integer) value)
+  (let ((coerced-value value))
+    (not (zerop (opendaq:integer/equals-value (%require-live-pointer object) coerced-value)))
+  )
+)
+
+(defun daq-integer-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:integer/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric value (object))
+(defmethod value ((object daq-integer))
+  (opendaq:integer/get-value (%require-live-pointer object))
+)
+
+(defun io-folder-config-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:io-folder-config/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric create-end-iterator (object))
+(defmethod create-end-iterator ((object iterable))
+  (wrap-iterator (opendaq:iterable/create-end-iterator (%require-live-pointer object)))
+)
+
+(defgeneric create-start-iterator (object))
+(defmethod create-start-iterator ((object iterable))
+  (wrap-iterator (opendaq:iterable/create-start-iterator (%require-live-pointer object)))
+)
+
+(defun iterable-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:iterable/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric current (object))
+(defmethod current ((object iterator))
+  (wrap-base-object (opendaq:iterator/get-current (%require-live-pointer object)))
+)
+
+(defun iterator-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:iterator/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric move-next (object))
+(defmethod move-next ((object iterator))
+  (opendaq:iterator/move-next (%require-live-pointer object))
+)
+
+(defun last-message-logger-sink-private-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:last-message-logger-sink-private/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric last-message (object))
+(defmethod last-message ((object last-message-logger-sink-private))
+  (%daq-string-to-lisp-and-release (opendaq:last-message-logger-sink-private/get-last-message (%require-live-pointer object)))
+)
+
+(defgeneric wait-for-message (object timeout-ms))
+(defmethod wait-for-message ((object last-message-logger-sink-private) timeout-ms)
+  (let ((coerced-timeout-ms timeout-ms))
+    (not (zerop (opendaq:last-message-logger-sink-private/wait-for-message (%require-live-pointer object) coerced-timeout-ms)))
+  )
+)
+
+(defgeneric element-interface-id (object))
+(defmethod element-interface-id ((object list-element-type))
+  (cffi:with-foreign-object (id-slot 'opendaq::daq-intf-id)
+    (opendaq:list-element-type/get-element-interface-id (%require-live-pointer object) id-slot)
+    (cffi:mem-ref id-slot 'opendaq::daq-intf-id)
+  )
+)
+
+(defun list-element-type-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:list-element-type/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric clear (object))
+(defmethod clear ((object object-list))
+  (opendaq:list/clear (%require-live-pointer object))
+)
+
+(defgeneric create-end-iterator (object))
+(defmethod create-end-iterator ((object object-list))
+  (wrap-iterator (opendaq:list/create-end-iterator (%require-live-pointer object)))
+)
+
+(defgeneric create-start-iterator (object))
+(defmethod create-start-iterator ((object object-list))
+  (wrap-iterator (opendaq:list/create-start-iterator (%require-live-pointer object)))
+)
+
+(defgeneric delete-at (object index))
+(defmethod delete-at ((object object-list) index)
+  (let ((coerced-index index))
+    (opendaq:list/delete-at (%require-live-pointer object) coerced-index)
+  )
+)
+
+(defgeneric count (object))
+(defmethod count ((object object-list))
+  (opendaq:list/get-count (%require-live-pointer object))
+)
+
+(defun object-list-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:list/get-interface-id intf-id-slot)
+    nil
+  )
 )
 
 (defgeneric item-at (object index))
@@ -300,6 +11940,2965 @@
   (let ((coerced-index index))
     (wrap-base-object (opendaq:list/get-item-at (%require-live-pointer object) coerced-index))
   )
+)
+
+(defgeneric insert-at (object index obj))
+(defmethod insert-at ((object object-list) index obj)
+  (let ((coerced-index index))
+    (multiple-value-bind (coerced-obj cleanup-obj)
+        (%coerce-argument obj :daq-base-object)
+      (unwind-protect
+          (opendaq:list/insert-at (%require-live-pointer object) coerced-index coerced-obj)
+        (%cleanup-coerced-argument cleanup-obj)))
+  )
+)
+
+(defgeneric move-back (object obj))
+(defmethod move-back ((object object-list) obj)
+  (multiple-value-bind (coerced-obj cleanup-obj)
+      (%coerce-argument obj :daq-base-object)
+    (unwind-protect
+        (opendaq:list/move-back (%require-live-pointer object) coerced-obj)
+      (%cleanup-coerced-argument cleanup-obj)))
+)
+
+(defgeneric move-front (object obj))
+(defmethod move-front ((object object-list) obj)
+  (multiple-value-bind (coerced-obj cleanup-obj)
+      (%coerce-argument obj :daq-base-object)
+    (unwind-protect
+        (opendaq:list/move-front (%require-live-pointer object) coerced-obj)
+      (%cleanup-coerced-argument cleanup-obj)))
+)
+
+(defgeneric pop-back (object))
+(defmethod pop-back ((object object-list))
+  (wrap-base-object (opendaq:list/pop-back (%require-live-pointer object)))
+)
+
+(defgeneric pop-front (object))
+(defmethod pop-front ((object object-list))
+  (wrap-base-object (opendaq:list/pop-front (%require-live-pointer object)))
+)
+
+(defgeneric push-back (object obj))
+(defmethod push-back ((object object-list) obj)
+  (multiple-value-bind (coerced-obj cleanup-obj)
+      (%coerce-argument obj :daq-base-object)
+    (unwind-protect
+        (opendaq:list/push-back (%require-live-pointer object) coerced-obj)
+      (%cleanup-coerced-argument cleanup-obj)))
+)
+
+(defgeneric push-front (object obj))
+(defmethod push-front ((object object-list) obj)
+  (multiple-value-bind (coerced-obj cleanup-obj)
+      (%coerce-argument obj :daq-base-object)
+    (unwind-protect
+        (opendaq:list/push-front (%require-live-pointer object) coerced-obj)
+      (%cleanup-coerced-argument cleanup-obj)))
+)
+
+(defgeneric remove-at (object index))
+(defmethod remove-at ((object object-list) index)
+  (let ((coerced-index index))
+    (wrap-base-object (opendaq:list/remove-at (%require-live-pointer object) coerced-index))
+  )
+)
+
+(defgeneric (setf item-at) (new-value object index))
+(defmethod (setf item-at) (new-value (object object-list) index)
+  (let ((coerced-index index))
+    (multiple-value-bind (coerced-new-value cleanup-new-value)
+        (%coerce-argument new-value :daq-base-object)
+      (unwind-protect
+          (opendaq:list/set-item-at (%require-live-pointer object) coerced-index coerced-new-value)
+        (%cleanup-coerced-argument cleanup-new-value)))
+  )
+  new-value)
+
+(defun lock-guard-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:lock-guard/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric build (object))
+(defmethod build ((object log-file-info-builder))
+  (wrap-log-file-info (opendaq:log-file-info-builder/build (%require-live-pointer object)))
+)
+
+(defgeneric description (object))
+(defmethod description ((object log-file-info-builder))
+  (%daq-string-to-lisp-and-release (opendaq:log-file-info-builder/get-description (%require-live-pointer object)))
+)
+
+(defgeneric encoding (object))
+(defmethod encoding ((object log-file-info-builder))
+  (%daq-string-to-lisp-and-release (opendaq:log-file-info-builder/get-encoding (%require-live-pointer object)))
+)
+
+(defgeneric id (object))
+(defmethod id ((object log-file-info-builder))
+  (%daq-string-to-lisp-and-release (opendaq:log-file-info-builder/get-id (%require-live-pointer object)))
+)
+
+(defun log-file-info-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:log-file-info-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric last-modified (object))
+(defmethod last-modified ((object log-file-info-builder))
+  (%daq-string-to-lisp-and-release (opendaq:log-file-info-builder/get-last-modified (%require-live-pointer object)))
+)
+
+(defgeneric local-path (object))
+(defmethod local-path ((object log-file-info-builder))
+  (%daq-string-to-lisp-and-release (opendaq:log-file-info-builder/get-local-path (%require-live-pointer object)))
+)
+
+(defgeneric name (object))
+(defmethod name ((object log-file-info-builder))
+  (%daq-string-to-lisp-and-release (opendaq:log-file-info-builder/get-name (%require-live-pointer object)))
+)
+
+(defgeneric size (object))
+(defmethod size ((object log-file-info-builder))
+  (opendaq:log-file-info-builder/get-size (%require-live-pointer object))
+)
+
+(defgeneric (setf description) (new-value object))
+(defmethod (setf description) (new-value (object log-file-info-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:log-file-info-builder/set-description (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf encoding) (new-value object))
+(defmethod (setf encoding) (new-value (object log-file-info-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:log-file-info-builder/set-encoding (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf id) (new-value object))
+(defmethod (setf id) (new-value (object log-file-info-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:log-file-info-builder/set-id (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf last-modified) (new-value object))
+(defmethod (setf last-modified) (new-value (object log-file-info-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:log-file-info-builder/set-last-modified (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf local-path) (new-value object))
+(defmethod (setf local-path) (new-value (object log-file-info-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:log-file-info-builder/set-local-path (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf name) (new-value object))
+(defmethod (setf name) (new-value (object log-file-info-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:log-file-info-builder/set-name (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf size) (new-value object))
+(defmethod (setf size) (new-value (object log-file-info-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:log-file-info-builder/set-size (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric description (object))
+(defmethod description ((object log-file-info))
+  (%daq-string-to-lisp-and-release (opendaq:log-file-info/get-description (%require-live-pointer object)))
+)
+
+(defgeneric encoding (object))
+(defmethod encoding ((object log-file-info))
+  (%daq-string-to-lisp-and-release (opendaq:log-file-info/get-encoding (%require-live-pointer object)))
+)
+
+(defgeneric id (object))
+(defmethod id ((object log-file-info))
+  (%daq-string-to-lisp-and-release (opendaq:log-file-info/get-id (%require-live-pointer object)))
+)
+
+(defun log-file-info-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:log-file-info/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric last-modified (object))
+(defmethod last-modified ((object log-file-info))
+  (%daq-string-to-lisp-and-release (opendaq:log-file-info/get-last-modified (%require-live-pointer object)))
+)
+
+(defgeneric local-path (object))
+(defmethod local-path ((object log-file-info))
+  (%daq-string-to-lisp-and-release (opendaq:log-file-info/get-local-path (%require-live-pointer object)))
+)
+
+(defgeneric name (object))
+(defmethod name ((object log-file-info))
+  (%daq-string-to-lisp-and-release (opendaq:log-file-info/get-name (%require-live-pointer object)))
+)
+
+(defgeneric size (object))
+(defmethod size ((object log-file-info))
+  (opendaq:log-file-info/get-size (%require-live-pointer object))
+)
+
+(defgeneric flush (object))
+(defmethod flush ((object logger-component))
+  (opendaq:logger-component/flush (%require-live-pointer object))
+)
+
+(defgeneric flush-on-level (object level))
+(defmethod flush-on-level ((object logger-component) level)
+  (let ((coerced-level level))
+    (opendaq:logger-component/flush-on-level (%require-live-pointer object) coerced-level)
+  )
+)
+
+(defun logger-component-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:logger-component/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric level (object))
+(defmethod level ((object logger-component))
+  (opendaq:logger-component/get-level (%require-live-pointer object))
+)
+
+(defgeneric name (object))
+(defmethod name ((object logger-component))
+  (%daq-string-to-lisp-and-release (opendaq:logger-component/get-name (%require-live-pointer object)))
+)
+
+(defgeneric (setf level) (new-value object))
+(defmethod (setf level) (new-value (object logger-component))
+  (let ((coerced-new-value new-value))
+    (opendaq:logger-component/set-level (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf pattern) (new-value object))
+(defmethod (setf pattern) (new-value (object logger-component))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:logger-component/set-pattern (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric should-log (object level))
+(defmethod should-log ((object logger-component) level)
+  (let ((coerced-level level))
+    (not (zerop (opendaq:logger-component/should-log (%require-live-pointer object) coerced-level)))
+  )
+)
+
+(defun logger-sink-create-rotating-file-logger-sink (file-name max-file-byte-size max-files)
+  (multiple-value-bind (coerced-file-name cleanup-file-name)
+      (%coerce-argument file-name :daq-string)
+    (unwind-protect
+        (let ((coerced-max-file-byte-size max-file-byte-size))
+          (let ((coerced-max-files max-files))
+            (wrap-logger-sink (opendaq:logger-sink/create-rotating-file-logger-sink coerced-file-name coerced-max-file-byte-size coerced-max-files))
+          )
+        )
+      (%cleanup-coerced-argument cleanup-file-name)))
+)
+
+(defun logger-sink-create-std-err-logger-sink ()
+  (wrap-logger-sink (opendaq:logger-sink/create-std-err-logger-sink))
+)
+
+(defun logger-sink-create-std-out-logger-sink ()
+  (wrap-logger-sink (opendaq:logger-sink/create-std-out-logger-sink))
+)
+
+(defun logger-sink-create-win-debug-logger-sink ()
+  (wrap-logger-sink (opendaq:logger-sink/create-win-debug-logger-sink))
+)
+
+(defgeneric flush (object))
+(defmethod flush ((object logger-sink))
+  (opendaq:logger-sink/flush (%require-live-pointer object))
+)
+
+(defgeneric level (object))
+(defmethod level ((object logger-sink))
+  (opendaq:logger-sink/get-level (%require-live-pointer object))
+)
+
+(defgeneric (setf level) (new-value object))
+(defmethod (setf level) (new-value (object logger-sink))
+  (let ((coerced-new-value new-value))
+    (opendaq:logger-sink/set-level (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf pattern) (new-value object))
+(defmethod (setf pattern) (new-value (object logger-sink))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:logger-sink/set-pattern (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric should-log (object level))
+(defmethod should-log ((object logger-sink) level)
+  (let ((coerced-level level))
+    (not (zerop (opendaq:logger-sink/should-log (%require-live-pointer object) coerced-level)))
+  )
+)
+
+(defun logger-thread-pool-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:logger-thread-pool/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric add-component (object name))
+(defmethod add-component ((object logger) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (wrap-logger-component (opendaq:logger/add-component (%require-live-pointer object) coerced-name))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric flush (object))
+(defmethod flush ((object logger))
+  (opendaq:logger/flush (%require-live-pointer object))
+)
+
+(defgeneric flush-on-level (object level))
+(defmethod flush-on-level ((object logger) level)
+  (let ((coerced-level level))
+    (opendaq:logger/flush-on-level (%require-live-pointer object) coerced-level)
+  )
+)
+
+(defgeneric logger-component (object name))
+(defmethod logger-component ((object logger) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (wrap-logger-component (opendaq:logger/get-component (%require-live-pointer object) coerced-name))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric components (object))
+(defmethod components ((object logger))
+  (wrap-object-list (opendaq:logger/get-components (%require-live-pointer object)))
+)
+
+(defun logger-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:logger/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric level (object))
+(defmethod level ((object logger))
+  (opendaq:logger/get-level (%require-live-pointer object))
+)
+
+(defgeneric or-add-component (object name))
+(defmethod or-add-component ((object logger) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (wrap-logger-component (opendaq:logger/get-or-add-component (%require-live-pointer object) coerced-name))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric remove-component (object name))
+(defmethod remove-component ((object logger) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (opendaq:logger/remove-component (%require-live-pointer object) coerced-name)
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric (setf level) (new-value object))
+(defmethod (setf level) (new-value (object logger))
+  (let ((coerced-new-value new-value))
+    (opendaq:logger/set-level (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric add-streaming-source (object streaming-source))
+(defmethod add-streaming-source ((object mirrored-device-config) streaming-source)
+  (multiple-value-bind (coerced-streaming-source cleanup-streaming-source)
+      (%coerce-argument streaming-source :managed-pointer)
+    (unwind-protect
+        (opendaq:mirrored-device-config/add-streaming-source (%require-live-pointer object) coerced-streaming-source)
+      (%cleanup-coerced-argument cleanup-streaming-source)))
+)
+
+(defun mirrored-device-config-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:mirrored-device-config/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric remove-streaming-source (object streaming-connection-string))
+(defmethod remove-streaming-source ((object mirrored-device-config) streaming-connection-string)
+  (multiple-value-bind (coerced-streaming-connection-string cleanup-streaming-connection-string)
+      (%coerce-argument streaming-connection-string :daq-string)
+    (unwind-protect
+        (opendaq:mirrored-device-config/remove-streaming-source (%require-live-pointer object) coerced-streaming-connection-string)
+      (%cleanup-coerced-argument cleanup-streaming-connection-string)))
+)
+
+(defgeneric (setf mirrored-device-type) (new-value object))
+(defmethod (setf mirrored-device-type) (new-value (object mirrored-device-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:mirrored-device-config/set-mirrored-device-type (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defun mirrored-device-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:mirrored-device/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric mirrored-device-type (object))
+(defmethod mirrored-device-type ((object mirrored-device))
+  (wrap-device-type (opendaq:mirrored-device/get-mirrored-device-type (%require-live-pointer object)))
+)
+
+(defgeneric remote-id (object))
+(defmethod remote-id ((object mirrored-device))
+  (%daq-string-to-lisp-and-release (opendaq:mirrored-device/get-remote-id (%require-live-pointer object)))
+)
+
+(defgeneric streaming-sources (object))
+(defmethod streaming-sources ((object mirrored-device))
+  (wrap-object-list (opendaq:mirrored-device/get-streaming-sources (%require-live-pointer object)))
+)
+
+(defgeneric active-streaming-source (object))
+(defmethod active-streaming-source ((object mirrored-input-port-config))
+  (%daq-string-to-lisp-and-release (opendaq:mirrored-input-port-config/get-active-streaming-source (%require-live-pointer object)))
+)
+
+(defun mirrored-input-port-config-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:mirrored-input-port-config/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric remote-id (object))
+(defmethod remote-id ((object mirrored-input-port-config))
+  (%daq-string-to-lisp-and-release (opendaq:mirrored-input-port-config/get-remote-id (%require-live-pointer object)))
+)
+
+(defgeneric streaming-sources (object))
+(defmethod streaming-sources ((object mirrored-input-port-config))
+  (wrap-object-list (opendaq:mirrored-input-port-config/get-streaming-sources (%require-live-pointer object)))
+)
+
+(defgeneric (setf active-streaming-source) (new-value object))
+(defmethod (setf active-streaming-source) (new-value (object mirrored-input-port-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:mirrored-input-port-config/set-active-streaming-source (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric deactivate-streaming (object))
+(defmethod deactivate-streaming ((object mirrored-signal-config))
+  (opendaq:mirrored-signal-config/deactivate-streaming (%require-live-pointer object))
+)
+
+(defgeneric active-streaming-source (object))
+(defmethod active-streaming-source ((object mirrored-signal-config))
+  (%daq-string-to-lisp-and-release (opendaq:mirrored-signal-config/get-active-streaming-source (%require-live-pointer object)))
+)
+
+(defun mirrored-signal-config-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:mirrored-signal-config/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric on-subscribe-complete (object))
+(defmethod on-subscribe-complete ((object mirrored-signal-config))
+  (wrap-event (opendaq:mirrored-signal-config/get-on-subscribe-complete (%require-live-pointer object)))
+)
+
+(defgeneric on-unsubscribe-complete (object))
+(defmethod on-unsubscribe-complete ((object mirrored-signal-config))
+  (wrap-event (opendaq:mirrored-signal-config/get-on-unsubscribe-complete (%require-live-pointer object)))
+)
+
+(defgeneric remote-id (object))
+(defmethod remote-id ((object mirrored-signal-config))
+  (%daq-string-to-lisp-and-release (opendaq:mirrored-signal-config/get-remote-id (%require-live-pointer object)))
+)
+
+(defgeneric streaming-sources (object))
+(defmethod streaming-sources ((object mirrored-signal-config))
+  (wrap-object-list (opendaq:mirrored-signal-config/get-streaming-sources (%require-live-pointer object)))
+)
+
+(defgeneric (setf active-streaming-source) (new-value object))
+(defmethod (setf active-streaming-source) (new-value (object mirrored-signal-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:mirrored-signal-config/set-active-streaming-source (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric add-streaming-source (object streaming))
+(defmethod add-streaming-source ((object mirrored-signal-private) streaming)
+  (multiple-value-bind (coerced-streaming cleanup-streaming)
+      (%coerce-argument streaming :managed-pointer)
+    (unwind-protect
+        (opendaq:mirrored-signal-private/add-streaming-source (%require-live-pointer object) coerced-streaming)
+      (%cleanup-coerced-argument cleanup-streaming)))
+)
+
+(defun mirrored-signal-private-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:mirrored-signal-private/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric mirrored-data-descriptor (object))
+(defmethod mirrored-data-descriptor ((object mirrored-signal-private))
+  (wrap-data-descriptor (opendaq:mirrored-signal-private/get-mirrored-data-descriptor (%require-live-pointer object)))
+)
+
+(defgeneric mirrored-domain-signal (object))
+(defmethod mirrored-domain-signal ((object mirrored-signal-private))
+  (wrap-mirrored-signal-config (opendaq:mirrored-signal-private/get-mirrored-domain-signal (%require-live-pointer object)))
+)
+
+(defgeneric remove-streaming-source (object streaming-connection-string))
+(defmethod remove-streaming-source ((object mirrored-signal-private) streaming-connection-string)
+  (multiple-value-bind (coerced-streaming-connection-string cleanup-streaming-connection-string)
+      (%coerce-argument streaming-connection-string :daq-string)
+    (unwind-protect
+        (opendaq:mirrored-signal-private/remove-streaming-source (%require-live-pointer object) coerced-streaming-connection-string)
+      (%cleanup-coerced-argument cleanup-streaming-connection-string)))
+)
+
+(defgeneric (setf mirrored-data-descriptor) (new-value object))
+(defmethod (setf mirrored-data-descriptor) (new-value (object mirrored-signal-private))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:mirrored-signal-private/set-mirrored-data-descriptor (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf mirrored-domain-signal) (new-value object))
+(defmethod (setf mirrored-domain-signal) (new-value (object mirrored-signal-private))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:mirrored-signal-private/set-mirrored-domain-signal (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric subscribe-completed (object streaming-connection-string))
+(defmethod subscribe-completed ((object mirrored-signal-private) streaming-connection-string)
+  (multiple-value-bind (coerced-streaming-connection-string cleanup-streaming-connection-string)
+      (%coerce-argument streaming-connection-string :daq-string)
+    (unwind-protect
+        (opendaq:mirrored-signal-private/subscribe-completed (%require-live-pointer object) coerced-streaming-connection-string)
+      (%cleanup-coerced-argument cleanup-streaming-connection-string)))
+)
+
+(defgeneric trigger-event (object event-packet))
+(defmethod trigger-event ((object mirrored-signal-private) event-packet)
+  (multiple-value-bind (coerced-event-packet cleanup-event-packet)
+      (%coerce-argument event-packet :managed-pointer)
+    (unwind-protect
+        (not (zerop (opendaq:mirrored-signal-private/trigger-event (%require-live-pointer object) coerced-event-packet)))
+      (%cleanup-coerced-argument cleanup-event-packet)))
+)
+
+(defgeneric unsubscribe-completed (object streaming-connection-string))
+(defmethod unsubscribe-completed ((object mirrored-signal-private) streaming-connection-string)
+  (multiple-value-bind (coerced-streaming-connection-string cleanup-streaming-connection-string)
+      (%coerce-argument streaming-connection-string :daq-string)
+    (unwind-protect
+        (opendaq:mirrored-signal-private/unsubscribe-completed (%require-live-pointer object) coerced-streaming-connection-string)
+      (%cleanup-coerced-argument cleanup-streaming-connection-string)))
+)
+
+(defgeneric unsubscribe-completed-no-lock (object streaming-connection-string))
+(defmethod unsubscribe-completed-no-lock ((object mirrored-signal-private) streaming-connection-string)
+  (multiple-value-bind (coerced-streaming-connection-string cleanup-streaming-connection-string)
+      (%coerce-argument streaming-connection-string :daq-string)
+    (unwind-protect
+        (opendaq:mirrored-signal-private/unsubscribe-completed-no-lock (%require-live-pointer object) coerced-streaming-connection-string)
+      (%cleanup-coerced-argument cleanup-streaming-connection-string)))
+)
+
+(defgeneric id (object))
+(defmethod id ((object module-info))
+  (%daq-string-to-lisp-and-release (opendaq:module-info/get-id (%require-live-pointer object)))
+)
+
+(defun module-info-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:module-info/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric name (object))
+(defmethod name ((object module-info))
+  (%daq-string-to-lisp-and-release (opendaq:module-info/get-name (%require-live-pointer object)))
+)
+
+(defgeneric version-info (object))
+(defmethod version-info ((object module-info))
+  (wrap-version-info (opendaq:module-info/get-version-info (%require-live-pointer object)))
+)
+
+(defgeneric change-ip-config (object iface manufacturer serial-number config))
+(defmethod change-ip-config ((object module-manager-utils) iface manufacturer serial-number config)
+  (multiple-value-bind (coerced-iface cleanup-iface)
+      (%coerce-argument iface :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-manufacturer cleanup-manufacturer)
+            (%coerce-argument manufacturer :daq-string)
+          (unwind-protect
+              (multiple-value-bind (coerced-serial-number cleanup-serial-number)
+                  (%coerce-argument serial-number :daq-string)
+                (unwind-protect
+                    (multiple-value-bind (coerced-config cleanup-config)
+                        (%coerce-argument config :managed-pointer)
+                      (unwind-protect
+                          (opendaq:module-manager-utils/change-ip-config (%require-live-pointer object) coerced-iface coerced-manufacturer coerced-serial-number coerced-config)
+                        (%cleanup-coerced-argument cleanup-config)))
+                  (%cleanup-coerced-argument cleanup-serial-number)))
+            (%cleanup-coerced-argument cleanup-manufacturer)))
+      (%cleanup-coerced-argument cleanup-iface)))
+)
+
+(defgeneric complete-device-capabilities (object device))
+(defmethod complete-device-capabilities ((object module-manager-utils) device)
+  (multiple-value-bind (coerced-device cleanup-device)
+      (%coerce-argument device :managed-pointer)
+    (unwind-protect
+        (opendaq:module-manager-utils/complete-device-capabilities (%require-live-pointer object) coerced-device)
+      (%cleanup-coerced-argument cleanup-device)))
+)
+
+(defgeneric create-default-add-device-config (object))
+(defmethod create-default-add-device-config ((object module-manager-utils))
+  (wrap-property-object (opendaq:module-manager-utils/create-default-add-device-config (%require-live-pointer object)))
+)
+
+(defgeneric create-device (object connection-string parent config))
+(defmethod create-device ((object module-manager-utils) connection-string parent config)
+  (multiple-value-bind (coerced-connection-string cleanup-connection-string)
+      (%coerce-argument connection-string :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-parent cleanup-parent)
+            (%coerce-argument parent :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-config cleanup-config)
+                  (%coerce-argument config :managed-pointer)
+                (unwind-protect
+                    (wrap-device (opendaq:module-manager-utils/create-device (%require-live-pointer object) coerced-connection-string coerced-parent coerced-config))
+                  (%cleanup-coerced-argument cleanup-config)))
+            (%cleanup-coerced-argument cleanup-parent)))
+      (%cleanup-coerced-argument cleanup-connection-string)))
+)
+
+(defgeneric create-devices (object connection-args parent err-codes error-infos))
+(defmethod create-devices ((object module-manager-utils) connection-args parent err-codes error-infos)
+  (multiple-value-bind (coerced-connection-args cleanup-connection-args)
+      (%coerce-argument connection-args :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-parent cleanup-parent)
+            (%coerce-argument parent :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-err-codes cleanup-err-codes)
+                  (%coerce-argument err-codes :managed-pointer)
+                (unwind-protect
+                    (multiple-value-bind (coerced-error-infos cleanup-error-infos)
+                        (%coerce-argument error-infos :managed-pointer)
+                      (unwind-protect
+                          (wrap-dict (opendaq:module-manager-utils/create-devices (%require-live-pointer object) coerced-connection-args coerced-parent coerced-err-codes coerced-error-infos))
+                        (%cleanup-coerced-argument cleanup-error-infos)))
+                  (%cleanup-coerced-argument cleanup-err-codes)))
+            (%cleanup-coerced-argument cleanup-parent)))
+      (%cleanup-coerced-argument cleanup-connection-args)))
+)
+
+(defgeneric create-function-block (object id parent config local-id))
+(defmethod create-function-block ((object module-manager-utils) id parent config local-id)
+  (multiple-value-bind (coerced-id cleanup-id)
+      (%coerce-argument id :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-parent cleanup-parent)
+            (%coerce-argument parent :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-config cleanup-config)
+                  (%coerce-argument config :managed-pointer)
+                (unwind-protect
+                    (multiple-value-bind (coerced-local-id cleanup-local-id)
+                        (%coerce-argument local-id :daq-string)
+                      (unwind-protect
+                          (wrap-function-block (opendaq:module-manager-utils/create-function-block (%require-live-pointer object) coerced-id coerced-parent coerced-config coerced-local-id))
+                        (%cleanup-coerced-argument cleanup-local-id)))
+                  (%cleanup-coerced-argument cleanup-config)))
+            (%cleanup-coerced-argument cleanup-parent)))
+      (%cleanup-coerced-argument cleanup-id)))
+)
+
+(defgeneric create-server (object server-type-id root-device server-config))
+(defmethod create-server ((object module-manager-utils) server-type-id root-device server-config)
+  (multiple-value-bind (coerced-server-type-id cleanup-server-type-id)
+      (%coerce-argument server-type-id :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-root-device cleanup-root-device)
+            (%coerce-argument root-device :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-server-config cleanup-server-config)
+                  (%coerce-argument server-config :managed-pointer)
+                (unwind-protect
+                    (wrap-server (opendaq:module-manager-utils/create-server (%require-live-pointer object) coerced-server-type-id coerced-root-device coerced-server-config))
+                  (%cleanup-coerced-argument cleanup-server-config)))
+            (%cleanup-coerced-argument cleanup-root-device)))
+      (%cleanup-coerced-argument cleanup-server-type-id)))
+)
+
+(defgeneric create-streaming (object connection-string config))
+(defmethod create-streaming ((object module-manager-utils) connection-string config)
+  (multiple-value-bind (coerced-connection-string cleanup-connection-string)
+      (%coerce-argument connection-string :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-config cleanup-config)
+            (%coerce-argument config :managed-pointer)
+          (unwind-protect
+              (wrap-streaming (opendaq:module-manager-utils/create-streaming (%require-live-pointer object) coerced-connection-string coerced-config))
+            (%cleanup-coerced-argument cleanup-config)))
+      (%cleanup-coerced-argument cleanup-connection-string)))
+)
+
+(defgeneric available-device-types (object))
+(defmethod available-device-types ((object module-manager-utils))
+  (wrap-dict (opendaq:module-manager-utils/get-available-device-types (%require-live-pointer object)))
+)
+
+(defgeneric available-devices (object))
+(defmethod available-devices ((object module-manager-utils))
+  (wrap-object-list (opendaq:module-manager-utils/get-available-devices (%require-live-pointer object)))
+)
+
+(defgeneric available-function-block-types (object))
+(defmethod available-function-block-types ((object module-manager-utils))
+  (wrap-dict (opendaq:module-manager-utils/get-available-function-block-types (%require-live-pointer object)))
+)
+
+(defgeneric available-streaming-types (object))
+(defmethod available-streaming-types ((object module-manager-utils))
+  (wrap-dict (opendaq:module-manager-utils/get-available-streaming-types (%require-live-pointer object)))
+)
+
+(defgeneric discovery-info (object manufacturer serial-number))
+(defmethod discovery-info ((object module-manager-utils) manufacturer serial-number)
+  (multiple-value-bind (coerced-manufacturer cleanup-manufacturer)
+      (%coerce-argument manufacturer :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-serial-number cleanup-serial-number)
+            (%coerce-argument serial-number :daq-string)
+          (unwind-protect
+              (wrap-device-info (opendaq:module-manager-utils/get-discovery-info (%require-live-pointer object) coerced-manufacturer coerced-serial-number))
+            (%cleanup-coerced-argument cleanup-serial-number)))
+      (%cleanup-coerced-argument cleanup-manufacturer)))
+)
+
+(defun module-manager-utils-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:module-manager-utils/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric request-ip-config (object iface manufacturer serial-number))
+(defmethod request-ip-config ((object module-manager-utils) iface manufacturer serial-number)
+  (multiple-value-bind (coerced-iface cleanup-iface)
+      (%coerce-argument iface :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-manufacturer cleanup-manufacturer)
+            (%coerce-argument manufacturer :daq-string)
+          (unwind-protect
+              (multiple-value-bind (coerced-serial-number cleanup-serial-number)
+                  (%coerce-argument serial-number :daq-string)
+                (unwind-protect
+                    (wrap-property-object (opendaq:module-manager-utils/request-ip-config (%require-live-pointer object) coerced-iface coerced-manufacturer coerced-serial-number))
+                  (%cleanup-coerced-argument cleanup-serial-number)))
+            (%cleanup-coerced-argument cleanup-manufacturer)))
+      (%cleanup-coerced-argument cleanup-iface)))
+)
+
+(defgeneric add-module (object module))
+(defmethod add-module ((object module-manager) module)
+  (multiple-value-bind (coerced-module cleanup-module)
+      (%coerce-argument module :managed-pointer)
+    (unwind-protect
+        (opendaq:module-manager/add-module (%require-live-pointer object) coerced-module)
+      (%cleanup-coerced-argument cleanup-module)))
+)
+
+(defun module-manager-create-module-manager-multiple-paths (paths)
+  (multiple-value-bind (coerced-paths cleanup-paths)
+      (%coerce-argument paths :managed-pointer)
+    (unwind-protect
+        (wrap-module-manager (opendaq:module-manager/create-module-manager-multiple-paths coerced-paths))
+      (%cleanup-coerced-argument cleanup-paths)))
+)
+
+(defun module-manager-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:module-manager/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric modules (object))
+(defmethod modules ((object module-manager))
+  (wrap-object-list (opendaq:module-manager/get-modules (%require-live-pointer object)))
+)
+
+(defgeneric vendor-keys (object))
+(defmethod vendor-keys ((object module-manager))
+  (wrap-dict (opendaq:module-manager/get-vendor-keys (%require-live-pointer object)))
+)
+
+(defgeneric load-module (object path))
+(defmethod load-module ((object module-manager) path)
+  (multiple-value-bind (coerced-path cleanup-path)
+      (%coerce-argument path :daq-string)
+    (unwind-protect
+        (wrap-module (opendaq:module-manager/load-module (%require-live-pointer object) coerced-path))
+      (%cleanup-coerced-argument cleanup-path)))
+)
+
+(defgeneric load-modules (object context))
+(defmethod load-modules ((object module-manager) context)
+  (multiple-value-bind (coerced-context cleanup-context)
+      (%coerce-argument context :managed-pointer)
+    (unwind-protect
+        (opendaq:module-manager/load-modules (%require-live-pointer object) coerced-context)
+      (%cleanup-coerced-argument cleanup-context)))
+)
+
+(defgeneric (setf authenticated-only) (new-value object))
+(defmethod (setf authenticated-only) (new-value (object module-manager))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:module-manager/set-authenticated-only (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf module-authenticator) (new-value object))
+(defmethod (setf module-authenticator) (new-value (object module-manager))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:module-manager/set-module-authenticator (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric complete-server-capability (object source target))
+(defmethod complete-server-capability ((object module) source target)
+  (multiple-value-bind (coerced-source cleanup-source)
+      (%coerce-argument source :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-target cleanup-target)
+            (%coerce-argument target :managed-pointer)
+          (unwind-protect
+              (not (zerop (opendaq:module/complete-server-capability (%require-live-pointer object) coerced-source coerced-target)))
+            (%cleanup-coerced-argument cleanup-target)))
+      (%cleanup-coerced-argument cleanup-source)))
+)
+
+(defgeneric create-device (object connection-string parent config))
+(defmethod create-device ((object module) connection-string parent config)
+  (multiple-value-bind (coerced-connection-string cleanup-connection-string)
+      (%coerce-argument connection-string :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-parent cleanup-parent)
+            (%coerce-argument parent :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-config cleanup-config)
+                  (%coerce-argument config :managed-pointer)
+                (unwind-protect
+                    (wrap-device (opendaq:module/create-device (%require-live-pointer object) coerced-connection-string coerced-parent coerced-config))
+                  (%cleanup-coerced-argument cleanup-config)))
+            (%cleanup-coerced-argument cleanup-parent)))
+      (%cleanup-coerced-argument cleanup-connection-string)))
+)
+
+(defgeneric create-function-block (object id parent local-id config))
+(defmethod create-function-block ((object module) id parent local-id config)
+  (multiple-value-bind (coerced-id cleanup-id)
+      (%coerce-argument id :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-parent cleanup-parent)
+            (%coerce-argument parent :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-local-id cleanup-local-id)
+                  (%coerce-argument local-id :daq-string)
+                (unwind-protect
+                    (multiple-value-bind (coerced-config cleanup-config)
+                        (%coerce-argument config :managed-pointer)
+                      (unwind-protect
+                          (wrap-function-block (opendaq:module/create-function-block (%require-live-pointer object) coerced-id coerced-parent coerced-local-id coerced-config))
+                        (%cleanup-coerced-argument cleanup-config)))
+                  (%cleanup-coerced-argument cleanup-local-id)))
+            (%cleanup-coerced-argument cleanup-parent)))
+      (%cleanup-coerced-argument cleanup-id)))
+)
+
+(defgeneric create-server (object server-type-id root-device config))
+(defmethod create-server ((object module) server-type-id root-device config)
+  (multiple-value-bind (coerced-server-type-id cleanup-server-type-id)
+      (%coerce-argument server-type-id :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-root-device cleanup-root-device)
+            (%coerce-argument root-device :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-config cleanup-config)
+                  (%coerce-argument config :managed-pointer)
+                (unwind-protect
+                    (wrap-server (opendaq:module/create-server (%require-live-pointer object) coerced-server-type-id coerced-root-device coerced-config))
+                  (%cleanup-coerced-argument cleanup-config)))
+            (%cleanup-coerced-argument cleanup-root-device)))
+      (%cleanup-coerced-argument cleanup-server-type-id)))
+)
+
+(defgeneric create-streaming (object connection-string config))
+(defmethod create-streaming ((object module) connection-string config)
+  (multiple-value-bind (coerced-connection-string cleanup-connection-string)
+      (%coerce-argument connection-string :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-config cleanup-config)
+            (%coerce-argument config :managed-pointer)
+          (unwind-protect
+              (wrap-streaming (opendaq:module/create-streaming (%require-live-pointer object) coerced-connection-string coerced-config))
+            (%cleanup-coerced-argument cleanup-config)))
+      (%cleanup-coerced-argument cleanup-connection-string)))
+)
+
+(defgeneric available-device-types (object))
+(defmethod available-device-types ((object module))
+  (wrap-dict (opendaq:module/get-available-device-types (%require-live-pointer object)))
+)
+
+(defgeneric available-devices (object))
+(defmethod available-devices ((object module))
+  (wrap-object-list (opendaq:module/get-available-devices (%require-live-pointer object)))
+)
+
+(defgeneric available-function-block-types (object))
+(defmethod available-function-block-types ((object module))
+  (wrap-dict (opendaq:module/get-available-function-block-types (%require-live-pointer object)))
+)
+
+(defgeneric available-server-types (object))
+(defmethod available-server-types ((object module))
+  (wrap-dict (opendaq:module/get-available-server-types (%require-live-pointer object)))
+)
+
+(defgeneric available-streaming-types (object))
+(defmethod available-streaming-types ((object module))
+  (wrap-dict (opendaq:module/get-available-streaming-types (%require-live-pointer object)))
+)
+
+(defun module-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:module/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric license-config (object))
+(defmethod license-config ((object module))
+  (wrap-dict (opendaq:module/get-license-config (%require-live-pointer object)))
+)
+
+(defgeneric module-info (object))
+(defmethod module-info ((object module))
+  (wrap-module-info (opendaq:module/get-module-info (%require-live-pointer object)))
+)
+
+(defgeneric license-loaded (object))
+(defmethod license-loaded ((object module))
+  (not (zerop (opendaq:module/license-loaded (%require-live-pointer object))))
+)
+
+(defgeneric load-license (object license-config))
+(defmethod load-license ((object module) license-config)
+  (multiple-value-bind (coerced-license-config cleanup-license-config)
+      (%coerce-argument license-config :managed-pointer)
+    (unwind-protect
+        (not (zerop (opendaq:module/load-license (%require-live-pointer object) coerced-license-config)))
+      (%cleanup-coerced-argument cleanup-license-config)))
+)
+
+(defgeneric add-input-port (object port))
+(defmethod add-input-port ((object multi-reader-builder) port)
+  (multiple-value-bind (coerced-port cleanup-port)
+      (%coerce-argument port :managed-pointer)
+    (unwind-protect
+        (opendaq:multi-reader-builder/add-input-port (%require-live-pointer object) coerced-port)
+      (%cleanup-coerced-argument cleanup-port)))
+)
+
+(defgeneric add-input-ports (object ports))
+(defmethod add-input-ports ((object multi-reader-builder) ports)
+  (multiple-value-bind (coerced-ports cleanup-ports)
+      (%coerce-argument ports :managed-pointer)
+    (unwind-protect
+        (opendaq:multi-reader-builder/add-input-ports (%require-live-pointer object) coerced-ports)
+      (%cleanup-coerced-argument cleanup-ports)))
+)
+
+(defgeneric add-signal (object signal))
+(defmethod add-signal ((object multi-reader-builder) signal)
+  (multiple-value-bind (coerced-signal cleanup-signal)
+      (%coerce-argument signal :managed-pointer)
+    (unwind-protect
+        (opendaq:multi-reader-builder/add-signal (%require-live-pointer object) coerced-signal)
+      (%cleanup-coerced-argument cleanup-signal)))
+)
+
+(defgeneric add-signals (object signals))
+(defmethod add-signals ((object multi-reader-builder) signals)
+  (multiple-value-bind (coerced-signals cleanup-signals)
+      (%coerce-argument signals :managed-pointer)
+    (unwind-protect
+        (opendaq:multi-reader-builder/add-signals (%require-live-pointer object) coerced-signals)
+      (%cleanup-coerced-argument cleanup-signals)))
+)
+
+(defgeneric build (object))
+(defmethod build ((object multi-reader-builder))
+  (wrap-multi-reader (opendaq:multi-reader-builder/build (%require-live-pointer object)))
+)
+
+(defgeneric allow-different-sampling-rates (object))
+(defmethod allow-different-sampling-rates ((object multi-reader-builder))
+  (not (zerop (opendaq:multi-reader-builder/get-allow-different-sampling-rates (%require-live-pointer object))))
+)
+
+(defgeneric domain-read-type (object))
+(defmethod domain-read-type ((object multi-reader-builder))
+  (opendaq:multi-reader-builder/get-domain-read-type (%require-live-pointer object))
+)
+
+(defgeneric input-port-notification-method (object))
+(defmethod input-port-notification-method ((object multi-reader-builder))
+  (opendaq:multi-reader-builder/get-input-port-notification-method (%require-live-pointer object))
+)
+
+(defgeneric input-port-notification-methods (object))
+(defmethod input-port-notification-methods ((object multi-reader-builder))
+  (wrap-object-list (opendaq:multi-reader-builder/get-input-port-notification-methods (%require-live-pointer object)))
+)
+
+(defun multi-reader-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:multi-reader-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric min-read-count (object))
+(defmethod min-read-count ((object multi-reader-builder))
+  (opendaq:multi-reader-builder/get-min-read-count (%require-live-pointer object))
+)
+
+(defgeneric read-mode (object))
+(defmethod read-mode ((object multi-reader-builder))
+  (opendaq:multi-reader-builder/get-read-mode (%require-live-pointer object))
+)
+
+(defgeneric read-timeout-type (object))
+(defmethod read-timeout-type ((object multi-reader-builder))
+  (opendaq:multi-reader-builder/get-read-timeout-type (%require-live-pointer object))
+)
+
+(defgeneric required-common-sample-rate (object))
+(defmethod required-common-sample-rate ((object multi-reader-builder))
+  (opendaq:multi-reader-builder/get-required-common-sample-rate (%require-live-pointer object))
+)
+
+(defgeneric source-components (object))
+(defmethod source-components ((object multi-reader-builder))
+  (wrap-object-list (opendaq:multi-reader-builder/get-source-components (%require-live-pointer object)))
+)
+
+(defgeneric start-on-full-unit-of-domain (object))
+(defmethod start-on-full-unit-of-domain ((object multi-reader-builder))
+  (not (zerop (opendaq:multi-reader-builder/get-start-on-full-unit-of-domain (%require-live-pointer object))))
+)
+
+(defgeneric tick-offset-tolerance (object))
+(defmethod tick-offset-tolerance ((object multi-reader-builder))
+  (wrap-ratio (opendaq:multi-reader-builder/get-tick-offset-tolerance (%require-live-pointer object)))
+)
+
+(defgeneric value-read-type (object))
+(defmethod value-read-type ((object multi-reader-builder))
+  (opendaq:multi-reader-builder/get-value-read-type (%require-live-pointer object))
+)
+
+(defgeneric (setf allow-different-sampling-rates) (new-value object))
+(defmethod (setf allow-different-sampling-rates) (new-value (object multi-reader-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:multi-reader-builder/set-allow-different-sampling-rates (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf domain-read-type) (new-value object))
+(defmethod (setf domain-read-type) (new-value (object multi-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:multi-reader-builder/set-domain-read-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf input-port-notification-method) (new-value object))
+(defmethod (setf input-port-notification-method) (new-value (object multi-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:multi-reader-builder/set-input-port-notification-method (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf input-port-notification-methods) (new-value object))
+(defmethod (setf input-port-notification-methods) (new-value (object multi-reader-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:multi-reader-builder/set-input-port-notification-methods (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf min-read-count) (new-value object))
+(defmethod (setf min-read-count) (new-value (object multi-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:multi-reader-builder/set-min-read-count (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf read-mode) (new-value object))
+(defmethod (setf read-mode) (new-value (object multi-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:multi-reader-builder/set-read-mode (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf read-timeout-type) (new-value object))
+(defmethod (setf read-timeout-type) (new-value (object multi-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:multi-reader-builder/set-read-timeout-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf required-common-sample-rate) (new-value object))
+(defmethod (setf required-common-sample-rate) (new-value (object multi-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:multi-reader-builder/set-required-common-sample-rate (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf start-on-full-unit-of-domain) (new-value object))
+(defmethod (setf start-on-full-unit-of-domain) (new-value (object multi-reader-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:multi-reader-builder/set-start-on-full-unit-of-domain (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf tick-offset-tolerance) (new-value object))
+(defmethod (setf tick-offset-tolerance) (new-value (object multi-reader-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:multi-reader-builder/set-tick-offset-tolerance (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf value-read-type) (new-value object))
+(defmethod (setf value-read-type) (new-value (object multi-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:multi-reader-builder/set-value-read-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric event-packets (object))
+(defmethod event-packets ((object multi-reader-status))
+  (wrap-dict (opendaq:multi-reader-status/get-event-packets (%require-live-pointer object)))
+)
+
+(defun multi-reader-status-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:multi-reader-status/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric main-descriptor (object))
+(defmethod main-descriptor ((object multi-reader-status))
+  (wrap-event-packet (opendaq:multi-reader-status/get-main-descriptor (%require-live-pointer object)))
+)
+
+(defgeneric add-input (object input))
+(defmethod add-input ((object multi-reader) input)
+  (multiple-value-bind (coerced-input cleanup-input)
+      (%coerce-argument input :managed-pointer)
+    (unwind-protect
+        (opendaq:multi-reader/add-input (%require-live-pointer object) coerced-input)
+      (%cleanup-coerced-argument cleanup-input)))
+)
+
+(defun multi-reader-create-multi-reader-ex (signals value-read-type domain-read-type mode timeout-type required-common-sample-rate start-on-full-unit-of-domain min-read-count)
+  (multiple-value-bind (coerced-signals cleanup-signals)
+      (%coerce-argument signals :managed-pointer)
+    (unwind-protect
+        (let ((coerced-value-read-type value-read-type))
+          (let ((coerced-domain-read-type domain-read-type))
+            (let ((coerced-mode mode))
+              (let ((coerced-timeout-type timeout-type))
+                (let ((coerced-required-common-sample-rate required-common-sample-rate))
+                  (multiple-value-bind (coerced-start-on-full-unit-of-domain cleanup-start-on-full-unit-of-domain)
+                      (%coerce-argument start-on-full-unit-of-domain :daq-bool)
+                    (unwind-protect
+                        (let ((coerced-min-read-count min-read-count))
+                          (wrap-multi-reader (opendaq:multi-reader/create-multi-reader-ex coerced-signals coerced-value-read-type coerced-domain-read-type coerced-mode coerced-timeout-type coerced-required-common-sample-rate coerced-start-on-full-unit-of-domain coerced-min-read-count))
+                        )
+                      (%cleanup-coerced-argument cleanup-start-on-full-unit-of-domain)))
+                )
+              )
+            )
+          )
+        )
+      (%cleanup-coerced-argument cleanup-signals)))
+)
+
+(defun multi-reader-create-multi-reader-from-existing (invalidated-reader value-read-type domain-read-type)
+  (multiple-value-bind (coerced-invalidated-reader cleanup-invalidated-reader)
+      (%coerce-argument invalidated-reader :managed-pointer)
+    (unwind-protect
+        (let ((coerced-value-read-type value-read-type))
+          (let ((coerced-domain-read-type domain-read-type))
+            (wrap-multi-reader (opendaq:multi-reader/create-multi-reader-from-existing coerced-invalidated-reader coerced-value-read-type coerced-domain-read-type))
+          )
+        )
+      (%cleanup-coerced-argument cleanup-invalidated-reader)))
+)
+
+(defgeneric active (object))
+(defmethod active ((object multi-reader))
+  (not (zerop (opendaq:multi-reader/get-active (%require-live-pointer object))))
+)
+
+(defgeneric common-sample-rate (object))
+(defmethod common-sample-rate ((object multi-reader))
+  (opendaq:multi-reader/get-common-sample-rate (%require-live-pointer object))
+)
+
+(defgeneric input-used (object id))
+(defmethod input-used ((object multi-reader) id)
+  (multiple-value-bind (coerced-id cleanup-id)
+      (%coerce-argument id :daq-string)
+    (unwind-protect
+        (not (zerop (opendaq:multi-reader/get-input-used (%require-live-pointer object) coerced-id)))
+      (%cleanup-coerced-argument cleanup-id)))
+)
+
+(defun multi-reader-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:multi-reader/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric is-synchronized (object))
+(defmethod is-synchronized ((object multi-reader))
+  (not (zerop (opendaq:multi-reader/get-is-synchronized (%require-live-pointer object))))
+)
+
+(defgeneric multi-reader-offset (object domain-start))
+(defmethod multi-reader-offset ((object multi-reader) domain-start)
+  (let ((coerced-domain-start domain-start))
+    (opendaq:multi-reader/get-offset (%require-live-pointer object) coerced-domain-start)
+  )
+)
+
+(defgeneric origin (object))
+(defmethod origin ((object multi-reader))
+  (%daq-string-to-lisp-and-release (opendaq:multi-reader/get-origin (%require-live-pointer object)))
+)
+
+(defgeneric tick-resolution (object))
+(defmethod tick-resolution ((object multi-reader))
+  (wrap-ratio (opendaq:multi-reader/get-tick-resolution (%require-live-pointer object)))
+)
+
+(defgeneric multi-reader-read (object samples count timeout-ms))
+(defmethod multi-reader-read ((object multi-reader) samples count timeout-ms)
+  (let ((coerced-samples samples))
+    (let ((coerced-count count))
+      (let ((coerced-timeout-ms timeout-ms))
+        (multiple-value-bind (value-0 value-1)
+            (opendaq:multi-reader/read (%require-live-pointer object) coerced-samples coerced-count coerced-timeout-ms)
+          (cl:values
+            value-0
+            (wrap-multi-reader-status value-1)))
+      )
+    )
+  )
+)
+
+(defgeneric multi-reader-read-with-domain (object samples domain count timeout-ms))
+(defmethod multi-reader-read-with-domain ((object multi-reader) samples domain count timeout-ms)
+  (let ((coerced-samples samples))
+    (let ((coerced-domain domain))
+      (let ((coerced-count count))
+        (let ((coerced-timeout-ms timeout-ms))
+          (multiple-value-bind (value-0 value-1)
+              (opendaq:multi-reader/read-with-domain (%require-live-pointer object) coerced-samples coerced-domain coerced-count coerced-timeout-ms)
+            (cl:values
+              value-0
+              (wrap-multi-reader-status value-1)))
+        )
+      )
+    )
+  )
+)
+
+(defgeneric remove-input (object id))
+(defmethod remove-input ((object multi-reader) id)
+  (multiple-value-bind (coerced-id cleanup-id)
+      (%coerce-argument id :daq-string)
+    (unwind-protect
+        (opendaq:multi-reader/remove-input (%require-live-pointer object) coerced-id)
+      (%cleanup-coerced-argument cleanup-id)))
+)
+
+(defgeneric (setf active) (new-value object))
+(defmethod (setf active) (new-value (object multi-reader))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:multi-reader/set-active (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf input-used) (new-value object id))
+(defmethod (setf input-used) (new-value (object multi-reader) id)
+  (multiple-value-bind (coerced-id cleanup-id)
+      (%coerce-argument id :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-new-value cleanup-new-value)
+            (%coerce-argument new-value :daq-bool)
+          (unwind-protect
+              (opendaq:multi-reader/set-input-used (%require-live-pointer object) coerced-id coerced-new-value)
+            (%cleanup-coerced-argument cleanup-new-value)))
+      (%cleanup-coerced-argument cleanup-id)))
+  new-value)
+
+(defgeneric skip-samples (object count))
+(defmethod skip-samples ((object multi-reader) count)
+  (let ((coerced-count count))
+    (multiple-value-bind (value-0 value-1)
+        (opendaq:multi-reader/skip-samples (%require-live-pointer object) coerced-count)
+      (cl:values
+        value-0
+        (wrap-multi-reader-status value-1)))
+  )
+)
+
+(defgeneric create-default-configuration (object))
+(defmethod create-default-configuration ((object network-interface))
+  (wrap-property-object (opendaq:network-interface/create-default-configuration (%require-live-pointer object)))
+)
+
+(defun network-interface-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:network-interface/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric request-current-configuration (object))
+(defmethod request-current-configuration ((object network-interface))
+  (wrap-property-object (opendaq:network-interface/request-current-configuration (%require-live-pointer object)))
+)
+
+(defgeneric submit-configuration (object config))
+(defmethod submit-configuration ((object network-interface) config)
+  (multiple-value-bind (coerced-config cleanup-config)
+      (%coerce-argument config :managed-pointer)
+    (unwind-protect
+        (opendaq:network-interface/submit-configuration (%require-live-pointer object) coerced-config)
+      (%cleanup-coerced-argument cleanup-config)))
+)
+
+(defgeneric float-value (object))
+(defmethod float-value ((object daq-number))
+  (opendaq:number/get-float-value (%require-live-pointer object))
+)
+
+(defgeneric int-value (object))
+(defmethod int-value ((object daq-number))
+  (opendaq:number/get-int-value (%require-live-pointer object))
+)
+
+(defun daq-number-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:number/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defun ownable-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:ownable/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric (setf owner) (new-value object))
+(defmethod (setf owner) (new-value (object ownable))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:ownable/set-owner (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defun packet-destruct-callback-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:packet-destruct-callback/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric on-packet-destroyed (object))
+(defmethod on-packet-destroyed ((object packet-destruct-callback))
+  (opendaq:packet-destruct-callback/on-packet-destroyed (%require-live-pointer object))
+)
+
+(defun packet-reader-create-packet-reader-from-port (port)
+  (multiple-value-bind (coerced-port cleanup-port)
+      (%coerce-argument port :managed-pointer)
+    (unwind-protect
+        (wrap-packet-reader (opendaq:packet-reader/create-packet-reader-from-port coerced-port))
+      (%cleanup-coerced-argument cleanup-port)))
+)
+
+(defun packet-reader-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:packet-reader/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric packet-reader-read (object))
+(defmethod packet-reader-read ((object packet-reader))
+  (wrap-packet (opendaq:packet-reader/read (%require-live-pointer object)))
+)
+
+(defgeneric read-all (object))
+(defmethod read-all ((object packet-reader))
+  (wrap-object-list (opendaq:packet-reader/read-all (%require-live-pointer object)))
+)
+
+(defun packet-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:packet/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric ref-count (object))
+(defmethod ref-count ((object packet))
+  (opendaq:packet/get-ref-count (%require-live-pointer object))
+)
+
+(defgeneric packet-type (object))
+(defmethod packet-type ((object packet))
+  (opendaq:packet/get-type (%require-live-pointer object))
+)
+
+(defgeneric subscribe-for-destruct-notification (object packet-destruct-callback))
+(defmethod subscribe-for-destruct-notification ((object packet) packet-destruct-callback)
+  (multiple-value-bind (coerced-packet-destruct-callback cleanup-packet-destruct-callback)
+      (%coerce-argument packet-destruct-callback :managed-pointer)
+    (unwind-protect
+        (opendaq:packet/subscribe-for-destruct-notification (%require-live-pointer object) coerced-packet-destruct-callback)
+      (%cleanup-coerced-argument cleanup-packet-destruct-callback)))
+)
+
+(defgeneric add-child-manager (object child-manager))
+(defmethod add-child-manager ((object permission-manager-internal) child-manager)
+  (multiple-value-bind (coerced-child-manager cleanup-child-manager)
+      (%coerce-argument child-manager :managed-pointer)
+    (unwind-protect
+        (opendaq:permission-manager-internal/add-child-manager (%require-live-pointer object) coerced-child-manager)
+      (%cleanup-coerced-argument cleanup-child-manager)))
+)
+
+(defun permission-manager-internal-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:permission-manager-internal/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric permissions (object))
+(defmethod permissions ((object permission-manager-internal))
+  (wrap-permissions (opendaq:permission-manager-internal/get-permissions (%require-live-pointer object)))
+)
+
+(defgeneric remove-child-manager (object child-manager))
+(defmethod remove-child-manager ((object permission-manager-internal) child-manager)
+  (multiple-value-bind (coerced-child-manager cleanup-child-manager)
+      (%coerce-argument child-manager :managed-pointer)
+    (unwind-protect
+        (opendaq:permission-manager-internal/remove-child-manager (%require-live-pointer object) coerced-child-manager)
+      (%cleanup-coerced-argument cleanup-child-manager)))
+)
+
+(defgeneric (setf parent) (new-value object))
+(defmethod (setf parent) (new-value (object permission-manager-internal))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:permission-manager-internal/set-parent (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric update-inherited-permissions (object))
+(defmethod update-inherited-permissions ((object permission-manager-internal))
+  (opendaq:permission-manager-internal/update-inherited-permissions (%require-live-pointer object))
+)
+
+(defun permission-manager-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:permission-manager/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric is-authorized (object user permission))
+(defmethod is-authorized ((object permission-manager) user permission)
+  (multiple-value-bind (coerced-user cleanup-user)
+      (%coerce-argument user :managed-pointer)
+    (unwind-protect
+        (let ((coerced-permission permission))
+          (not (zerop (opendaq:permission-manager/is-authorized (%require-live-pointer object) coerced-user coerced-permission)))
+        )
+      (%cleanup-coerced-argument cleanup-user)))
+)
+
+(defgeneric (setf permissions) (new-value object))
+(defmethod (setf permissions) (new-value (object permission-manager))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:permission-manager/set-permissions (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric build (object))
+(defmethod build ((object permission-mask-builder))
+  (opendaq:permission-mask-builder/build (%require-live-pointer object))
+)
+
+(defgeneric clear (object))
+(defmethod clear ((object permission-mask-builder))
+  (opendaq:permission-mask-builder/clear (%require-live-pointer object))
+)
+
+(defun permission-mask-builder-create-permission-mask-builder-from-mask (permission-mask)
+  (let ((coerced-permission-mask permission-mask))
+    (wrap-permission-mask-builder (opendaq:permission-mask-builder/create-permission-mask-builder-from-mask coerced-permission-mask))
+  )
+)
+
+(defgeneric execute (object))
+(defmethod execute ((object permission-mask-builder))
+  (opendaq:permission-mask-builder/execute (%require-live-pointer object))
+)
+
+(defun permission-mask-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:permission-mask-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric permission-mask-builder-read (object))
+(defmethod permission-mask-builder-read ((object permission-mask-builder))
+  (opendaq:permission-mask-builder/read (%require-live-pointer object))
+)
+
+(defgeneric write (object))
+(defmethod write ((object permission-mask-builder))
+  (opendaq:permission-mask-builder/write (%require-live-pointer object))
+)
+
+(defgeneric allow (object group-id permissions))
+(defmethod allow ((object permissions-builder) group-id permissions)
+  (multiple-value-bind (coerced-group-id cleanup-group-id)
+      (%coerce-argument group-id :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-permissions cleanup-permissions)
+            (%coerce-argument permissions :managed-pointer)
+          (unwind-protect
+              (opendaq:permissions-builder/allow (%require-live-pointer object) coerced-group-id coerced-permissions)
+            (%cleanup-coerced-argument cleanup-permissions)))
+      (%cleanup-coerced-argument cleanup-group-id)))
+)
+
+(defgeneric assign (object group-id permissions))
+(defmethod assign ((object permissions-builder) group-id permissions)
+  (multiple-value-bind (coerced-group-id cleanup-group-id)
+      (%coerce-argument group-id :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-permissions cleanup-permissions)
+            (%coerce-argument permissions :managed-pointer)
+          (unwind-protect
+              (opendaq:permissions-builder/assign (%require-live-pointer object) coerced-group-id coerced-permissions)
+            (%cleanup-coerced-argument cleanup-permissions)))
+      (%cleanup-coerced-argument cleanup-group-id)))
+)
+
+(defgeneric build (object))
+(defmethod build ((object permissions-builder))
+  (wrap-permissions (opendaq:permissions-builder/build (%require-live-pointer object)))
+)
+
+(defgeneric deny (object group-id permissions))
+(defmethod deny ((object permissions-builder) group-id permissions)
+  (multiple-value-bind (coerced-group-id cleanup-group-id)
+      (%coerce-argument group-id :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-permissions cleanup-permissions)
+            (%coerce-argument permissions :managed-pointer)
+          (unwind-protect
+              (opendaq:permissions-builder/deny (%require-live-pointer object) coerced-group-id coerced-permissions)
+            (%cleanup-coerced-argument cleanup-permissions)))
+      (%cleanup-coerced-argument cleanup-group-id)))
+)
+
+(defgeneric extend (object config))
+(defmethod extend ((object permissions-builder) config)
+  (multiple-value-bind (coerced-config cleanup-config)
+      (%coerce-argument config :managed-pointer)
+    (unwind-protect
+        (opendaq:permissions-builder/extend (%require-live-pointer object) coerced-config)
+      (%cleanup-coerced-argument cleanup-config)))
+)
+
+(defun permissions-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:permissions-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric inherit (object inherit))
+(defmethod inherit ((object permissions-builder) inherit)
+  (multiple-value-bind (coerced-inherit cleanup-inherit)
+      (%coerce-argument inherit :daq-bool)
+    (unwind-protect
+        (opendaq:permissions-builder/inherit (%require-live-pointer object) coerced-inherit)
+      (%cleanup-coerced-argument cleanup-inherit)))
+)
+
+(defgeneric assigned (object))
+(defmethod assigned ((object permissions-internal))
+  (wrap-dict (opendaq:permissions-internal/get-assigned (%require-live-pointer object)))
+)
+
+(defun permissions-internal-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:permissions-internal/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric allowed (object))
+(defmethod allowed ((object permissions))
+  (wrap-dict (opendaq:permissions/get-allowed (%require-live-pointer object)))
+)
+
+(defgeneric denied (object))
+(defmethod denied ((object permissions))
+  (wrap-dict (opendaq:permissions/get-denied (%require-live-pointer object)))
+)
+
+(defgeneric inherited (object))
+(defmethod inherited ((object permissions))
+  (not (zerop (opendaq:permissions/get-inherited (%require-live-pointer object))))
+)
+
+(defun permissions-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:permissions/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric dispatch (object params))
+(defmethod dispatch ((object procedure) params)
+  (multiple-value-bind (coerced-params cleanup-params)
+      (%coerce-argument params :daq-base-object)
+    (unwind-protect
+        (opendaq:procedure/dispatch (%require-live-pointer object) coerced-params)
+      (%cleanup-coerced-argument cleanup-params)))
+)
+
+(defgeneric build (object))
+(defmethod build ((object property-builder))
+  (wrap-property (opendaq:property-builder/build (%require-live-pointer object)))
+)
+
+(defun property-builder-create-bool-property-builder (name default-value)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (wrap-property-builder (opendaq:property-builder/create-bool-property-builder coerced-name coerced-default-value))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-builder-create-dict-property-builder (name default-value)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (wrap-property-builder (opendaq:property-builder/create-dict-property-builder coerced-name coerced-default-value))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-builder-create-enumeration-property-builder (name default-value)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (wrap-property-builder (opendaq:property-builder/create-enumeration-property-builder coerced-name coerced-default-value))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-builder-create-float-property-builder (name default-value)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (wrap-property-builder (opendaq:property-builder/create-float-property-builder coerced-name coerced-default-value))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-builder-create-function-property-builder (name callable-info)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-callable-info cleanup-callable-info)
+            (%coerce-argument callable-info :managed-pointer)
+          (unwind-protect
+              (wrap-property-builder (opendaq:property-builder/create-function-property-builder coerced-name coerced-callable-info))
+            (%cleanup-coerced-argument cleanup-callable-info)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-builder-create-int-property-builder (name default-value)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (wrap-property-builder (opendaq:property-builder/create-int-property-builder coerced-name coerced-default-value))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-builder-create-list-property-builder (name default-value)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (wrap-property-builder (opendaq:property-builder/create-list-property-builder coerced-name coerced-default-value))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-builder-create-object-property-builder (name default-value)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (wrap-property-builder (opendaq:property-builder/create-object-property-builder coerced-name coerced-default-value))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-builder-create-ratio-property-builder (name default-value)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (wrap-property-builder (opendaq:property-builder/create-ratio-property-builder coerced-name coerced-default-value))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-builder-create-reference-property-builder (name referenced-property-eval)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-referenced-property-eval cleanup-referenced-property-eval)
+            (%coerce-argument referenced-property-eval :managed-pointer)
+          (unwind-protect
+              (wrap-property-builder (opendaq:property-builder/create-reference-property-builder coerced-name coerced-referenced-property-eval))
+            (%cleanup-coerced-argument cleanup-referenced-property-eval)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-builder-create-selection-property-builder (name selection-values default-value)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-selection-values cleanup-selection-values)
+            (%coerce-argument selection-values :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-default-value cleanup-default-value)
+                  (%coerce-argument default-value :managed-pointer)
+                (unwind-protect
+                    (wrap-property-builder (opendaq:property-builder/create-selection-property-builder coerced-name coerced-selection-values coerced-default-value))
+                  (%cleanup-coerced-argument cleanup-default-value)))
+            (%cleanup-coerced-argument cleanup-selection-values)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-builder-create-sparse-selection-property-builder (name selection-values default-value)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-selection-values cleanup-selection-values)
+            (%coerce-argument selection-values :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-default-value cleanup-default-value)
+                  (%coerce-argument default-value :managed-pointer)
+                (unwind-protect
+                    (wrap-property-builder (opendaq:property-builder/create-sparse-selection-property-builder coerced-name coerced-selection-values coerced-default-value))
+                  (%cleanup-coerced-argument cleanup-default-value)))
+            (%cleanup-coerced-argument cleanup-selection-values)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-builder-create-string-property-builder (name default-value)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :daq-string)
+          (unwind-protect
+              (wrap-property-builder (opendaq:property-builder/create-string-property-builder coerced-name coerced-default-value))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-builder-create-struct-property-builder (name default-value)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (wrap-property-builder (opendaq:property-builder/create-struct-property-builder coerced-name coerced-default-value))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric callable-info (object))
+(defmethod callable-info ((object property-builder))
+  (wrap-callable-info (opendaq:property-builder/get-callable-info (%require-live-pointer object)))
+)
+
+(defgeneric coercer (object))
+(defmethod coercer ((object property-builder))
+  (wrap-coercer (opendaq:property-builder/get-coercer (%require-live-pointer object)))
+)
+
+(defgeneric default-value (object))
+(defmethod default-value ((object property-builder))
+  (wrap-base-object (opendaq:property-builder/get-default-value (%require-live-pointer object)))
+)
+
+(defgeneric description (object))
+(defmethod description ((object property-builder))
+  (%daq-string-to-lisp-and-release (opendaq:property-builder/get-description (%require-live-pointer object)))
+)
+
+(defun property-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:property-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric is-integer-value-selection (object))
+(defmethod is-integer-value-selection ((object property-builder))
+  (not (zerop (opendaq:property-builder/get-is-integer-value-selection (%require-live-pointer object))))
+)
+
+(defgeneric max-value (object))
+(defmethod max-value ((object property-builder))
+  (wrap-daq-number (opendaq:property-builder/get-max-value (%require-live-pointer object)))
+)
+
+(defgeneric min-value (object))
+(defmethod min-value ((object property-builder))
+  (wrap-daq-number (opendaq:property-builder/get-min-value (%require-live-pointer object)))
+)
+
+(defgeneric name (object))
+(defmethod name ((object property-builder))
+  (%daq-string-to-lisp-and-release (opendaq:property-builder/get-name (%require-live-pointer object)))
+)
+
+(defgeneric property-builder-on-property-value-read (object))
+(defmethod property-builder-on-property-value-read ((object property-builder))
+  (wrap-event (opendaq:property-builder/get-on-property-value-read (%require-live-pointer object)))
+)
+
+(defgeneric property-builder-on-property-value-write (object))
+(defmethod property-builder-on-property-value-write ((object property-builder))
+  (wrap-event (opendaq:property-builder/get-on-property-value-write (%require-live-pointer object)))
+)
+
+(defgeneric on-selection-values-read (object))
+(defmethod on-selection-values-read ((object property-builder))
+  (wrap-event (opendaq:property-builder/get-on-selection-values-read (%require-live-pointer object)))
+)
+
+(defgeneric on-suggested-values-read (object))
+(defmethod on-suggested-values-read ((object property-builder))
+  (wrap-event (opendaq:property-builder/get-on-suggested-values-read (%require-live-pointer object)))
+)
+
+(defgeneric read-only (object))
+(defmethod read-only ((object property-builder))
+  (wrap-daq-boolean (opendaq:property-builder/get-read-only (%require-live-pointer object)))
+)
+
+(defgeneric referenced-property (object))
+(defmethod referenced-property ((object property-builder))
+  (wrap-eval-value (opendaq:property-builder/get-referenced-property (%require-live-pointer object)))
+)
+
+(defgeneric selection-values (object values))
+(defmethod selection-values ((object property-builder) values)
+  (multiple-value-bind (coerced-values cleanup-values)
+      (%coerce-argument values :daq-base-object)
+    (unwind-protect
+        (opendaq:property-builder/get-selection-values (%require-live-pointer object) coerced-values)
+      (%cleanup-coerced-argument cleanup-values)))
+)
+
+(defgeneric suggested-values (object values))
+(defmethod suggested-values ((object property-builder) values)
+  (let ((coerced-values values))
+    (opendaq:property-builder/get-suggested-values (%require-live-pointer object) coerced-values)
+  )
+)
+
+(defgeneric unit (object))
+(defmethod unit ((object property-builder))
+  (wrap-unit (opendaq:property-builder/get-unit (%require-live-pointer object)))
+)
+
+(defgeneric validator (object))
+(defmethod validator ((object property-builder))
+  (wrap-validator (opendaq:property-builder/get-validator (%require-live-pointer object)))
+)
+
+(defgeneric value-type (object))
+(defmethod value-type ((object property-builder))
+  (opendaq:property-builder/get-value-type (%require-live-pointer object))
+)
+
+(defgeneric visible (object))
+(defmethod visible ((object property-builder))
+  (wrap-daq-boolean (opendaq:property-builder/get-visible (%require-live-pointer object)))
+)
+
+(defgeneric (setf callable-info) (new-value object))
+(defmethod (setf callable-info) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:property-builder/set-callable-info (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf coercer) (new-value object))
+(defmethod (setf coercer) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:property-builder/set-coercer (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf default-value) (new-value object))
+(defmethod (setf default-value) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-base-object)
+    (unwind-protect
+        (opendaq:property-builder/set-default-value (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf description) (new-value object))
+(defmethod (setf description) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:property-builder/set-description (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf is-integer-value-selection) (new-value object))
+(defmethod (setf is-integer-value-selection) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:property-builder/set-is-integer-value-selection (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf max-value) (new-value object))
+(defmethod (setf max-value) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:property-builder/set-max-value (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf min-value) (new-value object))
+(defmethod (setf min-value) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:property-builder/set-min-value (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf name) (new-value object))
+(defmethod (setf name) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:property-builder/set-name (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf on-property-value-read) (new-value object))
+(defmethod (setf on-property-value-read) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:property-builder/set-on-property-value-read (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf on-property-value-write) (new-value object))
+(defmethod (setf on-property-value-write) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:property-builder/set-on-property-value-write (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf on-selection-values-read) (new-value object))
+(defmethod (setf on-selection-values-read) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:property-builder/set-on-selection-values-read (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf on-suggested-values-read) (new-value object))
+(defmethod (setf on-suggested-values-read) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:property-builder/set-on-suggested-values-read (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf read-only) (new-value object))
+(defmethod (setf read-only) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:property-builder/set-read-only (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf referenced-property) (new-value object))
+(defmethod (setf referenced-property) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:property-builder/set-referenced-property (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf selection-values) (new-value object))
+(defmethod (setf selection-values) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-base-object)
+    (unwind-protect
+        (opendaq:property-builder/set-selection-values (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf suggested-values) (new-value object))
+(defmethod (setf suggested-values) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:property-builder/set-suggested-values (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf unit) (new-value object))
+(defmethod (setf unit) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:property-builder/set-unit (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf validator) (new-value object))
+(defmethod (setf validator) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:property-builder/set-validator (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf value-type) (new-value object))
+(defmethod (setf value-type) (new-value (object property-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:property-builder/set-value-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf visible) (new-value object))
+(defmethod (setf visible) (new-value (object property-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:property-builder/set-visible (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric property-internal-clone (object))
+(defmethod property-internal-clone ((object property-internal))
+  (wrap-property (opendaq:property-internal/clone (%require-live-pointer object)))
+)
+
+(defgeneric clone-with-owner (object owner))
+(defmethod clone-with-owner ((object property-internal) owner)
+  (multiple-value-bind (coerced-owner cleanup-owner)
+      (%coerce-argument owner :managed-pointer)
+    (unwind-protect
+        (wrap-property (opendaq:property-internal/clone-with-owner (%require-live-pointer object) coerced-owner))
+      (%cleanup-coerced-argument cleanup-owner)))
+)
+
+(defgeneric callable-info-no-lock (object))
+(defmethod callable-info-no-lock ((object property-internal))
+  (wrap-callable-info (opendaq:property-internal/get-callable-info-no-lock (%require-live-pointer object)))
+)
+
+(defgeneric class-on-property-value-read (object))
+(defmethod class-on-property-value-read ((object property-internal))
+  (wrap-event (opendaq:property-internal/get-class-on-property-value-read (%require-live-pointer object)))
+)
+
+(defgeneric class-on-property-value-write (object))
+(defmethod class-on-property-value-write ((object property-internal))
+  (wrap-event (opendaq:property-internal/get-class-on-property-value-write (%require-live-pointer object)))
+)
+
+(defgeneric coercer-no-lock (object))
+(defmethod coercer-no-lock ((object property-internal))
+  (wrap-coercer (opendaq:property-internal/get-coercer-no-lock (%require-live-pointer object)))
+)
+
+(defgeneric default-value-no-lock (object))
+(defmethod default-value-no-lock ((object property-internal))
+  (wrap-base-object (opendaq:property-internal/get-default-value-no-lock (%require-live-pointer object)))
+)
+
+(defgeneric default-value-unresolved (object))
+(defmethod default-value-unresolved ((object property-internal))
+  (wrap-base-object (opendaq:property-internal/get-default-value-unresolved (%require-live-pointer object)))
+)
+
+(defgeneric description-no-lock (object))
+(defmethod description-no-lock ((object property-internal))
+  (%daq-string-to-lisp-and-release (opendaq:property-internal/get-description-no-lock (%require-live-pointer object)))
+)
+
+(defgeneric description-unresolved (object))
+(defmethod description-unresolved ((object property-internal))
+  (%daq-string-to-lisp-and-release (opendaq:property-internal/get-description-unresolved (%require-live-pointer object)))
+)
+
+(defgeneric has-on-get-selection-values-listeners (object))
+(defmethod has-on-get-selection-values-listeners ((object property-internal))
+  (not (zerop (opendaq:property-internal/get-has-on-get-selection-values-listeners (%require-live-pointer object))))
+)
+
+(defgeneric has-on-get-suggested-values-listeners (object))
+(defmethod has-on-get-suggested-values-listeners ((object property-internal))
+  (not (zerop (opendaq:property-internal/get-has-on-get-suggested-values-listeners (%require-live-pointer object))))
+)
+
+(defgeneric has-on-read-listeners (object))
+(defmethod has-on-read-listeners ((object property-internal))
+  (not (zerop (opendaq:property-internal/get-has-on-read-listeners (%require-live-pointer object))))
+)
+
+(defun property-internal-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:property-internal/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric is-referenced-no-lock (object))
+(defmethod is-referenced-no-lock ((object property-internal))
+  (not (zerop (opendaq:property-internal/get-is-referenced-no-lock (%require-live-pointer object))))
+)
+
+(defgeneric item-type-no-lock (object))
+(defmethod item-type-no-lock ((object property-internal))
+  (opendaq:property-internal/get-item-type-no-lock (%require-live-pointer object))
+)
+
+(defgeneric key-type-no-lock (object))
+(defmethod key-type-no-lock ((object property-internal))
+  (opendaq:property-internal/get-key-type-no-lock (%require-live-pointer object))
+)
+
+(defgeneric max-value-no-lock (object))
+(defmethod max-value-no-lock ((object property-internal))
+  (wrap-daq-number (opendaq:property-internal/get-max-value-no-lock (%require-live-pointer object)))
+)
+
+(defgeneric max-value-unresolved (object))
+(defmethod max-value-unresolved ((object property-internal))
+  (wrap-daq-number (opendaq:property-internal/get-max-value-unresolved (%require-live-pointer object)))
+)
+
+(defgeneric min-value-no-lock (object))
+(defmethod min-value-no-lock ((object property-internal))
+  (wrap-daq-number (opendaq:property-internal/get-min-value-no-lock (%require-live-pointer object)))
+)
+
+(defgeneric min-value-unresolved (object))
+(defmethod min-value-unresolved ((object property-internal))
+  (wrap-daq-number (opendaq:property-internal/get-min-value-unresolved (%require-live-pointer object)))
+)
+
+(defgeneric read-only-no-lock (object))
+(defmethod read-only-no-lock ((object property-internal))
+  (not (zerop (opendaq:property-internal/get-read-only-no-lock (%require-live-pointer object))))
+)
+
+(defgeneric read-only-unresolved (object))
+(defmethod read-only-unresolved ((object property-internal))
+  (wrap-daq-boolean (opendaq:property-internal/get-read-only-unresolved (%require-live-pointer object)))
+)
+
+(defgeneric referenced-property-no-lock (object))
+(defmethod referenced-property-no-lock ((object property-internal))
+  (wrap-property (opendaq:property-internal/get-referenced-property-no-lock (%require-live-pointer object)))
+)
+
+(defgeneric referenced-property-unresolved (object))
+(defmethod referenced-property-unresolved ((object property-internal))
+  (wrap-eval-value (opendaq:property-internal/get-referenced-property-unresolved (%require-live-pointer object)))
+)
+
+(defgeneric selection-values-no-lock (object values))
+(defmethod selection-values-no-lock ((object property-internal) values)
+  (multiple-value-bind (coerced-values cleanup-values)
+      (%coerce-argument values :daq-base-object)
+    (unwind-protect
+        (opendaq:property-internal/get-selection-values-no-lock (%require-live-pointer object) coerced-values)
+      (%cleanup-coerced-argument cleanup-values)))
+)
+
+(defgeneric selection-values-unresolved (object values))
+(defmethod selection-values-unresolved ((object property-internal) values)
+  (multiple-value-bind (coerced-values cleanup-values)
+      (%coerce-argument values :daq-base-object)
+    (unwind-protect
+        (opendaq:property-internal/get-selection-values-unresolved (%require-live-pointer object) coerced-values)
+      (%cleanup-coerced-argument cleanup-values)))
+)
+
+(defgeneric struct-type-no-lock (object))
+(defmethod struct-type-no-lock ((object property-internal))
+  (wrap-struct-type (opendaq:property-internal/get-struct-type-no-lock (%require-live-pointer object)))
+)
+
+(defgeneric suggested-values-no-lock (object values))
+(defmethod suggested-values-no-lock ((object property-internal) values)
+  (let ((coerced-values values))
+    (opendaq:property-internal/get-suggested-values-no-lock (%require-live-pointer object) coerced-values)
+  )
+)
+
+(defgeneric suggested-values-unresolved (object values))
+(defmethod suggested-values-unresolved ((object property-internal) values)
+  (let ((coerced-values values))
+    (opendaq:property-internal/get-suggested-values-unresolved (%require-live-pointer object) coerced-values)
+  )
+)
+
+(defgeneric unit-no-lock (object))
+(defmethod unit-no-lock ((object property-internal))
+  (wrap-unit (opendaq:property-internal/get-unit-no-lock (%require-live-pointer object)))
+)
+
+(defgeneric unit-unresolved (object))
+(defmethod unit-unresolved ((object property-internal))
+  (wrap-base-object (opendaq:property-internal/get-unit-unresolved (%require-live-pointer object)))
+)
+
+(defgeneric validator-no-lock (object))
+(defmethod validator-no-lock ((object property-internal))
+  (wrap-validator (opendaq:property-internal/get-validator-no-lock (%require-live-pointer object)))
+)
+
+(defgeneric value-type-no-lock (object))
+(defmethod value-type-no-lock ((object property-internal))
+  (opendaq:property-internal/get-value-type-no-lock (%require-live-pointer object))
+)
+
+(defgeneric value-type-unresolved (object))
+(defmethod value-type-unresolved ((object property-internal))
+  (opendaq:property-internal/get-value-type-unresolved (%require-live-pointer object))
+)
+
+(defgeneric visible-no-lock (object))
+(defmethod visible-no-lock ((object property-internal))
+  (not (zerop (opendaq:property-internal/get-visible-no-lock (%require-live-pointer object))))
+)
+
+(defgeneric visible-unresolved (object))
+(defmethod visible-unresolved ((object property-internal))
+  (wrap-daq-boolean (opendaq:property-internal/get-visible-unresolved (%require-live-pointer object)))
+)
+
+(defgeneric override-default-value (object new-default-value))
+(defmethod override-default-value ((object property-internal) new-default-value)
+  (multiple-value-bind (coerced-new-default-value cleanup-new-default-value)
+      (%coerce-argument new-default-value :daq-base-object)
+    (unwind-protect
+        (opendaq:property-internal/override-default-value (%require-live-pointer object) coerced-new-default-value)
+      (%cleanup-coerced-argument cleanup-new-default-value)))
+)
+
+(defgeneric (setf value-protected) (new-value object))
+(defmethod (setf value-protected) (new-value (object property-internal))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-base-object)
+    (unwind-protect
+        (opendaq:property-internal/set-value-protected (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric add-property (object property))
+(defmethod add-property ((object property-object-class-builder) property)
+  (multiple-value-bind (coerced-property cleanup-property)
+      (%coerce-argument property :managed-pointer)
+    (unwind-protect
+        (opendaq:property-object-class-builder/add-property (%require-live-pointer object) coerced-property)
+      (%cleanup-coerced-argument cleanup-property)))
+)
+
+(defgeneric build (object))
+(defmethod build ((object property-object-class-builder))
+  (wrap-property-object-class (opendaq:property-object-class-builder/build (%require-live-pointer object)))
+)
+
+(defun property-object-class-builder-create-property-object-class-builder-with-manager (manager name)
+  (multiple-value-bind (coerced-manager cleanup-manager)
+      (%coerce-argument manager :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-name cleanup-name)
+            (%coerce-argument name :daq-string)
+          (unwind-protect
+              (wrap-property-object-class-builder (opendaq:property-object-class-builder/create-property-object-class-builder-with-manager coerced-manager coerced-name))
+            (%cleanup-coerced-argument cleanup-name)))
+      (%cleanup-coerced-argument cleanup-manager)))
+)
+
+(defun property-object-class-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:property-object-class-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric manager (object))
+(defmethod manager ((object property-object-class-builder))
+  (wrap-type-manager (opendaq:property-object-class-builder/get-manager (%require-live-pointer object)))
+)
+
+(defgeneric name (object))
+(defmethod name ((object property-object-class-builder))
+  (%daq-string-to-lisp-and-release (opendaq:property-object-class-builder/get-name (%require-live-pointer object)))
+)
+
+(defgeneric parent-name (object))
+(defmethod parent-name ((object property-object-class-builder))
+  (%daq-string-to-lisp-and-release (opendaq:property-object-class-builder/get-parent-name (%require-live-pointer object)))
+)
+
+(defgeneric property-object-class-builder-properties (object))
+(defmethod property-object-class-builder-properties ((object property-object-class-builder))
+  (wrap-dict (opendaq:property-object-class-builder/get-properties (%require-live-pointer object)))
+)
+
+(defgeneric property-order (object))
+(defmethod property-order ((object property-object-class-builder))
+  (wrap-object-list (opendaq:property-object-class-builder/get-property-order (%require-live-pointer object)))
+)
+
+(defgeneric remove-property (object property-name))
+(defmethod remove-property ((object property-object-class-builder) property-name)
+  (multiple-value-bind (coerced-property-name cleanup-property-name)
+      (%coerce-argument property-name :daq-string)
+    (unwind-protect
+        (opendaq:property-object-class-builder/remove-property (%require-live-pointer object) coerced-property-name)
+      (%cleanup-coerced-argument cleanup-property-name)))
+)
+
+(defgeneric (setf name) (new-value object))
+(defmethod (setf name) (new-value (object property-object-class-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:property-object-class-builder/set-name (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf parent-name) (new-value object))
+(defmethod (setf parent-name) (new-value (object property-object-class-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:property-object-class-builder/set-parent-name (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf property-order) (new-value object))
+(defmethod (setf property-order) (new-value (object property-object-class-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:property-object-class-builder/set-property-order (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric property-object-class-internal-clone (object type-manager))
+(defmethod property-object-class-internal-clone ((object property-object-class-internal) type-manager)
+  (multiple-value-bind (coerced-type-manager cleanup-type-manager)
+      (%coerce-argument type-manager :managed-pointer)
+    (unwind-protect
+        (wrap-property-object-class (opendaq:property-object-class-internal/clone (%require-live-pointer object) coerced-type-manager))
+      (%cleanup-coerced-argument cleanup-type-manager)))
+)
+
+(defun property-object-class-internal-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:property-object-class-internal/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defun property-object-class-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:property-object-class/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric parent-name (object))
+(defmethod parent-name ((object property-object-class))
+  (%daq-string-to-lisp-and-release (opendaq:property-object-class/get-parent-name (%require-live-pointer object)))
+)
+
+(defgeneric property-object-class-properties (object include-inherited))
+(defmethod property-object-class-properties ((object property-object-class) include-inherited)
+  (multiple-value-bind (coerced-include-inherited cleanup-include-inherited)
+      (%coerce-argument include-inherited :daq-bool)
+    (unwind-protect
+        (wrap-object-list (opendaq:property-object-class/get-properties (%require-live-pointer object) coerced-include-inherited))
+      (%cleanup-coerced-argument cleanup-include-inherited)))
+)
+
+(defgeneric property-object-class-property (object property-name))
+(defmethod property-object-class-property ((object property-object-class) property-name)
+  (multiple-value-bind (coerced-property-name cleanup-property-name)
+      (%coerce-argument property-name :daq-string)
+    (unwind-protect
+        (wrap-property (opendaq:property-object-class/get-property (%require-live-pointer object) coerced-property-name))
+      (%cleanup-coerced-argument cleanup-property-name)))
+)
+
+(defgeneric has-property (object property-name))
+(defmethod has-property ((object property-object-class) property-name)
+  (multiple-value-bind (coerced-property-name cleanup-property-name)
+      (%coerce-argument property-name :daq-string)
+    (unwind-protect
+        (not (zerop (opendaq:property-object-class/has-property (%require-live-pointer object) coerced-property-name)))
+      (%cleanup-coerced-argument cleanup-property-name)))
+)
+
+(defgeneric check-for-references (object property))
+(defmethod check-for-references ((object property-object-internal) property)
+  (multiple-value-bind (coerced-property cleanup-property)
+      (%coerce-argument property :managed-pointer)
+    (unwind-protect
+        (not (zerop (opendaq:property-object-internal/check-for-references (%require-live-pointer object) coerced-property)))
+      (%cleanup-coerced-argument cleanup-property)))
+)
+
+(defgeneric check-for-references-no-lock (object property))
+(defmethod check-for-references-no-lock ((object property-object-internal) property)
+  (multiple-value-bind (coerced-property cleanup-property)
+      (%coerce-argument property :managed-pointer)
+    (unwind-protect
+        (not (zerop (opendaq:property-object-internal/check-for-references-no-lock (%require-live-pointer object) coerced-property)))
+      (%cleanup-coerced-argument cleanup-property)))
+)
+
+(defgeneric clear-property-value-no-lock (object name))
+(defmethod clear-property-value-no-lock ((object property-object-internal) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (opendaq:property-object-internal/clear-property-value-no-lock (%require-live-pointer object) coerced-name)
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric property-object-internal-clone (object))
+(defmethod property-object-internal-clone ((object property-object-internal))
+  (wrap-property-object (opendaq:property-object-internal/clone (%require-live-pointer object)))
+)
+
+(defgeneric disable-core-event-trigger (object))
+(defmethod disable-core-event-trigger ((object property-object-internal))
+  (opendaq:property-object-internal/disable-core-event-trigger (%require-live-pointer object))
+)
+
+(defgeneric enable-core-event-trigger (object))
+(defmethod enable-core-event-trigger ((object property-object-internal))
+  (opendaq:property-object-internal/enable-core-event-trigger (%require-live-pointer object))
+)
+
+(defgeneric core-event-trigger (object))
+(defmethod core-event-trigger ((object property-object-internal))
+  (wrap-procedure (opendaq:property-object-internal/get-core-event-trigger (%require-live-pointer object)))
+)
+
+(defun property-object-internal-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:property-object-internal/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric lock-guard (object))
+(defmethod lock-guard ((object property-object-internal))
+  (wrap-lock-guard (opendaq:property-object-internal/get-lock-guard (%require-live-pointer object)))
+)
+
+(defgeneric locking-strategy (object))
+(defmethod locking-strategy ((object property-object-internal))
+  (opendaq:property-object-internal/get-locking-strategy (%require-live-pointer object))
+)
+
+(defgeneric mutex (object))
+(defmethod mutex ((object property-object-internal))
+  (wrap-mutex (opendaq:property-object-internal/get-mutex (%require-live-pointer object)))
+)
+
+(defgeneric mutex-owner (object))
+(defmethod mutex-owner ((object property-object-internal))
+  (wrap-property-object-internal (opendaq:property-object-internal/get-mutex-owner (%require-live-pointer object)))
+)
+
+(defgeneric path (object))
+(defmethod path ((object property-object-internal))
+  (%daq-string-to-lisp-and-release (opendaq:property-object-internal/get-path (%require-live-pointer object)))
+)
+
+(defgeneric property-selection-value-no-lock (object name))
+(defmethod property-selection-value-no-lock ((object property-object-internal) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (wrap-base-object (opendaq:property-object-internal/get-property-selection-value-no-lock (%require-live-pointer object) coerced-name))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric property-value-no-lock (object name))
+(defmethod property-value-no-lock ((object property-object-internal) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (wrap-base-object (opendaq:property-object-internal/get-property-value-no-lock (%require-live-pointer object) coerced-name))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric recursive-lock-guard (object))
+(defmethod recursive-lock-guard ((object property-object-internal))
+  (wrap-lock-guard (opendaq:property-object-internal/get-recursive-lock-guard (%require-live-pointer object)))
+)
+
+(defgeneric has-user-read-access (object user-context))
+(defmethod has-user-read-access ((object property-object-internal) user-context)
+  (multiple-value-bind (coerced-user-context cleanup-user-context)
+      (%coerce-argument user-context :daq-base-object)
+    (unwind-protect
+        (not (zerop (opendaq:property-object-internal/has-user-read-access (%require-live-pointer object) coerced-user-context)))
+      (%cleanup-coerced-argument cleanup-user-context)))
+)
+
+(defgeneric is-updating (object))
+(defmethod is-updating ((object property-object-internal))
+  (not (zerop (opendaq:property-object-internal/is-updating (%require-live-pointer object))))
+)
+
+(defgeneric (setf core-event-trigger) (new-value object))
+(defmethod (setf core-event-trigger) (new-value (object property-object-internal))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:property-object-internal/set-core-event-trigger (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf locking-strategy) (new-value object))
+(defmethod (setf locking-strategy) (new-value (object property-object-internal))
+  (let ((coerced-new-value new-value))
+    (opendaq:property-object-internal/set-locking-strategy (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf path) (new-value object))
+(defmethod (setf path) (new-value (object property-object-internal))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:property-object-internal/set-path (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf property-value-no-lock) (new-value object name))
+(defmethod (setf property-value-no-lock) (new-value (object property-object-internal) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-new-value cleanup-new-value)
+            (%coerce-argument new-value :daq-base-object)
+          (unwind-protect
+              (opendaq:property-object-internal/set-property-value-no-lock (%require-live-pointer object) coerced-name coerced-new-value)
+            (%cleanup-coerced-argument cleanup-new-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+  new-value)
+
+(defgeneric (setf protected-property-value-no-lock) (new-value object name))
+(defmethod (setf protected-property-value-no-lock) (new-value (object property-object-internal) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-new-value cleanup-new-value)
+            (%coerce-argument new-value :daq-base-object)
+          (unwind-protect
+              (opendaq:property-object-internal/set-protected-property-value-no-lock (%require-live-pointer object) coerced-name coerced-new-value)
+            (%cleanup-coerced-argument cleanup-new-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+  new-value)
+
+(defgeneric clear-protected-property-value (object property-name))
+(defmethod clear-protected-property-value ((object property-object-protected) property-name)
+  (multiple-value-bind (coerced-property-name cleanup-property-name)
+      (%coerce-argument property-name :daq-string)
+    (unwind-protect
+        (opendaq:property-object-protected/clear-protected-property-value (%require-live-pointer object) coerced-property-name)
+      (%cleanup-coerced-argument cleanup-property-name)))
+)
+
+(defgeneric clear-protected-property-values (object))
+(defmethod clear-protected-property-values ((object property-object-protected))
+  (opendaq:property-object-protected/clear-protected-property-values (%require-live-pointer object))
+)
+
+(defun property-object-protected-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:property-object-protected/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric (setf protected-property-selection-value) (new-value object property-name))
+(defmethod (setf protected-property-selection-value) (new-value (object property-object-protected) property-name)
+  (multiple-value-bind (coerced-property-name cleanup-property-name)
+      (%coerce-argument property-name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-new-value cleanup-new-value)
+            (%coerce-argument new-value :daq-base-object)
+          (unwind-protect
+              (opendaq:property-object-protected/set-protected-property-selection-value (%require-live-pointer object) coerced-property-name coerced-new-value)
+            (%cleanup-coerced-argument cleanup-new-value)))
+      (%cleanup-coerced-argument cleanup-property-name)))
+  new-value)
+
+(defgeneric (setf protected-property-value) (new-value object property-name))
+(defmethod (setf protected-property-value) (new-value (object property-object-protected) property-name)
+  (multiple-value-bind (coerced-property-name cleanup-property-name)
+      (%coerce-argument property-name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-new-value cleanup-new-value)
+            (%coerce-argument new-value :daq-base-object)
+          (unwind-protect
+              (opendaq:property-object-protected/set-protected-property-value (%require-live-pointer object) coerced-property-name coerced-new-value)
+            (%cleanup-coerced-argument cleanup-new-value)))
+      (%cleanup-coerced-argument cleanup-property-name)))
+  new-value)
+
+(defgeneric add-property (object property))
+(defmethod add-property ((object property-object) property)
+  (multiple-value-bind (coerced-property cleanup-property)
+      (%coerce-argument property :managed-pointer)
+    (unwind-protect
+        (opendaq:property-object/add-property (%require-live-pointer object) coerced-property)
+      (%cleanup-coerced-argument cleanup-property)))
+)
+
+(defgeneric begin-update (object))
+(defmethod begin-update ((object property-object))
+  (opendaq:property-object/begin-update (%require-live-pointer object))
+)
+
+(defgeneric clear-property-value (object property-name))
+(defmethod clear-property-value ((object property-object) property-name)
+  (multiple-value-bind (coerced-property-name cleanup-property-name)
+      (%coerce-argument property-name :daq-string)
+    (unwind-protect
+        (opendaq:property-object/clear-property-value (%require-live-pointer object) coerced-property-name)
+      (%cleanup-coerced-argument cleanup-property-name)))
+)
+
+(defgeneric clear-property-values (object))
+(defmethod clear-property-values ((object property-object))
+  (opendaq:property-object/clear-property-values (%require-live-pointer object))
+)
+
+(defun property-object-create-property-object-with-class-and-manager (manager class-name)
+  (multiple-value-bind (coerced-manager cleanup-manager)
+      (%coerce-argument manager :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-class-name cleanup-class-name)
+            (%coerce-argument class-name :daq-string)
+          (unwind-protect
+              (wrap-property-object (opendaq:property-object/create-property-object-with-class-and-manager coerced-manager coerced-class-name))
+            (%cleanup-coerced-argument cleanup-class-name)))
+      (%cleanup-coerced-argument cleanup-manager)))
+)
+
+(defgeneric end-update (object))
+(defmethod end-update ((object property-object))
+  (opendaq:property-object/end-update (%require-live-pointer object))
+)
+
+(defgeneric find-properties (object property-filter component-filter))
+(defmethod find-properties ((object property-object) property-filter component-filter)
+  (multiple-value-bind (coerced-property-filter cleanup-property-filter)
+      (%coerce-argument property-filter :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-component-filter cleanup-component-filter)
+            (%coerce-argument component-filter :managed-pointer)
+          (unwind-protect
+              (wrap-object-list (opendaq:property-object/find-properties (%require-live-pointer object) coerced-property-filter coerced-component-filter))
+            (%cleanup-coerced-argument cleanup-component-filter)))
+      (%cleanup-coerced-argument cleanup-property-filter)))
+)
+
+(defgeneric all-properties (object))
+(defmethod all-properties ((object property-object))
+  (wrap-object-list (opendaq:property-object/get-all-properties (%require-live-pointer object)))
+)
+
+(defgeneric class-name (object))
+(defmethod class-name ((object property-object))
+  (%daq-string-to-lisp-and-release (opendaq:property-object/get-class-name (%require-live-pointer object)))
+)
+
+(defun property-object-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:property-object/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric on-any-property-value-read (object))
+(defmethod on-any-property-value-read ((object property-object))
+  (wrap-event (opendaq:property-object/get-on-any-property-value-read (%require-live-pointer object)))
+)
+
+(defgeneric on-any-property-value-write (object))
+(defmethod on-any-property-value-write ((object property-object))
+  (wrap-event (opendaq:property-object/get-on-any-property-value-write (%require-live-pointer object)))
+)
+
+(defgeneric on-end-update (object))
+(defmethod on-end-update ((object property-object))
+  (wrap-event (opendaq:property-object/get-on-end-update (%require-live-pointer object)))
+)
+
+(defgeneric property-object-on-property-value-read (object property-name))
+(defmethod property-object-on-property-value-read ((object property-object) property-name)
+  (multiple-value-bind (coerced-property-name cleanup-property-name)
+      (%coerce-argument property-name :daq-string)
+    (unwind-protect
+        (wrap-event (opendaq:property-object/get-on-property-value-read (%require-live-pointer object) coerced-property-name))
+      (%cleanup-coerced-argument cleanup-property-name)))
+)
+
+(defgeneric property-object-on-property-value-write (object property-name))
+(defmethod property-object-on-property-value-write ((object property-object) property-name)
+  (multiple-value-bind (coerced-property-name cleanup-property-name)
+      (%coerce-argument property-name :daq-string)
+    (unwind-protect
+        (wrap-event (opendaq:property-object/get-on-property-value-write (%require-live-pointer object) coerced-property-name))
+      (%cleanup-coerced-argument cleanup-property-name)))
+)
+
+(defgeneric permission-manager (object))
+(defmethod permission-manager ((object property-object))
+  (wrap-permission-manager (opendaq:property-object/get-permission-manager (%require-live-pointer object)))
+)
+
+(defgeneric property-object-property (object property-name))
+(defmethod property-object-property ((object property-object) property-name)
+  (multiple-value-bind (coerced-property-name cleanup-property-name)
+      (%coerce-argument property-name :daq-string)
+    (unwind-protect
+        (wrap-property (opendaq:property-object/get-property (%require-live-pointer object) coerced-property-name))
+      (%cleanup-coerced-argument cleanup-property-name)))
+)
+
+(defgeneric property-selection-value (object property-name))
+(defmethod property-selection-value ((object property-object) property-name)
+  (multiple-value-bind (coerced-property-name cleanup-property-name)
+      (%coerce-argument property-name :daq-string)
+    (unwind-protect
+        (wrap-base-object (opendaq:property-object/get-property-selection-value (%require-live-pointer object) coerced-property-name))
+      (%cleanup-coerced-argument cleanup-property-name)))
 )
 
 (defgeneric property-value (object property-name))
@@ -310,6 +14909,56 @@
         (wrap-base-object (opendaq:property-object/get-property-value (%require-live-pointer object) coerced-property-name))
       (%cleanup-coerced-argument cleanup-property-name)))
 )
+
+(defgeneric updating (object))
+(defmethod updating ((object property-object))
+  (not (zerop (opendaq:property-object/get-updating (%require-live-pointer object))))
+)
+
+(defgeneric visible-properties (object))
+(defmethod visible-properties ((object property-object))
+  (wrap-object-list (opendaq:property-object/get-visible-properties (%require-live-pointer object)))
+)
+
+(defgeneric has-property (object property-name))
+(defmethod has-property ((object property-object) property-name)
+  (multiple-value-bind (coerced-property-name cleanup-property-name)
+      (%coerce-argument property-name :daq-string)
+    (unwind-protect
+        (not (zerop (opendaq:property-object/has-property (%require-live-pointer object) coerced-property-name)))
+      (%cleanup-coerced-argument cleanup-property-name)))
+)
+
+(defgeneric remove-property (object property-name))
+(defmethod remove-property ((object property-object) property-name)
+  (multiple-value-bind (coerced-property-name cleanup-property-name)
+      (%coerce-argument property-name :daq-string)
+    (unwind-protect
+        (opendaq:property-object/remove-property (%require-live-pointer object) coerced-property-name)
+      (%cleanup-coerced-argument cleanup-property-name)))
+)
+
+(defgeneric (setf property-order) (new-value object))
+(defmethod (setf property-order) (new-value (object property-object))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:property-object/set-property-order (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf property-selection-value) (new-value object property-name))
+(defmethod (setf property-selection-value) (new-value (object property-object) property-name)
+  (multiple-value-bind (coerced-property-name cleanup-property-name)
+      (%coerce-argument property-name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-new-value cleanup-new-value)
+            (%coerce-argument new-value :daq-base-object)
+          (unwind-protect
+              (opendaq:property-object/set-property-selection-value (%require-live-pointer object) coerced-property-name coerced-new-value)
+            (%cleanup-coerced-argument cleanup-new-value)))
+      (%cleanup-coerced-argument cleanup-property-name)))
+  new-value)
 
 (defgeneric (setf property-value) (new-value object property-name))
 (defmethod (setf property-value) (new-value (object managed-object) property-name)
@@ -323,6 +14972,3237 @@
             (%cleanup-coerced-argument cleanup-new-value)))
       (%cleanup-coerced-argument cleanup-property-name)))
   new-value)
+
+(defgeneric is-updating (object))
+(defmethod is-updating ((object property-value-event-args))
+  (not (zerop (opendaq:property-value-event-args/get-is-updating (%require-live-pointer object))))
+)
+
+(defgeneric old-value (object))
+(defmethod old-value ((object property-value-event-args))
+  (wrap-base-object (opendaq:property-value-event-args/get-old-value (%require-live-pointer object)))
+)
+
+(defgeneric property-value-event-args-property (object))
+(defmethod property-value-event-args-property ((object property-value-event-args))
+  (wrap-property (opendaq:property-value-event-args/get-property (%require-live-pointer object)))
+)
+
+(defgeneric property-event-type (object))
+(defmethod property-event-type ((object property-value-event-args))
+  (opendaq:property-value-event-args/get-property-event-type (%require-live-pointer object))
+)
+
+(defgeneric value (object))
+(defmethod value ((object property-value-event-args))
+  (wrap-base-object (opendaq:property-value-event-args/get-value (%require-live-pointer object)))
+)
+
+(defgeneric (setf value) (new-value object))
+(defmethod (setf value) (new-value (object property-value-event-args))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-base-object)
+    (unwind-protect
+        (opendaq:property-value-event-args/set-value (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defun property-create-dict-property (name default-value visible)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-visible cleanup-visible)
+                  (%coerce-argument visible :managed-pointer)
+                (unwind-protect
+                    (wrap-property (opendaq:property/create-dict-property coerced-name coerced-default-value coerced-visible))
+                  (%cleanup-coerced-argument cleanup-visible)))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-create-enumeration-property (name default-value visible)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-visible cleanup-visible)
+                  (%coerce-argument visible :managed-pointer)
+                (unwind-protect
+                    (wrap-property (opendaq:property/create-enumeration-property coerced-name coerced-default-value coerced-visible))
+                  (%cleanup-coerced-argument cleanup-visible)))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-create-float-property (name default-value visible)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-visible cleanup-visible)
+                  (%coerce-argument visible :managed-pointer)
+                (unwind-protect
+                    (wrap-property (opendaq:property/create-float-property coerced-name coerced-default-value coerced-visible))
+                  (%cleanup-coerced-argument cleanup-visible)))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-create-function-property (name callable-info visible)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-callable-info cleanup-callable-info)
+            (%coerce-argument callable-info :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-visible cleanup-visible)
+                  (%coerce-argument visible :managed-pointer)
+                (unwind-protect
+                    (wrap-property (opendaq:property/create-function-property coerced-name coerced-callable-info coerced-visible))
+                  (%cleanup-coerced-argument cleanup-visible)))
+            (%cleanup-coerced-argument cleanup-callable-info)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-create-int-property (name default-value visible)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-visible cleanup-visible)
+                  (%coerce-argument visible :managed-pointer)
+                (unwind-protect
+                    (wrap-property (opendaq:property/create-int-property coerced-name coerced-default-value coerced-visible))
+                  (%cleanup-coerced-argument cleanup-visible)))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-create-list-property (name default-value visible)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-visible cleanup-visible)
+                  (%coerce-argument visible :managed-pointer)
+                (unwind-protect
+                    (wrap-property (opendaq:property/create-list-property coerced-name coerced-default-value coerced-visible))
+                  (%cleanup-coerced-argument cleanup-visible)))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-create-object-property (name default-value)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (wrap-property (opendaq:property/create-object-property coerced-name coerced-default-value))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-create-ratio-property (name default-value visible)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-visible cleanup-visible)
+                  (%coerce-argument visible :managed-pointer)
+                (unwind-protect
+                    (wrap-property (opendaq:property/create-ratio-property coerced-name coerced-default-value coerced-visible))
+                  (%cleanup-coerced-argument cleanup-visible)))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-create-reference-property (name referenced-property-eval)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-referenced-property-eval cleanup-referenced-property-eval)
+            (%coerce-argument referenced-property-eval :managed-pointer)
+          (unwind-protect
+              (wrap-property (opendaq:property/create-reference-property coerced-name coerced-referenced-property-eval))
+            (%cleanup-coerced-argument cleanup-referenced-property-eval)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-create-selection-property (name selection-values default-value visible)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-selection-values cleanup-selection-values)
+            (%coerce-argument selection-values :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-default-value cleanup-default-value)
+                  (%coerce-argument default-value :managed-pointer)
+                (unwind-protect
+                    (multiple-value-bind (coerced-visible cleanup-visible)
+                        (%coerce-argument visible :managed-pointer)
+                      (unwind-protect
+                          (wrap-property (opendaq:property/create-selection-property coerced-name coerced-selection-values coerced-default-value coerced-visible))
+                        (%cleanup-coerced-argument cleanup-visible)))
+                  (%cleanup-coerced-argument cleanup-default-value)))
+            (%cleanup-coerced-argument cleanup-selection-values)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-create-sparse-selection-property (name selection-values default-value visible)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-selection-values cleanup-selection-values)
+            (%coerce-argument selection-values :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-default-value cleanup-default-value)
+                  (%coerce-argument default-value :managed-pointer)
+                (unwind-protect
+                    (multiple-value-bind (coerced-visible cleanup-visible)
+                        (%coerce-argument visible :managed-pointer)
+                      (unwind-protect
+                          (wrap-property (opendaq:property/create-sparse-selection-property coerced-name coerced-selection-values coerced-default-value coerced-visible))
+                        (%cleanup-coerced-argument cleanup-visible)))
+                  (%cleanup-coerced-argument cleanup-default-value)))
+            (%cleanup-coerced-argument cleanup-selection-values)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-create-string-property (name default-value visible)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :daq-string)
+          (unwind-protect
+              (multiple-value-bind (coerced-visible cleanup-visible)
+                  (%coerce-argument visible :managed-pointer)
+                (unwind-protect
+                    (wrap-property (opendaq:property/create-string-property coerced-name coerced-default-value coerced-visible))
+                  (%cleanup-coerced-argument cleanup-visible)))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun property-create-struct-property (name default-value visible)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-visible cleanup-visible)
+                  (%coerce-argument visible :managed-pointer)
+                (unwind-protect
+                    (wrap-property (opendaq:property/create-struct-property coerced-name coerced-default-value coerced-visible))
+                  (%cleanup-coerced-argument cleanup-visible)))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric callable-info (object))
+(defmethod callable-info ((object property))
+  (wrap-callable-info (opendaq:property/get-callable-info (%require-live-pointer object)))
+)
+
+(defgeneric coercer (object))
+(defmethod coercer ((object property))
+  (wrap-coercer (opendaq:property/get-coercer (%require-live-pointer object)))
+)
+
+(defgeneric default-value (object))
+(defmethod default-value ((object property))
+  (wrap-base-object (opendaq:property/get-default-value (%require-live-pointer object)))
+)
+
+(defgeneric description (object))
+(defmethod description ((object property))
+  (%daq-string-to-lisp-and-release (opendaq:property/get-description (%require-live-pointer object)))
+)
+
+(defun property-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:property/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric is-referenced (object))
+(defmethod is-referenced ((object property))
+  (not (zerop (opendaq:property/get-is-referenced (%require-live-pointer object))))
+)
+
+(defgeneric item-type (object))
+(defmethod item-type ((object property))
+  (opendaq:property/get-item-type (%require-live-pointer object))
+)
+
+(defgeneric key-type (object))
+(defmethod key-type ((object property))
+  (opendaq:property/get-key-type (%require-live-pointer object))
+)
+
+(defgeneric max-value (object))
+(defmethod max-value ((object property))
+  (wrap-daq-number (opendaq:property/get-max-value (%require-live-pointer object)))
+)
+
+(defgeneric min-value (object))
+(defmethod min-value ((object property))
+  (wrap-daq-number (opendaq:property/get-min-value (%require-live-pointer object)))
+)
+
+(defgeneric name (object))
+(defmethod name ((object property))
+  (%daq-string-to-lisp-and-release (opendaq:property/get-name (%require-live-pointer object)))
+)
+
+(defgeneric property-on-property-value-read (object))
+(defmethod property-on-property-value-read ((object property))
+  (wrap-event (opendaq:property/get-on-property-value-read (%require-live-pointer object)))
+)
+
+(defgeneric property-on-property-value-write (object))
+(defmethod property-on-property-value-write ((object property))
+  (wrap-event (opendaq:property/get-on-property-value-write (%require-live-pointer object)))
+)
+
+(defgeneric on-selection-values-read (object))
+(defmethod on-selection-values-read ((object property))
+  (wrap-event (opendaq:property/get-on-selection-values-read (%require-live-pointer object)))
+)
+
+(defgeneric on-suggested-values-read (object))
+(defmethod on-suggested-values-read ((object property))
+  (wrap-event (opendaq:property/get-on-suggested-values-read (%require-live-pointer object)))
+)
+
+(defgeneric property-type (object))
+(defmethod property-type ((object property))
+  (opendaq:property/get-property-type (%require-live-pointer object))
+)
+
+(defgeneric read-only (object))
+(defmethod read-only ((object property))
+  (not (zerop (opendaq:property/get-read-only (%require-live-pointer object))))
+)
+
+(defgeneric referenced-property (object))
+(defmethod referenced-property ((object property))
+  (wrap-property (opendaq:property/get-referenced-property (%require-live-pointer object)))
+)
+
+(defgeneric selection-values (object values))
+(defmethod selection-values ((object property) values)
+  (multiple-value-bind (coerced-values cleanup-values)
+      (%coerce-argument values :daq-base-object)
+    (unwind-protect
+        (opendaq:property/get-selection-values (%require-live-pointer object) coerced-values)
+      (%cleanup-coerced-argument cleanup-values)))
+)
+
+(defgeneric struct-type (object))
+(defmethod struct-type ((object property))
+  (wrap-struct-type (opendaq:property/get-struct-type (%require-live-pointer object)))
+)
+
+(defgeneric suggested-values (object values))
+(defmethod suggested-values ((object property) values)
+  (let ((coerced-values values))
+    (opendaq:property/get-suggested-values (%require-live-pointer object) coerced-values)
+  )
+)
+
+(defgeneric unit (object))
+(defmethod unit ((object property))
+  (wrap-unit (opendaq:property/get-unit (%require-live-pointer object)))
+)
+
+(defgeneric validator (object))
+(defmethod validator ((object property))
+  (wrap-validator (opendaq:property/get-validator (%require-live-pointer object)))
+)
+
+(defgeneric value (object))
+(defmethod value ((object property))
+  (wrap-base-object (opendaq:property/get-value (%require-live-pointer object)))
+)
+
+(defgeneric value-type (object))
+(defmethod value-type ((object property))
+  (opendaq:property/get-value-type (%require-live-pointer object))
+)
+
+(defgeneric visible (object))
+(defmethod visible ((object property))
+  (not (zerop (opendaq:property/get-visible (%require-live-pointer object))))
+)
+
+(defgeneric (setf value) (new-value object))
+(defmethod (setf value) (new-value (object property))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-base-object)
+    (unwind-protect
+        (opendaq:property/set-value (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric high-value (object))
+(defmethod high-value ((object range))
+  (wrap-daq-number (opendaq:range/get-high-value (%require-live-pointer object)))
+)
+
+(defun range-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:range/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric low-value (object))
+(defmethod low-value ((object range))
+  (wrap-daq-number (opendaq:range/get-low-value (%require-live-pointer object)))
+)
+
+(defgeneric denominator (object))
+(defmethod denominator ((object ratio))
+  (opendaq:ratio/get-denominator (%require-live-pointer object))
+)
+
+(defun ratio-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:ratio/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric numerator (object))
+(defmethod numerator ((object ratio))
+  (opendaq:ratio/get-numerator (%require-live-pointer object))
+)
+
+(defgeneric simplify (object))
+(defmethod simplify ((object ratio))
+  (wrap-ratio (opendaq:ratio/simplify (%require-live-pointer object)))
+)
+
+(defgeneric domain-transform-function (object))
+(defmethod domain-transform-function ((object reader-config))
+  (wrap-daq-function (opendaq:reader-config/get-domain-transform-function (%require-live-pointer object)))
+)
+
+(defgeneric reader-config-input-ports (object))
+(defmethod reader-config-input-ports ((object reader-config))
+  (wrap-object-list (opendaq:reader-config/get-input-ports (%require-live-pointer object)))
+)
+
+(defun reader-config-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:reader-config/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric is-valid (object))
+(defmethod is-valid ((object reader-config))
+  (not (zerop (opendaq:reader-config/get-is-valid (%require-live-pointer object))))
+)
+
+(defgeneric read-timeout-type (object))
+(defmethod read-timeout-type ((object reader-config))
+  (opendaq:reader-config/get-read-timeout-type (%require-live-pointer object))
+)
+
+(defgeneric value-transform-function (object))
+(defmethod value-transform-function ((object reader-config))
+  (wrap-daq-function (opendaq:reader-config/get-value-transform-function (%require-live-pointer object)))
+)
+
+(defgeneric mark-as-invalid (object))
+(defmethod mark-as-invalid ((object reader-config))
+  (opendaq:reader-config/mark-as-invalid (%require-live-pointer object))
+)
+
+(defgeneric event-packet (object))
+(defmethod event-packet ((object reader-status))
+  (wrap-event-packet (opendaq:reader-status/get-event-packet (%require-live-pointer object)))
+)
+
+(defun reader-status-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:reader-status/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric reader-status-offset (object))
+(defmethod reader-status-offset ((object reader-status))
+  (wrap-daq-number (opendaq:reader-status/get-offset (%require-live-pointer object)))
+)
+
+(defgeneric read-status (object))
+(defmethod read-status ((object reader-status))
+  (opendaq:reader-status/get-read-status (%require-live-pointer object))
+)
+
+(defgeneric valid (object))
+(defmethod valid ((object reader-status))
+  (not (zerop (opendaq:reader-status/get-valid (%require-live-pointer object))))
+)
+
+(defgeneric available-count (object))
+(defmethod available-count ((object reader))
+  (opendaq:reader/get-available-count (%require-live-pointer object))
+)
+
+(defgeneric empty (object))
+(defmethod empty ((object reader))
+  (not (zerop (opendaq:reader/get-empty (%require-live-pointer object))))
+)
+
+(defun reader-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:reader/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric (setf external-listener) (new-value object))
+(defmethod (setf external-listener) (new-value (object reader))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:reader/set-external-listener (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf on-data-available) (new-value object))
+(defmethod (setf on-data-available) (new-value (object reader))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:reader/set-on-data-available (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defun recorder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:recorder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric is-recording (object))
+(defmethod is-recording ((object recorder))
+  (not (zerop (opendaq:recorder/get-is-recording (%require-live-pointer object))))
+)
+
+(defgeneric start-recording (object))
+(defmethod start-recording ((object recorder))
+  (opendaq:recorder/start-recording (%require-live-pointer object))
+)
+
+(defgeneric stop-recording (object))
+(defmethod stop-recording ((object recorder))
+  (opendaq:recorder/stop-recording (%require-live-pointer object))
+)
+
+(defun recursive-search-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:recursive-search/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric build (object))
+(defmethod build ((object reference-domain-info-builder))
+  (wrap-reference-domain-info (opendaq:reference-domain-info-builder/build (%require-live-pointer object)))
+)
+
+(defun reference-domain-info-builder-create-reference-domain-info-builder-from-existing (reference-domain-info-to-copy)
+  (multiple-value-bind (coerced-reference-domain-info-to-copy cleanup-reference-domain-info-to-copy)
+      (%coerce-argument reference-domain-info-to-copy :managed-pointer)
+    (unwind-protect
+        (wrap-reference-domain-info-builder (opendaq:reference-domain-info-builder/create-reference-domain-info-builder-from-existing coerced-reference-domain-info-to-copy))
+      (%cleanup-coerced-argument cleanup-reference-domain-info-to-copy)))
+)
+
+(defun reference-domain-info-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:reference-domain-info-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric reference-domain-id (object))
+(defmethod reference-domain-id ((object reference-domain-info-builder))
+  (%daq-string-to-lisp-and-release (opendaq:reference-domain-info-builder/get-reference-domain-id (%require-live-pointer object)))
+)
+
+(defgeneric reference-domain-offset (object))
+(defmethod reference-domain-offset ((object reference-domain-info-builder))
+  (wrap-daq-integer (opendaq:reference-domain-info-builder/get-reference-domain-offset (%require-live-pointer object)))
+)
+
+(defgeneric reference-time-protocol (object))
+(defmethod reference-time-protocol ((object reference-domain-info-builder))
+  (opendaq:reference-domain-info-builder/get-reference-time-protocol (%require-live-pointer object))
+)
+
+(defgeneric uses-offset (object))
+(defmethod uses-offset ((object reference-domain-info-builder))
+  (opendaq:reference-domain-info-builder/get-uses-offset (%require-live-pointer object))
+)
+
+(defgeneric (setf reference-domain-id) (new-value object))
+(defmethod (setf reference-domain-id) (new-value (object reference-domain-info-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:reference-domain-info-builder/set-reference-domain-id (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf reference-domain-offset) (new-value object))
+(defmethod (setf reference-domain-offset) (new-value (object reference-domain-info-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:reference-domain-info-builder/set-reference-domain-offset (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf reference-time-protocol) (new-value object))
+(defmethod (setf reference-time-protocol) (new-value (object reference-domain-info-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:reference-domain-info-builder/set-reference-time-protocol (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf uses-offset) (new-value object))
+(defmethod (setf uses-offset) (new-value (object reference-domain-info-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:reference-domain-info-builder/set-uses-offset (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defun reference-domain-info-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:reference-domain-info/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric reference-domain-id (object))
+(defmethod reference-domain-id ((object reference-domain-info))
+  (%daq-string-to-lisp-and-release (opendaq:reference-domain-info/get-reference-domain-id (%require-live-pointer object)))
+)
+
+(defgeneric reference-domain-offset (object))
+(defmethod reference-domain-offset ((object reference-domain-info))
+  (wrap-daq-integer (opendaq:reference-domain-info/get-reference-domain-offset (%require-live-pointer object)))
+)
+
+(defgeneric reference-time-protocol (object))
+(defmethod reference-time-protocol ((object reference-domain-info))
+  (opendaq:reference-domain-info/get-reference-time-protocol (%require-live-pointer object))
+)
+
+(defgeneric uses-offset (object))
+(defmethod uses-offset ((object reference-domain-info))
+  (opendaq:reference-domain-info/get-uses-offset (%require-live-pointer object))
+)
+
+(defun removable-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:removable/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric is-removed (object))
+(defmethod is-removed ((object removable))
+  (not (zerop (opendaq:removable/is-removed (%require-live-pointer object))))
+)
+
+(defgeneric removable-remove (object))
+(defmethod removable-remove ((object removable))
+  (opendaq:removable/remove (%require-live-pointer object))
+)
+
+(defun reusable-data-packet-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:reusable-data-packet/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric reuse (object new-descriptor new-sample-count new-offset new-domain-packet can-realloc-memory))
+(defmethod reuse ((object reusable-data-packet) new-descriptor new-sample-count new-offset new-domain-packet can-realloc-memory)
+  (multiple-value-bind (coerced-new-descriptor cleanup-new-descriptor)
+      (%coerce-argument new-descriptor :managed-pointer)
+    (unwind-protect
+        (let ((coerced-new-sample-count new-sample-count))
+          (multiple-value-bind (coerced-new-offset cleanup-new-offset)
+              (%coerce-argument new-offset :managed-pointer)
+            (unwind-protect
+                (multiple-value-bind (coerced-new-domain-packet cleanup-new-domain-packet)
+                    (%coerce-argument new-domain-packet :managed-pointer)
+                  (unwind-protect
+                      (multiple-value-bind (coerced-can-realloc-memory cleanup-can-realloc-memory)
+                          (%coerce-argument can-realloc-memory :daq-bool)
+                        (unwind-protect
+                            (not (zerop (opendaq:reusable-data-packet/reuse (%require-live-pointer object) coerced-new-descriptor coerced-new-sample-count coerced-new-offset coerced-new-domain-packet coerced-can-realloc-memory)))
+                          (%cleanup-coerced-argument cleanup-can-realloc-memory)))
+                    (%cleanup-coerced-argument cleanup-new-domain-packet)))
+              (%cleanup-coerced-argument cleanup-new-offset)))
+        )
+      (%cleanup-coerced-argument cleanup-new-descriptor)))
+)
+
+(defun rule-private-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:rule-private/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric verify-parameters (object))
+(defmethod verify-parameters ((object rule-private))
+  (opendaq:rule-private/verify-parameters (%require-live-pointer object))
+)
+
+(defgeneric domain-read-type (object))
+(defmethod domain-read-type ((object sample-reader))
+  (opendaq:sample-reader/get-domain-read-type (%require-live-pointer object))
+)
+
+(defun sample-reader-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:sample-reader/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric read-mode (object))
+(defmethod read-mode ((object sample-reader))
+  (opendaq:sample-reader/get-read-mode (%require-live-pointer object))
+)
+
+(defgeneric value-read-type (object))
+(defmethod value-read-type ((object sample-reader))
+  (opendaq:sample-reader/get-value-read-type (%require-live-pointer object))
+)
+
+(defgeneric (setf domain-transform-function) (new-value object))
+(defmethod (setf domain-transform-function) (new-value (object sample-reader))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:sample-reader/set-domain-transform-function (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf value-transform-function) (new-value object))
+(defmethod (setf value-transform-function) (new-value (object sample-reader))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:sample-reader/set-value-transform-function (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric add-parameter (object name parameter))
+(defmethod add-parameter ((object scaling-builder) name parameter)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-parameter cleanup-parameter)
+            (%coerce-argument parameter :daq-base-object)
+          (unwind-protect
+              (opendaq:scaling-builder/add-parameter (%require-live-pointer object) coerced-name coerced-parameter)
+            (%cleanup-coerced-argument cleanup-parameter)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric build (object))
+(defmethod build ((object scaling-builder))
+  (wrap-scaling (opendaq:scaling-builder/build (%require-live-pointer object)))
+)
+
+(defun scaling-builder-create-scaling-builder-from-existing (scaling-to-copy)
+  (multiple-value-bind (coerced-scaling-to-copy cleanup-scaling-to-copy)
+      (%coerce-argument scaling-to-copy :managed-pointer)
+    (unwind-protect
+        (wrap-scaling-builder (opendaq:scaling-builder/create-scaling-builder-from-existing coerced-scaling-to-copy))
+      (%cleanup-coerced-argument cleanup-scaling-to-copy)))
+)
+
+(defgeneric input-data-type (object))
+(defmethod input-data-type ((object scaling-builder))
+  (opendaq:scaling-builder/get-input-data-type (%require-live-pointer object))
+)
+
+(defun scaling-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:scaling-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric output-data-type (object))
+(defmethod output-data-type ((object scaling-builder))
+  (opendaq:scaling-builder/get-output-data-type (%require-live-pointer object))
+)
+
+(defgeneric parameters (object))
+(defmethod parameters ((object scaling-builder))
+  (wrap-dict (opendaq:scaling-builder/get-parameters (%require-live-pointer object)))
+)
+
+(defgeneric scaling-type (object))
+(defmethod scaling-type ((object scaling-builder))
+  (opendaq:scaling-builder/get-scaling-type (%require-live-pointer object))
+)
+
+(defgeneric remove-parameter (object name))
+(defmethod remove-parameter ((object scaling-builder) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (opendaq:scaling-builder/remove-parameter (%require-live-pointer object) coerced-name)
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric (setf input-data-type) (new-value object))
+(defmethod (setf input-data-type) (new-value (object scaling-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:scaling-builder/set-input-data-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf output-data-type) (new-value object))
+(defmethod (setf output-data-type) (new-value (object scaling-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:scaling-builder/set-output-data-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf parameters) (new-value object))
+(defmethod (setf parameters) (new-value (object scaling-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:scaling-builder/set-parameters (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf scaling-type) (new-value object))
+(defmethod (setf scaling-type) (new-value (object scaling-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:scaling-builder/set-scaling-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defun scaling-calc-private-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:scaling-calc-private/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric has-scaling-calc (object))
+(defmethod has-scaling-calc ((object scaling-calc-private))
+  (opendaq:scaling-calc-private/has-scaling-calc (%require-live-pointer object))
+)
+
+(defgeneric scale-data (object data sample-count))
+(defmethod scale-data ((object scaling-calc-private) data sample-count)
+  (let ((coerced-data data))
+    (let ((coerced-sample-count sample-count))
+      (opendaq:scaling-calc-private/scale-data (%require-live-pointer object) coerced-data coerced-sample-count)
+    )
+  )
+)
+
+(defgeneric scale-data-output (object data sample-count output))
+(defmethod scale-data-output ((object scaling-calc-private) data sample-count output)
+  (let ((coerced-data data))
+    (let ((coerced-sample-count sample-count))
+      (let ((coerced-output output))
+        (opendaq:scaling-calc-private/scale-data-output (%require-live-pointer object) coerced-data coerced-sample-count coerced-output)
+      )
+    )
+  )
+)
+
+(defun scaling-create-linear-scaling (scale offset input-data-type output-data-type)
+  (multiple-value-bind (coerced-scale cleanup-scale)
+      (%coerce-argument scale :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-offset cleanup-offset)
+            (%coerce-argument offset :managed-pointer)
+          (unwind-protect
+              (let ((coerced-input-data-type input-data-type))
+                (let ((coerced-output-data-type output-data-type))
+                  (wrap-scaling (opendaq:scaling/create-linear-scaling coerced-scale coerced-offset coerced-input-data-type coerced-output-data-type))
+                )
+              )
+            (%cleanup-coerced-argument cleanup-offset)))
+      (%cleanup-coerced-argument cleanup-scale)))
+)
+
+(defun scaling-create-scaling-from-builder (builder)
+  (multiple-value-bind (coerced-builder cleanup-builder)
+      (%coerce-argument builder :managed-pointer)
+    (unwind-protect
+        (wrap-scaling (opendaq:scaling/create-scaling-from-builder coerced-builder))
+      (%cleanup-coerced-argument cleanup-builder)))
+)
+
+(defgeneric input-sample-type (object))
+(defmethod input-sample-type ((object scaling))
+  (opendaq:scaling/get-input-sample-type (%require-live-pointer object))
+)
+
+(defun scaling-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:scaling/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric output-sample-type (object))
+(defmethod output-sample-type ((object scaling))
+  (opendaq:scaling/get-output-sample-type (%require-live-pointer object))
+)
+
+(defgeneric parameters (object))
+(defmethod parameters ((object scaling))
+  (wrap-dict (opendaq:scaling/get-parameters (%require-live-pointer object)))
+)
+
+(defgeneric scaling-type (object))
+(defmethod scaling-type ((object scaling))
+  (opendaq:scaling/get-type (%require-live-pointer object))
+)
+
+(defun scheduler-create-scheduler-with-main-loop (logger num-workers use-main-loop)
+  (multiple-value-bind (coerced-logger cleanup-logger)
+      (%coerce-argument logger :managed-pointer)
+    (unwind-protect
+        (let ((coerced-num-workers num-workers))
+          (multiple-value-bind (coerced-use-main-loop cleanup-use-main-loop)
+              (%coerce-argument use-main-loop :daq-bool)
+            (unwind-protect
+                (wrap-scheduler (opendaq:scheduler/create-scheduler-with-main-loop coerced-logger coerced-num-workers coerced-use-main-loop))
+              (%cleanup-coerced-argument cleanup-use-main-loop)))
+        )
+      (%cleanup-coerced-argument cleanup-logger)))
+)
+
+(defun scheduler-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:scheduler/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric is-main-loop-set (object))
+(defmethod is-main-loop-set ((object scheduler))
+  (not (zerop (opendaq:scheduler/is-main-loop-set (%require-live-pointer object))))
+)
+
+(defgeneric is-multi-threaded (object))
+(defmethod is-multi-threaded ((object scheduler))
+  (not (zerop (opendaq:scheduler/is-multi-threaded (%require-live-pointer object))))
+)
+
+(defgeneric run-main-loop (object loop-time))
+(defmethod run-main-loop ((object scheduler) loop-time)
+  (let ((coerced-loop-time loop-time))
+    (opendaq:scheduler/run-main-loop (%require-live-pointer object) coerced-loop-time)
+  )
+)
+
+(defgeneric run-main-loop-iteration (object))
+(defmethod run-main-loop-iteration ((object scheduler))
+  (opendaq:scheduler/run-main-loop-iteration (%require-live-pointer object))
+)
+
+(defgeneric schedule-function (object function))
+(defmethod schedule-function ((object scheduler) function)
+  (multiple-value-bind (coerced-function cleanup-function)
+      (%coerce-argument function :managed-pointer)
+    (unwind-protect
+        (wrap-awaitable (opendaq:scheduler/schedule-function (%require-live-pointer object) coerced-function))
+      (%cleanup-coerced-argument cleanup-function)))
+)
+
+(defgeneric schedule-graph (object graph))
+(defmethod schedule-graph ((object scheduler) graph)
+  (multiple-value-bind (coerced-graph cleanup-graph)
+      (%coerce-argument graph :managed-pointer)
+    (unwind-protect
+        (wrap-awaitable (opendaq:scheduler/schedule-graph (%require-live-pointer object) coerced-graph))
+      (%cleanup-coerced-argument cleanup-graph)))
+)
+
+(defgeneric schedule-work (object work))
+(defmethod schedule-work ((object scheduler) work)
+  (multiple-value-bind (coerced-work cleanup-work)
+      (%coerce-argument work :managed-pointer)
+    (unwind-protect
+        (opendaq:scheduler/schedule-work (%require-live-pointer object) coerced-work)
+      (%cleanup-coerced-argument cleanup-work)))
+)
+
+(defgeneric schedule-work-on-main-loop (object work))
+(defmethod schedule-work-on-main-loop ((object scheduler) work)
+  (multiple-value-bind (coerced-work cleanup-work)
+      (%coerce-argument work :managed-pointer)
+    (unwind-protect
+        (opendaq:scheduler/schedule-work-on-main-loop (%require-live-pointer object) coerced-work)
+      (%cleanup-coerced-argument cleanup-work)))
+)
+
+(defgeneric stop (object))
+(defmethod stop ((object scheduler))
+  (opendaq:scheduler/stop (%require-live-pointer object))
+)
+
+(defgeneric stop-main-loop (object))
+(defmethod stop-main-loop ((object scheduler))
+  (opendaq:scheduler/stop-main-loop (%require-live-pointer object))
+)
+
+(defgeneric wait-all (object))
+(defmethod wait-all ((object scheduler))
+  (opendaq:scheduler/wait-all (%require-live-pointer object))
+)
+
+(defgeneric accepts-object (object obj))
+(defmethod accepts-object ((object search-filter) obj)
+  (multiple-value-bind (coerced-obj cleanup-obj)
+      (%coerce-argument obj :daq-base-object)
+    (unwind-protect
+        (not (zerop (opendaq:search-filter/accepts-object (%require-live-pointer object) coerced-obj)))
+      (%cleanup-coerced-argument cleanup-obj)))
+)
+
+(defun search-filter-create-any-search-filter ()
+  (wrap-search-filter (opendaq:search-filter/create-any-search-filter))
+)
+
+(defun search-filter-create-custom-search-filter (accepts-function visit-function)
+  (multiple-value-bind (coerced-accepts-function cleanup-accepts-function)
+      (%coerce-argument accepts-function :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-visit-function cleanup-visit-function)
+            (%coerce-argument visit-function :managed-pointer)
+          (unwind-protect
+              (wrap-search-filter (opendaq:search-filter/create-custom-search-filter coerced-accepts-function coerced-visit-function))
+            (%cleanup-coerced-argument cleanup-visit-function)))
+      (%cleanup-coerced-argument cleanup-accepts-function)))
+)
+
+(defun search-filter-create-excluded-tags-search-filter (excluded-tags)
+  (multiple-value-bind (coerced-excluded-tags cleanup-excluded-tags)
+      (%coerce-argument excluded-tags :managed-pointer)
+    (unwind-protect
+        (wrap-search-filter (opendaq:search-filter/create-excluded-tags-search-filter coerced-excluded-tags))
+      (%cleanup-coerced-argument cleanup-excluded-tags)))
+)
+
+(defun search-filter-create-local-id-search-filter (local-id)
+  (multiple-value-bind (coerced-local-id cleanup-local-id)
+      (%coerce-argument local-id :daq-string)
+    (unwind-protect
+        (wrap-search-filter (opendaq:search-filter/create-local-id-search-filter coerced-local-id))
+      (%cleanup-coerced-argument cleanup-local-id)))
+)
+
+(defun search-filter-create-not-search-filter (filter)
+  (multiple-value-bind (coerced-filter cleanup-filter)
+      (%coerce-argument filter :managed-pointer)
+    (unwind-protect
+        (wrap-search-filter (opendaq:search-filter/create-not-search-filter coerced-filter))
+      (%cleanup-coerced-argument cleanup-filter)))
+)
+
+(defun search-filter-create-or-search-filter (left right)
+  (multiple-value-bind (coerced-left cleanup-left)
+      (%coerce-argument left :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-right cleanup-right)
+            (%coerce-argument right :managed-pointer)
+          (unwind-protect
+              (wrap-search-filter (opendaq:search-filter/create-or-search-filter coerced-left coerced-right))
+            (%cleanup-coerced-argument cleanup-right)))
+      (%cleanup-coerced-argument cleanup-left)))
+)
+
+(defun search-filter-create-recursive-search-filter (filter)
+  (multiple-value-bind (coerced-filter cleanup-filter)
+      (%coerce-argument filter :managed-pointer)
+    (unwind-protect
+        (wrap-search-filter (opendaq:search-filter/create-recursive-search-filter coerced-filter))
+      (%cleanup-coerced-argument cleanup-filter)))
+)
+
+(defun search-filter-create-required-tags-search-filter (required-tags)
+  (multiple-value-bind (coerced-required-tags cleanup-required-tags)
+      (%coerce-argument required-tags :managed-pointer)
+    (unwind-protect
+        (wrap-search-filter (opendaq:search-filter/create-required-tags-search-filter coerced-required-tags))
+      (%cleanup-coerced-argument cleanup-required-tags)))
+)
+
+(defun search-filter-create-visible-search-filter ()
+  (wrap-search-filter (opendaq:search-filter/create-visible-search-filter))
+)
+
+(defun search-filter-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:search-filter/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric visit-children (object obj))
+(defmethod visit-children ((object search-filter) obj)
+  (multiple-value-bind (coerced-obj cleanup-obj)
+      (%coerce-argument obj :daq-base-object)
+    (unwind-protect
+        (not (zerop (opendaq:search-filter/visit-children (%require-live-pointer object) coerced-obj)))
+      (%cleanup-coerced-argument cleanup-obj)))
+)
+
+(defun serializable-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:serializable/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric serialize-id (object))
+(defmethod serialize-id ((object serializable))
+  (wrap-const-char-ptr (opendaq:serializable/get-serialize-id (%require-live-pointer object)))
+)
+
+(defgeneric serialize (object serializer))
+(defmethod serialize ((object serializable) serializer)
+  (multiple-value-bind (coerced-serializer cleanup-serializer)
+      (%coerce-argument serializer :managed-pointer)
+    (unwind-protect
+        (opendaq:serializable/serialize (%require-live-pointer object) coerced-serializer)
+      (%cleanup-coerced-argument cleanup-serializer)))
+)
+
+(defgeneric count (object))
+(defmethod count ((object serialized-list))
+  (opendaq:serialized-list/get-count (%require-live-pointer object))
+)
+
+(defgeneric current-item-type (object))
+(defmethod current-item-type ((object serialized-list))
+  (opendaq:serialized-list/get-current-item-type (%require-live-pointer object))
+)
+
+(defun serialized-list-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:serialized-list/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric serialized-list-read-bool (object))
+(defmethod serialized-list-read-bool ((object serialized-list))
+  (not (zerop (opendaq:serialized-list/read-bool (%require-live-pointer object))))
+)
+
+(defgeneric serialized-list-read-float (object))
+(defmethod serialized-list-read-float ((object serialized-list))
+  (opendaq:serialized-list/read-float (%require-live-pointer object))
+)
+
+(defgeneric serialized-list-read-int (object))
+(defmethod serialized-list-read-int ((object serialized-list))
+  (opendaq:serialized-list/read-int (%require-live-pointer object))
+)
+
+(defgeneric serialized-list-read-list (object context factory-callback))
+(defmethod serialized-list-read-list ((object serialized-list) context factory-callback)
+  (multiple-value-bind (coerced-context cleanup-context)
+      (%coerce-argument context :daq-base-object)
+    (unwind-protect
+        (multiple-value-bind (coerced-factory-callback cleanup-factory-callback)
+            (%coerce-argument factory-callback :managed-pointer)
+          (unwind-protect
+              (wrap-object-list (opendaq:serialized-list/read-list (%require-live-pointer object) coerced-context coerced-factory-callback))
+            (%cleanup-coerced-argument cleanup-factory-callback)))
+      (%cleanup-coerced-argument cleanup-context)))
+)
+
+(defgeneric serialized-list-read-object (object context factory-callback))
+(defmethod serialized-list-read-object ((object serialized-list) context factory-callback)
+  (multiple-value-bind (coerced-context cleanup-context)
+      (%coerce-argument context :daq-base-object)
+    (unwind-protect
+        (multiple-value-bind (coerced-factory-callback cleanup-factory-callback)
+            (%coerce-argument factory-callback :managed-pointer)
+          (unwind-protect
+              (wrap-base-object (opendaq:serialized-list/read-object (%require-live-pointer object) coerced-context coerced-factory-callback))
+            (%cleanup-coerced-argument cleanup-factory-callback)))
+      (%cleanup-coerced-argument cleanup-context)))
+)
+
+(defgeneric serialized-list-read-serialized-list (object))
+(defmethod serialized-list-read-serialized-list ((object serialized-list))
+  (wrap-serialized-list (opendaq:serialized-list/read-serialized-list (%require-live-pointer object)))
+)
+
+(defgeneric serialized-list-read-serialized-object (object))
+(defmethod serialized-list-read-serialized-object ((object serialized-list))
+  (wrap-serialized-object (opendaq:serialized-list/read-serialized-object (%require-live-pointer object)))
+)
+
+(defgeneric serialized-list-read-string (object))
+(defmethod serialized-list-read-string ((object serialized-list))
+  (%daq-string-to-lisp-and-release (opendaq:serialized-list/read-string (%require-live-pointer object)))
+)
+
+(defun serialized-object-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:serialized-object/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric keys (object))
+(defmethod keys ((object serialized-object))
+  (wrap-object-list (opendaq:serialized-object/get-keys (%require-live-pointer object)))
+)
+
+(defgeneric serialized-object-type (object key))
+(defmethod serialized-object-type ((object serialized-object) key)
+  (multiple-value-bind (coerced-key cleanup-key)
+      (%coerce-argument key :daq-string)
+    (unwind-protect
+        (opendaq:serialized-object/get-type (%require-live-pointer object) coerced-key)
+      (%cleanup-coerced-argument cleanup-key)))
+)
+
+(defgeneric has-key (object key))
+(defmethod has-key ((object serialized-object) key)
+  (multiple-value-bind (coerced-key cleanup-key)
+      (%coerce-argument key :daq-string)
+    (unwind-protect
+        (not (zerop (opendaq:serialized-object/has-key (%require-live-pointer object) coerced-key)))
+      (%cleanup-coerced-argument cleanup-key)))
+)
+
+(defgeneric is-root (object))
+(defmethod is-root ((object serialized-object))
+  (not (zerop (opendaq:serialized-object/is-root (%require-live-pointer object))))
+)
+
+(defgeneric serialized-object-read-bool (object key))
+(defmethod serialized-object-read-bool ((object serialized-object) key)
+  (multiple-value-bind (coerced-key cleanup-key)
+      (%coerce-argument key :daq-string)
+    (unwind-protect
+        (not (zerop (opendaq:serialized-object/read-bool (%require-live-pointer object) coerced-key)))
+      (%cleanup-coerced-argument cleanup-key)))
+)
+
+(defgeneric serialized-object-read-float (object key))
+(defmethod serialized-object-read-float ((object serialized-object) key)
+  (multiple-value-bind (coerced-key cleanup-key)
+      (%coerce-argument key :daq-string)
+    (unwind-protect
+        (opendaq:serialized-object/read-float (%require-live-pointer object) coerced-key)
+      (%cleanup-coerced-argument cleanup-key)))
+)
+
+(defgeneric serialized-object-read-int (object key))
+(defmethod serialized-object-read-int ((object serialized-object) key)
+  (multiple-value-bind (coerced-key cleanup-key)
+      (%coerce-argument key :daq-string)
+    (unwind-protect
+        (opendaq:serialized-object/read-int (%require-live-pointer object) coerced-key)
+      (%cleanup-coerced-argument cleanup-key)))
+)
+
+(defgeneric serialized-object-read-list (object key context factory-callback))
+(defmethod serialized-object-read-list ((object serialized-object) key context factory-callback)
+  (multiple-value-bind (coerced-key cleanup-key)
+      (%coerce-argument key :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-context cleanup-context)
+            (%coerce-argument context :daq-base-object)
+          (unwind-protect
+              (multiple-value-bind (coerced-factory-callback cleanup-factory-callback)
+                  (%coerce-argument factory-callback :managed-pointer)
+                (unwind-protect
+                    (wrap-object-list (opendaq:serialized-object/read-list (%require-live-pointer object) coerced-key coerced-context coerced-factory-callback))
+                  (%cleanup-coerced-argument cleanup-factory-callback)))
+            (%cleanup-coerced-argument cleanup-context)))
+      (%cleanup-coerced-argument cleanup-key)))
+)
+
+(defgeneric serialized-object-read-object (object key context factory-callback))
+(defmethod serialized-object-read-object ((object serialized-object) key context factory-callback)
+  (multiple-value-bind (coerced-key cleanup-key)
+      (%coerce-argument key :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-context cleanup-context)
+            (%coerce-argument context :daq-base-object)
+          (unwind-protect
+              (multiple-value-bind (coerced-factory-callback cleanup-factory-callback)
+                  (%coerce-argument factory-callback :managed-pointer)
+                (unwind-protect
+                    (wrap-base-object (opendaq:serialized-object/read-object (%require-live-pointer object) coerced-key coerced-context coerced-factory-callback))
+                  (%cleanup-coerced-argument cleanup-factory-callback)))
+            (%cleanup-coerced-argument cleanup-context)))
+      (%cleanup-coerced-argument cleanup-key)))
+)
+
+(defgeneric serialized-object-read-serialized-list (object key))
+(defmethod serialized-object-read-serialized-list ((object serialized-object) key)
+  (multiple-value-bind (coerced-key cleanup-key)
+      (%coerce-argument key :daq-string)
+    (unwind-protect
+        (wrap-serialized-list (opendaq:serialized-object/read-serialized-list (%require-live-pointer object) coerced-key))
+      (%cleanup-coerced-argument cleanup-key)))
+)
+
+(defgeneric serialized-object-read-serialized-object (object key))
+(defmethod serialized-object-read-serialized-object ((object serialized-object) key)
+  (multiple-value-bind (coerced-key cleanup-key)
+      (%coerce-argument key :daq-string)
+    (unwind-protect
+        (wrap-serialized-object (opendaq:serialized-object/read-serialized-object (%require-live-pointer object) coerced-key))
+      (%cleanup-coerced-argument cleanup-key)))
+)
+
+(defgeneric serialized-object-read-string (object key))
+(defmethod serialized-object-read-string ((object serialized-object) key)
+  (multiple-value-bind (coerced-key cleanup-key)
+      (%coerce-argument key :daq-string)
+    (unwind-protect
+        (%daq-string-to-lisp-and-release (opendaq:serialized-object/read-string (%require-live-pointer object) coerced-key))
+      (%cleanup-coerced-argument cleanup-key)))
+)
+
+(defgeneric to-json (object))
+(defmethod to-json ((object serialized-object))
+  (%daq-string-to-lisp-and-release (opendaq:serialized-object/to-json (%require-live-pointer object)))
+)
+
+(defgeneric end-list (object))
+(defmethod end-list ((object serializer))
+  (opendaq:serializer/end-list (%require-live-pointer object))
+)
+
+(defgeneric end-object (object))
+(defmethod end-object ((object serializer))
+  (opendaq:serializer/end-object (%require-live-pointer object))
+)
+
+(defgeneric output (object))
+(defmethod output ((object serializer))
+  (%daq-string-to-lisp-and-release (opendaq:serializer/get-output (%require-live-pointer object)))
+)
+
+(defgeneric user (object))
+(defmethod user ((object serializer))
+  (wrap-base-object (opendaq:serializer/get-user (%require-live-pointer object)))
+)
+
+(defgeneric version (object))
+(defmethod version ((object serializer))
+  (opendaq:serializer/get-version (%require-live-pointer object))
+)
+
+(defgeneric is-complete (object))
+(defmethod is-complete ((object serializer))
+  (not (zerop (opendaq:serializer/is-complete (%require-live-pointer object))))
+)
+
+(defgeneric key (object string))
+(defmethod key ((object serializer) string)
+  (let ((coerced-string string))
+    (opendaq:serializer/key (%require-live-pointer object) coerced-string)
+  )
+)
+
+(defgeneric key-raw (object string length))
+(defmethod key-raw ((object serializer) string length)
+  (let ((coerced-string string))
+    (let ((coerced-length length))
+      (opendaq:serializer/key-raw (%require-live-pointer object) coerced-string coerced-length)
+    )
+  )
+)
+
+(defgeneric key-str (object name))
+(defmethod key-str ((object serializer) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (opendaq:serializer/key-str (%require-live-pointer object) coerced-name)
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric reset (object))
+(defmethod reset ((object serializer))
+  (opendaq:serializer/reset (%require-live-pointer object))
+)
+
+(defgeneric (setf user) (new-value object))
+(defmethod (setf user) (new-value (object serializer))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-base-object)
+    (unwind-protect
+        (opendaq:serializer/set-user (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric start-list (object))
+(defmethod start-list ((object serializer))
+  (opendaq:serializer/start-list (%require-live-pointer object))
+)
+
+(defgeneric start-object (object))
+(defmethod start-object ((object serializer))
+  (opendaq:serializer/start-object (%require-live-pointer object))
+)
+
+(defgeneric start-tagged-object (object obj))
+(defmethod start-tagged-object ((object serializer) obj)
+  (multiple-value-bind (coerced-obj cleanup-obj)
+      (%coerce-argument obj :managed-pointer)
+    (unwind-protect
+        (opendaq:serializer/start-tagged-object (%require-live-pointer object) coerced-obj)
+      (%cleanup-coerced-argument cleanup-obj)))
+)
+
+(defgeneric write-bool (object boolean))
+(defmethod write-bool ((object serializer) boolean)
+  (multiple-value-bind (coerced-boolean cleanup-boolean)
+      (%coerce-argument boolean :daq-bool)
+    (unwind-protect
+        (opendaq:serializer/write-bool (%require-live-pointer object) coerced-boolean)
+      (%cleanup-coerced-argument cleanup-boolean)))
+)
+
+(defgeneric write-float (object real))
+(defmethod write-float ((object serializer) real)
+  (let ((coerced-real real))
+    (opendaq:serializer/write-float (%require-live-pointer object) coerced-real)
+  )
+)
+
+(defgeneric write-int (object integer))
+(defmethod write-int ((object serializer) integer)
+  (let ((coerced-integer integer))
+    (opendaq:serializer/write-int (%require-live-pointer object) coerced-integer)
+  )
+)
+
+(defgeneric write-null (object))
+(defmethod write-null ((object serializer))
+  (opendaq:serializer/write-null (%require-live-pointer object))
+)
+
+(defgeneric write-string (object string length))
+(defmethod write-string ((object serializer) string length)
+  (let ((coerced-string string))
+    (let ((coerced-length length))
+      (opendaq:serializer/write-string (%require-live-pointer object) coerced-string coerced-length)
+    )
+  )
+)
+
+(defgeneric add-address (object address))
+(defmethod add-address ((object server-capability-config) address)
+  (multiple-value-bind (coerced-address cleanup-address)
+      (%coerce-argument address :daq-string)
+    (unwind-protect
+        (opendaq:server-capability-config/add-address (%require-live-pointer object) coerced-address)
+      (%cleanup-coerced-argument cleanup-address)))
+)
+
+(defgeneric add-address-info (object address-info))
+(defmethod add-address-info ((object server-capability-config) address-info)
+  (multiple-value-bind (coerced-address-info cleanup-address-info)
+      (%coerce-argument address-info :managed-pointer)
+    (unwind-protect
+        (opendaq:server-capability-config/add-address-info (%require-live-pointer object) coerced-address-info)
+      (%cleanup-coerced-argument cleanup-address-info)))
+)
+
+(defgeneric add-connection-string (object connection-string))
+(defmethod add-connection-string ((object server-capability-config) connection-string)
+  (multiple-value-bind (coerced-connection-string cleanup-connection-string)
+      (%coerce-argument connection-string :daq-string)
+    (unwind-protect
+        (opendaq:server-capability-config/add-connection-string (%require-live-pointer object) coerced-connection-string)
+      (%cleanup-coerced-argument cleanup-connection-string)))
+)
+
+(defun server-capability-config-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:server-capability-config/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric (setf connection-string) (new-value object))
+(defmethod (setf connection-string) (new-value (object server-capability-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:server-capability-config/set-connection-string (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf connection-type) (new-value object))
+(defmethod (setf connection-type) (new-value (object server-capability-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:server-capability-config/set-connection-type (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf core-events-enabled) (new-value object))
+(defmethod (setf core-events-enabled) (new-value (object server-capability-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:server-capability-config/set-core-events-enabled (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf port) (new-value object))
+(defmethod (setf port) (new-value (object server-capability-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:server-capability-config/set-port (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf prefix) (new-value object))
+(defmethod (setf prefix) (new-value (object server-capability-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:server-capability-config/set-prefix (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf protocol-id) (new-value object))
+(defmethod (setf protocol-id) (new-value (object server-capability-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:server-capability-config/set-protocol-id (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf protocol-name) (new-value object))
+(defmethod (setf protocol-name) (new-value (object server-capability-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:server-capability-config/set-protocol-name (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf protocol-type) (new-value object))
+(defmethod (setf protocol-type) (new-value (object server-capability-config))
+  (let ((coerced-new-value new-value))
+    (opendaq:server-capability-config/set-protocol-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf protocol-version) (new-value object))
+(defmethod (setf protocol-version) (new-value (object server-capability-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:server-capability-config/set-protocol-version (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric address-info (object))
+(defmethod address-info ((object server-capability))
+  (wrap-object-list (opendaq:server-capability/get-address-info (%require-live-pointer object)))
+)
+
+(defgeneric addresses (object))
+(defmethod addresses ((object server-capability))
+  (wrap-object-list (opendaq:server-capability/get-addresses (%require-live-pointer object)))
+)
+
+(defgeneric connection-string (object))
+(defmethod connection-string ((object server-capability))
+  (%daq-string-to-lisp-and-release (opendaq:server-capability/get-connection-string (%require-live-pointer object)))
+)
+
+(defgeneric connection-strings (object))
+(defmethod connection-strings ((object server-capability))
+  (wrap-object-list (opendaq:server-capability/get-connection-strings (%require-live-pointer object)))
+)
+
+(defgeneric connection-type (object))
+(defmethod connection-type ((object server-capability))
+  (%daq-string-to-lisp-and-release (opendaq:server-capability/get-connection-type (%require-live-pointer object)))
+)
+
+(defgeneric core-events-enabled (object))
+(defmethod core-events-enabled ((object server-capability))
+  (not (zerop (opendaq:server-capability/get-core-events-enabled (%require-live-pointer object))))
+)
+
+(defun server-capability-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:server-capability/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric port (object))
+(defmethod port ((object server-capability))
+  (wrap-daq-integer (opendaq:server-capability/get-port (%require-live-pointer object)))
+)
+
+(defgeneric prefix (object))
+(defmethod prefix ((object server-capability))
+  (%daq-string-to-lisp-and-release (opendaq:server-capability/get-prefix (%require-live-pointer object)))
+)
+
+(defgeneric protocol-id (object))
+(defmethod protocol-id ((object server-capability))
+  (%daq-string-to-lisp-and-release (opendaq:server-capability/get-protocol-id (%require-live-pointer object)))
+)
+
+(defgeneric protocol-name (object))
+(defmethod protocol-name ((object server-capability))
+  (%daq-string-to-lisp-and-release (opendaq:server-capability/get-protocol-name (%require-live-pointer object)))
+)
+
+(defgeneric protocol-type (object))
+(defmethod protocol-type ((object server-capability))
+  (opendaq:server-capability/get-protocol-type (%require-live-pointer object))
+)
+
+(defgeneric protocol-version (object))
+(defmethod protocol-version ((object server-capability))
+  (%daq-string-to-lisp-and-release (opendaq:server-capability/get-protocol-version (%require-live-pointer object)))
+)
+
+(defun server-type-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:server-type/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric disable-discovery (object))
+(defmethod disable-discovery ((object server))
+  (opendaq:server/disable-discovery (%require-live-pointer object))
+)
+
+(defgeneric enable-discovery (object))
+(defmethod enable-discovery ((object server))
+  (opendaq:server/enable-discovery (%require-live-pointer object))
+)
+
+(defgeneric id (object))
+(defmethod id ((object server))
+  (%daq-string-to-lisp-and-release (opendaq:server/get-id (%require-live-pointer object)))
+)
+
+(defun server-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:server/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric server-signals (object search-filter))
+(defmethod server-signals ((object server) search-filter)
+  (multiple-value-bind (coerced-search-filter cleanup-search-filter)
+      (%coerce-argument search-filter :managed-pointer)
+    (unwind-protect
+        (wrap-object-list (opendaq:server/get-signals (%require-live-pointer object) coerced-search-filter))
+      (%cleanup-coerced-argument cleanup-search-filter)))
+)
+
+(defgeneric streaming (object))
+(defmethod streaming ((object server))
+  (wrap-streaming (opendaq:server/get-streaming (%require-live-pointer object)))
+)
+
+(defgeneric stop (object))
+(defmethod stop ((object server))
+  (opendaq:server/stop (%require-live-pointer object))
+)
+
+(defgeneric add-related-signal (object signal))
+(defmethod add-related-signal ((object signal-config) signal)
+  (multiple-value-bind (coerced-signal cleanup-signal)
+      (%coerce-argument signal :managed-pointer)
+    (unwind-protect
+        (opendaq:signal-config/add-related-signal (%require-live-pointer object) coerced-signal)
+      (%cleanup-coerced-argument cleanup-signal)))
+)
+
+(defgeneric clear-related-signals (object))
+(defmethod clear-related-signals ((object signal-config))
+  (opendaq:signal-config/clear-related-signals (%require-live-pointer object))
+)
+
+(defun signal-config-create-signal-with-descriptor (context descriptor parent local-id class-name)
+  (multiple-value-bind (coerced-context cleanup-context)
+      (%coerce-argument context :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-descriptor cleanup-descriptor)
+            (%coerce-argument descriptor :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-parent cleanup-parent)
+                  (%coerce-argument parent :managed-pointer)
+                (unwind-protect
+                    (multiple-value-bind (coerced-local-id cleanup-local-id)
+                        (%coerce-argument local-id :daq-string)
+                      (unwind-protect
+                          (multiple-value-bind (coerced-class-name cleanup-class-name)
+                              (%coerce-argument class-name :daq-string)
+                            (unwind-protect
+                                (wrap-signal-config (opendaq:signal-config/create-signal-with-descriptor coerced-context coerced-descriptor coerced-parent coerced-local-id coerced-class-name))
+                              (%cleanup-coerced-argument cleanup-class-name)))
+                        (%cleanup-coerced-argument cleanup-local-id)))
+                  (%cleanup-coerced-argument cleanup-parent)))
+            (%cleanup-coerced-argument cleanup-descriptor)))
+      (%cleanup-coerced-argument cleanup-context)))
+)
+
+(defun signal-config-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:signal-config/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric remove-related-signal (object signal))
+(defmethod remove-related-signal ((object signal-config) signal)
+  (multiple-value-bind (coerced-signal cleanup-signal)
+      (%coerce-argument signal :managed-pointer)
+    (unwind-protect
+        (opendaq:signal-config/remove-related-signal (%require-live-pointer object) coerced-signal)
+      (%cleanup-coerced-argument cleanup-signal)))
+)
+
+(defgeneric send-packet (object packet))
+(defmethod send-packet ((object signal-config) packet)
+  (multiple-value-bind (coerced-packet cleanup-packet)
+      (%coerce-argument packet :managed-pointer)
+    (unwind-protect
+        (opendaq:signal-config/send-packet (%require-live-pointer object) coerced-packet)
+      (%cleanup-coerced-argument cleanup-packet)))
+)
+
+(defgeneric send-packet-and-steal-ref (object packet))
+(defmethod send-packet-and-steal-ref ((object signal-config) packet)
+  (multiple-value-bind (coerced-packet cleanup-packet)
+      (%coerce-argument packet :managed-pointer)
+    (unwind-protect
+        (opendaq:signal-config/send-packet-and-steal-ref (%require-live-pointer object) coerced-packet)
+      (%cleanup-coerced-argument cleanup-packet)))
+)
+
+(defgeneric send-packets (object packets))
+(defmethod send-packets ((object signal-config) packets)
+  (multiple-value-bind (coerced-packets cleanup-packets)
+      (%coerce-argument packets :managed-pointer)
+    (unwind-protect
+        (opendaq:signal-config/send-packets (%require-live-pointer object) coerced-packets)
+      (%cleanup-coerced-argument cleanup-packets)))
+)
+
+(defgeneric send-packets-and-steal-ref (object packets))
+(defmethod send-packets-and-steal-ref ((object signal-config) packets)
+  (multiple-value-bind (coerced-packets cleanup-packets)
+      (%coerce-argument packets :managed-pointer)
+    (unwind-protect
+        (opendaq:signal-config/send-packets-and-steal-ref (%require-live-pointer object) coerced-packets)
+      (%cleanup-coerced-argument cleanup-packets)))
+)
+
+(defgeneric (setf descriptor) (new-value object))
+(defmethod (setf descriptor) (new-value (object signal-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:signal-config/set-descriptor (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf domain-signal) (new-value object))
+(defmethod (setf domain-signal) (new-value (object signal-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:signal-config/set-domain-signal (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf last-value) (new-value object))
+(defmethod (setf last-value) (new-value (object signal-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-base-object)
+    (unwind-protect
+        (opendaq:signal-config/set-last-value (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf related-signals) (new-value object))
+(defmethod (setf related-signals) (new-value (object signal-config))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:signal-config/set-related-signals (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric domain-signal-reference-removed (object signal))
+(defmethod domain-signal-reference-removed ((object signal-events) signal)
+  (multiple-value-bind (coerced-signal cleanup-signal)
+      (%coerce-argument signal :managed-pointer)
+    (unwind-protect
+        (opendaq:signal-events/domain-signal-reference-removed (%require-live-pointer object) coerced-signal)
+      (%cleanup-coerced-argument cleanup-signal)))
+)
+
+(defgeneric domain-signal-reference-set (object signal))
+(defmethod domain-signal-reference-set ((object signal-events) signal)
+  (multiple-value-bind (coerced-signal cleanup-signal)
+      (%coerce-argument signal :managed-pointer)
+    (unwind-protect
+        (opendaq:signal-events/domain-signal-reference-set (%require-live-pointer object) coerced-signal)
+      (%cleanup-coerced-argument cleanup-signal)))
+)
+
+(defun signal-events-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:signal-events/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric listener-connected (object connection))
+(defmethod listener-connected ((object signal-events) connection)
+  (multiple-value-bind (coerced-connection cleanup-connection)
+      (%coerce-argument connection :managed-pointer)
+    (unwind-protect
+        (opendaq:signal-events/listener-connected (%require-live-pointer object) coerced-connection)
+      (%cleanup-coerced-argument cleanup-connection)))
+)
+
+(defgeneric listener-connected-scheduled (object connection))
+(defmethod listener-connected-scheduled ((object signal-events) connection)
+  (multiple-value-bind (coerced-connection cleanup-connection)
+      (%coerce-argument connection :managed-pointer)
+    (unwind-protect
+        (opendaq:signal-events/listener-connected-scheduled (%require-live-pointer object) coerced-connection)
+      (%cleanup-coerced-argument cleanup-connection)))
+)
+
+(defgeneric listener-disconnected (object connection))
+(defmethod listener-disconnected ((object signal-events) connection)
+  (multiple-value-bind (coerced-connection cleanup-connection)
+      (%coerce-argument connection :managed-pointer)
+    (unwind-protect
+        (opendaq:signal-events/listener-disconnected (%require-live-pointer object) coerced-connection)
+      (%cleanup-coerced-argument cleanup-connection)))
+)
+
+(defgeneric clear-domain-signal-without-notification (object))
+(defmethod clear-domain-signal-without-notification ((object signal-private))
+  (opendaq:signal-private/clear-domain-signal-without-notification (%require-live-pointer object))
+)
+
+(defgeneric enable-keep-last-value (object enabled))
+(defmethod enable-keep-last-value ((object signal-private) enabled)
+  (multiple-value-bind (coerced-enabled cleanup-enabled)
+      (%coerce-argument enabled :daq-bool)
+    (unwind-protect
+        (opendaq:signal-private/enable-keep-last-value (%require-live-pointer object) coerced-enabled)
+      (%cleanup-coerced-argument cleanup-enabled)))
+)
+
+(defun signal-private-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:signal-private/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric keep-last-value (object))
+(defmethod keep-last-value ((object signal-private))
+  (not (zerop (opendaq:signal-private/get-keep-last-value (%require-live-pointer object))))
+)
+
+(defgeneric signal-serialize-id (object))
+(defmethod signal-serialize-id ((object signal-private))
+  (%daq-string-to-lisp-and-release (opendaq:signal-private/get-signal-serialize-id (%require-live-pointer object)))
+)
+
+(defgeneric send-packet-recursive-lock (object packet))
+(defmethod send-packet-recursive-lock ((object signal-private) packet)
+  (multiple-value-bind (coerced-packet cleanup-packet)
+      (%coerce-argument packet :managed-pointer)
+    (unwind-protect
+        (opendaq:signal-private/send-packet-recursive-lock (%require-live-pointer object) coerced-packet)
+      (%cleanup-coerced-argument cleanup-packet)))
+)
+
+(defgeneric connections (object))
+(defmethod connections ((object signal))
+  (wrap-object-list (opendaq:signal/get-connections (%require-live-pointer object)))
+)
+
+(defgeneric descriptor (object))
+(defmethod descriptor ((object signal))
+  (wrap-data-descriptor (opendaq:signal/get-descriptor (%require-live-pointer object)))
+)
+
+(defgeneric domain-signal (object))
+(defmethod domain-signal ((object signal))
+  (wrap-signal (opendaq:signal/get-domain-signal (%require-live-pointer object)))
+)
+
+(defun signal-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:signal/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric signal-last-value (object))
+(defmethod signal-last-value ((object signal))
+  (wrap-base-object (opendaq:signal/get-last-value (%require-live-pointer object)))
+)
+
+(defgeneric public (object))
+(defmethod public ((object signal))
+  (not (zerop (opendaq:signal/get-public (%require-live-pointer object))))
+)
+
+(defgeneric related-signals (object))
+(defmethod related-signals ((object signal))
+  (wrap-object-list (opendaq:signal/get-related-signals (%require-live-pointer object)))
+)
+
+(defgeneric streamed (object))
+(defmethod streamed ((object signal))
+  (not (zerop (opendaq:signal/get-streamed (%require-live-pointer object))))
+)
+
+(defgeneric (setf public) (new-value object))
+(defmethod (setf public) (new-value (object signal))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:signal/set-public (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf streamed) (new-value object))
+(defmethod (setf streamed) (new-value (object signal))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:signal/set-streamed (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defun simple-type-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:simple-type/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric build (object))
+(defmethod build ((object stream-reader-builder))
+  (wrap-stream-reader (opendaq:stream-reader-builder/build (%require-live-pointer object)))
+)
+
+(defgeneric domain-read-type (object))
+(defmethod domain-read-type ((object stream-reader-builder))
+  (opendaq:stream-reader-builder/get-domain-read-type (%require-live-pointer object))
+)
+
+(defgeneric input-port (object))
+(defmethod input-port ((object stream-reader-builder))
+  (wrap-input-port (opendaq:stream-reader-builder/get-input-port (%require-live-pointer object)))
+)
+
+(defgeneric input-port-notification-method (object))
+(defmethod input-port-notification-method ((object stream-reader-builder))
+  (opendaq:stream-reader-builder/get-input-port-notification-method (%require-live-pointer object))
+)
+
+(defun stream-reader-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:stream-reader-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric read-mode (object))
+(defmethod read-mode ((object stream-reader-builder))
+  (opendaq:stream-reader-builder/get-read-mode (%require-live-pointer object))
+)
+
+(defgeneric read-timeout-type (object))
+(defmethod read-timeout-type ((object stream-reader-builder))
+  (opendaq:stream-reader-builder/get-read-timeout-type (%require-live-pointer object))
+)
+
+(defgeneric stream-reader-builder-signal (object))
+(defmethod stream-reader-builder-signal ((object stream-reader-builder))
+  (wrap-signal (opendaq:stream-reader-builder/get-signal (%require-live-pointer object)))
+)
+
+(defgeneric skip-events (object))
+(defmethod skip-events ((object stream-reader-builder))
+  (not (zerop (opendaq:stream-reader-builder/get-skip-events (%require-live-pointer object))))
+)
+
+(defgeneric value-read-type (object))
+(defmethod value-read-type ((object stream-reader-builder))
+  (opendaq:stream-reader-builder/get-value-read-type (%require-live-pointer object))
+)
+
+(defgeneric (setf domain-read-type) (new-value object))
+(defmethod (setf domain-read-type) (new-value (object stream-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:stream-reader-builder/set-domain-read-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf input-port) (new-value object))
+(defmethod (setf input-port) (new-value (object stream-reader-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:stream-reader-builder/set-input-port (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf input-port-notification-method) (new-value object))
+(defmethod (setf input-port-notification-method) (new-value (object stream-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:stream-reader-builder/set-input-port-notification-method (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf read-mode) (new-value object))
+(defmethod (setf read-mode) (new-value (object stream-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:stream-reader-builder/set-read-mode (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf read-timeout-type) (new-value object))
+(defmethod (setf read-timeout-type) (new-value (object stream-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:stream-reader-builder/set-read-timeout-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf signal) (new-value object))
+(defmethod (setf signal) (new-value (object stream-reader-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:stream-reader-builder/set-signal (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf skip-events) (new-value object))
+(defmethod (setf skip-events) (new-value (object stream-reader-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:stream-reader-builder/set-skip-events (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf value-read-type) (new-value object))
+(defmethod (setf value-read-type) (new-value (object stream-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:stream-reader-builder/set-value-read-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defun stream-reader-create-stream-reader-from-existing (invalidated-reader value-read-type domain-read-type)
+  (multiple-value-bind (coerced-invalidated-reader cleanup-invalidated-reader)
+      (%coerce-argument invalidated-reader :managed-pointer)
+    (unwind-protect
+        (let ((coerced-value-read-type value-read-type))
+          (let ((coerced-domain-read-type domain-read-type))
+            (wrap-stream-reader (opendaq:stream-reader/create-stream-reader-from-existing coerced-invalidated-reader coerced-value-read-type coerced-domain-read-type))
+          )
+        )
+      (%cleanup-coerced-argument cleanup-invalidated-reader)))
+)
+
+(defun stream-reader-create-stream-reader-from-port (port value-read-type domain-read-type read-mode timeout-type)
+  (multiple-value-bind (coerced-port cleanup-port)
+      (%coerce-argument port :managed-pointer)
+    (unwind-protect
+        (let ((coerced-value-read-type value-read-type))
+          (let ((coerced-domain-read-type domain-read-type))
+            (let ((coerced-read-mode read-mode))
+              (let ((coerced-timeout-type timeout-type))
+                (wrap-stream-reader (opendaq:stream-reader/create-stream-reader-from-port coerced-port coerced-value-read-type coerced-domain-read-type coerced-read-mode coerced-timeout-type))
+              )
+            )
+          )
+        )
+      (%cleanup-coerced-argument cleanup-port)))
+)
+
+(defun stream-reader-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:stream-reader/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric stream-reader-read (object samples count timeout-ms))
+(defmethod stream-reader-read ((object stream-reader) samples count timeout-ms)
+  (let ((coerced-samples samples))
+    (let ((coerced-count count))
+      (let ((coerced-timeout-ms timeout-ms))
+        (multiple-value-bind (value-0 value-1)
+            (opendaq:stream-reader/read (%require-live-pointer object) coerced-samples coerced-count coerced-timeout-ms)
+          (cl:values
+            value-0
+            (wrap-reader-status value-1)))
+      )
+    )
+  )
+)
+
+(defgeneric stream-reader-read-with-domain (object samples domain count timeout-ms))
+(defmethod stream-reader-read-with-domain ((object stream-reader) samples domain count timeout-ms)
+  (let ((coerced-samples samples))
+    (let ((coerced-domain domain))
+      (let ((coerced-count count))
+        (let ((coerced-timeout-ms timeout-ms))
+          (multiple-value-bind (value-0 value-1)
+              (opendaq:stream-reader/read-with-domain (%require-live-pointer object) coerced-samples coerced-domain coerced-count coerced-timeout-ms)
+            (cl:values
+              value-0
+              (wrap-reader-status value-1)))
+        )
+      )
+    )
+  )
+)
+
+(defgeneric skip-samples (object count))
+(defmethod skip-samples ((object stream-reader) count)
+  (let ((coerced-count count))
+    (multiple-value-bind (value-0 value-1)
+        (opendaq:stream-reader/skip-samples (%require-live-pointer object) coerced-count)
+      (cl:values
+        value-0
+        (wrap-reader-status value-1)))
+  )
+)
+
+(defgeneric connection-string-prefix (object))
+(defmethod connection-string-prefix ((object streaming-type))
+  (%daq-string-to-lisp-and-release (opendaq:streaming-type/get-connection-string-prefix (%require-live-pointer object)))
+)
+
+(defun streaming-type-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:streaming-type/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric add-input-ports (object input-ports))
+(defmethod add-input-ports ((object streaming) input-ports)
+  (multiple-value-bind (coerced-input-ports cleanup-input-ports)
+      (%coerce-argument input-ports :managed-pointer)
+    (unwind-protect
+        (opendaq:streaming/add-input-ports (%require-live-pointer object) coerced-input-ports)
+      (%cleanup-coerced-argument cleanup-input-ports)))
+)
+
+(defgeneric add-signals (object signals))
+(defmethod add-signals ((object streaming) signals)
+  (multiple-value-bind (coerced-signals cleanup-signals)
+      (%coerce-argument signals :managed-pointer)
+    (unwind-protect
+        (opendaq:streaming/add-signals (%require-live-pointer object) coerced-signals)
+      (%cleanup-coerced-argument cleanup-signals)))
+)
+
+(defgeneric active (object))
+(defmethod active ((object streaming))
+  (not (zerop (opendaq:streaming/get-active (%require-live-pointer object))))
+)
+
+(defgeneric client-to-device-streaming-enabled (object))
+(defmethod client-to-device-streaming-enabled ((object streaming))
+  (not (zerop (opendaq:streaming/get-client-to-device-streaming-enabled (%require-live-pointer object))))
+)
+
+(defgeneric connection-status (object))
+(defmethod connection-status ((object streaming))
+  (wrap-enumeration (opendaq:streaming/get-connection-status (%require-live-pointer object)))
+)
+
+(defgeneric connection-string (object))
+(defmethod connection-string ((object streaming))
+  (%daq-string-to-lisp-and-release (opendaq:streaming/get-connection-string (%require-live-pointer object)))
+)
+
+(defun streaming-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:streaming/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric owner-device-remote-id (object))
+(defmethod owner-device-remote-id ((object streaming))
+  (%daq-string-to-lisp-and-release (opendaq:streaming/get-owner-device-remote-id (%require-live-pointer object)))
+)
+
+(defgeneric protocol-id (object))
+(defmethod protocol-id ((object streaming))
+  (%daq-string-to-lisp-and-release (opendaq:streaming/get-protocol-id (%require-live-pointer object)))
+)
+
+(defgeneric remove-all-input-ports (object))
+(defmethod remove-all-input-ports ((object streaming))
+  (opendaq:streaming/remove-all-input-ports (%require-live-pointer object))
+)
+
+(defgeneric remove-all-signals (object))
+(defmethod remove-all-signals ((object streaming))
+  (opendaq:streaming/remove-all-signals (%require-live-pointer object))
+)
+
+(defgeneric remove-input-ports (object input-ports))
+(defmethod remove-input-ports ((object streaming) input-ports)
+  (multiple-value-bind (coerced-input-ports cleanup-input-ports)
+      (%coerce-argument input-ports :managed-pointer)
+    (unwind-protect
+        (opendaq:streaming/remove-input-ports (%require-live-pointer object) coerced-input-ports)
+      (%cleanup-coerced-argument cleanup-input-ports)))
+)
+
+(defgeneric remove-signals (object signals))
+(defmethod remove-signals ((object streaming) signals)
+  (multiple-value-bind (coerced-signals cleanup-signals)
+      (%coerce-argument signals :managed-pointer)
+    (unwind-protect
+        (opendaq:streaming/remove-signals (%require-live-pointer object) coerced-signals)
+      (%cleanup-coerced-argument cleanup-signals)))
+)
+
+(defgeneric (setf active) (new-value object))
+(defmethod (setf active) (new-value (object streaming))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:streaming/set-active (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defun daq-string-object-create-string-n (str length)
+  (let ((coerced-str str))
+    (let ((coerced-length length))
+      (%daq-string-to-lisp-and-release (opendaq:string/create-string-n coerced-str coerced-length))
+    )
+  )
+)
+
+(defgeneric char-ptr (object))
+(defmethod char-ptr ((object daq-string-object))
+  (wrap-const-char-ptr (opendaq:string/get-char-ptr (%require-live-pointer object)))
+)
+
+(defun daq-string-object-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:string/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric length (object))
+(defmethod length ((object daq-string-object))
+  (opendaq:string/get-length (%require-live-pointer object))
+)
+
+(defgeneric build (object))
+(defmethod build ((object struct-builder))
+  (wrap-struct (opendaq:struct-builder/build (%require-live-pointer object)))
+)
+
+(defun struct-builder-create-struct-builder-from-struct (struct)
+  (multiple-value-bind (coerced-struct cleanup-struct)
+      (%coerce-argument struct :managed-pointer)
+    (unwind-protect
+        (wrap-struct-builder (opendaq:struct-builder/create-struct-builder-from-struct coerced-struct))
+      (%cleanup-coerced-argument cleanup-struct)))
+)
+
+(defgeneric get (object name))
+(defmethod get ((object struct-builder) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (wrap-base-object (opendaq:struct-builder/get (%require-live-pointer object) coerced-name))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric as-dictionary (object))
+(defmethod as-dictionary ((object struct-builder))
+  (wrap-dict (opendaq:struct-builder/get-as-dictionary (%require-live-pointer object)))
+)
+
+(defgeneric field-names (object))
+(defmethod field-names ((object struct-builder))
+  (wrap-object-list (opendaq:struct-builder/get-field-names (%require-live-pointer object)))
+)
+
+(defgeneric field-values (object values))
+(defmethod field-values ((object struct-builder) values)
+  (let ((coerced-values values))
+    (opendaq:struct-builder/get-field-values (%require-live-pointer object) coerced-values)
+  )
+)
+
+(defun struct-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:struct-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric struct-type (object))
+(defmethod struct-type ((object struct-builder))
+  (wrap-struct-type (opendaq:struct-builder/get-struct-type (%require-live-pointer object)))
+)
+
+(defgeneric has-field (object name))
+(defmethod has-field ((object struct-builder) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (not (zerop (opendaq:struct-builder/has-field (%require-live-pointer object) coerced-name)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric set (object name field))
+(defmethod set ((object struct-builder) name field)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-field cleanup-field)
+            (%coerce-argument field :daq-base-object)
+          (unwind-protect
+              (opendaq:struct-builder/set (%require-live-pointer object) coerced-name coerced-field)
+            (%cleanup-coerced-argument cleanup-field)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric (setf field-values) (new-value object))
+(defmethod (setf field-values) (new-value (object struct-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:struct-builder/set-field-values (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defun struct-type-create-struct-type-no-defaults (name names types)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-names cleanup-names)
+            (%coerce-argument names :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-types cleanup-types)
+                  (%coerce-argument types :managed-pointer)
+                (unwind-protect
+                    (wrap-struct-type (opendaq:struct-type/create-struct-type-no-defaults coerced-name coerced-names coerced-types))
+                  (%cleanup-coerced-argument cleanup-types)))
+            (%cleanup-coerced-argument cleanup-names)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric field-default-values (object))
+(defmethod field-default-values ((object struct-type))
+  (wrap-object-list (opendaq:struct-type/get-field-default-values (%require-live-pointer object)))
+)
+
+(defgeneric field-names (object))
+(defmethod field-names ((object struct-type))
+  (wrap-object-list (opendaq:struct-type/get-field-names (%require-live-pointer object)))
+)
+
+(defgeneric field-types (object))
+(defmethod field-types ((object struct-type))
+  (wrap-object-list (opendaq:struct-type/get-field-types (%require-live-pointer object)))
+)
+
+(defun struct-type-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:struct-type/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defun struct-create-struct-from-builder (builder)
+  (multiple-value-bind (coerced-builder cleanup-builder)
+      (%coerce-argument builder :managed-pointer)
+    (unwind-protect
+        (wrap-struct (opendaq:struct/create-struct-from-builder coerced-builder))
+      (%cleanup-coerced-argument cleanup-builder)))
+)
+
+(defgeneric get (object name))
+(defmethod get ((object struct) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (wrap-base-object (opendaq:struct/get (%require-live-pointer object) coerced-name))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric as-dictionary (object))
+(defmethod as-dictionary ((object struct))
+  (wrap-dict (opendaq:struct/get-as-dictionary (%require-live-pointer object)))
+)
+
+(defgeneric field-names (object))
+(defmethod field-names ((object struct))
+  (wrap-object-list (opendaq:struct/get-field-names (%require-live-pointer object)))
+)
+
+(defgeneric field-values (object values))
+(defmethod field-values ((object struct) values)
+  (let ((coerced-values values))
+    (opendaq:struct/get-field-values (%require-live-pointer object) coerced-values)
+  )
+)
+
+(defun struct-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:struct/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric struct-type (object))
+(defmethod struct-type ((object struct))
+  (wrap-struct-type (opendaq:struct/get-struct-type (%require-live-pointer object)))
+)
+
+(defgeneric has-field (object name))
+(defmethod has-field ((object struct) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (not (zerop (opendaq:struct/has-field (%require-live-pointer object) coerced-name)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun subscription-event-args-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:subscription-event-args/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric streaming-connection-string (object))
+(defmethod streaming-connection-string ((object subscription-event-args))
+  (%daq-string-to-lisp-and-release (opendaq:subscription-event-args/get-streaming-connection-string (%require-live-pointer object)))
+)
+
+(defgeneric subscription-event-type (object))
+(defmethod subscription-event-type ((object subscription-event-args))
+  (opendaq:subscription-event-args/get-subscription-event-type (%require-live-pointer object))
+)
+
+(defgeneric add-interface (object sync-interface))
+(defmethod add-interface ((object sync-component-private) sync-interface)
+  (multiple-value-bind (coerced-sync-interface cleanup-sync-interface)
+      (%coerce-argument sync-interface :managed-pointer)
+    (unwind-protect
+        (opendaq:sync-component-private/add-interface (%require-live-pointer object) coerced-sync-interface)
+      (%cleanup-coerced-argument cleanup-sync-interface)))
+)
+
+(defun sync-component-private-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:sync-component-private/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric remove-interface (object sync-interface-name))
+(defmethod remove-interface ((object sync-component-private) sync-interface-name)
+  (multiple-value-bind (coerced-sync-interface-name cleanup-sync-interface-name)
+      (%coerce-argument sync-interface-name :daq-string)
+    (unwind-protect
+        (opendaq:sync-component-private/remove-interface (%require-live-pointer object) coerced-sync-interface-name)
+      (%cleanup-coerced-argument cleanup-sync-interface-name)))
+)
+
+(defgeneric (setf sync-locked) (new-value object))
+(defmethod (setf sync-locked) (new-value (object sync-component-private))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:sync-component-private/set-sync-locked (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defun sync-component-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:sync-component/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric interfaces (object))
+(defmethod interfaces ((object sync-component))
+  (wrap-dict (opendaq:sync-component/get-interfaces (%require-live-pointer object)))
+)
+
+(defgeneric selected-source (object))
+(defmethod selected-source ((object sync-component))
+  (opendaq:sync-component/get-selected-source (%require-live-pointer object))
+)
+
+(defgeneric sync-locked (object))
+(defmethod sync-locked ((object sync-component))
+  (not (zerop (opendaq:sync-component/get-sync-locked (%require-live-pointer object))))
+)
+
+(defgeneric (setf selected-source) (new-value object))
+(defmethod (setf selected-source) (new-value (object sync-component))
+  (let ((coerced-new-value new-value))
+    (opendaq:sync-component/set-selected-source (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric add (object name))
+(defmethod add ((object tags-private) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (opendaq:tags-private/add (%require-live-pointer object) coerced-name)
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun tags-private-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:tags-private/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric tags-private-remove (object name))
+(defmethod tags-private-remove ((object tags-private) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (opendaq:tags-private/remove (%require-live-pointer object) coerced-name)
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defgeneric replace (object tags))
+(defmethod replace ((object tags-private) tags)
+  (multiple-value-bind (coerced-tags cleanup-tags)
+      (%coerce-argument tags :managed-pointer)
+    (unwind-protect
+        (opendaq:tags-private/replace (%require-live-pointer object) coerced-tags)
+      (%cleanup-coerced-argument cleanup-tags)))
+)
+
+(defgeneric contains (object name))
+(defmethod contains ((object tags) name)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (not (zerop (opendaq:tags/contains (%require-live-pointer object) coerced-name)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun tags-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:tags/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric list (object))
+(defmethod list ((object tags))
+  (wrap-object-list (opendaq:tags/get-list (%require-live-pointer object)))
+)
+
+(defgeneric query (object query))
+(defmethod query ((object tags) query)
+  (multiple-value-bind (coerced-query cleanup-query)
+      (%coerce-argument query :daq-string)
+    (unwind-protect
+        (not (zerop (opendaq:tags/query (%require-live-pointer object) coerced-query)))
+      (%cleanup-coerced-argument cleanup-query)))
+)
+
+(defgeneric build (object))
+(defmethod build ((object tail-reader-builder))
+  (wrap-tail-reader (opendaq:tail-reader-builder/build (%require-live-pointer object)))
+)
+
+(defgeneric domain-read-type (object))
+(defmethod domain-read-type ((object tail-reader-builder))
+  (opendaq:tail-reader-builder/get-domain-read-type (%require-live-pointer object))
+)
+
+(defgeneric history-size (object))
+(defmethod history-size ((object tail-reader-builder))
+  (opendaq:tail-reader-builder/get-history-size (%require-live-pointer object))
+)
+
+(defgeneric input-port (object))
+(defmethod input-port ((object tail-reader-builder))
+  (wrap-input-port (opendaq:tail-reader-builder/get-input-port (%require-live-pointer object)))
+)
+
+(defun tail-reader-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:tail-reader-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric read-mode (object))
+(defmethod read-mode ((object tail-reader-builder))
+  (opendaq:tail-reader-builder/get-read-mode (%require-live-pointer object))
+)
+
+(defgeneric tail-reader-builder-signal (object))
+(defmethod tail-reader-builder-signal ((object tail-reader-builder))
+  (wrap-signal (opendaq:tail-reader-builder/get-signal (%require-live-pointer object)))
+)
+
+(defgeneric skip-events (object))
+(defmethod skip-events ((object tail-reader-builder))
+  (not (zerop (opendaq:tail-reader-builder/get-skip-events (%require-live-pointer object))))
+)
+
+(defgeneric value-read-type (object))
+(defmethod value-read-type ((object tail-reader-builder))
+  (opendaq:tail-reader-builder/get-value-read-type (%require-live-pointer object))
+)
+
+(defgeneric (setf domain-read-type) (new-value object))
+(defmethod (setf domain-read-type) (new-value (object tail-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:tail-reader-builder/set-domain-read-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf history-size) (new-value object))
+(defmethod (setf history-size) (new-value (object tail-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:tail-reader-builder/set-history-size (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf input-port) (new-value object))
+(defmethod (setf input-port) (new-value (object tail-reader-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:tail-reader-builder/set-input-port (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf read-mode) (new-value object))
+(defmethod (setf read-mode) (new-value (object tail-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:tail-reader-builder/set-read-mode (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf signal) (new-value object))
+(defmethod (setf signal) (new-value (object tail-reader-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:tail-reader-builder/set-signal (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf skip-events) (new-value object))
+(defmethod (setf skip-events) (new-value (object tail-reader-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-bool)
+    (unwind-protect
+        (opendaq:tail-reader-builder/set-skip-events (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf value-read-type) (new-value object))
+(defmethod (setf value-read-type) (new-value (object tail-reader-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:tail-reader-builder/set-value-read-type (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defun tail-reader-status-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:tail-reader-status/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric sufficient-history (object))
+(defmethod sufficient-history ((object tail-reader-status))
+  (not (zerop (opendaq:tail-reader-status/get-sufficient-history (%require-live-pointer object))))
+)
+
+(defun tail-reader-create-tail-reader-from-existing (invalidated-reader history-size value-read-type domain-read-type)
+  (multiple-value-bind (coerced-invalidated-reader cleanup-invalidated-reader)
+      (%coerce-argument invalidated-reader :managed-pointer)
+    (unwind-protect
+        (let ((coerced-history-size history-size))
+          (let ((coerced-value-read-type value-read-type))
+            (let ((coerced-domain-read-type domain-read-type))
+              (wrap-tail-reader (opendaq:tail-reader/create-tail-reader-from-existing coerced-invalidated-reader coerced-history-size coerced-value-read-type coerced-domain-read-type))
+            )
+          )
+        )
+      (%cleanup-coerced-argument cleanup-invalidated-reader)))
+)
+
+(defun tail-reader-create-tail-reader-from-port (port history-size value-read-type domain-read-type mode)
+  (multiple-value-bind (coerced-port cleanup-port)
+      (%coerce-argument port :managed-pointer)
+    (unwind-protect
+        (let ((coerced-history-size history-size))
+          (let ((coerced-value-read-type value-read-type))
+            (let ((coerced-domain-read-type domain-read-type))
+              (let ((coerced-mode mode))
+                (wrap-tail-reader (opendaq:tail-reader/create-tail-reader-from-port coerced-port coerced-history-size coerced-value-read-type coerced-domain-read-type coerced-mode))
+              )
+            )
+          )
+        )
+      (%cleanup-coerced-argument cleanup-port)))
+)
+
+(defgeneric history-size (object))
+(defmethod history-size ((object tail-reader))
+  (opendaq:tail-reader/get-history-size (%require-live-pointer object))
+)
+
+(defun tail-reader-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:tail-reader/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric tail-reader-read (object values count))
+(defmethod tail-reader-read ((object tail-reader) values count)
+  (let ((coerced-values values))
+    (let ((coerced-count count))
+      (multiple-value-bind (value-0 value-1)
+          (opendaq:tail-reader/read (%require-live-pointer object) coerced-values coerced-count)
+        (cl:values
+          value-0
+          (wrap-tail-reader-status value-1)))
+    )
+  )
+)
+
+(defgeneric tail-reader-read-with-domain (object values domain count))
+(defmethod tail-reader-read-with-domain ((object tail-reader) values domain count)
+  (let ((coerced-values values))
+    (let ((coerced-domain domain))
+      (let ((coerced-count count))
+        (multiple-value-bind (value-0 value-1)
+            (opendaq:tail-reader/read-with-domain (%require-live-pointer object) coerced-values coerced-domain coerced-count)
+          (cl:values
+            value-0
+            (wrap-tail-reader-status value-1)))
+      )
+    )
+  )
+)
+
+(defun task-graph-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:task-graph/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defun task-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:task/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric name (object))
+(defmethod name ((object task))
+  (%daq-string-to-lisp-and-release (opendaq:task/get-name (%require-live-pointer object)))
+)
+
+(defgeneric (setf name) (new-value object))
+(defmethod (setf name) (new-value (object task))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:task/set-name (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric then (object continuation))
+(defmethod then ((object task) continuation)
+  (multiple-value-bind (coerced-continuation cleanup-continuation)
+      (%coerce-argument continuation :managed-pointer)
+    (unwind-protect
+        (opendaq:task/then (%require-live-pointer object) coerced-continuation)
+      (%cleanup-coerced-argument cleanup-continuation)))
+)
+
+(defun type-manager-private-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:type-manager-private/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric (setf core-event-callback) (new-value object))
+(defmethod (setf core-event-callback) (new-value (object type-manager-private))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:type-manager-private/set-core-event-callback (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric add-type (object type))
+(defmethod add-type ((object type-manager) type)
+  (multiple-value-bind (coerced-type cleanup-type)
+      (%coerce-argument type :managed-pointer)
+    (unwind-protect
+        (opendaq:type-manager/add-type (%require-live-pointer object) coerced-type)
+      (%cleanup-coerced-argument cleanup-type)))
+)
+
+(defun type-manager-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:type-manager/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric type-manager-type (object type-name))
+(defmethod type-manager-type ((object type-manager) type-name)
+  (multiple-value-bind (coerced-type-name cleanup-type-name)
+      (%coerce-argument type-name :daq-string)
+    (unwind-protect
+        (wrap-daq-type (opendaq:type-manager/get-type (%require-live-pointer object) coerced-type-name))
+      (%cleanup-coerced-argument cleanup-type-name)))
+)
+
+(defgeneric types (object))
+(defmethod types ((object type-manager))
+  (wrap-object-list (opendaq:type-manager/get-types (%require-live-pointer object)))
+)
+
+(defgeneric has-type (object type-name))
+(defmethod has-type ((object type-manager) type-name)
+  (multiple-value-bind (coerced-type-name cleanup-type-name)
+      (%coerce-argument type-name :daq-string)
+    (unwind-protect
+        (not (zerop (opendaq:type-manager/has-type (%require-live-pointer object) coerced-type-name)))
+      (%cleanup-coerced-argument cleanup-type-name)))
+)
+
+(defgeneric remove-type (object type-name))
+(defmethod remove-type ((object type-manager) type-name)
+  (multiple-value-bind (coerced-type-name cleanup-type-name)
+      (%coerce-argument type-name :daq-string)
+    (unwind-protect
+        (opendaq:type-manager/remove-type (%require-live-pointer object) coerced-type-name)
+      (%cleanup-coerced-argument cleanup-type-name)))
+)
+
+(defun daq-type-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:type/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric name (object))
+(defmethod name ((object daq-type))
+  (%daq-string-to-lisp-and-release (opendaq:type/get-name (%require-live-pointer object)))
+)
+
+(defgeneric build (object))
+(defmethod build ((object unit-builder))
+  (wrap-unit (opendaq:unit-builder/build (%require-live-pointer object)))
+)
+
+(defun unit-builder-create-unit-builder-from-existing (unit-to-copy)
+  (multiple-value-bind (coerced-unit-to-copy cleanup-unit-to-copy)
+      (%coerce-argument unit-to-copy :managed-pointer)
+    (unwind-protect
+        (wrap-unit-builder (opendaq:unit-builder/create-unit-builder-from-existing coerced-unit-to-copy))
+      (%cleanup-coerced-argument cleanup-unit-to-copy)))
+)
+
+(defgeneric id (object))
+(defmethod id ((object unit-builder))
+  (opendaq:unit-builder/get-id (%require-live-pointer object))
+)
+
+(defun unit-builder-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:unit-builder/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric name (object))
+(defmethod name ((object unit-builder))
+  (%daq-string-to-lisp-and-release (opendaq:unit-builder/get-name (%require-live-pointer object)))
+)
+
+(defgeneric quantity (object))
+(defmethod quantity ((object unit-builder))
+  (%daq-string-to-lisp-and-release (opendaq:unit-builder/get-quantity (%require-live-pointer object)))
+)
+
+(defgeneric symbol (object))
+(defmethod symbol ((object unit-builder))
+  (%daq-string-to-lisp-and-release (opendaq:unit-builder/get-symbol (%require-live-pointer object)))
+)
+
+(defgeneric (setf id) (new-value object))
+(defmethod (setf id) (new-value (object unit-builder))
+  (let ((coerced-new-value new-value))
+    (opendaq:unit-builder/set-id (%require-live-pointer object) coerced-new-value)
+  )
+  new-value)
+
+(defgeneric (setf name) (new-value object))
+(defmethod (setf name) (new-value (object unit-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:unit-builder/set-name (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf quantity) (new-value object))
+(defmethod (setf quantity) (new-value (object unit-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:unit-builder/set-quantity (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric (setf symbol) (new-value object))
+(defmethod (setf symbol) (new-value (object unit-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:unit-builder/set-symbol (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric id (object))
+(defmethod id ((object unit))
+  (opendaq:unit/get-id (%require-live-pointer object))
+)
+
+(defun unit-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:unit/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric name (object))
+(defmethod name ((object unit))
+  (%daq-string-to-lisp-and-release (opendaq:unit/get-name (%require-live-pointer object)))
+)
+
+(defgeneric quantity (object))
+(defmethod quantity ((object unit))
+  (%daq-string-to-lisp-and-release (opendaq:unit/get-quantity (%require-live-pointer object)))
+)
+
+(defgeneric symbol (object))
+(defmethod symbol ((object unit))
+  (%daq-string-to-lisp-and-release (opendaq:unit/get-symbol (%require-live-pointer object)))
+)
+
+(defun updatable-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:updatable/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric serialize-for-update (object serializer))
+(defmethod serialize-for-update ((object updatable) serializer)
+  (multiple-value-bind (coerced-serializer cleanup-serializer)
+      (%coerce-argument serializer :managed-pointer)
+    (unwind-protect
+        (opendaq:updatable/serialize-for-update (%require-live-pointer object) coerced-serializer)
+      (%cleanup-coerced-argument cleanup-serializer)))
+)
+
+(defgeneric updatable-update (object update config))
+(defmethod updatable-update ((object updatable) update config)
+  (multiple-value-bind (coerced-update cleanup-update)
+      (%coerce-argument update :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-config cleanup-config)
+            (%coerce-argument config :daq-base-object)
+          (unwind-protect
+              (opendaq:updatable/update (%require-live-pointer object) coerced-update coerced-config)
+            (%cleanup-coerced-argument cleanup-config)))
+      (%cleanup-coerced-argument cleanup-update)))
+)
+
+(defgeneric update-ended (object context))
+(defmethod update-ended ((object updatable) context)
+  (multiple-value-bind (coerced-context cleanup-context)
+      (%coerce-argument context :daq-base-object)
+    (unwind-protect
+        (opendaq:updatable/update-ended (%require-live-pointer object) coerced-context)
+      (%cleanup-coerced-argument cleanup-context)))
+)
+
+(defgeneric update-internal (object update context))
+(defmethod update-internal ((object updatable) update context)
+  (multiple-value-bind (coerced-update cleanup-update)
+      (%coerce-argument update :managed-pointer)
+    (unwind-protect
+        (multiple-value-bind (coerced-context cleanup-context)
+            (%coerce-argument context :daq-base-object)
+          (unwind-protect
+              (opendaq:updatable/update-internal (%require-live-pointer object) coerced-update coerced-context)
+            (%cleanup-coerced-argument cleanup-context)))
+      (%cleanup-coerced-argument cleanup-update)))
+)
+
+(defgeneric device-update-options (object))
+(defmethod device-update-options ((object update-parameters))
+  (wrap-device-update-options (opendaq:update-parameters/get-device-update-options (%require-live-pointer object)))
+)
+
+(defun update-parameters-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:update-parameters/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric (setf device-update-options) (new-value object))
+(defmethod (setf device-update-options) (new-value (object update-parameters))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :managed-pointer)
+    (unwind-protect
+        (opendaq:update-parameters/set-device-update-options (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defun user-internal-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:user-internal/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric password-hash (object))
+(defmethod password-hash ((object user-internal))
+  (%daq-string-to-lisp-and-release (opendaq:user-internal/get-password-hash (%require-live-pointer object)))
+)
+
+(defgeneric is-anonymous (object))
+(defmethod is-anonymous ((object user-internal))
+  (not (zerop (opendaq:user-internal/is-anonymous (%require-live-pointer object))))
+)
+
+(defgeneric force-unlock (object))
+(defmethod force-unlock ((object user-lock))
+  (opendaq:user-lock/force-unlock (%require-live-pointer object))
+)
+
+(defun user-lock-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:user-lock/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric is-locked (object))
+(defmethod is-locked ((object user-lock))
+  (not (zerop (opendaq:user-lock/is-locked (%require-live-pointer object))))
+)
+
+(defgeneric user-lock-lock (object user))
+(defmethod user-lock-lock ((object user-lock) user)
+  (multiple-value-bind (coerced-user cleanup-user)
+      (%coerce-argument user :managed-pointer)
+    (unwind-protect
+        (opendaq:user-lock/lock (%require-live-pointer object) coerced-user)
+      (%cleanup-coerced-argument cleanup-user)))
+)
+
+(defgeneric user-lock-unlock (object user))
+(defmethod user-lock-unlock ((object user-lock) user)
+  (multiple-value-bind (coerced-user cleanup-user)
+      (%coerce-argument user :managed-pointer)
+    (unwind-protect
+        (opendaq:user-lock/unlock (%require-live-pointer object) coerced-user)
+      (%cleanup-coerced-argument cleanup-user)))
+)
+
+(defgeneric groups (object))
+(defmethod groups ((object user))
+  (wrap-object-list (opendaq:user/get-groups (%require-live-pointer object)))
+)
+
+(defun user-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:user/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric username (object))
+(defmethod username ((object user))
+  (%daq-string-to-lisp-and-release (opendaq:user/get-username (%require-live-pointer object)))
+)
+
+(defgeneric eval (object))
+(defmethod eval ((object validator))
+  (%daq-string-to-lisp-and-release (opendaq:validator/get-eval (%require-live-pointer object)))
+)
+
+(defun validator-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:validator/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric validate (object prop-obj value))
+(defmethod validate ((object validator) prop-obj value)
+  (multiple-value-bind (coerced-prop-obj cleanup-prop-obj)
+      (%coerce-argument prop-obj :daq-base-object)
+    (unwind-protect
+        (multiple-value-bind (coerced-value cleanup-value)
+            (%coerce-argument value :daq-base-object)
+          (unwind-protect
+              (opendaq:validator/validate (%require-live-pointer object) coerced-prop-obj coerced-value)
+            (%cleanup-coerced-argument cleanup-value)))
+      (%cleanup-coerced-argument cleanup-prop-obj)))
+)
+
+(defgeneric validate-no-lock (object prop-obj value))
+(defmethod validate-no-lock ((object validator) prop-obj value)
+  (multiple-value-bind (coerced-prop-obj cleanup-prop-obj)
+      (%coerce-argument prop-obj :daq-base-object)
+    (unwind-protect
+        (multiple-value-bind (coerced-value cleanup-value)
+            (%coerce-argument value :daq-base-object)
+          (unwind-protect
+              (opendaq:validator/validate-no-lock (%require-live-pointer object) coerced-prop-obj coerced-value)
+            (%cleanup-coerced-argument cleanup-value)))
+      (%cleanup-coerced-argument cleanup-prop-obj)))
+)
+
+(defun version-info-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:version-info/get-interface-id intf-id-slot)
+    nil
+  )
+)
+
+(defgeneric major (object))
+(defmethod major ((object version-info))
+  (opendaq:version-info/get-major (%require-live-pointer object))
+)
+
+(defgeneric minor (object))
+(defmethod minor ((object version-info))
+  (opendaq:version-info/get-minor (%require-live-pointer object))
+)
+
+(defgeneric patch (object))
+(defmethod patch ((object version-info))
+  (opendaq:version-info/get-patch (%require-live-pointer object))
+)
+
+(defgeneric execute (object))
+(defmethod execute ((object work))
+  (opendaq:work/execute (%require-live-pointer object))
+)
+
+(defun work-interface-id ()
+  (cffi:with-foreign-object (intf-id-slot 'opendaq::daq-intf-id)
+    (opendaq:work/get-interface-id intf-id-slot)
+    nil
+  )
+)
 
 (defgeneric read-samples (reader count &optional timeout-ms poll-interval))
 (defmethod read-samples ((reader stream-reader) count
@@ -352,36 +18232,1487 @@
                                 collect (cffi:mem-aref samples :double index))))))))
 
 (export '(
+         accepts-object
+         accepts-signals
+         active
+         active-streaming-source
+         add
+         add-address
+         add-address-info
+         add-child-manager
+         add-component
+         add-config-provider
+         add-configuration-connection-status
+         add-connected-client
+         add-connection-string
          add-device
+         add-device-remapping
+         add-devices
+         add-discovery-server
+         add-function-block
+         add-handler
+         add-input
+         add-input-port
+         add-input-ports
+         add-interface
+         add-item
+         add-logger-sink
+         add-module
+         add-module-path
+         add-network-inteface
+         add-parameter
+         add-property
+         add-ref
+         add-related-signal
+         add-server
+         add-server-capability
+         add-signal
+         add-signals
+         add-standard-servers
+         add-status
+         add-status-with-message
+         add-streaming
+         add-streaming-connection-status
+         add-streaming-source
+         add-type
+         address
+         address-info
+         address-info-address
+         address-info-builder
+         address-info-builder-address
+         address-info-builder-interface-id
+         address-info-builder-type
+         address-info-create-address-info-from-builder
+         address-info-interface-id
+         address-info-private
+         address-info-private-interface-id
+         address-info-type
+         addresses
+         all-properties
+         allocate
+         allocator
+         allocator-create-malloc-allocator
+         allocator-interface-id
+         allow
+         allow-different-sampling-rates
+         allowed
+         argument-info
+         argument-info-create-dict-argument-info
+         argument-info-create-list-argument-info
+         argument-info-interface-id
+         argument-info-type
+         arguments
+         as-dictionary
+         asset-id
+         assign
+         assigned
+         authenticate
+         authenticate-anonymous
+         authenticated-only
+         authentication-provider
+         authentication-provider-create-json-file-authentication-provider
+         authentication-provider-create-json-string-authentication-provider
+         authentication-provider-create-static-authentication-provider
+         authentication-provider-interface-id
+         available-count
+         available-device-types
+         available-devices
+         available-function-block-types
+         available-operation-modes
+         available-samples
+         available-server-types
+         available-streaming-types
+         awaitable
+         awaitable-interface-id
          base-object
+         base-object-create
+         begin-update
+         binary-data
+         binary-data-address
+         binary-data-interface-id
+         block-reader
+         block-reader-builder
+         block-reader-builder-interface-id
+         block-reader-builder-signal
+         block-reader-create-block-reader-from-existing
+         block-reader-create-block-reader-from-port
+         block-reader-interface-id
+         block-reader-read
+         block-reader-read-with-domain
+         block-reader-status
+         block-reader-status-interface-id
+         block-reader-status-read-samples
+         block-size
          build
+         call
+         call-custom-proc
+         callable-info
+         callable-info-interface-id
+         callable-info-no-lock
+         cancel
+         change-ip-config
+         channel
+         channel-interface-id
+         channels
+         channels-recursive
+         char-ptr
+         check-for-references
+         check-for-references-no-lock
+         child-device-options
+         class-name
+         class-on-property-value-read
+         class-on-property-value-write
+         clear
+         clear-domain-signal-without-notification
+         clear-property-value
+         clear-property-value-no-lock
+         clear-property-values
+         clear-protected-property-value
+         clear-protected-property-values
+         clear-related-signals
+         clear-server-streaming-capabilities
+         client-to-device-streaming-enabled
+         client-type-name
+         clone-with-owner
+         cloneable
+         cloneable-clone
+         cloneable-interface-id
+         coerce
+         coerce-no-lock
+         coercer
+         coercer-interface-id
+         coercer-no-lock
+         common-sample-rate
+         comparable
+         comparable-interface-id
+         compare-to
+         complete
+         complete-device-capabilities
+         complete-server-capability
+         complex-number
+         complex-number-interface-id
          component
+         component-config
+         component-deserialize-context
+         component-deserialize-context-clone
+         component-deserialize-context-create-component-deserialize-context
+         component-deserialize-context-interface-id
+         component-holder
+         component-holder-component
+         component-holder-create-component-holder-with-ids
+         component-holder-interface-id
+         component-interface-id
+         component-log-level
+         component-private
+         component-private-interface-id
+         component-status-container
+         component-status-container-interface-id
+         component-status-container-private
+         component-status-container-private-interface-id
+         component-type
+         component-type-builder
+         component-type-builder-create-device-type-builder
+         component-type-builder-create-function-block-type-builder
+         component-type-builder-create-server-type-builder
+         component-type-builder-create-streaming-type-builder
+         component-type-builder-interface-id
+         component-type-interface-id
+         component-type-private
+         component-type-private-interface-id
+         component-update-context
+         component-update-context-interface-id
+         component-update-context-signal
+         components
+         components-log-level
+         config-provider
+         config-provider-create-env-config-provider
+         config-provider-create-json-config-provider
+         config-provider-interface-id
+         configuration-connection-info
+         connect
+         connect-signal-scheduler-notification
+         connected
+         connected-client-info
+         connected-client-info-address
+         connected-client-info-create-connected-client-info-with-params
+         connected-client-info-interface-id
+         connected-clients-info
+         connection
+         connection-interface-id
+         connection-internal
+         connection-internal-interface-id
+         connection-signal
+         connection-status
+         connection-status-container
+         connection-status-container-private
+         connection-status-container-private-interface-id
+         connection-string
+         connection-string-prefix
+         connection-strings
+         connection-type
+         connections
+         const-char-ptr
+         contains
+         context
+         context-interface-id
+         context-internal
+         context-internal-interface-id
+         convertible
+         convertible-interface-id
+         core-event-args
+         core-event-args-create-core-event-args-property-added
+         core-event-args-create-core-event-args-property-object-update-end
+         core-event-args-create-core-event-args-property-order-changed
+         core-event-args-create-core-event-args-property-removed
+         core-event-args-create-core-event-args-property-value-changed
+         core-event-args-create-core-event-args-type-added
+         core-event-args-create-core-event-args-type-removed
+         core-event-args-interface-id
+         core-event-callback
+         core-event-trigger
+         core-events-enabled
+         core-type
+         count
+         create-default-add-device-config
+         create-default-config
+         create-default-configuration
+         create-device
+         create-devices
+         create-end-iterator
+         create-function-block
+         create-server
+         create-start-iterator
+         create-streaming
+         current
+         current-item-type
+         custom-components
+         custom-data
+         custom-info-property-names
+         daq-boolean
+         daq-boolean-create-boolean
+         daq-boolean-interface-id
+         daq-function
+         daq-integer
+         daq-integer-interface-id
+         daq-number
+         daq-number-interface-id
+         daq-string-object
+         daq-string-object-create-string-n
+         daq-string-object-interface-id
+         daq-type
+         daq-type-interface-id
+         data
+         data-descriptor
+         data-descriptor-builder
+         data-descriptor-builder-create-data-descriptor-builder-from-existing
+         data-descriptor-builder-interface-id
+         data-descriptor-interface-id
+         data-packet
+         data-packet-create-constant-data-packet-with-domain
+         data-packet-create-data-packet-with-domain
+         data-packet-create-data-packet-with-external-memory
+         data-packet-interface-id
+         data-packet-last-value
+         data-packet-offset
+         data-rule
+         data-rule-builder
+         data-rule-builder-create-data-rule-builder-from-existing
+         data-rule-builder-interface-id
+         data-rule-builder-type
+         data-rule-create-constant-data-rule
+         data-rule-create-data-rule-from-builder
+         data-rule-create-explicit-data-rule
+         data-rule-create-explicit-domain-data-rule
+         data-rule-create-linear-data-rule
+         data-rule-interface-id
+         data-rule-type
+         data-size
+         deactivate-streaming
+         default-config
+         default-root-device-info
+         default-root-device-local-id
+         default-value
+         default-value-no-lock
+         default-value-unresolved
+         delete-at
+         delete-item
+         delete-memory
+         deleter
+         deleter-interface-id
+         denied
          denominator
+         deny
+         dequeue
+         dequeue-all
+         dequeue-up-to
+         description
+         description-no-lock
+         description-unresolved
+         descriptor
+         deserialize
+         deserialize-component
+         deserialize-component-interface-id
+         deserialize-values
+         deserialized-parameter
+         deserializer
+         deserializer-update
          device
+         device-class
+         device-config
+         device-domain
+         device-domain-create-device-domain-with-reference-domain-info
+         device-domain-interface-id
+         device-info
+         device-info-config
+         device-info-config-create-device-info-config-with-custom-sdk-version
+         device-info-config-interface-id
+         device-info-interface-id
+         device-info-internal
+         device-info-internal-interface-id
+         device-interface-id
+         device-lock
+         device-manual
+         device-network-config
+         device-network-config-interface-id
+         device-private
+         device-private-interface-id
+         device-private-lock
+         device-private-unlock
+         device-revision
+         device-signals
+         device-type
+         device-type-interface-id
+         device-unlock
+         device-update-options
+         device-update-options-interface-id
+         device-update-options-with-local-id-or-null
+         devices
+         dict
+         dict-element-type
+         dict-element-type-interface-id
+         dict-interface-id
+         dict-remove
+         dimension
+         dimension-builder
+         dimension-builder-create-dimension-builder-from-existing
+         dimension-builder-interface-id
+         dimension-create-dimension-from-builder
+         dimension-interface-id
+         dimension-rule
+         dimension-rule-builder
+         dimension-rule-builder-create-dimension-rule-builder-from-existing
+         dimension-rule-builder-interface-id
+         dimension-rule-builder-type
+         dimension-rule-create-dimension-rule-from-builder
+         dimension-rule-create-linear-dimension-rule
+         dimension-rule-create-list-dimension-rule
+         dimension-rule-create-logarithmic-dimension-rule
+         dimension-rule-interface-id
+         dimension-rule-type
+         dimensions
+         disable-core-event-trigger
+         disable-discovery
+         disconnect
+         disconnect-without-signal-notification
+         disconnected
+         discovery-info
+         discovery-server
+         discovery-server-interface-id
+         discovery-server-root-device
+         discovery-servers
+         dispatch
+         dispose
+         domain
+         domain-packet
+         domain-read-type
+         domain-signal
+         domain-signal-reference-removed
+         domain-signal-reference-set
+         domain-transform-function
+         dump
+         element-interface-id
+         empty
+         enable-core-event-trigger
+         enable-discovery
+         enable-keep-last-value
          enable-standard-providers
+         encoding
+         end-list
+         end-object
+         end-update
+         end-update-event-args
+         end-update-event-args-interface-id
+         end-update-event-args-properties
+         enqueue
+         enqueue-and-steal-ref
+         enqueue-last-descriptor
+         enqueue-multiple
+         enqueue-multiple-and-steal-ref
+         enqueue-on-this-thread
+         enqueue-with-scheduler
+         enumeration
+         enumeration-create-enumeration-with-int-value
+         enumeration-create-enumeration-with-int-value-and-type
+         enumeration-create-enumeration-with-type
+         enumeration-interface-id
+         enumeration-type
+         enumeration-type-create-enumeration-type-with-values
+         enumeration-type-interface-id
+         enumerator-int-value
+         enumerator-names
+         equals
+         equals-value
+         error-info
+         eval
+         eval-value
+         eval-value-create-eval-value-args
+         eval-value-create-eval-value-func
+         eval-value-interface-id
+         event
+         event-args
+         event-args-interface-id
+         event-handler
+         event-handler-interface-id
+         event-id
+         event-interface-id
+         event-name
+         event-packet
+         event-packet-create-data-descriptor-changed-event-packet
+         event-packet-create-implicit-domain-gap-detected-event-packet
+         event-packet-interface-id
+         event-packets
+         execute
+         extend
+         external-listener
+         field-default-values
+         field-names
+         field-types
+         field-values
+         file-line
+         file-name
          find-component
+         find-properties
+         find-user
+         float-object
+         float-object-create-float
+         float-object-interface-id
+         float-value
+         flush
+         flush-on-level
+         folder
+         folder-config
+         folder-config-create-io-folder
+         folder-config-interface-id
+         folder-interface-id
+         force-unlock
+         free
+         freezable
+         freezable-interface-id
+         freeze
+         function-block
+         function-block-input-ports
+         function-block-interface-id
+         function-block-signals
+         function-block-type
+         function-block-type-interface-id
+         function-blocks
+         gap-checking-enabled
+         get
+         global-id
+         global-log-level
+         graph-visualization
+         graph-visualization-interface-id
+         groups
+         handle-event
+         hardware-revision
+         has-completed
+         has-event-packet
+         has-field
+         has-gap-packet
+         has-item
+         has-key
+         has-on-get-selection-values-listeners
+         has-on-get-suggested-values-listeners
+         has-on-read-listeners
+         has-property
+         has-scaling-calc
+         has-server-capability
+         has-type
+         has-user-read-access
+         hash-code
+         high-value
+         history-size
+         host-name
+         id
+         imaginary
+         info
+         inherit
+         inherited
+         input-data-type
+         input-port
+         input-port-accepts-signal
+         input-port-config
+         input-port-config-interface-id
+         input-port-connection
+         input-port-connections
+         input-port-interface-id
+         input-port-notification-method
+         input-port-notification-methods
+         input-port-notifications
+         input-port-notifications-accepts-signal
+         input-port-notifications-interface-id
+         input-port-private
+         input-port-private-interface-id
+         input-port-signal
+         input-sample-type
+         input-used
+         inputs-outputs-folder
+         insert-at
+         inspectable
          instance
          instance-builder
+         instance-builder-interface-id
+         instance-builder-root-device
+         instance-create-instance
+         instance-interface-id
+         instance-root-device
+         int-value
+         interfaces
+         internal-state
+         intf-id
+         io-folder-config
+         io-folder-config-interface-id
+         is-anonymous
+         is-anonymous-allowed
+         is-authorized
+         is-complete
+         is-const
+         is-empty
+         is-frozen
+         is-integer-value-selection
+         is-locked
+         is-locked-internal
+         is-main-loop-set
+         is-multi-threaded
+         is-parent-updating
+         is-recording
+         is-referenced
+         is-referenced-no-lock
+         is-remote
+         is-removed
+         is-root
+         is-synchronized
+         is-updating
+         is-valid
+         item
          item-at
+         item-type
+         item-type-no-lock
+         items
+         iterable
+         iterable-interface-id
+         iterator
+         iterator-interface-id
+         keep-last-value
+         key
+         key-interface-id
+         key-list
+         key-raw
+         key-str
+         key-type
+         key-type-no-lock
+         keys
+         labels
+         last-message
+         last-message-logger-sink-private
+         last-message-logger-sink-private-interface-id
+         last-modified
+         last-value
+         length
+         level
+         license-config
+         license-loaded
+         list
+         list-element-type
+         list-element-type-interface-id
+         listener
+         listener-connected
+         listener-connected-scheduled
+         listener-disconnected
+         load-authenticated-modules-only
+         load-configuration
+         load-license
+         load-module
+         load-modules
+         local-active
+         local-id
+         local-path
+         location
+         lock-all-attributes
+         lock-attributes
+         lock-guard
+         lock-guard-interface-id
+         locked-attributes
+         locking-strategy
+         log
+         log-file-info
+         log-file-info-builder
+         log-file-info-builder-interface-id
+         log-file-info-interface-id
+         log-file-infos
+         logger
+         logger-component
+         logger-component-interface-id
+         logger-interface-id
+         logger-sink
+         logger-sink-create-rotating-file-logger-sink
+         logger-sink-create-std-err-logger-sink
+         logger-sink-create-std-out-logger-sink
+         logger-sink-create-win-debug-logger-sink
+         logger-sinks
+         logger-thread-pool
+         logger-thread-pool-interface-id
+         low-value
+         mac-address
+         main-descriptor
+         major
+         manager
+         manufacturer
+         manufacturer-uri
+         mark-as-invalid
+         max-value
+         max-value-no-lock
+         max-value-unresolved
+         message
+         metadata
+         min-read-count
+         min-value
+         min-value-no-lock
+         min-value-unresolved
+         minor
+         mirrored-data-descriptor
+         mirrored-device
+         mirrored-device-config
+         mirrored-device-config-interface-id
+         mirrored-device-interface-id
+         mirrored-device-type
+         mirrored-domain-signal
+         mirrored-input-port-config
+         mirrored-input-port-config-interface-id
+         mirrored-signal-config
+         mirrored-signal-config-interface-id
+         mirrored-signal-private
+         mirrored-signal-private-interface-id
+         model
+         module
+         module-authenticator
+         module-info
+         module-info-interface-id
+         module-interface-id
+         module-manager
+         module-manager-create-module-manager-multiple-paths
+         module-manager-interface-id
+         module-manager-utils
+         module-manager-utils-interface-id
+         module-options
          module-path
+         module-paths-list
+         modules
+         move-back
+         move-front
+         move-module-manager
+         move-next
+         multi-reader
+         multi-reader-builder
+         multi-reader-builder-interface-id
+         multi-reader-create-multi-reader-ex
+         multi-reader-create-multi-reader-from-existing
+         multi-reader-interface-id
+         multi-reader-offset
+         multi-reader-read
+         multi-reader-read-with-domain
+         multi-reader-status
+         multi-reader-status-interface-id
+         mute
+         mute-listener
+         mutex
+         mutex-owner
+         name
+         network-configuration-enabled
+         network-interface
+         network-interface-interface-id
+         network-interface-names
+         network-interfaces
+         new-connection-string
+         new-manufacturer
+         new-serial-number
+         notification-method
+         notify-packet-enqueued
+         notify-packet-enqueued-on-this-thread
+         notify-packet-enqueued-with-scheduler
          numerator
          object-list
+         object-list-interface-id
+         old-block-reader
+         old-value
+         on-any-property-value-read
+         on-any-property-value-write
+         on-component-core-event
+         on-core-event
+         on-data-available
+         on-end-update
+         on-packet-destroyed
+         on-property-value-read
+         on-property-value-write
+         on-selection-values-read
+         on-subscribe-complete
+         on-suggested-values-read
+         on-unsubscribe-complete
+         operation-mode
+         operation-mode-recursive
+         options
+         or-add-component
+         origin
+         output
+         output-data-type
+         output-sample-type
+         overlap
+         override-default-value
+         override-state
+         ownable
+         ownable-interface-id
+         owner
+         owner-device-remote-id
+         packet
+         packet-count
+         packet-destruct-callback
+         packet-destruct-callback-interface-id
+         packet-id
+         packet-interface-id
+         packet-reader
+         packet-reader-create-packet-reader-from-port
+         packet-reader-interface-id
+         packet-reader-read
+         packet-received
+         packet-type
+         parameters
+         parent
+         parent-active
+         parent-global-id
+         parent-mac-address
+         parent-name
+         parse-error-code
+         password-hash
+         patch
+         path
+         pattern
+         peek
+         permission-manager
+         permission-manager-interface-id
+         permission-manager-internal
+         permission-manager-internal-interface-id
+         permission-mask-builder
+         permission-mask-builder-create-permission-mask-builder-from-mask
+         permission-mask-builder-interface-id
+         permission-mask-builder-read
+         permissions
+         permissions-builder
+         permissions-builder-interface-id
+         permissions-interface-id
+         permissions-internal
+         permissions-internal-interface-id
+         platform
+         pop-back
+         pop-front
+         populate-options
+         port
+         position
+         post-scaling
+         prefix
+         procedure
+         product-code
+         product-instance-uri
+         property
+         property-builder
+         property-builder-create-bool-property-builder
+         property-builder-create-dict-property-builder
+         property-builder-create-enumeration-property-builder
+         property-builder-create-float-property-builder
+         property-builder-create-function-property-builder
+         property-builder-create-int-property-builder
+         property-builder-create-list-property-builder
+         property-builder-create-object-property-builder
+         property-builder-create-ratio-property-builder
+         property-builder-create-reference-property-builder
+         property-builder-create-selection-property-builder
+         property-builder-create-sparse-selection-property-builder
+         property-builder-create-string-property-builder
+         property-builder-create-struct-property-builder
+         property-builder-interface-id
+         property-builder-on-property-value-read
+         property-builder-on-property-value-write
+         property-create-dict-property
+         property-create-enumeration-property
+         property-create-float-property
+         property-create-function-property
+         property-create-int-property
+         property-create-list-property
+         property-create-object-property
+         property-create-ratio-property
+         property-create-reference-property
+         property-create-selection-property
+         property-create-sparse-selection-property
+         property-create-string-property
+         property-create-struct-property
+         property-event-type
+         property-interface-id
+         property-internal
+         property-internal-clone
+         property-internal-interface-id
+         property-object
+         property-object-class
+         property-object-class-builder
+         property-object-class-builder-create-property-object-class-builder-with-manager
+         property-object-class-builder-interface-id
+         property-object-class-builder-properties
+         property-object-class-interface-id
+         property-object-class-internal
+         property-object-class-internal-clone
+         property-object-class-internal-interface-id
+         property-object-class-properties
+         property-object-class-property
+         property-object-create-property-object-with-class-and-manager
+         property-object-interface-id
+         property-object-internal
+         property-object-internal-clone
+         property-object-internal-interface-id
+         property-object-on-property-value-read
+         property-object-on-property-value-write
+         property-object-property
+         property-object-protected
+         property-object-protected-interface-id
+         property-on-property-value-read
+         property-on-property-value-write
+         property-order
+         property-references
+         property-selection-value
+         property-selection-value-no-lock
+         property-type
          property-value
+         property-value-event-args
+         property-value-event-args-property
+         property-value-no-lock
+         protected-property-selection-value
+         protected-property-value
+         protected-property-value-no-lock
+         protocol-id
+         protocol-name
+         protocol-type
+         protocol-version
+         public
+         push-back
+         push-front
+         quantity
+         query
+         range
+         range-interface-id
          ratio
+         ratio-interface-id
+         raw-data
+         raw-data-size
+         raw-last-value
          raw-pointer
+         raw-sample-size
+         raw-value-by-index
+         reachability-status
+         reachability-status-private
+         read-all
+         read-mode
+         read-only
+         read-only-no-lock
+         read-only-unresolved
          read-samples
+         read-status
+         read-timeout-type
+         reader
+         reader-config
+         reader-config-input-ports
+         reader-config-interface-id
+         reader-interface-id
+         reader-status
+         reader-status-interface-id
+         reader-status-offset
+         real
+         recorder
+         recorder-interface-id
+         recursive-lock-guard
+         recursive-search
+         recursive-search-interface-id
+         ref-count
+         reference-domain-id
+         reference-domain-info
+         reference-domain-info-builder
+         reference-domain-info-builder-create-reference-domain-info-builder-from-existing
+         reference-domain-info-builder-interface-id
+         reference-domain-info-interface-id
+         reference-domain-offset
+         reference-time-protocol
+         referenced-property
+         referenced-property-no-lock
+         referenced-property-unresolved
+         register-service
+         related-signals
          release
+         release-ref
+         remap-input-port-connections
+         remote-id
+         removable
+         removable-interface-id
+         removable-remove
+         remove-all-input-ports
+         remove-all-signals
+         remove-at
+         remove-child-manager
+         remove-component
+         remove-connected-client
+         remove-device
+         remove-function-block
+         remove-handler
+         remove-input
+         remove-input-port-connection
+         remove-input-ports
+         remove-interface
+         remove-item
+         remove-item-with-local-id
+         remove-parameter
+         remove-property
+         remove-related-signal
+         remove-server
+         remove-server-capability
+         remove-signals
+         remove-streaming-connection-status
+         remove-streaming-source
+         remove-type
+         replace
+         request-current-configuration
+         request-ip-config
+         required-common-sample-rate
+         requires-signal
+         reset
+         result
+         result-no-lock
+         retrieve-network-configuration
+         return-type
+         reusable-data-packet
+         reusable-data-packet-interface-id
+         reuse
+         revision-counter
+         root
+         root-component
          root-device
-         signals
+         root-device-config
+         rule
+         rule-private
+         rule-private-interface-id
+         run-main-loop
+         run-main-loop-iteration
+         runtime-class-name
+         sample-count
+         sample-reader
+         sample-reader-interface-id
+         sample-size
+         sample-type
+         samples-until-next-descriptor
+         samples-until-next-event-packet
+         samples-until-next-gap-packet
+         save-configuration
+         scale-data
+         scale-data-output
+         scaling
+         scaling-builder
+         scaling-builder-create-scaling-builder-from-existing
+         scaling-builder-interface-id
+         scaling-calc-private
+         scaling-calc-private-interface-id
+         scaling-create-linear-scaling
+         scaling-create-scaling-from-builder
+         scaling-interface-id
+         scaling-type
+         schedule-function
+         schedule-graph
+         schedule-work
+         schedule-work-on-main-loop
+         scheduler
+         scheduler-create-scheduler-with-main-loop
+         scheduler-interface-id
+         scheduler-worker-num
+         sdk-version
+         search-filter
+         search-filter-create-any-search-filter
+         search-filter-create-custom-search-filter
+         search-filter-create-excluded-tags-search-filter
+         search-filter-create-local-id-search-filter
+         search-filter-create-not-search-filter
+         search-filter-create-or-search-filter
+         search-filter-create-recursive-search-filter
+         search-filter-create-required-tags-search-filter
+         search-filter-create-visible-search-filter
+         search-filter-interface-id
+         selected-source
+         selection-values
+         selection-values-no-lock
+         selection-values-unresolved
+         send-packet
+         send-packet-and-steal-ref
+         send-packet-recursive-lock
+         send-packets
+         send-packets-and-steal-ref
+         serial-number
+         serializable
+         serializable-interface-id
+         serialize
+         serialize-for-update
+         serialize-id
+         serialized-list
+         serialized-list-interface-id
+         serialized-list-read-bool
+         serialized-list-read-float
+         serialized-list-read-int
+         serialized-list-read-list
+         serialized-list-read-object
+         serialized-list-read-serialized-list
+         serialized-list-read-serialized-object
+         serialized-list-read-string
+         serialized-object
+         serialized-object-interface-id
+         serialized-object-read-bool
+         serialized-object-read-float
+         serialized-object-read-int
+         serialized-object-read-list
+         serialized-object-read-object
+         serialized-object-read-serialized-list
+         serialized-object-read-serialized-object
+         serialized-object-read-string
+         serialized-object-type
+         serializer
+         server
+         server-capabilities
+         server-capability
+         server-capability-config
+         server-capability-config-interface-id
+         server-capability-interface-id
+         server-interface-id
+         server-signals
+         server-type
+         server-type-interface-id
+         servers
+         set
+         set-as-root
+         should-log
+         signal
+         signal-config
+         signal-config-create-signal-with-descriptor
+         signal-config-interface-id
+         signal-dependency
+         signal-events
+         signal-events-interface-id
+         signal-interface-id
+         signal-last-value
+         signal-private
+         signal-private-interface-id
+         signal-serialize-id
          signals-recursive
+         simple-type
+         simple-type-interface-id
          simplify
+         sink-log-level
+         size
+         skip-events
+         skip-samples
+         software-revision
+         source
+         source-components
+         start-list
+         start-object
+         start-on-full-unit-of-domain
+         start-recording
+         start-tagged-object
+         status
+         status-container
+         status-message
+         status-signal
+         status-with-message
+         statuses
+         stop
+         stop-main-loop
+         stop-recording
          stream-reader
+         stream-reader-builder
+         stream-reader-builder-interface-id
+         stream-reader-builder-signal
+         stream-reader-create-stream-reader-from-existing
+         stream-reader-create-stream-reader-from-port
+         stream-reader-interface-id
+         stream-reader-read
+         stream-reader-read-with-domain
+         streamed
+         streaming
+         streaming-connection-string
+         streaming-interface-id
+         streaming-sources
+         streaming-type
+         streaming-type-interface-id
+         struct
+         struct-builder
+         struct-builder-create-struct-builder-from-struct
+         struct-builder-interface-id
+         struct-create-struct-from-builder
+         struct-fields
+         struct-interface-id
+         struct-type
+         struct-type-create-struct-type-no-defaults
+         struct-type-interface-id
+         struct-type-no-lock
+         submit-configuration
+         submit-network-configuration
+         subscribe-completed
+         subscribe-for-destruct-notification
+         subscriber-count
+         subscribers
+         subscription-event-args
+         subscription-event-args-interface-id
+         subscription-event-type
+         sufficient-history
+         suggested-values
+         suggested-values-no-lock
+         suggested-values-unresolved
+         symbol
+         sync-component
+         sync-component-interface-id
+         sync-component-private
+         sync-component-private-interface-id
+         sync-locked
+         system-type
+         system-uuid
+         tags
+         tags-interface-id
+         tags-private
+         tags-private-interface-id
+         tags-private-remove
+         tail-reader
+         tail-reader-builder
+         tail-reader-builder-interface-id
+         tail-reader-builder-signal
+         tail-reader-create-tail-reader-from-existing
+         tail-reader-create-tail-reader-from-port
+         tail-reader-interface-id
+         tail-reader-read
+         tail-reader-read-with-domain
+         tail-reader-status
+         tail-reader-status-interface-id
+         task
+         task-graph
+         task-graph-interface-id
+         task-interface-id
+         then
+         tick-offset-tolerance
+         tick-resolution
+         ticks-since-origin
+         to-bool
+         to-float
+         to-int
+         to-json
+         to-string
+         trigger
+         trigger-component-core-event
+         trigger-core-event
+         trigger-event
+         type
+         type-manager
+         type-manager-interface-id
+         type-manager-private
+         type-manager-private-interface-id
+         type-manager-type
+         type-sort
+         types
+         unit
+         unit-builder
+         unit-builder-create-unit-builder-from-existing
+         unit-builder-interface-id
+         unit-interface-id
+         unit-no-lock
+         unit-unresolved
+         unlock-all-attributes
+         unlock-attributes
+         unmute
+         unmute-listener
+         unregister-service
+         unsubscribe-completed
+         unsubscribe-completed-no-lock
+         updatable
+         updatable-interface-id
+         updatable-update
+         update-connection-status
+         update-connection-status-with-message
+         update-ended
+         update-inherited-permissions
+         update-internal
+         update-mode
+         update-operation-mode
+         update-parameters
+         update-parameters-interface-id
+         updating
+         user
+         user-interface-id
+         user-internal
+         user-internal-interface-id
+         user-lock
+         user-lock-interface-id
+         user-lock-lock
+         user-lock-unlock
+         user-name
+         username
+         uses-offset
+         using-scheduler-main-loop
+         valid
+         validate
+         validate-no-lock
+         validator
+         validator-interface-id
+         validator-no-lock
+         value
+         value-by-index
+         value-interface-id
+         value-list
+         value-protected
+         value-range
+         value-read-type
+         value-transform-function
+         value-type
+         value-type-no-lock
+         value-type-unresolved
+         values
+         vendor-keys
+         verify-parameters
+         version
+         version-info
+         version-info-interface-id
+         visible
+         visible-no-lock
+         visible-properties
+         visible-unresolved
+         visit-children
+         wait
+         wait-all
+         wait-for-message
+         work
+         work-interface-id
+         wrap-address-info
+         wrap-address-info-builder
+         wrap-address-info-private
+         wrap-allocator
+         wrap-argument-info
+         wrap-authentication-provider
+         wrap-awaitable
          wrap-base-object
+         wrap-binary-data
+         wrap-block-reader
+         wrap-block-reader-builder
+         wrap-block-reader-status
+         wrap-callable-info
+         wrap-channel
+         wrap-char-ptr
+         wrap-cloneable
+         wrap-coercer
+         wrap-comparable
+         wrap-complex-number
          wrap-component
+         wrap-component-deserialize-context
+         wrap-component-holder
+         wrap-component-private
+         wrap-component-status-container
+         wrap-component-status-container-private
+         wrap-component-type
+         wrap-component-type-builder
+         wrap-component-type-private
+         wrap-component-update-context
+         wrap-config-provider
+         wrap-connected-client-info
+         wrap-connection
+         wrap-connection-internal
+         wrap-connection-status-container-private
+         wrap-const-char-ptr
+         wrap-context
+         wrap-context-internal
+         wrap-convertible
+         wrap-core-event-args
+         wrap-core-type
+         wrap-daq-boolean
+         wrap-daq-function
+         wrap-daq-integer
+         wrap-daq-number
+         wrap-daq-string-object
+         wrap-daq-type
+         wrap-data-descriptor
+         wrap-data-descriptor-builder
+         wrap-data-packet
+         wrap-data-rule
+         wrap-data-rule-builder
+         wrap-deleter
+         wrap-deserialize-component
+         wrap-deserializer
          wrap-device
+         wrap-device-domain
+         wrap-device-info
+         wrap-device-info-config
+         wrap-device-info-internal
+         wrap-device-network-config
+         wrap-device-private
+         wrap-device-type
+         wrap-device-update-options
+         wrap-dict
+         wrap-dict-element-type
+         wrap-dimension
+         wrap-dimension-builder
+         wrap-dimension-rule
+         wrap-dimension-rule-builder
+         wrap-discovery-server
+         wrap-end-update-event-args
+         wrap-enumeration
+         wrap-enumeration-type
+         wrap-error-info
+         wrap-eval-value
+         wrap-event
+         wrap-event-args
+         wrap-event-handler
+         wrap-event-packet
+         wrap-float-object
+         wrap-folder
+         wrap-folder-config
+         wrap-freezable
+         wrap-function-block
+         wrap-function-block-type
+         wrap-graph-visualization
+         wrap-input-port
+         wrap-input-port-config
+         wrap-input-port-notifications
+         wrap-input-port-private
+         wrap-inspectable
          wrap-instance
          wrap-instance-builder
+         wrap-io-folder-config
+         wrap-iterable
+         wrap-iterator
+         wrap-last-message-logger-sink-private
+         wrap-list-element-type
+         wrap-lock-guard
+         wrap-log-file-info
+         wrap-log-file-info-builder
+         wrap-logger
+         wrap-logger-component
+         wrap-logger-sink
+         wrap-logger-thread-pool
+         wrap-mirrored-device
+         wrap-mirrored-device-config
+         wrap-mirrored-input-port-config
+         wrap-mirrored-signal-config
+         wrap-mirrored-signal-private
+         wrap-module
+         wrap-module-authenticator
+         wrap-module-info
+         wrap-module-manager
+         wrap-module-manager-utils
+         wrap-multi-reader
+         wrap-multi-reader-builder
+         wrap-multi-reader-status
+         wrap-mutex
+         wrap-network-interface
          wrap-object-list
+         wrap-ownable
+         wrap-packet
+         wrap-packet-destruct-callback
+         wrap-packet-reader
+         wrap-permission-manager
+         wrap-permission-manager-internal
+         wrap-permission-mask-builder
+         wrap-permissions
+         wrap-permissions-builder
+         wrap-permissions-internal
+         wrap-procedure
+         wrap-property
+         wrap-property-builder
+         wrap-property-internal
+         wrap-property-object
+         wrap-property-object-class
+         wrap-property-object-class-builder
+         wrap-property-object-class-internal
+         wrap-property-object-internal
+         wrap-property-object-protected
+         wrap-property-value-event-args
+         wrap-range
          wrap-ratio
+         wrap-reader
+         wrap-reader-config
+         wrap-reader-status
+         wrap-recorder
+         wrap-recursive-search
+         wrap-reference-domain-info
+         wrap-reference-domain-info-builder
+         wrap-removable
+         wrap-reusable-data-packet
+         wrap-rule-private
+         wrap-sample-reader
+         wrap-scaling
+         wrap-scaling-builder
+         wrap-scaling-calc-private
+         wrap-scheduler
+         wrap-search-filter
+         wrap-serializable
+         wrap-serialized-list
+         wrap-serialized-object
+         wrap-serializer
+         wrap-server
+         wrap-server-capability
+         wrap-server-capability-config
+         wrap-server-type
+         wrap-signal
+         wrap-signal-config
+         wrap-signal-events
+         wrap-signal-private
+         wrap-simple-type
          wrap-stream-reader
+         wrap-stream-reader-builder
+         wrap-streaming
+         wrap-streaming-type
+         wrap-struct
+         wrap-struct-builder
+         wrap-struct-type
+         wrap-subscription-event-args
+         wrap-sync-component
+         wrap-sync-component-private
+         wrap-tags
+         wrap-tags-private
+         wrap-tail-reader
+         wrap-tail-reader-builder
+         wrap-tail-reader-status
+         wrap-task
+         wrap-task-graph
+         wrap-type-manager
+         wrap-type-manager-private
+         wrap-unit
+         wrap-unit-builder
+         wrap-updatable
+         wrap-update-parameters
+         wrap-user
+         wrap-user-internal
+         wrap-user-lock
+         wrap-validator
+         wrap-version-info
+         wrap-work
+         write
+         write-bool
+         write-float
+         write-int
+         write-null
+         write-string
          ))
