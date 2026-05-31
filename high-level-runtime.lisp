@@ -56,6 +56,71 @@
       (error "The openDAQ object ~S has already been released." object))
     pointer))
 
+(defun %daq-string-to-lisp-and-release (pointer)
+  (if (or (null pointer) (cffi:null-pointer-p pointer))
+      nil
+      (prog1
+          (cffi:foreign-string-to-lisp (opendaq:string/get-char-ptr pointer))
+        (%release-pointer pointer))))
+
+(defun %cleanup-coerced-argument (cleanup)
+  (when cleanup
+    (funcall cleanup))
+  nil)
+
+(defun %coerce-argument (value category)
+  (flet ((make-cleanup (pointer)
+           (lambda ()
+             (%release-pointer pointer))))
+    (case category
+      (:managed-pointer
+       (values (cond ((typep value 'managed-object)
+                      (%require-live-pointer value))
+                     ((null value)
+                      (cffi:null-pointer))
+                     (t
+                      value))
+               nil))
+      (:daq-string
+       (cond ((typep value 'managed-object)
+              (values (%require-live-pointer value) nil))
+             ((null value)
+              (values (cffi:null-pointer) nil))
+             ((stringp value)
+              (let ((pointer (opendaq:make-daq-string value)))
+                (values pointer (make-cleanup pointer))))
+             ((pathnamep value)
+              (let ((pointer (opendaq:make-daq-string (namestring value))))
+                (values pointer (make-cleanup pointer))))
+             (t
+              (values value nil))))
+      (:daq-base-object
+       (cond ((typep value 'managed-object)
+              (values (%require-live-pointer value) nil))
+             ((stringp value)
+              (let ((pointer (opendaq:make-daq-string value)))
+                (values pointer (make-cleanup pointer))))
+             ((pathnamep value)
+              (let ((pointer (opendaq:make-daq-string (namestring value))))
+                (values pointer (make-cleanup pointer))))
+             ((floatp value)
+              (let ((pointer (opendaq:float-object/create-float
+                              (coerce value 'double-float))))
+                (values pointer (make-cleanup pointer))))
+             ((integerp value)
+              (let ((pointer (opendaq:integer/create-integer value)))
+                (values pointer (make-cleanup pointer))))
+             ((or (eq value t) (null value))
+              (let ((pointer (opendaq:boolean/create-bool-object
+                              (if value 1 0))))
+                (values pointer (make-cleanup pointer))))
+             (t
+              (values value nil))))
+      (:daq-bool
+       (values (if value 1 0) nil))
+      (otherwise
+       (values value nil)))))
+
 (defmethod raw-pointer ((object managed-object))
   (%pointer object))
 

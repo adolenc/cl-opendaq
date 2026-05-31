@@ -3,6 +3,100 @@
 
 (in-package #:opendaq.high-level)
 
+(defclass base-object (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object base-object)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "BASE-OBJECT requires :POINTER.")))
+
+(defun wrap-base-object (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'base-object :pointer pointer)))
+
+(defclass component (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object component)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "COMPONENT requires :POINTER.")))
+
+(defun wrap-component (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'component :pointer pointer)))
+
+(defclass device (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object device)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (if pointer-p
+      (%adopt-pointer object pointer)
+      (error "DEVICE requires :POINTER.")))
+
+(defun wrap-device (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'device :pointer pointer)))
+
+(defclass instance (managed-object)
+  (
+   (%builder-initarg :initarg :builder :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object instance)
+                                       &key (pointer nil pointer-p)
+                                            (builder (let ((builder (make-instance 'instance-builder))) (setf (module-path builder) (native-library-directory)) builder) builder-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or builder-p)
+        (error "INSTANCE cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    (t
+      (multiple-value-bind (coerced-builder cleanup-builder)
+          (%coerce-argument builder :managed-pointer)
+        (unwind-protect
+            (%adopt-pointer object (opendaq:instance/create-instance-from-builder coerced-builder))
+          (%cleanup-coerced-argument cleanup-builder)))
+      )))
+
+(defun wrap-instance (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'instance :pointer pointer)))
+
+(defclass instance-builder (managed-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object instance-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (%adopt-pointer object pointer))
+    (t
+      (%adopt-pointer object (opendaq:instance-builder/create-instance-builder ))
+      )))
+
+(defun wrap-instance-builder (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'instance-builder :pointer pointer)))
+
 (defclass ratio (managed-object)
   (
    (%numerator-initarg :initarg :numerator :initform nil)
@@ -21,29 +115,209 @@
         (error "RATIO cannot be initialized with both :POINTER and constructor arguments."))
       (%adopt-pointer object pointer))
     ((and numerator-p denominator-p)
-      (%adopt-pointer object (opendaq:ratio/create-ratio numerator denominator)))
+      (let ((coerced-numerator numerator))
+        (let ((coerced-denominator denominator))
+          (%adopt-pointer object (opendaq:ratio/create-ratio coerced-numerator coerced-denominator))
+        )
+      )
+      )
     (t
       (error "RATIO requires either :POINTER or :NUMERATOR and :DENOMINATOR."))))
 
 (defun wrap-ratio (pointer)
-  (make-instance 'ratio :pointer pointer))
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'ratio :pointer pointer)))
+
+(defclass stream-reader (managed-object)
+  (
+   (%signal-initarg :initarg :signal :initform nil)
+   (%value-read-type-initarg :initarg :value-read-type :initform nil)
+   (%domain-read-type-initarg :initarg :domain-read-type :initform nil)
+   (%mode-initarg :initarg :mode :initform nil)
+   (%timeout-type-initarg :initarg :timeout-type :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object stream-reader)
+                                       &key (pointer nil pointer-p)
+                                            (signal nil signal-p)
+                                            (value-read-type opendaq::+daq-sample-type-float-64+ value-read-type-p)
+                                            (domain-read-type opendaq::+daq-sample-type-int-64+ domain-read-type-p)
+                                            (mode :daq-read-mode-scaled mode-p)
+                                            (timeout-type :daq-read-timeout-type-any timeout-type-p)
+                                       &allow-other-keys)
+  (cond
+    (pointer-p
+      (when (or signal-p value-read-type-p domain-read-type-p mode-p timeout-type-p)
+        (error "STREAM-READER cannot be initialized with both :POINTER and constructor arguments."))
+      (%adopt-pointer object pointer))
+    ((and signal-p)
+      (multiple-value-bind (coerced-signal cleanup-signal)
+          (%coerce-argument signal :managed-pointer)
+        (unwind-protect
+            (let ((coerced-value-read-type value-read-type))
+              (let ((coerced-domain-read-type domain-read-type))
+                (let ((coerced-mode mode))
+                  (let ((coerced-timeout-type timeout-type))
+                    (%adopt-pointer object (opendaq:stream-reader/create-stream-reader coerced-signal coerced-value-read-type coerced-domain-read-type coerced-mode coerced-timeout-type))
+                  )
+                )
+              )
+            )
+          (%cleanup-coerced-argument cleanup-signal)))
+      )
+    (t
+      (error "STREAM-READER requires either :POINTER or :SIGNAL."))))
+
+(defun wrap-stream-reader (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'stream-reader :pointer pointer)))
 
 (defgeneric numerator (object))
 (defmethod numerator ((object ratio))
-  (opendaq:ratio/get-numerator (%require-live-pointer object)))
+  (opendaq:ratio/get-numerator (%require-live-pointer object))
+)
 
 (defgeneric denominator (object))
 (defmethod denominator ((object ratio))
-  (opendaq:ratio/get-denominator (%require-live-pointer object)))
+  (opendaq:ratio/get-denominator (%require-live-pointer object))
+)
 
 (defgeneric simplify (object))
 (defmethod simplify ((object ratio))
-  (wrap-ratio (opendaq:ratio/simplify (%require-live-pointer object))))
+  (wrap-ratio (opendaq:ratio/simplify (%require-live-pointer object)))
+)
 
-(export '(release
-         raw-pointer
-         ratio
-         wrap-ratio
-         numerator
+(defgeneric module-path (object))
+(defmethod module-path ((object instance-builder))
+  (%daq-string-to-lisp-and-release (opendaq:instance-builder/get-module-path (%require-live-pointer object)))
+)
+
+(defgeneric (setf module-path) (new-value object))
+(defmethod (setf module-path) (new-value (object instance-builder))
+  (multiple-value-bind (coerced-new-value cleanup-new-value)
+      (%coerce-argument new-value :daq-string)
+    (unwind-protect
+        (opendaq:instance-builder/set-module-path (%require-live-pointer object) coerced-new-value)
+      (%cleanup-coerced-argument cleanup-new-value)))
+  new-value)
+
+(defgeneric enable-standard-providers (object &optional flag))
+(defmethod enable-standard-providers ((object instance-builder) &optional (flag t))
+  (multiple-value-bind (coerced-flag cleanup-flag)
+      (%coerce-argument flag :daq-bool)
+    (unwind-protect
+        (opendaq:instance-builder/enable-standard-providers (%require-live-pointer object) coerced-flag)
+      (%cleanup-coerced-argument cleanup-flag)))
+)
+
+(defgeneric build (object))
+(defmethod build ((object instance-builder))
+  (wrap-instance (opendaq:instance-builder/build (%require-live-pointer object)))
+)
+
+(defgeneric root-device (object))
+(defmethod root-device ((object instance))
+  (wrap-device (opendaq:instance/get-root-device (%require-live-pointer object)))
+)
+
+(defgeneric add-device (object connection-string &optional config))
+(defmethod add-device ((object device) connection-string &optional (config nil))
+  (multiple-value-bind (coerced-connection-string cleanup-connection-string)
+      (%coerce-argument connection-string :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-config cleanup-config)
+            (%coerce-argument config :managed-pointer)
+          (unwind-protect
+              (wrap-device (opendaq:device/add-device (%require-live-pointer object) coerced-connection-string coerced-config))
+            (%cleanup-coerced-argument cleanup-config)))
+      (%cleanup-coerced-argument cleanup-connection-string)))
+)
+
+(defgeneric find-component (object id))
+(defmethod find-component ((object managed-object) id)
+  (multiple-value-bind (coerced-id cleanup-id)
+      (%coerce-argument id :daq-string)
+    (unwind-protect
+        (wrap-component (opendaq:component/find-component (%require-live-pointer object) coerced-id))
+      (%cleanup-coerced-argument cleanup-id)))
+)
+
+(defgeneric property-value (object property-name))
+(defmethod property-value ((object managed-object) property-name)
+  (multiple-value-bind (coerced-property-name cleanup-property-name)
+      (%coerce-argument property-name :daq-string)
+    (unwind-protect
+        (wrap-base-object (opendaq:property-object/get-property-value (%require-live-pointer object) coerced-property-name))
+      (%cleanup-coerced-argument cleanup-property-name)))
+)
+
+(defgeneric (setf property-value) (new-value object property-name))
+(defmethod (setf property-value) (new-value (object managed-object) property-name)
+  (multiple-value-bind (coerced-property-name cleanup-property-name)
+      (%coerce-argument property-name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-new-value cleanup-new-value)
+            (%coerce-argument new-value :daq-base-object)
+          (unwind-protect
+              (opendaq:property-object/set-property-value (%require-live-pointer object) coerced-property-name coerced-new-value)
+            (%cleanup-coerced-argument cleanup-new-value)))
+      (%cleanup-coerced-argument cleanup-property-name)))
+  new-value)
+
+(defgeneric read-samples (reader count &optional timeout-ms poll-interval))
+(defmethod read-samples ((reader stream-reader) count
+                         &optional (timeout-ms 1000) (poll-interval 0.01))
+  (when (minusp count)
+    (error "COUNT must be non-negative."))
+  (if (zerop count)
+      nil
+      (let ((reader-pointer (%require-live-pointer reader)))
+        (cffi:with-foreign-object (samples :double count)
+          (loop with total = 0
+                while (< total count)
+                do (multiple-value-bind (read-count status)
+                       (opendaq:stream-reader/read
+                        reader-pointer
+                        (cffi:inc-pointer samples
+                                          (* total (cffi:foreign-type-size :double)))
+                        (- count total)
+                        timeout-ms)
+                     (unwind-protect
+                         (if (zerop read-count)
+                             (sleep poll-interval)
+                             (incf total read-count))
+                       (%release-pointer status)))
+                finally (return
+                          (loop for index below count
+                                collect (cffi:mem-aref samples :double index))))))))
+
+(export '(
+         add-device
+         base-object
+         build
+         component
          denominator
-         simplify))
+         device
+         enable-standard-providers
+         find-component
+         instance
+         instance-builder
+         module-path
+         numerator
+         property-value
+         ratio
+         raw-pointer
+         read-samples
+         release
+         root-device
+         simplify
+         stream-reader
+         wrap-base-object
+         wrap-component
+         wrap-device
+         wrap-instance
+         wrap-instance-builder
+         wrap-ratio
+         wrap-stream-reader
+         ))

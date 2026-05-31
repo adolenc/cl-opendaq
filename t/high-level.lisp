@@ -64,3 +64,50 @@
         "High-level ratio should release its native pointer when the wrapper is garbage-collected.")
     (is (null (trivial-garbage:weak-pointer-value weak-pointer))
         "High-level ratio wrapper should be reclaimable without an explicit release call.")))
+
+(test high-level-instance-make-instance
+  (let (instance root-device)
+    (unwind-protect
+        (progn
+          (setf instance (make-instance 'daq:instance))
+          (setf root-device (daq:root-device instance))
+          (is (typep root-device 'daq:device)
+              "High-level instance constructor should produce an instance with a root device.")
+          (is (not (cffi:null-pointer-p (daq:raw-pointer instance)))
+              "High-level instance should hold a live native pointer."))
+      (when root-device
+        (daq:release root-device))
+      (when instance
+        (daq:release instance)))))
+
+(test high-level-simulator-read-samples
+  (let (instance root-device device channel signal reader samples)
+    (unwind-protect
+        (progn
+          (setf instance (make-instance 'daq:instance))
+          (setf root-device (daq:root-device instance))
+          (setf device (daq:add-device root-device "daqref://device0"))
+          (setf channel (daq:find-component instance "/openDAQDevice/Dev/RefDev0/IO/AI/RefCh0"))
+          (setf signal (daq:find-component instance "/openDAQDevice/Dev/RefDev0/IO/AI/RefCh0/Sig/AI0"))
+          (setf (daq:property-value channel "Frequency") 0.5d0)
+          (setf reader (make-instance 'daq:stream-reader :signal signal))
+          (sleep 0.05)
+          (setf samples (daq:read-samples reader 100))
+          (is (= 100 (length samples))
+              "High-level stream reader should return the requested number of samples.")
+          (is (every #'numberp samples)
+              "High-level stream reader should return numeric samples.")
+          (is (some (lambda (sample) (> (abs sample) 1d-9)) samples)
+              "High-level stream reader should return non-zero simulator samples."))
+      (when reader
+        (daq:release reader))
+      (when signal
+        (daq:release signal))
+      (when channel
+        (daq:release channel))
+      (when device
+        (daq:release device))
+      (when root-device
+        (daq:release root-device))
+      (when instance
+        (daq:release instance)))))

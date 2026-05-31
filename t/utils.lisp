@@ -57,7 +57,7 @@
 
 (def-suite high-level-suite
   :in opendaq-suite
-  :description "High-level wrapper coverage for the generated ratio slice.")
+  :description "High-level wrapper coverage for the generated bindings layer.")
 
 (defun %daq-string-value (string)
   (cffi:foreign-string-to-lisp (daq.ll:string/get-char-ptr string)))
