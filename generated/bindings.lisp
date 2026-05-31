@@ -455,7 +455,6 @@
   )
 
 (defun address-info-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (address-slot 'daq-address-info)
     (%check-error (%daq-address-info-builder-build self address-slot) "daqAddressInfoBuilder_build")
     (cffi:mem-ref address-slot 'daq-address-info)
@@ -467,7 +466,6 @@
   )
 
 (defun address-info-builder/create-address-info-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-address-info-builder)
     (%check-error (%daq-address-info-builder-create-address-info-builder obj-slot) "daqAddressInfoBuilder_createAddressInfoBuilder")
     (cffi:mem-ref obj-slot 'daq-address-info-builder)
@@ -480,7 +478,6 @@
   )
 
 (defun address-info-builder/get-address (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (address-slot 'daq-string)
     (%check-error (%daq-address-info-builder-get-address self address-slot) "daqAddressInfoBuilder_getAddress")
     (cffi:mem-ref address-slot 'daq-string)
@@ -493,7 +490,6 @@
   )
 
 (defun address-info-builder/get-connection-string (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (connection-string-slot 'daq-string)
     (%check-error (%daq-address-info-builder-get-connection-string self connection-string-slot) "daqAddressInfoBuilder_getConnectionString")
     (cffi:mem-ref connection-string-slot 'daq-string)
@@ -505,7 +501,6 @@
   )
 
 (defun address-info-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-address-info-builder-get-interface-id intf-id)
   nil)
 
@@ -515,7 +510,6 @@
   )
 
 (defun address-info-builder/get-reachability-status (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (address-reachability-slot 'daq-address-reachability-status)
     (%check-error (%daq-address-info-builder-get-reachability-status self address-reachability-slot) "daqAddressInfoBuilder_getReachabilityStatus")
     (cffi:mem-ref address-reachability-slot 'daq-address-reachability-status)
@@ -528,7 +522,6 @@
   )
 
 (defun address-info-builder/get-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-string)
     (%check-error (%daq-address-info-builder-get-type self type-slot) "daqAddressInfoBuilder_getType")
     (cffi:mem-ref type-slot 'daq-string)
@@ -541,7 +534,6 @@
   )
 
 (defun address-info-builder/set-address (self address)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-address-info-builder-set-address self address) "daqAddressInfoBuilder_setAddress")
   nil
 )
@@ -552,7 +544,6 @@
   )
 
 (defun address-info-builder/set-connection-string (self connection-string)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-address-info-builder-set-connection-string self connection-string) "daqAddressInfoBuilder_setConnectionString")
   nil
 )
@@ -563,7 +554,6 @@
   )
 
 (defun address-info-builder/set-reachability-status (self address-reachability)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-address-info-builder-set-reachability-status self address-reachability) "daqAddressInfoBuilder_setReachabilityStatus")
   nil
 )
@@ -574,7 +564,6 @@
   )
 
 (defun address-info-builder/set-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-address-info-builder-set-type self type) "daqAddressInfoBuilder_setType")
   nil
 )
@@ -584,7 +573,6 @@
   )
 
 (defun address-info-private/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-address-info-private-get-interface-id intf-id)
   nil)
 
@@ -594,7 +582,6 @@
   )
 
 (defun address-info-private/set-reachability-status-private (self address-reachability)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-address-info-private-set-reachability-status-private self address-reachability) "daqAddressInfoPrivate_setReachabilityStatusPrivate")
   nil
 )
@@ -604,7 +591,6 @@
   )
 
 (defun address-info/create-address-info ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-address-info)
     (%check-error (%daq-address-info-create-address-info obj-slot) "daqAddressInfo_createAddressInfo")
     (cffi:mem-ref obj-slot 'daq-address-info)
@@ -617,7 +603,6 @@
   )
 
 (defun address-info/create-address-info-from-builder (builder)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-address-info)
     (%check-error (%daq-address-info-create-address-info-from-builder obj-slot builder) "daqAddressInfo_createAddressInfoFromBuilder")
     (cffi:mem-ref obj-slot 'daq-address-info)
@@ -630,7 +615,6 @@
   )
 
 (defun address-info/get-address (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (address-slot 'daq-string)
     (%check-error (%daq-address-info-get-address self address-slot) "daqAddressInfo_getAddress")
     (cffi:mem-ref address-slot 'daq-string)
@@ -643,7 +627,6 @@
   )
 
 (defun address-info/get-connection-string (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (connection-string-slot 'daq-string)
     (%check-error (%daq-address-info-get-connection-string self connection-string-slot) "daqAddressInfo_getConnectionString")
     (cffi:mem-ref connection-string-slot 'daq-string)
@@ -655,7 +638,6 @@
   )
 
 (defun address-info/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-address-info-get-interface-id intf-id)
   nil)
 
@@ -665,7 +647,6 @@
   )
 
 (defun address-info/get-reachability-status (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (address-reachability-slot 'daq-address-reachability-status)
     (%check-error (%daq-address-info-get-reachability-status self address-reachability-slot) "daqAddressInfo_getReachabilityStatus")
     (cffi:mem-ref address-reachability-slot 'daq-address-reachability-status)
@@ -678,7 +659,6 @@
   )
 
 (defun address-info/get-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-string)
     (%check-error (%daq-address-info-get-type self type-slot) "daqAddressInfo_getType")
     (cffi:mem-ref type-slot 'daq-string)
@@ -694,7 +674,6 @@
   )
 
 (defun allocator/allocate (self descriptor bytes align address)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-allocator-allocate self descriptor bytes align address) "daqAllocator_allocate")
   nil
 )
@@ -706,7 +685,6 @@
   )
 
 (defun allocator/create-external-allocator (data deleter)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-allocator)
     (%check-error (%daq-allocator-create-external-allocator obj-slot data deleter) "daqAllocator_createExternalAllocator")
     (cffi:mem-ref obj-slot 'daq-allocator)
@@ -718,7 +696,6 @@
   )
 
 (defun allocator/create-malloc-allocator ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-allocator)
     (%check-error (%daq-allocator-create-malloc-allocator obj-slot) "daqAllocator_createMallocAllocator")
     (cffi:mem-ref obj-slot 'daq-allocator)
@@ -731,7 +708,6 @@
   )
 
 (defun allocator/free (self address)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-allocator-free self address) "daqAllocator_free")
   nil
 )
@@ -741,7 +717,6 @@
   )
 
 (defun allocator/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-allocator-get-interface-id intf-id)
   nil)
 
@@ -752,7 +727,6 @@
   )
 
 (defun argument-info/create-argument-info (name type)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-argument-info)
     (%check-error (%daq-argument-info-create-argument-info obj-slot name type) "daqArgumentInfo_createArgumentInfo")
     (cffi:mem-ref obj-slot 'daq-argument-info)
@@ -767,7 +741,6 @@
   )
 
 (defun argument-info/create-dict-argument-info (name key-type item-type)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-argument-info)
     (%check-error (%daq-argument-info-create-dict-argument-info obj-slot name key-type item-type) "daqArgumentInfo_createDictArgumentInfo")
     (cffi:mem-ref obj-slot 'daq-argument-info)
@@ -781,7 +754,6 @@
   )
 
 (defun argument-info/create-list-argument-info (name item-type)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-argument-info)
     (%check-error (%daq-argument-info-create-list-argument-info obj-slot name item-type) "daqArgumentInfo_createListArgumentInfo")
     (cffi:mem-ref obj-slot 'daq-argument-info)
@@ -793,7 +765,6 @@
   )
 
 (defun argument-info/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-argument-info-get-interface-id intf-id)
   nil)
 
@@ -803,7 +774,6 @@
   )
 
 (defun argument-info/get-item-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (item-type-slot 'daq-core-type)
     (%check-error (%daq-argument-info-get-item-type self item-type-slot) "daqArgumentInfo_getItemType")
     (cffi:mem-ref item-type-slot 'daq-core-type)
@@ -816,7 +786,6 @@
   )
 
 (defun argument-info/get-key-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (key-type-slot 'daq-core-type)
     (%check-error (%daq-argument-info-get-key-type self key-type-slot) "daqArgumentInfo_getKeyType")
     (cffi:mem-ref key-type-slot 'daq-core-type)
@@ -829,7 +798,6 @@
   )
 
 (defun argument-info/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-argument-info-get-name self name-slot) "daqArgumentInfo_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -842,7 +810,6 @@
   )
 
 (defun argument-info/get-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-core-type)
     (%check-error (%daq-argument-info-get-type self type-slot) "daqArgumentInfo_getType")
     (cffi:mem-ref type-slot 'daq-core-type)
@@ -857,7 +824,6 @@
   )
 
 (defun authentication-provider/authenticate (self username password)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (user-out-slot 'daq-user)
     (%check-error (%daq-authentication-provider-authenticate self username password user-out-slot) "daqAuthenticationProvider_authenticate")
     (cffi:mem-ref user-out-slot 'daq-user)
@@ -870,7 +836,6 @@
   )
 
 (defun authentication-provider/authenticate-anonymous (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (user-out-slot 'daq-user)
     (%check-error (%daq-authentication-provider-authenticate-anonymous self user-out-slot) "daqAuthenticationProvider_authenticateAnonymous")
     (cffi:mem-ref user-out-slot 'daq-user)
@@ -883,7 +848,6 @@
   )
 
 (defun authentication-provider/create-authentication-provider (allow-anonymous)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-authentication-provider)
     (%check-error (%daq-authentication-provider-create-authentication-provider obj-slot allow-anonymous) "daqAuthenticationProvider_createAuthenticationProvider")
     (cffi:mem-ref obj-slot 'daq-authentication-provider)
@@ -896,7 +860,6 @@
   )
 
 (defun authentication-provider/create-json-file-authentication-provider (filename)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-authentication-provider)
     (%check-error (%daq-authentication-provider-create-json-file-authentication-provider obj-slot filename) "daqAuthenticationProvider_createJsonFileAuthenticationProvider")
     (cffi:mem-ref obj-slot 'daq-authentication-provider)
@@ -909,7 +872,6 @@
   )
 
 (defun authentication-provider/create-json-string-authentication-provider (json-string)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-authentication-provider)
     (%check-error (%daq-authentication-provider-create-json-string-authentication-provider obj-slot json-string) "daqAuthenticationProvider_createJsonStringAuthenticationProvider")
     (cffi:mem-ref obj-slot 'daq-authentication-provider)
@@ -923,7 +885,6 @@
   )
 
 (defun authentication-provider/create-static-authentication-provider (allow-anonymous user-list)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-authentication-provider)
     (%check-error (%daq-authentication-provider-create-static-authentication-provider obj-slot allow-anonymous user-list) "daqAuthenticationProvider_createStaticAuthenticationProvider")
     (cffi:mem-ref obj-slot 'daq-authentication-provider)
@@ -937,7 +898,6 @@
   )
 
 (defun authentication-provider/find-user (self username)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (user-out-slot 'daq-user)
     (%check-error (%daq-authentication-provider-find-user self username user-out-slot) "daqAuthenticationProvider_findUser")
     (cffi:mem-ref user-out-slot 'daq-user)
@@ -949,7 +909,6 @@
   )
 
 (defun authentication-provider/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-authentication-provider-get-interface-id intf-id)
   nil)
 
@@ -959,7 +918,6 @@
   )
 
 (defun authentication-provider/is-anonymous-allowed (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (allowed-out-slot 'daq-bool)
     (%check-error (%daq-authentication-provider-is-anonymous-allowed self allowed-out-slot) "daqAuthenticationProvider_isAnonymousAllowed")
     (cffi:mem-ref allowed-out-slot 'daq-bool)
@@ -972,7 +930,6 @@
   )
 
 (defun awaitable/cancel (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (canceled-slot 'daq-bool)
     (%check-error (%daq-awaitable-cancel self canceled-slot) "daqAwaitable_cancel")
     (cffi:mem-ref canceled-slot 'daq-bool)
@@ -984,7 +941,6 @@
   )
 
 (defun awaitable/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-awaitable-get-interface-id intf-id)
   nil)
 
@@ -994,7 +950,6 @@
   )
 
 (defun awaitable/get-result (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (result-slot 'daq-base-object)
     (%check-error (%daq-awaitable-get-result self result-slot) "daqAwaitable_getResult")
     (cffi:mem-ref result-slot 'daq-base-object)
@@ -1007,7 +962,6 @@
   )
 
 (defun awaitable/has-completed (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (completed-slot 'daq-bool)
     (%check-error (%daq-awaitable-has-completed self completed-slot) "daqAwaitable_hasCompleted")
     (cffi:mem-ref completed-slot 'daq-bool)
@@ -1019,7 +973,6 @@
   )
 
 (defun awaitable/wait (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-awaitable-wait self) "daqAwaitable_wait")
   nil
 )
@@ -1029,7 +982,6 @@
   )
 
 (defun base-object/add-ref (self)
-  (ensure-opendaq-loaded)
   (let ((result (%daq-base-object-add-ref self)))
     result
   )
@@ -1040,7 +992,6 @@
   )
 
 (defun base-object/create ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (base-object-slot 'daq-base-object)
     (%check-error (%daq-base-object-create base-object-slot) "daqBaseObject_create")
     (cffi:mem-ref base-object-slot 'daq-base-object)
@@ -1052,7 +1003,6 @@
   )
 
 (defun base-object/dispose (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-base-object-dispose self) "daqBaseObject_dispose")
   nil
 )
@@ -1064,7 +1014,6 @@
   )
 
 (defun base-object/equals (self other)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (equal-slot 'daq-bool)
     (%check-error (%daq-base-object-equals self other equal-slot) "daqBaseObject_equals")
     (cffi:mem-ref equal-slot 'daq-bool)
@@ -1077,7 +1026,6 @@
   )
 
 (defun base-object/get-hash-code (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (hash-code-slot 'daq-size-t)
     (%check-error (%daq-base-object-get-hash-code self hash-code-slot) "daqBaseObject_getHashCode")
     (cffi:mem-ref hash-code-slot 'daq-size-t)
@@ -1089,7 +1037,6 @@
   )
 
 (defun base-object/release-ref (self)
-  (ensure-opendaq-loaded)
   (let ((result (%daq-base-object-release-ref self)))
     result
   )
@@ -1101,7 +1048,6 @@
   )
 
 (defun base-object/to-string (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (str-slot 'daq-char-ptr)
     (%check-error (%daq-base-object-to-string self str-slot) "daqBaseObject_toString")
     (cffi:mem-ref str-slot 'daq-char-ptr)
@@ -1114,7 +1060,6 @@
   )
 
 (defun binary-data/create-binary-data (size)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-binary-data)
     (%check-error (%daq-binary-data-create-binary-data obj-slot size) "daqBinaryData_createBinaryData")
     (cffi:mem-ref obj-slot 'daq-binary-data)
@@ -1127,7 +1072,6 @@
   )
 
 (defun binary-data/get-address (self data)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-binary-data-get-address self data) "daqBinaryData_getAddress")
   nil
 )
@@ -1137,7 +1081,6 @@
   )
 
 (defun binary-data/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-binary-data-get-interface-id intf-id)
   nil)
 
@@ -1147,7 +1090,6 @@
   )
 
 (defun binary-data/get-size (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (size-slot 'daq-size-t)
     (%check-error (%daq-binary-data-get-size self size-slot) "daqBinaryData_getSize")
     (cffi:mem-ref size-slot 'daq-size-t)
@@ -1160,7 +1102,6 @@
   )
 
 (defun block-reader-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (block-reader-slot 'daq-block-reader)
     (%check-error (%daq-block-reader-builder-build self block-reader-slot) "daqBlockReaderBuilder_build")
     (cffi:mem-ref block-reader-slot 'daq-block-reader)
@@ -1172,7 +1113,6 @@
   )
 
 (defun block-reader-builder/create-block-reader-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-block-reader-builder)
     (%check-error (%daq-block-reader-builder-create-block-reader-builder obj-slot) "daqBlockReaderBuilder_createBlockReaderBuilder")
     (cffi:mem-ref obj-slot 'daq-block-reader-builder)
@@ -1185,7 +1125,6 @@
   )
 
 (defun block-reader-builder/get-block-size (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (size-slot 'daq-size-t)
     (%check-error (%daq-block-reader-builder-get-block-size self size-slot) "daqBlockReaderBuilder_getBlockSize")
     (cffi:mem-ref size-slot 'daq-size-t)
@@ -1198,7 +1137,6 @@
   )
 
 (defun block-reader-builder/get-domain-read-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-sample-type)
     (%check-error (%daq-block-reader-builder-get-domain-read-type self type-slot) "daqBlockReaderBuilder_getDomainReadType")
     (cffi:mem-ref type-slot 'daq-sample-type)
@@ -1211,7 +1149,6 @@
   )
 
 (defun block-reader-builder/get-input-port (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (port-slot 'daq-input-port)
     (%check-error (%daq-block-reader-builder-get-input-port self port-slot) "daqBlockReaderBuilder_getInputPort")
     (cffi:mem-ref port-slot 'daq-input-port)
@@ -1223,7 +1160,6 @@
   )
 
 (defun block-reader-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-block-reader-builder-get-interface-id intf-id)
   nil)
 
@@ -1233,7 +1169,6 @@
   )
 
 (defun block-reader-builder/get-old-block-reader (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (block-reader-slot 'daq-block-reader)
     (%check-error (%daq-block-reader-builder-get-old-block-reader self block-reader-slot) "daqBlockReaderBuilder_getOldBlockReader")
     (cffi:mem-ref block-reader-slot 'daq-block-reader)
@@ -1246,7 +1181,6 @@
   )
 
 (defun block-reader-builder/get-overlap (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (overlap-slot 'daq-size-t)
     (%check-error (%daq-block-reader-builder-get-overlap self overlap-slot) "daqBlockReaderBuilder_getOverlap")
     (cffi:mem-ref overlap-slot 'daq-size-t)
@@ -1259,7 +1193,6 @@
   )
 
 (defun block-reader-builder/get-read-mode (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (mode-slot 'daq-read-mode)
     (%check-error (%daq-block-reader-builder-get-read-mode self mode-slot) "daqBlockReaderBuilder_getReadMode")
     (cffi:mem-ref mode-slot 'daq-read-mode)
@@ -1272,7 +1205,6 @@
   )
 
 (defun block-reader-builder/get-signal (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (signal-slot 'daq-signal)
     (%check-error (%daq-block-reader-builder-get-signal self signal-slot) "daqBlockReaderBuilder_getSignal")
     (cffi:mem-ref signal-slot 'daq-signal)
@@ -1285,7 +1217,6 @@
   )
 
 (defun block-reader-builder/get-skip-events (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (skip-events-slot 'daq-bool)
     (%check-error (%daq-block-reader-builder-get-skip-events self skip-events-slot) "daqBlockReaderBuilder_getSkipEvents")
     (cffi:mem-ref skip-events-slot 'daq-bool)
@@ -1298,7 +1229,6 @@
   )
 
 (defun block-reader-builder/get-value-read-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-sample-type)
     (%check-error (%daq-block-reader-builder-get-value-read-type self type-slot) "daqBlockReaderBuilder_getValueReadType")
     (cffi:mem-ref type-slot 'daq-sample-type)
@@ -1311,7 +1241,6 @@
   )
 
 (defun block-reader-builder/set-block-size (self size)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-block-reader-builder-set-block-size self size) "daqBlockReaderBuilder_setBlockSize")
   nil
 )
@@ -1322,7 +1251,6 @@
   )
 
 (defun block-reader-builder/set-domain-read-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-block-reader-builder-set-domain-read-type self type) "daqBlockReaderBuilder_setDomainReadType")
   nil
 )
@@ -1333,7 +1261,6 @@
   )
 
 (defun block-reader-builder/set-input-port (self port)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-block-reader-builder-set-input-port self port) "daqBlockReaderBuilder_setInputPort")
   nil
 )
@@ -1344,7 +1271,6 @@
   )
 
 (defun block-reader-builder/set-old-block-reader (self block-reader)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-block-reader-builder-set-old-block-reader self block-reader) "daqBlockReaderBuilder_setOldBlockReader")
   nil
 )
@@ -1355,7 +1281,6 @@
   )
 
 (defun block-reader-builder/set-overlap (self overlap)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-block-reader-builder-set-overlap self overlap) "daqBlockReaderBuilder_setOverlap")
   nil
 )
@@ -1366,7 +1291,6 @@
   )
 
 (defun block-reader-builder/set-read-mode (self mode)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-block-reader-builder-set-read-mode self mode) "daqBlockReaderBuilder_setReadMode")
   nil
 )
@@ -1377,7 +1301,6 @@
   )
 
 (defun block-reader-builder/set-signal (self signal)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-block-reader-builder-set-signal self signal) "daqBlockReaderBuilder_setSignal")
   nil
 )
@@ -1388,7 +1311,6 @@
   )
 
 (defun block-reader-builder/set-skip-events (self skip-events)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-block-reader-builder-set-skip-events self skip-events) "daqBlockReaderBuilder_setSkipEvents")
   nil
 )
@@ -1399,7 +1321,6 @@
   )
 
 (defun block-reader-builder/set-value-read-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-block-reader-builder-set-value-read-type self type) "daqBlockReaderBuilder_setValueReadType")
   nil
 )
@@ -1413,7 +1334,6 @@
   )
 
 (defun block-reader-status/create-block-reader-status (event-packet valid offset read-samples)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-block-reader-status)
     (%check-error (%daq-block-reader-status-create-block-reader-status obj-slot event-packet valid offset read-samples) "daqBlockReaderStatus_createBlockReaderStatus")
     (cffi:mem-ref obj-slot 'daq-block-reader-status)
@@ -1425,7 +1345,6 @@
   )
 
 (defun block-reader-status/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-block-reader-status-get-interface-id intf-id)
   nil)
 
@@ -1435,7 +1354,6 @@
   )
 
 (defun block-reader-status/get-read-samples (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (read-samples-slot 'daq-size-t)
     (%check-error (%daq-block-reader-status-get-read-samples self read-samples-slot) "daqBlockReaderStatus_getReadSamples")
     (cffi:mem-ref read-samples-slot 'daq-size-t)
@@ -1452,7 +1370,6 @@
   )
 
 (defun block-reader/create-block-reader (signal block-size value-read-type domain-read-type mode)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-block-reader)
     (%check-error (%daq-block-reader-create-block-reader obj-slot signal block-size value-read-type domain-read-type mode) "daqBlockReader_createBlockReader")
     (cffi:mem-ref obj-slot 'daq-block-reader)
@@ -1468,7 +1385,6 @@
   )
 
 (defun block-reader/create-block-reader-from-existing (invalidated-reader value-read-type domain-read-type block-size)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-block-reader)
     (%check-error (%daq-block-reader-create-block-reader-from-existing obj-slot invalidated-reader value-read-type domain-read-type block-size) "daqBlockReader_createBlockReaderFromExisting")
     (cffi:mem-ref obj-slot 'daq-block-reader)
@@ -1485,7 +1401,6 @@
   )
 
 (defun block-reader/create-block-reader-from-port (port block-size value-read-type domain-read-type mode)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-block-reader)
     (%check-error (%daq-block-reader-create-block-reader-from-port obj-slot port block-size value-read-type domain-read-type mode) "daqBlockReader_createBlockReaderFromPort")
     (cffi:mem-ref obj-slot 'daq-block-reader)
@@ -1498,7 +1413,6 @@
   )
 
 (defun block-reader/get-block-size (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (size-slot 'daq-size-t)
     (%check-error (%daq-block-reader-get-block-size self size-slot) "daqBlockReader_getBlockSize")
     (cffi:mem-ref size-slot 'daq-size-t)
@@ -1510,7 +1424,6 @@
   )
 
 (defun block-reader/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-block-reader-get-interface-id intf-id)
   nil)
 
@@ -1520,7 +1433,6 @@
   )
 
 (defun block-reader/get-overlap (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (overlap-slot 'daq-size-t)
     (%check-error (%daq-block-reader-get-overlap self overlap-slot) "daqBlockReader_getOverlap")
     (cffi:mem-ref overlap-slot 'daq-size-t)
@@ -1536,7 +1448,6 @@
   )
 
 (defun block-reader/read (self blocks count timeout-ms)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (count-slot 'daq-size-t)
     (cffi:with-foreign-object (status-slot 'daq-block-reader-status)
       (setf (cffi:mem-ref count-slot 'daq-size-t) count)
@@ -1556,7 +1467,6 @@
   )
 
 (defun block-reader/read-with-domain (self data-blocks domain-blocks count timeout-ms)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (count-slot 'daq-size-t)
     (cffi:with-foreign-object (status-slot 'daq-block-reader-status)
       (setf (cffi:mem-ref count-slot 'daq-size-t) count)
@@ -1572,7 +1482,6 @@
   )
 
 (defun boolean/create-bool-object (value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-boolean)
     (%check-error (%daq-boolean-create-bool-object obj-slot value) "daqBoolean_createBoolObject")
     (cffi:mem-ref obj-slot 'daq-boolean)
@@ -1585,7 +1494,6 @@
   )
 
 (defun boolean/create-boolean (value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-boolean)
     (%check-error (%daq-boolean-create-boolean obj-slot value) "daqBoolean_createBoolean")
     (cffi:mem-ref obj-slot 'daq-boolean)
@@ -1599,7 +1507,6 @@
   )
 
 (defun boolean/equals-value (self value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (equal-slot 'daq-bool)
     (%check-error (%daq-boolean-equals-value self value equal-slot) "daqBoolean_equalsValue")
     (cffi:mem-ref equal-slot 'daq-bool)
@@ -1611,7 +1518,6 @@
   )
 
 (defun boolean/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-boolean-get-interface-id intf-id)
   nil)
 
@@ -1621,7 +1527,6 @@
   )
 
 (defun boolean/get-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-bool)
     (%check-error (%daq-boolean-get-value self value-slot) "daqBoolean_getValue")
     (cffi:mem-ref value-slot 'daq-bool)
@@ -1636,7 +1541,6 @@
   )
 
 (defun callable-info/create-callable-info (argument-info return-type const-flag)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-callable-info)
     (%check-error (%daq-callable-info-create-callable-info obj-slot argument-info return-type const-flag) "daqCallableInfo_createCallableInfo")
     (cffi:mem-ref obj-slot 'daq-callable-info)
@@ -1649,7 +1553,6 @@
   )
 
 (defun callable-info/get-arguments (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (argument-info-slot 'daq-list)
     (%check-error (%daq-callable-info-get-arguments self argument-info-slot) "daqCallableInfo_getArguments")
     (cffi:mem-ref argument-info-slot 'daq-list)
@@ -1661,7 +1564,6 @@
   )
 
 (defun callable-info/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-callable-info-get-interface-id intf-id)
   nil)
 
@@ -1671,7 +1573,6 @@
   )
 
 (defun callable-info/get-return-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-core-type)
     (%check-error (%daq-callable-info-get-return-type self type-slot) "daqCallableInfo_getReturnType")
     (cffi:mem-ref type-slot 'daq-core-type)
@@ -1684,7 +1585,6 @@
   )
 
 (defun callable-info/is-const (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (const-flag-slot 'daq-bool)
     (%check-error (%daq-callable-info-is-const self const-flag-slot) "daqCallableInfo_isConst")
     (cffi:mem-ref const-flag-slot 'daq-bool)
@@ -1696,7 +1596,6 @@
   )
 
 (defun channel/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-channel-get-interface-id intf-id)
   nil)
 
@@ -1706,7 +1605,6 @@
   )
 
 (defun cloneable/clone (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (cloned-slot 'daq-base-object)
     (%check-error (%daq-cloneable-clone self cloned-slot) "daqCloneable_clone")
     (cffi:mem-ref cloned-slot 'daq-base-object)
@@ -1718,7 +1616,6 @@
   )
 
 (defun cloneable/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-cloneable-get-interface-id intf-id)
   nil)
 
@@ -1730,7 +1627,6 @@
   )
 
 (defun coercer/coerce (self prop-obj value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (result-slot 'daq-base-object)
     (%check-error (%daq-coercer-coerce self prop-obj value result-slot) "daqCoercer_coerce")
     (cffi:mem-ref result-slot 'daq-base-object)
@@ -1745,7 +1641,6 @@
   )
 
 (defun coercer/coerce-no-lock (self prop-obj value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (result-slot 'daq-base-object)
     (%check-error (%daq-coercer-coerce-no-lock self prop-obj value result-slot) "daqCoercer_coerceNoLock")
     (cffi:mem-ref result-slot 'daq-base-object)
@@ -1758,7 +1653,6 @@
   )
 
 (defun coercer/create-coercer (eval)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-coercer)
     (%check-error (%daq-coercer-create-coercer obj-slot eval) "daqCoercer_createCoercer")
     (cffi:mem-ref obj-slot 'daq-coercer)
@@ -1771,7 +1665,6 @@
   )
 
 (defun coercer/get-eval (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (eval-slot 'daq-string)
     (%check-error (%daq-coercer-get-eval self eval-slot) "daqCoercer_getEval")
     (cffi:mem-ref eval-slot 'daq-string)
@@ -1783,7 +1676,6 @@
   )
 
 (defun coercer/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-coercer-get-interface-id intf-id)
   nil)
 
@@ -1793,7 +1685,6 @@
   )
 
 (defun comparable/compare-to (self obj)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-comparable-compare-to self obj) "daqComparable_compareTo")
   nil
 )
@@ -1803,7 +1694,6 @@
   )
 
 (defun comparable/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-comparable-get-interface-id intf-id)
   nil)
 
@@ -1814,7 +1704,6 @@
   )
 
 (defun complex-number/create-complex-number (real imaginary)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-complex-number)
     (%check-error (%daq-complex-number-create-complex-number obj-slot real imaginary) "daqComplexNumber_createComplexNumber")
     (cffi:mem-ref obj-slot 'daq-complex-number)
@@ -1827,7 +1716,6 @@
   )
 
 (defun complex-number/get-imaginary (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (imaginary-slot 'daq-float)
     (%check-error (%daq-complex-number-get-imaginary self imaginary-slot) "daqComplexNumber_getImaginary")
     (cffi:mem-ref imaginary-slot 'daq-float)
@@ -1839,7 +1727,6 @@
   )
 
 (defun complex-number/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-complex-number-get-interface-id intf-id)
   nil)
 
@@ -1849,7 +1736,6 @@
   )
 
 (defun complex-number/get-real (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (real-slot 'daq-float)
     (%check-error (%daq-complex-number-get-real self real-slot) "daqComplexNumber_getReal")
     (cffi:mem-ref real-slot 'daq-float)
@@ -1866,7 +1752,6 @@
   )
 
 (defun component-deserialize-context/clone (self new-parent new-local-id new-component-deserialize-context new-intf-id new-trigger-core-event)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-deserialize-context-clone self new-parent new-local-id new-component-deserialize-context new-intf-id new-trigger-core-event) "daqComponentDeserializeContext_clone")
   nil)
 
@@ -1881,7 +1766,6 @@
   )
 
 (defun component-deserialize-context/create-component-deserialize-context (obj context root parent local-id intf-id trigger-core-event)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-deserialize-context-create-component-deserialize-context obj context root parent local-id intf-id trigger-core-event) "daqComponentDeserializeContext_createComponentDeserializeContext")
   nil)
 
@@ -1891,7 +1775,6 @@
   )
 
 (defun component-deserialize-context/get-context (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (context-slot 'daq-context)
     (%check-error (%daq-component-deserialize-context-get-context self context-slot) "daqComponentDeserializeContext_getContext")
     (cffi:mem-ref context-slot 'daq-context)
@@ -1903,7 +1786,6 @@
   )
 
 (defun component-deserialize-context/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-component-deserialize-context-get-interface-id intf-id)
   nil)
 
@@ -1913,7 +1795,6 @@
   )
 
 (defun component-deserialize-context/get-intf-id (self intf-id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-deserialize-context-get-intf-id self intf-id) "daqComponentDeserializeContext_getIntfID")
   nil)
 
@@ -1923,7 +1804,6 @@
   )
 
 (defun component-deserialize-context/get-local-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (local-id-slot 'daq-string)
     (%check-error (%daq-component-deserialize-context-get-local-id self local-id-slot) "daqComponentDeserializeContext_getLocalId")
     (cffi:mem-ref local-id-slot 'daq-string)
@@ -1936,7 +1816,6 @@
   )
 
 (defun component-deserialize-context/get-parent (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (parent-slot 'daq-component)
     (%check-error (%daq-component-deserialize-context-get-parent self parent-slot) "daqComponentDeserializeContext_getParent")
     (cffi:mem-ref parent-slot 'daq-component)
@@ -1949,7 +1828,6 @@
   )
 
 (defun component-deserialize-context/get-root (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (root-slot 'daq-component)
     (%check-error (%daq-component-deserialize-context-get-root self root-slot) "daqComponentDeserializeContext_getRoot")
     (cffi:mem-ref root-slot 'daq-component)
@@ -1962,7 +1840,6 @@
   )
 
 (defun component-deserialize-context/get-trigger-core-event (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (trigger-core-event-slot 'daq-procedure)
     (%check-error (%daq-component-deserialize-context-get-trigger-core-event self trigger-core-event-slot) "daqComponentDeserializeContext_getTriggerCoreEvent")
     (cffi:mem-ref trigger-core-event-slot 'daq-procedure)
@@ -1975,7 +1852,6 @@
   )
 
 (defun component-holder/create-component-holder (component)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-component-holder)
     (%check-error (%daq-component-holder-create-component-holder obj-slot component) "daqComponentHolder_createComponentHolder")
     (cffi:mem-ref obj-slot 'daq-component-holder)
@@ -1990,7 +1866,6 @@
   )
 
 (defun component-holder/create-component-holder-with-ids (id parent-global-id component)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-component-holder)
     (%check-error (%daq-component-holder-create-component-holder-with-ids obj-slot id parent-global-id component) "daqComponentHolder_createComponentHolderWithIds")
     (cffi:mem-ref obj-slot 'daq-component-holder)
@@ -2003,7 +1878,6 @@
   )
 
 (defun component-holder/get-component (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (component-slot 'daq-component)
     (%check-error (%daq-component-holder-get-component self component-slot) "daqComponentHolder_getComponent")
     (cffi:mem-ref component-slot 'daq-component)
@@ -2015,7 +1889,6 @@
   )
 
 (defun component-holder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-component-holder-get-interface-id intf-id)
   nil)
 
@@ -2025,7 +1898,6 @@
   )
 
 (defun component-holder/get-local-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (local-id-slot 'daq-string)
     (%check-error (%daq-component-holder-get-local-id self local-id-slot) "daqComponentHolder_getLocalId")
     (cffi:mem-ref local-id-slot 'daq-string)
@@ -2038,7 +1910,6 @@
   )
 
 (defun component-holder/get-parent-global-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (parent-id-slot 'daq-string)
     (%check-error (%daq-component-holder-get-parent-global-id self parent-id-slot) "daqComponentHolder_getParentGlobalId")
     (cffi:mem-ref parent-id-slot 'daq-string)
@@ -2051,7 +1922,6 @@
   )
 
 (defun component-private/get-component-config (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (config-slot 'daq-property-object)
     (%check-error (%daq-component-private-get-component-config self config-slot) "daqComponentPrivate_getComponentConfig")
     (cffi:mem-ref config-slot 'daq-property-object)
@@ -2063,7 +1933,6 @@
   )
 
 (defun component-private/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-component-private-get-interface-id intf-id)
   nil)
 
@@ -2072,7 +1941,6 @@
   )
 
 (defun component-private/lock-all-attributes (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-private-lock-all-attributes self) "daqComponentPrivate_lockAllAttributes")
   nil
 )
@@ -2083,7 +1951,6 @@
   )
 
 (defun component-private/lock-attributes (self attributes)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-private-lock-attributes self attributes) "daqComponentPrivate_lockAttributes")
   nil
 )
@@ -2094,7 +1961,6 @@
   )
 
 (defun component-private/set-component-config (self config)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-private-set-component-config self config) "daqComponentPrivate_setComponentConfig")
   nil
 )
@@ -2105,7 +1971,6 @@
   )
 
 (defun component-private/set-parent-active (self parent-active)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-private-set-parent-active self parent-active) "daqComponentPrivate_setParentActive")
   nil
 )
@@ -2116,7 +1981,6 @@
   )
 
 (defun component-private/trigger-component-core-event (self args)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-private-trigger-component-core-event self args) "daqComponentPrivate_triggerComponentCoreEvent")
   nil
 )
@@ -2126,7 +1990,6 @@
   )
 
 (defun component-private/unlock-all-attributes (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-private-unlock-all-attributes self) "daqComponentPrivate_unlockAllAttributes")
   nil
 )
@@ -2137,7 +2000,6 @@
   )
 
 (defun component-private/unlock-attributes (self attributes)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-private-unlock-attributes self attributes) "daqComponentPrivate_unlockAttributes")
   nil
 )
@@ -2148,7 +2010,6 @@
   )
 
 (defun component-private/update-operation-mode (self mode-type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-private-update-operation-mode self mode-type) "daqComponentPrivate_updateOperationMode")
   nil
 )
@@ -2160,7 +2021,6 @@
   )
 
 (defun component-status-container-private/add-status (self name initial-value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-status-container-private-add-status self name initial-value) "daqComponentStatusContainerPrivate_addStatus")
   nil
 )
@@ -2173,7 +2033,6 @@
   )
 
 (defun component-status-container-private/add-status-with-message (self name initial-value message)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-status-container-private-add-status-with-message self name initial-value message) "daqComponentStatusContainerPrivate_addStatusWithMessage")
   nil
 )
@@ -2183,7 +2042,6 @@
   )
 
 (defun component-status-container-private/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-component-status-container-private-get-interface-id intf-id)
   nil)
 
@@ -2194,7 +2052,6 @@
   )
 
 (defun component-status-container-private/set-status (self name value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-status-container-private-set-status self name value) "daqComponentStatusContainerPrivate_setStatus")
   nil
 )
@@ -2207,7 +2064,6 @@
   )
 
 (defun component-status-container-private/set-status-with-message (self name value message)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-status-container-private-set-status-with-message self name value message) "daqComponentStatusContainerPrivate_setStatusWithMessage")
   nil
 )
@@ -2217,7 +2073,6 @@
   )
 
 (defun component-status-container/create-component-status-container ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-component-status-container)
     (%check-error (%daq-component-status-container-create-component-status-container obj-slot) "daqComponentStatusContainer_createComponentStatusContainer")
     (cffi:mem-ref obj-slot 'daq-component-status-container)
@@ -2229,7 +2084,6 @@
   )
 
 (defun component-status-container/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-component-status-container-get-interface-id intf-id)
   nil)
 
@@ -2240,7 +2094,6 @@
   )
 
 (defun component-status-container/get-status (self name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-enumeration)
     (%check-error (%daq-component-status-container-get-status self name value-slot) "daqComponentStatusContainer_getStatus")
     (cffi:mem-ref value-slot 'daq-enumeration)
@@ -2254,7 +2107,6 @@
   )
 
 (defun component-status-container/get-status-message (self name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (message-slot 'daq-string)
     (%check-error (%daq-component-status-container-get-status-message self name message-slot) "daqComponentStatusContainer_getStatusMessage")
     (cffi:mem-ref message-slot 'daq-string)
@@ -2267,7 +2119,6 @@
   )
 
 (defun component-status-container/get-statuses (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (statuses-slot 'daq-dict)
     (%check-error (%daq-component-status-container-get-statuses self statuses-slot) "daqComponentStatusContainer_getStatuses")
     (cffi:mem-ref statuses-slot 'daq-dict)
@@ -2280,7 +2131,6 @@
   )
 
 (defun component-type-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (component-type-slot 'daq-component-type)
     (%check-error (%daq-component-type-builder-build self component-type-slot) "daqComponentTypeBuilder_build")
     (cffi:mem-ref component-type-slot 'daq-component-type)
@@ -2292,7 +2142,6 @@
   )
 
 (defun component-type-builder/create-component-type-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-component-type-builder)
     (%check-error (%daq-component-type-builder-create-component-type-builder obj-slot) "daqComponentTypeBuilder_createComponentTypeBuilder")
     (cffi:mem-ref obj-slot 'daq-component-type-builder)
@@ -2304,7 +2153,6 @@
   )
 
 (defun component-type-builder/create-device-type-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-component-type-builder)
     (%check-error (%daq-component-type-builder-create-device-type-builder obj-slot) "daqComponentTypeBuilder_createDeviceTypeBuilder")
     (cffi:mem-ref obj-slot 'daq-component-type-builder)
@@ -2316,7 +2164,6 @@
   )
 
 (defun component-type-builder/create-function-block-type-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-component-type-builder)
     (%check-error (%daq-component-type-builder-create-function-block-type-builder obj-slot) "daqComponentTypeBuilder_createFunctionBlockTypeBuilder")
     (cffi:mem-ref obj-slot 'daq-component-type-builder)
@@ -2328,7 +2175,6 @@
   )
 
 (defun component-type-builder/create-server-type-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-component-type-builder)
     (%check-error (%daq-component-type-builder-create-server-type-builder obj-slot) "daqComponentTypeBuilder_createServerTypeBuilder")
     (cffi:mem-ref obj-slot 'daq-component-type-builder)
@@ -2340,7 +2186,6 @@
   )
 
 (defun component-type-builder/create-streaming-type-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-component-type-builder)
     (%check-error (%daq-component-type-builder-create-streaming-type-builder obj-slot) "daqComponentTypeBuilder_createStreamingTypeBuilder")
     (cffi:mem-ref obj-slot 'daq-component-type-builder)
@@ -2353,7 +2198,6 @@
   )
 
 (defun component-type-builder/get-connection-string-prefix (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (prefix-slot 'daq-string)
     (%check-error (%daq-component-type-builder-get-connection-string-prefix self prefix-slot) "daqComponentTypeBuilder_getConnectionStringPrefix")
     (cffi:mem-ref prefix-slot 'daq-string)
@@ -2366,7 +2210,6 @@
   )
 
 (defun component-type-builder/get-default-config (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (default-config-slot 'daq-property-object)
     (%check-error (%daq-component-type-builder-get-default-config self default-config-slot) "daqComponentTypeBuilder_getDefaultConfig")
     (cffi:mem-ref default-config-slot 'daq-property-object)
@@ -2379,7 +2222,6 @@
   )
 
 (defun component-type-builder/get-description (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (description-slot 'daq-string)
     (%check-error (%daq-component-type-builder-get-description self description-slot) "daqComponentTypeBuilder_getDescription")
     (cffi:mem-ref description-slot 'daq-string)
@@ -2392,7 +2234,6 @@
   )
 
 (defun component-type-builder/get-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (id-slot 'daq-string)
     (%check-error (%daq-component-type-builder-get-id self id-slot) "daqComponentTypeBuilder_getId")
     (cffi:mem-ref id-slot 'daq-string)
@@ -2404,7 +2245,6 @@
   )
 
 (defun component-type-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-component-type-builder-get-interface-id intf-id)
   nil)
 
@@ -2414,7 +2254,6 @@
   )
 
 (defun component-type-builder/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-component-type-builder-get-name self name-slot) "daqComponentTypeBuilder_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -2427,7 +2266,6 @@
   )
 
 (defun component-type-builder/get-type-sort (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (sort-slot 'daq-component-type-sort)
     (%check-error (%daq-component-type-builder-get-type-sort self sort-slot) "daqComponentTypeBuilder_getTypeSort")
     (cffi:mem-ref sort-slot 'daq-component-type-sort)
@@ -2440,7 +2278,6 @@
   )
 
 (defun component-type-builder/set-connection-string-prefix (self prefix)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-type-builder-set-connection-string-prefix self prefix) "daqComponentTypeBuilder_setConnectionStringPrefix")
   nil
 )
@@ -2451,7 +2288,6 @@
   )
 
 (defun component-type-builder/set-default-config (self default-config)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-type-builder-set-default-config self default-config) "daqComponentTypeBuilder_setDefaultConfig")
   nil
 )
@@ -2462,7 +2298,6 @@
   )
 
 (defun component-type-builder/set-description (self description)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-type-builder-set-description self description) "daqComponentTypeBuilder_setDescription")
   nil
 )
@@ -2473,7 +2308,6 @@
   )
 
 (defun component-type-builder/set-id (self id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-type-builder-set-id self id) "daqComponentTypeBuilder_setId")
   nil
 )
@@ -2484,7 +2318,6 @@
   )
 
 (defun component-type-builder/set-name (self name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-type-builder-set-name self name) "daqComponentTypeBuilder_setName")
   nil
 )
@@ -2495,7 +2328,6 @@
   )
 
 (defun component-type-builder/set-type-sort (self sort)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-type-builder-set-type-sort self sort) "daqComponentTypeBuilder_setTypeSort")
   nil
 )
@@ -2505,7 +2337,6 @@
   )
 
 (defun component-type-private/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-component-type-private-get-interface-id intf-id)
   nil)
 
@@ -2515,7 +2346,6 @@
   )
 
 (defun component-type-private/set-module-info (self info)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-type-private-set-module-info self info) "daqComponentTypePrivate_setModuleInfo")
   nil
 )
@@ -2526,7 +2356,6 @@
   )
 
 (defun component-type/create-default-config (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (default-config-slot 'daq-property-object)
     (%check-error (%daq-component-type-create-default-config self default-config-slot) "daqComponentType_createDefaultConfig")
     (cffi:mem-ref default-config-slot 'daq-property-object)
@@ -2539,7 +2368,6 @@
   )
 
 (defun component-type/get-description (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (description-slot 'daq-string)
     (%check-error (%daq-component-type-get-description self description-slot) "daqComponentType_getDescription")
     (cffi:mem-ref description-slot 'daq-string)
@@ -2552,7 +2380,6 @@
   )
 
 (defun component-type/get-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (id-slot 'daq-string)
     (%check-error (%daq-component-type-get-id self id-slot) "daqComponentType_getId")
     (cffi:mem-ref id-slot 'daq-string)
@@ -2564,7 +2391,6 @@
   )
 
 (defun component-type/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-component-type-get-interface-id intf-id)
   nil)
 
@@ -2574,7 +2400,6 @@
   )
 
 (defun component-type/get-module-info (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (info-slot 'daq-module-info)
     (%check-error (%daq-component-type-get-module-info self info-slot) "daqComponentType_getModuleInfo")
     (cffi:mem-ref info-slot 'daq-module-info)
@@ -2587,7 +2412,6 @@
   )
 
 (defun component-type/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-component-type-get-name self name-slot) "daqComponentType_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -2601,7 +2425,6 @@
   )
 
 (defun component-update-context/add-device-remapping (self original-device-id new-device-id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-update-context-add-device-remapping self original-device-id new-device-id) "daqComponentUpdateContext_addDeviceRemapping")
   nil
 )
@@ -2613,7 +2436,6 @@
   )
 
 (defun component-update-context/get-device-update-options-with-local-id-or-null (self local-id)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (options-slot 'daq-device-update-options)
     (%check-error (%daq-component-update-context-get-device-update-options-with-local-id-or-null self local-id options-slot) "daqComponentUpdateContext_getDeviceUpdateOptionsWithLocalIdOrNull")
     (cffi:mem-ref options-slot 'daq-device-update-options)
@@ -2627,7 +2449,6 @@
   )
 
 (defun component-update-context/get-input-port-connections (self parent-id)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (connections-slot 'daq-dict)
     (%check-error (%daq-component-update-context-get-input-port-connections self parent-id connections-slot) "daqComponentUpdateContext_getInputPortConnections")
     (cffi:mem-ref connections-slot 'daq-dict)
@@ -2639,7 +2460,6 @@
   )
 
 (defun component-update-context/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-component-update-context-get-interface-id intf-id)
   nil)
 
@@ -2649,7 +2469,6 @@
   )
 
 (defun component-update-context/get-internal-state (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (state-slot 'daq-dict)
     (%check-error (%daq-component-update-context-get-internal-state self state-slot) "daqComponentUpdateContext_getInternalState")
     (cffi:mem-ref state-slot 'daq-dict)
@@ -2662,7 +2481,6 @@
   )
 
 (defun component-update-context/get-root-component (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (root-component-slot 'daq-component)
     (%check-error (%daq-component-update-context-get-root-component self root-component-slot) "daqComponentUpdateContext_getRootComponent")
     (cffi:mem-ref root-component-slot 'daq-component)
@@ -2677,7 +2495,6 @@
   )
 
 (defun component-update-context/get-signal (self parent-id port-id)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (signal-slot 'daq-signal)
     (%check-error (%daq-component-update-context-get-signal self parent-id port-id signal-slot) "daqComponentUpdateContext_getSignal")
     (cffi:mem-ref signal-slot 'daq-signal)
@@ -2690,7 +2507,6 @@
   )
 
 (defun component-update-context/get-update-parameters (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (update-parameters-slot 'daq-update-parameters)
     (%check-error (%daq-component-update-context-get-update-parameters self update-parameters-slot) "daqComponentUpdateContext_getUpdateParameters")
     (cffi:mem-ref update-parameters-slot 'daq-update-parameters)
@@ -2703,7 +2519,6 @@
   )
 
 (defun component-update-context/override-state (self update-context)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-update-context-override-state self update-context) "daqComponentUpdateContext_overrideState")
   nil
 )
@@ -2713,7 +2528,6 @@
   )
 
 (defun component-update-context/remap-input-port-connections (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-update-context-remap-input-port-connections self) "daqComponentUpdateContext_remapInputPortConnections")
   nil
 )
@@ -2724,7 +2538,6 @@
   )
 
 (defun component-update-context/remove-input-port-connection (self parent-id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-update-context-remove-input-port-connection self parent-id) "daqComponentUpdateContext_removeInputPortConnection")
   nil
 )
@@ -2737,7 +2550,6 @@
   )
 
 (defun component-update-context/set-input-port-connection (self parent-id port-id signal-id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-update-context-set-input-port-connection self parent-id port-id signal-id) "daqComponentUpdateContext_setInputPortConnection")
   nil
 )
@@ -2748,7 +2560,6 @@
   )
 
 (defun component-update-context/set-root-component (self root-component)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-update-context-set-root-component self root-component) "daqComponentUpdateContext_setRootComponent")
   nil
 )
@@ -2760,7 +2571,6 @@
   )
 
 (defun component-update-context/set-signal-dependency (self signal-id parent-id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-update-context-set-signal-dependency self signal-id parent-id) "daqComponentUpdateContext_setSignalDependency")
   nil
 )
@@ -2774,7 +2584,6 @@
   )
 
 (defun component/create-component (context parent local-id class-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-component)
     (%check-error (%daq-component-create-component obj-slot context parent local-id class-name) "daqComponent_createComponent")
     (cffi:mem-ref obj-slot 'daq-component)
@@ -2788,7 +2597,6 @@
   )
 
 (defun component/find-component (self id)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (out-component-slot 'daq-component)
     (%check-error (%daq-component-find-component self id out-component-slot) "daqComponent_findComponent")
     (cffi:mem-ref out-component-slot 'daq-component)
@@ -2801,7 +2609,6 @@
   )
 
 (defun component/get-active (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (active-slot 'daq-bool)
     (%check-error (%daq-component-get-active self active-slot) "daqComponent_getActive")
     (cffi:mem-ref active-slot 'daq-bool)
@@ -2814,7 +2621,6 @@
   )
 
 (defun component/get-context (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (context-slot 'daq-context)
     (%check-error (%daq-component-get-context self context-slot) "daqComponent_getContext")
     (cffi:mem-ref context-slot 'daq-context)
@@ -2827,7 +2633,6 @@
   )
 
 (defun component/get-description (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (description-slot 'daq-string)
     (%check-error (%daq-component-get-description self description-slot) "daqComponent_getDescription")
     (cffi:mem-ref description-slot 'daq-string)
@@ -2840,7 +2645,6 @@
   )
 
 (defun component/get-global-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (global-id-slot 'daq-string)
     (%check-error (%daq-component-get-global-id self global-id-slot) "daqComponent_getGlobalId")
     (cffi:mem-ref global-id-slot 'daq-string)
@@ -2852,7 +2656,6 @@
   )
 
 (defun component/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-component-get-interface-id intf-id)
   nil)
 
@@ -2862,7 +2665,6 @@
   )
 
 (defun component/get-local-active (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (local-active-slot 'daq-bool)
     (%check-error (%daq-component-get-local-active self local-active-slot) "daqComponent_getLocalActive")
     (cffi:mem-ref local-active-slot 'daq-bool)
@@ -2875,7 +2677,6 @@
   )
 
 (defun component/get-local-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (local-id-slot 'daq-string)
     (%check-error (%daq-component-get-local-id self local-id-slot) "daqComponent_getLocalId")
     (cffi:mem-ref local-id-slot 'daq-string)
@@ -2888,7 +2689,6 @@
   )
 
 (defun component/get-locked-attributes (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (attributes-slot 'daq-list)
     (%check-error (%daq-component-get-locked-attributes self attributes-slot) "daqComponent_getLockedAttributes")
     (cffi:mem-ref attributes-slot 'daq-list)
@@ -2901,7 +2701,6 @@
   )
 
 (defun component/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-component-get-name self name-slot) "daqComponent_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -2914,7 +2713,6 @@
   )
 
 (defun component/get-on-component-core-event (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-component-get-on-component-core-event self event-slot) "daqComponent_getOnComponentCoreEvent")
     (cffi:mem-ref event-slot 'daq-event)
@@ -2927,7 +2725,6 @@
   )
 
 (defun component/get-operation-mode (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (mode-type-slot 'daq-operation-mode-type)
     (%check-error (%daq-component-get-operation-mode self mode-type-slot) "daqComponent_getOperationMode")
     (cffi:mem-ref mode-type-slot 'daq-operation-mode-type)
@@ -2940,7 +2737,6 @@
   )
 
 (defun component/get-parent (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (parent-slot 'daq-component)
     (%check-error (%daq-component-get-parent self parent-slot) "daqComponent_getParent")
     (cffi:mem-ref parent-slot 'daq-component)
@@ -2953,7 +2749,6 @@
   )
 
 (defun component/get-parent-active (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (parent-active-slot 'daq-bool)
     (%check-error (%daq-component-get-parent-active self parent-active-slot) "daqComponent_getParentActive")
     (cffi:mem-ref parent-active-slot 'daq-bool)
@@ -2966,7 +2761,6 @@
   )
 
 (defun component/get-status-container (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (status-container-slot 'daq-component-status-container)
     (%check-error (%daq-component-get-status-container self status-container-slot) "daqComponent_getStatusContainer")
     (cffi:mem-ref status-container-slot 'daq-component-status-container)
@@ -2979,7 +2773,6 @@
   )
 
 (defun component/get-tags (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (tags-slot 'daq-tags)
     (%check-error (%daq-component-get-tags self tags-slot) "daqComponent_getTags")
     (cffi:mem-ref tags-slot 'daq-tags)
@@ -2992,7 +2785,6 @@
   )
 
 (defun component/get-visible (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (visible-slot 'daq-bool)
     (%check-error (%daq-component-get-visible self visible-slot) "daqComponent_getVisible")
     (cffi:mem-ref visible-slot 'daq-bool)
@@ -3005,7 +2797,6 @@
   )
 
 (defun component/set-active (self active)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-set-active self active) "daqComponent_setActive")
   nil
 )
@@ -3016,7 +2807,6 @@
   )
 
 (defun component/set-description (self description)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-set-description self description) "daqComponent_setDescription")
   nil
 )
@@ -3027,7 +2817,6 @@
   )
 
 (defun component/set-name (self name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-set-name self name) "daqComponent_setName")
   nil
 )
@@ -3038,7 +2827,6 @@
   )
 
 (defun component/set-visible (self visible)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-component-set-visible self visible) "daqComponent_setVisible")
   nil
 )
@@ -3049,7 +2837,6 @@
   )
 
 (defun config-provider/create-cmd-line-args-config-provider (cmd-line-args)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-config-provider)
     (%check-error (%daq-config-provider-create-cmd-line-args-config-provider obj-slot cmd-line-args) "daqConfigProvider_createCmdLineArgsConfigProvider")
     (cffi:mem-ref obj-slot 'daq-config-provider)
@@ -3061,7 +2848,6 @@
   )
 
 (defun config-provider/create-env-config-provider ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-config-provider)
     (%check-error (%daq-config-provider-create-env-config-provider obj-slot) "daqConfigProvider_createEnvConfigProvider")
     (cffi:mem-ref obj-slot 'daq-config-provider)
@@ -3074,7 +2860,6 @@
   )
 
 (defun config-provider/create-json-config-provider (filename)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-config-provider)
     (%check-error (%daq-config-provider-create-json-config-provider obj-slot filename) "daqConfigProvider_createJsonConfigProvider")
     (cffi:mem-ref obj-slot 'daq-config-provider)
@@ -3086,7 +2871,6 @@
   )
 
 (defun config-provider/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-config-provider-get-interface-id intf-id)
   nil)
 
@@ -3096,7 +2880,6 @@
   )
 
 (defun config-provider/populate-options (self options)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-config-provider-populate-options self options) "daqConfigProvider_populateOptions")
   nil
 )
@@ -3106,7 +2889,6 @@
   )
 
 (defun connected-client-info/create-connected-client-info ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-connected-client-info)
     (%check-error (%daq-connected-client-info-create-connected-client-info obj-slot) "daqConnectedClientInfo_createConnectedClientInfo")
     (cffi:mem-ref obj-slot 'daq-connected-client-info)
@@ -3123,7 +2905,6 @@
   )
 
 (defun connected-client-info/create-connected-client-info-with-params (address protocol-type protocol-name client-type host-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-connected-client-info)
     (%check-error (%daq-connected-client-info-create-connected-client-info-with-params obj-slot address protocol-type protocol-name client-type host-name) "daqConnectedClientInfo_createConnectedClientInfoWithParams")
     (cffi:mem-ref obj-slot 'daq-connected-client-info)
@@ -3136,7 +2917,6 @@
   )
 
 (defun connected-client-info/get-address (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (address-slot 'daq-string)
     (%check-error (%daq-connected-client-info-get-address self address-slot) "daqConnectedClientInfo_getAddress")
     (cffi:mem-ref address-slot 'daq-string)
@@ -3149,7 +2929,6 @@
   )
 
 (defun connected-client-info/get-client-type-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-string)
     (%check-error (%daq-connected-client-info-get-client-type-name self type-slot) "daqConnectedClientInfo_getClientTypeName")
     (cffi:mem-ref type-slot 'daq-string)
@@ -3162,7 +2941,6 @@
   )
 
 (defun connected-client-info/get-host-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (host-name-slot 'daq-string)
     (%check-error (%daq-connected-client-info-get-host-name self host-name-slot) "daqConnectedClientInfo_getHostName")
     (cffi:mem-ref host-name-slot 'daq-string)
@@ -3174,7 +2952,6 @@
   )
 
 (defun connected-client-info/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-connected-client-info-get-interface-id intf-id)
   nil)
 
@@ -3184,7 +2961,6 @@
   )
 
 (defun connected-client-info/get-protocol-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (protocol-name-slot 'daq-string)
     (%check-error (%daq-connected-client-info-get-protocol-name self protocol-name-slot) "daqConnectedClientInfo_getProtocolName")
     (cffi:mem-ref protocol-name-slot 'daq-string)
@@ -3197,7 +2973,6 @@
   )
 
 (defun connected-client-info/get-protocol-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-protocol-type)
     (%check-error (%daq-connected-client-info-get-protocol-type self type-slot) "daqConnectedClientInfo_getProtocolType")
     (cffi:mem-ref type-slot 'daq-protocol-type)
@@ -3211,7 +2986,6 @@
   )
 
 (defun connection-internal/dequeue-up-to (self count)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (packet-ptr-slot 'daq-packet)
     (cffi:with-foreign-object (count-slot 'daq-size-t)
       (setf (cffi:mem-ref count-slot 'daq-size-t) count)
@@ -3226,7 +3000,6 @@
   )
 
 (defun connection-internal/enqueue-last-descriptor (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-connection-internal-enqueue-last-descriptor self) "daqConnectionInternal_enqueueLastDescriptor")
   nil
 )
@@ -3236,7 +3009,6 @@
   )
 
 (defun connection-internal/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-connection-internal-get-interface-id intf-id)
   nil)
 
@@ -3247,7 +3019,6 @@
   )
 
 (defun connection-status-container-private/add-configuration-connection-status (self connection-string initial-value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-connection-status-container-private-add-configuration-connection-status self connection-string initial-value) "daqConnectionStatusContainerPrivate_addConfigurationConnectionStatus")
   nil
 )
@@ -3260,7 +3031,6 @@
   )
 
 (defun connection-status-container-private/add-streaming-connection-status (self connection-string initial-value streaming-object)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-connection-status-container-private-add-streaming-connection-status self connection-string initial-value streaming-object) "daqConnectionStatusContainerPrivate_addStreamingConnectionStatus")
   nil
 )
@@ -3270,7 +3040,6 @@
   )
 
 (defun connection-status-container-private/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-connection-status-container-private-get-interface-id intf-id)
   nil)
 
@@ -3280,7 +3049,6 @@
   )
 
 (defun connection-status-container-private/remove-streaming-connection-status (self connection-string)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-connection-status-container-private-remove-streaming-connection-status self connection-string) "daqConnectionStatusContainerPrivate_removeStreamingConnectionStatus")
   nil
 )
@@ -3293,7 +3061,6 @@
   )
 
 (defun connection-status-container-private/update-connection-status (self connection-string value streaming-object)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-connection-status-container-private-update-connection-status self connection-string value streaming-object) "daqConnectionStatusContainerPrivate_updateConnectionStatus")
   nil
 )
@@ -3307,7 +3074,6 @@
   )
 
 (defun connection-status-container-private/update-connection-status-with-message (self connection-string value streaming-object message)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-connection-status-container-private-update-connection-status-with-message self connection-string value streaming-object message) "daqConnectionStatusContainerPrivate_updateConnectionStatusWithMessage")
   nil
 )
@@ -3320,7 +3086,6 @@
   )
 
 (defun connection/create-connection (input-port signal context)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-connection)
     (%check-error (%daq-connection-create-connection obj-slot input-port signal context) "daqConnection_createConnection")
     (cffi:mem-ref obj-slot 'daq-connection)
@@ -3333,7 +3098,6 @@
   )
 
 (defun connection/dequeue (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (packet-slot 'daq-packet)
     (%check-error (%daq-connection-dequeue self packet-slot) "daqConnection_dequeue")
     (cffi:mem-ref packet-slot 'daq-packet)
@@ -3346,7 +3110,6 @@
   )
 
 (defun connection/dequeue-all (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (packets-slot 'daq-list)
     (%check-error (%daq-connection-dequeue-all self packets-slot) "daqConnection_dequeueAll")
     (cffi:mem-ref packets-slot 'daq-list)
@@ -3359,7 +3122,6 @@
   )
 
 (defun connection/enqueue (self packet)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-connection-enqueue self packet) "daqConnection_enqueue")
   nil
 )
@@ -3370,7 +3132,6 @@
   )
 
 (defun connection/enqueue-and-steal-ref (self packet)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-connection-enqueue-and-steal-ref self packet) "daqConnection_enqueueAndStealRef")
   nil
 )
@@ -3381,7 +3142,6 @@
   )
 
 (defun connection/enqueue-multiple (self packets)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-connection-enqueue-multiple self packets) "daqConnection_enqueueMultiple")
   nil
 )
@@ -3392,7 +3152,6 @@
   )
 
 (defun connection/enqueue-multiple-and-steal-ref (self packets)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-connection-enqueue-multiple-and-steal-ref self packets) "daqConnection_enqueueMultipleAndStealRef")
   nil
 )
@@ -3403,7 +3162,6 @@
   )
 
 (defun connection/enqueue-on-this-thread (self packet)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-connection-enqueue-on-this-thread self packet) "daqConnection_enqueueOnThisThread")
   nil
 )
@@ -3414,7 +3172,6 @@
   )
 
 (defun connection/enqueue-with-scheduler (self packet)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-connection-enqueue-with-scheduler self packet) "daqConnection_enqueueWithScheduler")
   nil
 )
@@ -3425,7 +3182,6 @@
   )
 
 (defun connection/get-available-samples (self samples)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-connection-get-available-samples self samples) "daqConnection_getAvailableSamples")
   nil
 )
@@ -3436,7 +3192,6 @@
   )
 
 (defun connection/get-input-port (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (input-port-slot 'daq-input-port)
     (%check-error (%daq-connection-get-input-port self input-port-slot) "daqConnection_getInputPort")
     (cffi:mem-ref input-port-slot 'daq-input-port)
@@ -3448,7 +3203,6 @@
   )
 
 (defun connection/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-connection-get-interface-id intf-id)
   nil)
 
@@ -3458,7 +3212,6 @@
   )
 
 (defun connection/get-packet-count (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (packet-count-slot 'daq-size-t)
     (%check-error (%daq-connection-get-packet-count self packet-count-slot) "daqConnection_getPacketCount")
     (cffi:mem-ref packet-count-slot 'daq-size-t)
@@ -3471,7 +3224,6 @@
   )
 
 (defun connection/get-samples-until-next-descriptor (self samples)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-connection-get-samples-until-next-descriptor self samples) "daqConnection_getSamplesUntilNextDescriptor")
   nil
 )
@@ -3482,7 +3234,6 @@
   )
 
 (defun connection/get-samples-until-next-event-packet (self samples)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-connection-get-samples-until-next-event-packet self samples) "daqConnection_getSamplesUntilNextEventPacket")
   nil
 )
@@ -3493,7 +3244,6 @@
   )
 
 (defun connection/get-samples-until-next-gap-packet (self samples)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-connection-get-samples-until-next-gap-packet self samples) "daqConnection_getSamplesUntilNextGapPacket")
   nil
 )
@@ -3504,7 +3254,6 @@
   )
 
 (defun connection/get-signal (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (signal-slot 'daq-signal)
     (%check-error (%daq-connection-get-signal self signal-slot) "daqConnection_getSignal")
     (cffi:mem-ref signal-slot 'daq-signal)
@@ -3517,7 +3266,6 @@
   )
 
 (defun connection/has-event-packet (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (has-event-packet-slot 'daq-bool)
     (%check-error (%daq-connection-has-event-packet self has-event-packet-slot) "daqConnection_hasEventPacket")
     (cffi:mem-ref has-event-packet-slot 'daq-bool)
@@ -3530,7 +3278,6 @@
   )
 
 (defun connection/has-gap-packet (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (has-gap-packet-slot 'daq-bool)
     (%check-error (%daq-connection-has-gap-packet self has-gap-packet-slot) "daqConnection_hasGapPacket")
     (cffi:mem-ref has-gap-packet-slot 'daq-bool)
@@ -3543,7 +3290,6 @@
   )
 
 (defun connection/is-remote (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (remote-slot 'daq-bool)
     (%check-error (%daq-connection-is-remote self remote-slot) "daqConnection_isRemote")
     (cffi:mem-ref remote-slot 'daq-bool)
@@ -3556,7 +3302,6 @@
   )
 
 (defun connection/peek (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (packet-slot 'daq-packet)
     (%check-error (%daq-connection-peek self packet-slot) "daqConnection_peek")
     (cffi:mem-ref packet-slot 'daq-packet)
@@ -3568,7 +3313,6 @@
   )
 
 (defun context-internal/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-context-internal-get-interface-id intf-id)
   nil)
 
@@ -3578,7 +3322,6 @@
   )
 
 (defun context-internal/move-module-manager (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (manager-slot 'daq-module-manager)
     (%check-error (%daq-context-internal-move-module-manager self manager-slot) "daqContextInternal_moveModuleManager")
     (cffi:mem-ref manager-slot 'daq-module-manager)
@@ -3597,7 +3340,6 @@
   )
 
 (defun context/create-context (scheduler logger type-manager module-manager authentication-provider options discovery-servers)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-context)
     (%check-error (%daq-context-create-context obj-slot scheduler logger type-manager module-manager authentication-provider options discovery-servers) "daqContext_createContext")
     (cffi:mem-ref obj-slot 'daq-context)
@@ -3610,7 +3352,6 @@
   )
 
 (defun context/get-authentication-provider (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (authentication-provider-slot 'daq-authentication-provider)
     (%check-error (%daq-context-get-authentication-provider self authentication-provider-slot) "daqContext_getAuthenticationProvider")
     (cffi:mem-ref authentication-provider-slot 'daq-authentication-provider)
@@ -3623,7 +3364,6 @@
   )
 
 (defun context/get-discovery-servers (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (servers-slot 'daq-dict)
     (%check-error (%daq-context-get-discovery-servers self servers-slot) "daqContext_getDiscoveryServers")
     (cffi:mem-ref servers-slot 'daq-dict)
@@ -3635,7 +3375,6 @@
   )
 
 (defun context/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-context-get-interface-id intf-id)
   nil)
 
@@ -3645,7 +3384,6 @@
   )
 
 (defun context/get-logger (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (logger-slot 'daq-logger)
     (%check-error (%daq-context-get-logger self logger-slot) "daqContext_getLogger")
     (cffi:mem-ref logger-slot 'daq-logger)
@@ -3658,7 +3396,6 @@
   )
 
 (defun context/get-module-manager (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (manager-slot 'daq-base-object)
     (%check-error (%daq-context-get-module-manager self manager-slot) "daqContext_getModuleManager")
     (cffi:mem-ref manager-slot 'daq-base-object)
@@ -3672,7 +3409,6 @@
   )
 
 (defun context/get-module-options (self module-id)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (options-slot 'daq-dict)
     (%check-error (%daq-context-get-module-options self module-id options-slot) "daqContext_getModuleOptions")
     (cffi:mem-ref options-slot 'daq-dict)
@@ -3685,7 +3421,6 @@
   )
 
 (defun context/get-on-core-event (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-context-get-on-core-event self event-slot) "daqContext_getOnCoreEvent")
     (cffi:mem-ref event-slot 'daq-event)
@@ -3698,7 +3433,6 @@
   )
 
 (defun context/get-options (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (options-slot 'daq-dict)
     (%check-error (%daq-context-get-options self options-slot) "daqContext_getOptions")
     (cffi:mem-ref options-slot 'daq-dict)
@@ -3711,7 +3445,6 @@
   )
 
 (defun context/get-scheduler (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (scheduler-slot 'daq-scheduler)
     (%check-error (%daq-context-get-scheduler self scheduler-slot) "daqContext_getScheduler")
     (cffi:mem-ref scheduler-slot 'daq-scheduler)
@@ -3724,7 +3457,6 @@
   )
 
 (defun context/get-type-manager (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (manager-slot 'daq-type-manager)
     (%check-error (%daq-context-get-type-manager self manager-slot) "daqContext_getTypeManager")
     (cffi:mem-ref manager-slot 'daq-type-manager)
@@ -3736,7 +3468,6 @@
   )
 
 (defun convertible/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-convertible-get-interface-id intf-id)
   nil)
 
@@ -3746,7 +3477,6 @@
   )
 
 (defun convertible/to-bool (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (val-slot 'daq-bool)
     (%check-error (%daq-convertible-to-bool self val-slot) "daqConvertible_toBool")
     (cffi:mem-ref val-slot 'daq-bool)
@@ -3759,7 +3489,6 @@
   )
 
 (defun convertible/to-float (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (val-slot 'daq-float)
     (%check-error (%daq-convertible-to-float self val-slot) "daqConvertible_toFloat")
     (cffi:mem-ref val-slot 'daq-float)
@@ -3772,7 +3501,6 @@
   )
 
 (defun convertible/to-int (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (val-slot 'daq-int)
     (%check-error (%daq-convertible-to-int self val-slot) "daqConvertible_toInt")
     (cffi:mem-ref val-slot 'daq-int)
@@ -3787,7 +3515,6 @@
   )
 
 (defun core-event-args/create-core-event-args (event-id event-name parameters)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
     (%check-error (%daq-core-event-args-create-core-event-args obj-slot event-id event-name parameters) "daqCoreEventArgs_createCoreEventArgs")
     (cffi:mem-ref obj-slot 'daq-core-event-args)
@@ -3802,7 +3529,6 @@
   )
 
 (defun core-event-args/create-core-event-args-property-added (prop-owner prop path)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
     (%check-error (%daq-core-event-args-create-core-event-args-property-added obj-slot prop-owner prop path) "daqCoreEventArgs_createCoreEventArgsPropertyAdded")
     (cffi:mem-ref obj-slot 'daq-core-event-args)
@@ -3817,7 +3543,6 @@
   )
 
 (defun core-event-args/create-core-event-args-property-object-update-end (prop-owner updated-properties path)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
     (%check-error (%daq-core-event-args-create-core-event-args-property-object-update-end obj-slot prop-owner updated-properties path) "daqCoreEventArgs_createCoreEventArgsPropertyObjectUpdateEnd")
     (cffi:mem-ref obj-slot 'daq-core-event-args)
@@ -3832,7 +3557,6 @@
   )
 
 (defun core-event-args/create-core-event-args-property-order-changed (prop-owner property-order path)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
     (%check-error (%daq-core-event-args-create-core-event-args-property-order-changed obj-slot prop-owner property-order path) "daqCoreEventArgs_createCoreEventArgsPropertyOrderChanged")
     (cffi:mem-ref obj-slot 'daq-core-event-args)
@@ -3847,7 +3571,6 @@
   )
 
 (defun core-event-args/create-core-event-args-property-removed (prop-owner prop-name path)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
     (%check-error (%daq-core-event-args-create-core-event-args-property-removed obj-slot prop-owner prop-name path) "daqCoreEventArgs_createCoreEventArgsPropertyRemoved")
     (cffi:mem-ref obj-slot 'daq-core-event-args)
@@ -3863,7 +3586,6 @@
   )
 
 (defun core-event-args/create-core-event-args-property-value-changed (prop-owner prop-name value path)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
     (%check-error (%daq-core-event-args-create-core-event-args-property-value-changed obj-slot prop-owner prop-name value path) "daqCoreEventArgs_createCoreEventArgsPropertyValueChanged")
     (cffi:mem-ref obj-slot 'daq-core-event-args)
@@ -3876,7 +3598,6 @@
   )
 
 (defun core-event-args/create-core-event-args-type-added (type)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
     (%check-error (%daq-core-event-args-create-core-event-args-type-added obj-slot type) "daqCoreEventArgs_createCoreEventArgsTypeAdded")
     (cffi:mem-ref obj-slot 'daq-core-event-args)
@@ -3889,7 +3610,6 @@
   )
 
 (defun core-event-args/create-core-event-args-type-removed (type-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
     (%check-error (%daq-core-event-args-create-core-event-args-type-removed obj-slot type-name) "daqCoreEventArgs_createCoreEventArgsTypeRemoved")
     (cffi:mem-ref obj-slot 'daq-core-event-args)
@@ -3901,7 +3621,6 @@
   )
 
 (defun core-event-args/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-core-event-args-get-interface-id intf-id)
   nil)
 
@@ -3911,7 +3630,6 @@
   )
 
 (defun core-event-args/get-parameters (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (parameters-slot 'daq-dict)
     (%check-error (%daq-core-event-args-get-parameters self parameters-slot) "daqCoreEventArgs_getParameters")
     (cffi:mem-ref parameters-slot 'daq-dict)
@@ -3924,7 +3642,6 @@
   )
 
 (defun core-type/get-core-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (core-type-slot 'daq-core-type)
     (%check-error (%daq-core-type-get-core-type self core-type-slot) "daqCoreType_getCoreType")
     (cffi:mem-ref core-type-slot 'daq-core-type)
@@ -3937,7 +3654,6 @@
   )
 
 (defun data-descriptor-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (data-descriptor-slot 'daq-data-descriptor)
     (%check-error (%daq-data-descriptor-builder-build self data-descriptor-slot) "daqDataDescriptorBuilder_build")
     (cffi:mem-ref data-descriptor-slot 'daq-data-descriptor)
@@ -3949,7 +3665,6 @@
   )
 
 (defun data-descriptor-builder/create-data-descriptor-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-data-descriptor-builder)
     (%check-error (%daq-data-descriptor-builder-create-data-descriptor-builder obj-slot) "daqDataDescriptorBuilder_createDataDescriptorBuilder")
     (cffi:mem-ref obj-slot 'daq-data-descriptor-builder)
@@ -3962,7 +3677,6 @@
   )
 
 (defun data-descriptor-builder/create-data-descriptor-builder-from-existing (descriptor-to-copy)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-data-descriptor-builder)
     (%check-error (%daq-data-descriptor-builder-create-data-descriptor-builder-from-existing obj-slot descriptor-to-copy) "daqDataDescriptorBuilder_createDataDescriptorBuilderFromExisting")
     (cffi:mem-ref obj-slot 'daq-data-descriptor-builder)
@@ -3975,7 +3689,6 @@
   )
 
 (defun data-descriptor-builder/get-dimensions (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (dimensions-slot 'daq-list)
     (%check-error (%daq-data-descriptor-builder-get-dimensions self dimensions-slot) "daqDataDescriptorBuilder_getDimensions")
     (cffi:mem-ref dimensions-slot 'daq-list)
@@ -3987,7 +3700,6 @@
   )
 
 (defun data-descriptor-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-data-descriptor-builder-get-interface-id intf-id)
   nil)
 
@@ -3997,7 +3709,6 @@
   )
 
 (defun data-descriptor-builder/get-metadata (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (metadata-slot 'daq-dict)
     (%check-error (%daq-data-descriptor-builder-get-metadata self metadata-slot) "daqDataDescriptorBuilder_getMetadata")
     (cffi:mem-ref metadata-slot 'daq-dict)
@@ -4010,7 +3721,6 @@
   )
 
 (defun data-descriptor-builder/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-data-descriptor-builder-get-name self name-slot) "daqDataDescriptorBuilder_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -4023,7 +3733,6 @@
   )
 
 (defun data-descriptor-builder/get-origin (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (origin-slot 'daq-string)
     (%check-error (%daq-data-descriptor-builder-get-origin self origin-slot) "daqDataDescriptorBuilder_getOrigin")
     (cffi:mem-ref origin-slot 'daq-string)
@@ -4036,7 +3745,6 @@
   )
 
 (defun data-descriptor-builder/get-post-scaling (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (scaling-slot 'daq-scaling)
     (%check-error (%daq-data-descriptor-builder-get-post-scaling self scaling-slot) "daqDataDescriptorBuilder_getPostScaling")
     (cffi:mem-ref scaling-slot 'daq-scaling)
@@ -4049,7 +3757,6 @@
   )
 
 (defun data-descriptor-builder/get-reference-domain-info (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (reference-domain-info-slot 'daq-reference-domain-info)
     (%check-error (%daq-data-descriptor-builder-get-reference-domain-info self reference-domain-info-slot) "daqDataDescriptorBuilder_getReferenceDomainInfo")
     (cffi:mem-ref reference-domain-info-slot 'daq-reference-domain-info)
@@ -4062,7 +3769,6 @@
   )
 
 (defun data-descriptor-builder/get-rule (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (rule-slot 'daq-data-rule)
     (%check-error (%daq-data-descriptor-builder-get-rule self rule-slot) "daqDataDescriptorBuilder_getRule")
     (cffi:mem-ref rule-slot 'daq-data-rule)
@@ -4075,7 +3781,6 @@
   )
 
 (defun data-descriptor-builder/get-sample-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (sample-type-slot 'daq-sample-type)
     (%check-error (%daq-data-descriptor-builder-get-sample-type self sample-type-slot) "daqDataDescriptorBuilder_getSampleType")
     (cffi:mem-ref sample-type-slot 'daq-sample-type)
@@ -4088,7 +3793,6 @@
   )
 
 (defun data-descriptor-builder/get-struct-fields (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (struct-fields-slot 'daq-list)
     (%check-error (%daq-data-descriptor-builder-get-struct-fields self struct-fields-slot) "daqDataDescriptorBuilder_getStructFields")
     (cffi:mem-ref struct-fields-slot 'daq-list)
@@ -4101,7 +3805,6 @@
   )
 
 (defun data-descriptor-builder/get-tick-resolution (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (tick-resolution-slot 'daq-ratio)
     (%check-error (%daq-data-descriptor-builder-get-tick-resolution self tick-resolution-slot) "daqDataDescriptorBuilder_getTickResolution")
     (cffi:mem-ref tick-resolution-slot 'daq-ratio)
@@ -4114,7 +3817,6 @@
   )
 
 (defun data-descriptor-builder/get-unit (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (unit-slot 'daq-unit)
     (%check-error (%daq-data-descriptor-builder-get-unit self unit-slot) "daqDataDescriptorBuilder_getUnit")
     (cffi:mem-ref unit-slot 'daq-unit)
@@ -4127,7 +3829,6 @@
   )
 
 (defun data-descriptor-builder/get-value-range (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (range-slot 'daq-range)
     (%check-error (%daq-data-descriptor-builder-get-value-range self range-slot) "daqDataDescriptorBuilder_getValueRange")
     (cffi:mem-ref range-slot 'daq-range)
@@ -4140,7 +3841,6 @@
   )
 
 (defun data-descriptor-builder/set-dimensions (self dimensions)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-descriptor-builder-set-dimensions self dimensions) "daqDataDescriptorBuilder_setDimensions")
   nil
 )
@@ -4151,7 +3851,6 @@
   )
 
 (defun data-descriptor-builder/set-metadata (self metadata)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-descriptor-builder-set-metadata self metadata) "daqDataDescriptorBuilder_setMetadata")
   nil
 )
@@ -4162,7 +3861,6 @@
   )
 
 (defun data-descriptor-builder/set-name (self name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-descriptor-builder-set-name self name) "daqDataDescriptorBuilder_setName")
   nil
 )
@@ -4173,7 +3871,6 @@
   )
 
 (defun data-descriptor-builder/set-origin (self origin)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-descriptor-builder-set-origin self origin) "daqDataDescriptorBuilder_setOrigin")
   nil
 )
@@ -4184,7 +3881,6 @@
   )
 
 (defun data-descriptor-builder/set-post-scaling (self scaling)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-descriptor-builder-set-post-scaling self scaling) "daqDataDescriptorBuilder_setPostScaling")
   nil
 )
@@ -4195,7 +3891,6 @@
   )
 
 (defun data-descriptor-builder/set-reference-domain-info (self reference-domain-info)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-descriptor-builder-set-reference-domain-info self reference-domain-info) "daqDataDescriptorBuilder_setReferenceDomainInfo")
   nil
 )
@@ -4206,7 +3901,6 @@
   )
 
 (defun data-descriptor-builder/set-rule (self rule)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-descriptor-builder-set-rule self rule) "daqDataDescriptorBuilder_setRule")
   nil
 )
@@ -4217,7 +3911,6 @@
   )
 
 (defun data-descriptor-builder/set-sample-type (self sample-type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-descriptor-builder-set-sample-type self sample-type) "daqDataDescriptorBuilder_setSampleType")
   nil
 )
@@ -4228,7 +3921,6 @@
   )
 
 (defun data-descriptor-builder/set-struct-fields (self struct-fields)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-descriptor-builder-set-struct-fields self struct-fields) "daqDataDescriptorBuilder_setStructFields")
   nil
 )
@@ -4239,7 +3931,6 @@
   )
 
 (defun data-descriptor-builder/set-tick-resolution (self tick-resolution)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-descriptor-builder-set-tick-resolution self tick-resolution) "daqDataDescriptorBuilder_setTickResolution")
   nil
 )
@@ -4250,7 +3941,6 @@
   )
 
 (defun data-descriptor-builder/set-unit (self unit)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-descriptor-builder-set-unit self unit) "daqDataDescriptorBuilder_setUnit")
   nil
 )
@@ -4261,7 +3951,6 @@
   )
 
 (defun data-descriptor-builder/set-value-range (self range)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-descriptor-builder-set-value-range self range) "daqDataDescriptorBuilder_setValueRange")
   nil
 )
@@ -4272,7 +3961,6 @@
   )
 
 (defun data-descriptor/create-data-descriptor-from-builder (builder)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-data-descriptor)
     (%check-error (%daq-data-descriptor-create-data-descriptor-from-builder obj-slot builder) "daqDataDescriptor_createDataDescriptorFromBuilder")
     (cffi:mem-ref obj-slot 'daq-data-descriptor)
@@ -4285,7 +3973,6 @@
   )
 
 (defun data-descriptor/get-dimensions (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (dimensions-slot 'daq-list)
     (%check-error (%daq-data-descriptor-get-dimensions self dimensions-slot) "daqDataDescriptor_getDimensions")
     (cffi:mem-ref dimensions-slot 'daq-list)
@@ -4297,7 +3984,6 @@
   )
 
 (defun data-descriptor/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-data-descriptor-get-interface-id intf-id)
   nil)
 
@@ -4307,7 +3993,6 @@
   )
 
 (defun data-descriptor/get-metadata (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (metadata-slot 'daq-dict)
     (%check-error (%daq-data-descriptor-get-metadata self metadata-slot) "daqDataDescriptor_getMetadata")
     (cffi:mem-ref metadata-slot 'daq-dict)
@@ -4320,7 +4005,6 @@
   )
 
 (defun data-descriptor/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-data-descriptor-get-name self name-slot) "daqDataDescriptor_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -4333,7 +4017,6 @@
   )
 
 (defun data-descriptor/get-origin (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (origin-slot 'daq-string)
     (%check-error (%daq-data-descriptor-get-origin self origin-slot) "daqDataDescriptor_getOrigin")
     (cffi:mem-ref origin-slot 'daq-string)
@@ -4346,7 +4029,6 @@
   )
 
 (defun data-descriptor/get-post-scaling (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (scaling-slot 'daq-scaling)
     (%check-error (%daq-data-descriptor-get-post-scaling self scaling-slot) "daqDataDescriptor_getPostScaling")
     (cffi:mem-ref scaling-slot 'daq-scaling)
@@ -4359,7 +4041,6 @@
   )
 
 (defun data-descriptor/get-raw-sample-size (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (raw-sample-size-slot 'daq-size-t)
     (%check-error (%daq-data-descriptor-get-raw-sample-size self raw-sample-size-slot) "daqDataDescriptor_getRawSampleSize")
     (cffi:mem-ref raw-sample-size-slot 'daq-size-t)
@@ -4372,7 +4053,6 @@
   )
 
 (defun data-descriptor/get-reference-domain-info (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (reference-domain-info-slot 'daq-reference-domain-info)
     (%check-error (%daq-data-descriptor-get-reference-domain-info self reference-domain-info-slot) "daqDataDescriptor_getReferenceDomainInfo")
     (cffi:mem-ref reference-domain-info-slot 'daq-reference-domain-info)
@@ -4385,7 +4065,6 @@
   )
 
 (defun data-descriptor/get-rule (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (rule-slot 'daq-data-rule)
     (%check-error (%daq-data-descriptor-get-rule self rule-slot) "daqDataDescriptor_getRule")
     (cffi:mem-ref rule-slot 'daq-data-rule)
@@ -4398,7 +4077,6 @@
   )
 
 (defun data-descriptor/get-sample-size (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (sample-size-slot 'daq-size-t)
     (%check-error (%daq-data-descriptor-get-sample-size self sample-size-slot) "daqDataDescriptor_getSampleSize")
     (cffi:mem-ref sample-size-slot 'daq-size-t)
@@ -4411,7 +4089,6 @@
   )
 
 (defun data-descriptor/get-sample-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (sample-type-slot 'daq-sample-type)
     (%check-error (%daq-data-descriptor-get-sample-type self sample-type-slot) "daqDataDescriptor_getSampleType")
     (cffi:mem-ref sample-type-slot 'daq-sample-type)
@@ -4424,7 +4101,6 @@
   )
 
 (defun data-descriptor/get-struct-fields (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (struct-fields-slot 'daq-list)
     (%check-error (%daq-data-descriptor-get-struct-fields self struct-fields-slot) "daqDataDescriptor_getStructFields")
     (cffi:mem-ref struct-fields-slot 'daq-list)
@@ -4437,7 +4113,6 @@
   )
 
 (defun data-descriptor/get-tick-resolution (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (tick-resolution-slot 'daq-ratio)
     (%check-error (%daq-data-descriptor-get-tick-resolution self tick-resolution-slot) "daqDataDescriptor_getTickResolution")
     (cffi:mem-ref tick-resolution-slot 'daq-ratio)
@@ -4450,7 +4125,6 @@
   )
 
 (defun data-descriptor/get-unit (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (unit-slot 'daq-unit)
     (%check-error (%daq-data-descriptor-get-unit self unit-slot) "daqDataDescriptor_getUnit")
     (cffi:mem-ref unit-slot 'daq-unit)
@@ -4463,7 +4137,6 @@
   )
 
 (defun data-descriptor/get-value-range (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (range-slot 'daq-range)
     (%check-error (%daq-data-descriptor-get-value-range self range-slot) "daqDataDescriptor_getValueRange")
     (cffi:mem-ref range-slot 'daq-range)
@@ -4481,7 +4154,6 @@
   )
 
 (defun data-packet/create-constant-data-packet-with-domain (domain-packet descriptor sample-count initial-value other-values other-value-count)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-data-packet)
     (%check-error (%daq-data-packet-create-constant-data-packet-with-domain obj-slot domain-packet descriptor sample-count initial-value other-values other-value-count) "daqDataPacket_createConstantDataPacketWithDomain")
     (cffi:mem-ref obj-slot 'daq-data-packet)
@@ -4496,7 +4168,6 @@
   )
 
 (defun data-packet/create-data-packet (descriptor sample-count offset)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-data-packet)
     (%check-error (%daq-data-packet-create-data-packet obj-slot descriptor sample-count offset) "daqDataPacket_createDataPacket")
     (cffi:mem-ref obj-slot 'daq-data-packet)
@@ -4512,7 +4183,6 @@
   )
 
 (defun data-packet/create-data-packet-with-domain (domain-packet descriptor sample-count offset)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-data-packet)
     (%check-error (%daq-data-packet-create-data-packet-with-domain obj-slot domain-packet descriptor sample-count offset) "daqDataPacket_createDataPacketWithDomain")
     (cffi:mem-ref obj-slot 'daq-data-packet)
@@ -4531,7 +4201,6 @@
   )
 
 (defun data-packet/create-data-packet-with-external-memory (domain-packet descriptor sample-count offset external-memory deleter buffer-size)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-data-packet)
     (%check-error (%daq-data-packet-create-data-packet-with-external-memory obj-slot domain-packet descriptor sample-count offset external-memory deleter buffer-size) "daqDataPacket_createDataPacketWithExternalMemory")
     (cffi:mem-ref obj-slot 'daq-data-packet)
@@ -4544,7 +4213,6 @@
   )
 
 (defun data-packet/get-data (self address)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-packet-get-data self address) "daqDataPacket_getData")
   nil
 )
@@ -4555,7 +4223,6 @@
   )
 
 (defun data-packet/get-data-descriptor (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (descriptor-slot 'daq-data-descriptor)
     (%check-error (%daq-data-packet-get-data-descriptor self descriptor-slot) "daqDataPacket_getDataDescriptor")
     (cffi:mem-ref descriptor-slot 'daq-data-descriptor)
@@ -4568,7 +4235,6 @@
   )
 
 (defun data-packet/get-data-size (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (data-size-slot 'daq-size-t)
     (%check-error (%daq-data-packet-get-data-size self data-size-slot) "daqDataPacket_getDataSize")
     (cffi:mem-ref data-size-slot 'daq-size-t)
@@ -4581,7 +4247,6 @@
   )
 
 (defun data-packet/get-domain-packet (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (packet-slot 'daq-data-packet)
     (%check-error (%daq-data-packet-get-domain-packet self packet-slot) "daqDataPacket_getDomainPacket")
     (cffi:mem-ref packet-slot 'daq-data-packet)
@@ -4593,7 +4258,6 @@
   )
 
 (defun data-packet/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-data-packet-get-interface-id intf-id)
   nil)
 
@@ -4604,7 +4268,6 @@
   )
 
 (defun data-packet/get-last-value (self type-manager)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-base-object)
     (%check-error (%daq-data-packet-get-last-value self value-slot type-manager) "daqDataPacket_getLastValue")
     (cffi:mem-ref value-slot 'daq-base-object)
@@ -4617,7 +4280,6 @@
   )
 
 (defun data-packet/get-offset (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (offset-slot 'daq-number)
     (%check-error (%daq-data-packet-get-offset self offset-slot) "daqDataPacket_getOffset")
     (cffi:mem-ref offset-slot 'daq-number)
@@ -4630,7 +4292,6 @@
   )
 
 (defun data-packet/get-packet-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (packet-id-slot 'daq-int)
     (%check-error (%daq-data-packet-get-packet-id self packet-id-slot) "daqDataPacket_getPacketId")
     (cffi:mem-ref packet-id-slot 'daq-int)
@@ -4643,7 +4304,6 @@
   )
 
 (defun data-packet/get-raw-data (self address)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-packet-get-raw-data self address) "daqDataPacket_getRawData")
   nil
 )
@@ -4654,7 +4314,6 @@
   )
 
 (defun data-packet/get-raw-data-size (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (raw-data-size-slot 'daq-size-t)
     (%check-error (%daq-data-packet-get-raw-data-size self raw-data-size-slot) "daqDataPacket_getRawDataSize")
     (cffi:mem-ref raw-data-size-slot 'daq-size-t)
@@ -4667,7 +4326,6 @@
   )
 
 (defun data-packet/get-raw-last-value (self value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-packet-get-raw-last-value self value) "daqDataPacket_getRawLastValue")
   nil
 )
@@ -4679,7 +4337,6 @@
   )
 
 (defun data-packet/get-raw-value-by-index (self value index)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-packet-get-raw-value-by-index self value index) "daqDataPacket_getRawValueByIndex")
   nil
 )
@@ -4690,7 +4347,6 @@
   )
 
 (defun data-packet/get-sample-count (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (sample-count-slot 'daq-size-t)
     (%check-error (%daq-data-packet-get-sample-count self sample-count-slot) "daqDataPacket_getSampleCount")
     (cffi:mem-ref sample-count-slot 'daq-size-t)
@@ -4705,7 +4361,6 @@
   )
 
 (defun data-packet/get-value-by-index (self index type-manager)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-base-object)
     (%check-error (%daq-data-packet-get-value-by-index self value-slot index type-manager) "daqDataPacket_getValueByIndex")
     (cffi:mem-ref value-slot 'daq-base-object)
@@ -4719,7 +4374,6 @@
   )
 
 (defun data-rule-builder/add-parameter (self name parameter)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-rule-builder-add-parameter self name parameter) "daqDataRuleBuilder_addParameter")
   nil
 )
@@ -4730,7 +4384,6 @@
   )
 
 (defun data-rule-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (data-rule-slot 'daq-data-rule)
     (%check-error (%daq-data-rule-builder-build self data-rule-slot) "daqDataRuleBuilder_build")
     (cffi:mem-ref data-rule-slot 'daq-data-rule)
@@ -4742,7 +4395,6 @@
   )
 
 (defun data-rule-builder/create-data-rule-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-data-rule-builder)
     (%check-error (%daq-data-rule-builder-create-data-rule-builder obj-slot) "daqDataRuleBuilder_createDataRuleBuilder")
     (cffi:mem-ref obj-slot 'daq-data-rule-builder)
@@ -4755,7 +4407,6 @@
   )
 
 (defun data-rule-builder/create-data-rule-builder-from-existing (rule-to-copy)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-data-rule-builder)
     (%check-error (%daq-data-rule-builder-create-data-rule-builder-from-existing obj-slot rule-to-copy) "daqDataRuleBuilder_createDataRuleBuilderFromExisting")
     (cffi:mem-ref obj-slot 'daq-data-rule-builder)
@@ -4767,7 +4418,6 @@
   )
 
 (defun data-rule-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-data-rule-builder-get-interface-id intf-id)
   nil)
 
@@ -4777,7 +4427,6 @@
   )
 
 (defun data-rule-builder/get-parameters (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (parameters-slot 'daq-dict)
     (%check-error (%daq-data-rule-builder-get-parameters self parameters-slot) "daqDataRuleBuilder_getParameters")
     (cffi:mem-ref parameters-slot 'daq-dict)
@@ -4790,7 +4439,6 @@
   )
 
 (defun data-rule-builder/get-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-data-rule-type)
     (%check-error (%daq-data-rule-builder-get-type self type-slot) "daqDataRuleBuilder_getType")
     (cffi:mem-ref type-slot 'daq-data-rule-type)
@@ -4803,7 +4451,6 @@
   )
 
 (defun data-rule-builder/remove-parameter (self name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-rule-builder-remove-parameter self name) "daqDataRuleBuilder_removeParameter")
   nil
 )
@@ -4814,7 +4461,6 @@
   )
 
 (defun data-rule-builder/set-parameters (self parameters)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-rule-builder-set-parameters self parameters) "daqDataRuleBuilder_setParameters")
   nil
 )
@@ -4825,7 +4471,6 @@
   )
 
 (defun data-rule-builder/set-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-data-rule-builder-set-type self type) "daqDataRuleBuilder_setType")
   nil
 )
@@ -4835,7 +4480,6 @@
   )
 
 (defun data-rule/create-constant-data-rule ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-data-rule)
     (%check-error (%daq-data-rule-create-constant-data-rule obj-slot) "daqDataRule_createConstantDataRule")
     (cffi:mem-ref obj-slot 'daq-data-rule)
@@ -4849,7 +4493,6 @@
   )
 
 (defun data-rule/create-data-rule (rule-type parameters)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-data-rule)
     (%check-error (%daq-data-rule-create-data-rule obj-slot rule-type parameters) "daqDataRule_createDataRule")
     (cffi:mem-ref obj-slot 'daq-data-rule)
@@ -4862,7 +4505,6 @@
   )
 
 (defun data-rule/create-data-rule-from-builder (builder)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-data-rule)
     (%check-error (%daq-data-rule-create-data-rule-from-builder obj-slot builder) "daqDataRule_createDataRuleFromBuilder")
     (cffi:mem-ref obj-slot 'daq-data-rule)
@@ -4874,7 +4516,6 @@
   )
 
 (defun data-rule/create-explicit-data-rule ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-data-rule)
     (%check-error (%daq-data-rule-create-explicit-data-rule obj-slot) "daqDataRule_createExplicitDataRule")
     (cffi:mem-ref obj-slot 'daq-data-rule)
@@ -4888,7 +4529,6 @@
   )
 
 (defun data-rule/create-explicit-domain-data-rule (min-expected-delta max-expected-delta)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-data-rule)
     (%check-error (%daq-data-rule-create-explicit-domain-data-rule obj-slot min-expected-delta max-expected-delta) "daqDataRule_createExplicitDomainDataRule")
     (cffi:mem-ref obj-slot 'daq-data-rule)
@@ -4902,7 +4542,6 @@
   )
 
 (defun data-rule/create-linear-data-rule (delta start)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-data-rule)
     (%check-error (%daq-data-rule-create-linear-data-rule obj-slot delta start) "daqDataRule_createLinearDataRule")
     (cffi:mem-ref obj-slot 'daq-data-rule)
@@ -4914,7 +4553,6 @@
   )
 
 (defun data-rule/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-data-rule-get-interface-id intf-id)
   nil)
 
@@ -4924,7 +4562,6 @@
   )
 
 (defun data-rule/get-parameters (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (parameters-slot 'daq-dict)
     (%check-error (%daq-data-rule-get-parameters self parameters-slot) "daqDataRule_getParameters")
     (cffi:mem-ref parameters-slot 'daq-dict)
@@ -4937,7 +4574,6 @@
   )
 
 (defun data-rule/get-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-data-rule-type)
     (%check-error (%daq-data-rule-get-type self type-slot) "daqDataRule_getType")
     (cffi:mem-ref type-slot 'daq-data-rule-type)
@@ -4950,7 +4586,6 @@
   )
 
 (defun deleter/delete-memory (self address)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-deleter-delete-memory self address) "daqDeleter_deleteMemory")
   nil
 )
@@ -4960,7 +4595,6 @@
   )
 
 (defun deleter/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-deleter-get-interface-id intf-id)
   nil)
 
@@ -4969,7 +4603,6 @@
   )
 
 (defun deserialize-component/complete (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-deserialize-component-complete self) "daqDeserializeComponent_complete")
   nil
 )
@@ -4982,7 +4615,6 @@
   )
 
 (defun deserialize-component/deserialize-values (self serialized-object context callback-factory)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-deserialize-component-deserialize-values self serialized-object context callback-factory) "daqDeserializeComponent_deserializeValues")
   nil
 )
@@ -4994,7 +4626,6 @@
   )
 
 (defun deserialize-component/get-deserialized-parameter (self parameter)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-base-object)
     (%check-error (%daq-deserialize-component-get-deserialized-parameter self parameter value-slot) "daqDeserializeComponent_getDeserializedParameter")
     (cffi:mem-ref value-slot 'daq-base-object)
@@ -5006,7 +4637,6 @@
   )
 
 (defun deserialize-component/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-deserialize-component-get-interface-id intf-id)
   nil)
 
@@ -5017,7 +4647,6 @@
   )
 
 (defun deserializer/call-custom-proc (self custom-deserialize serialized)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-deserializer-call-custom-proc self custom-deserialize serialized) "daqDeserializer_callCustomProc")
   nil
 )
@@ -5031,7 +4660,6 @@
   )
 
 (defun deserializer/deserialize (self serialized context factory-callback)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (object-slot 'daq-base-object)
     (%check-error (%daq-deserializer-deserialize self serialized context factory-callback object-slot) "daqDeserializer_deserialize")
     (cffi:mem-ref object-slot 'daq-base-object)
@@ -5046,7 +4674,6 @@
   )
 
 (defun deserializer/update (self updatable serialized config)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-deserializer-update self updatable serialized config) "daqDeserializer_update")
   nil
 )
@@ -5059,7 +4686,6 @@
   )
 
 (defun device-domain/create-device-domain (tick-resolution origin unit)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-device-domain)
     (%check-error (%daq-device-domain-create-device-domain obj-slot tick-resolution origin unit) "daqDeviceDomain_createDeviceDomain")
     (cffi:mem-ref obj-slot 'daq-device-domain)
@@ -5075,7 +4701,6 @@
   )
 
 (defun device-domain/create-device-domain-with-reference-domain-info (tick-resolution origin unit reference-domain-info)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-device-domain)
     (%check-error (%daq-device-domain-create-device-domain-with-reference-domain-info obj-slot tick-resolution origin unit reference-domain-info) "daqDeviceDomain_createDeviceDomainWithReferenceDomainInfo")
     (cffi:mem-ref obj-slot 'daq-device-domain)
@@ -5087,7 +4712,6 @@
   )
 
 (defun device-domain/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-device-domain-get-interface-id intf-id)
   nil)
 
@@ -5097,7 +4721,6 @@
   )
 
 (defun device-domain/get-origin (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (origin-slot 'daq-string)
     (%check-error (%daq-device-domain-get-origin self origin-slot) "daqDeviceDomain_getOrigin")
     (cffi:mem-ref origin-slot 'daq-string)
@@ -5110,7 +4733,6 @@
   )
 
 (defun device-domain/get-reference-domain-info (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (reference-domain-info-slot 'daq-reference-domain-info)
     (%check-error (%daq-device-domain-get-reference-domain-info self reference-domain-info-slot) "daqDeviceDomain_getReferenceDomainInfo")
     (cffi:mem-ref reference-domain-info-slot 'daq-reference-domain-info)
@@ -5123,7 +4745,6 @@
   )
 
 (defun device-domain/get-tick-resolution (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (tick-resolution-slot 'daq-ratio)
     (%check-error (%daq-device-domain-get-tick-resolution self tick-resolution-slot) "daqDeviceDomain_getTickResolution")
     (cffi:mem-ref tick-resolution-slot 'daq-ratio)
@@ -5136,7 +4757,6 @@
   )
 
 (defun device-domain/get-unit (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (unit-slot 'daq-unit)
     (%check-error (%daq-device-domain-get-unit self unit-slot) "daqDeviceDomain_getUnit")
     (cffi:mem-ref unit-slot 'daq-unit)
@@ -5150,7 +4770,6 @@
   )
 
 (defun device-info-config/create-device-info-config (name connection-string)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-device-info-config)
     (%check-error (%daq-device-info-config-create-device-info-config obj-slot name connection-string) "daqDeviceInfoConfig_createDeviceInfoConfig")
     (cffi:mem-ref obj-slot 'daq-device-info-config)
@@ -5165,7 +4784,6 @@
   )
 
 (defun device-info-config/create-device-info-config-with-custom-sdk-version (name connection-string sdk-version)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-device-info-config)
     (%check-error (%daq-device-info-config-create-device-info-config-with-custom-sdk-version obj-slot name connection-string sdk-version) "daqDeviceInfoConfig_createDeviceInfoConfigWithCustomSdkVersion")
     (cffi:mem-ref obj-slot 'daq-device-info-config)
@@ -5177,7 +4795,6 @@
   )
 
 (defun device-info-config/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-device-info-config-get-interface-id intf-id)
   nil)
 
@@ -5187,7 +4804,6 @@
   )
 
 (defun device-info-config/set-asset-id (self id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-asset-id self id) "daqDeviceInfoConfig_setAssetId")
   nil
 )
@@ -5198,7 +4814,6 @@
   )
 
 (defun device-info-config/set-connection-string (self connection-string)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-connection-string self connection-string) "daqDeviceInfoConfig_setConnectionString")
   nil
 )
@@ -5209,7 +4824,6 @@
   )
 
 (defun device-info-config/set-device-class (self device-class)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-device-class self device-class) "daqDeviceInfoConfig_setDeviceClass")
   nil
 )
@@ -5220,7 +4834,6 @@
   )
 
 (defun device-info-config/set-device-manual (self device-manual)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-device-manual self device-manual) "daqDeviceInfoConfig_setDeviceManual")
   nil
 )
@@ -5231,7 +4844,6 @@
   )
 
 (defun device-info-config/set-device-revision (self device-revision)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-device-revision self device-revision) "daqDeviceInfoConfig_setDeviceRevision")
   nil
 )
@@ -5242,7 +4854,6 @@
   )
 
 (defun device-info-config/set-device-type (self device-type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-device-type self device-type) "daqDeviceInfoConfig_setDeviceType")
   nil
 )
@@ -5253,7 +4864,6 @@
   )
 
 (defun device-info-config/set-hardware-revision (self hardware-revision)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-hardware-revision self hardware-revision) "daqDeviceInfoConfig_setHardwareRevision")
   nil
 )
@@ -5264,7 +4874,6 @@
   )
 
 (defun device-info-config/set-location (self location)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-location self location) "daqDeviceInfoConfig_setLocation")
   nil
 )
@@ -5275,7 +4884,6 @@
   )
 
 (defun device-info-config/set-mac-address (self mac-address)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-mac-address self mac-address) "daqDeviceInfoConfig_setMacAddress")
   nil
 )
@@ -5286,7 +4894,6 @@
   )
 
 (defun device-info-config/set-manufacturer (self manufacturer)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-manufacturer self manufacturer) "daqDeviceInfoConfig_setManufacturer")
   nil
 )
@@ -5297,7 +4904,6 @@
   )
 
 (defun device-info-config/set-manufacturer-uri (self manufacturer-uri)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-manufacturer-uri self manufacturer-uri) "daqDeviceInfoConfig_setManufacturerUri")
   nil
 )
@@ -5308,7 +4914,6 @@
   )
 
 (defun device-info-config/set-model (self model)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-model self model) "daqDeviceInfoConfig_setModel")
   nil
 )
@@ -5319,7 +4924,6 @@
   )
 
 (defun device-info-config/set-name (self name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-name self name) "daqDeviceInfoConfig_setName")
   nil
 )
@@ -5330,7 +4934,6 @@
   )
 
 (defun device-info-config/set-parent-mac-address (self mac-address)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-parent-mac-address self mac-address) "daqDeviceInfoConfig_setParentMacAddress")
   nil
 )
@@ -5341,7 +4944,6 @@
   )
 
 (defun device-info-config/set-platform (self platform)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-platform self platform) "daqDeviceInfoConfig_setPlatform")
   nil
 )
@@ -5352,7 +4954,6 @@
   )
 
 (defun device-info-config/set-position (self position)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-position self position) "daqDeviceInfoConfig_setPosition")
   nil
 )
@@ -5363,7 +4964,6 @@
   )
 
 (defun device-info-config/set-product-code (self product-code)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-product-code self product-code) "daqDeviceInfoConfig_setProductCode")
   nil
 )
@@ -5374,7 +4974,6 @@
   )
 
 (defun device-info-config/set-product-instance-uri (self product-instance-uri)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-product-instance-uri self product-instance-uri) "daqDeviceInfoConfig_setProductInstanceUri")
   nil
 )
@@ -5385,7 +4984,6 @@
   )
 
 (defun device-info-config/set-revision-counter (self revision-counter)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-revision-counter self revision-counter) "daqDeviceInfoConfig_setRevisionCounter")
   nil
 )
@@ -5396,7 +4994,6 @@
   )
 
 (defun device-info-config/set-serial-number (self serial-number)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-serial-number self serial-number) "daqDeviceInfoConfig_setSerialNumber")
   nil
 )
@@ -5407,7 +5004,6 @@
   )
 
 (defun device-info-config/set-software-revision (self software-revision)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-software-revision self software-revision) "daqDeviceInfoConfig_setSoftwareRevision")
   nil
 )
@@ -5418,7 +5014,6 @@
   )
 
 (defun device-info-config/set-system-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-system-type self type) "daqDeviceInfoConfig_setSystemType")
   nil
 )
@@ -5429,7 +5024,6 @@
   )
 
 (defun device-info-config/set-system-uuid (self uuid)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-system-uuid self uuid) "daqDeviceInfoConfig_setSystemUuid")
   nil
 )
@@ -5440,7 +5034,6 @@
   )
 
 (defun device-info-config/set-user-name (self user-name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-config-set-user-name self user-name) "daqDeviceInfoConfig_setUserName")
   nil
 )
@@ -5452,7 +5045,6 @@
   )
 
 (defun device-info-internal/add-connected-client (self client-info)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (client-number-slot 'daq-size-t)
     (%check-error (%daq-device-info-internal-add-connected-client self client-number-slot client-info) "daqDeviceInfoInternal_addConnectedClient")
     (cffi:mem-ref client-number-slot 'daq-size-t)
@@ -5466,7 +5058,6 @@
   )
 
 (defun device-info-internal/add-network-inteface (self name network-interface)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-internal-add-network-inteface self name network-interface) "daqDeviceInfoInternal_addNetworkInteface")
   nil
 )
@@ -5477,7 +5068,6 @@
   )
 
 (defun device-info-internal/add-server-capability (self server-capability)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-internal-add-server-capability self server-capability) "daqDeviceInfoInternal_addServerCapability")
   nil
 )
@@ -5487,7 +5077,6 @@
   )
 
 (defun device-info-internal/clear-server-streaming-capabilities (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-internal-clear-server-streaming-capabilities self) "daqDeviceInfoInternal_clearServerStreamingCapabilities")
   nil
 )
@@ -5497,7 +5086,6 @@
   )
 
 (defun device-info-internal/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-device-info-internal-get-interface-id intf-id)
   nil)
 
@@ -5507,7 +5095,6 @@
   )
 
 (defun device-info-internal/remove-connected-client (self client-number)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-internal-remove-connected-client self client-number) "daqDeviceInfoInternal_removeConnectedClient")
   nil
 )
@@ -5518,7 +5105,6 @@
   )
 
 (defun device-info-internal/remove-server-capability (self protocol-id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-info-internal-remove-server-capability self protocol-id) "daqDeviceInfoInternal_removeServerCapability")
   nil
 )
@@ -5529,7 +5115,6 @@
   )
 
 (defun device-info/get-asset-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (id-slot 'daq-string)
     (%check-error (%daq-device-info-get-asset-id self id-slot) "daqDeviceInfo_getAssetId")
     (cffi:mem-ref id-slot 'daq-string)
@@ -5542,7 +5127,6 @@
   )
 
 (defun device-info/get-configuration-connection-info (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (connection-info-slot 'daq-server-capability)
     (%check-error (%daq-device-info-get-configuration-connection-info self connection-info-slot) "daqDeviceInfo_getConfigurationConnectionInfo")
     (cffi:mem-ref connection-info-slot 'daq-server-capability)
@@ -5555,7 +5139,6 @@
   )
 
 (defun device-info/get-connected-clients-info (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (connected-clients-info-slot 'daq-list)
     (%check-error (%daq-device-info-get-connected-clients-info self connected-clients-info-slot) "daqDeviceInfo_getConnectedClientsInfo")
     (cffi:mem-ref connected-clients-info-slot 'daq-list)
@@ -5568,7 +5151,6 @@
   )
 
 (defun device-info/get-connection-string (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (connection-string-slot 'daq-string)
     (%check-error (%daq-device-info-get-connection-string self connection-string-slot) "daqDeviceInfo_getConnectionString")
     (cffi:mem-ref connection-string-slot 'daq-string)
@@ -5581,7 +5163,6 @@
   )
 
 (defun device-info/get-custom-info-property-names (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (custom-info-names-slot 'daq-list)
     (%check-error (%daq-device-info-get-custom-info-property-names self custom-info-names-slot) "daqDeviceInfo_getCustomInfoPropertyNames")
     (cffi:mem-ref custom-info-names-slot 'daq-list)
@@ -5594,7 +5175,6 @@
   )
 
 (defun device-info/get-device-class (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (device-class-slot 'daq-string)
     (%check-error (%daq-device-info-get-device-class self device-class-slot) "daqDeviceInfo_getDeviceClass")
     (cffi:mem-ref device-class-slot 'daq-string)
@@ -5607,7 +5187,6 @@
   )
 
 (defun device-info/get-device-manual (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (device-manual-slot 'daq-string)
     (%check-error (%daq-device-info-get-device-manual self device-manual-slot) "daqDeviceInfo_getDeviceManual")
     (cffi:mem-ref device-manual-slot 'daq-string)
@@ -5620,7 +5199,6 @@
   )
 
 (defun device-info/get-device-revision (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (device-revision-slot 'daq-string)
     (%check-error (%daq-device-info-get-device-revision self device-revision-slot) "daqDeviceInfo_getDeviceRevision")
     (cffi:mem-ref device-revision-slot 'daq-string)
@@ -5633,7 +5211,6 @@
   )
 
 (defun device-info/get-device-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (device-type-slot 'daq-device-type)
     (%check-error (%daq-device-info-get-device-type self device-type-slot) "daqDeviceInfo_getDeviceType")
     (cffi:mem-ref device-type-slot 'daq-device-type)
@@ -5646,7 +5223,6 @@
   )
 
 (defun device-info/get-hardware-revision (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (hardware-revision-slot 'daq-string)
     (%check-error (%daq-device-info-get-hardware-revision self hardware-revision-slot) "daqDeviceInfo_getHardwareRevision")
     (cffi:mem-ref hardware-revision-slot 'daq-string)
@@ -5658,7 +5234,6 @@
   )
 
 (defun device-info/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-device-info-get-interface-id intf-id)
   nil)
 
@@ -5668,7 +5243,6 @@
   )
 
 (defun device-info/get-location (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (location-slot 'daq-string)
     (%check-error (%daq-device-info-get-location self location-slot) "daqDeviceInfo_getLocation")
     (cffi:mem-ref location-slot 'daq-string)
@@ -5681,7 +5255,6 @@
   )
 
 (defun device-info/get-mac-address (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (mac-address-slot 'daq-string)
     (%check-error (%daq-device-info-get-mac-address self mac-address-slot) "daqDeviceInfo_getMacAddress")
     (cffi:mem-ref mac-address-slot 'daq-string)
@@ -5694,7 +5267,6 @@
   )
 
 (defun device-info/get-manufacturer (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (manufacturer-slot 'daq-string)
     (%check-error (%daq-device-info-get-manufacturer self manufacturer-slot) "daqDeviceInfo_getManufacturer")
     (cffi:mem-ref manufacturer-slot 'daq-string)
@@ -5707,7 +5279,6 @@
   )
 
 (defun device-info/get-manufacturer-uri (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (manufacturer-uri-slot 'daq-string)
     (%check-error (%daq-device-info-get-manufacturer-uri self manufacturer-uri-slot) "daqDeviceInfo_getManufacturerUri")
     (cffi:mem-ref manufacturer-uri-slot 'daq-string)
@@ -5720,7 +5291,6 @@
   )
 
 (defun device-info/get-model (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (model-slot 'daq-string)
     (%check-error (%daq-device-info-get-model self model-slot) "daqDeviceInfo_getModel")
     (cffi:mem-ref model-slot 'daq-string)
@@ -5733,7 +5303,6 @@
   )
 
 (defun device-info/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-device-info-get-name self name-slot) "daqDeviceInfo_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -5747,7 +5316,6 @@
   )
 
 (defun device-info/get-network-interface (self interface-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (intf-slot 'daq-network-interface)
     (%check-error (%daq-device-info-get-network-interface self interface-name intf-slot) "daqDeviceInfo_getNetworkInterface")
     (cffi:mem-ref intf-slot 'daq-network-interface)
@@ -5760,7 +5328,6 @@
   )
 
 (defun device-info/get-network-interfaces (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (interfaces-slot 'daq-dict)
     (%check-error (%daq-device-info-get-network-interfaces self interfaces-slot) "daqDeviceInfo_getNetworkInterfaces")
     (cffi:mem-ref interfaces-slot 'daq-dict)
@@ -5773,7 +5340,6 @@
   )
 
 (defun device-info/get-parent-mac-address (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (mac-address-slot 'daq-string)
     (%check-error (%daq-device-info-get-parent-mac-address self mac-address-slot) "daqDeviceInfo_getParentMacAddress")
     (cffi:mem-ref mac-address-slot 'daq-string)
@@ -5786,7 +5352,6 @@
   )
 
 (defun device-info/get-platform (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (platform-slot 'daq-string)
     (%check-error (%daq-device-info-get-platform self platform-slot) "daqDeviceInfo_getPlatform")
     (cffi:mem-ref platform-slot 'daq-string)
@@ -5799,7 +5364,6 @@
   )
 
 (defun device-info/get-position (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (position-slot 'daq-int)
     (%check-error (%daq-device-info-get-position self position-slot) "daqDeviceInfo_getPosition")
     (cffi:mem-ref position-slot 'daq-int)
@@ -5812,7 +5376,6 @@
   )
 
 (defun device-info/get-product-code (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (product-code-slot 'daq-string)
     (%check-error (%daq-device-info-get-product-code self product-code-slot) "daqDeviceInfo_getProductCode")
     (cffi:mem-ref product-code-slot 'daq-string)
@@ -5825,7 +5388,6 @@
   )
 
 (defun device-info/get-product-instance-uri (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (product-instance-uri-slot 'daq-string)
     (%check-error (%daq-device-info-get-product-instance-uri self product-instance-uri-slot) "daqDeviceInfo_getProductInstanceUri")
     (cffi:mem-ref product-instance-uri-slot 'daq-string)
@@ -5838,7 +5400,6 @@
   )
 
 (defun device-info/get-revision-counter (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (revision-counter-slot 'daq-int)
     (%check-error (%daq-device-info-get-revision-counter self revision-counter-slot) "daqDeviceInfo_getRevisionCounter")
     (cffi:mem-ref revision-counter-slot 'daq-int)
@@ -5851,7 +5412,6 @@
   )
 
 (defun device-info/get-sdk-version (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (version-slot 'daq-string)
     (%check-error (%daq-device-info-get-sdk-version self version-slot) "daqDeviceInfo_getSdkVersion")
     (cffi:mem-ref version-slot 'daq-string)
@@ -5864,7 +5424,6 @@
   )
 
 (defun device-info/get-serial-number (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (serial-number-slot 'daq-string)
     (%check-error (%daq-device-info-get-serial-number self serial-number-slot) "daqDeviceInfo_getSerialNumber")
     (cffi:mem-ref serial-number-slot 'daq-string)
@@ -5877,7 +5436,6 @@
   )
 
 (defun device-info/get-server-capabilities (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (server-capabilities-slot 'daq-list)
     (%check-error (%daq-device-info-get-server-capabilities self server-capabilities-slot) "daqDeviceInfo_getServerCapabilities")
     (cffi:mem-ref server-capabilities-slot 'daq-list)
@@ -5891,7 +5449,6 @@
   )
 
 (defun device-info/get-server-capability (self protocol-id)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (server-capability-slot 'daq-server-capability)
     (%check-error (%daq-device-info-get-server-capability self protocol-id server-capability-slot) "daqDeviceInfo_getServerCapability")
     (cffi:mem-ref server-capability-slot 'daq-server-capability)
@@ -5904,7 +5461,6 @@
   )
 
 (defun device-info/get-software-revision (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (software-revision-slot 'daq-string)
     (%check-error (%daq-device-info-get-software-revision self software-revision-slot) "daqDeviceInfo_getSoftwareRevision")
     (cffi:mem-ref software-revision-slot 'daq-string)
@@ -5917,7 +5473,6 @@
   )
 
 (defun device-info/get-system-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-string)
     (%check-error (%daq-device-info-get-system-type self type-slot) "daqDeviceInfo_getSystemType")
     (cffi:mem-ref type-slot 'daq-string)
@@ -5930,7 +5485,6 @@
   )
 
 (defun device-info/get-system-uuid (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (uuid-slot 'daq-string)
     (%check-error (%daq-device-info-get-system-uuid self uuid-slot) "daqDeviceInfo_getSystemUuid")
     (cffi:mem-ref uuid-slot 'daq-string)
@@ -5943,7 +5497,6 @@
   )
 
 (defun device-info/get-user-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (user-name-slot 'daq-string)
     (%check-error (%daq-device-info-get-user-name self user-name-slot) "daqDeviceInfo_getUserName")
     (cffi:mem-ref user-name-slot 'daq-string)
@@ -5957,7 +5510,6 @@
   )
 
 (defun device-info/has-server-capability (self protocol-id)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (has-capability-slot 'daq-bool)
     (%check-error (%daq-device-info-has-server-capability self protocol-id has-capability-slot) "daqDeviceInfo_hasServerCapability")
     (cffi:mem-ref has-capability-slot 'daq-bool)
@@ -5969,7 +5521,6 @@
   )
 
 (defun device-network-config/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-device-network-config-get-interface-id intf-id)
   nil)
 
@@ -5979,7 +5530,6 @@
   )
 
 (defun device-network-config/get-network-configuration-enabled (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (enabled-slot 'daq-bool)
     (%check-error (%daq-device-network-config-get-network-configuration-enabled self enabled-slot) "daqDeviceNetworkConfig_getNetworkConfigurationEnabled")
     (cffi:mem-ref enabled-slot 'daq-bool)
@@ -5992,7 +5542,6 @@
   )
 
 (defun device-network-config/get-network-interface-names (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (iface-names-slot 'daq-list)
     (%check-error (%daq-device-network-config-get-network-interface-names self iface-names-slot) "daqDeviceNetworkConfig_getNetworkInterfaceNames")
     (cffi:mem-ref iface-names-slot 'daq-list)
@@ -6006,7 +5555,6 @@
   )
 
 (defun device-network-config/retrieve-network-configuration (self iface-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (config-slot 'daq-property-object)
     (%check-error (%daq-device-network-config-retrieve-network-configuration self iface-name config-slot) "daqDeviceNetworkConfig_retrieveNetworkConfiguration")
     (cffi:mem-ref config-slot 'daq-property-object)
@@ -6020,7 +5568,6 @@
   )
 
 (defun device-network-config/submit-network-configuration (self iface-name config)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-network-config-submit-network-configuration self iface-name config) "daqDeviceNetworkConfig_submitNetworkConfiguration")
   nil
 )
@@ -6030,7 +5577,6 @@
   )
 
 (defun device-private/force-unlock (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-private-force-unlock self) "daqDevicePrivate_forceUnlock")
   nil
 )
@@ -6041,7 +5587,6 @@
   )
 
 (defun device-private/get-device-config (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (config-slot 'daq-property-object)
     (%check-error (%daq-device-private-get-device-config self config-slot) "daqDevicePrivate_getDeviceConfig")
     (cffi:mem-ref config-slot 'daq-property-object)
@@ -6053,7 +5598,6 @@
   )
 
 (defun device-private/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-device-private-get-interface-id intf-id)
   nil)
 
@@ -6063,7 +5607,6 @@
   )
 
 (defun device-private/is-locked-internal (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (locked-slot 'daq-bool)
     (%check-error (%daq-device-private-is-locked-internal self locked-slot) "daqDevicePrivate_isLockedInternal")
     (cffi:mem-ref locked-slot 'daq-bool)
@@ -6076,7 +5619,6 @@
   )
 
 (defun device-private/lock (self user)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-private-lock self user) "daqDevicePrivate_lock")
   nil
 )
@@ -6086,7 +5628,6 @@
   )
 
 (defun device-private/set-as-root (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-private-set-as-root self) "daqDevicePrivate_setAsRoot")
   nil
 )
@@ -6097,7 +5638,6 @@
   )
 
 (defun device-private/set-device-config (self config)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-private-set-device-config self config) "daqDevicePrivate_setDeviceConfig")
   nil
 )
@@ -6108,7 +5648,6 @@
   )
 
 (defun device-private/unlock (self user)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-private-unlock self user) "daqDevicePrivate_unlock")
   nil
 )
@@ -6123,7 +5662,6 @@
   )
 
 (defun device-type/create-device-type (id name description default-config prefix)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-device-type)
     (%check-error (%daq-device-type-create-device-type obj-slot id name description default-config prefix) "daqDeviceType_createDeviceType")
     (cffi:mem-ref obj-slot 'daq-device-type)
@@ -6136,7 +5674,6 @@
   )
 
 (defun device-type/get-connection-string-prefix (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (prefix-slot 'daq-string)
     (%check-error (%daq-device-type-get-connection-string-prefix self prefix-slot) "daqDeviceType_getConnectionStringPrefix")
     (cffi:mem-ref prefix-slot 'daq-string)
@@ -6148,7 +5685,6 @@
   )
 
 (defun device-type/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-device-type-get-interface-id intf-id)
   nil)
 
@@ -6158,7 +5694,6 @@
   )
 
 (defun device-update-options/create-device-update-options (setup-string)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-device-update-options)
     (%check-error (%daq-device-update-options-create-device-update-options obj-slot setup-string) "daqDeviceUpdateOptions_createDeviceUpdateOptions")
     (cffi:mem-ref obj-slot 'daq-device-update-options)
@@ -6171,7 +5706,6 @@
   )
 
 (defun device-update-options/get-child-device-options (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (child-device-options-slot 'daq-list)
     (%check-error (%daq-device-update-options-get-child-device-options self child-device-options-slot) "daqDeviceUpdateOptions_getChildDeviceOptions")
     (cffi:mem-ref child-device-options-slot 'daq-list)
@@ -6184,7 +5718,6 @@
   )
 
 (defun device-update-options/get-connection-string (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (connection-string-slot 'daq-string)
     (%check-error (%daq-device-update-options-get-connection-string self connection-string-slot) "daqDeviceUpdateOptions_getConnectionString")
     (cffi:mem-ref connection-string-slot 'daq-string)
@@ -6196,7 +5729,6 @@
   )
 
 (defun device-update-options/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-device-update-options-get-interface-id intf-id)
   nil)
 
@@ -6206,7 +5738,6 @@
   )
 
 (defun device-update-options/get-local-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (local-id-slot 'daq-string)
     (%check-error (%daq-device-update-options-get-local-id self local-id-slot) "daqDeviceUpdateOptions_getLocalId")
     (cffi:mem-ref local-id-slot 'daq-string)
@@ -6219,7 +5750,6 @@
   )
 
 (defun device-update-options/get-manufacturer (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (manufacturer-slot 'daq-string)
     (%check-error (%daq-device-update-options-get-manufacturer self manufacturer-slot) "daqDeviceUpdateOptions_getManufacturer")
     (cffi:mem-ref manufacturer-slot 'daq-string)
@@ -6232,7 +5762,6 @@
   )
 
 (defun device-update-options/get-new-connection-string (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (connection-string-slot 'daq-string)
     (%check-error (%daq-device-update-options-get-new-connection-string self connection-string-slot) "daqDeviceUpdateOptions_getNewConnectionString")
     (cffi:mem-ref connection-string-slot 'daq-string)
@@ -6245,7 +5774,6 @@
   )
 
 (defun device-update-options/get-new-manufacturer (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (manufacturer-slot 'daq-string)
     (%check-error (%daq-device-update-options-get-new-manufacturer self manufacturer-slot) "daqDeviceUpdateOptions_getNewManufacturer")
     (cffi:mem-ref manufacturer-slot 'daq-string)
@@ -6258,7 +5786,6 @@
   )
 
 (defun device-update-options/get-new-serial-number (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (serial-number-slot 'daq-string)
     (%check-error (%daq-device-update-options-get-new-serial-number self serial-number-slot) "daqDeviceUpdateOptions_getNewSerialNumber")
     (cffi:mem-ref serial-number-slot 'daq-string)
@@ -6271,7 +5798,6 @@
   )
 
 (defun device-update-options/get-serial-number (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (serial-number-slot 'daq-string)
     (%check-error (%daq-device-update-options-get-serial-number self serial-number-slot) "daqDeviceUpdateOptions_getSerialNumber")
     (cffi:mem-ref serial-number-slot 'daq-string)
@@ -6284,7 +5810,6 @@
   )
 
 (defun device-update-options/get-update-mode (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (mode-slot 'daq-device-update-mode)
     (%check-error (%daq-device-update-options-get-update-mode self mode-slot) "daqDeviceUpdateOptions_getUpdateMode")
     (cffi:mem-ref mode-slot 'daq-device-update-mode)
@@ -6297,7 +5822,6 @@
   )
 
 (defun device-update-options/set-new-connection-string (self connection-string)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-update-options-set-new-connection-string self connection-string) "daqDeviceUpdateOptions_setNewConnectionString")
   nil
 )
@@ -6308,7 +5832,6 @@
   )
 
 (defun device-update-options/set-new-manufacturer (self manufacturer)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-update-options-set-new-manufacturer self manufacturer) "daqDeviceUpdateOptions_setNewManufacturer")
   nil
 )
@@ -6319,7 +5842,6 @@
   )
 
 (defun device-update-options/set-new-serial-number (self serial-number)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-update-options-set-new-serial-number self serial-number) "daqDeviceUpdateOptions_setNewSerialNumber")
   nil
 )
@@ -6330,7 +5852,6 @@
   )
 
 (defun device-update-options/set-update-mode (self mode)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-update-options-set-update-mode self mode) "daqDeviceUpdateOptions_setUpdateMode")
   nil
 )
@@ -6343,7 +5864,6 @@
   )
 
 (defun device/add-device (self connection-string config)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (device-slot 'daq-device)
     (%check-error (%daq-device-add-device self device-slot connection-string config) "daqDevice_addDevice")
     (cffi:mem-ref device-slot 'daq-device)
@@ -6359,7 +5879,6 @@
   )
 
 (defun device/add-devices (self connection-args err-codes error-infos)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (devices-slot 'daq-dict)
     (%check-error (%daq-device-add-devices self devices-slot connection-args err-codes error-infos) "daqDevice_addDevices")
     (cffi:mem-ref devices-slot 'daq-dict)
@@ -6374,7 +5893,6 @@
   )
 
 (defun device/add-function-block (self type-id config)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (function-block-slot 'daq-function-block)
     (%check-error (%daq-device-add-function-block self function-block-slot type-id config) "daqDevice_addFunctionBlock")
     (cffi:mem-ref function-block-slot 'daq-function-block)
@@ -6389,7 +5907,6 @@
   )
 
 (defun device/add-server (self type-id config)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (server-slot 'daq-server)
     (%check-error (%daq-device-add-server self type-id config server-slot) "daqDevice_addServer")
     (cffi:mem-ref server-slot 'daq-server)
@@ -6404,7 +5921,6 @@
   )
 
 (defun device/add-streaming (self connection-string config)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (streaming-slot 'daq-streaming)
     (%check-error (%daq-device-add-streaming self streaming-slot connection-string config) "daqDevice_addStreaming")
     (cffi:mem-ref streaming-slot 'daq-streaming)
@@ -6420,7 +5936,6 @@
   )
 
 (defun device/create-client (ctx local-id default-device-info parent)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-device)
     (%check-error (%daq-device-create-client obj-slot ctx local-id default-device-info parent) "daqDevice_createClient")
     (cffi:mem-ref obj-slot 'daq-device)
@@ -6433,7 +5948,6 @@
   )
 
 (defun device/create-default-add-device-config (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (default-config-slot 'daq-property-object)
     (%check-error (%daq-device-create-default-add-device-config self default-config-slot) "daqDevice_createDefaultAddDeviceConfig")
     (cffi:mem-ref default-config-slot 'daq-property-object)
@@ -6446,7 +5960,6 @@
   )
 
 (defun device/get-available-device-types (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (device-types-slot 'daq-dict)
     (%check-error (%daq-device-get-available-device-types self device-types-slot) "daqDevice_getAvailableDeviceTypes")
     (cffi:mem-ref device-types-slot 'daq-dict)
@@ -6459,7 +5972,6 @@
   )
 
 (defun device/get-available-devices (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (available-devices-slot 'daq-list)
     (%check-error (%daq-device-get-available-devices self available-devices-slot) "daqDevice_getAvailableDevices")
     (cffi:mem-ref available-devices-slot 'daq-list)
@@ -6472,7 +5984,6 @@
   )
 
 (defun device/get-available-function-block-types (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (function-block-types-slot 'daq-dict)
     (%check-error (%daq-device-get-available-function-block-types self function-block-types-slot) "daqDevice_getAvailableFunctionBlockTypes")
     (cffi:mem-ref function-block-types-slot 'daq-dict)
@@ -6485,7 +5996,6 @@
   )
 
 (defun device/get-available-operation-modes (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (available-op-modes-slot 'daq-list)
     (%check-error (%daq-device-get-available-operation-modes self available-op-modes-slot) "daqDevice_getAvailableOperationModes")
     (cffi:mem-ref available-op-modes-slot 'daq-list)
@@ -6499,7 +6009,6 @@
   )
 
 (defun device/get-channels (self search-filter)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (channels-slot 'daq-list)
     (%check-error (%daq-device-get-channels self channels-slot search-filter) "daqDevice_getChannels")
     (cffi:mem-ref channels-slot 'daq-list)
@@ -6513,7 +6022,6 @@
   )
 
 (defun device/get-channels-recursive (self search-filter)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (channels-slot 'daq-list)
     (%check-error (%daq-device-get-channels-recursive self channels-slot search-filter) "daqDevice_getChannelsRecursive")
     (cffi:mem-ref channels-slot 'daq-list)
@@ -6526,7 +6034,6 @@
   )
 
 (defun device/get-connection-status-container (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (status-container-slot 'daq-component-status-container)
     (%check-error (%daq-device-get-connection-status-container self status-container-slot) "daqDevice_getConnectionStatusContainer")
     (cffi:mem-ref status-container-slot 'daq-component-status-container)
@@ -6539,7 +6046,6 @@
   )
 
 (defun device/get-custom-components (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (custom-components-slot 'daq-list)
     (%check-error (%daq-device-get-custom-components self custom-components-slot) "daqDevice_getCustomComponents")
     (cffi:mem-ref custom-components-slot 'daq-list)
@@ -6553,7 +6059,6 @@
   )
 
 (defun device/get-devices (self search-filter)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (devices-slot 'daq-list)
     (%check-error (%daq-device-get-devices self devices-slot search-filter) "daqDevice_getDevices")
     (cffi:mem-ref devices-slot 'daq-list)
@@ -6566,7 +6071,6 @@
   )
 
 (defun device/get-domain (self domain)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-get-domain self domain) "daqDevice_getDomain")
   nil
 )
@@ -6578,7 +6082,6 @@
   )
 
 (defun device/get-function-blocks (self search-filter)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (function-blocks-slot 'daq-list)
     (%check-error (%daq-device-get-function-blocks self function-blocks-slot search-filter) "daqDevice_getFunctionBlocks")
     (cffi:mem-ref function-blocks-slot 'daq-list)
@@ -6591,7 +6094,6 @@
   )
 
 (defun device/get-info (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (info-slot 'daq-device-info)
     (%check-error (%daq-device-get-info self info-slot) "daqDevice_getInfo")
     (cffi:mem-ref info-slot 'daq-device-info)
@@ -6604,7 +6106,6 @@
   )
 
 (defun device/get-inputs-outputs-folder (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (inputs-outputs-folder-slot 'daq-folder)
     (%check-error (%daq-device-get-inputs-outputs-folder self inputs-outputs-folder-slot) "daqDevice_getInputsOutputsFolder")
     (cffi:mem-ref inputs-outputs-folder-slot 'daq-folder)
@@ -6616,7 +6117,6 @@
   )
 
 (defun device/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-device-get-interface-id intf-id)
   nil)
 
@@ -6629,7 +6129,6 @@
   )
 
 (defun device/get-log (self id size offset)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (log-slot 'daq-string)
     (%check-error (%daq-device-get-log self log-slot id size offset) "daqDevice_getLog")
     (cffi:mem-ref log-slot 'daq-string)
@@ -6642,7 +6141,6 @@
   )
 
 (defun device/get-log-file-infos (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (log-file-infos-slot 'daq-list)
     (%check-error (%daq-device-get-log-file-infos self log-file-infos-slot) "daqDevice_getLogFileInfos")
     (cffi:mem-ref log-file-infos-slot 'daq-list)
@@ -6655,7 +6153,6 @@
   )
 
 (defun device/get-servers (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (servers-slot 'daq-list)
     (%check-error (%daq-device-get-servers self servers-slot) "daqDevice_getServers")
     (cffi:mem-ref servers-slot 'daq-list)
@@ -6669,7 +6166,6 @@
   )
 
 (defun device/get-signals (self search-filter)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (signals-slot 'daq-list)
     (%check-error (%daq-device-get-signals self signals-slot search-filter) "daqDevice_getSignals")
     (cffi:mem-ref signals-slot 'daq-list)
@@ -6683,7 +6179,6 @@
   )
 
 (defun device/get-signals-recursive (self search-filter)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (signals-slot 'daq-list)
     (%check-error (%daq-device-get-signals-recursive self signals-slot search-filter) "daqDevice_getSignalsRecursive")
     (cffi:mem-ref signals-slot 'daq-list)
@@ -6696,7 +6191,6 @@
   )
 
 (defun device/get-sync-component (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (sync-slot 'daq-sync-component)
     (%check-error (%daq-device-get-sync-component self sync-slot) "daqDevice_getSyncComponent")
     (cffi:mem-ref sync-slot 'daq-sync-component)
@@ -6709,7 +6203,6 @@
   )
 
 (defun device/get-ticks-since-origin (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (ticks-slot 'daq-u-int)
     (%check-error (%daq-device-get-ticks-since-origin self ticks-slot) "daqDevice_getTicksSinceOrigin")
     (cffi:mem-ref ticks-slot 'daq-u-int)
@@ -6722,7 +6215,6 @@
   )
 
 (defun device/is-locked (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (locked-slot 'daq-bool)
     (%check-error (%daq-device-is-locked self locked-slot) "daqDevice_isLocked")
     (cffi:mem-ref locked-slot 'daq-bool)
@@ -6736,7 +6228,6 @@
   )
 
 (defun device/load-configuration (self configuration config)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-load-configuration self configuration config) "daqDevice_loadConfiguration")
   nil
 )
@@ -6746,7 +6237,6 @@
   )
 
 (defun device/lock (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-lock self) "daqDevice_lock")
   nil
 )
@@ -6757,7 +6247,6 @@
   )
 
 (defun device/remove-device (self device)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-remove-device self device) "daqDevice_removeDevice")
   nil
 )
@@ -6768,7 +6257,6 @@
   )
 
 (defun device/remove-function-block (self function-block)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-remove-function-block self function-block) "daqDevice_removeFunctionBlock")
   nil
 )
@@ -6779,7 +6267,6 @@
   )
 
 (defun device/remove-server (self server)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-remove-server self server) "daqDevice_removeServer")
   nil
 )
@@ -6790,7 +6277,6 @@
   )
 
 (defun device/save-configuration (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (configuration-slot 'daq-string)
     (%check-error (%daq-device-save-configuration self configuration-slot) "daqDevice_saveConfiguration")
     (cffi:mem-ref configuration-slot 'daq-string)
@@ -6803,7 +6289,6 @@
   )
 
 (defun device/set-operation-mode (self mode-type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-set-operation-mode self mode-type) "daqDevice_setOperationMode")
   nil
 )
@@ -6814,7 +6299,6 @@
   )
 
 (defun device/set-operation-mode-recursive (self mode-type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-set-operation-mode-recursive self mode-type) "daqDevice_setOperationModeRecursive")
   nil
 )
@@ -6824,7 +6308,6 @@
   )
 
 (defun device/unlock (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-device-unlock self) "daqDevice_unlock")
   nil
 )
@@ -6834,7 +6317,6 @@
   )
 
 (defun dict-element-type/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-dict-element-type-get-interface-id intf-id)
   nil)
 
@@ -6844,7 +6326,6 @@
   )
 
 (defun dict-element-type/get-key-interface-id (self id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-dict-element-type-get-key-interface-id self id) "daqDictElementType_getKeyInterfaceId")
   nil)
 
@@ -6854,7 +6335,6 @@
   )
 
 (defun dict-element-type/get-value-interface-id (self id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-dict-element-type-get-value-interface-id self id) "daqDictElementType_getValueInterfaceId")
   nil)
 
@@ -6863,7 +6343,6 @@
   )
 
 (defun dict/clear (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-dict-clear self) "daqDict_clear")
   nil
 )
@@ -6873,7 +6352,6 @@
   )
 
 (defun dict/create-dict ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-dict)
     (%check-error (%daq-dict-create-dict obj-slot) "daqDict_createDict")
     (cffi:mem-ref obj-slot 'daq-dict)
@@ -6886,7 +6364,6 @@
   )
 
 (defun dict/delete-item (self key)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-dict-delete-item self key) "daqDict_deleteItem")
   nil
 )
@@ -6898,7 +6375,6 @@
   )
 
 (defun dict/get (self key)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-base-object)
     (%check-error (%daq-dict-get self key value-slot) "daqDict_get")
     (cffi:mem-ref value-slot 'daq-base-object)
@@ -6911,7 +6387,6 @@
   )
 
 (defun dict/get-count (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (size-slot 'daq-size-t)
     (%check-error (%daq-dict-get-count self size-slot) "daqDict_getCount")
     (cffi:mem-ref size-slot 'daq-size-t)
@@ -6923,7 +6398,6 @@
   )
 
 (defun dict/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-dict-get-interface-id intf-id)
   nil)
 
@@ -6933,7 +6407,6 @@
   )
 
 (defun dict/get-key-list (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (keys-slot 'daq-list)
     (%check-error (%daq-dict-get-key-list self keys-slot) "daqDict_getKeyList")
     (cffi:mem-ref keys-slot 'daq-list)
@@ -6946,7 +6419,6 @@
   )
 
 (defun dict/get-keys (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (iterable-slot 'daq-iterable)
     (%check-error (%daq-dict-get-keys self iterable-slot) "daqDict_getKeys")
     (cffi:mem-ref iterable-slot 'daq-iterable)
@@ -6959,7 +6431,6 @@
   )
 
 (defun dict/get-value-list (self values)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-dict-get-value-list self values) "daqDict_getValueList")
   nil
 )
@@ -6970,7 +6441,6 @@
   )
 
 (defun dict/get-values (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (iterable-slot 'daq-iterable)
     (%check-error (%daq-dict-get-values self iterable-slot) "daqDict_getValues")
     (cffi:mem-ref iterable-slot 'daq-iterable)
@@ -6984,7 +6454,6 @@
   )
 
 (defun dict/has-key (self key)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (has-key-slot 'daq-bool)
     (%check-error (%daq-dict-has-key self key has-key-slot) "daqDict_hasKey")
     (cffi:mem-ref has-key-slot 'daq-bool)
@@ -6998,7 +6467,6 @@
   )
 
 (defun dict/remove (self key)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-base-object)
     (%check-error (%daq-dict-remove self key value-slot) "daqDict_remove")
     (cffi:mem-ref value-slot 'daq-base-object)
@@ -7012,7 +6480,6 @@
   )
 
 (defun dict/set (self key value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-dict-set self key value) "daqDict_set")
   nil
 )
@@ -7023,7 +6490,6 @@
   )
 
 (defun dimension-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (dimension-slot 'daq-dimension)
     (%check-error (%daq-dimension-builder-build self dimension-slot) "daqDimensionBuilder_build")
     (cffi:mem-ref dimension-slot 'daq-dimension)
@@ -7035,7 +6501,6 @@
   )
 
 (defun dimension-builder/create-dimension-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-dimension-builder)
     (%check-error (%daq-dimension-builder-create-dimension-builder obj-slot) "daqDimensionBuilder_createDimensionBuilder")
     (cffi:mem-ref obj-slot 'daq-dimension-builder)
@@ -7048,7 +6513,6 @@
   )
 
 (defun dimension-builder/create-dimension-builder-from-existing (dimension-to-copy)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-dimension-builder)
     (%check-error (%daq-dimension-builder-create-dimension-builder-from-existing obj-slot dimension-to-copy) "daqDimensionBuilder_createDimensionBuilderFromExisting")
     (cffi:mem-ref obj-slot 'daq-dimension-builder)
@@ -7060,7 +6524,6 @@
   )
 
 (defun dimension-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-dimension-builder-get-interface-id intf-id)
   nil)
 
@@ -7070,7 +6533,6 @@
   )
 
 (defun dimension-builder/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-dimension-builder-get-name self name-slot) "daqDimensionBuilder_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -7083,7 +6545,6 @@
   )
 
 (defun dimension-builder/get-rule (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (rule-slot 'daq-dimension-rule)
     (%check-error (%daq-dimension-builder-get-rule self rule-slot) "daqDimensionBuilder_getRule")
     (cffi:mem-ref rule-slot 'daq-dimension-rule)
@@ -7096,7 +6557,6 @@
   )
 
 (defun dimension-builder/get-unit (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (unit-slot 'daq-unit)
     (%check-error (%daq-dimension-builder-get-unit self unit-slot) "daqDimensionBuilder_getUnit")
     (cffi:mem-ref unit-slot 'daq-unit)
@@ -7109,7 +6569,6 @@
   )
 
 (defun dimension-builder/set-name (self name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-dimension-builder-set-name self name) "daqDimensionBuilder_setName")
   nil
 )
@@ -7120,7 +6579,6 @@
   )
 
 (defun dimension-builder/set-rule (self rule)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-dimension-builder-set-rule self rule) "daqDimensionBuilder_setRule")
   nil
 )
@@ -7131,7 +6589,6 @@
   )
 
 (defun dimension-builder/set-unit (self unit)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-dimension-builder-set-unit self unit) "daqDimensionBuilder_setUnit")
   nil
 )
@@ -7143,7 +6600,6 @@
   )
 
 (defun dimension-rule-builder/add-parameter (self name parameter)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-dimension-rule-builder-add-parameter self name parameter) "daqDimensionRuleBuilder_addParameter")
   nil
 )
@@ -7154,7 +6610,6 @@
   )
 
 (defun dimension-rule-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (dimension-rule-slot 'daq-dimension-rule)
     (%check-error (%daq-dimension-rule-builder-build self dimension-rule-slot) "daqDimensionRuleBuilder_build")
     (cffi:mem-ref dimension-rule-slot 'daq-dimension-rule)
@@ -7166,7 +6621,6 @@
   )
 
 (defun dimension-rule-builder/create-dimension-rule-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-dimension-rule-builder)
     (%check-error (%daq-dimension-rule-builder-create-dimension-rule-builder obj-slot) "daqDimensionRuleBuilder_createDimensionRuleBuilder")
     (cffi:mem-ref obj-slot 'daq-dimension-rule-builder)
@@ -7179,7 +6633,6 @@
   )
 
 (defun dimension-rule-builder/create-dimension-rule-builder-from-existing (rule-to-copy)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-dimension-rule-builder)
     (%check-error (%daq-dimension-rule-builder-create-dimension-rule-builder-from-existing obj-slot rule-to-copy) "daqDimensionRuleBuilder_createDimensionRuleBuilderFromExisting")
     (cffi:mem-ref obj-slot 'daq-dimension-rule-builder)
@@ -7191,7 +6644,6 @@
   )
 
 (defun dimension-rule-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-dimension-rule-builder-get-interface-id intf-id)
   nil)
 
@@ -7201,7 +6653,6 @@
   )
 
 (defun dimension-rule-builder/get-parameters (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (parameters-slot 'daq-dict)
     (%check-error (%daq-dimension-rule-builder-get-parameters self parameters-slot) "daqDimensionRuleBuilder_getParameters")
     (cffi:mem-ref parameters-slot 'daq-dict)
@@ -7214,7 +6665,6 @@
   )
 
 (defun dimension-rule-builder/get-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-dimension-rule-type)
     (%check-error (%daq-dimension-rule-builder-get-type self type-slot) "daqDimensionRuleBuilder_getType")
     (cffi:mem-ref type-slot 'daq-dimension-rule-type)
@@ -7227,7 +6677,6 @@
   )
 
 (defun dimension-rule-builder/remove-parameter (self name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-dimension-rule-builder-remove-parameter self name) "daqDimensionRuleBuilder_removeParameter")
   nil
 )
@@ -7238,7 +6687,6 @@
   )
 
 (defun dimension-rule-builder/set-parameters (self parameters)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-dimension-rule-builder-set-parameters self parameters) "daqDimensionRuleBuilder_setParameters")
   nil
 )
@@ -7249,7 +6697,6 @@
   )
 
 (defun dimension-rule-builder/set-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-dimension-rule-builder-set-type self type) "daqDimensionRuleBuilder_setType")
   nil
 )
@@ -7261,7 +6708,6 @@
   )
 
 (defun dimension-rule/create-dimension-rule (type parameters)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-dimension-rule)
     (%check-error (%daq-dimension-rule-create-dimension-rule obj-slot type parameters) "daqDimensionRule_createDimensionRule")
     (cffi:mem-ref obj-slot 'daq-dimension-rule)
@@ -7274,7 +6720,6 @@
   )
 
 (defun dimension-rule/create-dimension-rule-from-builder (builder)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-dimension-rule)
     (%check-error (%daq-dimension-rule-create-dimension-rule-from-builder obj-slot builder) "daqDimensionRule_createDimensionRuleFromBuilder")
     (cffi:mem-ref obj-slot 'daq-dimension-rule)
@@ -7289,7 +6734,6 @@
   )
 
 (defun dimension-rule/create-linear-dimension-rule (delta start size)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-dimension-rule)
     (%check-error (%daq-dimension-rule-create-linear-dimension-rule obj-slot delta start size) "daqDimensionRule_createLinearDimensionRule")
     (cffi:mem-ref obj-slot 'daq-dimension-rule)
@@ -7302,7 +6746,6 @@
   )
 
 (defun dimension-rule/create-list-dimension-rule (list)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-dimension-rule)
     (%check-error (%daq-dimension-rule-create-list-dimension-rule obj-slot list) "daqDimensionRule_createListDimensionRule")
     (cffi:mem-ref obj-slot 'daq-dimension-rule)
@@ -7318,7 +6761,6 @@
   )
 
 (defun dimension-rule/create-logarithmic-dimension-rule (delta start base size)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-dimension-rule)
     (%check-error (%daq-dimension-rule-create-logarithmic-dimension-rule obj-slot delta start base size) "daqDimensionRule_createLogarithmicDimensionRule")
     (cffi:mem-ref obj-slot 'daq-dimension-rule)
@@ -7330,7 +6772,6 @@
   )
 
 (defun dimension-rule/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-dimension-rule-get-interface-id intf-id)
   nil)
 
@@ -7340,7 +6781,6 @@
   )
 
 (defun dimension-rule/get-parameters (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (parameters-slot 'daq-dict)
     (%check-error (%daq-dimension-rule-get-parameters self parameters-slot) "daqDimensionRule_getParameters")
     (cffi:mem-ref parameters-slot 'daq-dict)
@@ -7353,7 +6793,6 @@
   )
 
 (defun dimension-rule/get-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-dimension-rule-type)
     (%check-error (%daq-dimension-rule-get-type self type-slot) "daqDimensionRule_getType")
     (cffi:mem-ref type-slot 'daq-dimension-rule-type)
@@ -7368,7 +6807,6 @@
   )
 
 (defun dimension/create-dimension (rule unit name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-dimension)
     (%check-error (%daq-dimension-create-dimension obj-slot rule unit name) "daqDimension_createDimension")
     (cffi:mem-ref obj-slot 'daq-dimension)
@@ -7381,7 +6819,6 @@
   )
 
 (defun dimension/create-dimension-from-builder (builder)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-dimension)
     (%check-error (%daq-dimension-create-dimension-from-builder obj-slot builder) "daqDimension_createDimensionFromBuilder")
     (cffi:mem-ref obj-slot 'daq-dimension)
@@ -7393,7 +6830,6 @@
   )
 
 (defun dimension/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-dimension-get-interface-id intf-id)
   nil)
 
@@ -7403,7 +6839,6 @@
   )
 
 (defun dimension/get-labels (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (labels-slot 'daq-list)
     (%check-error (%daq-dimension-get-labels self labels-slot) "daqDimension_getLabels")
     (cffi:mem-ref labels-slot 'daq-list)
@@ -7416,7 +6851,6 @@
   )
 
 (defun dimension/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-dimension-get-name self name-slot) "daqDimension_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -7429,7 +6863,6 @@
   )
 
 (defun dimension/get-rule (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (rule-slot 'daq-dimension-rule)
     (%check-error (%daq-dimension-get-rule self rule-slot) "daqDimension_getRule")
     (cffi:mem-ref rule-slot 'daq-dimension-rule)
@@ -7442,7 +6875,6 @@
   )
 
 (defun dimension/get-size (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (size-slot 'daq-size-t)
     (%check-error (%daq-dimension-get-size self size-slot) "daqDimension_getSize")
     (cffi:mem-ref size-slot 'daq-size-t)
@@ -7455,7 +6887,6 @@
   )
 
 (defun dimension/get-unit (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (unit-slot 'daq-unit)
     (%check-error (%daq-dimension-get-unit self unit-slot) "daqDimension_getUnit")
     (cffi:mem-ref unit-slot 'daq-unit)
@@ -7468,7 +6899,6 @@
   )
 
 (defun discovery-server/create-mdns-discovery-server (logger)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-discovery-server)
     (%check-error (%daq-discovery-server-create-mdns-discovery-server obj-slot logger) "daqDiscoveryServer_createMdnsDiscoveryServer")
     (cffi:mem-ref obj-slot 'daq-discovery-server)
@@ -7480,7 +6910,6 @@
   )
 
 (defun discovery-server/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-discovery-server-get-interface-id intf-id)
   nil)
 
@@ -7492,7 +6921,6 @@
   )
 
 (defun discovery-server/register-service (self id config device-info)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-discovery-server-register-service self id config device-info) "daqDiscoveryServer_registerService")
   nil
 )
@@ -7503,7 +6931,6 @@
   )
 
 (defun discovery-server/set-root-device (self device)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-discovery-server-set-root-device self device) "daqDiscoveryServer_setRootDevice")
   nil
 )
@@ -7514,7 +6941,6 @@
   )
 
 (defun discovery-server/unregister-service (self id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-discovery-server-unregister-service self id) "daqDiscoveryServer_unregisterService")
   nil
 )
@@ -7526,7 +6952,6 @@
   )
 
 (defun end-update-event-args/create-end-update-event-args (properties is-parent-updating)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-end-update-event-args)
     (%check-error (%daq-end-update-event-args-create-end-update-event-args obj-slot properties is-parent-updating) "daqEndUpdateEventArgs_createEndUpdateEventArgs")
     (cffi:mem-ref obj-slot 'daq-end-update-event-args)
@@ -7538,7 +6963,6 @@
   )
 
 (defun end-update-event-args/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-end-update-event-args-get-interface-id intf-id)
   nil)
 
@@ -7548,7 +6972,6 @@
   )
 
 (defun end-update-event-args/get-is-parent-updating (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-parent-updating-slot 'daq-bool)
     (%check-error (%daq-end-update-event-args-get-is-parent-updating self is-parent-updating-slot) "daqEndUpdateEventArgs_getIsParentUpdating")
     (cffi:mem-ref is-parent-updating-slot 'daq-bool)
@@ -7561,7 +6984,6 @@
   )
 
 (defun end-update-event-args/get-properties (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (properties-slot 'daq-list)
     (%check-error (%daq-end-update-event-args-get-properties self properties-slot) "daqEndUpdateEventArgs_getProperties")
     (cffi:mem-ref properties-slot 'daq-list)
@@ -7576,7 +6998,6 @@
   )
 
 (defun enumeration-type/create-enumeration-type (type-name enumerator-names first-enumerator-int-value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-enumeration-type)
     (%check-error (%daq-enumeration-type-create-enumeration-type obj-slot type-name enumerator-names first-enumerator-int-value) "daqEnumerationType_createEnumerationType")
     (cffi:mem-ref obj-slot 'daq-enumeration-type)
@@ -7590,7 +7011,6 @@
   )
 
 (defun enumeration-type/create-enumeration-type-with-values (type-name enumerators)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-enumeration-type)
     (%check-error (%daq-enumeration-type-create-enumeration-type-with-values obj-slot type-name enumerators) "daqEnumerationType_createEnumerationTypeWithValues")
     (cffi:mem-ref obj-slot 'daq-enumeration-type)
@@ -7603,7 +7023,6 @@
   )
 
 (defun enumeration-type/get-as-dictionary (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (dictionary-slot 'daq-dict)
     (%check-error (%daq-enumeration-type-get-as-dictionary self dictionary-slot) "daqEnumerationType_getAsDictionary")
     (cffi:mem-ref dictionary-slot 'daq-dict)
@@ -7616,7 +7035,6 @@
   )
 
 (defun enumeration-type/get-count (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (count-slot 'daq-size-t)
     (%check-error (%daq-enumeration-type-get-count self count-slot) "daqEnumerationType_getCount")
     (cffi:mem-ref count-slot 'daq-size-t)
@@ -7630,7 +7048,6 @@
   )
 
 (defun enumeration-type/get-enumerator-int-value (self name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-int)
     (%check-error (%daq-enumeration-type-get-enumerator-int-value self name value-slot) "daqEnumerationType_getEnumeratorIntValue")
     (cffi:mem-ref value-slot 'daq-int)
@@ -7643,7 +7060,6 @@
   )
 
 (defun enumeration-type/get-enumerator-names (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (names-slot 'daq-list)
     (%check-error (%daq-enumeration-type-get-enumerator-names self names-slot) "daqEnumerationType_getEnumeratorNames")
     (cffi:mem-ref names-slot 'daq-list)
@@ -7655,7 +7071,6 @@
   )
 
 (defun enumeration-type/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-enumeration-type-get-interface-id intf-id)
   nil)
 
@@ -7667,7 +7082,6 @@
   )
 
 (defun enumeration/create-enumeration (name value type-manager)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-enumeration)
     (%check-error (%daq-enumeration-create-enumeration obj-slot name value type-manager) "daqEnumeration_createEnumeration")
     (cffi:mem-ref obj-slot 'daq-enumeration)
@@ -7682,7 +7096,6 @@
   )
 
 (defun enumeration/create-enumeration-with-int-value (name value type-manager)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-enumeration)
     (%check-error (%daq-enumeration-create-enumeration-with-int-value obj-slot name value type-manager) "daqEnumeration_createEnumerationWithIntValue")
     (cffi:mem-ref obj-slot 'daq-enumeration)
@@ -7696,7 +7109,6 @@
   )
 
 (defun enumeration/create-enumeration-with-int-value-and-type (type value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-enumeration)
     (%check-error (%daq-enumeration-create-enumeration-with-int-value-and-type obj-slot type value) "daqEnumeration_createEnumerationWithIntValueAndType")
     (cffi:mem-ref obj-slot 'daq-enumeration)
@@ -7710,7 +7122,6 @@
   )
 
 (defun enumeration/create-enumeration-with-type (type value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-enumeration)
     (%check-error (%daq-enumeration-create-enumeration-with-type obj-slot type value) "daqEnumeration_createEnumerationWithType")
     (cffi:mem-ref obj-slot 'daq-enumeration)
@@ -7723,7 +7134,6 @@
   )
 
 (defun enumeration/get-enumeration-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-enumeration-type)
     (%check-error (%daq-enumeration-get-enumeration-type self type-slot) "daqEnumeration_getEnumerationType")
     (cffi:mem-ref type-slot 'daq-enumeration-type)
@@ -7736,7 +7146,6 @@
   )
 
 (defun enumeration/get-int-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-int)
     (%check-error (%daq-enumeration-get-int-value self value-slot) "daqEnumeration_getIntValue")
     (cffi:mem-ref value-slot 'daq-int)
@@ -7748,7 +7157,6 @@
   )
 
 (defun enumeration/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-enumeration-get-interface-id intf-id)
   nil)
 
@@ -7758,7 +7166,6 @@
   )
 
 (defun enumeration/get-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-string)
     (%check-error (%daq-enumeration-get-value self value-slot) "daqEnumeration_getValue")
     (cffi:mem-ref value-slot 'daq-string)
@@ -7770,7 +7177,6 @@
   )
 
 (defun error-info/create-error-info ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-error-info)
     (%check-error (%daq-error-info-create-error-info obj-slot) "daqErrorInfo_createErrorInfo")
     (cffi:mem-ref obj-slot 'daq-error-info)
@@ -7783,7 +7189,6 @@
   )
 
 (defun error-info/get-file-line (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (file-line-slot 'daq-int)
     (%check-error (%daq-error-info-get-file-line self file-line-slot) "daqErrorInfo_getFileLine")
     (cffi:mem-ref file-line-slot 'daq-int)
@@ -7796,7 +7201,6 @@
   )
 
 (defun error-info/get-file-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (file-name-slot 'daq-const-char-ptr)
     (%check-error (%daq-error-info-get-file-name self file-name-slot) "daqErrorInfo_getFileName")
     (cffi:mem-ref file-name-slot 'daq-const-char-ptr)
@@ -7809,7 +7213,6 @@
   )
 
 (defun error-info/get-message (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (message-slot 'daq-string)
     (%check-error (%daq-error-info-get-message self message-slot) "daqErrorInfo_getMessage")
     (cffi:mem-ref message-slot 'daq-string)
@@ -7822,7 +7225,6 @@
   )
 
 (defun error-info/get-source (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (source-slot 'daq-string)
     (%check-error (%daq-error-info-get-source self source-slot) "daqErrorInfo_getSource")
     (cffi:mem-ref source-slot 'daq-string)
@@ -7835,7 +7237,6 @@
   )
 
 (defun error-info/set-file-line (self file-line)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-error-info-set-file-line self file-line) "daqErrorInfo_setFileLine")
   nil
 )
@@ -7846,7 +7247,6 @@
   )
 
 (defun error-info/set-file-name (self file-name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-error-info-set-file-name self file-name) "daqErrorInfo_setFileName")
   nil
 )
@@ -7857,7 +7257,6 @@
   )
 
 (defun error-info/set-message (self message)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-error-info-set-message self message) "daqErrorInfo_setMessage")
   nil
 )
@@ -7868,7 +7267,6 @@
   )
 
 (defun error-info/set-source (self source)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-error-info-set-source self source) "daqErrorInfo_setSource")
   nil
 )
@@ -7880,7 +7278,6 @@
   )
 
 (defun eval-value/clone-with-owner (self owner)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (cloned-value-slot 'daq-eval-value)
     (%check-error (%daq-eval-value-clone-with-owner self owner cloned-value-slot) "daqEvalValue_cloneWithOwner")
     (cffi:mem-ref cloned-value-slot 'daq-eval-value)
@@ -7893,7 +7290,6 @@
   )
 
 (defun eval-value/create-eval-value (eval)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-eval-value)
     (%check-error (%daq-eval-value-create-eval-value obj-slot eval) "daqEvalValue_createEvalValue")
     (cffi:mem-ref obj-slot 'daq-eval-value)
@@ -7907,7 +7303,6 @@
   )
 
 (defun eval-value/create-eval-value-args (eval args)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-eval-value)
     (%check-error (%daq-eval-value-create-eval-value-args obj-slot eval args) "daqEvalValue_createEvalValueArgs")
     (cffi:mem-ref obj-slot 'daq-eval-value)
@@ -7921,7 +7316,6 @@
   )
 
 (defun eval-value/create-eval-value-func (eval func)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-eval-value)
     (%check-error (%daq-eval-value-create-eval-value-func obj-slot eval func) "daqEvalValue_createEvalValueFunc")
     (cffi:mem-ref obj-slot 'daq-eval-value)
@@ -7934,7 +7328,6 @@
   )
 
 (defun eval-value/get-eval (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (eval-slot 'daq-string)
     (%check-error (%daq-eval-value-get-eval self eval-slot) "daqEvalValue_getEval")
     (cffi:mem-ref eval-slot 'daq-string)
@@ -7946,7 +7339,6 @@
   )
 
 (defun eval-value/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-eval-value-get-interface-id intf-id)
   nil)
 
@@ -7955,7 +7347,6 @@
   )
 
 (defun eval-value/get-parse-error-code (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-eval-value-get-parse-error-code self) "daqEvalValue_getParseErrorCode")
   nil
 )
@@ -7966,7 +7357,6 @@
   )
 
 (defun eval-value/get-property-references (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (property-references-slot 'daq-list)
     (%check-error (%daq-eval-value-get-property-references self property-references-slot) "daqEvalValue_getPropertyReferences")
     (cffi:mem-ref property-references-slot 'daq-list)
@@ -7979,7 +7369,6 @@
   )
 
 (defun eval-value/get-result (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-base-object)
     (%check-error (%daq-eval-value-get-result self obj-slot) "daqEvalValue_getResult")
     (cffi:mem-ref obj-slot 'daq-base-object)
@@ -7992,7 +7381,6 @@
   )
 
 (defun eval-value/get-result-no-lock (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-base-object)
     (%check-error (%daq-eval-value-get-result-no-lock self obj-slot) "daqEvalValue_getResultNoLock")
     (cffi:mem-ref obj-slot 'daq-base-object)
@@ -8006,7 +7394,6 @@
   )
 
 (defun event-args/create-event-args (event-id event-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-event-args)
     (%check-error (%daq-event-args-create-event-args obj-slot event-id event-name) "daqEventArgs_createEventArgs")
     (cffi:mem-ref obj-slot 'daq-event-args)
@@ -8019,7 +7406,6 @@
   )
 
 (defun event-args/get-event-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (id-slot 'daq-int)
     (%check-error (%daq-event-args-get-event-id self id-slot) "daqEventArgs_getEventId")
     (cffi:mem-ref id-slot 'daq-int)
@@ -8032,7 +7418,6 @@
   )
 
 (defun event-args/get-event-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-event-args-get-event-name self name-slot) "daqEventArgs_getEventName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -8044,7 +7429,6 @@
   )
 
 (defun event-args/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-event-args-get-interface-id intf-id)
   nil)
 
@@ -8054,7 +7438,6 @@
   )
 
 (defun event-handler/create-event-handler (call)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-event-handler)
     (%check-error (%daq-event-handler-create-event-handler obj-slot call) "daqEventHandler_createEventHandler")
     (cffi:mem-ref obj-slot 'daq-event-handler)
@@ -8066,7 +7449,6 @@
   )
 
 (defun event-handler/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-event-handler-get-interface-id intf-id)
   nil)
 
@@ -8077,7 +7459,6 @@
   )
 
 (defun event-handler/handle-event (self sender event-args)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-event-handler-handle-event self sender event-args) "daqEventHandler_handleEvent")
   nil
 )
@@ -8089,7 +7470,6 @@
   )
 
 (defun event-packet/create-data-descriptor-changed-event-packet (data-descriptor domain-data-descriptor)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-event-packet)
     (%check-error (%daq-event-packet-create-data-descriptor-changed-event-packet obj-slot data-descriptor domain-data-descriptor) "daqEventPacket_createDataDescriptorChangedEventPacket")
     (cffi:mem-ref obj-slot 'daq-event-packet)
@@ -8103,7 +7483,6 @@
   )
 
 (defun event-packet/create-event-packet (id params)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-event-packet)
     (%check-error (%daq-event-packet-create-event-packet obj-slot id params) "daqEventPacket_createEventPacket")
     (cffi:mem-ref obj-slot 'daq-event-packet)
@@ -8116,7 +7495,6 @@
   )
 
 (defun event-packet/create-implicit-domain-gap-detected-event-packet (diff)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-event-packet)
     (%check-error (%daq-event-packet-create-implicit-domain-gap-detected-event-packet obj-slot diff) "daqEventPacket_createImplicitDomainGapDetectedEventPacket")
     (cffi:mem-ref obj-slot 'daq-event-packet)
@@ -8129,7 +7507,6 @@
   )
 
 (defun event-packet/get-event-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (id-slot 'daq-string)
     (%check-error (%daq-event-packet-get-event-id self id-slot) "daqEventPacket_getEventId")
     (cffi:mem-ref id-slot 'daq-string)
@@ -8141,7 +7518,6 @@
   )
 
 (defun event-packet/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-event-packet-get-interface-id intf-id)
   nil)
 
@@ -8151,7 +7527,6 @@
   )
 
 (defun event-packet/get-parameters (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (parameters-slot 'daq-dict)
     (%check-error (%daq-event-packet-get-parameters self parameters-slot) "daqEventPacket_getParameters")
     (cffi:mem-ref parameters-slot 'daq-dict)
@@ -8164,7 +7539,6 @@
   )
 
 (defun event/add-handler (self event-handler)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-event-add-handler self event-handler) "daqEvent_addHandler")
   nil
 )
@@ -8174,7 +7548,6 @@
   )
 
 (defun event/clear (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-event-clear self) "daqEvent_clear")
   nil
 )
@@ -8184,7 +7557,6 @@
   )
 
 (defun event/create-event ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-event)
     (%check-error (%daq-event-create-event obj-slot) "daqEvent_createEvent")
     (cffi:mem-ref obj-slot 'daq-event)
@@ -8196,7 +7568,6 @@
   )
 
 (defun event/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-event-get-interface-id intf-id)
   nil)
 
@@ -8206,7 +7577,6 @@
   )
 
 (defun event/get-subscriber-count (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (count-slot 'daq-size-t)
     (%check-error (%daq-event-get-subscriber-count self count-slot) "daqEvent_getSubscriberCount")
     (cffi:mem-ref count-slot 'daq-size-t)
@@ -8219,7 +7589,6 @@
   )
 
 (defun event/get-subscribers (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (subscribers-slot 'daq-list)
     (%check-error (%daq-event-get-subscribers self subscribers-slot) "daqEvent_getSubscribers")
     (cffi:mem-ref subscribers-slot 'daq-list)
@@ -8231,7 +7600,6 @@
   )
 
 (defun event/mute (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-event-mute self) "daqEvent_mute")
   nil
 )
@@ -8242,7 +7610,6 @@
   )
 
 (defun event/mute-listener (self event-handler)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-event-mute-listener self event-handler) "daqEvent_muteListener")
   nil
 )
@@ -8253,7 +7620,6 @@
   )
 
 (defun event/remove-handler (self event-handler)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-event-remove-handler self event-handler) "daqEvent_removeHandler")
   nil
 )
@@ -8265,7 +7631,6 @@
   )
 
 (defun event/trigger (self sender args)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-event-trigger self sender args) "daqEvent_trigger")
   nil
 )
@@ -8275,7 +7640,6 @@
   )
 
 (defun event/unmute (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-event-unmute self) "daqEvent_unmute")
   nil
 )
@@ -8286,7 +7650,6 @@
   )
 
 (defun event/unmute-listener (self event-handler)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-event-unmute-listener self event-handler) "daqEvent_unmuteListener")
   nil
 )
@@ -8297,7 +7660,6 @@
   )
 
 (defun float-object/create-float (value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-float-object)
     (%check-error (%daq-float-object-create-float obj-slot value) "daqFloatObject_createFloat")
     (cffi:mem-ref obj-slot 'daq-float-object)
@@ -8310,7 +7672,6 @@
   )
 
 (defun float-object/create-float-object (value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-float-object)
     (%check-error (%daq-float-object-create-float-object obj-slot value) "daqFloatObject_createFloatObject")
     (cffi:mem-ref obj-slot 'daq-float-object)
@@ -8324,7 +7685,6 @@
   )
 
 (defun float-object/equals-value (self value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (equals-slot 'daq-bool)
     (%check-error (%daq-float-object-equals-value self value equals-slot) "daqFloatObject_equalsValue")
     (cffi:mem-ref equals-slot 'daq-bool)
@@ -8336,7 +7696,6 @@
   )
 
 (defun float-object/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-float-object-get-interface-id intf-id)
   nil)
 
@@ -8346,7 +7705,6 @@
   )
 
 (defun float-object/get-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-float)
     (%check-error (%daq-float-object-get-value self value-slot) "daqFloatObject_getValue")
     (cffi:mem-ref value-slot 'daq-float)
@@ -8359,7 +7717,6 @@
   )
 
 (defun folder-config/add-item (self item)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-folder-config-add-item self item) "daqFolderConfig_addItem")
   nil
 )
@@ -8369,7 +7726,6 @@
   )
 
 (defun folder-config/clear (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-folder-config-clear self) "daqFolderConfig_clear")
   nil
 )
@@ -8382,7 +7738,6 @@
   )
 
 (defun folder-config/create-folder (context parent local-id)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-folder-config)
     (%check-error (%daq-folder-config-create-folder obj-slot context parent local-id) "daqFolderConfig_createFolder")
     (cffi:mem-ref obj-slot 'daq-folder-config)
@@ -8397,7 +7752,6 @@
   )
 
 (defun folder-config/create-io-folder (context parent local-id)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-folder-config)
     (%check-error (%daq-folder-config-create-io-folder obj-slot context parent local-id) "daqFolderConfig_createIoFolder")
     (cffi:mem-ref obj-slot 'daq-folder-config)
@@ -8409,7 +7763,6 @@
   )
 
 (defun folder-config/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-folder-config-get-interface-id intf-id)
   nil)
 
@@ -8419,7 +7772,6 @@
   )
 
 (defun folder-config/remove-item (self item)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-folder-config-remove-item self item) "daqFolderConfig_removeItem")
   nil
 )
@@ -8430,7 +7782,6 @@
   )
 
 (defun folder-config/remove-item-with-local-id (self local-id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-folder-config-remove-item-with-local-id self local-id) "daqFolderConfig_removeItemWithLocalId")
   nil
 )
@@ -8440,7 +7791,6 @@
   )
 
 (defun folder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-folder-get-interface-id intf-id)
   nil)
 
@@ -8451,7 +7801,6 @@
   )
 
 (defun folder/get-item (self local-id)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (item-slot 'daq-component)
     (%check-error (%daq-folder-get-item self local-id item-slot) "daqFolder_getItem")
     (cffi:mem-ref item-slot 'daq-component)
@@ -8465,7 +7814,6 @@
   )
 
 (defun folder/get-items (self search-filter)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (items-slot 'daq-list)
     (%check-error (%daq-folder-get-items self items-slot search-filter) "daqFolder_getItems")
     (cffi:mem-ref items-slot 'daq-list)
@@ -8479,7 +7827,6 @@
   )
 
 (defun folder/has-item (self local-id)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-bool)
     (%check-error (%daq-folder-has-item self local-id value-slot) "daqFolder_hasItem")
     (cffi:mem-ref value-slot 'daq-bool)
@@ -8492,7 +7839,6 @@
   )
 
 (defun folder/is-empty (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (empty-slot 'daq-bool)
     (%check-error (%daq-folder-is-empty self empty-slot) "daqFolder_isEmpty")
     (cffi:mem-ref empty-slot 'daq-bool)
@@ -8504,7 +7850,6 @@
   )
 
 (defun freezable/freeze (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-freezable-freeze self) "daqFreezable_freeze")
   nil
 )
@@ -8514,7 +7859,6 @@
   )
 
 (defun freezable/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-freezable-get-interface-id intf-id)
   nil)
 
@@ -8524,7 +7868,6 @@
   )
 
 (defun freezable/is-frozen (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-frozen-slot 'daq-bool)
     (%check-error (%daq-freezable-is-frozen self is-frozen-slot) "daqFreezable_isFrozen")
     (cffi:mem-ref is-frozen-slot 'daq-bool)
@@ -8540,7 +7883,6 @@
   )
 
 (defun function-block-type/create-function-block-type (id name description default-config)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-function-block-type)
     (%check-error (%daq-function-block-type-create-function-block-type obj-slot id name description default-config) "daqFunctionBlockType_createFunctionBlockType")
     (cffi:mem-ref obj-slot 'daq-function-block-type)
@@ -8552,7 +7894,6 @@
   )
 
 (defun function-block-type/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-function-block-type-get-interface-id intf-id)
   nil)
 
@@ -8564,7 +7905,6 @@
   )
 
 (defun function-block/add-function-block (self type-id config)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (function-block-slot 'daq-function-block)
     (%check-error (%daq-function-block-add-function-block self function-block-slot type-id config) "daqFunctionBlock_addFunctionBlock")
     (cffi:mem-ref function-block-slot 'daq-function-block)
@@ -8577,7 +7917,6 @@
   )
 
 (defun function-block/get-available-function-block-types (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (function-block-types-slot 'daq-dict)
     (%check-error (%daq-function-block-get-available-function-block-types self function-block-types-slot) "daqFunctionBlock_getAvailableFunctionBlockTypes")
     (cffi:mem-ref function-block-types-slot 'daq-dict)
@@ -8590,7 +7929,6 @@
   )
 
 (defun function-block/get-function-block-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-function-block-type)
     (%check-error (%daq-function-block-get-function-block-type self type-slot) "daqFunctionBlock_getFunctionBlockType")
     (cffi:mem-ref type-slot 'daq-function-block-type)
@@ -8604,7 +7942,6 @@
   )
 
 (defun function-block/get-function-blocks (self search-filter)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (function-blocks-slot 'daq-list)
     (%check-error (%daq-function-block-get-function-blocks self function-blocks-slot search-filter) "daqFunctionBlock_getFunctionBlocks")
     (cffi:mem-ref function-blocks-slot 'daq-list)
@@ -8618,7 +7955,6 @@
   )
 
 (defun function-block/get-input-ports (self search-filter)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (ports-slot 'daq-list)
     (%check-error (%daq-function-block-get-input-ports self ports-slot search-filter) "daqFunctionBlock_getInputPorts")
     (cffi:mem-ref ports-slot 'daq-list)
@@ -8630,7 +7966,6 @@
   )
 
 (defun function-block/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-function-block-get-interface-id intf-id)
   nil)
 
@@ -8641,7 +7976,6 @@
   )
 
 (defun function-block/get-signals (self search-filter)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (signals-slot 'daq-list)
     (%check-error (%daq-function-block-get-signals self signals-slot search-filter) "daqFunctionBlock_getSignals")
     (cffi:mem-ref signals-slot 'daq-list)
@@ -8655,7 +7989,6 @@
   )
 
 (defun function-block/get-signals-recursive (self search-filter)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (signals-slot 'daq-list)
     (%check-error (%daq-function-block-get-signals-recursive self signals-slot search-filter) "daqFunctionBlock_getSignalsRecursive")
     (cffi:mem-ref signals-slot 'daq-list)
@@ -8668,7 +8001,6 @@
   )
 
 (defun function-block/get-status-signal (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (status-signal-slot 'daq-signal)
     (%check-error (%daq-function-block-get-status-signal self status-signal-slot) "daqFunctionBlock_getStatusSignal")
     (cffi:mem-ref status-signal-slot 'daq-signal)
@@ -8681,7 +8013,6 @@
   )
 
 (defun function-block/remove-function-block (self function-block)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-function-block-remove-function-block self function-block) "daqFunctionBlock_removeFunctionBlock")
   nil
 )
@@ -8693,7 +8024,6 @@
   )
 
 (defun function/call (self params result)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (result-slot 'daq-base-object)
     (setf (cffi:mem-ref result-slot 'daq-base-object) result)
     (%check-error (%daq-function-call self params result-slot) "daqFunction_call")
@@ -8707,7 +8037,6 @@
   )
 
 (defun function/create-function (value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-function)
     (%check-error (%daq-function-create-function obj-slot value) "daqFunction_createFunction")
     (cffi:mem-ref obj-slot 'daq-function)
@@ -8720,7 +8049,6 @@
   )
 
 (defun graph-visualization/dump (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (dot-slot 'daq-string)
     (%check-error (%daq-graph-visualization-dump self dot-slot) "daqGraphVisualization_dump")
     (cffi:mem-ref dot-slot 'daq-string)
@@ -8732,7 +8060,6 @@
   )
 
 (defun graph-visualization/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-graph-visualization-get-interface-id intf-id)
   nil)
 
@@ -8745,7 +8072,6 @@
   )
 
 (defun input-port-config/create-input-port (context parent local-id gap-checking)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-input-port-config)
     (%check-error (%daq-input-port-config-create-input-port obj-slot context parent local-id gap-checking) "daqInputPortConfig_createInputPort")
     (cffi:mem-ref obj-slot 'daq-input-port-config)
@@ -8758,7 +8084,6 @@
   )
 
 (defun input-port-config/get-custom-data (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (custom-data-slot 'daq-base-object)
     (%check-error (%daq-input-port-config-get-custom-data self custom-data-slot) "daqInputPortConfig_getCustomData")
     (cffi:mem-ref custom-data-slot 'daq-base-object)
@@ -8771,7 +8096,6 @@
   )
 
 (defun input-port-config/get-gap-checking-enabled (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (gap-checking-enabled-slot 'daq-bool)
     (%check-error (%daq-input-port-config-get-gap-checking-enabled self gap-checking-enabled-slot) "daqInputPortConfig_getGapCheckingEnabled")
     (cffi:mem-ref gap-checking-enabled-slot 'daq-bool)
@@ -8783,7 +8107,6 @@
   )
 
 (defun input-port-config/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-input-port-config-get-interface-id intf-id)
   nil)
 
@@ -8793,7 +8116,6 @@
   )
 
 (defun input-port-config/get-listener (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (port-slot 'daq-input-port-notifications)
     (%check-error (%daq-input-port-config-get-listener self port-slot) "daqInputPortConfig_getListener")
     (cffi:mem-ref port-slot 'daq-input-port-notifications)
@@ -8806,7 +8128,6 @@
   )
 
 (defun input-port-config/get-notification-method (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (method-slot 'daq-packet-ready-notification)
     (%check-error (%daq-input-port-config-get-notification-method self method-slot) "daqInputPortConfig_getNotificationMethod")
     (cffi:mem-ref method-slot 'daq-packet-ready-notification)
@@ -8819,7 +8140,6 @@
   )
 
 (defun input-port-config/notify-packet-enqueued (self queue-was-empty)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-input-port-config-notify-packet-enqueued self queue-was-empty) "daqInputPortConfig_notifyPacketEnqueued")
   nil
 )
@@ -8829,7 +8149,6 @@
   )
 
 (defun input-port-config/notify-packet-enqueued-on-this-thread (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-input-port-config-notify-packet-enqueued-on-this-thread self) "daqInputPortConfig_notifyPacketEnqueuedOnThisThread")
   nil
 )
@@ -8839,7 +8158,6 @@
   )
 
 (defun input-port-config/notify-packet-enqueued-with-scheduler (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-input-port-config-notify-packet-enqueued-with-scheduler self) "daqInputPortConfig_notifyPacketEnqueuedWithScheduler")
   nil
 )
@@ -8850,7 +8168,6 @@
   )
 
 (defun input-port-config/set-custom-data (self custom-data)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-input-port-config-set-custom-data self custom-data) "daqInputPortConfig_setCustomData")
   nil
 )
@@ -8861,7 +8178,6 @@
   )
 
 (defun input-port-config/set-listener (self port)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-input-port-config-set-listener self port) "daqInputPortConfig_setListener")
   nil
 )
@@ -8872,7 +8188,6 @@
   )
 
 (defun input-port-config/set-notification-method (self method)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-input-port-config-set-notification-method self method) "daqInputPortConfig_setNotificationMethod")
   nil
 )
@@ -8883,7 +8198,6 @@
   )
 
 (defun input-port-config/set-requires-signal (self requires-signal)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-input-port-config-set-requires-signal self requires-signal) "daqInputPortConfig_setRequiresSignal")
   nil
 )
@@ -8896,7 +8210,6 @@
   )
 
 (defun input-port-notifications/accepts-signal (self port signal)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (accept-slot 'daq-bool)
     (%check-error (%daq-input-port-notifications-accepts-signal self port signal accept-slot) "daqInputPortNotifications_acceptsSignal")
     (cffi:mem-ref accept-slot 'daq-bool)
@@ -8909,7 +8222,6 @@
   )
 
 (defun input-port-notifications/connected (self port)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-input-port-notifications-connected self port) "daqInputPortNotifications_connected")
   nil
 )
@@ -8920,7 +8232,6 @@
   )
 
 (defun input-port-notifications/disconnected (self port)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-input-port-notifications-disconnected self port) "daqInputPortNotifications_disconnected")
   nil
 )
@@ -8930,7 +8241,6 @@
   )
 
 (defun input-port-notifications/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-input-port-notifications-get-interface-id intf-id)
   nil)
 
@@ -8940,7 +8250,6 @@
   )
 
 (defun input-port-notifications/packet-received (self port)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-input-port-notifications-packet-received self port) "daqInputPortNotifications_packetReceived")
   nil
 )
@@ -8951,7 +8260,6 @@
   )
 
 (defun input-port-private/connect-signal-scheduler-notification (self signal)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-input-port-private-connect-signal-scheduler-notification self signal) "daqInputPortPrivate_connectSignalSchedulerNotification")
   nil
 )
@@ -8961,7 +8269,6 @@
   )
 
 (defun input-port-private/disconnect-without-signal-notification (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-input-port-private-disconnect-without-signal-notification self) "daqInputPortPrivate_disconnectWithoutSignalNotification")
   nil
 )
@@ -8971,7 +8278,6 @@
   )
 
 (defun input-port-private/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-input-port-private-get-interface-id intf-id)
   nil)
 
@@ -8982,7 +8288,6 @@
   )
 
 (defun input-port/accepts-signal (self signal)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (accepts-slot 'daq-bool)
     (%check-error (%daq-input-port-accepts-signal self signal accepts-slot) "daqInputPort_acceptsSignal")
     (cffi:mem-ref accepts-slot 'daq-bool)
@@ -8996,7 +8301,6 @@
   )
 
 (defun input-port/accepts-signals (self signals)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (accepts-slot 'daq-list)
     (%check-error (%daq-input-port-accepts-signals self signals accepts-slot) "daqInputPort_acceptsSignals")
     (cffi:mem-ref accepts-slot 'daq-list)
@@ -9009,7 +8313,6 @@
   )
 
 (defun input-port/connect (self signal)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-input-port-connect self signal) "daqInputPort_connect")
   nil
 )
@@ -9019,7 +8322,6 @@
   )
 
 (defun input-port/disconnect (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-input-port-disconnect self) "daqInputPort_disconnect")
   nil
 )
@@ -9030,7 +8332,6 @@
   )
 
 (defun input-port/get-connection (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (connection-slot 'daq-connection)
     (%check-error (%daq-input-port-get-connection self connection-slot) "daqInputPort_getConnection")
     (cffi:mem-ref connection-slot 'daq-connection)
@@ -9042,7 +8343,6 @@
   )
 
 (defun input-port/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-input-port-get-interface-id intf-id)
   nil)
 
@@ -9052,7 +8352,6 @@
   )
 
 (defun input-port/get-public (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-public-slot 'daq-bool)
     (%check-error (%daq-input-port-get-public self is-public-slot) "daqInputPort_getPublic")
     (cffi:mem-ref is-public-slot 'daq-bool)
@@ -9065,7 +8364,6 @@
   )
 
 (defun input-port/get-requires-signal (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (requires-signal-slot 'daq-bool)
     (%check-error (%daq-input-port-get-requires-signal self requires-signal-slot) "daqInputPort_getRequiresSignal")
     (cffi:mem-ref requires-signal-slot 'daq-bool)
@@ -9078,7 +8376,6 @@
   )
 
 (defun input-port/get-signal (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (signal-slot 'daq-signal)
     (%check-error (%daq-input-port-get-signal self signal-slot) "daqInputPort_getSignal")
     (cffi:mem-ref signal-slot 'daq-signal)
@@ -9091,7 +8388,6 @@
   )
 
 (defun input-port/set-public (self is-public)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-input-port-set-public self is-public) "daqInputPort_setPublic")
   nil
 )
@@ -9102,7 +8398,6 @@
   )
 
 (defun inspectable/get-runtime-class-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (implementation-name-slot 'daq-string)
     (%check-error (%daq-inspectable-get-runtime-class-name self implementation-name-slot) "daqInspectable_getRuntimeClassName")
     (cffi:mem-ref implementation-name-slot 'daq-string)
@@ -9115,7 +8410,6 @@
   )
 
 (defun instance-builder/add-config-provider (self config-provider)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-add-config-provider self config-provider) "daqInstanceBuilder_addConfigProvider")
   nil
 )
@@ -9126,7 +8420,6 @@
   )
 
 (defun instance-builder/add-discovery-server (self server-name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-add-discovery-server self server-name) "daqInstanceBuilder_addDiscoveryServer")
   nil
 )
@@ -9137,7 +8430,6 @@
   )
 
 (defun instance-builder/add-logger-sink (self sink)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-add-logger-sink self sink) "daqInstanceBuilder_addLoggerSink")
   nil
 )
@@ -9148,7 +8440,6 @@
   )
 
 (defun instance-builder/add-module-path (self path)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-add-module-path self path) "daqInstanceBuilder_addModulePath")
   nil
 )
@@ -9159,7 +8450,6 @@
   )
 
 (defun instance-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (instance-slot 'daq-instance)
     (%check-error (%daq-instance-builder-build self instance-slot) "daqInstanceBuilder_build")
     (cffi:mem-ref instance-slot 'daq-instance)
@@ -9171,7 +8461,6 @@
   )
 
 (defun instance-builder/create-instance-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-instance-builder)
     (%check-error (%daq-instance-builder-create-instance-builder obj-slot) "daqInstanceBuilder_createInstanceBuilder")
     (cffi:mem-ref obj-slot 'daq-instance-builder)
@@ -9184,7 +8473,6 @@
   )
 
 (defun instance-builder/enable-standard-providers (self flag)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-enable-standard-providers self flag) "daqInstanceBuilder_enableStandardProviders")
   nil
 )
@@ -9195,7 +8483,6 @@
   )
 
 (defun instance-builder/get-authentication-provider (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (authentication-provider-slot 'daq-authentication-provider)
     (%check-error (%daq-instance-builder-get-authentication-provider self authentication-provider-slot) "daqInstanceBuilder_getAuthenticationProvider")
     (cffi:mem-ref authentication-provider-slot 'daq-authentication-provider)
@@ -9208,7 +8495,6 @@
   )
 
 (defun instance-builder/get-components-log-level (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (components-slot 'daq-dict)
     (%check-error (%daq-instance-builder-get-components-log-level self components-slot) "daqInstanceBuilder_getComponentsLogLevel")
     (cffi:mem-ref components-slot 'daq-dict)
@@ -9221,7 +8507,6 @@
   )
 
 (defun instance-builder/get-context (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (context-slot 'daq-context)
     (%check-error (%daq-instance-builder-get-context self context-slot) "daqInstanceBuilder_getContext")
     (cffi:mem-ref context-slot 'daq-context)
@@ -9234,7 +8519,6 @@
   )
 
 (defun instance-builder/get-default-root-device-info (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (device-info-slot 'daq-device-info)
     (%check-error (%daq-instance-builder-get-default-root-device-info self device-info-slot) "daqInstanceBuilder_getDefaultRootDeviceInfo")
     (cffi:mem-ref device-info-slot 'daq-device-info)
@@ -9247,7 +8531,6 @@
   )
 
 (defun instance-builder/get-default-root-device-local-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (local-id-slot 'daq-string)
     (%check-error (%daq-instance-builder-get-default-root-device-local-id self local-id-slot) "daqInstanceBuilder_getDefaultRootDeviceLocalId")
     (cffi:mem-ref local-id-slot 'daq-string)
@@ -9260,7 +8543,6 @@
   )
 
 (defun instance-builder/get-discovery-servers (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (server-names-slot 'daq-list)
     (%check-error (%daq-instance-builder-get-discovery-servers self server-names-slot) "daqInstanceBuilder_getDiscoveryServers")
     (cffi:mem-ref server-names-slot 'daq-list)
@@ -9273,7 +8555,6 @@
   )
 
 (defun instance-builder/get-global-log-level (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (log-level-slot 'daq-log-level)
     (%check-error (%daq-instance-builder-get-global-log-level self log-level-slot) "daqInstanceBuilder_getGlobalLogLevel")
     (cffi:mem-ref log-level-slot 'daq-log-level)
@@ -9285,7 +8566,6 @@
   )
 
 (defun instance-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-instance-builder-get-interface-id intf-id)
   nil)
 
@@ -9295,7 +8575,6 @@
   )
 
 (defun instance-builder/get-load-authenticated-modules-only (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (auth-only-slot 'daq-bool)
     (%check-error (%daq-instance-builder-get-load-authenticated-modules-only self auth-only-slot) "daqInstanceBuilder_getLoadAuthenticatedModulesOnly")
     (cffi:mem-ref auth-only-slot 'daq-bool)
@@ -9308,7 +8587,6 @@
   )
 
 (defun instance-builder/get-logger (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (logger-slot 'daq-logger)
     (%check-error (%daq-instance-builder-get-logger self logger-slot) "daqInstanceBuilder_getLogger")
     (cffi:mem-ref logger-slot 'daq-logger)
@@ -9321,7 +8599,6 @@
   )
 
 (defun instance-builder/get-logger-sinks (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (sinks-slot 'daq-list)
     (%check-error (%daq-instance-builder-get-logger-sinks self sinks-slot) "daqInstanceBuilder_getLoggerSinks")
     (cffi:mem-ref sinks-slot 'daq-list)
@@ -9334,7 +8611,6 @@
   )
 
 (defun instance-builder/get-module-authenticator (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (authenticator-slot 'daq-module-authenticator)
     (%check-error (%daq-instance-builder-get-module-authenticator self authenticator-slot) "daqInstanceBuilder_getModuleAuthenticator")
     (cffi:mem-ref authenticator-slot 'daq-module-authenticator)
@@ -9347,7 +8623,6 @@
   )
 
 (defun instance-builder/get-module-manager (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (module-manager-slot 'daq-module-manager)
     (%check-error (%daq-instance-builder-get-module-manager self module-manager-slot) "daqInstanceBuilder_getModuleManager")
     (cffi:mem-ref module-manager-slot 'daq-module-manager)
@@ -9360,7 +8635,6 @@
   )
 
 (defun instance-builder/get-module-path (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (path-slot 'daq-string)
     (%check-error (%daq-instance-builder-get-module-path self path-slot) "daqInstanceBuilder_getModulePath")
     (cffi:mem-ref path-slot 'daq-string)
@@ -9373,7 +8647,6 @@
   )
 
 (defun instance-builder/get-module-paths-list (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (paths-slot 'daq-list)
     (%check-error (%daq-instance-builder-get-module-paths-list self paths-slot) "daqInstanceBuilder_getModulePathsList")
     (cffi:mem-ref paths-slot 'daq-list)
@@ -9386,7 +8659,6 @@
   )
 
 (defun instance-builder/get-options (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (options-slot 'daq-dict)
     (%check-error (%daq-instance-builder-get-options self options-slot) "daqInstanceBuilder_getOptions")
     (cffi:mem-ref options-slot 'daq-dict)
@@ -9399,7 +8671,6 @@
   )
 
 (defun instance-builder/get-root-device (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (connection-string-slot 'daq-string)
     (%check-error (%daq-instance-builder-get-root-device self connection-string-slot) "daqInstanceBuilder_getRootDevice")
     (cffi:mem-ref connection-string-slot 'daq-string)
@@ -9412,7 +8683,6 @@
   )
 
 (defun instance-builder/get-root-device-config (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (config-slot 'daq-property-object)
     (%check-error (%daq-instance-builder-get-root-device-config self config-slot) "daqInstanceBuilder_getRootDeviceConfig")
     (cffi:mem-ref config-slot 'daq-property-object)
@@ -9425,7 +8695,6 @@
   )
 
 (defun instance-builder/get-scheduler (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (scheduler-slot 'daq-scheduler)
     (%check-error (%daq-instance-builder-get-scheduler self scheduler-slot) "daqInstanceBuilder_getScheduler")
     (cffi:mem-ref scheduler-slot 'daq-scheduler)
@@ -9438,7 +8707,6 @@
   )
 
 (defun instance-builder/get-scheduler-worker-num (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (num-workers-slot 'daq-size-t)
     (%check-error (%daq-instance-builder-get-scheduler-worker-num self num-workers-slot) "daqInstanceBuilder_getSchedulerWorkerNum")
     (cffi:mem-ref num-workers-slot 'daq-size-t)
@@ -9451,7 +8719,6 @@
   )
 
 (defun instance-builder/get-using-scheduler-main-loop (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (use-main-loop-slot 'daq-bool)
     (%check-error (%daq-instance-builder-get-using-scheduler-main-loop self use-main-loop-slot) "daqInstanceBuilder_getUsingSchedulerMainLoop")
     (cffi:mem-ref use-main-loop-slot 'daq-bool)
@@ -9464,7 +8731,6 @@
   )
 
 (defun instance-builder/set-authentication-provider (self authentication-provider)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-set-authentication-provider self authentication-provider) "daqInstanceBuilder_setAuthenticationProvider")
   nil
 )
@@ -9476,7 +8742,6 @@
   )
 
 (defun instance-builder/set-component-log-level (self component log-level)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-set-component-log-level self component log-level) "daqInstanceBuilder_setComponentLogLevel")
   nil
 )
@@ -9487,7 +8752,6 @@
   )
 
 (defun instance-builder/set-context (self context)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-set-context self context) "daqInstanceBuilder_setContext")
   nil
 )
@@ -9498,7 +8762,6 @@
   )
 
 (defun instance-builder/set-default-root-device-info (self device-info)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-set-default-root-device-info self device-info) "daqInstanceBuilder_setDefaultRootDeviceInfo")
   nil
 )
@@ -9509,7 +8772,6 @@
   )
 
 (defun instance-builder/set-default-root-device-local-id (self local-id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-set-default-root-device-local-id self local-id) "daqInstanceBuilder_setDefaultRootDeviceLocalId")
   nil
 )
@@ -9520,7 +8782,6 @@
   )
 
 (defun instance-builder/set-global-log-level (self log-level)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-set-global-log-level self log-level) "daqInstanceBuilder_setGlobalLogLevel")
   nil
 )
@@ -9531,7 +8792,6 @@
   )
 
 (defun instance-builder/set-load-authenticated-modules-only (self auth-only)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-set-load-authenticated-modules-only self auth-only) "daqInstanceBuilder_setLoadAuthenticatedModulesOnly")
   nil
 )
@@ -9542,7 +8802,6 @@
   )
 
 (defun instance-builder/set-logger (self logger)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-set-logger self logger) "daqInstanceBuilder_setLogger")
   nil
 )
@@ -9553,7 +8812,6 @@
   )
 
 (defun instance-builder/set-module-authenticator (self authenticator)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-set-module-authenticator self authenticator) "daqInstanceBuilder_setModuleAuthenticator")
   nil
 )
@@ -9564,7 +8822,6 @@
   )
 
 (defun instance-builder/set-module-manager (self module-manager)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-set-module-manager self module-manager) "daqInstanceBuilder_setModuleManager")
   nil
 )
@@ -9575,7 +8832,6 @@
   )
 
 (defun instance-builder/set-module-path (self path)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-set-module-path self path) "daqInstanceBuilder_setModulePath")
   nil
 )
@@ -9587,7 +8843,6 @@
   )
 
 (defun instance-builder/set-root-device (self connection-string config)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-set-root-device self connection-string config) "daqInstanceBuilder_setRootDevice")
   nil
 )
@@ -9598,7 +8853,6 @@
   )
 
 (defun instance-builder/set-scheduler (self scheduler)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-set-scheduler self scheduler) "daqInstanceBuilder_setScheduler")
   nil
 )
@@ -9609,7 +8863,6 @@
   )
 
 (defun instance-builder/set-scheduler-worker-num (self num-workers)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-set-scheduler-worker-num self num-workers) "daqInstanceBuilder_setSchedulerWorkerNum")
   nil
 )
@@ -9621,7 +8874,6 @@
   )
 
 (defun instance-builder/set-sink-log-level (self sink log-level)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-set-sink-log-level self sink log-level) "daqInstanceBuilder_setSinkLogLevel")
   nil
 )
@@ -9632,7 +8884,6 @@
   )
 
 (defun instance-builder/set-using-scheduler-main-loop (self use-main-loop)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-builder-set-using-scheduler-main-loop self use-main-loop) "daqInstanceBuilder_setUsingSchedulerMainLoop")
   nil
 )
@@ -9643,7 +8894,6 @@
   )
 
 (defun instance/add-standard-servers (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (servers-slot 'daq-list)
     (%check-error (%daq-instance-add-standard-servers self servers-slot) "daqInstance_addStandardServers")
     (cffi:mem-ref servers-slot 'daq-list)
@@ -9657,7 +8907,6 @@
   )
 
 (defun instance/create-instance (context local-id)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-instance)
     (%check-error (%daq-instance-create-instance obj-slot context local-id) "daqInstance_createInstance")
     (cffi:mem-ref obj-slot 'daq-instance)
@@ -9670,7 +8919,6 @@
   )
 
 (defun instance/create-instance-from-builder (builder)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-instance)
     (%check-error (%daq-instance-create-instance-from-builder obj-slot builder) "daqInstance_createInstanceFromBuilder")
     (cffi:mem-ref obj-slot 'daq-instance)
@@ -9683,7 +8931,6 @@
   )
 
 (defun instance/get-available-server-types (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (server-types-slot 'daq-dict)
     (%check-error (%daq-instance-get-available-server-types self server-types-slot) "daqInstance_getAvailableServerTypes")
     (cffi:mem-ref server-types-slot 'daq-dict)
@@ -9695,7 +8942,6 @@
   )
 
 (defun instance/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-instance-get-interface-id intf-id)
   nil)
 
@@ -9705,7 +8951,6 @@
   )
 
 (defun instance/get-module-manager (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (manager-slot 'daq-module-manager)
     (%check-error (%daq-instance-get-module-manager self manager-slot) "daqInstance_getModuleManager")
     (cffi:mem-ref manager-slot 'daq-module-manager)
@@ -9718,7 +8963,6 @@
   )
 
 (defun instance/get-root-device (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (root-device-slot 'daq-device)
     (%check-error (%daq-instance-get-root-device self root-device-slot) "daqInstance_getRootDevice")
     (cffi:mem-ref root-device-slot 'daq-device)
@@ -9732,7 +8976,6 @@
   )
 
 (defun instance/set-root-device (self connection-string config)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-instance-set-root-device self connection-string config) "daqInstance_setRootDevice")
   nil
 )
@@ -9743,7 +8986,6 @@
   )
 
 (defun integer/create-integer (value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-integer)
     (%check-error (%daq-integer-create-integer obj-slot value) "daqInteger_createInteger")
     (cffi:mem-ref obj-slot 'daq-integer)
@@ -9757,7 +8999,6 @@
   )
 
 (defun integer/equals-value (self value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (equals-slot 'daq-bool)
     (%check-error (%daq-integer-equals-value self value equals-slot) "daqInteger_equalsValue")
     (cffi:mem-ref equals-slot 'daq-bool)
@@ -9769,7 +9010,6 @@
   )
 
 (defun integer/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-integer-get-interface-id intf-id)
   nil)
 
@@ -9779,7 +9019,6 @@
   )
 
 (defun integer/get-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-int)
     (%check-error (%daq-integer-get-value self value-slot) "daqInteger_getValue")
     (cffi:mem-ref value-slot 'daq-int)
@@ -9791,7 +9030,6 @@
   )
 
 (defun io-folder-config/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-io-folder-config-get-interface-id intf-id)
   nil)
 
@@ -9801,7 +9039,6 @@
   )
 
 (defun iterable/create-end-iterator (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (iterator-slot 'daq-iterator)
     (%check-error (%daq-iterable-create-end-iterator self iterator-slot) "daqIterable_createEndIterator")
     (cffi:mem-ref iterator-slot 'daq-iterator)
@@ -9814,7 +9051,6 @@
   )
 
 (defun iterable/create-start-iterator (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (iterator-slot 'daq-iterator)
     (%check-error (%daq-iterable-create-start-iterator self iterator-slot) "daqIterable_createStartIterator")
     (cffi:mem-ref iterator-slot 'daq-iterator)
@@ -9826,7 +9062,6 @@
   )
 
 (defun iterable/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-iterable-get-interface-id intf-id)
   nil)
 
@@ -9836,7 +9071,6 @@
   )
 
 (defun iterator/get-current (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-base-object)
     (%check-error (%daq-iterator-get-current self obj-slot) "daqIterator_getCurrent")
     (cffi:mem-ref obj-slot 'daq-base-object)
@@ -9848,7 +9082,6 @@
   )
 
 (defun iterator/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-iterator-get-interface-id intf-id)
   nil)
 
@@ -9857,7 +9090,6 @@
   )
 
 (defun iterator/move-next (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-iterator-move-next self) "daqIterator_moveNext")
   nil
 )
@@ -9867,7 +9099,6 @@
   )
 
 (defun last-message-logger-sink-private/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-last-message-logger-sink-private-get-interface-id intf-id)
   nil)
 
@@ -9877,7 +9108,6 @@
   )
 
 (defun last-message-logger-sink-private/get-last-message (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (last-message-slot 'daq-string)
     (%check-error (%daq-last-message-logger-sink-private-get-last-message self last-message-slot) "daqLastMessageLoggerSinkPrivate_getLastMessage")
     (cffi:mem-ref last-message-slot 'daq-string)
@@ -9891,7 +9121,6 @@
   )
 
 (defun last-message-logger-sink-private/wait-for-message (self timeout-ms)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (success-slot 'daq-bool)
     (%check-error (%daq-last-message-logger-sink-private-wait-for-message self timeout-ms success-slot) "daqLastMessageLoggerSinkPrivate_waitForMessage")
     (cffi:mem-ref success-slot 'daq-bool)
@@ -9904,7 +9133,6 @@
   )
 
 (defun list-element-type/get-element-interface-id (self id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-list-element-type-get-element-interface-id self id) "daqListElementType_getElementInterfaceId")
   nil)
 
@@ -9913,7 +9141,6 @@
   )
 
 (defun list-element-type/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-list-element-type-get-interface-id intf-id)
   nil)
 
@@ -9922,7 +9149,6 @@
   )
 
 (defun list/clear (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-list-clear self) "daqList_clear")
   nil
 )
@@ -9933,7 +9159,6 @@
   )
 
 (defun list/create-end-iterator (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (iterator-slot 'daq-iterator)
     (%check-error (%daq-list-create-end-iterator self iterator-slot) "daqList_createEndIterator")
     (cffi:mem-ref iterator-slot 'daq-iterator)
@@ -9945,7 +9170,6 @@
   )
 
 (defun list/create-list ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-list)
     (%check-error (%daq-list-create-list obj-slot) "daqList_createList")
     (cffi:mem-ref obj-slot 'daq-list)
@@ -9958,7 +9182,6 @@
   )
 
 (defun list/create-start-iterator (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (iterator-slot 'daq-iterator)
     (%check-error (%daq-list-create-start-iterator self iterator-slot) "daqList_createStartIterator")
     (cffi:mem-ref iterator-slot 'daq-iterator)
@@ -9971,7 +9194,6 @@
   )
 
 (defun list/delete-at (self index)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-list-delete-at self index) "daqList_deleteAt")
   nil
 )
@@ -9982,7 +9204,6 @@
   )
 
 (defun list/get-count (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (size-slot 'daq-size-t)
     (%check-error (%daq-list-get-count self size-slot) "daqList_getCount")
     (cffi:mem-ref size-slot 'daq-size-t)
@@ -9994,7 +9215,6 @@
   )
 
 (defun list/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-list-get-interface-id intf-id)
   nil)
 
@@ -10005,7 +9225,6 @@
   )
 
 (defun list/get-item-at (self index)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-base-object)
     (%check-error (%daq-list-get-item-at self index obj-slot) "daqList_getItemAt")
     (cffi:mem-ref obj-slot 'daq-base-object)
@@ -10019,7 +9238,6 @@
   )
 
 (defun list/insert-at (self index obj)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-list-insert-at self index obj) "daqList_insertAt")
   nil
 )
@@ -10030,7 +9248,6 @@
   )
 
 (defun list/move-back (self obj)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-list-move-back self obj) "daqList_moveBack")
   nil
 )
@@ -10041,7 +9258,6 @@
   )
 
 (defun list/move-front (self obj)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-list-move-front self obj) "daqList_moveFront")
   nil
 )
@@ -10052,7 +9268,6 @@
   )
 
 (defun list/pop-back (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-base-object)
     (%check-error (%daq-list-pop-back self obj-slot) "daqList_popBack")
     (cffi:mem-ref obj-slot 'daq-base-object)
@@ -10065,7 +9280,6 @@
   )
 
 (defun list/pop-front (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-base-object)
     (%check-error (%daq-list-pop-front self obj-slot) "daqList_popFront")
     (cffi:mem-ref obj-slot 'daq-base-object)
@@ -10078,7 +9292,6 @@
   )
 
 (defun list/push-back (self obj)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-list-push-back self obj) "daqList_pushBack")
   nil
 )
@@ -10089,7 +9302,6 @@
   )
 
 (defun list/push-front (self obj)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-list-push-front self obj) "daqList_pushFront")
   nil
 )
@@ -10101,7 +9313,6 @@
   )
 
 (defun list/remove-at (self index)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-base-object)
     (%check-error (%daq-list-remove-at self index obj-slot) "daqList_removeAt")
     (cffi:mem-ref obj-slot 'daq-base-object)
@@ -10115,7 +9326,6 @@
   )
 
 (defun list/set-item-at (self index obj)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-list-set-item-at self index obj) "daqList_setItemAt")
   nil
 )
@@ -10125,7 +9335,6 @@
   )
 
 (defun lock-guard/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-lock-guard-get-interface-id intf-id)
   nil)
 
@@ -10135,7 +9344,6 @@
   )
 
 (defun log-file-info-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (log-file-info-slot 'daq-log-file-info)
     (%check-error (%daq-log-file-info-builder-build self log-file-info-slot) "daqLogFileInfoBuilder_build")
     (cffi:mem-ref log-file-info-slot 'daq-log-file-info)
@@ -10147,7 +9355,6 @@
   )
 
 (defun log-file-info-builder/create-log-file-info-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-log-file-info-builder)
     (%check-error (%daq-log-file-info-builder-create-log-file-info-builder obj-slot) "daqLogFileInfoBuilder_createLogFileInfoBuilder")
     (cffi:mem-ref obj-slot 'daq-log-file-info-builder)
@@ -10160,7 +9367,6 @@
   )
 
 (defun log-file-info-builder/get-description (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (description-slot 'daq-string)
     (%check-error (%daq-log-file-info-builder-get-description self description-slot) "daqLogFileInfoBuilder_getDescription")
     (cffi:mem-ref description-slot 'daq-string)
@@ -10173,7 +9379,6 @@
   )
 
 (defun log-file-info-builder/get-encoding (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (encoding-slot 'daq-string)
     (%check-error (%daq-log-file-info-builder-get-encoding self encoding-slot) "daqLogFileInfoBuilder_getEncoding")
     (cffi:mem-ref encoding-slot 'daq-string)
@@ -10186,7 +9391,6 @@
   )
 
 (defun log-file-info-builder/get-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (id-slot 'daq-string)
     (%check-error (%daq-log-file-info-builder-get-id self id-slot) "daqLogFileInfoBuilder_getId")
     (cffi:mem-ref id-slot 'daq-string)
@@ -10198,7 +9402,6 @@
   )
 
 (defun log-file-info-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-log-file-info-builder-get-interface-id intf-id)
   nil)
 
@@ -10208,7 +9411,6 @@
   )
 
 (defun log-file-info-builder/get-last-modified (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (last-modified-slot 'daq-string)
     (%check-error (%daq-log-file-info-builder-get-last-modified self last-modified-slot) "daqLogFileInfoBuilder_getLastModified")
     (cffi:mem-ref last-modified-slot 'daq-string)
@@ -10221,7 +9423,6 @@
   )
 
 (defun log-file-info-builder/get-local-path (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (local-path-slot 'daq-string)
     (%check-error (%daq-log-file-info-builder-get-local-path self local-path-slot) "daqLogFileInfoBuilder_getLocalPath")
     (cffi:mem-ref local-path-slot 'daq-string)
@@ -10234,7 +9435,6 @@
   )
 
 (defun log-file-info-builder/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-log-file-info-builder-get-name self name-slot) "daqLogFileInfoBuilder_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -10247,7 +9447,6 @@
   )
 
 (defun log-file-info-builder/get-size (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (size-slot 'daq-size-t)
     (%check-error (%daq-log-file-info-builder-get-size self size-slot) "daqLogFileInfoBuilder_getSize")
     (cffi:mem-ref size-slot 'daq-size-t)
@@ -10260,7 +9459,6 @@
   )
 
 (defun log-file-info-builder/set-description (self description)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-log-file-info-builder-set-description self description) "daqLogFileInfoBuilder_setDescription")
   nil
 )
@@ -10271,7 +9469,6 @@
   )
 
 (defun log-file-info-builder/set-encoding (self encoding)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-log-file-info-builder-set-encoding self encoding) "daqLogFileInfoBuilder_setEncoding")
   nil
 )
@@ -10282,7 +9479,6 @@
   )
 
 (defun log-file-info-builder/set-id (self id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-log-file-info-builder-set-id self id) "daqLogFileInfoBuilder_setId")
   nil
 )
@@ -10293,7 +9489,6 @@
   )
 
 (defun log-file-info-builder/set-last-modified (self last-modified)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-log-file-info-builder-set-last-modified self last-modified) "daqLogFileInfoBuilder_setLastModified")
   nil
 )
@@ -10304,7 +9499,6 @@
   )
 
 (defun log-file-info-builder/set-local-path (self local-path)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-log-file-info-builder-set-local-path self local-path) "daqLogFileInfoBuilder_setLocalPath")
   nil
 )
@@ -10315,7 +9509,6 @@
   )
 
 (defun log-file-info-builder/set-name (self name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-log-file-info-builder-set-name self name) "daqLogFileInfoBuilder_setName")
   nil
 )
@@ -10326,7 +9519,6 @@
   )
 
 (defun log-file-info-builder/set-size (self size)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-log-file-info-builder-set-size self size) "daqLogFileInfoBuilder_setSize")
   nil
 )
@@ -10337,7 +9529,6 @@
   )
 
 (defun log-file-info/create-log-file-info-from-builder (builder)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-log-file-info)
     (%check-error (%daq-log-file-info-create-log-file-info-from-builder obj-slot builder) "daqLogFileInfo_createLogFileInfoFromBuilder")
     (cffi:mem-ref obj-slot 'daq-log-file-info)
@@ -10350,7 +9541,6 @@
   )
 
 (defun log-file-info/get-description (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (description-slot 'daq-string)
     (%check-error (%daq-log-file-info-get-description self description-slot) "daqLogFileInfo_getDescription")
     (cffi:mem-ref description-slot 'daq-string)
@@ -10363,7 +9553,6 @@
   )
 
 (defun log-file-info/get-encoding (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (encoding-slot 'daq-string)
     (%check-error (%daq-log-file-info-get-encoding self encoding-slot) "daqLogFileInfo_getEncoding")
     (cffi:mem-ref encoding-slot 'daq-string)
@@ -10376,7 +9565,6 @@
   )
 
 (defun log-file-info/get-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (id-slot 'daq-string)
     (%check-error (%daq-log-file-info-get-id self id-slot) "daqLogFileInfo_getId")
     (cffi:mem-ref id-slot 'daq-string)
@@ -10388,7 +9576,6 @@
   )
 
 (defun log-file-info/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-log-file-info-get-interface-id intf-id)
   nil)
 
@@ -10398,7 +9585,6 @@
   )
 
 (defun log-file-info/get-last-modified (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (last-modified-slot 'daq-string)
     (%check-error (%daq-log-file-info-get-last-modified self last-modified-slot) "daqLogFileInfo_getLastModified")
     (cffi:mem-ref last-modified-slot 'daq-string)
@@ -10411,7 +9597,6 @@
   )
 
 (defun log-file-info/get-local-path (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (local-path-slot 'daq-string)
     (%check-error (%daq-log-file-info-get-local-path self local-path-slot) "daqLogFileInfo_getLocalPath")
     (cffi:mem-ref local-path-slot 'daq-string)
@@ -10424,7 +9609,6 @@
   )
 
 (defun log-file-info/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-log-file-info-get-name self name-slot) "daqLogFileInfo_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -10437,7 +9621,6 @@
   )
 
 (defun log-file-info/get-size (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (size-slot 'daq-size-t)
     (%check-error (%daq-log-file-info-get-size self size-slot) "daqLogFileInfo_getSize")
     (cffi:mem-ref size-slot 'daq-size-t)
@@ -10453,7 +9636,6 @@
   )
 
 (defun logger-component/create-logger-component (name sinks thread-pool level)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-logger-component)
     (%check-error (%daq-logger-component-create-logger-component obj-slot name sinks thread-pool level) "daqLoggerComponent_createLoggerComponent")
     (cffi:mem-ref obj-slot 'daq-logger-component)
@@ -10465,7 +9647,6 @@
   )
 
 (defun logger-component/flush (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-logger-component-flush self) "daqLoggerComponent_flush")
   nil
 )
@@ -10476,7 +9657,6 @@
   )
 
 (defun logger-component/flush-on-level (self level)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-logger-component-flush-on-level self level) "daqLoggerComponent_flushOnLevel")
   nil
 )
@@ -10486,7 +9666,6 @@
   )
 
 (defun logger-component/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-logger-component-get-interface-id intf-id)
   nil)
 
@@ -10496,7 +9675,6 @@
   )
 
 (defun logger-component/get-level (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (level-slot 'daq-log-level)
     (%check-error (%daq-logger-component-get-level self level-slot) "daqLoggerComponent_getLevel")
     (cffi:mem-ref level-slot 'daq-log-level)
@@ -10509,7 +9687,6 @@
   )
 
 (defun logger-component/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-logger-component-get-name self name-slot) "daqLoggerComponent_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -10522,7 +9699,6 @@
   )
 
 (defun logger-component/set-level (self level)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-logger-component-set-level self level) "daqLoggerComponent_setLevel")
   nil
 )
@@ -10533,7 +9709,6 @@
   )
 
 (defun logger-component/set-pattern (self pattern)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-logger-component-set-pattern self pattern) "daqLoggerComponent_setPattern")
   nil
 )
@@ -10545,7 +9720,6 @@
   )
 
 (defun logger-component/should-log (self level)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (will-log-slot 'daq-bool)
     (%check-error (%daq-logger-component-should-log self level will-log-slot) "daqLoggerComponent_shouldLog")
     (cffi:mem-ref will-log-slot 'daq-bool)
@@ -10558,7 +9732,6 @@
   )
 
 (defun logger-sink/create-basic-file-logger-sink (file-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-logger-sink)
     (%check-error (%daq-logger-sink-create-basic-file-logger-sink obj-slot file-name) "daqLoggerSink_createBasicFileLoggerSink")
     (cffi:mem-ref obj-slot 'daq-logger-sink)
@@ -10573,7 +9746,6 @@
   )
 
 (defun logger-sink/create-rotating-file-logger-sink (file-name max-file-byte-size max-files)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-logger-sink)
     (%check-error (%daq-logger-sink-create-rotating-file-logger-sink obj-slot file-name max-file-byte-size max-files) "daqLoggerSink_createRotatingFileLoggerSink")
     (cffi:mem-ref obj-slot 'daq-logger-sink)
@@ -10585,7 +9757,6 @@
   )
 
 (defun logger-sink/create-std-err-logger-sink ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-logger-sink)
     (%check-error (%daq-logger-sink-create-std-err-logger-sink obj-slot) "daqLoggerSink_createStdErrLoggerSink")
     (cffi:mem-ref obj-slot 'daq-logger-sink)
@@ -10597,7 +9768,6 @@
   )
 
 (defun logger-sink/create-std-out-logger-sink ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-logger-sink)
     (%check-error (%daq-logger-sink-create-std-out-logger-sink obj-slot) "daqLoggerSink_createStdOutLoggerSink")
     (cffi:mem-ref obj-slot 'daq-logger-sink)
@@ -10609,7 +9779,6 @@
   )
 
 (defun logger-sink/create-win-debug-logger-sink ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-logger-sink)
     (%check-error (%daq-logger-sink-create-win-debug-logger-sink obj-slot) "daqLoggerSink_createWinDebugLoggerSink")
     (cffi:mem-ref obj-slot 'daq-logger-sink)
@@ -10621,7 +9790,6 @@
   )
 
 (defun logger-sink/flush (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-logger-sink-flush self) "daqLoggerSink_flush")
   nil
 )
@@ -10632,7 +9800,6 @@
   )
 
 (defun logger-sink/get-level (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (level-slot 'daq-log-level)
     (%check-error (%daq-logger-sink-get-level self level-slot) "daqLoggerSink_getLevel")
     (cffi:mem-ref level-slot 'daq-log-level)
@@ -10645,7 +9812,6 @@
   )
 
 (defun logger-sink/set-level (self level)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-logger-sink-set-level self level) "daqLoggerSink_setLevel")
   nil
 )
@@ -10656,7 +9822,6 @@
   )
 
 (defun logger-sink/set-pattern (self pattern)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-logger-sink-set-pattern self pattern) "daqLoggerSink_setPattern")
   nil
 )
@@ -10668,7 +9833,6 @@
   )
 
 (defun logger-sink/should-log (self level)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (will-log-slot 'daq-bool)
     (%check-error (%daq-logger-sink-should-log self level will-log-slot) "daqLoggerSink_shouldLog")
     (cffi:mem-ref will-log-slot 'daq-bool)
@@ -10680,7 +9844,6 @@
   )
 
 (defun logger-thread-pool/create-logger-thread-pool ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-logger-thread-pool)
     (%check-error (%daq-logger-thread-pool-create-logger-thread-pool obj-slot) "daqLoggerThreadPool_createLoggerThreadPool")
     (cffi:mem-ref obj-slot 'daq-logger-thread-pool)
@@ -10692,7 +9855,6 @@
   )
 
 (defun logger-thread-pool/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-logger-thread-pool-get-interface-id intf-id)
   nil)
 
@@ -10703,7 +9865,6 @@
   )
 
 (defun logger/add-component (self name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (component-slot 'daq-logger-component)
     (%check-error (%daq-logger-add-component self name component-slot) "daqLogger_addComponent")
     (cffi:mem-ref component-slot 'daq-logger-component)
@@ -10717,7 +9878,6 @@
   )
 
 (defun logger/create-logger (sinks level)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-logger)
     (%check-error (%daq-logger-create-logger obj-slot sinks level) "daqLogger_createLogger")
     (cffi:mem-ref obj-slot 'daq-logger)
@@ -10729,7 +9889,6 @@
   )
 
 (defun logger/flush (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-logger-flush self) "daqLogger_flush")
   nil
 )
@@ -10740,7 +9899,6 @@
   )
 
 (defun logger/flush-on-level (self level)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-logger-flush-on-level self level) "daqLogger_flushOnLevel")
   nil
 )
@@ -10752,7 +9910,6 @@
   )
 
 (defun logger/get-component (self name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (component-slot 'daq-logger-component)
     (%check-error (%daq-logger-get-component self name component-slot) "daqLogger_getComponent")
     (cffi:mem-ref component-slot 'daq-logger-component)
@@ -10765,7 +9922,6 @@
   )
 
 (defun logger/get-components (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (components-slot 'daq-list)
     (%check-error (%daq-logger-get-components self components-slot) "daqLogger_getComponents")
     (cffi:mem-ref components-slot 'daq-list)
@@ -10777,7 +9933,6 @@
   )
 
 (defun logger/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-logger-get-interface-id intf-id)
   nil)
 
@@ -10787,7 +9942,6 @@
   )
 
 (defun logger/get-level (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (level-slot 'daq-log-level)
     (%check-error (%daq-logger-get-level self level-slot) "daqLogger_getLevel")
     (cffi:mem-ref level-slot 'daq-log-level)
@@ -10801,7 +9955,6 @@
   )
 
 (defun logger/get-or-add-component (self name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (component-slot 'daq-logger-component)
     (%check-error (%daq-logger-get-or-add-component self name component-slot) "daqLogger_getOrAddComponent")
     (cffi:mem-ref component-slot 'daq-logger-component)
@@ -10814,7 +9967,6 @@
   )
 
 (defun logger/remove-component (self name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-logger-remove-component self name) "daqLogger_removeComponent")
   nil
 )
@@ -10825,7 +9977,6 @@
   )
 
 (defun logger/set-level (self level)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-logger-set-level self level) "daqLogger_setLevel")
   nil
 )
@@ -10836,7 +9987,6 @@
   )
 
 (defun mirrored-device-config/add-streaming-source (self streaming-source)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-mirrored-device-config-add-streaming-source self streaming-source) "daqMirroredDeviceConfig_addStreamingSource")
   nil
 )
@@ -10846,7 +9996,6 @@
   )
 
 (defun mirrored-device-config/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-mirrored-device-config-get-interface-id intf-id)
   nil)
 
@@ -10856,7 +10005,6 @@
   )
 
 (defun mirrored-device-config/remove-streaming-source (self streaming-connection-string)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-mirrored-device-config-remove-streaming-source self streaming-connection-string) "daqMirroredDeviceConfig_removeStreamingSource")
   nil
 )
@@ -10867,7 +10015,6 @@
   )
 
 (defun mirrored-device-config/set-mirrored-device-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-mirrored-device-config-set-mirrored-device-type self type) "daqMirroredDeviceConfig_setMirroredDeviceType")
   nil
 )
@@ -10877,7 +10024,6 @@
   )
 
 (defun mirrored-device/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-mirrored-device-get-interface-id intf-id)
   nil)
 
@@ -10887,7 +10033,6 @@
   )
 
 (defun mirrored-device/get-mirrored-device-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-device-type)
     (%check-error (%daq-mirrored-device-get-mirrored-device-type self type-slot) "daqMirroredDevice_getMirroredDeviceType")
     (cffi:mem-ref type-slot 'daq-device-type)
@@ -10900,7 +10045,6 @@
   )
 
 (defun mirrored-device/get-remote-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (id-slot 'daq-string)
     (%check-error (%daq-mirrored-device-get-remote-id self id-slot) "daqMirroredDevice_getRemoteId")
     (cffi:mem-ref id-slot 'daq-string)
@@ -10913,7 +10057,6 @@
   )
 
 (defun mirrored-device/get-streaming-sources (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (streaming-sources-slot 'daq-list)
     (%check-error (%daq-mirrored-device-get-streaming-sources self streaming-sources-slot) "daqMirroredDevice_getStreamingSources")
     (cffi:mem-ref streaming-sources-slot 'daq-list)
@@ -10926,7 +10069,6 @@
   )
 
 (defun mirrored-input-port-config/get-active-streaming-source (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (streaming-connection-string-slot 'daq-string)
     (%check-error (%daq-mirrored-input-port-config-get-active-streaming-source self streaming-connection-string-slot) "daqMirroredInputPortConfig_getActiveStreamingSource")
     (cffi:mem-ref streaming-connection-string-slot 'daq-string)
@@ -10938,7 +10080,6 @@
   )
 
 (defun mirrored-input-port-config/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-mirrored-input-port-config-get-interface-id intf-id)
   nil)
 
@@ -10948,7 +10089,6 @@
   )
 
 (defun mirrored-input-port-config/get-remote-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (id-slot 'daq-string)
     (%check-error (%daq-mirrored-input-port-config-get-remote-id self id-slot) "daqMirroredInputPortConfig_getRemoteId")
     (cffi:mem-ref id-slot 'daq-string)
@@ -10961,7 +10101,6 @@
   )
 
 (defun mirrored-input-port-config/get-streaming-sources (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (streaming-connection-strings-slot 'daq-list)
     (%check-error (%daq-mirrored-input-port-config-get-streaming-sources self streaming-connection-strings-slot) "daqMirroredInputPortConfig_getStreamingSources")
     (cffi:mem-ref streaming-connection-strings-slot 'daq-list)
@@ -10974,7 +10113,6 @@
   )
 
 (defun mirrored-input-port-config/set-active-streaming-source (self streaming-connection-string)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-mirrored-input-port-config-set-active-streaming-source self streaming-connection-string) "daqMirroredInputPortConfig_setActiveStreamingSource")
   nil
 )
@@ -10984,7 +10122,6 @@
   )
 
 (defun mirrored-signal-config/deactivate-streaming (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-mirrored-signal-config-deactivate-streaming self) "daqMirroredSignalConfig_deactivateStreaming")
   nil
 )
@@ -10995,7 +10132,6 @@
   )
 
 (defun mirrored-signal-config/get-active-streaming-source (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (streaming-connection-string-slot 'daq-string)
     (%check-error (%daq-mirrored-signal-config-get-active-streaming-source self streaming-connection-string-slot) "daqMirroredSignalConfig_getActiveStreamingSource")
     (cffi:mem-ref streaming-connection-string-slot 'daq-string)
@@ -11007,7 +10143,6 @@
   )
 
 (defun mirrored-signal-config/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-mirrored-signal-config-get-interface-id intf-id)
   nil)
 
@@ -11017,7 +10152,6 @@
   )
 
 (defun mirrored-signal-config/get-on-subscribe-complete (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-mirrored-signal-config-get-on-subscribe-complete self event-slot) "daqMirroredSignalConfig_getOnSubscribeComplete")
     (cffi:mem-ref event-slot 'daq-event)
@@ -11030,7 +10164,6 @@
   )
 
 (defun mirrored-signal-config/get-on-unsubscribe-complete (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-mirrored-signal-config-get-on-unsubscribe-complete self event-slot) "daqMirroredSignalConfig_getOnUnsubscribeComplete")
     (cffi:mem-ref event-slot 'daq-event)
@@ -11043,7 +10176,6 @@
   )
 
 (defun mirrored-signal-config/get-remote-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (id-slot 'daq-string)
     (%check-error (%daq-mirrored-signal-config-get-remote-id self id-slot) "daqMirroredSignalConfig_getRemoteId")
     (cffi:mem-ref id-slot 'daq-string)
@@ -11056,7 +10188,6 @@
   )
 
 (defun mirrored-signal-config/get-streaming-sources (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (streaming-connection-strings-slot 'daq-list)
     (%check-error (%daq-mirrored-signal-config-get-streaming-sources self streaming-connection-strings-slot) "daqMirroredSignalConfig_getStreamingSources")
     (cffi:mem-ref streaming-connection-strings-slot 'daq-list)
@@ -11069,7 +10200,6 @@
   )
 
 (defun mirrored-signal-config/set-active-streaming-source (self streaming-connection-string)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-mirrored-signal-config-set-active-streaming-source self streaming-connection-string) "daqMirroredSignalConfig_setActiveStreamingSource")
   nil
 )
@@ -11080,7 +10210,6 @@
   )
 
 (defun mirrored-signal-private/add-streaming-source (self streaming)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-mirrored-signal-private-add-streaming-source self streaming) "daqMirroredSignalPrivate_addStreamingSource")
   nil
 )
@@ -11090,7 +10219,6 @@
   )
 
 (defun mirrored-signal-private/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-mirrored-signal-private-get-interface-id intf-id)
   nil)
 
@@ -11100,7 +10228,6 @@
   )
 
 (defun mirrored-signal-private/get-mirrored-data-descriptor (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (descriptor-slot 'daq-data-descriptor)
     (%check-error (%daq-mirrored-signal-private-get-mirrored-data-descriptor self descriptor-slot) "daqMirroredSignalPrivate_getMirroredDataDescriptor")
     (cffi:mem-ref descriptor-slot 'daq-data-descriptor)
@@ -11113,7 +10240,6 @@
   )
 
 (defun mirrored-signal-private/get-mirrored-domain-signal (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (domain-signals-slot 'daq-mirrored-signal-config)
     (%check-error (%daq-mirrored-signal-private-get-mirrored-domain-signal self domain-signals-slot) "daqMirroredSignalPrivate_getMirroredDomainSignal")
     (cffi:mem-ref domain-signals-slot 'daq-mirrored-signal-config)
@@ -11126,7 +10252,6 @@
   )
 
 (defun mirrored-signal-private/remove-streaming-source (self streaming-connection-string)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-mirrored-signal-private-remove-streaming-source self streaming-connection-string) "daqMirroredSignalPrivate_removeStreamingSource")
   nil
 )
@@ -11137,7 +10262,6 @@
   )
 
 (defun mirrored-signal-private/set-mirrored-data-descriptor (self descriptor)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-mirrored-signal-private-set-mirrored-data-descriptor self descriptor) "daqMirroredSignalPrivate_setMirroredDataDescriptor")
   nil
 )
@@ -11148,7 +10272,6 @@
   )
 
 (defun mirrored-signal-private/set-mirrored-domain-signal (self domain-signal)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-mirrored-signal-private-set-mirrored-domain-signal self domain-signal) "daqMirroredSignalPrivate_setMirroredDomainSignal")
   nil
 )
@@ -11159,7 +10282,6 @@
   )
 
 (defun mirrored-signal-private/subscribe-completed (self streaming-connection-string)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-mirrored-signal-private-subscribe-completed self streaming-connection-string) "daqMirroredSignalPrivate_subscribeCompleted")
   nil
 )
@@ -11171,7 +10293,6 @@
   )
 
 (defun mirrored-signal-private/trigger-event (self event-packet)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (forward-slot 'daq-bool)
     (%check-error (%daq-mirrored-signal-private-trigger-event self event-packet forward-slot) "daqMirroredSignalPrivate_triggerEvent")
     (cffi:mem-ref forward-slot 'daq-bool)
@@ -11184,7 +10305,6 @@
   )
 
 (defun mirrored-signal-private/unsubscribe-completed (self streaming-connection-string)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-mirrored-signal-private-unsubscribe-completed self streaming-connection-string) "daqMirroredSignalPrivate_unsubscribeCompleted")
   nil
 )
@@ -11195,7 +10315,6 @@
   )
 
 (defun mirrored-signal-private/unsubscribe-completed-no-lock (self streaming-connection-string)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-mirrored-signal-private-unsubscribe-completed-no-lock self streaming-connection-string) "daqMirroredSignalPrivate_unsubscribeCompletedNoLock")
   nil
 )
@@ -11208,7 +10327,6 @@
   )
 
 (defun module-info/create-module-info (version-info name id)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-module-info)
     (%check-error (%daq-module-info-create-module-info obj-slot version-info name id) "daqModuleInfo_createModuleInfo")
     (cffi:mem-ref obj-slot 'daq-module-info)
@@ -11221,7 +10339,6 @@
   )
 
 (defun module-info/get-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (id-slot 'daq-string)
     (%check-error (%daq-module-info-get-id self id-slot) "daqModuleInfo_getId")
     (cffi:mem-ref id-slot 'daq-string)
@@ -11233,7 +10350,6 @@
   )
 
 (defun module-info/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-module-info-get-interface-id intf-id)
   nil)
 
@@ -11243,7 +10359,6 @@
   )
 
 (defun module-info/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-module-info-get-name self name-slot) "daqModuleInfo_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -11256,7 +10371,6 @@
   )
 
 (defun module-info/get-version-info (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (version-slot 'daq-version-info)
     (%check-error (%daq-module-info-get-version-info self version-slot) "daqModuleInfo_getVersionInfo")
     (cffi:mem-ref version-slot 'daq-version-info)
@@ -11272,7 +10386,6 @@
   )
 
 (defun module-manager-utils/change-ip-config (self iface manufacturer serial-number config)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-module-manager-utils-change-ip-config self iface manufacturer serial-number config) "daqModuleManagerUtils_changeIpConfig")
   nil
 )
@@ -11283,7 +10396,6 @@
   )
 
 (defun module-manager-utils/complete-device-capabilities (self device)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-module-manager-utils-complete-device-capabilities self device) "daqModuleManagerUtils_completeDeviceCapabilities")
   nil
 )
@@ -11294,7 +10406,6 @@
   )
 
 (defun module-manager-utils/create-default-add-device-config (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (default-config-slot 'daq-property-object)
     (%check-error (%daq-module-manager-utils-create-default-add-device-config self default-config-slot) "daqModuleManagerUtils_createDefaultAddDeviceConfig")
     (cffi:mem-ref default-config-slot 'daq-property-object)
@@ -11310,7 +10421,6 @@
   )
 
 (defun module-manager-utils/create-device (self connection-string parent config)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (device-slot 'daq-device)
     (%check-error (%daq-module-manager-utils-create-device self device-slot connection-string parent config) "daqModuleManagerUtils_createDevice")
     (cffi:mem-ref device-slot 'daq-device)
@@ -11327,7 +10437,6 @@
   )
 
 (defun module-manager-utils/create-devices (self connection-args parent err-codes error-infos)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (devices-slot 'daq-dict)
     (%check-error (%daq-module-manager-utils-create-devices self devices-slot connection-args parent err-codes error-infos) "daqModuleManagerUtils_createDevices")
     (cffi:mem-ref devices-slot 'daq-dict)
@@ -11344,7 +10453,6 @@
   )
 
 (defun module-manager-utils/create-function-block (self id parent config local-id)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (function-block-slot 'daq-function-block)
     (%check-error (%daq-module-manager-utils-create-function-block self function-block-slot id parent config local-id) "daqModuleManagerUtils_createFunctionBlock")
     (cffi:mem-ref function-block-slot 'daq-function-block)
@@ -11360,7 +10468,6 @@
   )
 
 (defun module-manager-utils/create-server (self server-type-id root-device server-config)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (server-slot 'daq-server)
     (%check-error (%daq-module-manager-utils-create-server self server-slot server-type-id root-device server-config) "daqModuleManagerUtils_createServer")
     (cffi:mem-ref server-slot 'daq-server)
@@ -11375,7 +10482,6 @@
   )
 
 (defun module-manager-utils/create-streaming (self connection-string config)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (streaming-slot 'daq-streaming)
     (%check-error (%daq-module-manager-utils-create-streaming self streaming-slot connection-string config) "daqModuleManagerUtils_createStreaming")
     (cffi:mem-ref streaming-slot 'daq-streaming)
@@ -11388,7 +10494,6 @@
   )
 
 (defun module-manager-utils/get-available-device-types (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (device-types-slot 'daq-dict)
     (%check-error (%daq-module-manager-utils-get-available-device-types self device-types-slot) "daqModuleManagerUtils_getAvailableDeviceTypes")
     (cffi:mem-ref device-types-slot 'daq-dict)
@@ -11401,7 +10506,6 @@
   )
 
 (defun module-manager-utils/get-available-devices (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (available-devices-slot 'daq-list)
     (%check-error (%daq-module-manager-utils-get-available-devices self available-devices-slot) "daqModuleManagerUtils_getAvailableDevices")
     (cffi:mem-ref available-devices-slot 'daq-list)
@@ -11414,7 +10518,6 @@
   )
 
 (defun module-manager-utils/get-available-function-block-types (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (function-block-types-slot 'daq-dict)
     (%check-error (%daq-module-manager-utils-get-available-function-block-types self function-block-types-slot) "daqModuleManagerUtils_getAvailableFunctionBlockTypes")
     (cffi:mem-ref function-block-types-slot 'daq-dict)
@@ -11427,7 +10530,6 @@
   )
 
 (defun module-manager-utils/get-available-streaming-types (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (streaming-types-slot 'daq-dict)
     (%check-error (%daq-module-manager-utils-get-available-streaming-types self streaming-types-slot) "daqModuleManagerUtils_getAvailableStreamingTypes")
     (cffi:mem-ref streaming-types-slot 'daq-dict)
@@ -11442,7 +10544,6 @@
   )
 
 (defun module-manager-utils/get-discovery-info (self manufacturer serial-number)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (device-info-slot 'daq-device-info)
     (%check-error (%daq-module-manager-utils-get-discovery-info self device-info-slot manufacturer serial-number) "daqModuleManagerUtils_getDiscoveryInfo")
     (cffi:mem-ref device-info-slot 'daq-device-info)
@@ -11454,7 +10555,6 @@
   )
 
 (defun module-manager-utils/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-module-manager-utils-get-interface-id intf-id)
   nil)
 
@@ -11467,7 +10567,6 @@
   )
 
 (defun module-manager-utils/request-ip-config (self iface manufacturer serial-number)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (config-slot 'daq-property-object)
     (%check-error (%daq-module-manager-utils-request-ip-config self iface manufacturer serial-number config-slot) "daqModuleManagerUtils_requestIpConfig")
     (cffi:mem-ref config-slot 'daq-property-object)
@@ -11480,7 +10579,6 @@
   )
 
 (defun module-manager/add-module (self module)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-module-manager-add-module self module) "daqModuleManager_addModule")
   nil
 )
@@ -11491,7 +10589,6 @@
   )
 
 (defun module-manager/create-module-manager (path)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-module-manager)
     (%check-error (%daq-module-manager-create-module-manager obj-slot path) "daqModuleManager_createModuleManager")
     (cffi:mem-ref obj-slot 'daq-module-manager)
@@ -11504,7 +10601,6 @@
   )
 
 (defun module-manager/create-module-manager-multiple-paths (paths)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-module-manager)
     (%check-error (%daq-module-manager-create-module-manager-multiple-paths obj-slot paths) "daqModuleManager_createModuleManagerMultiplePaths")
     (cffi:mem-ref obj-slot 'daq-module-manager)
@@ -11516,7 +10612,6 @@
   )
 
 (defun module-manager/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-module-manager-get-interface-id intf-id)
   nil)
 
@@ -11526,7 +10621,6 @@
   )
 
 (defun module-manager/get-modules (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (modules-slot 'daq-list)
     (%check-error (%daq-module-manager-get-modules self modules-slot) "daqModuleManager_getModules")
     (cffi:mem-ref modules-slot 'daq-list)
@@ -11539,7 +10633,6 @@
   )
 
 (defun module-manager/get-vendor-keys (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (vendor-keys-slot 'daq-dict)
     (%check-error (%daq-module-manager-get-vendor-keys self vendor-keys-slot) "daqModuleManager_getVendorKeys")
     (cffi:mem-ref vendor-keys-slot 'daq-dict)
@@ -11553,7 +10646,6 @@
   )
 
 (defun module-manager/load-module (self path)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (module-slot 'daq-module)
     (%check-error (%daq-module-manager-load-module self path module-slot) "daqModuleManager_loadModule")
     (cffi:mem-ref module-slot 'daq-module)
@@ -11566,7 +10658,6 @@
   )
 
 (defun module-manager/load-modules (self context)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-module-manager-load-modules self context) "daqModuleManager_loadModules")
   nil
 )
@@ -11577,7 +10668,6 @@
   )
 
 (defun module-manager/set-authenticated-only (self authenticated-only)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-module-manager-set-authenticated-only self authenticated-only) "daqModuleManager_setAuthenticatedOnly")
   nil
 )
@@ -11588,7 +10678,6 @@
   )
 
 (defun module-manager/set-module-authenticator (self authenticator)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-module-manager-set-module-authenticator self authenticator) "daqModuleManager_setModuleAuthenticator")
   nil
 )
@@ -11601,7 +10690,6 @@
   )
 
 (defun module/complete-server-capability (self source target)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (succeeded-slot 'daq-bool)
     (%check-error (%daq-module-complete-server-capability self succeeded-slot source target) "daqModule_completeServerCapability")
     (cffi:mem-ref succeeded-slot 'daq-bool)
@@ -11617,7 +10705,6 @@
   )
 
 (defun module/create-device (self connection-string parent config)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (device-slot 'daq-device)
     (%check-error (%daq-module-create-device self device-slot connection-string parent config) "daqModule_createDevice")
     (cffi:mem-ref device-slot 'daq-device)
@@ -11634,7 +10721,6 @@
   )
 
 (defun module/create-function-block (self id parent local-id config)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (function-block-slot 'daq-function-block)
     (%check-error (%daq-module-create-function-block self function-block-slot id parent local-id config) "daqModule_createFunctionBlock")
     (cffi:mem-ref function-block-slot 'daq-function-block)
@@ -11650,7 +10736,6 @@
   )
 
 (defun module/create-server (self server-type-id root-device config)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (server-slot 'daq-server)
     (%check-error (%daq-module-create-server self server-slot server-type-id root-device config) "daqModule_createServer")
     (cffi:mem-ref server-slot 'daq-server)
@@ -11665,7 +10750,6 @@
   )
 
 (defun module/create-streaming (self connection-string config)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (streaming-slot 'daq-streaming)
     (%check-error (%daq-module-create-streaming self streaming-slot connection-string config) "daqModule_createStreaming")
     (cffi:mem-ref streaming-slot 'daq-streaming)
@@ -11678,7 +10762,6 @@
   )
 
 (defun module/get-available-device-types (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (device-types-slot 'daq-dict)
     (%check-error (%daq-module-get-available-device-types self device-types-slot) "daqModule_getAvailableDeviceTypes")
     (cffi:mem-ref device-types-slot 'daq-dict)
@@ -11691,7 +10774,6 @@
   )
 
 (defun module/get-available-devices (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (available-devices-slot 'daq-list)
     (%check-error (%daq-module-get-available-devices self available-devices-slot) "daqModule_getAvailableDevices")
     (cffi:mem-ref available-devices-slot 'daq-list)
@@ -11704,7 +10786,6 @@
   )
 
 (defun module/get-available-function-block-types (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (function-block-types-slot 'daq-dict)
     (%check-error (%daq-module-get-available-function-block-types self function-block-types-slot) "daqModule_getAvailableFunctionBlockTypes")
     (cffi:mem-ref function-block-types-slot 'daq-dict)
@@ -11717,7 +10798,6 @@
   )
 
 (defun module/get-available-server-types (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (server-types-slot 'daq-dict)
     (%check-error (%daq-module-get-available-server-types self server-types-slot) "daqModule_getAvailableServerTypes")
     (cffi:mem-ref server-types-slot 'daq-dict)
@@ -11730,7 +10810,6 @@
   )
 
 (defun module/get-available-streaming-types (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (streaming-types-slot 'daq-dict)
     (%check-error (%daq-module-get-available-streaming-types self streaming-types-slot) "daqModule_getAvailableStreamingTypes")
     (cffi:mem-ref streaming-types-slot 'daq-dict)
@@ -11742,7 +10821,6 @@
   )
 
 (defun module/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-module-get-interface-id intf-id)
   nil)
 
@@ -11752,7 +10830,6 @@
   )
 
 (defun module/get-license-config (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (license-config-slot 'daq-dict)
     (%check-error (%daq-module-get-license-config self license-config-slot) "daqModule_getLicenseConfig")
     (cffi:mem-ref license-config-slot 'daq-dict)
@@ -11765,7 +10842,6 @@
   )
 
 (defun module/get-module-info (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (info-slot 'daq-module-info)
     (%check-error (%daq-module-get-module-info self info-slot) "daqModule_getModuleInfo")
     (cffi:mem-ref info-slot 'daq-module-info)
@@ -11778,7 +10854,6 @@
   )
 
 (defun module/license-loaded (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (loaded-slot 'daq-bool)
     (%check-error (%daq-module-license-loaded self loaded-slot) "daqModule_licenseLoaded")
     (cffi:mem-ref loaded-slot 'daq-bool)
@@ -11792,7 +10867,6 @@
   )
 
 (defun module/load-license (self license-config)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (succeeded-slot 'daq-bool)
     (%check-error (%daq-module-load-license self succeeded-slot license-config) "daqModule_loadLicense")
     (cffi:mem-ref succeeded-slot 'daq-bool)
@@ -11805,7 +10879,6 @@
   )
 
 (defun multi-reader-builder/add-input-port (self port)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-builder-add-input-port self port) "daqMultiReaderBuilder_addInputPort")
   nil
 )
@@ -11816,7 +10889,6 @@
   )
 
 (defun multi-reader-builder/add-input-ports (self ports)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-builder-add-input-ports self ports) "daqMultiReaderBuilder_addInputPorts")
   nil
 )
@@ -11827,7 +10899,6 @@
   )
 
 (defun multi-reader-builder/add-signal (self signal)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-builder-add-signal self signal) "daqMultiReaderBuilder_addSignal")
   nil
 )
@@ -11838,7 +10909,6 @@
   )
 
 (defun multi-reader-builder/add-signals (self signals)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-builder-add-signals self signals) "daqMultiReaderBuilder_addSignals")
   nil
 )
@@ -11849,7 +10919,6 @@
   )
 
 (defun multi-reader-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (multi-reader-slot 'daq-multi-reader)
     (%check-error (%daq-multi-reader-builder-build self multi-reader-slot) "daqMultiReaderBuilder_build")
     (cffi:mem-ref multi-reader-slot 'daq-multi-reader)
@@ -11861,7 +10930,6 @@
   )
 
 (defun multi-reader-builder/create-multi-reader-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-multi-reader-builder)
     (%check-error (%daq-multi-reader-builder-create-multi-reader-builder obj-slot) "daqMultiReaderBuilder_createMultiReaderBuilder")
     (cffi:mem-ref obj-slot 'daq-multi-reader-builder)
@@ -11874,7 +10942,6 @@
   )
 
 (defun multi-reader-builder/get-allow-different-sampling-rates (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (allow-different-rates-slot 'daq-bool)
     (%check-error (%daq-multi-reader-builder-get-allow-different-sampling-rates self allow-different-rates-slot) "daqMultiReaderBuilder_getAllowDifferentSamplingRates")
     (cffi:mem-ref allow-different-rates-slot 'daq-bool)
@@ -11887,7 +10954,6 @@
   )
 
 (defun multi-reader-builder/get-domain-read-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-sample-type)
     (%check-error (%daq-multi-reader-builder-get-domain-read-type self type-slot) "daqMultiReaderBuilder_getDomainReadType")
     (cffi:mem-ref type-slot 'daq-sample-type)
@@ -11900,7 +10966,6 @@
   )
 
 (defun multi-reader-builder/get-input-port-notification-method (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (notification-method-slot 'daq-packet-ready-notification)
     (%check-error (%daq-multi-reader-builder-get-input-port-notification-method self notification-method-slot) "daqMultiReaderBuilder_getInputPortNotificationMethod")
     (cffi:mem-ref notification-method-slot 'daq-packet-ready-notification)
@@ -11913,7 +10978,6 @@
   )
 
 (defun multi-reader-builder/get-input-port-notification-methods (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (notification-methods-slot 'daq-list)
     (%check-error (%daq-multi-reader-builder-get-input-port-notification-methods self notification-methods-slot) "daqMultiReaderBuilder_getInputPortNotificationMethods")
     (cffi:mem-ref notification-methods-slot 'daq-list)
@@ -11925,7 +10989,6 @@
   )
 
 (defun multi-reader-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-multi-reader-builder-get-interface-id intf-id)
   nil)
 
@@ -11935,7 +10998,6 @@
   )
 
 (defun multi-reader-builder/get-min-read-count (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (min-read-count-slot 'daq-size-t)
     (%check-error (%daq-multi-reader-builder-get-min-read-count self min-read-count-slot) "daqMultiReaderBuilder_getMinReadCount")
     (cffi:mem-ref min-read-count-slot 'daq-size-t)
@@ -11948,7 +11010,6 @@
   )
 
 (defun multi-reader-builder/get-read-mode (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (mode-slot 'daq-read-mode)
     (%check-error (%daq-multi-reader-builder-get-read-mode self mode-slot) "daqMultiReaderBuilder_getReadMode")
     (cffi:mem-ref mode-slot 'daq-read-mode)
@@ -11961,7 +11022,6 @@
   )
 
 (defun multi-reader-builder/get-read-timeout-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-read-timeout-type)
     (%check-error (%daq-multi-reader-builder-get-read-timeout-type self type-slot) "daqMultiReaderBuilder_getReadTimeoutType")
     (cffi:mem-ref type-slot 'daq-read-timeout-type)
@@ -11974,7 +11034,6 @@
   )
 
 (defun multi-reader-builder/get-required-common-sample-rate (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (sample-rate-slot 'daq-int)
     (%check-error (%daq-multi-reader-builder-get-required-common-sample-rate self sample-rate-slot) "daqMultiReaderBuilder_getRequiredCommonSampleRate")
     (cffi:mem-ref sample-rate-slot 'daq-int)
@@ -11987,7 +11046,6 @@
   )
 
 (defun multi-reader-builder/get-source-components (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (components-slot 'daq-list)
     (%check-error (%daq-multi-reader-builder-get-source-components self components-slot) "daqMultiReaderBuilder_getSourceComponents")
     (cffi:mem-ref components-slot 'daq-list)
@@ -12000,7 +11058,6 @@
   )
 
 (defun multi-reader-builder/get-start-on-full-unit-of-domain (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (enabled-slot 'daq-bool)
     (%check-error (%daq-multi-reader-builder-get-start-on-full-unit-of-domain self enabled-slot) "daqMultiReaderBuilder_getStartOnFullUnitOfDomain")
     (cffi:mem-ref enabled-slot 'daq-bool)
@@ -12013,7 +11070,6 @@
   )
 
 (defun multi-reader-builder/get-tick-offset-tolerance (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (offset-tolerance-slot 'daq-ratio)
     (%check-error (%daq-multi-reader-builder-get-tick-offset-tolerance self offset-tolerance-slot) "daqMultiReaderBuilder_getTickOffsetTolerance")
     (cffi:mem-ref offset-tolerance-slot 'daq-ratio)
@@ -12026,7 +11082,6 @@
   )
 
 (defun multi-reader-builder/get-value-read-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-sample-type)
     (%check-error (%daq-multi-reader-builder-get-value-read-type self type-slot) "daqMultiReaderBuilder_getValueReadType")
     (cffi:mem-ref type-slot 'daq-sample-type)
@@ -12039,7 +11094,6 @@
   )
 
 (defun multi-reader-builder/set-allow-different-sampling-rates (self allow-different-rates)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-builder-set-allow-different-sampling-rates self allow-different-rates) "daqMultiReaderBuilder_setAllowDifferentSamplingRates")
   nil
 )
@@ -12050,7 +11104,6 @@
   )
 
 (defun multi-reader-builder/set-domain-read-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-builder-set-domain-read-type self type) "daqMultiReaderBuilder_setDomainReadType")
   nil
 )
@@ -12061,7 +11114,6 @@
   )
 
 (defun multi-reader-builder/set-input-port-notification-method (self notification-method)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-builder-set-input-port-notification-method self notification-method) "daqMultiReaderBuilder_setInputPortNotificationMethod")
   nil
 )
@@ -12072,7 +11124,6 @@
   )
 
 (defun multi-reader-builder/set-input-port-notification-methods (self notification-methods)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-builder-set-input-port-notification-methods self notification-methods) "daqMultiReaderBuilder_setInputPortNotificationMethods")
   nil
 )
@@ -12083,7 +11134,6 @@
   )
 
 (defun multi-reader-builder/set-min-read-count (self min-read-count)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-builder-set-min-read-count self min-read-count) "daqMultiReaderBuilder_setMinReadCount")
   nil
 )
@@ -12094,7 +11144,6 @@
   )
 
 (defun multi-reader-builder/set-read-mode (self mode)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-builder-set-read-mode self mode) "daqMultiReaderBuilder_setReadMode")
   nil
 )
@@ -12105,7 +11154,6 @@
   )
 
 (defun multi-reader-builder/set-read-timeout-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-builder-set-read-timeout-type self type) "daqMultiReaderBuilder_setReadTimeoutType")
   nil
 )
@@ -12116,7 +11164,6 @@
   )
 
 (defun multi-reader-builder/set-required-common-sample-rate (self sample-rate)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-builder-set-required-common-sample-rate self sample-rate) "daqMultiReaderBuilder_setRequiredCommonSampleRate")
   nil
 )
@@ -12127,7 +11174,6 @@
   )
 
 (defun multi-reader-builder/set-start-on-full-unit-of-domain (self enabled)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-builder-set-start-on-full-unit-of-domain self enabled) "daqMultiReaderBuilder_setStartOnFullUnitOfDomain")
   nil
 )
@@ -12138,7 +11184,6 @@
   )
 
 (defun multi-reader-builder/set-tick-offset-tolerance (self offset-tolerance)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-builder-set-tick-offset-tolerance self offset-tolerance) "daqMultiReaderBuilder_setTickOffsetTolerance")
   nil
 )
@@ -12149,7 +11194,6 @@
   )
 
 (defun multi-reader-builder/set-value-read-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-builder-set-value-read-type self type) "daqMultiReaderBuilder_setValueReadType")
   nil
 )
@@ -12163,7 +11207,6 @@
   )
 
 (defun multi-reader-status/create-multi-reader-status (main-descriptor event-packets valid offset)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-multi-reader-status)
     (%check-error (%daq-multi-reader-status-create-multi-reader-status obj-slot main-descriptor event-packets valid offset) "daqMultiReaderStatus_createMultiReaderStatus")
     (cffi:mem-ref obj-slot 'daq-multi-reader-status)
@@ -12176,7 +11219,6 @@
   )
 
 (defun multi-reader-status/get-event-packets (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-packets-slot 'daq-dict)
     (%check-error (%daq-multi-reader-status-get-event-packets self event-packets-slot) "daqMultiReaderStatus_getEventPackets")
     (cffi:mem-ref event-packets-slot 'daq-dict)
@@ -12188,7 +11230,6 @@
   )
 
 (defun multi-reader-status/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-multi-reader-status-get-interface-id intf-id)
   nil)
 
@@ -12198,7 +11239,6 @@
   )
 
 (defun multi-reader-status/get-main-descriptor (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (descriptor-slot 'daq-event-packet)
     (%check-error (%daq-multi-reader-status-get-main-descriptor self descriptor-slot) "daqMultiReaderStatus_getMainDescriptor")
     (cffi:mem-ref descriptor-slot 'daq-event-packet)
@@ -12211,7 +11251,6 @@
   )
 
 (defun multi-reader/add-input (self input)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-add-input self input) "daqMultiReader_addInput")
   nil
 )
@@ -12226,7 +11265,6 @@
   )
 
 (defun multi-reader/create-multi-reader (signals value-read-type domain-read-type mode timeout-type)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-multi-reader)
     (%check-error (%daq-multi-reader-create-multi-reader obj-slot signals value-read-type domain-read-type mode timeout-type) "daqMultiReader_createMultiReader")
     (cffi:mem-ref obj-slot 'daq-multi-reader)
@@ -12246,7 +11284,6 @@
   )
 
 (defun multi-reader/create-multi-reader-ex (signals value-read-type domain-read-type mode timeout-type required-common-sample-rate start-on-full-unit-of-domain min-read-count)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-multi-reader)
     (%check-error (%daq-multi-reader-create-multi-reader-ex obj-slot signals value-read-type domain-read-type mode timeout-type required-common-sample-rate start-on-full-unit-of-domain min-read-count) "daqMultiReader_createMultiReaderEx")
     (cffi:mem-ref obj-slot 'daq-multi-reader)
@@ -12261,7 +11298,6 @@
   )
 
 (defun multi-reader/create-multi-reader-from-existing (invalidated-reader value-read-type domain-read-type)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-multi-reader)
     (%check-error (%daq-multi-reader-create-multi-reader-from-existing obj-slot invalidated-reader value-read-type domain-read-type) "daqMultiReader_createMultiReaderFromExisting")
     (cffi:mem-ref obj-slot 'daq-multi-reader)
@@ -12274,7 +11310,6 @@
   )
 
 (defun multi-reader/get-active (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-active-slot 'daq-bool)
     (%check-error (%daq-multi-reader-get-active self is-active-slot) "daqMultiReader_getActive")
     (cffi:mem-ref is-active-slot 'daq-bool)
@@ -12287,7 +11322,6 @@
   )
 
 (defun multi-reader/get-common-sample-rate (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (common-sample-rate-slot 'daq-int)
     (%check-error (%daq-multi-reader-get-common-sample-rate self common-sample-rate-slot) "daqMultiReader_getCommonSampleRate")
     (cffi:mem-ref common-sample-rate-slot 'daq-int)
@@ -12301,7 +11335,6 @@
   )
 
 (defun multi-reader/get-input-used (self id)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-used-slot 'daq-bool)
     (%check-error (%daq-multi-reader-get-input-used self id is-used-slot) "daqMultiReader_getInputUsed")
     (cffi:mem-ref is-used-slot 'daq-bool)
@@ -12313,7 +11346,6 @@
   )
 
 (defun multi-reader/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-multi-reader-get-interface-id intf-id)
   nil)
 
@@ -12323,7 +11355,6 @@
   )
 
 (defun multi-reader/get-is-synchronized (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-synchronized-slot 'daq-bool)
     (%check-error (%daq-multi-reader-get-is-synchronized self is-synchronized-slot) "daqMultiReader_getIsSynchronized")
     (cffi:mem-ref is-synchronized-slot 'daq-bool)
@@ -12336,7 +11367,6 @@
   )
 
 (defun multi-reader/get-offset (self domain-start)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-get-offset self domain-start) "daqMultiReader_getOffset")
   nil
 )
@@ -12347,7 +11377,6 @@
   )
 
 (defun multi-reader/get-origin (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (origin-slot 'daq-string)
     (%check-error (%daq-multi-reader-get-origin self origin-slot) "daqMultiReader_getOrigin")
     (cffi:mem-ref origin-slot 'daq-string)
@@ -12360,7 +11389,6 @@
   )
 
 (defun multi-reader/get-tick-resolution (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (resolution-slot 'daq-ratio)
     (%check-error (%daq-multi-reader-get-tick-resolution self resolution-slot) "daqMultiReader_getTickResolution")
     (cffi:mem-ref resolution-slot 'daq-ratio)
@@ -12376,7 +11404,6 @@
   )
 
 (defun multi-reader/read (self samples count timeout-ms)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (count-slot 'daq-size-t)
     (cffi:with-foreign-object (status-slot 'daq-multi-reader-status)
       (setf (cffi:mem-ref count-slot 'daq-size-t) count)
@@ -12396,7 +11423,6 @@
   )
 
 (defun multi-reader/read-with-domain (self samples domain count timeout-ms)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (count-slot 'daq-size-t)
     (cffi:with-foreign-object (status-slot 'daq-multi-reader-status)
       (setf (cffi:mem-ref count-slot 'daq-size-t) count)
@@ -12412,7 +11438,6 @@
   )
 
 (defun multi-reader/remove-input (self id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-remove-input self id) "daqMultiReader_removeInput")
   nil
 )
@@ -12423,7 +11448,6 @@
   )
 
 (defun multi-reader/set-active (self is-active)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-set-active self is-active) "daqMultiReader_setActive")
   nil
 )
@@ -12435,7 +11459,6 @@
   )
 
 (defun multi-reader/set-input-used (self id is-used)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-multi-reader-set-input-used self id is-used) "daqMultiReader_setInputUsed")
   nil
 )
@@ -12447,7 +11470,6 @@
   )
 
 (defun multi-reader/skip-samples (self count)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (count-slot 'daq-size-t)
     (cffi:with-foreign-object (status-slot 'daq-multi-reader-status)
       (setf (cffi:mem-ref count-slot 'daq-size-t) count)
@@ -12463,7 +11485,6 @@
   )
 
 (defun network-interface/create-default-configuration (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (default-config-slot 'daq-property-object)
     (%check-error (%daq-network-interface-create-default-configuration self default-config-slot) "daqNetworkInterface_createDefaultConfiguration")
     (cffi:mem-ref default-config-slot 'daq-property-object)
@@ -12479,7 +11500,6 @@
   )
 
 (defun network-interface/create-network-interface (name owner-device-manufacturer-name owner-device-serial-number module-manager)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-network-interface)
     (%check-error (%daq-network-interface-create-network-interface obj-slot name owner-device-manufacturer-name owner-device-serial-number module-manager) "daqNetworkInterface_createNetworkInterface")
     (cffi:mem-ref obj-slot 'daq-network-interface)
@@ -12491,7 +11511,6 @@
   )
 
 (defun network-interface/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-network-interface-get-interface-id intf-id)
   nil)
 
@@ -12501,7 +11520,6 @@
   )
 
 (defun network-interface/request-current-configuration (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (config-slot 'daq-property-object)
     (%check-error (%daq-network-interface-request-current-configuration self config-slot) "daqNetworkInterface_requestCurrentConfiguration")
     (cffi:mem-ref config-slot 'daq-property-object)
@@ -12514,7 +11532,6 @@
   )
 
 (defun network-interface/submit-configuration (self config)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-network-interface-submit-configuration self config) "daqNetworkInterface_submitConfiguration")
   nil
 )
@@ -12525,7 +11542,6 @@
   )
 
 (defun number/get-float-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-float)
     (%check-error (%daq-number-get-float-value self value-slot) "daqNumber_getFloatValue")
     (cffi:mem-ref value-slot 'daq-float)
@@ -12538,7 +11554,6 @@
   )
 
 (defun number/get-int-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-int)
     (%check-error (%daq-number-get-int-value self value-slot) "daqNumber_getIntValue")
     (cffi:mem-ref value-slot 'daq-int)
@@ -12550,7 +11565,6 @@
   )
 
 (defun number/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-number-get-interface-id intf-id)
   nil)
 
@@ -12559,7 +11573,6 @@
   )
 
 (defun ownable/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-ownable-get-interface-id intf-id)
   nil)
 
@@ -12569,7 +11582,6 @@
   )
 
 (defun ownable/set-owner (self owner)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-ownable-set-owner self owner) "daqOwnable_setOwner")
   nil
 )
@@ -12579,7 +11591,6 @@
   )
 
 (defun packet-destruct-callback/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-packet-destruct-callback-get-interface-id intf-id)
   nil)
 
@@ -12588,7 +11599,6 @@
   )
 
 (defun packet-destruct-callback/on-packet-destroyed (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-packet-destruct-callback-on-packet-destroyed self) "daqPacketDestructCallback_onPacketDestroyed")
   nil
 )
@@ -12599,7 +11609,6 @@
   )
 
 (defun packet-reader/create-packet-reader (signal)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-packet-reader)
     (%check-error (%daq-packet-reader-create-packet-reader obj-slot signal) "daqPacketReader_createPacketReader")
     (cffi:mem-ref obj-slot 'daq-packet-reader)
@@ -12612,7 +11621,6 @@
   )
 
 (defun packet-reader/create-packet-reader-from-port (port)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-packet-reader)
     (%check-error (%daq-packet-reader-create-packet-reader-from-port obj-slot port) "daqPacketReader_createPacketReaderFromPort")
     (cffi:mem-ref obj-slot 'daq-packet-reader)
@@ -12624,7 +11632,6 @@
   )
 
 (defun packet-reader/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-packet-reader-get-interface-id intf-id)
   nil)
 
@@ -12634,7 +11641,6 @@
   )
 
 (defun packet-reader/read (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (packet-slot 'daq-packet)
     (%check-error (%daq-packet-reader-read self packet-slot) "daqPacketReader_read")
     (cffi:mem-ref packet-slot 'daq-packet)
@@ -12647,7 +11653,6 @@
   )
 
 (defun packet-reader/read-all (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (packets-slot 'daq-list)
     (%check-error (%daq-packet-reader-read-all self packets-slot) "daqPacketReader_readAll")
     (cffi:mem-ref packets-slot 'daq-list)
@@ -12659,7 +11664,6 @@
   )
 
 (defun packet/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-packet-get-interface-id intf-id)
   nil)
 
@@ -12669,7 +11673,6 @@
   )
 
 (defun packet/get-ref-count (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (ref-count-slot 'daq-size-t)
     (%check-error (%daq-packet-get-ref-count self ref-count-slot) "daqPacket_getRefCount")
     (cffi:mem-ref ref-count-slot 'daq-size-t)
@@ -12682,7 +11685,6 @@
   )
 
 (defun packet/get-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-packet-type)
     (%check-error (%daq-packet-get-type self type-slot) "daqPacket_getType")
     (cffi:mem-ref type-slot 'daq-packet-type)
@@ -12695,7 +11697,6 @@
   )
 
 (defun packet/subscribe-for-destruct-notification (self packet-destruct-callback)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-packet-subscribe-for-destruct-notification self packet-destruct-callback) "daqPacket_subscribeForDestructNotification")
   nil
 )
@@ -12706,7 +11707,6 @@
   )
 
 (defun permission-manager-internal/add-child-manager (self child-manager)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-permission-manager-internal-add-child-manager self child-manager) "daqPermissionManagerInternal_addChildManager")
   nil
 )
@@ -12716,7 +11716,6 @@
   )
 
 (defun permission-manager-internal/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-permission-manager-internal-get-interface-id intf-id)
   nil)
 
@@ -12726,7 +11725,6 @@
   )
 
 (defun permission-manager-internal/get-permissions (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (permissions-out-slot 'daq-permissions)
     (%check-error (%daq-permission-manager-internal-get-permissions self permissions-out-slot) "daqPermissionManagerInternal_getPermissions")
     (cffi:mem-ref permissions-out-slot 'daq-permissions)
@@ -12739,7 +11737,6 @@
   )
 
 (defun permission-manager-internal/remove-child-manager (self child-manager)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-permission-manager-internal-remove-child-manager self child-manager) "daqPermissionManagerInternal_removeChildManager")
   nil
 )
@@ -12750,7 +11747,6 @@
   )
 
 (defun permission-manager-internal/set-parent (self parent-manager)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-permission-manager-internal-set-parent self parent-manager) "daqPermissionManagerInternal_setParent")
   nil
 )
@@ -12760,7 +11756,6 @@
   )
 
 (defun permission-manager-internal/update-inherited-permissions (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-permission-manager-internal-update-inherited-permissions self) "daqPermissionManagerInternal_updateInheritedPermissions")
   nil
 )
@@ -12771,7 +11766,6 @@
   )
 
 (defun permission-manager/create-permission-manager (parent)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-permission-manager)
     (%check-error (%daq-permission-manager-create-permission-manager obj-slot parent) "daqPermissionManager_createPermissionManager")
     (cffi:mem-ref obj-slot 'daq-permission-manager)
@@ -12783,7 +11777,6 @@
   )
 
 (defun permission-manager/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-permission-manager-get-interface-id intf-id)
   nil)
 
@@ -12795,7 +11788,6 @@
   )
 
 (defun permission-manager/is-authorized (self user permission)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (authorized-out-slot 'daq-bool)
     (%check-error (%daq-permission-manager-is-authorized self user permission authorized-out-slot) "daqPermissionManager_isAuthorized")
     (cffi:mem-ref authorized-out-slot 'daq-bool)
@@ -12808,7 +11800,6 @@
   )
 
 (defun permission-manager/set-permissions (self permissions)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-permission-manager-set-permissions self permissions) "daqPermissionManager_setPermissions")
   nil
 )
@@ -12819,7 +11810,6 @@
   )
 
 (defun permission-mask-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (permission-mask-slot 'daq-int)
     (%check-error (%daq-permission-mask-builder-build self permission-mask-slot) "daqPermissionMaskBuilder_build")
     (cffi:mem-ref permission-mask-slot 'daq-int)
@@ -12831,7 +11821,6 @@
   )
 
 (defun permission-mask-builder/clear (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-permission-mask-builder-clear self) "daqPermissionMaskBuilder_clear")
   nil
 )
@@ -12841,7 +11830,6 @@
   )
 
 (defun permission-mask-builder/create-permission-mask-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-permission-mask-builder)
     (%check-error (%daq-permission-mask-builder-create-permission-mask-builder obj-slot) "daqPermissionMaskBuilder_createPermissionMaskBuilder")
     (cffi:mem-ref obj-slot 'daq-permission-mask-builder)
@@ -12854,7 +11842,6 @@
   )
 
 (defun permission-mask-builder/create-permission-mask-builder-from-mask (permission-mask)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-permission-mask-builder)
     (%check-error (%daq-permission-mask-builder-create-permission-mask-builder-from-mask obj-slot permission-mask) "daqPermissionMaskBuilder_createPermissionMaskBuilderFromMask")
     (cffi:mem-ref obj-slot 'daq-permission-mask-builder)
@@ -12866,7 +11853,6 @@
   )
 
 (defun permission-mask-builder/execute (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-permission-mask-builder-execute self) "daqPermissionMaskBuilder_execute")
   nil
 )
@@ -12876,7 +11862,6 @@
   )
 
 (defun permission-mask-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-permission-mask-builder-get-interface-id intf-id)
   nil)
 
@@ -12885,7 +11870,6 @@
   )
 
 (defun permission-mask-builder/read (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-permission-mask-builder-read self) "daqPermissionMaskBuilder_read")
   nil
 )
@@ -12895,7 +11879,6 @@
   )
 
 (defun permission-mask-builder/write (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-permission-mask-builder-write self) "daqPermissionMaskBuilder_write")
   nil
 )
@@ -12907,7 +11890,6 @@
   )
 
 (defun permissions-builder/allow (self group-id permissions)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-permissions-builder-allow self group-id permissions) "daqPermissionsBuilder_allow")
   nil
 )
@@ -12919,7 +11901,6 @@
   )
 
 (defun permissions-builder/assign (self group-id permissions)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-permissions-builder-assign self group-id permissions) "daqPermissionsBuilder_assign")
   nil
 )
@@ -12930,7 +11911,6 @@
   )
 
 (defun permissions-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (config-out-slot 'daq-permissions)
     (%check-error (%daq-permissions-builder-build self config-out-slot) "daqPermissionsBuilder_build")
     (cffi:mem-ref config-out-slot 'daq-permissions)
@@ -12942,7 +11922,6 @@
   )
 
 (defun permissions-builder/create-permissions-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-permissions-builder)
     (%check-error (%daq-permissions-builder-create-permissions-builder obj-slot) "daqPermissionsBuilder_createPermissionsBuilder")
     (cffi:mem-ref obj-slot 'daq-permissions-builder)
@@ -12956,7 +11935,6 @@
   )
 
 (defun permissions-builder/deny (self group-id permissions)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-permissions-builder-deny self group-id permissions) "daqPermissionsBuilder_deny")
   nil
 )
@@ -12967,7 +11945,6 @@
   )
 
 (defun permissions-builder/extend (self config)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-permissions-builder-extend self config) "daqPermissionsBuilder_extend")
   nil
 )
@@ -12977,7 +11954,6 @@
   )
 
 (defun permissions-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-permissions-builder-get-interface-id intf-id)
   nil)
 
@@ -12987,7 +11963,6 @@
   )
 
 (defun permissions-builder/inherit (self inherit)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-permissions-builder-inherit self inherit) "daqPermissionsBuilder_inherit")
   nil
 )
@@ -12998,7 +11973,6 @@
   )
 
 (defun permissions-internal/get-assigned (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (permissions-slot 'daq-dict)
     (%check-error (%daq-permissions-internal-get-assigned self permissions-slot) "daqPermissionsInternal_getAssigned")
     (cffi:mem-ref permissions-slot 'daq-dict)
@@ -13010,7 +11984,6 @@
   )
 
 (defun permissions-internal/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-permissions-internal-get-interface-id intf-id)
   nil)
 
@@ -13020,7 +11993,6 @@
   )
 
 (defun permissions/get-allowed (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (permissions-slot 'daq-dict)
     (%check-error (%daq-permissions-get-allowed self permissions-slot) "daqPermissions_getAllowed")
     (cffi:mem-ref permissions-slot 'daq-dict)
@@ -13033,7 +12005,6 @@
   )
 
 (defun permissions/get-denied (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (permissions-slot 'daq-dict)
     (%check-error (%daq-permissions-get-denied self permissions-slot) "daqPermissions_getDenied")
     (cffi:mem-ref permissions-slot 'daq-dict)
@@ -13046,7 +12017,6 @@
   )
 
 (defun permissions/get-inherited (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-inherited-slot 'daq-bool)
     (%check-error (%daq-permissions-get-inherited self is-inherited-slot) "daqPermissions_getInherited")
     (cffi:mem-ref is-inherited-slot 'daq-bool)
@@ -13058,7 +12028,6 @@
   )
 
 (defun permissions/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-permissions-get-interface-id intf-id)
   nil)
 
@@ -13068,7 +12037,6 @@
   )
 
 (defun procedure/create-procedure (value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-procedure)
     (%check-error (%daq-procedure-create-procedure obj-slot value) "daqProcedure_createProcedure")
     (cffi:mem-ref obj-slot 'daq-procedure)
@@ -13081,7 +12049,6 @@
   )
 
 (defun procedure/dispatch (self params)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-procedure-dispatch self params) "daqProcedure_dispatch")
   nil
 )
@@ -13092,7 +12059,6 @@
   )
 
 (defun property-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (property-slot 'daq-property)
     (%check-error (%daq-property-builder-build self property-slot) "daqPropertyBuilder_build")
     (cffi:mem-ref property-slot 'daq-property)
@@ -13106,7 +12072,6 @@
   )
 
 (defun property-builder/create-bool-property-builder (name default-value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-builder)
     (%check-error (%daq-property-builder-create-bool-property-builder obj-slot name default-value) "daqPropertyBuilder_createBoolPropertyBuilder")
     (cffi:mem-ref obj-slot 'daq-property-builder)
@@ -13120,7 +12085,6 @@
   )
 
 (defun property-builder/create-dict-property-builder (name default-value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-builder)
     (%check-error (%daq-property-builder-create-dict-property-builder obj-slot name default-value) "daqPropertyBuilder_createDictPropertyBuilder")
     (cffi:mem-ref obj-slot 'daq-property-builder)
@@ -13134,7 +12098,6 @@
   )
 
 (defun property-builder/create-enumeration-property-builder (name default-value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-builder)
     (%check-error (%daq-property-builder-create-enumeration-property-builder obj-slot name default-value) "daqPropertyBuilder_createEnumerationPropertyBuilder")
     (cffi:mem-ref obj-slot 'daq-property-builder)
@@ -13148,7 +12111,6 @@
   )
 
 (defun property-builder/create-float-property-builder (name default-value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-builder)
     (%check-error (%daq-property-builder-create-float-property-builder obj-slot name default-value) "daqPropertyBuilder_createFloatPropertyBuilder")
     (cffi:mem-ref obj-slot 'daq-property-builder)
@@ -13162,7 +12124,6 @@
   )
 
 (defun property-builder/create-function-property-builder (name callable-info)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-builder)
     (%check-error (%daq-property-builder-create-function-property-builder obj-slot name callable-info) "daqPropertyBuilder_createFunctionPropertyBuilder")
     (cffi:mem-ref obj-slot 'daq-property-builder)
@@ -13176,7 +12137,6 @@
   )
 
 (defun property-builder/create-int-property-builder (name default-value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-builder)
     (%check-error (%daq-property-builder-create-int-property-builder obj-slot name default-value) "daqPropertyBuilder_createIntPropertyBuilder")
     (cffi:mem-ref obj-slot 'daq-property-builder)
@@ -13190,7 +12150,6 @@
   )
 
 (defun property-builder/create-list-property-builder (name default-value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-builder)
     (%check-error (%daq-property-builder-create-list-property-builder obj-slot name default-value) "daqPropertyBuilder_createListPropertyBuilder")
     (cffi:mem-ref obj-slot 'daq-property-builder)
@@ -13204,7 +12163,6 @@
   )
 
 (defun property-builder/create-object-property-builder (name default-value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-builder)
     (%check-error (%daq-property-builder-create-object-property-builder obj-slot name default-value) "daqPropertyBuilder_createObjectPropertyBuilder")
     (cffi:mem-ref obj-slot 'daq-property-builder)
@@ -13217,7 +12175,6 @@
   )
 
 (defun property-builder/create-property-builder (name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-builder)
     (%check-error (%daq-property-builder-create-property-builder obj-slot name) "daqPropertyBuilder_createPropertyBuilder")
     (cffi:mem-ref obj-slot 'daq-property-builder)
@@ -13231,7 +12188,6 @@
   )
 
 (defun property-builder/create-ratio-property-builder (name default-value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-builder)
     (%check-error (%daq-property-builder-create-ratio-property-builder obj-slot name default-value) "daqPropertyBuilder_createRatioPropertyBuilder")
     (cffi:mem-ref obj-slot 'daq-property-builder)
@@ -13245,7 +12201,6 @@
   )
 
 (defun property-builder/create-reference-property-builder (name referenced-property-eval)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-builder)
     (%check-error (%daq-property-builder-create-reference-property-builder obj-slot name referenced-property-eval) "daqPropertyBuilder_createReferencePropertyBuilder")
     (cffi:mem-ref obj-slot 'daq-property-builder)
@@ -13260,7 +12215,6 @@
   )
 
 (defun property-builder/create-selection-property-builder (name selection-values default-value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-builder)
     (%check-error (%daq-property-builder-create-selection-property-builder obj-slot name selection-values default-value) "daqPropertyBuilder_createSelectionPropertyBuilder")
     (cffi:mem-ref obj-slot 'daq-property-builder)
@@ -13275,7 +12229,6 @@
   )
 
 (defun property-builder/create-sparse-selection-property-builder (name selection-values default-value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-builder)
     (%check-error (%daq-property-builder-create-sparse-selection-property-builder obj-slot name selection-values default-value) "daqPropertyBuilder_createSparseSelectionPropertyBuilder")
     (cffi:mem-ref obj-slot 'daq-property-builder)
@@ -13289,7 +12242,6 @@
   )
 
 (defun property-builder/create-string-property-builder (name default-value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-builder)
     (%check-error (%daq-property-builder-create-string-property-builder obj-slot name default-value) "daqPropertyBuilder_createStringPropertyBuilder")
     (cffi:mem-ref obj-slot 'daq-property-builder)
@@ -13303,7 +12255,6 @@
   )
 
 (defun property-builder/create-struct-property-builder (name default-value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-builder)
     (%check-error (%daq-property-builder-create-struct-property-builder obj-slot name default-value) "daqPropertyBuilder_createStructPropertyBuilder")
     (cffi:mem-ref obj-slot 'daq-property-builder)
@@ -13316,7 +12267,6 @@
   )
 
 (defun property-builder/get-callable-info (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (callable-slot 'daq-callable-info)
     (%check-error (%daq-property-builder-get-callable-info self callable-slot) "daqPropertyBuilder_getCallableInfo")
     (cffi:mem-ref callable-slot 'daq-callable-info)
@@ -13329,7 +12279,6 @@
   )
 
 (defun property-builder/get-coercer (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (coercer-slot 'daq-coercer)
     (%check-error (%daq-property-builder-get-coercer self coercer-slot) "daqPropertyBuilder_getCoercer")
     (cffi:mem-ref coercer-slot 'daq-coercer)
@@ -13342,7 +12291,6 @@
   )
 
 (defun property-builder/get-default-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-base-object)
     (%check-error (%daq-property-builder-get-default-value self value-slot) "daqPropertyBuilder_getDefaultValue")
     (cffi:mem-ref value-slot 'daq-base-object)
@@ -13355,7 +12303,6 @@
   )
 
 (defun property-builder/get-description (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (description-slot 'daq-string)
     (%check-error (%daq-property-builder-get-description self description-slot) "daqPropertyBuilder_getDescription")
     (cffi:mem-ref description-slot 'daq-string)
@@ -13367,7 +12314,6 @@
   )
 
 (defun property-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-property-builder-get-interface-id intf-id)
   nil)
 
@@ -13377,7 +12323,6 @@
   )
 
 (defun property-builder/get-is-integer-value-selection (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-integer-value-selection-slot 'daq-bool)
     (%check-error (%daq-property-builder-get-is-integer-value-selection self is-integer-value-selection-slot) "daqPropertyBuilder_getIsIntegerValueSelection")
     (cffi:mem-ref is-integer-value-selection-slot 'daq-bool)
@@ -13390,7 +12335,6 @@
   )
 
 (defun property-builder/get-max-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (max-slot 'daq-number)
     (%check-error (%daq-property-builder-get-max-value self max-slot) "daqPropertyBuilder_getMaxValue")
     (cffi:mem-ref max-slot 'daq-number)
@@ -13403,7 +12347,6 @@
   )
 
 (defun property-builder/get-min-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (min-slot 'daq-number)
     (%check-error (%daq-property-builder-get-min-value self min-slot) "daqPropertyBuilder_getMinValue")
     (cffi:mem-ref min-slot 'daq-number)
@@ -13416,7 +12359,6 @@
   )
 
 (defun property-builder/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-property-builder-get-name self name-slot) "daqPropertyBuilder_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -13429,7 +12371,6 @@
   )
 
 (defun property-builder/get-on-property-value-read (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-property-builder-get-on-property-value-read self event-slot) "daqPropertyBuilder_getOnPropertyValueRead")
     (cffi:mem-ref event-slot 'daq-event)
@@ -13442,7 +12383,6 @@
   )
 
 (defun property-builder/get-on-property-value-write (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-property-builder-get-on-property-value-write self event-slot) "daqPropertyBuilder_getOnPropertyValueWrite")
     (cffi:mem-ref event-slot 'daq-event)
@@ -13455,7 +12395,6 @@
   )
 
 (defun property-builder/get-on-selection-values-read (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-property-builder-get-on-selection-values-read self event-slot) "daqPropertyBuilder_getOnSelectionValuesRead")
     (cffi:mem-ref event-slot 'daq-event)
@@ -13468,7 +12407,6 @@
   )
 
 (defun property-builder/get-on-suggested-values-read (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-property-builder-get-on-suggested-values-read self event-slot) "daqPropertyBuilder_getOnSuggestedValuesRead")
     (cffi:mem-ref event-slot 'daq-event)
@@ -13481,7 +12419,6 @@
   )
 
 (defun property-builder/get-read-only (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (read-only-slot 'daq-boolean)
     (%check-error (%daq-property-builder-get-read-only self read-only-slot) "daqPropertyBuilder_getReadOnly")
     (cffi:mem-ref read-only-slot 'daq-boolean)
@@ -13494,7 +12431,6 @@
   )
 
 (defun property-builder/get-referenced-property (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (property-eval-slot 'daq-eval-value)
     (%check-error (%daq-property-builder-get-referenced-property self property-eval-slot) "daqPropertyBuilder_getReferencedProperty")
     (cffi:mem-ref property-eval-slot 'daq-eval-value)
@@ -13507,7 +12443,6 @@
   )
 
 (defun property-builder/get-selection-values (self values)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-get-selection-values self values) "daqPropertyBuilder_getSelectionValues")
   nil
 )
@@ -13518,7 +12453,6 @@
   )
 
 (defun property-builder/get-suggested-values (self values)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-get-suggested-values self values) "daqPropertyBuilder_getSuggestedValues")
   nil
 )
@@ -13529,7 +12463,6 @@
   )
 
 (defun property-builder/get-unit (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (unit-slot 'daq-unit)
     (%check-error (%daq-property-builder-get-unit self unit-slot) "daqPropertyBuilder_getUnit")
     (cffi:mem-ref unit-slot 'daq-unit)
@@ -13542,7 +12475,6 @@
   )
 
 (defun property-builder/get-validator (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (validator-slot 'daq-validator)
     (%check-error (%daq-property-builder-get-validator self validator-slot) "daqPropertyBuilder_getValidator")
     (cffi:mem-ref validator-slot 'daq-validator)
@@ -13555,7 +12487,6 @@
   )
 
 (defun property-builder/get-value-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-core-type)
     (%check-error (%daq-property-builder-get-value-type self type-slot) "daqPropertyBuilder_getValueType")
     (cffi:mem-ref type-slot 'daq-core-type)
@@ -13568,7 +12499,6 @@
   )
 
 (defun property-builder/get-visible (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (visible-slot 'daq-boolean)
     (%check-error (%daq-property-builder-get-visible self visible-slot) "daqPropertyBuilder_getVisible")
     (cffi:mem-ref visible-slot 'daq-boolean)
@@ -13581,7 +12511,6 @@
   )
 
 (defun property-builder/set-callable-info (self callable)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-callable-info self callable) "daqPropertyBuilder_setCallableInfo")
   nil
 )
@@ -13592,7 +12521,6 @@
   )
 
 (defun property-builder/set-coercer (self coercer)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-coercer self coercer) "daqPropertyBuilder_setCoercer")
   nil
 )
@@ -13603,7 +12531,6 @@
   )
 
 (defun property-builder/set-default-value (self value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-default-value self value) "daqPropertyBuilder_setDefaultValue")
   nil
 )
@@ -13614,7 +12541,6 @@
   )
 
 (defun property-builder/set-description (self description)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-description self description) "daqPropertyBuilder_setDescription")
   nil
 )
@@ -13625,7 +12551,6 @@
   )
 
 (defun property-builder/set-is-integer-value-selection (self is-integer-value-selection)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-is-integer-value-selection self is-integer-value-selection) "daqPropertyBuilder_setIsIntegerValueSelection")
   nil
 )
@@ -13636,7 +12561,6 @@
   )
 
 (defun property-builder/set-max-value (self max)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-max-value self max) "daqPropertyBuilder_setMaxValue")
   nil
 )
@@ -13647,7 +12571,6 @@
   )
 
 (defun property-builder/set-min-value (self min)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-min-value self min) "daqPropertyBuilder_setMinValue")
   nil
 )
@@ -13658,7 +12581,6 @@
   )
 
 (defun property-builder/set-name (self name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-name self name) "daqPropertyBuilder_setName")
   nil
 )
@@ -13669,7 +12591,6 @@
   )
 
 (defun property-builder/set-on-property-value-read (self event)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-on-property-value-read self event) "daqPropertyBuilder_setOnPropertyValueRead")
   nil
 )
@@ -13680,7 +12601,6 @@
   )
 
 (defun property-builder/set-on-property-value-write (self event)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-on-property-value-write self event) "daqPropertyBuilder_setOnPropertyValueWrite")
   nil
 )
@@ -13691,7 +12611,6 @@
   )
 
 (defun property-builder/set-on-selection-values-read (self event)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-on-selection-values-read self event) "daqPropertyBuilder_setOnSelectionValuesRead")
   nil
 )
@@ -13702,7 +12621,6 @@
   )
 
 (defun property-builder/set-on-suggested-values-read (self event)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-on-suggested-values-read self event) "daqPropertyBuilder_setOnSuggestedValuesRead")
   nil
 )
@@ -13713,7 +12631,6 @@
   )
 
 (defun property-builder/set-read-only (self read-only)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-read-only self read-only) "daqPropertyBuilder_setReadOnly")
   nil
 )
@@ -13724,7 +12641,6 @@
   )
 
 (defun property-builder/set-referenced-property (self property-eval)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-referenced-property self property-eval) "daqPropertyBuilder_setReferencedProperty")
   nil
 )
@@ -13735,7 +12651,6 @@
   )
 
 (defun property-builder/set-selection-values (self values)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-selection-values self values) "daqPropertyBuilder_setSelectionValues")
   nil
 )
@@ -13746,7 +12661,6 @@
   )
 
 (defun property-builder/set-suggested-values (self values)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-suggested-values self values) "daqPropertyBuilder_setSuggestedValues")
   nil
 )
@@ -13757,7 +12671,6 @@
   )
 
 (defun property-builder/set-unit (self unit)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-unit self unit) "daqPropertyBuilder_setUnit")
   nil
 )
@@ -13768,7 +12681,6 @@
   )
 
 (defun property-builder/set-validator (self validator)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-validator self validator) "daqPropertyBuilder_setValidator")
   nil
 )
@@ -13779,7 +12691,6 @@
   )
 
 (defun property-builder/set-value-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-value-type self type) "daqPropertyBuilder_setValueType")
   nil
 )
@@ -13790,7 +12701,6 @@
   )
 
 (defun property-builder/set-visible (self visible)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-builder-set-visible self visible) "daqPropertyBuilder_setVisible")
   nil
 )
@@ -13801,7 +12711,6 @@
   )
 
 (defun property-internal/clone (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (cloned-property-slot 'daq-property)
     (%check-error (%daq-property-internal-clone self cloned-property-slot) "daqPropertyInternal_clone")
     (cffi:mem-ref cloned-property-slot 'daq-property)
@@ -13815,7 +12724,6 @@
   )
 
 (defun property-internal/clone-with-owner (self owner)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (cloned-property-slot 'daq-property)
     (%check-error (%daq-property-internal-clone-with-owner self owner cloned-property-slot) "daqPropertyInternal_cloneWithOwner")
     (cffi:mem-ref cloned-property-slot 'daq-property)
@@ -13828,7 +12736,6 @@
   )
 
 (defun property-internal/get-callable-info-no-lock (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (callable-slot 'daq-callable-info)
     (%check-error (%daq-property-internal-get-callable-info-no-lock self callable-slot) "daqPropertyInternal_getCallableInfoNoLock")
     (cffi:mem-ref callable-slot 'daq-callable-info)
@@ -13841,7 +12748,6 @@
   )
 
 (defun property-internal/get-class-on-property-value-read (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-property-internal-get-class-on-property-value-read self event-slot) "daqPropertyInternal_getClassOnPropertyValueRead")
     (cffi:mem-ref event-slot 'daq-event)
@@ -13854,7 +12760,6 @@
   )
 
 (defun property-internal/get-class-on-property-value-write (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-property-internal-get-class-on-property-value-write self event-slot) "daqPropertyInternal_getClassOnPropertyValueWrite")
     (cffi:mem-ref event-slot 'daq-event)
@@ -13867,7 +12772,6 @@
   )
 
 (defun property-internal/get-coercer-no-lock (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (coercer-slot 'daq-coercer)
     (%check-error (%daq-property-internal-get-coercer-no-lock self coercer-slot) "daqPropertyInternal_getCoercerNoLock")
     (cffi:mem-ref coercer-slot 'daq-coercer)
@@ -13880,7 +12784,6 @@
   )
 
 (defun property-internal/get-default-value-no-lock (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-base-object)
     (%check-error (%daq-property-internal-get-default-value-no-lock self value-slot) "daqPropertyInternal_getDefaultValueNoLock")
     (cffi:mem-ref value-slot 'daq-base-object)
@@ -13893,7 +12796,6 @@
   )
 
 (defun property-internal/get-default-value-unresolved (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-base-object)
     (%check-error (%daq-property-internal-get-default-value-unresolved self value-slot) "daqPropertyInternal_getDefaultValueUnresolved")
     (cffi:mem-ref value-slot 'daq-base-object)
@@ -13906,7 +12808,6 @@
   )
 
 (defun property-internal/get-description-no-lock (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (description-slot 'daq-string)
     (%check-error (%daq-property-internal-get-description-no-lock self description-slot) "daqPropertyInternal_getDescriptionNoLock")
     (cffi:mem-ref description-slot 'daq-string)
@@ -13919,7 +12820,6 @@
   )
 
 (defun property-internal/get-description-unresolved (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (description-slot 'daq-string)
     (%check-error (%daq-property-internal-get-description-unresolved self description-slot) "daqPropertyInternal_getDescriptionUnresolved")
     (cffi:mem-ref description-slot 'daq-string)
@@ -13932,7 +12832,6 @@
   )
 
 (defun property-internal/get-has-on-get-selection-values-listeners (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (has-listeners-slot 'daq-bool)
     (%check-error (%daq-property-internal-get-has-on-get-selection-values-listeners self has-listeners-slot) "daqPropertyInternal_getHasOnGetSelectionValuesListeners")
     (cffi:mem-ref has-listeners-slot 'daq-bool)
@@ -13945,7 +12844,6 @@
   )
 
 (defun property-internal/get-has-on-get-suggested-values-listeners (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (has-listeners-slot 'daq-bool)
     (%check-error (%daq-property-internal-get-has-on-get-suggested-values-listeners self has-listeners-slot) "daqPropertyInternal_getHasOnGetSuggestedValuesListeners")
     (cffi:mem-ref has-listeners-slot 'daq-bool)
@@ -13958,7 +12856,6 @@
   )
 
 (defun property-internal/get-has-on-read-listeners (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (has-listeners-slot 'daq-bool)
     (%check-error (%daq-property-internal-get-has-on-read-listeners self has-listeners-slot) "daqPropertyInternal_getHasOnReadListeners")
     (cffi:mem-ref has-listeners-slot 'daq-bool)
@@ -13970,7 +12867,6 @@
   )
 
 (defun property-internal/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-property-internal-get-interface-id intf-id)
   nil)
 
@@ -13980,7 +12876,6 @@
   )
 
 (defun property-internal/get-is-referenced-no-lock (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-referenced-slot 'daq-bool)
     (%check-error (%daq-property-internal-get-is-referenced-no-lock self is-referenced-slot) "daqPropertyInternal_getIsReferencedNoLock")
     (cffi:mem-ref is-referenced-slot 'daq-bool)
@@ -13993,7 +12888,6 @@
   )
 
 (defun property-internal/get-item-type-no-lock (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-core-type)
     (%check-error (%daq-property-internal-get-item-type-no-lock self type-slot) "daqPropertyInternal_getItemTypeNoLock")
     (cffi:mem-ref type-slot 'daq-core-type)
@@ -14006,7 +12900,6 @@
   )
 
 (defun property-internal/get-key-type-no-lock (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-core-type)
     (%check-error (%daq-property-internal-get-key-type-no-lock self type-slot) "daqPropertyInternal_getKeyTypeNoLock")
     (cffi:mem-ref type-slot 'daq-core-type)
@@ -14019,7 +12912,6 @@
   )
 
 (defun property-internal/get-max-value-no-lock (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (max-slot 'daq-number)
     (%check-error (%daq-property-internal-get-max-value-no-lock self max-slot) "daqPropertyInternal_getMaxValueNoLock")
     (cffi:mem-ref max-slot 'daq-number)
@@ -14032,7 +12924,6 @@
   )
 
 (defun property-internal/get-max-value-unresolved (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (max-slot 'daq-number)
     (%check-error (%daq-property-internal-get-max-value-unresolved self max-slot) "daqPropertyInternal_getMaxValueUnresolved")
     (cffi:mem-ref max-slot 'daq-number)
@@ -14045,7 +12936,6 @@
   )
 
 (defun property-internal/get-min-value-no-lock (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (min-slot 'daq-number)
     (%check-error (%daq-property-internal-get-min-value-no-lock self min-slot) "daqPropertyInternal_getMinValueNoLock")
     (cffi:mem-ref min-slot 'daq-number)
@@ -14058,7 +12948,6 @@
   )
 
 (defun property-internal/get-min-value-unresolved (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (min-slot 'daq-number)
     (%check-error (%daq-property-internal-get-min-value-unresolved self min-slot) "daqPropertyInternal_getMinValueUnresolved")
     (cffi:mem-ref min-slot 'daq-number)
@@ -14071,7 +12960,6 @@
   )
 
 (defun property-internal/get-read-only-no-lock (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (read-only-slot 'daq-bool)
     (%check-error (%daq-property-internal-get-read-only-no-lock self read-only-slot) "daqPropertyInternal_getReadOnlyNoLock")
     (cffi:mem-ref read-only-slot 'daq-bool)
@@ -14084,7 +12972,6 @@
   )
 
 (defun property-internal/get-read-only-unresolved (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (read-only-slot 'daq-boolean)
     (%check-error (%daq-property-internal-get-read-only-unresolved self read-only-slot) "daqPropertyInternal_getReadOnlyUnresolved")
     (cffi:mem-ref read-only-slot 'daq-boolean)
@@ -14097,7 +12984,6 @@
   )
 
 (defun property-internal/get-referenced-property-no-lock (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (property-eval-slot 'daq-property)
     (%check-error (%daq-property-internal-get-referenced-property-no-lock self property-eval-slot) "daqPropertyInternal_getReferencedPropertyNoLock")
     (cffi:mem-ref property-eval-slot 'daq-property)
@@ -14110,7 +12996,6 @@
   )
 
 (defun property-internal/get-referenced-property-unresolved (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (property-eval-slot 'daq-eval-value)
     (%check-error (%daq-property-internal-get-referenced-property-unresolved self property-eval-slot) "daqPropertyInternal_getReferencedPropertyUnresolved")
     (cffi:mem-ref property-eval-slot 'daq-eval-value)
@@ -14123,7 +13008,6 @@
   )
 
 (defun property-internal/get-selection-values-no-lock (self values)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-internal-get-selection-values-no-lock self values) "daqPropertyInternal_getSelectionValuesNoLock")
   nil
 )
@@ -14134,7 +13018,6 @@
   )
 
 (defun property-internal/get-selection-values-unresolved (self values)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-internal-get-selection-values-unresolved self values) "daqPropertyInternal_getSelectionValuesUnresolved")
   nil
 )
@@ -14145,7 +13028,6 @@
   )
 
 (defun property-internal/get-struct-type-no-lock (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (struct-type-slot 'daq-struct-type)
     (%check-error (%daq-property-internal-get-struct-type-no-lock self struct-type-slot) "daqPropertyInternal_getStructTypeNoLock")
     (cffi:mem-ref struct-type-slot 'daq-struct-type)
@@ -14158,7 +13040,6 @@
   )
 
 (defun property-internal/get-suggested-values-no-lock (self values)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-internal-get-suggested-values-no-lock self values) "daqPropertyInternal_getSuggestedValuesNoLock")
   nil
 )
@@ -14169,7 +13050,6 @@
   )
 
 (defun property-internal/get-suggested-values-unresolved (self values)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-internal-get-suggested-values-unresolved self values) "daqPropertyInternal_getSuggestedValuesUnresolved")
   nil
 )
@@ -14180,7 +13060,6 @@
   )
 
 (defun property-internal/get-unit-no-lock (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (unit-slot 'daq-unit)
     (%check-error (%daq-property-internal-get-unit-no-lock self unit-slot) "daqPropertyInternal_getUnitNoLock")
     (cffi:mem-ref unit-slot 'daq-unit)
@@ -14193,7 +13072,6 @@
   )
 
 (defun property-internal/get-unit-unresolved (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (unit-slot 'daq-base-object)
     (%check-error (%daq-property-internal-get-unit-unresolved self unit-slot) "daqPropertyInternal_getUnitUnresolved")
     (cffi:mem-ref unit-slot 'daq-base-object)
@@ -14206,7 +13084,6 @@
   )
 
 (defun property-internal/get-validator-no-lock (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (validator-slot 'daq-validator)
     (%check-error (%daq-property-internal-get-validator-no-lock self validator-slot) "daqPropertyInternal_getValidatorNoLock")
     (cffi:mem-ref validator-slot 'daq-validator)
@@ -14219,7 +13096,6 @@
   )
 
 (defun property-internal/get-value-type-no-lock (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-core-type)
     (%check-error (%daq-property-internal-get-value-type-no-lock self type-slot) "daqPropertyInternal_getValueTypeNoLock")
     (cffi:mem-ref type-slot 'daq-core-type)
@@ -14232,7 +13108,6 @@
   )
 
 (defun property-internal/get-value-type-unresolved (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (core-type-slot 'daq-core-type)
     (%check-error (%daq-property-internal-get-value-type-unresolved self core-type-slot) "daqPropertyInternal_getValueTypeUnresolved")
     (cffi:mem-ref core-type-slot 'daq-core-type)
@@ -14245,7 +13120,6 @@
   )
 
 (defun property-internal/get-visible-no-lock (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (visible-slot 'daq-bool)
     (%check-error (%daq-property-internal-get-visible-no-lock self visible-slot) "daqPropertyInternal_getVisibleNoLock")
     (cffi:mem-ref visible-slot 'daq-bool)
@@ -14258,7 +13132,6 @@
   )
 
 (defun property-internal/get-visible-unresolved (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (visible-slot 'daq-boolean)
     (%check-error (%daq-property-internal-get-visible-unresolved self visible-slot) "daqPropertyInternal_getVisibleUnresolved")
     (cffi:mem-ref visible-slot 'daq-boolean)
@@ -14271,7 +13144,6 @@
   )
 
 (defun property-internal/override-default-value (self new-default-value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-internal-override-default-value self new-default-value) "daqPropertyInternal_overrideDefaultValue")
   nil
 )
@@ -14282,7 +13154,6 @@
   )
 
 (defun property-internal/set-value-protected (self new-value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-internal-set-value-protected self new-value) "daqPropertyInternal_setValueProtected")
   nil
 )
@@ -14293,7 +13164,6 @@
   )
 
 (defun property-object-class-builder/add-property (self property)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-class-builder-add-property self property) "daqPropertyObjectClassBuilder_addProperty")
   nil
 )
@@ -14304,7 +13174,6 @@
   )
 
 (defun property-object-class-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (property-object-class-slot 'daq-property-object-class)
     (%check-error (%daq-property-object-class-builder-build self property-object-class-slot) "daqPropertyObjectClassBuilder_build")
     (cffi:mem-ref property-object-class-slot 'daq-property-object-class)
@@ -14317,7 +13186,6 @@
   )
 
 (defun property-object-class-builder/create-property-object-class-builder (name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-object-class-builder)
     (%check-error (%daq-property-object-class-builder-create-property-object-class-builder obj-slot name) "daqPropertyObjectClassBuilder_createPropertyObjectClassBuilder")
     (cffi:mem-ref obj-slot 'daq-property-object-class-builder)
@@ -14331,7 +13199,6 @@
   )
 
 (defun property-object-class-builder/create-property-object-class-builder-with-manager (manager name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-object-class-builder)
     (%check-error (%daq-property-object-class-builder-create-property-object-class-builder-with-manager obj-slot manager name) "daqPropertyObjectClassBuilder_createPropertyObjectClassBuilderWithManager")
     (cffi:mem-ref obj-slot 'daq-property-object-class-builder)
@@ -14343,7 +13210,6 @@
   )
 
 (defun property-object-class-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-property-object-class-builder-get-interface-id intf-id)
   nil)
 
@@ -14353,7 +13219,6 @@
   )
 
 (defun property-object-class-builder/get-manager (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (manager-slot 'daq-type-manager)
     (%check-error (%daq-property-object-class-builder-get-manager self manager-slot) "daqPropertyObjectClassBuilder_getManager")
     (cffi:mem-ref manager-slot 'daq-type-manager)
@@ -14366,7 +13231,6 @@
   )
 
 (defun property-object-class-builder/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (class-name-slot 'daq-string)
     (%check-error (%daq-property-object-class-builder-get-name self class-name-slot) "daqPropertyObjectClassBuilder_getName")
     (cffi:mem-ref class-name-slot 'daq-string)
@@ -14379,7 +13243,6 @@
   )
 
 (defun property-object-class-builder/get-parent-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (parent-name-slot 'daq-string)
     (%check-error (%daq-property-object-class-builder-get-parent-name self parent-name-slot) "daqPropertyObjectClassBuilder_getParentName")
     (cffi:mem-ref parent-name-slot 'daq-string)
@@ -14392,7 +13255,6 @@
   )
 
 (defun property-object-class-builder/get-properties (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (properties-slot 'daq-dict)
     (%check-error (%daq-property-object-class-builder-get-properties self properties-slot) "daqPropertyObjectClassBuilder_getProperties")
     (cffi:mem-ref properties-slot 'daq-dict)
@@ -14405,7 +13267,6 @@
   )
 
 (defun property-object-class-builder/get-property-order (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (ordered-property-names-slot 'daq-list)
     (%check-error (%daq-property-object-class-builder-get-property-order self ordered-property-names-slot) "daqPropertyObjectClassBuilder_getPropertyOrder")
     (cffi:mem-ref ordered-property-names-slot 'daq-list)
@@ -14418,7 +13279,6 @@
   )
 
 (defun property-object-class-builder/remove-property (self property-name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-class-builder-remove-property self property-name) "daqPropertyObjectClassBuilder_removeProperty")
   nil
 )
@@ -14429,7 +13289,6 @@
   )
 
 (defun property-object-class-builder/set-name (self class-name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-class-builder-set-name self class-name) "daqPropertyObjectClassBuilder_setName")
   nil
 )
@@ -14440,7 +13299,6 @@
   )
 
 (defun property-object-class-builder/set-parent-name (self parent-name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-class-builder-set-parent-name self parent-name) "daqPropertyObjectClassBuilder_setParentName")
   nil
 )
@@ -14451,7 +13309,6 @@
   )
 
 (defun property-object-class-builder/set-property-order (self ordered-property-names)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-class-builder-set-property-order self ordered-property-names) "daqPropertyObjectClassBuilder_setPropertyOrder")
   nil
 )
@@ -14463,7 +13320,6 @@
   )
 
 (defun property-object-class-internal/clone (self type-manager)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (cloned-slot 'daq-property-object-class)
     (%check-error (%daq-property-object-class-internal-clone self cloned-slot type-manager) "daqPropertyObjectClassInternal_clone")
     (cffi:mem-ref cloned-slot 'daq-property-object-class)
@@ -14475,7 +13331,6 @@
   )
 
 (defun property-object-class-internal/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-property-object-class-internal-get-interface-id intf-id)
   nil)
 
@@ -14485,7 +13340,6 @@
   )
 
 (defun property-object-class/create-property-object-class-from-builder (builder)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-object-class)
     (%check-error (%daq-property-object-class-create-property-object-class-from-builder obj-slot builder) "daqPropertyObjectClass_createPropertyObjectClassFromBuilder")
     (cffi:mem-ref obj-slot 'daq-property-object-class)
@@ -14497,7 +13351,6 @@
   )
 
 (defun property-object-class/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-property-object-class-get-interface-id intf-id)
   nil)
 
@@ -14507,7 +13360,6 @@
   )
 
 (defun property-object-class/get-parent-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (parent-name-slot 'daq-string)
     (%check-error (%daq-property-object-class-get-parent-name self parent-name-slot) "daqPropertyObjectClass_getParentName")
     (cffi:mem-ref parent-name-slot 'daq-string)
@@ -14521,7 +13373,6 @@
   )
 
 (defun property-object-class/get-properties (self include-inherited)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (properties-slot 'daq-list)
     (%check-error (%daq-property-object-class-get-properties self include-inherited properties-slot) "daqPropertyObjectClass_getProperties")
     (cffi:mem-ref properties-slot 'daq-list)
@@ -14535,7 +13386,6 @@
   )
 
 (defun property-object-class/get-property (self property-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (property-slot 'daq-property)
     (%check-error (%daq-property-object-class-get-property self property-name property-slot) "daqPropertyObjectClass_getProperty")
     (cffi:mem-ref property-slot 'daq-property)
@@ -14549,7 +13399,6 @@
   )
 
 (defun property-object-class/has-property (self property-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (has-property-slot 'daq-bool)
     (%check-error (%daq-property-object-class-has-property self property-name has-property-slot) "daqPropertyObjectClass_hasProperty")
     (cffi:mem-ref has-property-slot 'daq-bool)
@@ -14563,7 +13412,6 @@
   )
 
 (defun property-object-internal/check-for-references (self property)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-referenced-slot 'daq-bool)
     (%check-error (%daq-property-object-internal-check-for-references self property is-referenced-slot) "daqPropertyObjectInternal_checkForReferences")
     (cffi:mem-ref is-referenced-slot 'daq-bool)
@@ -14577,7 +13425,6 @@
   )
 
 (defun property-object-internal/check-for-references-no-lock (self property)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-referenced-slot 'daq-bool)
     (%check-error (%daq-property-object-internal-check-for-references-no-lock self property is-referenced-slot) "daqPropertyObjectInternal_checkForReferencesNoLock")
     (cffi:mem-ref is-referenced-slot 'daq-bool)
@@ -14590,7 +13437,6 @@
   )
 
 (defun property-object-internal/clear-property-value-no-lock (self name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-internal-clear-property-value-no-lock self name) "daqPropertyObjectInternal_clearPropertyValueNoLock")
   nil
 )
@@ -14601,7 +13447,6 @@
   )
 
 (defun property-object-internal/clone (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (cloned-slot 'daq-property-object)
     (%check-error (%daq-property-object-internal-clone self cloned-slot) "daqPropertyObjectInternal_clone")
     (cffi:mem-ref cloned-slot 'daq-property-object)
@@ -14613,7 +13458,6 @@
   )
 
 (defun property-object-internal/disable-core-event-trigger (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-internal-disable-core-event-trigger self) "daqPropertyObjectInternal_disableCoreEventTrigger")
   nil
 )
@@ -14623,7 +13467,6 @@
   )
 
 (defun property-object-internal/enable-core-event-trigger (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-internal-enable-core-event-trigger self) "daqPropertyObjectInternal_enableCoreEventTrigger")
   nil
 )
@@ -14634,7 +13477,6 @@
   )
 
 (defun property-object-internal/get-core-event-trigger (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (trigger-slot 'daq-procedure)
     (%check-error (%daq-property-object-internal-get-core-event-trigger self trigger-slot) "daqPropertyObjectInternal_getCoreEventTrigger")
     (cffi:mem-ref trigger-slot 'daq-procedure)
@@ -14646,7 +13488,6 @@
   )
 
 (defun property-object-internal/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-property-object-internal-get-interface-id intf-id)
   nil)
 
@@ -14656,7 +13497,6 @@
   )
 
 (defun property-object-internal/get-lock-guard (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (lock-guard-slot 'daq-lock-guard)
     (%check-error (%daq-property-object-internal-get-lock-guard self lock-guard-slot) "daqPropertyObjectInternal_getLockGuard")
     (cffi:mem-ref lock-guard-slot 'daq-lock-guard)
@@ -14669,7 +13509,6 @@
   )
 
 (defun property-object-internal/get-locking-strategy (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (strategy-slot 'daq-locking-strategy)
     (%check-error (%daq-property-object-internal-get-locking-strategy self strategy-slot) "daqPropertyObjectInternal_getLockingStrategy")
     (cffi:mem-ref strategy-slot 'daq-locking-strategy)
@@ -14682,7 +13521,6 @@
   )
 
 (defun property-object-internal/get-mutex (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (mutex-slot 'daq-mutex)
     (%check-error (%daq-property-object-internal-get-mutex self mutex-slot) "daqPropertyObjectInternal_getMutex")
     (cffi:mem-ref mutex-slot 'daq-mutex)
@@ -14695,7 +13533,6 @@
   )
 
 (defun property-object-internal/get-mutex-owner (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (owner-slot 'daq-property-object-internal)
     (%check-error (%daq-property-object-internal-get-mutex-owner self owner-slot) "daqPropertyObjectInternal_getMutexOwner")
     (cffi:mem-ref owner-slot 'daq-property-object-internal)
@@ -14708,7 +13545,6 @@
   )
 
 (defun property-object-internal/get-path (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (path-slot 'daq-string)
     (%check-error (%daq-property-object-internal-get-path self path-slot) "daqPropertyObjectInternal_getPath")
     (cffi:mem-ref path-slot 'daq-string)
@@ -14722,7 +13558,6 @@
   )
 
 (defun property-object-internal/get-property-selection-value-no-lock (self name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-base-object)
     (%check-error (%daq-property-object-internal-get-property-selection-value-no-lock self name value-slot) "daqPropertyObjectInternal_getPropertySelectionValueNoLock")
     (cffi:mem-ref value-slot 'daq-base-object)
@@ -14736,7 +13571,6 @@
   )
 
 (defun property-object-internal/get-property-value-no-lock (self name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-base-object)
     (%check-error (%daq-property-object-internal-get-property-value-no-lock self name value-slot) "daqPropertyObjectInternal_getPropertyValueNoLock")
     (cffi:mem-ref value-slot 'daq-base-object)
@@ -14749,7 +13583,6 @@
   )
 
 (defun property-object-internal/get-recursive-lock-guard (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (lock-guard-slot 'daq-lock-guard)
     (%check-error (%daq-property-object-internal-get-recursive-lock-guard self lock-guard-slot) "daqPropertyObjectInternal_getRecursiveLockGuard")
     (cffi:mem-ref lock-guard-slot 'daq-lock-guard)
@@ -14763,7 +13596,6 @@
   )
 
 (defun property-object-internal/has-user-read-access (self user-context)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (has-access-out-slot 'daq-bool)
     (%check-error (%daq-property-object-internal-has-user-read-access self user-context has-access-out-slot) "daqPropertyObjectInternal_hasUserReadAccess")
     (cffi:mem-ref has-access-out-slot 'daq-bool)
@@ -14776,7 +13608,6 @@
   )
 
 (defun property-object-internal/is-updating (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (updating-slot 'daq-bool)
     (%check-error (%daq-property-object-internal-is-updating self updating-slot) "daqPropertyObjectInternal_isUpdating")
     (cffi:mem-ref updating-slot 'daq-bool)
@@ -14789,7 +13620,6 @@
   )
 
 (defun property-object-internal/set-core-event-trigger (self trigger)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-internal-set-core-event-trigger self trigger) "daqPropertyObjectInternal_setCoreEventTrigger")
   nil
 )
@@ -14800,7 +13630,6 @@
   )
 
 (defun property-object-internal/set-locking-strategy (self strategy)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-internal-set-locking-strategy self strategy) "daqPropertyObjectInternal_setLockingStrategy")
   nil
 )
@@ -14811,7 +13640,6 @@
   )
 
 (defun property-object-internal/set-path (self path)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-internal-set-path self path) "daqPropertyObjectInternal_setPath")
   nil
 )
@@ -14823,7 +13651,6 @@
   )
 
 (defun property-object-internal/set-property-value-no-lock (self name value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-internal-set-property-value-no-lock self name value) "daqPropertyObjectInternal_setPropertyValueNoLock")
   nil
 )
@@ -14835,7 +13662,6 @@
   )
 
 (defun property-object-internal/set-protected-property-value-no-lock (self name value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-internal-set-protected-property-value-no-lock self name value) "daqPropertyObjectInternal_setProtectedPropertyValueNoLock")
   nil
 )
@@ -14846,7 +13672,6 @@
   )
 
 (defun property-object-protected/clear-protected-property-value (self property-name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-protected-clear-protected-property-value self property-name) "daqPropertyObjectProtected_clearProtectedPropertyValue")
   nil
 )
@@ -14856,7 +13681,6 @@
   )
 
 (defun property-object-protected/clear-protected-property-values (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-protected-clear-protected-property-values self) "daqPropertyObjectProtected_clearProtectedPropertyValues")
   nil
 )
@@ -14866,7 +13690,6 @@
   )
 
 (defun property-object-protected/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-property-object-protected-get-interface-id intf-id)
   nil)
 
@@ -14877,7 +13700,6 @@
   )
 
 (defun property-object-protected/set-protected-property-selection-value (self property-name value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-protected-set-protected-property-selection-value self property-name value) "daqPropertyObjectProtected_setProtectedPropertySelectionValue")
   nil
 )
@@ -14889,7 +13711,6 @@
   )
 
 (defun property-object-protected/set-protected-property-value (self property-name value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-protected-set-protected-property-value self property-name value) "daqPropertyObjectProtected_setProtectedPropertyValue")
   nil
 )
@@ -14900,7 +13721,6 @@
   )
 
 (defun property-object/add-property (self property)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-add-property self property) "daqPropertyObject_addProperty")
   nil
 )
@@ -14910,7 +13730,6 @@
   )
 
 (defun property-object/begin-update (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-begin-update self) "daqPropertyObject_beginUpdate")
   nil
 )
@@ -14921,7 +13740,6 @@
   )
 
 (defun property-object/clear-property-value (self property-name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-clear-property-value self property-name) "daqPropertyObject_clearPropertyValue")
   nil
 )
@@ -14931,7 +13749,6 @@
   )
 
 (defun property-object/clear-property-values (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-clear-property-values self) "daqPropertyObject_clearPropertyValues")
   nil
 )
@@ -14941,7 +13758,6 @@
   )
 
 (defun property-object/create-property-object ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-object)
     (%check-error (%daq-property-object-create-property-object obj-slot) "daqPropertyObject_createPropertyObject")
     (cffi:mem-ref obj-slot 'daq-property-object)
@@ -14955,7 +13771,6 @@
   )
 
 (defun property-object/create-property-object-with-class-and-manager (manager class-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-object)
     (%check-error (%daq-property-object-create-property-object-with-class-and-manager obj-slot manager class-name) "daqPropertyObject_createPropertyObjectWithClassAndManager")
     (cffi:mem-ref obj-slot 'daq-property-object)
@@ -14967,7 +13782,6 @@
   )
 
 (defun property-object/end-update (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-end-update self) "daqPropertyObject_endUpdate")
   nil
 )
@@ -14980,7 +13794,6 @@
   )
 
 (defun property-object/find-properties (self property-filter component-filter)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (properties-slot 'daq-list)
     (%check-error (%daq-property-object-find-properties self properties-slot property-filter component-filter) "daqPropertyObject_findProperties")
     (cffi:mem-ref properties-slot 'daq-list)
@@ -14993,7 +13806,6 @@
   )
 
 (defun property-object/get-all-properties (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (properties-slot 'daq-list)
     (%check-error (%daq-property-object-get-all-properties self properties-slot) "daqPropertyObject_getAllProperties")
     (cffi:mem-ref properties-slot 'daq-list)
@@ -15006,7 +13818,6 @@
   )
 
 (defun property-object/get-class-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (class-name-slot 'daq-string)
     (%check-error (%daq-property-object-get-class-name self class-name-slot) "daqPropertyObject_getClassName")
     (cffi:mem-ref class-name-slot 'daq-string)
@@ -15018,7 +13829,6 @@
   )
 
 (defun property-object/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-property-object-get-interface-id intf-id)
   nil)
 
@@ -15028,7 +13838,6 @@
   )
 
 (defun property-object/get-on-any-property-value-read (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-property-object-get-on-any-property-value-read self event-slot) "daqPropertyObject_getOnAnyPropertyValueRead")
     (cffi:mem-ref event-slot 'daq-event)
@@ -15041,7 +13850,6 @@
   )
 
 (defun property-object/get-on-any-property-value-write (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-property-object-get-on-any-property-value-write self event-slot) "daqPropertyObject_getOnAnyPropertyValueWrite")
     (cffi:mem-ref event-slot 'daq-event)
@@ -15054,7 +13862,6 @@
   )
 
 (defun property-object/get-on-end-update (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-property-object-get-on-end-update self event-slot) "daqPropertyObject_getOnEndUpdate")
     (cffi:mem-ref event-slot 'daq-event)
@@ -15068,7 +13875,6 @@
   )
 
 (defun property-object/get-on-property-value-read (self property-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-property-object-get-on-property-value-read self property-name event-slot) "daqPropertyObject_getOnPropertyValueRead")
     (cffi:mem-ref event-slot 'daq-event)
@@ -15082,7 +13888,6 @@
   )
 
 (defun property-object/get-on-property-value-write (self property-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-property-object-get-on-property-value-write self property-name event-slot) "daqPropertyObject_getOnPropertyValueWrite")
     (cffi:mem-ref event-slot 'daq-event)
@@ -15095,7 +13900,6 @@
   )
 
 (defun property-object/get-permission-manager (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (permission-manager-slot 'daq-permission-manager)
     (%check-error (%daq-property-object-get-permission-manager self permission-manager-slot) "daqPropertyObject_getPermissionManager")
     (cffi:mem-ref permission-manager-slot 'daq-permission-manager)
@@ -15109,7 +13913,6 @@
   )
 
 (defun property-object/get-property (self property-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (property-slot 'daq-property)
     (%check-error (%daq-property-object-get-property self property-name property-slot) "daqPropertyObject_getProperty")
     (cffi:mem-ref property-slot 'daq-property)
@@ -15123,7 +13926,6 @@
   )
 
 (defun property-object/get-property-selection-value (self property-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-base-object)
     (%check-error (%daq-property-object-get-property-selection-value self property-name value-slot) "daqPropertyObject_getPropertySelectionValue")
     (cffi:mem-ref value-slot 'daq-base-object)
@@ -15137,7 +13939,6 @@
   )
 
 (defun property-object/get-property-value (self property-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-base-object)
     (%check-error (%daq-property-object-get-property-value self property-name value-slot) "daqPropertyObject_getPropertyValue")
     (cffi:mem-ref value-slot 'daq-base-object)
@@ -15150,7 +13951,6 @@
   )
 
 (defun property-object/get-updating (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (updating-slot 'daq-bool)
     (%check-error (%daq-property-object-get-updating self updating-slot) "daqPropertyObject_getUpdating")
     (cffi:mem-ref updating-slot 'daq-bool)
@@ -15163,7 +13963,6 @@
   )
 
 (defun property-object/get-visible-properties (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (properties-slot 'daq-list)
     (%check-error (%daq-property-object-get-visible-properties self properties-slot) "daqPropertyObject_getVisibleProperties")
     (cffi:mem-ref properties-slot 'daq-list)
@@ -15177,7 +13976,6 @@
   )
 
 (defun property-object/has-property (self property-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (has-property-slot 'daq-bool)
     (%check-error (%daq-property-object-has-property self property-name has-property-slot) "daqPropertyObject_hasProperty")
     (cffi:mem-ref has-property-slot 'daq-bool)
@@ -15190,7 +13988,6 @@
   )
 
 (defun property-object/remove-property (self property-name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-remove-property self property-name) "daqPropertyObject_removeProperty")
   nil
 )
@@ -15201,7 +13998,6 @@
   )
 
 (defun property-object/set-property-order (self ordered-property-names)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-set-property-order self ordered-property-names) "daqPropertyObject_setPropertyOrder")
   nil
 )
@@ -15213,7 +14009,6 @@
   )
 
 (defun property-object/set-property-selection-value (self property-name value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-set-property-selection-value self property-name value) "daqPropertyObject_setPropertySelectionValue")
   nil
 )
@@ -15225,7 +14020,6 @@
   )
 
 (defun property-object/set-property-value (self property-name value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-object-set-property-value self property-name value) "daqPropertyObject_setPropertyValue")
   nil
 )
@@ -15240,7 +14034,6 @@
   )
 
 (defun property-value-event-args/create-property-value-event-args (prop value old-value type is-updating)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property-value-event-args)
     (%check-error (%daq-property-value-event-args-create-property-value-event-args obj-slot prop value old-value type is-updating) "daqPropertyValueEventArgs_createPropertyValueEventArgs")
     (cffi:mem-ref obj-slot 'daq-property-value-event-args)
@@ -15253,7 +14046,6 @@
   )
 
 (defun property-value-event-args/get-is-updating (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-updating-slot 'daq-bool)
     (%check-error (%daq-property-value-event-args-get-is-updating self is-updating-slot) "daqPropertyValueEventArgs_getIsUpdating")
     (cffi:mem-ref is-updating-slot 'daq-bool)
@@ -15266,7 +14058,6 @@
   )
 
 (defun property-value-event-args/get-old-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-base-object)
     (%check-error (%daq-property-value-event-args-get-old-value self value-slot) "daqPropertyValueEventArgs_getOldValue")
     (cffi:mem-ref value-slot 'daq-base-object)
@@ -15279,7 +14070,6 @@
   )
 
 (defun property-value-event-args/get-property (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (property-slot 'daq-property)
     (%check-error (%daq-property-value-event-args-get-property self property-slot) "daqPropertyValueEventArgs_getProperty")
     (cffi:mem-ref property-slot 'daq-property)
@@ -15292,7 +14082,6 @@
   )
 
 (defun property-value-event-args/get-property-event-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (change-type-slot 'daq-property-event-type)
     (%check-error (%daq-property-value-event-args-get-property-event-type self change-type-slot) "daqPropertyValueEventArgs_getPropertyEventType")
     (cffi:mem-ref change-type-slot 'daq-property-event-type)
@@ -15305,7 +14094,6 @@
   )
 
 (defun property-value-event-args/get-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-base-object)
     (%check-error (%daq-property-value-event-args-get-value self value-slot) "daqPropertyValueEventArgs_getValue")
     (cffi:mem-ref value-slot 'daq-base-object)
@@ -15318,7 +14106,6 @@
   )
 
 (defun property-value-event-args/set-value (self value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-value-event-args-set-value self value) "daqPropertyValueEventArgs_setValue")
   nil
 )
@@ -15331,7 +14118,6 @@
   )
 
 (defun property/create-bool-property (name default-value visible)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property)
     (%check-error (%daq-property-create-bool-property obj-slot name default-value visible) "daqProperty_createBoolProperty")
     (cffi:mem-ref obj-slot 'daq-property)
@@ -15346,7 +14132,6 @@
   )
 
 (defun property/create-dict-property (name default-value visible)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property)
     (%check-error (%daq-property-create-dict-property obj-slot name default-value visible) "daqProperty_createDictProperty")
     (cffi:mem-ref obj-slot 'daq-property)
@@ -15361,7 +14146,6 @@
   )
 
 (defun property/create-enumeration-property (name default-value visible)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property)
     (%check-error (%daq-property-create-enumeration-property obj-slot name default-value visible) "daqProperty_createEnumerationProperty")
     (cffi:mem-ref obj-slot 'daq-property)
@@ -15376,7 +14160,6 @@
   )
 
 (defun property/create-float-property (name default-value visible)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property)
     (%check-error (%daq-property-create-float-property obj-slot name default-value visible) "daqProperty_createFloatProperty")
     (cffi:mem-ref obj-slot 'daq-property)
@@ -15391,7 +14174,6 @@
   )
 
 (defun property/create-function-property (name callable-info visible)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property)
     (%check-error (%daq-property-create-function-property obj-slot name callable-info visible) "daqProperty_createFunctionProperty")
     (cffi:mem-ref obj-slot 'daq-property)
@@ -15406,7 +14188,6 @@
   )
 
 (defun property/create-int-property (name default-value visible)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property)
     (%check-error (%daq-property-create-int-property obj-slot name default-value visible) "daqProperty_createIntProperty")
     (cffi:mem-ref obj-slot 'daq-property)
@@ -15421,7 +14202,6 @@
   )
 
 (defun property/create-list-property (name default-value visible)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property)
     (%check-error (%daq-property-create-list-property obj-slot name default-value visible) "daqProperty_createListProperty")
     (cffi:mem-ref obj-slot 'daq-property)
@@ -15435,7 +14215,6 @@
   )
 
 (defun property/create-object-property (name default-value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property)
     (%check-error (%daq-property-create-object-property obj-slot name default-value) "daqProperty_createObjectProperty")
     (cffi:mem-ref obj-slot 'daq-property)
@@ -15450,7 +14229,6 @@
   )
 
 (defun property/create-ratio-property (name default-value visible)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property)
     (%check-error (%daq-property-create-ratio-property obj-slot name default-value visible) "daqProperty_createRatioProperty")
     (cffi:mem-ref obj-slot 'daq-property)
@@ -15464,7 +14242,6 @@
   )
 
 (defun property/create-reference-property (name referenced-property-eval)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property)
     (%check-error (%daq-property-create-reference-property obj-slot name referenced-property-eval) "daqProperty_createReferenceProperty")
     (cffi:mem-ref obj-slot 'daq-property)
@@ -15480,7 +14257,6 @@
   )
 
 (defun property/create-selection-property (name selection-values default-value visible)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property)
     (%check-error (%daq-property-create-selection-property obj-slot name selection-values default-value visible) "daqProperty_createSelectionProperty")
     (cffi:mem-ref obj-slot 'daq-property)
@@ -15496,7 +14272,6 @@
   )
 
 (defun property/create-sparse-selection-property (name selection-values default-value visible)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property)
     (%check-error (%daq-property-create-sparse-selection-property obj-slot name selection-values default-value visible) "daqProperty_createSparseSelectionProperty")
     (cffi:mem-ref obj-slot 'daq-property)
@@ -15511,7 +14286,6 @@
   )
 
 (defun property/create-string-property (name default-value visible)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property)
     (%check-error (%daq-property-create-string-property obj-slot name default-value visible) "daqProperty_createStringProperty")
     (cffi:mem-ref obj-slot 'daq-property)
@@ -15526,7 +14300,6 @@
   )
 
 (defun property/create-struct-property (name default-value visible)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-property)
     (%check-error (%daq-property-create-struct-property obj-slot name default-value visible) "daqProperty_createStructProperty")
     (cffi:mem-ref obj-slot 'daq-property)
@@ -15539,7 +14312,6 @@
   )
 
 (defun property/get-callable-info (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (callable-slot 'daq-callable-info)
     (%check-error (%daq-property-get-callable-info self callable-slot) "daqProperty_getCallableInfo")
     (cffi:mem-ref callable-slot 'daq-callable-info)
@@ -15552,7 +14324,6 @@
   )
 
 (defun property/get-coercer (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (coercer-slot 'daq-coercer)
     (%check-error (%daq-property-get-coercer self coercer-slot) "daqProperty_getCoercer")
     (cffi:mem-ref coercer-slot 'daq-coercer)
@@ -15565,7 +14336,6 @@
   )
 
 (defun property/get-default-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-base-object)
     (%check-error (%daq-property-get-default-value self value-slot) "daqProperty_getDefaultValue")
     (cffi:mem-ref value-slot 'daq-base-object)
@@ -15578,7 +14348,6 @@
   )
 
 (defun property/get-description (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (description-slot 'daq-string)
     (%check-error (%daq-property-get-description self description-slot) "daqProperty_getDescription")
     (cffi:mem-ref description-slot 'daq-string)
@@ -15590,7 +14359,6 @@
   )
 
 (defun property/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-property-get-interface-id intf-id)
   nil)
 
@@ -15600,7 +14368,6 @@
   )
 
 (defun property/get-is-referenced (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-referenced-slot 'daq-bool)
     (%check-error (%daq-property-get-is-referenced self is-referenced-slot) "daqProperty_getIsReferenced")
     (cffi:mem-ref is-referenced-slot 'daq-bool)
@@ -15613,7 +14380,6 @@
   )
 
 (defun property/get-item-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-core-type)
     (%check-error (%daq-property-get-item-type self type-slot) "daqProperty_getItemType")
     (cffi:mem-ref type-slot 'daq-core-type)
@@ -15626,7 +14392,6 @@
   )
 
 (defun property/get-key-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-core-type)
     (%check-error (%daq-property-get-key-type self type-slot) "daqProperty_getKeyType")
     (cffi:mem-ref type-slot 'daq-core-type)
@@ -15639,7 +14404,6 @@
   )
 
 (defun property/get-max-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (max-slot 'daq-number)
     (%check-error (%daq-property-get-max-value self max-slot) "daqProperty_getMaxValue")
     (cffi:mem-ref max-slot 'daq-number)
@@ -15652,7 +14416,6 @@
   )
 
 (defun property/get-min-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (min-slot 'daq-number)
     (%check-error (%daq-property-get-min-value self min-slot) "daqProperty_getMinValue")
     (cffi:mem-ref min-slot 'daq-number)
@@ -15665,7 +14428,6 @@
   )
 
 (defun property/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-property-get-name self name-slot) "daqProperty_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -15678,7 +14440,6 @@
   )
 
 (defun property/get-on-property-value-read (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-property-get-on-property-value-read self event-slot) "daqProperty_getOnPropertyValueRead")
     (cffi:mem-ref event-slot 'daq-event)
@@ -15691,7 +14452,6 @@
   )
 
 (defun property/get-on-property-value-write (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-property-get-on-property-value-write self event-slot) "daqProperty_getOnPropertyValueWrite")
     (cffi:mem-ref event-slot 'daq-event)
@@ -15704,7 +14464,6 @@
   )
 
 (defun property/get-on-selection-values-read (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-property-get-on-selection-values-read self event-slot) "daqProperty_getOnSelectionValuesRead")
     (cffi:mem-ref event-slot 'daq-event)
@@ -15717,7 +14476,6 @@
   )
 
 (defun property/get-on-suggested-values-read (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (event-slot 'daq-event)
     (%check-error (%daq-property-get-on-suggested-values-read self event-slot) "daqProperty_getOnSuggestedValuesRead")
     (cffi:mem-ref event-slot 'daq-event)
@@ -15730,7 +14488,6 @@
   )
 
 (defun property/get-property-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-property-type)
     (%check-error (%daq-property-get-property-type self type-slot) "daqProperty_getPropertyType")
     (cffi:mem-ref type-slot 'daq-property-type)
@@ -15743,7 +14500,6 @@
   )
 
 (defun property/get-read-only (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (read-only-slot 'daq-bool)
     (%check-error (%daq-property-get-read-only self read-only-slot) "daqProperty_getReadOnly")
     (cffi:mem-ref read-only-slot 'daq-bool)
@@ -15756,7 +14512,6 @@
   )
 
 (defun property/get-referenced-property (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (property-slot 'daq-property)
     (%check-error (%daq-property-get-referenced-property self property-slot) "daqProperty_getReferencedProperty")
     (cffi:mem-ref property-slot 'daq-property)
@@ -15769,7 +14524,6 @@
   )
 
 (defun property/get-selection-values (self values)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-get-selection-values self values) "daqProperty_getSelectionValues")
   nil
 )
@@ -15780,7 +14534,6 @@
   )
 
 (defun property/get-struct-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (struct-type-slot 'daq-struct-type)
     (%check-error (%daq-property-get-struct-type self struct-type-slot) "daqProperty_getStructType")
     (cffi:mem-ref struct-type-slot 'daq-struct-type)
@@ -15793,7 +14546,6 @@
   )
 
 (defun property/get-suggested-values (self values)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-get-suggested-values self values) "daqProperty_getSuggestedValues")
   nil
 )
@@ -15804,7 +14556,6 @@
   )
 
 (defun property/get-unit (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (unit-slot 'daq-unit)
     (%check-error (%daq-property-get-unit self unit-slot) "daqProperty_getUnit")
     (cffi:mem-ref unit-slot 'daq-unit)
@@ -15817,7 +14568,6 @@
   )
 
 (defun property/get-validator (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (validator-slot 'daq-validator)
     (%check-error (%daq-property-get-validator self validator-slot) "daqProperty_getValidator")
     (cffi:mem-ref validator-slot 'daq-validator)
@@ -15830,7 +14580,6 @@
   )
 
 (defun property/get-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-base-object)
     (%check-error (%daq-property-get-value self value-slot) "daqProperty_getValue")
     (cffi:mem-ref value-slot 'daq-base-object)
@@ -15843,7 +14592,6 @@
   )
 
 (defun property/get-value-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-core-type)
     (%check-error (%daq-property-get-value-type self type-slot) "daqProperty_getValueType")
     (cffi:mem-ref type-slot 'daq-core-type)
@@ -15856,7 +14604,6 @@
   )
 
 (defun property/get-visible (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (visible-slot 'daq-bool)
     (%check-error (%daq-property-get-visible self visible-slot) "daqProperty_getVisible")
     (cffi:mem-ref visible-slot 'daq-bool)
@@ -15869,7 +14616,6 @@
   )
 
 (defun property/set-value (self value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-property-set-value self value) "daqProperty_setValue")
   nil
 )
@@ -15881,7 +14627,6 @@
   )
 
 (defun range/create-range (low-value high-value)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-range)
     (%check-error (%daq-range-create-range obj-slot low-value high-value) "daqRange_createRange")
     (cffi:mem-ref obj-slot 'daq-range)
@@ -15894,7 +14639,6 @@
   )
 
 (defun range/get-high-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-number)
     (%check-error (%daq-range-get-high-value self value-slot) "daqRange_getHighValue")
     (cffi:mem-ref value-slot 'daq-number)
@@ -15906,7 +14650,6 @@
   )
 
 (defun range/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-range-get-interface-id intf-id)
   nil)
 
@@ -15916,7 +14659,6 @@
   )
 
 (defun range/get-low-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-number)
     (%check-error (%daq-range-get-low-value self value-slot) "daqRange_getLowValue")
     (cffi:mem-ref value-slot 'daq-number)
@@ -15930,7 +14672,6 @@
   )
 
 (defun ratio/create-ratio (numerator denominator)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-ratio)
     (%check-error (%daq-ratio-create-ratio obj-slot numerator denominator) "daqRatio_createRatio")
     (cffi:mem-ref obj-slot 'daq-ratio)
@@ -15943,7 +14684,6 @@
   )
 
 (defun ratio/get-denominator (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (denominator-slot 'daq-int)
     (%check-error (%daq-ratio-get-denominator self denominator-slot) "daqRatio_getDenominator")
     (cffi:mem-ref denominator-slot 'daq-int)
@@ -15955,7 +14695,6 @@
   )
 
 (defun ratio/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-ratio-get-interface-id intf-id)
   nil)
 
@@ -15965,7 +14704,6 @@
   )
 
 (defun ratio/get-numerator (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (numerator-slot 'daq-int)
     (%check-error (%daq-ratio-get-numerator self numerator-slot) "daqRatio_getNumerator")
     (cffi:mem-ref numerator-slot 'daq-int)
@@ -15978,7 +14716,6 @@
   )
 
 (defun ratio/simplify (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (simplified-ratio-slot 'daq-ratio)
     (%check-error (%daq-ratio-simplify self simplified-ratio-slot) "daqRatio_simplify")
     (cffi:mem-ref simplified-ratio-slot 'daq-ratio)
@@ -15991,7 +14728,6 @@
   )
 
 (defun reader-config/get-domain-transform-function (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (transform-slot 'daq-function)
     (%check-error (%daq-reader-config-get-domain-transform-function self transform-slot) "daqReaderConfig_getDomainTransformFunction")
     (cffi:mem-ref transform-slot 'daq-function)
@@ -16004,7 +14740,6 @@
   )
 
 (defun reader-config/get-input-ports (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (ports-slot 'daq-list)
     (%check-error (%daq-reader-config-get-input-ports self ports-slot) "daqReaderConfig_getInputPorts")
     (cffi:mem-ref ports-slot 'daq-list)
@@ -16016,7 +14751,6 @@
   )
 
 (defun reader-config/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-reader-config-get-interface-id intf-id)
   nil)
 
@@ -16026,7 +14760,6 @@
   )
 
 (defun reader-config/get-is-valid (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-valid-slot 'daq-bool)
     (%check-error (%daq-reader-config-get-is-valid self is-valid-slot) "daqReaderConfig_getIsValid")
     (cffi:mem-ref is-valid-slot 'daq-bool)
@@ -16039,7 +14772,6 @@
   )
 
 (defun reader-config/get-read-timeout-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (timeout-type-slot 'daq-read-timeout-type)
     (%check-error (%daq-reader-config-get-read-timeout-type self timeout-type-slot) "daqReaderConfig_getReadTimeoutType")
     (cffi:mem-ref timeout-type-slot 'daq-read-timeout-type)
@@ -16052,7 +14784,6 @@
   )
 
 (defun reader-config/get-value-transform-function (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (transform-slot 'daq-function)
     (%check-error (%daq-reader-config-get-value-transform-function self transform-slot) "daqReaderConfig_getValueTransformFunction")
     (cffi:mem-ref transform-slot 'daq-function)
@@ -16064,7 +14795,6 @@
   )
 
 (defun reader-config/mark-as-invalid (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-reader-config-mark-as-invalid self) "daqReaderConfig_markAsInvalid")
   nil
 )
@@ -16077,7 +14807,6 @@
   )
 
 (defun reader-status/create-reader-status (event-packet valid offset)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-reader-status)
     (%check-error (%daq-reader-status-create-reader-status obj-slot event-packet valid offset) "daqReaderStatus_createReaderStatus")
     (cffi:mem-ref obj-slot 'daq-reader-status)
@@ -16090,7 +14819,6 @@
   )
 
 (defun reader-status/get-event-packet (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (packet-slot 'daq-event-packet)
     (%check-error (%daq-reader-status-get-event-packet self packet-slot) "daqReaderStatus_getEventPacket")
     (cffi:mem-ref packet-slot 'daq-event-packet)
@@ -16102,7 +14830,6 @@
   )
 
 (defun reader-status/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-reader-status-get-interface-id intf-id)
   nil)
 
@@ -16112,7 +14839,6 @@
   )
 
 (defun reader-status/get-offset (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (offset-slot 'daq-number)
     (%check-error (%daq-reader-status-get-offset self offset-slot) "daqReaderStatus_getOffset")
     (cffi:mem-ref offset-slot 'daq-number)
@@ -16125,7 +14851,6 @@
   )
 
 (defun reader-status/get-read-status (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (status-slot 'daq-read-status)
     (%check-error (%daq-reader-status-get-read-status self status-slot) "daqReaderStatus_getReadStatus")
     (cffi:mem-ref status-slot 'daq-read-status)
@@ -16138,7 +14863,6 @@
   )
 
 (defun reader-status/get-valid (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (valid-slot 'daq-bool)
     (%check-error (%daq-reader-status-get-valid self valid-slot) "daqReaderStatus_getValid")
     (cffi:mem-ref valid-slot 'daq-bool)
@@ -16151,7 +14875,6 @@
   )
 
 (defun reader/get-available-count (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (count-slot 'daq-size-t)
     (%check-error (%daq-reader-get-available-count self count-slot) "daqReader_getAvailableCount")
     (cffi:mem-ref count-slot 'daq-size-t)
@@ -16164,7 +14887,6 @@
   )
 
 (defun reader/get-empty (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (empty-slot 'daq-bool)
     (%check-error (%daq-reader-get-empty self empty-slot) "daqReader_getEmpty")
     (cffi:mem-ref empty-slot 'daq-bool)
@@ -16176,7 +14898,6 @@
   )
 
 (defun reader/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-reader-get-interface-id intf-id)
   nil)
 
@@ -16186,7 +14907,6 @@
   )
 
 (defun reader/set-external-listener (self listener)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-reader-set-external-listener self listener) "daqReader_setExternalListener")
   nil
 )
@@ -16197,7 +14917,6 @@
   )
 
 (defun reader/set-on-data-available (self callback)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-reader-set-on-data-available self callback) "daqReader_setOnDataAvailable")
   nil
 )
@@ -16207,7 +14926,6 @@
   )
 
 (defun recorder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-recorder-get-interface-id intf-id)
   nil)
 
@@ -16217,7 +14935,6 @@
   )
 
 (defun recorder/get-is-recording (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-recording-slot 'daq-bool)
     (%check-error (%daq-recorder-get-is-recording self is-recording-slot) "daqRecorder_getIsRecording")
     (cffi:mem-ref is-recording-slot 'daq-bool)
@@ -16229,7 +14946,6 @@
   )
 
 (defun recorder/start-recording (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-recorder-start-recording self) "daqRecorder_startRecording")
   nil
 )
@@ -16239,7 +14955,6 @@
   )
 
 (defun recorder/stop-recording (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-recorder-stop-recording self) "daqRecorder_stopRecording")
   nil
 )
@@ -16249,7 +14964,6 @@
   )
 
 (defun recursive-search/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-recursive-search-get-interface-id intf-id)
   nil)
 
@@ -16259,7 +14973,6 @@
   )
 
 (defun reference-domain-info-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (reference-domain-info-slot 'daq-reference-domain-info)
     (%check-error (%daq-reference-domain-info-builder-build self reference-domain-info-slot) "daqReferenceDomainInfoBuilder_build")
     (cffi:mem-ref reference-domain-info-slot 'daq-reference-domain-info)
@@ -16271,7 +14984,6 @@
   )
 
 (defun reference-domain-info-builder/create-reference-domain-info-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-reference-domain-info-builder)
     (%check-error (%daq-reference-domain-info-builder-create-reference-domain-info-builder obj-slot) "daqReferenceDomainInfoBuilder_createReferenceDomainInfoBuilder")
     (cffi:mem-ref obj-slot 'daq-reference-domain-info-builder)
@@ -16284,7 +14996,6 @@
   )
 
 (defun reference-domain-info-builder/create-reference-domain-info-builder-from-existing (reference-domain-info-to-copy)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-reference-domain-info-builder)
     (%check-error (%daq-reference-domain-info-builder-create-reference-domain-info-builder-from-existing obj-slot reference-domain-info-to-copy) "daqReferenceDomainInfoBuilder_createReferenceDomainInfoBuilderFromExisting")
     (cffi:mem-ref obj-slot 'daq-reference-domain-info-builder)
@@ -16296,7 +15007,6 @@
   )
 
 (defun reference-domain-info-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-reference-domain-info-builder-get-interface-id intf-id)
   nil)
 
@@ -16306,7 +15016,6 @@
   )
 
 (defun reference-domain-info-builder/get-reference-domain-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (reference-domain-id-slot 'daq-string)
     (%check-error (%daq-reference-domain-info-builder-get-reference-domain-id self reference-domain-id-slot) "daqReferenceDomainInfoBuilder_getReferenceDomainId")
     (cffi:mem-ref reference-domain-id-slot 'daq-string)
@@ -16319,7 +15028,6 @@
   )
 
 (defun reference-domain-info-builder/get-reference-domain-offset (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (reference-domain-offset-slot 'daq-integer)
     (%check-error (%daq-reference-domain-info-builder-get-reference-domain-offset self reference-domain-offset-slot) "daqReferenceDomainInfoBuilder_getReferenceDomainOffset")
     (cffi:mem-ref reference-domain-offset-slot 'daq-integer)
@@ -16332,7 +15040,6 @@
   )
 
 (defun reference-domain-info-builder/get-reference-time-protocol (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (reference-time-protocol-slot 'daq-time-protocol)
     (%check-error (%daq-reference-domain-info-builder-get-reference-time-protocol self reference-time-protocol-slot) "daqReferenceDomainInfoBuilder_getReferenceTimeProtocol")
     (cffi:mem-ref reference-time-protocol-slot 'daq-time-protocol)
@@ -16345,7 +15052,6 @@
   )
 
 (defun reference-domain-info-builder/get-uses-offset (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (uses-offset-slot 'daq-uses-offset)
     (%check-error (%daq-reference-domain-info-builder-get-uses-offset self uses-offset-slot) "daqReferenceDomainInfoBuilder_getUsesOffset")
     (cffi:mem-ref uses-offset-slot 'daq-uses-offset)
@@ -16358,7 +15064,6 @@
   )
 
 (defun reference-domain-info-builder/set-reference-domain-id (self reference-domain-id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-reference-domain-info-builder-set-reference-domain-id self reference-domain-id) "daqReferenceDomainInfoBuilder_setReferenceDomainId")
   nil
 )
@@ -16369,7 +15074,6 @@
   )
 
 (defun reference-domain-info-builder/set-reference-domain-offset (self reference-domain-offset)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-reference-domain-info-builder-set-reference-domain-offset self reference-domain-offset) "daqReferenceDomainInfoBuilder_setReferenceDomainOffset")
   nil
 )
@@ -16380,7 +15084,6 @@
   )
 
 (defun reference-domain-info-builder/set-reference-time-protocol (self reference-time-protocol)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-reference-domain-info-builder-set-reference-time-protocol self reference-time-protocol) "daqReferenceDomainInfoBuilder_setReferenceTimeProtocol")
   nil
 )
@@ -16391,7 +15094,6 @@
   )
 
 (defun reference-domain-info-builder/set-uses-offset (self uses-offset)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-reference-domain-info-builder-set-uses-offset self uses-offset) "daqReferenceDomainInfoBuilder_setUsesOffset")
   nil
 )
@@ -16402,7 +15104,6 @@
   )
 
 (defun reference-domain-info/create-reference-domain-info-from-builder (builder)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-reference-domain-info)
     (%check-error (%daq-reference-domain-info-create-reference-domain-info-from-builder obj-slot builder) "daqReferenceDomainInfo_createReferenceDomainInfoFromBuilder")
     (cffi:mem-ref obj-slot 'daq-reference-domain-info)
@@ -16414,7 +15115,6 @@
   )
 
 (defun reference-domain-info/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-reference-domain-info-get-interface-id intf-id)
   nil)
 
@@ -16424,7 +15124,6 @@
   )
 
 (defun reference-domain-info/get-reference-domain-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (reference-domain-id-slot 'daq-string)
     (%check-error (%daq-reference-domain-info-get-reference-domain-id self reference-domain-id-slot) "daqReferenceDomainInfo_getReferenceDomainId")
     (cffi:mem-ref reference-domain-id-slot 'daq-string)
@@ -16437,7 +15136,6 @@
   )
 
 (defun reference-domain-info/get-reference-domain-offset (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (reference-domain-offset-slot 'daq-integer)
     (%check-error (%daq-reference-domain-info-get-reference-domain-offset self reference-domain-offset-slot) "daqReferenceDomainInfo_getReferenceDomainOffset")
     (cffi:mem-ref reference-domain-offset-slot 'daq-integer)
@@ -16450,7 +15148,6 @@
   )
 
 (defun reference-domain-info/get-reference-time-protocol (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (reference-time-protocol-slot 'daq-time-protocol)
     (%check-error (%daq-reference-domain-info-get-reference-time-protocol self reference-time-protocol-slot) "daqReferenceDomainInfo_getReferenceTimeProtocol")
     (cffi:mem-ref reference-time-protocol-slot 'daq-time-protocol)
@@ -16463,7 +15160,6 @@
   )
 
 (defun reference-domain-info/get-uses-offset (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (uses-offset-slot 'daq-uses-offset)
     (%check-error (%daq-reference-domain-info-get-uses-offset self uses-offset-slot) "daqReferenceDomainInfo_getUsesOffset")
     (cffi:mem-ref uses-offset-slot 'daq-uses-offset)
@@ -16475,7 +15171,6 @@
   )
 
 (defun removable/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-removable-get-interface-id intf-id)
   nil)
 
@@ -16485,7 +15180,6 @@
   )
 
 (defun removable/is-removed (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (removed-slot 'daq-bool)
     (%check-error (%daq-removable-is-removed self removed-slot) "daqRemovable_isRemoved")
     (cffi:mem-ref removed-slot 'daq-bool)
@@ -16497,7 +15191,6 @@
   )
 
 (defun removable/remove (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-removable-remove self) "daqRemovable_remove")
   nil
 )
@@ -16507,7 +15200,6 @@
   )
 
 (defun reusable-data-packet/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-reusable-data-packet-get-interface-id intf-id)
   nil)
 
@@ -16522,7 +15214,6 @@
   )
 
 (defun reusable-data-packet/reuse (self new-descriptor new-sample-count new-offset new-domain-packet can-realloc-memory)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (success-slot 'daq-bool)
     (%check-error (%daq-reusable-data-packet-reuse self new-descriptor new-sample-count new-offset new-domain-packet can-realloc-memory success-slot) "daqReusableDataPacket_reuse")
     (cffi:mem-ref success-slot 'daq-bool)
@@ -16534,7 +15225,6 @@
   )
 
 (defun rule-private/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-rule-private-get-interface-id intf-id)
   nil)
 
@@ -16543,7 +15233,6 @@
   )
 
 (defun rule-private/verify-parameters (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-rule-private-verify-parameters self) "daqRulePrivate_verifyParameters")
   nil
 )
@@ -16554,7 +15243,6 @@
   )
 
 (defun sample-reader/get-domain-read-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (sample-type-slot 'daq-sample-type)
     (%check-error (%daq-sample-reader-get-domain-read-type self sample-type-slot) "daqSampleReader_getDomainReadType")
     (cffi:mem-ref sample-type-slot 'daq-sample-type)
@@ -16566,7 +15254,6 @@
   )
 
 (defun sample-reader/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-sample-reader-get-interface-id intf-id)
   nil)
 
@@ -16576,7 +15263,6 @@
   )
 
 (defun sample-reader/get-read-mode (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (mode-slot 'daq-read-mode)
     (%check-error (%daq-sample-reader-get-read-mode self mode-slot) "daqSampleReader_getReadMode")
     (cffi:mem-ref mode-slot 'daq-read-mode)
@@ -16589,7 +15275,6 @@
   )
 
 (defun sample-reader/get-value-read-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (sample-type-slot 'daq-sample-type)
     (%check-error (%daq-sample-reader-get-value-read-type self sample-type-slot) "daqSampleReader_getValueReadType")
     (cffi:mem-ref sample-type-slot 'daq-sample-type)
@@ -16602,7 +15287,6 @@
   )
 
 (defun sample-reader/set-domain-transform-function (self transform)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-sample-reader-set-domain-transform-function self transform) "daqSampleReader_setDomainTransformFunction")
   nil
 )
@@ -16613,7 +15297,6 @@
   )
 
 (defun sample-reader/set-value-transform-function (self transform)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-sample-reader-set-value-transform-function self transform) "daqSampleReader_setValueTransformFunction")
   nil
 )
@@ -16625,7 +15308,6 @@
   )
 
 (defun scaling-builder/add-parameter (self name parameter)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-scaling-builder-add-parameter self name parameter) "daqScalingBuilder_addParameter")
   nil
 )
@@ -16636,7 +15318,6 @@
   )
 
 (defun scaling-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (scaling-slot 'daq-scaling)
     (%check-error (%daq-scaling-builder-build self scaling-slot) "daqScalingBuilder_build")
     (cffi:mem-ref scaling-slot 'daq-scaling)
@@ -16648,7 +15329,6 @@
   )
 
 (defun scaling-builder/create-scaling-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-scaling-builder)
     (%check-error (%daq-scaling-builder-create-scaling-builder obj-slot) "daqScalingBuilder_createScalingBuilder")
     (cffi:mem-ref obj-slot 'daq-scaling-builder)
@@ -16661,7 +15341,6 @@
   )
 
 (defun scaling-builder/create-scaling-builder-from-existing (scaling-to-copy)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-scaling-builder)
     (%check-error (%daq-scaling-builder-create-scaling-builder-from-existing obj-slot scaling-to-copy) "daqScalingBuilder_createScalingBuilderFromExisting")
     (cffi:mem-ref obj-slot 'daq-scaling-builder)
@@ -16674,7 +15353,6 @@
   )
 
 (defun scaling-builder/get-input-data-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-sample-type)
     (%check-error (%daq-scaling-builder-get-input-data-type self type-slot) "daqScalingBuilder_getInputDataType")
     (cffi:mem-ref type-slot 'daq-sample-type)
@@ -16686,7 +15364,6 @@
   )
 
 (defun scaling-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-scaling-builder-get-interface-id intf-id)
   nil)
 
@@ -16696,7 +15373,6 @@
   )
 
 (defun scaling-builder/get-output-data-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-scaled-sample-type)
     (%check-error (%daq-scaling-builder-get-output-data-type self type-slot) "daqScalingBuilder_getOutputDataType")
     (cffi:mem-ref type-slot 'daq-scaled-sample-type)
@@ -16709,7 +15385,6 @@
   )
 
 (defun scaling-builder/get-parameters (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (parameters-slot 'daq-dict)
     (%check-error (%daq-scaling-builder-get-parameters self parameters-slot) "daqScalingBuilder_getParameters")
     (cffi:mem-ref parameters-slot 'daq-dict)
@@ -16722,7 +15397,6 @@
   )
 
 (defun scaling-builder/get-scaling-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-scaling-type)
     (%check-error (%daq-scaling-builder-get-scaling-type self type-slot) "daqScalingBuilder_getScalingType")
     (cffi:mem-ref type-slot 'daq-scaling-type)
@@ -16735,7 +15409,6 @@
   )
 
 (defun scaling-builder/remove-parameter (self name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-scaling-builder-remove-parameter self name) "daqScalingBuilder_removeParameter")
   nil
 )
@@ -16746,7 +15419,6 @@
   )
 
 (defun scaling-builder/set-input-data-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-scaling-builder-set-input-data-type self type) "daqScalingBuilder_setInputDataType")
   nil
 )
@@ -16757,7 +15429,6 @@
   )
 
 (defun scaling-builder/set-output-data-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-scaling-builder-set-output-data-type self type) "daqScalingBuilder_setOutputDataType")
   nil
 )
@@ -16768,7 +15439,6 @@
   )
 
 (defun scaling-builder/set-parameters (self parameters)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-scaling-builder-set-parameters self parameters) "daqScalingBuilder_setParameters")
   nil
 )
@@ -16779,7 +15449,6 @@
   )
 
 (defun scaling-builder/set-scaling-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-scaling-builder-set-scaling-type self type) "daqScalingBuilder_setScalingType")
   nil
 )
@@ -16789,7 +15458,6 @@
   )
 
 (defun scaling-calc-private/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-scaling-calc-private-get-interface-id intf-id)
   nil)
 
@@ -16798,7 +15466,6 @@
   )
 
 (defun scaling-calc-private/has-scaling-calc (self)
-  (ensure-opendaq-loaded)
   (let ((result (%daq-scaling-calc-private-has-scaling-calc self)))
     result
   )
@@ -16811,7 +15478,6 @@
   )
 
 (defun scaling-calc-private/scale-data (self data sample-count)
-  (ensure-opendaq-loaded)
   (%daq-scaling-calc-private-scale-data self data sample-count)
   nil
 )
@@ -16824,7 +15490,6 @@
   )
 
 (defun scaling-calc-private/scale-data-output (self data sample-count output)
-  (ensure-opendaq-loaded)
   (%daq-scaling-calc-private-scale-data-output self data sample-count output)
   nil
 )
@@ -16838,7 +15503,6 @@
   )
 
 (defun scaling/create-linear-scaling (scale offset input-data-type output-data-type)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-scaling)
     (%check-error (%daq-scaling-create-linear-scaling obj-slot scale offset input-data-type output-data-type) "daqScaling_createLinearScaling")
     (cffi:mem-ref obj-slot 'daq-scaling)
@@ -16854,7 +15518,6 @@
   )
 
 (defun scaling/create-scaling (input-data-type output-data-type scaling-type parameters)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-scaling)
     (%check-error (%daq-scaling-create-scaling obj-slot input-data-type output-data-type scaling-type parameters) "daqScaling_createScaling")
     (cffi:mem-ref obj-slot 'daq-scaling)
@@ -16867,7 +15530,6 @@
   )
 
 (defun scaling/create-scaling-from-builder (builder)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-scaling)
     (%check-error (%daq-scaling-create-scaling-from-builder obj-slot builder) "daqScaling_createScalingFromBuilder")
     (cffi:mem-ref obj-slot 'daq-scaling)
@@ -16880,7 +15542,6 @@
   )
 
 (defun scaling/get-input-sample-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-sample-type)
     (%check-error (%daq-scaling-get-input-sample-type self type-slot) "daqScaling_getInputSampleType")
     (cffi:mem-ref type-slot 'daq-sample-type)
@@ -16892,7 +15553,6 @@
   )
 
 (defun scaling/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-scaling-get-interface-id intf-id)
   nil)
 
@@ -16902,7 +15562,6 @@
   )
 
 (defun scaling/get-output-sample-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-scaled-sample-type)
     (%check-error (%daq-scaling-get-output-sample-type self type-slot) "daqScaling_getOutputSampleType")
     (cffi:mem-ref type-slot 'daq-scaled-sample-type)
@@ -16915,7 +15574,6 @@
   )
 
 (defun scaling/get-parameters (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (parameters-slot 'daq-dict)
     (%check-error (%daq-scaling-get-parameters self parameters-slot) "daqScaling_getParameters")
     (cffi:mem-ref parameters-slot 'daq-dict)
@@ -16928,7 +15586,6 @@
   )
 
 (defun scaling/get-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-scaling-type)
     (%check-error (%daq-scaling-get-type self type-slot) "daqScaling_getType")
     (cffi:mem-ref type-slot 'daq-scaling-type)
@@ -16942,7 +15599,6 @@
   )
 
 (defun scheduler/create-scheduler (logger num-workers)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-scheduler)
     (%check-error (%daq-scheduler-create-scheduler obj-slot logger num-workers) "daqScheduler_createScheduler")
     (cffi:mem-ref obj-slot 'daq-scheduler)
@@ -16957,7 +15613,6 @@
   )
 
 (defun scheduler/create-scheduler-with-main-loop (logger num-workers use-main-loop)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-scheduler)
     (%check-error (%daq-scheduler-create-scheduler-with-main-loop obj-slot logger num-workers use-main-loop) "daqScheduler_createSchedulerWithMainLoop")
     (cffi:mem-ref obj-slot 'daq-scheduler)
@@ -16969,7 +15624,6 @@
   )
 
 (defun scheduler/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-scheduler-get-interface-id intf-id)
   nil)
 
@@ -16979,7 +15633,6 @@
   )
 
 (defun scheduler/is-main-loop-set (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-set-slot 'daq-bool)
     (%check-error (%daq-scheduler-is-main-loop-set self is-set-slot) "daqScheduler_isMainLoopSet")
     (cffi:mem-ref is-set-slot 'daq-bool)
@@ -16992,7 +15645,6 @@
   )
 
 (defun scheduler/is-multi-threaded (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (multi-threaded-slot 'daq-bool)
     (%check-error (%daq-scheduler-is-multi-threaded self multi-threaded-slot) "daqScheduler_isMultiThreaded")
     (cffi:mem-ref multi-threaded-slot 'daq-bool)
@@ -17005,7 +15657,6 @@
   )
 
 (defun scheduler/run-main-loop (self loop-time)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-scheduler-run-main-loop self loop-time) "daqScheduler_runMainLoop")
   nil
 )
@@ -17015,7 +15666,6 @@
   )
 
 (defun scheduler/run-main-loop-iteration (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-scheduler-run-main-loop-iteration self) "daqScheduler_runMainLoopIteration")
   nil
 )
@@ -17027,7 +15677,6 @@
   )
 
 (defun scheduler/schedule-function (self function)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (awaitable-slot 'daq-awaitable)
     (%check-error (%daq-scheduler-schedule-function self function awaitable-slot) "daqScheduler_scheduleFunction")
     (cffi:mem-ref awaitable-slot 'daq-awaitable)
@@ -17041,7 +15690,6 @@
   )
 
 (defun scheduler/schedule-graph (self graph)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (awaitable-slot 'daq-awaitable)
     (%check-error (%daq-scheduler-schedule-graph self graph awaitable-slot) "daqScheduler_scheduleGraph")
     (cffi:mem-ref awaitable-slot 'daq-awaitable)
@@ -17054,7 +15702,6 @@
   )
 
 (defun scheduler/schedule-work (self work)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-scheduler-schedule-work self work) "daqScheduler_scheduleWork")
   nil
 )
@@ -17065,7 +15712,6 @@
   )
 
 (defun scheduler/schedule-work-on-main-loop (self work)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-scheduler-schedule-work-on-main-loop self work) "daqScheduler_scheduleWorkOnMainLoop")
   nil
 )
@@ -17075,7 +15721,6 @@
   )
 
 (defun scheduler/stop (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-scheduler-stop self) "daqScheduler_stop")
   nil
 )
@@ -17085,7 +15730,6 @@
   )
 
 (defun scheduler/stop-main-loop (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-scheduler-stop-main-loop self) "daqScheduler_stopMainLoop")
   nil
 )
@@ -17095,7 +15739,6 @@
   )
 
 (defun scheduler/wait-all (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-scheduler-wait-all self) "daqScheduler_waitAll")
   nil
 )
@@ -17107,7 +15750,6 @@
   )
 
 (defun search-filter/accepts-object (self obj)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (accepts-slot 'daq-bool)
     (%check-error (%daq-search-filter-accepts-object self obj accepts-slot) "daqSearchFilter_acceptsObject")
     (cffi:mem-ref accepts-slot 'daq-bool)
@@ -17121,7 +15763,6 @@
   )
 
 (defun search-filter/create-and-search-filter (left right)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-search-filter)
     (%check-error (%daq-search-filter-create-and-search-filter obj-slot left right) "daqSearchFilter_createAndSearchFilter")
     (cffi:mem-ref obj-slot 'daq-search-filter)
@@ -17133,7 +15774,6 @@
   )
 
 (defun search-filter/create-any-search-filter ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-search-filter)
     (%check-error (%daq-search-filter-create-any-search-filter obj-slot) "daqSearchFilter_createAnySearchFilter")
     (cffi:mem-ref obj-slot 'daq-search-filter)
@@ -17147,7 +15787,6 @@
   )
 
 (defun search-filter/create-custom-search-filter (accepts-function visit-function)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-search-filter)
     (%check-error (%daq-search-filter-create-custom-search-filter obj-slot accepts-function visit-function) "daqSearchFilter_createCustomSearchFilter")
     (cffi:mem-ref obj-slot 'daq-search-filter)
@@ -17160,7 +15799,6 @@
   )
 
 (defun search-filter/create-excluded-tags-search-filter (excluded-tags)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-search-filter)
     (%check-error (%daq-search-filter-create-excluded-tags-search-filter obj-slot excluded-tags) "daqSearchFilter_createExcludedTagsSearchFilter")
     (cffi:mem-ref obj-slot 'daq-search-filter)
@@ -17173,7 +15811,6 @@
   )
 
 (defun search-filter/create-local-id-search-filter (local-id)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-search-filter)
     (%check-error (%daq-search-filter-create-local-id-search-filter obj-slot local-id) "daqSearchFilter_createLocalIdSearchFilter")
     (cffi:mem-ref obj-slot 'daq-search-filter)
@@ -17186,7 +15823,6 @@
   )
 
 (defun search-filter/create-not-search-filter (filter)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-search-filter)
     (%check-error (%daq-search-filter-create-not-search-filter obj-slot filter) "daqSearchFilter_createNotSearchFilter")
     (cffi:mem-ref obj-slot 'daq-search-filter)
@@ -17200,7 +15836,6 @@
   )
 
 (defun search-filter/create-or-search-filter (left right)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-search-filter)
     (%check-error (%daq-search-filter-create-or-search-filter obj-slot left right) "daqSearchFilter_createOrSearchFilter")
     (cffi:mem-ref obj-slot 'daq-search-filter)
@@ -17213,7 +15848,6 @@
   )
 
 (defun search-filter/create-recursive-search-filter (filter)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-search-filter)
     (%check-error (%daq-search-filter-create-recursive-search-filter obj-slot filter) "daqSearchFilter_createRecursiveSearchFilter")
     (cffi:mem-ref obj-slot 'daq-search-filter)
@@ -17226,7 +15860,6 @@
   )
 
 (defun search-filter/create-required-tags-search-filter (required-tags)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-search-filter)
     (%check-error (%daq-search-filter-create-required-tags-search-filter obj-slot required-tags) "daqSearchFilter_createRequiredTagsSearchFilter")
     (cffi:mem-ref obj-slot 'daq-search-filter)
@@ -17238,7 +15871,6 @@
   )
 
 (defun search-filter/create-visible-search-filter ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-search-filter)
     (%check-error (%daq-search-filter-create-visible-search-filter obj-slot) "daqSearchFilter_createVisibleSearchFilter")
     (cffi:mem-ref obj-slot 'daq-search-filter)
@@ -17250,7 +15882,6 @@
   )
 
 (defun search-filter/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-search-filter-get-interface-id intf-id)
   nil)
 
@@ -17261,7 +15892,6 @@
   )
 
 (defun search-filter/visit-children (self obj)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (visit-slot 'daq-bool)
     (%check-error (%daq-search-filter-visit-children self obj visit-slot) "daqSearchFilter_visitChildren")
     (cffi:mem-ref visit-slot 'daq-bool)
@@ -17273,7 +15903,6 @@
   )
 
 (defun serializable/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-serializable-get-interface-id intf-id)
   nil)
 
@@ -17283,7 +15912,6 @@
   )
 
 (defun serializable/get-serialize-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (id-slot 'daq-const-char-ptr)
     (%check-error (%daq-serializable-get-serialize-id self id-slot) "daqSerializable_getSerializeId")
     (cffi:mem-ref id-slot 'daq-const-char-ptr)
@@ -17296,7 +15924,6 @@
   )
 
 (defun serializable/serialize (self serializer)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-serializable-serialize self serializer) "daqSerializable_serialize")
   nil
 )
@@ -17307,7 +15934,6 @@
   )
 
 (defun serialized-list/get-count (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (size-slot 'daq-size-t)
     (%check-error (%daq-serialized-list-get-count self size-slot) "daqSerializedList_getCount")
     (cffi:mem-ref size-slot 'daq-size-t)
@@ -17320,7 +15946,6 @@
   )
 
 (defun serialized-list/get-current-item-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (size-slot 'daq-core-type)
     (%check-error (%daq-serialized-list-get-current-item-type self size-slot) "daqSerializedList_getCurrentItemType")
     (cffi:mem-ref size-slot 'daq-core-type)
@@ -17332,7 +15957,6 @@
   )
 
 (defun serialized-list/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-serialized-list-get-interface-id intf-id)
   nil)
 
@@ -17342,7 +15966,6 @@
   )
 
 (defun serialized-list/read-bool (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (boolean-slot 'daq-bool)
     (%check-error (%daq-serialized-list-read-bool self boolean-slot) "daqSerializedList_readBool")
     (cffi:mem-ref boolean-slot 'daq-bool)
@@ -17355,7 +15978,6 @@
   )
 
 (defun serialized-list/read-float (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (real-slot 'daq-float)
     (%check-error (%daq-serialized-list-read-float self real-slot) "daqSerializedList_readFloat")
     (cffi:mem-ref real-slot 'daq-float)
@@ -17368,7 +15990,6 @@
   )
 
 (defun serialized-list/read-int (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (integer-slot 'daq-int)
     (%check-error (%daq-serialized-list-read-int self integer-slot) "daqSerializedList_readInt")
     (cffi:mem-ref integer-slot 'daq-int)
@@ -17383,7 +16004,6 @@
   )
 
 (defun serialized-list/read-list (self context factory-callback)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (list-slot 'daq-list)
     (%check-error (%daq-serialized-list-read-list self context factory-callback list-slot) "daqSerializedList_readList")
     (cffi:mem-ref list-slot 'daq-list)
@@ -17398,7 +16018,6 @@
   )
 
 (defun serialized-list/read-object (self context factory-callback)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-base-object)
     (%check-error (%daq-serialized-list-read-object self context factory-callback obj-slot) "daqSerializedList_readObject")
     (cffi:mem-ref obj-slot 'daq-base-object)
@@ -17411,7 +16030,6 @@
   )
 
 (defun serialized-list/read-serialized-list (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (list-slot 'daq-serialized-list)
     (%check-error (%daq-serialized-list-read-serialized-list self list-slot) "daqSerializedList_readSerializedList")
     (cffi:mem-ref list-slot 'daq-serialized-list)
@@ -17424,7 +16042,6 @@
   )
 
 (defun serialized-list/read-serialized-object (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (plain-obj-slot 'daq-serialized-object)
     (%check-error (%daq-serialized-list-read-serialized-object self plain-obj-slot) "daqSerializedList_readSerializedObject")
     (cffi:mem-ref plain-obj-slot 'daq-serialized-object)
@@ -17437,7 +16054,6 @@
   )
 
 (defun serialized-list/read-string (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (string-slot 'daq-string)
     (%check-error (%daq-serialized-list-read-string self string-slot) "daqSerializedList_readString")
     (cffi:mem-ref string-slot 'daq-string)
@@ -17449,7 +16065,6 @@
   )
 
 (defun serialized-object/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-serialized-object-get-interface-id intf-id)
   nil)
 
@@ -17459,7 +16074,6 @@
   )
 
 (defun serialized-object/get-keys (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (list-slot 'daq-list)
     (%check-error (%daq-serialized-object-get-keys self list-slot) "daqSerializedObject_getKeys")
     (cffi:mem-ref list-slot 'daq-list)
@@ -17473,7 +16087,6 @@
   )
 
 (defun serialized-object/get-type (self key)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-core-type)
     (%check-error (%daq-serialized-object-get-type self key type-slot) "daqSerializedObject_getType")
     (cffi:mem-ref type-slot 'daq-core-type)
@@ -17487,7 +16100,6 @@
   )
 
 (defun serialized-object/has-key (self key)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (has-key-slot 'daq-bool)
     (%check-error (%daq-serialized-object-has-key self key has-key-slot) "daqSerializedObject_hasKey")
     (cffi:mem-ref has-key-slot 'daq-bool)
@@ -17500,7 +16112,6 @@
   )
 
 (defun serialized-object/is-root (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-root-slot 'daq-bool)
     (%check-error (%daq-serialized-object-is-root self is-root-slot) "daqSerializedObject_isRoot")
     (cffi:mem-ref is-root-slot 'daq-bool)
@@ -17514,7 +16125,6 @@
   )
 
 (defun serialized-object/read-bool (self key)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (boolean-slot 'daq-bool)
     (%check-error (%daq-serialized-object-read-bool self key boolean-slot) "daqSerializedObject_readBool")
     (cffi:mem-ref boolean-slot 'daq-bool)
@@ -17528,7 +16138,6 @@
   )
 
 (defun serialized-object/read-float (self key)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (real-slot 'daq-float)
     (%check-error (%daq-serialized-object-read-float self key real-slot) "daqSerializedObject_readFloat")
     (cffi:mem-ref real-slot 'daq-float)
@@ -17542,7 +16151,6 @@
   )
 
 (defun serialized-object/read-int (self key)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (integer-slot 'daq-int)
     (%check-error (%daq-serialized-object-read-int self key integer-slot) "daqSerializedObject_readInt")
     (cffi:mem-ref integer-slot 'daq-int)
@@ -17558,7 +16166,6 @@
   )
 
 (defun serialized-object/read-list (self key context factory-callback)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (list-slot 'daq-list)
     (%check-error (%daq-serialized-object-read-list self key context factory-callback list-slot) "daqSerializedObject_readList")
     (cffi:mem-ref list-slot 'daq-list)
@@ -17574,7 +16181,6 @@
   )
 
 (defun serialized-object/read-object (self key context factory-callback)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-base-object)
     (%check-error (%daq-serialized-object-read-object self key context factory-callback obj-slot) "daqSerializedObject_readObject")
     (cffi:mem-ref obj-slot 'daq-base-object)
@@ -17588,7 +16194,6 @@
   )
 
 (defun serialized-object/read-serialized-list (self key)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (list-slot 'daq-serialized-list)
     (%check-error (%daq-serialized-object-read-serialized-list self key list-slot) "daqSerializedObject_readSerializedList")
     (cffi:mem-ref list-slot 'daq-serialized-list)
@@ -17602,7 +16207,6 @@
   )
 
 (defun serialized-object/read-serialized-object (self key)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (plain-obj-slot 'daq-serialized-object)
     (%check-error (%daq-serialized-object-read-serialized-object self key plain-obj-slot) "daqSerializedObject_readSerializedObject")
     (cffi:mem-ref plain-obj-slot 'daq-serialized-object)
@@ -17616,7 +16220,6 @@
   )
 
 (defun serialized-object/read-string (self key)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (string-slot 'daq-string)
     (%check-error (%daq-serialized-object-read-string self key string-slot) "daqSerializedObject_readString")
     (cffi:mem-ref string-slot 'daq-string)
@@ -17629,7 +16232,6 @@
   )
 
 (defun serialized-object/to-json (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (json-string-slot 'daq-string)
     (%check-error (%daq-serialized-object-to-json self json-string-slot) "daqSerializedObject_toJson")
     (cffi:mem-ref json-string-slot 'daq-string)
@@ -17642,7 +16244,6 @@
   )
 
 (defun serializer/create-json-serializer (pretty)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-serializer)
     (%check-error (%daq-serializer-create-json-serializer obj-slot pretty) "daqSerializer_createJsonSerializer")
     (cffi:mem-ref obj-slot 'daq-serializer)
@@ -17654,7 +16255,6 @@
   )
 
 (defun serializer/end-list (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-serializer-end-list self) "daqSerializer_endList")
   nil
 )
@@ -17664,7 +16264,6 @@
   )
 
 (defun serializer/end-object (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-serializer-end-object self) "daqSerializer_endObject")
   nil
 )
@@ -17675,7 +16274,6 @@
   )
 
 (defun serializer/get-output (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (serialized-slot 'daq-string)
     (%check-error (%daq-serializer-get-output self serialized-slot) "daqSerializer_getOutput")
     (cffi:mem-ref serialized-slot 'daq-string)
@@ -17688,7 +16286,6 @@
   )
 
 (defun serializer/get-user (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (user-slot 'daq-base-object)
     (%check-error (%daq-serializer-get-user self user-slot) "daqSerializer_getUser")
     (cffi:mem-ref user-slot 'daq-base-object)
@@ -17701,7 +16298,6 @@
   )
 
 (defun serializer/get-version (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (version-slot 'daq-int)
     (%check-error (%daq-serializer-get-version self version-slot) "daqSerializer_getVersion")
     (cffi:mem-ref version-slot 'daq-int)
@@ -17714,7 +16310,6 @@
   )
 
 (defun serializer/is-complete (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (complete-slot 'daq-bool)
     (%check-error (%daq-serializer-is-complete self complete-slot) "daqSerializer_isComplete")
     (cffi:mem-ref complete-slot 'daq-bool)
@@ -17727,7 +16322,6 @@
   )
 
 (defun serializer/key (self string)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-serializer-key self string) "daqSerializer_key")
   nil
 )
@@ -17739,7 +16333,6 @@
   )
 
 (defun serializer/key-raw (self string length)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-serializer-key-raw self string length) "daqSerializer_keyRaw")
   nil
 )
@@ -17750,7 +16343,6 @@
   )
 
 (defun serializer/key-str (self name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-serializer-key-str self name) "daqSerializer_keyStr")
   nil
 )
@@ -17760,7 +16352,6 @@
   )
 
 (defun serializer/reset (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-serializer-reset self) "daqSerializer_reset")
   nil
 )
@@ -17771,7 +16362,6 @@
   )
 
 (defun serializer/set-user (self user)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-serializer-set-user self user) "daqSerializer_setUser")
   nil
 )
@@ -17781,7 +16371,6 @@
   )
 
 (defun serializer/start-list (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-serializer-start-list self) "daqSerializer_startList")
   nil
 )
@@ -17791,7 +16380,6 @@
   )
 
 (defun serializer/start-object (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-serializer-start-object self) "daqSerializer_startObject")
   nil
 )
@@ -17802,7 +16390,6 @@
   )
 
 (defun serializer/start-tagged-object (self obj)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-serializer-start-tagged-object self obj) "daqSerializer_startTaggedObject")
   nil
 )
@@ -17813,7 +16400,6 @@
   )
 
 (defun serializer/write-bool (self boolean)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-serializer-write-bool self boolean) "daqSerializer_writeBool")
   nil
 )
@@ -17824,7 +16410,6 @@
   )
 
 (defun serializer/write-float (self real)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-serializer-write-float self real) "daqSerializer_writeFloat")
   nil
 )
@@ -17835,7 +16420,6 @@
   )
 
 (defun serializer/write-int (self integer)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-serializer-write-int self integer) "daqSerializer_writeInt")
   nil
 )
@@ -17845,7 +16429,6 @@
   )
 
 (defun serializer/write-null (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-serializer-write-null self) "daqSerializer_writeNull")
   nil
 )
@@ -17857,7 +16440,6 @@
   )
 
 (defun serializer/write-string (self string length)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-serializer-write-string self string length) "daqSerializer_writeString")
   nil
 )
@@ -17868,7 +16450,6 @@
   )
 
 (defun server-capability-config/add-address (self address)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-server-capability-config-add-address self address) "daqServerCapabilityConfig_addAddress")
   nil
 )
@@ -17879,7 +16460,6 @@
   )
 
 (defun server-capability-config/add-address-info (self address-info)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-server-capability-config-add-address-info self address-info) "daqServerCapabilityConfig_addAddressInfo")
   nil
 )
@@ -17890,7 +16470,6 @@
   )
 
 (defun server-capability-config/add-connection-string (self connection-string)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-server-capability-config-add-connection-string self connection-string) "daqServerCapabilityConfig_addConnectionString")
   nil
 )
@@ -17903,7 +16482,6 @@
   )
 
 (defun server-capability-config/create-server-capability (protocol-id protocol-name protocol-type)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-server-capability-config)
     (%check-error (%daq-server-capability-config-create-server-capability obj-slot protocol-id protocol-name protocol-type) "daqServerCapabilityConfig_createServerCapability")
     (cffi:mem-ref obj-slot 'daq-server-capability-config)
@@ -17915,7 +16493,6 @@
   )
 
 (defun server-capability-config/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-server-capability-config-get-interface-id intf-id)
   nil)
 
@@ -17925,7 +16502,6 @@
   )
 
 (defun server-capability-config/set-connection-string (self connection-string)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-server-capability-config-set-connection-string self connection-string) "daqServerCapabilityConfig_setConnectionString")
   nil
 )
@@ -17936,7 +16512,6 @@
   )
 
 (defun server-capability-config/set-connection-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-server-capability-config-set-connection-type self type) "daqServerCapabilityConfig_setConnectionType")
   nil
 )
@@ -17947,7 +16522,6 @@
   )
 
 (defun server-capability-config/set-core-events-enabled (self enabled)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-server-capability-config-set-core-events-enabled self enabled) "daqServerCapabilityConfig_setCoreEventsEnabled")
   nil
 )
@@ -17958,7 +16532,6 @@
   )
 
 (defun server-capability-config/set-port (self port)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-server-capability-config-set-port self port) "daqServerCapabilityConfig_setPort")
   nil
 )
@@ -17969,7 +16542,6 @@
   )
 
 (defun server-capability-config/set-prefix (self prefix)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-server-capability-config-set-prefix self prefix) "daqServerCapabilityConfig_setPrefix")
   nil
 )
@@ -17980,7 +16552,6 @@
   )
 
 (defun server-capability-config/set-protocol-id (self protocol-id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-server-capability-config-set-protocol-id self protocol-id) "daqServerCapabilityConfig_setProtocolId")
   nil
 )
@@ -17991,7 +16562,6 @@
   )
 
 (defun server-capability-config/set-protocol-name (self protocol-name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-server-capability-config-set-protocol-name self protocol-name) "daqServerCapabilityConfig_setProtocolName")
   nil
 )
@@ -18002,7 +16572,6 @@
   )
 
 (defun server-capability-config/set-protocol-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-server-capability-config-set-protocol-type self type) "daqServerCapabilityConfig_setProtocolType")
   nil
 )
@@ -18013,7 +16582,6 @@
   )
 
 (defun server-capability-config/set-protocol-version (self version)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-server-capability-config-set-protocol-version self version) "daqServerCapabilityConfig_setProtocolVersion")
   nil
 )
@@ -18024,7 +16592,6 @@
   )
 
 (defun server-capability/get-address-info (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (address-info-slot 'daq-list)
     (%check-error (%daq-server-capability-get-address-info self address-info-slot) "daqServerCapability_getAddressInfo")
     (cffi:mem-ref address-info-slot 'daq-list)
@@ -18037,7 +16604,6 @@
   )
 
 (defun server-capability/get-addresses (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (addresses-slot 'daq-list)
     (%check-error (%daq-server-capability-get-addresses self addresses-slot) "daqServerCapability_getAddresses")
     (cffi:mem-ref addresses-slot 'daq-list)
@@ -18050,7 +16616,6 @@
   )
 
 (defun server-capability/get-connection-string (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (connection-string-slot 'daq-string)
     (%check-error (%daq-server-capability-get-connection-string self connection-string-slot) "daqServerCapability_getConnectionString")
     (cffi:mem-ref connection-string-slot 'daq-string)
@@ -18063,7 +16628,6 @@
   )
 
 (defun server-capability/get-connection-strings (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (connection-strings-slot 'daq-list)
     (%check-error (%daq-server-capability-get-connection-strings self connection-strings-slot) "daqServerCapability_getConnectionStrings")
     (cffi:mem-ref connection-strings-slot 'daq-list)
@@ -18076,7 +16640,6 @@
   )
 
 (defun server-capability/get-connection-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-string)
     (%check-error (%daq-server-capability-get-connection-type self type-slot) "daqServerCapability_getConnectionType")
     (cffi:mem-ref type-slot 'daq-string)
@@ -18089,7 +16652,6 @@
   )
 
 (defun server-capability/get-core-events-enabled (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (enabled-slot 'daq-bool)
     (%check-error (%daq-server-capability-get-core-events-enabled self enabled-slot) "daqServerCapability_getCoreEventsEnabled")
     (cffi:mem-ref enabled-slot 'daq-bool)
@@ -18101,7 +16663,6 @@
   )
 
 (defun server-capability/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-server-capability-get-interface-id intf-id)
   nil)
 
@@ -18111,7 +16672,6 @@
   )
 
 (defun server-capability/get-port (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (port-slot 'daq-integer)
     (%check-error (%daq-server-capability-get-port self port-slot) "daqServerCapability_getPort")
     (cffi:mem-ref port-slot 'daq-integer)
@@ -18124,7 +16684,6 @@
   )
 
 (defun server-capability/get-prefix (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (prefix-slot 'daq-string)
     (%check-error (%daq-server-capability-get-prefix self prefix-slot) "daqServerCapability_getPrefix")
     (cffi:mem-ref prefix-slot 'daq-string)
@@ -18137,7 +16696,6 @@
   )
 
 (defun server-capability/get-protocol-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (protocol-id-slot 'daq-string)
     (%check-error (%daq-server-capability-get-protocol-id self protocol-id-slot) "daqServerCapability_getProtocolId")
     (cffi:mem-ref protocol-id-slot 'daq-string)
@@ -18150,7 +16708,6 @@
   )
 
 (defun server-capability/get-protocol-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (protocol-name-slot 'daq-string)
     (%check-error (%daq-server-capability-get-protocol-name self protocol-name-slot) "daqServerCapability_getProtocolName")
     (cffi:mem-ref protocol-name-slot 'daq-string)
@@ -18163,7 +16720,6 @@
   )
 
 (defun server-capability/get-protocol-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-protocol-type)
     (%check-error (%daq-server-capability-get-protocol-type self type-slot) "daqServerCapability_getProtocolType")
     (cffi:mem-ref type-slot 'daq-protocol-type)
@@ -18176,7 +16732,6 @@
   )
 
 (defun server-capability/get-protocol-version (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (version-slot 'daq-string)
     (%check-error (%daq-server-capability-get-protocol-version self version-slot) "daqServerCapability_getProtocolVersion")
     (cffi:mem-ref version-slot 'daq-string)
@@ -18192,7 +16747,6 @@
   )
 
 (defun server-type/create-server-type (id name description default-config)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-server-type)
     (%check-error (%daq-server-type-create-server-type obj-slot id name description default-config) "daqServerType_createServerType")
     (cffi:mem-ref obj-slot 'daq-server-type)
@@ -18204,7 +16758,6 @@
   )
 
 (defun server-type/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-server-type-get-interface-id intf-id)
   nil)
 
@@ -18213,7 +16766,6 @@
   )
 
 (defun server/disable-discovery (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-server-disable-discovery self) "daqServer_disableDiscovery")
   nil
 )
@@ -18223,7 +16775,6 @@
   )
 
 (defun server/enable-discovery (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-server-enable-discovery self) "daqServer_enableDiscovery")
   nil
 )
@@ -18234,7 +16785,6 @@
   )
 
 (defun server/get-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (server-id-slot 'daq-string)
     (%check-error (%daq-server-get-id self server-id-slot) "daqServer_getId")
     (cffi:mem-ref server-id-slot 'daq-string)
@@ -18246,7 +16796,6 @@
   )
 
 (defun server/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-server-get-interface-id intf-id)
   nil)
 
@@ -18257,7 +16806,6 @@
   )
 
 (defun server/get-signals (self search-filter)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (signals-slot 'daq-list)
     (%check-error (%daq-server-get-signals self signals-slot search-filter) "daqServer_getSignals")
     (cffi:mem-ref signals-slot 'daq-list)
@@ -18270,7 +16818,6 @@
   )
 
 (defun server/get-streaming (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (streaming-slot 'daq-streaming)
     (%check-error (%daq-server-get-streaming self streaming-slot) "daqServer_getStreaming")
     (cffi:mem-ref streaming-slot 'daq-streaming)
@@ -18282,7 +16829,6 @@
   )
 
 (defun server/stop (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-server-stop self) "daqServer_stop")
   nil
 )
@@ -18293,7 +16839,6 @@
   )
 
 (defun signal-config/add-related-signal (self signal)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-config-add-related-signal self signal) "daqSignalConfig_addRelatedSignal")
   nil
 )
@@ -18303,7 +16848,6 @@
   )
 
 (defun signal-config/clear-related-signals (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-config-clear-related-signals self) "daqSignalConfig_clearRelatedSignals")
   nil
 )
@@ -18317,7 +16861,6 @@
   )
 
 (defun signal-config/create-signal (context parent local-id class-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-signal-config)
     (%check-error (%daq-signal-config-create-signal obj-slot context parent local-id class-name) "daqSignalConfig_createSignal")
     (cffi:mem-ref obj-slot 'daq-signal-config)
@@ -18334,7 +16877,6 @@
   )
 
 (defun signal-config/create-signal-with-descriptor (context descriptor parent local-id class-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-signal-config)
     (%check-error (%daq-signal-config-create-signal-with-descriptor obj-slot context descriptor parent local-id class-name) "daqSignalConfig_createSignalWithDescriptor")
     (cffi:mem-ref obj-slot 'daq-signal-config)
@@ -18346,7 +16888,6 @@
   )
 
 (defun signal-config/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-signal-config-get-interface-id intf-id)
   nil)
 
@@ -18356,7 +16897,6 @@
   )
 
 (defun signal-config/remove-related-signal (self signal)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-config-remove-related-signal self signal) "daqSignalConfig_removeRelatedSignal")
   nil
 )
@@ -18367,7 +16907,6 @@
   )
 
 (defun signal-config/send-packet (self packet)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-config-send-packet self packet) "daqSignalConfig_sendPacket")
   nil
 )
@@ -18378,7 +16917,6 @@
   )
 
 (defun signal-config/send-packet-and-steal-ref (self packet)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-config-send-packet-and-steal-ref self packet) "daqSignalConfig_sendPacketAndStealRef")
   nil
 )
@@ -18389,7 +16927,6 @@
   )
 
 (defun signal-config/send-packets (self packets)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-config-send-packets self packets) "daqSignalConfig_sendPackets")
   nil
 )
@@ -18400,7 +16937,6 @@
   )
 
 (defun signal-config/send-packets-and-steal-ref (self packets)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-config-send-packets-and-steal-ref self packets) "daqSignalConfig_sendPacketsAndStealRef")
   nil
 )
@@ -18411,7 +16947,6 @@
   )
 
 (defun signal-config/set-descriptor (self descriptor)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-config-set-descriptor self descriptor) "daqSignalConfig_setDescriptor")
   nil
 )
@@ -18422,7 +16957,6 @@
   )
 
 (defun signal-config/set-domain-signal (self signal)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-config-set-domain-signal self signal) "daqSignalConfig_setDomainSignal")
   nil
 )
@@ -18433,7 +16967,6 @@
   )
 
 (defun signal-config/set-last-value (self last-value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-config-set-last-value self last-value) "daqSignalConfig_setLastValue")
   nil
 )
@@ -18444,7 +16977,6 @@
   )
 
 (defun signal-config/set-related-signals (self signals)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-config-set-related-signals self signals) "daqSignalConfig_setRelatedSignals")
   nil
 )
@@ -18455,7 +16987,6 @@
   )
 
 (defun signal-events/domain-signal-reference-removed (self signal)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-events-domain-signal-reference-removed self signal) "daqSignalEvents_domainSignalReferenceRemoved")
   nil
 )
@@ -18466,7 +16997,6 @@
   )
 
 (defun signal-events/domain-signal-reference-set (self signal)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-events-domain-signal-reference-set self signal) "daqSignalEvents_domainSignalReferenceSet")
   nil
 )
@@ -18476,7 +17006,6 @@
   )
 
 (defun signal-events/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-signal-events-get-interface-id intf-id)
   nil)
 
@@ -18486,7 +17015,6 @@
   )
 
 (defun signal-events/listener-connected (self connection)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-events-listener-connected self connection) "daqSignalEvents_listenerConnected")
   nil
 )
@@ -18497,7 +17025,6 @@
   )
 
 (defun signal-events/listener-connected-scheduled (self connection)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-events-listener-connected-scheduled self connection) "daqSignalEvents_listenerConnectedScheduled")
   nil
 )
@@ -18508,7 +17035,6 @@
   )
 
 (defun signal-events/listener-disconnected (self connection)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-events-listener-disconnected self connection) "daqSignalEvents_listenerDisconnected")
   nil
 )
@@ -18518,7 +17044,6 @@
   )
 
 (defun signal-private/clear-domain-signal-without-notification (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-private-clear-domain-signal-without-notification self) "daqSignalPrivate_clearDomainSignalWithoutNotification")
   nil
 )
@@ -18529,7 +17054,6 @@
   )
 
 (defun signal-private/enable-keep-last-value (self enabled)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-private-enable-keep-last-value self enabled) "daqSignalPrivate_enableKeepLastValue")
   nil
 )
@@ -18539,7 +17063,6 @@
   )
 
 (defun signal-private/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-signal-private-get-interface-id intf-id)
   nil)
 
@@ -18549,7 +17072,6 @@
   )
 
 (defun signal-private/get-keep-last-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (keep-last-value-slot 'daq-bool)
     (%check-error (%daq-signal-private-get-keep-last-value self keep-last-value-slot) "daqSignalPrivate_getKeepLastValue")
     (cffi:mem-ref keep-last-value-slot 'daq-bool)
@@ -18562,7 +17084,6 @@
   )
 
 (defun signal-private/get-signal-serialize-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (serialize-id-slot 'daq-string)
     (%check-error (%daq-signal-private-get-signal-serialize-id self serialize-id-slot) "daqSignalPrivate_getSignalSerializeId")
     (cffi:mem-ref serialize-id-slot 'daq-string)
@@ -18575,7 +17096,6 @@
   )
 
 (defun signal-private/send-packet-recursive-lock (self packet)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-private-send-packet-recursive-lock self packet) "daqSignalPrivate_sendPacketRecursiveLock")
   nil
 )
@@ -18586,7 +17106,6 @@
   )
 
 (defun signal/get-connections (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (connections-slot 'daq-list)
     (%check-error (%daq-signal-get-connections self connections-slot) "daqSignal_getConnections")
     (cffi:mem-ref connections-slot 'daq-list)
@@ -18599,7 +17118,6 @@
   )
 
 (defun signal/get-descriptor (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (descriptor-slot 'daq-data-descriptor)
     (%check-error (%daq-signal-get-descriptor self descriptor-slot) "daqSignal_getDescriptor")
     (cffi:mem-ref descriptor-slot 'daq-data-descriptor)
@@ -18612,7 +17130,6 @@
   )
 
 (defun signal/get-domain-signal (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (signal-slot 'daq-signal)
     (%check-error (%daq-signal-get-domain-signal self signal-slot) "daqSignal_getDomainSignal")
     (cffi:mem-ref signal-slot 'daq-signal)
@@ -18624,7 +17141,6 @@
   )
 
 (defun signal/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-signal-get-interface-id intf-id)
   nil)
 
@@ -18634,7 +17150,6 @@
   )
 
 (defun signal/get-last-value (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-base-object)
     (%check-error (%daq-signal-get-last-value self value-slot) "daqSignal_getLastValue")
     (cffi:mem-ref value-slot 'daq-base-object)
@@ -18647,7 +17162,6 @@
   )
 
 (defun signal/get-public (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-public-slot 'daq-bool)
     (%check-error (%daq-signal-get-public self is-public-slot) "daqSignal_getPublic")
     (cffi:mem-ref is-public-slot 'daq-bool)
@@ -18660,7 +17174,6 @@
   )
 
 (defun signal/get-related-signals (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (signals-slot 'daq-list)
     (%check-error (%daq-signal-get-related-signals self signals-slot) "daqSignal_getRelatedSignals")
     (cffi:mem-ref signals-slot 'daq-list)
@@ -18673,7 +17186,6 @@
   )
 
 (defun signal/get-streamed (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (streamed-slot 'daq-bool)
     (%check-error (%daq-signal-get-streamed self streamed-slot) "daqSignal_getStreamed")
     (cffi:mem-ref streamed-slot 'daq-bool)
@@ -18686,7 +17198,6 @@
   )
 
 (defun signal/set-public (self is-public)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-set-public self is-public) "daqSignal_setPublic")
   nil
 )
@@ -18697,7 +17208,6 @@
   )
 
 (defun signal/set-streamed (self streamed)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-signal-set-streamed self streamed) "daqSignal_setStreamed")
   nil
 )
@@ -18708,7 +17218,6 @@
   )
 
 (defun simple-type/create-simple-type (core-type)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-simple-type)
     (%check-error (%daq-simple-type-create-simple-type obj-slot core-type) "daqSimpleType_createSimpleType")
     (cffi:mem-ref obj-slot 'daq-simple-type)
@@ -18720,7 +17229,6 @@
   )
 
 (defun simple-type/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-simple-type-get-interface-id intf-id)
   nil)
 
@@ -18730,7 +17238,6 @@
   )
 
 (defun stream-reader-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (stream-reader-slot 'daq-stream-reader)
     (%check-error (%daq-stream-reader-builder-build self stream-reader-slot) "daqStreamReaderBuilder_build")
     (cffi:mem-ref stream-reader-slot 'daq-stream-reader)
@@ -18742,7 +17249,6 @@
   )
 
 (defun stream-reader-builder/create-stream-reader-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-stream-reader-builder)
     (%check-error (%daq-stream-reader-builder-create-stream-reader-builder obj-slot) "daqStreamReaderBuilder_createStreamReaderBuilder")
     (cffi:mem-ref obj-slot 'daq-stream-reader-builder)
@@ -18755,7 +17261,6 @@
   )
 
 (defun stream-reader-builder/get-domain-read-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-sample-type)
     (%check-error (%daq-stream-reader-builder-get-domain-read-type self type-slot) "daqStreamReaderBuilder_getDomainReadType")
     (cffi:mem-ref type-slot 'daq-sample-type)
@@ -18768,7 +17273,6 @@
   )
 
 (defun stream-reader-builder/get-input-port (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (port-slot 'daq-input-port)
     (%check-error (%daq-stream-reader-builder-get-input-port self port-slot) "daqStreamReaderBuilder_getInputPort")
     (cffi:mem-ref port-slot 'daq-input-port)
@@ -18781,7 +17285,6 @@
   )
 
 (defun stream-reader-builder/get-input-port-notification-method (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (notification-method-slot 'daq-packet-ready-notification)
     (%check-error (%daq-stream-reader-builder-get-input-port-notification-method self notification-method-slot) "daqStreamReaderBuilder_getInputPortNotificationMethod")
     (cffi:mem-ref notification-method-slot 'daq-packet-ready-notification)
@@ -18793,7 +17296,6 @@
   )
 
 (defun stream-reader-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-stream-reader-builder-get-interface-id intf-id)
   nil)
 
@@ -18803,7 +17305,6 @@
   )
 
 (defun stream-reader-builder/get-read-mode (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (mode-slot 'daq-read-mode)
     (%check-error (%daq-stream-reader-builder-get-read-mode self mode-slot) "daqStreamReaderBuilder_getReadMode")
     (cffi:mem-ref mode-slot 'daq-read-mode)
@@ -18816,7 +17317,6 @@
   )
 
 (defun stream-reader-builder/get-read-timeout-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-read-timeout-type)
     (%check-error (%daq-stream-reader-builder-get-read-timeout-type self type-slot) "daqStreamReaderBuilder_getReadTimeoutType")
     (cffi:mem-ref type-slot 'daq-read-timeout-type)
@@ -18829,7 +17329,6 @@
   )
 
 (defun stream-reader-builder/get-signal (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (signal-slot 'daq-signal)
     (%check-error (%daq-stream-reader-builder-get-signal self signal-slot) "daqStreamReaderBuilder_getSignal")
     (cffi:mem-ref signal-slot 'daq-signal)
@@ -18842,7 +17341,6 @@
   )
 
 (defun stream-reader-builder/get-skip-events (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (skip-events-slot 'daq-bool)
     (%check-error (%daq-stream-reader-builder-get-skip-events self skip-events-slot) "daqStreamReaderBuilder_getSkipEvents")
     (cffi:mem-ref skip-events-slot 'daq-bool)
@@ -18855,7 +17353,6 @@
   )
 
 (defun stream-reader-builder/get-value-read-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-sample-type)
     (%check-error (%daq-stream-reader-builder-get-value-read-type self type-slot) "daqStreamReaderBuilder_getValueReadType")
     (cffi:mem-ref type-slot 'daq-sample-type)
@@ -18868,7 +17365,6 @@
   )
 
 (defun stream-reader-builder/set-domain-read-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-stream-reader-builder-set-domain-read-type self type) "daqStreamReaderBuilder_setDomainReadType")
   nil
 )
@@ -18879,7 +17375,6 @@
   )
 
 (defun stream-reader-builder/set-input-port (self port)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-stream-reader-builder-set-input-port self port) "daqStreamReaderBuilder_setInputPort")
   nil
 )
@@ -18890,7 +17385,6 @@
   )
 
 (defun stream-reader-builder/set-input-port-notification-method (self notification-method)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-stream-reader-builder-set-input-port-notification-method self notification-method) "daqStreamReaderBuilder_setInputPortNotificationMethod")
   nil
 )
@@ -18901,7 +17395,6 @@
   )
 
 (defun stream-reader-builder/set-read-mode (self mode)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-stream-reader-builder-set-read-mode self mode) "daqStreamReaderBuilder_setReadMode")
   nil
 )
@@ -18912,7 +17405,6 @@
   )
 
 (defun stream-reader-builder/set-read-timeout-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-stream-reader-builder-set-read-timeout-type self type) "daqStreamReaderBuilder_setReadTimeoutType")
   nil
 )
@@ -18923,7 +17415,6 @@
   )
 
 (defun stream-reader-builder/set-signal (self signal)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-stream-reader-builder-set-signal self signal) "daqStreamReaderBuilder_setSignal")
   nil
 )
@@ -18934,7 +17425,6 @@
   )
 
 (defun stream-reader-builder/set-skip-events (self skip-events)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-stream-reader-builder-set-skip-events self skip-events) "daqStreamReaderBuilder_setSkipEvents")
   nil
 )
@@ -18945,7 +17435,6 @@
   )
 
 (defun stream-reader-builder/set-value-read-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-stream-reader-builder-set-value-read-type self type) "daqStreamReaderBuilder_setValueReadType")
   nil
 )
@@ -18960,7 +17449,6 @@
   )
 
 (defun stream-reader/create-stream-reader (signal value-read-type domain-read-type mode timeout-type)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-stream-reader)
     (%check-error (%daq-stream-reader-create-stream-reader obj-slot signal value-read-type domain-read-type mode timeout-type) "daqStreamReader_createStreamReader")
     (cffi:mem-ref obj-slot 'daq-stream-reader)
@@ -18975,7 +17463,6 @@
   )
 
 (defun stream-reader/create-stream-reader-from-existing (invalidated-reader value-read-type domain-read-type)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-stream-reader)
     (%check-error (%daq-stream-reader-create-stream-reader-from-existing obj-slot invalidated-reader value-read-type domain-read-type) "daqStreamReader_createStreamReaderFromExisting")
     (cffi:mem-ref obj-slot 'daq-stream-reader)
@@ -18992,7 +17479,6 @@
   )
 
 (defun stream-reader/create-stream-reader-from-port (port value-read-type domain-read-type read-mode timeout-type)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-stream-reader)
     (%check-error (%daq-stream-reader-create-stream-reader-from-port obj-slot port value-read-type domain-read-type read-mode timeout-type) "daqStreamReader_createStreamReaderFromPort")
     (cffi:mem-ref obj-slot 'daq-stream-reader)
@@ -19004,7 +17490,6 @@
   )
 
 (defun stream-reader/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-stream-reader-get-interface-id intf-id)
   nil)
 
@@ -19017,7 +17502,6 @@
   )
 
 (defun stream-reader/read (self samples count timeout-ms)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (count-slot 'daq-size-t)
     (cffi:with-foreign-object (status-slot 'daq-reader-status)
       (setf (cffi:mem-ref count-slot 'daq-size-t) count)
@@ -19037,7 +17521,6 @@
   )
 
 (defun stream-reader/read-with-domain (self samples domain count timeout-ms)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (count-slot 'daq-size-t)
     (cffi:with-foreign-object (status-slot 'daq-reader-status)
       (setf (cffi:mem-ref count-slot 'daq-size-t) count)
@@ -19054,7 +17537,6 @@
   )
 
 (defun stream-reader/skip-samples (self count)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (count-slot 'daq-size-t)
     (cffi:with-foreign-object (status-slot 'daq-reader-status)
       (setf (cffi:mem-ref count-slot 'daq-size-t) count)
@@ -19074,7 +17556,6 @@
   )
 
 (defun streaming-type/create-streaming-type (id name description prefix default-config)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-streaming-type)
     (%check-error (%daq-streaming-type-create-streaming-type obj-slot id name description prefix default-config) "daqStreamingType_createStreamingType")
     (cffi:mem-ref obj-slot 'daq-streaming-type)
@@ -19087,7 +17568,6 @@
   )
 
 (defun streaming-type/get-connection-string-prefix (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (prefix-slot 'daq-string)
     (%check-error (%daq-streaming-type-get-connection-string-prefix self prefix-slot) "daqStreamingType_getConnectionStringPrefix")
     (cffi:mem-ref prefix-slot 'daq-string)
@@ -19099,7 +17579,6 @@
   )
 
 (defun streaming-type/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-streaming-type-get-interface-id intf-id)
   nil)
 
@@ -19109,7 +17588,6 @@
   )
 
 (defun streaming/add-input-ports (self input-ports)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-streaming-add-input-ports self input-ports) "daqStreaming_addInputPorts")
   nil
 )
@@ -19120,7 +17598,6 @@
   )
 
 (defun streaming/add-signals (self signals)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-streaming-add-signals self signals) "daqStreaming_addSignals")
   nil
 )
@@ -19131,7 +17608,6 @@
   )
 
 (defun streaming/get-active (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (active-slot 'daq-bool)
     (%check-error (%daq-streaming-get-active self active-slot) "daqStreaming_getActive")
     (cffi:mem-ref active-slot 'daq-bool)
@@ -19144,7 +17620,6 @@
   )
 
 (defun streaming/get-client-to-device-streaming-enabled (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (enabled-slot 'daq-bool)
     (%check-error (%daq-streaming-get-client-to-device-streaming-enabled self enabled-slot) "daqStreaming_getClientToDeviceStreamingEnabled")
     (cffi:mem-ref enabled-slot 'daq-bool)
@@ -19157,7 +17632,6 @@
   )
 
 (defun streaming/get-connection-status (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (connection-status-slot 'daq-enumeration)
     (%check-error (%daq-streaming-get-connection-status self connection-status-slot) "daqStreaming_getConnectionStatus")
     (cffi:mem-ref connection-status-slot 'daq-enumeration)
@@ -19170,7 +17644,6 @@
   )
 
 (defun streaming/get-connection-string (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (connection-string-slot 'daq-string)
     (%check-error (%daq-streaming-get-connection-string self connection-string-slot) "daqStreaming_getConnectionString")
     (cffi:mem-ref connection-string-slot 'daq-string)
@@ -19182,7 +17655,6 @@
   )
 
 (defun streaming/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-streaming-get-interface-id intf-id)
   nil)
 
@@ -19192,7 +17664,6 @@
   )
 
 (defun streaming/get-owner-device-remote-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (device-remote-id-slot 'daq-string)
     (%check-error (%daq-streaming-get-owner-device-remote-id self device-remote-id-slot) "daqStreaming_getOwnerDeviceRemoteId")
     (cffi:mem-ref device-remote-id-slot 'daq-string)
@@ -19205,7 +17676,6 @@
   )
 
 (defun streaming/get-protocol-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (protocol-id-slot 'daq-string)
     (%check-error (%daq-streaming-get-protocol-id self protocol-id-slot) "daqStreaming_getProtocolId")
     (cffi:mem-ref protocol-id-slot 'daq-string)
@@ -19217,7 +17687,6 @@
   )
 
 (defun streaming/remove-all-input-ports (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-streaming-remove-all-input-ports self) "daqStreaming_removeAllInputPorts")
   nil
 )
@@ -19227,7 +17696,6 @@
   )
 
 (defun streaming/remove-all-signals (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-streaming-remove-all-signals self) "daqStreaming_removeAllSignals")
   nil
 )
@@ -19238,7 +17706,6 @@
   )
 
 (defun streaming/remove-input-ports (self input-ports)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-streaming-remove-input-ports self input-ports) "daqStreaming_removeInputPorts")
   nil
 )
@@ -19249,7 +17716,6 @@
   )
 
 (defun streaming/remove-signals (self signals)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-streaming-remove-signals self signals) "daqStreaming_removeSignals")
   nil
 )
@@ -19260,7 +17726,6 @@
   )
 
 (defun streaming/set-active (self active)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-streaming-set-active self active) "daqStreaming_setActive")
   nil
 )
@@ -19271,7 +17736,6 @@
   )
 
 (defun string/create-string (str)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-string)
     (%check-error (%daq-string-create-string obj-slot str) "daqString_createString")
     (cffi:mem-ref obj-slot 'daq-string)
@@ -19285,7 +17749,6 @@
   )
 
 (defun string/create-string-n (str length)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-string)
     (%check-error (%daq-string-create-string-n obj-slot str length) "daqString_createStringN")
     (cffi:mem-ref obj-slot 'daq-string)
@@ -19298,7 +17761,6 @@
   )
 
 (defun string/get-char-ptr (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-const-char-ptr)
     (%check-error (%daq-string-get-char-ptr self value-slot) "daqString_getCharPtr")
     (cffi:mem-ref value-slot 'daq-const-char-ptr)
@@ -19310,7 +17772,6 @@
   )
 
 (defun string/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-string-get-interface-id intf-id)
   nil)
 
@@ -19320,7 +17781,6 @@
   )
 
 (defun string/get-length (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (size-slot 'daq-size-t)
     (%check-error (%daq-string-get-length self size-slot) "daqString_getLength")
     (cffi:mem-ref size-slot 'daq-size-t)
@@ -19333,7 +17793,6 @@
   )
 
 (defun struct-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (struct-slot 'daq-struct)
     (%check-error (%daq-struct-builder-build self struct-slot) "daqStructBuilder_build")
     (cffi:mem-ref struct-slot 'daq-struct)
@@ -19347,7 +17806,6 @@
   )
 
 (defun struct-builder/create-struct-builder (name type-manager)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-struct-builder)
     (%check-error (%daq-struct-builder-create-struct-builder obj-slot name type-manager) "daqStructBuilder_createStructBuilder")
     (cffi:mem-ref obj-slot 'daq-struct-builder)
@@ -19360,7 +17818,6 @@
   )
 
 (defun struct-builder/create-struct-builder-from-struct (struct)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-struct-builder)
     (%check-error (%daq-struct-builder-create-struct-builder-from-struct obj-slot struct) "daqStructBuilder_createStructBuilderFromStruct")
     (cffi:mem-ref obj-slot 'daq-struct-builder)
@@ -19374,7 +17831,6 @@
   )
 
 (defun struct-builder/get (self name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (field-slot 'daq-base-object)
     (%check-error (%daq-struct-builder-get self name field-slot) "daqStructBuilder_get")
     (cffi:mem-ref field-slot 'daq-base-object)
@@ -19387,7 +17843,6 @@
   )
 
 (defun struct-builder/get-as-dictionary (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (dictionary-slot 'daq-dict)
     (%check-error (%daq-struct-builder-get-as-dictionary self dictionary-slot) "daqStructBuilder_getAsDictionary")
     (cffi:mem-ref dictionary-slot 'daq-dict)
@@ -19400,7 +17855,6 @@
   )
 
 (defun struct-builder/get-field-names (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (names-slot 'daq-list)
     (%check-error (%daq-struct-builder-get-field-names self names-slot) "daqStructBuilder_getFieldNames")
     (cffi:mem-ref names-slot 'daq-list)
@@ -19413,7 +17867,6 @@
   )
 
 (defun struct-builder/get-field-values (self values)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-struct-builder-get-field-values self values) "daqStructBuilder_getFieldValues")
   nil
 )
@@ -19423,7 +17876,6 @@
   )
 
 (defun struct-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-struct-builder-get-interface-id intf-id)
   nil)
 
@@ -19433,7 +17885,6 @@
   )
 
 (defun struct-builder/get-struct-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-struct-type)
     (%check-error (%daq-struct-builder-get-struct-type self type-slot) "daqStructBuilder_getStructType")
     (cffi:mem-ref type-slot 'daq-struct-type)
@@ -19447,7 +17898,6 @@
   )
 
 (defun struct-builder/has-field (self name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (contains-slot 'daq-bool)
     (%check-error (%daq-struct-builder-has-field self name contains-slot) "daqStructBuilder_hasField")
     (cffi:mem-ref contains-slot 'daq-bool)
@@ -19461,7 +17911,6 @@
   )
 
 (defun struct-builder/set (self name field)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-struct-builder-set self name field) "daqStructBuilder_set")
   nil
 )
@@ -19472,7 +17921,6 @@
   )
 
 (defun struct-builder/set-field-values (self values)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-struct-builder-set-field-values self values) "daqStructBuilder_setFieldValues")
   nil
 )
@@ -19486,7 +17934,6 @@
   )
 
 (defun struct-type/create-struct-type (name names default-values types)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-struct-type)
     (%check-error (%daq-struct-type-create-struct-type obj-slot name names default-values types) "daqStructType_createStructType")
     (cffi:mem-ref obj-slot 'daq-struct-type)
@@ -19501,7 +17948,6 @@
   )
 
 (defun struct-type/create-struct-type-no-defaults (name names types)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-struct-type)
     (%check-error (%daq-struct-type-create-struct-type-no-defaults obj-slot name names types) "daqStructType_createStructTypeNoDefaults")
     (cffi:mem-ref obj-slot 'daq-struct-type)
@@ -19514,7 +17960,6 @@
   )
 
 (defun struct-type/get-field-default-values (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (default-values-slot 'daq-list)
     (%check-error (%daq-struct-type-get-field-default-values self default-values-slot) "daqStructType_getFieldDefaultValues")
     (cffi:mem-ref default-values-slot 'daq-list)
@@ -19527,7 +17972,6 @@
   )
 
 (defun struct-type/get-field-names (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (names-slot 'daq-list)
     (%check-error (%daq-struct-type-get-field-names self names-slot) "daqStructType_getFieldNames")
     (cffi:mem-ref names-slot 'daq-list)
@@ -19540,7 +17984,6 @@
   )
 
 (defun struct-type/get-field-types (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (types-slot 'daq-list)
     (%check-error (%daq-struct-type-get-field-types self types-slot) "daqStructType_getFieldTypes")
     (cffi:mem-ref types-slot 'daq-list)
@@ -19552,7 +17995,6 @@
   )
 
 (defun struct-type/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-struct-type-get-interface-id intf-id)
   nil)
 
@@ -19564,7 +18006,6 @@
   )
 
 (defun struct/create-struct (name fields type-manager)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-struct)
     (%check-error (%daq-struct-create-struct obj-slot name fields type-manager) "daqStruct_createStruct")
     (cffi:mem-ref obj-slot 'daq-struct)
@@ -19577,7 +18018,6 @@
   )
 
 (defun struct/create-struct-from-builder (builder)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-struct)
     (%check-error (%daq-struct-create-struct-from-builder obj-slot builder) "daqStruct_createStructFromBuilder")
     (cffi:mem-ref obj-slot 'daq-struct)
@@ -19591,7 +18031,6 @@
   )
 
 (defun struct/get (self name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (field-slot 'daq-base-object)
     (%check-error (%daq-struct-get self name field-slot) "daqStruct_get")
     (cffi:mem-ref field-slot 'daq-base-object)
@@ -19604,7 +18043,6 @@
   )
 
 (defun struct/get-as-dictionary (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (dictionary-slot 'daq-dict)
     (%check-error (%daq-struct-get-as-dictionary self dictionary-slot) "daqStruct_getAsDictionary")
     (cffi:mem-ref dictionary-slot 'daq-dict)
@@ -19617,7 +18055,6 @@
   )
 
 (defun struct/get-field-names (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (names-slot 'daq-list)
     (%check-error (%daq-struct-get-field-names self names-slot) "daqStruct_getFieldNames")
     (cffi:mem-ref names-slot 'daq-list)
@@ -19630,7 +18067,6 @@
   )
 
 (defun struct/get-field-values (self values)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-struct-get-field-values self values) "daqStruct_getFieldValues")
   nil
 )
@@ -19640,7 +18076,6 @@
   )
 
 (defun struct/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-struct-get-interface-id intf-id)
   nil)
 
@@ -19650,7 +18085,6 @@
   )
 
 (defun struct/get-struct-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-struct-type)
     (%check-error (%daq-struct-get-struct-type self type-slot) "daqStruct_getStructType")
     (cffi:mem-ref type-slot 'daq-struct-type)
@@ -19664,7 +18098,6 @@
   )
 
 (defun struct/has-field (self name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (contains-slot 'daq-bool)
     (%check-error (%daq-struct-has-field self name contains-slot) "daqStruct_hasField")
     (cffi:mem-ref contains-slot 'daq-bool)
@@ -19678,7 +18111,6 @@
   )
 
 (defun subscription-event-args/create-subscription-event-args (streaming-connection-string type)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-subscription-event-args)
     (%check-error (%daq-subscription-event-args-create-subscription-event-args obj-slot streaming-connection-string type) "daqSubscriptionEventArgs_createSubscriptionEventArgs")
     (cffi:mem-ref obj-slot 'daq-subscription-event-args)
@@ -19690,7 +18122,6 @@
   )
 
 (defun subscription-event-args/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-subscription-event-args-get-interface-id intf-id)
   nil)
 
@@ -19700,7 +18131,6 @@
   )
 
 (defun subscription-event-args/get-streaming-connection-string (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (streaming-connection-string-slot 'daq-string)
     (%check-error (%daq-subscription-event-args-get-streaming-connection-string self streaming-connection-string-slot) "daqSubscriptionEventArgs_getStreamingConnectionString")
     (cffi:mem-ref streaming-connection-string-slot 'daq-string)
@@ -19713,7 +18143,6 @@
   )
 
 (defun subscription-event-args/get-subscription-event-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-subscription-event-type)
     (%check-error (%daq-subscription-event-args-get-subscription-event-type self type-slot) "daqSubscriptionEventArgs_getSubscriptionEventType")
     (cffi:mem-ref type-slot 'daq-subscription-event-type)
@@ -19726,7 +18155,6 @@
   )
 
 (defun sync-component-private/add-interface (self sync-interface)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-sync-component-private-add-interface self sync-interface) "daqSyncComponentPrivate_addInterface")
   nil
 )
@@ -19736,7 +18164,6 @@
   )
 
 (defun sync-component-private/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-sync-component-private-get-interface-id intf-id)
   nil)
 
@@ -19746,7 +18173,6 @@
   )
 
 (defun sync-component-private/remove-interface (self sync-interface-name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-sync-component-private-remove-interface self sync-interface-name) "daqSyncComponentPrivate_removeInterface")
   nil
 )
@@ -19757,7 +18183,6 @@
   )
 
 (defun sync-component-private/set-sync-locked (self synchronization-locked)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-sync-component-private-set-sync-locked self synchronization-locked) "daqSyncComponentPrivate_setSyncLocked")
   nil
 )
@@ -19770,7 +18195,6 @@
   )
 
 (defun sync-component/create-sync-component (context parse-failed-exception local-id)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-sync-component)
     (%check-error (%daq-sync-component-create-sync-component obj-slot context parse-failed-exception local-id) "daqSyncComponent_createSyncComponent")
     (cffi:mem-ref obj-slot 'daq-sync-component)
@@ -19782,7 +18206,6 @@
   )
 
 (defun sync-component/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-sync-component-get-interface-id intf-id)
   nil)
 
@@ -19792,7 +18215,6 @@
   )
 
 (defun sync-component/get-interfaces (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (interfaces-slot 'daq-dict)
     (%check-error (%daq-sync-component-get-interfaces self interfaces-slot) "daqSyncComponent_getInterfaces")
     (cffi:mem-ref interfaces-slot 'daq-dict)
@@ -19805,7 +18227,6 @@
   )
 
 (defun sync-component/get-selected-source (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (selected-source-slot 'daq-int)
     (%check-error (%daq-sync-component-get-selected-source self selected-source-slot) "daqSyncComponent_getSelectedSource")
     (cffi:mem-ref selected-source-slot 'daq-int)
@@ -19818,7 +18239,6 @@
   )
 
 (defun sync-component/get-sync-locked (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (synchronization-locked-slot 'daq-bool)
     (%check-error (%daq-sync-component-get-sync-locked self synchronization-locked-slot) "daqSyncComponent_getSyncLocked")
     (cffi:mem-ref synchronization-locked-slot 'daq-bool)
@@ -19831,7 +18251,6 @@
   )
 
 (defun sync-component/set-selected-source (self selected-source)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-sync-component-set-selected-source self selected-source) "daqSyncComponent_setSelectedSource")
   nil
 )
@@ -19842,7 +18261,6 @@
   )
 
 (defun tags-private/add (self name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-tags-private-add self name) "daqTagsPrivate_add")
   nil
 )
@@ -19852,7 +18270,6 @@
   )
 
 (defun tags-private/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-tags-private-get-interface-id intf-id)
   nil)
 
@@ -19862,7 +18279,6 @@
   )
 
 (defun tags-private/remove (self name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-tags-private-remove self name) "daqTagsPrivate_remove")
   nil
 )
@@ -19873,7 +18289,6 @@
   )
 
 (defun tags-private/replace (self tags)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-tags-private-replace self tags) "daqTagsPrivate_replace")
   nil
 )
@@ -19885,7 +18300,6 @@
   )
 
 (defun tags/contains (self name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-bool)
     (%check-error (%daq-tags-contains self name value-slot) "daqTags_contains")
     (cffi:mem-ref value-slot 'daq-bool)
@@ -19897,7 +18311,6 @@
   )
 
 (defun tags/create-tags ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-tags)
     (%check-error (%daq-tags-create-tags obj-slot) "daqTags_createTags")
     (cffi:mem-ref obj-slot 'daq-tags)
@@ -19909,7 +18322,6 @@
   )
 
 (defun tags/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-tags-get-interface-id intf-id)
   nil)
 
@@ -19919,7 +18331,6 @@
   )
 
 (defun tags/get-list (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-list)
     (%check-error (%daq-tags-get-list self value-slot) "daqTags_getList")
     (cffi:mem-ref value-slot 'daq-list)
@@ -19933,7 +18344,6 @@
   )
 
 (defun tags/query (self query)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (value-slot 'daq-bool)
     (%check-error (%daq-tags-query self query value-slot) "daqTags_query")
     (cffi:mem-ref value-slot 'daq-bool)
@@ -19946,7 +18356,6 @@
   )
 
 (defun tail-reader-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (tail-reader-slot 'daq-tail-reader)
     (%check-error (%daq-tail-reader-builder-build self tail-reader-slot) "daqTailReaderBuilder_build")
     (cffi:mem-ref tail-reader-slot 'daq-tail-reader)
@@ -19958,7 +18367,6 @@
   )
 
 (defun tail-reader-builder/create-tail-reader-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-tail-reader-builder)
     (%check-error (%daq-tail-reader-builder-create-tail-reader-builder obj-slot) "daqTailReaderBuilder_createTailReaderBuilder")
     (cffi:mem-ref obj-slot 'daq-tail-reader-builder)
@@ -19971,7 +18379,6 @@
   )
 
 (defun tail-reader-builder/get-domain-read-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-sample-type)
     (%check-error (%daq-tail-reader-builder-get-domain-read-type self type-slot) "daqTailReaderBuilder_getDomainReadType")
     (cffi:mem-ref type-slot 'daq-sample-type)
@@ -19984,7 +18391,6 @@
   )
 
 (defun tail-reader-builder/get-history-size (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (history-size-slot 'daq-size-t)
     (%check-error (%daq-tail-reader-builder-get-history-size self history-size-slot) "daqTailReaderBuilder_getHistorySize")
     (cffi:mem-ref history-size-slot 'daq-size-t)
@@ -19997,7 +18403,6 @@
   )
 
 (defun tail-reader-builder/get-input-port (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (port-slot 'daq-input-port)
     (%check-error (%daq-tail-reader-builder-get-input-port self port-slot) "daqTailReaderBuilder_getInputPort")
     (cffi:mem-ref port-slot 'daq-input-port)
@@ -20009,7 +18414,6 @@
   )
 
 (defun tail-reader-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-tail-reader-builder-get-interface-id intf-id)
   nil)
 
@@ -20019,7 +18423,6 @@
   )
 
 (defun tail-reader-builder/get-read-mode (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (mode-slot 'daq-read-mode)
     (%check-error (%daq-tail-reader-builder-get-read-mode self mode-slot) "daqTailReaderBuilder_getReadMode")
     (cffi:mem-ref mode-slot 'daq-read-mode)
@@ -20032,7 +18435,6 @@
   )
 
 (defun tail-reader-builder/get-signal (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (signal-slot 'daq-signal)
     (%check-error (%daq-tail-reader-builder-get-signal self signal-slot) "daqTailReaderBuilder_getSignal")
     (cffi:mem-ref signal-slot 'daq-signal)
@@ -20045,7 +18447,6 @@
   )
 
 (defun tail-reader-builder/get-skip-events (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (skip-events-slot 'daq-bool)
     (%check-error (%daq-tail-reader-builder-get-skip-events self skip-events-slot) "daqTailReaderBuilder_getSkipEvents")
     (cffi:mem-ref skip-events-slot 'daq-bool)
@@ -20058,7 +18459,6 @@
   )
 
 (defun tail-reader-builder/get-value-read-type (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-sample-type)
     (%check-error (%daq-tail-reader-builder-get-value-read-type self type-slot) "daqTailReaderBuilder_getValueReadType")
     (cffi:mem-ref type-slot 'daq-sample-type)
@@ -20071,7 +18471,6 @@
   )
 
 (defun tail-reader-builder/set-domain-read-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-tail-reader-builder-set-domain-read-type self type) "daqTailReaderBuilder_setDomainReadType")
   nil
 )
@@ -20082,7 +18481,6 @@
   )
 
 (defun tail-reader-builder/set-history-size (self history-size)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-tail-reader-builder-set-history-size self history-size) "daqTailReaderBuilder_setHistorySize")
   nil
 )
@@ -20093,7 +18491,6 @@
   )
 
 (defun tail-reader-builder/set-input-port (self port)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-tail-reader-builder-set-input-port self port) "daqTailReaderBuilder_setInputPort")
   nil
 )
@@ -20104,7 +18501,6 @@
   )
 
 (defun tail-reader-builder/set-read-mode (self mode)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-tail-reader-builder-set-read-mode self mode) "daqTailReaderBuilder_setReadMode")
   nil
 )
@@ -20115,7 +18511,6 @@
   )
 
 (defun tail-reader-builder/set-signal (self signal)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-tail-reader-builder-set-signal self signal) "daqTailReaderBuilder_setSignal")
   nil
 )
@@ -20126,7 +18521,6 @@
   )
 
 (defun tail-reader-builder/set-skip-events (self skip-events)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-tail-reader-builder-set-skip-events self skip-events) "daqTailReaderBuilder_setSkipEvents")
   nil
 )
@@ -20137,7 +18531,6 @@
   )
 
 (defun tail-reader-builder/set-value-read-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-tail-reader-builder-set-value-read-type self type) "daqTailReaderBuilder_setValueReadType")
   nil
 )
@@ -20151,7 +18544,6 @@
   )
 
 (defun tail-reader-status/create-tail-reader-status (event-packet valid offset sufficient-history)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-tail-reader-status)
     (%check-error (%daq-tail-reader-status-create-tail-reader-status obj-slot event-packet valid offset sufficient-history) "daqTailReaderStatus_createTailReaderStatus")
     (cffi:mem-ref obj-slot 'daq-tail-reader-status)
@@ -20163,7 +18555,6 @@
   )
 
 (defun tail-reader-status/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-tail-reader-status-get-interface-id intf-id)
   nil)
 
@@ -20173,7 +18564,6 @@
   )
 
 (defun tail-reader-status/get-sufficient-history (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (status-slot 'daq-bool)
     (%check-error (%daq-tail-reader-status-get-sufficient-history self status-slot) "daqTailReaderStatus_getSufficientHistory")
     (cffi:mem-ref status-slot 'daq-bool)
@@ -20190,7 +18580,6 @@
   )
 
 (defun tail-reader/create-tail-reader (signal history-size value-read-type domain-read-type mode)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-tail-reader)
     (%check-error (%daq-tail-reader-create-tail-reader obj-slot signal history-size value-read-type domain-read-type mode) "daqTailReader_createTailReader")
     (cffi:mem-ref obj-slot 'daq-tail-reader)
@@ -20206,7 +18595,6 @@
   )
 
 (defun tail-reader/create-tail-reader-from-existing (invalidated-reader history-size value-read-type domain-read-type)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-tail-reader)
     (%check-error (%daq-tail-reader-create-tail-reader-from-existing obj-slot invalidated-reader history-size value-read-type domain-read-type) "daqTailReader_createTailReaderFromExisting")
     (cffi:mem-ref obj-slot 'daq-tail-reader)
@@ -20223,7 +18611,6 @@
   )
 
 (defun tail-reader/create-tail-reader-from-port (port history-size value-read-type domain-read-type mode)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-tail-reader)
     (%check-error (%daq-tail-reader-create-tail-reader-from-port obj-slot port history-size value-read-type domain-read-type mode) "daqTailReader_createTailReaderFromPort")
     (cffi:mem-ref obj-slot 'daq-tail-reader)
@@ -20236,7 +18623,6 @@
   )
 
 (defun tail-reader/get-history-size (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (size-slot 'daq-size-t)
     (%check-error (%daq-tail-reader-get-history-size self size-slot) "daqTailReader_getHistorySize")
     (cffi:mem-ref size-slot 'daq-size-t)
@@ -20248,7 +18634,6 @@
   )
 
 (defun tail-reader/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-tail-reader-get-interface-id intf-id)
   nil)
 
@@ -20260,7 +18645,6 @@
   )
 
 (defun tail-reader/read (self values count)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (count-slot 'daq-size-t)
     (cffi:with-foreign-object (status-slot 'daq-tail-reader-status)
       (setf (cffi:mem-ref count-slot 'daq-size-t) count)
@@ -20279,7 +18663,6 @@
   )
 
 (defun tail-reader/read-with-domain (self values domain count)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (count-slot 'daq-size-t)
     (cffi:with-foreign-object (status-slot 'daq-tail-reader-status)
       (setf (cffi:mem-ref count-slot 'daq-size-t) count)
@@ -20296,7 +18679,6 @@
   )
 
 (defun task-graph/create-task-graph (work name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-task-graph)
     (%check-error (%daq-task-graph-create-task-graph obj-slot work name) "daqTaskGraph_createTaskGraph")
     (cffi:mem-ref obj-slot 'daq-task-graph)
@@ -20308,7 +18690,6 @@
   )
 
 (defun task-graph/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-task-graph-get-interface-id intf-id)
   nil)
 
@@ -20319,7 +18700,6 @@
   )
 
 (defun task/create-task (work name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-task)
     (%check-error (%daq-task-create-task obj-slot work name) "daqTask_createTask")
     (cffi:mem-ref obj-slot 'daq-task)
@@ -20331,7 +18711,6 @@
   )
 
 (defun task/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-task-get-interface-id intf-id)
   nil)
 
@@ -20341,7 +18720,6 @@
   )
 
 (defun task/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-task-get-name self name-slot) "daqTask_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -20354,7 +18732,6 @@
   )
 
 (defun task/set-name (self name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-task-set-name self name) "daqTask_setName")
   nil
 )
@@ -20365,7 +18742,6 @@
   )
 
 (defun task/then (self continuation)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-task-then self continuation) "daqTask_then")
   nil
 )
@@ -20375,7 +18751,6 @@
   )
 
 (defun type-manager-private/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-type-manager-private-get-interface-id intf-id)
   nil)
 
@@ -20385,7 +18760,6 @@
   )
 
 (defun type-manager-private/set-core-event-callback (self callback)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-type-manager-private-set-core-event-callback self callback) "daqTypeManagerPrivate_setCoreEventCallback")
   nil
 )
@@ -20396,7 +18770,6 @@
   )
 
 (defun type-manager/add-type (self type)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-type-manager-add-type self type) "daqTypeManager_addType")
   nil
 )
@@ -20406,7 +18779,6 @@
   )
 
 (defun type-manager/create-type-manager ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-type-manager)
     (%check-error (%daq-type-manager-create-type-manager obj-slot) "daqTypeManager_createTypeManager")
     (cffi:mem-ref obj-slot 'daq-type-manager)
@@ -20418,7 +18790,6 @@
   )
 
 (defun type-manager/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-type-manager-get-interface-id intf-id)
   nil)
 
@@ -20429,7 +18800,6 @@
   )
 
 (defun type-manager/get-type (self type-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-slot 'daq-type)
     (%check-error (%daq-type-manager-get-type self type-name type-slot) "daqTypeManager_getType")
     (cffi:mem-ref type-slot 'daq-type)
@@ -20442,7 +18812,6 @@
   )
 
 (defun type-manager/get-types (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (types-slot 'daq-list)
     (%check-error (%daq-type-manager-get-types self types-slot) "daqTypeManager_getTypes")
     (cffi:mem-ref types-slot 'daq-list)
@@ -20456,7 +18825,6 @@
   )
 
 (defun type-manager/has-type (self type-name)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (has-type-slot 'daq-bool)
     (%check-error (%daq-type-manager-has-type self type-name has-type-slot) "daqTypeManager_hasType")
     (cffi:mem-ref has-type-slot 'daq-bool)
@@ -20469,7 +18837,6 @@
   )
 
 (defun type-manager/remove-type (self type-name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-type-manager-remove-type self type-name) "daqTypeManager_removeType")
   nil
 )
@@ -20479,7 +18846,6 @@
   )
 
 (defun type/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-type-get-interface-id intf-id)
   nil)
 
@@ -20489,7 +18855,6 @@
   )
 
 (defun type/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (type-name-slot 'daq-string)
     (%check-error (%daq-type-get-name self type-name-slot) "daqType_getName")
     (cffi:mem-ref type-name-slot 'daq-string)
@@ -20502,7 +18867,6 @@
   )
 
 (defun unit-builder/build (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (unit-slot 'daq-unit)
     (%check-error (%daq-unit-builder-build self unit-slot) "daqUnitBuilder_build")
     (cffi:mem-ref unit-slot 'daq-unit)
@@ -20514,7 +18878,6 @@
   )
 
 (defun unit-builder/create-unit-builder ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-unit-builder)
     (%check-error (%daq-unit-builder-create-unit-builder obj-slot) "daqUnitBuilder_createUnitBuilder")
     (cffi:mem-ref obj-slot 'daq-unit-builder)
@@ -20527,7 +18890,6 @@
   )
 
 (defun unit-builder/create-unit-builder-from-existing (unit-to-copy)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-unit-builder)
     (%check-error (%daq-unit-builder-create-unit-builder-from-existing obj-slot unit-to-copy) "daqUnitBuilder_createUnitBuilderFromExisting")
     (cffi:mem-ref obj-slot 'daq-unit-builder)
@@ -20540,7 +18902,6 @@
   )
 
 (defun unit-builder/get-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (id-slot 'daq-int)
     (%check-error (%daq-unit-builder-get-id self id-slot) "daqUnitBuilder_getId")
     (cffi:mem-ref id-slot 'daq-int)
@@ -20552,7 +18913,6 @@
   )
 
 (defun unit-builder/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-unit-builder-get-interface-id intf-id)
   nil)
 
@@ -20562,7 +18922,6 @@
   )
 
 (defun unit-builder/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-unit-builder-get-name self name-slot) "daqUnitBuilder_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -20575,7 +18934,6 @@
   )
 
 (defun unit-builder/get-quantity (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (quantity-slot 'daq-string)
     (%check-error (%daq-unit-builder-get-quantity self quantity-slot) "daqUnitBuilder_getQuantity")
     (cffi:mem-ref quantity-slot 'daq-string)
@@ -20588,7 +18946,6 @@
   )
 
 (defun unit-builder/get-symbol (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (symbol-slot 'daq-string)
     (%check-error (%daq-unit-builder-get-symbol self symbol-slot) "daqUnitBuilder_getSymbol")
     (cffi:mem-ref symbol-slot 'daq-string)
@@ -20601,7 +18958,6 @@
   )
 
 (defun unit-builder/set-id (self id)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-unit-builder-set-id self id) "daqUnitBuilder_setId")
   nil
 )
@@ -20612,7 +18968,6 @@
   )
 
 (defun unit-builder/set-name (self name)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-unit-builder-set-name self name) "daqUnitBuilder_setName")
   nil
 )
@@ -20623,7 +18978,6 @@
   )
 
 (defun unit-builder/set-quantity (self quantity)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-unit-builder-set-quantity self quantity) "daqUnitBuilder_setQuantity")
   nil
 )
@@ -20634,7 +18988,6 @@
   )
 
 (defun unit-builder/set-symbol (self symbol)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-unit-builder-set-symbol self symbol) "daqUnitBuilder_setSymbol")
   nil
 )
@@ -20648,7 +19001,6 @@
   )
 
 (defun unit/create-unit (id symbol name quantity)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-unit)
     (%check-error (%daq-unit-create-unit obj-slot id symbol name quantity) "daqUnit_createUnit")
     (cffi:mem-ref obj-slot 'daq-unit)
@@ -20661,7 +19013,6 @@
   )
 
 (defun unit/get-id (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (id-slot 'daq-int)
     (%check-error (%daq-unit-get-id self id-slot) "daqUnit_getId")
     (cffi:mem-ref id-slot 'daq-int)
@@ -20673,7 +19024,6 @@
   )
 
 (defun unit/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-unit-get-interface-id intf-id)
   nil)
 
@@ -20683,7 +19033,6 @@
   )
 
 (defun unit/get-name (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (name-slot 'daq-string)
     (%check-error (%daq-unit-get-name self name-slot) "daqUnit_getName")
     (cffi:mem-ref name-slot 'daq-string)
@@ -20696,7 +19045,6 @@
   )
 
 (defun unit/get-quantity (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (quantity-slot 'daq-string)
     (%check-error (%daq-unit-get-quantity self quantity-slot) "daqUnit_getQuantity")
     (cffi:mem-ref quantity-slot 'daq-string)
@@ -20709,7 +19057,6 @@
   )
 
 (defun unit/get-symbol (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (symbol-slot 'daq-string)
     (%check-error (%daq-unit-get-symbol self symbol-slot) "daqUnit_getSymbol")
     (cffi:mem-ref symbol-slot 'daq-string)
@@ -20721,7 +19068,6 @@
   )
 
 (defun updatable/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-updatable-get-interface-id intf-id)
   nil)
 
@@ -20731,7 +19077,6 @@
   )
 
 (defun updatable/serialize-for-update (self serializer)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-updatable-serialize-for-update self serializer) "daqUpdatable_serializeForUpdate")
   nil
 )
@@ -20743,7 +19088,6 @@
   )
 
 (defun updatable/update (self update config)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-updatable-update self update config) "daqUpdatable_update")
   nil
 )
@@ -20754,7 +19098,6 @@
   )
 
 (defun updatable/update-ended (self context)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-updatable-update-ended self context) "daqUpdatable_updateEnded")
   nil
 )
@@ -20766,7 +19109,6 @@
   )
 
 (defun updatable/update-internal (self update context)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-updatable-update-internal self update context) "daqUpdatable_updateInternal")
   nil
 )
@@ -20776,7 +19118,6 @@
   )
 
 (defun update-parameters/create-update-parameters ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-update-parameters)
     (%check-error (%daq-update-parameters-create-update-parameters obj-slot) "daqUpdateParameters_createUpdateParameters")
     (cffi:mem-ref obj-slot 'daq-update-parameters)
@@ -20789,7 +19130,6 @@
   )
 
 (defun update-parameters/get-device-update-options (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (options-slot 'daq-device-update-options)
     (%check-error (%daq-update-parameters-get-device-update-options self options-slot) "daqUpdateParameters_getDeviceUpdateOptions")
     (cffi:mem-ref options-slot 'daq-device-update-options)
@@ -20801,7 +19141,6 @@
   )
 
 (defun update-parameters/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-update-parameters-get-interface-id intf-id)
   nil)
 
@@ -20811,7 +19150,6 @@
   )
 
 (defun update-parameters/set-device-update-options (self options)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-update-parameters-set-device-update-options self options) "daqUpdateParameters_setDeviceUpdateOptions")
   nil
 )
@@ -20821,7 +19159,6 @@
   )
 
 (defun user-internal/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-user-internal-get-interface-id intf-id)
   nil)
 
@@ -20831,7 +19168,6 @@
   )
 
 (defun user-internal/get-password-hash (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (password-hash-slot 'daq-string)
     (%check-error (%daq-user-internal-get-password-hash self password-hash-slot) "daqUserInternal_getPasswordHash")
     (cffi:mem-ref password-hash-slot 'daq-string)
@@ -20844,7 +19180,6 @@
   )
 
 (defun user-internal/is-anonymous (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (anonymous-slot 'daq-bool)
     (%check-error (%daq-user-internal-is-anonymous self anonymous-slot) "daqUserInternal_isAnonymous")
     (cffi:mem-ref anonymous-slot 'daq-bool)
@@ -20856,7 +19191,6 @@
   )
 
 (defun user-lock/create-user-lock ()
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-user-lock)
     (%check-error (%daq-user-lock-create-user-lock obj-slot) "daqUserLock_createUserLock")
     (cffi:mem-ref obj-slot 'daq-user-lock)
@@ -20868,7 +19202,6 @@
   )
 
 (defun user-lock/force-unlock (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-user-lock-force-unlock self) "daqUserLock_forceUnlock")
   nil
 )
@@ -20878,7 +19211,6 @@
   )
 
 (defun user-lock/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-user-lock-get-interface-id intf-id)
   nil)
 
@@ -20888,7 +19220,6 @@
   )
 
 (defun user-lock/is-locked (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (is-locked-out-slot 'daq-bool)
     (%check-error (%daq-user-lock-is-locked self is-locked-out-slot) "daqUserLock_isLocked")
     (cffi:mem-ref is-locked-out-slot 'daq-bool)
@@ -20901,7 +19232,6 @@
   )
 
 (defun user-lock/lock (self user)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-user-lock-lock self user) "daqUserLock_lock")
   nil
 )
@@ -20912,7 +19242,6 @@
   )
 
 (defun user-lock/unlock (self user)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-user-lock-unlock self user) "daqUserLock_unlock")
   nil
 )
@@ -20925,7 +19254,6 @@
   )
 
 (defun user/create-user (username password-hash groups)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-user)
     (%check-error (%daq-user-create-user obj-slot username password-hash groups) "daqUser_createUser")
     (cffi:mem-ref obj-slot 'daq-user)
@@ -20938,7 +19266,6 @@
   )
 
 (defun user/get-groups (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (groups-slot 'daq-list)
     (%check-error (%daq-user-get-groups self groups-slot) "daqUser_getGroups")
     (cffi:mem-ref groups-slot 'daq-list)
@@ -20950,7 +19277,6 @@
   )
 
 (defun user/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-user-get-interface-id intf-id)
   nil)
 
@@ -20960,7 +19286,6 @@
   )
 
 (defun user/get-username (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (username-slot 'daq-string)
     (%check-error (%daq-user-get-username self username-slot) "daqUser_getUsername")
     (cffi:mem-ref username-slot 'daq-string)
@@ -20973,7 +19298,6 @@
   )
 
 (defun validator/create-validator (eval)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-validator)
     (%check-error (%daq-validator-create-validator obj-slot eval) "daqValidator_createValidator")
     (cffi:mem-ref obj-slot 'daq-validator)
@@ -20986,7 +19310,6 @@
   )
 
 (defun validator/get-eval (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (eval-slot 'daq-string)
     (%check-error (%daq-validator-get-eval self eval-slot) "daqValidator_getEval")
     (cffi:mem-ref eval-slot 'daq-string)
@@ -20998,7 +19321,6 @@
   )
 
 (defun validator/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-validator-get-interface-id intf-id)
   nil)
 
@@ -21009,7 +19331,6 @@
   )
 
 (defun validator/validate (self prop-obj value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-validator-validate self prop-obj value) "daqValidator_validate")
   nil
 )
@@ -21021,7 +19342,6 @@
   )
 
 (defun validator/validate-no-lock (self prop-obj value)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-validator-validate-no-lock self prop-obj value) "daqValidator_validateNoLock")
   nil
 )
@@ -21034,7 +19354,6 @@
   )
 
 (defun version-info/create-version-info (major minor patch)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (obj-slot 'daq-version-info)
     (%check-error (%daq-version-info-create-version-info obj-slot major minor patch) "daqVersionInfo_createVersionInfo")
     (cffi:mem-ref obj-slot 'daq-version-info)
@@ -21046,7 +19365,6 @@
   )
 
 (defun version-info/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-version-info-get-interface-id intf-id)
   nil)
 
@@ -21056,7 +19374,6 @@
   )
 
 (defun version-info/get-major (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (major-slot 'daq-size-t)
     (%check-error (%daq-version-info-get-major self major-slot) "daqVersionInfo_getMajor")
     (cffi:mem-ref major-slot 'daq-size-t)
@@ -21069,7 +19386,6 @@
   )
 
 (defun version-info/get-minor (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (minor-slot 'daq-size-t)
     (%check-error (%daq-version-info-get-minor self minor-slot) "daqVersionInfo_getMinor")
     (cffi:mem-ref minor-slot 'daq-size-t)
@@ -21082,7 +19398,6 @@
   )
 
 (defun version-info/get-patch (self)
-  (ensure-opendaq-loaded)
   (cffi:with-foreign-object (patch-slot 'daq-size-t)
     (%check-error (%daq-version-info-get-patch self patch-slot) "daqVersionInfo_getPatch")
     (cffi:mem-ref patch-slot 'daq-size-t)
@@ -21094,7 +19409,6 @@
   )
 
 (defun work/execute (self)
-  (ensure-opendaq-loaded)
   (%check-error (%daq-work-execute self) "daqWork_execute")
   nil
 )
@@ -21104,7 +19418,6 @@
   )
 
 (defun work/get-interface-id (intf-id)
-  (ensure-opendaq-loaded)
   (%daq-work-get-interface-id intf-id)
   nil)
 

@@ -2,6 +2,7 @@
   (:nicknames #:daq)
   (:use #:cl)
   (:export #:clear-error-info
+           #:healthcheck
            #:ensure-opendaq-loaded
            #:make-daq-string
            #:native-library-directory

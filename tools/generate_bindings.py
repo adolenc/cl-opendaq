@@ -594,7 +594,6 @@ def emit_public_wrapper(function: FunctionInfo) -> list[str]:
     )
     arguments = " ".join(parameter.lisp_name for parameter in signature_parameters)
     lines = [f"(defun {function.public_lisp_name} ({arguments})"]
-    lines.append("  (ensure-opendaq-loaded)")
 
     if not auto_wrap:
         if function.return_spec == "daq-err-code":

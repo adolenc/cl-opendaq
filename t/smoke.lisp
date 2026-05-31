@@ -5,12 +5,10 @@
 (defun %probe-low-level-simulator ()
   (daq:with-daq-objects (builder module-path instance root-device connection-string device signals signal reader)
     (setf builder (daq:instance-builder/create-instance-builder))
-    (cffi:with-foreign-string (path (namestring (daq:native-library-directory)))
-      (setf module-path (daq:string/create-string path)))
+    (setf module-path (daq:make-daq-string (namestring (daq:native-library-directory))))
     (daq:instance-builder/set-module-path builder module-path)
     (daq:instance-builder/enable-standard-providers builder 1)
     (setf instance (daq:instance-builder/build builder))
-
     (setf root-device (daq:instance/get-root-device instance))
     (cffi:with-foreign-string (uri "daqref://device0")
       (setf connection-string (daq:string/create-string uri)))
@@ -48,6 +46,13 @@
         "Raw simplified numerator mismatch")
     (is (= 3 (daq:ratio/get-denominator raw-simplified))
         "Raw simplified denominator mismatch")))
+
+(test autoload-healthcheck
+  (let ((report (daq:healthcheck nil)))
+    (is (eq :loaded (getf report :status))
+        "Library should autoload during system load.")
+    (is (not (null (getf report :loaded-native-directory)))
+        "Healthcheck did not report a loaded native directory.")))
 
 (test simulator-probe
   (is (plusp (%probe-low-level-simulator))
