@@ -1,0 +1,38 @@
+name: Test
+
+'on':
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install SBCL
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends sbcl curl
+
+      - name: Install Quicklisp
+        shell: bash
+        run: |
+          curl --fail --silent --show-error --location \
+            https://beta.quicklisp.org/quicklisp.lisp \
+            --output quicklisp.lisp
+          sbcl --noinform --non-interactive \
+            --load quicklisp.lisp \
+            --eval '(quicklisp-quickstart:install :path (merge-pathnames #P"quicklisp/" (user-homedir-pathname)))'
+          printf '(load #P"%squicklisp/setup.lisp")\n' "$HOME/" > "$HOME/.sbclrc"
+
+      - name: Run tests
+        shell: bash
+        run: make test

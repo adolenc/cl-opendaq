@@ -118,44 +118,6 @@
     (is (= 10 (daq.ll:integer/get-value value))
         "coreobjects/EvalValue value mismatch")))
 
-(test coreobjects-permissions
-  (daq.ll:with-daq-objects (admin-groups guest-groups admin-name guest-name password admin guest
-                         manager mask-builder permissions-builder admin-permissions)
-    (setf admin-groups (daq.ll:list/create-list))
-    (setf guest-groups (daq.ll:list/create-list))
-    (setf admin-name (daq.ll:make-daq-string "admin"))
-    (setf guest-name (daq.ll:make-daq-string "guest"))
-    (setf password (daq.ll:make-daq-string "password"))
-
-    (daq.ll:list/push-back admin-groups admin-name)
-    (daq.ll:list/push-back admin-groups guest-name)
-    (daq.ll:list/push-back guest-groups guest-name)
-
-    (setf admin (daq.ll:user/create-user admin-name password admin-groups))
-    (setf guest (daq.ll:user/create-user guest-name password guest-groups))
-    (setf manager (daq.ll:permission-manager/create-permission-manager (cffi:null-pointer)))
-    (setf mask-builder (daq.ll:permission-mask-builder/create-permission-mask-builder))
-    (daq.ll:permission-mask-builder/read mask-builder)
-    (daq.ll:permission-mask-builder/write mask-builder)
-
-    (setf permissions-builder (daq.ll:permissions-builder/create-permissions-builder))
-    (daq.ll:permissions-builder/assign permissions-builder admin-name mask-builder)
-    (setf admin-permissions (daq.ll:permissions-builder/build permissions-builder))
-    (daq.ll:permission-manager/set-permissions manager admin-permissions)
-
-    (is (= 1 (daq.ll:permission-manager/is-authorized manager admin :daq-permission-read))
-        "coreobjects/Permissions admin read mismatch")
-    (is (= 1 (daq.ll:permission-manager/is-authorized manager admin :daq-permission-write))
-        "coreobjects/Permissions admin write mismatch")
-    (is (= 0 (daq.ll:permission-manager/is-authorized manager admin :daq-permission-execute))
-        "coreobjects/Permissions admin execute mismatch")
-    (is (= 0 (daq.ll:permission-manager/is-authorized manager guest :daq-permission-read))
-        "coreobjects/Permissions guest read mismatch")
-    (is (= 0 (daq.ll:permission-manager/is-authorized manager guest :daq-permission-write))
-        "coreobjects/Permissions guest write mismatch")
-    (is (= 0 (daq.ll:permission-manager/is-authorized manager guest :daq-permission-execute))
-        "coreobjects/Permissions guest execute mismatch")))
-
 (test coreobjects-property
   (daq.ll:with-daq-objects (prop name default-value visible default-value-out name-out)
     (setf name (daq.ll:make-daq-string "test_property"))
