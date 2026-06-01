@@ -25,7 +25,9 @@
   (:shadow #:ratio
            #:numerator
            #:denominator)
-  (:export #:clear-error-info
+  (:export #:as
+           #:as-list
+           #:clear-error-info
            #:ensure-opendaq-loaded
            #:healthcheck
            #:native-library-directory

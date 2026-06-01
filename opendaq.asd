@@ -10,7 +10,8 @@
                (:file "errors")
                (:file "utils")
                (:file "high-level-runtime")
-               (:file "generated/high-level-bindings"))
+               (:file "generated/high-level-bindings")
+               (:file "high-level-utils"))
   :in-order-to ((test-op (test-op "opendaq/tests"))))
 
 (asdf:defsystem "opendaq/tests"
