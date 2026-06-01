@@ -49,16 +49,6 @@ make clean    # remove bin/ and tmp/
 
 Override `OPENDAQ_REF` in the Makefile if you want a different upstream version. Override `OPENDAQ_RUNTIME_TRIPLE` if you want `make bindings`, `make repl`, and `make test` to use a different `bin/<platform>/` directory name.
 
-### GitHub Actions
-
-The repository also includes a manual GitHub Actions workflow at `.github/workflows/build-native-binaries.yml`. Run **Build native binaries** from the Actions tab to build the pinned openDAQ runtime for:
-
-- `bin/linux-x64/`
-- `bin/darwin-x64/`
-- `bin/windows-x64/`
-
-After all three builds finish, the workflow also refreshes those `bin/<platform>/` directories in the repository and pushes a commit back to the branch you ran it on. The artifacts are still uploaded as `opendaq-native-*` downloads in case you want to inspect them before or after the commit.
-
 ### Folder structure
 
 - `opendaq.asd` - ASDF system definition
