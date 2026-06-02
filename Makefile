@@ -6,7 +6,7 @@ OPENDAQ_SRC_DIR := $(TMP_DIR)/openDAQ
 OPENDAQ_BUILD_DIR := $(TMP_DIR)/build
 PYTHON ?= python3
 JOBS ?= $(shell nproc 2>/dev/null || echo 4)
-OPENDAQ_REF ?= 70104b729126ce17a76b7c795a306570b8a337b5
+OPENDAQ_REF ?= release/3.40
 GENERATED_BINDINGS := $(CURDIR)/generated/bindings.lisp
 GENERATED_HIGH_LEVEL_BINDINGS := $(CURDIR)/generated/high-level-bindings.lisp
 

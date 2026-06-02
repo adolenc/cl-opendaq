@@ -74,9 +74,9 @@ jobs:
             cmake_generator: Ninja
             cmake_build_type: Release
             cmake_extra_args: ""
-          - name: macOS x64
-            runner: macos-15-intel
-            runtime_triple: darwin-x64
+          - name: macOS arm64
+            runner: macos-15
+            runtime_triple: darwin-arm64
             cmake_generator: Ninja
             cmake_build_type: Release
             cmake_extra_args: "-DCMAKE_OSX_DEPLOYMENT_TARGET=10.15"
@@ -223,23 +223,23 @@ jobs:
             exit 1
           fi
 
-          for runtime_dir in linux-x64 darwin-x64 windows-x64; do
+          for runtime_dir in linux-x64 darwin-arm64 windows-x64; do
             if [ ! -d "staged-artifacts/bin/$runtime_dir" ]; then
               echo "Missing downloaded runtime directory bin/$runtime_dir." >&2
               exit 1
             fi
           done
 
-          rm -rf bin/linux-x64 bin/darwin-x64 bin/windows-x64
+          rm -rf bin/linux-x64 bin/darwin-arm64 bin/windows-x64
           mkdir -p bin
           cp -a staged-artifacts/bin/. bin/
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A bin/linux-x64 bin/darwin-x64 bin/windows-x64
+          git add -A bin/linux-x64 bin/darwin-arm64 bin/windows-x64
 
           staged_binaries="$(git diff --cached --name-only --diff-filter=AM -- \
-            bin/linux-x64 bin/darwin-x64 bin/windows-x64 | grep -E '\.(so|dll|dylib)$' || true)"
+            bin/linux-x64 bin/darwin-arm64 bin/windows-x64 | grep -E '\.(so|dll|dylib)$' || true)"
 
           if [ -n "$staged_binaries" ]; then
             printf '%s\n' "$staged_binaries" | while IFS= read -r binary; do
