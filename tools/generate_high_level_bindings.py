@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -67,7 +68,7 @@ CLASS_OVERRIDES = {
                 "(setf (module-path builder) (native-library-directory)) "
                 "builder)",
             ),
-        )
+        ),
     ),
     "stream-reader": ClassOverride(
         constructor_defaults=(
@@ -91,16 +92,11 @@ FUNCTION_OVERRIDES = {
         optional_defaults=(("search-filter", "nil"),)
     ),
     "function-block/get-signals": FunctionOverride(
-        specializer="managed-object",
         optional_defaults=(("search-filter", "nil"),),
     ),
     "function-block/get-signals-recursive": FunctionOverride(
-        specializer="managed-object",
         optional_defaults=(("search-filter", "nil"),),
     ),
-    "component/find-component": FunctionOverride(specializer="managed-object"),
-    "property-object/get-property-value": FunctionOverride(specializer="managed-object"),
-    "property-object/set-property-value": FunctionOverride(specializer="managed-object"),
 }
 
 
@@ -164,6 +160,132 @@ def classify_function(function: FunctionInfo) -> str:
             return "method"
         return "writer"
     return "method"
+
+
+HIERARCHY_CACHE: dict[str, str] | None = None
+
+
+def _scan_interface_hierarchy(cpp_root: Path) -> dict[str, str]:
+    """Extract class parent relationships from DECLARE_OPENDAQ_INTERFACE macros.
+
+    Returns a mapping from child lisp class name to parent lisp class name.
+    E.g. ``{"instance": "device", "device": "folder", ...}``.
+    """
+    def to_lisp_name(camel: str) -> str:
+        """Convert ``CamelCase`` to ``hyphenated-case``, then apply overrides."""
+        hyphenated = re.sub(r"([a-z])([A-Z])", r"\1-\2", camel).lower()
+        return CLASS_NAME_OVERRIDES.get(hyphenated, hyphenated)
+
+    hierarchy: dict[str, str] = {}
+    rx = re.compile(r"DECLARE_OPENDAQ_INTERFACE\s*\(\s*I(\w+)\s*,\s*I(\w+)\s*\)")
+    for header in sorted(cpp_root.rglob("*.h")):
+        if "gmock" in str(header) or "test" in str(header):
+            continue
+        try:
+            text = header.read_text(errors="ignore")
+        except OSError:
+            continue
+        for match in rx.finditer(text):
+            child = to_lisp_name(match.group(1))
+            parent = to_lisp_name(match.group(2))
+            hierarchy[child] = parent
+    return hierarchy
+
+
+def class_parent(class_name: str, cpp_root: Path | None = None) -> str:
+    """Return the parent class for *class_name*, or ``"managed-object"``."""
+    global HIERARCHY_CACHE
+    if HIERARCHY_CACHE is None:
+        if cpp_root is None:
+            cpp_root = DEFAULT_INCLUDE_DIR.parent / "tmp" / "openDAQ" / "core"
+        HIERARCHY_CACHE = _scan_interface_hierarchy(cpp_root)
+    if class_name == "managed-object":
+        return "standard-object"
+    return HIERARCHY_CACHE.get(class_name, "managed-object")
+
+
+def ancestor_chain(class_name: str) -> list[str]:
+    """Return the ancestor chain from *class_name* up to and including ``"managed-object"``."""
+    chain = [class_name]
+    current = class_name
+    while current != "managed-object":
+        current = class_parent(current)
+        chain.append(current)
+    return chain
+
+
+def lowest_common_ancestor(class_names: set[str]) -> str:
+    """Find the lowest (most specific) common ancestor class of *class_names*."""
+    if len(class_names) == 1:
+        return next(iter(class_names))
+    chains = [list(reversed(ancestor_chain(n))) for n in class_names]
+    lca = "managed-object"
+    for idx in range(len(chains[0])):
+        ancestor = chains[0][idx]
+        if any(idx >= len(c) or c[idx] != ancestor for c in chains[1:]):
+            break
+        lca = ancestor
+    return lca
+
+
+def _emit_polymorphic_bridge(
+    method_name: str, specs: list[MethodSpec], lca: str
+) -> list[str] | None:
+    """Emit a bridge defmethod on *lca* that tries each sibling's low-level call.
+
+    Only works for methods with no outputs beyond the return value.
+    Returns a list of Lisp source lines, or ``None`` if a bridge cannot be generated.
+    """
+    # Use the first spec as the template for the parameter list.
+    template = specs[0]
+    parameters = method_parameters(template.function)
+    defaults = {name: value for name, value in template.optional_defaults}
+
+    # Build the lambda list.
+    lambda_parts = [f"(object {lca})"]
+    for p in parameters:
+        if p.lisp_name in defaults:
+            lambda_parts.append(f"&optional ({p.lisp_name} {defaults[p.lisp_name]})")
+        else:
+            lambda_parts.append(p.lisp_name)
+    lambda_list = " ".join(lambda_parts)
+
+    lines = [f"(defmethod {method_name} ({lambda_list})"]
+
+    # Emit a chain of handler-case forms: try each sibling, catching errors.
+    inner_form: str | None = None
+    for spec in specs:
+        func = spec.function
+        call_args = ["(%require-live-pointer object)"]
+        for p in method_parameters(func):
+            arg_name = f"coerced-{p.lisp_name}" if coerce_category(p) is not None else p.lisp_name
+            call_args.append(arg_name)
+        call_form = f"({LOW_LEVEL_PACKAGE}:{func.public_lisp_name} {' '.join(call_args)})"
+
+        if func.return_spec == "daq-err-code":
+            # Returns via output parameter — not supported for bridges yet
+            return None
+
+        if inner_form is None:
+            inner_form = call_form
+        else:
+            inner_form = f"(handler-case {call_form} (error () {inner_form}))"
+
+    # Generate the coercion let-bindings for all parameters
+    coercion_bindings = []
+    for p in parameters:
+        cat = coerce_category(p)
+        if cat is not None:
+            coercion_bindings.append(f"(coerced-{p.lisp_name} ({cat} {p.lisp_name}))")
+
+    if coercion_bindings:
+        lines.append(f"  (let ({' '.join(coercion_bindings)})")
+        lines.append(f"    {inner_form})")
+    else:
+        lines.append(f"  {inner_form}")
+    lines.append("")
+
+    return lines
 
 
 def exposed_name(function: FunctionInfo, kind: str) -> str:
@@ -302,16 +424,14 @@ def setter_lambda_list(
 
 
 def constructor_lambda_lines(spec: ClassSpec) -> list[str]:
+    """Emit an :after method that only handles constructor logic.
+
+    Pointer adoption is handled generically by managed-object's :after,
+    so classes only worry about their own native constructor call.
+    """
     if spec.constructor is None:
-        return [
-            f"(defmethod initialize-instance :after ((object {spec.name})",
-            "                                       &key (pointer nil pointer-p)",
-            "                                       &allow-other-keys)",
-            "  (if pointer-p",
-            "      (%adopt-pointer object pointer)",
-            f'      (error "{spec.name.upper()} requires :POINTER.")))',
-            "",
-        ]
+        # No constructor; pointer adoption handled by managed-object :after.
+        return [""]
 
     parameters = constructor_parameters(spec.constructor)
     defaults = default_map(spec.constructor_defaults)
@@ -327,22 +447,7 @@ def constructor_lambda_lines(spec: ClassSpec) -> list[str]:
         lines.append(
             f"                                            ({parameter.lisp_name} {default} {parameter.lisp_name}-p)"
         )
-    lines.extend(
-        [
-            "                                       &allow-other-keys)",
-            "  (cond",
-            "    (pointer-p",
-        ]
-    )
-    provided_checks = " ".join(f"{parameter.lisp_name}-p" for parameter in parameters)
-    if provided_checks:
-        lines.extend(
-            [
-                f"      (when (or {provided_checks})",
-                f'        (error "{spec.name.upper()} cannot be initialized with both :POINTER and constructor arguments."))',
-            ]
-        )
-    lines.append("      (%adopt-pointer object pointer))")
+    lines.extend(["                                       &allow-other-keys)"])
 
     constructor_call = emit_coerced_call(
         parameters,
@@ -351,28 +456,24 @@ def constructor_lambda_lines(spec: ClassSpec) -> list[str]:
             + "".join(f" coerced-{parameter.lisp_name}" for parameter in parameters)
             + "))"
         ],
-        indent="      ",
+        indent="  ",
     )
 
     if required:
         required_checks = " ".join(f"{parameter.lisp_name}-p" for parameter in required)
-        lines.append(f"    ((and {required_checks})")
+        lines.append(f"  (when (and (not pointer-p) {required_checks})")
         lines.extend(constructor_call)
-        lines.append("      )")
-        required_text = " and ".join(f":{parameter.lisp_name.upper()}" for parameter in required)
-        lines.append("    (t")
-        lines.append(
-            f'      (error "{spec.name.upper()} requires either :POINTER or {required_text}."))))'
-        )
+        lines.append("    ))")
     else:
-        lines.append("    (t")
+        lines.append("  (unless pointer-p")
         lines.extend(constructor_call)
-        lines.append("      )))")
+        lines.append("    ))")
     lines.append("")
     return lines
 
 
 def emit_class_definition(spec: ClassSpec) -> list[str]:
+    parent = class_parent(spec.name)
     slots = (
         [
             f"   (%{parameter.lisp_name}-initarg :initarg :{parameter.lisp_name} :initform nil)"
@@ -381,7 +482,7 @@ def emit_class_definition(spec: ClassSpec) -> list[str]:
         if spec.constructor is not None
         else []
     )
-    lines = [f"(defclass {spec.name} (managed-object)", "  ("]
+    lines = [f"(defclass {spec.name} ({parent})", "  ("]
     lines.extend(slots)
     lines.extend(["   ))", "", ""])
     return lines
@@ -801,11 +902,16 @@ def select_method_names(functions: list[FunctionInfo]) -> dict[str, str]:
             )
             for function in instance_functions
         }
-        qualify_instances = len(shapes) > 1 or base_name in RESERVED_METHOD_NAMES
+        # Qualify when multiple shapes share the same short name
+        # (different specializers, different arg counts), or when reserved.
+        qualify_instances = (
+            len(shapes) > 1 or base_name in RESERVED_METHOD_NAMES
+        )
         for function in instance_functions:
             names[function.public_lisp_name] = (
                 qualified_name(function, kind) if qualify_instances else base_name
             )
+
     return names
 
 
@@ -881,24 +987,8 @@ def build_specs(functions: list[FunctionInfo]) -> tuple[list[ClassSpec], list[Me
     if "base-object" not in classes:
         classes["base-object"] = ClassSpec(name="base-object")
 
-    assert_no_managed_object_collisions(methods)
     ordered_classes = sorted(classes.values(), key=lambda spec: spec.name)
     return ordered_classes, methods
-
-
-def assert_no_managed_object_collisions(methods: list[MethodSpec]) -> None:
-    seen: dict[tuple[str, str], str] = {}
-    for spec in methods:
-        if spec.specializer != "managed-object":
-            continue
-        key = (spec.kind, spec.name)
-        previous = seen.get(key)
-        if previous is not None and previous != spec.function.public_lisp_name:
-            raise ValueError(
-                f"Managed-object dispatch collision for {spec.name}: "
-                f"{previous} and {spec.function.public_lisp_name}"
-            )
-        seen[key] = spec.function.public_lisp_name
 
 
 def export_symbols(classes: list[ClassSpec], methods: list[MethodSpec]) -> list[str]:
@@ -944,6 +1034,38 @@ def render_output(include_dir: Path) -> str:
             lines.extend(emit_writer(spec))
         elif spec.kind == "method":
             lines.extend(emit_method(spec))
+
+    # Emit bridge methods: when the same method name appears on multiple
+    # sibling specializers (e.g. signals-recursive on device and function-block),
+    # add a fallback on their lowest common ancestor that tries each sibling.
+    bridge_names: dict[str, list[MethodSpec]] = {}
+    for spec in methods:
+        if spec.kind not in ("method", "reader", "writer"):
+            continue
+        bridge_names.setdefault(spec.name, []).append(spec)
+    for name, specs in bridge_names.items():
+        specializers = list(dict.fromkeys(s.specializer for s in specs))  # dedup order-preserving
+        if len(specializers) <= 1:
+            continue
+        lca = lowest_common_ancestor(set(specializers))
+        if lca in specializers:
+            continue
+        # Emit a bridge on the LCA that tries each sibling in order.
+        bridge_lines = _emit_polymorphic_bridge(name, specs, lca)
+        if bridge_lines:
+            lines.extend(bridge_lines)
+
+    # Deduplicate defgenerics so each generic is defined only once.
+    seen_generics: set[str] = set()
+    deduped: list[str] = []
+    for line in lines:
+        if line.startswith("(defgeneric "):
+            sig = line.split(")")[0]  # "(defgeneric name (object"
+            if sig in seen_generics:
+                continue
+            seen_generics.add(sig)
+        deduped.append(line)
+    lines = deduped
 
     lines.extend(emit_read_samples_helper())
 

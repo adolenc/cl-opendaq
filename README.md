@@ -11,11 +11,11 @@ Then, run the following in your REPL:
 
 (defparameter *instance* (make-instance 'daq:instance))
 
-(mapcar
-  (lambda (d) (format t "~A~%" (daq:connection-string (daq:as d 'daq:device-info))))
-  (daq:as-list (daq:available-devices (daq:root-device *instance*))))
+(format t "Available devices: ~A~%" 
+  (mapcar (lambda (d) (daq:connection-string (daq:as d 'daq:device-info)))
+          (daq:as-list (daq:available-devices *instance*))))
 
-(let* ((device (daq:add-device (daq:root-device *instance*) "daqref://device0"))
+(let* ((device (daq:add-device *instance* "daqref://device0"))
        (channel (daq:find-component device "IO/AI/RefCh0"))
        (signal (daq:item-at (daq:signals-recursive channel) 0))
        (reader (make-instance 'daq:stream-reader :signal signal)))

@@ -13,6 +13,12 @@
     :initarg :release-hook
     :initform nil)))
 
+(defmethod initialize-instance :after ((object managed-object)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  (when pointer-p
+    (%adopt-pointer object pointer)))
+
 (defgeneric raw-pointer (object))
 (defgeneric release (object))
 
@@ -72,54 +78,68 @@
   (flet ((make-cleanup (pointer)
            (lambda ()
              (%release-pointer pointer))))
-    (case category
-      (:managed-pointer
-       (values (cond ((typep value 'managed-object)
-                      (%require-live-pointer value))
-                     ((null value)
-                      (cffi:null-pointer))
-                     (t
-                      value))
-               nil))
-      (:daq-string
-       (cond ((typep value 'managed-object)
-              (values (%require-live-pointer value) nil))
-             ((null value)
-              (values (cffi:null-pointer) nil))
-             ((stringp value)
-              (let ((pointer (opendaq:make-daq-string value)))
-                (values pointer (make-cleanup pointer))))
-             ((pathnamep value)
-              (let ((pointer (opendaq:make-daq-string (namestring value))))
-                (values pointer (make-cleanup pointer))))
-             (t
-              (values value nil))))
-      (:daq-base-object
-       (cond ((typep value 'managed-object)
-              (values (%require-live-pointer value) nil))
-             ((stringp value)
-              (let ((pointer (opendaq:make-daq-string value)))
-                (values pointer (make-cleanup pointer))))
-             ((pathnamep value)
-              (let ((pointer (opendaq:make-daq-string (namestring value))))
-                (values pointer (make-cleanup pointer))))
-             ((floatp value)
-              (let ((pointer (opendaq:float-object/create-float
-                              (coerce value 'double-float))))
-                (values pointer (make-cleanup pointer))))
-             ((integerp value)
-              (let ((pointer (opendaq:integer/create-integer value)))
-                (values pointer (make-cleanup pointer))))
-             ((or (eq value t) (null value))
-              (let ((pointer (opendaq:boolean/create-bool-object
-                              (if value 1 0))))
-                (values pointer (make-cleanup pointer))))
-             (t
-              (values value nil))))
-      (:daq-bool
-       (values (if value 1 0) nil))
-      (otherwise
-       (values value nil)))))
+    (macrolet ((managed-result (raw-value-form)
+                 ;; When VALUE is a managed-object, the cleanup closure
+                 ;; closes over VALUE to pin it against GC while the raw
+                 ;; pointer is in flight during an FFI call.
+                 `(cond ((typep value 'managed-object)
+                         (let ((raw ,raw-value-form))
+                           (values raw
+                                   (let ((v value))
+                                     (lambda ()
+                                       ;; Pin V against GC — SBCL at debug<3
+                                       ;; eliminates (declare ignore v) bindings.
+                                       v nil)))))
+                        ((null value)
+                         (values (cffi:null-pointer) nil))
+                        (t
+                         (values value nil)))))
+      (case category
+        (:managed-pointer
+         (managed-result (%require-live-pointer value)))
+        (:daq-string
+         (cond ((typep value 'managed-object)
+                (let ((raw (%require-live-pointer value)))
+                  (values raw (let ((v value))
+                                (lambda () v nil)))))
+               ((null value)
+                (values (cffi:null-pointer) nil))
+               ((stringp value)
+                (let ((pointer (opendaq:make-daq-string value)))
+                  (values pointer (make-cleanup pointer))))
+               ((pathnamep value)
+                (let ((pointer (opendaq:make-daq-string (namestring value))))
+                  (values pointer (make-cleanup pointer))))
+               (t
+                (values value nil))))
+        (:daq-base-object
+         (cond ((typep value 'managed-object)
+                (let ((raw (%require-live-pointer value)))
+                  (values raw (let ((v value))
+                                (lambda () v nil)))))
+               ((stringp value)
+                (let ((pointer (opendaq:make-daq-string value)))
+                  (values pointer (make-cleanup pointer))))
+               ((pathnamep value)
+                (let ((pointer (opendaq:make-daq-string (namestring value))))
+                  (values pointer (make-cleanup pointer))))
+               ((floatp value)
+                (let ((pointer (opendaq:float-object/create-float
+                                (coerce value 'double-float))))
+                  (values pointer (make-cleanup pointer))))
+               ((integerp value)
+                (let ((pointer (opendaq:integer/create-integer value)))
+                  (values pointer (make-cleanup pointer))))
+               ((or (eq value t) (null value))
+                (let ((pointer (opendaq:boolean/create-bool-object
+                                (if value 1 0))))
+                  (values pointer (make-cleanup pointer))))
+               (t
+                (values value nil))))
+        (:daq-bool
+         (values (if value 1 0) nil))
+        (otherwise
+         (values value nil))))))
 
 (defmethod raw-pointer ((object managed-object))
   (%pointer object))
