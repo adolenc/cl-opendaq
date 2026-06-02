@@ -438,6 +438,9 @@ def constructor_lambda_lines(spec: ClassSpec) -> list[str]:
     required = tuple(
         parameter for parameter in parameters if parameter.lisp_name not in defaults
     )
+    ignored = tuple(
+        parameter for parameter in parameters if parameter.lisp_name in defaults
+    )
     lines = [
         f"(defmethod initialize-instance :after ((object {spec.name})",
         "                                       &key (pointer nil pointer-p)",
@@ -447,7 +450,12 @@ def constructor_lambda_lines(spec: ClassSpec) -> list[str]:
         lines.append(
             f"                                            ({parameter.lisp_name} {default} {parameter.lisp_name}-p)"
         )
-    lines.extend(["                                       &allow-other-keys)"])
+    ignore_clause = " ".join([f"{p.lisp_name}-p" for p in ignored])
+    lines.append("                                       &allow-other-keys)")
+    if ignore_clause:
+        lines.append(f"  (declare (ignore pointer {ignore_clause}))")
+    else:
+        lines.append("  (declare (ignore pointer))")
 
     constructor_call = emit_coerced_call(
         parameters,
