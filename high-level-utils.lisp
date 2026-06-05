@@ -32,9 +32,13 @@ TARGET-TYPE is a symbol naming the wrapper class (e.g. 'DEVICE-INFO)."
       (%coerce-argument search-filter :managed-pointer)
     (unwind-protect
          (handler-case
-             (wrap-object-list (opendaq:function-block/get-signals-recursive
-                                (%require-live-pointer object) coerced-search-filter))
+             (as-list-of
+              (wrap-object-list (opendaq:function-block/get-signals-recursive
+                                 (%require-live-pointer object) coerced-search-filter))
+              'signal)
            (error ()
-             (wrap-object-list (opendaq:device/get-signals-recursive
-                                (%require-live-pointer object) coerced-search-filter))))
+             (as-list-of
+              (wrap-object-list (opendaq:device/get-signals-recursive
+                                 (%require-live-pointer object) coerced-search-filter))
+              'signal)))
       (%cleanup-coerced-argument cleanup-search-filter))))

@@ -58,6 +58,30 @@ CLASS_NAME_OVERRIDES = {
     "type": "daq-type",
 }
 
+# Map of (function_public_lisp_name, output_param_c_name) -> element-type class name.
+# The C++ headers carry [elementType(param, Type)] annotations, but the C
+# headers that the generator actually parses have no such info.  This dict
+# bridges the gap until the generator learns to read the C++ headers directly.
+LIST_ELEMENT_TYPES: dict[tuple[str, str], str] = {
+    # device.h
+    ("device/get-available-devices", "availableDevices"): "device-info",
+    ("device/get-devices", "devices"): "device",
+    ("device/get-function-blocks", "functionBlocks"): "function-block",
+    ("device/get-signals", "signals"): "signal",
+    ("device/get-signals-recursive", "signals"): "signal",
+    ("device/get-channels", "channels"): "channel",
+    ("device/get-channels-recursive", "channels"): "channel",
+    ("device/get-servers", "servers"): "server",
+    ("device/get-log-file-infos", "logFileInfos"): "log-file-info",
+    ("device/get-custom-components", "customComponents"): "component",
+    # module.h
+    ("module/get-available-devices", "availableDevices"): "device-info",
+    # module_manager_utils.h
+    ("module-manager-utils/get-available-devices", "availableDevices"): "device-info",
+    # function_block.h
+    ("function-block/get-signals-recursive", "signals"): "signal",
+}
+
 CLASS_OVERRIDES = {
     "instance": ClassOverride(
         constructor_name="instance/create-instance-from-builder",
@@ -541,13 +565,17 @@ def emit_coerced_call(
     return lines
 
 
-def value_expression(parameter: ParameterInfo, value_form: str) -> str:
+def value_expression(parameter: ParameterInfo, value_form: str, function_name: str = "") -> str:
     if parameter.base_lisp_name == "daq-string":
         return f"(%daq-string-to-lisp-and-release {value_form})"
     if parameter.base_lisp_name == "daq-bool":
         return f"(not (zerop {value_form}))"
     class_name = class_name_for_type(parameter.base_lisp_name)
     if parameter.pointer_like and class_name is not None:
+        if function_name:
+            element_type = LIST_ELEMENT_TYPES.get((function_name, parameter.c_name))
+            if element_type is not None:
+                return f"(as-list-of (wrap-{class_name} {value_form}) '{element_type})"
         return f"(wrap-{class_name} {value_form})"
     return value_form
 
@@ -578,7 +606,7 @@ def emit_result_lines(function: FunctionInfo, call_form: str) -> list[str]:
     if not outputs:
         return [call_form]
     if len(outputs) == 1:
-        return [value_expression(outputs[0], call_form)]
+        return [value_expression(outputs[0], call_form, function.public_lisp_name)]
 
     binding_names = [f"value-{index}" for index in range(len(outputs))]
     lines = [
@@ -589,7 +617,7 @@ def emit_result_lines(function: FunctionInfo, call_form: str) -> list[str]:
     for index, parameter in enumerate(outputs):
         suffix = "))" if index == len(outputs) - 1 else ""
         lines.append(
-            f"    {value_expression(parameter, binding_names[index])}{suffix}"
+            f"    {value_expression(parameter, binding_names[index], function.public_lisp_name)}{suffix}"
         )
     return lines
 
@@ -633,7 +661,7 @@ def emit_manual_call_lines(
                 elif len(outputs) == 1:
                     lines.append(
                         f"{current_indent}"
-                        f"{value_expression(outputs[0], raw_output_slot_value(outputs[0], slot_names[outputs[0].lisp_name]))}"
+                        f"{value_expression(outputs[0], raw_output_slot_value(outputs[0], slot_names[outputs[0].lisp_name]), function.public_lisp_name)}"
                     )
                 else:
                     lines.append(f"{current_indent}(cl:values")
@@ -641,7 +669,7 @@ def emit_manual_call_lines(
                         suffix = ")" if output_index == len(outputs) - 1 else ""
                         lines.append(
                             f"{current_indent}  "
-                            f"{value_expression(parameter, raw_output_slot_value(parameter, slot_names[parameter.lisp_name]))}"
+                            f"{value_expression(parameter, raw_output_slot_value(parameter, slot_names[parameter.lisp_name]), function.public_lisp_name)}"
                             f"{suffix}"
                         )
                 return
@@ -660,7 +688,7 @@ def emit_manual_call_lines(
                     suffix = "))" if output_index == len(outputs) - 1 else ""
                     lines.append(
                         f"{current_indent}    "
-                        f"{value_expression(parameter, raw_output_slot_value(parameter, slot_names[parameter.lisp_name]))}"
+                        f"{value_expression(parameter, raw_output_slot_value(parameter, slot_names[parameter.lisp_name]), function.public_lisp_name)}"
                         f"{suffix}"
                     )
             return
@@ -1000,7 +1028,7 @@ def build_specs(functions: list[FunctionInfo]) -> tuple[list[ClassSpec], list[Me
 
 
 def export_symbols(classes: list[ClassSpec], methods: list[MethodSpec]) -> list[str]:
-    exports = {"release", "raw-pointer", "read-samples"}
+    exports = {"as-list-of", "release", "raw-pointer", "read-samples"}
     for spec in classes:
         exports.add(spec.name)
         exports.add(f"wrap-{spec.name}")
@@ -1034,6 +1062,22 @@ def render_output(include_dir: Path) -> str:
         lines.extend(emit_class_definition(spec))
         lines.extend(constructor_lambda_lines(spec))
         lines.extend(emit_wrapper_constructor(spec))
+
+    # Emit as-list-of helper: converts an openDAQ object-list into a proper
+    # Lisp list, casting each element to a given wrapper type so that
+    # type-specific generics work without manual casting.
+    lines.extend([
+        "",
+        "(defun as-list-of (object-list target-type)",
+        '  "Convert an openDAQ object-list into a proper Lisp list, casting each element',
+        "to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.",
+        "",
+        "  Example: (as-list-of (wrap-object-list pointer) 'device-info)",
+        "            => (#<DEVICE-INFO ...> #<DEVICE-INFO ...>)\"",
+        "  (loop for i below (count object-list)",
+        "        collect (as (item-at object-list i) target-type)))",
+        "",
+    ])
 
     for spec in methods:
         if spec.kind == "reader":

@@ -76,6 +76,7 @@
             argument-info-type
             arguments
             as-dictionary
+            as-list-of
             asset-id
             assign
             assigned
@@ -5506,6 +5507,16 @@
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
     (make-instance 'work :pointer pointer)))
 
+
+(defun as-list-of (object-list target-type)
+  "Convert an openDAQ object-list into a proper Lisp list, casting each element
+to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
+
+  Example: (as-list-of (wrap-object-list pointer) 'device-info)
+            => (#<DEVICE-INFO ...> #<DEVICE-INFO ...>)"
+  (loop for i below (count object-list)
+        collect (as (item-at object-list i) target-type)))
+
 (defgeneric build (object))
 (defmethod build ((object address-info-builder))
   (wrap-address-info (opendaq:address-info-builder/build (%require-live-pointer object)))
@@ -8850,7 +8861,7 @@
 
 (defgeneric available-devices (object))
 (defmethod available-devices ((object device))
-  (wrap-object-list (opendaq:device/get-available-devices (%require-live-pointer object)))
+  (as-list-of (wrap-object-list (opendaq:device/get-available-devices (%require-live-pointer object))) 'device-info)
 )
 
 (defgeneric available-function-block-types (object))
@@ -8868,7 +8879,7 @@
   (multiple-value-bind (coerced-search-filter cleanup-search-filter)
       (%coerce-argument search-filter :managed-pointer)
     (unwind-protect
-        (wrap-object-list (opendaq:device/get-channels (%require-live-pointer object) coerced-search-filter))
+        (as-list-of (wrap-object-list (opendaq:device/get-channels (%require-live-pointer object) coerced-search-filter)) 'channel)
       (%cleanup-coerced-argument cleanup-search-filter)))
 )
 
@@ -8877,7 +8888,7 @@
   (multiple-value-bind (coerced-search-filter cleanup-search-filter)
       (%coerce-argument search-filter :managed-pointer)
     (unwind-protect
-        (wrap-object-list (opendaq:device/get-channels-recursive (%require-live-pointer object) coerced-search-filter))
+        (as-list-of (wrap-object-list (opendaq:device/get-channels-recursive (%require-live-pointer object) coerced-search-filter)) 'channel)
       (%cleanup-coerced-argument cleanup-search-filter)))
 )
 
@@ -8888,7 +8899,7 @@
 
 (defgeneric custom-components (object))
 (defmethod custom-components ((object device))
-  (wrap-object-list (opendaq:device/get-custom-components (%require-live-pointer object)))
+  (as-list-of (wrap-object-list (opendaq:device/get-custom-components (%require-live-pointer object))) 'component)
 )
 
 (defgeneric devices (object search-filter))
@@ -8896,7 +8907,7 @@
   (multiple-value-bind (coerced-search-filter cleanup-search-filter)
       (%coerce-argument search-filter :managed-pointer)
     (unwind-protect
-        (wrap-object-list (opendaq:device/get-devices (%require-live-pointer object) coerced-search-filter))
+        (as-list-of (wrap-object-list (opendaq:device/get-devices (%require-live-pointer object) coerced-search-filter)) 'device)
       (%cleanup-coerced-argument cleanup-search-filter)))
 )
 
@@ -8912,7 +8923,7 @@
   (multiple-value-bind (coerced-search-filter cleanup-search-filter)
       (%coerce-argument search-filter :managed-pointer)
     (unwind-protect
-        (wrap-object-list (opendaq:device/get-function-blocks (%require-live-pointer object) coerced-search-filter))
+        (as-list-of (wrap-object-list (opendaq:device/get-function-blocks (%require-live-pointer object) coerced-search-filter)) 'function-block)
       (%cleanup-coerced-argument cleanup-search-filter)))
 )
 
@@ -8948,12 +8959,12 @@
 
 (defgeneric log-file-infos (object))
 (defmethod log-file-infos ((object device))
-  (wrap-object-list (opendaq:device/get-log-file-infos (%require-live-pointer object)))
+  (as-list-of (wrap-object-list (opendaq:device/get-log-file-infos (%require-live-pointer object))) 'log-file-info)
 )
 
 (defgeneric servers (object))
 (defmethod servers ((object device))
-  (wrap-object-list (opendaq:device/get-servers (%require-live-pointer object)))
+  (as-list-of (wrap-object-list (opendaq:device/get-servers (%require-live-pointer object))) 'server)
 )
 
 (defgeneric device-signals (object &optional search-filter))
@@ -8961,7 +8972,7 @@
   (multiple-value-bind (coerced-search-filter cleanup-search-filter)
       (%coerce-argument search-filter :managed-pointer)
     (unwind-protect
-        (wrap-object-list (opendaq:device/get-signals (%require-live-pointer object) coerced-search-filter))
+        (as-list-of (wrap-object-list (opendaq:device/get-signals (%require-live-pointer object) coerced-search-filter)) 'signal)
       (%cleanup-coerced-argument cleanup-search-filter)))
 )
 
@@ -8970,7 +8981,7 @@
   (multiple-value-bind (coerced-search-filter cleanup-search-filter)
       (%coerce-argument search-filter :managed-pointer)
     (unwind-protect
-        (wrap-object-list (opendaq:device/get-signals-recursive (%require-live-pointer object) coerced-search-filter))
+        (as-list-of (wrap-object-list (opendaq:device/get-signals-recursive (%require-live-pointer object) coerced-search-filter)) 'signal)
       (%cleanup-coerced-argument cleanup-search-filter)))
 )
 
@@ -10013,7 +10024,7 @@
   (multiple-value-bind (coerced-search-filter cleanup-search-filter)
       (%coerce-argument search-filter :managed-pointer)
     (unwind-protect
-        (wrap-object-list (opendaq:function-block/get-signals-recursive (%require-live-pointer object) coerced-search-filter))
+        (as-list-of (wrap-object-list (opendaq:function-block/get-signals-recursive (%require-live-pointer object) coerced-search-filter)) 'signal)
       (%cleanup-coerced-argument cleanup-search-filter)))
 )
 
@@ -11510,7 +11521,7 @@
 )
 
 (defmethod available-devices ((object module-manager-utils))
-  (wrap-object-list (opendaq:module-manager-utils/get-available-devices (%require-live-pointer object)))
+  (as-list-of (wrap-object-list (opendaq:module-manager-utils/get-available-devices (%require-live-pointer object))) 'device-info)
 )
 
 (defmethod available-function-block-types ((object module-manager-utils))
@@ -11712,7 +11723,7 @@
 )
 
 (defmethod available-devices ((object module))
-  (wrap-object-list (opendaq:module/get-available-devices (%require-live-pointer object)))
+  (as-list-of (wrap-object-list (opendaq:module/get-available-devices (%require-live-pointer object))) 'device-info)
 )
 
 (defmethod available-function-block-types ((object module))
@@ -16921,6 +16932,7 @@
          argument-info-type
          arguments
          as-dictionary
+         as-list-of
          asset-id
          assign
          assigned
