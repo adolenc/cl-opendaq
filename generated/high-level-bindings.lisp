@@ -353,7 +353,6 @@
             device-private-lock
             device-private-unlock
             device-revision
-            device-signals
             device-type
             device-type-interface-id
             device-unlock
@@ -486,7 +485,6 @@
             function-block
             function-block-input-ports
             function-block-interface-id
-            function-block-signals
             function-block-type
             function-block-type-interface-id
             function-blocks
@@ -1076,7 +1074,6 @@
             server-capability-config-interface-id
             server-capability-interface-id
             server-interface-id
-            server-signals
             server-type
             server-type-interface-id
             servers
@@ -1095,6 +1092,7 @@
             signal-private
             signal-private-interface-id
             signal-serialize-id
+            signals
             signals-recursive
             simple-type
             simple-type-interface-id
@@ -8967,8 +8965,8 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
   (as-list-of (wrap-object-list (opendaq:device/get-servers (%require-live-pointer object))) 'server)
 )
 
-(defgeneric device-signals (object &optional search-filter))
-(defmethod device-signals ((object device) &optional (search-filter nil))
+(defgeneric signals (object &optional search-filter))
+(defmethod signals ((object device) &optional (search-filter nil))
   (multiple-value-bind (coerced-search-filter cleanup-search-filter)
       (%coerce-argument search-filter :managed-pointer)
     (unwind-protect
@@ -10011,12 +10009,11 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
   )
 )
 
-(defgeneric function-block-signals (object &optional search-filter))
-(defmethod function-block-signals ((object function-block) &optional (search-filter nil))
+(defmethod signals ((object function-block) &optional (search-filter nil))
   (multiple-value-bind (coerced-search-filter cleanup-search-filter)
       (%coerce-argument search-filter :managed-pointer)
     (unwind-protect
-        (wrap-object-list (opendaq:function-block/get-signals (%require-live-pointer object) coerced-search-filter))
+        (as-list-of (wrap-object-list (opendaq:function-block/get-signals (%require-live-pointer object) coerced-search-filter)) 'signal)
       (%cleanup-coerced-argument cleanup-search-filter)))
 )
 
@@ -15343,12 +15340,11 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
   )
 )
 
-(defgeneric server-signals (object search-filter))
-(defmethod server-signals ((object server) search-filter)
+(defmethod signals ((object server) &optional (search-filter nil))
   (multiple-value-bind (coerced-search-filter cleanup-search-filter)
       (%coerce-argument search-filter :managed-pointer)
     (unwind-protect
-        (wrap-object-list (opendaq:server/get-signals (%require-live-pointer object) coerced-search-filter))
+        (as-list-of (wrap-object-list (opendaq:server/get-signals (%require-live-pointer object) coerced-search-filter)) 'signal)
       (%cleanup-coerced-argument cleanup-search-filter)))
 )
 
@@ -17209,7 +17205,6 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
          device-private-lock
          device-private-unlock
          device-revision
-         device-signals
          device-type
          device-type-interface-id
          device-unlock
@@ -17342,7 +17337,6 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
          function-block
          function-block-input-ports
          function-block-interface-id
-         function-block-signals
          function-block-type
          function-block-type-interface-id
          function-blocks
@@ -17932,7 +17926,6 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
          server-capability-config-interface-id
          server-capability-interface-id
          server-interface-id
-         server-signals
          server-type
          server-type-interface-id
          servers
@@ -17951,6 +17944,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
          signal-private
          signal-private-interface-id
          signal-serialize-id
+         signals
          signals-recursive
          simple-type
          simple-type-interface-id

@@ -79,7 +79,10 @@ LIST_ELEMENT_TYPES: dict[tuple[str, str], str] = {
     # module_manager_utils.h
     ("module-manager-utils/get-available-devices", "availableDevices"): "device-info",
     # function_block.h
+    ("function-block/get-signals", "signals"): "signal",
     ("function-block/get-signals-recursive", "signals"): "signal",
+    # server.h
+    ("server/get-signals", "signals"): "signal",
 }
 
 CLASS_OVERRIDES = {
@@ -114,6 +117,9 @@ FUNCTION_OVERRIDES = {
     "device/get-signals": FunctionOverride(optional_defaults=(("search-filter", "nil"),)),
     "device/get-signals-recursive": FunctionOverride(
         optional_defaults=(("search-filter", "nil"),)
+    ),
+    "server/get-signals": FunctionOverride(
+        optional_defaults=(("search-filter", "nil"),),
     ),
     "function-block/get-signals": FunctionOverride(
         optional_defaults=(("search-filter", "nil"),),

@@ -13,12 +13,12 @@ Then, run the following in your REPL:
 (defparameter *instance* (make-instance 'daq:instance))
 
 (format t "Available devices: ~%~{ - ~A~%~}"
-  (mapcar (lambda (d) (daq:connection-string d)) (daq:available-devices *instance*)))
+  (mapcar #'daq:connection-string (daq:available-devices *instance*)))
 
 (daq:add-device *instance* "daqref://device0")
 
-(let* ((channel (daq:find-component *instance* "Dev/RefDev0/IO/AI/RefCh0"))
-       (signal (first (daq:signals-recursive channel)))
+(let* ((channel (daq:as (daq:find-component *instance* "Dev/RefDev0/IO/AI/RefCh0") 'daq:channel))
+       (signal (first (daq:signals channel)))
        (reader (make-instance 'daq:stream-reader :signal signal)))
   (setf (daq:property-value channel "Frequency") 0.5d0)
   (daq:read-samples reader 100))
