@@ -31,6 +31,7 @@
                (:file "t/low-level/server")
                (:file "t/low-level/signal")
                (:file "t/low-level/smoke")
+               (:file "t/low-level/errors")
                (:file "t/high-level/compile")
                (:file "t/high-level/coretypes")
                (:file "t/high-level/coreobjects")

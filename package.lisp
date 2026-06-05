@@ -8,6 +8,7 @@
            #:native-library-directory
            #:opendaq-error
            #:opendaq-error-code
+           #:opendaq-error-message
            #:opendaq-error-operation
            #:with-daq-objects))
 
@@ -21,6 +22,7 @@
                 #:native-library-directory
                 #:opendaq-error
                 #:opendaq-error-code
+                #:opendaq-error-message
                 #:opendaq-error-operation)
   (:shadow #:ratio
            #:numerator
@@ -33,4 +35,5 @@
            #:native-library-directory
            #:opendaq-error
            #:opendaq-error-code
+           #:opendaq-error-message
            #:opendaq-error-operation))
