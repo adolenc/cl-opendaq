@@ -6,6 +6,7 @@ OPENDAQ_SRC_DIR := $(TMP_DIR)/openDAQ
 OPENDAQ_BUILD_DIR := $(TMP_DIR)/build
 PYTHON ?= python3
 JOBS ?= $(shell nproc 2>/dev/null || echo 4)
+OPENDAQ_REPO_URL ?= https://github.com/openDAQ/openDAQ.git
 OPENDAQ_REF ?= release/3.40
 GENERATED_BINDINGS := $(CURDIR)/generated/bindings.lisp
 GENERATED_HIGH_LEVEL_BINDINGS := $(CURDIR)/generated/high-level-bindings.lisp
@@ -15,7 +16,7 @@ GENERATED_HIGH_LEVEL_BINDINGS := $(CURDIR)/generated/high-level-bindings.lisp
 bindings:
 	rm -rf $(TMP_DIR) $(LISP_BIN_DIR)
 	mkdir -p $(TMP_DIR) $(OPENDAQ_RUNTIME_DIR) $(dir $(GENERATED_BINDINGS))
-	git clone https://github.com/openDAQ/openDAQ.git $(OPENDAQ_SRC_DIR)
+	git clone $(OPENDAQ_REPO_URL) $(OPENDAQ_SRC_DIR)
 	git -C $(OPENDAQ_SRC_DIR) checkout --force $(OPENDAQ_REF)
 	cmake -S $(OPENDAQ_SRC_DIR) -B $(OPENDAQ_BUILD_DIR) \
 	  -DOPENDAQ_GENERATE_C_BINDINGS=ON \
@@ -32,6 +33,9 @@ bindings:
 	  -DBOOST_LOCALE_ENABLE_ICU=OFF
 	cmake --build $(OPENDAQ_BUILD_DIR) -j$(JOBS)
 	cp -a $(OPENDAQ_BUILD_DIR)/bin/*.so $(OPENDAQ_RUNTIME_DIR)/
+	make regenerate-bindings
+
+regenerate-bindings:
 	$(PYTHON) $(CURDIR)/tools/generate_bindings.py --include-dir $(OPENDAQ_SRC_DIR)/bindings/c/include --output $(GENERATED_BINDINGS)
 	$(PYTHON) $(CURDIR)/tools/generate_high_level_bindings.py --output $(GENERATED_HIGH_LEVEL_BINDINGS)
 
