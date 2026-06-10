@@ -1,0 +1,696 @@
+#!/usr/bin/env python3
+"""
+parse_bindings.py - Walk openDAQ C binding headers and emit a JSONL stream
+of parsed bindings (functions, interfaces, enums, typedefs).
+
+Usage:
+    python parse_bindings.py --opendaq-repo tmp/openDAQ/
+    python parse_bindings.py --opendaq-repo tmp/openDAQ/ --kinds function interface
+
+Each line of stdout is a JSON object with a "kind" discriminator.  Example:
+
+  {"kind": "function",
+   "name": "daqDevice_addDevices",
+   "return_type": {"name": "daqErrCode"},
+   "arguments": [
+     {"name": "self",           "type": {"name": "daqDevice"}, "direction": "in"},
+     {"name": "devices",        "type": {"name": "daqDict", "pointer_depth": 2, "key_type": "String", "value_type": "Device"}, "direction": "out"},
+     {"name": "connectionArgs", "type": {"name": "daqDict", "pointer_depth": 1, "key_type": "String", "value_type": "PropertyObject"}, "direction": "in"}
+   ],
+   "docstring": "@brief Connects to multiple devices in parallel ...\\n...",
+   "source_file": "bindings/c/include/copendaq/device/device.h"}
+
+JSON schema (per kind):
+
+  function:
+    name           : str     — full C function name (e.g. "daqDevice_addDevices")
+                               class / method split on the first '_'
+    return_type    : TypeDesc
+    arguments[]    : { name: str, type: TypeDesc, direction: "in"|"out" }
+    docstring      : str     - raw doxygen text with newlines preserved
+    source_file    : str     - relative path from the repo root
+
+  interface:
+    name           : str     - e.g. "daqDevice"
+    parent         : str     - parent interface from DECLARE_OPENDAQ_INTERFACE
+    docstring      : str
+    source_file    : str
+
+  typedef:
+    name           : str     - C typedef name
+    category       : "opaque" | "struct" | "enum" | "callback" | "alias"
+    pointer_depth  : int     - present only when > 0
+    base_type      : str     - (alias only) underlying type name
+    enum_entries[] : { name: str, value: int|null }
+    struct_fields[]: { name: str, type: TypeDesc }
+
+  TypeDesc  (inline object, never appears as a top-level record):
+    name           : str     - base type (e.g. "daqDict", "uint32_t", "void")
+    pointer_depth  : int?    - (>0 only) number of '*' levels (e.g. daqDict** has pointer_depth=2)
+    key_type       : str?    - (Dict only) key type name
+    value_type     : str?    - (List/Dict only) element/value type name
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import sys
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Iterable
+
+
+# ---------------------------------------------------------------------------
+# Patterns (compiled once)
+# ---------------------------------------------------------------------------
+
+# Single-line comment that wraps DECLARE_OPENDAQ_INTERFACE
+IFACE_COMMENT_RE = re.compile(
+    r"^\s*//\s*DECLARE_OPENDAQ_INTERFACE\s*\(\s*(\w+)\s*,\s*(\w+)\s*\)\s*$",
+    re.M,
+)
+
+# Single-line [templateType(param, Key, Value)] or [elementType(param, Elem)]
+_TEMPLATE_TYPE_RE = re.compile(
+    r"^\s*//\s*\[(templateType|elementType)\s*\(\s*(\w+)\s*,\s*([\w,\s]+)\)\s*\]\s*$",
+    re.M,
+)
+
+# Doxygen /** ... @brief ... */ block (greedy across lines)
+DOXY_BLOCK_RE = re.compile(r"/\*!.*?\*/", re.S)
+
+# /* ... */ regular comment (non-doxygen)
+REGULAR_BLOCK_COMMENT_RE = re.compile(r"/\*(?!!).*?\*/", re.S)
+# // ... single-line comment (not matching our special annotations)
+SL_COMMENT_RE = re.compile(r"//[^\n]*")
+
+# Preprocessor directives
+PREPROCESSOR_RE = re.compile(r"^\s*#.*$", re.M)
+
+# Numeric #define for enum value resolution
+DEFINE_RE = re.compile(
+    r"^\s*#define\s+(?P<name>[A-Za-z_]\w*)\s+(?P<value>\(?[-+]?0[xX][0-9A-Fa-f]+|\(?[-+]?\d+\)?)\s*$",
+    re.M,
+)
+
+# Opaque struct typedef: typedef struct daqFoo daqFoo;
+OPAQUE_STRUCT_RE = re.compile(r"typedef\s+struct\s+(\w+)\s+(\w+)\s*;", re.S)
+
+# Concrete struct typedef: typedef struct daqFoo { ... } daqFoo;
+CONCRETE_STRUCT_RE = re.compile(
+    r"typedef\s+struct\s+(\w+)\s*\{(?P<body>.*?)\}\s*(\w+)\s*;", re.S
+)
+
+# Enum typedef: typedef enum daqFoo { ... } daqFoo;
+ENUM_RE = re.compile(
+    r"typedef\s+enum\s+(\w+)\s*\{(?P<body>.*?)\}\s*(\w+)\s*;", re.S
+)
+
+# Function pointer typedef: typedef RetType (*daqCallback)(args);
+FUNCTION_POINTER_RE = re.compile(
+    r"typedef\s+(?P<ret>[^;()]+?)\(\s*\*\s*(\w+)\s*\)\s*\((?P<args>.*?)\)\s*;", re.S
+)
+
+# Simple typedef: typedef BaseType NewName;
+SIMPLE_TYPEDEF_RE = re.compile(
+    r"typedef\s+(?!struct\b)(?!enum\b)(.*?)\s+(\w+)\s*;"
+)
+
+# Function declaration: return_type EXPORTED daqName_method(args);
+FUNCTION_RE = re.compile(
+    r"([A-Za-z_][A-Za-z0-9_\s\*]*?)\s+EXPORTED\s+"
+    r"(\w+)\s*\(([^;]*)\)\s*;",
+    re.S,
+)
+
+# Interface ID declaration: EXPORTED extern const daqIntfID DAQ_XXX_INTF_ID;
+INTF_ID_RE = re.compile(
+    r"EXPORTED\s+extern\s+const\s+daqIntfID\s+(\w+)\s*;"
+)
+
+# getInterfaceId function
+GET_INTF_ID_RE = re.compile(
+    r"void\s+EXPORTED\s+(\w+)_getInterfaceId\s*\(daqIntfID\*\s*\w+\)\s*;"
+)
+
+# Argument split: type_and_name
+ARG_SPLIT_RE = re.compile(r"^(?P<type>.+?)(?P<name>[A-Za-z_]\w*)$")
+
+# Set of builtin C type names (used for direction inference)
+BUILTIN_TYPES: set[str] = {
+    "char", "double", "float", "int",
+    "int8_t", "int16_t", "int32_t", "int64_t",
+    "size_t",
+    "uint8_t", "uint16_t", "uint32_t", "uint64_t",
+    "void",
+}
+
+IGNORED_FILENAMES = {"copendaq_private.h"}
+
+
+# ---------------------------------------------------------------------------
+# Dataclasses for JSON output
+# ---------------------------------------------------------------------------
+
+@dataclass
+class TypeDesc:
+    """Describes a C type in the parsed output."""
+    name: str          # base type name e.g. "daqDict", "uint32_t", "int"
+    pointer_depth: int = 0  # number of * levels
+    is_const: bool = False
+    key_type: str | None = None     # for Dict: key type
+    value_type: str | None = None   # for List: element type; for Dict: value type
+
+
+@dataclass
+class ArgumentDesc:
+    """Describes one function argument."""
+    name: str
+    type: TypeDesc
+    direction: str           # "in" or "out" (inferred from pointer depth / heuristics)
+    doc_param: str | None = None    # @param description text
+
+
+@dataclass
+class FunctionDesc:
+    """Describes a parsed C function declaration."""
+    kind: str = "function"
+    name: str = ""                    # full C name e.g. daqDevice_getInfo
+    return_type: TypeDesc | None = None
+    arguments: list[ArgumentDesc] | None = None
+    docstring: str = ""               # raw docstring (brief + params + details)
+    source_file: str = ""             # relative path from repo root
+
+
+@dataclass
+class InterfaceDesc:
+    """Describes a DECLARE_OPENDAQ_INTERFACE declaration."""
+    kind: str = "interface"
+    name: str = ""                    # e.g. daqDevice
+    parent: str = ""                  # e.g. daqFolder
+    docstring: str = ""
+    source_file: str = ""
+
+
+@dataclass
+class TypedefDesc:
+    """Describes a typedef (opaque struct, enum, function pointer, alias)."""
+    kind: str = "typedef"
+    name: str = ""                    # e.g. daqDevice
+    category: str = ""                # "opaque", "enum", "callback", "alias", "struct"
+    base_type: str | None = None      # for aliases
+    pointer_depth: int = 0            # for pointer aliases
+    enum_entries: list[dict] | None = None  # [{name: "daqCtBool", value: 0}, ...]
+    struct_fields: list[dict] | None = None
+    docstring: str = ""
+    source_file: str = ""
+
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def normalize_type(type_spec: str) -> tuple[str, int, bool]:
+    """Split a C type string into base name, pointer depth, const flag."""
+    normalized = " ".join(type_spec.replace("*", " * ").split())
+    tokens = normalized.split()
+    is_const = "const" in tokens
+    tokens = [t for t in tokens if t not in {"const", "volatile", "restrict"}]
+    pointer_depth = tokens.count("*")
+    base_tokens = [t for t in tokens if t != "*"]
+    base = " ".join(base_tokens) if base_tokens else "void"
+    return base, pointer_depth, is_const
+
+
+def make_type_desc(type_spec: str) -> TypeDesc:
+    """Create a TypeDesc from a raw C type specifier."""
+    base, pd, is_const = normalize_type(type_spec)
+    return TypeDesc(name=base, pointer_depth=pd, is_const=is_const)
+
+
+def split_arg_decl(declaration: str) -> tuple[str, str]:
+    """Split 'type name' into (type, name)."""
+    declaration = " ".join(declaration.split())
+    m = ARG_SPLIT_RE.match(declaration)
+    if not m:
+        raise ValueError(f"Cannot split argument declaration: {declaration}")
+    return m.group("type").strip(), m.group("name")
+
+
+def parse_enum_entries(body: str, defines: dict[str, int] | None = None) -> list[dict]:
+    """Parse comma-separated enum entries, optionally with = value.
+    Uses *defines* to resolve #define'd constant values."""
+    if defines is None:
+        defines = {}
+    entries: list[dict] = []
+    current_value: int | None = -1
+    for raw_entry in body.split(","):
+        entry = raw_entry.strip()
+        if not entry:
+            continue
+        if "=" in entry:
+            name, value_text = [part.strip() for part in entry.split("=", 1)]
+            try:
+                current_value = int(value_text, 0)
+            except ValueError:
+                # Try resolving via #define
+                if value_text in defines:
+                    current_value = defines[value_text]
+                else:
+                    current_value = None
+        else:
+            name = entry.strip()
+            if current_value is not None:
+                current_value += 1
+        entries.append({"name": name, "value": current_value})
+    return entries
+
+
+def parse_struct_fields(body: str) -> list[dict]:
+    """Parse semicolon-separated struct fields into name/type entries."""
+    fields: list[dict] = []
+    for raw_field in body.split(";"):
+        field = raw_field.strip()
+        if not field:
+            continue
+        try:
+            type_part, name = split_arg_decl(field)
+            td = make_type_desc(type_part)
+            ftype: dict = {"name": td.name}
+            if td.pointer_depth:
+                ftype["pointer_depth"] = td.pointer_depth
+            fields.append({"name": name, "type": ftype})
+        except ValueError:
+            continue
+    return fields
+
+
+def scan_numeric_defines(raw_text: str) -> dict[str, int]:
+    """Collect #define'd integer constants for enum value resolution."""
+    defines: dict[str, int] = {}
+    for m in DEFINE_RE.finditer(raw_text):
+        value_text = m.group("value").strip()
+        if value_text.startswith("(") and value_text.endswith(")"):
+            value_text = value_text[1:-1].strip()
+        try:
+            defines[m.group("name")] = int(value_text, 0)
+        except ValueError:
+            continue
+    return defines
+
+
+def extract_docstring_summary(doxy_text: str) -> str:
+    """Extract a clean summary from a /*! ... */ doxygen block.
+
+    Strips the comment delimiters and leading * on each line,
+    then concatenates everything into one plain string.
+    """
+    # Remove the /*! and */
+    inner = doxy_text[3:-2].strip()
+    # Strip leading * on each line
+    lines: list[str] = []
+    for line in inner.split("\n"):
+        stripped = line.strip()
+        if stripped.startswith("*"):
+            stripped = stripped[1:].strip()
+        if stripped:
+            lines.append(stripped)
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Main parser
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Association helpers (operate on line-indexed annotation maps)
+# ---------------------------------------------------------------------------
+
+def _blank_single_line_comments(text: str) -> str:
+    """Replace // ... comments with spaces, preserving line positions and
+    /*! ... */ doxygen blocks intact."""
+    # Protect doxygen blocks first
+    doxy_spans = [(m.start(), m.end()) for m in DOXY_BLOCK_RE.finditer(text)]
+    chars = list(text)
+    i = 0
+    while i < len(chars) - 1:
+        if chars[i] == "/" and chars[i + 1] == "/":
+            # Don't blank inside doxygen blocks
+            inside_doxy = any(start <= i < end for start, end in doxy_spans)
+            if inside_doxy:
+                i += 1
+                continue
+            # Blank from // to end of line
+            while i < len(chars) and chars[i] != "\n":
+                chars[i] = " "
+                i += 1
+        else:
+            i += 1
+    return "".join(chars)
+
+
+def _blank_non_newlines(text: str) -> str:
+    return re.sub(r"[^\n]", " ", text)
+
+def _find_doc_before_line(target_ln: int, doxy_blocks: dict[int, tuple[int, str]]) -> str:
+    """Return the docstring from the doxygen block that ends nearest
+    before *target_ln* (and is not after it)."""
+    best_end = -1
+    best_text = ""
+    for end_line, (_, raw) in doxy_blocks.items():
+        if best_end < end_line < target_ln:
+            best_end = end_line
+            best_text = raw
+    return extract_docstring_summary(best_text) if best_text else ""
+
+
+def _collect_tts_before(
+    func_ln: int, annotations: dict[int, list[tuple[str, str | None, str | None]]]
+) -> list[tuple[str, str | None, str | None]]:
+    """Return all templateType/elementType annotations before *func_ln*.
+    Each annotation is (param_name, key_type, value_type).
+    Clears consumed annotations so they aren't reused."""
+    result: list[tuple[str, str | None, str | None]] = []
+    consumed: list[int] = []
+    for ln in sorted(annotations.keys()):
+        if ln < func_ln:
+            result.extend(annotations[ln])
+            consumed.append(ln)
+    for ln in consumed:
+        del annotations[ln]
+    return result
+
+
+def _infer_direction(arg_name: str, td: TypeDesc, index: int, type_categories: dict[str, str]) -> str:
+    """Infer whether an argument is 'in' or 'out' based on its type and position."""
+    # 'self' is always an input
+    if arg_name == "self":
+        return "in"
+    # No pointer depth — always input
+    if td.pointer_depth == 0:
+        return "in"
+    # Double or higher pointer — always output
+    if td.pointer_depth >= 2:
+        return "out"
+    # pointer_depth == 1
+    # Void* is input
+    if td.name == "void":
+        return "in"
+    # daqBaseObject* is always an input object reference
+    if td.name == "daqBaseObject":
+        return "in"
+    # Builtin C types (int*, daqBool*, daqSizeT*, etc.) with single pointer → output
+    if td.name in BUILTIN_TYPES:
+        return "out"
+    # daq* types with single pointer:
+    #   opaque / callback → input (object reference)
+    #   struct / enum / alias → output (passed by pointer for return value)
+    cat = type_categories.get(td.name, "")
+    if cat in ("opaque", "callback"):
+        return "in"
+    # Unknown daq types default to "out" (e.g. daqIntfID*, daqCoreType*, daqEnumType*)
+    return "out"
+
+
+class HeaderParser:
+    """Parses a single C header file and extracts bindings."""
+
+    def __init__(self, source_file: str):
+        self.source_file = source_file
+        self.interfaces: list[InterfaceDesc] = []
+        self.functions: list[FunctionDesc] = []
+        self.typedefs: list[TypedefDesc] = []
+
+    def parse(self, raw_text: str) -> None:
+        """Parse raw header text and populate self.{interfaces, functions, typedefs}."""
+
+        # --- Phase 1: scan raw text for doxygen blocks, DECLARE_OPENDAQ_INTERFACE,
+        #     templateType annotations, and function declarations ---
+        # We do this on raw text so positions are accurate for association.
+
+        # Doxygen blocks: (end_line, start_line) -> raw text
+        doxy_blocks: dict[int, tuple[int, str]] = {}
+        for m in DOXY_BLOCK_RE.finditer(raw_text):
+            start_line = raw_text[: m.start()].count("\n")
+            end_line = raw_text[: m.end()].count("\n")
+            if end_line not in doxy_blocks or start_line > doxy_blocks[end_line][0]:
+                doxy_blocks[end_line] = (start_line, m.group(0))
+
+        # DECLARE_OPENDAQ_INTERFACE lines: list of (name, parent, line_number)
+        ifaces: list[tuple[str, str, int]] = []
+        for m in IFACE_COMMENT_RE.finditer(raw_text):
+            ln = raw_text[: m.start()].count("\n")
+            ifaces.append((m.group(1), m.group(2), ln))
+
+        # templateType / elementType annotations: line -> list
+        template_annotations: dict[int, list[tuple[str, str | None, str | None]]] = {}
+        for m in _TEMPLATE_TYPE_RE.finditer(raw_text):
+            ln = raw_text[: m.start()].count("\n")
+            kind = m.group(1)
+            param_name = m.group(2)
+            types_str = m.group(3)
+            type_parts = [t.strip() for t in types_str.split(",")]
+            if kind == "templateType" and len(type_parts) >= 2:
+                template_annotations.setdefault(ln, []).append(
+                    (param_name, type_parts[0], type_parts[-1])
+                )
+            elif kind == "elementType" or kind == "templateType":
+                template_annotations.setdefault(ln, []).append(
+                    (param_name, None, type_parts[0])
+                )
+
+        # Function declarations — match on raw text with single-line comments blanked out
+        # (to avoid matching commented-out declarations)
+        raw_no_sl = _blank_single_line_comments(
+            PREPROCESSOR_RE.sub(
+                lambda m: _blank_non_newlines(m.group(0)),
+                REGULAR_BLOCK_COMMENT_RE.sub(lambda m: _blank_non_newlines(m.group(0)), raw_text),
+            )
+        )
+        func_matches: list[tuple[int, str, str, str]] = []  # (line, return_str, name, args_str)
+        for m in FUNCTION_RE.finditer(raw_no_sl):
+            ln = raw_no_sl[: m.start()].count("\n")
+            func_matches.append((ln, m.group(1).strip(), m.group(2), m.group(3).strip()))
+
+        # --- Phase 2: strip comments for structural parsing ---
+        text_no_comments = REGULAR_BLOCK_COMMENT_RE.sub("", raw_text)
+        text_no_comments = SL_COMMENT_RE.sub("", text_no_comments)
+        text_no_comments = DOXY_BLOCK_RE.sub("", text_no_comments)
+        text_no_comments = PREPROCESSOR_RE.sub("", text_no_comments)
+
+        # Resolve #define constants for enum values
+        defines = scan_numeric_defines(raw_text)
+
+        # --- Phase 3: parse structural typedefs & collect category info for direction inference ---
+        type_categories: dict[str, str] = {}  # name -> "opaque" | "struct" | "enum" | "callback" | "alias"
+
+        for m in OPAQUE_STRUCT_RE.finditer(text_no_comments):
+            c_name = m.group(2)
+            type_categories[c_name] = "opaque"
+            self.typedefs.append(TypedefDesc(
+                kind="typedef", name=c_name, category="opaque",
+                pointer_depth=1, source_file=self.source_file,
+            ))
+
+        for m in CONCRETE_STRUCT_RE.finditer(text_no_comments):
+            c_name = m.group(3)
+            type_categories[c_name] = "struct"
+            self.typedefs.append(TypedefDesc(
+                kind="typedef", name=c_name, category="struct",
+                struct_fields=parse_struct_fields(m.group("body")),
+                source_file=self.source_file,
+            ))
+
+        for m in ENUM_RE.finditer(text_no_comments):
+            c_name = m.group(3)
+            type_categories[c_name] = "enum"
+            self.typedefs.append(TypedefDesc(
+                kind="typedef", name=c_name, category="enum",
+                enum_entries=parse_enum_entries(m.group("body"), defines),
+                source_file=self.source_file,
+            ))
+
+        for m in FUNCTION_POINTER_RE.finditer(text_no_comments):
+            c_name = m.group(2)
+            type_categories[c_name] = "callback"
+            self.typedefs.append(TypedefDesc(
+                kind="typedef", name=c_name, category="callback",
+                pointer_depth=1, source_file=self.source_file,
+            ))
+
+        consumed_spans = (
+            [m.span() for m in OPAQUE_STRUCT_RE.finditer(text_no_comments)]
+            + [m.span() for m in CONCRETE_STRUCT_RE.finditer(text_no_comments)]
+            + [m.span() for m in ENUM_RE.finditer(text_no_comments)]
+            + [m.span() for m in FUNCTION_POINTER_RE.finditer(text_no_comments)]
+        )
+        mutable = list(text_no_comments)
+        for start, end in consumed_spans:
+            for i in range(start, end):
+                mutable[i] = " "
+        text_simple = "".join(mutable)
+        for m in SIMPLE_TYPEDEF_RE.finditer(text_simple):
+            base, pd, _ = normalize_type(m.group(1))
+            alias_name = m.group(2)
+            # Resolve category: if base is a known daq type, inherit; else it's a plain alias
+            cat = type_categories.get(base, "alias")
+            type_categories[alias_name] = cat
+            self.typedefs.append(TypedefDesc(
+                kind="typedef", name=alias_name, category=cat,
+                base_type=base, pointer_depth=pd, source_file=self.source_file,
+            ))
+
+        # --- Phase 4: interfaces (associate nearest preceding doxygen block) ---
+        for name, parent, ln in ifaces:
+            doc = _find_doc_before_line(ln, doxy_blocks)
+            self.interfaces.append(InterfaceDesc(
+                name=name, parent=parent, docstring=doc,
+                source_file=self.source_file,
+            ))
+
+        # --- Phase 5: functions with accurate docstring / templateType association ---
+        for func_ln, return_type_str, func_name, args_str in func_matches:
+            return_td = make_type_desc(return_type_str)
+
+            # Parse arguments
+            arguments: list[ArgumentDesc] = []
+            if args_str and args_str != "void":
+                for idx, raw_arg in enumerate(args_str.split(","), start=1):
+                    raw_arg = raw_arg.strip()
+                    try:
+                        type_part, arg_name = split_arg_decl(raw_arg)
+                    except ValueError:
+                        arg_name = f"arg{idx}"
+                        type_part = raw_arg
+                    arg_td = make_type_desc(type_part)
+                    direction = _infer_direction(arg_name, arg_td, idx, type_categories)
+                    arguments.append(ArgumentDesc(name=arg_name, type=arg_td, direction=direction))
+
+            # Find templateType annotations between previous function and this one
+            func_tts = _collect_tts_before(func_ln, template_annotations)
+            for pname, kt, vt in func_tts:
+                for arg in arguments:
+                    if arg.name == pname:
+                        arg.type.key_type = kt
+                        arg.type.value_type = vt
+                        break
+
+            # Find docstring
+            doc = _find_doc_before_line(func_ln, doxy_blocks)
+
+            self.functions.append(FunctionDesc(
+                name=func_name,
+                return_type=return_td,
+                arguments=arguments,
+                docstring=doc,
+                source_file=self.source_file,
+            ))
+
+
+# ---------------------------------------------------------------------------
+# JSONL emitter
+# ---------------------------------------------------------------------------
+
+class DataclassEncoder(json.JSONEncoder):
+    """Handles dataclass serialisation, skipping None, is_const:false, pointer_depth:0."""
+    def default(self, obj):
+        if hasattr(obj, "__dataclass_fields__"):
+            d = {}
+            for field_name in obj.__dataclass_fields__:
+                value = getattr(obj, field_name)
+                if value is None:
+                    continue
+                if field_name == "is_const" and value is False:
+                    continue
+                if field_name == "pointer_depth" and value == 0:
+                    continue
+                d[field_name] = value
+            return d
+        return super().default(obj)
+
+
+def emit_jsonl(records: Iterable[InterfaceDesc | FunctionDesc | TypedefDesc]) -> None:
+    """Write one JSON object per line to stdout."""
+    for rec in records:
+        print(json.dumps(rec, cls=DataclassEncoder))
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
+def collect_headers(repo_root: Path) -> list[Path]:
+    """Collect all C binding header files under bindings/c/include/."""
+    include_dir = repo_root / "bindings" / "c" / "include"
+    if not include_dir.is_dir():
+        # Try alternate: the repo is the include dir itself
+        # (user might pass the include directory directly)
+        alt = repo_root / "include"
+        if alt.is_dir():
+            include_dir = alt
+        else:
+            raise ValueError(
+                f"No bindings/c/include/ or include/ found under {repo_root}"
+            )
+    headers: list[Path] = []
+    for path in sorted(include_dir.rglob("*.h")):
+        if path.name in IGNORED_FILENAMES or "private" in path.parts:
+            continue
+        headers.append(path)
+    return headers
+
+
+def parse_repo(repo_root: Path) -> list[InterfaceDesc | FunctionDesc | TypedefDesc]:
+    """Parse all headers in the repo and return a flat list of binding records."""
+    headers = collect_headers(repo_root)
+    if not headers:
+        print(f"Warning: No headers found under {repo_root}", file=sys.stderr)
+        return []
+
+    records: list[InterfaceDesc | FunctionDesc | TypedefDesc] = []
+    for header_path in headers:
+        try:
+            rel_path = str(header_path.relative_to(repo_root))
+        except ValueError:
+            rel_path = str(header_path)
+
+        raw_text = header_path.read_text(encoding="utf-8", errors="replace")
+        parser = HeaderParser(source_file=rel_path)
+        parser.parse(raw_text)
+        records.extend(parser.interfaces)
+        records.extend(parser.typedefs)
+        records.extend(parser.functions)
+
+    return records
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(
+        description="Parse openDAQ C binding headers and emit JSONL to stdout."
+    )
+    ap.add_argument(
+        "--opendaq-repo",
+        type=Path,
+        required=True,
+        help="Path to the root of the openDAQ repository "
+        "(containing bindings/c/include/).",
+    )
+    ap.add_argument(
+        "--kinds",
+        nargs="+",
+        choices=["function", "interface", "typedef"],
+        default=["function", "interface", "typedef"],
+        help="Which kinds of binding records to emit (default: all).",
+    )
+    args = ap.parse_args()
+
+    records = parse_repo(args.opendaq_repo)
+    kinds = set(args.kinds)
+    filtered = [r for r in records if r.kind in kinds]
+    emit_jsonl(filtered)
+
+
+if __name__ == "__main__":
+    main()
