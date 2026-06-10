@@ -37,7 +37,7 @@ bindings:
 
 regenerate-bindings:
 	$(PYTHON) $(CURDIR)/tools/generate_bindings.py --include-dir $(OPENDAQ_SRC_DIR)/bindings/c/include --output $(GENERATED_BINDINGS)
-	$(PYTHON) $(CURDIR)/tools/generate_high_level_bindings.py --output $(GENERATED_HIGH_LEVEL_BINDINGS)
+	$(PYTHON) $(CURDIR)/tools/generate_high_level_bindings.py --include-dir $(OPENDAQ_SRC_DIR)/bindings/c/include --output $(GENERATED_HIGH_LEVEL_BINDINGS)
 
 repl:
 	OPENDAQ_MODULES_PATH=$$(if [ -d "$(OPENDAQ_RUNTIME_DIR)" ]; then printf %s "$(OPENDAQ_RUNTIME_DIR)"; else printf %s "$(LISP_BIN_DIR)"; fi) sbcl --noinform \
