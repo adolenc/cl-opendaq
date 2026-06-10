@@ -3,302 +3,20 @@
 from __future__ import annotations
 
 import argparse
-import json
 import re
-import subprocess
 import sys
 from pathlib import Path
 
+from generate_bindings import (
+    build_functions as build_raw_functions,
+    build_types,
+    can_auto_wrap,
+    parameter_mode,
+    parse_records,
+)
 
-BUILTIN_TYPE_MAP = {
-    "char": ":char",
-    "double": ":double",
-    "float": ":float",
-    "int": ":int",
-    "int8_t": ":int8",
-    "int16_t": ":int16",
-    "int32_t": ":int32",
-    "int64_t": ":int64",
-    "size_t": ":size",
-    "uint8_t": ":uint8",
-    "uint16_t": ":uint16",
-    "uint32_t": ":uint32",
-    "uint64_t": ":uint64",
-    "void": ":void",
-}
 
-RAW_BUFFER_PARAMETER_NAMES = {
-    "blocks",
-    "data",
-    "data-blocks",
-    "domain",
-    "domain-blocks",
-    "samples",
-    "values",
-}
-
-IN_OUT_PARAMETER_OVERRIDES: dict[str, dict[str, str]] = {
-    "daqBlockReader_read": {"count": "in-out"},
-    "daqBlockReader_readWithDomain": {"count": "in-out"},
-    "daqConnectionInternal_dequeueUpTo": {"count": "in-out"},
-    "daqFunction_call": {"result": "in-out"},
-    "daqMultiReader_read": {"count": "in-out"},
-    "daqMultiReader_readWithDomain": {"count": "in-out"},
-    "daqMultiReader_skipSamples": {"count": "in-out"},
-    "daqStreamReader_read": {"count": "in-out"},
-    "daqStreamReader_readWithDomain": {"count": "in-out"},
-    "daqStreamReader_skipSamples": {"count": "in-out"},
-    "daqTailReader_read": {"count": "in-out"},
-    "daqTailReader_readWithDomain": {"count": "in-out"},
-}
-
-LOW_LEVEL_PACKAGE = "opendaq"
 DEFAULT_INCLUDE_DIR = Path(__file__).resolve().parents[1] / "include"
-
-
-def c_identifier_to_lisp(name: str) -> str:
-    tokens: list[str] = []
-    for chunk in name.split("_"):
-        tokens.extend(
-            match.group(0).lower()
-            for match in re.finditer(
-                r"[A-Z]+(?=[A-Z][a-z]|[0-9]|\b)|[A-Z]?[a-z]+|[a-z]+|[0-9]+",
-                chunk,
-            )
-        )
-    return "-".join(token for token in tokens if token)
-
-
-def strip_daq_prefix(name: str) -> str:
-    if name.startswith("daq") and len(name) > 3 and name[3].isupper():
-        return name[3:]
-    return name
-
-
-def c_function_to_public_lisp(name: str) -> str:
-    receiver, separator, method = name.partition("_")
-    public_receiver = c_identifier_to_lisp(strip_daq_prefix(receiver))
-    if not separator:
-        return public_receiver or c_identifier_to_lisp(name)
-    public_method = c_identifier_to_lisp(method)
-    if public_receiver and public_method:
-        return f"{public_receiver}/{public_method}"
-    return public_receiver or public_method or c_identifier_to_lisp(name)
-
-
-def wrap_pointer(type_spec: str, depth: int) -> str:
-    for _ in range(depth):
-        type_spec = f"(:pointer {type_spec})"
-    return type_spec
-
-
-def repo_root(path: Path) -> Path:
-    path = path.resolve()
-    if path.name != "include":
-        return path
-    if path.parent.name == "c" and path.parent.parent.name == "bindings":
-        return path.parent.parent.parent
-    return path.parent
-
-
-def parse_records(include_dir: Path) -> list[dict]:
-    output = subprocess.run(
-        [
-            sys.executable,
-            str(Path(__file__).with_name("parse_bindings.py")),
-            "--opendaq-repo",
-            str(repo_root(include_dir)),
-            "--kinds",
-            "typedef",
-            "function",
-        ],
-        check=True,
-        capture_output=True,
-        text=True,
-    ).stdout
-    return [json.loads(line) for line in output.splitlines() if line.strip()]
-
-
-def build_types(records: list[dict]) -> dict[str, dict]:
-    typedefs = {record["name"]: record for record in records if record["kind"] == "typedef"}
-    types: dict[str, dict] = {}
-
-    def build(name: str) -> dict:
-        if name in types:
-            return types[name]
-        record = typedefs[name]
-        lisp_name = c_identifier_to_lisp(name)
-        category = record["category"]
-        if category == "struct":
-            types[name] = {
-                "c_name": name,
-                "lisp_name": lisp_name,
-                "kind": "struct",
-                "cffi_spec": f"(:struct {lisp_name})",
-                "fields": tuple(
-                    (
-                        c_identifier_to_lisp(field["name"]),
-                        wrap_pointer(BUILTIN_TYPE_MAP[field["type"]["name"]], field["type"].get("pointer_depth", 0)),
-                    )
-                    for field in record.get("struct_fields", [])
-                ),
-            }
-            return types[name]
-        if category == "enum":
-            values = [(entry["name"], entry["value"]) for entry in record.get("enum_entries", [])]
-            numeric = tuple((entry_name, entry_value) for entry_name, entry_value in values if entry_value is not None)
-            seen: set[int] = set()
-            duplicates = False
-            for _, value in numeric:
-                if value in seen:
-                    duplicates = True
-                seen.add(value)
-            types[name] = {
-                "c_name": name,
-                "lisp_name": lisp_name,
-                "kind": "enum",
-                "cffi_spec": lisp_name if not duplicates and all(value is not None for _, value in values) else "daq-enum-type",
-                "enum_entries": tuple(
-                    (entry_name, "<implicit-after-unsupported>" if entry_value is None else str(entry_value))
-                    for entry_name, entry_value in values
-                ),
-                "numeric_enum_entries": numeric,
-                "enum_has_duplicates": duplicates,
-                "enum_has_unsupported_values": any(value is None for _, value in values),
-            }
-            return types[name]
-        if category in {"opaque", "callback"} and "base_type" not in record:
-            types[name] = {
-                "c_name": name,
-                "lisp_name": lisp_name,
-                "kind": category,
-                "cffi_spec": ":pointer",
-                "pointer_like": True,
-            }
-            return types[name]
-        base_type = record.get("base_type")
-        pointer_depth = record.get("pointer_depth", 0)
-        if name == "daqBaseObject" or pointer_depth > 0:
-            types[name] = {
-                "c_name": name,
-                "lisp_name": lisp_name,
-                "kind": "pointer-alias",
-                "cffi_spec": ":pointer",
-                "pointer_like": True,
-            }
-            return types[name]
-        if base_type in BUILTIN_TYPE_MAP:
-            types[name] = {"c_name": name, "lisp_name": lisp_name, "kind": "alias", "cffi_spec": BUILTIN_TYPE_MAP[base_type]}
-            return types[name]
-        aliased = build(base_type)
-        types[name] = {
-            "c_name": name,
-            "lisp_name": lisp_name,
-            "kind": "alias",
-            "cffi_spec": aliased["lisp_name"],
-            "pointer_like": aliased.get("pointer_like", False),
-        }
-        return types[name]
-
-    for name in typedefs:
-        build(name)
-    return types
-
-
-def resolve_cffi_type(base_type: str, pointer_depth: int, types: dict[str, dict]) -> str:
-    if base_type in types:
-        type_info = types[base_type]
-        if type_info.get("pointer_like"):
-            if pointer_depth == 0:
-                return type_info["lisp_name"]
-            return wrap_pointer(type_info["lisp_name"], pointer_depth - 1)
-        return wrap_pointer(type_info["lisp_name"], pointer_depth)
-
-    if base_type in BUILTIN_TYPE_MAP:
-        builtin = BUILTIN_TYPE_MAP[base_type]
-        if builtin == ":void" and pointer_depth > 0:
-            return wrap_pointer(":pointer", pointer_depth - 1)
-        return wrap_pointer(builtin, pointer_depth)
-
-    raise ValueError(f"Unsupported C type: {base_type}")
-
-
-def ensure_supported_signature_type(base_type: str, pointer_depth: int, types: dict[str, dict]) -> None:
-    type_info = types.get(base_type)
-    if type_info and type_info["kind"] == "struct" and pointer_depth == 0:
-        raise ValueError(f"by-value struct parameters are not supported yet ({base_type})")
-
-
-def build_functions(records: list[dict], types: dict[str, dict]) -> tuple[list[dict], list[tuple[str, str]]]:
-    functions: list[dict] = []
-    skipped: list[tuple[str, str]] = []
-    for record in sorted((record for record in records if record["kind"] == "function"), key=lambda item: item["name"]):
-        return_type = record["return_type"]
-        base_type = return_type["name"]
-        pointer_depth = return_type.get("pointer_depth", 0)
-        if base_type in types and types[base_type]["kind"] == "struct" and pointer_depth == 0:
-            skipped.append((record["name"], f"by-value struct parameters are not supported yet ({base_type})"))
-            continue
-        try:
-            parameters: list[dict] = []
-            for argument in record.get("arguments", []):
-                arg_type = argument["type"]
-                arg_base = arg_type["name"]
-                arg_depth = arg_type.get("pointer_depth", 0)
-                if arg_base in types and types[arg_base]["kind"] == "struct" and arg_depth == 0:
-                    raise ValueError(f"by-value struct parameters are not supported yet ({arg_base})")
-                base_info = types.get(arg_base)
-                parameters.append(
-                    {
-                        "c_name": argument["name"],
-                        "lisp_name": c_identifier_to_lisp(argument["name"]),
-                        "cffi_spec": resolve_cffi_type(arg_base, arg_depth, types),
-                        "base_type": arg_base,
-                        "base_lisp_name": base_info["lisp_name"] if base_info else BUILTIN_TYPE_MAP[arg_base],
-                        "base_kind": base_info["kind"] if base_info else "builtin",
-                        "pointer_depth": arg_depth,
-                        "pointer_like": base_info.get("pointer_like", False) if base_info else False,
-                        "pointee_cffi_spec": resolve_cffi_type(arg_base, arg_depth - 1, types) if arg_depth else None,
-                        "pointee_kind": base_info["kind"] if base_info else "builtin" if arg_base in BUILTIN_TYPE_MAP else None,
-                    }
-                )
-            functions.append(
-                {
-                    "c_name": record["name"],
-                    "raw_lisp_name": "%" + c_identifier_to_lisp(record["name"]),
-                    "public_lisp_name": c_function_to_public_lisp(record["name"]),
-                    "return_spec": resolve_cffi_type(base_type, pointer_depth, types),
-                    "parameters": tuple(parameters),
-                }
-            )
-        except ValueError as exc:
-            skipped.append((record["name"], str(exc)))
-    return functions, skipped
-
-
-def parameter_mode(function: dict, parameter: dict) -> str:
-    override = IN_OUT_PARAMETER_OVERRIDES.get(function["c_name"], {}).get(parameter["lisp_name"])
-    if override:
-        return override
-    if parameter["pointer_depth"] == 0:
-        return "in"
-    if parameter["pointer_depth"] == 1 and (
-        parameter["base_kind"] in {"opaque", "callback"} or parameter["base_type"] == "daqBaseObject"
-    ):
-        return "in"
-    if parameter["base_type"] == "void" or parameter["lisp_name"] in RAW_BUFFER_PARAMETER_NAMES:
-        return "in"
-    return "out"
-
-
-def can_auto_wrap(function: dict) -> bool:
-    for parameter in function["parameters"]:
-        mode = parameter_mode(function, parameter)
-        if mode == "in":
-            continue
-        if parameter["pointee_cffi_spec"] is None or parameter["pointee_kind"] == "struct":
-            return False
-    return True
 
 
 CLASS_NAME_OVERRIDES = {
@@ -383,46 +101,28 @@ def method_name(function: dict) -> str:
 
 
 def call_parameters(function: dict) -> tuple[dict, ...]:
-    return tuple(
-        parameter
-        for parameter in function["parameters"]
-        if parameter_mode(function, parameter) != "out"
-    )
+    return tuple(p for p in function["parameters"] if parameter_mode(function, p) != "out")
 
 
 def output_parameters(function: dict) -> tuple[dict, ...]:
-    return tuple(
-        parameter
-        for parameter in function["parameters"]
-        if parameter_mode(function, parameter) != "in"
-    )
+    return tuple(p for p in function["parameters"] if parameter_mode(function, p) != "in")
 
 
 def constructor_parameters(function: dict) -> tuple[dict, ...]:
-    return tuple(
-        parameter
-        for parameter in function["parameters"]
-        if parameter["lisp_name"] != "obj" and parameter_mode(function, parameter) != "out"
-    )
+    return tuple(p for p in function["parameters"] if p["lisp_name"] != "obj" and parameter_mode(function, p) != "out")
 
 
 def classify_function(function: dict) -> str:
     stem = method_name(function)
     if stem.startswith("create-"):
         outputs = output_parameters(function)
-        if (
-            not uses_instance_receiver(function)
-            and len(outputs) == 1
-            and outputs[0]["lisp_name"] == "obj"
-        ):
+        if not uses_instance_receiver(function) and len(outputs) == 1 and outputs[0]["lisp_name"] == "obj":
             return "constructor"
         return "method"
     if stem.startswith("get-"):
         return "reader"
     if stem.startswith("set-"):
-        if not method_parameters(function):
-            return "method"
-        return "writer"
+        return "writer" if method_parameters(function) else "method"
     return "method"
 
 
@@ -483,9 +183,7 @@ def lowest_common_ancestor(class_names: set[str]) -> str:
     return lca
 
 
-def _emit_polymorphic_bridge(
-    method_name: str, specs: list[dict], lca: str
-) -> list[str] | None:
+def _emit_polymorphic_bridge(method_name: str, specs: list[dict], lca: str) -> list[str] | None:
     template = specs[0]
     parameters = method_parameters(template["function"])
     defaults = {name: value for name, value in template.get("optional_defaults", ())}
@@ -496,10 +194,8 @@ def _emit_polymorphic_bridge(
             lambda_parts.append(f"&optional ({p['lisp_name']} {defaults[p['lisp_name']]})")
         else:
             lambda_parts.append(p["lisp_name"])
-    lambda_list = " ".join(lambda_parts)
 
-    lines = [f"(defmethod {method_name} ({lambda_list})"]
-
+    lines = [f"(defmethod {method_name} ({' '.join(lambda_parts)})"]
     inner_form: str | None = None
     for spec in specs:
         func = spec["function"]
@@ -507,15 +203,10 @@ def _emit_polymorphic_bridge(
         for p in method_parameters(func):
             arg_name = f"coerced-{p['lisp_name']}" if coerce_category(p) is not None else p["lisp_name"]
             call_args.append(arg_name)
-        call_form = f"({LOW_LEVEL_PACKAGE}:{func['public_lisp_name']} {' '.join(call_args)})"
-
+        call_form = f"(opendaq:{func['public_lisp_name']} {' '.join(call_args)})"
         if func["return_spec"] == "daq-err-code":
             return None
-
-        if inner_form is None:
-            inner_form = call_form
-        else:
-            inner_form = f"(handler-case {call_form} (error () {inner_form}))"
+        inner_form = call_form if inner_form is None else f"(handler-case {call_form} (error () {inner_form}))"
 
     coercion_bindings = []
     for p in parameters:
@@ -529,15 +220,12 @@ def _emit_polymorphic_bridge(
     else:
         lines.append(f"  {inner_form}")
     lines.append("")
-
     return lines
 
 
 def exposed_name(function: dict, kind: str) -> str:
     stem = method_name(function)
-    if kind in {"reader", "writer"}:
-        return stem.partition("-")[2]
-    return stem
+    return stem.partition("-")[2] if kind in {"reader", "writer"} else stem
 
 
 def uses_instance_receiver(function: dict) -> bool:
@@ -547,9 +235,7 @@ def uses_instance_receiver(function: dict) -> bool:
 
 def method_parameters(function: dict) -> tuple[dict, ...]:
     params = call_parameters(function)
-    if uses_instance_receiver(function):
-        return params[1:]
-    return params
+    return params[1:] if uses_instance_receiver(function) else params
 
 
 def result_class_names(function: dict) -> tuple[str, ...]:
@@ -557,43 +243,10 @@ def result_class_names(function: dict) -> tuple[str, ...]:
     for parameter in output_parameters(function):
         if parameter["base_lisp_name"] == "daq-string" or not parameter.get("pointer_like"):
             continue
-        class_name = class_name_for_type(parameter["base_lisp_name"])
-        if class_name is not None:
-            classes.append(class_name)
+        cn = class_name_for_type(parameter["base_lisp_name"])
+        if cn is not None:
+            classes.append(cn)
     return tuple(classes)
-
-
-def required_optional_counts(
-    parameters: tuple[dict, ...], optional_defaults: tuple[tuple[str, str], ...]
-) -> tuple[int, int]:
-    defaults = default_map(optional_defaults)
-    required_count = len(parameters)
-    for index, parameter in enumerate(parameters):
-        if parameter["lisp_name"] in defaults:
-            required_count = index
-            break
-    optional = parameters[required_count:]
-    if optional and any(parameter["lisp_name"] not in defaults for parameter in optional):
-        raise ValueError("Optional defaults must cover a trailing suffix of parameters.")
-    return required_count, len(optional)
-
-
-def generic_shape(
-    parameters: tuple[dict, ...], optional_defaults: tuple[tuple[str, str], ...]
-) -> tuple[int, int]:
-    return required_optional_counts(parameters, optional_defaults)
-
-
-def writer_shape(
-    parameters: tuple[dict, ...], optional_defaults: tuple[tuple[str, str], ...]
-) -> tuple[int, int]:
-    if not parameters:
-        raise ValueError("Writers require at least one value parameter.")
-    return (2 + len(parameters) - 1, 0)
-
-
-def qualified_name(function: dict, kind: str) -> str:
-    return f"{receiver_name(function)}-{exposed_name(function, kind)}"
 
 
 def default_map(defaults: tuple[tuple[str, str], ...]) -> dict[str, str]:
@@ -612,67 +265,59 @@ def coerce_category(parameter: dict) -> str | None:
     return None
 
 
+def _split_optional_params(
+    parameters: tuple[dict, ...], optional_defaults: tuple[tuple[str, str], ...]
+) -> tuple[list[dict], list[dict]]:
+    defaults = default_map(optional_defaults)
+    required_count = len(parameters)
+    for idx, p in enumerate(parameters):
+        if p["lisp_name"] in defaults:
+            required_count = idx
+            break
+    optional = list(parameters[required_count:])
+    if optional and any(p["lisp_name"] not in defaults for p in optional):
+        raise ValueError("Optional defaults must cover a trailing suffix of parameters.")
+    return list(parameters[:required_count]), optional
+
+
 def lambda_list(
-    parameters: tuple[dict, ...], optional_defaults: tuple[tuple[str, str], ...]
+    parameters: tuple[dict, ...], optional_defaults: tuple[tuple[str, str], ...], with_defaults: bool = True
 ) -> str:
-    defaults = default_map(optional_defaults)
-    required_count = len(parameters)
-    for index, parameter in enumerate(parameters):
-        if parameter["lisp_name"] in defaults:
-            required_count = index
-            break
-
-    non_optional = [parameter["lisp_name"] for parameter in parameters[:required_count]]
-    optional = parameters[required_count:]
-    if optional and any(parameter["lisp_name"] not in defaults for parameter in optional):
-        raise ValueError("Optional defaults must cover a trailing suffix of parameters.")
-
-    parts = list(non_optional)
+    non_optional, optional = _split_optional_params(parameters, optional_defaults)
+    parts = [p["lisp_name"] for p in non_optional]
     if optional:
         parts.append("&optional")
-        parts.extend(
-            f"({parameter['lisp_name']} {defaults[parameter['lisp_name']]})"
-            for parameter in optional
-        )
+        defaults = default_map(optional_defaults)
+        if with_defaults:
+            parts.extend(f"({p['lisp_name']} {defaults[p['lisp_name']]})" for p in optional)
+        else:
+            parts.extend(p["lisp_name"] for p in optional)
     return " ".join(parts)
 
 
-def generic_lambda_list(
-    parameters: tuple[dict, ...], optional_defaults: tuple[tuple[str, str], ...]
-) -> str:
-    defaults = default_map(optional_defaults)
-    required_count = len(parameters)
-    for index, parameter in enumerate(parameters):
-        if parameter["lisp_name"] in defaults:
-            required_count = index
-            break
-
-    non_optional = [parameter["lisp_name"] for parameter in parameters[:required_count]]
-    optional = parameters[required_count:]
-    if optional and any(parameter["lisp_name"] not in defaults for parameter in optional):
-        raise ValueError("Optional defaults must cover a trailing suffix of parameters.")
-
-    parts = list(non_optional)
-    if optional:
-        parts.append("&optional")
-        parts.extend(parameter["lisp_name"] for parameter in optional)
-    return " ".join(parts)
-
-
-def setter_lambda_list(
-    parameters: tuple[dict, ...], optional_defaults: tuple[tuple[str, str], ...]
-) -> str:
+def setter_lambda_list(parameters: tuple[dict, ...], optional_defaults: tuple[tuple[str, str], ...]) -> str:
     if optional_defaults:
         raise ValueError("Setf writers with optional arguments are not supported.")
-    return " ".join(["new-value", "object", *(parameter["lisp_name"] for parameter in parameters)])
+    return " ".join(["new-value", "object", *(p["lisp_name"] for p in parameters)])
+
+
+def generic_shape(parameters: tuple[dict, ...], optional_defaults: tuple[tuple[str, str], ...]) -> tuple[int, int]:
+    req, opt = _split_optional_params(parameters, optional_defaults)
+    return len(req), len(opt)
 
 
 def method_signature_shape(function: dict, override: dict) -> tuple[int, int]:
     params = method_parameters(function)
     kind = classify_function(function)
     if kind == "writer":
-        return writer_shape(params, override.get("optional_defaults", ()))
+        if not params:
+            raise ValueError("Writers require at least one value parameter.")
+        return (2 + len(params) - 1, 0)
     return generic_shape(params, override.get("optional_defaults", ()))
+
+
+def qualified_name(function: dict, kind: str) -> str:
+    return f"{receiver_name(function)}-{exposed_name(function, kind)}"
 
 
 def select_class_constructors(functions: list[dict]) -> dict[str, dict]:
@@ -689,11 +334,9 @@ def select_class_constructors(functions: list[dict]) -> dict[str, dict]:
         current = selected.get(receiver)
         if current is None:
             selected[receiver] = function
-            continue
-        if (
+        elif (
             CLASS_OVERRIDES.get(receiver, {}).get("constructor_name") is None
-            and
-            current["public_lisp_name"] != preferred_name
+            and current["public_lisp_name"] != preferred_name
             and function["public_lisp_name"] == preferred_name
         ):
             selected[receiver] = function
@@ -710,29 +353,19 @@ def select_method_names(functions: list[dict]) -> dict[str, str]:
 
     names: dict[str, str] = {}
     for (kind, base_name), grouped in groups.items():
-        static_functions = [
-            f for f in grouped if not uses_instance_receiver(f)
-        ]
-        instance_functions = [
-            f for f in grouped if uses_instance_receiver(f)
-        ]
+        static = [f for f in grouped if not uses_instance_receiver(f)]
+        instance = [f for f in grouped if uses_instance_receiver(f)]
 
-        for func in static_functions:
+        for func in static:
             names[func["public_lisp_name"]] = qualified_name(func, kind)
 
         shapes = {
-            method_signature_shape(
-                f, FUNCTION_OVERRIDES.get(f["public_lisp_name"], {})
-            )
-            for f in instance_functions
+            method_signature_shape(f, FUNCTION_OVERRIDES.get(f["public_lisp_name"], {}))
+            for f in instance
         }
-        qualify_instances = (
-            len(shapes) > 1 or base_name in RESERVED_METHOD_NAMES
-        )
-        for func in instance_functions:
-            names[func["public_lisp_name"]] = (
-                qualified_name(func, kind) if qualify_instances else base_name
-            )
+        qualify = len(shapes) > 1 or base_name in RESERVED_METHOD_NAMES
+        for func in instance:
+            names[func["public_lisp_name"]] = qualified_name(func, kind) if qualify else base_name
 
     return names
 
@@ -744,11 +377,7 @@ def build_specs(functions: list[dict]) -> tuple[list[dict], list[dict]]:
     classes: dict[str, dict] = {}
     methods: list[dict] = []
 
-    constructors = {
-        f["public_lisp_name"]: f
-        for f in functions
-        if classify_function(f) == "constructor"
-    }
+    constructors = {f["public_lisp_name"]: f for f in functions if classify_function(f) == "constructor"}
 
     for function in functions:
         kind = classify_function(function)
@@ -756,62 +385,50 @@ def build_specs(functions: list[dict]) -> tuple[list[dict], list[dict]]:
 
         if kind == "constructor":
             if class_constructors.get(receiver) != function:
-                methods.append(
-                    {
-                        "function": function,
-                        "kind": "method",
-                        "name": qualified_name(function, "method"),
-                        "specializer": receiver,
-                        "optional_defaults": (),
-                    }
-                )
+                methods.append({
+                    "function": function, "kind": "method",
+                    "name": qualified_name(function, "method"),
+                    "specializer": receiver, "optional_defaults": (),
+                })
                 continue
-            class_override = CLASS_OVERRIDES.get(receiver, {})
+            co = CLASS_OVERRIDES.get(receiver, {})
             classes[receiver] = {
-                "name": receiver,
-                "constructor": function,
-                "constructor_defaults": class_override.get("constructor_defaults", ()),
+                "name": receiver, "constructor": function,
+                "constructor_defaults": co.get("constructor_defaults", ()),
             }
             continue
 
         for result_class in result_class_names(function):
-            class_override = CLASS_OVERRIDES.get(result_class, {})
-            classes.setdefault(
-                result_class,
-                {
-                    "name": result_class,
-                    "constructor": constructors.get(f"{result_class}/create-{result_class}"),
-                    "constructor_defaults": class_override.get("constructor_defaults", ()),
-                },
-            )
+            co = CLASS_OVERRIDES.get(result_class, {})
+            classes.setdefault(result_class, {
+                "name": result_class,
+                "constructor": constructors.get(f"{result_class}/create-{result_class}"),
+                "constructor_defaults": co.get("constructor_defaults", ()),
+            })
 
         override = FUNCTION_OVERRIDES.get(function["public_lisp_name"], {})
-        methods.append(
-            {
-                "function": function,
-                "kind": kind,
-                "name": method_names[function["public_lisp_name"]],
-                "specializer": override.get("specializer") or receiver,
-                "optional_defaults": override.get("optional_defaults", ()),
-            }
-        )
+        methods.append({
+            "function": function, "kind": kind,
+            "name": method_names[function["public_lisp_name"]],
+            "specializer": override.get("specializer") or receiver,
+            "optional_defaults": override.get("optional_defaults", ()),
+        })
 
     for spec in methods:
         if spec["specializer"] == "managed-object":
             continue
         if spec["specializer"] not in classes:
-            class_override = CLASS_OVERRIDES.get(spec["specializer"], {})
+            co = CLASS_OVERRIDES.get(spec["specializer"], {})
             classes[spec["specializer"]] = {
                 "name": spec["specializer"],
                 "constructor": constructors.get(f"{spec['specializer']}/create-{spec['specializer']}"),
-                "constructor_defaults": class_override.get("constructor_defaults", ()),
+                "constructor_defaults": co.get("constructor_defaults", ()),
             }
 
     if "base-object" not in classes:
         classes["base-object"] = {"name": "base-object", "constructor": None, "constructor_defaults": ()}
 
-    ordered_classes = sorted(classes.values(), key=lambda spec: spec["name"])
-    return ordered_classes, methods
+    return sorted(classes.values(), key=lambda s: s["name"]), methods
 
 
 def export_symbols(classes: list[dict], methods: list[dict]) -> list[str]:
@@ -831,46 +448,34 @@ def constructor_lambda_lines(spec: dict) -> list[str]:
     constructor = spec["constructor"]
     parameters = constructor_parameters(constructor)
     defaults = default_map(spec.get("constructor_defaults", ()))
-    required = tuple(
-        parameter for parameter in parameters if parameter["lisp_name"] not in defaults
-    )
-    ignored = tuple(
-        parameter for parameter in parameters if parameter["lisp_name"] in defaults
-    )
+    required = tuple(p for p in parameters if p["lisp_name"] not in defaults)
+    ignored = tuple(p for p in parameters if p["lisp_name"] in defaults)
+
     lines = [
         f"(defmethod initialize-instance :after ((object {spec['name']})",
         "                                       &key (pointer nil pointer-p)",
     ]
-    for parameter in parameters:
-        default = defaults.get(parameter["lisp_name"], "nil")
-        lines.append(
-            f"                                            ({parameter['lisp_name']} {default} {parameter['lisp_name']}-p)"
-        )
-    ignore_clause = " ".join([f"{p['lisp_name']}-p" for p in ignored])
+    for p in parameters:
+        lines.append(f"                                            ({p['lisp_name']} {defaults.get(p['lisp_name'], 'nil')} {p['lisp_name']}-p)")
+    ignore_clause = " ".join(f"{p['lisp_name']}-p" for p in ignored)
     lines.append("                                       &allow-other-keys)")
-    if ignore_clause:
-        lines.append(f"  (declare (ignore pointer {ignore_clause}))")
-    else:
-        lines.append("  (declare (ignore pointer))")
+    lines.append(f"  (declare (ignore pointer{(' ' + ignore_clause) if ignore_clause else ''}))")
 
-    constructor_call = emit_coerced_call(
+    call_body = emit_coerced_call(
         parameters,
-        [
-            f"(%adopt-pointer object ({LOW_LEVEL_PACKAGE}:{constructor['public_lisp_name']}"
-            + "".join(f" coerced-{parameter['lisp_name']}" for parameter in parameters)
-            + "))"
-        ],
+        [f"(%adopt-pointer object (opendaq:{constructor['public_lisp_name']}"
+         + "".join(f" coerced-{p['lisp_name']}" for p in parameters) + "))"],
         indent="  ",
     )
 
     if required:
-        required_checks = " ".join(f"{parameter['lisp_name']}-p" for parameter in required)
-        lines.append(f"  (when (and (not pointer-p) {required_checks})")
-        lines.extend(constructor_call)
+        checks = " ".join(f"{p['lisp_name']}-p" for p in required)
+        lines.append(f"  (when (and (not pointer-p) {checks})")
+        lines.extend(call_body)
         lines.append("    ))")
     else:
         lines.append("  (unless pointer-p")
-        lines.extend(constructor_call)
+        lines.extend(call_body)
         lines.append("    ))")
     lines.append("")
     return lines
@@ -879,17 +484,12 @@ def constructor_lambda_lines(spec: dict) -> list[str]:
 def emit_class_definition(spec: dict) -> list[str]:
     parent = class_parent(spec["name"])
     slots = (
-        [
-            f"   (%{parameter['lisp_name']}-initarg :initarg :{parameter['lisp_name']} :initform nil)"
-            for parameter in constructor_parameters(spec["constructor"])
-        ]
+        [f"   (%{p['lisp_name']}-initarg :initarg :{p['lisp_name']} :initform nil)"
+         for p in constructor_parameters(spec["constructor"])]
         if spec["constructor"] is not None
         else []
     )
-    lines = [f"(defclass {spec['name']} ({parent})", "  ("]
-    lines.extend(slots)
-    lines.extend(["   ))", "", ""])
-    return lines
+    return [f"(defclass {spec['name']} ({parent})", "  (", *slots, "   ))", "", ""]
 
 
 def emit_wrapper_constructor(spec: dict) -> list[str]:
@@ -901,37 +501,25 @@ def emit_wrapper_constructor(spec: dict) -> list[str]:
     ]
 
 
-def emit_coerced_call(
-    parameters: tuple[dict, ...], inner_lines: list[str], indent: str
-) -> list[str]:
+def emit_coerced_call(parameters: tuple[dict, ...], inner_lines: list[str], indent: str) -> list[str]:
     lines: list[str] = []
 
-    def recurse(index: int, current_indent: str) -> None:
-        if index == len(parameters):
-            lines.extend(indent_lines(inner_lines, current_indent))
+    def recurse(idx: int, cur_indent: str) -> None:
+        if idx == len(parameters):
+            lines.extend([f"{cur_indent}{line}" if line else line for line in inner_lines])
             return
-
-        parameter = parameters[index]
-        category = coerce_category(parameter)
-        if category is None:
-            lines.append(
-                f"{current_indent}(let ((coerced-{parameter['lisp_name']} {parameter['lisp_name']}))"
-            )
-            recurse(index + 1, current_indent + "  ")
-            lines.append(f"{current_indent})")
-            return
-
-        lines.append(
-            f"{current_indent}(multiple-value-bind (coerced-{parameter['lisp_name']} cleanup-{parameter['lisp_name']})"
-        )
-        lines.append(
-            f"{current_indent}    (%coerce-argument {parameter['lisp_name']} {category})"
-        )
-        lines.append(f"{current_indent}  (unwind-protect")
-        recurse(index + 1, current_indent + "      ")
-        lines.append(
-            f"{current_indent}    (%cleanup-coerced-argument cleanup-{parameter['lisp_name']})))"
-        )
+        p = parameters[idx]
+        cat = coerce_category(p)
+        if cat is None:
+            lines.append(f"{cur_indent}(let ((coerced-{p['lisp_name']} {p['lisp_name']}))")
+            recurse(idx + 1, cur_indent + "  ")
+            lines.append(f"{cur_indent})")
+        else:
+            lines.append(f"{cur_indent}(multiple-value-bind (coerced-{p['lisp_name']} cleanup-{p['lisp_name']})")
+            lines.append(f"{cur_indent}    (%coerce-argument {p['lisp_name']} {cat})")
+            lines.append(f"{cur_indent}  (unwind-protect")
+            recurse(idx + 1, cur_indent + "      ")
+            lines.append(f"{cur_indent}    (%cleanup-coerced-argument cleanup-{p['lisp_name']})))")
 
     recurse(0, indent)
     return lines
@@ -942,285 +530,196 @@ def value_expression(parameter: dict, value_form: str, function_name: str = "") 
         return f"(%daq-string-to-lisp-and-release {value_form})"
     if parameter["base_lisp_name"] == "daq-bool":
         return f"(not (zerop {value_form}))"
-    class_name = class_name_for_type(parameter["base_lisp_name"])
-    if parameter.get("pointer_like") and class_name is not None:
+    cn = class_name_for_type(parameter["base_lisp_name"])
+    if parameter.get("pointer_like") and cn is not None:
         if function_name:
             element_type = LIST_ELEMENT_TYPES.get((function_name, parameter["c_name"]))
             if element_type is not None:
-                return f"(as-list-of (wrap-{class_name} {value_form}) '{element_type})"
-        return f"(wrap-{class_name} {value_form})"
+                return f"(as-list-of (wrap-{cn} {value_form}) '{element_type})"
+        return f"(wrap-{cn} {value_form})"
     return value_form
 
 
-def indent_lines(lines: list[str], prefix: str) -> list[str]:
-    return [f"{prefix}{line}" if line else line for line in lines]
+def _type_spec_ref(type_name: str) -> str:
+    return type_name if type_name.startswith(":") or type_name.startswith("(") else f"opendaq::{type_name}"
 
 
-def lisp_type_reference(type_name: str) -> str:
-    if type_name.startswith(":"):
-        return type_name
-    return f"{LOW_LEVEL_PACKAGE}::{type_name}"
-
-
-def type_spec_reference(type_name: str) -> str:
-    if type_name.startswith(":") or type_name.startswith("("):
-        return type_name
-    return f"{LOW_LEVEL_PACKAGE}::{type_name}"
-
-
-def raw_output_slot_value(parameter: dict, slot_name: str) -> str:
+def _raw_output_slot_value(parameter: dict, slot_name: str) -> str:
     type_name = parameter["pointee_cffi_spec"] or parameter["base_lisp_name"]
-    return f"(cffi:mem-ref {slot_name} '{type_spec_reference(type_name)})"
+    return f"(cffi:mem-ref {slot_name} '{_type_spec_ref(type_name)})"
 
 
-def emit_result_lines(function: dict, call_form: str) -> list[str]:
+def _emit_result(function: dict, call_form: str) -> list[str]:
     outputs = output_parameters(function)
     if not outputs:
         return [call_form]
     if len(outputs) == 1:
         return [value_expression(outputs[0], call_form, function["public_lisp_name"])]
 
-    binding_names = [f"value-{index}" for index in range(len(outputs))]
-    lines = [
-        f"(multiple-value-bind ({' '.join(binding_names)})",
-        f"    {call_form}",
-        "  (cl:values",
-    ]
-    for index, parameter in enumerate(outputs):
-        suffix = "))" if index == len(outputs) - 1 else ""
-        lines.append(
-            f"    {value_expression(parameter, binding_names[index], function['public_lisp_name'])}{suffix}"
-        )
+    binding_names = [f"value-{idx}" for idx in range(len(outputs))]
+    lines = [f"(multiple-value-bind ({' '.join(binding_names)})", f"    {call_form}", "  (cl:values"]
+    for idx, param in enumerate(outputs):
+        suffix = "))" if idx == len(outputs) - 1 else ""
+        lines.append(f"    {value_expression(param, binding_names[idx], function['public_lisp_name'])}{suffix}")
     return lines
 
 
-def emit_manual_call_lines(
-    function: dict, argument_map: dict[str, str]
-) -> list[str]:
+def _emit_manual_call(function: dict, argument_map: dict[str, str]) -> list[str]:
     outputs = output_parameters(function)
-    slot_names = {parameter["lisp_name"]: f"{parameter['lisp_name']}-slot" for parameter in outputs}
+    slot_names = {p["lisp_name"]: f"{p['lisp_name']}-slot" for p in outputs}
     lines: list[str] = []
 
-    def recurse(index: int, current_indent: str) -> None:
-        if index == len(outputs):
-            for parameter in outputs:
-                if parameter_mode(function, parameter) != "in-out":
+    def recurse(idx: int, cur_indent: str) -> None:
+        if idx == len(outputs):
+            for param in outputs:
+                if parameter_mode(function, param) != "in-out":
                     continue
                 lines.append(
-                    f"{current_indent}(setf "
-                    f"(cffi:mem-ref {slot_names[parameter['lisp_name']]} "
-                    f"'{type_spec_reference(parameter['pointee_cffi_spec'])}) "
-                    f"{argument_map[parameter['lisp_name']]})"
+                    f"{cur_indent}(setf "
+                    f"(cffi:mem-ref {slot_names[param['lisp_name']]} "
+                    f"'{_type_spec_ref(param['pointee_cffi_spec'])}) "
+                    f"{argument_map[param['lisp_name']]})"
                 )
 
-            call_arguments = []
-            for parameter in function["parameters"]:
-                mode = parameter_mode(function, parameter)
-                if mode == "in":
-                    call_arguments.append(argument_map[parameter["lisp_name"]])
-                else:
-                    call_arguments.append(slot_names[parameter["lisp_name"]])
+            call_args = []
+            for param in function["parameters"]:
+                mode = parameter_mode(function, param)
+                call_args.append(argument_map[param["lisp_name"]] if mode == "in" else slot_names[param["lisp_name"]])
 
-            call_form = (
-                f"({LOW_LEVEL_PACKAGE}:{function['public_lisp_name']}"
-                + "".join(f" {argument}" for argument in call_arguments)
-                + ")"
-            )
-            if function["return_spec"] == "daq-err-code":
-                lines.append(f"{current_indent}{call_form}")
+            call_form = f"(opendaq:{function['public_lisp_name']}" + "".join(f" {a}" for a in call_args) + ")"
+
+            ret = function["return_spec"]
+            if ret == "daq-err-code":
+                lines.append(f"{cur_indent}{call_form}")
                 if not outputs:
-                    lines.append(f"{current_indent}nil")
+                    lines.append(f"{cur_indent}nil")
                 elif len(outputs) == 1:
-                    lines.append(
-                        f"{current_indent}"
-                        f"{value_expression(outputs[0], raw_output_slot_value(outputs[0], slot_names[outputs[0]['lisp_name']]), function['public_lisp_name'])}"
-                    )
+                    p = outputs[0]
+                    lines.append(f"{cur_indent}{value_expression(p, _raw_output_slot_value(p, slot_names[p['lisp_name']]), function['public_lisp_name'])}")
                 else:
-                    lines.append(f"{current_indent}(cl:values")
-                    for output_index, parameter in enumerate(outputs):
-                        suffix = ")" if output_index == len(outputs) - 1 else ""
-                        lines.append(
-                            f"{current_indent}  "
-                            f"{value_expression(parameter, raw_output_slot_value(parameter, slot_names[parameter['lisp_name']]), function['public_lisp_name'])}"
-                            f"{suffix}"
-                        )
+                    lines.append(f"{cur_indent}(cl:values")
+                    for oi, p in enumerate(outputs):
+                        sfx = ")" if oi == len(outputs) - 1 else ""
+                        lines.append(f"{cur_indent}  {value_expression(p, _raw_output_slot_value(p, slot_names[p['lisp_name']]), function['public_lisp_name'])}{sfx}")
                 return
 
-            if function["return_spec"] == ":void":
-                lines.append(f"{current_indent}{call_form}")
-                lines.append(f"{current_indent}nil")
+            if ret == ":void":
+                lines.append(f"{cur_indent}{call_form}")
+                lines.append(f"{cur_indent}nil")
                 return
 
-            lines.append(f"{current_indent}(let ((result {call_form}))")
+            lines.append(f"{cur_indent}(let ((result {call_form}))")
             if not outputs:
-                lines.append(f"{current_indent}  result)")
+                lines.append(f"{cur_indent}  result)")
             else:
-                lines.append(f"{current_indent}  (cl:values result")
-                for output_index, parameter in enumerate(outputs):
-                    suffix = "))" if output_index == len(outputs) - 1 else ""
-                    lines.append(
-                        f"{current_indent}    "
-                        f"{value_expression(parameter, raw_output_slot_value(parameter, slot_names[parameter['lisp_name']]), function['public_lisp_name'])}"
-                        f"{suffix}"
-                    )
+                lines.append(f"{cur_indent}  (cl:values result")
+                for oi, p in enumerate(outputs):
+                    sfx = "))" if oi == len(outputs) - 1 else ""
+                    lines.append(f"{cur_indent}    {value_expression(p, _raw_output_slot_value(p, slot_names[p['lisp_name']]), function['public_lisp_name'])}{sfx}")
             return
 
-        parameter = outputs[index]
-        slot_name = slot_names[parameter["lisp_name"]]
-        lines.append(
-            f"{current_indent}(cffi:with-foreign-object "
-            f"({slot_name} '{type_spec_reference(parameter['pointee_cffi_spec'])})"
-        )
-        recurse(index + 1, current_indent + "  ")
-        lines.append(f"{current_indent})")
+        param = outputs[idx]
+        slot_name = slot_names[param["lisp_name"]]
+        lines.append(f"{cur_indent}(cffi:with-foreign-object ({slot_name} '{_type_spec_ref(param['pointee_cffi_spec'])})")
+        recurse(idx + 1, cur_indent + "  ")
+        lines.append(f"{cur_indent})")
 
     recurse(0, "")
     return lines
 
 
-def emit_call_lines(spec: dict, parameter_names: tuple[str, ...]) -> list[str]:
+def _emit_call_body(spec: dict, parameter_names: tuple[str, ...]) -> list[str]:
     function = spec["function"]
-    parameters = method_parameters(function)
+    params = method_parameters(function)
     argument_map: dict[str, str] = {}
     if uses_instance_receiver(function):
         argument_map["self"] = "(%require-live-pointer object)"
-    for parameter, argument in zip(parameters, parameter_names):
-        argument_map[parameter["lisp_name"]] = argument
+    for param, arg in zip(params, parameter_names):
+        argument_map[param["lisp_name"]] = arg
 
     if can_auto_wrap(function):
-        call_arguments = [argument_map[parameter["lisp_name"]] for parameter in call_parameters(function)]
-        call_form = (
-            f"({LOW_LEVEL_PACKAGE}:{function['public_lisp_name']}"
-            + "".join(f" {argument}" for argument in call_arguments)
-            + ")"
-        )
-        return emit_result_lines(function, call_form)
+        call_args = [argument_map[p["lisp_name"]] for p in call_parameters(function)]
+        call_form = f"(opendaq:{function['public_lisp_name']}" + "".join(f" {a}" for a in call_args) + ")"
+        return _emit_result(function, call_form)
 
-    return emit_manual_call_lines(function, argument_map)
+    return _emit_manual_call(function, argument_map)
 
 
-def emit_plain_function(spec: dict) -> list[str]:
+def _emit_plain_function(spec: dict) -> list[str]:
     function = spec["function"]
-    parameters = method_parameters(function)
-    lambda_tail = lambda_list(parameters, spec.get("optional_defaults", ()))
-    body_lines = emit_coerced_call(
-        parameters,
-        emit_call_lines(
-            spec,
-            tuple(f"coerced-{parameter['lisp_name']}" for parameter in parameters),
-        ),
+    params = method_parameters(function)
+    tail = lambda_list(params, spec.get("optional_defaults", ()))
+    body = emit_coerced_call(
+        params,
+        _emit_call_body(spec, tuple(f"coerced-{p['lisp_name']}" for p in params)),
         indent="  ",
     )
-    return [
-        f"(defun {spec['name']} ({lambda_tail})" if lambda_tail else f"(defun {spec['name']} ()",
-        *body_lines,
-        ")",
-        "",
-    ]
+    header = f"(defun {spec['name']} ({tail})" if tail else f"(defun {spec['name']} ()"
+    return [header, *body, ")", ""]
 
 
-def emit_reader(spec: dict) -> list[str]:
+def _emit_instance_method(spec: dict) -> list[str]:
     if not uses_instance_receiver(spec["function"]):
-        return emit_plain_function(spec)
+        return _emit_plain_function(spec)
 
     function = spec["function"]
-    parameters = method_parameters(function)
-    lambda_tail = lambda_list(parameters, spec.get("optional_defaults", ()))
-    generic_tail = generic_lambda_list(parameters, spec.get("optional_defaults", ()))
-    method_tail = (
-        f"((object {spec['specializer']}){(' ' + lambda_tail) if lambda_tail else ''})"
-    )
+    params = method_parameters(function)
+    tail = lambda_list(params, spec.get("optional_defaults", ()))
+    generic_tail = lambda_list(params, spec.get("optional_defaults", ()), with_defaults=False)
+    method_tail = f"((object {spec['specializer']}){(' ' + tail) if tail else ''})"
+
     lines = [
         f"(defgeneric {spec['name']} (object{(' ' + generic_tail) if generic_tail else ''}))",
         f"(defmethod {spec['name']} {method_tail}",
     ]
-    body_lines = emit_coerced_call(
-        parameters,
-        emit_call_lines(
-            spec,
-            tuple(f"coerced-{parameter['lisp_name']}" for parameter in parameters),
-        ),
+    body = emit_coerced_call(
+        params,
+        _emit_call_body(spec, tuple(f"coerced-{p['lisp_name']}" for p in params)),
         indent="  ",
     )
-    lines.extend(body_lines)
+    lines.extend(body)
     lines.extend([")", ""])
     return lines
 
 
-def emit_writer(spec: dict) -> list[str]:
+def _emit_writer(spec: dict) -> list[str]:
     if not uses_instance_receiver(spec["function"]):
-        return emit_plain_function(spec)
+        return _emit_plain_function(spec)
 
     function = spec["function"]
-    parameters = method_parameters(function)
-    if not parameters:
+    params = method_parameters(function)
+    if not params:
         raise ValueError(f"{function['public_lisp_name']} has no writable value.")
-    accessor_parameters = parameters[:-1]
-    value_parameter = parameters[-1]
+    accessor_params = params[:-1]
+    value_param = params[-1]
+
     method_tail = (
         f"(new-value (object {spec['specializer']})"
-        + "".join(f" {parameter['lisp_name']}" for parameter in accessor_parameters)
-        + ")"
+        + "".join(f" {p['lisp_name']}" for p in accessor_params) + ")"
     )
     lines = [
-        f"(defgeneric (setf {spec['name']}) ({setter_lambda_list(accessor_parameters, spec.get('optional_defaults', ()))}))",
+        f"(defgeneric (setf {spec['name']}) ({setter_lambda_list(accessor_params, spec.get('optional_defaults', ()))}))",
         f"(defmethod (setf {spec['name']}) {method_tail}",
     ]
-    coerced_parameters = accessor_parameters + (
+
+    coerced_params = accessor_params + (
         {
-            "c_name": value_parameter["c_name"],
+            "c_name": value_param["c_name"],
             "lisp_name": "new-value",
-            "cffi_spec": value_parameter["cffi_spec"],
-            "base_type": value_parameter["base_type"],
-            "base_lisp_name": value_parameter["base_lisp_name"],
-            "base_kind": value_parameter["base_kind"],
-            "pointer_depth": value_parameter["pointer_depth"],
-            "pointer_like": value_parameter.get("pointer_like", False),
-            "pointee_cffi_spec": value_parameter["pointee_cffi_spec"],
-            "pointee_kind": value_parameter["pointee_kind"],
+            "cffi_spec": value_param["cffi_spec"],
+            "base_type": value_param["base_type"],
+            "base_lisp_name": value_param["base_lisp_name"],
+            "base_kind": value_param["base_kind"],
+            "pointer_depth": value_param["pointer_depth"],
+            "pointer_like": value_param.get("pointer_like", False),
+            "pointee_cffi_spec": value_param["pointee_cffi_spec"],
+            "pointee_kind": value_param["pointee_kind"],
         },
     )
-    body_lines = emit_coerced_call(
-        coerced_parameters,
-        emit_call_lines(
-            spec,
-            tuple(
-                [f"coerced-{parameter['lisp_name']}" for parameter in accessor_parameters]
-                + ["coerced-new-value"]
-            ),
-        ),
-        indent="  ",
-    )
-    lines.extend(body_lines)
+    arg_names = tuple([f"coerced-{p['lisp_name']}" for p in accessor_params] + ["coerced-new-value"])
+    body = emit_coerced_call(coerced_params, _emit_call_body(spec, arg_names), indent="  ")
+    lines.extend(body)
     lines.extend(["  new-value)", ""])
-    return lines
-
-
-def emit_method(spec: dict) -> list[str]:
-    if not uses_instance_receiver(spec["function"]):
-        return emit_plain_function(spec)
-
-    function = spec["function"]
-    parameters = method_parameters(function)
-    lambda_tail = lambda_list(parameters, spec.get("optional_defaults", ()))
-    generic_tail = generic_lambda_list(parameters, spec.get("optional_defaults", ()))
-    method_tail = (
-        f"((object {spec['specializer']}){(' ' + lambda_tail) if lambda_tail else ''})"
-    )
-    lines = [
-        f"(defgeneric {spec['name']} (object{(' ' + generic_tail) if generic_tail else ''}))",
-        f"(defmethod {spec['name']} {method_tail}",
-    ]
-    body_lines = emit_coerced_call(
-        parameters,
-        emit_call_lines(
-            spec,
-            tuple(f"coerced-{parameter['lisp_name']}" for parameter in parameters),
-        ),
-        indent="  ",
-    )
-    lines.extend(body_lines)
-    lines.extend([")", ""])
     return lines
 
 
@@ -1259,7 +758,7 @@ def emit_read_samples_helper() -> list[str]:
 def render_output(include_dir: Path) -> str:
     records = parse_records(include_dir)
     types = build_types(records)
-    functions, _ = build_functions(records, types)
+    functions, _ = build_raw_functions(records, types)
     classes, methods = build_specs(functions)
     exports = export_symbols(classes, methods)
 
@@ -1272,7 +771,6 @@ def render_output(include_dir: Path) -> str:
         "(eval-when (:compile-toplevel :load-toplevel :execute)",
         "  (shadow '(",
     ]
-
     for symbol in exports:
         lines.append(f"            {symbol}")
     lines.extend(["            ))", "  )", "", ""])
@@ -1296,18 +794,16 @@ def render_output(include_dir: Path) -> str:
     ])
 
     for spec in methods:
-        if spec["kind"] == "reader":
-            lines.extend(emit_reader(spec))
-        elif spec["kind"] == "writer":
-            lines.extend(emit_writer(spec))
-        elif spec["kind"] == "method":
-            lines.extend(emit_method(spec))
+        kind = spec["kind"]
+        if kind == "writer":
+            lines.extend(_emit_writer(spec))
+        elif kind in ("reader", "method"):
+            lines.extend(_emit_instance_method(spec))
 
     bridge_names: dict[str, list[dict]] = {}
     for spec in methods:
-        if spec["kind"] not in ("method", "reader", "writer"):
-            continue
-        bridge_names.setdefault(spec["name"], []).append(spec)
+        if spec["kind"] in ("method", "reader", "writer"):
+            bridge_names.setdefault(spec["name"], []).append(spec)
     for name, specs in bridge_names.items():
         specializers = list(dict.fromkeys(s["specializer"] for s in specs))
         if len(specializers) <= 1:
@@ -1340,19 +836,10 @@ def render_output(include_dir: Path) -> str:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="Generate the high-level Common Lisp bindings layer."
-    )
+    parser = argparse.ArgumentParser(description="Generate the high-level Common Lisp bindings layer.")
+    parser.add_argument("--output", required=True, type=Path, help="Path to the generated high-level Lisp file.")
     parser.add_argument(
-        "--output",
-        required=True,
-        type=Path,
-        help="Path to the generated high-level Lisp file.",
-    )
-    parser.add_argument(
-        "--include-dir",
-        type=Path,
-        default=DEFAULT_INCLUDE_DIR,
+        "--include-dir", type=Path, default=DEFAULT_INCLUDE_DIR,
         help="Path to the openDAQ C headers used to derive the high-level wrappers.",
     )
     return parser.parse_args()

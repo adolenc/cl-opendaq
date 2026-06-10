@@ -241,8 +241,10 @@ def build_functions(records: list[dict], types: dict[str, dict]) -> tuple[list[d
                         "lisp_name": c_identifier_to_lisp(argument["name"]),
                         "cffi_spec": resolve_cffi_type(arg_base, arg_depth, types),
                         "base_type": arg_base,
+                        "base_lisp_name": base_info["lisp_name"] if base_info else BUILTIN_TYPE_MAP[arg_base],
                         "base_kind": base_info["kind"] if base_info else "builtin",
                         "pointer_depth": arg_depth,
+                        "pointer_like": base_info.get("pointer_like", False) if base_info else False,
                         "pointee_cffi_spec": resolve_cffi_type(arg_base, arg_depth - 1, types) if arg_depth else None,
                         "pointee_kind": base_info["kind"] if base_info else "builtin" if arg_base in BUILTIN_TYPE_MAP else None,
                     }
