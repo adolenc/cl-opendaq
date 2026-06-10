@@ -13,9 +13,9 @@ Each line of stdout is a JSON object with a "kind" discriminator.  Example:
    "name": "daqDevice_addDevices",
    "return_type": {"name": "daqErrCode"},
    "arguments": [
-     {"name": "self",           "type": {"name": "daqDevice"}, "direction": "in"},
-     {"name": "devices",        "type": {"name": "daqDict", "pointer_depth": 2, "key_type": "String", "value_type": "Device"}, "direction": "out"},
-     {"name": "connectionArgs", "type": {"name": "daqDict", "pointer_depth": 1, "key_type": "String", "value_type": "PropertyObject"}, "direction": "in"}
+     {"name": "self",           "type": {"name": "daqDevice"}},
+     {"name": "devices",        "type": {"name": "daqDict", "pointer_depth": 2, "key_type": "String", "value_type": "Device"}},
+     {"name": "connectionArgs", "type": {"name": "daqDict", "pointer_depth": 1, "key_type": "String", "value_type": "PropertyObject"}}
    ],
    "docstring": "@brief Connects to multiple devices in parallel ...\\n...",
    "source_file": "bindings/c/include/copendaq/device/device.h"}
@@ -26,7 +26,7 @@ JSON schema (per kind):
     name           : str     — full C function name (e.g. "daqDevice_addDevices")
                                class / method split on the first '_'
     return_type    : TypeDesc
-    arguments[]    : { name: str, type: TypeDesc, direction: "in"|"out" }
+    arguments[]    : { name: str, type: TypeDesc }
     docstring      : str     - raw doxygen text with newlines preserved
     source_file    : str     - relative path from the repo root
 
@@ -138,15 +138,6 @@ GET_INTF_ID_RE = re.compile(
 # Argument split: type_and_name
 ARG_SPLIT_RE = re.compile(r"^(?P<type>.+?)(?P<name>[A-Za-z_]\w*)$")
 
-# Set of builtin C type names (used for direction inference)
-BUILTIN_TYPES: set[str] = {
-    "char", "double", "float", "int",
-    "int8_t", "int16_t", "int32_t", "int64_t",
-    "size_t",
-    "uint8_t", "uint16_t", "uint32_t", "uint64_t",
-    "void",
-}
-
 IGNORED_FILENAMES = {"copendaq_private.h"}
 
 
@@ -169,7 +160,6 @@ class ArgumentDesc:
     """Describes one function argument."""
     name: str
     type: TypeDesc
-    direction: str           # "in" or "out" (inferred from pointer depth / heuristics)
     doc_param: str | None = None    # @param description text
 
 
@@ -383,37 +373,6 @@ def _collect_tts_before(
     return result
 
 
-def _infer_direction(arg_name: str, td: TypeDesc, index: int, type_categories: dict[str, str]) -> str:
-    """Infer whether an argument is 'in' or 'out' based on its type and position."""
-    # 'self' is always an input
-    if arg_name == "self":
-        return "in"
-    # No pointer depth — always input
-    if td.pointer_depth == 0:
-        return "in"
-    # Double or higher pointer — always output
-    if td.pointer_depth >= 2:
-        return "out"
-    # pointer_depth == 1
-    # Void* is input
-    if td.name == "void":
-        return "in"
-    # daqBaseObject* is always an input object reference
-    if td.name == "daqBaseObject":
-        return "in"
-    # Builtin C types (int*, daqBool*, daqSizeT*, etc.) with single pointer → output
-    if td.name in BUILTIN_TYPES:
-        return "out"
-    # daq* types with single pointer:
-    #   opaque / callback → input (object reference)
-    #   struct / enum / alias → output (passed by pointer for return value)
-    cat = type_categories.get(td.name, "")
-    if cat in ("opaque", "callback"):
-        return "in"
-    # Unknown daq types default to "out" (e.g. daqIntfID*, daqCoreType*, daqEnumType*)
-    return "out"
-
-
 class HeaderParser:
     """Parses a single C header file and extracts bindings."""
 
@@ -483,7 +442,7 @@ class HeaderParser:
         # Resolve #define constants for enum values
         defines = scan_numeric_defines(raw_text)
 
-        # --- Phase 3: parse structural typedefs & collect category info for direction inference ---
+        # --- Phase 3: parse structural typedefs & collect category info ---
         type_categories: dict[str, str] = {}  # name -> "opaque" | "struct" | "enum" | "callback" | "alias"
 
         for m in OPAQUE_STRUCT_RE.finditer(text_no_comments):
@@ -565,8 +524,7 @@ class HeaderParser:
                         arg_name = f"arg{idx}"
                         type_part = raw_arg
                     arg_td = make_type_desc(type_part)
-                    direction = _infer_direction(arg_name, arg_td, idx, type_categories)
-                    arguments.append(ArgumentDesc(name=arg_name, type=arg_td, direction=direction))
+                    arguments.append(ArgumentDesc(name=arg_name, type=arg_td))
 
             # Find templateType annotations between previous function and this one
             func_tts = _collect_tts_before(func_ln, template_annotations)
