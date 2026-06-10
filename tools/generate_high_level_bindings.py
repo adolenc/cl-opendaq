@@ -7,7 +7,7 @@ import re
 import sys
 from pathlib import Path
 
-from generate_bindings import (
+from generate_low_level_bindings import (
     build_functions as build_raw_functions,
     build_types,
     can_auto_wrap,

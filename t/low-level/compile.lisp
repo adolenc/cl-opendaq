@@ -1,6 +1,6 @@
 (in-package #:opendaq.tests)
 
-(in-suite compile-and-run-suite)
+(in-suite low-level-compile-and-run-suite)
 
 (test test-compile
   (daq.ll:with-daq-objects (str)

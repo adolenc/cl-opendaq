@@ -5,7 +5,7 @@
 ;; Ownable and PropertyObjectProtected remain blocked until the generator
 ;; supports daqBaseObject_borrowInterface and daqIntfID-by-value signatures.
 
-(in-suite coreobjects-suite)
+(in-suite low-level-coreobjects-suite)
 
 (defparameter *coreobjects-end-update-called* nil)
 

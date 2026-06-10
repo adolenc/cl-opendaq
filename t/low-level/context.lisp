@@ -2,7 +2,7 @@
 
 ;; Direct port of bindings/c/tests/copendaq/test_copendaq_context.cpp.
 
-(in-suite opendaq-context-suite)
+(in-suite low-level-context-suite)
 
 (test opendaq-context
   (daq.ll:with-daq-objects (context out-logger out-type-manager out-options out-discovery-servers)

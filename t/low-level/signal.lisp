@@ -4,7 +4,7 @@
 ;; DataPacket, DimensionRule, EventPacket, and Range remain blocked because the current generated
 ;; bindings do not expose the daqNumber/queryInterface paths safely enough for those tests.
 
-(in-suite opendaq-signal-suite)
+(in-suite low-level-signal-suite)
 
 (defun %make-signal-value-descriptor ()
   (let ((descriptor nil))

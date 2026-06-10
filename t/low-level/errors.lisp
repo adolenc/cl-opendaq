@@ -1,6 +1,6 @@
 (in-package #:opendaq.tests)
 
-(in-suite smoke-suite)
+(in-suite low-level-smoke-suite)
 
 (test opendaq-error-report-includes-code-name-and-message
   (let* ((err (make-condition 'opendaq:opendaq-error

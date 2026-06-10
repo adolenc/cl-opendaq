@@ -1,6 +1,6 @@
 (in-package #:opendaq.tests)
 
-(in-suite smoke-suite)
+(in-suite low-level-smoke-suite)
 
 (defun %temporary-test-directory ()
   (let ((directory

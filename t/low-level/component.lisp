@@ -4,7 +4,7 @@
 ;; ComponentPrivate, ComponentStatusContainer, Folder, Removable, Tags, and other borrowInterface
 ;; paths remain blocked until daqBaseObject_borrowInterface is supported.
 
-(in-suite opendaq-component-suite)
+(in-suite low-level-component-suite)
 
 (test opendaq-component
   (daq.ll:with-daq-objects (context parent-id child-id component child child-local-id child-global-id)

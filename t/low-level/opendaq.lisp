@@ -2,7 +2,7 @@
 
 ;; Direct port of the portable subset of bindings/c/tests/copendaq/test_copendaq_opendaq.cpp.
 
-(in-suite opendaq-api-suite)
+(in-suite low-level-api-suite)
 
 (test opendaq-config-provider
   (daq.ll:with-daq-objects (config-provider)

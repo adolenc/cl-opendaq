@@ -2,7 +2,7 @@
 
 ;; Direct port of bindings/c/tests/copendaq/test_copendaq_streaming.cpp.
 
-(in-suite opendaq-streaming-suite)
+(in-suite low-level-streaming-suite)
 
 (test opendaq-streaming-type
   (daq.ll:with-daq-objects (id name description prefix streaming-type)

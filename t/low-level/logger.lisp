@@ -2,7 +2,7 @@
 
 ;; Direct port of bindings/c/tests/copendaq/test_copendaq_logger.cpp.
 
-(in-suite opendaq-logger-suite)
+(in-suite low-level-logger-suite)
 
 (test opendaq-logger
   (daq.ll:with-daq-objects (sinks sink logger)

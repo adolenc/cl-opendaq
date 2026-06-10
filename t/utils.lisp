@@ -1,62 +1,62 @@
 (in-package #:opendaq.tests)
 
-(def-suite opendaq-suite
+(def-suite low-level-suite
   :description "Standalone low-level openDAQ Lisp bindings tests.")
 
-(def-suite compile-and-run-suite
-  :in opendaq-suite
+(def-suite low-level-compile-and-run-suite
+  :in low-level-suite
   :description "Direct ports of bindings/c/tests/compile_and_run.")
 
-(def-suite coretypes-suite
-  :in opendaq-suite
+(def-suite low-level-coretypes-suite
+  :in low-level-suite
   :description "Direct ports of the portable subset of bindings/c/tests/coretypes.")
 
-(def-suite coreobjects-suite
-  :in opendaq-suite
+(def-suite low-level-coreobjects-suite
+  :in low-level-suite
   :description "Direct ports of the portable subset of bindings/c/tests/coreobjects.")
 
-(def-suite opendaq-runtime-suite
-  :in opendaq-suite
+(def-suite low-level-runtime-suite
+  :in low-level-suite
   :description "Direct ports of the portable subset of bindings/c/tests/copendaq.")
 
-(def-suite opendaq-api-suite
-  :in opendaq-runtime-suite
+(def-suite low-level-api-suite
+  :in low-level-runtime-suite
   :description "Portable ports of test_copendaq_opendaq.cpp.")
 
-(def-suite opendaq-context-suite
-  :in opendaq-runtime-suite
+(def-suite low-level-context-suite
+  :in low-level-runtime-suite
   :description "Portable ports of test_copendaq_context.cpp.")
 
-(def-suite opendaq-logger-suite
-  :in opendaq-runtime-suite
+(def-suite low-level-logger-suite
+  :in low-level-runtime-suite
   :description "Portable ports of test_copendaq_logger.cpp.")
 
-(def-suite opendaq-device-suite
-  :in opendaq-runtime-suite
+(def-suite low-level-device-suite
+  :in low-level-runtime-suite
   :description "Portable ports of test_copendaq_device.cpp.")
 
-(def-suite opendaq-component-suite
-  :in opendaq-runtime-suite
+(def-suite low-level-component-suite
+  :in low-level-runtime-suite
   :description "Portable ports of test_copendaq_component.cpp.")
 
-(def-suite opendaq-streaming-suite
-  :in opendaq-runtime-suite
+(def-suite low-level-streaming-suite
+  :in low-level-runtime-suite
   :description "Portable ports of test_copendaq_streaming.cpp.")
 
-(def-suite opendaq-server-suite
-  :in opendaq-runtime-suite
+(def-suite low-level-server-suite
+  :in low-level-runtime-suite
   :description "Portable ports of test_copendaq_server.cpp.")
 
-(def-suite opendaq-signal-suite
-  :in opendaq-runtime-suite
+(def-suite low-level-signal-suite
+  :in low-level-runtime-suite
   :description "Portable ports of test_copendaq_signal.cpp.")
 
-(def-suite smoke-suite
-  :in opendaq-suite
+(def-suite low-level-smoke-suite
+  :in low-level-suite
   :description "Low-level smoke coverage for generated wrappers and simulator access.")
 
 (def-suite high-level-suite
-  :in opendaq-suite
+  :in low-level-suite
   :description "High-level wrapper coverage for the generated bindings layer.")
 
 (def-suite high-level-compile-suite
@@ -161,7 +161,7 @@
   (let ((*print-names* t)
         (*on-error* :backtrace)
         (*on-failure* nil))
-    (unless (run! 'opendaq-suite)
+    (unless (run! 'low-level-suite)
       (error "FiveAM test suite failed."))
     t))
 

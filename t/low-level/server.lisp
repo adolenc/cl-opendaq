@@ -2,7 +2,7 @@
 
 ;; Direct port of bindings/c/tests/copendaq/test_copendaq_server.cpp.
 
-(in-suite opendaq-server-suite)
+(in-suite low-level-server-suite)
 
 (test opendaq-server-type
   (daq.ll:with-daq-objects (id name description default-config server-type)

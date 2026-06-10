@@ -3,7 +3,7 @@
 ;; Direct port of the portable subset of bindings/c/tests/copendaq/test_copendaq_device.cpp.
 ;; IoFolderConfig remains blocked until daqBaseObject_borrowInterface is supported.
 
-(in-suite opendaq-device-suite)
+(in-suite low-level-device-suite)
 
 (test opendaq-address-info
   (daq.ll:with-daq-objects (builder connection-string type address address-info connection-string-out)

@@ -5,7 +5,7 @@
 ;; Tests that depend on daqBaseObject_borrowInterface remain pending until the
 ;; generator supports daqIntfID-by-value signatures.
 
-(in-suite coretypes-suite)
+(in-suite low-level-coretypes-suite)
 
 (defparameter *coretypes-event-called* nil)
 (defparameter *coretypes-function-called* nil)

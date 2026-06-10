@@ -5,7 +5,7 @@
   :depends-on ("cffi" "trivial-garbage")
   :serial t
   :components ((:file "package")
-               (:file "generated/bindings")
+               (:file "generated/low-level-bindings")
                (:file "loader")
                (:file "errors")
                (:file "utils")
