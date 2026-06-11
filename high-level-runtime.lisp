@@ -153,4 +153,37 @@
       (%consume-release-state release-state))
     nil))
 
-(export '(release raw-pointer))
+(export '(release raw-pointer primitive-type-p))
+
+(defun primitive-type-p (type-name)
+  "Return T if TYPE-NAME names a boxed primitive (integer, boolean,
+float, number, string, ratio, or complex-number) rather than
+a full managed-object class like DEVICE or SIGNAL."
+  (member type-name '(daq-boolean daq-float daq-integer daq-number
+                      daq-ratio daq-string-object complex-number)))
+
+(defun %unbox-primitive (object target-type)
+  "Extract the Lisp value from a boxed primitive wrapper and release the
+temporary wrapper.  TARGET-TYPE is a symbol naming the primitive class
+(e.g. DAQ-INTEGER)."
+  (let ((ptr (raw-pointer object)))
+    (flet ((finish (value)
+             (release object)
+             value))
+      (ecase target-type
+        (daq-boolean        (finish (not (zerop (opendaq:boolean/get-value ptr)))))
+        (daq-float          (finish (opendaq:float-object/get-value ptr)))
+        (daq-integer        (finish (opendaq:integer/get-value ptr)))
+        (daq-number         (finish (opendaq:number/get-float-value ptr)))
+        (daq-ratio          (finish (let ((num (opendaq:ratio/get-numerator ptr))
+                                          (den (opendaq:ratio/get-denominator ptr)))
+                                      (/ num den))))
+        (daq-string-object  (prog1
+                                (cffi:foreign-string-to-lisp
+                                 (opendaq:string/get-char-ptr ptr))
+                              (%release-pointer ptr)
+                              (setf (%release-state object) nil)
+                              (%cancel-finalizer object)
+                              (setf (%pointer object) (cffi:null-pointer))))
+        (complex-number     (finish (complex (opendaq:complex-number/get-real ptr)
+                                             (opendaq:complex-number/get-imaginary ptr))))))))
