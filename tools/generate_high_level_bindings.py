@@ -29,24 +29,6 @@ CLASS_NAME_OVERRIDES = {
     "type": "daq-type",
 }
 
-LIST_ELEMENT_TYPES: dict[tuple[str, str], str] = {
-    ("device/get-available-devices", "availableDevices"): "device-info",
-    ("device/get-devices", "devices"): "device",
-    ("device/get-function-blocks", "functionBlocks"): "function-block",
-    ("device/get-signals", "signals"): "signal",
-    ("device/get-signals-recursive", "signals"): "signal",
-    ("device/get-channels", "channels"): "channel",
-    ("device/get-channels-recursive", "channels"): "channel",
-    ("device/get-servers", "servers"): "server",
-    ("device/get-log-file-infos", "logFileInfos"): "log-file-info",
-    ("device/get-custom-components", "customComponents"): "component",
-    ("module/get-available-devices", "availableDevices"): "device-info",
-    ("module-manager-utils/get-available-devices", "availableDevices"): "device-info",
-    ("function-block/get-signals", "signals"): "signal",
-    ("function-block/get-signals-recursive", "signals"): "signal",
-    ("server/get-signals", "signals"): "signal",
-}
-
 CLASS_OVERRIDES: dict[str, dict] = {
     "instance": {
         "constructor_name": "instance/create-instance-from-builder",
@@ -525,17 +507,18 @@ def emit_coerced_call(parameters: tuple[dict, ...], inner_lines: list[str], inde
     return lines
 
 
-def value_expression(parameter: dict, value_form: str, function_name: str = "") -> str:
+def value_expression(parameter: dict, value_form: str) -> str:
     if parameter["base_lisp_name"] == "daq-string":
         return f"(%daq-string-to-lisp-and-release {value_form})"
     if parameter["base_lisp_name"] == "daq-bool":
         return f"(not (zerop {value_form}))"
     cn = class_name_for_type(parameter["base_lisp_name"])
     if parameter.get("pointer_like") and cn is not None:
-        if function_name:
-            element_type = LIST_ELEMENT_TYPES.get((function_name, parameter["c_name"]))
-            if element_type is not None:
-                return f"(as-list-of (wrap-{cn} {value_form}) '{element_type})"
+        value_type = parameter.get("value_type")
+        if value_type and cn == "object-list":
+            hyphenated = re.sub(r"([a-z])([A-Z])", r"\1-\2", value_type).lower()
+            element_type = CLASS_NAME_OVERRIDES.get(hyphenated, hyphenated)
+            return f"(as-list-of (wrap-{cn} {value_form}) '{element_type})"
         return f"(wrap-{cn} {value_form})"
     return value_form
 
@@ -554,13 +537,13 @@ def _emit_result(function: dict, call_form: str) -> list[str]:
     if not outputs:
         return [call_form]
     if len(outputs) == 1:
-        return [value_expression(outputs[0], call_form, function["public_lisp_name"])]
+        return [value_expression(outputs[0], call_form)]
 
     binding_names = [f"value-{idx}" for idx in range(len(outputs))]
     lines = [f"(multiple-value-bind ({' '.join(binding_names)})", f"    {call_form}", "  (cl:values"]
     for idx, param in enumerate(outputs):
         suffix = "))" if idx == len(outputs) - 1 else ""
-        lines.append(f"    {value_expression(param, binding_names[idx], function['public_lisp_name'])}{suffix}")
+        lines.append(f"    {value_expression(param, binding_names[idx])}{suffix}")
     return lines
 
 
@@ -595,12 +578,12 @@ def _emit_manual_call(function: dict, argument_map: dict[str, str]) -> list[str]
                     lines.append(f"{cur_indent}nil")
                 elif len(outputs) == 1:
                     p = outputs[0]
-                    lines.append(f"{cur_indent}{value_expression(p, _raw_output_slot_value(p, slot_names[p['lisp_name']]), function['public_lisp_name'])}")
+                    lines.append(f"{cur_indent}{value_expression(p, _raw_output_slot_value(p, slot_names[p['lisp_name']]))}")
                 else:
                     lines.append(f"{cur_indent}(cl:values")
                     for oi, p in enumerate(outputs):
                         sfx = ")" if oi == len(outputs) - 1 else ""
-                        lines.append(f"{cur_indent}  {value_expression(p, _raw_output_slot_value(p, slot_names[p['lisp_name']]), function['public_lisp_name'])}{sfx}")
+                        lines.append(f"{cur_indent}  {value_expression(p, _raw_output_slot_value(p, slot_names[p['lisp_name']]))}{sfx}")
                 return
 
             if ret == ":void":
@@ -615,7 +598,7 @@ def _emit_manual_call(function: dict, argument_map: dict[str, str]) -> list[str]
                 lines.append(f"{cur_indent}  (cl:values result")
                 for oi, p in enumerate(outputs):
                     sfx = "))" if oi == len(outputs) - 1 else ""
-                    lines.append(f"{cur_indent}    {value_expression(p, _raw_output_slot_value(p, slot_names[p['lisp_name']]), function['public_lisp_name'])}{sfx}")
+                    lines.append(f"{cur_indent}    {value_expression(p, _raw_output_slot_value(p, slot_names[p['lisp_name']]))}{sfx}")
             return
 
         param = outputs[idx]
