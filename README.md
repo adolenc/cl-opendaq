@@ -43,6 +43,41 @@ The hierarchy is parsed automatically from the C++ headers via the `DECLARE_OPEN
 
 Some openDAQ generics (e.g. `signals-recursive`) are defined on sibling classes - `device` and `function-block` both implement it, but share only `component` as their lowest common ancestor. Since `find-component` returns a generic `component`, calling `(signals-recursive component)` would signal a `no-applicable-method` error without a method on `component` itself. The generator emits **bridge methods** on the common ancestor that try each sibling's native C call in a `handler-case` chain. The C call on the wrong type fails at the COM-interface level, so the bridge falls through to the correct one transparently. This means you never need to manually cast with `as` just to call a polymorphic method.
 
+### Boxing / unboxing
+
+The high-level API insulates you from openDAQ's C types. Arguments accept plain Lisp values and return values are plain Lisp types.
+
+**Input (boxing).** When you pass arguments to a high-level function, they are automatically boxed into the appropriate openDAQ type:
+
+| Lisp value  | Boxed to |
+|-------------|----------|
+| `string`    | `daqString` |
+| `fixnum` / `integer` | `daqInteger` |
+| `float`     | `daqFloat` |
+| `t` / `nil` | `daqBool` |
+| managed-object (any `daq` object) | its raw pointer is extracted |
+
+**Output (unboxing).** Return values are unboxed to native Lisp types:
+
+| openDAQ type    | Unboxed to |
+|-----------------|------------|
+| `daqString`     | string     |
+| `daqBool`       | `t` / `nil` |
+| `daqInteger`    | fixnum |
+| `daqFloat` / `daqNumber` | float |
+| `daqRatio`      | ratio |
+| `complexNumber` | `(complex real imag)` |
+| anything else (device, signal, …) | `daq` object |
+
+**Manual conversion.** A few functions let you cross the boundary explicitly when needed:
+
+- `(as obj 'device-info)` — cast a wrapper to a more specific type
+- `(as-list obj-list)` — object-list to plain Lisp list of base-object wrappers
+- `(as-list-of obj-list 'device-info)` — same, with each element cast
+- `(as-hashtable-of dict 'string 'device-info)` — dict to hash-table
+- `(raw-pointer obj)` — get the underlying C pointer from any wrapper
+- `(release obj)` — manually drop the reference (normally handled by GC finalizers)
+
 ## Development
 
 The attached makefile is used for simplification of development. It handles cloning the pinned openDAQ source, building the native libraries, copying them into `bin/linux-x64/`, and regenerating the generated Lisp bindings. It also has targets for starting a REPL with the system loaded and running the test suite.
