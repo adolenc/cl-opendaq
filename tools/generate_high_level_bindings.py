@@ -414,7 +414,7 @@ def build_specs(functions: list[dict]) -> tuple[list[dict], list[dict]]:
 
 
 def export_symbols(classes: list[dict], methods: list[dict]) -> list[str]:
-    exports = {"as-list-of", "release", "raw-pointer", "read-samples"}
+    exports = {"as-hashtable-of", "as-list-of", "release", "raw-pointer", "read-samples"}
     for spec in classes:
         exports.add(spec["name"])
         exports.add(f"wrap-{spec['name']}")
@@ -507,6 +507,11 @@ def emit_coerced_call(parameters: tuple[dict, ...], inner_lines: list[str], inde
     return lines
 
 
+def _camel_to_kebab(name: str) -> str:
+    hyphenated = re.sub(r"([a-z])([A-Z])", r"\1-\2", name).lower()
+    return CLASS_NAME_OVERRIDES.get(hyphenated, hyphenated)
+
+
 def value_expression(parameter: dict, value_form: str) -> str:
     if parameter["base_lisp_name"] == "daq-string":
         return f"(%daq-string-to-lisp-and-release {value_form})"
@@ -515,10 +520,14 @@ def value_expression(parameter: dict, value_form: str) -> str:
     cn = class_name_for_type(parameter["base_lisp_name"])
     if parameter.get("pointer_like") and cn is not None:
         value_type = parameter.get("value_type")
+        key_type = parameter.get("key_type")
         if value_type and cn == "object-list":
-            hyphenated = re.sub(r"([a-z])([A-Z])", r"\1-\2", value_type).lower()
-            element_type = CLASS_NAME_OVERRIDES.get(hyphenated, hyphenated)
+            element_type = _camel_to_kebab(value_type)
             return f"(as-list-of (wrap-{cn} {value_form}) '{element_type})"
+        if key_type and cn == "dict":
+            key_type_lisp = _camel_to_kebab(key_type)
+            val_type_lisp = _camel_to_kebab(value_type) if value_type else "t"
+            return f"(as-hashtable-of (wrap-{cn} {value_form}) '{key_type_lisp} '{val_type_lisp})"
         return f"(wrap-{cn} {value_form})"
     return value_form
 
@@ -773,6 +782,23 @@ def render_output(include_dir: Path) -> str:
         "            => (#<DEVICE-INFO ...> #<DEVICE-INFO ...>)\"",
         "  (loop for i below (count object-list)",
         "        collect (as (item-at object-list i) target-type)))",
+        "",
+        "(defun as-hashtable-of (dict key-type value-type)",
+        '  "Convert an openDAQ dict into a Lisp hash-table, casting each value',
+        "to VALUE-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.",
+        "Keys are converted to strings.",
+        "",
+        "  Example: (as-hashtable-of (wrap-dict pointer) 'daq-string-object 'device-info)\"",
+        "  (let* ((raw (%require-live-pointer dict))",
+        "         (key-list (opendaq:dict/get-key-list raw))",
+        "         (n (opendaq:list/get-count key-list))",
+        "         (ht (make-hash-table :test 'equal :size n)))",
+        "    (loop for i below n",
+        "          for key-ptr = (opendaq:list/get-item-at key-list i)",
+        "          for key-str = (%daq-string-to-lisp-and-release key-ptr)",
+        "          for val-ptr = (opendaq:dict/get raw key-ptr)",
+        "          do (setf (gethash key-str ht) (as (wrap-base-object val-ptr) value-type)))",
+        "    ht))",
         "",
     ])
 

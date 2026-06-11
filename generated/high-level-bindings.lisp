@@ -76,6 +76,7 @@
             argument-info-type
             arguments
             as-dictionary
+            as-hashtable-of
             as-list-of
             asset-id
             assign
@@ -5515,6 +5516,23 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
   (loop for i below (count object-list)
         collect (as (item-at object-list i) target-type)))
 
+(defun as-hashtable-of (dict key-type value-type)
+  "Convert an openDAQ dict into a Lisp hash-table, casting each value
+to VALUE-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
+Keys are converted to strings.
+
+  Example: (as-hashtable-of (wrap-dict pointer) 'daq-string-object 'device-info)"
+  (let* ((raw (%require-live-pointer dict))
+         (key-list (opendaq:dict/get-key-list raw))
+         (n (opendaq:list/get-count key-list))
+         (ht (make-hash-table :test 'equal :size n)))
+    (loop for i below n
+          for key-ptr = (opendaq:list/get-item-at key-list i)
+          for key-str = (%daq-string-to-lisp-and-release key-ptr)
+          for val-ptr = (opendaq:dict/get raw key-ptr)
+          do (setf (gethash key-str ht) (as (wrap-base-object val-ptr) value-type)))
+    ht))
+
 (defgeneric build (object))
 (defmethod build ((object address-info-builder))
   (wrap-address-info (opendaq:address-info-builder/build (%require-live-pointer object)))
@@ -6518,7 +6536,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric statuses (object))
 (defmethod statuses ((object component-status-container))
-  (wrap-dict (opendaq:component-status-container/get-statuses (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:component-status-container/get-statuses (%require-live-pointer object))) 'daq-string-object 'enumeration)
 )
 
 (defmethod build ((object component-type-builder))
@@ -6701,7 +6719,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
   (multiple-value-bind (coerced-parent-id cleanup-parent-id)
       (%coerce-argument parent-id :daq-string)
     (unwind-protect
-        (wrap-dict (opendaq:component-update-context/get-input-port-connections (%require-live-pointer object) coerced-parent-id))
+        (as-hashtable-of (wrap-dict (opendaq:component-update-context/get-input-port-connections (%require-live-pointer object) coerced-parent-id)) 'daq-string-object 'daq-string-object)
       (%cleanup-coerced-argument cleanup-parent-id)))
 )
 
@@ -6714,7 +6732,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric internal-state (object))
 (defmethod internal-state ((object component-update-context))
-  (wrap-dict (opendaq:component-update-context/get-internal-state (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:component-update-context/get-internal-state (%require-live-pointer object))) 'daq-string-object 'base-object)
 )
 
 (defgeneric root-component (object))
@@ -7263,7 +7281,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric discovery-servers (object))
 (defmethod discovery-servers ((object context))
-  (wrap-dict (opendaq:context/get-discovery-servers (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:context/get-discovery-servers (%require-live-pointer object))) 'daq-string-object 'base-object)
 )
 
 (defun context-interface-id ()
@@ -7288,7 +7306,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
   (multiple-value-bind (coerced-module-id cleanup-module-id)
       (%coerce-argument module-id :daq-string)
     (unwind-protect
-        (wrap-dict (opendaq:context/get-module-options (%require-live-pointer object) coerced-module-id))
+        (as-hashtable-of (wrap-dict (opendaq:context/get-module-options (%require-live-pointer object) coerced-module-id)) 'daq-string-object 'base-object)
       (%cleanup-coerced-argument cleanup-module-id)))
 )
 
@@ -7299,7 +7317,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric options (object))
 (defmethod options ((object context))
-  (wrap-dict (opendaq:context/get-options (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:context/get-options (%require-live-pointer object))) 'daq-string-object 'base-object)
 )
 
 (defgeneric scheduler (object))
@@ -7443,7 +7461,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric parameters (object))
 (defmethod parameters ((object core-event-args))
-  (wrap-dict (opendaq:core-event-args/get-parameters (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:core-event-args/get-parameters (%require-live-pointer object))) 'daq-string-object 'base-object)
 )
 
 (defgeneric core-type (object))
@@ -7477,7 +7495,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric metadata (object))
 (defmethod metadata ((object data-descriptor-builder))
-  (wrap-dict (opendaq:data-descriptor-builder/get-metadata (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:data-descriptor-builder/get-metadata (%require-live-pointer object))) 'daq-string-object 'daq-string-object)
 )
 
 (defmethod name ((object data-descriptor-builder))
@@ -7646,7 +7664,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 )
 
 (defmethod metadata ((object data-descriptor))
-  (wrap-dict (opendaq:data-descriptor/get-metadata (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:data-descriptor/get-metadata (%require-live-pointer object))) 'daq-string-object 'daq-string-object)
 )
 
 (defmethod name ((object data-descriptor))
@@ -7888,7 +7906,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 )
 
 (defmethod parameters ((object data-rule-builder))
-  (wrap-dict (opendaq:data-rule-builder/get-parameters (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:data-rule-builder/get-parameters (%require-live-pointer object))) 'daq-string-object 'base-object)
 )
 
 (defgeneric data-rule-builder-type (object))
@@ -7968,7 +7986,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 )
 
 (defmethod parameters ((object data-rule))
-  (wrap-dict (opendaq:data-rule/get-parameters (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:data-rule/get-parameters (%require-live-pointer object))) 'daq-string-object 'base-object)
 )
 
 (defgeneric data-rule-type (object))
@@ -8506,7 +8524,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric network-interfaces (object))
 (defmethod network-interfaces ((object device-info))
-  (wrap-dict (opendaq:device-info/get-network-interfaces (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:device-info/get-network-interfaces (%require-live-pointer object))) 'daq-string-object 'network-interface)
 )
 
 (defgeneric parent-mac-address (object))
@@ -8802,7 +8820,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
               (multiple-value-bind (coerced-error-infos cleanup-error-infos)
                   (%coerce-argument error-infos :managed-pointer)
                 (unwind-protect
-                    (wrap-dict (opendaq:device/add-devices (%require-live-pointer object) coerced-connection-args coerced-err-codes coerced-error-infos))
+                    (as-hashtable-of (wrap-dict (opendaq:device/add-devices (%require-live-pointer object) coerced-connection-args coerced-err-codes coerced-error-infos)) 'daq-string-object 'device)
                   (%cleanup-coerced-argument cleanup-error-infos)))
             (%cleanup-coerced-argument cleanup-err-codes)))
       (%cleanup-coerced-argument cleanup-connection-args)))
@@ -8854,7 +8872,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric available-device-types (object))
 (defmethod available-device-types ((object device))
-  (wrap-dict (opendaq:device/get-available-device-types (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:device/get-available-device-types (%require-live-pointer object))) 'daq-string-object 'device-type)
 )
 
 (defgeneric available-devices (object))
@@ -8864,7 +8882,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric available-function-block-types (object))
 (defmethod available-function-block-types ((object device))
-  (wrap-dict (opendaq:device/get-available-function-block-types (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:device/get-available-function-block-types (%require-live-pointer object))) 'daq-string-object 'function-block-type)
 )
 
 (defgeneric available-operation-modes (object))
@@ -9265,7 +9283,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 )
 
 (defmethod parameters ((object dimension-rule-builder))
-  (wrap-dict (opendaq:dimension-rule-builder/get-parameters (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:dimension-rule-builder/get-parameters (%require-live-pointer object))) 'daq-string-object 'base-object)
 )
 
 (defgeneric dimension-rule-builder-type (object))
@@ -9351,7 +9369,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 )
 
 (defmethod parameters ((object dimension-rule))
-  (wrap-dict (opendaq:dimension-rule/get-parameters (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:dimension-rule/get-parameters (%require-live-pointer object))) 'daq-string-object 'base-object)
 )
 
 (defgeneric dimension-rule-type (object))
@@ -9468,7 +9486,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric as-dictionary (object))
 (defmethod as-dictionary ((object enumeration-type))
-  (wrap-dict (opendaq:enumeration-type/get-as-dictionary (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:enumeration-type/get-as-dictionary (%require-live-pointer object))) 'daq-string-object 'daq-integer)
 )
 
 (defmethod count ((object enumeration-type))
@@ -9741,7 +9759,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 )
 
 (defmethod parameters ((object event-packet))
-  (wrap-dict (opendaq:event-packet/get-parameters (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:event-packet/get-parameters (%require-live-pointer object))) 'daq-string-object 'base-object)
 )
 
 (defgeneric add-handler (object event-handler))
@@ -9977,7 +9995,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 )
 
 (defmethod available-function-block-types ((object function-block))
-  (wrap-dict (opendaq:function-block/get-available-function-block-types (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:function-block/get-available-function-block-types (%require-live-pointer object))) 'daq-string-object 'function-block-type)
 )
 
 (defgeneric function-block-type (object))
@@ -10339,7 +10357,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric components-log-level (object))
 (defmethod components-log-level ((object instance-builder))
-  (wrap-dict (opendaq:instance-builder/get-components-log-level (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:instance-builder/get-components-log-level (%require-live-pointer object))) 'daq-string-object 'daq-number)
 )
 
 (defmethod context ((object instance-builder))
@@ -10406,7 +10424,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 )
 
 (defmethod options ((object instance-builder))
-  (wrap-dict (opendaq:instance-builder/get-options (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:instance-builder/get-options (%require-live-pointer object))) 'daq-string-object 'base-object)
 )
 
 (defgeneric root-device (object))
@@ -10600,7 +10618,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric available-server-types (object))
 (defmethod available-server-types ((object instance))
-  (wrap-dict (opendaq:instance/get-available-server-types (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:instance/get-available-server-types (%require-live-pointer object))) 'daq-string-object 'server-type)
 )
 
 (defun instance-interface-id ()
@@ -11455,7 +11473,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
                     (multiple-value-bind (coerced-error-infos cleanup-error-infos)
                         (%coerce-argument error-infos :managed-pointer)
                       (unwind-protect
-                          (wrap-dict (opendaq:module-manager-utils/create-devices (%require-live-pointer object) coerced-connection-args coerced-parent coerced-err-codes coerced-error-infos))
+                          (as-hashtable-of (wrap-dict (opendaq:module-manager-utils/create-devices (%require-live-pointer object) coerced-connection-args coerced-parent coerced-err-codes coerced-error-infos)) 'daq-string-object 'device)
                         (%cleanup-coerced-argument cleanup-error-infos)))
                   (%cleanup-coerced-argument cleanup-err-codes)))
             (%cleanup-coerced-argument cleanup-parent)))
@@ -11514,7 +11532,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 )
 
 (defmethod available-device-types ((object module-manager-utils))
-  (wrap-dict (opendaq:module-manager-utils/get-available-device-types (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:module-manager-utils/get-available-device-types (%require-live-pointer object))) 'daq-string-object 'device-type)
 )
 
 (defmethod available-devices ((object module-manager-utils))
@@ -11522,12 +11540,12 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 )
 
 (defmethod available-function-block-types ((object module-manager-utils))
-  (wrap-dict (opendaq:module-manager-utils/get-available-function-block-types (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:module-manager-utils/get-available-function-block-types (%require-live-pointer object))) 'daq-string-object 'function-block-type)
 )
 
 (defgeneric available-streaming-types (object))
 (defmethod available-streaming-types ((object module-manager-utils))
-  (wrap-dict (opendaq:module-manager-utils/get-available-streaming-types (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:module-manager-utils/get-available-streaming-types (%require-live-pointer object))) 'daq-string-object 'streaming-type)
 )
 
 (defgeneric discovery-info (object manufacturer serial-number))
@@ -11598,7 +11616,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric vendor-keys (object))
 (defmethod vendor-keys ((object module-manager))
-  (wrap-dict (opendaq:module-manager/get-vendor-keys (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:module-manager/get-vendor-keys (%require-live-pointer object))) 'daq-string-object 'daq-string-object)
 )
 
 (defgeneric load-module (object path))
@@ -11716,7 +11734,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 )
 
 (defmethod available-device-types ((object module))
-  (wrap-dict (opendaq:module/get-available-device-types (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:module/get-available-device-types (%require-live-pointer object))) 'daq-string-object 'device-type)
 )
 
 (defmethod available-devices ((object module))
@@ -11724,15 +11742,15 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 )
 
 (defmethod available-function-block-types ((object module))
-  (wrap-dict (opendaq:module/get-available-function-block-types (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:module/get-available-function-block-types (%require-live-pointer object))) 'daq-string-object 'function-block-type)
 )
 
 (defmethod available-server-types ((object module))
-  (wrap-dict (opendaq:module/get-available-server-types (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:module/get-available-server-types (%require-live-pointer object))) 'daq-string-object 'server-type)
 )
 
 (defmethod available-streaming-types ((object module))
-  (wrap-dict (opendaq:module/get-available-streaming-types (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:module/get-available-streaming-types (%require-live-pointer object))) 'daq-string-object 'streaming-type)
 )
 
 (defun module-interface-id ()
@@ -11744,7 +11762,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric license-config (object))
 (defmethod license-config ((object module))
-  (wrap-dict (opendaq:module/get-license-config (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:module/get-license-config (%require-live-pointer object))) 'daq-string-object 'daq-string-object)
 )
 
 (defmethod module-info ((object module))
@@ -11953,7 +11971,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric event-packets (object))
 (defmethod event-packets ((object multi-reader-status))
-  (wrap-dict (opendaq:multi-reader-status/get-event-packets (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:multi-reader-status/get-event-packets (%require-live-pointer object))) 'daq-string-object 'event-packet)
 )
 
 (defun multi-reader-status-interface-id ()
@@ -12429,7 +12447,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric assigned (object))
 (defmethod assigned ((object permissions-internal))
-  (wrap-dict (opendaq:permissions-internal/get-assigned (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:permissions-internal/get-assigned (%require-live-pointer object))) 'daq-string-object 'daq-integer)
 )
 
 (defun permissions-internal-interface-id ()
@@ -12441,12 +12459,12 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric allowed (object))
 (defmethod allowed ((object permissions))
-  (wrap-dict (opendaq:permissions/get-allowed (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:permissions/get-allowed (%require-live-pointer object))) 'daq-string-object 'daq-integer)
 )
 
 (defgeneric denied (object))
 (defmethod denied ((object permissions))
-  (wrap-dict (opendaq:permissions/get-denied (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:permissions/get-denied (%require-live-pointer object))) 'daq-string-object 'daq-integer)
 )
 
 (defgeneric inherited (object))
@@ -13201,7 +13219,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric property-object-class-builder-properties (object))
 (defmethod property-object-class-builder-properties ((object property-object-class-builder))
-  (wrap-dict (opendaq:property-object-class-builder/get-properties (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:property-object-class-builder/get-properties (%require-live-pointer object))) 'daq-string-object 'property)
 )
 
 (defgeneric property-order (object))
@@ -14475,7 +14493,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 )
 
 (defmethod parameters ((object scaling-builder))
-  (wrap-dict (opendaq:scaling-builder/get-parameters (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:scaling-builder/get-parameters (%require-live-pointer object))) 'daq-string-object 'base-object)
 )
 
 (defgeneric scaling-type (object))
@@ -14594,7 +14612,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 )
 
 (defmethod parameters ((object scaling))
-  (wrap-dict (opendaq:scaling/get-parameters (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:scaling/get-parameters (%require-live-pointer object))) 'daq-string-object 'base-object)
 )
 
 (defmethod scaling-type ((object scaling))
@@ -15960,7 +15978,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 )
 
 (defmethod as-dictionary ((object struct-builder))
-  (wrap-dict (opendaq:struct-builder/get-as-dictionary (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:struct-builder/get-as-dictionary (%require-live-pointer object))) 'daq-string-object 'base-object)
 )
 
 (defgeneric field-names (object))
@@ -16071,7 +16089,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 )
 
 (defmethod as-dictionary ((object struct))
-  (wrap-dict (opendaq:struct/get-as-dictionary (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:struct/get-as-dictionary (%require-live-pointer object))) 'daq-string-object 'base-object)
 )
 
 (defmethod field-names ((object struct))
@@ -16163,7 +16181,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
 
 (defgeneric interfaces (object))
 (defmethod interfaces ((object sync-component))
-  (wrap-dict (opendaq:sync-component/get-interfaces (%require-live-pointer object)))
+  (as-hashtable-of (wrap-dict (opendaq:sync-component/get-interfaces (%require-live-pointer object))) 'daq-string-object 'property-object)
 )
 
 (defgeneric selected-source (object))
@@ -16928,6 +16946,7 @@ to TARGET-TYPE (e.g. 'DEVICE-INFO) so that type-specific generics work.
          argument-info-type
          arguments
          as-dictionary
+         as-hashtable-of
          as-list-of
          asset-id
          assign

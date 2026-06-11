@@ -248,6 +248,7 @@ def build_functions(records: list[dict], types: dict[str, dict]) -> tuple[list[d
                         "pointee_cffi_spec": resolve_cffi_type(arg_base, arg_depth - 1, types) if arg_depth else None,
                         "pointee_kind": base_info["kind"] if base_info else "builtin" if arg_base in BUILTIN_TYPE_MAP else None,
                         "value_type": arg_type.get("value_type"),
+                        "key_type": arg_type.get("key_type"),
                     }
                 )
             functions.append(
