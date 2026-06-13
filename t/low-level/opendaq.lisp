@@ -5,14 +5,14 @@
 (in-suite low-level-api-suite)
 
 (test opendaq-config-provider
-  (daq.ll:with-daq-objects (config-provider)
-    (setf config-provider (daq.ll:config-provider/create-env-config-provider))
+  (opendaq.low-level:with-daq-objects (config-provider)
+    (setf config-provider (opendaq.low-level:config-provider/create-env-config-provider))
     (is (not (cffi:null-pointer-p config-provider))
         "opendaq/opendaq ConfigProvider returned a null object")))
 
 (test opendaq-instance-and-builder
-  (daq.ll:with-daq-objects (builder instance)
-    (setf builder (daq.ll:instance-builder/create-instance-builder))
+  (opendaq.low-level:with-daq-objects (builder instance)
+    (setf builder (opendaq.low-level:instance-builder/create-instance-builder))
     (is (not (cffi:null-pointer-p builder))
         "opendaq/opendaq InstanceBuilder returned a null object")
     (setf instance (%make-test-instance))

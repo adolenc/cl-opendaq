@@ -43,8 +43,8 @@ CLASS_OVERRIDES: dict[str, dict] = {
     },
     "stream-reader": {
         "constructor_defaults": (
-            ("value-read-type", "opendaq::+daq-sample-type-float-64+"),
-            ("domain-read-type", "opendaq::+daq-sample-type-int-64+"),
+            ("value-read-type", "opendaq.low-level::+daq-sample-type-float-64+"),
+            ("domain-read-type", "opendaq.low-level::+daq-sample-type-int-64+"),
             ("mode", ":daq-read-mode-scaled"),
             ("timeout-type", ":daq-read-timeout-type-any"),
         )
@@ -185,7 +185,7 @@ def _emit_polymorphic_bridge(method_name: str, specs: list[dict], lca: str) -> l
         for p in method_parameters(func):
             arg_name = f"coerced-{p['lisp_name']}" if coerce_category(p) is not None else p["lisp_name"]
             call_args.append(arg_name)
-        call_form = f"(opendaq:{func['public_lisp_name']} {' '.join(call_args)})"
+        call_form = f"(opendaq.low-level:{func['public_lisp_name']} {' '.join(call_args)})"
         if func["return_spec"] == "daq-err-code":
             return None
         inner_form = call_form if inner_form is None else f"(handler-case {call_form} (error () {inner_form}))"
@@ -445,7 +445,7 @@ def constructor_lambda_lines(spec: dict) -> list[str]:
 
     call_body = emit_coerced_call(
         parameters,
-        [f"(%adopt-pointer object (opendaq:{constructor['public_lisp_name']}"
+        [f"(%adopt-pointer object (opendaq.low-level:{constructor['public_lisp_name']}"
          + "".join(f" coerced-{p['lisp_name']}" for p in parameters) + "))"],
         indent="  ",
     )
@@ -533,7 +533,7 @@ def value_expression(parameter: dict, value_form: str) -> str:
 
 
 def _type_spec_ref(type_name: str) -> str:
-    return type_name if type_name.startswith(":") or type_name.startswith("(") else f"opendaq::{type_name}"
+    return type_name if type_name.startswith(":") or type_name.startswith("(") else f"opendaq.low-level::{type_name}"
 
 
 def _raw_output_slot_value(parameter: dict, slot_name: str) -> str:
@@ -578,7 +578,7 @@ def _emit_manual_call(function: dict, argument_map: dict[str, str]) -> list[str]
                 mode = parameter_mode(function, param)
                 call_args.append(argument_map[param["lisp_name"]] if mode == "in" else slot_names[param["lisp_name"]])
 
-            call_form = f"(opendaq:{function['public_lisp_name']}" + "".join(f" {a}" for a in call_args) + ")"
+            call_form = f"(opendaq.low-level:{function['public_lisp_name']}" + "".join(f" {a}" for a in call_args) + ")"
 
             ret = function["return_spec"]
             if ret == "daq-err-code":
@@ -631,7 +631,7 @@ def _emit_call_body(spec: dict, parameter_names: tuple[str, ...]) -> list[str]:
 
     if can_auto_wrap(function):
         call_args = [argument_map[p["lisp_name"]] for p in call_parameters(function)]
-        call_form = f"(opendaq:{function['public_lisp_name']}" + "".join(f" {a}" for a in call_args) + ")"
+        call_form = f"(opendaq.low-level:{function['public_lisp_name']}" + "".join(f" {a}" for a in call_args) + ")"
         return _emit_result(function, call_form)
 
     return _emit_manual_call(function, argument_map)
@@ -729,7 +729,7 @@ def emit_read_samples_helper() -> list[str]:
         "          (loop with total = 0",
         "                while (< total count)",
         "                do (multiple-value-bind (read-count status)",
-        "                       (opendaq:stream-reader/read",
+        "                       (opendaq.low-level:stream-reader/read",
         "                        reader-pointer",
         "                        (cffi:inc-pointer samples",
         "                                          (* total (cffi:foreign-type-size :double)))",
@@ -798,12 +798,12 @@ def render_output(include_dir: Path) -> str:
         "  Example: (as-hashtable-of (wrap-dict pointer) 'string 'device-info)",
         "            => #<HASH-TABLE>\"",
         "  (let* ((raw (%require-live-pointer dict))",
-        "         (key-list (opendaq:dict/get-key-list raw))",
-        "         (n (opendaq:list/get-count key-list))",
+        "         (key-list (opendaq.low-level:dict/get-key-list raw))",
+        "         (n (opendaq.low-level:list/get-count key-list))",
         "         (ht (make-hash-table :test 'equal :size n)))",
         "    (loop for i below n",
-        "          for key-ptr = (opendaq:list/get-item-at key-list i)",
-        "          for val-ptr = (opendaq:dict/get raw key-ptr)",
+        "          for key-ptr = (opendaq.low-level:list/get-item-at key-list i)",
+        "          for val-ptr = (opendaq.low-level:dict/get raw key-ptr)",
         "          for key-obj = (wrap-base-object key-ptr)",
         "          for key = (if (primitive-type-p key-type)",
         "                       (%unbox-primitive key-obj key-type)",

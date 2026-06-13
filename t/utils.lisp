@@ -112,34 +112,34 @@
   :description "High-level smoke coverage for generated wrappers and simulator access.")
 
 (defun %daq-string-value (string)
-  (cffi:foreign-string-to-lisp (daq.ll:string/get-char-ptr string)))
+  (cffi:foreign-string-to-lisp (opendaq.low-level:string/get-char-ptr string)))
 
 (defun %release-daq-object (object)
   (when (and object (not (cffi:null-pointer-p object)))
-    (daq.ll:base-object/release-ref object))
+    (opendaq.low-level:base-object/release-ref object))
   nil)
 
 (defun %boxed-string-value (object)
   (%daq-string-value (daq:raw-pointer object)))
 
 (defun %boxed-integer-value (object)
-  (daq.ll:integer/get-value (daq:raw-pointer object)))
+  (opendaq.low-level:integer/get-value (daq:raw-pointer object)))
 
 (defun %boxed-boolean-value (object)
-  (not (zerop (daq.ll:boolean/get-value (daq:raw-pointer object)))))
+  (not (zerop (opendaq.low-level:boolean/get-value (daq:raw-pointer object)))))
 
 (defun %make-test-context (&optional (scheduler (cffi:null-pointer)))
   (let ((context nil))
-    (daq.ll:with-daq-objects (sinks sink logger type-manager options discovery-servers)
-      (setf sinks (daq.ll:list/create-list))
-      (setf sink (daq.ll:logger-sink/create-std-err-logger-sink))
-      (daq.ll:list/push-back sinks sink)
-      (setf logger (daq.ll:logger/create-logger sinks :daq-log-level-debug))
-      (setf type-manager (daq.ll:type-manager/create-type-manager))
-      (setf options (daq.ll:dict/create-dict))
-      (setf discovery-servers (daq.ll:dict/create-dict))
+    (opendaq.low-level:with-daq-objects (sinks sink logger type-manager options discovery-servers)
+      (setf sinks (opendaq.low-level:list/create-list))
+      (setf sink (opendaq.low-level:logger-sink/create-std-err-logger-sink))
+      (opendaq.low-level:list/push-back sinks sink)
+      (setf logger (opendaq.low-level:logger/create-logger sinks :daq-log-level-debug))
+      (setf type-manager (opendaq.low-level:type-manager/create-type-manager))
+      (setf options (opendaq.low-level:dict/create-dict))
+      (setf discovery-servers (opendaq.low-level:dict/create-dict))
       (setf context
-            (daq.ll:context/create-context
+            (opendaq.low-level:context/create-context
              scheduler
              logger
              type-manager
@@ -153,7 +153,7 @@
   (let ((context (%make-test-context))
         (instance nil))
     (unwind-protect
-        (setf instance (daq.ll:instance/create-instance context (cffi:null-pointer)))
+        (setf instance (opendaq.low-level:instance/create-instance context (cffi:null-pointer)))
       (%release-daq-object context))
     instance))
 

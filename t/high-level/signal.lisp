@@ -6,7 +6,7 @@
   (let* ((allocator (daq:allocator-create-malloc-allocator))
          (builder (make-instance 'daq:data-descriptor-builder))
          (unit-builder (make-instance 'daq:unit-builder)))
-    (setf (daq:sample-type builder) daq.ll::+daq-sample-type-int-64+
+    (setf (daq:sample-type builder) opendaq.low-level::+daq-sample-type-int-64+
           (daq:name builder) "vals"
           (daq:id unit-builder) -1
           (daq:name unit-builder) "volts"
@@ -25,7 +25,7 @@
 (test high-level-data-descriptor
   (let* ((builder (make-instance 'daq:data-descriptor-builder))
          (unit-builder (make-instance 'daq:unit-builder)))
-    (setf (daq:sample-type builder) daq.ll::+daq-sample-type-int-64+
+    (setf (daq:sample-type builder) opendaq.low-level::+daq-sample-type-int-64+
           (daq:name builder) "vals"
           (daq:id unit-builder) -1
           (daq:name unit-builder) "volts"
@@ -38,7 +38,7 @@
             "High-level data-descriptor builders should preserve the descriptor name.")
         (is (string= "V" (daq:symbol (daq:unit descriptor)))
             "High-level data descriptors should expose the generated unit symbol.")
-        (is (= daq.ll::+daq-sample-type-int-64+ (daq:sample-type descriptor))
+        (is (= opendaq.low-level::+daq-sample-type-int-64+ (daq:sample-type descriptor))
             "High-level data descriptors should preserve the configured sample type.")))))
 
 (test high-level-input-port-config
@@ -72,15 +72,15 @@
          (builder (make-instance 'daq:scaling-builder)))
     (daq:set parameters "scale" 10)
     (daq:set parameters "offset" 10)
-    (setf (daq:input-data-type builder) daq.ll::+daq-sample-type-int-16+
-          (daq:output-data-type builder) daq.ll::+daq-sample-type-float-32+
+    (setf (daq:input-data-type builder) opendaq.low-level::+daq-sample-type-int-16+
+          (daq:output-data-type builder) opendaq.low-level::+daq-sample-type-float-32+
           (daq:scaling-type builder) :daq-scaling-type-linear
           (daq:parameters builder) parameters)
     (let* ((scaling (daq:build builder))
            (scaling-parameters (daq:parameters scaling))
            (scale-value (daq:get scaling-parameters "scale"))
            (offset-value (daq:get scaling-parameters "offset")))
-      (is (= daq.ll::+daq-sample-type-int-16+ (daq:input-sample-type scaling))
+      (is (= opendaq.low-level::+daq-sample-type-int-16+ (daq:input-sample-type scaling))
           "High-level scaling wrappers should preserve the input sample type.")
       (is (eql :daq-scaled-sample-type-float-32 (daq:output-sample-type scaling))
           "High-level scaling wrappers should preserve the output sample type.")
@@ -109,7 +109,7 @@
                                    :discovery-servers discovery-servers))
            (builder (make-instance 'daq:data-descriptor-builder))
            (unit-builder (make-instance 'daq:unit-builder)))
-      (setf (daq:sample-type builder) daq.ll::+daq-sample-type-int-64+
+      (setf (daq:sample-type builder) opendaq.low-level::+daq-sample-type-int-64+
             (daq:name builder) "vals"
             (daq:id unit-builder) -1
             (daq:name unit-builder) "volts"

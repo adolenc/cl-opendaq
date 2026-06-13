@@ -5,12 +5,12 @@
 (in-suite low-level-logger-suite)
 
 (test opendaq-logger
-  (daq.ll:with-daq-objects (sinks sink logger)
-    (setf sinks (daq.ll:list/create-list))
-    (setf sink (daq.ll:logger-sink/create-std-out-logger-sink))
-    (daq.ll:list/push-back sinks sink)
-    (setf logger (daq.ll:logger/create-logger sinks :daq-log-level-debug))
+  (opendaq.low-level:with-daq-objects (sinks sink logger)
+    (setf sinks (opendaq.low-level:list/create-list))
+    (setf sink (opendaq.low-level:logger-sink/create-std-out-logger-sink))
+    (opendaq.low-level:list/push-back sinks sink)
+    (setf logger (opendaq.low-level:logger/create-logger sinks :daq-log-level-debug))
     (is (not (cffi:null-pointer-p logger))
         "opendaq/logger Logger returned a null object")
-    (is (eq :daq-log-level-debug (daq.ll:logger/get-level logger))
+    (is (eq :daq-log-level-debug (opendaq.low-level:logger/get-level logger))
         "opendaq/logger level mismatch")))

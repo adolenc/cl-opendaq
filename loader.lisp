@@ -1,4 +1,4 @@
-(in-package #:opendaq)
+(in-package #:opendaq.low-level)
 
 (eval-when (:compile-toplevel :load-toplevel :execute)
   #+sbcl

@@ -1,4 +1,4 @@
-(in-package #:opendaq)
+(in-package #:opendaq.low-level)
 
 (cffi:defcfun ("daqClearErrorInfo" %daq-clear-error-info) :void)
 

@@ -5,13 +5,13 @@
 (defparameter *high-level-coreobjects-update-ended* nil)
 
 (cffi:defcallback %high-level-coreobjects-on-property-object-update-end :void
-    ((sender daq.ll::daq-base-object)
-     (args daq.ll::daq-base-object))
-  (let ((properties (daq.ll:end-update-event-args/get-properties args)))
+    ((sender opendaq.low-level::daq-base-object)
+     (args opendaq.low-level::daq-base-object))
+  (let ((properties (opendaq.low-level:end-update-event-args/get-properties args)))
     (setf *high-level-coreobjects-update-ended* t)
-    (daq.ll:base-object/release-ref properties)
-    (daq.ll:base-object/release-ref sender)
-    (daq.ll:base-object/release-ref args)))
+    (opendaq.low-level:base-object/release-ref properties)
+    (opendaq.low-level:base-object/release-ref sender)
+    (opendaq.low-level:base-object/release-ref args)))
 
 (test high-level-coreobjects-argument-and-callable-info
   (let* ((argument-info (make-instance 'daq:argument-info :name "test_argument" :type :daq-ct-int))

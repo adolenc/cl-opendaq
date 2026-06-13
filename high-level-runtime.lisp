@@ -24,7 +24,7 @@
 
 (defun %release-pointer (pointer)
   (when (and pointer (not (cffi:null-pointer-p pointer)))
-    (opendaq:base-object/release-ref pointer))
+    (opendaq.low-level:base-object/release-ref pointer))
   nil)
 
 (defun %consume-release-state (release-state)
@@ -66,7 +66,7 @@
   (if (or (null pointer) (cffi:null-pointer-p pointer))
       nil
       (prog1
-          (cffi:foreign-string-to-lisp (opendaq:string/get-char-ptr pointer))
+          (cffi:foreign-string-to-lisp (opendaq.low-level:string/get-char-ptr pointer))
         (%release-pointer pointer))))
 
 (defun %cleanup-coerced-argument (cleanup)
@@ -105,10 +105,10 @@
                ((null value)
                 (values (cffi:null-pointer) nil))
                ((stringp value)
-                (let ((pointer (opendaq:make-daq-string value)))
+                (let ((pointer (opendaq.low-level:make-daq-string value)))
                   (values pointer (make-cleanup pointer))))
                ((pathnamep value)
-                (let ((pointer (opendaq:make-daq-string (namestring value))))
+                (let ((pointer (opendaq.low-level:make-daq-string (namestring value))))
                   (values pointer (make-cleanup pointer))))
                (t
                 (values value nil))))
@@ -118,20 +118,20 @@
                   (values raw (let ((v value))
                                 (lambda () v nil)))))
                ((stringp value)
-                (let ((pointer (opendaq:make-daq-string value)))
+                (let ((pointer (opendaq.low-level:make-daq-string value)))
                   (values pointer (make-cleanup pointer))))
                ((pathnamep value)
-                (let ((pointer (opendaq:make-daq-string (namestring value))))
+                (let ((pointer (opendaq.low-level:make-daq-string (namestring value))))
                   (values pointer (make-cleanup pointer))))
                ((floatp value)
-                (let ((pointer (opendaq:float-object/create-float
+                (let ((pointer (opendaq.low-level:float-object/create-float
                                 (coerce value 'double-float))))
                   (values pointer (make-cleanup pointer))))
                ((integerp value)
-                (let ((pointer (opendaq:integer/create-integer value)))
+                (let ((pointer (opendaq.low-level:integer/create-integer value)))
                   (values pointer (make-cleanup pointer))))
                ((or (eq value t) (null value))
-                (let ((pointer (opendaq:boolean/create-bool-object
+                (let ((pointer (opendaq.low-level:boolean/create-bool-object
                                 (if value 1 0))))
                   (values pointer (make-cleanup pointer))))
                (t
@@ -171,19 +171,19 @@ temporary wrapper.  TARGET-TYPE is a symbol naming the primitive class
              (release object)
              value))
       (ecase target-type
-        (daq-boolean        (finish (not (zerop (opendaq:boolean/get-value ptr)))))
-        (daq-float          (finish (opendaq:float-object/get-value ptr)))
-        (daq-integer        (finish (opendaq:integer/get-value ptr)))
-        (daq-number         (finish (opendaq:number/get-float-value ptr)))
-        (daq-ratio          (finish (let ((num (opendaq:ratio/get-numerator ptr))
-                                          (den (opendaq:ratio/get-denominator ptr)))
+        (daq-boolean        (finish (not (zerop (opendaq.low-level:boolean/get-value ptr)))))
+        (daq-float          (finish (opendaq.low-level:float-object/get-value ptr)))
+        (daq-integer        (finish (opendaq.low-level:integer/get-value ptr)))
+        (daq-number         (finish (opendaq.low-level:number/get-float-value ptr)))
+        (daq-ratio          (finish (let ((num (opendaq.low-level:ratio/get-numerator ptr))
+                                          (den (opendaq.low-level:ratio/get-denominator ptr)))
                                       (/ num den))))
         (daq-string-object  (prog1
                                 (cffi:foreign-string-to-lisp
-                                 (opendaq:string/get-char-ptr ptr))
+                                 (opendaq.low-level:string/get-char-ptr ptr))
                               (%release-pointer ptr)
                               (setf (%release-state object) nil)
                               (%cancel-finalizer object)
                               (setf (%pointer object) (cffi:null-pointer))))
-        (complex-number     (finish (complex (opendaq:complex-number/get-real ptr)
-                                             (opendaq:complex-number/get-imaginary ptr))))))))
+        (complex-number     (finish (complex (opendaq.low-level:complex-number/get-real ptr)
+                                             (opendaq.low-level:complex-number/get-imaginary ptr))))))))

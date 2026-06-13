@@ -1,5 +1,4 @@
-(defpackage #:opendaq
-  (:nicknames #:daq.ll)
+(defpackage #:opendaq.low-level
   (:use #:cl)
   (:export #:clear-error-info
            #:healthcheck
@@ -13,9 +12,9 @@
            #:with-daq-objects))
 
 (defpackage #:opendaq.high-level
-  (:nicknames #:daq #:daq.hl)
+  (:nicknames #:daq #:opendaq)
   (:use #:cl)
-  (:import-from #:opendaq
+  (:import-from #:opendaq.low-level
                 #:clear-error-info
                 #:ensure-opendaq-loaded
                 #:healthcheck

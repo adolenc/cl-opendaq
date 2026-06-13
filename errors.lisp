@@ -1,4 +1,4 @@
-(in-package #:opendaq)
+(in-package #:opendaq.low-level)
 
 (defconstant +daq-success+ #x00000000)
 
