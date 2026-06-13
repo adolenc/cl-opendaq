@@ -143,67 +143,6 @@ def class_parent(class_name: str, cpp_root: Path | None = None) -> str:
     return HIERARCHY_CACHE.get(class_name, "managed-object")
 
 
-def ancestor_chain(class_name: str) -> list[str]:
-    chain = [class_name]
-    current = class_name
-    while current != "managed-object":
-        current = class_parent(current)
-        chain.append(current)
-    return chain
-
-
-def lowest_common_ancestor(class_names: set[str]) -> str:
-    if len(class_names) == 1:
-        return next(iter(class_names))
-    chains = [list(reversed(ancestor_chain(n))) for n in class_names]
-    lca = "managed-object"
-    for idx in range(len(chains[0])):
-        ancestor = chains[0][idx]
-        if any(idx >= len(c) or c[idx] != ancestor for c in chains[1:]):
-            break
-        lca = ancestor
-    return lca
-
-
-def _emit_polymorphic_bridge(method_name: str, specs: list[dict], lca: str) -> list[str] | None:
-    template = specs[0]
-    parameters = method_parameters(template["function"])
-    defaults = {name: value for name, value in template.get("optional_defaults", ())}
-
-    lambda_parts = [f"(object {lca})"]
-    for p in parameters:
-        if p["lisp_name"] in defaults:
-            lambda_parts.append(f"&optional ({p['lisp_name']} {defaults[p['lisp_name']]})")
-        else:
-            lambda_parts.append(p["lisp_name"])
-
-    lines = [f"(defmethod {method_name} ({' '.join(lambda_parts)})"]
-    inner_form: str | None = None
-    for spec in specs:
-        func = spec["function"]
-        call_args = ["(%require-live-pointer object)"]
-        for p in method_parameters(func):
-            arg_name = f"coerced-{p['lisp_name']}" if coerce_category(p) is not None else p["lisp_name"]
-            call_args.append(arg_name)
-        call_form = f"(opendaq.low-level:{func['public_lisp_name']} {' '.join(call_args)})"
-        if func["return_spec"] == "daq-err-code":
-            return None
-        inner_form = call_form if inner_form is None else f"(handler-case {call_form} (error () {inner_form}))"
-
-    coercion_bindings = []
-    for p in parameters:
-        cat = coerce_category(p)
-        if cat is not None:
-            coercion_bindings.append(f"(coerced-{p['lisp_name']} ({cat} {p['lisp_name']}))")
-
-    if coercion_bindings:
-        lines.append(f"  (let ({' '.join(coercion_bindings)})")
-        lines.append(f"    {inner_form})")
-    else:
-        lines.append(f"  {inner_form}")
-    lines.append("")
-    return lines
-
 
 def exposed_name(function: dict, kind: str) -> str:
     stem = method_name(function)
@@ -823,21 +762,6 @@ def render_output(include_dir: Path) -> str:
             lines.extend(_emit_writer(spec))
         elif kind in ("reader", "method"):
             lines.extend(_emit_instance_method(spec))
-
-    bridge_names: dict[str, list[dict]] = {}
-    for spec in methods:
-        if spec["kind"] in ("method", "reader", "writer"):
-            bridge_names.setdefault(spec["name"], []).append(spec)
-    for name, specs in bridge_names.items():
-        specializers = list(dict.fromkeys(s["specializer"] for s in specs))
-        if len(specializers) <= 1:
-            continue
-        lca = lowest_common_ancestor(set(specializers))
-        if lca in specializers:
-            continue
-        bridge_lines = _emit_polymorphic_bridge(name, specs, lca)
-        if bridge_lines:
-            lines.extend(bridge_lines)
 
     seen_generics: set[str] = set()
     deduped: list[str] = []

@@ -22,23 +22,3 @@ TARGET-TYPE is a symbol naming the wrapper class (e.g. 'DEVICE-INFO)."
     (add-ref object)
     (make-instance class :pointer (raw-pointer object))))
 
-;;; Polymorphic bridge methods — when the same generic operates on multiple
-;;; sibling specializers (e.g. signals-recursive on both device and
-;;; function-block), provide a fallback on their least common ancestor so that
-;;; objects returned by find-component & friends still work without manual casting.
-
-(defmethod signals-recursive ((object component) &optional (search-filter nil))
-  (multiple-value-bind (coerced-search-filter cleanup-search-filter)
-      (%coerce-argument search-filter :managed-pointer)
-    (unwind-protect
-         (handler-case
-             (as-list-of
-              (wrap-object-list (opendaq.low-level:function-block/get-signals-recursive
-                                 (%require-live-pointer object) coerced-search-filter))
-              'signal)
-           (error ()
-             (as-list-of
-              (wrap-object-list (opendaq.low-level:device/get-signals-recursive
-                                 (%require-live-pointer object) coerced-search-filter))
-              'signal)))
-      (%cleanup-coerced-argument cleanup-search-filter))))

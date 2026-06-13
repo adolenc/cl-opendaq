@@ -13,7 +13,7 @@
            (root-device (daq:root-device instance))
            (device (daq:add-device root-device "daqref://device0"))
            (channel (daq:find-component device "IO/AI/RefCh0"))
-           (signals (daq:signals-recursive channel)))
+           (signals (daq:signals-recursive (daq:as channel 'daq:channel))))
       (is (listp signals)
           "High-level signal discovery should return a list of typed signal objects.")
       (is (plusp (cl:length signals))

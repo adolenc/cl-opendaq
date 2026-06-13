@@ -41,8 +41,6 @@ The high-level API uses CLOS to attempt to mirror openDAQ classes and their hier
 
 The hierarchy is parsed automatically from the C++ headers via the `DECLARE_OPENDAQ_INTERFACE(IChild, IParent)` macros. The root of the hierarchy is `managed-object`, which owns a raw pointer and registers a `trivial-garbage` finalizer to call `release-ref` when the wrapper is collected, so no manually releasing of the openDAQ objects is required.
 
-Some openDAQ generics (e.g. `signals-recursive`) are defined on sibling classes - `device` and `function-block` both implement it, but share only `component` as their lowest common ancestor. Since `find-component` returns a generic `component`, calling `(signals-recursive component)` would signal a `no-applicable-method` error without a method on `component` itself. The generator emits **bridge methods** on the common ancestor that try each sibling's native C call in a `handler-case` chain. The C call on the wrong type fails at the COM-interface level, so the bridge falls through to the correct one transparently. This means you never need to manually cast with `as` just to call a polymorphic method.
-
 ### Boxing / unboxing
 
 The high-level API insulates you from openDAQ's C types. Arguments accept plain Lisp values and return values are plain Lisp types.
