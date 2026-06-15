@@ -55,7 +55,6 @@
             address-info-builder-address
             address-info-builder-interface-id
             address-info-builder-type
-            address-info-create-address-info-from-builder
             address-info-interface-id
             address-info-private
             address-info-private-interface-id
@@ -64,14 +63,11 @@
             all-properties
             allocate
             allocator
-            allocator-create-malloc-allocator
             allocator-interface-id
             allow
             allow-different-sampling-rates
             allowed
             argument-info
-            argument-info-create-dict-argument-info
-            argument-info-create-list-argument-info
             argument-info-interface-id
             argument-info-type
             arguments
@@ -85,9 +81,6 @@
             authenticate-anonymous
             authenticated-only
             authentication-provider
-            authentication-provider-create-json-file-authentication-provider
-            authentication-provider-create-json-string-authentication-provider
-            authentication-provider-create-static-authentication-provider
             authentication-provider-interface-id
             available-count
             available-device-types
@@ -109,8 +102,6 @@
             block-reader-builder
             block-reader-builder-interface-id
             block-reader-builder-signal
-            block-reader-create-block-reader-from-existing
-            block-reader-create-block-reader-from-port
             block-reader-interface-id
             block-reader-read
             block-reader-read-with-domain
@@ -170,11 +161,9 @@
             component-config
             component-deserialize-context
             component-deserialize-context-clone
-            component-deserialize-context-create-component-deserialize-context
             component-deserialize-context-interface-id
             component-holder
             component-holder-component
-            component-holder-create-component-holder-with-ids
             component-holder-interface-id
             component-interface-id
             component-log-level
@@ -186,10 +175,6 @@
             component-status-container-private-interface-id
             component-type
             component-type-builder
-            component-type-builder-create-device-type-builder
-            component-type-builder-create-function-block-type-builder
-            component-type-builder-create-server-type-builder
-            component-type-builder-create-streaming-type-builder
             component-type-builder-interface-id
             component-type-interface-id
             component-type-private
@@ -200,8 +185,6 @@
             components
             components-log-level
             config-provider
-            config-provider-create-env-config-provider
-            config-provider-create-json-config-provider
             config-provider-interface-id
             configuration-connection-info
             connect
@@ -209,7 +192,6 @@
             connected
             connected-client-info
             connected-client-info-address
-            connected-client-info-create-connected-client-info-with-params
             connected-client-info-interface-id
             connected-clients-info
             connection
@@ -235,36 +217,151 @@
             convertible
             convertible-interface-id
             core-event-args
-            core-event-args-create-core-event-args-property-added
-            core-event-args-create-core-event-args-property-object-update-end
-            core-event-args-create-core-event-args-property-order-changed
-            core-event-args-create-core-event-args-property-removed
-            core-event-args-create-core-event-args-property-value-changed
-            core-event-args-create-core-event-args-type-added
-            core-event-args-create-core-event-args-type-removed
             core-event-args-interface-id
             core-event-callback
             core-event-trigger
             core-events-enabled
             core-type
             count
+            create-address-info-from-builder
+            create-any-search-filter
+            create-block-reader-from-existing
+            create-block-reader-from-port
+            create-bool-property
+            create-bool-property-builder
+            create-boolean
+            create-component-deserialize-context
+            create-component-holder-with-ids
+            create-connected-client-info-with-params
+            create-constant-data-packet-with-domain
+            create-constant-data-rule
+            create-core-event-args-property-added
+            create-core-event-args-property-object-update-end
+            create-core-event-args-property-order-changed
+            create-core-event-args-property-removed
+            create-core-event-args-property-value-changed
+            create-core-event-args-type-added
+            create-core-event-args-type-removed
+            create-custom-search-filter
+            create-data-descriptor-builder-from-existing
+            create-data-descriptor-changed-event-packet
+            create-data-packet-with-domain
+            create-data-packet-with-external-memory
+            create-data-rule-builder-from-existing
+            create-data-rule-from-builder
             create-default-add-device-config
             create-default-config
             create-default-configuration
             create-device
+            create-device-domain-with-reference-domain-info
+            create-device-info-config-with-custom-sdk-version
+            create-device-type-builder
             create-devices
+            create-dict-argument-info
+            create-dict-property
+            create-dict-property-builder
+            create-dict-with-expected-types
+            create-dimension-builder-from-existing
+            create-dimension-from-builder
+            create-dimension-rule-builder-from-existing
+            create-dimension-rule-from-builder
             create-end-iterator
+            create-enumeration-property
+            create-enumeration-property-builder
+            create-enumeration-type-with-values
+            create-enumeration-with-int-value
+            create-enumeration-with-int-value-and-type
+            create-enumeration-with-type
+            create-env-config-provider
+            create-eval-value-args
+            create-eval-value-func
+            create-excluded-tags-search-filter
+            create-explicit-data-rule
+            create-explicit-domain-data-rule
+            create-float
+            create-float-property
+            create-float-property-builder
+            create-folder-with-item-type
             create-function-block
+            create-function-block-type-builder
+            create-function-property
+            create-function-property-builder
+            create-implicit-domain-gap-detected-event-packet
+            create-instance
+            create-int-property
+            create-int-property-builder
+            create-interface-id-search-filter
+            create-io-folder
+            create-json-config-provider
+            create-json-file-authentication-provider
+            create-json-string-authentication-provider
+            create-linear-data-rule
+            create-linear-dimension-rule
+            create-linear-scaling
+            create-list-argument-info
+            create-list-dimension-rule
+            create-list-property
+            create-list-property-builder
+            create-list-with-element-type
+            create-local-id-search-filter
+            create-logarithmic-dimension-rule
+            create-malloc-allocator
+            create-module-manager-multiple-paths
+            create-multi-reader-ex
+            create-multi-reader-from-existing
+            create-not-search-filter
+            create-object-property
+            create-object-property-builder
+            create-or-search-filter
+            create-packet-reader-from-port
+            create-permission-mask-builder-from-mask
+            create-property-object-class-builder-with-manager
+            create-property-object-with-class-and-manager
+            create-ratio-property
+            create-ratio-property-builder
+            create-recursive-search-filter
+            create-reference-domain-info-builder-from-existing
+            create-reference-property
+            create-reference-property-builder
+            create-required-tags-search-filter
+            create-rotating-file-logger-sink
+            create-scaling-builder-from-existing
+            create-scaling-from-builder
+            create-scheduler-with-main-loop
+            create-selection-property
+            create-selection-property-builder
             create-server
+            create-server-type-builder
+            create-signal-with-descriptor
+            create-sparse-selection-property
+            create-sparse-selection-property-builder
             create-start-iterator
+            create-static-authentication-provider
+            create-std-err-logger-sink
+            create-std-out-logger-sink
+            create-stream-reader-from-existing
+            create-stream-reader-from-port
             create-streaming
+            create-streaming-type-builder
+            create-string-n
+            create-string-property
+            create-string-property-builder
+            create-struct-builder-from-struct
+            create-struct-from-builder
+            create-struct-property
+            create-struct-property-builder
+            create-struct-type-no-defaults
+            create-tail-reader-from-existing
+            create-tail-reader-from-port
+            create-unit-builder-from-existing
+            create-visible-search-filter
+            create-win-debug-logger-sink
             current
             current-item-type
             custom-components
             custom-data
             custom-info-property-names
             daq-boolean
-            daq-boolean-create-boolean
             daq-boolean-interface-id
             daq-function
             daq-integer
@@ -272,33 +369,22 @@
             daq-number
             daq-number-interface-id
             daq-string-object
-            daq-string-object-create-string-n
             daq-string-object-interface-id
             daq-type
             daq-type-interface-id
             data
             data-descriptor
             data-descriptor-builder
-            data-descriptor-builder-create-data-descriptor-builder-from-existing
             data-descriptor-builder-interface-id
             data-descriptor-interface-id
             data-packet
-            data-packet-create-constant-data-packet-with-domain
-            data-packet-create-data-packet-with-domain
-            data-packet-create-data-packet-with-external-memory
             data-packet-interface-id
             data-packet-last-value
             data-packet-offset
             data-rule
             data-rule-builder
-            data-rule-builder-create-data-rule-builder-from-existing
             data-rule-builder-interface-id
             data-rule-builder-type
-            data-rule-create-constant-data-rule
-            data-rule-create-data-rule-from-builder
-            data-rule-create-explicit-data-rule
-            data-rule-create-explicit-domain-data-rule
-            data-rule-create-linear-data-rule
             data-rule-interface-id
             data-rule-type
             data-size
@@ -335,11 +421,9 @@
             device-class
             device-config
             device-domain
-            device-domain-create-device-domain-with-reference-domain-info
             device-domain-interface-id
             device-info
             device-info-config
-            device-info-config-create-device-info-config-with-custom-sdk-version
             device-info-config-interface-id
             device-info-interface-id
             device-info-internal
@@ -362,26 +446,18 @@
             device-update-options-with-local-id-or-null
             devices
             dict
-            dict-create-dict-with-expected-types
             dict-element-type
             dict-element-type-interface-id
             dict-interface-id
             dict-remove
             dimension
             dimension-builder
-            dimension-builder-create-dimension-builder-from-existing
             dimension-builder-interface-id
-            dimension-create-dimension-from-builder
             dimension-interface-id
             dimension-rule
             dimension-rule-builder
-            dimension-rule-builder-create-dimension-rule-builder-from-existing
             dimension-rule-builder-interface-id
             dimension-rule-builder-type
-            dimension-rule-create-dimension-rule-from-builder
-            dimension-rule-create-linear-dimension-rule
-            dimension-rule-create-list-dimension-rule
-            dimension-rule-create-logarithmic-dimension-rule
             dimension-rule-interface-id
             dimension-rule-type
             dimensions
@@ -426,12 +502,8 @@
             enqueue-on-this-thread
             enqueue-with-scheduler
             enumeration
-            enumeration-create-enumeration-with-int-value
-            enumeration-create-enumeration-with-int-value-and-type
-            enumeration-create-enumeration-with-type
             enumeration-interface-id
             enumeration-type
-            enumeration-type-create-enumeration-type-with-values
             enumeration-type-interface-id
             enumerator-int-value
             enumerator-names
@@ -440,8 +512,6 @@
             error-info
             eval
             eval-value
-            eval-value-create-eval-value-args
-            eval-value-create-eval-value-func
             eval-value-interface-id
             event
             event-args
@@ -452,8 +522,6 @@
             event-interface-id
             event-name
             event-packet
-            event-packet-create-data-descriptor-changed-event-packet
-            event-packet-create-implicit-domain-gap-detected-event-packet
             event-packet-interface-id
             event-packets
             execute
@@ -469,15 +537,12 @@
             find-properties
             find-user
             float-object
-            float-object-create-float
             float-object-interface-id
             float-value
             flush
             flush-on-level
             folder
             folder-config
-            folder-config-create-folder-with-item-type
-            folder-config-create-io-folder
             folder-config-interface-id
             folder-interface-id
             force-unlock
@@ -549,7 +614,6 @@
             instance-builder
             instance-builder-interface-id
             instance-builder-root-device
-            instance-create-instance
             instance-interface-id
             instance-root-device
             int-value
@@ -641,10 +705,6 @@
             logger-component-interface-id
             logger-interface-id
             logger-sink
-            logger-sink-create-rotating-file-logger-sink
-            logger-sink-create-std-err-logger-sink
-            logger-sink-create-std-out-logger-sink
-            logger-sink-create-win-debug-logger-sink
             logger-sinks
             logger-thread-pool
             logger-thread-pool-interface-id
@@ -686,7 +746,6 @@
             module-info-interface-id
             module-interface-id
             module-manager
-            module-manager-create-module-manager-multiple-paths
             module-manager-interface-id
             module-manager-utils
             module-manager-utils-interface-id
@@ -701,8 +760,6 @@
             multi-reader
             multi-reader-builder
             multi-reader-builder-interface-id
-            multi-reader-create-multi-reader-ex
-            multi-reader-create-multi-reader-from-existing
             multi-reader-interface-id
             multi-reader-offset
             multi-reader-read
@@ -728,7 +785,6 @@
             notify-packet-enqueued-with-scheduler
             numerator
             object-list
-            object-list-create-list-with-element-type
             object-list-interface-id
             old-block-reader
             old-value
@@ -767,7 +823,6 @@
             packet-id
             packet-interface-id
             packet-reader
-            packet-reader-create-packet-reader-from-port
             packet-reader-interface-id
             packet-reader-read
             packet-received
@@ -789,7 +844,6 @@
             permission-manager-internal
             permission-manager-internal-interface-id
             permission-mask-builder
-            permission-mask-builder-create-permission-mask-builder-from-mask
             permission-mask-builder-interface-id
             permission-mask-builder-read
             permissions
@@ -811,36 +865,9 @@
             product-instance-uri
             property
             property-builder
-            property-builder-create-bool-property-builder
-            property-builder-create-dict-property-builder
-            property-builder-create-enumeration-property-builder
-            property-builder-create-float-property-builder
-            property-builder-create-function-property-builder
-            property-builder-create-int-property-builder
-            property-builder-create-list-property-builder
-            property-builder-create-object-property-builder
-            property-builder-create-ratio-property-builder
-            property-builder-create-reference-property-builder
-            property-builder-create-selection-property-builder
-            property-builder-create-sparse-selection-property-builder
-            property-builder-create-string-property-builder
-            property-builder-create-struct-property-builder
             property-builder-interface-id
             property-builder-on-property-value-read
             property-builder-on-property-value-write
-            property-create-dict-property
-            property-create-enumeration-property
-            property-create-float-property
-            property-create-function-property
-            property-create-int-property
-            property-create-list-property
-            property-create-object-property
-            property-create-ratio-property
-            property-create-reference-property
-            property-create-selection-property
-            property-create-sparse-selection-property
-            property-create-string-property
-            property-create-struct-property
             property-event-type
             property-interface-id
             property-internal
@@ -849,7 +876,6 @@
             property-object
             property-object-class
             property-object-class-builder
-            property-object-class-builder-create-property-object-class-builder-with-manager
             property-object-class-builder-interface-id
             property-object-class-builder-properties
             property-object-class-interface-id
@@ -858,7 +884,6 @@
             property-object-class-internal-interface-id
             property-object-class-properties
             property-object-class-property
-            property-object-create-property-object-with-class-and-manager
             property-object-interface-id
             property-object-internal
             property-object-internal-clone
@@ -931,7 +956,6 @@
             reference-domain-id
             reference-domain-info
             reference-domain-info-builder
-            reference-domain-info-builder-create-reference-domain-info-builder-from-existing
             reference-domain-info-builder-interface-id
             reference-domain-info-interface-id
             reference-domain-offset
@@ -1009,12 +1033,9 @@
             scale-data-output
             scaling
             scaling-builder
-            scaling-builder-create-scaling-builder-from-existing
             scaling-builder-interface-id
             scaling-calc-private
             scaling-calc-private-interface-id
-            scaling-create-linear-scaling
-            scaling-create-scaling-from-builder
             scaling-interface-id
             scaling-type
             schedule-function
@@ -1022,21 +1043,10 @@
             schedule-work
             schedule-work-on-main-loop
             scheduler
-            scheduler-create-scheduler-with-main-loop
             scheduler-interface-id
             scheduler-worker-num
             sdk-version
             search-filter
-            search-filter-create-any-search-filter
-            search-filter-create-custom-search-filter
-            search-filter-create-excluded-tags-search-filter
-            search-filter-create-interface-id-search-filter
-            search-filter-create-local-id-search-filter
-            search-filter-create-not-search-filter
-            search-filter-create-or-search-filter
-            search-filter-create-recursive-search-filter
-            search-filter-create-required-tags-search-filter
-            search-filter-create-visible-search-filter
             search-filter-interface-id
             selected-source
             selection-values
@@ -1090,7 +1100,6 @@
             should-log
             signal
             signal-config
-            signal-config-create-signal-with-descriptor
             signal-config-interface-id
             signal-dependency
             signal-events
@@ -1130,8 +1139,6 @@
             stream-reader-builder
             stream-reader-builder-interface-id
             stream-reader-builder-signal
-            stream-reader-create-stream-reader-from-existing
-            stream-reader-create-stream-reader-from-port
             stream-reader-interface-id
             stream-reader-read
             stream-reader-read-with-domain
@@ -1144,13 +1151,10 @@
             streaming-type-interface-id
             struct
             struct-builder
-            struct-builder-create-struct-builder-from-struct
             struct-builder-interface-id
-            struct-create-struct-from-builder
             struct-fields
             struct-interface-id
             struct-type
-            struct-type-create-struct-type-no-defaults
             struct-type-interface-id
             struct-type-no-lock
             submit-configuration
@@ -1183,8 +1187,6 @@
             tail-reader-builder
             tail-reader-builder-interface-id
             tail-reader-builder-signal
-            tail-reader-create-tail-reader-from-existing
-            tail-reader-create-tail-reader-from-port
             tail-reader-interface-id
             tail-reader-read
             tail-reader-read-with-domain
@@ -1217,7 +1219,6 @@
             types
             unit
             unit-builder
-            unit-builder-create-unit-builder-from-existing
             unit-builder-interface-id
             unit-interface-id
             unit-no-lock
@@ -4013,34 +4014,9 @@
 
 (defclass property (base-object)
   (
-   (%name-initarg :initarg :name :initform nil)
-   (%default-value-initarg :initarg :default-value :initform nil)
-   (%visible-initarg :initarg :visible :initform nil)
    ))
 
 
-(defmethod initialize-instance :after ((object property)
-                                       &key (pointer nil pointer-p)
-                                            (name nil name-p)
-                                            (default-value nil default-value-p)
-                                            (visible nil visible-p)
-                                       &allow-other-keys)
-  (declare (ignore pointer))
-  (when (and (not pointer-p) name-p default-value-p visible-p)
-  (multiple-value-bind (coerced-name cleanup-name)
-      (%coerce-argument name :daq-string)
-    (unwind-protect
-        (multiple-value-bind (coerced-default-value cleanup-default-value)
-            (%coerce-argument default-value :managed-pointer)
-          (unwind-protect
-              (multiple-value-bind (coerced-visible cleanup-visible)
-                  (%coerce-argument visible :managed-pointer)
-                (unwind-protect
-                    (%adopt-pointer object (opendaq.low-level:property/create-bool-property coerced-name coerced-default-value coerced-visible))
-                  (%cleanup-coerced-argument cleanup-visible)))
-            (%cleanup-coerced-argument cleanup-default-value)))
-      (%cleanup-coerced-argument cleanup-name)))
-    ))
 
 (defun wrap-property (pointer)
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
@@ -5521,7 +5497,7 @@
   )
   new-value)
 
-(defun address-info-create-address-info-from-builder (builder)
+(defun create-address-info-from-builder (builder)
   (multiple-value-bind (coerced-builder cleanup-builder)
       (%coerce-argument builder :managed-pointer)
     (unwind-protect
@@ -5569,7 +5545,7 @@
       (%cleanup-coerced-argument cleanup-descriptor)))
 )
 
-(defun allocator-create-malloc-allocator ()
+(defun create-malloc-allocator ()
   (wrap-allocator (opendaq.low-level:allocator/create-malloc-allocator))
 )
 
@@ -5587,7 +5563,7 @@
   )
 )
 
-(defun argument-info-create-dict-argument-info (name key-type item-type)
+(defun create-dict-argument-info (name key-type item-type)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -5599,7 +5575,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun argument-info-create-list-argument-info (name item-type)
+(defun create-list-argument-info (name item-type)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -5654,7 +5630,7 @@
   (wrap-user (opendaq.low-level:authentication-provider/authenticate-anonymous (%require-live-pointer object)))
 )
 
-(defun authentication-provider-create-json-file-authentication-provider (filename)
+(defun create-json-file-authentication-provider (filename)
   (multiple-value-bind (coerced-filename cleanup-filename)
       (%coerce-argument filename :daq-string)
     (unwind-protect
@@ -5662,7 +5638,7 @@
       (%cleanup-coerced-argument cleanup-filename)))
 )
 
-(defun authentication-provider-create-json-string-authentication-provider (json-string)
+(defun create-json-string-authentication-provider (json-string)
   (multiple-value-bind (coerced-json-string cleanup-json-string)
       (%coerce-argument json-string :daq-string)
     (unwind-protect
@@ -5670,7 +5646,7 @@
       (%cleanup-coerced-argument cleanup-json-string)))
 )
 
-(defun authentication-provider-create-static-authentication-provider (allow-anonymous user-list)
+(defun create-static-authentication-provider (allow-anonymous user-list)
   (multiple-value-bind (coerced-allow-anonymous cleanup-allow-anonymous)
       (%coerce-argument allow-anonymous :daq-bool)
     (unwind-protect
@@ -5940,7 +5916,7 @@
   (opendaq.low-level:block-reader-status/get-read-samples (%require-live-pointer object))
 )
 
-(defun block-reader-create-block-reader-from-existing (invalidated-reader value-read-type domain-read-type block-size)
+(defun create-block-reader-from-existing (invalidated-reader value-read-type domain-read-type block-size)
   (multiple-value-bind (coerced-invalidated-reader cleanup-invalidated-reader)
       (%coerce-argument invalidated-reader :managed-pointer)
     (unwind-protect
@@ -5954,7 +5930,7 @@
       (%cleanup-coerced-argument cleanup-invalidated-reader)))
 )
 
-(defun block-reader-create-block-reader-from-port (port block-size value-read-type domain-read-type mode)
+(defun create-block-reader-from-port (port block-size value-read-type domain-read-type mode)
   (multiple-value-bind (coerced-port cleanup-port)
       (%coerce-argument port :managed-pointer)
     (unwind-protect
@@ -6017,7 +5993,7 @@
   )
 )
 
-(defun daq-boolean-create-boolean (value)
+(defun create-boolean (value)
   (multiple-value-bind (coerced-value cleanup-value)
       (%coerce-argument value :daq-bool)
     (unwind-protect
@@ -6182,7 +6158,7 @@
       (%cleanup-coerced-argument cleanup-new-parent)))
 )
 
-(defun component-deserialize-context-create-component-deserialize-context (context root parent local-id trigger-core-event)
+(defun create-component-deserialize-context (context root parent local-id trigger-core-event)
   (multiple-value-bind (coerced-context cleanup-context)
       (%coerce-argument context :managed-pointer)
     (unwind-protect
@@ -6253,7 +6229,7 @@
   (wrap-procedure (opendaq.low-level:component-deserialize-context/get-trigger-core-event (%require-live-pointer object)))
 )
 
-(defun component-holder-create-component-holder-with-ids (id parent-global-id component)
+(defun create-component-holder-with-ids (id parent-global-id component)
   (multiple-value-bind (coerced-id cleanup-id)
       (%coerce-argument id :daq-string)
     (unwind-protect
@@ -6465,19 +6441,19 @@
   (wrap-component-type (opendaq.low-level:component-type-builder/build (%require-live-pointer object)))
 )
 
-(defun component-type-builder-create-device-type-builder ()
+(defun create-device-type-builder ()
   (wrap-component-type-builder (opendaq.low-level:component-type-builder/create-device-type-builder))
 )
 
-(defun component-type-builder-create-function-block-type-builder ()
+(defun create-function-block-type-builder ()
   (wrap-component-type-builder (opendaq.low-level:component-type-builder/create-function-block-type-builder))
 )
 
-(defun component-type-builder-create-server-type-builder ()
+(defun create-server-type-builder ()
   (wrap-component-type-builder (opendaq.low-level:component-type-builder/create-server-type-builder))
 )
 
-(defun component-type-builder-create-streaming-type-builder ()
+(defun create-streaming-type-builder ()
   (wrap-component-type-builder (opendaq.low-level:component-type-builder/create-streaming-type-builder))
 )
 
@@ -6862,11 +6838,11 @@
       (%cleanup-coerced-argument cleanup-new-value)))
   new-value)
 
-(defun config-provider-create-env-config-provider ()
+(defun create-env-config-provider ()
   (wrap-config-provider (opendaq.low-level:config-provider/create-env-config-provider))
 )
 
-(defun config-provider-create-json-config-provider (filename)
+(defun create-json-config-provider (filename)
   (multiple-value-bind (coerced-filename cleanup-filename)
       (%coerce-argument filename :daq-string)
     (unwind-protect
@@ -6890,7 +6866,7 @@
       (%cleanup-coerced-argument cleanup-options)))
 )
 
-(defun connected-client-info-create-connected-client-info-with-params (address protocol-type protocol-name client-type host-name)
+(defun create-connected-client-info-with-params (address protocol-type protocol-name client-type host-name)
   (multiple-value-bind (coerced-address cleanup-address)
       (%coerce-argument address :daq-string)
     (unwind-protect
@@ -7274,7 +7250,7 @@
   (opendaq.low-level:convertible/to-int (%require-live-pointer object))
 )
 
-(defun core-event-args-create-core-event-args-property-added (prop-owner prop path)
+(defun create-core-event-args-property-added (prop-owner prop path)
   (multiple-value-bind (coerced-prop-owner cleanup-prop-owner)
       (%coerce-argument prop-owner :managed-pointer)
     (unwind-protect
@@ -7290,7 +7266,7 @@
       (%cleanup-coerced-argument cleanup-prop-owner)))
 )
 
-(defun core-event-args-create-core-event-args-property-object-update-end (prop-owner updated-properties path)
+(defun create-core-event-args-property-object-update-end (prop-owner updated-properties path)
   (multiple-value-bind (coerced-prop-owner cleanup-prop-owner)
       (%coerce-argument prop-owner :managed-pointer)
     (unwind-protect
@@ -7306,7 +7282,7 @@
       (%cleanup-coerced-argument cleanup-prop-owner)))
 )
 
-(defun core-event-args-create-core-event-args-property-order-changed (prop-owner property-order path)
+(defun create-core-event-args-property-order-changed (prop-owner property-order path)
   (multiple-value-bind (coerced-prop-owner cleanup-prop-owner)
       (%coerce-argument prop-owner :managed-pointer)
     (unwind-protect
@@ -7322,7 +7298,7 @@
       (%cleanup-coerced-argument cleanup-prop-owner)))
 )
 
-(defun core-event-args-create-core-event-args-property-removed (prop-owner prop-name path)
+(defun create-core-event-args-property-removed (prop-owner prop-name path)
   (multiple-value-bind (coerced-prop-owner cleanup-prop-owner)
       (%coerce-argument prop-owner :managed-pointer)
     (unwind-protect
@@ -7338,7 +7314,7 @@
       (%cleanup-coerced-argument cleanup-prop-owner)))
 )
 
-(defun core-event-args-create-core-event-args-property-value-changed (prop-owner prop-name value path)
+(defun create-core-event-args-property-value-changed (prop-owner prop-name value path)
   (multiple-value-bind (coerced-prop-owner cleanup-prop-owner)
       (%coerce-argument prop-owner :managed-pointer)
     (unwind-protect
@@ -7358,7 +7334,7 @@
       (%cleanup-coerced-argument cleanup-prop-owner)))
 )
 
-(defun core-event-args-create-core-event-args-type-added (type)
+(defun create-core-event-args-type-added (type)
   (multiple-value-bind (coerced-type cleanup-type)
       (%coerce-argument type :managed-pointer)
     (unwind-protect
@@ -7366,7 +7342,7 @@
       (%cleanup-coerced-argument cleanup-type)))
 )
 
-(defun core-event-args-create-core-event-args-type-removed (type-name)
+(defun create-core-event-args-type-removed (type-name)
   (multiple-value-bind (coerced-type-name cleanup-type-name)
       (%coerce-argument type-name :daq-string)
     (unwind-protect
@@ -7395,7 +7371,7 @@
   (wrap-data-descriptor (opendaq.low-level:data-descriptor-builder/build (%require-live-pointer object)))
 )
 
-(defun data-descriptor-builder-create-data-descriptor-builder-from-existing (descriptor-to-copy)
+(defun create-data-descriptor-builder-from-existing (descriptor-to-copy)
   (multiple-value-bind (coerced-descriptor-to-copy cleanup-descriptor-to-copy)
       (%coerce-argument descriptor-to-copy :managed-pointer)
     (unwind-protect
@@ -7639,7 +7615,7 @@
   (wrap-range (opendaq.low-level:data-descriptor/get-value-range (%require-live-pointer object)))
 )
 
-(defun data-packet-create-constant-data-packet-with-domain (domain-packet descriptor sample-count initial-value other-values other-value-count)
+(defun create-constant-data-packet-with-domain (domain-packet descriptor sample-count initial-value other-values other-value-count)
   (multiple-value-bind (coerced-domain-packet cleanup-domain-packet)
       (%coerce-argument domain-packet :managed-pointer)
     (unwind-protect
@@ -7659,7 +7635,7 @@
       (%cleanup-coerced-argument cleanup-domain-packet)))
 )
 
-(defun data-packet-create-data-packet-with-domain (domain-packet descriptor sample-count offset)
+(defun create-data-packet-with-domain (domain-packet descriptor sample-count offset)
   (multiple-value-bind (coerced-domain-packet cleanup-domain-packet)
       (%coerce-argument domain-packet :managed-pointer)
     (unwind-protect
@@ -7677,7 +7653,7 @@
       (%cleanup-coerced-argument cleanup-domain-packet)))
 )
 
-(defun data-packet-create-data-packet-with-external-memory (domain-packet descriptor sample-count offset external-memory deleter buffer-size)
+(defun create-data-packet-with-external-memory (domain-packet descriptor sample-count offset external-memory deleter buffer-size)
   (multiple-value-bind (coerced-domain-packet cleanup-domain-packet)
       (%coerce-argument domain-packet :managed-pointer)
     (unwind-protect
@@ -7798,7 +7774,7 @@
   (wrap-data-rule (opendaq.low-level:data-rule-builder/build (%require-live-pointer object)))
 )
 
-(defun data-rule-builder-create-data-rule-builder-from-existing (rule-to-copy)
+(defun create-data-rule-builder-from-existing (rule-to-copy)
   (multiple-value-bind (coerced-rule-to-copy cleanup-rule-to-copy)
       (%coerce-argument rule-to-copy :managed-pointer)
     (unwind-protect
@@ -7846,11 +7822,11 @@
   )
   new-value)
 
-(defun data-rule-create-constant-data-rule ()
+(defun create-constant-data-rule ()
   (wrap-data-rule (opendaq.low-level:data-rule/create-constant-data-rule))
 )
 
-(defun data-rule-create-data-rule-from-builder (builder)
+(defun create-data-rule-from-builder (builder)
   (multiple-value-bind (coerced-builder cleanup-builder)
       (%coerce-argument builder :managed-pointer)
     (unwind-protect
@@ -7858,11 +7834,11 @@
       (%cleanup-coerced-argument cleanup-builder)))
 )
 
-(defun data-rule-create-explicit-data-rule ()
+(defun create-explicit-data-rule ()
   (wrap-data-rule (opendaq.low-level:data-rule/create-explicit-data-rule))
 )
 
-(defun data-rule-create-explicit-domain-data-rule (min-expected-delta max-expected-delta)
+(defun create-explicit-domain-data-rule (min-expected-delta max-expected-delta)
   (multiple-value-bind (coerced-min-expected-delta cleanup-min-expected-delta)
       (%coerce-argument min-expected-delta :managed-pointer)
     (unwind-protect
@@ -7874,7 +7850,7 @@
       (%cleanup-coerced-argument cleanup-min-expected-delta)))
 )
 
-(defun data-rule-create-linear-data-rule (delta start)
+(defun create-linear-data-rule (delta start)
   (multiple-value-bind (coerced-delta cleanup-delta)
       (%coerce-argument delta :managed-pointer)
     (unwind-protect
@@ -8001,7 +7977,7 @@
       (%cleanup-coerced-argument cleanup-updatable)))
 )
 
-(defun device-domain-create-device-domain-with-reference-domain-info (tick-resolution origin unit reference-domain-info)
+(defun create-device-domain-with-reference-domain-info (tick-resolution origin unit reference-domain-info)
   (multiple-value-bind (coerced-tick-resolution cleanup-tick-resolution)
       (%coerce-argument tick-resolution :managed-pointer)
     (unwind-protect
@@ -8044,7 +8020,7 @@
   (wrap-unit (opendaq.low-level:device-domain/get-unit (%require-live-pointer object)))
 )
 
-(defun device-info-config-create-device-info-config-with-custom-sdk-version (name connection-string sdk-version)
+(defun create-device-info-config-with-custom-sdk-version (name connection-string sdk-version)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -9021,7 +8997,7 @@
   (opendaq.low-level:dict/clear (%require-live-pointer object))
 )
 
-(defun dict-create-dict-with-expected-types (key-type value-type)
+(defun create-dict-with-expected-types (key-type value-type)
   (let ((coerced-key-type key-type))
     (let ((coerced-value-type value-type))
       (wrap-dict (opendaq.low-level:dict/create-dict-with-expected-types coerced-key-type coerced-value-type))
@@ -9116,7 +9092,7 @@
   (wrap-dimension (opendaq.low-level:dimension-builder/build (%require-live-pointer object)))
 )
 
-(defun dimension-builder-create-dimension-builder-from-existing (dimension-to-copy)
+(defun create-dimension-builder-from-existing (dimension-to-copy)
   (multiple-value-bind (coerced-dimension-to-copy cleanup-dimension-to-copy)
       (%coerce-argument dimension-to-copy :managed-pointer)
     (unwind-protect
@@ -9183,7 +9159,7 @@
   (wrap-dimension-rule (opendaq.low-level:dimension-rule-builder/build (%require-live-pointer object)))
 )
 
-(defun dimension-rule-builder-create-dimension-rule-builder-from-existing (rule-to-copy)
+(defun create-dimension-rule-builder-from-existing (rule-to-copy)
   (multiple-value-bind (coerced-rule-to-copy cleanup-rule-to-copy)
       (%coerce-argument rule-to-copy :managed-pointer)
     (unwind-protect
@@ -9229,7 +9205,7 @@
   )
   new-value)
 
-(defun dimension-rule-create-dimension-rule-from-builder (builder)
+(defun create-dimension-rule-from-builder (builder)
   (multiple-value-bind (coerced-builder cleanup-builder)
       (%coerce-argument builder :managed-pointer)
     (unwind-protect
@@ -9237,7 +9213,7 @@
       (%cleanup-coerced-argument cleanup-builder)))
 )
 
-(defun dimension-rule-create-linear-dimension-rule (delta start size)
+(defun create-linear-dimension-rule (delta start size)
   (multiple-value-bind (coerced-delta cleanup-delta)
       (%coerce-argument delta :managed-pointer)
     (unwind-protect
@@ -9251,7 +9227,7 @@
       (%cleanup-coerced-argument cleanup-delta)))
 )
 
-(defun dimension-rule-create-list-dimension-rule (list)
+(defun create-list-dimension-rule (list)
   (multiple-value-bind (coerced-list cleanup-list)
       (%coerce-argument list :managed-pointer)
     (unwind-protect
@@ -9259,7 +9235,7 @@
       (%cleanup-coerced-argument cleanup-list)))
 )
 
-(defun dimension-rule-create-logarithmic-dimension-rule (delta start base size)
+(defun create-logarithmic-dimension-rule (delta start base size)
   (multiple-value-bind (coerced-delta cleanup-delta)
       (%coerce-argument delta :managed-pointer)
     (unwind-protect
@@ -9293,7 +9269,7 @@
   (opendaq.low-level:dimension-rule/get-type (%require-live-pointer object))
 )
 
-(defun dimension-create-dimension-from-builder (builder)
+(defun create-dimension-from-builder (builder)
   (multiple-value-bind (coerced-builder cleanup-builder)
       (%coerce-argument builder :managed-pointer)
     (unwind-protect
@@ -9388,7 +9364,7 @@
   (as-list-of (wrap-object-list (opendaq.low-level:end-update-event-args/get-properties (%require-live-pointer object))) 'daq-string-object)
 )
 
-(defun enumeration-type-create-enumeration-type-with-values (type-name enumerators)
+(defun create-enumeration-type-with-values (type-name enumerators)
   (multiple-value-bind (coerced-type-name cleanup-type-name)
       (%coerce-argument type-name :daq-string)
     (unwind-protect
@@ -9430,7 +9406,7 @@
   )
 )
 
-(defun enumeration-create-enumeration-with-int-value (name value type-manager)
+(defun create-enumeration-with-int-value (name value type-manager)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -9446,7 +9422,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun enumeration-create-enumeration-with-int-value-and-type (type value)
+(defun create-enumeration-with-int-value-and-type (type value)
   (multiple-value-bind (coerced-type cleanup-type)
       (%coerce-argument type :managed-pointer)
     (unwind-protect
@@ -9458,7 +9434,7 @@
       (%cleanup-coerced-argument cleanup-type)))
 )
 
-(defun enumeration-create-enumeration-with-type (type value)
+(defun create-enumeration-with-type (type value)
   (multiple-value-bind (coerced-type cleanup-type)
       (%coerce-argument type :managed-pointer)
     (unwind-protect
@@ -9552,7 +9528,7 @@
       (%cleanup-coerced-argument cleanup-owner)))
 )
 
-(defun eval-value-create-eval-value-args (eval args)
+(defun create-eval-value-args (eval args)
   (multiple-value-bind (coerced-eval cleanup-eval)
       (%coerce-argument eval :daq-string)
     (unwind-protect
@@ -9564,7 +9540,7 @@
       (%cleanup-coerced-argument cleanup-eval)))
 )
 
-(defun eval-value-create-eval-value-func (eval func)
+(defun create-eval-value-func (eval func)
   (multiple-value-bind (coerced-eval cleanup-eval)
       (%coerce-argument eval :daq-string)
     (unwind-protect
@@ -9643,7 +9619,7 @@
       (%cleanup-coerced-argument cleanup-sender)))
 )
 
-(defun event-packet-create-data-descriptor-changed-event-packet (data-descriptor domain-data-descriptor)
+(defun create-data-descriptor-changed-event-packet (data-descriptor domain-data-descriptor)
   (multiple-value-bind (coerced-data-descriptor cleanup-data-descriptor)
       (%coerce-argument data-descriptor :managed-pointer)
     (unwind-protect
@@ -9655,7 +9631,7 @@
       (%cleanup-coerced-argument cleanup-data-descriptor)))
 )
 
-(defun event-packet-create-implicit-domain-gap-detected-event-packet (diff)
+(defun create-implicit-domain-gap-detected-event-packet (diff)
   (multiple-value-bind (coerced-diff cleanup-diff)
       (%coerce-argument diff :managed-pointer)
     (unwind-protect
@@ -9758,7 +9734,7 @@
       (%cleanup-coerced-argument cleanup-event-handler)))
 )
 
-(defun float-object-create-float (value)
+(defun create-float (value)
   (let ((coerced-value value))
     (wrap-float-object (opendaq.low-level:float-object/create-float coerced-value))
   )
@@ -9794,7 +9770,7 @@
   (opendaq.low-level:folder-config/clear (%require-live-pointer object))
 )
 
-(defun folder-config-create-folder-with-item-type (item-type context parent local-id)
+(defun create-folder-with-item-type (item-type context parent local-id)
   (let ((coerced-item-type item-type))
     (multiple-value-bind (coerced-context cleanup-context)
         (%coerce-argument context :managed-pointer)
@@ -9812,7 +9788,7 @@
   )
 )
 
-(defun folder-config-create-io-folder (context parent local-id)
+(defun create-io-folder (context parent local-id)
   (multiple-value-bind (coerced-context cleanup-context)
       (%coerce-argument context :managed-pointer)
     (unwind-protect
@@ -10538,7 +10514,7 @@
   (as-list-of (wrap-object-list (opendaq.low-level:instance/add-standard-servers (%require-live-pointer object))) 'server)
 )
 
-(defun instance-create-instance (context local-id)
+(defun create-instance (context local-id)
   (multiple-value-bind (coerced-context cleanup-context)
       (%coerce-argument context :managed-pointer)
     (unwind-protect
@@ -10683,7 +10659,7 @@
   (wrap-iterator (opendaq.low-level:list/create-end-iterator (%require-live-pointer object)))
 )
 
-(defun object-list-create-list-with-element-type (id)
+(defun create-list-with-element-type (id)
   (let ((coerced-id id))
     (wrap-object-list (opendaq.low-level:list/create-list-with-element-type coerced-id))
   )
@@ -10986,7 +10962,7 @@
   )
 )
 
-(defun logger-sink-create-rotating-file-logger-sink (file-name max-file-byte-size max-files)
+(defun create-rotating-file-logger-sink (file-name max-file-byte-size max-files)
   (multiple-value-bind (coerced-file-name cleanup-file-name)
       (%coerce-argument file-name :daq-string)
     (unwind-protect
@@ -10998,15 +10974,15 @@
       (%cleanup-coerced-argument cleanup-file-name)))
 )
 
-(defun logger-sink-create-std-err-logger-sink ()
+(defun create-std-err-logger-sink ()
   (wrap-logger-sink (opendaq.low-level:logger-sink/create-std-err-logger-sink))
 )
 
-(defun logger-sink-create-std-out-logger-sink ()
+(defun create-std-out-logger-sink ()
   (wrap-logger-sink (opendaq.low-level:logger-sink/create-std-out-logger-sink))
 )
 
-(defun logger-sink-create-win-debug-logger-sink ()
+(defun create-win-debug-logger-sink ()
   (wrap-logger-sink (opendaq.low-level:logger-sink/create-win-debug-logger-sink))
 )
 
@@ -11534,7 +11510,7 @@
       (%cleanup-coerced-argument cleanup-module)))
 )
 
-(defun module-manager-create-module-manager-multiple-paths (paths)
+(defun create-module-manager-multiple-paths (paths)
   (multiple-value-bind (coerced-paths cleanup-paths)
       (%coerce-argument paths :managed-pointer)
     (unwind-protect
@@ -11935,7 +11911,7 @@
       (%cleanup-coerced-argument cleanup-input)))
 )
 
-(defun multi-reader-create-multi-reader-ex (signals value-read-type domain-read-type mode timeout-type required-common-sample-rate start-on-full-unit-of-domain min-read-count)
+(defun create-multi-reader-ex (signals value-read-type domain-read-type mode timeout-type required-common-sample-rate start-on-full-unit-of-domain min-read-count)
   (multiple-value-bind (coerced-signals cleanup-signals)
       (%coerce-argument signals :managed-pointer)
     (unwind-protect
@@ -11959,7 +11935,7 @@
       (%cleanup-coerced-argument cleanup-signals)))
 )
 
-(defun multi-reader-create-multi-reader-from-existing (invalidated-reader value-read-type domain-read-type)
+(defun create-multi-reader-from-existing (invalidated-reader value-read-type domain-read-type)
   (multiple-value-bind (coerced-invalidated-reader cleanup-invalidated-reader)
       (%coerce-argument invalidated-reader :managed-pointer)
     (unwind-protect
@@ -12159,7 +12135,7 @@
   (opendaq.low-level:packet-destruct-callback/on-packet-destroyed (%require-live-pointer object))
 )
 
-(defun packet-reader-create-packet-reader-from-port (port)
+(defun create-packet-reader-from-port (port)
   (multiple-value-bind (coerced-port cleanup-port)
       (%coerce-argument port :managed-pointer)
     (unwind-protect
@@ -12289,7 +12265,7 @@
   (opendaq.low-level:permission-mask-builder/clear (%require-live-pointer object))
 )
 
-(defun permission-mask-builder-create-permission-mask-builder-from-mask (permission-mask)
+(defun create-permission-mask-builder-from-mask (permission-mask)
   (let ((coerced-permission-mask permission-mask))
     (wrap-permission-mask-builder (opendaq.low-level:permission-mask-builder/create-permission-mask-builder-from-mask coerced-permission-mask))
   )
@@ -12432,7 +12408,7 @@
   (wrap-property (opendaq.low-level:property-builder/build (%require-live-pointer object)))
 )
 
-(defun property-builder-create-bool-property-builder (name default-value)
+(defun create-bool-property-builder (name default-value)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -12444,7 +12420,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-builder-create-dict-property-builder (name default-value)
+(defun create-dict-property-builder (name default-value)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -12456,7 +12432,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-builder-create-enumeration-property-builder (name default-value)
+(defun create-enumeration-property-builder (name default-value)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -12468,7 +12444,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-builder-create-float-property-builder (name default-value)
+(defun create-float-property-builder (name default-value)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -12480,7 +12456,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-builder-create-function-property-builder (name callable-info)
+(defun create-function-property-builder (name callable-info)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -12492,7 +12468,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-builder-create-int-property-builder (name default-value)
+(defun create-int-property-builder (name default-value)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -12504,7 +12480,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-builder-create-list-property-builder (name default-value)
+(defun create-list-property-builder (name default-value)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -12516,7 +12492,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-builder-create-object-property-builder (name default-value)
+(defun create-object-property-builder (name default-value)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -12528,7 +12504,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-builder-create-ratio-property-builder (name default-value)
+(defun create-ratio-property-builder (name default-value)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -12540,7 +12516,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-builder-create-reference-property-builder (name referenced-property-eval)
+(defun create-reference-property-builder (name referenced-property-eval)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -12552,7 +12528,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-builder-create-selection-property-builder (name selection-values default-value)
+(defun create-selection-property-builder (name selection-values default-value)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -12568,7 +12544,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-builder-create-sparse-selection-property-builder (name selection-values default-value)
+(defun create-sparse-selection-property-builder (name selection-values default-value)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -12584,7 +12560,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-builder-create-string-property-builder (name default-value)
+(defun create-string-property-builder (name default-value)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -12596,7 +12572,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-builder-create-struct-property-builder (name default-value)
+(defun create-struct-property-builder (name default-value)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -13124,7 +13100,7 @@
   (wrap-property-object-class (opendaq.low-level:property-object-class-builder/build (%require-live-pointer object)))
 )
 
-(defun property-object-class-builder-create-property-object-class-builder-with-manager (manager name)
+(defun create-property-object-class-builder-with-manager (manager name)
   (multiple-value-bind (coerced-manager cleanup-manager)
       (%coerce-argument manager :managed-pointer)
     (unwind-protect
@@ -13497,7 +13473,7 @@
   (opendaq.low-level:property-object/clear-property-values (%require-live-pointer object))
 )
 
-(defun property-object-create-property-object-with-class-and-manager (manager class-name)
+(defun create-property-object-with-class-and-manager (manager class-name)
   (multiple-value-bind (coerced-manager cleanup-manager)
       (%coerce-argument manager :managed-pointer)
     (unwind-protect
@@ -13701,7 +13677,23 @@
       (%cleanup-coerced-argument cleanup-new-value)))
   new-value)
 
-(defun property-create-dict-property (name default-value visible)
+(defun create-bool-property (name default-value visible)
+  (multiple-value-bind (coerced-name cleanup-name)
+      (%coerce-argument name :daq-string)
+    (unwind-protect
+        (multiple-value-bind (coerced-default-value cleanup-default-value)
+            (%coerce-argument default-value :managed-pointer)
+          (unwind-protect
+              (multiple-value-bind (coerced-visible cleanup-visible)
+                  (%coerce-argument visible :managed-pointer)
+                (unwind-protect
+                    (wrap-property (opendaq.low-level:property/create-bool-property coerced-name coerced-default-value coerced-visible))
+                  (%cleanup-coerced-argument cleanup-visible)))
+            (%cleanup-coerced-argument cleanup-default-value)))
+      (%cleanup-coerced-argument cleanup-name)))
+)
+
+(defun create-dict-property (name default-value visible)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -13717,7 +13709,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-create-enumeration-property (name default-value visible)
+(defun create-enumeration-property (name default-value visible)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -13733,7 +13725,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-create-float-property (name default-value visible)
+(defun create-float-property (name default-value visible)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -13749,7 +13741,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-create-function-property (name callable-info visible)
+(defun create-function-property (name callable-info visible)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -13765,7 +13757,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-create-int-property (name default-value visible)
+(defun create-int-property (name default-value visible)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -13781,7 +13773,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-create-list-property (name default-value visible)
+(defun create-list-property (name default-value visible)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -13797,7 +13789,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-create-object-property (name default-value)
+(defun create-object-property (name default-value)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -13809,7 +13801,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-create-ratio-property (name default-value visible)
+(defun create-ratio-property (name default-value visible)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -13825,7 +13817,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-create-reference-property (name referenced-property-eval)
+(defun create-reference-property (name referenced-property-eval)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -13837,7 +13829,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-create-selection-property (name selection-values default-value visible)
+(defun create-selection-property (name selection-values default-value visible)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -13857,7 +13849,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-create-sparse-selection-property (name selection-values default-value visible)
+(defun create-sparse-selection-property (name selection-values default-value visible)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -13877,7 +13869,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-create-string-property (name default-value visible)
+(defun create-string-property (name default-value visible)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -13893,7 +13885,7 @@
       (%cleanup-coerced-argument cleanup-name)))
 )
 
-(defun property-create-struct-property (name default-value visible)
+(defun create-struct-property (name default-value visible)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -14205,7 +14197,7 @@
   (wrap-reference-domain-info (opendaq.low-level:reference-domain-info-builder/build (%require-live-pointer object)))
 )
 
-(defun reference-domain-info-builder-create-reference-domain-info-builder-from-existing (reference-domain-info-to-copy)
+(defun create-reference-domain-info-builder-from-existing (reference-domain-info-to-copy)
   (multiple-value-bind (coerced-reference-domain-info-to-copy cleanup-reference-domain-info-to-copy)
       (%coerce-argument reference-domain-info-to-copy :managed-pointer)
     (unwind-protect
@@ -14407,7 +14399,7 @@
   (wrap-scaling (opendaq.low-level:scaling-builder/build (%require-live-pointer object)))
 )
 
-(defun scaling-builder-create-scaling-builder-from-existing (scaling-to-copy)
+(defun create-scaling-builder-from-existing (scaling-to-copy)
   (multiple-value-bind (coerced-scaling-to-copy cleanup-scaling-to-copy)
       (%coerce-argument scaling-to-copy :managed-pointer)
     (unwind-protect
@@ -14510,7 +14502,7 @@
   )
 )
 
-(defun scaling-create-linear-scaling (scale offset input-data-type output-data-type)
+(defun create-linear-scaling (scale offset input-data-type output-data-type)
   (multiple-value-bind (coerced-scale cleanup-scale)
       (%coerce-argument scale :managed-pointer)
     (unwind-protect
@@ -14526,7 +14518,7 @@
       (%cleanup-coerced-argument cleanup-scale)))
 )
 
-(defun scaling-create-scaling-from-builder (builder)
+(defun create-scaling-from-builder (builder)
   (multiple-value-bind (coerced-builder cleanup-builder)
       (%coerce-argument builder :managed-pointer)
     (unwind-protect
@@ -14559,7 +14551,7 @@
   (opendaq.low-level:scaling/get-type (%require-live-pointer object))
 )
 
-(defun scheduler-create-scheduler-with-main-loop (logger num-workers use-main-loop)
+(defun create-scheduler-with-main-loop (logger num-workers use-main-loop)
   (multiple-value-bind (coerced-logger cleanup-logger)
       (%coerce-argument logger :managed-pointer)
     (unwind-protect
@@ -14662,11 +14654,11 @@
       (%cleanup-coerced-argument cleanup-obj)))
 )
 
-(defun search-filter-create-any-search-filter ()
+(defun create-any-search-filter ()
   (wrap-search-filter (opendaq.low-level:search-filter/create-any-search-filter))
 )
 
-(defun search-filter-create-custom-search-filter (accepts-function visit-function)
+(defun create-custom-search-filter (accepts-function visit-function)
   (multiple-value-bind (coerced-accepts-function cleanup-accepts-function)
       (%coerce-argument accepts-function :managed-pointer)
     (unwind-protect
@@ -14678,7 +14670,7 @@
       (%cleanup-coerced-argument cleanup-accepts-function)))
 )
 
-(defun search-filter-create-excluded-tags-search-filter (excluded-tags)
+(defun create-excluded-tags-search-filter (excluded-tags)
   (multiple-value-bind (coerced-excluded-tags cleanup-excluded-tags)
       (%coerce-argument excluded-tags :managed-pointer)
     (unwind-protect
@@ -14686,13 +14678,13 @@
       (%cleanup-coerced-argument cleanup-excluded-tags)))
 )
 
-(defun search-filter-create-interface-id-search-filter (intf-id)
+(defun create-interface-id-search-filter (intf-id)
   (let ((coerced-intf-id intf-id))
     (wrap-search-filter (opendaq.low-level:search-filter/create-interface-id-search-filter coerced-intf-id))
   )
 )
 
-(defun search-filter-create-local-id-search-filter (local-id)
+(defun create-local-id-search-filter (local-id)
   (multiple-value-bind (coerced-local-id cleanup-local-id)
       (%coerce-argument local-id :daq-string)
     (unwind-protect
@@ -14700,7 +14692,7 @@
       (%cleanup-coerced-argument cleanup-local-id)))
 )
 
-(defun search-filter-create-not-search-filter (filter)
+(defun create-not-search-filter (filter)
   (multiple-value-bind (coerced-filter cleanup-filter)
       (%coerce-argument filter :managed-pointer)
     (unwind-protect
@@ -14708,7 +14700,7 @@
       (%cleanup-coerced-argument cleanup-filter)))
 )
 
-(defun search-filter-create-or-search-filter (left right)
+(defun create-or-search-filter (left right)
   (multiple-value-bind (coerced-left cleanup-left)
       (%coerce-argument left :managed-pointer)
     (unwind-protect
@@ -14720,7 +14712,7 @@
       (%cleanup-coerced-argument cleanup-left)))
 )
 
-(defun search-filter-create-recursive-search-filter (filter)
+(defun create-recursive-search-filter (filter)
   (multiple-value-bind (coerced-filter cleanup-filter)
       (%coerce-argument filter :managed-pointer)
     (unwind-protect
@@ -14728,7 +14720,7 @@
       (%cleanup-coerced-argument cleanup-filter)))
 )
 
-(defun search-filter-create-required-tags-search-filter (required-tags)
+(defun create-required-tags-search-filter (required-tags)
   (multiple-value-bind (coerced-required-tags cleanup-required-tags)
       (%coerce-argument required-tags :managed-pointer)
     (unwind-protect
@@ -14736,7 +14728,7 @@
       (%cleanup-coerced-argument cleanup-required-tags)))
 )
 
-(defun search-filter-create-visible-search-filter ()
+(defun create-visible-search-filter ()
   (wrap-search-filter (opendaq.low-level:search-filter/create-visible-search-filter))
 )
 
@@ -15335,7 +15327,7 @@
   (opendaq.low-level:signal-config/clear-related-signals (%require-live-pointer object))
 )
 
-(defun signal-config-create-signal-with-descriptor (context descriptor parent local-id class-name)
+(defun create-signal-with-descriptor (context descriptor parent local-id class-name)
   (multiple-value-bind (coerced-context cleanup-context)
       (%coerce-argument context :managed-pointer)
     (unwind-protect
@@ -15702,7 +15694,7 @@
   )
   new-value)
 
-(defun stream-reader-create-stream-reader-from-existing (invalidated-reader value-read-type domain-read-type)
+(defun create-stream-reader-from-existing (invalidated-reader value-read-type domain-read-type)
   (multiple-value-bind (coerced-invalidated-reader cleanup-invalidated-reader)
       (%coerce-argument invalidated-reader :managed-pointer)
     (unwind-protect
@@ -15714,7 +15706,7 @@
       (%cleanup-coerced-argument cleanup-invalidated-reader)))
 )
 
-(defun stream-reader-create-stream-reader-from-port (port value-read-type domain-read-type read-mode timeout-type)
+(defun create-stream-reader-from-port (port value-read-type domain-read-type read-mode timeout-type)
   (multiple-value-bind (coerced-port cleanup-port)
       (%coerce-argument port :managed-pointer)
     (unwind-protect
@@ -15877,7 +15869,7 @@
       (%cleanup-coerced-argument cleanup-new-value)))
   new-value)
 
-(defun daq-string-object-create-string-n (str length)
+(defun create-string-n (str length)
   (let ((coerced-str str))
     (let ((coerced-length length))
       (%daq-string-to-lisp-and-release (opendaq.low-level:string/create-string-n coerced-str coerced-length))
@@ -15906,7 +15898,7 @@
   (wrap-struct (opendaq.low-level:struct-builder/build (%require-live-pointer object)))
 )
 
-(defun struct-builder-create-struct-builder-from-struct (struct)
+(defun create-struct-builder-from-struct (struct)
   (multiple-value-bind (coerced-struct cleanup-struct)
       (%coerce-argument struct :managed-pointer)
     (unwind-protect
@@ -15981,7 +15973,7 @@
       (%cleanup-coerced-argument cleanup-new-value)))
   new-value)
 
-(defun struct-type-create-struct-type-no-defaults (name names types)
+(defun create-struct-type-no-defaults (name names types)
   (multiple-value-bind (coerced-name cleanup-name)
       (%coerce-argument name :daq-string)
     (unwind-protect
@@ -16018,7 +16010,7 @@
   )
 )
 
-(defun struct-create-struct-from-builder (builder)
+(defun create-struct-from-builder (builder)
   (multiple-value-bind (coerced-builder cleanup-builder)
       (%coerce-argument builder :managed-pointer)
     (unwind-protect
@@ -16313,7 +16305,7 @@
   (not (zerop (opendaq.low-level:tail-reader-status/get-sufficient-history (%require-live-pointer object))))
 )
 
-(defun tail-reader-create-tail-reader-from-existing (invalidated-reader history-size value-read-type domain-read-type)
+(defun create-tail-reader-from-existing (invalidated-reader history-size value-read-type domain-read-type)
   (multiple-value-bind (coerced-invalidated-reader cleanup-invalidated-reader)
       (%coerce-argument invalidated-reader :managed-pointer)
     (unwind-protect
@@ -16327,7 +16319,7 @@
       (%cleanup-coerced-argument cleanup-invalidated-reader)))
 )
 
-(defun tail-reader-create-tail-reader-from-port (port history-size value-read-type domain-read-type mode)
+(defun create-tail-reader-from-port (port history-size value-read-type domain-read-type mode)
   (multiple-value-bind (coerced-port cleanup-port)
       (%coerce-argument port :managed-pointer)
     (unwind-protect
@@ -16496,7 +16488,7 @@
   (wrap-unit (opendaq.low-level:unit-builder/build (%require-live-pointer object)))
 )
 
-(defun unit-builder-create-unit-builder-from-existing (unit-to-copy)
+(defun create-unit-builder-from-existing (unit-to-copy)
   (multiple-value-bind (coerced-unit-to-copy cleanup-unit-to-copy)
       (%coerce-argument unit-to-copy :managed-pointer)
     (unwind-protect
@@ -16844,7 +16836,6 @@
          address-info-builder-address
          address-info-builder-interface-id
          address-info-builder-type
-         address-info-create-address-info-from-builder
          address-info-interface-id
          address-info-private
          address-info-private-interface-id
@@ -16853,14 +16844,11 @@
          all-properties
          allocate
          allocator
-         allocator-create-malloc-allocator
          allocator-interface-id
          allow
          allow-different-sampling-rates
          allowed
          argument-info
-         argument-info-create-dict-argument-info
-         argument-info-create-list-argument-info
          argument-info-interface-id
          argument-info-type
          arguments
@@ -16874,9 +16862,6 @@
          authenticate-anonymous
          authenticated-only
          authentication-provider
-         authentication-provider-create-json-file-authentication-provider
-         authentication-provider-create-json-string-authentication-provider
-         authentication-provider-create-static-authentication-provider
          authentication-provider-interface-id
          available-count
          available-device-types
@@ -16898,8 +16883,6 @@
          block-reader-builder
          block-reader-builder-interface-id
          block-reader-builder-signal
-         block-reader-create-block-reader-from-existing
-         block-reader-create-block-reader-from-port
          block-reader-interface-id
          block-reader-read
          block-reader-read-with-domain
@@ -16959,11 +16942,9 @@
          component-config
          component-deserialize-context
          component-deserialize-context-clone
-         component-deserialize-context-create-component-deserialize-context
          component-deserialize-context-interface-id
          component-holder
          component-holder-component
-         component-holder-create-component-holder-with-ids
          component-holder-interface-id
          component-interface-id
          component-log-level
@@ -16975,10 +16956,6 @@
          component-status-container-private-interface-id
          component-type
          component-type-builder
-         component-type-builder-create-device-type-builder
-         component-type-builder-create-function-block-type-builder
-         component-type-builder-create-server-type-builder
-         component-type-builder-create-streaming-type-builder
          component-type-builder-interface-id
          component-type-interface-id
          component-type-private
@@ -16989,8 +16966,6 @@
          components
          components-log-level
          config-provider
-         config-provider-create-env-config-provider
-         config-provider-create-json-config-provider
          config-provider-interface-id
          configuration-connection-info
          connect
@@ -16998,7 +16973,6 @@
          connected
          connected-client-info
          connected-client-info-address
-         connected-client-info-create-connected-client-info-with-params
          connected-client-info-interface-id
          connected-clients-info
          connection
@@ -17024,36 +16998,151 @@
          convertible
          convertible-interface-id
          core-event-args
-         core-event-args-create-core-event-args-property-added
-         core-event-args-create-core-event-args-property-object-update-end
-         core-event-args-create-core-event-args-property-order-changed
-         core-event-args-create-core-event-args-property-removed
-         core-event-args-create-core-event-args-property-value-changed
-         core-event-args-create-core-event-args-type-added
-         core-event-args-create-core-event-args-type-removed
          core-event-args-interface-id
          core-event-callback
          core-event-trigger
          core-events-enabled
          core-type
          count
+         create-address-info-from-builder
+         create-any-search-filter
+         create-block-reader-from-existing
+         create-block-reader-from-port
+         create-bool-property
+         create-bool-property-builder
+         create-boolean
+         create-component-deserialize-context
+         create-component-holder-with-ids
+         create-connected-client-info-with-params
+         create-constant-data-packet-with-domain
+         create-constant-data-rule
+         create-core-event-args-property-added
+         create-core-event-args-property-object-update-end
+         create-core-event-args-property-order-changed
+         create-core-event-args-property-removed
+         create-core-event-args-property-value-changed
+         create-core-event-args-type-added
+         create-core-event-args-type-removed
+         create-custom-search-filter
+         create-data-descriptor-builder-from-existing
+         create-data-descriptor-changed-event-packet
+         create-data-packet-with-domain
+         create-data-packet-with-external-memory
+         create-data-rule-builder-from-existing
+         create-data-rule-from-builder
          create-default-add-device-config
          create-default-config
          create-default-configuration
          create-device
+         create-device-domain-with-reference-domain-info
+         create-device-info-config-with-custom-sdk-version
+         create-device-type-builder
          create-devices
+         create-dict-argument-info
+         create-dict-property
+         create-dict-property-builder
+         create-dict-with-expected-types
+         create-dimension-builder-from-existing
+         create-dimension-from-builder
+         create-dimension-rule-builder-from-existing
+         create-dimension-rule-from-builder
          create-end-iterator
+         create-enumeration-property
+         create-enumeration-property-builder
+         create-enumeration-type-with-values
+         create-enumeration-with-int-value
+         create-enumeration-with-int-value-and-type
+         create-enumeration-with-type
+         create-env-config-provider
+         create-eval-value-args
+         create-eval-value-func
+         create-excluded-tags-search-filter
+         create-explicit-data-rule
+         create-explicit-domain-data-rule
+         create-float
+         create-float-property
+         create-float-property-builder
+         create-folder-with-item-type
          create-function-block
+         create-function-block-type-builder
+         create-function-property
+         create-function-property-builder
+         create-implicit-domain-gap-detected-event-packet
+         create-instance
+         create-int-property
+         create-int-property-builder
+         create-interface-id-search-filter
+         create-io-folder
+         create-json-config-provider
+         create-json-file-authentication-provider
+         create-json-string-authentication-provider
+         create-linear-data-rule
+         create-linear-dimension-rule
+         create-linear-scaling
+         create-list-argument-info
+         create-list-dimension-rule
+         create-list-property
+         create-list-property-builder
+         create-list-with-element-type
+         create-local-id-search-filter
+         create-logarithmic-dimension-rule
+         create-malloc-allocator
+         create-module-manager-multiple-paths
+         create-multi-reader-ex
+         create-multi-reader-from-existing
+         create-not-search-filter
+         create-object-property
+         create-object-property-builder
+         create-or-search-filter
+         create-packet-reader-from-port
+         create-permission-mask-builder-from-mask
+         create-property-object-class-builder-with-manager
+         create-property-object-with-class-and-manager
+         create-ratio-property
+         create-ratio-property-builder
+         create-recursive-search-filter
+         create-reference-domain-info-builder-from-existing
+         create-reference-property
+         create-reference-property-builder
+         create-required-tags-search-filter
+         create-rotating-file-logger-sink
+         create-scaling-builder-from-existing
+         create-scaling-from-builder
+         create-scheduler-with-main-loop
+         create-selection-property
+         create-selection-property-builder
          create-server
+         create-server-type-builder
+         create-signal-with-descriptor
+         create-sparse-selection-property
+         create-sparse-selection-property-builder
          create-start-iterator
+         create-static-authentication-provider
+         create-std-err-logger-sink
+         create-std-out-logger-sink
+         create-stream-reader-from-existing
+         create-stream-reader-from-port
          create-streaming
+         create-streaming-type-builder
+         create-string-n
+         create-string-property
+         create-string-property-builder
+         create-struct-builder-from-struct
+         create-struct-from-builder
+         create-struct-property
+         create-struct-property-builder
+         create-struct-type-no-defaults
+         create-tail-reader-from-existing
+         create-tail-reader-from-port
+         create-unit-builder-from-existing
+         create-visible-search-filter
+         create-win-debug-logger-sink
          current
          current-item-type
          custom-components
          custom-data
          custom-info-property-names
          daq-boolean
-         daq-boolean-create-boolean
          daq-boolean-interface-id
          daq-function
          daq-integer
@@ -17061,33 +17150,22 @@
          daq-number
          daq-number-interface-id
          daq-string-object
-         daq-string-object-create-string-n
          daq-string-object-interface-id
          daq-type
          daq-type-interface-id
          data
          data-descriptor
          data-descriptor-builder
-         data-descriptor-builder-create-data-descriptor-builder-from-existing
          data-descriptor-builder-interface-id
          data-descriptor-interface-id
          data-packet
-         data-packet-create-constant-data-packet-with-domain
-         data-packet-create-data-packet-with-domain
-         data-packet-create-data-packet-with-external-memory
          data-packet-interface-id
          data-packet-last-value
          data-packet-offset
          data-rule
          data-rule-builder
-         data-rule-builder-create-data-rule-builder-from-existing
          data-rule-builder-interface-id
          data-rule-builder-type
-         data-rule-create-constant-data-rule
-         data-rule-create-data-rule-from-builder
-         data-rule-create-explicit-data-rule
-         data-rule-create-explicit-domain-data-rule
-         data-rule-create-linear-data-rule
          data-rule-interface-id
          data-rule-type
          data-size
@@ -17124,11 +17202,9 @@
          device-class
          device-config
          device-domain
-         device-domain-create-device-domain-with-reference-domain-info
          device-domain-interface-id
          device-info
          device-info-config
-         device-info-config-create-device-info-config-with-custom-sdk-version
          device-info-config-interface-id
          device-info-interface-id
          device-info-internal
@@ -17151,26 +17227,18 @@
          device-update-options-with-local-id-or-null
          devices
          dict
-         dict-create-dict-with-expected-types
          dict-element-type
          dict-element-type-interface-id
          dict-interface-id
          dict-remove
          dimension
          dimension-builder
-         dimension-builder-create-dimension-builder-from-existing
          dimension-builder-interface-id
-         dimension-create-dimension-from-builder
          dimension-interface-id
          dimension-rule
          dimension-rule-builder
-         dimension-rule-builder-create-dimension-rule-builder-from-existing
          dimension-rule-builder-interface-id
          dimension-rule-builder-type
-         dimension-rule-create-dimension-rule-from-builder
-         dimension-rule-create-linear-dimension-rule
-         dimension-rule-create-list-dimension-rule
-         dimension-rule-create-logarithmic-dimension-rule
          dimension-rule-interface-id
          dimension-rule-type
          dimensions
@@ -17215,12 +17283,8 @@
          enqueue-on-this-thread
          enqueue-with-scheduler
          enumeration
-         enumeration-create-enumeration-with-int-value
-         enumeration-create-enumeration-with-int-value-and-type
-         enumeration-create-enumeration-with-type
          enumeration-interface-id
          enumeration-type
-         enumeration-type-create-enumeration-type-with-values
          enumeration-type-interface-id
          enumerator-int-value
          enumerator-names
@@ -17229,8 +17293,6 @@
          error-info
          eval
          eval-value
-         eval-value-create-eval-value-args
-         eval-value-create-eval-value-func
          eval-value-interface-id
          event
          event-args
@@ -17241,8 +17303,6 @@
          event-interface-id
          event-name
          event-packet
-         event-packet-create-data-descriptor-changed-event-packet
-         event-packet-create-implicit-domain-gap-detected-event-packet
          event-packet-interface-id
          event-packets
          execute
@@ -17258,15 +17318,12 @@
          find-properties
          find-user
          float-object
-         float-object-create-float
          float-object-interface-id
          float-value
          flush
          flush-on-level
          folder
          folder-config
-         folder-config-create-folder-with-item-type
-         folder-config-create-io-folder
          folder-config-interface-id
          folder-interface-id
          force-unlock
@@ -17338,7 +17395,6 @@
          instance-builder
          instance-builder-interface-id
          instance-builder-root-device
-         instance-create-instance
          instance-interface-id
          instance-root-device
          int-value
@@ -17430,10 +17486,6 @@
          logger-component-interface-id
          logger-interface-id
          logger-sink
-         logger-sink-create-rotating-file-logger-sink
-         logger-sink-create-std-err-logger-sink
-         logger-sink-create-std-out-logger-sink
-         logger-sink-create-win-debug-logger-sink
          logger-sinks
          logger-thread-pool
          logger-thread-pool-interface-id
@@ -17475,7 +17527,6 @@
          module-info-interface-id
          module-interface-id
          module-manager
-         module-manager-create-module-manager-multiple-paths
          module-manager-interface-id
          module-manager-utils
          module-manager-utils-interface-id
@@ -17490,8 +17541,6 @@
          multi-reader
          multi-reader-builder
          multi-reader-builder-interface-id
-         multi-reader-create-multi-reader-ex
-         multi-reader-create-multi-reader-from-existing
          multi-reader-interface-id
          multi-reader-offset
          multi-reader-read
@@ -17517,7 +17566,6 @@
          notify-packet-enqueued-with-scheduler
          numerator
          object-list
-         object-list-create-list-with-element-type
          object-list-interface-id
          old-block-reader
          old-value
@@ -17556,7 +17604,6 @@
          packet-id
          packet-interface-id
          packet-reader
-         packet-reader-create-packet-reader-from-port
          packet-reader-interface-id
          packet-reader-read
          packet-received
@@ -17578,7 +17625,6 @@
          permission-manager-internal
          permission-manager-internal-interface-id
          permission-mask-builder
-         permission-mask-builder-create-permission-mask-builder-from-mask
          permission-mask-builder-interface-id
          permission-mask-builder-read
          permissions
@@ -17600,36 +17646,9 @@
          product-instance-uri
          property
          property-builder
-         property-builder-create-bool-property-builder
-         property-builder-create-dict-property-builder
-         property-builder-create-enumeration-property-builder
-         property-builder-create-float-property-builder
-         property-builder-create-function-property-builder
-         property-builder-create-int-property-builder
-         property-builder-create-list-property-builder
-         property-builder-create-object-property-builder
-         property-builder-create-ratio-property-builder
-         property-builder-create-reference-property-builder
-         property-builder-create-selection-property-builder
-         property-builder-create-sparse-selection-property-builder
-         property-builder-create-string-property-builder
-         property-builder-create-struct-property-builder
          property-builder-interface-id
          property-builder-on-property-value-read
          property-builder-on-property-value-write
-         property-create-dict-property
-         property-create-enumeration-property
-         property-create-float-property
-         property-create-function-property
-         property-create-int-property
-         property-create-list-property
-         property-create-object-property
-         property-create-ratio-property
-         property-create-reference-property
-         property-create-selection-property
-         property-create-sparse-selection-property
-         property-create-string-property
-         property-create-struct-property
          property-event-type
          property-interface-id
          property-internal
@@ -17638,7 +17657,6 @@
          property-object
          property-object-class
          property-object-class-builder
-         property-object-class-builder-create-property-object-class-builder-with-manager
          property-object-class-builder-interface-id
          property-object-class-builder-properties
          property-object-class-interface-id
@@ -17647,7 +17665,6 @@
          property-object-class-internal-interface-id
          property-object-class-properties
          property-object-class-property
-         property-object-create-property-object-with-class-and-manager
          property-object-interface-id
          property-object-internal
          property-object-internal-clone
@@ -17720,7 +17737,6 @@
          reference-domain-id
          reference-domain-info
          reference-domain-info-builder
-         reference-domain-info-builder-create-reference-domain-info-builder-from-existing
          reference-domain-info-builder-interface-id
          reference-domain-info-interface-id
          reference-domain-offset
@@ -17798,12 +17814,9 @@
          scale-data-output
          scaling
          scaling-builder
-         scaling-builder-create-scaling-builder-from-existing
          scaling-builder-interface-id
          scaling-calc-private
          scaling-calc-private-interface-id
-         scaling-create-linear-scaling
-         scaling-create-scaling-from-builder
          scaling-interface-id
          scaling-type
          schedule-function
@@ -17811,21 +17824,10 @@
          schedule-work
          schedule-work-on-main-loop
          scheduler
-         scheduler-create-scheduler-with-main-loop
          scheduler-interface-id
          scheduler-worker-num
          sdk-version
          search-filter
-         search-filter-create-any-search-filter
-         search-filter-create-custom-search-filter
-         search-filter-create-excluded-tags-search-filter
-         search-filter-create-interface-id-search-filter
-         search-filter-create-local-id-search-filter
-         search-filter-create-not-search-filter
-         search-filter-create-or-search-filter
-         search-filter-create-recursive-search-filter
-         search-filter-create-required-tags-search-filter
-         search-filter-create-visible-search-filter
          search-filter-interface-id
          selected-source
          selection-values
@@ -17879,7 +17881,6 @@
          should-log
          signal
          signal-config
-         signal-config-create-signal-with-descriptor
          signal-config-interface-id
          signal-dependency
          signal-events
@@ -17919,8 +17920,6 @@
          stream-reader-builder
          stream-reader-builder-interface-id
          stream-reader-builder-signal
-         stream-reader-create-stream-reader-from-existing
-         stream-reader-create-stream-reader-from-port
          stream-reader-interface-id
          stream-reader-read
          stream-reader-read-with-domain
@@ -17933,13 +17932,10 @@
          streaming-type-interface-id
          struct
          struct-builder
-         struct-builder-create-struct-builder-from-struct
          struct-builder-interface-id
-         struct-create-struct-from-builder
          struct-fields
          struct-interface-id
          struct-type
-         struct-type-create-struct-type-no-defaults
          struct-type-interface-id
          struct-type-no-lock
          submit-configuration
@@ -17972,8 +17968,6 @@
          tail-reader-builder
          tail-reader-builder-interface-id
          tail-reader-builder-signal
-         tail-reader-create-tail-reader-from-existing
-         tail-reader-create-tail-reader-from-port
          tail-reader-interface-id
          tail-reader-read
          tail-reader-read-with-domain
@@ -18006,7 +18000,6 @@
          types
          unit
          unit-builder
-         unit-builder-create-unit-builder-from-existing
          unit-builder-interface-id
          unit-interface-id
          unit-no-lock

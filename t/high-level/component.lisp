@@ -4,7 +4,7 @@
 
 (test high-level-component-hierarchy
   (let* ((sinks (make-instance 'daq:object-list))
-         (sink (daq:logger-sink-create-std-err-logger-sink)))
+         (sink (daq:create-std-err-logger-sink)))
     (daq:push-back sinks sink)
     (let* ((logger (make-instance 'daq:logger :sinks sinks :level :daq-log-level-debug))
            (type-manager (make-instance 'daq:type-manager))

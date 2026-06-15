@@ -42,7 +42,7 @@
            (users (make-instance 'daq:object-list)))
       (daq:push-back users user)
       (let* ((authentication-provider
-               (daq:authentication-provider-create-static-authentication-provider t users))
+               (daq:create-static-authentication-provider t users))
              (anonymous-user (daq:authenticate-anonymous authentication-provider))
              (authenticated-user (daq:authenticate authentication-provider "test_user" "test_hash"))
              (found-user (daq:find-user authentication-provider "test_user"))
@@ -61,8 +61,8 @@
 (test high-level-coreobjects-property-builders
   (let* ((default-value (make-instance 'daq:daq-integer :value 10))
          (visible-flag (make-instance 'daq:daq-boolean :value t))
-         (property (daq:property-create-int-property "test_property" default-value visible-flag))
-         (property-builder (daq:property-builder-create-int-property-builder "test_property" default-value)))
+         (property (daq:create-int-property "test_property" default-value visible-flag))
+         (property-builder (daq:create-int-property-builder "test_property" default-value)))
     (setf (daq:visible property-builder) visible-flag)
     (let* ((built-property (daq:build property-builder))
            (built-default (daq:default-value built-property))
@@ -96,13 +96,13 @@
   (let* ((property-object (make-instance 'daq:property-object))
          (default-value (make-instance 'daq:daq-integer :value 10))
          (visible-flag (make-instance 'daq:daq-boolean :value t))
-         (property (daq:property-create-int-property "test_property" default-value visible-flag))
+         (property (daq:create-int-property "test_property" default-value visible-flag))
          (coercer (make-instance 'daq:coercer :eval "value + 2"))
          (validator (make-instance 'daq:validator :eval "value > 5")))
     (daq:add-property property-object property)
     (let ((eval-value (make-instance 'daq:eval-value :eval "%test_property")))
       (daq:add-property property-object
-                        (daq:property-create-reference-property "ref_property" eval-value))
+                        (daq:create-reference-property "ref_property" eval-value))
       (let* ((valid-value (make-instance 'daq:daq-integer :value 10))
              (invalid-value (make-instance 'daq:daq-integer :value 5))
              (reference-property (daq:property-value property-object "ref_property"))
@@ -126,7 +126,7 @@
 (test high-level-coreobjects-property-value-event-args
   (let* ((default-value (make-instance 'daq:daq-integer :value 10))
          (visible-flag (make-instance 'daq:daq-boolean :value t))
-         (property (daq:property-create-int-property "test_property" default-value visible-flag))
+         (property (daq:create-int-property "test_property" default-value visible-flag))
          (old-value (make-instance 'daq:daq-integer :value 20))
          (new-value (make-instance 'daq:daq-integer :value 30))
          (event-args (make-instance 'daq:property-value-event-args

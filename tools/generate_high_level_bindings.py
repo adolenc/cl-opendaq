@@ -63,9 +63,6 @@ METHOD_NAME_OVERRIDES = {
     "block-reader-status/get-read-samples": "get-read-samples",
 }
 
-# Functions intentionally not auto-generated because they are hand-written in the
-# high-level layer (their void** out-parameter buffers carry a runtime-typed
-# payload the generator cannot model).  See high-level-post-bindings.lisp.
 # Classes whose constructor is hand-written in the high-level layer (built via the
 # reader builder so skip-events can default to true).  See high-level-post-bindings.lisp.
 MANUAL_CONSTRUCTORS = {
@@ -74,6 +71,20 @@ MANUAL_CONSTRUCTORS = {
     "block-reader",
 }
 
+# Classes that intentionally get NO direct make-instance constructor.  openDAQ gives
+# a property no plain createProperty(): it is built only through one of its typed
+# factory functions (create-int-property, ...).  With no canonical constructor the
+# generator used to silently pick the first create-* it saw (bool), so make-instance
+# arbitrarily produced a bool property.  Suppress that; the class is still wrappable
+# from a pointer and its create-* factories are emitted as free factory functions.
+# (property-builder is NOT here: it has a real createPropertyBuilder(name).)
+NO_DIRECT_CONSTRUCTOR = {
+    "property",
+}
+
+# Functions intentionally not auto-generated because they are hand-written in the
+# high-level layer (their void** out-parameter buffers carry a runtime-typed
+# payload the generator cannot model).  See high-level-post-bindings.lisp.
 MANUAL_METHODS = {
     "data-packet/get-data",
     "data-packet/get-raw-data",
@@ -267,12 +278,31 @@ def qualified_name(function: dict, kind: str) -> str:
     return f"{receiver_name(function)}-{exposed_name(function, kind)}"
 
 
+def factory_function_name(function: dict, kind: str) -> str:
+    """Public name for a *static* (no-receiver) function.
+
+    openDAQ exposes object construction as free factory functions (C++
+    IntProperty(), LinearDataRule(), ...; Python opendaq.IntProperty(), ...).  A
+    static `createXxx` therefore reads better -- and mirrors openDAQ -- as its
+    bare stem CREATE-XXX rather than the qualified RECEIVER-CREATE-XXX, since
+    there is no per-variant interface/class to attach it to.  Non-create static
+    functions keep the qualified name.  The create-* stems are globally unique,
+    so dropping the receiver introduces no collisions.
+    """
+    stem = exposed_name(function, kind)
+    if stem.startswith("create-"):
+        return stem
+    return qualified_name(function, kind)
+
+
 def select_class_constructors(functions: list[dict]) -> dict[str, dict]:
     selected: dict[str, dict] = {}
     for function in functions:
         if classify_function(function) != "constructor":
             continue
         receiver = receiver_name(function)
+        if receiver in NO_DIRECT_CONSTRUCTOR:
+            continue
         override = CLASS_OVERRIDES.get(receiver)
         if override is not None and override.get("constructor_name") == function["public_lisp_name"]:
             selected[receiver] = function
@@ -305,7 +335,7 @@ def select_method_names(functions: list[dict]) -> dict[str, str]:
 
         for func in static:
             pln = func["public_lisp_name"]
-            names[pln] = METHOD_NAME_OVERRIDES.get(pln, qualified_name(func, kind))
+            names[pln] = METHOD_NAME_OVERRIDES.get(pln, factory_function_name(func, kind))
 
         shapes = {
             method_signature_shape(f, FUNCTION_OVERRIDES.get(f["public_lisp_name"], {}))
@@ -339,7 +369,7 @@ def build_specs(functions: list[dict]) -> tuple[list[dict], list[dict]]:
             if class_constructors.get(receiver) != function:
                 methods.append({
                     "function": function, "kind": "method",
-                    "name": qualified_name(function, "method"),
+                    "name": factory_function_name(function, "method"),
                     "specializer": receiver, "optional_defaults": (),
                 })
                 continue

@@ -3,7 +3,7 @@
 (in-suite high-level-signal-suite)
 
 (test high-level-allocator
-  (let* ((allocator (daq:allocator-create-malloc-allocator))
+  (let* ((allocator (daq:create-malloc-allocator))
          (builder (make-instance 'daq:data-descriptor-builder))
          (unit-builder (make-instance 'daq:unit-builder)))
     (setf (daq:sample-type builder) opendaq.low-level::+daq-sample-type-int-64+
@@ -43,7 +43,7 @@
 
 (test high-level-input-port-config
   (let* ((sinks (make-instance 'daq:object-list))
-         (sink (daq:logger-sink-create-std-err-logger-sink)))
+         (sink (daq:create-std-err-logger-sink)))
     (daq:push-back sinks sink)
     (let* ((logger (make-instance 'daq:logger :sinks sinks :level :daq-log-level-debug))
            (type-manager (make-instance 'daq:type-manager))
@@ -93,7 +93,7 @@
 
 (test high-level-signal-config
   (let* ((sinks (make-instance 'daq:object-list))
-         (sink (daq:logger-sink-create-std-err-logger-sink)))
+         (sink (daq:create-std-err-logger-sink)))
     (daq:push-back sinks sink)
     (let* ((logger (make-instance 'daq:logger :sinks sinks :level :daq-log-level-debug))
            (type-manager (make-instance 'daq:type-manager))
@@ -118,7 +118,7 @@
       (let* ((unit (daq:build unit-builder)))
         (setf (daq:unit builder) unit)
         (let* ((descriptor (daq:build builder))
-               (signal-config (daq:signal-config-create-signal-with-descriptor
+               (signal-config (daq:create-signal-with-descriptor
                                context descriptor nil "sig" nil)))
           (is (typep signal-config 'daq:signal-config)
               "High-level signal helpers should construct generated signal-config wrappers.")

@@ -76,6 +76,21 @@ The high-level API insulates you from openDAQ's C types. Arguments accept plain 
 - `(raw-pointer obj)` — get the underlying C pointer from any wrapper
 - `(release obj)` — manually drop the reference (normally handled by GC finalizers)
 
+### Construction
+
+Most objects are created with `make-instance`, e.g. `(make-instance 'daq:stream-reader :signal signal)`.
+
+Some things, though, are not distinct openDAQ interfaces but *variants* of one type that openDAQ builds through factory functions — for example a property is always an int/string/selection/… property, never a bare `Property`. These have no `make-instance` constructor; you create them with the matching `create-*` factory function, mirroring openDAQ's own API:
+
+```lisp
+(daq:create-int-property "Frequency" 10 t)        ; name, default, visible
+(daq:create-selection-property "Mode" modes 0 t)
+(daq:create-linear-data-rule 2 0)
+(daq:create-std-err-logger-sink)
+```
+
+The same applies to property builders, data/dimension rules, search filters, scalings, logger sinks, and similar factory-built types. (`apropos` for `create-` lists them.)
+
 ## Development
 
 The attached makefile is used for simplification of development. It handles cloning the pinned openDAQ source, building the native libraries, copying them into `bin/linux-x64/`, and regenerating the generated Lisp bindings. It also has targets for starting a REPL with the system loaded and running the test suite.

@@ -95,9 +95,9 @@
     (daq:push-back field-names "int")
     (daq:push-back field-types field-type)
     (let* ((enumeration-type
-             (daq:enumeration-type-create-enumeration-type-with-values "MyEnum" enumerators))
-           (enumeration (daq:enumeration-create-enumeration-with-type enumeration-type "Two"))
-           (struct-type (daq:struct-type-create-struct-type-no-defaults "test" field-names field-types)))
+             (daq:create-enumeration-type-with-values "MyEnum" enumerators))
+           (enumeration (daq:create-enumeration-with-type enumeration-type "Two"))
+           (struct-type (daq:create-struct-type-no-defaults "test" field-names field-types)))
       (daq:add-type type-manager struct-type)
       (let* ((managed-type (daq:type-manager-type type-manager "test"))
              (struct-builder (make-instance 'daq:struct-builder :name "test" :type-manager type-manager)))
