@@ -6,10 +6,7 @@
   :serial t
   :components ((:file "package")
                (:file "generated/low-level-bindings")
-               (:file "loader")
-               (:file "errors")
-               (:file "utils")
-               (:file "high-level-runtime")
+               (:file "runtime")
                (:file "generated/high-level-bindings")
                (:file "high-level-post-bindings"))
   :in-order-to ((test-op (test-op "opendaq/tests"))))

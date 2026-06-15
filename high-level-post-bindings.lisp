@@ -11,8 +11,8 @@
 ;;;                              MANUAL_METHODS in the generator)
 ;;;   * object helpers         — AS / AS-LIST
 ;;;
-;;; Code that must load *before* the generated bindings lives in
-;;; high-level-runtime.lisp.
+;;; Code that must load *before* the generated bindings lives in runtime.lisp
+;;; (its high-level runtime section).
 
 (in-package #:opendaq.high-level)
 
