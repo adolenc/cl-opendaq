@@ -5441,48 +5441,6 @@
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
     (make-instance 'work :pointer pointer)))
 
-
-(defun as-list-of (object-list target-type)
-  "Convert an openDAQ object-list into a proper Lisp list, unboxing primitives
-(integers, booleans, floats, strings, ratios, complex numbers) into
-their native Lisp equivalents and casting objects to TARGET-TYPE.
-
-  Example: (as-list-of (wrap-object-list pointer) 'device-info)
-            => (#<DEVICE-INFO ...> #<DEVICE-INFO ...>)
-
-  Example: (as-list-of (wrap-object-list pointer) 'daq-integer)
-            => (1 2 3)"
-  (if (primitive-type-p target-type)
-      (loop for i below (count object-list)
-            for obj = (item-at object-list i)
-            collect (%unbox-primitive obj target-type))
-      (loop for i below (count object-list)
-            collect (as (item-at object-list i) target-type))))
-
-(defun as-hashtable-of (dict key-type value-type)
-  "Convert an openDAQ dict into a Lisp hash-table.  Keys and values are
-unboxed if their type is a primitive, or cast via AS otherwise.
-
-  Example: (as-hashtable-of (wrap-dict pointer) 'string 'device-info)
-            => #<HASH-TABLE>"
-  (let* ((raw (%require-live-pointer dict))
-         (key-list (opendaq.low-level:dict/get-key-list raw))
-         (n (opendaq.low-level:list/get-count key-list))
-         (ht (make-hash-table :test 'equal :size n)))
-    (loop for i below n
-          for key-ptr = (opendaq.low-level:list/get-item-at key-list i)
-          for val-ptr = (opendaq.low-level:dict/get raw key-ptr)
-          for key-obj = (wrap-base-object key-ptr)
-          for key = (if (primitive-type-p key-type)
-                       (%unbox-primitive key-obj key-type)
-                       (as key-obj key-type))
-          for val-obj = (wrap-base-object val-ptr)
-          for val = (if (primitive-type-p value-type)
-                       (%unbox-primitive val-obj value-type)
-                       (as val-obj value-type))
-          do (setf (gethash key ht) val))
-    ht))
-
 (defgeneric build (object))
 (defmethod build ((object address-info-builder))
   (wrap-address-info (opendaq.low-level:address-info-builder/build (%require-live-pointer object)))
