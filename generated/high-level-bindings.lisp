@@ -118,6 +118,7 @@
             block-reader-status-interface-id
             block-reader-status-read-samples
             block-size
+            borrow-interface
             build
             call
             call-custom-proc
@@ -362,6 +363,7 @@
             device-update-options-with-local-id-or-null
             devices
             dict
+            dict-create-dict-with-expected-types
             dict-element-type
             dict-element-type-interface-id
             dict-interface-id
@@ -475,6 +477,7 @@
             flush-on-level
             folder
             folder-config
+            folder-config-create-folder-with-item-type
             folder-config-create-io-folder
             folder-config-interface-id
             folder-interface-id
@@ -725,6 +728,7 @@
             notify-packet-enqueued-with-scheduler
             numerator
             object-list
+            object-list-create-list-with-element-type
             object-list-interface-id
             old-block-reader
             old-value
@@ -887,6 +891,7 @@
             push-front
             quantity
             query
+            query-interface
             range
             range-interface-id
             ratio
@@ -1024,6 +1029,7 @@
             search-filter-create-any-search-filter
             search-filter-create-custom-search-filter
             search-filter-create-excluded-tags-search-filter
+            search-filter-create-interface-id-search-filter
             search-filter-create-local-id-search-filter
             search-filter-create-not-search-filter
             search-filter-create-or-search-filter
@@ -5842,6 +5848,13 @@ unboxed if their type is a primitive, or cast via AS otherwise.
   (opendaq.low-level:base-object/add-ref (%require-live-pointer object))
 )
 
+(defgeneric borrow-interface (object intf-id))
+(defmethod borrow-interface ((object base-object) intf-id)
+  (let ((coerced-intf-id intf-id))
+    (wrap-base-object (opendaq.low-level:base-object/borrow-interface (%require-live-pointer object) coerced-intf-id))
+  )
+)
+
 (defun base-object-create ()
   (wrap-base-object (opendaq.low-level:base-object/create))
 )
@@ -5863,6 +5876,13 @@ unboxed if their type is a primitive, or cast via AS otherwise.
 (defgeneric hash-code (object))
 (defmethod hash-code ((object base-object))
   (opendaq.low-level:base-object/get-hash-code (%require-live-pointer object))
+)
+
+(defgeneric query-interface (object intf-id))
+(defmethod query-interface ((object base-object) intf-id)
+  (let ((coerced-intf-id intf-id))
+    (wrap-base-object (opendaq.low-level:base-object/query-interface (%require-live-pointer object) coerced-intf-id))
+  )
 )
 
 (defgeneric release-ref (object))
@@ -9128,6 +9148,14 @@ unboxed if their type is a primitive, or cast via AS otherwise.
   (opendaq.low-level:dict/clear (%require-live-pointer object))
 )
 
+(defun dict-create-dict-with-expected-types (key-type value-type)
+  (let ((coerced-key-type key-type))
+    (let ((coerced-value-type value-type))
+      (wrap-dict (opendaq.low-level:dict/create-dict-with-expected-types coerced-key-type coerced-value-type))
+    )
+  )
+)
+
 (defgeneric delete-item (object key))
 (defmethod delete-item ((object dict) key)
   (multiple-value-bind (coerced-key cleanup-key)
@@ -9891,6 +9919,24 @@ unboxed if their type is a primitive, or cast via AS otherwise.
 
 (defmethod clear ((object folder-config))
   (opendaq.low-level:folder-config/clear (%require-live-pointer object))
+)
+
+(defun folder-config-create-folder-with-item-type (item-type context parent local-id)
+  (let ((coerced-item-type item-type))
+    (multiple-value-bind (coerced-context cleanup-context)
+        (%coerce-argument context :managed-pointer)
+      (unwind-protect
+          (multiple-value-bind (coerced-parent cleanup-parent)
+              (%coerce-argument parent :managed-pointer)
+            (unwind-protect
+                (multiple-value-bind (coerced-local-id cleanup-local-id)
+                    (%coerce-argument local-id :daq-string)
+                  (unwind-protect
+                      (wrap-folder-config (opendaq.low-level:folder-config/create-folder-with-item-type coerced-item-type coerced-context coerced-parent coerced-local-id))
+                    (%cleanup-coerced-argument cleanup-local-id)))
+              (%cleanup-coerced-argument cleanup-parent)))
+        (%cleanup-coerced-argument cleanup-context)))
+  )
 )
 
 (defun folder-config-create-io-folder (context parent local-id)
@@ -10762,6 +10808,12 @@ unboxed if their type is a primitive, or cast via AS otherwise.
 
 (defmethod create-end-iterator ((object object-list))
   (wrap-iterator (opendaq.low-level:list/create-end-iterator (%require-live-pointer object)))
+)
+
+(defun object-list-create-list-with-element-type (id)
+  (let ((coerced-id id))
+    (wrap-object-list (opendaq.low-level:list/create-list-with-element-type coerced-id))
+  )
 )
 
 (defmethod create-start-iterator ((object object-list))
@@ -14761,6 +14813,12 @@ unboxed if their type is a primitive, or cast via AS otherwise.
       (%cleanup-coerced-argument cleanup-excluded-tags)))
 )
 
+(defun search-filter-create-interface-id-search-filter (intf-id)
+  (let ((coerced-intf-id intf-id))
+    (wrap-search-filter (opendaq.low-level:search-filter/create-interface-id-search-filter coerced-intf-id))
+  )
+)
+
 (defun search-filter-create-local-id-search-filter (local-id)
   (multiple-value-bind (coerced-local-id cleanup-local-id)
       (%coerce-argument local-id :daq-string)
@@ -17003,6 +17061,7 @@ unboxed if their type is a primitive, or cast via AS otherwise.
          block-reader-status-interface-id
          block-reader-status-read-samples
          block-size
+         borrow-interface
          build
          call
          call-custom-proc
@@ -17247,6 +17306,7 @@ unboxed if their type is a primitive, or cast via AS otherwise.
          device-update-options-with-local-id-or-null
          devices
          dict
+         dict-create-dict-with-expected-types
          dict-element-type
          dict-element-type-interface-id
          dict-interface-id
@@ -17360,6 +17420,7 @@ unboxed if their type is a primitive, or cast via AS otherwise.
          flush-on-level
          folder
          folder-config
+         folder-config-create-folder-with-item-type
          folder-config-create-io-folder
          folder-config-interface-id
          folder-interface-id
@@ -17610,6 +17671,7 @@ unboxed if their type is a primitive, or cast via AS otherwise.
          notify-packet-enqueued-with-scheduler
          numerator
          object-list
+         object-list-create-list-with-element-type
          object-list-interface-id
          old-block-reader
          old-value
@@ -17772,6 +17834,7 @@ unboxed if their type is a primitive, or cast via AS otherwise.
          push-front
          quantity
          query
+         query-interface
          range
          range-interface-id
          ratio
@@ -17909,6 +17972,7 @@ unboxed if their type is a primitive, or cast via AS otherwise.
          search-filter-create-any-search-filter
          search-filter-create-custom-search-filter
          search-filter-create-excluded-tags-search-filter
+         search-filter-create-interface-id-search-filter
          search-filter-create-local-id-search-filter
          search-filter-create-not-search-filter
          search-filter-create-or-search-filter

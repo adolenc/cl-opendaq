@@ -232,8 +232,6 @@ def build_functions(records: list[dict], types: dict[str, dict]) -> tuple[list[d
                 arg_type = argument["type"]
                 arg_base = arg_type["name"]
                 arg_depth = arg_type.get("pointer_depth", 0)
-                if arg_base in types and types[arg_base]["kind"] == "struct" and arg_depth == 0:
-                    raise ValueError(f"by-value struct parameters are not supported yet ({arg_base})")
                 base_info = types.get(arg_base)
                 parameters.append(
                     {
