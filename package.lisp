@@ -1,14 +1,14 @@
 (defpackage #:opendaq.low-level
   (:use #:cl)
-  (:export #:clear-error-info
-           #:healthcheck
+  (:intern #:clear-error-info
            #:ensure-opendaq-loaded
-           #:make-daq-string
+           #:healthcheck
            #:native-library-directory
            #:opendaq-error
            #:opendaq-error-code
            #:opendaq-error-message
-           #:opendaq-error-operation
+           #:opendaq-error-operation)
+  (:export #:make-daq-string
            #:with-daq-objects))
 
 (defpackage #:opendaq.high-level
