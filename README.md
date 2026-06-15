@@ -12,19 +12,19 @@ Then, run the following in your REPL:
 
 (defparameter *instance* (make-instance 'daq:instance))
 
-(format t "Available devices: ~%~{ - ~A~%~}"
+(format t "Available devices: ~%~{ - ~A~%~}~%"
   (mapcar #'daq:connection-string (daq:available-devices *instance*)))
 
-(daq:add-device *instance* "daqref://device0")
-
-(let* ((channel (daq:as (daq:find-component *instance* "Dev/RefDev0/IO/AI/RefCh0") 'daq:channel))
+(let* ((device (daq:add-device *instance* "daqref://device0"))
+       (channel (daq:as (daq:find-component *instance* "Dev/RefDev0/IO/AI/RefCh0") 'daq:channel))
        (signal (first (daq:signals channel)))
        (reader (make-instance 'daq:stream-reader :signal signal)))
-  (setf (daq:property-value channel "Frequency") 0.5d0)
-  (daq:read-samples reader 100))
+  (setf (daq:property-value device "GlobalSampleRate") 100
+        (daq:property-value channel "Frequency") 0.5)
+  (daq:read reader 100 :timeout-ms 2000))
 ```
 
-This should give you an output of 100 samples from the simulator device, a sine wave at 0.5Hz.
+This should give you an output of 100 samples from the simulator device set to run at 100Hz, a sine wave at 0.5Hz.
 
 If that fails, run a healthcheck to verify that the library can find and load the native openDAQ libraries correctly:
 ```lisp

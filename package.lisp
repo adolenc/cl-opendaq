@@ -25,7 +25,8 @@
                 #:opendaq-error-operation)
   (:shadow #:ratio
            #:numerator
-           #:denominator)
+           #:denominator
+           #:read)
   (:export #:as
            #:as-list
            #:clear-error-info

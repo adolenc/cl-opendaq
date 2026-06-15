@@ -11,7 +11,7 @@
                (:file "utils")
                (:file "high-level-runtime")
                (:file "generated/high-level-bindings")
-               (:file "high-level-utils"))
+               (:file "high-level-post-bindings"))
   :in-order-to ((test-op (test-op "opendaq/tests"))))
 
 (asdf:defsystem "opendaq/tests"

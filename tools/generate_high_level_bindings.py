@@ -41,17 +41,43 @@ CLASS_OVERRIDES: dict[str, dict] = {
             ),
         ),
     },
-    "stream-reader": {
+    "multi-reader": {
         "constructor_defaults": (
             ("value-read-type", "opendaq.low-level::+daq-sample-type-float-64+"),
             ("domain-read-type", "opendaq.low-level::+daq-sample-type-int-64+"),
             ("mode", ":daq-read-mode-scaled"),
-            ("timeout-type", ":daq-read-timeout-type-any"),
+            ("timeout-type", ":daq-read-timeout-type-all"),
         )
     },
+    # stream-reader, tail-reader and block-reader are constructed by hand via their
+    # builders so the reader's skip-events flag can default to true (the direct create
+    # call has no such parameter).  See MANUAL_CONSTRUCTORS and high-level-post-bindings.lisp.
 }
 
-RESERVED_METHOD_NAMES = {"read-samples"}
+# Explicit method-name overrides for individual functions, keyed by public lisp
+# name (same key style as FUNCTION_OVERRIDES).  Use when the default naming would
+# produce a name that is misleading or collides with something hand-written.
+METHOD_NAME_OVERRIDES = {
+    # Default would be a bare READ-SAMPLES (it is the only getter with that stem),
+    # too easily confused with reader READ; name it explicitly instead.
+    "block-reader-status/get-read-samples": "get-read-samples",
+}
+
+# Functions intentionally not auto-generated because they are hand-written in the
+# high-level layer (their void** out-parameter buffers carry a runtime-typed
+# payload the generator cannot model).  See high-level-post-bindings.lisp.
+# Classes whose constructor is hand-written in the high-level layer (built via the
+# reader builder so skip-events can default to true).  See high-level-post-bindings.lisp.
+MANUAL_CONSTRUCTORS = {
+    "stream-reader",
+    "tail-reader",
+    "block-reader",
+}
+
+MANUAL_METHODS = {
+    "data-packet/get-data",
+    "data-packet/get-raw-data",
+}
 
 FUNCTION_OVERRIDES: dict[str, dict] = {
     "instance-builder/enable-standard-providers": {"optional_defaults": (("flag", "t"),)},
@@ -278,15 +304,18 @@ def select_method_names(functions: list[dict]) -> dict[str, str]:
         instance = [f for f in grouped if uses_instance_receiver(f)]
 
         for func in static:
-            names[func["public_lisp_name"]] = qualified_name(func, kind)
+            pln = func["public_lisp_name"]
+            names[pln] = METHOD_NAME_OVERRIDES.get(pln, qualified_name(func, kind))
 
         shapes = {
             method_signature_shape(f, FUNCTION_OVERRIDES.get(f["public_lisp_name"], {}))
             for f in instance
         }
-        qualify = len(shapes) > 1 or base_name in RESERVED_METHOD_NAMES
+        qualify = len(shapes) > 1
         for func in instance:
-            names[func["public_lisp_name"]] = qualified_name(func, kind) if qualify else base_name
+            pln = func["public_lisp_name"]
+            names[pln] = METHOD_NAME_OVERRIDES.get(
+                pln, qualified_name(func, kind) if qualify else base_name)
 
     return names
 
@@ -301,6 +330,8 @@ def build_specs(functions: list[dict]) -> tuple[list[dict], list[dict]]:
     constructors = {f["public_lisp_name"]: f for f in functions if classify_function(f) == "constructor"}
 
     for function in functions:
+        if function["public_lisp_name"] in MANUAL_METHODS:
+            continue
         kind = classify_function(function)
         receiver = receiver_name(function)
 
@@ -353,7 +384,8 @@ def build_specs(functions: list[dict]) -> tuple[list[dict], list[dict]]:
 
 
 def export_symbols(classes: list[dict], methods: list[dict]) -> list[str]:
-    exports = {"as-hashtable-of", "as-list-of", "release", "raw-pointer", "read-samples"}
+    exports = {"as-hashtable-of", "as-list-of", "release", "raw-pointer", "read", "read-with-domain",
+               "data", "raw-data"}
     for spec in classes:
         exports.add(spec["name"])
         exports.add(f"wrap-{spec['name']}")
@@ -363,7 +395,7 @@ def export_symbols(classes: list[dict], methods: list[dict]) -> list[str]:
 
 
 def constructor_lambda_lines(spec: dict) -> list[str]:
-    if spec["constructor"] is None:
+    if spec["constructor"] is None or spec["name"] in MANUAL_CONSTRUCTORS:
         return [""]
 
     constructor = spec["constructor"]
@@ -654,36 +686,6 @@ def _emit_writer(spec: dict) -> list[str]:
     return lines
 
 
-def emit_read_samples_helper() -> list[str]:
-    return [
-        "(defgeneric read-samples (reader count &optional timeout-ms poll-interval))",
-        "(defmethod read-samples ((reader stream-reader) count",
-        "                         &optional (timeout-ms 1000) (poll-interval 0.01))",
-        '  (when (minusp count)',
-        '    (error "COUNT must be non-negative."))',
-        "  (if (zerop count)",
-        "      nil",
-        "      (let ((reader-pointer (%require-live-pointer reader)))",
-        "        (cffi:with-foreign-object (samples :double count)",
-        "          (loop with total = 0",
-        "                while (< total count)",
-        "                do (multiple-value-bind (read-count status)",
-        "                       (opendaq.low-level:stream-reader/read",
-        "                        reader-pointer",
-        "                        (cffi:inc-pointer samples",
-        "                                          (* total (cffi:foreign-type-size :double)))",
-        "                        (- count total)",
-        "                        timeout-ms)",
-        "                     (unwind-protect",
-        "                         (if (zerop read-count)",
-        "                             (sleep poll-interval)",
-        "                             (incf total read-count))",
-        "                       (%release-pointer status)))",
-        "                finally (return",
-        "                          (loop for index below count",
-        "                                collect (cffi:mem-aref samples :double index))))))))",
-        "",
-    ]
 
 
 def render_output(include_dir: Path) -> str:
@@ -773,8 +775,6 @@ def render_output(include_dir: Path) -> str:
             seen_generics.add(sig)
         deduped.append(line)
     lines = deduped
-
-    lines.extend(emit_read_samples_helper())
 
     lines.append("(export '(")
     for symbol in exports:

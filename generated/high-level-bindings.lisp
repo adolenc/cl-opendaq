@@ -116,7 +116,6 @@
             block-reader-read-with-domain
             block-reader-status
             block-reader-status-interface-id
-            block-reader-status-read-samples
             block-size
             borrow-interface
             build
@@ -494,6 +493,7 @@
             function-blocks
             gap-checking-enabled
             get
+            get-read-samples
             global-id
             global-log-level
             graph-visualization
@@ -904,14 +904,15 @@
             raw-value-by-index
             reachability-status
             reachability-status-private
+            read
             read-all
             read-mode
             read-only
             read-only-no-lock
             read-only-unresolved
-            read-samples
             read-status
             read-timeout-type
+            read-with-domain
             reader
             reader-config
             reader-config-input-ports
@@ -1670,30 +1671,6 @@
    ))
 
 
-(defmethod initialize-instance :after ((object block-reader)
-                                       &key (pointer nil pointer-p)
-                                            (signal nil signal-p)
-                                            (block-size nil block-size-p)
-                                            (value-read-type nil value-read-type-p)
-                                            (domain-read-type nil domain-read-type-p)
-                                            (mode nil mode-p)
-                                       &allow-other-keys)
-  (declare (ignore pointer))
-  (when (and (not pointer-p) signal-p block-size-p value-read-type-p domain-read-type-p mode-p)
-  (multiple-value-bind (coerced-signal cleanup-signal)
-      (%coerce-argument signal :managed-pointer)
-    (unwind-protect
-        (let ((coerced-block-size block-size))
-          (let ((coerced-value-read-type value-read-type))
-            (let ((coerced-domain-read-type domain-read-type))
-              (let ((coerced-mode mode))
-                (%adopt-pointer object (opendaq.low-level:block-reader/create-block-reader coerced-signal coerced-block-size coerced-value-read-type coerced-domain-read-type coerced-mode))
-              )
-            )
-          )
-        )
-      (%cleanup-coerced-argument cleanup-signal)))
-    ))
 
 (defun wrap-block-reader (pointer)
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
@@ -3721,13 +3698,13 @@
 (defmethod initialize-instance :after ((object multi-reader)
                                        &key (pointer nil pointer-p)
                                             (signals nil signals-p)
-                                            (value-read-type nil value-read-type-p)
-                                            (domain-read-type nil domain-read-type-p)
-                                            (mode nil mode-p)
-                                            (timeout-type nil timeout-type-p)
+                                            (value-read-type opendaq.low-level::+daq-sample-type-float-64+ value-read-type-p)
+                                            (domain-read-type opendaq.low-level::+daq-sample-type-int-64+ domain-read-type-p)
+                                            (mode :daq-read-mode-scaled mode-p)
+                                            (timeout-type :daq-read-timeout-type-all timeout-type-p)
                                        &allow-other-keys)
-  (declare (ignore pointer))
-  (when (and (not pointer-p) signals-p value-read-type-p domain-read-type-p mode-p timeout-type-p)
+  (declare (ignore pointer value-read-type-p domain-read-type-p mode-p timeout-type-p))
+  (when (and (not pointer-p) signals-p)
   (multiple-value-bind (coerced-signals cleanup-signals)
       (%coerce-argument signals :managed-pointer)
     (unwind-protect
@@ -4816,30 +4793,6 @@
    ))
 
 
-(defmethod initialize-instance :after ((object stream-reader)
-                                       &key (pointer nil pointer-p)
-                                            (signal nil signal-p)
-                                            (value-read-type opendaq.low-level::+daq-sample-type-float-64+ value-read-type-p)
-                                            (domain-read-type opendaq.low-level::+daq-sample-type-int-64+ domain-read-type-p)
-                                            (mode :daq-read-mode-scaled mode-p)
-                                            (timeout-type :daq-read-timeout-type-any timeout-type-p)
-                                       &allow-other-keys)
-  (declare (ignore pointer value-read-type-p domain-read-type-p mode-p timeout-type-p))
-  (when (and (not pointer-p) signal-p)
-  (multiple-value-bind (coerced-signal cleanup-signal)
-      (%coerce-argument signal :managed-pointer)
-    (unwind-protect
-        (let ((coerced-value-read-type value-read-type))
-          (let ((coerced-domain-read-type domain-read-type))
-            (let ((coerced-mode mode))
-              (let ((coerced-timeout-type timeout-type))
-                (%adopt-pointer object (opendaq.low-level:stream-reader/create-stream-reader coerced-signal coerced-value-read-type coerced-domain-read-type coerced-mode coerced-timeout-type))
-              )
-            )
-          )
-        )
-      (%cleanup-coerced-argument cleanup-signal)))
-    ))
 
 (defun wrap-stream-reader (pointer)
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
@@ -5133,30 +5086,6 @@
    ))
 
 
-(defmethod initialize-instance :after ((object tail-reader)
-                                       &key (pointer nil pointer-p)
-                                            (signal nil signal-p)
-                                            (history-size nil history-size-p)
-                                            (value-read-type nil value-read-type-p)
-                                            (domain-read-type nil domain-read-type-p)
-                                            (mode nil mode-p)
-                                       &allow-other-keys)
-  (declare (ignore pointer))
-  (when (and (not pointer-p) signal-p history-size-p value-read-type-p domain-read-type-p mode-p)
-  (multiple-value-bind (coerced-signal cleanup-signal)
-      (%coerce-argument signal :managed-pointer)
-    (unwind-protect
-        (let ((coerced-history-size history-size))
-          (let ((coerced-value-read-type value-read-type))
-            (let ((coerced-domain-read-type domain-read-type))
-              (let ((coerced-mode mode))
-                (%adopt-pointer object (opendaq.low-level:tail-reader/create-tail-reader coerced-signal coerced-history-size coerced-value-read-type coerced-domain-read-type coerced-mode))
-              )
-            )
-          )
-        )
-      (%cleanup-coerced-argument cleanup-signal)))
-    ))
 
 (defun wrap-tail-reader (pointer)
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
@@ -6048,8 +5977,8 @@ unboxed if their type is a primitive, or cast via AS otherwise.
   )
 )
 
-(defgeneric block-reader-status-read-samples (object))
-(defmethod block-reader-status-read-samples ((object block-reader-status))
+(defgeneric get-read-samples (object))
+(defmethod get-read-samples ((object block-reader-status))
   (opendaq.low-level:block-reader-status/get-read-samples (%require-live-pointer object))
 )
 
@@ -7816,13 +7745,6 @@ unboxed if their type is a primitive, or cast via AS otherwise.
       (%cleanup-coerced-argument cleanup-domain-packet)))
 )
 
-(defgeneric data (object address))
-(defmethod data ((object data-packet) address)
-  (let ((coerced-address address))
-    (opendaq.low-level:data-packet/get-data (%require-live-pointer object) coerced-address)
-  )
-)
-
 (defgeneric data-descriptor (object))
 (defmethod data-descriptor ((object data-packet))
   (wrap-data-descriptor (opendaq.low-level:data-packet/get-data-descriptor (%require-live-pointer object)))
@@ -7862,13 +7784,6 @@ unboxed if their type is a primitive, or cast via AS otherwise.
 (defgeneric packet-id (object))
 (defmethod packet-id ((object data-packet))
   (opendaq.low-level:data-packet/get-packet-id (%require-live-pointer object))
-)
-
-(defgeneric raw-data (object address))
-(defmethod raw-data ((object data-packet) address)
-  (let ((coerced-address address))
-    (opendaq.low-level:data-packet/get-raw-data (%require-live-pointer object) coerced-address)
-  )
 )
 
 (defgeneric raw-data-size (object))
@@ -16920,33 +16835,6 @@ unboxed if their type is a primitive, or cast via AS otherwise.
   )
 )
 
-(defgeneric read-samples (reader count &optional timeout-ms poll-interval))
-(defmethod read-samples ((reader stream-reader) count
-                         &optional (timeout-ms 1000) (poll-interval 0.01))
-  (when (minusp count)
-    (error "COUNT must be non-negative."))
-  (if (zerop count)
-      nil
-      (let ((reader-pointer (%require-live-pointer reader)))
-        (cffi:with-foreign-object (samples :double count)
-          (loop with total = 0
-                while (< total count)
-                do (multiple-value-bind (read-count status)
-                       (opendaq.low-level:stream-reader/read
-                        reader-pointer
-                        (cffi:inc-pointer samples
-                                          (* total (cffi:foreign-type-size :double)))
-                        (- count total)
-                        timeout-ms)
-                     (unwind-protect
-                         (if (zerop read-count)
-                             (sleep poll-interval)
-                             (incf total read-count))
-                       (%release-pointer status)))
-                finally (return
-                          (loop for index below count
-                                collect (cffi:mem-aref samples :double index))))))))
-
 (export '(
          accepts-object
          accepts-signals
@@ -17059,7 +16947,6 @@ unboxed if their type is a primitive, or cast via AS otherwise.
          block-reader-read-with-domain
          block-reader-status
          block-reader-status-interface-id
-         block-reader-status-read-samples
          block-size
          borrow-interface
          build
@@ -17437,6 +17324,7 @@ unboxed if their type is a primitive, or cast via AS otherwise.
          function-blocks
          gap-checking-enabled
          get
+         get-read-samples
          global-id
          global-log-level
          graph-visualization
@@ -17847,14 +17735,15 @@ unboxed if their type is a primitive, or cast via AS otherwise.
          raw-value-by-index
          reachability-status
          reachability-status-private
+         read
          read-all
          read-mode
          read-only
          read-only-no-lock
          read-only-unresolved
-         read-samples
          read-status
          read-timeout-type
+         read-with-domain
          reader
          reader-config
          reader-config-input-ports

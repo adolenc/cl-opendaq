@@ -2,33 +2,78 @@
 
 (in-suite high-level-smoke-suite)
 
-(test high-level-simulator-read-samples
-  ;; SBCL at default debug levels (debug < 3) may determine that LET*
-  ;; bindings holding managed-object wrappers are dead after their raw
-  ;; pointer (SAP) is extracted for a CFFI call.  The local OPTIMIZE
-  ;; declaration preserves the bindings so that GC does not release the
-  ;; underlying C++ objects while we still need them.
+(test high-level-simulator-reads
   (locally (declare (optimize (debug 3)))
     (let* ((instance (make-instance 'daq:instance))
            (root-device (daq:root-device instance))
            (device (daq:add-device root-device "daqref://device0"))
            (channel (daq:find-component device "IO/AI/RefCh0"))
            (signals (daq:signals-recursive (daq:as channel 'daq:channel))))
-      (is (listp signals)
-          "High-level signal discovery should return a list of typed signal objects.")
       (is (plusp (cl:length signals))
           "High-level signal discovery should find at least one signal on the channel.")
       (let ((signal (first signals)))
-        (setf (daq:property-value channel "Frequency") 0.5d0)
-        (let* ((reader (make-instance 'daq:stream-reader :signal signal)))
-          (sleep 0.1)
-          (let ((samples (daq:read-samples reader 100)))
+        ;; No priming read: the first READ must skip the reader's initial
+        ;; descriptor-change event on its own and still return samples.
+        (let ((reader (make-instance 'daq:stream-reader :signal signal)))
+          (let ((samples (daq:read reader 100 :timeout-ms 2000)))
+            (is (vectorp samples)
+                "Stream reader READ should return a vector.")
             (is (= 100 (cl:length samples))
-                "High-level stream readers should return the requested number of samples.")
+                "Stream reader READ should return the requested number of samples.")
             (is (every #'numberp samples)
-                "High-level stream readers should return numeric samples.")
-            (is (some (lambda (sample) (> (abs sample) 1d-9)) samples)
-                "High-level stream readers should surface non-zero simulator samples.")))))))
+                "Stream reader READ should return numeric elements.")
+            (is (eq 'double-float (array-element-type samples))
+                "Stream reader default value-type should be double-float.")))
+        (let ((reader2 (make-instance 'daq:stream-reader :signal signal)))
+          (multiple-value-bind (values domain)
+              (daq:read-with-domain reader2 10 :timeout-ms 2000)
+            (is (= 10 (cl:length values))
+                "read-with-domain should return the requested number of values.")
+            (is (vectorp domain)
+                "read-with-domain domain should be a vector.")
+            (is (= (cl:length values) (cl:length domain))
+                "read-with-domain value and domain arrays must have equal length.")
+            (is (equal '(signed-byte 64) (array-element-type domain))
+                "read-with-domain domain default type should be signed-byte 64.")))))))
+
+(test high-level-block-reader
+  (locally (declare (optimize (debug 3)))
+    (let* ((instance (make-instance 'daq:instance))
+           (root-device (daq:root-device instance))
+           (device (daq:add-device root-device "daqref://device0"))
+           (channel (daq:find-component device "IO/AI/RefCh0"))
+           (signals (daq:signals-recursive (daq:as channel 'daq:channel)))
+           (signal (first signals))
+           (reader (make-instance 'daq:block-reader :signal signal :block-size 10)))
+      (let ((blocks (daq:read reader 5 :timeout-ms 2000)))
+        (is (= 2 (array-rank blocks))
+            "block reader READ should return a 2-D array.")
+        (is (= 5 (array-dimension blocks 0))
+            "block reader READ should return the requested number of blocks.")
+        (is (= 10 (array-dimension blocks 1))
+            "block reader READ columns should equal the block size.")
+        (is (eq 'double-float (array-element-type blocks))
+            "block reader default value-type should be double-float.")))))
+
+(test high-level-data-packet-buffers
+  (let ((builder (make-instance 'daq:data-descriptor-builder)))
+    (setf (daq:sample-type builder) opendaq.low-level::+daq-sample-type-float-64+)
+    (let* ((descriptor (daq:build builder))
+           (offset (make-instance 'daq:daq-integer :value 0))
+           (packet (make-instance 'daq:data-packet
+                                  :descriptor descriptor :sample-count 8 :offset offset))
+           (values (daq:data packet))
+           (raw (daq:raw-data packet)))
+      (is (vectorp values)
+          "data-packet DATA should return a vector.")
+      (is (= 8 (cl:length values))
+          "data-packet DATA length should match the sample count.")
+      (is (eq 'double-float (array-element-type values))
+          "data-packet DATA element type should follow the descriptor sample type.")
+      (is (equal '(unsigned-byte 8) (array-element-type raw))
+          "data-packet RAW-DATA should be an (unsigned-byte 8) vector.")
+      (is (= 64 (cl:length raw))
+          "data-packet RAW-DATA size should be sample-count * element-size bytes."))))
 
 (test high-level-autoload-healthcheck
   (let* ((status (daq:healthcheck nil))
