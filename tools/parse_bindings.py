@@ -344,16 +344,29 @@ def _blank_single_line_comments(text: str) -> str:
 def _blank_non_newlines(text: str) -> str:
     return re.sub(r"[^\n]", " ", text)
 
-def _find_doc_before_line(target_ln: int, doxy_blocks: dict[int, tuple[int, str]]) -> str:
-    """Return the docstring from the doxygen block that ends nearest
-    before *target_ln* (and is not after it)."""
+def _find_doc_for_decl(
+    decl_offset: int,
+    doxy_blocks: list[tuple[int, str]],
+    code_only: str,
+) -> str:
+    """Return the docstring from the doxygen block immediately preceding
+    *decl_offset*.
+
+    A block counts only when nothing but whitespace separates its end from
+    the declaration in *code_only* (a view of the source with every comment
+    and preprocessor line blanked out).  This stops a declaration from
+    inheriting the doc of an earlier sibling when another declaration sits
+    between them — e.g. a factory function with no doc of its own must not
+    pick up the previous method's doc."""
     best_end = -1
-    best_text = ""
-    for end_line, (_, raw) in doxy_blocks.items():
-        if best_end < end_line < target_ln:
-            best_end = end_line
-            best_text = raw
-    return extract_docstring_summary(best_text) if best_text else ""
+    best_raw = ""
+    for end_off, raw in doxy_blocks:
+        if best_end < end_off <= decl_offset:
+            best_end = end_off
+            best_raw = raw
+    if not best_raw or code_only[best_end:decl_offset].strip():
+        return ""
+    return extract_docstring_summary(best_raw)
 
 
 def _collect_tts_before(
@@ -389,19 +402,15 @@ class HeaderParser:
         #     templateType annotations, and function declarations ---
         # We do this on raw text so positions are accurate for association.
 
-        # Doxygen blocks: (end_line, start_line) -> raw text
-        doxy_blocks: dict[int, tuple[int, str]] = {}
+        # Doxygen blocks: list of (end_offset, raw text), in source order.
+        doxy_blocks: list[tuple[int, str]] = []
         for m in DOXY_BLOCK_RE.finditer(raw_text):
-            start_line = raw_text[: m.start()].count("\n")
-            end_line = raw_text[: m.end()].count("\n")
-            if end_line not in doxy_blocks or start_line > doxy_blocks[end_line][0]:
-                doxy_blocks[end_line] = (start_line, m.group(0))
+            doxy_blocks.append((m.end(), m.group(0)))
 
-        # DECLARE_OPENDAQ_INTERFACE lines: list of (name, parent, line_number)
+        # DECLARE_OPENDAQ_INTERFACE: list of (name, parent, decl_offset)
         ifaces: list[tuple[str, str, int]] = []
         for m in IFACE_COMMENT_RE.finditer(raw_text):
-            ln = raw_text[: m.start()].count("\n")
-            ifaces.append((m.group(1), m.group(2), ln))
+            ifaces.append((m.group(1), m.group(2), m.start()))
 
         # templateType / elementType annotations: line -> list
         template_annotations: dict[int, list[tuple[str, str | None, str | None]]] = {}
@@ -428,10 +437,15 @@ class HeaderParser:
                 REGULAR_BLOCK_COMMENT_RE.sub(lambda m: _blank_non_newlines(m.group(0)), raw_text),
             )
         )
-        func_matches: list[tuple[int, str, str, str]] = []  # (line, return_str, name, args_str)
+        func_matches: list[tuple[int, int, str, str, str]] = []  # (offset, line, return_str, name, args_str)
         for m in FUNCTION_RE.finditer(raw_no_sl):
             ln = raw_no_sl[: m.start()].count("\n")
-            func_matches.append((ln, m.group(1).strip(), m.group(2), m.group(3).strip()))
+            func_matches.append((m.start(), ln, m.group(1).strip(), m.group(2), m.group(3).strip()))
+
+        # Code-only view (all comments, doxygen and preprocessor blanked, length
+        # preserved) used to verify a docstring sits immediately before a
+        # declaration with no intervening code.
+        fully_stripped = DOXY_BLOCK_RE.sub(lambda m: _blank_non_newlines(m.group(0)), raw_no_sl)
 
         # --- Phase 2: strip comments for structural parsing ---
         text_no_comments = REGULAR_BLOCK_COMMENT_RE.sub("", raw_text)
@@ -501,16 +515,16 @@ class HeaderParser:
                 base_type=base, pointer_depth=pd, source_file=self.source_file,
             ))
 
-        # --- Phase 4: interfaces (associate nearest preceding doxygen block) ---
-        for name, parent, ln in ifaces:
-            doc = _find_doc_before_line(ln, doxy_blocks)
+        # --- Phase 4: interfaces (associate immediately preceding doxygen block) ---
+        for name, parent, off in ifaces:
+            doc = _find_doc_for_decl(off, doxy_blocks, fully_stripped)
             self.interfaces.append(InterfaceDesc(
                 name=name, parent=parent, docstring=doc,
                 source_file=self.source_file,
             ))
 
         # --- Phase 5: functions with accurate docstring / templateType association ---
-        for func_ln, return_type_str, func_name, args_str in func_matches:
+        for func_off, func_ln, return_type_str, func_name, args_str in func_matches:
             return_td = make_type_desc(return_type_str)
 
             # Parse arguments
@@ -536,7 +550,7 @@ class HeaderParser:
                         break
 
             # Find docstring
-            doc = _find_doc_before_line(func_ln, doxy_blocks)
+            doc = _find_doc_for_decl(func_off, doxy_blocks, fully_stripped)
 
             self.functions.append(FunctionDesc(
                 name=func_name,
