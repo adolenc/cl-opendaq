@@ -70,10 +70,10 @@
            (property-class-builder (make-instance 'daq:property-object-class-builder :name "test_property_class")))
       (daq:add-property property-object property)
       (daq:add-property property-class-builder property)
-      (let* ((property-object-property (daq:property-object-property property-object "test_property"))
+      (let* ((property-object-property (daq:property property-object "test_property"))
              (property-default (daq:default-value property-object-property))
              (property-class (daq:build property-class-builder))
-             (class-property (daq:property-object-class-property property-class "test_property")))
+             (class-property (daq:property property-class "test_property")))
         (is (string= "test_property" (daq:name property))
             "High-level property factories should preserve the property name.")
         (is (= 10 (%boxed-integer-value built-default))
@@ -138,7 +138,7 @@
          (event-value (daq:value event-args))
          (event-old-value (daq:old-value event-args)))
     (is (string= "test_property"
-                 (daq:name (daq:property-value-event-args-property event-args)))
+                 (daq:name (daq:property event-args)))
         "High-level property-value-event-args should expose their property.")
     (is (= 30 (%boxed-integer-value event-value))
         "High-level property-value-event-args should expose the new boxed value.")
@@ -148,6 +148,31 @@
         "High-level property-value-event-args should preserve the event type symbol.")
     (is (null (daq:is-updating event-args))
         "High-level property-value-event-args should decode false updating flags into NIL.")))
+
+(test high-level-coreobjects-unified-optional-generic
+  ;; PROPERTY is one of the UNIFY_OPTIONAL generics: a single generic spanning a
+  ;; zero-arg specializer (property-value-event-args, padding) and an extra-arg
+  ;; specializer (property-object, required PROPERTY-NAME).  Exercise both correct
+  ;; arities and both misuse errors (supplied-p rejection / required omission).
+  (let* ((default-value (make-instance 'daq:daq-integer :value 10))
+         (visible-flag (make-instance 'daq:daq-boolean :value t))
+         (property (daq:create-int-property "test_property" default-value visible-flag))
+         (property-object (make-instance 'daq:property-object))
+         (event-args (make-instance 'daq:property-value-event-args
+                                    :prop property
+                                    :value (make-instance 'daq:daq-integer :value 30)
+                                    :old-value (make-instance 'daq:daq-integer :value 20)
+                                    :type :daq-property-event-type-event-type-update
+                                    :is-updating nil)))
+    (daq:add-property property-object property)
+    (is (string= "test_property" (daq:name (daq:property property-object "test_property")))
+        "Unified PROPERTY should accept the extra PROPERTY-NAME argument on property-object.")
+    (is (string= "test_property" (daq:name (daq:property event-args)))
+        "Unified PROPERTY should work with no extra argument on property-value-event-args.")
+    (signals (error "Unified PROPERTY should reject an extra argument on property-value-event-args.")
+      (daq:property event-args "test_property"))
+    (signals (error "Unified PROPERTY should require the PROPERTY-NAME argument on property-object.")
+      (daq:property property-object))))
 
 (test high-level-coreobjects-end-update-event
   (let* ((property-object (make-instance 'daq:property-object))

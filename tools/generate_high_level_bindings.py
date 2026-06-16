@@ -98,6 +98,47 @@ FUNCTION_OVERRIDES: dict[str, dict] = {
     "server/get-signals": {"optional_defaults": (("search-filter", "nil"),)},
     "function-block/get-signals": {"optional_defaults": (("search-filter", "nil"),)},
     "function-block/get-signals-recursive": {"optional_defaults": (("search-filter", "nil"),)},
+    # Extra args of UNIFY_OPTIONAL members that openDAQ makes nullptr-defaulted
+    # (strictness rule 3): the unified generic must NOT require them.  See the
+    # UNIFY_OPTIONAL comment and docs/method-name-unification.md.
+    "data-packet/get-last-value": {"optional_defaults": (("type-manager", "nil"),)},
+    "function-block/get-input-ports": {"optional_defaults": (("search-filter", "nil"),)},
+    "user-lock/lock": {"optional_defaults": (("user", "nil"),)},
+    "user-lock/unlock": {"optional_defaults": (("user", "nil"),)},
+}
+
+# Curated set of instance-method base names that are unified into a single CLOS
+# generic via &optional padding instead of being qualified with a receiver prefix.
+# openDAQ gives the same conceptual operation different arities across interfaces
+# (e.g. signal.getLastValue() vs dataPacket.getLastValue(typeManager)); those
+# lambda lists are not congruent, so the generator's fallback is to prefix the
+# whole group (data-packet-last-value, signal-last-value, ...).
+#
+# For these base names we instead emit one generic whose lambda list is the union
+# of the group's trailing extra args, all &optional, and have every method validate
+# its own contract at runtime via supplied-p checks (no silent argument-eating, no
+# silent null-passing).  Only groups whose arg lists *nest* (each a positional
+# prefix of the longest) may appear here; _unify_method_group asserts this.
+#
+# Excluded on purpose: signal/component/address (coincidental name reuse -- they
+# nest but mean unrelated things) and the genuinely divergent Group-2 names
+# (clone, type, remove, read, ...).  See docs/method-name-unification.md.
+UNIFY_OPTIONAL = {
+    "last-value",
+    "offset",
+    "on-property-value-read",
+    "on-property-value-write",
+    "properties",
+    "property",
+    "input-ports",
+    "lock",
+    "unlock",
+    "read-bool",
+    "read-float",
+    "read-int",
+    "read-string",
+    "read-serialized-list",
+    "read-serialized-object",
 }
 
 
@@ -320,7 +361,51 @@ def select_class_constructors(functions: list[dict]) -> dict[str, dict]:
     return selected
 
 
-def select_method_names(functions: list[dict]) -> dict[str, str]:
+def _unify_method_group(
+    base_name: str, instance: list[dict], names: dict[str, str], unify: dict[str, dict]
+) -> None:
+    """Fold a UNIFY_OPTIONAL instance-method group into one &optional generic.
+
+    All methods get the unqualified BASE-NAME.  The generic's extra args are the
+    union of the group's trailing args (the longest method's, since they nest),
+    all &optional.  Each method records, per union param, whether it is REAL and
+    REQUIRED, REAL and OPTIONAL (nullptr-defaulted -- via optional_defaults), or
+    PADDING (this method's C function does not take it); _emit_unified_method
+    turns that into the per-method supplied-p validation.
+    """
+    longest = max((method_parameters(f) for f in instance), key=len)
+
+    # Validation guard: every arg list must be a positional prefix of the longest,
+    # so a bad curation entry fails loudly instead of emitting incongruent methods.
+    for func in instance:
+        params = method_parameters(func)
+        for index, param in enumerate(params):
+            if index >= len(longest) or param["lisp_name"] != longest[index]["lisp_name"]:
+                raise ValueError(
+                    f"UNIFY_OPTIONAL group {base_name!r} does not nest: "
+                    f"{func['public_lisp_name']} arg {param['lisp_name']!r} is not a "
+                    f"prefix of {[p['lisp_name'] for p in longest]}.")
+
+    union_params = list(longest)
+    for func in instance:
+        pln = func["public_lisp_name"]
+        names[pln] = METHOD_NAME_OVERRIDES.get(pln, base_name)
+
+        params = method_parameters(func)
+        override = FUNCTION_OVERRIDES.get(pln, {})
+        required, _optional = _split_optional_params(params, override.get("optional_defaults", ()))
+        classification = []
+        for index in range(len(union_params)):
+            if index < len(required):
+                classification.append("required")
+            elif index < len(params):
+                classification.append("optional")
+            else:
+                classification.append("padding")
+        unify[pln] = {"union_params": union_params, "classification": classification}
+
+
+def select_method_names(functions: list[dict]) -> tuple[dict[str, str], dict[str, dict]]:
     groups: dict[tuple[str, str], list[dict]] = {}
     for function in functions:
         kind = classify_function(function)
@@ -329,6 +414,7 @@ def select_method_names(functions: list[dict]) -> dict[str, str]:
         groups.setdefault((kind, exposed_name(function, kind)), []).append(function)
 
     names: dict[str, str] = {}
+    unify: dict[str, dict] = {}
     for (kind, base_name), grouped in groups.items():
         static = [f for f in grouped if not uses_instance_receiver(f)]
         instance = [f for f in grouped if uses_instance_receiver(f)]
@@ -336,6 +422,10 @@ def select_method_names(functions: list[dict]) -> dict[str, str]:
         for func in static:
             pln = func["public_lisp_name"]
             names[pln] = METHOD_NAME_OVERRIDES.get(pln, factory_function_name(func, kind))
+
+        if base_name in UNIFY_OPTIONAL and kind in {"reader", "method"} and len(instance) > 1:
+            _unify_method_group(base_name, instance, names, unify)
+            continue
 
         shapes = {
             method_signature_shape(f, FUNCTION_OVERRIDES.get(f["public_lisp_name"], {}))
@@ -347,11 +437,11 @@ def select_method_names(functions: list[dict]) -> dict[str, str]:
             names[pln] = METHOD_NAME_OVERRIDES.get(
                 pln, qualified_name(func, kind) if qualify else base_name)
 
-    return names
+    return names, unify
 
 
 def build_specs(functions: list[dict]) -> tuple[list[dict], list[dict]]:
-    method_names = select_method_names(functions)
+    method_names, unify_specs = select_method_names(functions)
     class_constructors = select_class_constructors(functions)
 
     classes: dict[str, dict] = {}
@@ -394,6 +484,7 @@ def build_specs(functions: list[dict]) -> tuple[list[dict], list[dict]]:
             "name": method_names[function["public_lisp_name"]],
             "specializer": override.get("specializer") or receiver,
             "optional_defaults": override.get("optional_defaults", ()),
+            "unify": unify_specs.get(function["public_lisp_name"]),
         })
 
     for spec in methods:
@@ -651,9 +742,67 @@ def _emit_plain_function(spec: dict) -> list[str]:
     return [header, *body, ")", ""]
 
 
+def _emit_unified_method(spec: dict) -> list[str]:
+    """Emit one member of a UNIFY_OPTIONAL generic (see _unify_method_group).
+
+    The generic's lambda list is (object &optional <union args>); every method
+    shares it for congruence and validates its own contract via supplied-p:
+    PADDING args must be omitted, REQUIRED args must be supplied, OPTIONAL
+    (nullptr-defaulted) args may be either.
+    """
+    function = spec["function"]
+    params = method_parameters(function)
+    unify = spec["unify"]
+    union_names = [p["lisp_name"] for p in unify["union_params"]]
+    classification = unify["classification"]
+
+    # OPTIONAL (nullptr-defaulted) args carry no supplied-p check, so omit their
+    # supplied-p variable to avoid an "unused variable" warning.  Supplied-p
+    # variables do not affect generic congruence, so methods may differ here.
+    generic_tail = "&optional " + " ".join(union_names)
+    method_optionals = " ".join(
+        f"({name} nil {name}-suppliedp)" if kind != "optional" else f"({name} nil)"
+        for name, kind in zip(union_names, classification))
+    method_tail = f"((object {spec['specializer']}) &optional {method_optionals})"
+
+    lines = [
+        f"(defgeneric {spec['name']} (object {generic_tail}))",
+        f"(defmethod {spec['name']} {method_tail}",
+    ]
+
+    padding = [name for name, kind in zip(union_names, classification) if kind == "padding"]
+    if padding:
+        lines.append(f"  (declare (ignore {' '.join(padding)}))")
+
+    name_upper = spec["name"].upper()
+    for name, kind in zip(union_names, classification):
+        if kind == "padding":
+            lines.append(f"  (when {name}-suppliedp")
+            lines.append(
+                f"    (error \"{name_upper} is not applicable with a {name.upper()} "
+                f"argument for ~S.\" '{spec['specializer']}))")
+        elif kind == "required":
+            lines.append(f"  (unless {name}-suppliedp")
+            lines.append(
+                f"    (error \"{name_upper} requires a {name.upper()} "
+                f"argument for ~S.\" '{spec['specializer']}))")
+
+    body = emit_coerced_call(
+        params,
+        _emit_call_body(spec, tuple(f"coerced-{p['lisp_name']}" for p in params)),
+        indent="  ",
+    )
+    lines.extend(body)
+    lines.extend([")", ""])
+    return lines
+
+
 def _emit_instance_method(spec: dict) -> list[str]:
     if not uses_instance_receiver(spec["function"]):
         return _emit_plain_function(spec)
+
+    if spec.get("unify") is not None:
+        return _emit_unified_method(spec)
 
     function = spec["function"]
     params = method_parameters(function)

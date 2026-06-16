@@ -39,6 +39,8 @@ The library is composed of 2 packages: `:opendaq` (nicknamed `:daq`) and `:opend
 
 The high-level API uses CLOS to attempt to mirror openDAQ classes and their hierarchy, and uses generics/methods on them for function calls. It drops the get/set prefixes from the function names, and instead uses `setf` wrappers for setters.
 
+A method's name is normally its bare stem (`signals`, `lock`), shared as one generic across every class that has it. When the same operation has incongruent arities across classes (CLOS requires congruent lambda lists), a curated set is still unified into one generic via trailing `&optional` parameters, each method validating its own contract at runtime (`(last-value packet manager)` works, `(last-value signal manager)` errors); the rest fall back to a receiver-prefixed name (`device-private-lock`). See `UNIFY_OPTIONAL` in `tools/generate_high_level_bindings.py` and `docs/method-name-unification.md`. Some names only look prefixed: the leading word may be openDAQ's own (`getDeviceRevision` → `device-revision`), or it may be a static per-interface method with no receiver to dispatch on (`getInterfaceId` → `<class>-interface-id`).
+
 The hierarchy is parsed automatically from the C++ headers via the `DECLARE_OPENDAQ_INTERFACE(IChild, IParent)` macros. The root of the hierarchy is `managed-object`, which owns a raw pointer and registers a `trivial-garbage` finalizer to call `release-ref` when the wrapper is collected, so no manually releasing of the openDAQ objects is required.
 
 ### Boxing / unboxing

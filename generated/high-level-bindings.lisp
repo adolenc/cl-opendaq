@@ -379,8 +379,6 @@
             data-descriptor-interface-id
             data-packet
             data-packet-interface-id
-            data-packet-last-value
-            data-packet-offset
             data-rule
             data-rule-builder
             data-rule-builder-interface-id
@@ -429,18 +427,14 @@
             device-info-internal
             device-info-internal-interface-id
             device-interface-id
-            device-lock
             device-manual
             device-network-config
             device-network-config-interface-id
             device-private
             device-private-interface-id
-            device-private-lock
-            device-private-unlock
             device-revision
             device-type
             device-type-interface-id
-            device-unlock
             device-update-options
             device-update-options-interface-id
             device-update-options-with-local-id-or-null
@@ -493,7 +487,6 @@
             end-update
             end-update-event-args
             end-update-event-args-interface-id
-            end-update-event-args-properties
             enqueue
             enqueue-and-steal-ref
             enqueue-last-descriptor
@@ -551,7 +544,6 @@
             freezable-interface-id
             freeze
             function-block
-            function-block-input-ports
             function-block-interface-id
             function-block-type
             function-block-type-interface-id
@@ -605,6 +597,7 @@
             input-port-private
             input-port-private-interface-id
             input-port-signal
+            input-ports
             input-sample-type
             input-used
             inputs-outputs-folder
@@ -688,6 +681,7 @@
             local-id
             local-path
             location
+            lock
             lock-all-attributes
             lock-attributes
             lock-guard
@@ -761,7 +755,6 @@
             multi-reader-builder
             multi-reader-builder-interface-id
             multi-reader-interface-id
-            multi-reader-offset
             multi-reader-read
             multi-reader-read-with-domain
             multi-reader-status
@@ -786,6 +779,7 @@
             numerator
             object-list
             object-list-interface-id
+            offset
             old-block-reader
             old-value
             on-any-property-value-read
@@ -863,11 +857,10 @@
             procedure
             product-code
             product-instance-uri
+            properties
             property
             property-builder
             property-builder-interface-id
-            property-builder-on-property-value-read
-            property-builder-on-property-value-write
             property-event-type
             property-interface-id
             property-internal
@@ -877,24 +870,16 @@
             property-object-class
             property-object-class-builder
             property-object-class-builder-interface-id
-            property-object-class-builder-properties
             property-object-class-interface-id
             property-object-class-internal
             property-object-class-internal-clone
             property-object-class-internal-interface-id
-            property-object-class-properties
-            property-object-class-property
             property-object-interface-id
             property-object-internal
             property-object-internal-clone
             property-object-internal-interface-id
-            property-object-on-property-value-read
-            property-object-on-property-value-write
-            property-object-property
             property-object-protected
             property-object-protected-interface-id
-            property-on-property-value-read
-            property-on-property-value-write
             property-order
             property-references
             property-selection-value
@@ -902,7 +887,6 @@
             property-type
             property-value
             property-value-event-args
-            property-value-event-args-property
             property-value-no-lock
             protected-property-selection-value
             protected-property-value
@@ -931,21 +915,25 @@
             reachability-status-private
             read
             read-all
+            read-bool
+            read-float
+            read-int
             read-mode
             read-only
             read-only-no-lock
             read-only-unresolved
+            read-serialized-list
+            read-serialized-object
             read-status
+            read-string
             read-timeout-type
             read-with-domain
             reader
             reader-config
-            reader-config-input-ports
             reader-config-interface-id
             reader-interface-id
             reader-status
             reader-status-interface-id
-            reader-status-offset
             real
             recorder
             recorder-interface-id
@@ -1065,24 +1053,12 @@
             serialize-id
             serialized-list
             serialized-list-interface-id
-            serialized-list-read-bool
-            serialized-list-read-float
-            serialized-list-read-int
             serialized-list-read-list
             serialized-list-read-object
-            serialized-list-read-serialized-list
-            serialized-list-read-serialized-object
-            serialized-list-read-string
             serialized-object
             serialized-object-interface-id
-            serialized-object-read-bool
-            serialized-object-read-float
-            serialized-object-read-int
             serialized-object-read-list
             serialized-object-read-object
-            serialized-object-read-serialized-list
-            serialized-object-read-serialized-object
-            serialized-object-read-string
             serialized-object-type
             serializer
             server
@@ -1105,7 +1081,6 @@
             signal-events
             signal-events-interface-id
             signal-interface-id
-            signal-last-value
             signal-private
             signal-private-interface-id
             signal-serialize-id
@@ -1223,6 +1198,7 @@
             unit-interface-id
             unit-no-lock
             unit-unresolved
+            unlock
             unlock-all-attributes
             unlock-attributes
             unmute
@@ -1249,8 +1225,6 @@
             user-internal-interface-id
             user-lock
             user-lock-interface-id
-            user-lock-lock
-            user-lock-unlock
             user-name
             username
             uses-offset
@@ -7701,8 +7675,8 @@
   )
 )
 
-(defgeneric data-packet-last-value (object type-manager))
-(defmethod data-packet-last-value ((object data-packet) type-manager)
+(defgeneric last-value (object &optional type-manager))
+(defmethod last-value ((object data-packet) &optional (type-manager nil))
   (multiple-value-bind (coerced-type-manager cleanup-type-manager)
       (%coerce-argument type-manager :managed-pointer)
     (unwind-protect
@@ -7710,8 +7684,11 @@
       (%cleanup-coerced-argument cleanup-type-manager)))
 )
 
-(defgeneric data-packet-offset (object))
-(defmethod data-packet-offset ((object data-packet))
+(defgeneric offset (object &optional domain-start))
+(defmethod offset ((object data-packet) &optional (domain-start nil domain-start-suppliedp))
+  (declare (ignore domain-start))
+  (when domain-start-suppliedp
+    (error "OFFSET is not applicable with a DOMAIN-START argument for ~S." 'data-packet))
   (wrap-daq-number (opendaq.low-level:data-packet/get-offset (%require-live-pointer object)))
 )
 
@@ -8555,8 +8532,10 @@
   (not (zerop (opendaq.low-level:device-private/is-locked-internal (%require-live-pointer object))))
 )
 
-(defgeneric device-private-lock (object user))
-(defmethod device-private-lock ((object device-private) user)
+(defgeneric lock (object &optional user))
+(defmethod lock ((object device-private) &optional (user nil user-suppliedp))
+  (unless user-suppliedp
+    (error "LOCK requires a USER argument for ~S." 'device-private))
   (multiple-value-bind (coerced-user cleanup-user)
       (%coerce-argument user :managed-pointer)
     (unwind-protect
@@ -8578,8 +8557,10 @@
       (%cleanup-coerced-argument cleanup-new-value)))
   new-value)
 
-(defgeneric device-private-unlock (object user))
-(defmethod device-private-unlock ((object device-private) user)
+(defgeneric unlock (object &optional user))
+(defmethod unlock ((object device-private) &optional (user nil user-suppliedp))
+  (unless user-suppliedp
+    (error "UNLOCK requires a USER argument for ~S." 'device-private))
   (multiple-value-bind (coerced-user cleanup-user)
       (%coerce-argument user :managed-pointer)
     (unwind-protect
@@ -8913,8 +8894,10 @@
       (%cleanup-coerced-argument cleanup-configuration)))
 )
 
-(defgeneric device-lock (object))
-(defmethod device-lock ((object device))
+(defmethod lock ((object device) &optional (user nil user-suppliedp))
+  (declare (ignore user))
+  (when user-suppliedp
+    (error "LOCK is not applicable with a USER argument for ~S." 'device))
   (opendaq.low-level:device/lock (%require-live-pointer object))
 )
 
@@ -8964,8 +8947,10 @@
   )
   new-value)
 
-(defgeneric device-unlock (object))
-(defmethod device-unlock ((object device))
+(defmethod unlock ((object device) &optional (user nil user-suppliedp))
+  (declare (ignore user))
+  (when user-suppliedp
+    (error "UNLOCK is not applicable with a USER argument for ~S." 'device))
   (opendaq.low-level:device/unlock (%require-live-pointer object))
 )
 
@@ -9359,8 +9344,11 @@
   (not (zerop (opendaq.low-level:end-update-event-args/get-is-parent-updating (%require-live-pointer object))))
 )
 
-(defgeneric end-update-event-args-properties (object))
-(defmethod end-update-event-args-properties ((object end-update-event-args))
+(defgeneric properties (object &optional include-inherited))
+(defmethod properties ((object end-update-event-args) &optional (include-inherited nil include-inherited-suppliedp))
+  (declare (ignore include-inherited))
+  (when include-inherited-suppliedp
+    (error "PROPERTIES is not applicable with a INCLUDE-INHERITED argument for ~S." 'end-update-event-args))
   (as-list-of (wrap-object-list (opendaq.low-level:end-update-event-args/get-properties (%require-live-pointer object))) 'daq-string-object)
 )
 
@@ -9921,8 +9909,8 @@
       (%cleanup-coerced-argument cleanup-search-filter)))
 )
 
-(defgeneric function-block-input-ports (object search-filter))
-(defmethod function-block-input-ports ((object function-block) search-filter)
+(defgeneric input-ports (object &optional search-filter))
+(defmethod input-ports ((object function-block) &optional (search-filter nil))
   (multiple-value-bind (coerced-search-filter cleanup-search-filter)
       (%coerce-argument search-filter :managed-pointer)
     (unwind-protect
@@ -11977,8 +11965,9 @@
   (not (zerop (opendaq.low-level:multi-reader/get-is-synchronized (%require-live-pointer object))))
 )
 
-(defgeneric multi-reader-offset (object domain-start))
-(defmethod multi-reader-offset ((object multi-reader) domain-start)
+(defmethod offset ((object multi-reader) &optional (domain-start nil domain-start-suppliedp))
+  (unless domain-start-suppliedp
+    (error "OFFSET requires a DOMAIN-START argument for ~S." 'multi-reader))
   (let ((coerced-domain-start domain-start))
     (opendaq.low-level:multi-reader/get-offset (%require-live-pointer object) coerced-domain-start)
   )
@@ -12629,13 +12618,19 @@
   (%daq-string-to-lisp-and-release (opendaq.low-level:property-builder/get-name (%require-live-pointer object)))
 )
 
-(defgeneric property-builder-on-property-value-read (object))
-(defmethod property-builder-on-property-value-read ((object property-builder))
+(defgeneric on-property-value-read (object &optional property-name))
+(defmethod on-property-value-read ((object property-builder) &optional (property-name nil property-name-suppliedp))
+  (declare (ignore property-name))
+  (when property-name-suppliedp
+    (error "ON-PROPERTY-VALUE-READ is not applicable with a PROPERTY-NAME argument for ~S." 'property-builder))
   (wrap-event (opendaq.low-level:property-builder/get-on-property-value-read (%require-live-pointer object)))
 )
 
-(defgeneric property-builder-on-property-value-write (object))
-(defmethod property-builder-on-property-value-write ((object property-builder))
+(defgeneric on-property-value-write (object &optional property-name))
+(defmethod on-property-value-write ((object property-builder) &optional (property-name nil property-name-suppliedp))
+  (declare (ignore property-name))
+  (when property-name-suppliedp
+    (error "ON-PROPERTY-VALUE-WRITE is not applicable with a PROPERTY-NAME argument for ~S." 'property-builder))
   (wrap-event (opendaq.low-level:property-builder/get-on-property-value-write (%require-live-pointer object)))
 )
 
@@ -13133,8 +13128,10 @@
   (%daq-string-to-lisp-and-release (opendaq.low-level:property-object-class-builder/get-parent-name (%require-live-pointer object)))
 )
 
-(defgeneric property-object-class-builder-properties (object))
-(defmethod property-object-class-builder-properties ((object property-object-class-builder))
+(defmethod properties ((object property-object-class-builder) &optional (include-inherited nil include-inherited-suppliedp))
+  (declare (ignore include-inherited))
+  (when include-inherited-suppliedp
+    (error "PROPERTIES is not applicable with a INCLUDE-INHERITED argument for ~S." 'property-object-class-builder))
   (as-hashtable-of (wrap-dict (opendaq.low-level:property-object-class-builder/get-properties (%require-live-pointer object))) 'daq-string-object 'property)
 )
 
@@ -13205,8 +13202,9 @@
   (%daq-string-to-lisp-and-release (opendaq.low-level:property-object-class/get-parent-name (%require-live-pointer object)))
 )
 
-(defgeneric property-object-class-properties (object include-inherited))
-(defmethod property-object-class-properties ((object property-object-class) include-inherited)
+(defmethod properties ((object property-object-class) &optional (include-inherited nil include-inherited-suppliedp))
+  (unless include-inherited-suppliedp
+    (error "PROPERTIES requires a INCLUDE-INHERITED argument for ~S." 'property-object-class))
   (multiple-value-bind (coerced-include-inherited cleanup-include-inherited)
       (%coerce-argument include-inherited :daq-bool)
     (unwind-protect
@@ -13214,8 +13212,10 @@
       (%cleanup-coerced-argument cleanup-include-inherited)))
 )
 
-(defgeneric property-object-class-property (object property-name))
-(defmethod property-object-class-property ((object property-object-class) property-name)
+(defgeneric property (object &optional property-name))
+(defmethod property ((object property-object-class) &optional (property-name nil property-name-suppliedp))
+  (unless property-name-suppliedp
+    (error "PROPERTY requires a PROPERTY-NAME argument for ~S." 'property-object-class))
   (multiple-value-bind (coerced-property-name cleanup-property-name)
       (%coerce-argument property-name :daq-string)
     (unwind-protect
@@ -13535,8 +13535,9 @@
   (wrap-event (opendaq.low-level:property-object/get-on-end-update (%require-live-pointer object)))
 )
 
-(defgeneric property-object-on-property-value-read (object property-name))
-(defmethod property-object-on-property-value-read ((object property-object) property-name)
+(defmethod on-property-value-read ((object property-object) &optional (property-name nil property-name-suppliedp))
+  (unless property-name-suppliedp
+    (error "ON-PROPERTY-VALUE-READ requires a PROPERTY-NAME argument for ~S." 'property-object))
   (multiple-value-bind (coerced-property-name cleanup-property-name)
       (%coerce-argument property-name :daq-string)
     (unwind-protect
@@ -13544,8 +13545,9 @@
       (%cleanup-coerced-argument cleanup-property-name)))
 )
 
-(defgeneric property-object-on-property-value-write (object property-name))
-(defmethod property-object-on-property-value-write ((object property-object) property-name)
+(defmethod on-property-value-write ((object property-object) &optional (property-name nil property-name-suppliedp))
+  (unless property-name-suppliedp
+    (error "ON-PROPERTY-VALUE-WRITE requires a PROPERTY-NAME argument for ~S." 'property-object))
   (multiple-value-bind (coerced-property-name cleanup-property-name)
       (%coerce-argument property-name :daq-string)
     (unwind-protect
@@ -13558,8 +13560,9 @@
   (wrap-permission-manager (opendaq.low-level:property-object/get-permission-manager (%require-live-pointer object)))
 )
 
-(defgeneric property-object-property (object property-name))
-(defmethod property-object-property ((object property-object) property-name)
+(defmethod property ((object property-object) &optional (property-name nil property-name-suppliedp))
+  (unless property-name-suppliedp
+    (error "PROPERTY requires a PROPERTY-NAME argument for ~S." 'property-object))
   (multiple-value-bind (coerced-property-name cleanup-property-name)
       (%coerce-argument property-name :daq-string)
     (unwind-protect
@@ -13654,8 +13657,10 @@
   (wrap-base-object (opendaq.low-level:property-value-event-args/get-old-value (%require-live-pointer object)))
 )
 
-(defgeneric property-value-event-args-property (object))
-(defmethod property-value-event-args-property ((object property-value-event-args))
+(defmethod property ((object property-value-event-args) &optional (property-name nil property-name-suppliedp))
+  (declare (ignore property-name))
+  (when property-name-suppliedp
+    (error "PROPERTY is not applicable with a PROPERTY-NAME argument for ~S." 'property-value-event-args))
   (wrap-property (opendaq.low-level:property-value-event-args/get-property (%require-live-pointer object)))
 )
 
@@ -13949,13 +13954,17 @@
   (%daq-string-to-lisp-and-release (opendaq.low-level:property/get-name (%require-live-pointer object)))
 )
 
-(defgeneric property-on-property-value-read (object))
-(defmethod property-on-property-value-read ((object property))
+(defmethod on-property-value-read ((object property) &optional (property-name nil property-name-suppliedp))
+  (declare (ignore property-name))
+  (when property-name-suppliedp
+    (error "ON-PROPERTY-VALUE-READ is not applicable with a PROPERTY-NAME argument for ~S." 'property))
   (wrap-event (opendaq.low-level:property/get-on-property-value-read (%require-live-pointer object)))
 )
 
-(defgeneric property-on-property-value-write (object))
-(defmethod property-on-property-value-write ((object property))
+(defmethod on-property-value-write ((object property) &optional (property-name nil property-name-suppliedp))
+  (declare (ignore property-name))
+  (when property-name-suppliedp
+    (error "ON-PROPERTY-VALUE-WRITE is not applicable with a PROPERTY-NAME argument for ~S." 'property))
   (wrap-event (opendaq.low-level:property/get-on-property-value-write (%require-live-pointer object)))
 )
 
@@ -14071,8 +14080,10 @@
   (wrap-daq-function (opendaq.low-level:reader-config/get-domain-transform-function (%require-live-pointer object)))
 )
 
-(defgeneric reader-config-input-ports (object))
-(defmethod reader-config-input-ports ((object reader-config))
+(defmethod input-ports ((object reader-config) &optional (search-filter nil search-filter-suppliedp))
+  (declare (ignore search-filter))
+  (when search-filter-suppliedp
+    (error "INPUT-PORTS is not applicable with a SEARCH-FILTER argument for ~S." 'reader-config))
   (as-list-of (wrap-object-list (opendaq.low-level:reader-config/get-input-ports (%require-live-pointer object))) 'input-port-config)
 )
 
@@ -14114,8 +14125,10 @@
   )
 )
 
-(defgeneric reader-status-offset (object))
-(defmethod reader-status-offset ((object reader-status))
+(defmethod offset ((object reader-status) &optional (domain-start nil domain-start-suppliedp))
+  (declare (ignore domain-start))
+  (when domain-start-suppliedp
+    (error "OFFSET is not applicable with a DOMAIN-START argument for ~S." 'reader-status))
   (wrap-daq-number (opendaq.low-level:reader-status/get-offset (%require-live-pointer object)))
 )
 
@@ -14785,18 +14798,27 @@
   )
 )
 
-(defgeneric serialized-list-read-bool (object))
-(defmethod serialized-list-read-bool ((object serialized-list))
+(defgeneric read-bool (object &optional key))
+(defmethod read-bool ((object serialized-list) &optional (key nil key-suppliedp))
+  (declare (ignore key))
+  (when key-suppliedp
+    (error "READ-BOOL is not applicable with a KEY argument for ~S." 'serialized-list))
   (not (zerop (opendaq.low-level:serialized-list/read-bool (%require-live-pointer object))))
 )
 
-(defgeneric serialized-list-read-float (object))
-(defmethod serialized-list-read-float ((object serialized-list))
+(defgeneric read-float (object &optional key))
+(defmethod read-float ((object serialized-list) &optional (key nil key-suppliedp))
+  (declare (ignore key))
+  (when key-suppliedp
+    (error "READ-FLOAT is not applicable with a KEY argument for ~S." 'serialized-list))
   (opendaq.low-level:serialized-list/read-float (%require-live-pointer object))
 )
 
-(defgeneric serialized-list-read-int (object))
-(defmethod serialized-list-read-int ((object serialized-list))
+(defgeneric read-int (object &optional key))
+(defmethod read-int ((object serialized-list) &optional (key nil key-suppliedp))
+  (declare (ignore key))
+  (when key-suppliedp
+    (error "READ-INT is not applicable with a KEY argument for ~S." 'serialized-list))
   (opendaq.low-level:serialized-list/read-int (%require-live-pointer object))
 )
 
@@ -14826,18 +14848,27 @@
       (%cleanup-coerced-argument cleanup-context)))
 )
 
-(defgeneric serialized-list-read-serialized-list (object))
-(defmethod serialized-list-read-serialized-list ((object serialized-list))
+(defgeneric read-serialized-list (object &optional key))
+(defmethod read-serialized-list ((object serialized-list) &optional (key nil key-suppliedp))
+  (declare (ignore key))
+  (when key-suppliedp
+    (error "READ-SERIALIZED-LIST is not applicable with a KEY argument for ~S." 'serialized-list))
   (wrap-serialized-list (opendaq.low-level:serialized-list/read-serialized-list (%require-live-pointer object)))
 )
 
-(defgeneric serialized-list-read-serialized-object (object))
-(defmethod serialized-list-read-serialized-object ((object serialized-list))
+(defgeneric read-serialized-object (object &optional key))
+(defmethod read-serialized-object ((object serialized-list) &optional (key nil key-suppliedp))
+  (declare (ignore key))
+  (when key-suppliedp
+    (error "READ-SERIALIZED-OBJECT is not applicable with a KEY argument for ~S." 'serialized-list))
   (wrap-serialized-object (opendaq.low-level:serialized-list/read-serialized-object (%require-live-pointer object)))
 )
 
-(defgeneric serialized-list-read-string (object))
-(defmethod serialized-list-read-string ((object serialized-list))
+(defgeneric read-string (object &optional key))
+(defmethod read-string ((object serialized-list) &optional (key nil key-suppliedp))
+  (declare (ignore key))
+  (when key-suppliedp
+    (error "READ-STRING is not applicable with a KEY argument for ~S." 'serialized-list))
   (%daq-string-to-lisp-and-release (opendaq.low-level:serialized-list/read-string (%require-live-pointer object)))
 )
 
@@ -14874,8 +14905,9 @@
   (not (zerop (opendaq.low-level:serialized-object/is-root (%require-live-pointer object))))
 )
 
-(defgeneric serialized-object-read-bool (object key))
-(defmethod serialized-object-read-bool ((object serialized-object) key)
+(defmethod read-bool ((object serialized-object) &optional (key nil key-suppliedp))
+  (unless key-suppliedp
+    (error "READ-BOOL requires a KEY argument for ~S." 'serialized-object))
   (multiple-value-bind (coerced-key cleanup-key)
       (%coerce-argument key :daq-string)
     (unwind-protect
@@ -14883,8 +14915,9 @@
       (%cleanup-coerced-argument cleanup-key)))
 )
 
-(defgeneric serialized-object-read-float (object key))
-(defmethod serialized-object-read-float ((object serialized-object) key)
+(defmethod read-float ((object serialized-object) &optional (key nil key-suppliedp))
+  (unless key-suppliedp
+    (error "READ-FLOAT requires a KEY argument for ~S." 'serialized-object))
   (multiple-value-bind (coerced-key cleanup-key)
       (%coerce-argument key :daq-string)
     (unwind-protect
@@ -14892,8 +14925,9 @@
       (%cleanup-coerced-argument cleanup-key)))
 )
 
-(defgeneric serialized-object-read-int (object key))
-(defmethod serialized-object-read-int ((object serialized-object) key)
+(defmethod read-int ((object serialized-object) &optional (key nil key-suppliedp))
+  (unless key-suppliedp
+    (error "READ-INT requires a KEY argument for ~S." 'serialized-object))
   (multiple-value-bind (coerced-key cleanup-key)
       (%coerce-argument key :daq-string)
     (unwind-protect
@@ -14935,8 +14969,9 @@
       (%cleanup-coerced-argument cleanup-key)))
 )
 
-(defgeneric serialized-object-read-serialized-list (object key))
-(defmethod serialized-object-read-serialized-list ((object serialized-object) key)
+(defmethod read-serialized-list ((object serialized-object) &optional (key nil key-suppliedp))
+  (unless key-suppliedp
+    (error "READ-SERIALIZED-LIST requires a KEY argument for ~S." 'serialized-object))
   (multiple-value-bind (coerced-key cleanup-key)
       (%coerce-argument key :daq-string)
     (unwind-protect
@@ -14944,8 +14979,9 @@
       (%cleanup-coerced-argument cleanup-key)))
 )
 
-(defgeneric serialized-object-read-serialized-object (object key))
-(defmethod serialized-object-read-serialized-object ((object serialized-object) key)
+(defmethod read-serialized-object ((object serialized-object) &optional (key nil key-suppliedp))
+  (unless key-suppliedp
+    (error "READ-SERIALIZED-OBJECT requires a KEY argument for ~S." 'serialized-object))
   (multiple-value-bind (coerced-key cleanup-key)
       (%coerce-argument key :daq-string)
     (unwind-protect
@@ -14953,8 +14989,9 @@
       (%cleanup-coerced-argument cleanup-key)))
 )
 
-(defgeneric serialized-object-read-string (object key))
-(defmethod serialized-object-read-string ((object serialized-object) key)
+(defmethod read-string ((object serialized-object) &optional (key nil key-suppliedp))
+  (unless key-suppliedp
+    (error "READ-STRING requires a KEY argument for ~S." 'serialized-object))
   (multiple-value-bind (coerced-key cleanup-key)
       (%coerce-argument key :daq-string)
     (unwind-protect
@@ -15553,8 +15590,10 @@
   )
 )
 
-(defgeneric signal-last-value (object))
-(defmethod signal-last-value ((object signal))
+(defmethod last-value ((object signal) &optional (type-manager nil type-manager-suppliedp))
+  (declare (ignore type-manager))
+  (when type-manager-suppliedp
+    (error "LAST-VALUE is not applicable with a TYPE-MANAGER argument for ~S." 'signal))
   (wrap-base-object (opendaq.low-level:signal/get-last-value (%require-live-pointer object)))
 )
 
@@ -16680,8 +16719,7 @@
   (not (zerop (opendaq.low-level:user-lock/is-locked (%require-live-pointer object))))
 )
 
-(defgeneric user-lock-lock (object user))
-(defmethod user-lock-lock ((object user-lock) user)
+(defmethod lock ((object user-lock) &optional (user nil))
   (multiple-value-bind (coerced-user cleanup-user)
       (%coerce-argument user :managed-pointer)
     (unwind-protect
@@ -16689,8 +16727,7 @@
       (%cleanup-coerced-argument cleanup-user)))
 )
 
-(defgeneric user-lock-unlock (object user))
-(defmethod user-lock-unlock ((object user-lock) user)
+(defmethod unlock ((object user-lock) &optional (user nil))
   (multiple-value-bind (coerced-user cleanup-user)
       (%coerce-argument user :managed-pointer)
     (unwind-protect
@@ -17160,8 +17197,6 @@
          data-descriptor-interface-id
          data-packet
          data-packet-interface-id
-         data-packet-last-value
-         data-packet-offset
          data-rule
          data-rule-builder
          data-rule-builder-interface-id
@@ -17210,18 +17245,14 @@
          device-info-internal
          device-info-internal-interface-id
          device-interface-id
-         device-lock
          device-manual
          device-network-config
          device-network-config-interface-id
          device-private
          device-private-interface-id
-         device-private-lock
-         device-private-unlock
          device-revision
          device-type
          device-type-interface-id
-         device-unlock
          device-update-options
          device-update-options-interface-id
          device-update-options-with-local-id-or-null
@@ -17274,7 +17305,6 @@
          end-update
          end-update-event-args
          end-update-event-args-interface-id
-         end-update-event-args-properties
          enqueue
          enqueue-and-steal-ref
          enqueue-last-descriptor
@@ -17332,7 +17362,6 @@
          freezable-interface-id
          freeze
          function-block
-         function-block-input-ports
          function-block-interface-id
          function-block-type
          function-block-type-interface-id
@@ -17386,6 +17415,7 @@
          input-port-private
          input-port-private-interface-id
          input-port-signal
+         input-ports
          input-sample-type
          input-used
          inputs-outputs-folder
@@ -17469,6 +17499,7 @@
          local-id
          local-path
          location
+         lock
          lock-all-attributes
          lock-attributes
          lock-guard
@@ -17542,7 +17573,6 @@
          multi-reader-builder
          multi-reader-builder-interface-id
          multi-reader-interface-id
-         multi-reader-offset
          multi-reader-read
          multi-reader-read-with-domain
          multi-reader-status
@@ -17567,6 +17597,7 @@
          numerator
          object-list
          object-list-interface-id
+         offset
          old-block-reader
          old-value
          on-any-property-value-read
@@ -17644,11 +17675,10 @@
          procedure
          product-code
          product-instance-uri
+         properties
          property
          property-builder
          property-builder-interface-id
-         property-builder-on-property-value-read
-         property-builder-on-property-value-write
          property-event-type
          property-interface-id
          property-internal
@@ -17658,24 +17688,16 @@
          property-object-class
          property-object-class-builder
          property-object-class-builder-interface-id
-         property-object-class-builder-properties
          property-object-class-interface-id
          property-object-class-internal
          property-object-class-internal-clone
          property-object-class-internal-interface-id
-         property-object-class-properties
-         property-object-class-property
          property-object-interface-id
          property-object-internal
          property-object-internal-clone
          property-object-internal-interface-id
-         property-object-on-property-value-read
-         property-object-on-property-value-write
-         property-object-property
          property-object-protected
          property-object-protected-interface-id
-         property-on-property-value-read
-         property-on-property-value-write
          property-order
          property-references
          property-selection-value
@@ -17683,7 +17705,6 @@
          property-type
          property-value
          property-value-event-args
-         property-value-event-args-property
          property-value-no-lock
          protected-property-selection-value
          protected-property-value
@@ -17712,21 +17733,25 @@
          reachability-status-private
          read
          read-all
+         read-bool
+         read-float
+         read-int
          read-mode
          read-only
          read-only-no-lock
          read-only-unresolved
+         read-serialized-list
+         read-serialized-object
          read-status
+         read-string
          read-timeout-type
          read-with-domain
          reader
          reader-config
-         reader-config-input-ports
          reader-config-interface-id
          reader-interface-id
          reader-status
          reader-status-interface-id
-         reader-status-offset
          real
          recorder
          recorder-interface-id
@@ -17846,24 +17871,12 @@
          serialize-id
          serialized-list
          serialized-list-interface-id
-         serialized-list-read-bool
-         serialized-list-read-float
-         serialized-list-read-int
          serialized-list-read-list
          serialized-list-read-object
-         serialized-list-read-serialized-list
-         serialized-list-read-serialized-object
-         serialized-list-read-string
          serialized-object
          serialized-object-interface-id
-         serialized-object-read-bool
-         serialized-object-read-float
-         serialized-object-read-int
          serialized-object-read-list
          serialized-object-read-object
-         serialized-object-read-serialized-list
-         serialized-object-read-serialized-object
-         serialized-object-read-string
          serialized-object-type
          serializer
          server
@@ -17886,7 +17899,6 @@
          signal-events
          signal-events-interface-id
          signal-interface-id
-         signal-last-value
          signal-private
          signal-private-interface-id
          signal-serialize-id
@@ -18004,6 +18016,7 @@
          unit-interface-id
          unit-no-lock
          unit-unresolved
+         unlock
          unlock-all-attributes
          unlock-attributes
          unmute
@@ -18030,8 +18043,6 @@
          user-internal-interface-id
          user-lock
          user-lock-interface-id
-         user-lock-lock
-         user-lock-unlock
          user-name
          username
          uses-offset
