@@ -163,8 +163,8 @@ builder, and adopts the resulting reader pointer into OBJECT."
   (:documentation
    "Read up to COUNT samples (or COUNT blocks, for a block reader) from READER.
 Returns a Lisp array whose element type matches the reader's VALUE-READ-TYPE: a
-vector for stream/tail readers, or a 2-D (blocks x block-size) array for block
-readers."))
+vector for stream/tail readers, a 2-D (blocks x block-size) array for block
+readers, or a list of one vector per signal for multi readers."))
 
 (defmethod read ((reader stream-reader) count &key (timeout-ms 0))
   (multiple-value-bind (cffi-type element-type)
@@ -191,9 +191,10 @@ readers."))
 
 (defgeneric read-with-domain (reader count &key timeout-ms)
   (:documentation
-   "Like READ, but also reads the domain (e.g. timestamp) values.  Returns two
-vectors as multiple values: the sample values and the domain values, sized to
-the same actual sample count."))
+   "Like READ, but also reads the domain (e.g. timestamp) values.  Returns the
+sample values and the domain values as two parallel results (multiple values),
+each sized to the same actual sample count: vectors for the single-signal
+readers, or a list of one vector per signal for multi readers."))
 
 (defmethod read-with-domain ((reader stream-reader) count &key (timeout-ms 0))
   (multiple-value-bind (value-type value-element-type)
@@ -229,6 +230,77 @@ the same actual sample count."))
             (let ((blocks-read (block-reader-read-with-domain reader values domain count timeout-ms)))
               (cl:values (%buffer->matrix values value-type value-element-type blocks-read block-size)
                          (%buffer->matrix domain domain-type domain-element-type blocks-read block-size)))))))))
+
+;;; ---------------------------------------------------------------------------
+;;; Multi reader
+;;;
+;;; A multi reader reads several signals at once, aligned on a common domain.
+;;; Unlike the single-buffer readers above it fills one value (and one domain)
+;;; buffer *per signal* -- the C API takes a void**, an array of buffer pointers.
+;;; We accept the signals as a plain Lisp list at construction and return one
+;;; Lisp vector per signal from READ / READ-WITH-DOMAIN, so callers never have to
+;;; touch the foreign buffers.
+;;; ---------------------------------------------------------------------------
+
+(defmethod initialize-instance :around ((reader multi-reader) &rest initargs &key signals &allow-other-keys)
+  "Let :SIGNALS be a plain Lisp list of signals (as well as an object-list),
+building the object-list the underlying constructor expects.  The original
+:SIGNALS is left in INITARGS but overridden by the leftmost one we prepend."
+  (if (and signals (listp signals))
+      (let ((object-list (make-instance 'object-list)))
+        (dolist (signal signals)
+          (push-back object-list signal))
+        (apply #'call-next-method reader :signals object-list initargs))
+      (call-next-method)))
+
+(defun %multi-reader-signal-count (reader)
+  "Number of signals READER was constructed with.  IMultiReader exposes no
+signal-count accessor, so we count the :SIGNALS object-list the constructor
+stashed in the class slot of the same name."
+  (let ((signals (slot-value reader '%signals-initarg)))
+    (unless signals
+      (error "Cannot determine the signal count of ~S; multi-reader READ needs a ~
+reader created with MAKE-INSTANCE and :SIGNALS." reader))
+    (count signals)))
+
+(defmacro %with-multi-reader-buffers ((array-var buffers-var signal-count cffi-type sample-count) &body body)
+  "Allocate SIGNAL-COUNT foreign buffers of SAMPLE-COUNT elements of CFFI-TYPE and
+a void** ARRAY-VAR pointing at them (one buffer per signal), run BODY with
+ARRAY-VAR and BUFFERS-VAR bound, and free everything afterwards."
+  (let ((index (gensym "INDEX"))
+        (count (gensym "COUNT")))
+    `(let* ((,count ,signal-count)
+            (,buffers-var (loop repeat ,count
+                                collect (cffi:foreign-alloc ,cffi-type :count (max ,sample-count 1)))))
+       (unwind-protect
+            (cffi:with-foreign-object (,array-var :pointer ,count)
+              (loop for ,index below ,count
+                    do (setf (cffi:mem-aref ,array-var :pointer ,index) (nth ,index ,buffers-var)))
+              ,@body)
+         (mapc #'cffi:foreign-free ,buffers-var)))))
+
+(defmethod read ((reader multi-reader) count &key (timeout-ms 0))
+  (let ((signal-count (%multi-reader-signal-count reader)))
+    (multiple-value-bind (cffi-type element-type)
+        (%sample-array-type (value-read-type reader))
+      (%with-multi-reader-buffers (value-array value-buffers signal-count cffi-type count)
+        (let ((read-count (multi-reader-read reader value-array count timeout-ms)))
+          (mapcar (lambda (buffer) (%buffer->vector buffer cffi-type element-type read-count))
+                  value-buffers))))))
+
+(defmethod read-with-domain ((reader multi-reader) count &key (timeout-ms 0))
+  (let ((signal-count (%multi-reader-signal-count reader)))
+    (multiple-value-bind (value-type value-element-type)
+        (%sample-array-type (value-read-type reader))
+      (multiple-value-bind (domain-type domain-element-type)
+          (%sample-array-type (domain-read-type reader))
+        (%with-multi-reader-buffers (value-array value-buffers signal-count value-type count)
+          (%with-multi-reader-buffers (domain-array domain-buffers signal-count domain-type count)
+            (let ((read-count (multi-reader-read-with-domain
+                               reader value-array domain-array count timeout-ms)))
+              (cl:values
+               (mapcar (lambda (b) (%buffer->vector b value-type value-element-type read-count)) value-buffers)
+               (mapcar (lambda (b) (%buffer->vector b domain-type domain-element-type read-count)) domain-buffers)))))))))
 
 ;;; ---------------------------------------------------------------------------
 ;;; Data packet buffer accessors

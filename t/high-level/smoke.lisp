@@ -46,6 +46,35 @@
                                          (daq:domain-tick->timestamp signal (aref domain 0)))
                   "domain-tick->timestamp should agree with the domain-time-converter closure."))))))))
 
+(test high-level-multi-reader
+  (locally (declare (optimize (debug 3)))
+    (let* ((instance (make-instance 'daq:instance))
+           (device (daq:add-device (daq:root-device instance) "daqref://device0"))
+           (channels (list (daq:as (daq:find-component device "IO/AI/RefCh0") 'daq:channel)
+                           (daq:as (daq:find-component device "IO/AI/RefCh1") 'daq:channel)))
+           (signals (mapcar (lambda (channel) (first (daq:signals channel))) channels))
+           ;; :SIGNALS accepts a plain Lisp list (built into an object-list for us).
+           (reader (make-instance 'daq:multi-reader :signals signals)))
+      ;; The first reads only synchronise the streams; loop until aligned data.
+      (loop for attempt below 30
+            do (multiple-value-bind (values domain)
+                   (daq:read-with-domain reader 10 :timeout-ms 1000)
+                 (when (plusp (cl:length (first domain)))
+                   (is (= 2 (cl:length values))
+                       "Multi reader should return one value vector per signal.")
+                   (is (= 2 (cl:length domain))
+                       "Multi reader should return one domain vector per signal.")
+                   (is (apply #'= (mapcar #'cl:length values))
+                       "All per-signal value vectors should share the same length.")
+                   (is (every (lambda (v) (eq 'double-float (array-element-type v))) values)
+                       "Multi reader default value type should be double-float.")
+                   (is (equalp (first domain) (second domain))
+                       "Synchronised signals should share identical domain ticks.")
+                   (is (= 2 (cl:length (daq:read reader 5 :timeout-ms 1000)))
+                       "Multi reader READ should also return one vector per signal.")
+                   (return)))
+            finally (fail "Multi reader did not synchronise within the attempt budget.")))))
+
 (test high-level-block-reader
   (locally (declare (optimize (debug 3)))
     (let* ((instance (make-instance 'daq:instance))
