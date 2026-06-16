@@ -60,6 +60,22 @@
     (is (= 16 (daq:size binary-data))
         "High-level binary-data wrappers should preserve their native buffer size.")))
 
+(test high-level-coretypes-ratio-boxing
+  ;; A native Lisp ratio passed as an argument should box into a daqRatio, and a
+  ;; daqRatio should unbox back into a native Lisp ratio through the primitive path.
+  (let ((list (make-instance 'daq:object-list)))
+    (daq:push-back list 2/3)
+    (let ((popped (daq:as (daq:pop-front list) 'daq:ratio)))
+      (is (= 2 (daq:numerator popped))
+          "A Lisp ratio argument should box into a daqRatio (numerator preserved).")
+      (is (= 3 (daq:denominator popped))
+          "A Lisp ratio argument should box into a daqRatio (denominator preserved.)")))
+  (let ((list (make-instance 'daq:object-list)))
+    (daq:push-back list 1/4)
+    (daq:push-back list 3/8)
+    (is (equal '(1/4 3/8) (daq:as-list-of list 'daq:ratio))
+        "daqRatios should unbox into native Lisp ratios via AS-LIST-OF.")))
+
 (test high-level-coretypes-collections
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list 1)

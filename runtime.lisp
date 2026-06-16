@@ -621,6 +621,10 @@ Uses direct FFI calls to avoid re-entering %check-error during error reporting."
                ((integerp value)
                 (let ((pointer (opendaq.low-level:integer/create-integer value)))
                   (values pointer (make-cleanup pointer))))
+               ((typep value 'cl:ratio)
+                (let ((pointer (opendaq.low-level:ratio/create-ratio
+                                (cl:numerator value) (cl:denominator value))))
+                  (values pointer (make-cleanup pointer))))
                ((or (eq value t) (null value))
                 (let ((pointer (opendaq.low-level:boolean/create-bool-object
                                 (if value 1 0))))
@@ -651,7 +655,7 @@ Uses direct FFI calls to avoid re-entering %check-error during error reporting."
 float, number, string, ratio, or complex-number) rather than
 a full managed-object class like DEVICE or SIGNAL."
   (member type-name '(daq-boolean daq-float daq-integer daq-number
-                      daq-ratio daq-string-object complex-number)))
+                      ratio daq-string-object complex-number)))
 
 (defun %unbox-primitive (object target-type)
   "Extract the Lisp value from a boxed primitive wrapper and release the
@@ -666,7 +670,7 @@ temporary wrapper.  TARGET-TYPE is a symbol naming the primitive class
         (daq-float          (finish (opendaq.low-level:float-object/get-value ptr)))
         (daq-integer        (finish (opendaq.low-level:integer/get-value ptr)))
         (daq-number         (finish (opendaq.low-level:number/get-float-value ptr)))
-        (daq-ratio          (finish (let ((num (opendaq.low-level:ratio/get-numerator ptr))
+        (ratio              (finish (let ((num (opendaq.low-level:ratio/get-numerator ptr))
                                           (den (opendaq.low-level:ratio/get-denominator ptr)))
                                       (/ num den))))
         (daq-string-object  (prog1

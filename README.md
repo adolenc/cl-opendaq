@@ -54,6 +54,7 @@ The high-level API insulates you from openDAQ's C types. Arguments accept plain 
 | `string`    | `daqString` |
 | `fixnum` / `integer` | `daqInteger` |
 | `float`     | `daqFloat` |
+| `ratio`     | `daqRatio` |
 | `t` / `nil` | `daqBool` |
 | managed-object (any `daq` object) | its raw pointer is extracted |
 
