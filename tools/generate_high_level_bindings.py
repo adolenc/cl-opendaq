@@ -593,26 +593,30 @@ def emit_wrapper_constructor(spec: dict) -> list[str]:
 
 
 def emit_coerced_call(parameters: tuple[dict, ...], inner_lines: list[str], indent: str) -> list[str]:
+    """Wrap INNER_LINES so each parameter is boxed for the call and released after.
+
+    Emits a single WITH-DAQ-BOXED-VALUES form (the macro defined in runtime.lisp)
+    binding one coerced-<name> per parameter; the macro centralises the per-argument
+    coerce / unwind-protect / cleanup dance that used to be expanded inline at every
+    call site.  A NIL category marks an argument that needs no boxing.  With no
+    parameters there is nothing to box, so INNER_LINES are emitted directly.
+    """
+    if not parameters:
+        return [f"{indent}{line}" if line else line for line in inner_lines]
+
+    open_prefix = f"{indent}(with-daq-boxed-values ("
+    align = " " * len(open_prefix)
     lines: list[str] = []
+    for index, p in enumerate(parameters):
+        category = coerce_category(p)
+        binding = f"(coerced-{p['lisp_name']} {p['lisp_name']} {category if category is not None else 'nil'})"
+        prefix = open_prefix if index == 0 else align
+        closing = ")" if index == len(parameters) - 1 else ""
+        lines.append(f"{prefix}{binding}{closing}")
 
-    def recurse(idx: int, cur_indent: str) -> None:
-        if idx == len(parameters):
-            lines.extend([f"{cur_indent}{line}" if line else line for line in inner_lines])
-            return
-        p = parameters[idx]
-        cat = coerce_category(p)
-        if cat is None:
-            lines.append(f"{cur_indent}(let ((coerced-{p['lisp_name']} {p['lisp_name']}))")
-            recurse(idx + 1, cur_indent + "  ")
-            lines.append(f"{cur_indent})")
-        else:
-            lines.append(f"{cur_indent}(multiple-value-bind (coerced-{p['lisp_name']} cleanup-{p['lisp_name']})")
-            lines.append(f"{cur_indent}    (%coerce-argument {p['lisp_name']} {cat})")
-            lines.append(f"{cur_indent}  (unwind-protect")
-            recurse(idx + 1, cur_indent + "      ")
-            lines.append(f"{cur_indent}    (%cleanup-coerced-argument cleanup-{p['lisp_name']})))")
-
-    recurse(0, indent)
+    body = [f"{indent}  {line}" if line else line for line in inner_lines]
+    body[-1] = body[-1] + ")"
+    lines.extend(body)
     return lines
 
 

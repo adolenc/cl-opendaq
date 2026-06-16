@@ -565,6 +565,27 @@ Uses direct FFI calls to avoid re-entering %check-error during error reporting."
     (funcall cleanup))
   nil)
 
+(defmacro with-daq-boxed-values (bindings &body body)
+  "Bind each (VAR VALUE-FORM CATEGORY) of BINDINGS to the boxed representation of
+VALUE-FORM (via %COERCE-ARGUMENT with the given CATEGORY), evaluate BODY, then
+release every boxed temporary on the way out -- innermost first -- whether BODY
+returns normally or unwinds.  A NIL CATEGORY binds VAR to VALUE-FORM verbatim,
+with no coercion and no cleanup (for arguments that need no boxing).  This is the
+single expansion the generated high-level wrappers use to marshal their
+arguments; see EMIT_COERCED_CALL in tools/generate_high_level_bindings.py."
+  (if (null bindings)
+      `(progn ,@body)
+      (destructuring-bind ((var value-form category) . rest) bindings
+        (if (null category)
+            `(let ((,var ,value-form))
+               (with-daq-boxed-values ,rest ,@body))
+            (let ((cleanup (gensym "CLEANUP-")))
+              `(multiple-value-bind (,var ,cleanup)
+                   (%coerce-argument ,value-form ,category)
+                 (unwind-protect
+                     (with-daq-boxed-values ,rest ,@body)
+                   (%cleanup-coerced-argument ,cleanup))))))))
+
 (defun %coerce-argument (value category)
   (flet ((make-cleanup (pointer)
            (lambda ()
