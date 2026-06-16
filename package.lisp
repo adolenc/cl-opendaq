@@ -23,8 +23,7 @@
                 #:opendaq-error-code
                 #:opendaq-error-message
                 #:opendaq-error-operation)
-  (:shadow #:ratio
-           #:numerator
+  (:shadow #:numerator
            #:denominator
            #:read)
   (:export #:as

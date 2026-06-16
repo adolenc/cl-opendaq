@@ -278,7 +278,6 @@
             create-excluded-tags-search-filter
             create-explicit-data-rule
             create-explicit-domain-data-rule
-            create-float
             create-float-property
             create-float-property-builder
             create-folder-with-item-type
@@ -363,11 +362,15 @@
             custom-info-property-names
             daq-boolean
             daq-boolean-interface-id
+            daq-float
+            daq-float-interface-id
             daq-function
             daq-integer
             daq-integer-interface-id
             daq-number
             daq-number-interface-id
+            daq-ratio
+            daq-ratio-interface-id
             daq-string-object
             daq-string-object-interface-id
             daq-type
@@ -529,8 +532,6 @@
             find-component
             find-properties
             find-user
-            float-object
-            float-object-interface-id
             float-value
             flush
             flush-on-level
@@ -903,8 +904,6 @@
             query-interface
             range
             range-interface-id
-            ratio
-            ratio-interface-id
             raw-data
             raw-data-size
             raw-last-value
@@ -1303,9 +1302,11 @@
             wrap-core-event-args
             wrap-core-type
             wrap-daq-boolean
+            wrap-daq-float
             wrap-daq-function
             wrap-daq-integer
             wrap-daq-number
+            wrap-daq-ratio
             wrap-daq-string-object
             wrap-daq-type
             wrap-data-descriptor
@@ -1341,7 +1342,6 @@
             wrap-event-args
             wrap-event-handler
             wrap-event-packet
-            wrap-float-object
             wrap-folder
             wrap-folder-config
             wrap-freezable
@@ -1405,7 +1405,6 @@
             wrap-property-object-protected
             wrap-property-value-event-args
             wrap-range
-            wrap-ratio
             wrap-reader
             wrap-reader-config
             wrap-reader-status
@@ -2236,6 +2235,27 @@
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
     (make-instance 'daq-boolean :pointer pointer)))
 
+(defclass daq-float (base-object)
+  (
+   (%value-initarg :initarg :value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object daq-float)
+                                       &key (pointer nil pointer-p)
+                                            (value nil value-p)
+                                       &allow-other-keys)
+  (declare (ignore pointer))
+  (when (and (not pointer-p) value-p)
+  (let ((coerced-value value))
+    (%adopt-pointer object (opendaq.low-level:float-object/create-float coerced-value))
+  )
+    ))
+
+(defun wrap-daq-float (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'daq-float :pointer pointer)))
+
 (defclass daq-function (base-object)
   (
    (%value-initarg :initarg :value :initform nil)
@@ -2287,6 +2307,31 @@
 (defun wrap-daq-number (pointer)
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
     (make-instance 'daq-number :pointer pointer)))
+
+(defclass daq-ratio (base-object)
+  (
+   (%numerator-initarg :initarg :numerator :initform nil)
+   (%denominator-initarg :initarg :denominator :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object daq-ratio)
+                                       &key (pointer nil pointer-p)
+                                            (numerator nil numerator-p)
+                                            (denominator nil denominator-p)
+                                       &allow-other-keys)
+  (declare (ignore pointer))
+  (when (and (not pointer-p) numerator-p denominator-p)
+  (let ((coerced-numerator numerator))
+    (let ((coerced-denominator denominator))
+      (%adopt-pointer object (opendaq.low-level:ratio/create-ratio coerced-numerator coerced-denominator))
+    )
+  )
+    ))
+
+(defun wrap-daq-ratio (pointer)
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance 'daq-ratio :pointer pointer)))
 
 (defclass daq-string-object (base-object)
   (
@@ -3057,27 +3102,6 @@
 (defun wrap-event-packet (pointer)
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
     (make-instance 'event-packet :pointer pointer)))
-
-(defclass float-object (managed-object)
-  (
-   (%value-initarg :initarg :value :initform nil)
-   ))
-
-
-(defmethod initialize-instance :after ((object float-object)
-                                       &key (pointer nil pointer-p)
-                                            (value nil value-p)
-                                       &allow-other-keys)
-  (declare (ignore pointer))
-  (when (and (not pointer-p) value-p)
-  (let ((coerced-value value))
-    (%adopt-pointer object (opendaq.low-level:float-object/create-float-object coerced-value))
-  )
-    ))
-
-(defun wrap-float-object (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'float-object :pointer pointer)))
 
 (defclass folder (component)
   (
@@ -4195,31 +4219,6 @@
 (defun wrap-range (pointer)
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
     (make-instance 'range :pointer pointer)))
-
-(defclass ratio (base-object)
-  (
-   (%numerator-initarg :initarg :numerator :initform nil)
-   (%denominator-initarg :initarg :denominator :initform nil)
-   ))
-
-
-(defmethod initialize-instance :after ((object ratio)
-                                       &key (pointer nil pointer-p)
-                                            (numerator nil numerator-p)
-                                            (denominator nil denominator-p)
-                                       &allow-other-keys)
-  (declare (ignore pointer))
-  (when (and (not pointer-p) numerator-p denominator-p)
-  (let ((coerced-numerator numerator))
-    (let ((coerced-denominator denominator))
-      (%adopt-pointer object (opendaq.low-level:ratio/create-ratio coerced-numerator coerced-denominator))
-    )
-  )
-    ))
-
-(defun wrap-ratio (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'ratio :pointer pointer)))
 
 (defclass reader (base-object)
   (
@@ -7406,7 +7405,7 @@
 
 (defgeneric tick-resolution (object))
 (defmethod tick-resolution ((object data-descriptor-builder))
-  (wrap-ratio (opendaq.low-level:data-descriptor-builder/get-tick-resolution (%require-live-pointer object)))
+  (wrap-daq-ratio (opendaq.low-level:data-descriptor-builder/get-tick-resolution (%require-live-pointer object)))
 )
 
 (defgeneric unit (object))
@@ -7578,7 +7577,7 @@
 )
 
 (defmethod tick-resolution ((object data-descriptor))
-  (wrap-ratio (opendaq.low-level:data-descriptor/get-tick-resolution (%require-live-pointer object)))
+  (wrap-daq-ratio (opendaq.low-level:data-descriptor/get-tick-resolution (%require-live-pointer object)))
 )
 
 (defmethod unit ((object data-descriptor))
@@ -7990,7 +7989,7 @@
 )
 
 (defmethod tick-resolution ((object device-domain))
-  (wrap-ratio (opendaq.low-level:device-domain/get-tick-resolution (%require-live-pointer object)))
+  (wrap-daq-ratio (opendaq.low-level:device-domain/get-tick-resolution (%require-live-pointer object)))
 )
 
 (defmethod unit ((object device-domain))
@@ -9722,26 +9721,20 @@
       (%cleanup-coerced-argument cleanup-event-handler)))
 )
 
-(defun create-float (value)
-  (let ((coerced-value value))
-    (wrap-float-object (opendaq.low-level:float-object/create-float coerced-value))
-  )
-)
-
-(defmethod equals-value ((object float-object) value)
+(defmethod equals-value ((object daq-float) value)
   (let ((coerced-value value))
     (not (zerop (opendaq.low-level:float-object/equals-value (%require-live-pointer object) coerced-value)))
   )
 )
 
-(defun float-object-interface-id ()
+(defun daq-float-interface-id ()
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
     (opendaq.low-level:float-object/get-interface-id intf-id-slot)
     nil
   )
 )
 
-(defmethod value ((object float-object))
+(defmethod value ((object daq-float))
   (opendaq.low-level:float-object/get-value (%require-live-pointer object))
 )
 
@@ -11784,7 +11777,7 @@
 
 (defgeneric tick-offset-tolerance (object))
 (defmethod tick-offset-tolerance ((object multi-reader-builder))
-  (wrap-ratio (opendaq.low-level:multi-reader-builder/get-tick-offset-tolerance (%require-live-pointer object)))
+  (wrap-daq-ratio (opendaq.low-level:multi-reader-builder/get-tick-offset-tolerance (%require-live-pointer object)))
 )
 
 (defmethod value-read-type ((object multi-reader-builder))
@@ -11978,7 +11971,7 @@
 )
 
 (defmethod tick-resolution ((object multi-reader))
-  (wrap-ratio (opendaq.low-level:multi-reader/get-tick-resolution (%require-live-pointer object)))
+  (wrap-daq-ratio (opendaq.low-level:multi-reader/get-tick-resolution (%require-live-pointer object)))
 )
 
 (defgeneric multi-reader-read (object samples count timeout-ms))
@@ -14054,11 +14047,11 @@
 )
 
 (defgeneric denominator (object))
-(defmethod denominator ((object ratio))
+(defmethod denominator ((object daq-ratio))
   (opendaq.low-level:ratio/get-denominator (%require-live-pointer object))
 )
 
-(defun ratio-interface-id ()
+(defun daq-ratio-interface-id ()
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
     (opendaq.low-level:ratio/get-interface-id intf-id-slot)
     nil
@@ -14066,13 +14059,13 @@
 )
 
 (defgeneric numerator (object))
-(defmethod numerator ((object ratio))
+(defmethod numerator ((object daq-ratio))
   (opendaq.low-level:ratio/get-numerator (%require-live-pointer object))
 )
 
 (defgeneric simplify (object))
-(defmethod simplify ((object ratio))
-  (wrap-ratio (opendaq.low-level:ratio/simplify (%require-live-pointer object)))
+(defmethod simplify ((object daq-ratio))
+  (wrap-daq-ratio (opendaq.low-level:ratio/simplify (%require-live-pointer object)))
 )
 
 (defgeneric domain-transform-function (object))
@@ -17096,7 +17089,6 @@
          create-excluded-tags-search-filter
          create-explicit-data-rule
          create-explicit-domain-data-rule
-         create-float
          create-float-property
          create-float-property-builder
          create-folder-with-item-type
@@ -17181,11 +17173,15 @@
          custom-info-property-names
          daq-boolean
          daq-boolean-interface-id
+         daq-float
+         daq-float-interface-id
          daq-function
          daq-integer
          daq-integer-interface-id
          daq-number
          daq-number-interface-id
+         daq-ratio
+         daq-ratio-interface-id
          daq-string-object
          daq-string-object-interface-id
          daq-type
@@ -17347,8 +17343,6 @@
          find-component
          find-properties
          find-user
-         float-object
-         float-object-interface-id
          float-value
          flush
          flush-on-level
@@ -17721,8 +17715,6 @@
          query-interface
          range
          range-interface-id
-         ratio
-         ratio-interface-id
          raw-data
          raw-data-size
          raw-last-value
@@ -18121,9 +18113,11 @@
          wrap-core-event-args
          wrap-core-type
          wrap-daq-boolean
+         wrap-daq-float
          wrap-daq-function
          wrap-daq-integer
          wrap-daq-number
+         wrap-daq-ratio
          wrap-daq-string-object
          wrap-daq-type
          wrap-data-descriptor
@@ -18159,7 +18153,6 @@
          wrap-event-args
          wrap-event-handler
          wrap-event-packet
-         wrap-float-object
          wrap-folder
          wrap-folder-config
          wrap-freezable
@@ -18223,7 +18216,6 @@
          wrap-property-object-protected
          wrap-property-value-event-args
          wrap-range
-         wrap-ratio
          wrap-reader
          wrap-reader-config
          wrap-reader-status

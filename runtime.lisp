@@ -655,7 +655,7 @@ Uses direct FFI calls to avoid re-entering %check-error during error reporting."
 float, number, string, ratio, or complex-number) rather than
 a full managed-object class like DEVICE or SIGNAL."
   (member type-name '(daq-boolean daq-float daq-integer daq-number
-                      ratio daq-string-object complex-number)))
+                      daq-ratio daq-string-object complex-number)))
 
 (defun %unbox-primitive (object target-type)
   "Extract the Lisp value from a boxed primitive wrapper and release the
@@ -670,7 +670,7 @@ temporary wrapper.  TARGET-TYPE is a symbol naming the primitive class
         (daq-float          (finish (opendaq.low-level:float-object/get-value ptr)))
         (daq-integer        (finish (opendaq.low-level:integer/get-value ptr)))
         (daq-number         (finish (opendaq.low-level:number/get-float-value ptr)))
-        (ratio              (finish (let ((num (opendaq.low-level:ratio/get-numerator ptr))
+        (daq-ratio          (finish (let ((num (opendaq.low-level:ratio/get-numerator ptr))
                                           (den (opendaq.low-level:ratio/get-denominator ptr)))
                                       (/ num den))))
         (daq-string-object  (prog1

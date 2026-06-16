@@ -12,13 +12,13 @@
 
 (test high-level-coretypes-primitives
   (let* ((base-object (daq:wrap-base-object (opendaq.low-level:base-object/create)))
-         (wrapped-ratio (daq:wrap-ratio (opendaq.low-level:ratio/create-ratio 8 12)))
-         (ratio (make-instance 'daq:ratio :numerator 6 :denominator 9))
+         (wrapped-ratio (daq:wrap-daq-ratio (opendaq.low-level:ratio/create-ratio 8 12)))
+         (ratio (make-instance 'daq:daq-ratio :numerator 6 :denominator 9))
          (simplified (daq:simplify ratio))
          (boolean (make-instance 'daq:daq-boolean :value nil))
          (complex-number (make-instance 'daq:complex-number :real 1.0d0 :imaginary 2.0d0))
          (integer (make-instance 'daq:daq-integer :value 1))
-         (float-object (make-instance 'daq:float-object :value 1.0d0))
+         (float-object (make-instance 'daq:daq-float :value 1.0d0))
          (string-object (daq:wrap-daq-string-object (opendaq.low-level:make-daq-string "test")))
          (simple-type (make-instance 'daq:simple-type :core-type :daq-ct-int))
          (version-info (make-instance 'daq:version-info :major 1 :minor 2 :patch 3))
@@ -65,7 +65,7 @@
   ;; daqRatio should unbox back into a native Lisp ratio through the primitive path.
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list 2/3)
-    (let ((popped (daq:as (daq:pop-front list) 'daq:ratio)))
+    (let ((popped (daq:as (daq:pop-front list) 'daq:daq-ratio)))
       (is (= 2 (daq:numerator popped))
           "A Lisp ratio argument should box into a daqRatio (numerator preserved).")
       (is (= 3 (daq:denominator popped))
@@ -73,7 +73,7 @@
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list 1/4)
     (daq:push-back list 3/8)
-    (is (equal '(1/4 3/8) (daq:as-list-of list 'daq:ratio))
+    (is (equal '(1/4 3/8) (daq:as-list-of list 'daq:daq-ratio))
         "daqRatios should unbox into native Lisp ratios via AS-LIST-OF.")))
 
 (test high-level-coretypes-collections
@@ -157,7 +157,7 @@
   (eval
    '(let* ((release-state (list nil))
           (weak-pointer
-            (let ((ratio (make-instance 'daq:ratio
+            (let ((ratio (make-instance 'daq:daq-ratio
                                         :numerator 14
                                         :denominator 21
                                         :release-hook (lambda ()

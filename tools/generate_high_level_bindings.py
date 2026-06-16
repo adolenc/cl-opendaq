@@ -21,10 +21,18 @@ DEFAULT_INCLUDE_DIR = Path(__file__).resolve().parents[1] / "include"
 
 CLASS_NAME_OVERRIDES = {
     "boolean": "daq-boolean",
+    # openDAQ names the boxed-float interface IFloatObject (so its functions are
+    # daqFloatObject_*, which would derive the class FLOAT-OBJECT) while the value
+    # type is daqFloat (which derives FLOAT).  Map both onto DAQ-FLOAT so the class,
+    # the daqFloat type, and the unboxer (see PRIMITIVE-TYPE-P) all agree, matching
+    # the DAQ-INTEGER / DAQ-NUMBER family.
+    "float": "daq-float",
+    "float-object": "daq-float",
     "function": "daq-function",
     "integer": "daq-integer",
     "list": "object-list",
     "number": "daq-number",
+    "ratio": "daq-ratio",
     "string": "daq-string-object",
     "type": "daq-type",
 }
@@ -88,6 +96,15 @@ NO_DIRECT_CONSTRUCTOR = {
 MANUAL_METHODS = {
     "data-packet/get-data",
     "data-packet/get-raw-data",
+}
+
+# Functions intentionally dropped because they are exact duplicates of another
+# generated entry.  openDAQ exposes both daqFloatObject_createFloat and
+# daqFloatObject_createFloatObject with identical (obj, value) signatures;
+# createFloat is adopted as the DAQ-FLOAT make-instance constructor, which leaves
+# createFloatObject a redundant CREATE-FLOAT-OBJECT free factory -- suppress it.
+SUPPRESSED_FUNCTIONS = {
+    "float-object/create-float-object",
 }
 
 FUNCTION_OVERRIDES: dict[str, dict] = {
@@ -450,7 +467,7 @@ def build_specs(functions: list[dict]) -> tuple[list[dict], list[dict]]:
     constructors = {f["public_lisp_name"]: f for f in functions if classify_function(f) == "constructor"}
 
     for function in functions:
-        if function["public_lisp_name"] in MANUAL_METHODS:
+        if function["public_lisp_name"] in MANUAL_METHODS or function["public_lisp_name"] in SUPPRESSED_FUNCTIONS:
             continue
         kind = classify_function(function)
         receiver = receiver_name(function)
