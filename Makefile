@@ -45,6 +45,7 @@ repl:
 	  --eval '(require :asdf)' \
 	  --eval '(ql:quickload :cffi :silent t)' \
 	  --eval '(ql:quickload :trivial-garbage :silent t)' \
+	  --eval '(ql:quickload :local-time :silent t)' \
 	  --eval '(asdf:load-asd (truename "opendaq.asd"))' \
 	  --eval '(asdf:load-system :opendaq)' \
 	  --eval '(in-package #:opendaq.high-level)'
@@ -55,6 +56,7 @@ test:
 	  --eval '(ql:quickload :cffi :silent t)' \
 	  --eval '(ql:quickload :fiveam :silent t)' \
 	  --eval '(ql:quickload :trivial-garbage :silent t)' \
+	  --eval '(ql:quickload :local-time :silent t)' \
 	  --eval '(asdf:load-asd (truename "opendaq.asd"))' \
 	  --eval '(asdf:test-system :opendaq)'
 

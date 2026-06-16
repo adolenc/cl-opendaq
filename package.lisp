@@ -28,6 +28,8 @@
            #:read)
   (:export #:as
            #:as-list
+           #:domain-time-converter
+           #:domain-tick->timestamp
            #:clear-error-info
            #:ensure-opendaq-loaded
            #:healthcheck

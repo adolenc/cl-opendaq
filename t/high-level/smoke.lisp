@@ -34,7 +34,17 @@
             (is (= (cl:length values) (cl:length domain))
                 "read-with-domain value and domain arrays must have equal length.")
             (is (equal '(signed-byte 64) (array-element-type domain))
-                "read-with-domain domain default type should be signed-byte 64.")))))))
+                "read-with-domain domain default type should be signed-byte 64.")
+            (let ((timestamps (map 'vector (daq:domain-time-converter signal) domain)))
+              (is (= (cl:length domain) (cl:length timestamps))
+                  "domain-time-converter should map each tick to a timestamp.")
+              (is (every (lambda (ts) (typep ts 'local-time:timestamp)) timestamps)
+                  "domain-time-converter should produce LOCAL-TIME timestamps.")
+              (is (apply #'local-time:timestamp<= (coerce timestamps 'list))
+                  "Successive domain ticks should map to non-decreasing timestamps.")
+              (is (local-time:timestamp= (aref timestamps 0)
+                                         (daq:domain-tick->timestamp signal (aref domain 0)))
+                  "domain-tick->timestamp should agree with the domain-time-converter closure."))))))))
 
 (test high-level-block-reader
   (locally (declare (optimize (debug 3)))

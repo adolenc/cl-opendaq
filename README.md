@@ -78,6 +78,7 @@ The high-level API insulates you from openDAQ's C types. Arguments accept plain 
 - `(as-hashtable-of dict 'string 'device-info)` — dict to hash-table
 - `(raw-pointer obj)` — get the underlying C pointer from any wrapper
 - `(release obj)` — manually drop the reference (normally handled by GC finalizers)
+- `(domain-tick->timestamp source tick)` — convert a domain tick to a `local-time` timestamp (`source` is a signal, data descriptor, or multi reader; `(domain-time-converter source)` returns a reusable per-tick closure)
 
 ### Construction
 

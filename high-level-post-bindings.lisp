@@ -334,3 +334,50 @@ unboxed if their type is a primitive, or cast via AS otherwise.
                        (as val-obj value-type))
           do (setf (gethash key ht) val))
     ht))
+
+;;; ---------------------------------------------------------------------------
+;;; Domain timestamps
+;;;
+;;; A domain signal reports plain integer ticks.  Turning a tick into wall-clock
+;;; time needs two pieces of metadata: the domain origin (an absolute epoch, as
+;;; an ISO-8601 string) and the tick resolution (seconds per tick, a ratio), so
+;;; that:  absolute-time = origin + tick * tick-resolution.  These helpers read
+;;; that metadata off a domain source and convert ticks into LOCAL-TIME
+;;; timestamps, which callers can then format however they like.
+;;; ---------------------------------------------------------------------------
+
+(defun %domain-time-converter (origin resolution)
+  "Build the tick->timestamp closure from a raw ORIGIN string and RESOLUTION
+ratio (seconds per tick)."
+  (let ((origin-unix (local-time:timestamp-to-unix (local-time:parse-timestring origin)))
+        (seconds-per-tick (/ (numerator resolution) (denominator resolution))))
+    (lambda (tick)
+      (multiple-value-bind (whole-seconds fractional-seconds)
+          (floor (+ origin-unix (* tick seconds-per-tick)))     ; exact rational
+        (local-time:unix-to-timestamp
+         whole-seconds :nsec (round (* fractional-seconds 1000000000)))))))
+
+(defgeneric domain-time-converter (source)
+  (:documentation
+   "Return a one-argument function mapping a domain tick (an integer) to an
+absolute LOCAL-TIME:TIMESTAMP.  SOURCE supplies the domain metadata and may be a
+DATA-DESCRIPTOR, a SIGNAL (its domain signal's descriptor is used), or a
+MULTI-READER (its common domain is used).  The origin and resolution are read
+once, so reuse the returned closure when converting many ticks."))
+
+(defmethod domain-time-converter ((source data-descriptor))
+  (%domain-time-converter (origin source) (tick-resolution source)))
+
+(defmethod domain-time-converter ((source multi-reader))
+  (%domain-time-converter (origin source) (tick-resolution source)))
+
+(defmethod domain-time-converter ((source signal))
+  (domain-time-converter (descriptor (domain-signal source))))
+
+(defun domain-tick->timestamp (source tick)
+  "Convert a single domain TICK from SOURCE to an absolute LOCAL-TIME:TIMESTAMP.
+Prefer DOMAIN-TIME-CONVERTER when converting many ticks, to avoid re-reading
+SOURCE's domain metadata each time, e.g.:
+
+  (map 'vector (domain-time-converter source) domain-ticks)"
+  (funcall (domain-time-converter source) tick))
