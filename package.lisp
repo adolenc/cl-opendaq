@@ -27,7 +27,6 @@
            #:denominator
            #:read)
   (:export #:as
-           #:as-list
            #:wrap
            #:domain-time-converter
            #:domain-tick->timestamp

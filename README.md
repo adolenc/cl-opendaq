@@ -64,8 +64,7 @@ The only output-only case is `daqNumber`, which unboxes to a `float` (no distinc
 **Manual conversion.** A few functions let you cross the boundary explicitly when needed:
 
 - `(as obj 'device-info)` - cast a wrapper to a more specific type
-- `(as-list obj-list)` - object-list to plain Lisp list of base-object wrappers
-- `(as-list-of obj-list 'device-info)` - same, with each element cast
+- `(as-list-of obj-list 'device-info)` - object-list to a plain Lisp list, with each element cast (or unboxed, for a primitive type)
 - `(as-hashtable-of dict 'string 'device-info)` - dict to hash-table
 - `(value-of obj)` / `(value-of obj 'daq-string-object)` - unbox a boxed primitive (number, string, bool, ratio, …) to its Lisp value; the type can be omitted for a typed wrapper but is needed for a generic base-object
 - `(raw-pointer obj)` - get the underlying C pointer from any wrapper
