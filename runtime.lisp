@@ -659,6 +659,11 @@ arguments; see EMIT_COERCED_CALL in tools/generate_high_level_bindings.py."
                 (let ((pointer (opendaq.low-level:ratio/create-ratio
                                 (cl:numerator value) (cl:denominator value))))
                   (values pointer (make-cleanup pointer))))
+               ((typep value 'cl:complex)
+                (let ((pointer (opendaq.low-level:complex-number/create-complex-number
+                                (coerce (realpart value) 'double-float)
+                                (coerce (imagpart value) 'double-float))))
+                  (values pointer (make-cleanup pointer))))
                ((or (eq value t) (null value))
                 (let ((pointer (opendaq.low-level:boolean/create-bool-object
                                 (if value 1 0))))

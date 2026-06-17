@@ -76,6 +76,21 @@
     (is (equal '(1/4 3/8) (daq:as-list-of list 'daq:daq-ratio))
         "daqRatios should unbox into native Lisp ratios via AS-LIST-OF.")))
 
+(test high-level-coretypes-complex-boxing
+  ;; A native Lisp complex passed as an argument should box into a complexNumber,
+  ;; mirroring the daqComplexNumber -> Lisp complex unboxing in %BOXED-VALUE.
+  (let ((list (make-instance 'daq:object-list)))
+    (daq:push-back list #C(1.0d0 2.0d0))
+    (let ((popped (daq:as (daq:pop-front list) 'daq:complex-number)))
+      (is (= 1.0d0 (daq:real popped))
+          "A Lisp complex argument should box into a complexNumber (real preserved).")
+      (is (= 2.0d0 (daq:imaginary popped))
+          "A Lisp complex argument should box into a complexNumber (imaginary preserved).")))
+  (let ((list (make-instance 'daq:object-list)))
+    (daq:push-back list #C(3.0d0 -4.0d0))
+    (is (equal '(#C(3.0d0 -4.0d0)) (daq:as-list-of list 'daq:complex-number))
+        "complexNumbers should unbox into native Lisp complexes via AS-LIST-OF.")))
+
 (test high-level-coretypes-value-of
   ;; VALUE-OF reads a Lisp value out of a boxed object: from a typed wrapper its
   ;; class is enough, while a generic base-object needs the expected type.

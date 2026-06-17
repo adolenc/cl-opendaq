@@ -47,30 +47,19 @@ The hierarchy is parsed automatically from the C++ headers via the `DECLARE_OPEN
 
 ### Boxing / unboxing
 
-The high-level API insulates you from openDAQ's C types. Arguments accept plain Lisp values and return values are plain Lisp types.
+The high-level API insulates you from openDAQ's C types. Arguments accept plain Lisp values (boxing, on input) and return values are plain Lisp types (unboxing, on output); the two directions are inverses, so one table covers both:
 
-**Input (boxing).** When you pass arguments to a high-level function, they are automatically boxed into the appropriate openDAQ type:
-
-| Lisp value  | Boxed to |
-|-------------|----------|
-| `string`    | `daqString` |
-| `fixnum` / `integer` | `daqInteger` |
-| `float`     | `daqFloat` |
-| `ratio`     | `daqRatio` |
+| Lisp value | openDAQ type |
+|------------|--------------|
+| `string`   | `daqString` |
+| `integer`  | `daqInteger` |
+| `float`    | `daqFloat` |
+| `ratio`    | `daqRatio` |
 | `t` / `nil` | `daqBool` |
-| managed-object (any `daq` object) | its raw pointer is extracted |
+| `(complex re im)` | `complexNumber` |
+| any `daq` object | the openDAQ object itself (its raw pointer is extracted on input, the result re-wrapped on output) |
 
-**Output (unboxing).** Return values are unboxed to native Lisp types:
-
-| openDAQ type    | Unboxed to |
-|-----------------|------------|
-| `daqString`     | string     |
-| `daqBool`       | `t` / `nil` |
-| `daqInteger`    | fixnum |
-| `daqFloat` / `daqNumber` | float |
-| `daqRatio`      | ratio |
-| `complexNumber` | `(complex real imag)` |
-| anything else (device, signal, …) | `daq` object |
+The only output-only case is `daqNumber`, which unboxes to a `float` (no distinct Lisp type boxes specifically to it; a `float` argument always boxes to `daqFloat`).
 
 **Manual conversion.** A few functions let you cross the boundary explicitly when needed:
 
