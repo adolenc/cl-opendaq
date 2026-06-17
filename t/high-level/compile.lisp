@@ -3,8 +3,9 @@
 (in-suite high-level-compile-suite)
 
 (test high-level-compile-string-object
-  (let ((string-object (daq:wrap-daq-string-object
-                        (opendaq.low-level:make-daq-string "Hello, C bindings!"))))
+  (let ((string-object (daq:wrap
+                        (opendaq.low-level:make-daq-string "Hello, C bindings!")
+                        'daq:daq-string-object)))
     (is (typep string-object 'daq:daq-string-object)
         "High-level compile coverage should construct a generated wrapper class.")
     (is (= 18 (daq:length string-object))

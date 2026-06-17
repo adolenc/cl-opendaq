@@ -1261,208 +1261,6 @@
             wait-for-message
             work
             work-interface-id
-            wrap-address-info
-            wrap-address-info-builder
-            wrap-address-info-private
-            wrap-allocator
-            wrap-argument-info
-            wrap-authentication-provider
-            wrap-awaitable
-            wrap-base-object
-            wrap-binary-data
-            wrap-block-reader
-            wrap-block-reader-builder
-            wrap-block-reader-status
-            wrap-callable-info
-            wrap-channel
-            wrap-char-ptr
-            wrap-cloneable
-            wrap-coercer
-            wrap-comparable
-            wrap-complex-number
-            wrap-component
-            wrap-component-deserialize-context
-            wrap-component-holder
-            wrap-component-private
-            wrap-component-status-container
-            wrap-component-status-container-private
-            wrap-component-type
-            wrap-component-type-builder
-            wrap-component-type-private
-            wrap-component-update-context
-            wrap-config-provider
-            wrap-connected-client-info
-            wrap-connection
-            wrap-connection-internal
-            wrap-connection-status-container-private
-            wrap-const-char-ptr
-            wrap-context
-            wrap-context-internal
-            wrap-convertible
-            wrap-core-event-args
-            wrap-core-type
-            wrap-daq-boolean
-            wrap-daq-float
-            wrap-daq-function
-            wrap-daq-integer
-            wrap-daq-number
-            wrap-daq-ratio
-            wrap-daq-string-object
-            wrap-daq-type
-            wrap-data-descriptor
-            wrap-data-descriptor-builder
-            wrap-data-packet
-            wrap-data-rule
-            wrap-data-rule-builder
-            wrap-deleter
-            wrap-deserialize-component
-            wrap-deserializer
-            wrap-device
-            wrap-device-domain
-            wrap-device-info
-            wrap-device-info-config
-            wrap-device-info-internal
-            wrap-device-network-config
-            wrap-device-private
-            wrap-device-type
-            wrap-device-update-options
-            wrap-dict
-            wrap-dict-element-type
-            wrap-dimension
-            wrap-dimension-builder
-            wrap-dimension-rule
-            wrap-dimension-rule-builder
-            wrap-discovery-server
-            wrap-end-update-event-args
-            wrap-enumeration
-            wrap-enumeration-type
-            wrap-error-info
-            wrap-eval-value
-            wrap-event
-            wrap-event-args
-            wrap-event-handler
-            wrap-event-packet
-            wrap-folder
-            wrap-folder-config
-            wrap-freezable
-            wrap-function-block
-            wrap-function-block-type
-            wrap-graph-visualization
-            wrap-input-port
-            wrap-input-port-config
-            wrap-input-port-notifications
-            wrap-input-port-private
-            wrap-inspectable
-            wrap-instance
-            wrap-instance-builder
-            wrap-io-folder-config
-            wrap-iterable
-            wrap-iterator
-            wrap-last-message-logger-sink-private
-            wrap-list-element-type
-            wrap-lock-guard
-            wrap-log-file-info
-            wrap-log-file-info-builder
-            wrap-logger
-            wrap-logger-component
-            wrap-logger-sink
-            wrap-logger-thread-pool
-            wrap-mirrored-device
-            wrap-mirrored-device-config
-            wrap-mirrored-input-port-config
-            wrap-mirrored-signal-config
-            wrap-mirrored-signal-private
-            wrap-module
-            wrap-module-authenticator
-            wrap-module-info
-            wrap-module-manager
-            wrap-module-manager-utils
-            wrap-multi-reader
-            wrap-multi-reader-builder
-            wrap-multi-reader-status
-            wrap-mutex
-            wrap-network-interface
-            wrap-object-list
-            wrap-ownable
-            wrap-packet
-            wrap-packet-destruct-callback
-            wrap-packet-reader
-            wrap-permission-manager
-            wrap-permission-manager-internal
-            wrap-permission-mask-builder
-            wrap-permissions
-            wrap-permissions-builder
-            wrap-permissions-internal
-            wrap-procedure
-            wrap-property
-            wrap-property-builder
-            wrap-property-internal
-            wrap-property-object
-            wrap-property-object-class
-            wrap-property-object-class-builder
-            wrap-property-object-class-internal
-            wrap-property-object-internal
-            wrap-property-object-protected
-            wrap-property-value-event-args
-            wrap-range
-            wrap-reader
-            wrap-reader-config
-            wrap-reader-status
-            wrap-recorder
-            wrap-recursive-search
-            wrap-reference-domain-info
-            wrap-reference-domain-info-builder
-            wrap-removable
-            wrap-reusable-data-packet
-            wrap-rule-private
-            wrap-sample-reader
-            wrap-scaling
-            wrap-scaling-builder
-            wrap-scaling-calc-private
-            wrap-scheduler
-            wrap-search-filter
-            wrap-serializable
-            wrap-serialized-list
-            wrap-serialized-object
-            wrap-serializer
-            wrap-server
-            wrap-server-capability
-            wrap-server-capability-config
-            wrap-server-type
-            wrap-signal
-            wrap-signal-config
-            wrap-signal-events
-            wrap-signal-private
-            wrap-simple-type
-            wrap-stream-reader
-            wrap-stream-reader-builder
-            wrap-streaming
-            wrap-streaming-type
-            wrap-struct
-            wrap-struct-builder
-            wrap-struct-type
-            wrap-subscription-event-args
-            wrap-sync-component
-            wrap-sync-component-private
-            wrap-tags
-            wrap-tags-private
-            wrap-tail-reader
-            wrap-tail-reader-builder
-            wrap-tail-reader-status
-            wrap-task
-            wrap-task-graph
-            wrap-type-manager
-            wrap-type-manager-private
-            wrap-unit
-            wrap-unit-builder
-            wrap-updatable
-            wrap-update-parameters
-            wrap-user
-            wrap-user-internal
-            wrap-user-lock
-            wrap-validator
-            wrap-version-info
-            wrap-work
             write
             write-bool
             write-float
@@ -1486,10 +1284,6 @@
   (%adopt-pointer object (opendaq.low-level:address-info/create-address-info))
     ))
 
-(defun wrap-address-info (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'address-info :pointer pointer)))
-
 (defclass address-info-builder (base-object)
   (
    ))
@@ -1503,19 +1297,11 @@
   (%adopt-pointer object (opendaq.low-level:address-info-builder/create-address-info-builder))
     ))
 
-(defun wrap-address-info-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'address-info-builder :pointer pointer)))
-
 (defclass address-info-private (base-object)
   (
    ))
 
 
-
-(defun wrap-address-info-private (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'address-info-private :pointer pointer)))
 
 (defclass allocator (base-object)
   (
@@ -1536,10 +1322,6 @@
     (%adopt-pointer object (opendaq.low-level:allocator/create-external-allocator coerced-data coerced-deleter)))
     ))
 
-(defun wrap-allocator (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'allocator :pointer pointer)))
-
 (defclass argument-info (base-object)
   (
    (%name-initarg :initarg :name :initform nil)
@@ -1559,10 +1341,6 @@
     (%adopt-pointer object (opendaq.low-level:argument-info/create-argument-info coerced-name coerced-type)))
     ))
 
-(defun wrap-argument-info (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'argument-info :pointer pointer)))
-
 (defclass authentication-provider (base-object)
   (
    (%allow-anonymous-initarg :initarg :allow-anonymous :initform nil)
@@ -1579,29 +1357,17 @@
     (%adopt-pointer object (opendaq.low-level:authentication-provider/create-authentication-provider coerced-allow-anonymous)))
     ))
 
-(defun wrap-authentication-provider (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'authentication-provider :pointer pointer)))
-
 (defclass awaitable (base-object)
   (
    ))
 
 
 
-(defun wrap-awaitable (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'awaitable :pointer pointer)))
-
 (defclass base-object (managed-object)
   (
    ))
 
 
-
-(defun wrap-base-object (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'base-object :pointer pointer)))
 
 (defclass binary-data (base-object)
   (
@@ -1619,10 +1385,6 @@
     (%adopt-pointer object (opendaq.low-level:binary-data/create-binary-data coerced-size)))
     ))
 
-(defun wrap-binary-data (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'binary-data :pointer pointer)))
-
 (defclass block-reader (sample-reader)
   (
    (%signal-initarg :initarg :signal :initform nil)
@@ -1633,10 +1395,6 @@
    ))
 
 
-
-(defun wrap-block-reader (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'block-reader :pointer pointer)))
 
 (defclass block-reader-builder (base-object)
   (
@@ -1650,10 +1408,6 @@
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:block-reader-builder/create-block-reader-builder))
     ))
-
-(defun wrap-block-reader-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'block-reader-builder :pointer pointer)))
 
 (defclass block-reader-status (reader-status)
   (
@@ -1680,10 +1434,6 @@
     (%adopt-pointer object (opendaq.low-level:block-reader-status/create-block-reader-status coerced-event-packet coerced-valid coerced-offset coerced-read-samples)))
     ))
 
-(defun wrap-block-reader-status (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'block-reader-status :pointer pointer)))
-
 (defclass callable-info (base-object)
   (
    (%argument-info-initarg :initarg :argument-info :initform nil)
@@ -1706,19 +1456,11 @@
     (%adopt-pointer object (opendaq.low-level:callable-info/create-callable-info coerced-argument-info coerced-return-type coerced-const-flag)))
     ))
 
-(defun wrap-callable-info (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'callable-info :pointer pointer)))
-
 (defclass channel (function-block)
   (
    ))
 
 
-
-(defun wrap-channel (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'channel :pointer pointer)))
 
 (defclass char-ptr (managed-object)
   (
@@ -1726,19 +1468,11 @@
 
 
 
-(defun wrap-char-ptr (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'char-ptr :pointer pointer)))
-
 (defclass cloneable (base-object)
   (
    ))
 
 
-
-(defun wrap-cloneable (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'cloneable :pointer pointer)))
 
 (defclass coercer (base-object)
   (
@@ -1756,19 +1490,11 @@
     (%adopt-pointer object (opendaq.low-level:coercer/create-coercer coerced-eval)))
     ))
 
-(defun wrap-coercer (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'coercer :pointer pointer)))
-
 (defclass comparable (base-object)
   (
    ))
 
 
-
-(defun wrap-comparable (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'comparable :pointer pointer)))
 
 (defclass complex-number (base-object)
   (
@@ -1788,10 +1514,6 @@
                           (coerced-imaginary imaginary nil))
     (%adopt-pointer object (opendaq.low-level:complex-number/create-complex-number coerced-real coerced-imaginary)))
     ))
-
-(defun wrap-complex-number (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'complex-number :pointer pointer)))
 
 (defclass component (property-object)
   (
@@ -1818,19 +1540,11 @@
     (%adopt-pointer object (opendaq.low-level:component/create-component coerced-context coerced-parent coerced-local-id coerced-class-name)))
     ))
 
-(defun wrap-component (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'component :pointer pointer)))
-
 (defclass component-deserialize-context (base-object)
   (
    ))
 
 
-
-(defun wrap-component-deserialize-context (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'component-deserialize-context :pointer pointer)))
 
 (defclass component-holder (base-object)
   (
@@ -1848,19 +1562,11 @@
     (%adopt-pointer object (opendaq.low-level:component-holder/create-component-holder coerced-component)))
     ))
 
-(defun wrap-component-holder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'component-holder :pointer pointer)))
-
 (defclass component-private (base-object)
   (
    ))
 
 
-
-(defun wrap-component-private (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'component-private :pointer pointer)))
 
 (defclass component-status-container (base-object)
   (
@@ -1875,29 +1581,17 @@
   (%adopt-pointer object (opendaq.low-level:component-status-container/create-component-status-container))
     ))
 
-(defun wrap-component-status-container (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'component-status-container :pointer pointer)))
-
 (defclass component-status-container-private (base-object)
   (
    ))
 
 
 
-(defun wrap-component-status-container-private (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'component-status-container-private :pointer pointer)))
-
 (defclass component-type (base-object)
   (
    ))
 
 
-
-(defun wrap-component-type (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'component-type :pointer pointer)))
 
 (defclass component-type-builder (base-object)
   (
@@ -1912,29 +1606,17 @@
   (%adopt-pointer object (opendaq.low-level:component-type-builder/create-component-type-builder))
     ))
 
-(defun wrap-component-type-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'component-type-builder :pointer pointer)))
-
 (defclass component-type-private (base-object)
   (
    ))
 
 
 
-(defun wrap-component-type-private (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'component-type-private :pointer pointer)))
-
 (defclass component-update-context (base-object)
   (
    ))
 
 
-
-(defun wrap-component-update-context (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'component-update-context :pointer pointer)))
 
 (defclass config-provider (base-object)
   (
@@ -1952,10 +1634,6 @@
     (%adopt-pointer object (opendaq.low-level:config-provider/create-cmd-line-args-config-provider coerced-cmd-line-args)))
     ))
 
-(defun wrap-config-provider (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'config-provider :pointer pointer)))
-
 (defclass connected-client-info (property-object)
   (
    ))
@@ -1968,10 +1646,6 @@
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:connected-client-info/create-connected-client-info))
     ))
-
-(defun wrap-connected-client-info (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'connected-client-info :pointer pointer)))
 
 (defclass connection (base-object)
   (
@@ -1995,19 +1669,11 @@
     (%adopt-pointer object (opendaq.low-level:connection/create-connection coerced-input-port coerced-signal coerced-context)))
     ))
 
-(defun wrap-connection (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'connection :pointer pointer)))
-
 (defclass connection-internal (base-object)
   (
    ))
 
 
-
-(defun wrap-connection-internal (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'connection-internal :pointer pointer)))
 
 (defclass connection-status-container-private (base-object)
   (
@@ -2015,19 +1681,11 @@
 
 
 
-(defun wrap-connection-status-container-private (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'connection-status-container-private :pointer pointer)))
-
 (defclass const-char-ptr (managed-object)
   (
    ))
 
 
-
-(defun wrap-const-char-ptr (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'const-char-ptr :pointer pointer)))
 
 (defclass context (base-object)
   (
@@ -2063,29 +1721,17 @@
     (%adopt-pointer object (opendaq.low-level:context/create-context coerced-scheduler coerced-logger coerced-type-manager coerced-module-manager coerced-authentication-provider coerced-options coerced-discovery-servers)))
     ))
 
-(defun wrap-context (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'context :pointer pointer)))
-
 (defclass context-internal (base-object)
   (
    ))
 
 
 
-(defun wrap-context-internal (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'context-internal :pointer pointer)))
-
 (defclass convertible (base-object)
   (
    ))
 
 
-
-(defun wrap-convertible (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'convertible :pointer pointer)))
 
 (defclass core-event-args (event-args)
   (
@@ -2109,19 +1755,11 @@
     (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args coerced-event-id coerced-event-name coerced-parameters)))
     ))
 
-(defun wrap-core-event-args (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'core-event-args :pointer pointer)))
-
 (defclass core-type (base-object)
   (
    ))
 
 
-
-(defun wrap-core-type (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'core-type :pointer pointer)))
 
 (defclass daq-boolean (base-object)
   (
@@ -2139,10 +1777,6 @@
     (%adopt-pointer object (opendaq.low-level:boolean/create-bool-object coerced-value)))
     ))
 
-(defun wrap-daq-boolean (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'daq-boolean :pointer pointer)))
-
 (defclass daq-float (base-object)
   (
    (%value-initarg :initarg :value :initform nil)
@@ -2158,10 +1792,6 @@
   (with-daq-boxed-values ((coerced-value value nil))
     (%adopt-pointer object (opendaq.low-level:float-object/create-float coerced-value)))
     ))
-
-(defun wrap-daq-float (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'daq-float :pointer pointer)))
 
 (defclass daq-function (base-object)
   (
@@ -2179,10 +1809,6 @@
     (%adopt-pointer object (opendaq.low-level:function/create-function coerced-value)))
     ))
 
-(defun wrap-daq-function (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'daq-function :pointer pointer)))
-
 (defclass daq-integer (base-object)
   (
    (%value-initarg :initarg :value :initform nil)
@@ -2199,19 +1825,11 @@
     (%adopt-pointer object (opendaq.low-level:integer/create-integer coerced-value)))
     ))
 
-(defun wrap-daq-integer (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'daq-integer :pointer pointer)))
-
 (defclass daq-number (base-object)
   (
    ))
 
 
-
-(defun wrap-daq-number (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'daq-number :pointer pointer)))
 
 (defclass daq-ratio (base-object)
   (
@@ -2232,10 +1850,6 @@
     (%adopt-pointer object (opendaq.low-level:ratio/create-ratio coerced-numerator coerced-denominator)))
     ))
 
-(defun wrap-daq-ratio (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'daq-ratio :pointer pointer)))
-
 (defclass daq-string-object (base-object)
   (
    (%str-initarg :initarg :str :initform nil)
@@ -2252,19 +1866,11 @@
     (%adopt-pointer object (opendaq.low-level:string/create-string coerced-str)))
     ))
 
-(defun wrap-daq-string-object (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'daq-string-object :pointer pointer)))
-
 (defclass daq-type (base-object)
   (
    ))
 
 
-
-(defun wrap-daq-type (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'daq-type :pointer pointer)))
 
 (defclass data-descriptor (base-object)
   (
@@ -2282,10 +1888,6 @@
     (%adopt-pointer object (opendaq.low-level:data-descriptor/create-data-descriptor-from-builder coerced-builder)))
     ))
 
-(defun wrap-data-descriptor (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'data-descriptor :pointer pointer)))
-
 (defclass data-descriptor-builder (base-object)
   (
    ))
@@ -2298,10 +1900,6 @@
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:data-descriptor-builder/create-data-descriptor-builder))
     ))
-
-(defun wrap-data-descriptor-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'data-descriptor-builder :pointer pointer)))
 
 (defclass data-packet (packet)
   (
@@ -2325,10 +1923,6 @@
     (%adopt-pointer object (opendaq.low-level:data-packet/create-data-packet coerced-descriptor coerced-sample-count coerced-offset)))
     ))
 
-(defun wrap-data-packet (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'data-packet :pointer pointer)))
-
 (defclass data-rule (base-object)
   (
    (%rule-type-initarg :initarg :rule-type :initform nil)
@@ -2348,10 +1942,6 @@
     (%adopt-pointer object (opendaq.low-level:data-rule/create-data-rule coerced-rule-type coerced-parameters)))
     ))
 
-(defun wrap-data-rule (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'data-rule :pointer pointer)))
-
 (defclass data-rule-builder (base-object)
   (
    ))
@@ -2365,19 +1955,11 @@
   (%adopt-pointer object (opendaq.low-level:data-rule-builder/create-data-rule-builder))
     ))
 
-(defun wrap-data-rule-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'data-rule-builder :pointer pointer)))
-
 (defclass deleter (base-object)
   (
    ))
 
 
-
-(defun wrap-deleter (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'deleter :pointer pointer)))
 
 (defclass deserialize-component (base-object)
   (
@@ -2385,19 +1967,11 @@
 
 
 
-(defun wrap-deserialize-component (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'deserialize-component :pointer pointer)))
-
 (defclass deserializer (base-object)
   (
    ))
 
 
-
-(defun wrap-deserializer (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'deserializer :pointer pointer)))
 
 (defclass device (folder)
   (
@@ -2424,10 +1998,6 @@
     (%adopt-pointer object (opendaq.low-level:device/create-client coerced-ctx coerced-local-id coerced-default-device-info coerced-parent)))
     ))
 
-(defun wrap-device (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'device :pointer pointer)))
-
 (defclass device-domain (base-object)
   (
    (%tick-resolution-initarg :initarg :tick-resolution :initform nil)
@@ -2450,19 +2020,11 @@
     (%adopt-pointer object (opendaq.low-level:device-domain/create-device-domain coerced-tick-resolution coerced-origin coerced-unit)))
     ))
 
-(defun wrap-device-domain (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'device-domain :pointer pointer)))
-
 (defclass device-info (property-object)
   (
    ))
 
 
-
-(defun wrap-device-info (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'device-info :pointer pointer)))
 
 (defclass device-info-config (device-info)
   (
@@ -2483,19 +2045,11 @@
     (%adopt-pointer object (opendaq.low-level:device-info-config/create-device-info-config coerced-name coerced-connection-string)))
     ))
 
-(defun wrap-device-info-config (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'device-info-config :pointer pointer)))
-
 (defclass device-info-internal (base-object)
   (
    ))
 
 
-
-(defun wrap-device-info-internal (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'device-info-internal :pointer pointer)))
 
 (defclass device-network-config (base-object)
   (
@@ -2503,19 +2057,11 @@
 
 
 
-(defun wrap-device-network-config (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'device-network-config :pointer pointer)))
-
 (defclass device-private (base-object)
   (
    ))
 
 
-
-(defun wrap-device-private (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'device-private :pointer pointer)))
 
 (defclass device-type (component-type)
   (
@@ -2545,10 +2091,6 @@
     (%adopt-pointer object (opendaq.low-level:device-type/create-device-type coerced-id coerced-name coerced-description coerced-default-config coerced-prefix)))
     ))
 
-(defun wrap-device-type (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'device-type :pointer pointer)))
-
 (defclass device-update-options (base-object)
   (
    (%setup-string-initarg :initarg :setup-string :initform nil)
@@ -2565,10 +2107,6 @@
     (%adopt-pointer object (opendaq.low-level:device-update-options/create-device-update-options coerced-setup-string)))
     ))
 
-(defun wrap-device-update-options (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'device-update-options :pointer pointer)))
-
 (defclass dict (base-object)
   (
    ))
@@ -2582,19 +2120,11 @@
   (%adopt-pointer object (opendaq.low-level:dict/create-dict))
     ))
 
-(defun wrap-dict (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'dict :pointer pointer)))
-
 (defclass dict-element-type (base-object)
   (
    ))
 
 
-
-(defun wrap-dict-element-type (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'dict-element-type :pointer pointer)))
 
 (defclass dimension (base-object)
   (
@@ -2618,10 +2148,6 @@
     (%adopt-pointer object (opendaq.low-level:dimension/create-dimension coerced-rule coerced-unit coerced-name)))
     ))
 
-(defun wrap-dimension (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'dimension :pointer pointer)))
-
 (defclass dimension-builder (base-object)
   (
    ))
@@ -2634,10 +2160,6 @@
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:dimension-builder/create-dimension-builder))
     ))
-
-(defun wrap-dimension-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'dimension-builder :pointer pointer)))
 
 (defclass dimension-rule (base-object)
   (
@@ -2658,10 +2180,6 @@
     (%adopt-pointer object (opendaq.low-level:dimension-rule/create-dimension-rule coerced-type coerced-parameters)))
     ))
 
-(defun wrap-dimension-rule (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'dimension-rule :pointer pointer)))
-
 (defclass dimension-rule-builder (base-object)
   (
    ))
@@ -2674,10 +2192,6 @@
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:dimension-rule-builder/create-dimension-rule-builder))
     ))
-
-(defun wrap-dimension-rule-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'dimension-rule-builder :pointer pointer)))
 
 (defclass discovery-server (base-object)
   (
@@ -2694,10 +2208,6 @@
   (with-daq-boxed-values ((coerced-logger logger :managed-pointer))
     (%adopt-pointer object (opendaq.low-level:discovery-server/create-mdns-discovery-server coerced-logger)))
     ))
-
-(defun wrap-discovery-server (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'discovery-server :pointer pointer)))
 
 (defclass end-update-event-args (event-args)
   (
@@ -2717,10 +2227,6 @@
                           (coerced-is-parent-updating is-parent-updating :daq-bool))
     (%adopt-pointer object (opendaq.low-level:end-update-event-args/create-end-update-event-args coerced-properties coerced-is-parent-updating)))
     ))
-
-(defun wrap-end-update-event-args (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'end-update-event-args :pointer pointer)))
 
 (defclass enumeration (base-object)
   (
@@ -2744,10 +2250,6 @@
     (%adopt-pointer object (opendaq.low-level:enumeration/create-enumeration coerced-name coerced-value coerced-type-manager)))
     ))
 
-(defun wrap-enumeration (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'enumeration :pointer pointer)))
-
 (defclass enumeration-type (daq-type)
   (
    (%type-name-initarg :initarg :type-name :initform nil)
@@ -2770,10 +2272,6 @@
     (%adopt-pointer object (opendaq.low-level:enumeration-type/create-enumeration-type coerced-type-name coerced-enumerator-names coerced-first-enumerator-int-value)))
     ))
 
-(defun wrap-enumeration-type (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'enumeration-type :pointer pointer)))
-
 (defclass error-info (base-object)
   (
    ))
@@ -2786,10 +2284,6 @@
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:error-info/create-error-info))
     ))
-
-(defun wrap-error-info (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'error-info :pointer pointer)))
 
 (defclass eval-value (base-object)
   (
@@ -2807,10 +2301,6 @@
     (%adopt-pointer object (opendaq.low-level:eval-value/create-eval-value coerced-eval)))
     ))
 
-(defun wrap-eval-value (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'eval-value :pointer pointer)))
-
 (defclass event (base-object)
   (
    ))
@@ -2823,10 +2313,6 @@
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:event/create-event))
     ))
-
-(defun wrap-event (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'event :pointer pointer)))
 
 (defclass event-args (base-object)
   (
@@ -2847,10 +2333,6 @@
     (%adopt-pointer object (opendaq.low-level:event-args/create-event-args coerced-event-id coerced-event-name)))
     ))
 
-(defun wrap-event-args (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'event-args :pointer pointer)))
-
 (defclass event-handler (base-object)
   (
    (%call-initarg :initarg :call :initform nil)
@@ -2866,10 +2348,6 @@
   (with-daq-boxed-values ((coerced-call call nil))
     (%adopt-pointer object (opendaq.low-level:event-handler/create-event-handler coerced-call)))
     ))
-
-(defun wrap-event-handler (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'event-handler :pointer pointer)))
 
 (defclass event-packet (packet)
   (
@@ -2890,19 +2368,11 @@
     (%adopt-pointer object (opendaq.low-level:event-packet/create-event-packet coerced-id coerced-params)))
     ))
 
-(defun wrap-event-packet (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'event-packet :pointer pointer)))
-
 (defclass folder (component)
   (
    ))
 
 
-
-(defun wrap-folder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'folder :pointer pointer)))
 
 (defclass folder-config (folder)
   (
@@ -2926,29 +2396,17 @@
     (%adopt-pointer object (opendaq.low-level:folder-config/create-folder coerced-context coerced-parent coerced-local-id)))
     ))
 
-(defun wrap-folder-config (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'folder-config :pointer pointer)))
-
 (defclass freezable (base-object)
   (
    ))
 
 
 
-(defun wrap-freezable (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'freezable :pointer pointer)))
-
 (defclass function-block (folder)
   (
    ))
 
 
-
-(defun wrap-function-block (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'function-block :pointer pointer)))
 
 (defclass function-block-type (component-type)
   (
@@ -2975,29 +2433,17 @@
     (%adopt-pointer object (opendaq.low-level:function-block-type/create-function-block-type coerced-id coerced-name coerced-description coerced-default-config)))
     ))
 
-(defun wrap-function-block-type (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'function-block-type :pointer pointer)))
-
 (defclass graph-visualization (base-object)
   (
    ))
 
 
 
-(defun wrap-graph-visualization (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'graph-visualization :pointer pointer)))
-
 (defclass input-port (component)
   (
    ))
 
 
-
-(defun wrap-input-port (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'input-port :pointer pointer)))
 
 (defclass input-port-config (input-port)
   (
@@ -3024,19 +2470,11 @@
     (%adopt-pointer object (opendaq.low-level:input-port-config/create-input-port coerced-context coerced-parent coerced-local-id coerced-gap-checking)))
     ))
 
-(defun wrap-input-port-config (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'input-port-config :pointer pointer)))
-
 (defclass input-port-notifications (base-object)
   (
    ))
 
 
-
-(defun wrap-input-port-notifications (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'input-port-notifications :pointer pointer)))
 
 (defclass input-port-private (base-object)
   (
@@ -3044,19 +2482,11 @@
 
 
 
-(defun wrap-input-port-private (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'input-port-private :pointer pointer)))
-
 (defclass inspectable (base-object)
   (
    ))
 
 
-
-(defun wrap-inspectable (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'inspectable :pointer pointer)))
 
 (defclass instance (device)
   (
@@ -3074,10 +2504,6 @@
     (%adopt-pointer object (opendaq.low-level:instance/create-instance-from-builder coerced-builder)))
     ))
 
-(defun wrap-instance (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'instance :pointer pointer)))
-
 (defclass instance-builder (base-object)
   (
    ))
@@ -3091,19 +2517,11 @@
   (%adopt-pointer object (opendaq.low-level:instance-builder/create-instance-builder))
     ))
 
-(defun wrap-instance-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'instance-builder :pointer pointer)))
-
 (defclass io-folder-config (folder-config)
   (
    ))
 
 
-
-(defun wrap-io-folder-config (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'io-folder-config :pointer pointer)))
 
 (defclass iterable (base-object)
   (
@@ -3111,19 +2529,11 @@
 
 
 
-(defun wrap-iterable (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'iterable :pointer pointer)))
-
 (defclass iterator (base-object)
   (
    ))
 
 
-
-(defun wrap-iterator (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'iterator :pointer pointer)))
 
 (defclass last-message-logger-sink-private (base-object)
   (
@@ -3131,29 +2541,17 @@
 
 
 
-(defun wrap-last-message-logger-sink-private (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'last-message-logger-sink-private :pointer pointer)))
-
 (defclass list-element-type (base-object)
   (
    ))
 
 
 
-(defun wrap-list-element-type (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'list-element-type :pointer pointer)))
-
 (defclass lock-guard (base-object)
   (
    ))
 
 
-
-(defun wrap-lock-guard (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'lock-guard :pointer pointer)))
 
 (defclass log-file-info (base-object)
   (
@@ -3171,10 +2569,6 @@
     (%adopt-pointer object (opendaq.low-level:log-file-info/create-log-file-info-from-builder coerced-builder)))
     ))
 
-(defun wrap-log-file-info (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'log-file-info :pointer pointer)))
-
 (defclass log-file-info-builder (base-object)
   (
    ))
@@ -3187,10 +2581,6 @@
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:log-file-info-builder/create-log-file-info-builder))
     ))
-
-(defun wrap-log-file-info-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'log-file-info-builder :pointer pointer)))
 
 (defclass logger (base-object)
   (
@@ -3210,10 +2600,6 @@
                           (coerced-level level nil))
     (%adopt-pointer object (opendaq.low-level:logger/create-logger coerced-sinks coerced-level)))
     ))
-
-(defun wrap-logger (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'logger :pointer pointer)))
 
 (defclass logger-component (base-object)
   (
@@ -3240,10 +2626,6 @@
     (%adopt-pointer object (opendaq.low-level:logger-component/create-logger-component coerced-name coerced-sinks coerced-thread-pool coerced-level)))
     ))
 
-(defun wrap-logger-component (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'logger-component :pointer pointer)))
-
 (defclass logger-sink (base-object)
   (
    (%file-name-initarg :initarg :file-name :initform nil)
@@ -3260,10 +2642,6 @@
     (%adopt-pointer object (opendaq.low-level:logger-sink/create-basic-file-logger-sink coerced-file-name)))
     ))
 
-(defun wrap-logger-sink (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'logger-sink :pointer pointer)))
-
 (defclass logger-thread-pool (base-object)
   (
    ))
@@ -3277,19 +2655,11 @@
   (%adopt-pointer object (opendaq.low-level:logger-thread-pool/create-logger-thread-pool))
     ))
 
-(defun wrap-logger-thread-pool (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'logger-thread-pool :pointer pointer)))
-
 (defclass mirrored-device (device)
   (
    ))
 
 
-
-(defun wrap-mirrored-device (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'mirrored-device :pointer pointer)))
 
 (defclass mirrored-device-config (mirrored-device)
   (
@@ -3297,19 +2667,11 @@
 
 
 
-(defun wrap-mirrored-device-config (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'mirrored-device-config :pointer pointer)))
-
 (defclass mirrored-input-port-config (input-port-config)
   (
    ))
 
 
-
-(defun wrap-mirrored-input-port-config (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'mirrored-input-port-config :pointer pointer)))
 
 (defclass mirrored-signal-config (signal-config)
   (
@@ -3317,19 +2679,11 @@
 
 
 
-(defun wrap-mirrored-signal-config (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'mirrored-signal-config :pointer pointer)))
-
 (defclass mirrored-signal-private (base-object)
   (
    ))
 
 
-
-(defun wrap-mirrored-signal-private (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'mirrored-signal-private :pointer pointer)))
 
 (defclass module (base-object)
   (
@@ -3337,19 +2691,11 @@
 
 
 
-(defun wrap-module (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'module :pointer pointer)))
-
 (defclass module-authenticator (base-object)
   (
    ))
 
 
-
-(defun wrap-module-authenticator (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'module-authenticator :pointer pointer)))
 
 (defclass module-info (base-object)
   (
@@ -3373,10 +2719,6 @@
     (%adopt-pointer object (opendaq.low-level:module-info/create-module-info coerced-version-info coerced-name coerced-id)))
     ))
 
-(defun wrap-module-info (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'module-info :pointer pointer)))
-
 (defclass module-manager (base-object)
   (
    (%path-initarg :initarg :path :initform nil)
@@ -3393,19 +2735,11 @@
     (%adopt-pointer object (opendaq.low-level:module-manager/create-module-manager coerced-path)))
     ))
 
-(defun wrap-module-manager (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'module-manager :pointer pointer)))
-
 (defclass module-manager-utils (base-object)
   (
    ))
 
 
-
-(defun wrap-module-manager-utils (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'module-manager-utils :pointer pointer)))
 
 (defclass multi-reader (sample-reader)
   (
@@ -3435,10 +2769,6 @@
     (%adopt-pointer object (opendaq.low-level:multi-reader/create-multi-reader coerced-signals coerced-value-read-type coerced-domain-read-type coerced-mode coerced-timeout-type)))
     ))
 
-(defun wrap-multi-reader (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'multi-reader :pointer pointer)))
-
 (defclass multi-reader-builder (base-object)
   (
    ))
@@ -3451,10 +2781,6 @@
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:multi-reader-builder/create-multi-reader-builder))
     ))
-
-(defun wrap-multi-reader-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'multi-reader-builder :pointer pointer)))
 
 (defclass multi-reader-status (reader-status)
   (
@@ -3481,19 +2807,11 @@
     (%adopt-pointer object (opendaq.low-level:multi-reader-status/create-multi-reader-status coerced-main-descriptor coerced-event-packets coerced-valid coerced-offset)))
     ))
 
-(defun wrap-multi-reader-status (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'multi-reader-status :pointer pointer)))
-
 (defclass mutex (base-object)
   (
    ))
 
 
-
-(defun wrap-mutex (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'mutex :pointer pointer)))
 
 (defclass network-interface (base-object)
   (
@@ -3520,10 +2838,6 @@
     (%adopt-pointer object (opendaq.low-level:network-interface/create-network-interface coerced-name coerced-owner-device-manufacturer-name coerced-owner-device-serial-number coerced-module-manager)))
     ))
 
-(defun wrap-network-interface (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'network-interface :pointer pointer)))
-
 (defclass object-list (base-object)
   (
    ))
@@ -3537,19 +2851,11 @@
   (%adopt-pointer object (opendaq.low-level:list/create-list))
     ))
 
-(defun wrap-object-list (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'object-list :pointer pointer)))
-
 (defclass ownable (base-object)
   (
    ))
 
 
-
-(defun wrap-ownable (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'ownable :pointer pointer)))
 
 (defclass packet (base-object)
   (
@@ -3557,19 +2863,11 @@
 
 
 
-(defun wrap-packet (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'packet :pointer pointer)))
-
 (defclass packet-destruct-callback (base-object)
   (
    ))
 
 
-
-(defun wrap-packet-destruct-callback (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'packet-destruct-callback :pointer pointer)))
 
 (defclass packet-reader (reader)
   (
@@ -3587,10 +2885,6 @@
     (%adopt-pointer object (opendaq.low-level:packet-reader/create-packet-reader coerced-signal)))
     ))
 
-(defun wrap-packet-reader (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'packet-reader :pointer pointer)))
-
 (defclass permission-manager (base-object)
   (
    (%parent-initarg :initarg :parent :initform nil)
@@ -3607,19 +2901,11 @@
     (%adopt-pointer object (opendaq.low-level:permission-manager/create-permission-manager coerced-parent)))
     ))
 
-(defun wrap-permission-manager (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'permission-manager :pointer pointer)))
-
 (defclass permission-manager-internal (base-object)
   (
    ))
 
 
-
-(defun wrap-permission-manager-internal (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'permission-manager-internal :pointer pointer)))
 
 (defclass permission-mask-builder (base-object)
   (
@@ -3634,19 +2920,11 @@
   (%adopt-pointer object (opendaq.low-level:permission-mask-builder/create-permission-mask-builder))
     ))
 
-(defun wrap-permission-mask-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'permission-mask-builder :pointer pointer)))
-
 (defclass permissions (base-object)
   (
    ))
 
 
-
-(defun wrap-permissions (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'permissions :pointer pointer)))
 
 (defclass permissions-builder (base-object)
   (
@@ -3661,19 +2939,11 @@
   (%adopt-pointer object (opendaq.low-level:permissions-builder/create-permissions-builder))
     ))
 
-(defun wrap-permissions-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'permissions-builder :pointer pointer)))
-
 (defclass permissions-internal (base-object)
   (
    ))
 
 
-
-(defun wrap-permissions-internal (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'permissions-internal :pointer pointer)))
 
 (defclass procedure (base-object)
   (
@@ -3691,19 +2961,11 @@
     (%adopt-pointer object (opendaq.low-level:procedure/create-procedure coerced-value)))
     ))
 
-(defun wrap-procedure (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'procedure :pointer pointer)))
-
 (defclass property (base-object)
   (
    ))
 
 
-
-(defun wrap-property (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'property :pointer pointer)))
 
 (defclass property-builder (base-object)
   (
@@ -3721,19 +2983,11 @@
     (%adopt-pointer object (opendaq.low-level:property-builder/create-property-builder coerced-name)))
     ))
 
-(defun wrap-property-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'property-builder :pointer pointer)))
-
 (defclass property-internal (base-object)
   (
    ))
 
 
-
-(defun wrap-property-internal (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'property-internal :pointer pointer)))
 
 (defclass property-object (base-object)
   (
@@ -3747,10 +3001,6 @@
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:property-object/create-property-object))
     ))
-
-(defun wrap-property-object (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'property-object :pointer pointer)))
 
 (defclass property-object-class (daq-type)
   (
@@ -3768,10 +3018,6 @@
     (%adopt-pointer object (opendaq.low-level:property-object-class/create-property-object-class-from-builder coerced-builder)))
     ))
 
-(defun wrap-property-object-class (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'property-object-class :pointer pointer)))
-
 (defclass property-object-class-builder (base-object)
   (
    (%name-initarg :initarg :name :initform nil)
@@ -3788,19 +3034,11 @@
     (%adopt-pointer object (opendaq.low-level:property-object-class-builder/create-property-object-class-builder coerced-name)))
     ))
 
-(defun wrap-property-object-class-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'property-object-class-builder :pointer pointer)))
-
 (defclass property-object-class-internal (base-object)
   (
    ))
 
 
-
-(defun wrap-property-object-class-internal (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'property-object-class-internal :pointer pointer)))
 
 (defclass property-object-internal (base-object)
   (
@@ -3808,19 +3046,11 @@
 
 
 
-(defun wrap-property-object-internal (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'property-object-internal :pointer pointer)))
-
 (defclass property-object-protected (base-object)
   (
    ))
 
 
-
-(defun wrap-property-object-protected (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'property-object-protected :pointer pointer)))
 
 (defclass property-value-event-args (event-args)
   (
@@ -3850,10 +3080,6 @@
     (%adopt-pointer object (opendaq.low-level:property-value-event-args/create-property-value-event-args coerced-prop coerced-value coerced-old-value coerced-type coerced-is-updating)))
     ))
 
-(defun wrap-property-value-event-args (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'property-value-event-args :pointer pointer)))
-
 (defclass range (base-object)
   (
    (%low-value-initarg :initarg :low-value :initform nil)
@@ -3873,29 +3099,17 @@
     (%adopt-pointer object (opendaq.low-level:range/create-range coerced-low-value coerced-high-value)))
     ))
 
-(defun wrap-range (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'range :pointer pointer)))
-
 (defclass reader (base-object)
   (
    ))
 
 
 
-(defun wrap-reader (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'reader :pointer pointer)))
-
 (defclass reader-config (base-object)
   (
    ))
 
 
-
-(defun wrap-reader-config (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'reader-config :pointer pointer)))
 
 (defclass reader-status (base-object)
   (
@@ -3919,29 +3133,17 @@
     (%adopt-pointer object (opendaq.low-level:reader-status/create-reader-status coerced-event-packet coerced-valid coerced-offset)))
     ))
 
-(defun wrap-reader-status (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'reader-status :pointer pointer)))
-
 (defclass recorder (base-object)
   (
    ))
 
 
 
-(defun wrap-recorder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'recorder :pointer pointer)))
-
 (defclass recursive-search (base-object)
   (
    ))
 
 
-
-(defun wrap-recursive-search (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'recursive-search :pointer pointer)))
 
 (defclass reference-domain-info (base-object)
   (
@@ -3959,10 +3161,6 @@
     (%adopt-pointer object (opendaq.low-level:reference-domain-info/create-reference-domain-info-from-builder coerced-builder)))
     ))
 
-(defun wrap-reference-domain-info (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'reference-domain-info :pointer pointer)))
-
 (defclass reference-domain-info-builder (base-object)
   (
    ))
@@ -3976,19 +3174,11 @@
   (%adopt-pointer object (opendaq.low-level:reference-domain-info-builder/create-reference-domain-info-builder))
     ))
 
-(defun wrap-reference-domain-info-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'reference-domain-info-builder :pointer pointer)))
-
 (defclass removable (base-object)
   (
    ))
 
 
-
-(defun wrap-removable (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'removable :pointer pointer)))
 
 (defclass reusable-data-packet (base-object)
   (
@@ -3996,29 +3186,17 @@
 
 
 
-(defun wrap-reusable-data-packet (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'reusable-data-packet :pointer pointer)))
-
 (defclass rule-private (base-object)
   (
    ))
 
 
 
-(defun wrap-rule-private (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'rule-private :pointer pointer)))
-
 (defclass sample-reader (reader)
   (
    ))
 
 
-
-(defun wrap-sample-reader (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'sample-reader :pointer pointer)))
 
 (defclass scaling (base-object)
   (
@@ -4045,10 +3223,6 @@
     (%adopt-pointer object (opendaq.low-level:scaling/create-scaling coerced-input-data-type coerced-output-data-type coerced-scaling-type coerced-parameters)))
     ))
 
-(defun wrap-scaling (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'scaling :pointer pointer)))
-
 (defclass scaling-builder (base-object)
   (
    ))
@@ -4062,19 +3236,11 @@
   (%adopt-pointer object (opendaq.low-level:scaling-builder/create-scaling-builder))
     ))
 
-(defun wrap-scaling-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'scaling-builder :pointer pointer)))
-
 (defclass scaling-calc-private (base-object)
   (
    ))
 
 
-
-(defun wrap-scaling-calc-private (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'scaling-calc-private :pointer pointer)))
 
 (defclass scheduler (base-object)
   (
@@ -4095,10 +3261,6 @@
     (%adopt-pointer object (opendaq.low-level:scheduler/create-scheduler coerced-logger coerced-num-workers)))
     ))
 
-(defun wrap-scheduler (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'scheduler :pointer pointer)))
-
 (defclass search-filter (base-object)
   (
    (%left-initarg :initarg :left :initform nil)
@@ -4118,19 +3280,11 @@
     (%adopt-pointer object (opendaq.low-level:search-filter/create-and-search-filter coerced-left coerced-right)))
     ))
 
-(defun wrap-search-filter (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'search-filter :pointer pointer)))
-
 (defclass serializable (base-object)
   (
    ))
 
 
-
-(defun wrap-serializable (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'serializable :pointer pointer)))
 
 (defclass serialized-list (base-object)
   (
@@ -4138,19 +3292,11 @@
 
 
 
-(defun wrap-serialized-list (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'serialized-list :pointer pointer)))
-
 (defclass serialized-object (base-object)
   (
    ))
 
 
-
-(defun wrap-serialized-object (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'serialized-object :pointer pointer)))
 
 (defclass serializer (base-object)
   (
@@ -4168,29 +3314,17 @@
     (%adopt-pointer object (opendaq.low-level:serializer/create-json-serializer coerced-pretty)))
     ))
 
-(defun wrap-serializer (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'serializer :pointer pointer)))
-
 (defclass server (folder)
   (
    ))
 
 
 
-(defun wrap-server (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'server :pointer pointer)))
-
 (defclass server-capability (property-object)
   (
    ))
 
 
-
-(defun wrap-server-capability (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'server-capability :pointer pointer)))
 
 (defclass server-capability-config (server-capability)
   (
@@ -4213,10 +3347,6 @@
                           (coerced-protocol-type protocol-type nil))
     (%adopt-pointer object (opendaq.low-level:server-capability-config/create-server-capability coerced-protocol-id coerced-protocol-name coerced-protocol-type)))
     ))
-
-(defun wrap-server-capability-config (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'server-capability-config :pointer pointer)))
 
 (defclass server-type (component-type)
   (
@@ -4243,19 +3373,11 @@
     (%adopt-pointer object (opendaq.low-level:server-type/create-server-type coerced-id coerced-name coerced-description coerced-default-config)))
     ))
 
-(defun wrap-server-type (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'server-type :pointer pointer)))
-
 (defclass signal (component)
   (
    ))
 
 
-
-(defun wrap-signal (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'signal :pointer pointer)))
 
 (defclass signal-config (signal)
   (
@@ -4282,29 +3404,17 @@
     (%adopt-pointer object (opendaq.low-level:signal-config/create-signal coerced-context coerced-parent coerced-local-id coerced-class-name)))
     ))
 
-(defun wrap-signal-config (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'signal-config :pointer pointer)))
-
 (defclass signal-events (base-object)
   (
    ))
 
 
 
-(defun wrap-signal-events (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'signal-events :pointer pointer)))
-
 (defclass signal-private (base-object)
   (
    ))
 
 
-
-(defun wrap-signal-private (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'signal-private :pointer pointer)))
 
 (defclass simple-type (daq-type)
   (
@@ -4322,10 +3432,6 @@
     (%adopt-pointer object (opendaq.low-level:simple-type/create-simple-type coerced-core-type)))
     ))
 
-(defun wrap-simple-type (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'simple-type :pointer pointer)))
-
 (defclass stream-reader (sample-reader)
   (
    (%signal-initarg :initarg :signal :initform nil)
@@ -4336,10 +3442,6 @@
    ))
 
 
-
-(defun wrap-stream-reader (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'stream-reader :pointer pointer)))
 
 (defclass stream-reader-builder (base-object)
   (
@@ -4354,19 +3456,11 @@
   (%adopt-pointer object (opendaq.low-level:stream-reader-builder/create-stream-reader-builder))
     ))
 
-(defun wrap-stream-reader-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'stream-reader-builder :pointer pointer)))
-
 (defclass streaming (base-object)
   (
    ))
 
 
-
-(defun wrap-streaming (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'streaming :pointer pointer)))
 
 (defclass streaming-type (component-type)
   (
@@ -4396,10 +3490,6 @@
     (%adopt-pointer object (opendaq.low-level:streaming-type/create-streaming-type coerced-id coerced-name coerced-description coerced-prefix coerced-default-config)))
     ))
 
-(defun wrap-streaming-type (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'streaming-type :pointer pointer)))
-
 (defclass struct (base-object)
   (
    (%name-initarg :initarg :name :initform nil)
@@ -4422,10 +3512,6 @@
     (%adopt-pointer object (opendaq.low-level:struct/create-struct coerced-name coerced-fields coerced-type-manager)))
     ))
 
-(defun wrap-struct (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'struct :pointer pointer)))
-
 (defclass struct-builder (base-object)
   (
    (%name-initarg :initarg :name :initform nil)
@@ -4444,10 +3530,6 @@
                           (coerced-type-manager type-manager :managed-pointer))
     (%adopt-pointer object (opendaq.low-level:struct-builder/create-struct-builder coerced-name coerced-type-manager)))
     ))
-
-(defun wrap-struct-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'struct-builder :pointer pointer)))
 
 (defclass struct-type (daq-type)
   (
@@ -4474,10 +3556,6 @@
     (%adopt-pointer object (opendaq.low-level:struct-type/create-struct-type coerced-name coerced-names coerced-default-values coerced-types)))
     ))
 
-(defun wrap-struct-type (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'struct-type :pointer pointer)))
-
 (defclass subscription-event-args (event-args)
   (
    (%streaming-connection-string-initarg :initarg :streaming-connection-string :initform nil)
@@ -4496,10 +3574,6 @@
                           (coerced-type type nil))
     (%adopt-pointer object (opendaq.low-level:subscription-event-args/create-subscription-event-args coerced-streaming-connection-string coerced-type)))
     ))
-
-(defun wrap-subscription-event-args (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'subscription-event-args :pointer pointer)))
 
 (defclass sync-component (component)
   (
@@ -4523,19 +3597,11 @@
     (%adopt-pointer object (opendaq.low-level:sync-component/create-sync-component coerced-context coerced-parse-failed-exception coerced-local-id)))
     ))
 
-(defun wrap-sync-component (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'sync-component :pointer pointer)))
-
 (defclass sync-component-private (base-object)
   (
    ))
 
 
-
-(defun wrap-sync-component-private (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'sync-component-private :pointer pointer)))
 
 (defclass tags (base-object)
   (
@@ -4550,19 +3616,11 @@
   (%adopt-pointer object (opendaq.low-level:tags/create-tags))
     ))
 
-(defun wrap-tags (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'tags :pointer pointer)))
-
 (defclass tags-private (base-object)
   (
    ))
 
 
-
-(defun wrap-tags-private (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'tags-private :pointer pointer)))
 
 (defclass tail-reader (sample-reader)
   (
@@ -4574,10 +3632,6 @@
    ))
 
 
-
-(defun wrap-tail-reader (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'tail-reader :pointer pointer)))
 
 (defclass tail-reader-builder (base-object)
   (
@@ -4591,10 +3645,6 @@
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:tail-reader-builder/create-tail-reader-builder))
     ))
-
-(defun wrap-tail-reader-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'tail-reader-builder :pointer pointer)))
 
 (defclass tail-reader-status (reader-status)
   (
@@ -4621,10 +3671,6 @@
     (%adopt-pointer object (opendaq.low-level:tail-reader-status/create-tail-reader-status coerced-event-packet coerced-valid coerced-offset coerced-sufficient-history)))
     ))
 
-(defun wrap-tail-reader-status (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'tail-reader-status :pointer pointer)))
-
 (defclass task (base-object)
   (
    (%work-initarg :initarg :work :initform nil)
@@ -4643,10 +3689,6 @@
                           (coerced-name name :daq-string))
     (%adopt-pointer object (opendaq.low-level:task/create-task coerced-work coerced-name)))
     ))
-
-(defun wrap-task (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'task :pointer pointer)))
 
 (defclass task-graph (task)
   (
@@ -4667,10 +3709,6 @@
     (%adopt-pointer object (opendaq.low-level:task-graph/create-task-graph coerced-work coerced-name)))
     ))
 
-(defun wrap-task-graph (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'task-graph :pointer pointer)))
-
 (defclass type-manager (base-object)
   (
    ))
@@ -4684,19 +3722,11 @@
   (%adopt-pointer object (opendaq.low-level:type-manager/create-type-manager))
     ))
 
-(defun wrap-type-manager (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'type-manager :pointer pointer)))
-
 (defclass type-manager-private (base-object)
   (
    ))
 
 
-
-(defun wrap-type-manager-private (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'type-manager-private :pointer pointer)))
 
 (defclass unit (base-object)
   (
@@ -4723,10 +3753,6 @@
     (%adopt-pointer object (opendaq.low-level:unit/create-unit coerced-id coerced-symbol coerced-name coerced-quantity)))
     ))
 
-(defun wrap-unit (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'unit :pointer pointer)))
-
 (defclass unit-builder (base-object)
   (
    ))
@@ -4740,19 +3766,11 @@
   (%adopt-pointer object (opendaq.low-level:unit-builder/create-unit-builder))
     ))
 
-(defun wrap-unit-builder (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'unit-builder :pointer pointer)))
-
 (defclass updatable (base-object)
   (
    ))
 
 
-
-(defun wrap-updatable (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'updatable :pointer pointer)))
 
 (defclass update-parameters (property-object)
   (
@@ -4766,10 +3784,6 @@
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:update-parameters/create-update-parameters))
     ))
-
-(defun wrap-update-parameters (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'update-parameters :pointer pointer)))
 
 (defclass user (base-object)
   (
@@ -4793,19 +3807,11 @@
     (%adopt-pointer object (opendaq.low-level:user/create-user coerced-username coerced-password-hash coerced-groups)))
     ))
 
-(defun wrap-user (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'user :pointer pointer)))
-
 (defclass user-internal (base-object)
   (
    ))
 
 
-
-(defun wrap-user-internal (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'user-internal :pointer pointer)))
 
 (defclass user-lock (base-object)
   (
@@ -4819,10 +3825,6 @@
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:user-lock/create-user-lock))
     ))
-
-(defun wrap-user-lock (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'user-lock :pointer pointer)))
 
 (defclass validator (base-object)
   (
@@ -4839,10 +3841,6 @@
   (with-daq-boxed-values ((coerced-eval eval :daq-string))
     (%adopt-pointer object (opendaq.low-level:validator/create-validator coerced-eval)))
     ))
-
-(defun wrap-validator (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'validator :pointer pointer)))
 
 (defclass version-info (base-object)
   (
@@ -4866,23 +3864,15 @@
     (%adopt-pointer object (opendaq.low-level:version-info/create-version-info coerced-major coerced-minor coerced-patch)))
     ))
 
-(defun wrap-version-info (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'version-info :pointer pointer)))
-
 (defclass work (base-object)
   (
    ))
 
 
 
-(defun wrap-work (pointer)
-  (unless (or (null pointer) (cffi:null-pointer-p pointer))
-    (make-instance 'work :pointer pointer)))
-
 (defgeneric build (object))
 (defmethod build ((object address-info-builder))
-  (wrap-address-info (opendaq.low-level:address-info-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:address-info-builder/build (%require-live-pointer object)) 'address-info)
 )
 
 (defgeneric address-info-builder-address (object))
@@ -4951,7 +3941,7 @@
 
 (defun create-address-info-from-builder (builder)
   (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (wrap-address-info (opendaq.low-level:address-info/create-address-info-from-builder coerced-builder)))
+    (wrap (opendaq.low-level:address-info/create-address-info-from-builder coerced-builder) 'address-info))
 )
 
 (defgeneric address-info-address (object))
@@ -4989,7 +3979,7 @@
 )
 
 (defun create-malloc-allocator ()
-  (wrap-allocator (opendaq.low-level:allocator/create-malloc-allocator))
+  (wrap (opendaq.low-level:allocator/create-malloc-allocator) 'allocator)
 )
 
 (defgeneric free (object address))
@@ -5009,13 +3999,13 @@
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-key-type key-type nil)
                           (coerced-item-type item-type nil))
-    (wrap-argument-info (opendaq.low-level:argument-info/create-dict-argument-info coerced-name coerced-key-type coerced-item-type)))
+    (wrap (opendaq.low-level:argument-info/create-dict-argument-info coerced-name coerced-key-type coerced-item-type) 'argument-info))
 )
 
 (defun create-list-argument-info (name item-type)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-item-type item-type nil))
-    (wrap-argument-info (opendaq.low-level:argument-info/create-list-argument-info coerced-name coerced-item-type)))
+    (wrap (opendaq.low-level:argument-info/create-list-argument-info coerced-name coerced-item-type) 'argument-info))
 )
 
 (defun argument-info-interface-id ()
@@ -5049,34 +4039,34 @@
 (defmethod authenticate ((object authentication-provider) username password)
   (with-daq-boxed-values ((coerced-username username :daq-string)
                           (coerced-password password :daq-string))
-    (wrap-user (opendaq.low-level:authentication-provider/authenticate (%require-live-pointer object) coerced-username coerced-password)))
+    (wrap (opendaq.low-level:authentication-provider/authenticate (%require-live-pointer object) coerced-username coerced-password) 'user))
 )
 
 (defgeneric authenticate-anonymous (object))
 (defmethod authenticate-anonymous ((object authentication-provider))
-  (wrap-user (opendaq.low-level:authentication-provider/authenticate-anonymous (%require-live-pointer object)))
+  (wrap (opendaq.low-level:authentication-provider/authenticate-anonymous (%require-live-pointer object)) 'user)
 )
 
 (defun create-json-file-authentication-provider (filename)
   (with-daq-boxed-values ((coerced-filename filename :daq-string))
-    (wrap-authentication-provider (opendaq.low-level:authentication-provider/create-json-file-authentication-provider coerced-filename)))
+    (wrap (opendaq.low-level:authentication-provider/create-json-file-authentication-provider coerced-filename) 'authentication-provider))
 )
 
 (defun create-json-string-authentication-provider (json-string)
   (with-daq-boxed-values ((coerced-json-string json-string :daq-string))
-    (wrap-authentication-provider (opendaq.low-level:authentication-provider/create-json-string-authentication-provider coerced-json-string)))
+    (wrap (opendaq.low-level:authentication-provider/create-json-string-authentication-provider coerced-json-string) 'authentication-provider))
 )
 
 (defun create-static-authentication-provider (allow-anonymous user-list)
   (with-daq-boxed-values ((coerced-allow-anonymous allow-anonymous :daq-bool)
                           (coerced-user-list user-list :managed-pointer))
-    (wrap-authentication-provider (opendaq.low-level:authentication-provider/create-static-authentication-provider coerced-allow-anonymous coerced-user-list)))
+    (wrap (opendaq.low-level:authentication-provider/create-static-authentication-provider coerced-allow-anonymous coerced-user-list) 'authentication-provider))
 )
 
 (defgeneric find-user (object username))
 (defmethod find-user ((object authentication-provider) username)
   (with-daq-boxed-values ((coerced-username username :daq-string))
-    (wrap-user (opendaq.low-level:authentication-provider/find-user (%require-live-pointer object) coerced-username)))
+    (wrap (opendaq.low-level:authentication-provider/find-user (%require-live-pointer object) coerced-username) 'user))
 )
 
 (defun authentication-provider-interface-id ()
@@ -5105,7 +4095,7 @@
 
 (defgeneric result (object))
 (defmethod result ((object awaitable))
-  (wrap-base-object (opendaq.low-level:awaitable/get-result (%require-live-pointer object)))
+  (wrap (opendaq.low-level:awaitable/get-result (%require-live-pointer object)) 'base-object)
 )
 
 (defgeneric has-completed (object))
@@ -5126,11 +4116,11 @@
 (defgeneric borrow-interface (object intf-id))
 (defmethod borrow-interface ((object base-object) intf-id)
   (with-daq-boxed-values ((coerced-intf-id intf-id nil))
-    (wrap-base-object (opendaq.low-level:base-object/borrow-interface (%require-live-pointer object) coerced-intf-id)))
+    (wrap (opendaq.low-level:base-object/borrow-interface (%require-live-pointer object) coerced-intf-id) 'base-object))
 )
 
 (defun base-object-create ()
-  (wrap-base-object (opendaq.low-level:base-object/create))
+  (wrap (opendaq.low-level:base-object/create) 'base-object)
 )
 
 (defgeneric dispose (object))
@@ -5152,7 +4142,7 @@
 (defgeneric query-interface (object intf-id))
 (defmethod query-interface ((object base-object) intf-id)
   (with-daq-boxed-values ((coerced-intf-id intf-id nil))
-    (wrap-base-object (opendaq.low-level:base-object/query-interface (%require-live-pointer object) coerced-intf-id)))
+    (wrap (opendaq.low-level:base-object/query-interface (%require-live-pointer object) coerced-intf-id) 'base-object))
 )
 
 (defgeneric release-ref (object))
@@ -5162,7 +4152,7 @@
 
 (defgeneric to-string (object))
 (defmethod to-string ((object base-object))
-  (wrap-char-ptr (opendaq.low-level:base-object/to-string (%require-live-pointer object)))
+  (wrap (opendaq.low-level:base-object/to-string (%require-live-pointer object)) 'char-ptr)
 )
 
 (defgeneric binary-data-address (object data))
@@ -5184,7 +4174,7 @@
 )
 
 (defmethod build ((object block-reader-builder))
-  (wrap-block-reader (opendaq.low-level:block-reader-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:block-reader-builder/build (%require-live-pointer object)) 'block-reader)
 )
 
 (defgeneric block-size (object))
@@ -5199,7 +4189,7 @@
 
 (defgeneric input-port (object))
 (defmethod input-port ((object block-reader-builder))
-  (wrap-input-port (opendaq.low-level:block-reader-builder/get-input-port (%require-live-pointer object)))
+  (wrap (opendaq.low-level:block-reader-builder/get-input-port (%require-live-pointer object)) 'input-port)
 )
 
 (defun block-reader-builder-interface-id ()
@@ -5211,7 +4201,7 @@
 
 (defgeneric old-block-reader (object))
 (defmethod old-block-reader ((object block-reader-builder))
-  (wrap-block-reader (opendaq.low-level:block-reader-builder/get-old-block-reader (%require-live-pointer object)))
+  (wrap (opendaq.low-level:block-reader-builder/get-old-block-reader (%require-live-pointer object)) 'block-reader)
 )
 
 (defgeneric overlap (object))
@@ -5226,7 +4216,7 @@
 
 (defgeneric block-reader-builder-signal (object))
 (defmethod block-reader-builder-signal ((object block-reader-builder))
-  (wrap-signal (opendaq.low-level:block-reader-builder/get-signal (%require-live-pointer object)))
+  (wrap (opendaq.low-level:block-reader-builder/get-signal (%require-live-pointer object)) 'signal)
 )
 
 (defgeneric skip-events (object))
@@ -5310,7 +4300,7 @@
                           (coerced-value-read-type value-read-type nil)
                           (coerced-domain-read-type domain-read-type nil)
                           (coerced-block-size block-size nil))
-    (wrap-block-reader (opendaq.low-level:block-reader/create-block-reader-from-existing coerced-invalidated-reader coerced-value-read-type coerced-domain-read-type coerced-block-size)))
+    (wrap (opendaq.low-level:block-reader/create-block-reader-from-existing coerced-invalidated-reader coerced-value-read-type coerced-domain-read-type coerced-block-size) 'block-reader))
 )
 
 (defun create-block-reader-from-port (port block-size value-read-type domain-read-type mode)
@@ -5319,7 +4309,7 @@
                           (coerced-value-read-type value-read-type nil)
                           (coerced-domain-read-type domain-read-type nil)
                           (coerced-mode mode nil))
-    (wrap-block-reader (opendaq.low-level:block-reader/create-block-reader-from-port coerced-port coerced-block-size coerced-value-read-type coerced-domain-read-type coerced-mode)))
+    (wrap (opendaq.low-level:block-reader/create-block-reader-from-port coerced-port coerced-block-size coerced-value-read-type coerced-domain-read-type coerced-mode) 'block-reader))
 )
 
 (defmethod block-size ((object block-reader))
@@ -5346,7 +4336,7 @@
         (opendaq.low-level:block-reader/read (%require-live-pointer object) coerced-blocks coerced-count coerced-timeout-ms)
       (cl:values
         value-0
-        (wrap-block-reader-status value-1))))
+        (wrap value-1 'block-reader-status))))
 )
 
 (defgeneric block-reader-read-with-domain (object data-blocks domain-blocks count timeout-ms))
@@ -5359,12 +4349,12 @@
         (opendaq.low-level:block-reader/read-with-domain (%require-live-pointer object) coerced-data-blocks coerced-domain-blocks coerced-count coerced-timeout-ms)
       (cl:values
         value-0
-        (wrap-block-reader-status value-1))))
+        (wrap value-1 'block-reader-status))))
 )
 
 (defun create-boolean (value)
   (with-daq-boxed-values ((coerced-value value :daq-bool))
-    (wrap-daq-boolean (opendaq.low-level:boolean/create-boolean coerced-value)))
+    (wrap (opendaq.low-level:boolean/create-boolean coerced-value) 'daq-boolean))
 )
 
 (defgeneric equals-value (object value))
@@ -5387,7 +4377,7 @@
 
 (defgeneric arguments (object))
 (defmethod arguments ((object callable-info))
-  (as-list-of (wrap-object-list (opendaq.low-level:callable-info/get-arguments (%require-live-pointer object))) 'argument-info)
+  (as-list-of (wrap (opendaq.low-level:callable-info/get-arguments (%require-live-pointer object)) 'object-list) 'argument-info)
 )
 
 (defun callable-info-interface-id ()
@@ -5416,7 +4406,7 @@
 
 (defgeneric cloneable-clone (object))
 (defmethod cloneable-clone ((object cloneable))
-  (wrap-base-object (opendaq.low-level:cloneable/clone (%require-live-pointer object)))
+  (wrap (opendaq.low-level:cloneable/clone (%require-live-pointer object)) 'base-object)
 )
 
 (defun cloneable-interface-id ()
@@ -5430,14 +4420,14 @@
 (defmethod coerce ((object coercer) prop-obj value)
   (with-daq-boxed-values ((coerced-prop-obj prop-obj :daq-base-object)
                           (coerced-value value :daq-base-object))
-    (wrap-base-object (opendaq.low-level:coercer/coerce (%require-live-pointer object) coerced-prop-obj coerced-value)))
+    (wrap (opendaq.low-level:coercer/coerce (%require-live-pointer object) coerced-prop-obj coerced-value) 'base-object))
 )
 
 (defgeneric coerce-no-lock (object prop-obj value))
 (defmethod coerce-no-lock ((object coercer) prop-obj value)
   (with-daq-boxed-values ((coerced-prop-obj prop-obj :daq-base-object)
                           (coerced-value value :daq-base-object))
-    (wrap-base-object (opendaq.low-level:coercer/coerce-no-lock (%require-live-pointer object) coerced-prop-obj coerced-value)))
+    (wrap (opendaq.low-level:coercer/coerce-no-lock (%require-live-pointer object) coerced-prop-obj coerced-value) 'base-object))
 )
 
 (defgeneric eval (object))
@@ -5491,7 +4481,7 @@
       (cffi:with-foreign-object (new-intf-id-slot 'opendaq.low-level::daq-intf-id)
         (opendaq.low-level:component-deserialize-context/clone (%require-live-pointer object) coerced-new-parent coerced-new-local-id new-component-deserialize-context-slot new-intf-id-slot coerced-new-trigger-core-event)
         (cl:values
-          (wrap-component-deserialize-context (cffi:mem-ref new-component-deserialize-context-slot 'opendaq.low-level::daq-component-deserialize-context))
+          (wrap (cffi:mem-ref new-component-deserialize-context-slot 'opendaq.low-level::daq-component-deserialize-context) 'component-deserialize-context)
           (cffi:mem-ref new-intf-id-slot 'opendaq.low-level::daq-intf-id))
       )
     ))
@@ -5507,7 +4497,7 @@
       (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
         (opendaq.low-level:component-deserialize-context/create-component-deserialize-context obj-slot coerced-context coerced-root coerced-parent coerced-local-id intf-id-slot coerced-trigger-core-event)
         (cl:values
-          (wrap-component-deserialize-context (cffi:mem-ref obj-slot 'opendaq.low-level::daq-component-deserialize-context))
+          (wrap (cffi:mem-ref obj-slot 'opendaq.low-level::daq-component-deserialize-context) 'component-deserialize-context)
           (cffi:mem-ref intf-id-slot 'opendaq.low-level::daq-intf-id))
       )
     ))
@@ -5515,7 +4505,7 @@
 
 (defgeneric context (object))
 (defmethod context ((object component-deserialize-context))
-  (wrap-context (opendaq.low-level:component-deserialize-context/get-context (%require-live-pointer object)))
+  (wrap (opendaq.low-level:component-deserialize-context/get-context (%require-live-pointer object)) 'context)
 )
 
 (defun component-deserialize-context-interface-id ()
@@ -5540,29 +4530,29 @@
 
 (defgeneric parent (object))
 (defmethod parent ((object component-deserialize-context))
-  (wrap-component (opendaq.low-level:component-deserialize-context/get-parent (%require-live-pointer object)))
+  (wrap (opendaq.low-level:component-deserialize-context/get-parent (%require-live-pointer object)) 'component)
 )
 
 (defgeneric root (object))
 (defmethod root ((object component-deserialize-context))
-  (wrap-component (opendaq.low-level:component-deserialize-context/get-root (%require-live-pointer object)))
+  (wrap (opendaq.low-level:component-deserialize-context/get-root (%require-live-pointer object)) 'component)
 )
 
 (defgeneric trigger-core-event (object))
 (defmethod trigger-core-event ((object component-deserialize-context))
-  (wrap-procedure (opendaq.low-level:component-deserialize-context/get-trigger-core-event (%require-live-pointer object)))
+  (wrap (opendaq.low-level:component-deserialize-context/get-trigger-core-event (%require-live-pointer object)) 'procedure)
 )
 
 (defun create-component-holder-with-ids (id parent-global-id component)
   (with-daq-boxed-values ((coerced-id id :daq-string)
                           (coerced-parent-global-id parent-global-id :daq-string)
                           (coerced-component component :managed-pointer))
-    (wrap-component-holder (opendaq.low-level:component-holder/create-component-holder-with-ids coerced-id coerced-parent-global-id coerced-component)))
+    (wrap (opendaq.low-level:component-holder/create-component-holder-with-ids coerced-id coerced-parent-global-id coerced-component) 'component-holder))
 )
 
 (defgeneric component-holder-component (object))
 (defmethod component-holder-component ((object component-holder))
-  (wrap-component (opendaq.low-level:component-holder/get-component (%require-live-pointer object)))
+  (wrap (opendaq.low-level:component-holder/get-component (%require-live-pointer object)) 'component)
 )
 
 (defun component-holder-interface-id ()
@@ -5583,7 +4573,7 @@
 
 (defgeneric component-config (object))
 (defmethod component-config ((object component-private))
-  (wrap-property-object (opendaq.low-level:component-private/get-component-config (%require-live-pointer object)))
+  (wrap (opendaq.low-level:component-private/get-component-config (%require-live-pointer object)) 'property-object)
 )
 
 (defun component-private-interface-id ()
@@ -5686,7 +4676,7 @@
 (defgeneric status (object name))
 (defmethod status ((object component-status-container) name)
   (with-daq-boxed-values ((coerced-name name :daq-string))
-    (wrap-enumeration (opendaq.low-level:component-status-container/get-status (%require-live-pointer object) coerced-name)))
+    (wrap (opendaq.low-level:component-status-container/get-status (%require-live-pointer object) coerced-name) 'enumeration))
 )
 
 (defgeneric status-message (object name))
@@ -5697,27 +4687,27 @@
 
 (defgeneric statuses (object))
 (defmethod statuses ((object component-status-container))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:component-status-container/get-statuses (%require-live-pointer object))) 'daq-string-object 'enumeration)
+  (as-hashtable-of (wrap (opendaq.low-level:component-status-container/get-statuses (%require-live-pointer object)) 'dict) 'daq-string-object 'enumeration)
 )
 
 (defmethod build ((object component-type-builder))
-  (wrap-component-type (opendaq.low-level:component-type-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:component-type-builder/build (%require-live-pointer object)) 'component-type)
 )
 
 (defun create-device-type-builder ()
-  (wrap-component-type-builder (opendaq.low-level:component-type-builder/create-device-type-builder))
+  (wrap (opendaq.low-level:component-type-builder/create-device-type-builder) 'component-type-builder)
 )
 
 (defun create-function-block-type-builder ()
-  (wrap-component-type-builder (opendaq.low-level:component-type-builder/create-function-block-type-builder))
+  (wrap (opendaq.low-level:component-type-builder/create-function-block-type-builder) 'component-type-builder)
 )
 
 (defun create-server-type-builder ()
-  (wrap-component-type-builder (opendaq.low-level:component-type-builder/create-server-type-builder))
+  (wrap (opendaq.low-level:component-type-builder/create-server-type-builder) 'component-type-builder)
 )
 
 (defun create-streaming-type-builder ()
-  (wrap-component-type-builder (opendaq.low-level:component-type-builder/create-streaming-type-builder))
+  (wrap (opendaq.low-level:component-type-builder/create-streaming-type-builder) 'component-type-builder)
 )
 
 (defgeneric connection-string-prefix (object))
@@ -5727,7 +4717,7 @@
 
 (defgeneric default-config (object))
 (defmethod default-config ((object component-type-builder))
-  (wrap-property-object (opendaq.low-level:component-type-builder/get-default-config (%require-live-pointer object)))
+  (wrap (opendaq.low-level:component-type-builder/get-default-config (%require-live-pointer object)) 'property-object)
 )
 
 (defgeneric description (object))
@@ -5807,7 +4797,7 @@
 
 (defgeneric create-default-config (object))
 (defmethod create-default-config ((object component-type))
-  (wrap-property-object (opendaq.low-level:component-type/create-default-config (%require-live-pointer object)))
+  (wrap (opendaq.low-level:component-type/create-default-config (%require-live-pointer object)) 'property-object)
 )
 
 (defmethod description ((object component-type))
@@ -5827,7 +4817,7 @@
 
 (defgeneric module-info (object))
 (defmethod module-info ((object component-type))
-  (wrap-module-info (opendaq.low-level:component-type/get-module-info (%require-live-pointer object)))
+  (wrap (opendaq.low-level:component-type/get-module-info (%require-live-pointer object)) 'module-info)
 )
 
 (defmethod name ((object component-type))
@@ -5844,13 +4834,13 @@
 (defgeneric device-update-options-with-local-id-or-null (object local-id))
 (defmethod device-update-options-with-local-id-or-null ((object component-update-context) local-id)
   (with-daq-boxed-values ((coerced-local-id local-id :daq-string))
-    (wrap-device-update-options (opendaq.low-level:component-update-context/get-device-update-options-with-local-id-or-null (%require-live-pointer object) coerced-local-id)))
+    (wrap (opendaq.low-level:component-update-context/get-device-update-options-with-local-id-or-null (%require-live-pointer object) coerced-local-id) 'device-update-options))
 )
 
 (defgeneric input-port-connections (object parent-id))
 (defmethod input-port-connections ((object component-update-context) parent-id)
   (with-daq-boxed-values ((coerced-parent-id parent-id :daq-string))
-    (as-hashtable-of (wrap-dict (opendaq.low-level:component-update-context/get-input-port-connections (%require-live-pointer object) coerced-parent-id)) 'daq-string-object 'daq-string-object))
+    (as-hashtable-of (wrap (opendaq.low-level:component-update-context/get-input-port-connections (%require-live-pointer object) coerced-parent-id) 'dict) 'daq-string-object 'daq-string-object))
 )
 
 (defun component-update-context-interface-id ()
@@ -5862,24 +4852,24 @@
 
 (defgeneric internal-state (object))
 (defmethod internal-state ((object component-update-context))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:component-update-context/get-internal-state (%require-live-pointer object))) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:component-update-context/get-internal-state (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
 )
 
 (defgeneric root-component (object))
 (defmethod root-component ((object component-update-context))
-  (wrap-component (opendaq.low-level:component-update-context/get-root-component (%require-live-pointer object)))
+  (wrap (opendaq.low-level:component-update-context/get-root-component (%require-live-pointer object)) 'component)
 )
 
 (defgeneric component-update-context-signal (object parent-id port-id))
 (defmethod component-update-context-signal ((object component-update-context) parent-id port-id)
   (with-daq-boxed-values ((coerced-parent-id parent-id :daq-string)
                           (coerced-port-id port-id :daq-string))
-    (wrap-signal (opendaq.low-level:component-update-context/get-signal (%require-live-pointer object) coerced-parent-id coerced-port-id)))
+    (wrap (opendaq.low-level:component-update-context/get-signal (%require-live-pointer object) coerced-parent-id coerced-port-id) 'signal))
 )
 
 (defgeneric update-parameters (object))
 (defmethod update-parameters ((object component-update-context))
-  (wrap-update-parameters (opendaq.low-level:component-update-context/get-update-parameters (%require-live-pointer object)))
+  (wrap (opendaq.low-level:component-update-context/get-update-parameters (%require-live-pointer object)) 'update-parameters)
 )
 
 (defgeneric override-state (object update-context))
@@ -5923,7 +4913,7 @@
 (defgeneric find-component (object id))
 (defmethod find-component ((object component) id)
   (with-daq-boxed-values ((coerced-id id :daq-string))
-    (wrap-component (opendaq.low-level:component/find-component (%require-live-pointer object) coerced-id)))
+    (wrap (opendaq.low-level:component/find-component (%require-live-pointer object) coerced-id) 'component))
 )
 
 (defgeneric active (object))
@@ -5932,7 +4922,7 @@
 )
 
 (defmethod context ((object component))
-  (wrap-context (opendaq.low-level:component/get-context (%require-live-pointer object)))
+  (wrap (opendaq.low-level:component/get-context (%require-live-pointer object)) 'context)
 )
 
 (defmethod description ((object component))
@@ -5962,7 +4952,7 @@
 
 (defgeneric locked-attributes (object))
 (defmethod locked-attributes ((object component))
-  (as-list-of (wrap-object-list (opendaq.low-level:component/get-locked-attributes (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:component/get-locked-attributes (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defmethod name ((object component))
@@ -5971,7 +4961,7 @@
 
 (defgeneric on-component-core-event (object))
 (defmethod on-component-core-event ((object component))
-  (wrap-event (opendaq.low-level:component/get-on-component-core-event (%require-live-pointer object)))
+  (wrap (opendaq.low-level:component/get-on-component-core-event (%require-live-pointer object)) 'event)
 )
 
 (defgeneric operation-mode (object))
@@ -5980,7 +4970,7 @@
 )
 
 (defmethod parent ((object component))
-  (wrap-component (opendaq.low-level:component/get-parent (%require-live-pointer object)))
+  (wrap (opendaq.low-level:component/get-parent (%require-live-pointer object)) 'component)
 )
 
 (defgeneric parent-active (object))
@@ -5990,12 +4980,12 @@
 
 (defgeneric status-container (object))
 (defmethod status-container ((object component))
-  (wrap-component-status-container (opendaq.low-level:component/get-status-container (%require-live-pointer object)))
+  (wrap (opendaq.low-level:component/get-status-container (%require-live-pointer object)) 'component-status-container)
 )
 
 (defgeneric tags (object))
 (defmethod tags ((object component))
-  (wrap-tags (opendaq.low-level:component/get-tags (%require-live-pointer object)))
+  (wrap (opendaq.low-level:component/get-tags (%require-live-pointer object)) 'tags)
 )
 
 (defgeneric visible (object))
@@ -6026,12 +5016,12 @@
   new-value)
 
 (defun create-env-config-provider ()
-  (wrap-config-provider (opendaq.low-level:config-provider/create-env-config-provider))
+  (wrap (opendaq.low-level:config-provider/create-env-config-provider) 'config-provider)
 )
 
 (defun create-json-config-provider (filename)
   (with-daq-boxed-values ((coerced-filename filename :daq-string))
-    (wrap-config-provider (opendaq.low-level:config-provider/create-json-config-provider coerced-filename)))
+    (wrap (opendaq.low-level:config-provider/create-json-config-provider coerced-filename) 'config-provider))
 )
 
 (defun config-provider-interface-id ()
@@ -6053,7 +5043,7 @@
                           (coerced-protocol-name protocol-name :daq-string)
                           (coerced-client-type client-type :daq-string)
                           (coerced-host-name host-name :daq-string))
-    (wrap-connected-client-info (opendaq.low-level:connected-client-info/create-connected-client-info-with-params coerced-address coerced-protocol-type coerced-protocol-name coerced-client-type coerced-host-name)))
+    (wrap (opendaq.low-level:connected-client-info/create-connected-client-info-with-params coerced-address coerced-protocol-type coerced-protocol-name coerced-client-type coerced-host-name) 'connected-client-info))
 )
 
 (defgeneric connected-client-info-address (object))
@@ -6094,7 +5084,7 @@
     (multiple-value-bind (value-0 value-1)
         (opendaq.low-level:connection-internal/dequeue-up-to (%require-live-pointer object) coerced-count)
       (cl:values
-        (wrap-packet value-0)
+        (wrap value-0 'packet)
         value-1)))
 )
 
@@ -6157,12 +5147,12 @@
 
 (defgeneric dequeue (object))
 (defmethod dequeue ((object connection))
-  (wrap-packet (opendaq.low-level:connection/dequeue (%require-live-pointer object)))
+  (wrap (opendaq.low-level:connection/dequeue (%require-live-pointer object)) 'packet)
 )
 
 (defgeneric dequeue-all (object))
 (defmethod dequeue-all ((object connection))
-  (as-list-of (wrap-object-list (opendaq.low-level:connection/dequeue-all (%require-live-pointer object))) 'packet)
+  (as-list-of (wrap (opendaq.low-level:connection/dequeue-all (%require-live-pointer object)) 'object-list) 'packet)
 )
 
 (defgeneric enqueue (object packet))
@@ -6208,7 +5198,7 @@
 )
 
 (defmethod input-port ((object connection))
-  (wrap-input-port (opendaq.low-level:connection/get-input-port (%require-live-pointer object)))
+  (wrap (opendaq.low-level:connection/get-input-port (%require-live-pointer object)) 'input-port)
 )
 
 (defun connection-interface-id ()
@@ -6243,7 +5233,7 @@
 
 (defgeneric connection-signal (object))
 (defmethod connection-signal ((object connection))
-  (wrap-signal (opendaq.low-level:connection/get-signal (%require-live-pointer object)))
+  (wrap (opendaq.low-level:connection/get-signal (%require-live-pointer object)) 'signal)
 )
 
 (defgeneric has-event-packet (object))
@@ -6263,7 +5253,7 @@
 
 (defgeneric peek (object))
 (defmethod peek ((object connection))
-  (wrap-packet (opendaq.low-level:connection/peek (%require-live-pointer object)))
+  (wrap (opendaq.low-level:connection/peek (%require-live-pointer object)) 'packet)
 )
 
 (defun context-internal-interface-id ()
@@ -6275,17 +5265,17 @@
 
 (defgeneric move-module-manager (object))
 (defmethod move-module-manager ((object context-internal))
-  (wrap-module-manager (opendaq.low-level:context-internal/move-module-manager (%require-live-pointer object)))
+  (wrap (opendaq.low-level:context-internal/move-module-manager (%require-live-pointer object)) 'module-manager)
 )
 
 (defgeneric authentication-provider (object))
 (defmethod authentication-provider ((object context))
-  (wrap-authentication-provider (opendaq.low-level:context/get-authentication-provider (%require-live-pointer object)))
+  (wrap (opendaq.low-level:context/get-authentication-provider (%require-live-pointer object)) 'authentication-provider)
 )
 
 (defgeneric discovery-servers (object))
 (defmethod discovery-servers ((object context))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:context/get-discovery-servers (%require-live-pointer object))) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:context/get-discovery-servers (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
 )
 
 (defun context-interface-id ()
@@ -6297,38 +5287,38 @@
 
 (defgeneric logger (object))
 (defmethod logger ((object context))
-  (wrap-logger (opendaq.low-level:context/get-logger (%require-live-pointer object)))
+  (wrap (opendaq.low-level:context/get-logger (%require-live-pointer object)) 'logger)
 )
 
 (defgeneric module-manager (object))
 (defmethod module-manager ((object context))
-  (wrap-base-object (opendaq.low-level:context/get-module-manager (%require-live-pointer object)))
+  (wrap (opendaq.low-level:context/get-module-manager (%require-live-pointer object)) 'base-object)
 )
 
 (defgeneric module-options (object module-id))
 (defmethod module-options ((object context) module-id)
   (with-daq-boxed-values ((coerced-module-id module-id :daq-string))
-    (as-hashtable-of (wrap-dict (opendaq.low-level:context/get-module-options (%require-live-pointer object) coerced-module-id)) 'daq-string-object 'base-object))
+    (as-hashtable-of (wrap (opendaq.low-level:context/get-module-options (%require-live-pointer object) coerced-module-id) 'dict) 'daq-string-object 'base-object))
 )
 
 (defgeneric on-core-event (object))
 (defmethod on-core-event ((object context))
-  (wrap-event (opendaq.low-level:context/get-on-core-event (%require-live-pointer object)))
+  (wrap (opendaq.low-level:context/get-on-core-event (%require-live-pointer object)) 'event)
 )
 
 (defgeneric options (object))
 (defmethod options ((object context))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:context/get-options (%require-live-pointer object))) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:context/get-options (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
 )
 
 (defgeneric scheduler (object))
 (defmethod scheduler ((object context))
-  (wrap-scheduler (opendaq.low-level:context/get-scheduler (%require-live-pointer object)))
+  (wrap (opendaq.low-level:context/get-scheduler (%require-live-pointer object)) 'scheduler)
 )
 
 (defgeneric type-manager (object))
 (defmethod type-manager ((object context))
-  (wrap-type-manager (opendaq.low-level:context/get-type-manager (%require-live-pointer object)))
+  (wrap (opendaq.low-level:context/get-type-manager (%require-live-pointer object)) 'type-manager)
 )
 
 (defun convertible-interface-id ()
@@ -6357,28 +5347,28 @@
   (with-daq-boxed-values ((coerced-prop-owner prop-owner :managed-pointer)
                           (coerced-prop prop :managed-pointer)
                           (coerced-path path :daq-string))
-    (wrap-core-event-args (opendaq.low-level:core-event-args/create-core-event-args-property-added coerced-prop-owner coerced-prop coerced-path)))
+    (wrap (opendaq.low-level:core-event-args/create-core-event-args-property-added coerced-prop-owner coerced-prop coerced-path) 'core-event-args))
 )
 
 (defun create-core-event-args-property-object-update-end (prop-owner updated-properties path)
   (with-daq-boxed-values ((coerced-prop-owner prop-owner :managed-pointer)
                           (coerced-updated-properties updated-properties :managed-pointer)
                           (coerced-path path :daq-string))
-    (wrap-core-event-args (opendaq.low-level:core-event-args/create-core-event-args-property-object-update-end coerced-prop-owner coerced-updated-properties coerced-path)))
+    (wrap (opendaq.low-level:core-event-args/create-core-event-args-property-object-update-end coerced-prop-owner coerced-updated-properties coerced-path) 'core-event-args))
 )
 
 (defun create-core-event-args-property-order-changed (prop-owner property-order path)
   (with-daq-boxed-values ((coerced-prop-owner prop-owner :managed-pointer)
                           (coerced-property-order property-order :managed-pointer)
                           (coerced-path path :daq-string))
-    (wrap-core-event-args (opendaq.low-level:core-event-args/create-core-event-args-property-order-changed coerced-prop-owner coerced-property-order coerced-path)))
+    (wrap (opendaq.low-level:core-event-args/create-core-event-args-property-order-changed coerced-prop-owner coerced-property-order coerced-path) 'core-event-args))
 )
 
 (defun create-core-event-args-property-removed (prop-owner prop-name path)
   (with-daq-boxed-values ((coerced-prop-owner prop-owner :managed-pointer)
                           (coerced-prop-name prop-name :daq-string)
                           (coerced-path path :daq-string))
-    (wrap-core-event-args (opendaq.low-level:core-event-args/create-core-event-args-property-removed coerced-prop-owner coerced-prop-name coerced-path)))
+    (wrap (opendaq.low-level:core-event-args/create-core-event-args-property-removed coerced-prop-owner coerced-prop-name coerced-path) 'core-event-args))
 )
 
 (defun create-core-event-args-property-value-changed (prop-owner prop-name value path)
@@ -6386,17 +5376,17 @@
                           (coerced-prop-name prop-name :daq-string)
                           (coerced-value value :daq-base-object)
                           (coerced-path path :daq-string))
-    (wrap-core-event-args (opendaq.low-level:core-event-args/create-core-event-args-property-value-changed coerced-prop-owner coerced-prop-name coerced-value coerced-path)))
+    (wrap (opendaq.low-level:core-event-args/create-core-event-args-property-value-changed coerced-prop-owner coerced-prop-name coerced-value coerced-path) 'core-event-args))
 )
 
 (defun create-core-event-args-type-added (type)
   (with-daq-boxed-values ((coerced-type type :managed-pointer))
-    (wrap-core-event-args (opendaq.low-level:core-event-args/create-core-event-args-type-added coerced-type)))
+    (wrap (opendaq.low-level:core-event-args/create-core-event-args-type-added coerced-type) 'core-event-args))
 )
 
 (defun create-core-event-args-type-removed (type-name)
   (with-daq-boxed-values ((coerced-type-name type-name :daq-string))
-    (wrap-core-event-args (opendaq.low-level:core-event-args/create-core-event-args-type-removed coerced-type-name)))
+    (wrap (opendaq.low-level:core-event-args/create-core-event-args-type-removed coerced-type-name) 'core-event-args))
 )
 
 (defun core-event-args-interface-id ()
@@ -6408,7 +5398,7 @@
 
 (defgeneric parameters (object))
 (defmethod parameters ((object core-event-args))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:core-event-args/get-parameters (%require-live-pointer object))) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:core-event-args/get-parameters (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
 )
 
 (defgeneric core-type (object))
@@ -6417,17 +5407,17 @@
 )
 
 (defmethod build ((object data-descriptor-builder))
-  (wrap-data-descriptor (opendaq.low-level:data-descriptor-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:data-descriptor-builder/build (%require-live-pointer object)) 'data-descriptor)
 )
 
 (defun create-data-descriptor-builder-from-existing (descriptor-to-copy)
   (with-daq-boxed-values ((coerced-descriptor-to-copy descriptor-to-copy :managed-pointer))
-    (wrap-data-descriptor-builder (opendaq.low-level:data-descriptor-builder/create-data-descriptor-builder-from-existing coerced-descriptor-to-copy)))
+    (wrap (opendaq.low-level:data-descriptor-builder/create-data-descriptor-builder-from-existing coerced-descriptor-to-copy) 'data-descriptor-builder))
 )
 
 (defgeneric dimensions (object))
 (defmethod dimensions ((object data-descriptor-builder))
-  (as-list-of (wrap-object-list (opendaq.low-level:data-descriptor-builder/get-dimensions (%require-live-pointer object))) 'dimension)
+  (as-list-of (wrap (opendaq.low-level:data-descriptor-builder/get-dimensions (%require-live-pointer object)) 'object-list) 'dimension)
 )
 
 (defun data-descriptor-builder-interface-id ()
@@ -6439,7 +5429,7 @@
 
 (defgeneric metadata (object))
 (defmethod metadata ((object data-descriptor-builder))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:data-descriptor-builder/get-metadata (%require-live-pointer object))) 'daq-string-object 'daq-string-object)
+  (as-hashtable-of (wrap (opendaq.low-level:data-descriptor-builder/get-metadata (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-string-object)
 )
 
 (defmethod name ((object data-descriptor-builder))
@@ -6453,17 +5443,17 @@
 
 (defgeneric post-scaling (object))
 (defmethod post-scaling ((object data-descriptor-builder))
-  (wrap-scaling (opendaq.low-level:data-descriptor-builder/get-post-scaling (%require-live-pointer object)))
+  (wrap (opendaq.low-level:data-descriptor-builder/get-post-scaling (%require-live-pointer object)) 'scaling)
 )
 
 (defgeneric reference-domain-info (object))
 (defmethod reference-domain-info ((object data-descriptor-builder))
-  (wrap-reference-domain-info (opendaq.low-level:data-descriptor-builder/get-reference-domain-info (%require-live-pointer object)))
+  (wrap (opendaq.low-level:data-descriptor-builder/get-reference-domain-info (%require-live-pointer object)) 'reference-domain-info)
 )
 
 (defgeneric rule (object))
 (defmethod rule ((object data-descriptor-builder))
-  (wrap-data-rule (opendaq.low-level:data-descriptor-builder/get-rule (%require-live-pointer object)))
+  (wrap (opendaq.low-level:data-descriptor-builder/get-rule (%require-live-pointer object)) 'data-rule)
 )
 
 (defgeneric sample-type (object))
@@ -6473,22 +5463,22 @@
 
 (defgeneric struct-fields (object))
 (defmethod struct-fields ((object data-descriptor-builder))
-  (as-list-of (wrap-object-list (opendaq.low-level:data-descriptor-builder/get-struct-fields (%require-live-pointer object))) 'data-descriptor)
+  (as-list-of (wrap (opendaq.low-level:data-descriptor-builder/get-struct-fields (%require-live-pointer object)) 'object-list) 'data-descriptor)
 )
 
 (defgeneric tick-resolution (object))
 (defmethod tick-resolution ((object data-descriptor-builder))
-  (wrap-daq-ratio (opendaq.low-level:data-descriptor-builder/get-tick-resolution (%require-live-pointer object)))
+  (wrap (opendaq.low-level:data-descriptor-builder/get-tick-resolution (%require-live-pointer object)) 'daq-ratio)
 )
 
 (defgeneric unit (object))
 (defmethod unit ((object data-descriptor-builder))
-  (wrap-unit (opendaq.low-level:data-descriptor-builder/get-unit (%require-live-pointer object)))
+  (wrap (opendaq.low-level:data-descriptor-builder/get-unit (%require-live-pointer object)) 'unit)
 )
 
 (defgeneric value-range (object))
 (defmethod value-range ((object data-descriptor-builder))
-  (wrap-range (opendaq.low-level:data-descriptor-builder/get-value-range (%require-live-pointer object)))
+  (wrap (opendaq.low-level:data-descriptor-builder/get-value-range (%require-live-pointer object)) 'range)
 )
 
 (defgeneric (setf dimensions) (new-value object))
@@ -6563,7 +5553,7 @@
   new-value)
 
 (defmethod dimensions ((object data-descriptor))
-  (as-list-of (wrap-object-list (opendaq.low-level:data-descriptor/get-dimensions (%require-live-pointer object))) 'dimension)
+  (as-list-of (wrap (opendaq.low-level:data-descriptor/get-dimensions (%require-live-pointer object)) 'object-list) 'dimension)
 )
 
 (defun data-descriptor-interface-id ()
@@ -6574,7 +5564,7 @@
 )
 
 (defmethod metadata ((object data-descriptor))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:data-descriptor/get-metadata (%require-live-pointer object))) 'daq-string-object 'daq-string-object)
+  (as-hashtable-of (wrap (opendaq.low-level:data-descriptor/get-metadata (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-string-object)
 )
 
 (defmethod name ((object data-descriptor))
@@ -6586,7 +5576,7 @@
 )
 
 (defmethod post-scaling ((object data-descriptor))
-  (wrap-scaling (opendaq.low-level:data-descriptor/get-post-scaling (%require-live-pointer object)))
+  (wrap (opendaq.low-level:data-descriptor/get-post-scaling (%require-live-pointer object)) 'scaling)
 )
 
 (defgeneric raw-sample-size (object))
@@ -6595,11 +5585,11 @@
 )
 
 (defmethod reference-domain-info ((object data-descriptor))
-  (wrap-reference-domain-info (opendaq.low-level:data-descriptor/get-reference-domain-info (%require-live-pointer object)))
+  (wrap (opendaq.low-level:data-descriptor/get-reference-domain-info (%require-live-pointer object)) 'reference-domain-info)
 )
 
 (defmethod rule ((object data-descriptor))
-  (wrap-data-rule (opendaq.low-level:data-descriptor/get-rule (%require-live-pointer object)))
+  (wrap (opendaq.low-level:data-descriptor/get-rule (%require-live-pointer object)) 'data-rule)
 )
 
 (defgeneric sample-size (object))
@@ -6612,19 +5602,19 @@
 )
 
 (defmethod struct-fields ((object data-descriptor))
-  (as-list-of (wrap-object-list (opendaq.low-level:data-descriptor/get-struct-fields (%require-live-pointer object))) 'data-descriptor)
+  (as-list-of (wrap (opendaq.low-level:data-descriptor/get-struct-fields (%require-live-pointer object)) 'object-list) 'data-descriptor)
 )
 
 (defmethod tick-resolution ((object data-descriptor))
-  (wrap-daq-ratio (opendaq.low-level:data-descriptor/get-tick-resolution (%require-live-pointer object)))
+  (wrap (opendaq.low-level:data-descriptor/get-tick-resolution (%require-live-pointer object)) 'daq-ratio)
 )
 
 (defmethod unit ((object data-descriptor))
-  (wrap-unit (opendaq.low-level:data-descriptor/get-unit (%require-live-pointer object)))
+  (wrap (opendaq.low-level:data-descriptor/get-unit (%require-live-pointer object)) 'unit)
 )
 
 (defmethod value-range ((object data-descriptor))
-  (wrap-range (opendaq.low-level:data-descriptor/get-value-range (%require-live-pointer object)))
+  (wrap (opendaq.low-level:data-descriptor/get-value-range (%require-live-pointer object)) 'range)
 )
 
 (defun create-constant-data-packet-with-domain (domain-packet descriptor sample-count initial-value other-values other-value-count)
@@ -6634,7 +5624,7 @@
                           (coerced-initial-value initial-value nil)
                           (coerced-other-values other-values nil)
                           (coerced-other-value-count other-value-count nil))
-    (wrap-data-packet (opendaq.low-level:data-packet/create-constant-data-packet-with-domain coerced-domain-packet coerced-descriptor coerced-sample-count coerced-initial-value coerced-other-values coerced-other-value-count)))
+    (wrap (opendaq.low-level:data-packet/create-constant-data-packet-with-domain coerced-domain-packet coerced-descriptor coerced-sample-count coerced-initial-value coerced-other-values coerced-other-value-count) 'data-packet))
 )
 
 (defun create-data-packet-with-domain (domain-packet descriptor sample-count offset)
@@ -6642,7 +5632,7 @@
                           (coerced-descriptor descriptor :managed-pointer)
                           (coerced-sample-count sample-count nil)
                           (coerced-offset offset :managed-pointer))
-    (wrap-data-packet (opendaq.low-level:data-packet/create-data-packet-with-domain coerced-domain-packet coerced-descriptor coerced-sample-count coerced-offset)))
+    (wrap (opendaq.low-level:data-packet/create-data-packet-with-domain coerced-domain-packet coerced-descriptor coerced-sample-count coerced-offset) 'data-packet))
 )
 
 (defun create-data-packet-with-external-memory (domain-packet descriptor sample-count offset external-memory deleter buffer-size)
@@ -6653,12 +5643,12 @@
                           (coerced-external-memory external-memory nil)
                           (coerced-deleter deleter :managed-pointer)
                           (coerced-buffer-size buffer-size nil))
-    (wrap-data-packet (opendaq.low-level:data-packet/create-data-packet-with-external-memory coerced-domain-packet coerced-descriptor coerced-sample-count coerced-offset coerced-external-memory coerced-deleter coerced-buffer-size)))
+    (wrap (opendaq.low-level:data-packet/create-data-packet-with-external-memory coerced-domain-packet coerced-descriptor coerced-sample-count coerced-offset coerced-external-memory coerced-deleter coerced-buffer-size) 'data-packet))
 )
 
 (defgeneric data-descriptor (object))
 (defmethod data-descriptor ((object data-packet))
-  (wrap-data-descriptor (opendaq.low-level:data-packet/get-data-descriptor (%require-live-pointer object)))
+  (wrap (opendaq.low-level:data-packet/get-data-descriptor (%require-live-pointer object)) 'data-descriptor)
 )
 
 (defgeneric data-size (object))
@@ -6668,7 +5658,7 @@
 
 (defgeneric domain-packet (object))
 (defmethod domain-packet ((object data-packet))
-  (wrap-data-packet (opendaq.low-level:data-packet/get-domain-packet (%require-live-pointer object)))
+  (wrap (opendaq.low-level:data-packet/get-domain-packet (%require-live-pointer object)) 'data-packet)
 )
 
 (defun data-packet-interface-id ()
@@ -6681,7 +5671,7 @@
 (defgeneric last-value (object &optional type-manager))
 (defmethod last-value ((object data-packet) &optional (type-manager nil))
   (with-daq-boxed-values ((coerced-type-manager type-manager :managed-pointer))
-    (wrap-base-object (opendaq.low-level:data-packet/get-last-value (%require-live-pointer object) coerced-type-manager)))
+    (wrap (opendaq.low-level:data-packet/get-last-value (%require-live-pointer object) coerced-type-manager) 'base-object))
 )
 
 (defgeneric offset (object &optional domain-start))
@@ -6689,7 +5679,7 @@
   (declare (ignore domain-start))
   (when domain-start-suppliedp
     (error "OFFSET is not applicable with a DOMAIN-START argument for ~S." 'data-packet))
-  (wrap-daq-number (opendaq.low-level:data-packet/get-offset (%require-live-pointer object)))
+  (wrap (opendaq.low-level:data-packet/get-offset (%require-live-pointer object)) 'daq-number)
 )
 
 (defgeneric packet-id (object))
@@ -6724,7 +5714,7 @@
 (defmethod value-by-index ((object data-packet) index type-manager)
   (with-daq-boxed-values ((coerced-index index nil)
                           (coerced-type-manager type-manager :managed-pointer))
-    (wrap-base-object (opendaq.low-level:data-packet/get-value-by-index (%require-live-pointer object) coerced-index coerced-type-manager)))
+    (wrap (opendaq.low-level:data-packet/get-value-by-index (%require-live-pointer object) coerced-index coerced-type-manager) 'base-object))
 )
 
 (defgeneric add-parameter (object name parameter))
@@ -6735,12 +5725,12 @@
 )
 
 (defmethod build ((object data-rule-builder))
-  (wrap-data-rule (opendaq.low-level:data-rule-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:data-rule-builder/build (%require-live-pointer object)) 'data-rule)
 )
 
 (defun create-data-rule-builder-from-existing (rule-to-copy)
   (with-daq-boxed-values ((coerced-rule-to-copy rule-to-copy :managed-pointer))
-    (wrap-data-rule-builder (opendaq.low-level:data-rule-builder/create-data-rule-builder-from-existing coerced-rule-to-copy)))
+    (wrap (opendaq.low-level:data-rule-builder/create-data-rule-builder-from-existing coerced-rule-to-copy) 'data-rule-builder))
 )
 
 (defun data-rule-builder-interface-id ()
@@ -6751,7 +5741,7 @@
 )
 
 (defmethod parameters ((object data-rule-builder))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:data-rule-builder/get-parameters (%require-live-pointer object))) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:data-rule-builder/get-parameters (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
 )
 
 (defgeneric data-rule-builder-type (object))
@@ -6777,28 +5767,28 @@
   new-value)
 
 (defun create-constant-data-rule ()
-  (wrap-data-rule (opendaq.low-level:data-rule/create-constant-data-rule))
+  (wrap (opendaq.low-level:data-rule/create-constant-data-rule) 'data-rule)
 )
 
 (defun create-data-rule-from-builder (builder)
   (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (wrap-data-rule (opendaq.low-level:data-rule/create-data-rule-from-builder coerced-builder)))
+    (wrap (opendaq.low-level:data-rule/create-data-rule-from-builder coerced-builder) 'data-rule))
 )
 
 (defun create-explicit-data-rule ()
-  (wrap-data-rule (opendaq.low-level:data-rule/create-explicit-data-rule))
+  (wrap (opendaq.low-level:data-rule/create-explicit-data-rule) 'data-rule)
 )
 
 (defun create-explicit-domain-data-rule (min-expected-delta max-expected-delta)
   (with-daq-boxed-values ((coerced-min-expected-delta min-expected-delta :managed-pointer)
                           (coerced-max-expected-delta max-expected-delta :managed-pointer))
-    (wrap-data-rule (opendaq.low-level:data-rule/create-explicit-domain-data-rule coerced-min-expected-delta coerced-max-expected-delta)))
+    (wrap (opendaq.low-level:data-rule/create-explicit-domain-data-rule coerced-min-expected-delta coerced-max-expected-delta) 'data-rule))
 )
 
 (defun create-linear-data-rule (delta start)
   (with-daq-boxed-values ((coerced-delta delta :managed-pointer)
                           (coerced-start start :managed-pointer))
-    (wrap-data-rule (opendaq.low-level:data-rule/create-linear-data-rule coerced-delta coerced-start)))
+    (wrap (opendaq.low-level:data-rule/create-linear-data-rule coerced-delta coerced-start) 'data-rule))
 )
 
 (defun data-rule-interface-id ()
@@ -6809,7 +5799,7 @@
 )
 
 (defmethod parameters ((object data-rule))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:data-rule/get-parameters (%require-live-pointer object))) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:data-rule/get-parameters (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
 )
 
 (defgeneric data-rule-type (object))
@@ -6846,7 +5836,7 @@
 (defgeneric deserialized-parameter (object parameter))
 (defmethod deserialized-parameter ((object deserialize-component) parameter)
   (with-daq-boxed-values ((coerced-parameter parameter :daq-string))
-    (wrap-base-object (opendaq.low-level:deserialize-component/get-deserialized-parameter (%require-live-pointer object) coerced-parameter)))
+    (wrap (opendaq.low-level:deserialize-component/get-deserialized-parameter (%require-live-pointer object) coerced-parameter) 'base-object))
 )
 
 (defun deserialize-component-interface-id ()
@@ -6868,7 +5858,7 @@
   (with-daq-boxed-values ((coerced-serialized serialized :daq-string)
                           (coerced-context context :daq-base-object)
                           (coerced-factory-callback factory-callback :managed-pointer))
-    (wrap-base-object (opendaq.low-level:deserializer/deserialize (%require-live-pointer object) coerced-serialized coerced-context coerced-factory-callback)))
+    (wrap (opendaq.low-level:deserializer/deserialize (%require-live-pointer object) coerced-serialized coerced-context coerced-factory-callback) 'base-object))
 )
 
 (defgeneric deserializer-update (object updatable serialized config))
@@ -6884,7 +5874,7 @@
                           (coerced-origin origin :daq-string)
                           (coerced-unit unit :managed-pointer)
                           (coerced-reference-domain-info reference-domain-info :managed-pointer))
-    (wrap-device-domain (opendaq.low-level:device-domain/create-device-domain-with-reference-domain-info coerced-tick-resolution coerced-origin coerced-unit coerced-reference-domain-info)))
+    (wrap (opendaq.low-level:device-domain/create-device-domain-with-reference-domain-info coerced-tick-resolution coerced-origin coerced-unit coerced-reference-domain-info) 'device-domain))
 )
 
 (defun device-domain-interface-id ()
@@ -6899,22 +5889,22 @@
 )
 
 (defmethod reference-domain-info ((object device-domain))
-  (wrap-reference-domain-info (opendaq.low-level:device-domain/get-reference-domain-info (%require-live-pointer object)))
+  (wrap (opendaq.low-level:device-domain/get-reference-domain-info (%require-live-pointer object)) 'reference-domain-info)
 )
 
 (defmethod tick-resolution ((object device-domain))
-  (wrap-daq-ratio (opendaq.low-level:device-domain/get-tick-resolution (%require-live-pointer object)))
+  (wrap (opendaq.low-level:device-domain/get-tick-resolution (%require-live-pointer object)) 'daq-ratio)
 )
 
 (defmethod unit ((object device-domain))
-  (wrap-unit (opendaq.low-level:device-domain/get-unit (%require-live-pointer object)))
+  (wrap (opendaq.low-level:device-domain/get-unit (%require-live-pointer object)) 'unit)
 )
 
 (defun create-device-info-config-with-custom-sdk-version (name connection-string sdk-version)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-connection-string connection-string :daq-string)
                           (coerced-sdk-version sdk-version :daq-string))
-    (wrap-device-info-config (opendaq.low-level:device-info-config/create-device-info-config-with-custom-sdk-version coerced-name coerced-connection-string coerced-sdk-version)))
+    (wrap (opendaq.low-level:device-info-config/create-device-info-config-with-custom-sdk-version coerced-name coerced-connection-string coerced-sdk-version) 'device-info-config))
 )
 
 (defun device-info-config-interface-id ()
@@ -7116,12 +6106,12 @@
 
 (defgeneric configuration-connection-info (object))
 (defmethod configuration-connection-info ((object device-info))
-  (wrap-server-capability (opendaq.low-level:device-info/get-configuration-connection-info (%require-live-pointer object)))
+  (wrap (opendaq.low-level:device-info/get-configuration-connection-info (%require-live-pointer object)) 'server-capability)
 )
 
 (defgeneric connected-clients-info (object))
 (defmethod connected-clients-info ((object device-info))
-  (as-list-of (wrap-object-list (opendaq.low-level:device-info/get-connected-clients-info (%require-live-pointer object))) 'connected-client-info)
+  (as-list-of (wrap (opendaq.low-level:device-info/get-connected-clients-info (%require-live-pointer object)) 'object-list) 'connected-client-info)
 )
 
 (defmethod connection-string ((object device-info))
@@ -7130,7 +6120,7 @@
 
 (defgeneric custom-info-property-names (object))
 (defmethod custom-info-property-names ((object device-info))
-  (as-list-of (wrap-object-list (opendaq.low-level:device-info/get-custom-info-property-names (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:device-info/get-custom-info-property-names (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defgeneric device-class (object))
@@ -7150,7 +6140,7 @@
 
 (defgeneric device-type (object))
 (defmethod device-type ((object device-info))
-  (wrap-device-type (opendaq.low-level:device-info/get-device-type (%require-live-pointer object)))
+  (wrap (opendaq.low-level:device-info/get-device-type (%require-live-pointer object)) 'device-type)
 )
 
 (defgeneric hardware-revision (object))
@@ -7197,12 +6187,12 @@
 (defgeneric network-interface (object interface-name))
 (defmethod network-interface ((object device-info) interface-name)
   (with-daq-boxed-values ((coerced-interface-name interface-name :daq-string))
-    (wrap-network-interface (opendaq.low-level:device-info/get-network-interface (%require-live-pointer object) coerced-interface-name)))
+    (wrap (opendaq.low-level:device-info/get-network-interface (%require-live-pointer object) coerced-interface-name) 'network-interface))
 )
 
 (defgeneric network-interfaces (object))
 (defmethod network-interfaces ((object device-info))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:device-info/get-network-interfaces (%require-live-pointer object))) 'daq-string-object 'network-interface)
+  (as-hashtable-of (wrap (opendaq.low-level:device-info/get-network-interfaces (%require-live-pointer object)) 'dict) 'daq-string-object 'network-interface)
 )
 
 (defgeneric parent-mac-address (object))
@@ -7247,13 +6237,13 @@
 
 (defgeneric server-capabilities (object))
 (defmethod server-capabilities ((object device-info))
-  (as-list-of (wrap-object-list (opendaq.low-level:device-info/get-server-capabilities (%require-live-pointer object))) 'server-capability)
+  (as-list-of (wrap (opendaq.low-level:device-info/get-server-capabilities (%require-live-pointer object)) 'object-list) 'server-capability)
 )
 
 (defgeneric server-capability (object protocol-id))
 (defmethod server-capability ((object device-info) protocol-id)
   (with-daq-boxed-values ((coerced-protocol-id protocol-id :daq-string))
-    (wrap-server-capability (opendaq.low-level:device-info/get-server-capability (%require-live-pointer object) coerced-protocol-id)))
+    (wrap (opendaq.low-level:device-info/get-server-capability (%require-live-pointer object) coerced-protocol-id) 'server-capability))
 )
 
 (defgeneric software-revision (object))
@@ -7296,13 +6286,13 @@
 
 (defgeneric network-interface-names (object))
 (defmethod network-interface-names ((object device-network-config))
-  (as-list-of (wrap-object-list (opendaq.low-level:device-network-config/get-network-interface-names (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:device-network-config/get-network-interface-names (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defgeneric retrieve-network-configuration (object iface-name))
 (defmethod retrieve-network-configuration ((object device-network-config) iface-name)
   (with-daq-boxed-values ((coerced-iface-name iface-name :daq-string))
-    (wrap-property-object (opendaq.low-level:device-network-config/retrieve-network-configuration (%require-live-pointer object) coerced-iface-name)))
+    (wrap (opendaq.low-level:device-network-config/retrieve-network-configuration (%require-live-pointer object) coerced-iface-name) 'property-object))
 )
 
 (defgeneric submit-network-configuration (object iface-name config))
@@ -7319,7 +6309,7 @@
 
 (defgeneric device-config (object))
 (defmethod device-config ((object device-private))
-  (wrap-property-object (opendaq.low-level:device-private/get-device-config (%require-live-pointer object)))
+  (wrap (opendaq.low-level:device-private/get-device-config (%require-live-pointer object)) 'property-object)
 )
 
 (defun device-private-interface-id ()
@@ -7374,7 +6364,7 @@
 
 (defgeneric child-device-options (object))
 (defmethod child-device-options ((object device-update-options))
-  (as-list-of (wrap-object-list (opendaq.low-level:device-update-options/get-child-device-options (%require-live-pointer object))) 'device-update-options)
+  (as-list-of (wrap (opendaq.low-level:device-update-options/get-child-device-options (%require-live-pointer object)) 'object-list) 'device-update-options)
 )
 
 (defmethod connection-string ((object device-update-options))
@@ -7448,7 +6438,7 @@
 (defmethod add-device ((object device) connection-string &optional (config nil))
   (with-daq-boxed-values ((coerced-connection-string connection-string :daq-string)
                           (coerced-config config :managed-pointer))
-    (wrap-device (opendaq.low-level:device/add-device (%require-live-pointer object) coerced-connection-string coerced-config)))
+    (wrap (opendaq.low-level:device/add-device (%require-live-pointer object) coerced-connection-string coerced-config) 'device))
 )
 
 (defgeneric add-devices (object connection-args err-codes error-infos))
@@ -7456,81 +6446,81 @@
   (with-daq-boxed-values ((coerced-connection-args connection-args :managed-pointer)
                           (coerced-err-codes err-codes :managed-pointer)
                           (coerced-error-infos error-infos :managed-pointer))
-    (as-hashtable-of (wrap-dict (opendaq.low-level:device/add-devices (%require-live-pointer object) coerced-connection-args coerced-err-codes coerced-error-infos)) 'daq-string-object 'device))
+    (as-hashtable-of (wrap (opendaq.low-level:device/add-devices (%require-live-pointer object) coerced-connection-args coerced-err-codes coerced-error-infos) 'dict) 'daq-string-object 'device))
 )
 
 (defgeneric add-function-block (object type-id config))
 (defmethod add-function-block ((object device) type-id config)
   (with-daq-boxed-values ((coerced-type-id type-id :daq-string)
                           (coerced-config config :managed-pointer))
-    (wrap-function-block (opendaq.low-level:device/add-function-block (%require-live-pointer object) coerced-type-id coerced-config)))
+    (wrap (opendaq.low-level:device/add-function-block (%require-live-pointer object) coerced-type-id coerced-config) 'function-block))
 )
 
 (defgeneric add-server (object type-id config))
 (defmethod add-server ((object device) type-id config)
   (with-daq-boxed-values ((coerced-type-id type-id :daq-string)
                           (coerced-config config :managed-pointer))
-    (wrap-server (opendaq.low-level:device/add-server (%require-live-pointer object) coerced-type-id coerced-config)))
+    (wrap (opendaq.low-level:device/add-server (%require-live-pointer object) coerced-type-id coerced-config) 'server))
 )
 
 (defgeneric add-streaming (object connection-string config))
 (defmethod add-streaming ((object device) connection-string config)
   (with-daq-boxed-values ((coerced-connection-string connection-string :daq-string)
                           (coerced-config config :managed-pointer))
-    (wrap-streaming (opendaq.low-level:device/add-streaming (%require-live-pointer object) coerced-connection-string coerced-config)))
+    (wrap (opendaq.low-level:device/add-streaming (%require-live-pointer object) coerced-connection-string coerced-config) 'streaming))
 )
 
 (defgeneric create-default-add-device-config (object))
 (defmethod create-default-add-device-config ((object device))
-  (wrap-property-object (opendaq.low-level:device/create-default-add-device-config (%require-live-pointer object)))
+  (wrap (opendaq.low-level:device/create-default-add-device-config (%require-live-pointer object)) 'property-object)
 )
 
 (defgeneric available-device-types (object))
 (defmethod available-device-types ((object device))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:device/get-available-device-types (%require-live-pointer object))) 'daq-string-object 'device-type)
+  (as-hashtable-of (wrap (opendaq.low-level:device/get-available-device-types (%require-live-pointer object)) 'dict) 'daq-string-object 'device-type)
 )
 
 (defgeneric available-devices (object))
 (defmethod available-devices ((object device))
-  (as-list-of (wrap-object-list (opendaq.low-level:device/get-available-devices (%require-live-pointer object))) 'device-info)
+  (as-list-of (wrap (opendaq.low-level:device/get-available-devices (%require-live-pointer object)) 'object-list) 'device-info)
 )
 
 (defgeneric available-function-block-types (object))
 (defmethod available-function-block-types ((object device))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:device/get-available-function-block-types (%require-live-pointer object))) 'daq-string-object 'function-block-type)
+  (as-hashtable-of (wrap (opendaq.low-level:device/get-available-function-block-types (%require-live-pointer object)) 'dict) 'daq-string-object 'function-block-type)
 )
 
 (defgeneric available-operation-modes (object))
 (defmethod available-operation-modes ((object device))
-  (as-list-of (wrap-object-list (opendaq.low-level:device/get-available-operation-modes (%require-live-pointer object))) 'daq-integer)
+  (as-list-of (wrap (opendaq.low-level:device/get-available-operation-modes (%require-live-pointer object)) 'object-list) 'daq-integer)
 )
 
 (defgeneric channels (object search-filter))
 (defmethod channels ((object device) search-filter)
   (with-daq-boxed-values ((coerced-search-filter search-filter :managed-pointer))
-    (as-list-of (wrap-object-list (opendaq.low-level:device/get-channels (%require-live-pointer object) coerced-search-filter)) 'channel))
+    (as-list-of (wrap (opendaq.low-level:device/get-channels (%require-live-pointer object) coerced-search-filter) 'object-list) 'channel))
 )
 
 (defgeneric channels-recursive (object search-filter))
 (defmethod channels-recursive ((object device) search-filter)
   (with-daq-boxed-values ((coerced-search-filter search-filter :managed-pointer))
-    (as-list-of (wrap-object-list (opendaq.low-level:device/get-channels-recursive (%require-live-pointer object) coerced-search-filter)) 'channel))
+    (as-list-of (wrap (opendaq.low-level:device/get-channels-recursive (%require-live-pointer object) coerced-search-filter) 'object-list) 'channel))
 )
 
 (defgeneric connection-status-container (object))
 (defmethod connection-status-container ((object device))
-  (wrap-component-status-container (opendaq.low-level:device/get-connection-status-container (%require-live-pointer object)))
+  (wrap (opendaq.low-level:device/get-connection-status-container (%require-live-pointer object)) 'component-status-container)
 )
 
 (defgeneric custom-components (object))
 (defmethod custom-components ((object device))
-  (as-list-of (wrap-object-list (opendaq.low-level:device/get-custom-components (%require-live-pointer object))) 'component)
+  (as-list-of (wrap (opendaq.low-level:device/get-custom-components (%require-live-pointer object)) 'object-list) 'component)
 )
 
 (defgeneric devices (object search-filter))
 (defmethod devices ((object device) search-filter)
   (with-daq-boxed-values ((coerced-search-filter search-filter :managed-pointer))
-    (as-list-of (wrap-object-list (opendaq.low-level:device/get-devices (%require-live-pointer object) coerced-search-filter)) 'device))
+    (as-list-of (wrap (opendaq.low-level:device/get-devices (%require-live-pointer object) coerced-search-filter) 'object-list) 'device))
 )
 
 (defgeneric domain (object domain))
@@ -7542,17 +6532,17 @@
 (defgeneric function-blocks (object search-filter))
 (defmethod function-blocks ((object device) search-filter)
   (with-daq-boxed-values ((coerced-search-filter search-filter :managed-pointer))
-    (as-list-of (wrap-object-list (opendaq.low-level:device/get-function-blocks (%require-live-pointer object) coerced-search-filter)) 'function-block))
+    (as-list-of (wrap (opendaq.low-level:device/get-function-blocks (%require-live-pointer object) coerced-search-filter) 'object-list) 'function-block))
 )
 
 (defgeneric info (object))
 (defmethod info ((object device))
-  (wrap-device-info (opendaq.low-level:device/get-info (%require-live-pointer object)))
+  (wrap (opendaq.low-level:device/get-info (%require-live-pointer object)) 'device-info)
 )
 
 (defgeneric inputs-outputs-folder (object))
 (defmethod inputs-outputs-folder ((object device))
-  (wrap-folder (opendaq.low-level:device/get-inputs-outputs-folder (%require-live-pointer object)))
+  (wrap (opendaq.low-level:device/get-inputs-outputs-folder (%require-live-pointer object)) 'folder)
 )
 
 (defun device-interface-id ()
@@ -7572,29 +6562,29 @@
 
 (defgeneric log-file-infos (object))
 (defmethod log-file-infos ((object device))
-  (as-list-of (wrap-object-list (opendaq.low-level:device/get-log-file-infos (%require-live-pointer object))) 'log-file-info)
+  (as-list-of (wrap (opendaq.low-level:device/get-log-file-infos (%require-live-pointer object)) 'object-list) 'log-file-info)
 )
 
 (defgeneric servers (object))
 (defmethod servers ((object device))
-  (as-list-of (wrap-object-list (opendaq.low-level:device/get-servers (%require-live-pointer object))) 'server)
+  (as-list-of (wrap (opendaq.low-level:device/get-servers (%require-live-pointer object)) 'object-list) 'server)
 )
 
 (defgeneric signals (object &optional search-filter))
 (defmethod signals ((object device) &optional (search-filter nil))
   (with-daq-boxed-values ((coerced-search-filter search-filter :managed-pointer))
-    (as-list-of (wrap-object-list (opendaq.low-level:device/get-signals (%require-live-pointer object) coerced-search-filter)) 'signal))
+    (as-list-of (wrap (opendaq.low-level:device/get-signals (%require-live-pointer object) coerced-search-filter) 'object-list) 'signal))
 )
 
 (defgeneric signals-recursive (object &optional search-filter))
 (defmethod signals-recursive ((object device) &optional (search-filter nil))
   (with-daq-boxed-values ((coerced-search-filter search-filter :managed-pointer))
-    (as-list-of (wrap-object-list (opendaq.low-level:device/get-signals-recursive (%require-live-pointer object) coerced-search-filter)) 'signal))
+    (as-list-of (wrap (opendaq.low-level:device/get-signals-recursive (%require-live-pointer object) coerced-search-filter) 'object-list) 'signal))
 )
 
 (defgeneric sync-component (object))
 (defmethod sync-component ((object device))
-  (wrap-sync-component (opendaq.low-level:device/get-sync-component (%require-live-pointer object)))
+  (wrap (opendaq.low-level:device/get-sync-component (%require-live-pointer object)) 'sync-component)
 )
 
 (defgeneric ticks-since-origin (object))
@@ -7694,7 +6684,7 @@
 (defun create-dict-with-expected-types (key-type value-type)
   (with-daq-boxed-values ((coerced-key-type key-type nil)
                           (coerced-value-type value-type nil))
-    (wrap-dict (opendaq.low-level:dict/create-dict-with-expected-types coerced-key-type coerced-value-type)))
+    (wrap (opendaq.low-level:dict/create-dict-with-expected-types coerced-key-type coerced-value-type) 'dict))
 )
 
 (defgeneric delete-item (object key))
@@ -7706,7 +6696,7 @@
 (defgeneric get (object key))
 (defmethod get ((object dict) key)
   (with-daq-boxed-values ((coerced-key key :daq-base-object))
-    (wrap-base-object (opendaq.low-level:dict/get (%require-live-pointer object) coerced-key)))
+    (wrap (opendaq.low-level:dict/get (%require-live-pointer object) coerced-key) 'base-object))
 )
 
 (defgeneric count (object))
@@ -7723,12 +6713,12 @@
 
 (defgeneric key-list (object))
 (defmethod key-list ((object dict))
-  (wrap-object-list (opendaq.low-level:dict/get-key-list (%require-live-pointer object)))
+  (wrap (opendaq.low-level:dict/get-key-list (%require-live-pointer object)) 'object-list)
 )
 
 (defgeneric keys (object))
 (defmethod keys ((object dict))
-  (wrap-iterable (opendaq.low-level:dict/get-keys (%require-live-pointer object)))
+  (wrap (opendaq.low-level:dict/get-keys (%require-live-pointer object)) 'iterable)
 )
 
 (defgeneric value-list (object values))
@@ -7739,7 +6729,7 @@
 
 (defgeneric values (object))
 (defmethod values ((object dict))
-  (wrap-iterable (opendaq.low-level:dict/get-values (%require-live-pointer object)))
+  (wrap (opendaq.low-level:dict/get-values (%require-live-pointer object)) 'iterable)
 )
 
 (defgeneric has-key (object key))
@@ -7751,7 +6741,7 @@
 (defgeneric dict-remove (object key))
 (defmethod dict-remove ((object dict) key)
   (with-daq-boxed-values ((coerced-key key :daq-base-object))
-    (wrap-base-object (opendaq.low-level:dict/remove (%require-live-pointer object) coerced-key)))
+    (wrap (opendaq.low-level:dict/remove (%require-live-pointer object) coerced-key) 'base-object))
 )
 
 (defgeneric set (object key value))
@@ -7762,12 +6752,12 @@
 )
 
 (defmethod build ((object dimension-builder))
-  (wrap-dimension (opendaq.low-level:dimension-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:dimension-builder/build (%require-live-pointer object)) 'dimension)
 )
 
 (defun create-dimension-builder-from-existing (dimension-to-copy)
   (with-daq-boxed-values ((coerced-dimension-to-copy dimension-to-copy :managed-pointer))
-    (wrap-dimension-builder (opendaq.low-level:dimension-builder/create-dimension-builder-from-existing coerced-dimension-to-copy)))
+    (wrap (opendaq.low-level:dimension-builder/create-dimension-builder-from-existing coerced-dimension-to-copy) 'dimension-builder))
 )
 
 (defun dimension-builder-interface-id ()
@@ -7782,11 +6772,11 @@
 )
 
 (defmethod rule ((object dimension-builder))
-  (wrap-dimension-rule (opendaq.low-level:dimension-builder/get-rule (%require-live-pointer object)))
+  (wrap (opendaq.low-level:dimension-builder/get-rule (%require-live-pointer object)) 'dimension-rule)
 )
 
 (defmethod unit ((object dimension-builder))
-  (wrap-unit (opendaq.low-level:dimension-builder/get-unit (%require-live-pointer object)))
+  (wrap (opendaq.low-level:dimension-builder/get-unit (%require-live-pointer object)) 'unit)
 )
 
 (defmethod (setf name) (new-value (object dimension-builder))
@@ -7811,12 +6801,12 @@
 )
 
 (defmethod build ((object dimension-rule-builder))
-  (wrap-dimension-rule (opendaq.low-level:dimension-rule-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:dimension-rule-builder/build (%require-live-pointer object)) 'dimension-rule)
 )
 
 (defun create-dimension-rule-builder-from-existing (rule-to-copy)
   (with-daq-boxed-values ((coerced-rule-to-copy rule-to-copy :managed-pointer))
-    (wrap-dimension-rule-builder (opendaq.low-level:dimension-rule-builder/create-dimension-rule-builder-from-existing coerced-rule-to-copy)))
+    (wrap (opendaq.low-level:dimension-rule-builder/create-dimension-rule-builder-from-existing coerced-rule-to-copy) 'dimension-rule-builder))
 )
 
 (defun dimension-rule-builder-interface-id ()
@@ -7827,7 +6817,7 @@
 )
 
 (defmethod parameters ((object dimension-rule-builder))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:dimension-rule-builder/get-parameters (%require-live-pointer object))) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:dimension-rule-builder/get-parameters (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
 )
 
 (defgeneric dimension-rule-builder-type (object))
@@ -7852,19 +6842,19 @@
 
 (defun create-dimension-rule-from-builder (builder)
   (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (wrap-dimension-rule (opendaq.low-level:dimension-rule/create-dimension-rule-from-builder coerced-builder)))
+    (wrap (opendaq.low-level:dimension-rule/create-dimension-rule-from-builder coerced-builder) 'dimension-rule))
 )
 
 (defun create-linear-dimension-rule (delta start size)
   (with-daq-boxed-values ((coerced-delta delta :managed-pointer)
                           (coerced-start start :managed-pointer)
                           (coerced-size size nil))
-    (wrap-dimension-rule (opendaq.low-level:dimension-rule/create-linear-dimension-rule coerced-delta coerced-start coerced-size)))
+    (wrap (opendaq.low-level:dimension-rule/create-linear-dimension-rule coerced-delta coerced-start coerced-size) 'dimension-rule))
 )
 
 (defun create-list-dimension-rule (list)
   (with-daq-boxed-values ((coerced-list list :managed-pointer))
-    (wrap-dimension-rule (opendaq.low-level:dimension-rule/create-list-dimension-rule coerced-list)))
+    (wrap (opendaq.low-level:dimension-rule/create-list-dimension-rule coerced-list) 'dimension-rule))
 )
 
 (defun create-logarithmic-dimension-rule (delta start base size)
@@ -7872,7 +6862,7 @@
                           (coerced-start start :managed-pointer)
                           (coerced-base base :managed-pointer)
                           (coerced-size size nil))
-    (wrap-dimension-rule (opendaq.low-level:dimension-rule/create-logarithmic-dimension-rule coerced-delta coerced-start coerced-base coerced-size)))
+    (wrap (opendaq.low-level:dimension-rule/create-logarithmic-dimension-rule coerced-delta coerced-start coerced-base coerced-size) 'dimension-rule))
 )
 
 (defun dimension-rule-interface-id ()
@@ -7883,7 +6873,7 @@
 )
 
 (defmethod parameters ((object dimension-rule))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:dimension-rule/get-parameters (%require-live-pointer object))) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:dimension-rule/get-parameters (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
 )
 
 (defgeneric dimension-rule-type (object))
@@ -7893,7 +6883,7 @@
 
 (defun create-dimension-from-builder (builder)
   (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (wrap-dimension (opendaq.low-level:dimension/create-dimension-from-builder coerced-builder)))
+    (wrap (opendaq.low-level:dimension/create-dimension-from-builder coerced-builder) 'dimension))
 )
 
 (defun dimension-interface-id ()
@@ -7905,7 +6895,7 @@
 
 (defgeneric labels (object))
 (defmethod labels ((object dimension))
-  (as-list-of (wrap-object-list (opendaq.low-level:dimension/get-labels (%require-live-pointer object))) 'base-object)
+  (as-list-of (wrap (opendaq.low-level:dimension/get-labels (%require-live-pointer object)) 'object-list) 'base-object)
 )
 
 (defmethod name ((object dimension))
@@ -7913,7 +6903,7 @@
 )
 
 (defmethod rule ((object dimension))
-  (wrap-dimension-rule (opendaq.low-level:dimension/get-rule (%require-live-pointer object)))
+  (wrap (opendaq.low-level:dimension/get-rule (%require-live-pointer object)) 'dimension-rule)
 )
 
 (defmethod size ((object dimension))
@@ -7921,7 +6911,7 @@
 )
 
 (defmethod unit ((object dimension))
-  (wrap-unit (opendaq.low-level:dimension/get-unit (%require-live-pointer object)))
+  (wrap (opendaq.low-level:dimension/get-unit (%require-live-pointer object)) 'unit)
 )
 
 (defun discovery-server-interface-id ()
@@ -7968,18 +6958,18 @@
   (declare (ignore include-inherited))
   (when include-inherited-suppliedp
     (error "PROPERTIES is not applicable with a INCLUDE-INHERITED argument for ~S." 'end-update-event-args))
-  (as-list-of (wrap-object-list (opendaq.low-level:end-update-event-args/get-properties (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:end-update-event-args/get-properties (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defun create-enumeration-type-with-values (type-name enumerators)
   (with-daq-boxed-values ((coerced-type-name type-name :daq-string)
                           (coerced-enumerators enumerators :managed-pointer))
-    (wrap-enumeration-type (opendaq.low-level:enumeration-type/create-enumeration-type-with-values coerced-type-name coerced-enumerators)))
+    (wrap (opendaq.low-level:enumeration-type/create-enumeration-type-with-values coerced-type-name coerced-enumerators) 'enumeration-type))
 )
 
 (defgeneric as-dictionary (object))
 (defmethod as-dictionary ((object enumeration-type))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:enumeration-type/get-as-dictionary (%require-live-pointer object))) 'daq-string-object 'daq-integer)
+  (as-hashtable-of (wrap (opendaq.low-level:enumeration-type/get-as-dictionary (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-integer)
 )
 
 (defmethod count ((object enumeration-type))
@@ -7994,7 +6984,7 @@
 
 (defgeneric enumerator-names (object))
 (defmethod enumerator-names ((object enumeration-type))
-  (as-list-of (wrap-object-list (opendaq.low-level:enumeration-type/get-enumerator-names (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:enumeration-type/get-enumerator-names (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defun enumeration-type-interface-id ()
@@ -8008,24 +6998,24 @@
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-value value :managed-pointer)
                           (coerced-type-manager type-manager :managed-pointer))
-    (wrap-enumeration (opendaq.low-level:enumeration/create-enumeration-with-int-value coerced-name coerced-value coerced-type-manager)))
+    (wrap (opendaq.low-level:enumeration/create-enumeration-with-int-value coerced-name coerced-value coerced-type-manager) 'enumeration))
 )
 
 (defun create-enumeration-with-int-value-and-type (type value)
   (with-daq-boxed-values ((coerced-type type :managed-pointer)
                           (coerced-value value :managed-pointer))
-    (wrap-enumeration (opendaq.low-level:enumeration/create-enumeration-with-int-value-and-type coerced-type coerced-value)))
+    (wrap (opendaq.low-level:enumeration/create-enumeration-with-int-value-and-type coerced-type coerced-value) 'enumeration))
 )
 
 (defun create-enumeration-with-type (type value)
   (with-daq-boxed-values ((coerced-type type :managed-pointer)
                           (coerced-value value :daq-string))
-    (wrap-enumeration (opendaq.low-level:enumeration/create-enumeration-with-type coerced-type coerced-value)))
+    (wrap (opendaq.low-level:enumeration/create-enumeration-with-type coerced-type coerced-value) 'enumeration))
 )
 
 (defgeneric enumeration-type (object))
 (defmethod enumeration-type ((object enumeration))
-  (wrap-enumeration-type (opendaq.low-level:enumeration/get-enumeration-type (%require-live-pointer object)))
+  (wrap (opendaq.low-level:enumeration/get-enumeration-type (%require-live-pointer object)) 'enumeration-type)
 )
 
 (defgeneric int-value (object))
@@ -8051,7 +7041,7 @@
 
 (defgeneric file-name (object))
 (defmethod file-name ((object error-info))
-  (wrap-const-char-ptr (opendaq.low-level:error-info/get-file-name (%require-live-pointer object)))
+  (wrap (opendaq.low-level:error-info/get-file-name (%require-live-pointer object)) 'const-char-ptr)
 )
 
 (defgeneric message (object))
@@ -8091,19 +7081,19 @@
 (defgeneric clone-with-owner (object owner))
 (defmethod clone-with-owner ((object eval-value) owner)
   (with-daq-boxed-values ((coerced-owner owner :managed-pointer))
-    (wrap-eval-value (opendaq.low-level:eval-value/clone-with-owner (%require-live-pointer object) coerced-owner)))
+    (wrap (opendaq.low-level:eval-value/clone-with-owner (%require-live-pointer object) coerced-owner) 'eval-value))
 )
 
 (defun create-eval-value-args (eval args)
   (with-daq-boxed-values ((coerced-eval eval :daq-string)
                           (coerced-args args :managed-pointer))
-    (wrap-eval-value (opendaq.low-level:eval-value/create-eval-value-args coerced-eval coerced-args)))
+    (wrap (opendaq.low-level:eval-value/create-eval-value-args coerced-eval coerced-args) 'eval-value))
 )
 
 (defun create-eval-value-func (eval func)
   (with-daq-boxed-values ((coerced-eval eval :daq-string)
                           (coerced-func func :managed-pointer))
-    (wrap-eval-value (opendaq.low-level:eval-value/create-eval-value-func coerced-eval coerced-func)))
+    (wrap (opendaq.low-level:eval-value/create-eval-value-func coerced-eval coerced-func) 'eval-value))
 )
 
 (defmethod eval ((object eval-value))
@@ -8124,16 +7114,16 @@
 
 (defgeneric property-references (object))
 (defmethod property-references ((object eval-value))
-  (as-list-of (wrap-object-list (opendaq.low-level:eval-value/get-property-references (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:eval-value/get-property-references (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defmethod result ((object eval-value))
-  (wrap-base-object (opendaq.low-level:eval-value/get-result (%require-live-pointer object)))
+  (wrap (opendaq.low-level:eval-value/get-result (%require-live-pointer object)) 'base-object)
 )
 
 (defgeneric result-no-lock (object))
 (defmethod result-no-lock ((object eval-value))
-  (wrap-base-object (opendaq.low-level:eval-value/get-result-no-lock (%require-live-pointer object)))
+  (wrap (opendaq.low-level:eval-value/get-result-no-lock (%require-live-pointer object)) 'base-object)
 )
 
 (defgeneric event-id (object))
@@ -8170,12 +7160,12 @@
 (defun create-data-descriptor-changed-event-packet (data-descriptor domain-data-descriptor)
   (with-daq-boxed-values ((coerced-data-descriptor data-descriptor :managed-pointer)
                           (coerced-domain-data-descriptor domain-data-descriptor :managed-pointer))
-    (wrap-event-packet (opendaq.low-level:event-packet/create-data-descriptor-changed-event-packet coerced-data-descriptor coerced-domain-data-descriptor)))
+    (wrap (opendaq.low-level:event-packet/create-data-descriptor-changed-event-packet coerced-data-descriptor coerced-domain-data-descriptor) 'event-packet))
 )
 
 (defun create-implicit-domain-gap-detected-event-packet (diff)
   (with-daq-boxed-values ((coerced-diff diff :managed-pointer))
-    (wrap-event-packet (opendaq.low-level:event-packet/create-implicit-domain-gap-detected-event-packet coerced-diff)))
+    (wrap (opendaq.low-level:event-packet/create-implicit-domain-gap-detected-event-packet coerced-diff) 'event-packet))
 )
 
 (defmethod event-id ((object event-packet))
@@ -8190,7 +7180,7 @@
 )
 
 (defmethod parameters ((object event-packet))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:event-packet/get-parameters (%require-live-pointer object))) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:event-packet/get-parameters (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
 )
 
 (defgeneric add-handler (object event-handler))
@@ -8217,7 +7207,7 @@
 
 (defgeneric subscribers (object))
 (defmethod subscribers ((object event))
-  (wrap-object-list (opendaq.low-level:event/get-subscribers (%require-live-pointer object)))
+  (wrap (opendaq.low-level:event/get-subscribers (%require-live-pointer object)) 'object-list)
 )
 
 (defgeneric mute (object))
@@ -8286,14 +7276,14 @@
                           (coerced-context context :managed-pointer)
                           (coerced-parent parent :managed-pointer)
                           (coerced-local-id local-id :daq-string))
-    (wrap-folder-config (opendaq.low-level:folder-config/create-folder-with-item-type coerced-item-type coerced-context coerced-parent coerced-local-id)))
+    (wrap (opendaq.low-level:folder-config/create-folder-with-item-type coerced-item-type coerced-context coerced-parent coerced-local-id) 'folder-config))
 )
 
 (defun create-io-folder (context parent local-id)
   (with-daq-boxed-values ((coerced-context context :managed-pointer)
                           (coerced-parent parent :managed-pointer)
                           (coerced-local-id local-id :daq-string))
-    (wrap-folder-config (opendaq.low-level:folder-config/create-io-folder coerced-context coerced-parent coerced-local-id)))
+    (wrap (opendaq.low-level:folder-config/create-io-folder coerced-context coerced-parent coerced-local-id) 'folder-config))
 )
 
 (defun folder-config-interface-id ()
@@ -8325,13 +7315,13 @@
 (defgeneric item (object local-id))
 (defmethod item ((object folder) local-id)
   (with-daq-boxed-values ((coerced-local-id local-id :daq-string))
-    (wrap-component (opendaq.low-level:folder/get-item (%require-live-pointer object) coerced-local-id)))
+    (wrap (opendaq.low-level:folder/get-item (%require-live-pointer object) coerced-local-id) 'component))
 )
 
 (defgeneric items (object search-filter))
 (defmethod items ((object folder) search-filter)
   (with-daq-boxed-values ((coerced-search-filter search-filter :managed-pointer))
-    (as-list-of (wrap-object-list (opendaq.low-level:folder/get-items (%require-live-pointer object) coerced-search-filter)) 'component))
+    (as-list-of (wrap (opendaq.low-level:folder/get-items (%require-live-pointer object) coerced-search-filter) 'object-list) 'component))
 )
 
 (defgeneric has-item (object local-id))
@@ -8372,27 +7362,27 @@
 (defmethod add-function-block ((object function-block) type-id config)
   (with-daq-boxed-values ((coerced-type-id type-id :daq-string)
                           (coerced-config config :managed-pointer))
-    (wrap-function-block (opendaq.low-level:function-block/add-function-block (%require-live-pointer object) coerced-type-id coerced-config)))
+    (wrap (opendaq.low-level:function-block/add-function-block (%require-live-pointer object) coerced-type-id coerced-config) 'function-block))
 )
 
 (defmethod available-function-block-types ((object function-block))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:function-block/get-available-function-block-types (%require-live-pointer object))) 'daq-string-object 'function-block-type)
+  (as-hashtable-of (wrap (opendaq.low-level:function-block/get-available-function-block-types (%require-live-pointer object)) 'dict) 'daq-string-object 'function-block-type)
 )
 
 (defgeneric function-block-type (object))
 (defmethod function-block-type ((object function-block))
-  (wrap-function-block-type (opendaq.low-level:function-block/get-function-block-type (%require-live-pointer object)))
+  (wrap (opendaq.low-level:function-block/get-function-block-type (%require-live-pointer object)) 'function-block-type)
 )
 
 (defmethod function-blocks ((object function-block) search-filter)
   (with-daq-boxed-values ((coerced-search-filter search-filter :managed-pointer))
-    (as-list-of (wrap-object-list (opendaq.low-level:function-block/get-function-blocks (%require-live-pointer object) coerced-search-filter)) 'function-block))
+    (as-list-of (wrap (opendaq.low-level:function-block/get-function-blocks (%require-live-pointer object) coerced-search-filter) 'object-list) 'function-block))
 )
 
 (defgeneric input-ports (object &optional search-filter))
 (defmethod input-ports ((object function-block) &optional (search-filter nil))
   (with-daq-boxed-values ((coerced-search-filter search-filter :managed-pointer))
-    (as-list-of (wrap-object-list (opendaq.low-level:function-block/get-input-ports (%require-live-pointer object) coerced-search-filter)) 'input-port))
+    (as-list-of (wrap (opendaq.low-level:function-block/get-input-ports (%require-live-pointer object) coerced-search-filter) 'object-list) 'input-port))
 )
 
 (defun function-block-interface-id ()
@@ -8404,17 +7394,17 @@
 
 (defmethod signals ((object function-block) &optional (search-filter nil))
   (with-daq-boxed-values ((coerced-search-filter search-filter :managed-pointer))
-    (as-list-of (wrap-object-list (opendaq.low-level:function-block/get-signals (%require-live-pointer object) coerced-search-filter)) 'signal))
+    (as-list-of (wrap (opendaq.low-level:function-block/get-signals (%require-live-pointer object) coerced-search-filter) 'object-list) 'signal))
 )
 
 (defmethod signals-recursive ((object function-block) &optional (search-filter nil))
   (with-daq-boxed-values ((coerced-search-filter search-filter :managed-pointer))
-    (as-list-of (wrap-object-list (opendaq.low-level:function-block/get-signals-recursive (%require-live-pointer object) coerced-search-filter)) 'signal))
+    (as-list-of (wrap (opendaq.low-level:function-block/get-signals-recursive (%require-live-pointer object) coerced-search-filter) 'object-list) 'signal))
 )
 
 (defgeneric status-signal (object))
 (defmethod status-signal ((object function-block))
-  (wrap-signal (opendaq.low-level:function-block/get-status-signal (%require-live-pointer object)))
+  (wrap (opendaq.low-level:function-block/get-status-signal (%require-live-pointer object)) 'signal)
 )
 
 (defmethod remove-function-block ((object function-block) function-block)
@@ -8426,7 +7416,7 @@
 (defmethod call ((object daq-function) params result)
   (with-daq-boxed-values ((coerced-params params :daq-base-object)
                           (coerced-result result :daq-base-object))
-    (wrap-base-object (opendaq.low-level:function/call (%require-live-pointer object) coerced-params coerced-result)))
+    (wrap (opendaq.low-level:function/call (%require-live-pointer object) coerced-params coerced-result) 'base-object))
 )
 
 (defgeneric dump (object))
@@ -8443,7 +7433,7 @@
 
 (defgeneric custom-data (object))
 (defmethod custom-data ((object input-port-config))
-  (wrap-base-object (opendaq.low-level:input-port-config/get-custom-data (%require-live-pointer object)))
+  (wrap (opendaq.low-level:input-port-config/get-custom-data (%require-live-pointer object)) 'base-object)
 )
 
 (defgeneric gap-checking-enabled (object))
@@ -8460,7 +7450,7 @@
 
 (defgeneric listener (object))
 (defmethod listener ((object input-port-config))
-  (wrap-input-port-notifications (opendaq.low-level:input-port-config/get-listener (%require-live-pointer object)))
+  (wrap (opendaq.low-level:input-port-config/get-listener (%require-live-pointer object)) 'input-port-notifications)
 )
 
 (defgeneric notification-method (object))
@@ -8567,7 +7557,7 @@
 (defgeneric accepts-signals (object signals))
 (defmethod accepts-signals ((object input-port) signals)
   (with-daq-boxed-values ((coerced-signals signals :managed-pointer))
-    (as-list-of (wrap-object-list (opendaq.low-level:input-port/accepts-signals (%require-live-pointer object) coerced-signals)) 'daq-boolean))
+    (as-list-of (wrap (opendaq.low-level:input-port/accepts-signals (%require-live-pointer object) coerced-signals) 'object-list) 'daq-boolean))
 )
 
 (defgeneric connect (object signal))
@@ -8583,7 +7573,7 @@
 
 (defgeneric connection (object))
 (defmethod connection ((object input-port))
-  (wrap-connection (opendaq.low-level:input-port/get-connection (%require-live-pointer object)))
+  (wrap (opendaq.low-level:input-port/get-connection (%require-live-pointer object)) 'connection)
 )
 
 (defun input-port-interface-id ()
@@ -8605,7 +7595,7 @@
 
 (defgeneric input-port-signal (object))
 (defmethod input-port-signal ((object input-port))
-  (wrap-signal (opendaq.low-level:input-port/get-signal (%require-live-pointer object)))
+  (wrap (opendaq.low-level:input-port/get-signal (%require-live-pointer object)) 'signal)
 )
 
 (defgeneric (setf public) (new-value object))
@@ -8644,7 +7634,7 @@
 )
 
 (defmethod build ((object instance-builder))
-  (wrap-instance (opendaq.low-level:instance-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:instance-builder/build (%require-live-pointer object)) 'instance)
 )
 
 (defgeneric enable-standard-providers (object &optional flag))
@@ -8654,21 +7644,21 @@
 )
 
 (defmethod authentication-provider ((object instance-builder))
-  (wrap-authentication-provider (opendaq.low-level:instance-builder/get-authentication-provider (%require-live-pointer object)))
+  (wrap (opendaq.low-level:instance-builder/get-authentication-provider (%require-live-pointer object)) 'authentication-provider)
 )
 
 (defgeneric components-log-level (object))
 (defmethod components-log-level ((object instance-builder))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:instance-builder/get-components-log-level (%require-live-pointer object))) 'daq-string-object 'daq-number)
+  (as-hashtable-of (wrap (opendaq.low-level:instance-builder/get-components-log-level (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-number)
 )
 
 (defmethod context ((object instance-builder))
-  (wrap-context (opendaq.low-level:instance-builder/get-context (%require-live-pointer object)))
+  (wrap (opendaq.low-level:instance-builder/get-context (%require-live-pointer object)) 'context)
 )
 
 (defgeneric default-root-device-info (object))
 (defmethod default-root-device-info ((object instance-builder))
-  (wrap-device-info (opendaq.low-level:instance-builder/get-default-root-device-info (%require-live-pointer object)))
+  (wrap (opendaq.low-level:instance-builder/get-default-root-device-info (%require-live-pointer object)) 'device-info)
 )
 
 (defgeneric default-root-device-local-id (object))
@@ -8677,7 +7667,7 @@
 )
 
 (defmethod discovery-servers ((object instance-builder))
-  (as-list-of (wrap-object-list (opendaq.low-level:instance-builder/get-discovery-servers (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:instance-builder/get-discovery-servers (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defgeneric global-log-level (object))
@@ -8698,21 +7688,21 @@
 )
 
 (defmethod logger ((object instance-builder))
-  (wrap-logger (opendaq.low-level:instance-builder/get-logger (%require-live-pointer object)))
+  (wrap (opendaq.low-level:instance-builder/get-logger (%require-live-pointer object)) 'logger)
 )
 
 (defgeneric logger-sinks (object))
 (defmethod logger-sinks ((object instance-builder))
-  (as-list-of (wrap-object-list (opendaq.low-level:instance-builder/get-logger-sinks (%require-live-pointer object))) 'logger-sink)
+  (as-list-of (wrap (opendaq.low-level:instance-builder/get-logger-sinks (%require-live-pointer object)) 'object-list) 'logger-sink)
 )
 
 (defgeneric module-authenticator (object))
 (defmethod module-authenticator ((object instance-builder))
-  (wrap-module-authenticator (opendaq.low-level:instance-builder/get-module-authenticator (%require-live-pointer object)))
+  (wrap (opendaq.low-level:instance-builder/get-module-authenticator (%require-live-pointer object)) 'module-authenticator)
 )
 
 (defmethod module-manager ((object instance-builder))
-  (wrap-module-manager (opendaq.low-level:instance-builder/get-module-manager (%require-live-pointer object)))
+  (wrap (opendaq.low-level:instance-builder/get-module-manager (%require-live-pointer object)) 'module-manager)
 )
 
 (defgeneric module-path (object))
@@ -8722,11 +7712,11 @@
 
 (defgeneric module-paths-list (object))
 (defmethod module-paths-list ((object instance-builder))
-  (as-list-of (wrap-object-list (opendaq.low-level:instance-builder/get-module-paths-list (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:instance-builder/get-module-paths-list (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defmethod options ((object instance-builder))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:instance-builder/get-options (%require-live-pointer object))) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:instance-builder/get-options (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
 )
 
 (defgeneric root-device (object))
@@ -8736,11 +7726,11 @@
 
 (defgeneric root-device-config (object))
 (defmethod root-device-config ((object instance-builder))
-  (wrap-property-object (opendaq.low-level:instance-builder/get-root-device-config (%require-live-pointer object)))
+  (wrap (opendaq.low-level:instance-builder/get-root-device-config (%require-live-pointer object)) 'property-object)
 )
 
 (defmethod scheduler ((object instance-builder))
-  (wrap-scheduler (opendaq.low-level:instance-builder/get-scheduler (%require-live-pointer object)))
+  (wrap (opendaq.low-level:instance-builder/get-scheduler (%require-live-pointer object)) 'scheduler)
 )
 
 (defgeneric scheduler-worker-num (object))
@@ -8854,18 +7844,18 @@
 
 (defgeneric add-standard-servers (object))
 (defmethod add-standard-servers ((object instance))
-  (as-list-of (wrap-object-list (opendaq.low-level:instance/add-standard-servers (%require-live-pointer object))) 'server)
+  (as-list-of (wrap (opendaq.low-level:instance/add-standard-servers (%require-live-pointer object)) 'object-list) 'server)
 )
 
 (defun create-instance (context local-id)
   (with-daq-boxed-values ((coerced-context context :managed-pointer)
                           (coerced-local-id local-id :daq-string))
-    (wrap-instance (opendaq.low-level:instance/create-instance coerced-context coerced-local-id)))
+    (wrap (opendaq.low-level:instance/create-instance coerced-context coerced-local-id) 'instance))
 )
 
 (defgeneric available-server-types (object))
 (defmethod available-server-types ((object instance))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:instance/get-available-server-types (%require-live-pointer object))) 'daq-string-object 'server-type)
+  (as-hashtable-of (wrap (opendaq.low-level:instance/get-available-server-types (%require-live-pointer object)) 'dict) 'daq-string-object 'server-type)
 )
 
 (defun instance-interface-id ()
@@ -8876,11 +7866,11 @@
 )
 
 (defmethod module-manager ((object instance))
-  (wrap-module-manager (opendaq.low-level:instance/get-module-manager (%require-live-pointer object)))
+  (wrap (opendaq.low-level:instance/get-module-manager (%require-live-pointer object)) 'module-manager)
 )
 
 (defmethod root-device ((object instance))
-  (wrap-device (opendaq.low-level:instance/get-root-device (%require-live-pointer object)))
+  (wrap (opendaq.low-level:instance/get-root-device (%require-live-pointer object)) 'device)
 )
 
 (defgeneric (setf instance-root-device) (new-value object connection-string))
@@ -8915,12 +7905,12 @@
 
 (defgeneric create-end-iterator (object))
 (defmethod create-end-iterator ((object iterable))
-  (wrap-iterator (opendaq.low-level:iterable/create-end-iterator (%require-live-pointer object)))
+  (wrap (opendaq.low-level:iterable/create-end-iterator (%require-live-pointer object)) 'iterator)
 )
 
 (defgeneric create-start-iterator (object))
 (defmethod create-start-iterator ((object iterable))
-  (wrap-iterator (opendaq.low-level:iterable/create-start-iterator (%require-live-pointer object)))
+  (wrap (opendaq.low-level:iterable/create-start-iterator (%require-live-pointer object)) 'iterator)
 )
 
 (defun iterable-interface-id ()
@@ -8932,7 +7922,7 @@
 
 (defgeneric current (object))
 (defmethod current ((object iterator))
-  (wrap-base-object (opendaq.low-level:iterator/get-current (%require-live-pointer object)))
+  (wrap (opendaq.low-level:iterator/get-current (%require-live-pointer object)) 'base-object)
 )
 
 (defun iterator-interface-id ()
@@ -8985,16 +7975,16 @@
 )
 
 (defmethod create-end-iterator ((object object-list))
-  (wrap-iterator (opendaq.low-level:list/create-end-iterator (%require-live-pointer object)))
+  (wrap (opendaq.low-level:list/create-end-iterator (%require-live-pointer object)) 'iterator)
 )
 
 (defun create-list-with-element-type (id)
   (with-daq-boxed-values ((coerced-id id nil))
-    (wrap-object-list (opendaq.low-level:list/create-list-with-element-type coerced-id)))
+    (wrap (opendaq.low-level:list/create-list-with-element-type coerced-id) 'object-list))
 )
 
 (defmethod create-start-iterator ((object object-list))
-  (wrap-iterator (opendaq.low-level:list/create-start-iterator (%require-live-pointer object)))
+  (wrap (opendaq.low-level:list/create-start-iterator (%require-live-pointer object)) 'iterator)
 )
 
 (defgeneric delete-at (object index))
@@ -9017,7 +8007,7 @@
 (defgeneric item-at (object index))
 (defmethod item-at ((object object-list) index)
   (with-daq-boxed-values ((coerced-index index nil))
-    (wrap-base-object (opendaq.low-level:list/get-item-at (%require-live-pointer object) coerced-index)))
+    (wrap (opendaq.low-level:list/get-item-at (%require-live-pointer object) coerced-index) 'base-object))
 )
 
 (defgeneric insert-at (object index obj))
@@ -9041,12 +8031,12 @@
 
 (defgeneric pop-back (object))
 (defmethod pop-back ((object object-list))
-  (wrap-base-object (opendaq.low-level:list/pop-back (%require-live-pointer object)))
+  (wrap (opendaq.low-level:list/pop-back (%require-live-pointer object)) 'base-object)
 )
 
 (defgeneric pop-front (object))
 (defmethod pop-front ((object object-list))
-  (wrap-base-object (opendaq.low-level:list/pop-front (%require-live-pointer object)))
+  (wrap (opendaq.low-level:list/pop-front (%require-live-pointer object)) 'base-object)
 )
 
 (defgeneric push-back (object obj))
@@ -9064,7 +8054,7 @@
 (defgeneric remove-at (object index))
 (defmethod remove-at ((object object-list) index)
   (with-daq-boxed-values ((coerced-index index nil))
-    (wrap-base-object (opendaq.low-level:list/remove-at (%require-live-pointer object) coerced-index)))
+    (wrap (opendaq.low-level:list/remove-at (%require-live-pointer object) coerced-index) 'base-object))
 )
 
 (defgeneric (setf item-at) (new-value object index))
@@ -9082,7 +8072,7 @@
 )
 
 (defmethod build ((object log-file-info-builder))
-  (wrap-log-file-info (opendaq.low-level:log-file-info-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:log-file-info-builder/build (%require-live-pointer object)) 'log-file-info)
 )
 
 (defmethod description ((object log-file-info-builder))
@@ -9246,19 +8236,19 @@
   (with-daq-boxed-values ((coerced-file-name file-name :daq-string)
                           (coerced-max-file-byte-size max-file-byte-size nil)
                           (coerced-max-files max-files nil))
-    (wrap-logger-sink (opendaq.low-level:logger-sink/create-rotating-file-logger-sink coerced-file-name coerced-max-file-byte-size coerced-max-files)))
+    (wrap (opendaq.low-level:logger-sink/create-rotating-file-logger-sink coerced-file-name coerced-max-file-byte-size coerced-max-files) 'logger-sink))
 )
 
 (defun create-std-err-logger-sink ()
-  (wrap-logger-sink (opendaq.low-level:logger-sink/create-std-err-logger-sink))
+  (wrap (opendaq.low-level:logger-sink/create-std-err-logger-sink) 'logger-sink)
 )
 
 (defun create-std-out-logger-sink ()
-  (wrap-logger-sink (opendaq.low-level:logger-sink/create-std-out-logger-sink))
+  (wrap (opendaq.low-level:logger-sink/create-std-out-logger-sink) 'logger-sink)
 )
 
 (defun create-win-debug-logger-sink ()
-  (wrap-logger-sink (opendaq.low-level:logger-sink/create-win-debug-logger-sink))
+  (wrap (opendaq.low-level:logger-sink/create-win-debug-logger-sink) 'logger-sink)
 )
 
 (defmethod flush ((object logger-sink))
@@ -9294,7 +8284,7 @@
 (defgeneric add-component (object name))
 (defmethod add-component ((object logger) name)
   (with-daq-boxed-values ((coerced-name name :daq-string))
-    (wrap-logger-component (opendaq.low-level:logger/add-component (%require-live-pointer object) coerced-name)))
+    (wrap (opendaq.low-level:logger/add-component (%require-live-pointer object) coerced-name) 'logger-component))
 )
 
 (defmethod flush ((object logger))
@@ -9309,12 +8299,12 @@
 (defgeneric logger-component (object name))
 (defmethod logger-component ((object logger) name)
   (with-daq-boxed-values ((coerced-name name :daq-string))
-    (wrap-logger-component (opendaq.low-level:logger/get-component (%require-live-pointer object) coerced-name)))
+    (wrap (opendaq.low-level:logger/get-component (%require-live-pointer object) coerced-name) 'logger-component))
 )
 
 (defgeneric components (object))
 (defmethod components ((object logger))
-  (as-list-of (wrap-object-list (opendaq.low-level:logger/get-components (%require-live-pointer object))) 'logger-component)
+  (as-list-of (wrap (opendaq.low-level:logger/get-components (%require-live-pointer object)) 'object-list) 'logger-component)
 )
 
 (defun logger-interface-id ()
@@ -9331,7 +8321,7 @@
 (defgeneric or-add-component (object name))
 (defmethod or-add-component ((object logger) name)
   (with-daq-boxed-values ((coerced-name name :daq-string))
-    (wrap-logger-component (opendaq.low-level:logger/get-or-add-component (%require-live-pointer object) coerced-name)))
+    (wrap (opendaq.low-level:logger/get-or-add-component (%require-live-pointer object) coerced-name) 'logger-component))
 )
 
 (defgeneric remove-component (object name))
@@ -9379,7 +8369,7 @@
 
 (defgeneric mirrored-device-type (object))
 (defmethod mirrored-device-type ((object mirrored-device))
-  (wrap-device-type (opendaq.low-level:mirrored-device/get-mirrored-device-type (%require-live-pointer object)))
+  (wrap (opendaq.low-level:mirrored-device/get-mirrored-device-type (%require-live-pointer object)) 'device-type)
 )
 
 (defgeneric remote-id (object))
@@ -9389,7 +8379,7 @@
 
 (defgeneric streaming-sources (object))
 (defmethod streaming-sources ((object mirrored-device))
-  (as-list-of (wrap-object-list (opendaq.low-level:mirrored-device/get-streaming-sources (%require-live-pointer object))) 'streaming)
+  (as-list-of (wrap (opendaq.low-level:mirrored-device/get-streaming-sources (%require-live-pointer object)) 'object-list) 'streaming)
 )
 
 (defgeneric active-streaming-source (object))
@@ -9409,7 +8399,7 @@
 )
 
 (defmethod streaming-sources ((object mirrored-input-port-config))
-  (as-list-of (wrap-object-list (opendaq.low-level:mirrored-input-port-config/get-streaming-sources (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:mirrored-input-port-config/get-streaming-sources (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defgeneric (setf active-streaming-source) (new-value object))
@@ -9436,12 +8426,12 @@
 
 (defgeneric on-subscribe-complete (object))
 (defmethod on-subscribe-complete ((object mirrored-signal-config))
-  (wrap-event (opendaq.low-level:mirrored-signal-config/get-on-subscribe-complete (%require-live-pointer object)))
+  (wrap (opendaq.low-level:mirrored-signal-config/get-on-subscribe-complete (%require-live-pointer object)) 'event)
 )
 
 (defgeneric on-unsubscribe-complete (object))
 (defmethod on-unsubscribe-complete ((object mirrored-signal-config))
-  (wrap-event (opendaq.low-level:mirrored-signal-config/get-on-unsubscribe-complete (%require-live-pointer object)))
+  (wrap (opendaq.low-level:mirrored-signal-config/get-on-unsubscribe-complete (%require-live-pointer object)) 'event)
 )
 
 (defmethod remote-id ((object mirrored-signal-config))
@@ -9449,7 +8439,7 @@
 )
 
 (defmethod streaming-sources ((object mirrored-signal-config))
-  (as-list-of (wrap-object-list (opendaq.low-level:mirrored-signal-config/get-streaming-sources (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:mirrored-signal-config/get-streaming-sources (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defmethod (setf active-streaming-source) (new-value (object mirrored-signal-config))
@@ -9472,12 +8462,12 @@
 
 (defgeneric mirrored-data-descriptor (object))
 (defmethod mirrored-data-descriptor ((object mirrored-signal-private))
-  (wrap-data-descriptor (opendaq.low-level:mirrored-signal-private/get-mirrored-data-descriptor (%require-live-pointer object)))
+  (wrap (opendaq.low-level:mirrored-signal-private/get-mirrored-data-descriptor (%require-live-pointer object)) 'data-descriptor)
 )
 
 (defgeneric mirrored-domain-signal (object))
 (defmethod mirrored-domain-signal ((object mirrored-signal-private))
-  (wrap-mirrored-signal-config (opendaq.low-level:mirrored-signal-private/get-mirrored-domain-signal (%require-live-pointer object)))
+  (wrap (opendaq.low-level:mirrored-signal-private/get-mirrored-domain-signal (%require-live-pointer object)) 'mirrored-signal-config)
 )
 
 (defmethod remove-streaming-source ((object mirrored-signal-private) streaming-connection-string)
@@ -9538,7 +8528,7 @@
 
 (defgeneric version-info (object))
 (defmethod version-info ((object module-info))
-  (wrap-version-info (opendaq.low-level:module-info/get-version-info (%require-live-pointer object)))
+  (wrap (opendaq.low-level:module-info/get-version-info (%require-live-pointer object)) 'version-info)
 )
 
 (defgeneric change-ip-config (object iface manufacturer serial-number config))
@@ -9557,7 +8547,7 @@
 )
 
 (defmethod create-default-add-device-config ((object module-manager-utils))
-  (wrap-property-object (opendaq.low-level:module-manager-utils/create-default-add-device-config (%require-live-pointer object)))
+  (wrap (opendaq.low-level:module-manager-utils/create-default-add-device-config (%require-live-pointer object)) 'property-object)
 )
 
 (defgeneric create-device (object connection-string parent config))
@@ -9565,7 +8555,7 @@
   (with-daq-boxed-values ((coerced-connection-string connection-string :daq-string)
                           (coerced-parent parent :managed-pointer)
                           (coerced-config config :managed-pointer))
-    (wrap-device (opendaq.low-level:module-manager-utils/create-device (%require-live-pointer object) coerced-connection-string coerced-parent coerced-config)))
+    (wrap (opendaq.low-level:module-manager-utils/create-device (%require-live-pointer object) coerced-connection-string coerced-parent coerced-config) 'device))
 )
 
 (defgeneric create-devices (object connection-args parent err-codes error-infos))
@@ -9574,7 +8564,7 @@
                           (coerced-parent parent :managed-pointer)
                           (coerced-err-codes err-codes :managed-pointer)
                           (coerced-error-infos error-infos :managed-pointer))
-    (as-hashtable-of (wrap-dict (opendaq.low-level:module-manager-utils/create-devices (%require-live-pointer object) coerced-connection-args coerced-parent coerced-err-codes coerced-error-infos)) 'daq-string-object 'device))
+    (as-hashtable-of (wrap (opendaq.low-level:module-manager-utils/create-devices (%require-live-pointer object) coerced-connection-args coerced-parent coerced-err-codes coerced-error-infos) 'dict) 'daq-string-object 'device))
 )
 
 (defgeneric create-function-block (object id parent config local-id))
@@ -9583,7 +8573,7 @@
                           (coerced-parent parent :managed-pointer)
                           (coerced-config config :managed-pointer)
                           (coerced-local-id local-id :daq-string))
-    (wrap-function-block (opendaq.low-level:module-manager-utils/create-function-block (%require-live-pointer object) coerced-id coerced-parent coerced-config coerced-local-id)))
+    (wrap (opendaq.low-level:module-manager-utils/create-function-block (%require-live-pointer object) coerced-id coerced-parent coerced-config coerced-local-id) 'function-block))
 )
 
 (defgeneric create-server (object server-type-id root-device server-config))
@@ -9591,38 +8581,38 @@
   (with-daq-boxed-values ((coerced-server-type-id server-type-id :daq-string)
                           (coerced-root-device root-device :managed-pointer)
                           (coerced-server-config server-config :managed-pointer))
-    (wrap-server (opendaq.low-level:module-manager-utils/create-server (%require-live-pointer object) coerced-server-type-id coerced-root-device coerced-server-config)))
+    (wrap (opendaq.low-level:module-manager-utils/create-server (%require-live-pointer object) coerced-server-type-id coerced-root-device coerced-server-config) 'server))
 )
 
 (defgeneric create-streaming (object connection-string config))
 (defmethod create-streaming ((object module-manager-utils) connection-string config)
   (with-daq-boxed-values ((coerced-connection-string connection-string :daq-string)
                           (coerced-config config :managed-pointer))
-    (wrap-streaming (opendaq.low-level:module-manager-utils/create-streaming (%require-live-pointer object) coerced-connection-string coerced-config)))
+    (wrap (opendaq.low-level:module-manager-utils/create-streaming (%require-live-pointer object) coerced-connection-string coerced-config) 'streaming))
 )
 
 (defmethod available-device-types ((object module-manager-utils))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:module-manager-utils/get-available-device-types (%require-live-pointer object))) 'daq-string-object 'device-type)
+  (as-hashtable-of (wrap (opendaq.low-level:module-manager-utils/get-available-device-types (%require-live-pointer object)) 'dict) 'daq-string-object 'device-type)
 )
 
 (defmethod available-devices ((object module-manager-utils))
-  (as-list-of (wrap-object-list (opendaq.low-level:module-manager-utils/get-available-devices (%require-live-pointer object))) 'device-info)
+  (as-list-of (wrap (opendaq.low-level:module-manager-utils/get-available-devices (%require-live-pointer object)) 'object-list) 'device-info)
 )
 
 (defmethod available-function-block-types ((object module-manager-utils))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:module-manager-utils/get-available-function-block-types (%require-live-pointer object))) 'daq-string-object 'function-block-type)
+  (as-hashtable-of (wrap (opendaq.low-level:module-manager-utils/get-available-function-block-types (%require-live-pointer object)) 'dict) 'daq-string-object 'function-block-type)
 )
 
 (defgeneric available-streaming-types (object))
 (defmethod available-streaming-types ((object module-manager-utils))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:module-manager-utils/get-available-streaming-types (%require-live-pointer object))) 'daq-string-object 'streaming-type)
+  (as-hashtable-of (wrap (opendaq.low-level:module-manager-utils/get-available-streaming-types (%require-live-pointer object)) 'dict) 'daq-string-object 'streaming-type)
 )
 
 (defgeneric discovery-info (object manufacturer serial-number))
 (defmethod discovery-info ((object module-manager-utils) manufacturer serial-number)
   (with-daq-boxed-values ((coerced-manufacturer manufacturer :daq-string)
                           (coerced-serial-number serial-number :daq-string))
-    (wrap-device-info (opendaq.low-level:module-manager-utils/get-discovery-info (%require-live-pointer object) coerced-manufacturer coerced-serial-number)))
+    (wrap (opendaq.low-level:module-manager-utils/get-discovery-info (%require-live-pointer object) coerced-manufacturer coerced-serial-number) 'device-info))
 )
 
 (defun module-manager-utils-interface-id ()
@@ -9637,7 +8627,7 @@
   (with-daq-boxed-values ((coerced-iface iface :daq-string)
                           (coerced-manufacturer manufacturer :daq-string)
                           (coerced-serial-number serial-number :daq-string))
-    (wrap-property-object (opendaq.low-level:module-manager-utils/request-ip-config (%require-live-pointer object) coerced-iface coerced-manufacturer coerced-serial-number)))
+    (wrap (opendaq.low-level:module-manager-utils/request-ip-config (%require-live-pointer object) coerced-iface coerced-manufacturer coerced-serial-number) 'property-object))
 )
 
 (defgeneric add-module (object module))
@@ -9648,7 +8638,7 @@
 
 (defun create-module-manager-multiple-paths (paths)
   (with-daq-boxed-values ((coerced-paths paths :managed-pointer))
-    (wrap-module-manager (opendaq.low-level:module-manager/create-module-manager-multiple-paths coerced-paths)))
+    (wrap (opendaq.low-level:module-manager/create-module-manager-multiple-paths coerced-paths) 'module-manager))
 )
 
 (defun module-manager-interface-id ()
@@ -9660,18 +8650,18 @@
 
 (defgeneric modules (object))
 (defmethod modules ((object module-manager))
-  (as-list-of (wrap-object-list (opendaq.low-level:module-manager/get-modules (%require-live-pointer object))) 'module)
+  (as-list-of (wrap (opendaq.low-level:module-manager/get-modules (%require-live-pointer object)) 'object-list) 'module)
 )
 
 (defgeneric vendor-keys (object))
 (defmethod vendor-keys ((object module-manager))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:module-manager/get-vendor-keys (%require-live-pointer object))) 'daq-string-object 'daq-string-object)
+  (as-hashtable-of (wrap (opendaq.low-level:module-manager/get-vendor-keys (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-string-object)
 )
 
 (defgeneric load-module (object path))
 (defmethod load-module ((object module-manager) path)
   (with-daq-boxed-values ((coerced-path path :daq-string))
-    (wrap-module (opendaq.low-level:module-manager/load-module (%require-live-pointer object) coerced-path)))
+    (wrap (opendaq.low-level:module-manager/load-module (%require-live-pointer object) coerced-path) 'module))
 )
 
 (defgeneric load-modules (object context))
@@ -9702,7 +8692,7 @@
   (with-daq-boxed-values ((coerced-connection-string connection-string :daq-string)
                           (coerced-parent parent :managed-pointer)
                           (coerced-config config :managed-pointer))
-    (wrap-device (opendaq.low-level:module/create-device (%require-live-pointer object) coerced-connection-string coerced-parent coerced-config)))
+    (wrap (opendaq.low-level:module/create-device (%require-live-pointer object) coerced-connection-string coerced-parent coerced-config) 'device))
 )
 
 (defgeneric create-function-block (object id parent local-id config))
@@ -9711,7 +8701,7 @@
                           (coerced-parent parent :managed-pointer)
                           (coerced-local-id local-id :daq-string)
                           (coerced-config config :managed-pointer))
-    (wrap-function-block (opendaq.low-level:module/create-function-block (%require-live-pointer object) coerced-id coerced-parent coerced-local-id coerced-config)))
+    (wrap (opendaq.low-level:module/create-function-block (%require-live-pointer object) coerced-id coerced-parent coerced-local-id coerced-config) 'function-block))
 )
 
 (defgeneric create-server (object server-type-id root-device config))
@@ -9719,33 +8709,33 @@
   (with-daq-boxed-values ((coerced-server-type-id server-type-id :daq-string)
                           (coerced-root-device root-device :managed-pointer)
                           (coerced-config config :managed-pointer))
-    (wrap-server (opendaq.low-level:module/create-server (%require-live-pointer object) coerced-server-type-id coerced-root-device coerced-config)))
+    (wrap (opendaq.low-level:module/create-server (%require-live-pointer object) coerced-server-type-id coerced-root-device coerced-config) 'server))
 )
 
 (defmethod create-streaming ((object module) connection-string config)
   (with-daq-boxed-values ((coerced-connection-string connection-string :daq-string)
                           (coerced-config config :managed-pointer))
-    (wrap-streaming (opendaq.low-level:module/create-streaming (%require-live-pointer object) coerced-connection-string coerced-config)))
+    (wrap (opendaq.low-level:module/create-streaming (%require-live-pointer object) coerced-connection-string coerced-config) 'streaming))
 )
 
 (defmethod available-device-types ((object module))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:module/get-available-device-types (%require-live-pointer object))) 'daq-string-object 'device-type)
+  (as-hashtable-of (wrap (opendaq.low-level:module/get-available-device-types (%require-live-pointer object)) 'dict) 'daq-string-object 'device-type)
 )
 
 (defmethod available-devices ((object module))
-  (as-list-of (wrap-object-list (opendaq.low-level:module/get-available-devices (%require-live-pointer object))) 'device-info)
+  (as-list-of (wrap (opendaq.low-level:module/get-available-devices (%require-live-pointer object)) 'object-list) 'device-info)
 )
 
 (defmethod available-function-block-types ((object module))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:module/get-available-function-block-types (%require-live-pointer object))) 'daq-string-object 'function-block-type)
+  (as-hashtable-of (wrap (opendaq.low-level:module/get-available-function-block-types (%require-live-pointer object)) 'dict) 'daq-string-object 'function-block-type)
 )
 
 (defmethod available-server-types ((object module))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:module/get-available-server-types (%require-live-pointer object))) 'daq-string-object 'server-type)
+  (as-hashtable-of (wrap (opendaq.low-level:module/get-available-server-types (%require-live-pointer object)) 'dict) 'daq-string-object 'server-type)
 )
 
 (defmethod available-streaming-types ((object module))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:module/get-available-streaming-types (%require-live-pointer object))) 'daq-string-object 'streaming-type)
+  (as-hashtable-of (wrap (opendaq.low-level:module/get-available-streaming-types (%require-live-pointer object)) 'dict) 'daq-string-object 'streaming-type)
 )
 
 (defun module-interface-id ()
@@ -9757,11 +8747,11 @@
 
 (defgeneric license-config (object))
 (defmethod license-config ((object module))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:module/get-license-config (%require-live-pointer object))) 'daq-string-object 'daq-string-object)
+  (as-hashtable-of (wrap (opendaq.low-level:module/get-license-config (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-string-object)
 )
 
 (defmethod module-info ((object module))
-  (wrap-module-info (opendaq.low-level:module/get-module-info (%require-live-pointer object)))
+  (wrap (opendaq.low-level:module/get-module-info (%require-live-pointer object)) 'module-info)
 )
 
 (defgeneric license-loaded (object))
@@ -9800,7 +8790,7 @@
 )
 
 (defmethod build ((object multi-reader-builder))
-  (wrap-multi-reader (opendaq.low-level:multi-reader-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:multi-reader-builder/build (%require-live-pointer object)) 'multi-reader)
 )
 
 (defgeneric allow-different-sampling-rates (object))
@@ -9819,7 +8809,7 @@
 
 (defgeneric input-port-notification-methods (object))
 (defmethod input-port-notification-methods ((object multi-reader-builder))
-  (as-list-of (wrap-object-list (opendaq.low-level:multi-reader-builder/get-input-port-notification-methods (%require-live-pointer object))) 'packet-ready-notification)
+  (as-list-of (wrap (opendaq.low-level:multi-reader-builder/get-input-port-notification-methods (%require-live-pointer object)) 'object-list) 'packet-ready-notification)
 )
 
 (defun multi-reader-builder-interface-id ()
@@ -9850,7 +8840,7 @@
 
 (defgeneric source-components (object))
 (defmethod source-components ((object multi-reader-builder))
-  (as-list-of (wrap-object-list (opendaq.low-level:multi-reader-builder/get-source-components (%require-live-pointer object))) 'component)
+  (as-list-of (wrap (opendaq.low-level:multi-reader-builder/get-source-components (%require-live-pointer object)) 'object-list) 'component)
 )
 
 (defgeneric start-on-full-unit-of-domain (object))
@@ -9860,7 +8850,7 @@
 
 (defgeneric tick-offset-tolerance (object))
 (defmethod tick-offset-tolerance ((object multi-reader-builder))
-  (wrap-daq-ratio (opendaq.low-level:multi-reader-builder/get-tick-offset-tolerance (%require-live-pointer object)))
+  (wrap (opendaq.low-level:multi-reader-builder/get-tick-offset-tolerance (%require-live-pointer object)) 'daq-ratio)
 )
 
 (defmethod value-read-type ((object multi-reader-builder))
@@ -9932,7 +8922,7 @@
 
 (defgeneric event-packets (object))
 (defmethod event-packets ((object multi-reader-status))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:multi-reader-status/get-event-packets (%require-live-pointer object))) 'daq-string-object 'event-packet)
+  (as-hashtable-of (wrap (opendaq.low-level:multi-reader-status/get-event-packets (%require-live-pointer object)) 'dict) 'daq-string-object 'event-packet)
 )
 
 (defun multi-reader-status-interface-id ()
@@ -9944,7 +8934,7 @@
 
 (defgeneric main-descriptor (object))
 (defmethod main-descriptor ((object multi-reader-status))
-  (wrap-event-packet (opendaq.low-level:multi-reader-status/get-main-descriptor (%require-live-pointer object)))
+  (wrap (opendaq.low-level:multi-reader-status/get-main-descriptor (%require-live-pointer object)) 'event-packet)
 )
 
 (defgeneric add-input (object input))
@@ -9962,14 +8952,14 @@
                           (coerced-required-common-sample-rate required-common-sample-rate nil)
                           (coerced-start-on-full-unit-of-domain start-on-full-unit-of-domain :daq-bool)
                           (coerced-min-read-count min-read-count nil))
-    (wrap-multi-reader (opendaq.low-level:multi-reader/create-multi-reader-ex coerced-signals coerced-value-read-type coerced-domain-read-type coerced-mode coerced-timeout-type coerced-required-common-sample-rate coerced-start-on-full-unit-of-domain coerced-min-read-count)))
+    (wrap (opendaq.low-level:multi-reader/create-multi-reader-ex coerced-signals coerced-value-read-type coerced-domain-read-type coerced-mode coerced-timeout-type coerced-required-common-sample-rate coerced-start-on-full-unit-of-domain coerced-min-read-count) 'multi-reader))
 )
 
 (defun create-multi-reader-from-existing (invalidated-reader value-read-type domain-read-type)
   (with-daq-boxed-values ((coerced-invalidated-reader invalidated-reader :managed-pointer)
                           (coerced-value-read-type value-read-type nil)
                           (coerced-domain-read-type domain-read-type nil))
-    (wrap-multi-reader (opendaq.low-level:multi-reader/create-multi-reader-from-existing coerced-invalidated-reader coerced-value-read-type coerced-domain-read-type)))
+    (wrap (opendaq.low-level:multi-reader/create-multi-reader-from-existing coerced-invalidated-reader coerced-value-read-type coerced-domain-read-type) 'multi-reader))
 )
 
 (defmethod active ((object multi-reader))
@@ -10011,7 +9001,7 @@
 )
 
 (defmethod tick-resolution ((object multi-reader))
-  (wrap-daq-ratio (opendaq.low-level:multi-reader/get-tick-resolution (%require-live-pointer object)))
+  (wrap (opendaq.low-level:multi-reader/get-tick-resolution (%require-live-pointer object)) 'daq-ratio)
 )
 
 (defgeneric multi-reader-read (object samples count timeout-ms))
@@ -10023,7 +9013,7 @@
         (opendaq.low-level:multi-reader/read (%require-live-pointer object) coerced-samples coerced-count coerced-timeout-ms)
       (cl:values
         value-0
-        (wrap-multi-reader-status value-1))))
+        (wrap value-1 'multi-reader-status))))
 )
 
 (defgeneric multi-reader-read-with-domain (object samples domain count timeout-ms))
@@ -10036,7 +9026,7 @@
         (opendaq.low-level:multi-reader/read-with-domain (%require-live-pointer object) coerced-samples coerced-domain coerced-count coerced-timeout-ms)
       (cl:values
         value-0
-        (wrap-multi-reader-status value-1))))
+        (wrap value-1 'multi-reader-status))))
 )
 
 (defgeneric remove-input (object id))
@@ -10064,12 +9054,12 @@
         (opendaq.low-level:multi-reader/skip-samples (%require-live-pointer object) coerced-count)
       (cl:values
         value-0
-        (wrap-multi-reader-status value-1))))
+        (wrap value-1 'multi-reader-status))))
 )
 
 (defgeneric create-default-configuration (object))
 (defmethod create-default-configuration ((object network-interface))
-  (wrap-property-object (opendaq.low-level:network-interface/create-default-configuration (%require-live-pointer object)))
+  (wrap (opendaq.low-level:network-interface/create-default-configuration (%require-live-pointer object)) 'property-object)
 )
 
 (defun network-interface-interface-id ()
@@ -10081,7 +9071,7 @@
 
 (defgeneric request-current-configuration (object))
 (defmethod request-current-configuration ((object network-interface))
-  (wrap-property-object (opendaq.low-level:network-interface/request-current-configuration (%require-live-pointer object)))
+  (wrap (opendaq.low-level:network-interface/request-current-configuration (%require-live-pointer object)) 'property-object)
 )
 
 (defgeneric submit-configuration (object config))
@@ -10133,7 +9123,7 @@
 
 (defun create-packet-reader-from-port (port)
   (with-daq-boxed-values ((coerced-port port :managed-pointer))
-    (wrap-packet-reader (opendaq.low-level:packet-reader/create-packet-reader-from-port coerced-port)))
+    (wrap (opendaq.low-level:packet-reader/create-packet-reader-from-port coerced-port) 'packet-reader))
 )
 
 (defun packet-reader-interface-id ()
@@ -10145,12 +9135,12 @@
 
 (defgeneric packet-reader-read (object))
 (defmethod packet-reader-read ((object packet-reader))
-  (wrap-packet (opendaq.low-level:packet-reader/read (%require-live-pointer object)))
+  (wrap (opendaq.low-level:packet-reader/read (%require-live-pointer object)) 'packet)
 )
 
 (defgeneric read-all (object))
 (defmethod read-all ((object packet-reader))
-  (as-list-of (wrap-object-list (opendaq.low-level:packet-reader/read-all (%require-live-pointer object))) 'packet)
+  (as-list-of (wrap (opendaq.low-level:packet-reader/read-all (%require-live-pointer object)) 'object-list) 'packet)
 )
 
 (defun packet-interface-id ()
@@ -10191,7 +9181,7 @@
 
 (defgeneric permissions (object))
 (defmethod permissions ((object permission-manager-internal))
-  (wrap-permissions (opendaq.low-level:permission-manager-internal/get-permissions (%require-live-pointer object)))
+  (wrap (opendaq.low-level:permission-manager-internal/get-permissions (%require-live-pointer object)) 'permissions)
 )
 
 (defgeneric remove-child-manager (object child-manager))
@@ -10241,7 +9231,7 @@
 
 (defun create-permission-mask-builder-from-mask (permission-mask)
   (with-daq-boxed-values ((coerced-permission-mask permission-mask nil))
-    (wrap-permission-mask-builder (opendaq.low-level:permission-mask-builder/create-permission-mask-builder-from-mask coerced-permission-mask)))
+    (wrap (opendaq.low-level:permission-mask-builder/create-permission-mask-builder-from-mask coerced-permission-mask) 'permission-mask-builder))
 )
 
 (defgeneric execute (object))
@@ -10281,7 +9271,7 @@
 )
 
 (defmethod build ((object permissions-builder))
-  (wrap-permissions (opendaq.low-level:permissions-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:permissions-builder/build (%require-live-pointer object)) 'permissions)
 )
 
 (defgeneric deny (object group-id permissions))
@@ -10312,7 +9302,7 @@
 
 (defgeneric assigned (object))
 (defmethod assigned ((object permissions-internal))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:permissions-internal/get-assigned (%require-live-pointer object))) 'daq-string-object 'daq-integer)
+  (as-hashtable-of (wrap (opendaq.low-level:permissions-internal/get-assigned (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-integer)
 )
 
 (defun permissions-internal-interface-id ()
@@ -10324,12 +9314,12 @@
 
 (defgeneric allowed (object))
 (defmethod allowed ((object permissions))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:permissions/get-allowed (%require-live-pointer object))) 'daq-string-object 'daq-integer)
+  (as-hashtable-of (wrap (opendaq.low-level:permissions/get-allowed (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-integer)
 )
 
 (defgeneric denied (object))
 (defmethod denied ((object permissions))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:permissions/get-denied (%require-live-pointer object))) 'daq-string-object 'daq-integer)
+  (as-hashtable-of (wrap (opendaq.low-level:permissions/get-denied (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-integer)
 )
 
 (defgeneric inherited (object))
@@ -10351,108 +9341,108 @@
 )
 
 (defmethod build ((object property-builder))
-  (wrap-property (opendaq.low-level:property-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-builder/build (%require-live-pointer object)) 'property)
 )
 
 (defun create-bool-property-builder (name default-value)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer))
-    (wrap-property-builder (opendaq.low-level:property-builder/create-bool-property-builder coerced-name coerced-default-value)))
+    (wrap (opendaq.low-level:property-builder/create-bool-property-builder coerced-name coerced-default-value) 'property-builder))
 )
 
 (defun create-dict-property-builder (name default-value)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer))
-    (wrap-property-builder (opendaq.low-level:property-builder/create-dict-property-builder coerced-name coerced-default-value)))
+    (wrap (opendaq.low-level:property-builder/create-dict-property-builder coerced-name coerced-default-value) 'property-builder))
 )
 
 (defun create-enumeration-property-builder (name default-value)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer))
-    (wrap-property-builder (opendaq.low-level:property-builder/create-enumeration-property-builder coerced-name coerced-default-value)))
+    (wrap (opendaq.low-level:property-builder/create-enumeration-property-builder coerced-name coerced-default-value) 'property-builder))
 )
 
 (defun create-float-property-builder (name default-value)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer))
-    (wrap-property-builder (opendaq.low-level:property-builder/create-float-property-builder coerced-name coerced-default-value)))
+    (wrap (opendaq.low-level:property-builder/create-float-property-builder coerced-name coerced-default-value) 'property-builder))
 )
 
 (defun create-function-property-builder (name callable-info)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-callable-info callable-info :managed-pointer))
-    (wrap-property-builder (opendaq.low-level:property-builder/create-function-property-builder coerced-name coerced-callable-info)))
+    (wrap (opendaq.low-level:property-builder/create-function-property-builder coerced-name coerced-callable-info) 'property-builder))
 )
 
 (defun create-int-property-builder (name default-value)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer))
-    (wrap-property-builder (opendaq.low-level:property-builder/create-int-property-builder coerced-name coerced-default-value)))
+    (wrap (opendaq.low-level:property-builder/create-int-property-builder coerced-name coerced-default-value) 'property-builder))
 )
 
 (defun create-list-property-builder (name default-value)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer))
-    (wrap-property-builder (opendaq.low-level:property-builder/create-list-property-builder coerced-name coerced-default-value)))
+    (wrap (opendaq.low-level:property-builder/create-list-property-builder coerced-name coerced-default-value) 'property-builder))
 )
 
 (defun create-object-property-builder (name default-value)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer))
-    (wrap-property-builder (opendaq.low-level:property-builder/create-object-property-builder coerced-name coerced-default-value)))
+    (wrap (opendaq.low-level:property-builder/create-object-property-builder coerced-name coerced-default-value) 'property-builder))
 )
 
 (defun create-ratio-property-builder (name default-value)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer))
-    (wrap-property-builder (opendaq.low-level:property-builder/create-ratio-property-builder coerced-name coerced-default-value)))
+    (wrap (opendaq.low-level:property-builder/create-ratio-property-builder coerced-name coerced-default-value) 'property-builder))
 )
 
 (defun create-reference-property-builder (name referenced-property-eval)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-referenced-property-eval referenced-property-eval :managed-pointer))
-    (wrap-property-builder (opendaq.low-level:property-builder/create-reference-property-builder coerced-name coerced-referenced-property-eval)))
+    (wrap (opendaq.low-level:property-builder/create-reference-property-builder coerced-name coerced-referenced-property-eval) 'property-builder))
 )
 
 (defun create-selection-property-builder (name selection-values default-value)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-selection-values selection-values :managed-pointer)
                           (coerced-default-value default-value :managed-pointer))
-    (wrap-property-builder (opendaq.low-level:property-builder/create-selection-property-builder coerced-name coerced-selection-values coerced-default-value)))
+    (wrap (opendaq.low-level:property-builder/create-selection-property-builder coerced-name coerced-selection-values coerced-default-value) 'property-builder))
 )
 
 (defun create-sparse-selection-property-builder (name selection-values default-value)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-selection-values selection-values :managed-pointer)
                           (coerced-default-value default-value :managed-pointer))
-    (wrap-property-builder (opendaq.low-level:property-builder/create-sparse-selection-property-builder coerced-name coerced-selection-values coerced-default-value)))
+    (wrap (opendaq.low-level:property-builder/create-sparse-selection-property-builder coerced-name coerced-selection-values coerced-default-value) 'property-builder))
 )
 
 (defun create-string-property-builder (name default-value)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :daq-string))
-    (wrap-property-builder (opendaq.low-level:property-builder/create-string-property-builder coerced-name coerced-default-value)))
+    (wrap (opendaq.low-level:property-builder/create-string-property-builder coerced-name coerced-default-value) 'property-builder))
 )
 
 (defun create-struct-property-builder (name default-value)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer))
-    (wrap-property-builder (opendaq.low-level:property-builder/create-struct-property-builder coerced-name coerced-default-value)))
+    (wrap (opendaq.low-level:property-builder/create-struct-property-builder coerced-name coerced-default-value) 'property-builder))
 )
 
 (defgeneric callable-info (object))
 (defmethod callable-info ((object property-builder))
-  (wrap-callable-info (opendaq.low-level:property-builder/get-callable-info (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-builder/get-callable-info (%require-live-pointer object)) 'callable-info)
 )
 
 (defgeneric coercer (object))
 (defmethod coercer ((object property-builder))
-  (wrap-coercer (opendaq.low-level:property-builder/get-coercer (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-builder/get-coercer (%require-live-pointer object)) 'coercer)
 )
 
 (defgeneric default-value (object))
 (defmethod default-value ((object property-builder))
-  (wrap-base-object (opendaq.low-level:property-builder/get-default-value (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-builder/get-default-value (%require-live-pointer object)) 'base-object)
 )
 
 (defmethod description ((object property-builder))
@@ -10473,12 +9463,12 @@
 
 (defgeneric max-value (object))
 (defmethod max-value ((object property-builder))
-  (wrap-daq-number (opendaq.low-level:property-builder/get-max-value (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-builder/get-max-value (%require-live-pointer object)) 'daq-number)
 )
 
 (defgeneric min-value (object))
 (defmethod min-value ((object property-builder))
-  (wrap-daq-number (opendaq.low-level:property-builder/get-min-value (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-builder/get-min-value (%require-live-pointer object)) 'daq-number)
 )
 
 (defmethod name ((object property-builder))
@@ -10490,7 +9480,7 @@
   (declare (ignore property-name))
   (when property-name-suppliedp
     (error "ON-PROPERTY-VALUE-READ is not applicable with a PROPERTY-NAME argument for ~S." 'property-builder))
-  (wrap-event (opendaq.low-level:property-builder/get-on-property-value-read (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-builder/get-on-property-value-read (%require-live-pointer object)) 'event)
 )
 
 (defgeneric on-property-value-write (object &optional property-name))
@@ -10498,27 +9488,27 @@
   (declare (ignore property-name))
   (when property-name-suppliedp
     (error "ON-PROPERTY-VALUE-WRITE is not applicable with a PROPERTY-NAME argument for ~S." 'property-builder))
-  (wrap-event (opendaq.low-level:property-builder/get-on-property-value-write (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-builder/get-on-property-value-write (%require-live-pointer object)) 'event)
 )
 
 (defgeneric on-selection-values-read (object))
 (defmethod on-selection-values-read ((object property-builder))
-  (wrap-event (opendaq.low-level:property-builder/get-on-selection-values-read (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-builder/get-on-selection-values-read (%require-live-pointer object)) 'event)
 )
 
 (defgeneric on-suggested-values-read (object))
 (defmethod on-suggested-values-read ((object property-builder))
-  (wrap-event (opendaq.low-level:property-builder/get-on-suggested-values-read (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-builder/get-on-suggested-values-read (%require-live-pointer object)) 'event)
 )
 
 (defgeneric read-only (object))
 (defmethod read-only ((object property-builder))
-  (wrap-daq-boolean (opendaq.low-level:property-builder/get-read-only (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-builder/get-read-only (%require-live-pointer object)) 'daq-boolean)
 )
 
 (defgeneric referenced-property (object))
 (defmethod referenced-property ((object property-builder))
-  (wrap-eval-value (opendaq.low-level:property-builder/get-referenced-property (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-builder/get-referenced-property (%require-live-pointer object)) 'eval-value)
 )
 
 (defgeneric selection-values (object values))
@@ -10534,12 +9524,12 @@
 )
 
 (defmethod unit ((object property-builder))
-  (wrap-unit (opendaq.low-level:property-builder/get-unit (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-builder/get-unit (%require-live-pointer object)) 'unit)
 )
 
 (defgeneric validator (object))
 (defmethod validator ((object property-builder))
-  (wrap-validator (opendaq.low-level:property-builder/get-validator (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-builder/get-validator (%require-live-pointer object)) 'validator)
 )
 
 (defgeneric value-type (object))
@@ -10548,7 +9538,7 @@
 )
 
 (defmethod visible ((object property-builder))
-  (wrap-daq-boolean (opendaq.low-level:property-builder/get-visible (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-builder/get-visible (%require-live-pointer object)) 'daq-boolean)
 )
 
 (defgeneric (setf callable-info) (new-value object))
@@ -10669,42 +9659,42 @@
 
 (defgeneric property-internal-clone (object))
 (defmethod property-internal-clone ((object property-internal))
-  (wrap-property (opendaq.low-level:property-internal/clone (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/clone (%require-live-pointer object)) 'property)
 )
 
 (defmethod clone-with-owner ((object property-internal) owner)
   (with-daq-boxed-values ((coerced-owner owner :managed-pointer))
-    (wrap-property (opendaq.low-level:property-internal/clone-with-owner (%require-live-pointer object) coerced-owner)))
+    (wrap (opendaq.low-level:property-internal/clone-with-owner (%require-live-pointer object) coerced-owner) 'property))
 )
 
 (defgeneric callable-info-no-lock (object))
 (defmethod callable-info-no-lock ((object property-internal))
-  (wrap-callable-info (opendaq.low-level:property-internal/get-callable-info-no-lock (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-callable-info-no-lock (%require-live-pointer object)) 'callable-info)
 )
 
 (defgeneric class-on-property-value-read (object))
 (defmethod class-on-property-value-read ((object property-internal))
-  (wrap-event (opendaq.low-level:property-internal/get-class-on-property-value-read (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-class-on-property-value-read (%require-live-pointer object)) 'event)
 )
 
 (defgeneric class-on-property-value-write (object))
 (defmethod class-on-property-value-write ((object property-internal))
-  (wrap-event (opendaq.low-level:property-internal/get-class-on-property-value-write (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-class-on-property-value-write (%require-live-pointer object)) 'event)
 )
 
 (defgeneric coercer-no-lock (object))
 (defmethod coercer-no-lock ((object property-internal))
-  (wrap-coercer (opendaq.low-level:property-internal/get-coercer-no-lock (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-coercer-no-lock (%require-live-pointer object)) 'coercer)
 )
 
 (defgeneric default-value-no-lock (object))
 (defmethod default-value-no-lock ((object property-internal))
-  (wrap-base-object (opendaq.low-level:property-internal/get-default-value-no-lock (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-default-value-no-lock (%require-live-pointer object)) 'base-object)
 )
 
 (defgeneric default-value-unresolved (object))
 (defmethod default-value-unresolved ((object property-internal))
-  (wrap-base-object (opendaq.low-level:property-internal/get-default-value-unresolved (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-default-value-unresolved (%require-live-pointer object)) 'base-object)
 )
 
 (defgeneric description-no-lock (object))
@@ -10756,22 +9746,22 @@
 
 (defgeneric max-value-no-lock (object))
 (defmethod max-value-no-lock ((object property-internal))
-  (wrap-daq-number (opendaq.low-level:property-internal/get-max-value-no-lock (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-max-value-no-lock (%require-live-pointer object)) 'daq-number)
 )
 
 (defgeneric max-value-unresolved (object))
 (defmethod max-value-unresolved ((object property-internal))
-  (wrap-daq-number (opendaq.low-level:property-internal/get-max-value-unresolved (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-max-value-unresolved (%require-live-pointer object)) 'daq-number)
 )
 
 (defgeneric min-value-no-lock (object))
 (defmethod min-value-no-lock ((object property-internal))
-  (wrap-daq-number (opendaq.low-level:property-internal/get-min-value-no-lock (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-min-value-no-lock (%require-live-pointer object)) 'daq-number)
 )
 
 (defgeneric min-value-unresolved (object))
 (defmethod min-value-unresolved ((object property-internal))
-  (wrap-daq-number (opendaq.low-level:property-internal/get-min-value-unresolved (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-min-value-unresolved (%require-live-pointer object)) 'daq-number)
 )
 
 (defgeneric read-only-no-lock (object))
@@ -10781,17 +9771,17 @@
 
 (defgeneric read-only-unresolved (object))
 (defmethod read-only-unresolved ((object property-internal))
-  (wrap-daq-boolean (opendaq.low-level:property-internal/get-read-only-unresolved (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-read-only-unresolved (%require-live-pointer object)) 'daq-boolean)
 )
 
 (defgeneric referenced-property-no-lock (object))
 (defmethod referenced-property-no-lock ((object property-internal))
-  (wrap-property (opendaq.low-level:property-internal/get-referenced-property-no-lock (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-referenced-property-no-lock (%require-live-pointer object)) 'property)
 )
 
 (defgeneric referenced-property-unresolved (object))
 (defmethod referenced-property-unresolved ((object property-internal))
-  (wrap-eval-value (opendaq.low-level:property-internal/get-referenced-property-unresolved (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-referenced-property-unresolved (%require-live-pointer object)) 'eval-value)
 )
 
 (defgeneric selection-values-no-lock (object values))
@@ -10808,7 +9798,7 @@
 
 (defgeneric struct-type-no-lock (object))
 (defmethod struct-type-no-lock ((object property-internal))
-  (wrap-struct-type (opendaq.low-level:property-internal/get-struct-type-no-lock (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-struct-type-no-lock (%require-live-pointer object)) 'struct-type)
 )
 
 (defgeneric suggested-values-no-lock (object values))
@@ -10825,17 +9815,17 @@
 
 (defgeneric unit-no-lock (object))
 (defmethod unit-no-lock ((object property-internal))
-  (wrap-unit (opendaq.low-level:property-internal/get-unit-no-lock (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-unit-no-lock (%require-live-pointer object)) 'unit)
 )
 
 (defgeneric unit-unresolved (object))
 (defmethod unit-unresolved ((object property-internal))
-  (wrap-base-object (opendaq.low-level:property-internal/get-unit-unresolved (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-unit-unresolved (%require-live-pointer object)) 'base-object)
 )
 
 (defgeneric validator-no-lock (object))
 (defmethod validator-no-lock ((object property-internal))
-  (wrap-validator (opendaq.low-level:property-internal/get-validator-no-lock (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-validator-no-lock (%require-live-pointer object)) 'validator)
 )
 
 (defgeneric value-type-no-lock (object))
@@ -10855,7 +9845,7 @@
 
 (defgeneric visible-unresolved (object))
 (defmethod visible-unresolved ((object property-internal))
-  (wrap-daq-boolean (opendaq.low-level:property-internal/get-visible-unresolved (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-internal/get-visible-unresolved (%require-live-pointer object)) 'daq-boolean)
 )
 
 (defgeneric override-default-value (object new-default-value))
@@ -10877,13 +9867,13 @@
 )
 
 (defmethod build ((object property-object-class-builder))
-  (wrap-property-object-class (opendaq.low-level:property-object-class-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-object-class-builder/build (%require-live-pointer object)) 'property-object-class)
 )
 
 (defun create-property-object-class-builder-with-manager (manager name)
   (with-daq-boxed-values ((coerced-manager manager :managed-pointer)
                           (coerced-name name :daq-string))
-    (wrap-property-object-class-builder (opendaq.low-level:property-object-class-builder/create-property-object-class-builder-with-manager coerced-manager coerced-name)))
+    (wrap (opendaq.low-level:property-object-class-builder/create-property-object-class-builder-with-manager coerced-manager coerced-name) 'property-object-class-builder))
 )
 
 (defun property-object-class-builder-interface-id ()
@@ -10895,7 +9885,7 @@
 
 (defgeneric manager (object))
 (defmethod manager ((object property-object-class-builder))
-  (wrap-type-manager (opendaq.low-level:property-object-class-builder/get-manager (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-object-class-builder/get-manager (%require-live-pointer object)) 'type-manager)
 )
 
 (defmethod name ((object property-object-class-builder))
@@ -10911,12 +9901,12 @@
   (declare (ignore include-inherited))
   (when include-inherited-suppliedp
     (error "PROPERTIES is not applicable with a INCLUDE-INHERITED argument for ~S." 'property-object-class-builder))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:property-object-class-builder/get-properties (%require-live-pointer object))) 'daq-string-object 'property)
+  (as-hashtable-of (wrap (opendaq.low-level:property-object-class-builder/get-properties (%require-live-pointer object)) 'dict) 'daq-string-object 'property)
 )
 
 (defgeneric property-order (object))
 (defmethod property-order ((object property-object-class-builder))
-  (as-list-of (wrap-object-list (opendaq.low-level:property-object-class-builder/get-property-order (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:property-object-class-builder/get-property-order (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defgeneric remove-property (object property-name))
@@ -10945,7 +9935,7 @@
 (defgeneric property-object-class-internal-clone (object type-manager))
 (defmethod property-object-class-internal-clone ((object property-object-class-internal) type-manager)
   (with-daq-boxed-values ((coerced-type-manager type-manager :managed-pointer))
-    (wrap-property-object-class (opendaq.low-level:property-object-class-internal/clone (%require-live-pointer object) coerced-type-manager)))
+    (wrap (opendaq.low-level:property-object-class-internal/clone (%require-live-pointer object) coerced-type-manager) 'property-object-class))
 )
 
 (defun property-object-class-internal-interface-id ()
@@ -10970,7 +9960,7 @@
   (unless include-inherited-suppliedp
     (error "PROPERTIES requires a INCLUDE-INHERITED argument for ~S." 'property-object-class))
   (with-daq-boxed-values ((coerced-include-inherited include-inherited :daq-bool))
-    (as-list-of (wrap-object-list (opendaq.low-level:property-object-class/get-properties (%require-live-pointer object) coerced-include-inherited)) 'property))
+    (as-list-of (wrap (opendaq.low-level:property-object-class/get-properties (%require-live-pointer object) coerced-include-inherited) 'object-list) 'property))
 )
 
 (defgeneric property (object &optional property-name))
@@ -10978,7 +9968,7 @@
   (unless property-name-suppliedp
     (error "PROPERTY requires a PROPERTY-NAME argument for ~S." 'property-object-class))
   (with-daq-boxed-values ((coerced-property-name property-name :daq-string))
-    (wrap-property (opendaq.low-level:property-object-class/get-property (%require-live-pointer object) coerced-property-name)))
+    (wrap (opendaq.low-level:property-object-class/get-property (%require-live-pointer object) coerced-property-name) 'property))
 )
 
 (defgeneric has-property (object property-name))
@@ -11007,7 +9997,7 @@
 
 (defgeneric property-object-internal-clone (object))
 (defmethod property-object-internal-clone ((object property-object-internal))
-  (wrap-property-object (opendaq.low-level:property-object-internal/clone (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-object-internal/clone (%require-live-pointer object)) 'property-object)
 )
 
 (defgeneric disable-core-event-trigger (object))
@@ -11022,7 +10012,7 @@
 
 (defgeneric core-event-trigger (object))
 (defmethod core-event-trigger ((object property-object-internal))
-  (wrap-procedure (opendaq.low-level:property-object-internal/get-core-event-trigger (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-object-internal/get-core-event-trigger (%require-live-pointer object)) 'procedure)
 )
 
 (defun property-object-internal-interface-id ()
@@ -11034,7 +10024,7 @@
 
 (defgeneric lock-guard (object))
 (defmethod lock-guard ((object property-object-internal))
-  (wrap-lock-guard (opendaq.low-level:property-object-internal/get-lock-guard (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-object-internal/get-lock-guard (%require-live-pointer object)) 'lock-guard)
 )
 
 (defgeneric locking-strategy (object))
@@ -11044,12 +10034,12 @@
 
 (defgeneric mutex (object))
 (defmethod mutex ((object property-object-internal))
-  (wrap-mutex (opendaq.low-level:property-object-internal/get-mutex (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-object-internal/get-mutex (%require-live-pointer object)) 'mutex)
 )
 
 (defgeneric mutex-owner (object))
 (defmethod mutex-owner ((object property-object-internal))
-  (wrap-property-object-internal (opendaq.low-level:property-object-internal/get-mutex-owner (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-object-internal/get-mutex-owner (%require-live-pointer object)) 'property-object-internal)
 )
 
 (defgeneric path (object))
@@ -11060,18 +10050,18 @@
 (defgeneric property-selection-value-no-lock (object name))
 (defmethod property-selection-value-no-lock ((object property-object-internal) name)
   (with-daq-boxed-values ((coerced-name name :daq-string))
-    (wrap-base-object (opendaq.low-level:property-object-internal/get-property-selection-value-no-lock (%require-live-pointer object) coerced-name)))
+    (wrap (opendaq.low-level:property-object-internal/get-property-selection-value-no-lock (%require-live-pointer object) coerced-name) 'base-object))
 )
 
 (defgeneric property-value-no-lock (object name))
 (defmethod property-value-no-lock ((object property-object-internal) name)
   (with-daq-boxed-values ((coerced-name name :daq-string))
-    (wrap-base-object (opendaq.low-level:property-object-internal/get-property-value-no-lock (%require-live-pointer object) coerced-name)))
+    (wrap (opendaq.low-level:property-object-internal/get-property-value-no-lock (%require-live-pointer object) coerced-name) 'base-object))
 )
 
 (defgeneric recursive-lock-guard (object))
 (defmethod recursive-lock-guard ((object property-object-internal))
-  (wrap-lock-guard (opendaq.low-level:property-object-internal/get-recursive-lock-guard (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-object-internal/get-recursive-lock-guard (%require-live-pointer object)) 'lock-guard)
 )
 
 (defgeneric has-user-read-access (object user-context))
@@ -11173,7 +10163,7 @@
 (defun create-property-object-with-class-and-manager (manager class-name)
   (with-daq-boxed-values ((coerced-manager manager :managed-pointer)
                           (coerced-class-name class-name :daq-string))
-    (wrap-property-object (opendaq.low-level:property-object/create-property-object-with-class-and-manager coerced-manager coerced-class-name)))
+    (wrap (opendaq.low-level:property-object/create-property-object-with-class-and-manager coerced-manager coerced-class-name) 'property-object))
 )
 
 (defgeneric end-update (object))
@@ -11185,12 +10175,12 @@
 (defmethod find-properties ((object property-object) property-filter component-filter)
   (with-daq-boxed-values ((coerced-property-filter property-filter :managed-pointer)
                           (coerced-component-filter component-filter :managed-pointer))
-    (as-list-of (wrap-object-list (opendaq.low-level:property-object/find-properties (%require-live-pointer object) coerced-property-filter coerced-component-filter)) 'property))
+    (as-list-of (wrap (opendaq.low-level:property-object/find-properties (%require-live-pointer object) coerced-property-filter coerced-component-filter) 'object-list) 'property))
 )
 
 (defgeneric all-properties (object))
 (defmethod all-properties ((object property-object))
-  (as-list-of (wrap-object-list (opendaq.low-level:property-object/get-all-properties (%require-live-pointer object))) 'property)
+  (as-list-of (wrap (opendaq.low-level:property-object/get-all-properties (%require-live-pointer object)) 'object-list) 'property)
 )
 
 (defgeneric class-name (object))
@@ -11207,55 +10197,55 @@
 
 (defgeneric on-any-property-value-read (object))
 (defmethod on-any-property-value-read ((object property-object))
-  (wrap-event (opendaq.low-level:property-object/get-on-any-property-value-read (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-object/get-on-any-property-value-read (%require-live-pointer object)) 'event)
 )
 
 (defgeneric on-any-property-value-write (object))
 (defmethod on-any-property-value-write ((object property-object))
-  (wrap-event (opendaq.low-level:property-object/get-on-any-property-value-write (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-object/get-on-any-property-value-write (%require-live-pointer object)) 'event)
 )
 
 (defgeneric on-end-update (object))
 (defmethod on-end-update ((object property-object))
-  (wrap-event (opendaq.low-level:property-object/get-on-end-update (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-object/get-on-end-update (%require-live-pointer object)) 'event)
 )
 
 (defmethod on-property-value-read ((object property-object) &optional (property-name nil property-name-suppliedp))
   (unless property-name-suppliedp
     (error "ON-PROPERTY-VALUE-READ requires a PROPERTY-NAME argument for ~S." 'property-object))
   (with-daq-boxed-values ((coerced-property-name property-name :daq-string))
-    (wrap-event (opendaq.low-level:property-object/get-on-property-value-read (%require-live-pointer object) coerced-property-name)))
+    (wrap (opendaq.low-level:property-object/get-on-property-value-read (%require-live-pointer object) coerced-property-name) 'event))
 )
 
 (defmethod on-property-value-write ((object property-object) &optional (property-name nil property-name-suppliedp))
   (unless property-name-suppliedp
     (error "ON-PROPERTY-VALUE-WRITE requires a PROPERTY-NAME argument for ~S." 'property-object))
   (with-daq-boxed-values ((coerced-property-name property-name :daq-string))
-    (wrap-event (opendaq.low-level:property-object/get-on-property-value-write (%require-live-pointer object) coerced-property-name)))
+    (wrap (opendaq.low-level:property-object/get-on-property-value-write (%require-live-pointer object) coerced-property-name) 'event))
 )
 
 (defgeneric permission-manager (object))
 (defmethod permission-manager ((object property-object))
-  (wrap-permission-manager (opendaq.low-level:property-object/get-permission-manager (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-object/get-permission-manager (%require-live-pointer object)) 'permission-manager)
 )
 
 (defmethod property ((object property-object) &optional (property-name nil property-name-suppliedp))
   (unless property-name-suppliedp
     (error "PROPERTY requires a PROPERTY-NAME argument for ~S." 'property-object))
   (with-daq-boxed-values ((coerced-property-name property-name :daq-string))
-    (wrap-property (opendaq.low-level:property-object/get-property (%require-live-pointer object) coerced-property-name)))
+    (wrap (opendaq.low-level:property-object/get-property (%require-live-pointer object) coerced-property-name) 'property))
 )
 
 (defgeneric property-selection-value (object property-name))
 (defmethod property-selection-value ((object property-object) property-name)
   (with-daq-boxed-values ((coerced-property-name property-name :daq-string))
-    (wrap-base-object (opendaq.low-level:property-object/get-property-selection-value (%require-live-pointer object) coerced-property-name)))
+    (wrap (opendaq.low-level:property-object/get-property-selection-value (%require-live-pointer object) coerced-property-name) 'base-object))
 )
 
 (defgeneric property-value (object property-name))
 (defmethod property-value ((object property-object) property-name)
   (with-daq-boxed-values ((coerced-property-name property-name :daq-string))
-    (wrap-base-object (opendaq.low-level:property-object/get-property-value (%require-live-pointer object) coerced-property-name)))
+    (wrap (opendaq.low-level:property-object/get-property-value (%require-live-pointer object) coerced-property-name) 'base-object))
 )
 
 (defgeneric updating (object))
@@ -11265,7 +10255,7 @@
 
 (defgeneric visible-properties (object))
 (defmethod visible-properties ((object property-object))
-  (as-list-of (wrap-object-list (opendaq.low-level:property-object/get-visible-properties (%require-live-pointer object))) 'property)
+  (as-list-of (wrap (opendaq.low-level:property-object/get-visible-properties (%require-live-pointer object)) 'object-list) 'property)
 )
 
 (defmethod has-property ((object property-object) property-name)
@@ -11303,14 +10293,14 @@
 
 (defgeneric old-value (object))
 (defmethod old-value ((object property-value-event-args))
-  (wrap-base-object (opendaq.low-level:property-value-event-args/get-old-value (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-value-event-args/get-old-value (%require-live-pointer object)) 'base-object)
 )
 
 (defmethod property ((object property-value-event-args) &optional (property-name nil property-name-suppliedp))
   (declare (ignore property-name))
   (when property-name-suppliedp
     (error "PROPERTY is not applicable with a PROPERTY-NAME argument for ~S." 'property-value-event-args))
-  (wrap-property (opendaq.low-level:property-value-event-args/get-property (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-value-event-args/get-property (%require-live-pointer object)) 'property)
 )
 
 (defgeneric property-event-type (object))
@@ -11319,7 +10309,7 @@
 )
 
 (defmethod value ((object property-value-event-args))
-  (wrap-base-object (opendaq.low-level:property-value-event-args/get-value (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property-value-event-args/get-value (%require-live-pointer object)) 'base-object)
 )
 
 (defgeneric (setf value) (new-value object))
@@ -11332,68 +10322,68 @@
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer)
                           (coerced-visible visible :managed-pointer))
-    (wrap-property (opendaq.low-level:property/create-bool-property coerced-name coerced-default-value coerced-visible)))
+    (wrap (opendaq.low-level:property/create-bool-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
 (defun create-dict-property (name default-value visible)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer)
                           (coerced-visible visible :managed-pointer))
-    (wrap-property (opendaq.low-level:property/create-dict-property coerced-name coerced-default-value coerced-visible)))
+    (wrap (opendaq.low-level:property/create-dict-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
 (defun create-enumeration-property (name default-value visible)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer)
                           (coerced-visible visible :managed-pointer))
-    (wrap-property (opendaq.low-level:property/create-enumeration-property coerced-name coerced-default-value coerced-visible)))
+    (wrap (opendaq.low-level:property/create-enumeration-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
 (defun create-float-property (name default-value visible)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer)
                           (coerced-visible visible :managed-pointer))
-    (wrap-property (opendaq.low-level:property/create-float-property coerced-name coerced-default-value coerced-visible)))
+    (wrap (opendaq.low-level:property/create-float-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
 (defun create-function-property (name callable-info visible)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-callable-info callable-info :managed-pointer)
                           (coerced-visible visible :managed-pointer))
-    (wrap-property (opendaq.low-level:property/create-function-property coerced-name coerced-callable-info coerced-visible)))
+    (wrap (opendaq.low-level:property/create-function-property coerced-name coerced-callable-info coerced-visible) 'property))
 )
 
 (defun create-int-property (name default-value visible)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer)
                           (coerced-visible visible :managed-pointer))
-    (wrap-property (opendaq.low-level:property/create-int-property coerced-name coerced-default-value coerced-visible)))
+    (wrap (opendaq.low-level:property/create-int-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
 (defun create-list-property (name default-value visible)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer)
                           (coerced-visible visible :managed-pointer))
-    (wrap-property (opendaq.low-level:property/create-list-property coerced-name coerced-default-value coerced-visible)))
+    (wrap (opendaq.low-level:property/create-list-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
 (defun create-object-property (name default-value)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer))
-    (wrap-property (opendaq.low-level:property/create-object-property coerced-name coerced-default-value)))
+    (wrap (opendaq.low-level:property/create-object-property coerced-name coerced-default-value) 'property))
 )
 
 (defun create-ratio-property (name default-value visible)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer)
                           (coerced-visible visible :managed-pointer))
-    (wrap-property (opendaq.low-level:property/create-ratio-property coerced-name coerced-default-value coerced-visible)))
+    (wrap (opendaq.low-level:property/create-ratio-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
 (defun create-reference-property (name referenced-property-eval)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-referenced-property-eval referenced-property-eval :managed-pointer))
-    (wrap-property (opendaq.low-level:property/create-reference-property coerced-name coerced-referenced-property-eval)))
+    (wrap (opendaq.low-level:property/create-reference-property coerced-name coerced-referenced-property-eval) 'property))
 )
 
 (defun create-selection-property (name selection-values default-value visible)
@@ -11401,7 +10391,7 @@
                           (coerced-selection-values selection-values :managed-pointer)
                           (coerced-default-value default-value :managed-pointer)
                           (coerced-visible visible :managed-pointer))
-    (wrap-property (opendaq.low-level:property/create-selection-property coerced-name coerced-selection-values coerced-default-value coerced-visible)))
+    (wrap (opendaq.low-level:property/create-selection-property coerced-name coerced-selection-values coerced-default-value coerced-visible) 'property))
 )
 
 (defun create-sparse-selection-property (name selection-values default-value visible)
@@ -11409,33 +10399,33 @@
                           (coerced-selection-values selection-values :managed-pointer)
                           (coerced-default-value default-value :managed-pointer)
                           (coerced-visible visible :managed-pointer))
-    (wrap-property (opendaq.low-level:property/create-sparse-selection-property coerced-name coerced-selection-values coerced-default-value coerced-visible)))
+    (wrap (opendaq.low-level:property/create-sparse-selection-property coerced-name coerced-selection-values coerced-default-value coerced-visible) 'property))
 )
 
 (defun create-string-property (name default-value visible)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :daq-string)
                           (coerced-visible visible :managed-pointer))
-    (wrap-property (opendaq.low-level:property/create-string-property coerced-name coerced-default-value coerced-visible)))
+    (wrap (opendaq.low-level:property/create-string-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
 (defun create-struct-property (name default-value visible)
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer)
                           (coerced-visible visible :managed-pointer))
-    (wrap-property (opendaq.low-level:property/create-struct-property coerced-name coerced-default-value coerced-visible)))
+    (wrap (opendaq.low-level:property/create-struct-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
 (defmethod callable-info ((object property))
-  (wrap-callable-info (opendaq.low-level:property/get-callable-info (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property/get-callable-info (%require-live-pointer object)) 'callable-info)
 )
 
 (defmethod coercer ((object property))
-  (wrap-coercer (opendaq.low-level:property/get-coercer (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property/get-coercer (%require-live-pointer object)) 'coercer)
 )
 
 (defmethod default-value ((object property))
-  (wrap-base-object (opendaq.low-level:property/get-default-value (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property/get-default-value (%require-live-pointer object)) 'base-object)
 )
 
 (defmethod description ((object property))
@@ -11463,11 +10453,11 @@
 )
 
 (defmethod max-value ((object property))
-  (wrap-daq-number (opendaq.low-level:property/get-max-value (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property/get-max-value (%require-live-pointer object)) 'daq-number)
 )
 
 (defmethod min-value ((object property))
-  (wrap-daq-number (opendaq.low-level:property/get-min-value (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property/get-min-value (%require-live-pointer object)) 'daq-number)
 )
 
 (defmethod name ((object property))
@@ -11478,22 +10468,22 @@
   (declare (ignore property-name))
   (when property-name-suppliedp
     (error "ON-PROPERTY-VALUE-READ is not applicable with a PROPERTY-NAME argument for ~S." 'property))
-  (wrap-event (opendaq.low-level:property/get-on-property-value-read (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property/get-on-property-value-read (%require-live-pointer object)) 'event)
 )
 
 (defmethod on-property-value-write ((object property) &optional (property-name nil property-name-suppliedp))
   (declare (ignore property-name))
   (when property-name-suppliedp
     (error "ON-PROPERTY-VALUE-WRITE is not applicable with a PROPERTY-NAME argument for ~S." 'property))
-  (wrap-event (opendaq.low-level:property/get-on-property-value-write (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property/get-on-property-value-write (%require-live-pointer object)) 'event)
 )
 
 (defmethod on-selection-values-read ((object property))
-  (wrap-event (opendaq.low-level:property/get-on-selection-values-read (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property/get-on-selection-values-read (%require-live-pointer object)) 'event)
 )
 
 (defmethod on-suggested-values-read ((object property))
-  (wrap-event (opendaq.low-level:property/get-on-suggested-values-read (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property/get-on-suggested-values-read (%require-live-pointer object)) 'event)
 )
 
 (defgeneric property-type (object))
@@ -11506,7 +10496,7 @@
 )
 
 (defmethod referenced-property ((object property))
-  (wrap-property (opendaq.low-level:property/get-referenced-property (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property/get-referenced-property (%require-live-pointer object)) 'property)
 )
 
 (defmethod selection-values ((object property) values)
@@ -11516,7 +10506,7 @@
 
 (defgeneric struct-type (object))
 (defmethod struct-type ((object property))
-  (wrap-struct-type (opendaq.low-level:property/get-struct-type (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property/get-struct-type (%require-live-pointer object)) 'struct-type)
 )
 
 (defmethod suggested-values ((object property) values)
@@ -11525,15 +10515,15 @@
 )
 
 (defmethod unit ((object property))
-  (wrap-unit (opendaq.low-level:property/get-unit (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property/get-unit (%require-live-pointer object)) 'unit)
 )
 
 (defmethod validator ((object property))
-  (wrap-validator (opendaq.low-level:property/get-validator (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property/get-validator (%require-live-pointer object)) 'validator)
 )
 
 (defmethod value ((object property))
-  (wrap-base-object (opendaq.low-level:property/get-value (%require-live-pointer object)))
+  (wrap (opendaq.low-level:property/get-value (%require-live-pointer object)) 'base-object)
 )
 
 (defmethod value-type ((object property))
@@ -11551,7 +10541,7 @@
 
 (defgeneric high-value (object))
 (defmethod high-value ((object range))
-  (wrap-daq-number (opendaq.low-level:range/get-high-value (%require-live-pointer object)))
+  (wrap (opendaq.low-level:range/get-high-value (%require-live-pointer object)) 'daq-number)
 )
 
 (defun range-interface-id ()
@@ -11563,7 +10553,7 @@
 
 (defgeneric low-value (object))
 (defmethod low-value ((object range))
-  (wrap-daq-number (opendaq.low-level:range/get-low-value (%require-live-pointer object)))
+  (wrap (opendaq.low-level:range/get-low-value (%require-live-pointer object)) 'daq-number)
 )
 
 (defgeneric denominator (object))
@@ -11585,19 +10575,19 @@
 
 (defgeneric simplify (object))
 (defmethod simplify ((object daq-ratio))
-  (wrap-daq-ratio (opendaq.low-level:ratio/simplify (%require-live-pointer object)))
+  (wrap (opendaq.low-level:ratio/simplify (%require-live-pointer object)) 'daq-ratio)
 )
 
 (defgeneric domain-transform-function (object))
 (defmethod domain-transform-function ((object reader-config))
-  (wrap-daq-function (opendaq.low-level:reader-config/get-domain-transform-function (%require-live-pointer object)))
+  (wrap (opendaq.low-level:reader-config/get-domain-transform-function (%require-live-pointer object)) 'daq-function)
 )
 
 (defmethod input-ports ((object reader-config) &optional (search-filter nil search-filter-suppliedp))
   (declare (ignore search-filter))
   (when search-filter-suppliedp
     (error "INPUT-PORTS is not applicable with a SEARCH-FILTER argument for ~S." 'reader-config))
-  (as-list-of (wrap-object-list (opendaq.low-level:reader-config/get-input-ports (%require-live-pointer object))) 'input-port-config)
+  (as-list-of (wrap (opendaq.low-level:reader-config/get-input-ports (%require-live-pointer object)) 'object-list) 'input-port-config)
 )
 
 (defun reader-config-interface-id ()
@@ -11618,7 +10608,7 @@
 
 (defgeneric value-transform-function (object))
 (defmethod value-transform-function ((object reader-config))
-  (wrap-daq-function (opendaq.low-level:reader-config/get-value-transform-function (%require-live-pointer object)))
+  (wrap (opendaq.low-level:reader-config/get-value-transform-function (%require-live-pointer object)) 'daq-function)
 )
 
 (defgeneric mark-as-invalid (object))
@@ -11628,7 +10618,7 @@
 
 (defgeneric event-packet (object))
 (defmethod event-packet ((object reader-status))
-  (wrap-event-packet (opendaq.low-level:reader-status/get-event-packet (%require-live-pointer object)))
+  (wrap (opendaq.low-level:reader-status/get-event-packet (%require-live-pointer object)) 'event-packet)
 )
 
 (defun reader-status-interface-id ()
@@ -11642,7 +10632,7 @@
   (declare (ignore domain-start))
   (when domain-start-suppliedp
     (error "OFFSET is not applicable with a DOMAIN-START argument for ~S." 'reader-status))
-  (wrap-daq-number (opendaq.low-level:reader-status/get-offset (%require-live-pointer object)))
+  (wrap (opendaq.low-level:reader-status/get-offset (%require-live-pointer object)) 'daq-number)
 )
 
 (defgeneric read-status (object))
@@ -11714,12 +10704,12 @@
 )
 
 (defmethod build ((object reference-domain-info-builder))
-  (wrap-reference-domain-info (opendaq.low-level:reference-domain-info-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:reference-domain-info-builder/build (%require-live-pointer object)) 'reference-domain-info)
 )
 
 (defun create-reference-domain-info-builder-from-existing (reference-domain-info-to-copy)
   (with-daq-boxed-values ((coerced-reference-domain-info-to-copy reference-domain-info-to-copy :managed-pointer))
-    (wrap-reference-domain-info-builder (opendaq.low-level:reference-domain-info-builder/create-reference-domain-info-builder-from-existing coerced-reference-domain-info-to-copy)))
+    (wrap (opendaq.low-level:reference-domain-info-builder/create-reference-domain-info-builder-from-existing coerced-reference-domain-info-to-copy) 'reference-domain-info-builder))
 )
 
 (defun reference-domain-info-builder-interface-id ()
@@ -11736,7 +10726,7 @@
 
 (defgeneric reference-domain-offset (object))
 (defmethod reference-domain-offset ((object reference-domain-info-builder))
-  (wrap-daq-integer (opendaq.low-level:reference-domain-info-builder/get-reference-domain-offset (%require-live-pointer object)))
+  (wrap (opendaq.low-level:reference-domain-info-builder/get-reference-domain-offset (%require-live-pointer object)) 'daq-integer)
 )
 
 (defgeneric reference-time-protocol (object))
@@ -11785,7 +10775,7 @@
 )
 
 (defmethod reference-domain-offset ((object reference-domain-info))
-  (wrap-daq-integer (opendaq.low-level:reference-domain-info/get-reference-domain-offset (%require-live-pointer object)))
+  (wrap (opendaq.low-level:reference-domain-info/get-reference-domain-offset (%require-live-pointer object)) 'daq-integer)
 )
 
 (defmethod reference-time-protocol ((object reference-domain-info))
@@ -11880,12 +10870,12 @@
 )
 
 (defmethod build ((object scaling-builder))
-  (wrap-scaling (opendaq.low-level:scaling-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:scaling-builder/build (%require-live-pointer object)) 'scaling)
 )
 
 (defun create-scaling-builder-from-existing (scaling-to-copy)
   (with-daq-boxed-values ((coerced-scaling-to-copy scaling-to-copy :managed-pointer))
-    (wrap-scaling-builder (opendaq.low-level:scaling-builder/create-scaling-builder-from-existing coerced-scaling-to-copy)))
+    (wrap (opendaq.low-level:scaling-builder/create-scaling-builder-from-existing coerced-scaling-to-copy) 'scaling-builder))
 )
 
 (defgeneric input-data-type (object))
@@ -11906,7 +10896,7 @@
 )
 
 (defmethod parameters ((object scaling-builder))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:scaling-builder/get-parameters (%require-live-pointer object))) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:scaling-builder/get-parameters (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
 )
 
 (defgeneric scaling-type (object))
@@ -11974,12 +10964,12 @@
                           (coerced-offset offset :managed-pointer)
                           (coerced-input-data-type input-data-type nil)
                           (coerced-output-data-type output-data-type nil))
-    (wrap-scaling (opendaq.low-level:scaling/create-linear-scaling coerced-scale coerced-offset coerced-input-data-type coerced-output-data-type)))
+    (wrap (opendaq.low-level:scaling/create-linear-scaling coerced-scale coerced-offset coerced-input-data-type coerced-output-data-type) 'scaling))
 )
 
 (defun create-scaling-from-builder (builder)
   (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (wrap-scaling (opendaq.low-level:scaling/create-scaling-from-builder coerced-builder)))
+    (wrap (opendaq.low-level:scaling/create-scaling-from-builder coerced-builder) 'scaling))
 )
 
 (defgeneric input-sample-type (object))
@@ -12000,7 +10990,7 @@
 )
 
 (defmethod parameters ((object scaling))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:scaling/get-parameters (%require-live-pointer object))) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:scaling/get-parameters (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
 )
 
 (defmethod scaling-type ((object scaling))
@@ -12011,7 +11001,7 @@
   (with-daq-boxed-values ((coerced-logger logger :managed-pointer)
                           (coerced-num-workers num-workers nil)
                           (coerced-use-main-loop use-main-loop :daq-bool))
-    (wrap-scheduler (opendaq.low-level:scheduler/create-scheduler-with-main-loop coerced-logger coerced-num-workers coerced-use-main-loop)))
+    (wrap (opendaq.low-level:scheduler/create-scheduler-with-main-loop coerced-logger coerced-num-workers coerced-use-main-loop) 'scheduler))
 )
 
 (defun scheduler-interface-id ()
@@ -12045,13 +11035,13 @@
 (defgeneric schedule-function (object function))
 (defmethod schedule-function ((object scheduler) function)
   (with-daq-boxed-values ((coerced-function function :managed-pointer))
-    (wrap-awaitable (opendaq.low-level:scheduler/schedule-function (%require-live-pointer object) coerced-function)))
+    (wrap (opendaq.low-level:scheduler/schedule-function (%require-live-pointer object) coerced-function) 'awaitable))
 )
 
 (defgeneric schedule-graph (object graph))
 (defmethod schedule-graph ((object scheduler) graph)
   (with-daq-boxed-values ((coerced-graph graph :managed-pointer))
-    (wrap-awaitable (opendaq.low-level:scheduler/schedule-graph (%require-live-pointer object) coerced-graph)))
+    (wrap (opendaq.low-level:scheduler/schedule-graph (%require-live-pointer object) coerced-graph) 'awaitable))
 )
 
 (defgeneric schedule-work (object work))
@@ -12088,53 +11078,53 @@
 )
 
 (defun create-any-search-filter ()
-  (wrap-search-filter (opendaq.low-level:search-filter/create-any-search-filter))
+  (wrap (opendaq.low-level:search-filter/create-any-search-filter) 'search-filter)
 )
 
 (defun create-custom-search-filter (accepts-function visit-function)
   (with-daq-boxed-values ((coerced-accepts-function accepts-function :managed-pointer)
                           (coerced-visit-function visit-function :managed-pointer))
-    (wrap-search-filter (opendaq.low-level:search-filter/create-custom-search-filter coerced-accepts-function coerced-visit-function)))
+    (wrap (opendaq.low-level:search-filter/create-custom-search-filter coerced-accepts-function coerced-visit-function) 'search-filter))
 )
 
 (defun create-excluded-tags-search-filter (excluded-tags)
   (with-daq-boxed-values ((coerced-excluded-tags excluded-tags :managed-pointer))
-    (wrap-search-filter (opendaq.low-level:search-filter/create-excluded-tags-search-filter coerced-excluded-tags)))
+    (wrap (opendaq.low-level:search-filter/create-excluded-tags-search-filter coerced-excluded-tags) 'search-filter))
 )
 
 (defun create-interface-id-search-filter (intf-id)
   (with-daq-boxed-values ((coerced-intf-id intf-id nil))
-    (wrap-search-filter (opendaq.low-level:search-filter/create-interface-id-search-filter coerced-intf-id)))
+    (wrap (opendaq.low-level:search-filter/create-interface-id-search-filter coerced-intf-id) 'search-filter))
 )
 
 (defun create-local-id-search-filter (local-id)
   (with-daq-boxed-values ((coerced-local-id local-id :daq-string))
-    (wrap-search-filter (opendaq.low-level:search-filter/create-local-id-search-filter coerced-local-id)))
+    (wrap (opendaq.low-level:search-filter/create-local-id-search-filter coerced-local-id) 'search-filter))
 )
 
 (defun create-not-search-filter (filter)
   (with-daq-boxed-values ((coerced-filter filter :managed-pointer))
-    (wrap-search-filter (opendaq.low-level:search-filter/create-not-search-filter coerced-filter)))
+    (wrap (opendaq.low-level:search-filter/create-not-search-filter coerced-filter) 'search-filter))
 )
 
 (defun create-or-search-filter (left right)
   (with-daq-boxed-values ((coerced-left left :managed-pointer)
                           (coerced-right right :managed-pointer))
-    (wrap-search-filter (opendaq.low-level:search-filter/create-or-search-filter coerced-left coerced-right)))
+    (wrap (opendaq.low-level:search-filter/create-or-search-filter coerced-left coerced-right) 'search-filter))
 )
 
 (defun create-recursive-search-filter (filter)
   (with-daq-boxed-values ((coerced-filter filter :managed-pointer))
-    (wrap-search-filter (opendaq.low-level:search-filter/create-recursive-search-filter coerced-filter)))
+    (wrap (opendaq.low-level:search-filter/create-recursive-search-filter coerced-filter) 'search-filter))
 )
 
 (defun create-required-tags-search-filter (required-tags)
   (with-daq-boxed-values ((coerced-required-tags required-tags :managed-pointer))
-    (wrap-search-filter (opendaq.low-level:search-filter/create-required-tags-search-filter coerced-required-tags)))
+    (wrap (opendaq.low-level:search-filter/create-required-tags-search-filter coerced-required-tags) 'search-filter))
 )
 
 (defun create-visible-search-filter ()
-  (wrap-search-filter (opendaq.low-level:search-filter/create-visible-search-filter))
+  (wrap (opendaq.low-level:search-filter/create-visible-search-filter) 'search-filter)
 )
 
 (defun search-filter-interface-id ()
@@ -12159,7 +11149,7 @@
 
 (defgeneric serialize-id (object))
 (defmethod serialize-id ((object serializable))
-  (wrap-const-char-ptr (opendaq.low-level:serializable/get-serialize-id (%require-live-pointer object)))
+  (wrap (opendaq.low-level:serializable/get-serialize-id (%require-live-pointer object)) 'const-char-ptr)
 )
 
 (defgeneric serialize (object serializer))
@@ -12212,14 +11202,14 @@
 (defmethod serialized-list-read-list ((object serialized-list) context factory-callback)
   (with-daq-boxed-values ((coerced-context context :daq-base-object)
                           (coerced-factory-callback factory-callback :managed-pointer))
-    (wrap-object-list (opendaq.low-level:serialized-list/read-list (%require-live-pointer object) coerced-context coerced-factory-callback)))
+    (wrap (opendaq.low-level:serialized-list/read-list (%require-live-pointer object) coerced-context coerced-factory-callback) 'object-list))
 )
 
 (defgeneric serialized-list-read-object (object context factory-callback))
 (defmethod serialized-list-read-object ((object serialized-list) context factory-callback)
   (with-daq-boxed-values ((coerced-context context :daq-base-object)
                           (coerced-factory-callback factory-callback :managed-pointer))
-    (wrap-base-object (opendaq.low-level:serialized-list/read-object (%require-live-pointer object) coerced-context coerced-factory-callback)))
+    (wrap (opendaq.low-level:serialized-list/read-object (%require-live-pointer object) coerced-context coerced-factory-callback) 'base-object))
 )
 
 (defgeneric read-serialized-list (object &optional key))
@@ -12227,7 +11217,7 @@
   (declare (ignore key))
   (when key-suppliedp
     (error "READ-SERIALIZED-LIST is not applicable with a KEY argument for ~S." 'serialized-list))
-  (wrap-serialized-list (opendaq.low-level:serialized-list/read-serialized-list (%require-live-pointer object)))
+  (wrap (opendaq.low-level:serialized-list/read-serialized-list (%require-live-pointer object)) 'serialized-list)
 )
 
 (defgeneric read-serialized-object (object &optional key))
@@ -12235,7 +11225,7 @@
   (declare (ignore key))
   (when key-suppliedp
     (error "READ-SERIALIZED-OBJECT is not applicable with a KEY argument for ~S." 'serialized-list))
-  (wrap-serialized-object (opendaq.low-level:serialized-list/read-serialized-object (%require-live-pointer object)))
+  (wrap (opendaq.low-level:serialized-list/read-serialized-object (%require-live-pointer object)) 'serialized-object)
 )
 
 (defgeneric read-string (object &optional key))
@@ -12254,7 +11244,7 @@
 )
 
 (defmethod keys ((object serialized-object))
-  (wrap-object-list (opendaq.low-level:serialized-object/get-keys (%require-live-pointer object)))
+  (wrap (opendaq.low-level:serialized-object/get-keys (%require-live-pointer object)) 'object-list)
 )
 
 (defgeneric serialized-object-type (object key))
@@ -12299,7 +11289,7 @@
   (with-daq-boxed-values ((coerced-key key :daq-string)
                           (coerced-context context :daq-base-object)
                           (coerced-factory-callback factory-callback :managed-pointer))
-    (wrap-object-list (opendaq.low-level:serialized-object/read-list (%require-live-pointer object) coerced-key coerced-context coerced-factory-callback)))
+    (wrap (opendaq.low-level:serialized-object/read-list (%require-live-pointer object) coerced-key coerced-context coerced-factory-callback) 'object-list))
 )
 
 (defgeneric serialized-object-read-object (object key context factory-callback))
@@ -12307,21 +11297,21 @@
   (with-daq-boxed-values ((coerced-key key :daq-string)
                           (coerced-context context :daq-base-object)
                           (coerced-factory-callback factory-callback :managed-pointer))
-    (wrap-base-object (opendaq.low-level:serialized-object/read-object (%require-live-pointer object) coerced-key coerced-context coerced-factory-callback)))
+    (wrap (opendaq.low-level:serialized-object/read-object (%require-live-pointer object) coerced-key coerced-context coerced-factory-callback) 'base-object))
 )
 
 (defmethod read-serialized-list ((object serialized-object) &optional (key nil key-suppliedp))
   (unless key-suppliedp
     (error "READ-SERIALIZED-LIST requires a KEY argument for ~S." 'serialized-object))
   (with-daq-boxed-values ((coerced-key key :daq-string))
-    (wrap-serialized-list (opendaq.low-level:serialized-object/read-serialized-list (%require-live-pointer object) coerced-key)))
+    (wrap (opendaq.low-level:serialized-object/read-serialized-list (%require-live-pointer object) coerced-key) 'serialized-list))
 )
 
 (defmethod read-serialized-object ((object serialized-object) &optional (key nil key-suppliedp))
   (unless key-suppliedp
     (error "READ-SERIALIZED-OBJECT requires a KEY argument for ~S." 'serialized-object))
   (with-daq-boxed-values ((coerced-key key :daq-string))
-    (wrap-serialized-object (opendaq.low-level:serialized-object/read-serialized-object (%require-live-pointer object) coerced-key)))
+    (wrap (opendaq.low-level:serialized-object/read-serialized-object (%require-live-pointer object) coerced-key) 'serialized-object))
 )
 
 (defmethod read-string ((object serialized-object) &optional (key nil key-suppliedp))
@@ -12353,7 +11343,7 @@
 
 (defgeneric user (object))
 (defmethod user ((object serializer))
-  (wrap-base-object (opendaq.low-level:serializer/get-user (%require-live-pointer object)))
+  (wrap (opendaq.low-level:serializer/get-user (%require-live-pointer object)) 'base-object)
 )
 
 (defgeneric version (object))
@@ -12522,12 +11512,12 @@
 
 (defgeneric address-info (object))
 (defmethod address-info ((object server-capability))
-  (as-list-of (wrap-object-list (opendaq.low-level:server-capability/get-address-info (%require-live-pointer object))) 'address-info)
+  (as-list-of (wrap (opendaq.low-level:server-capability/get-address-info (%require-live-pointer object)) 'object-list) 'address-info)
 )
 
 (defgeneric addresses (object))
 (defmethod addresses ((object server-capability))
-  (as-list-of (wrap-object-list (opendaq.low-level:server-capability/get-addresses (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:server-capability/get-addresses (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defmethod connection-string ((object server-capability))
@@ -12536,7 +11526,7 @@
 
 (defgeneric connection-strings (object))
 (defmethod connection-strings ((object server-capability))
-  (as-list-of (wrap-object-list (opendaq.low-level:server-capability/get-connection-strings (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:server-capability/get-connection-strings (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defgeneric connection-type (object))
@@ -12558,7 +11548,7 @@
 
 (defgeneric port (object))
 (defmethod port ((object server-capability))
-  (wrap-daq-integer (opendaq.low-level:server-capability/get-port (%require-live-pointer object)))
+  (wrap (opendaq.low-level:server-capability/get-port (%require-live-pointer object)) 'daq-integer)
 )
 
 (defgeneric prefix (object))
@@ -12614,12 +11604,12 @@
 
 (defmethod signals ((object server) &optional (search-filter nil))
   (with-daq-boxed-values ((coerced-search-filter search-filter :managed-pointer))
-    (as-list-of (wrap-object-list (opendaq.low-level:server/get-signals (%require-live-pointer object) coerced-search-filter)) 'signal))
+    (as-list-of (wrap (opendaq.low-level:server/get-signals (%require-live-pointer object) coerced-search-filter) 'object-list) 'signal))
 )
 
 (defgeneric streaming (object))
 (defmethod streaming ((object server))
-  (wrap-streaming (opendaq.low-level:server/get-streaming (%require-live-pointer object)))
+  (wrap (opendaq.low-level:server/get-streaming (%require-live-pointer object)) 'streaming)
 )
 
 (defmethod stop ((object server))
@@ -12643,7 +11633,7 @@
                           (coerced-parent parent :managed-pointer)
                           (coerced-local-id local-id :daq-string)
                           (coerced-class-name class-name :daq-string))
-    (wrap-signal-config (opendaq.low-level:signal-config/create-signal-with-descriptor coerced-context coerced-descriptor coerced-parent coerced-local-id coerced-class-name)))
+    (wrap (opendaq.low-level:signal-config/create-signal-with-descriptor coerced-context coerced-descriptor coerced-parent coerced-local-id coerced-class-name) 'signal-config))
 )
 
 (defun signal-config-interface-id ()
@@ -12780,17 +11770,17 @@
 
 (defgeneric connections (object))
 (defmethod connections ((object signal))
-  (as-list-of (wrap-object-list (opendaq.low-level:signal/get-connections (%require-live-pointer object))) 'connection)
+  (as-list-of (wrap (opendaq.low-level:signal/get-connections (%require-live-pointer object)) 'object-list) 'connection)
 )
 
 (defgeneric descriptor (object))
 (defmethod descriptor ((object signal))
-  (wrap-data-descriptor (opendaq.low-level:signal/get-descriptor (%require-live-pointer object)))
+  (wrap (opendaq.low-level:signal/get-descriptor (%require-live-pointer object)) 'data-descriptor)
 )
 
 (defgeneric domain-signal (object))
 (defmethod domain-signal ((object signal))
-  (wrap-signal (opendaq.low-level:signal/get-domain-signal (%require-live-pointer object)))
+  (wrap (opendaq.low-level:signal/get-domain-signal (%require-live-pointer object)) 'signal)
 )
 
 (defun signal-interface-id ()
@@ -12804,7 +11794,7 @@
   (declare (ignore type-manager))
   (when type-manager-suppliedp
     (error "LAST-VALUE is not applicable with a TYPE-MANAGER argument for ~S." 'signal))
-  (wrap-base-object (opendaq.low-level:signal/get-last-value (%require-live-pointer object)))
+  (wrap (opendaq.low-level:signal/get-last-value (%require-live-pointer object)) 'base-object)
 )
 
 (defmethod public ((object signal))
@@ -12813,7 +11803,7 @@
 
 (defgeneric related-signals (object))
 (defmethod related-signals ((object signal))
-  (as-list-of (wrap-object-list (opendaq.low-level:signal/get-related-signals (%require-live-pointer object))) 'signal)
+  (as-list-of (wrap (opendaq.low-level:signal/get-related-signals (%require-live-pointer object)) 'object-list) 'signal)
 )
 
 (defgeneric streamed (object))
@@ -12840,7 +11830,7 @@
 )
 
 (defmethod build ((object stream-reader-builder))
-  (wrap-stream-reader (opendaq.low-level:stream-reader-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:stream-reader-builder/build (%require-live-pointer object)) 'stream-reader)
 )
 
 (defmethod domain-read-type ((object stream-reader-builder))
@@ -12848,7 +11838,7 @@
 )
 
 (defmethod input-port ((object stream-reader-builder))
-  (wrap-input-port (opendaq.low-level:stream-reader-builder/get-input-port (%require-live-pointer object)))
+  (wrap (opendaq.low-level:stream-reader-builder/get-input-port (%require-live-pointer object)) 'input-port)
 )
 
 (defmethod input-port-notification-method ((object stream-reader-builder))
@@ -12872,7 +11862,7 @@
 
 (defgeneric stream-reader-builder-signal (object))
 (defmethod stream-reader-builder-signal ((object stream-reader-builder))
-  (wrap-signal (opendaq.low-level:stream-reader-builder/get-signal (%require-live-pointer object)))
+  (wrap (opendaq.low-level:stream-reader-builder/get-signal (%require-live-pointer object)) 'signal)
 )
 
 (defmethod skip-events ((object stream-reader-builder))
@@ -12927,7 +11917,7 @@
   (with-daq-boxed-values ((coerced-invalidated-reader invalidated-reader :managed-pointer)
                           (coerced-value-read-type value-read-type nil)
                           (coerced-domain-read-type domain-read-type nil))
-    (wrap-stream-reader (opendaq.low-level:stream-reader/create-stream-reader-from-existing coerced-invalidated-reader coerced-value-read-type coerced-domain-read-type)))
+    (wrap (opendaq.low-level:stream-reader/create-stream-reader-from-existing coerced-invalidated-reader coerced-value-read-type coerced-domain-read-type) 'stream-reader))
 )
 
 (defun create-stream-reader-from-port (port value-read-type domain-read-type read-mode timeout-type)
@@ -12936,7 +11926,7 @@
                           (coerced-domain-read-type domain-read-type nil)
                           (coerced-read-mode read-mode nil)
                           (coerced-timeout-type timeout-type nil))
-    (wrap-stream-reader (opendaq.low-level:stream-reader/create-stream-reader-from-port coerced-port coerced-value-read-type coerced-domain-read-type coerced-read-mode coerced-timeout-type)))
+    (wrap (opendaq.low-level:stream-reader/create-stream-reader-from-port coerced-port coerced-value-read-type coerced-domain-read-type coerced-read-mode coerced-timeout-type) 'stream-reader))
 )
 
 (defun stream-reader-interface-id ()
@@ -12955,7 +11945,7 @@
         (opendaq.low-level:stream-reader/read (%require-live-pointer object) coerced-samples coerced-count coerced-timeout-ms)
       (cl:values
         value-0
-        (wrap-reader-status value-1))))
+        (wrap value-1 'reader-status))))
 )
 
 (defgeneric stream-reader-read-with-domain (object samples domain count timeout-ms))
@@ -12968,7 +11958,7 @@
         (opendaq.low-level:stream-reader/read-with-domain (%require-live-pointer object) coerced-samples coerced-domain coerced-count coerced-timeout-ms)
       (cl:values
         value-0
-        (wrap-reader-status value-1))))
+        (wrap value-1 'reader-status))))
 )
 
 (defmethod skip-samples ((object stream-reader) count)
@@ -12977,7 +11967,7 @@
         (opendaq.low-level:stream-reader/skip-samples (%require-live-pointer object) coerced-count)
       (cl:values
         value-0
-        (wrap-reader-status value-1))))
+        (wrap value-1 'reader-status))))
 )
 
 (defmethod connection-string-prefix ((object streaming-type))
@@ -13013,7 +12003,7 @@
 
 (defgeneric connection-status (object))
 (defmethod connection-status ((object streaming))
-  (wrap-enumeration (opendaq.low-level:streaming/get-connection-status (%require-live-pointer object)))
+  (wrap (opendaq.low-level:streaming/get-connection-status (%require-live-pointer object)) 'enumeration)
 )
 
 (defmethod connection-string ((object streaming))
@@ -13071,7 +12061,7 @@
 
 (defgeneric char-ptr (object))
 (defmethod char-ptr ((object daq-string-object))
-  (wrap-const-char-ptr (opendaq.low-level:string/get-char-ptr (%require-live-pointer object)))
+  (wrap (opendaq.low-level:string/get-char-ptr (%require-live-pointer object)) 'const-char-ptr)
 )
 
 (defun daq-string-object-interface-id ()
@@ -13087,27 +12077,27 @@
 )
 
 (defmethod build ((object struct-builder))
-  (wrap-struct (opendaq.low-level:struct-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:struct-builder/build (%require-live-pointer object)) 'struct)
 )
 
 (defun create-struct-builder-from-struct (struct)
   (with-daq-boxed-values ((coerced-struct struct :managed-pointer))
-    (wrap-struct-builder (opendaq.low-level:struct-builder/create-struct-builder-from-struct coerced-struct)))
+    (wrap (opendaq.low-level:struct-builder/create-struct-builder-from-struct coerced-struct) 'struct-builder))
 )
 
 (defgeneric get (object name))
 (defmethod get ((object struct-builder) name)
   (with-daq-boxed-values ((coerced-name name :daq-string))
-    (wrap-base-object (opendaq.low-level:struct-builder/get (%require-live-pointer object) coerced-name)))
+    (wrap (opendaq.low-level:struct-builder/get (%require-live-pointer object) coerced-name) 'base-object))
 )
 
 (defmethod as-dictionary ((object struct-builder))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:struct-builder/get-as-dictionary (%require-live-pointer object))) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:struct-builder/get-as-dictionary (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
 )
 
 (defgeneric field-names (object))
 (defmethod field-names ((object struct-builder))
-  (as-list-of (wrap-object-list (opendaq.low-level:struct-builder/get-field-names (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:struct-builder/get-field-names (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defgeneric field-values (object values))
@@ -13124,7 +12114,7 @@
 )
 
 (defmethod struct-type ((object struct-builder))
-  (wrap-struct-type (opendaq.low-level:struct-builder/get-struct-type (%require-live-pointer object)))
+  (wrap (opendaq.low-level:struct-builder/get-struct-type (%require-live-pointer object)) 'struct-type)
 )
 
 (defgeneric has-field (object name))
@@ -13150,21 +12140,21 @@
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-names names :managed-pointer)
                           (coerced-types types :managed-pointer))
-    (wrap-struct-type (opendaq.low-level:struct-type/create-struct-type-no-defaults coerced-name coerced-names coerced-types)))
+    (wrap (opendaq.low-level:struct-type/create-struct-type-no-defaults coerced-name coerced-names coerced-types) 'struct-type))
 )
 
 (defgeneric field-default-values (object))
 (defmethod field-default-values ((object struct-type))
-  (as-list-of (wrap-object-list (opendaq.low-level:struct-type/get-field-default-values (%require-live-pointer object))) 'base-object)
+  (as-list-of (wrap (opendaq.low-level:struct-type/get-field-default-values (%require-live-pointer object)) 'object-list) 'base-object)
 )
 
 (defmethod field-names ((object struct-type))
-  (as-list-of (wrap-object-list (opendaq.low-level:struct-type/get-field-names (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:struct-type/get-field-names (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defgeneric field-types (object))
 (defmethod field-types ((object struct-type))
-  (as-list-of (wrap-object-list (opendaq.low-level:struct-type/get-field-types (%require-live-pointer object))) 'daq-type)
+  (as-list-of (wrap (opendaq.low-level:struct-type/get-field-types (%require-live-pointer object)) 'object-list) 'daq-type)
 )
 
 (defun struct-type-interface-id ()
@@ -13176,20 +12166,20 @@
 
 (defun create-struct-from-builder (builder)
   (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (wrap-struct (opendaq.low-level:struct/create-struct-from-builder coerced-builder)))
+    (wrap (opendaq.low-level:struct/create-struct-from-builder coerced-builder) 'struct))
 )
 
 (defmethod get ((object struct) name)
   (with-daq-boxed-values ((coerced-name name :daq-string))
-    (wrap-base-object (opendaq.low-level:struct/get (%require-live-pointer object) coerced-name)))
+    (wrap (opendaq.low-level:struct/get (%require-live-pointer object) coerced-name) 'base-object))
 )
 
 (defmethod as-dictionary ((object struct))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:struct/get-as-dictionary (%require-live-pointer object))) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:struct/get-as-dictionary (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
 )
 
 (defmethod field-names ((object struct))
-  (as-list-of (wrap-object-list (opendaq.low-level:struct/get-field-names (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:struct/get-field-names (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defmethod field-values ((object struct) values)
@@ -13205,7 +12195,7 @@
 )
 
 (defmethod struct-type ((object struct))
-  (wrap-struct-type (opendaq.low-level:struct/get-struct-type (%require-live-pointer object)))
+  (wrap (opendaq.low-level:struct/get-struct-type (%require-live-pointer object)) 'struct-type)
 )
 
 (defmethod has-field ((object struct) name)
@@ -13264,7 +12254,7 @@
 
 (defgeneric interfaces (object))
 (defmethod interfaces ((object sync-component))
-  (as-hashtable-of (wrap-dict (opendaq.low-level:sync-component/get-interfaces (%require-live-pointer object))) 'daq-string-object 'property-object)
+  (as-hashtable-of (wrap (opendaq.low-level:sync-component/get-interfaces (%require-live-pointer object)) 'dict) 'daq-string-object 'property-object)
 )
 
 (defgeneric selected-source (object))
@@ -13323,7 +12313,7 @@
 
 (defgeneric list (object))
 (defmethod list ((object tags))
-  (as-list-of (wrap-object-list (opendaq.low-level:tags/get-list (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:tags/get-list (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defgeneric query (object query))
@@ -13333,7 +12323,7 @@
 )
 
 (defmethod build ((object tail-reader-builder))
-  (wrap-tail-reader (opendaq.low-level:tail-reader-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:tail-reader-builder/build (%require-live-pointer object)) 'tail-reader)
 )
 
 (defmethod domain-read-type ((object tail-reader-builder))
@@ -13346,7 +12336,7 @@
 )
 
 (defmethod input-port ((object tail-reader-builder))
-  (wrap-input-port (opendaq.low-level:tail-reader-builder/get-input-port (%require-live-pointer object)))
+  (wrap (opendaq.low-level:tail-reader-builder/get-input-port (%require-live-pointer object)) 'input-port)
 )
 
 (defun tail-reader-builder-interface-id ()
@@ -13362,7 +12352,7 @@
 
 (defgeneric tail-reader-builder-signal (object))
 (defmethod tail-reader-builder-signal ((object tail-reader-builder))
-  (wrap-signal (opendaq.low-level:tail-reader-builder/get-signal (%require-live-pointer object)))
+  (wrap (opendaq.low-level:tail-reader-builder/get-signal (%require-live-pointer object)) 'signal)
 )
 
 (defmethod skip-events ((object tail-reader-builder))
@@ -13426,7 +12416,7 @@
                           (coerced-history-size history-size nil)
                           (coerced-value-read-type value-read-type nil)
                           (coerced-domain-read-type domain-read-type nil))
-    (wrap-tail-reader (opendaq.low-level:tail-reader/create-tail-reader-from-existing coerced-invalidated-reader coerced-history-size coerced-value-read-type coerced-domain-read-type)))
+    (wrap (opendaq.low-level:tail-reader/create-tail-reader-from-existing coerced-invalidated-reader coerced-history-size coerced-value-read-type coerced-domain-read-type) 'tail-reader))
 )
 
 (defun create-tail-reader-from-port (port history-size value-read-type domain-read-type mode)
@@ -13435,7 +12425,7 @@
                           (coerced-value-read-type value-read-type nil)
                           (coerced-domain-read-type domain-read-type nil)
                           (coerced-mode mode nil))
-    (wrap-tail-reader (opendaq.low-level:tail-reader/create-tail-reader-from-port coerced-port coerced-history-size coerced-value-read-type coerced-domain-read-type coerced-mode)))
+    (wrap (opendaq.low-level:tail-reader/create-tail-reader-from-port coerced-port coerced-history-size coerced-value-read-type coerced-domain-read-type coerced-mode) 'tail-reader))
 )
 
 (defmethod history-size ((object tail-reader))
@@ -13457,7 +12447,7 @@
         (opendaq.low-level:tail-reader/read (%require-live-pointer object) coerced-values coerced-count)
       (cl:values
         value-0
-        (wrap-tail-reader-status value-1))))
+        (wrap value-1 'tail-reader-status))))
 )
 
 (defgeneric tail-reader-read-with-domain (object values domain count))
@@ -13469,7 +12459,7 @@
         (opendaq.low-level:tail-reader/read-with-domain (%require-live-pointer object) coerced-values coerced-domain coerced-count)
       (cl:values
         value-0
-        (wrap-tail-reader-status value-1))))
+        (wrap value-1 'tail-reader-status))))
 )
 
 (defun task-graph-interface-id ()
@@ -13530,12 +12520,12 @@
 (defgeneric type-manager-type (object type-name))
 (defmethod type-manager-type ((object type-manager) type-name)
   (with-daq-boxed-values ((coerced-type-name type-name :daq-string))
-    (wrap-daq-type (opendaq.low-level:type-manager/get-type (%require-live-pointer object) coerced-type-name)))
+    (wrap (opendaq.low-level:type-manager/get-type (%require-live-pointer object) coerced-type-name) 'daq-type))
 )
 
 (defgeneric types (object))
 (defmethod types ((object type-manager))
-  (as-list-of (wrap-object-list (opendaq.low-level:type-manager/get-types (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:type-manager/get-types (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defgeneric has-type (object type-name))
@@ -13562,12 +12552,12 @@
 )
 
 (defmethod build ((object unit-builder))
-  (wrap-unit (opendaq.low-level:unit-builder/build (%require-live-pointer object)))
+  (wrap (opendaq.low-level:unit-builder/build (%require-live-pointer object)) 'unit)
 )
 
 (defun create-unit-builder-from-existing (unit-to-copy)
   (with-daq-boxed-values ((coerced-unit-to-copy unit-to-copy :managed-pointer))
-    (wrap-unit-builder (opendaq.low-level:unit-builder/create-unit-builder-from-existing coerced-unit-to-copy)))
+    (wrap (opendaq.low-level:unit-builder/create-unit-builder-from-existing coerced-unit-to-copy) 'unit-builder))
 )
 
 (defmethod id ((object unit-builder))
@@ -13675,7 +12665,7 @@
 
 (defgeneric device-update-options (object))
 (defmethod device-update-options ((object update-parameters))
-  (wrap-device-update-options (opendaq.low-level:update-parameters/get-device-update-options (%require-live-pointer object)))
+  (wrap (opendaq.low-level:update-parameters/get-device-update-options (%require-live-pointer object)) 'device-update-options)
 )
 
 (defun update-parameters-interface-id ()
@@ -13735,7 +12725,7 @@
 
 (defgeneric groups (object))
 (defmethod groups ((object user))
-  (as-list-of (wrap-object-list (opendaq.low-level:user/get-groups (%require-live-pointer object))) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:user/get-groups (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
 (defun user-interface-id ()
@@ -15065,208 +14055,6 @@
          wait-for-message
          work
          work-interface-id
-         wrap-address-info
-         wrap-address-info-builder
-         wrap-address-info-private
-         wrap-allocator
-         wrap-argument-info
-         wrap-authentication-provider
-         wrap-awaitable
-         wrap-base-object
-         wrap-binary-data
-         wrap-block-reader
-         wrap-block-reader-builder
-         wrap-block-reader-status
-         wrap-callable-info
-         wrap-channel
-         wrap-char-ptr
-         wrap-cloneable
-         wrap-coercer
-         wrap-comparable
-         wrap-complex-number
-         wrap-component
-         wrap-component-deserialize-context
-         wrap-component-holder
-         wrap-component-private
-         wrap-component-status-container
-         wrap-component-status-container-private
-         wrap-component-type
-         wrap-component-type-builder
-         wrap-component-type-private
-         wrap-component-update-context
-         wrap-config-provider
-         wrap-connected-client-info
-         wrap-connection
-         wrap-connection-internal
-         wrap-connection-status-container-private
-         wrap-const-char-ptr
-         wrap-context
-         wrap-context-internal
-         wrap-convertible
-         wrap-core-event-args
-         wrap-core-type
-         wrap-daq-boolean
-         wrap-daq-float
-         wrap-daq-function
-         wrap-daq-integer
-         wrap-daq-number
-         wrap-daq-ratio
-         wrap-daq-string-object
-         wrap-daq-type
-         wrap-data-descriptor
-         wrap-data-descriptor-builder
-         wrap-data-packet
-         wrap-data-rule
-         wrap-data-rule-builder
-         wrap-deleter
-         wrap-deserialize-component
-         wrap-deserializer
-         wrap-device
-         wrap-device-domain
-         wrap-device-info
-         wrap-device-info-config
-         wrap-device-info-internal
-         wrap-device-network-config
-         wrap-device-private
-         wrap-device-type
-         wrap-device-update-options
-         wrap-dict
-         wrap-dict-element-type
-         wrap-dimension
-         wrap-dimension-builder
-         wrap-dimension-rule
-         wrap-dimension-rule-builder
-         wrap-discovery-server
-         wrap-end-update-event-args
-         wrap-enumeration
-         wrap-enumeration-type
-         wrap-error-info
-         wrap-eval-value
-         wrap-event
-         wrap-event-args
-         wrap-event-handler
-         wrap-event-packet
-         wrap-folder
-         wrap-folder-config
-         wrap-freezable
-         wrap-function-block
-         wrap-function-block-type
-         wrap-graph-visualization
-         wrap-input-port
-         wrap-input-port-config
-         wrap-input-port-notifications
-         wrap-input-port-private
-         wrap-inspectable
-         wrap-instance
-         wrap-instance-builder
-         wrap-io-folder-config
-         wrap-iterable
-         wrap-iterator
-         wrap-last-message-logger-sink-private
-         wrap-list-element-type
-         wrap-lock-guard
-         wrap-log-file-info
-         wrap-log-file-info-builder
-         wrap-logger
-         wrap-logger-component
-         wrap-logger-sink
-         wrap-logger-thread-pool
-         wrap-mirrored-device
-         wrap-mirrored-device-config
-         wrap-mirrored-input-port-config
-         wrap-mirrored-signal-config
-         wrap-mirrored-signal-private
-         wrap-module
-         wrap-module-authenticator
-         wrap-module-info
-         wrap-module-manager
-         wrap-module-manager-utils
-         wrap-multi-reader
-         wrap-multi-reader-builder
-         wrap-multi-reader-status
-         wrap-mutex
-         wrap-network-interface
-         wrap-object-list
-         wrap-ownable
-         wrap-packet
-         wrap-packet-destruct-callback
-         wrap-packet-reader
-         wrap-permission-manager
-         wrap-permission-manager-internal
-         wrap-permission-mask-builder
-         wrap-permissions
-         wrap-permissions-builder
-         wrap-permissions-internal
-         wrap-procedure
-         wrap-property
-         wrap-property-builder
-         wrap-property-internal
-         wrap-property-object
-         wrap-property-object-class
-         wrap-property-object-class-builder
-         wrap-property-object-class-internal
-         wrap-property-object-internal
-         wrap-property-object-protected
-         wrap-property-value-event-args
-         wrap-range
-         wrap-reader
-         wrap-reader-config
-         wrap-reader-status
-         wrap-recorder
-         wrap-recursive-search
-         wrap-reference-domain-info
-         wrap-reference-domain-info-builder
-         wrap-removable
-         wrap-reusable-data-packet
-         wrap-rule-private
-         wrap-sample-reader
-         wrap-scaling
-         wrap-scaling-builder
-         wrap-scaling-calc-private
-         wrap-scheduler
-         wrap-search-filter
-         wrap-serializable
-         wrap-serialized-list
-         wrap-serialized-object
-         wrap-serializer
-         wrap-server
-         wrap-server-capability
-         wrap-server-capability-config
-         wrap-server-type
-         wrap-signal
-         wrap-signal-config
-         wrap-signal-events
-         wrap-signal-private
-         wrap-simple-type
-         wrap-stream-reader
-         wrap-stream-reader-builder
-         wrap-streaming
-         wrap-streaming-type
-         wrap-struct
-         wrap-struct-builder
-         wrap-struct-type
-         wrap-subscription-event-args
-         wrap-sync-component
-         wrap-sync-component-private
-         wrap-tags
-         wrap-tags-private
-         wrap-tail-reader
-         wrap-tail-reader-builder
-         wrap-tail-reader-status
-         wrap-task
-         wrap-task-graph
-         wrap-type-manager
-         wrap-type-manager-private
-         wrap-unit
-         wrap-unit-builder
-         wrap-updatable
-         wrap-update-parameters
-         wrap-user
-         wrap-user-internal
-         wrap-user-lock
-         wrap-validator
-         wrap-version-info
-         wrap-work
          write
          write-bool
          write-float

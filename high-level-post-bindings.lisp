@@ -371,10 +371,10 @@ TARGET-TYPE is a symbol naming the wrapper class (e.g. 'DEVICE-INFO)."
 (integers, booleans, floats, strings, ratios, complex numbers) into
 their native Lisp equivalents and casting objects to TARGET-TYPE.
 
-  Example: (as-list-of (wrap-object-list pointer) 'device-info)
+  Example: (as-list-of (wrap pointer 'object-list) 'device-info)
             => (#<DEVICE-INFO ...> #<DEVICE-INFO ...>)
 
-  Example: (as-list-of (wrap-object-list pointer) 'daq-integer)
+  Example: (as-list-of (wrap pointer 'object-list) 'daq-integer)
             => (1 2 3)"
   (if (primitive-type-p target-type)
       (loop for i below (count object-list)
@@ -387,7 +387,7 @@ their native Lisp equivalents and casting objects to TARGET-TYPE.
   "Convert an openDAQ dict into a Lisp hash-table.  Keys and values are
 unboxed if their type is a primitive, or cast via AS otherwise.
 
-  Example: (as-hashtable-of (wrap-dict pointer) 'string 'device-info)
+  Example: (as-hashtable-of (wrap pointer 'dict) 'string 'device-info)
             => #<HASH-TABLE>"
   (let* ((raw (%require-live-pointer dict))
          (key-list (opendaq.low-level:dict/get-key-list raw))
@@ -396,11 +396,11 @@ unboxed if their type is a primitive, or cast via AS otherwise.
     (loop for i below n
           for key-ptr = (opendaq.low-level:list/get-item-at key-list i)
           for val-ptr = (opendaq.low-level:dict/get raw key-ptr)
-          for key-obj = (wrap-base-object key-ptr)
+          for key-obj = (wrap key-ptr 'base-object)
           for key = (if (primitive-type-p key-type)
                        (%unbox-primitive key-obj key-type)
                        (as key-obj key-type))
-          for val-obj = (wrap-base-object val-ptr)
+          for val-obj = (wrap val-ptr 'base-object)
           for val = (if (primitive-type-p value-type)
                        (%unbox-primitive val-obj value-type)
                        (as val-obj value-type))
@@ -488,7 +488,7 @@ SOURCE's domain metadata each time, e.g.:
 (defun %dispatch-event-callback (index sender args)
   (let ((function (aref *event-callback-functions* index)))
     (when function
-      (funcall function (wrap-base-object sender) (wrap-base-object args)))))
+      (funcall function (wrap sender 'base-object) (wrap args 'base-object)))))
 
 (defun %make-event-trampoline (index)
   "Compile a fresh daqEventCall C trampoline routing to slot INDEX.  Built with

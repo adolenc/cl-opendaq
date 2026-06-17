@@ -553,6 +553,19 @@ Uses direct FFI calls to avoid re-entering %check-error during error reporting."
       (error "The openDAQ object ~S has already been released." object))
     pointer))
 
+(defun wrap (pointer target-type)
+  "Adopt a raw openDAQ POINTER as a TARGET-TYPE wrapper.
+
+Takes ownership of the reference the C call already handed back -- it does NOT
+add a reference -- so this is the correct way to wrap a pointer returned from an
+OPENDAQ.LOW-LEVEL call.  Returns NIL for a null pointer.  TARGET-TYPE is a symbol
+(or class) naming the wrapper class, e.g. 'BASE-OBJECT.
+
+This is the raw-pointer counterpart to AS: AS reinterprets an already-wrapped
+object and adds its own reference; WRAP adopts a bare pointer without one."
+  (unless (or (null pointer) (cffi:null-pointer-p pointer))
+    (make-instance target-type :pointer pointer)))
+
 (defun %daq-string-to-lisp-and-release (pointer)
   (if (or (null pointer) (cffi:null-pointer-p pointer))
       nil

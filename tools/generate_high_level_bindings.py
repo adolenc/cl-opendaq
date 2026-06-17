@@ -526,7 +526,6 @@ def export_symbols(classes: list[dict], methods: list[dict]) -> list[str]:
                "data", "raw-data"}
     for spec in classes:
         exports.add(spec["name"])
-        exports.add(f"wrap-{spec['name']}")
     for spec in methods:
         exports.add(spec["name"])
     return sorted(exports)
@@ -583,15 +582,6 @@ def emit_class_definition(spec: dict) -> list[str]:
     return [f"(defclass {spec['name']} ({parent})", "  (", *slots, "   ))", "", ""]
 
 
-def emit_wrapper_constructor(spec: dict) -> list[str]:
-    return [
-        f"(defun wrap-{spec['name']} (pointer)",
-        "  (unless (or (null pointer) (cffi:null-pointer-p pointer))",
-        f"    (make-instance '{spec['name']} :pointer pointer)))",
-        "",
-    ]
-
-
 def emit_coerced_call(parameters: tuple[dict, ...], inner_lines: list[str], indent: str) -> list[str]:
     """Wrap INNER_LINES so each parameter is boxed for the call and released after.
 
@@ -636,12 +626,12 @@ def value_expression(parameter: dict, value_form: str) -> str:
         key_type = parameter.get("key_type")
         if value_type and cn == "object-list":
             element_type = _camel_to_kebab(value_type)
-            return f"(as-list-of (wrap-{cn} {value_form}) '{element_type})"
+            return f"(as-list-of (wrap {value_form} '{cn}) '{element_type})"
         if key_type and cn == "dict":
             key_type_lisp = _camel_to_kebab(key_type)
             val_type_lisp = _camel_to_kebab(value_type) if value_type else "t"
-            return f"(as-hashtable-of (wrap-{cn} {value_form}) '{key_type_lisp} '{val_type_lisp})"
-        return f"(wrap-{cn} {value_form})"
+            return f"(as-hashtable-of (wrap {value_form} '{cn}) '{key_type_lisp} '{val_type_lisp})"
+        return f"(wrap {value_form} '{cn})"
     return value_form
 
 
@@ -911,7 +901,6 @@ def render_output(include_dir: Path) -> str:
     for spec in classes:
         lines.extend(emit_class_definition(spec))
         lines.extend(constructor_lambda_lines(spec))
-        lines.extend(emit_wrapper_constructor(spec))
 
     for spec in methods:
         kind = spec["kind"]
