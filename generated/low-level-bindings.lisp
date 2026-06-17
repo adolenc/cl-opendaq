@@ -987,19 +987,6 @@
   )
 )
 
-(cffi:defcfun ("daqBaseObject_borrowInterface" %daq-base-object-borrow-interface) daq-err-code
-  (self daq-base-object)
-  (intf-id daq-intf-id)
-  (interface-ptr (:pointer daq-base-object))
-  )
-
-(defun base-object/borrow-interface (self intf-id)
-  (cffi:with-foreign-object (interface-ptr-slot 'daq-base-object)
-    (%check-error (%daq-base-object-borrow-interface self intf-id interface-ptr-slot) "daqBaseObject_borrowInterface")
-    (cffi:mem-ref interface-ptr-slot 'daq-base-object)
-  )
-)
-
 (cffi:defcfun ("daqBaseObject_create" %daq-base-object-create) daq-err-code
   (base-object (:pointer daq-base-object))
   )
@@ -1042,19 +1029,6 @@
   (cffi:with-foreign-object (hash-code-slot 'daq-size-t)
     (%check-error (%daq-base-object-get-hash-code self hash-code-slot) "daqBaseObject_getHashCode")
     (cffi:mem-ref hash-code-slot 'daq-size-t)
-  )
-)
-
-(cffi:defcfun ("daqBaseObject_queryInterface" %daq-base-object-query-interface) daq-err-code
-  (self daq-base-object)
-  (intf-id daq-intf-id)
-  (interface-ptr (:pointer daq-base-object))
-  )
-
-(defun base-object/query-interface (self intf-id)
-  (cffi:with-foreign-object (interface-ptr-slot 'daq-base-object)
-    (%check-error (%daq-base-object-query-interface self intf-id interface-ptr-slot) "daqBaseObject_queryInterface")
-    (cffi:mem-ref interface-ptr-slot 'daq-base-object)
   )
 )
 
@@ -6384,19 +6358,6 @@
   )
 )
 
-(cffi:defcfun ("daqDict_createDictWithExpectedTypes" %daq-dict-create-dict-with-expected-types) daq-err-code
-  (obj (:pointer daq-dict))
-  (key-type daq-intf-id)
-  (value-type daq-intf-id)
-  )
-
-(defun dict/create-dict-with-expected-types (key-type value-type)
-  (cffi:with-foreign-object (obj-slot 'daq-dict)
-    (%check-error (%daq-dict-create-dict-with-expected-types obj-slot key-type value-type) "daqDict_createDictWithExpectedTypes")
-    (cffi:mem-ref obj-slot 'daq-dict)
-  )
-)
-
 (cffi:defcfun ("daqDict_deleteItem" %daq-dict-delete-item) daq-err-code
   (self daq-dict)
   (key daq-base-object)
@@ -7779,21 +7740,6 @@
 (defun folder-config/create-folder (context parent local-id)
   (cffi:with-foreign-object (obj-slot 'daq-folder-config)
     (%check-error (%daq-folder-config-create-folder obj-slot context parent local-id) "daqFolderConfig_createFolder")
-    (cffi:mem-ref obj-slot 'daq-folder-config)
-  )
-)
-
-(cffi:defcfun ("daqFolderConfig_createFolderWithItemType" %daq-folder-config-create-folder-with-item-type) daq-err-code
-  (obj (:pointer daq-folder-config))
-  (item-type daq-intf-id)
-  (context daq-context)
-  (parent daq-component)
-  (local-id daq-string)
-  )
-
-(defun folder-config/create-folder-with-item-type (item-type context parent local-id)
-  (cffi:with-foreign-object (obj-slot 'daq-folder-config)
-    (%check-error (%daq-folder-config-create-folder-with-item-type obj-slot item-type context parent local-id) "daqFolderConfig_createFolderWithItemType")
     (cffi:mem-ref obj-slot 'daq-folder-config)
   )
 )
@@ -9226,18 +9172,6 @@
 (defun list/create-list ()
   (cffi:with-foreign-object (obj-slot 'daq-list)
     (%check-error (%daq-list-create-list obj-slot) "daqList_createList")
-    (cffi:mem-ref obj-slot 'daq-list)
-  )
-)
-
-(cffi:defcfun ("daqList_createListWithElementType" %daq-list-create-list-with-element-type) daq-err-code
-  (obj (:pointer daq-list))
-  (id daq-intf-id)
-  )
-
-(defun list/create-list-with-element-type (id)
-  (cffi:with-foreign-object (obj-slot 'daq-list)
-    (%check-error (%daq-list-create-list-with-element-type obj-slot id) "daqList_createListWithElementType")
     (cffi:mem-ref obj-slot 'daq-list)
   )
 )
@@ -15871,18 +15805,6 @@
   )
 )
 
-(cffi:defcfun ("daqSearchFilter_createInterfaceIdSearchFilter" %daq-search-filter-create-interface-id-search-filter) daq-err-code
-  (obj (:pointer daq-search-filter))
-  (intf-id daq-intf-id)
-  )
-
-(defun search-filter/create-interface-id-search-filter (intf-id)
-  (cffi:with-foreign-object (obj-slot 'daq-search-filter)
-    (%check-error (%daq-search-filter-create-interface-id-search-filter obj-slot intf-id) "daqSearchFilter_createInterfaceIdSearchFilter")
-    (cffi:mem-ref obj-slot 'daq-search-filter)
-  )
-)
-
 (cffi:defcfun ("daqSearchFilter_createLocalIdSearchFilter" %daq-search-filter-create-local-id-search-filter) daq-err-code
   (obj (:pointer daq-search-filter))
   (local-id daq-string)
@@ -19549,12 +19471,10 @@
   awaitable/has-completed
   awaitable/wait
   base-object/add-ref
-  base-object/borrow-interface
   base-object/create
   base-object/dispose
   base-object/equals
   base-object/get-hash-code
-  base-object/query-interface
   base-object/release-ref
   base-object/to-string
   binary-data/create-binary-data
@@ -20025,7 +19945,6 @@
   dict-element-type/get-value-interface-id
   dict/clear
   dict/create-dict
-  dict/create-dict-with-expected-types
   dict/delete-item
   dict/get
   dict/get-count
@@ -20149,7 +20068,6 @@
   folder-config/add-item
   folder-config/clear
   folder-config/create-folder
-  folder-config/create-folder-with-item-type
   folder-config/create-io-folder
   folder-config/get-interface-id
   folder-config/remove-item
@@ -20281,7 +20199,6 @@
   list/clear
   list/create-end-iterator
   list/create-list
-  list/create-list-with-element-type
   list/create-start-iterator
   list/delete-at
   list/get-count
@@ -20868,7 +20785,6 @@
   search-filter/create-any-search-filter
   search-filter/create-custom-search-filter
   search-filter/create-excluded-tags-search-filter
-  search-filter/create-interface-id-search-filter
   search-filter/create-local-id-search-filter
   search-filter/create-not-search-filter
   search-filter/create-or-search-filter
@@ -21195,3 +21111,11 @@
   work/execute
   work/get-interface-id
   ))
+
+;;; Skipped functions
+;; daqBaseObject_borrowInterface: passes a struct by value, which would require cffi-libffi (daqIntfID)
+;; daqBaseObject_queryInterface: passes a struct by value, which would require cffi-libffi (daqIntfID)
+;; daqDict_createDictWithExpectedTypes: passes a struct by value, which would require cffi-libffi (daqIntfID)
+;; daqFolderConfig_createFolderWithItemType: passes a struct by value, which would require cffi-libffi (daqIntfID)
+;; daqList_createListWithElementType: passes a struct by value, which would require cffi-libffi (daqIntfID)
+;; daqSearchFilter_createInterfaceIdSearchFilter: passes a struct by value, which would require cffi-libffi (daqIntfID)

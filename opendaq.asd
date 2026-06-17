@@ -2,7 +2,7 @@
   :description "Common Lisp bindings for openDAQ."
   :author "Andrej Dolenc"
   :license "MIT"
-  :depends-on ("cffi" "cffi-libffi" "trivial-garbage" "local-time")
+  :depends-on ("cffi" "trivial-garbage" "local-time")
   :serial t
   :components ((:file "package")
                (:file "generated/low-level-bindings")

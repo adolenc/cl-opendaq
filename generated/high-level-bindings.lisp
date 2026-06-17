@@ -108,7 +108,6 @@
             block-reader-status
             block-reader-status-interface-id
             block-size
-            borrow-interface
             build
             call
             call-custom-proc
@@ -260,7 +259,6 @@
             create-dict-argument-info
             create-dict-property
             create-dict-property-builder
-            create-dict-with-expected-types
             create-dimension-builder-from-existing
             create-dimension-from-builder
             create-dimension-rule-builder-from-existing
@@ -280,7 +278,6 @@
             create-explicit-domain-data-rule
             create-float-property
             create-float-property-builder
-            create-folder-with-item-type
             create-function-block
             create-function-block-type-builder
             create-function-property
@@ -289,7 +286,6 @@
             create-instance
             create-int-property
             create-int-property-builder
-            create-interface-id-search-filter
             create-io-folder
             create-json-config-provider
             create-json-file-authentication-provider
@@ -301,7 +297,6 @@
             create-list-dimension-rule
             create-list-property
             create-list-property-builder
-            create-list-with-element-type
             create-local-id-search-filter
             create-logarithmic-dimension-rule
             create-malloc-allocator
@@ -901,7 +896,6 @@
             push-front
             quantity
             query
-            query-interface
             range
             range-interface-id
             raw-data
@@ -4113,12 +4107,6 @@
   (opendaq.low-level:base-object/add-ref (%require-live-pointer object))
 )
 
-(defgeneric borrow-interface (object intf-id))
-(defmethod borrow-interface ((object base-object) intf-id)
-  (with-daq-boxed-values ((coerced-intf-id intf-id nil))
-    (wrap (opendaq.low-level:base-object/borrow-interface (%require-live-pointer object) coerced-intf-id) 'base-object))
-)
-
 (defun base-object-create ()
   (wrap (opendaq.low-level:base-object/create) 'base-object)
 )
@@ -4137,12 +4125,6 @@
 (defgeneric hash-code (object))
 (defmethod hash-code ((object base-object))
   (opendaq.low-level:base-object/get-hash-code (%require-live-pointer object))
-)
-
-(defgeneric query-interface (object intf-id))
-(defmethod query-interface ((object base-object) intf-id)
-  (with-daq-boxed-values ((coerced-intf-id intf-id nil))
-    (wrap (opendaq.low-level:base-object/query-interface (%require-live-pointer object) coerced-intf-id) 'base-object))
 )
 
 (defgeneric release-ref (object))
@@ -6681,12 +6663,6 @@
   (opendaq.low-level:dict/clear (%require-live-pointer object))
 )
 
-(defun create-dict-with-expected-types (key-type value-type)
-  (with-daq-boxed-values ((coerced-key-type key-type nil)
-                          (coerced-value-type value-type nil))
-    (wrap (opendaq.low-level:dict/create-dict-with-expected-types coerced-key-type coerced-value-type) 'dict))
-)
-
 (defgeneric delete-item (object key))
 (defmethod delete-item ((object dict) key)
   (with-daq-boxed-values ((coerced-key key :daq-base-object))
@@ -7269,14 +7245,6 @@
 
 (defmethod clear ((object folder-config))
   (opendaq.low-level:folder-config/clear (%require-live-pointer object))
-)
-
-(defun create-folder-with-item-type (item-type context parent local-id)
-  (with-daq-boxed-values ((coerced-item-type item-type nil)
-                          (coerced-context context :managed-pointer)
-                          (coerced-parent parent :managed-pointer)
-                          (coerced-local-id local-id :daq-string))
-    (wrap (opendaq.low-level:folder-config/create-folder-with-item-type coerced-item-type coerced-context coerced-parent coerced-local-id) 'folder-config))
 )
 
 (defun create-io-folder (context parent local-id)
@@ -7976,11 +7944,6 @@
 
 (defmethod create-end-iterator ((object object-list))
   (wrap (opendaq.low-level:list/create-end-iterator (%require-live-pointer object)) 'iterator)
-)
-
-(defun create-list-with-element-type (id)
-  (with-daq-boxed-values ((coerced-id id nil))
-    (wrap (opendaq.low-level:list/create-list-with-element-type coerced-id) 'object-list))
 )
 
 (defmethod create-start-iterator ((object object-list))
@@ -11092,11 +11055,6 @@
     (wrap (opendaq.low-level:search-filter/create-excluded-tags-search-filter coerced-excluded-tags) 'search-filter))
 )
 
-(defun create-interface-id-search-filter (intf-id)
-  (with-daq-boxed-values ((coerced-intf-id intf-id nil))
-    (wrap (opendaq.low-level:search-filter/create-interface-id-search-filter coerced-intf-id) 'search-filter))
-)
-
 (defun create-local-id-search-filter (local-id)
   (with-daq-boxed-values ((coerced-local-id local-id :daq-string))
     (wrap (opendaq.low-level:search-filter/create-local-id-search-filter coerced-local-id) 'search-filter))
@@ -12902,7 +12860,6 @@
          block-reader-status
          block-reader-status-interface-id
          block-size
-         borrow-interface
          build
          call
          call-custom-proc
@@ -13054,7 +13011,6 @@
          create-dict-argument-info
          create-dict-property
          create-dict-property-builder
-         create-dict-with-expected-types
          create-dimension-builder-from-existing
          create-dimension-from-builder
          create-dimension-rule-builder-from-existing
@@ -13074,7 +13030,6 @@
          create-explicit-domain-data-rule
          create-float-property
          create-float-property-builder
-         create-folder-with-item-type
          create-function-block
          create-function-block-type-builder
          create-function-property
@@ -13083,7 +13038,6 @@
          create-instance
          create-int-property
          create-int-property-builder
-         create-interface-id-search-filter
          create-io-folder
          create-json-config-provider
          create-json-file-authentication-provider
@@ -13095,7 +13049,6 @@
          create-list-dimension-rule
          create-list-property
          create-list-property-builder
-         create-list-with-element-type
          create-local-id-search-filter
          create-logarithmic-dimension-rule
          create-malloc-allocator
@@ -13695,7 +13648,6 @@
          push-front
          quantity
          query
-         query-interface
          range
          range-interface-id
          raw-data

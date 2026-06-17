@@ -219,12 +219,28 @@ def parameter_mode(function: dict, parameter: dict) -> str:
 def build_functions(records: list[dict], types: dict[str, dict]) -> tuple[list[dict], list[tuple[str, str]]]:
     functions = []
     skipped = []
+    def by_value_struct(type_spec: dict) -> str | None:
+        name = type_spec["name"]
+        if type_spec.get("pointer_depth", 0) == 0 and name in types and types[name]["kind"] == "struct":
+            return name
+        return None
+
     for record in sorted((record for record in records if record["kind"] == "function"), key=lambda item: item["name"]):
         return_type = record["return_type"]
         base_type = return_type["name"]
         pointer_depth = return_type.get("pointer_depth", 0)
-        if base_type in types and types[base_type]["kind"] == "struct" and pointer_depth == 0:
-            skipped.append((record["name"], f"by-value struct parameters are not supported yet ({base_type})"))
+        # Skip functions that pass or return a struct by value.  CFFI can only
+        # marshal by-value structs through cffi-libffi, which compiles a small C
+        # shim at load time and therefore breaks wherever no C compiler is
+        # installed (notably a stock Windows host).  These functions are the
+        # binding's only by-value-struct call sites, so dropping them lets us
+        # depend on plain cffi alone.
+        struct_by_value = by_value_struct(return_type) or next(
+            (name for argument in record.get("arguments", []) if (name := by_value_struct(argument["type"]))),
+            None,
+        )
+        if struct_by_value is not None:
+            skipped.append((record["name"], f"passes a struct by value, which would require cffi-libffi ({struct_by_value})"))
             continue
         try:
             parameters = []
