@@ -549,6 +549,8 @@ def constructor_lambda_lines(spec: dict) -> list[str]:
         lines.append(f"                                            ({p['lisp_name']} {defaults.get(p['lisp_name'], 'nil')} {p['lisp_name']}-p)")
     ignore_clause = " ".join(f"{p['lisp_name']}-p" for p in ignored)
     lines.append("                                       &allow-other-keys)")
+    construct_sentence = f"Constructs the instance via the openDAQ C function {constructor['c_name']}()."
+    lines.extend(_string_literal_lines(_compose_doc_text(constructor, construct_sentence), "  "))
     lines.append(f"  (declare (ignore pointer{(' ' + ignore_clause) if ignore_clause else ''}))")
 
     call_body = emit_coerced_call(
@@ -740,7 +742,128 @@ def _emit_call_body(spec: dict, parameter_names: tuple[str, ...]) -> list[str]:
     return _emit_manual_call(function, argument_map)
 
 
-def _emit_plain_function(spec: dict) -> list[str]:
+def generic_doc_key(spec: dict) -> str | None:
+    """Dedup/aggregation key for the CLOS generic a method spec contributes to.
+
+    Readers and (plain) methods share the generic named by SPEC["name"]; writers
+    install a `(setf name)` generic, a distinct object from the same-named reader.
+    Specs that do not dispatch on a receiver (free factory/static functions) emit a
+    DEFUN rather than a generic, so they have no key.
+    """
+    if not uses_instance_receiver(spec["function"]):
+        return None
+    if spec["kind"] == "writer":
+        return f"(setf {spec['name']})"
+    return spec["name"]
+
+
+def build_generic_docs(methods: list[dict]) -> dict[str, tuple[tuple[str, dict], ...]]:
+    """Map each generic's key to the (specializer, function) of its every method.
+
+    A single generic frequently fronts several C functions: the same operation is
+    declared on multiple interfaces (so each class's method calls its own daqX_*),
+    and the UNIFY_OPTIONAL generics deliberately fold C functions with incongruent
+    arities behind one &optional lambda list.  Keeping every backing function lets
+    the defgeneric docstring reuse each one's own openDAQ doc comment (and name the
+    C function) instead of describing only the first one encountered.
+    """
+    docs: dict[str, list[tuple[str, dict]]] = {}
+    for spec in methods:
+        if spec["kind"] not in {"reader", "method", "writer"}:
+            continue
+        key = generic_doc_key(spec)
+        if key is None:
+            continue
+        docs.setdefault(key, []).append((spec["specializer"], spec["function"]))
+    return {key: tuple(entries) for key, entries in docs.items()}
+
+
+def _escape_lisp_string(text: str) -> str:
+    return text.replace("\\", "\\\\").replace('"', '\\"')
+
+
+def clean_doxygen(raw: str) -> str:
+    """Lightly tidy a raw openDAQ doxygen comment for use as a Lisp docstring.
+
+    The text is reused verbatim except for dropping the leading `@brief ` marker
+    (pure doxygen markup, not prose); every other tag/line is left untouched.
+    """
+    text = raw.strip()
+    return re.sub(r"^@brief\s+", "", text).strip()
+
+
+def _doc_brief(function: dict) -> str:
+    cleaned = clean_doxygen(function.get("docstring", ""))
+    return cleaned.split("\n", 1)[0].strip() if cleaned else ""
+
+
+def _c_call_sentence(function: dict) -> str:
+    return f"Calls the openDAQ C function {function['c_name']}()."
+
+
+def _compose_doc_text(function: dict, sentence: str | None = None) -> str:
+    """openDAQ doc comment for FUNCTION followed by the C call it makes.
+
+    SENTENCE overrides the trailing "Calls ..." line (constructors phrase it as a
+    construction).  Functions with no doc comment get just the C-call sentence.
+    """
+    cleaned = clean_doxygen(function.get("docstring", ""))
+    if sentence is None:
+        sentence = _c_call_sentence(function)
+    return f"{cleaned}\n\n{sentence}" if cleaned else sentence
+
+
+def _string_literal_lines(text: str, indent: str) -> list[str]:
+    """Render TEXT as a (possibly multi-line) Lisp string literal.
+
+    Continuation lines are emitted flush-left so the docstring's own content keeps
+    its formatting rather than inheriting the source indentation.
+    """
+    parts = _escape_lisp_string(text).split("\n")
+    if len(parts) == 1:
+        return [f'{indent}"{parts[0]}"']
+    return [f'{indent}"{parts[0]}', *parts[1:-1], f'{parts[-1]}"']
+
+
+def _docstring_body_lines(function: dict, indent: str = "  ") -> list[str]:
+    return _string_literal_lines(_compose_doc_text(function), indent)
+
+
+def _generic_lines(header: str, entries: tuple[tuple[str, dict], ...]) -> list[str]:
+    """Render a defgeneric (opened by HEADER) with a :documentation string drawn
+    from the openDAQ doc comments of the C functions it dispatches to.
+
+    A single backing function reuses its full doc comment (plus the C-call line).
+    An "overloaded" generic -- several specializers, or a UNIFY_OPTIONAL group with
+    incompatible arities -- lists each dispatching class beside the C function it
+    calls and that function's brief, so every backing form is accounted for.
+    """
+    seen: set[tuple[str, str]] = set()
+    unique: list[tuple[str, dict]] = []
+    for specializer, function in entries:
+        marker = (specializer, function["c_name"])
+        if marker not in seen:
+            seen.add(marker)
+            unique.append((specializer, function))
+
+    if len(unique) == 1:
+        text = _compose_doc_text(unique[0][1])
+    else:
+        blocks = []
+        for specializer, function in unique:
+            block = f"{specializer} => {function['c_name']}()"
+            brief = _doc_brief(function)
+            if brief:
+                block += f"\n    {brief}"
+            blocks.append(block)
+        text = "\n\n".join(blocks)
+
+    lines = _string_literal_lines(text, "  (:documentation ")
+    lines[-1] += "))"
+    return [header, *lines]
+
+
+def _emit_plain_function(spec: dict) -> tuple[str | None, list[str], list[str]]:
     function = spec["function"]
     params = method_parameters(function)
     tail = lambda_list(params, spec.get("optional_defaults", ()))
@@ -750,10 +873,10 @@ def _emit_plain_function(spec: dict) -> list[str]:
         indent="  ",
     )
     header = f"(defun {spec['name']} ({tail})" if tail else f"(defun {spec['name']} ()"
-    return [header, *body, ")", ""]
+    return None, [], [header, *_docstring_body_lines(function), *body, ")", ""]
 
 
-def _emit_unified_method(spec: dict) -> list[str]:
+def _emit_unified_method(spec: dict, generic_docs: dict[str, tuple[tuple[str, str], ...]]) -> tuple[str, list[str], list[str]]:
     """Emit one member of a UNIFY_OPTIONAL generic (see _unify_method_group).
 
     The generic's lambda list is (object &optional <union args>); every method
@@ -776,9 +899,11 @@ def _emit_unified_method(spec: dict) -> list[str]:
         for name, kind in zip(union_names, classification))
     method_tail = f"((object {spec['specializer']}) &optional {method_optionals})"
 
+    generic_lines = _generic_lines(
+        f"(defgeneric {spec['name']} (object {generic_tail})", generic_docs[spec["name"]])
     lines = [
-        f"(defgeneric {spec['name']} (object {generic_tail}))",
         f"(defmethod {spec['name']} {method_tail}",
+        *_docstring_body_lines(function),
     ]
 
     padding = [name for name, kind in zip(union_names, classification) if kind == "padding"]
@@ -805,15 +930,15 @@ def _emit_unified_method(spec: dict) -> list[str]:
     )
     lines.extend(body)
     lines.extend([")", ""])
-    return lines
+    return spec["name"], generic_lines, lines
 
 
-def _emit_instance_method(spec: dict) -> list[str]:
+def _emit_instance_method(spec: dict, generic_docs: dict[str, tuple[tuple[str, str], ...]]) -> tuple[str | None, list[str], list[str]]:
     if not uses_instance_receiver(spec["function"]):
         return _emit_plain_function(spec)
 
     if spec.get("unify") is not None:
-        return _emit_unified_method(spec)
+        return _emit_unified_method(spec, generic_docs)
 
     function = spec["function"]
     params = method_parameters(function)
@@ -821,9 +946,12 @@ def _emit_instance_method(spec: dict) -> list[str]:
     generic_tail = lambda_list(params, spec.get("optional_defaults", ()), with_defaults=False)
     method_tail = f"((object {spec['specializer']}){(' ' + tail) if tail else ''})"
 
+    generic_lines = _generic_lines(
+        f"(defgeneric {spec['name']} (object{(' ' + generic_tail) if generic_tail else ''})",
+        generic_docs[spec["name"]])
     lines = [
-        f"(defgeneric {spec['name']} (object{(' ' + generic_tail) if generic_tail else ''}))",
         f"(defmethod {spec['name']} {method_tail}",
+        *_docstring_body_lines(function),
     ]
     body = emit_coerced_call(
         params,
@@ -832,10 +960,10 @@ def _emit_instance_method(spec: dict) -> list[str]:
     )
     lines.extend(body)
     lines.extend([")", ""])
-    return lines
+    return spec["name"], generic_lines, lines
 
 
-def _emit_writer(spec: dict) -> list[str]:
+def _emit_writer(spec: dict, generic_docs: dict[str, tuple[tuple[str, str], ...]]) -> tuple[str | None, list[str], list[str]]:
     if not uses_instance_receiver(spec["function"]):
         return _emit_plain_function(spec)
 
@@ -850,9 +978,12 @@ def _emit_writer(spec: dict) -> list[str]:
         f"(new-value (object {spec['specializer']})"
         + "".join(f" {p['lisp_name']}" for p in accessor_params) + ")"
     )
+    generic_lines = _generic_lines(
+        f"(defgeneric (setf {spec['name']}) ({setter_lambda_list(accessor_params, spec.get('optional_defaults', ()))})",
+        generic_docs[f"(setf {spec['name']})"])
     lines = [
-        f"(defgeneric (setf {spec['name']}) ({setter_lambda_list(accessor_params, spec.get('optional_defaults', ()))}))",
         f"(defmethod (setf {spec['name']}) {method_tail}",
+        *_docstring_body_lines(function),
     ]
 
     coerced_params = accessor_params + (
@@ -873,7 +1004,7 @@ def _emit_writer(spec: dict) -> list[str]:
     body = emit_coerced_call(coerced_params, _emit_call_body(spec, arg_names), indent="  ")
     lines.extend(body)
     lines.extend(["  new-value)", ""])
-    return lines
+    return f"(setf {spec['name']})", generic_lines, lines
 
 
 
@@ -902,23 +1033,22 @@ def render_output(include_dir: Path) -> str:
         lines.extend(emit_class_definition(spec))
         lines.extend(constructor_lambda_lines(spec))
 
+    generic_docs = build_generic_docs(methods)
+    emitted_generics: set[str] = set()
     for spec in methods:
         kind = spec["kind"]
         if kind == "writer":
-            lines.extend(_emit_writer(spec))
+            generic_key, generic_lines, method_lines = _emit_writer(spec, generic_docs)
         elif kind in ("reader", "method"):
-            lines.extend(_emit_instance_method(spec))
-
-    seen_generics: set[str] = set()
-    deduped: list[str] = []
-    for line in lines:
-        if line.startswith("(defgeneric "):
-            sig = line.split(")")[0]
-            if sig in seen_generics:
-                continue
-            seen_generics.add(sig)
-        deduped.append(line)
-    lines = deduped
+            generic_key, generic_lines, method_lines = _emit_instance_method(spec, generic_docs)
+        else:
+            continue
+        # The defgeneric is shared by every method on the generic; emit it once (with
+        # its aggregated docstring) the first time the generic is seen.
+        if generic_key is not None and generic_key not in emitted_generics:
+            emitted_generics.add(generic_key)
+            lines.extend(generic_lines)
+        lines.extend(method_lines)
 
     lines.append("(export '(")
     for symbol in exports:

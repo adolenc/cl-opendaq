@@ -272,6 +272,7 @@ def build_functions(records: list[dict], types: dict[str, dict]) -> tuple[list[d
                     "public_lisp_name": c_function_to_public_lisp(record["name"]),
                     "return_spec": resolve_cffi_type(base_type, pointer_depth, types),
                     "parameters": tuple(parameters),
+                    "docstring": record.get("docstring", ""),
                 }
             )
         except ValueError as exc:
