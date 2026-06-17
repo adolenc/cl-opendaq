@@ -76,6 +76,23 @@
     (is (equal '(1/4 3/8) (daq:as-list-of list 'daq:daq-ratio))
         "daqRatios should unbox into native Lisp ratios via AS-LIST-OF.")))
 
+(test high-level-coretypes-value-of
+  ;; VALUE-OF reads a Lisp value out of a boxed object: from a typed wrapper its
+  ;; class is enough, while a generic base-object needs the expected type.
+  (is (= 42 (daq:value-of (make-instance 'daq:daq-integer :value 42)))
+      "value-of should read a daq-integer wrapper as an integer.")
+  (is (= 1.5d0 (daq:value-of (make-instance 'daq:daq-float :value 1.5d0)))
+      "value-of should read a daq-float wrapper as a float.")
+  (is (null (daq:value-of (make-instance 'daq:daq-boolean :value nil)))
+      "value-of should read a false daq-boolean as NIL.")
+  (is (= 1/2 (daq:value-of (make-instance 'daq:daq-ratio :numerator 1 :denominator 2)))
+      "value-of should read a daq-ratio wrapper as a Lisp ratio.")
+  (let ((boxed-string (daq:wrap-base-object (opendaq.low-level:make-daq-string "hello"))))
+    (is (string= "hello" (daq:value-of boxed-string 'daq:daq-string-object))
+        "value-of should read a generic base-object as a string given the type."))
+  (signals error (daq:value-of (make-instance 'daq:daq-integer :value 1) 'daq:signal)
+    "value-of should reject a non-primitive target type."))
+
 (test high-level-coretypes-collections
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list 1)
@@ -152,6 +169,48 @@
     (daq:handle-event handler sender event-args)
     (is (not (null *high-level-coretypes-event-called*))
         "High-level event handlers should invoke the supplied callback.")))
+
+(test high-level-coretypes-event-handler-from-function
+  ;; A plain Lisp function can be passed straight to ADD-HANDLER (no manual
+  ;; cffi:defcallback, no ref releasing): SENDER and ARGS arrive wrapped and their
+  ;; references are handled by GC.
+  (let* ((event (make-instance 'daq:event))
+         (captured (list nil))
+         (handler (daq:add-handler event
+                                   (lambda (sender args)
+                                     (declare (ignore sender))
+                                     (setf (first captured)
+                                           (daq:event-name (daq:as args 'daq:event-args))))))
+         (sender (daq:wrap-base-object (opendaq.low-level:base-object/create)))
+         (event-args (make-instance 'daq:event-args :event-id 42 :event-name "fn_event")))
+    (is (typep handler 'daq:event-handler)
+        "add-handler with a function should return the created event-handler.")
+    (is (= 1 (daq:subscriber-count event))
+        "add-handler with a function should subscribe it like any other handler.")
+    (daq:handle-event handler sender event-args)
+    (is (string= "fn_event" (first captured))
+        "A function passed to add-handler should run with the wrapped event args.")))
+
+(test high-level-coretypes-event-handler-routing
+  ;; Distinct function handlers must get distinct trampolines that route to their
+  ;; own closures, and a slot freed by remove-handler must be reusable.
+  (let* ((event (make-instance 'daq:event))
+         (a nil) (b nil)
+         (handler-a (daq:add-handler event (lambda (s args) (declare (ignore s args)) (setf a t))))
+         (sender (daq:wrap-base-object (opendaq.low-level:base-object/create)))
+         (event-args (make-instance 'daq:event-args :event-id 1 :event-name "e")))
+    (daq:add-handler event (lambda (s args) (declare (ignore s args)) (setf b t)))
+    (is (= 2 (daq:subscriber-count event))
+        "Two function handlers should both subscribe.")
+    (daq:handle-event handler-a sender event-args)
+    (is (and a (not b))
+        "Each function handler should route to its own closure.")
+    (daq:remove-handler event handler-a)
+    (setf a nil)
+    (let ((handler-c (daq:add-handler event (lambda (s args) (declare (ignore s args)) (setf a 42)))))
+      (daq:handle-event handler-c sender event-args)
+      (is (eql 42 a)
+          "A handler subscribed after a removal (reusing a freed slot) should still work."))))
 
 (defun %probe-ratio-finalization ()
   (eval

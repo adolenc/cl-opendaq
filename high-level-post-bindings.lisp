@@ -453,3 +453,88 @@ SOURCE's domain metadata each time, e.g.:
 
   (map 'vector (domain-time-converter source) domain-ticks)"
   (funcall (domain-time-converter source) tick))
+
+;;; ---------------------------------------------------------------------------
+;;; Event handlers from Lisp functions
+;;;
+;;; openDAQ's event callback (daqEventCall) is `void (BaseObject* sender,
+;;; BaseObject* args)' with no user-data argument, and portable CFFI cannot turn
+;;; a Lisp closure into a C function pointer.  So each subscribed function needs
+;;; its own C trampoline that knows which function to call.  We COMPILE one on
+;;; demand -- a CFFI:DEFCALLBACK baked with a slot index that routes to the
+;;; stored function -- and return its slot to a free list on REMOVE-HANDLER for
+;;; reuse.  There is thus no fixed limit; a stable set of handlers settles on a
+;;; stable set of trampolines (one per concurrently-live handler at the peak).
+;;;
+;;; Refcounts take care of themselves: the C binding add-refs sender and args
+;;; before calling us (handing the callback ownership of one reference to each),
+;;; and wrapping them as managed objects lets the GC finalizers release exactly
+;;; those references -- so a handler function never has to release anything.
+;;; ---------------------------------------------------------------------------
+
+(defvar *event-callback-functions* (make-array 16 :adjustable t :fill-pointer 0)
+  "Slot vector: entry I holds the Lisp function invoked by trampoline I, or NIL when free.")
+
+(defvar *event-callback-pointers* (make-array 16 :adjustable t :fill-pointer 0)
+  "Foreign pointer of the trampoline compiled for each slot, indexed by slot.")
+
+(defvar *free-event-callback-slots* '()
+  "Indices of slots whose handler was removed and whose trampoline can be reused.")
+
+(defvar *event-handler-callback-indices*
+  (trivial-garbage:make-weak-hash-table :weakness :key :test 'eq)
+  "Maps a function-backed EVENT-HANDLER to its slot, so REMOVE-HANDLER can free it.")
+
+(defun %dispatch-event-callback (index sender args)
+  (let ((function (aref *event-callback-functions* index)))
+    (when function
+      (funcall function (wrap-base-object sender) (wrap-base-object args)))))
+
+(defun %make-event-trampoline (index)
+  "Compile a fresh daqEventCall C trampoline routing to slot INDEX.  Built with
+COMPILE (rather than a fixed pre-built pool) so any number of distinct handlers
+is supported on any CFFI-capable Lisp."
+  (let ((name (gensym "EVENT-CALLBACK")))
+    (funcall (compile nil `(lambda ()
+                             (cffi:defcallback ,name :void ((sender :pointer) (args :pointer))
+                               (%dispatch-event-callback ,index sender args)))))
+    (cffi:get-callback name)))
+
+(defun %allocate-event-callback (function)
+  "Reserve a trampoline slot for FUNCTION -- reusing a freed slot or growing the
+table by compiling a new trampoline -- and return its foreign pointer and index."
+  (let ((index (or (pop *free-event-callback-slots*)
+                   (let ((new-index (fill-pointer *event-callback-functions*)))
+                     (vector-push-extend nil *event-callback-functions*)
+                     (vector-push-extend (%make-event-trampoline new-index) *event-callback-pointers*)
+                     new-index))))
+    (setf (aref *event-callback-functions* index) function)
+    (cl:values (aref *event-callback-pointers* index) index)))
+
+(defmethod initialize-instance :around ((handler event-handler) &rest initargs &key function &allow-other-keys)
+  "Let :FUNCTION be a Lisp function of (SENDER ARGS), called when the event fires,
+as an alternative to the raw :CALL foreign pointer.  SENDER and ARGS arrive as
+managed objects whose references the GC releases, so the function need not clean
+anything up; cast ARGS with AS for typed event args (e.g. to CORE-EVENT-ARGS)."
+  (if function
+      (multiple-value-bind (pointer index) (%allocate-event-callback function)
+        (let ((instance (apply #'call-next-method handler :call pointer initargs)))
+          (setf (gethash instance *event-handler-callback-indices*) index)
+          instance))
+      (call-next-method)))
+
+(defmethod add-handler ((object event) (handler function))
+  "Subscribe a Lisp function directly: HANDLER is wrapped in an EVENT-HANDLER and
+called with the wrapped SENDER and ARGS each time the event fires.  Returns the
+created EVENT-HANDLER, which may be passed to REMOVE-HANDLER to unsubscribe."
+  (let ((event-handler (make-instance 'event-handler :function handler)))
+    (add-handler object event-handler)
+    event-handler))
+
+(defmethod remove-handler :after ((object event) (handler event-handler))
+  "Free HANDLER's trampoline slot for reuse once it is unsubscribed."
+  (let ((index (gethash handler *event-handler-callback-indices*)))
+    (when index
+      (setf (aref *event-callback-functions* index) nil)
+      (push index *free-event-callback-slots*)
+      (remhash handler *event-handler-callback-indices*))))

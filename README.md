@@ -76,6 +76,7 @@ The high-level API insulates you from openDAQ's C types. Arguments accept plain 
 - `(as-list obj-list)` — object-list to plain Lisp list of base-object wrappers
 - `(as-list-of obj-list 'device-info)` — same, with each element cast
 - `(as-hashtable-of dict 'string 'device-info)` — dict to hash-table
+- `(value-of obj)` / `(value-of obj 'daq-string-object)` — unbox a boxed primitive (number, string, bool, ratio, …) to its Lisp value; the type can be omitted for a typed wrapper but is needed for a generic base-object
 - `(raw-pointer obj)` — get the underlying C pointer from any wrapper
 - `(release obj)` — manually drop the reference (normally handled by GC finalizers)
 - `(domain-tick->timestamp source tick)` — convert a domain tick to a `local-time` timestamp (`source` is a signal, data descriptor, or multi reader; `(domain-time-converter source)` returns a reusable per-tick closure)
@@ -94,6 +95,19 @@ Some things, though, are not distinct openDAQ interfaces but *variants* of one t
 ```
 
 The same applies to property builders, data/dimension rules, search filters, scalings, logger sinks, and similar factory-built types. (`apropos` for `create-` lists them.)
+
+### Events
+
+openDAQ events (core/structure events, property change notifications, …) are subscribed to by passing a Lisp function straight to `add-handler`; it is called with the sender and event args (already wrapped) each time the event fires, and reference counting is handled for you:
+
+```lisp
+(daq:add-handler (daq:on-core-event (daq:context instance))
+                 (lambda (sender args)
+                   (let ((event (daq:as args 'daq:core-event-args)))
+                     (format t "~A~%" (daq:event-name event)))))
+```
+
+`add-handler` returns the created `event-handler`, which can be passed to `remove-handler` to unsubscribe. See `examples/core-events.lisp`.
 
 ## Development
 
