@@ -46,90 +46,58 @@
 (defun %system-native-directory ()
   (ignore-errors (asdf:system-relative-pathname "opendaq" "bin/")))
 
-(defun %current-platform-os ()
-  (let ((value (string-downcase (software-type))))
-    (cond
-      ((search "linux" value) "linux")
-      ((or (search "darwin" value)
-           (search "mac" value))
-       "darwin")
-      ((search "win" value) "windows")
-      (t
-       (error "Unsupported operating system for openDAQ native libraries: ~A"
-              (software-type))))))
-
-(defun %current-platform-architecture ()
-  (let ((value (string-downcase (machine-type))))
-    (cond
-      ((member value '("x86-64" "x86_64" "amd64") :test #'string=) "x64")
-      ((member value '("aarch64" "arm64") :test #'string=) "arm64")
-      ((or (string= value "x86")
-           (search "i386" value)
-           (search "i686" value))
-       "x86")
-      ((search "arm" value) "arm")
-      (t value))))
-
-(defun %current-platform-os-aliases ()
-  (let ((os (%current-platform-os)))
-    (cond
-      ((string= os "darwin") '("darwin" "macos"))
-      ((string= os "windows") '("windows" "win32"))
-      (t (list os)))))
-
-(defun %current-platform-directory-names ()
-  (let ((architecture (%current-platform-architecture)))
-    (remove-duplicates
-     (append (mapcar (lambda (os)
-                       (format nil "~A-~A" os architecture))
-                     (%current-platform-os-aliases))
-             (%current-platform-os-aliases))
-     :test #'string=)))
+(defun %current-platform-directory-name ()
+  "Name of the bin/ subdirectory holding this host's native libraries, e.g.
+\"linux-x64\".  The OS and architecture are selected from *FEATURES* at read
+time rather than sniffed from SOFTWARE-TYPE / MACHINE-TYPE strings."
+  (let ((os #+linux "linux"
+            #+darwin "darwin"
+            #+(or windows win32) "windows"
+            #-(or linux darwin windows win32)
+            (error "Unsupported OS for openDAQ native libraries: ~A"
+                   (software-type)))
+        (arch #+(or x86-64 x86_64 amd64) "x64"
+              #+(or arm64 aarch64) "arm64"
+              #-(or x86-64 x86_64 amd64 arm64 aarch64)
+              (error "Unsupported architecture for openDAQ native libraries: ~A"
+                     (machine-type))))
+    (format nil "~A-~A" os arch)))
 
 (defun %native-search-paths-for-root (root)
   (let ((directory (uiop:ensure-directory-pathname root)))
-    (append (mapcar (lambda (name)
-                      (merge-pathnames (format nil "~A/" name) directory))
-                    (%current-platform-directory-names))
-            (list directory))))
+    (list (merge-pathnames (format nil "~A/" (%current-platform-directory-name))
+                           directory)
+          directory)))
 
 (defun %candidate-native-directories-for-root (root)
   (remove nil
           (mapcar #'%directory-if-exists
                   (%native-search-paths-for-root root))))
 
+(defun %native-search-roots ()
+  (remove nil (list (%environment-native-directory)
+                    (%system-native-directory))))
+
 (defun %candidate-native-directories ()
   (remove-duplicates
-   (mapcan #'%candidate-native-directories-for-root
-           (remove nil
-                   (list (%environment-native-directory)
-                         (%system-native-directory))))
+   (mapcan #'%candidate-native-directories-for-root (%native-search-roots))
    :test #'equal
    :key #'namestring))
 
 (defun %configured-native-search-paths ()
   (remove-duplicates
-   (mapcan #'%native-search-paths-for-root
-           (remove nil
-                   (list (%environment-native-directory)
-                         (%system-native-directory))))
+   (mapcan #'%native-search-paths-for-root (%native-search-roots))
    :test #'equal
    :key #'namestring))
 
 (defun %shared-library-patterns (base-name)
-  (let ((os (%current-platform-os)))
-    (cond
-      ((string= os "linux")
-       (list (format nil "lib~A*.so" base-name)))
-      ((string= os "darwin")
-       (list (format nil "lib~A*.dylib" base-name)
-             (format nil "lib~A*.so" base-name)))
-      ((string= os "windows")
-       (list (format nil "~A*.dll" base-name)
-             (format nil "lib~A*.dll" base-name)))
-      (t
-       (error "Unsupported operating system for openDAQ native libraries: ~A"
-              os)))))
+  #+linux (list (format nil "lib~A*.so" base-name))
+  #+darwin (list (format nil "lib~A*.dylib" base-name)
+                 (format nil "lib~A*.so" base-name))
+  #+(or windows win32) (list (format nil "~A*.dll" base-name)
+                             (format nil "lib~A*.dll" base-name))
+  #-(or linux darwin windows win32)
+  (error "Unsupported OS for openDAQ native libraries: ~A" (software-type)))
 
 (defun %sort-pathnames (pathnames)
   (sort (copy-list pathnames) #'string< :key #'namestring))

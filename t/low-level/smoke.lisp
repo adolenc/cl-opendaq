@@ -79,7 +79,7 @@
 (test native-directory-prefers-platform-subdirectory
   (with-temporary-test-directory (root)
     (let* ((platform-directory-name
-             (first (opendaq.low-level::%current-platform-directory-names)))
+             (opendaq.low-level::%current-platform-directory-name))
            (platform-directory
              (merge-pathnames (format nil "~A/" platform-directory-name) root))
            (candidates nil))
@@ -96,7 +96,7 @@
 (test native-directory-honors-environment-override
   (with-temporary-test-directory (root)
     (let* ((platform-directory-name
-             (first (opendaq.low-level::%current-platform-directory-names)))
+             (opendaq.low-level::%current-platform-directory-name))
            (platform-directory
              (merge-pathnames (format nil "~A/" platform-directory-name) root))
            (previous (uiop:getenv opendaq.low-level::+native-directory-env-var+)))
