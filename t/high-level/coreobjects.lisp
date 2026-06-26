@@ -92,6 +92,20 @@
         (is (not (daq:has-property property-object "test_property"))
             "High-level property objects should remove properties through the generated API.")))))
 
+(test high-level-coreobjects-create-factories-plain-values
+  (let ((int-property (daq:create-int-property "test_property" 10 t))
+        (float-property (daq:create-float-property "test_float" 1.5d0 t))
+        (bool-property (daq:create-bool-property "test_bool" nil t))
+        (linear-rule (daq:create-linear-data-rule 2 0)))
+    (is (= 10 (%boxed-integer-value (daq:default-value int-property)))
+        "create-int-property should box a plain integer default value.")
+    (is (= 1.5d0 (daq:value-of (daq:default-value float-property) 'daq:daq-float))
+        "create-float-property should box a plain float default value.")
+    (is (not (%boxed-boolean-value (daq:default-value bool-property)))
+        "create-bool-property should box a plain boolean default value.")
+    (is (typep linear-rule 'daq:data-rule)
+        "create-linear-data-rule should accept plain numeric arguments.")))
+
 (test high-level-coreobjects-eval-coercer-validator
   (let* ((property-object (make-instance 'daq:property-object))
          (default-value (make-instance 'daq:daq-integer :value 10))

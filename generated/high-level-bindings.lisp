@@ -1442,7 +1442,7 @@ Constructs the instance via the openDAQ C function daqAuthenticationProvider_cre
   (when (and (not pointer-p) event-packet-p valid-p offset-p read-samples-p)
   (with-daq-boxed-values ((coerced-event-packet event-packet :managed-pointer)
                           (coerced-valid valid :daq-bool)
-                          (coerced-offset offset :managed-pointer)
+                          (coerced-offset offset :daq-base-object)
                           (coerced-read-samples read-samples nil))
     (%adopt-pointer object (opendaq.low-level:block-reader-status/create-block-reader-status coerced-event-packet coerced-valid coerced-offset coerced-read-samples)))
     ))
@@ -1987,7 +1987,7 @@ Constructs the instance via the openDAQ C function daqDataPacket_createDataPacke
   (when (and (not pointer-p) descriptor-p sample-count-p offset-p)
   (with-daq-boxed-values ((coerced-descriptor descriptor :managed-pointer)
                           (coerced-sample-count sample-count nil)
-                          (coerced-offset offset :managed-pointer))
+                          (coerced-offset offset :daq-base-object))
     (%adopt-pointer object (opendaq.low-level:data-packet/create-data-packet coerced-descriptor coerced-sample-count coerced-offset)))
     ))
 
@@ -2098,7 +2098,7 @@ Constructs the instance via the openDAQ C function daqDevice_createClient()."
   "Constructs the instance via the openDAQ C function daqDeviceDomain_createDeviceDomain()."
   (declare (ignore pointer))
   (when (and (not pointer-p) tick-resolution-p origin-p unit-p)
-  (with-daq-boxed-values ((coerced-tick-resolution tick-resolution :managed-pointer)
+  (with-daq-boxed-values ((coerced-tick-resolution tick-resolution :daq-base-object)
                           (coerced-origin origin :daq-string)
                           (coerced-unit unit :managed-pointer))
     (%adopt-pointer object (opendaq.low-level:device-domain/create-device-domain coerced-tick-resolution coerced-origin coerced-unit)))
@@ -2965,7 +2965,7 @@ Constructs the instance via the openDAQ C function daqLogFileInfoBuilder_createL
   (with-daq-boxed-values ((coerced-main-descriptor main-descriptor :managed-pointer)
                           (coerced-event-packets event-packets :managed-pointer)
                           (coerced-valid valid :daq-bool)
-                          (coerced-offset offset :managed-pointer))
+                          (coerced-offset offset :daq-base-object))
     (%adopt-pointer object (opendaq.low-level:multi-reader-status/create-multi-reader-status coerced-main-descriptor coerced-event-packets coerced-valid coerced-offset)))
     ))
 
@@ -3293,8 +3293,8 @@ Constructs the instance via the openDAQ C function daqPropertyObjectClassBuilder
 Constructs the instance via the openDAQ C function daqRange_createRange()."
   (declare (ignore pointer))
   (when (and (not pointer-p) low-value-p high-value-p)
-  (with-daq-boxed-values ((coerced-low-value low-value :managed-pointer)
-                          (coerced-high-value high-value :managed-pointer))
+  (with-daq-boxed-values ((coerced-low-value low-value :daq-base-object)
+                          (coerced-high-value high-value :daq-base-object))
     (%adopt-pointer object (opendaq.low-level:range/create-range coerced-low-value coerced-high-value)))
     ))
 
@@ -3329,7 +3329,7 @@ Constructs the instance via the openDAQ C function daqRange_createRange()."
   (when (and (not pointer-p) event-packet-p valid-p offset-p)
   (with-daq-boxed-values ((coerced-event-packet event-packet :managed-pointer)
                           (coerced-valid valid :daq-bool)
-                          (coerced-offset offset :managed-pointer))
+                          (coerced-offset offset :daq-base-object))
     (%adopt-pointer object (opendaq.low-level:reader-status/create-reader-status coerced-event-packet coerced-valid coerced-offset)))
     ))
 
@@ -3916,7 +3916,7 @@ Constructs the instance via the openDAQ C function daqStreamingType_createStream
   (when (and (not pointer-p) event-packet-p valid-p offset-p sufficient-history-p)
   (with-daq-boxed-values ((coerced-event-packet event-packet :managed-pointer)
                           (coerced-valid valid :daq-bool)
-                          (coerced-offset offset :managed-pointer)
+                          (coerced-offset offset :daq-base-object)
                           (coerced-sufficient-history sufficient-history :daq-bool))
     (%adopt-pointer object (opendaq.low-level:tail-reader-status/create-tail-reader-status coerced-event-packet coerced-valid coerced-offset coerced-sufficient-history)))
     ))
@@ -8188,7 +8188,7 @@ Calls the openDAQ C function daqDataDescriptorBuilder_setTickResolution()."))
 @param tickResolution The Resolution.
 
 Calls the openDAQ C function daqDataDescriptorBuilder_setTickResolution()."
-  (with-daq-boxed-values ((coerced-new-value new-value :managed-pointer))
+  (with-daq-boxed-values ((coerced-new-value new-value :daq-base-object))
     (opendaq.low-level:data-descriptor-builder/set-tick-resolution (%require-live-pointer object) coerced-new-value))
   new-value)
 
@@ -8408,7 +8408,7 @@ Calls the openDAQ C function daqDataPacket_createDataPacketWithDomain()."
   (with-daq-boxed-values ((coerced-domain-packet domain-packet :managed-pointer)
                           (coerced-descriptor descriptor :managed-pointer)
                           (coerced-sample-count sample-count nil)
-                          (coerced-offset offset :managed-pointer))
+                          (coerced-offset offset :daq-base-object))
     (wrap (opendaq.low-level:data-packet/create-data-packet-with-domain coerced-domain-packet coerced-descriptor coerced-sample-count coerced-offset) 'data-packet))
 )
 
@@ -8429,7 +8429,7 @@ Calls the openDAQ C function daqDataPacket_createDataPacketWithExternalMemory().
   (with-daq-boxed-values ((coerced-domain-packet domain-packet :managed-pointer)
                           (coerced-descriptor descriptor :managed-pointer)
                           (coerced-sample-count sample-count nil)
-                          (coerced-offset offset :managed-pointer)
+                          (coerced-offset offset :daq-base-object)
                           (coerced-external-memory external-memory nil)
                           (coerced-deleter deleter :managed-pointer)
                           (coerced-buffer-size buffer-size nil))
@@ -8790,8 +8790,8 @@ Most often used for domain signals to specify estimates on how close together/fa
 subsequent samples might be.
 
 Calls the openDAQ C function daqDataRule_createExplicitDomainDataRule()."
-  (with-daq-boxed-values ((coerced-min-expected-delta min-expected-delta :managed-pointer)
-                          (coerced-max-expected-delta max-expected-delta :managed-pointer))
+  (with-daq-boxed-values ((coerced-min-expected-delta min-expected-delta :daq-base-object)
+                          (coerced-max-expected-delta max-expected-delta :daq-base-object))
     (wrap (opendaq.low-level:data-rule/create-explicit-domain-data-rule coerced-min-expected-delta coerced-max-expected-delta) 'data-rule))
 )
 
@@ -8803,8 +8803,8 @@ The scale and offset are stored within the `parameters` member of the Rule objec
 with the scale being at the first position of the list, and the offset at the second.
 
 Calls the openDAQ C function daqDataRule_createLinearDataRule()."
-  (with-daq-boxed-values ((coerced-delta delta :managed-pointer)
-                          (coerced-start start :managed-pointer))
+  (with-daq-boxed-values ((coerced-delta delta :daq-base-object)
+                          (coerced-start start :daq-base-object))
     (wrap (opendaq.low-level:data-rule/create-linear-data-rule coerced-delta coerced-start) 'data-rule))
 )
 
@@ -8923,7 +8923,7 @@ Calls the openDAQ C function daqDeleter_deleteMemory()."
 
 (defun create-device-domain-with-reference-domain-info (tick-resolution origin unit reference-domain-info)
   "Calls the openDAQ C function daqDeviceDomain_createDeviceDomainWithReferenceDomainInfo()."
-  (with-daq-boxed-values ((coerced-tick-resolution tick-resolution :managed-pointer)
+  (with-daq-boxed-values ((coerced-tick-resolution tick-resolution :daq-base-object)
                           (coerced-origin origin :daq-string)
                           (coerced-unit unit :managed-pointer)
                           (coerced-reference-domain-info reference-domain-info :managed-pointer))
@@ -11248,8 +11248,8 @@ The scale and offset are stored within the `parameters` member of the Rule objec
 with the scale being at the first position of the list, and the offset at the second.
 
 Calls the openDAQ C function daqDimensionRule_createLinearDimensionRule()."
-  (with-daq-boxed-values ((coerced-delta delta :managed-pointer)
-                          (coerced-start start :managed-pointer)
+  (with-daq-boxed-values ((coerced-delta delta :daq-base-object)
+                          (coerced-start start :daq-base-object)
                           (coerced-size size nil))
     (wrap (opendaq.low-level:dimension-rule/create-linear-dimension-rule coerced-delta coerced-start coerced-size) 'dimension-rule))
 )
@@ -11272,9 +11272,9 @@ Calls the openDAQ C function daqDimensionRule_createListDimensionRule()."
 @param size The size of the dimension described by the rule.
 
 Calls the openDAQ C function daqDimensionRule_createLogarithmicDimensionRule()."
-  (with-daq-boxed-values ((coerced-delta delta :managed-pointer)
-                          (coerced-start start :managed-pointer)
-                          (coerced-base base :managed-pointer)
+  (with-daq-boxed-values ((coerced-delta delta :daq-base-object)
+                          (coerced-start start :daq-base-object)
+                          (coerced-base base :daq-base-object)
                           (coerced-size size nil))
     (wrap (opendaq.low-level:dimension-rule/create-logarithmic-dimension-rule coerced-delta coerced-start coerced-base coerced-size) 'dimension-rule))
 )
@@ -11516,7 +11516,7 @@ Calls the openDAQ C function daqEnumerationType_getEnumeratorNames()."
 (defun create-enumeration-with-int-value (name value type-manager)
   "Calls the openDAQ C function daqEnumeration_createEnumerationWithIntValue()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-value value :managed-pointer)
+                          (coerced-value value :daq-base-object)
                           (coerced-type-manager type-manager :managed-pointer))
     (wrap (opendaq.low-level:enumeration/create-enumeration-with-int-value coerced-name coerced-value coerced-type-manager) 'enumeration))
 )
@@ -11524,7 +11524,7 @@ Calls the openDAQ C function daqEnumerationType_getEnumeratorNames()."
 (defun create-enumeration-with-int-value-and-type (type value)
   "Calls the openDAQ C function daqEnumeration_createEnumerationWithIntValueAndType()."
   (with-daq-boxed-values ((coerced-type type :managed-pointer)
-                          (coerced-value value :managed-pointer))
+                          (coerced-value value :daq-base-object))
     (wrap (opendaq.low-level:enumeration/create-enumeration-with-int-value-and-type coerced-type coerced-value) 'enumeration))
 )
 
@@ -11802,7 +11802,7 @@ The ID of the packet is \"IMPLICIT_DOMAIN_GAP_DETECTED\". Its parameters diction
 the size of the gap. The size can be negative, in which case it is an overlap of samples.
 
 Calls the openDAQ C function daqEventPacket_createImplicitDomainGapDetectedEventPacket()."
-  (with-daq-boxed-values ((coerced-diff diff :managed-pointer))
+  (with-daq-boxed-values ((coerced-diff diff :daq-base-object))
     (wrap (opendaq.low-level:event-packet/create-implicit-domain-gap-detected-event-packet coerced-diff) 'event-packet))
 )
 
@@ -15568,7 +15568,7 @@ Calls the openDAQ C function daqMultiReaderBuilder_setTickOffsetTolerance()."))
 @param offsetTolerance Ratio that define offset tolerance as a fraction of domain unit.
 
 Calls the openDAQ C function daqMultiReaderBuilder_setTickOffsetTolerance()."
-  (with-daq-boxed-values ((coerced-new-value new-value :managed-pointer))
+  (with-daq-boxed-values ((coerced-new-value new-value :daq-base-object))
     (opendaq.low-level:multi-reader-builder/set-tick-offset-tolerance (%require-live-pointer object) coerced-new-value))
   new-value)
 
@@ -16441,7 +16441,7 @@ The Property Value type is `ctBool`. Note that the defaultValue parameter can be
 
 Calls the openDAQ C function daqPropertyBuilder_createBoolPropertyBuilder()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer))
+                          (coerced-default-value default-value :daq-base-object))
     (wrap (opendaq.low-level:property-builder/create-bool-property-builder coerced-name coerced-default-value) 'property-builder))
 )
 
@@ -16481,7 +16481,7 @@ The Property Value type is `ctFloat`. Note that the defaultValue parameter can b
 
 Calls the openDAQ C function daqPropertyBuilder_createFloatPropertyBuilder()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer))
+                          (coerced-default-value default-value :daq-base-object))
     (wrap (opendaq.low-level:property-builder/create-float-property-builder coerced-name coerced-default-value) 'property-builder))
 )
 
@@ -16506,7 +16506,7 @@ The Property Value type is `ctInt`. Note that the defaultValue parameter can be 
 
 Calls the openDAQ C function daqPropertyBuilder_createIntPropertyBuilder()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer))
+                          (coerced-default-value default-value :daq-base-object))
     (wrap (opendaq.low-level:property-builder/create-int-property-builder coerced-name coerced-default-value) 'property-builder))
 )
 
@@ -16548,7 +16548,7 @@ TODO: defaultValue can be an EvalValue once ratios are supported.
 
 Calls the openDAQ C function daqPropertyBuilder_createRatioPropertyBuilder()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer))
+                          (coerced-default-value default-value :daq-base-object))
     (wrap (opendaq.low-level:property-builder/create-ratio-property-builder coerced-name coerced-default-value) 'property-builder))
 )
 
@@ -16573,7 +16573,7 @@ The Property Value type is `ctInt`.
 Calls the openDAQ C function daqPropertyBuilder_createSelectionPropertyBuilder()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-selection-values selection-values :managed-pointer)
-                          (coerced-default-value default-value :managed-pointer))
+                          (coerced-default-value default-value :daq-base-object))
     (wrap (opendaq.low-level:property-builder/create-selection-property-builder coerced-name coerced-selection-values coerced-default-value) 'property-builder))
 )
 
@@ -16587,7 +16587,7 @@ The Property Value type is `ctInt`. The key type of the Selection values diction
 Calls the openDAQ C function daqPropertyBuilder_createSparseSelectionPropertyBuilder()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-selection-values selection-values :managed-pointer)
-                          (coerced-default-value default-value :managed-pointer))
+                          (coerced-default-value default-value :daq-base-object))
     (wrap (opendaq.low-level:property-builder/create-sparse-selection-property-builder coerced-name coerced-selection-values coerced-default-value) 'property-builder))
 )
 
@@ -16985,7 +16985,7 @@ Calls the openDAQ C function daqPropertyBuilder_setMaxValue()."))
 @param max The Maximum value of the Property.
 
 Calls the openDAQ C function daqPropertyBuilder_setMaxValue()."
-  (with-daq-boxed-values ((coerced-new-value new-value :managed-pointer))
+  (with-daq-boxed-values ((coerced-new-value new-value :daq-base-object))
     (opendaq.low-level:property-builder/set-max-value (%require-live-pointer object) coerced-new-value))
   new-value)
 
@@ -16999,7 +16999,7 @@ Calls the openDAQ C function daqPropertyBuilder_setMinValue()."))
 @param min The Minimum value of the Property.
 
 Calls the openDAQ C function daqPropertyBuilder_setMinValue()."
-  (with-daq-boxed-values ((coerced-new-value new-value :managed-pointer))
+  (with-daq-boxed-values ((coerced-new-value new-value :daq-base-object))
     (opendaq.low-level:property-builder/set-min-value (%require-live-pointer object) coerced-new-value))
   new-value)
 
@@ -17080,7 +17080,7 @@ Calls the openDAQ C function daqPropertyBuilder_setReadOnly()."))
 Read-only Property values can still be modified by using the `PropertyObjectProtected` interface methods.
 
 Calls the openDAQ C function daqPropertyBuilder_setReadOnly()."
-  (with-daq-boxed-values ((coerced-new-value new-value :managed-pointer))
+  (with-daq-boxed-values ((coerced-new-value new-value :daq-base-object))
     (opendaq.low-level:property-builder/set-read-only (%require-live-pointer object) coerced-new-value))
   new-value)
 
@@ -17172,7 +17172,7 @@ Calls the openDAQ C function daqPropertyBuilder_setValueType()."
 @param visible True if the Property is visible; false otherwise.
 
 Calls the openDAQ C function daqPropertyBuilder_setVisible()."
-  (with-daq-boxed-values ((coerced-new-value new-value :managed-pointer))
+  (with-daq-boxed-values ((coerced-new-value new-value :daq-base-object))
     (opendaq.low-level:property-builder/set-visible (%require-live-pointer object) coerced-new-value))
   new-value)
 
@@ -18662,8 +18662,8 @@ The Property Value type is `ctBool`. Note that the defaultValue and visible para
 
 Calls the openDAQ C function daqProperty_createBoolProperty()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer)
-                          (coerced-visible visible :managed-pointer))
+                          (coerced-default-value default-value :daq-base-object)
+                          (coerced-visible visible :daq-base-object))
     (wrap (opendaq.low-level:property/create-bool-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
@@ -18681,7 +18681,7 @@ TODO: defaultValue can be an EvalValue once dictionaries are supported.
 Calls the openDAQ C function daqProperty_createDictProperty()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer)
-                          (coerced-visible visible :managed-pointer))
+                          (coerced-visible visible :daq-base-object))
     (wrap (opendaq.low-level:property/create-dict-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
@@ -18695,7 +18695,7 @@ The Property Value type is `ctEnumeration`.
 Calls the openDAQ C function daqProperty_createEnumerationProperty()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer)
-                          (coerced-visible visible :managed-pointer))
+                          (coerced-visible visible :daq-base-object))
     (wrap (opendaq.low-level:property/create-enumeration-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
@@ -18708,8 +18708,8 @@ The Property Value type is `ctFloat`. Note that the defaultValue and visible par
 
 Calls the openDAQ C function daqProperty_createFloatProperty()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer)
-                          (coerced-visible visible :managed-pointer))
+                          (coerced-default-value default-value :daq-base-object)
+                          (coerced-visible visible :daq-base-object))
     (wrap (opendaq.low-level:property/create-float-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
@@ -18724,7 +18724,7 @@ on the return type or not. Note that the visible parameter can be an EvalValue.
 Calls the openDAQ C function daqProperty_createFunctionProperty()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-callable-info callable-info :managed-pointer)
-                          (coerced-visible visible :managed-pointer))
+                          (coerced-visible visible :daq-base-object))
     (wrap (opendaq.low-level:property/create-function-property coerced-name coerced-callable-info coerced-visible) 'property))
 )
 
@@ -18737,8 +18737,8 @@ The Property Value type is `ctInt`. Note that the defaultValue and visible param
 
 Calls the openDAQ C function daqProperty_createIntProperty()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer)
-                          (coerced-visible visible :managed-pointer))
+                          (coerced-default-value default-value :daq-base-object)
+                          (coerced-visible visible :daq-base-object))
     (wrap (opendaq.low-level:property/create-int-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
@@ -18754,7 +18754,7 @@ The Property's Item type field will be set according to defaultValue list type.
 Calls the openDAQ C function daqProperty_createListProperty()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer)
-                          (coerced-visible visible :managed-pointer))
+                          (coerced-visible visible :daq-base-object))
     (wrap (opendaq.low-level:property/create-list-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
@@ -18783,8 +18783,8 @@ TODO: defaultValue can be an EvalValue once ratios are supported.
 
 Calls the openDAQ C function daqProperty_createRatioProperty()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer)
-                          (coerced-visible visible :managed-pointer))
+                          (coerced-default-value default-value :daq-base-object)
+                          (coerced-visible visible :daq-base-object))
     (wrap (opendaq.low-level:property/create-ratio-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
@@ -18810,8 +18810,8 @@ The Property Value type is `ctInt`.
 Calls the openDAQ C function daqProperty_createSelectionProperty()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-selection-values selection-values :managed-pointer)
-                          (coerced-default-value default-value :managed-pointer)
-                          (coerced-visible visible :managed-pointer))
+                          (coerced-default-value default-value :daq-base-object)
+                          (coerced-visible visible :daq-base-object))
     (wrap (opendaq.low-level:property/create-selection-property coerced-name coerced-selection-values coerced-default-value coerced-visible) 'property))
 )
 
@@ -18826,8 +18826,8 @@ The Property Value type is `ctInt`. The key type of the Selection values diction
 Calls the openDAQ C function daqProperty_createSparseSelectionProperty()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-selection-values selection-values :managed-pointer)
-                          (coerced-default-value default-value :managed-pointer)
-                          (coerced-visible visible :managed-pointer))
+                          (coerced-default-value default-value :daq-base-object)
+                          (coerced-visible visible :daq-base-object))
     (wrap (opendaq.low-level:property/create-sparse-selection-property coerced-name coerced-selection-values coerced-default-value coerced-visible) 'property))
 )
 
@@ -18841,7 +18841,7 @@ The Property Value type is `ctString`. Note that the defaultValue and visible pa
 Calls the openDAQ C function daqProperty_createStringProperty()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :daq-string)
-                          (coerced-visible visible :managed-pointer))
+                          (coerced-visible visible :daq-base-object))
     (wrap (opendaq.low-level:property/create-string-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
@@ -18855,7 +18855,7 @@ The Property Value type is `ctStruct`.
 Calls the openDAQ C function daqProperty_createStructProperty()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-default-value default-value :managed-pointer)
-                          (coerced-visible visible :managed-pointer))
+                          (coerced-visible visible :daq-base-object))
     (wrap (opendaq.low-level:property/create-struct-property coerced-name coerced-default-value coerced-visible) 'property))
 )
 
@@ -19621,7 +19621,7 @@ between errors (data loss) and resync events. Additionally, if the offset is not
 clients have no way of detecting a resync event in the case of asynchronous signals.
 
 Calls the openDAQ C function daqReferenceDomainInfoBuilder_setReferenceDomainOffset()."
-  (with-daq-boxed-values ((coerced-new-value new-value :managed-pointer))
+  (with-daq-boxed-values ((coerced-new-value new-value :daq-base-object))
     (opendaq.low-level:reference-domain-info-builder/set-reference-domain-offset (%require-live-pointer object) coerced-new-value))
   new-value)
 
@@ -19780,7 +19780,7 @@ Calls the openDAQ C function daqRemovable_remove()."
   "Calls the openDAQ C function daqReusableDataPacket_reuse()."
   (with-daq-boxed-values ((coerced-new-descriptor new-descriptor :managed-pointer)
                           (coerced-new-sample-count new-sample-count nil)
-                          (coerced-new-offset new-offset :managed-pointer)
+                          (coerced-new-offset new-offset :daq-base-object)
                           (coerced-new-domain-packet new-domain-packet :managed-pointer)
                           (coerced-can-realloc-memory can-realloc-memory :daq-bool))
     (not (zerop (opendaq.low-level:reusable-data-packet/reuse (%require-live-pointer object) coerced-new-descriptor coerced-new-sample-count coerced-new-offset coerced-new-domain-packet coerced-can-realloc-memory))))
@@ -20101,8 +20101,8 @@ Calls the openDAQ C function daqScalingCalcPrivate_scaleDataOutput()."
 @param outputDataType The scaling's output data type.
 
 Calls the openDAQ C function daqScaling_createLinearScaling()."
-  (with-daq-boxed-values ((coerced-scale scale :managed-pointer)
-                          (coerced-offset offset :managed-pointer)
+  (with-daq-boxed-values ((coerced-scale scale :daq-base-object)
+                          (coerced-offset offset :daq-base-object)
                           (coerced-input-data-type input-data-type nil)
                           (coerced-output-data-type output-data-type nil))
     (wrap (opendaq.low-level:scaling/create-linear-scaling coerced-scale coerced-offset coerced-input-data-type coerced-output-data-type) 'scaling))
@@ -20960,7 +20960,7 @@ Calls the openDAQ C function daqServerCapabilityConfig_setPort()."))
 @param port The port of the device
 
 Calls the openDAQ C function daqServerCapabilityConfig_setPort()."
-  (with-daq-boxed-values ((coerced-new-value new-value :managed-pointer))
+  (with-daq-boxed-values ((coerced-new-value new-value :daq-base-object))
     (opendaq.low-level:server-capability-config/set-port (%require-live-pointer object) coerced-new-value))
   new-value)
 

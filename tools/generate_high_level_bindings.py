@@ -269,10 +269,21 @@ def default_map(defaults: tuple[tuple[str, str], ...]) -> dict[str, str]:
     return dict(defaults)
 
 
+BOXED_PRIMITIVE_TYPES = frozenset((
+    "daq-base-object",
+    "daq-integer",
+    "daq-float-object",
+    "daq-boolean",
+    "daq-number",
+    "daq-ratio",
+    "daq-complex-number",
+))
+
+
 def coerce_category(parameter: dict) -> str | None:
     if parameter["base_lisp_name"] == "daq-string":
         return ":daq-string"
-    if parameter["base_lisp_name"] == "daq-base-object":
+    if parameter["base_lisp_name"] in BOXED_PRIMITIVE_TYPES:
         return ":daq-base-object"
     if parameter["base_lisp_name"] == "daq-bool":
         return ":daq-bool"
