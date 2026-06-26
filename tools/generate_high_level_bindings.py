@@ -114,6 +114,17 @@ SUPPRESSED_FUNCTIONS = {
     # It is an internal deserialization primitive, unused here; drop it (the class
     # is still wrappable and keeps its clone / interface-id methods).
     "component-deserialize-context/create-component-deserialize-context",
+    # These take a daqIntfID GUID by value.  The low-level layer now binds them
+    # (passed per-ABI; see generate_low_level_bindings), but they are plumbing:
+    # the GUID query is exposed idiomatically as supports-interface-p /
+    # component-type, and the untyped list/dict/folder constructors cover the
+    # rest, so they need no high-level wrapper.
+    "base-object/query-interface",
+    "base-object/borrow-interface",
+    "list/create-list-with-element-type",
+    "dict/create-dict-with-expected-types",
+    "folder-config/create-folder-with-item-type",
+    "search-filter/create-interface-id-search-filter",
 }
 
 # Curated make-instance proxy names (BASE/SUFFIX) for factory constructors whose

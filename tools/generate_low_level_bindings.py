@@ -229,18 +229,14 @@ def build_functions(records: list[dict], types: dict[str, dict]) -> tuple[list[d
         return_type = record["return_type"]
         base_type = return_type["name"]
         pointer_depth = return_type.get("pointer_depth", 0)
-        # Skip functions that pass or return a struct by value.  CFFI can only
-        # marshal by-value structs through cffi-libffi, which compiles a small C
-        # shim at load time and therefore breaks wherever no C compiler is
-        # installed (notably a stock Windows host).  These functions are the
-        # binding's only by-value-struct call sites, so dropping them lets us
-        # depend on plain cffi alone.
-        struct_by_value = by_value_struct(return_type) or next(
-            (name for argument in record.get("arguments", []) if (name := by_value_struct(argument["type"]))),
-            None,
-        )
-        if struct_by_value is not None:
-            skipped.append((record["name"], f"passes a struct by value, which would require cffi-libffi ({struct_by_value})"))
+        # A by-value struct *return* would come back in registers/memory we don't
+        # model, so still skip those (there are none in the API today).  By-value
+        # struct *arguments* (the daqIntfID GUID) are handled below: rather than
+        # marshal the struct -- which plain CFFI cannot do without cffi-libffi and
+        # its load-time C shim -- we pass it per the platform ABI, so no compiler
+        # is needed.
+        if by_value_struct(return_type):
+            skipped.append((record["name"], f"returns a struct by value ({by_value_struct(return_type)})"))
             continue
         try:
             parameters = []
@@ -249,6 +245,10 @@ def build_functions(records: list[dict], types: dict[str, dict]) -> tuple[list[d
                 arg_base = arg_type["name"]
                 arg_depth = arg_type.get("pointer_depth", 0)
                 base_info = types.get(arg_base)
+                # The only by-value struct in the API is the 16-byte daqIntfID
+                # GUID; record its lisp name so the emitter can split it (see
+                # SYSV_GUARD / emit_defcfun / raw_call).
+                by_value = types[arg_base]["lisp_name"] if by_value_struct(arg_type) else None
                 parameters.append(
                     {
                         "c_name": argument["name"],
@@ -263,6 +263,7 @@ def build_functions(records: list[dict], types: dict[str, dict]) -> tuple[list[d
                         "pointee_kind": base_info["kind"] if base_info else "builtin" if arg_base in BUILTIN_TYPE_MAP else None,
                         "value_type": arg_type.get("value_type"),
                         "key_type": arg_type.get("key_type"),
+                        "by_value_struct": by_value,
                     }
                 )
             functions.append(
@@ -291,6 +292,63 @@ def can_auto_wrap(function: dict) -> bool:
 def emit_call(function_name: str, arguments) -> str:
     arguments = " ".join(arguments)
     return f"({function_name} {arguments})" if arguments else f"({function_name})"
+
+
+# The only by-value struct in the API is the 16-byte daqIntfID GUID, passed
+# differently per ABI: System V (Linux x64) and AAPCS64 (macOS arm64) pass it in
+# two 64-bit integer registers (so we declare two :uint64 and split the buffer
+# into them); Microsoft x64 (Windows) passes a struct over 8 bytes by hidden
+# pointer (so we declare and pass a pointer).  The bytes stay opaque -- only ever
+# moved, never interpreted.  A different by-value struct would need this revisited.
+SYSV_GUARD = "#-(or windows win32)"
+WIN_GUARD = "#+(or windows win32)"
+
+
+def has_by_value_struct(function: dict) -> bool:
+    return any(parameter.get("by_value_struct") for parameter in function["parameters"])
+
+
+def defcfun_param_lines(function: dict, windows: bool) -> list[str]:
+    lines = []
+    for parameter in function["parameters"]:
+        struct = parameter.get("by_value_struct")
+        if not struct:
+            lines.append(f'  ({parameter["lisp_name"]} {parameter["cffi_spec"]})')
+        elif windows:
+            lines.append(f'  ({parameter["lisp_name"]} (:pointer (:struct {struct})))')
+        else:
+            lines.append(f'  ({parameter["lisp_name"]}-0 :uint64)')
+            lines.append(f'  ({parameter["lisp_name"]}-1 :uint64)')
+    return lines
+
+
+def emit_defcfun(function: dict) -> list[str]:
+    header = f'(cffi:defcfun ("{function["c_name"]}" {function["raw_lisp_name"]}) {function["return_spec"]}'
+    if not has_by_value_struct(function):
+        return ["", header, *defcfun_param_lines(function, windows=False), "  )"]
+    lines = []
+    for guard, windows in ((SYSV_GUARD, False), (WIN_GUARD, True)):
+        lines.extend(["", guard, header, *defcfun_param_lines(function, windows), "  )"])
+    return lines
+
+
+def raw_call(function: dict, arg_form) -> str:
+    """The (%raw ...) call for FUNCTION.  ARG_FORM maps an ordinary parameter to
+    its call form; by-value-struct parameters are split per platform, so the whole
+    call is reader-conditional when any is present."""
+    def build(windows: bool) -> str:
+        arguments = []
+        for parameter in function["parameters"]:
+            if not parameter.get("by_value_struct") or windows:
+                arguments.append(arg_form(parameter))
+            else:
+                pointer = arg_form(parameter)
+                arguments.append(f"(cffi:mem-ref {pointer} :uint64 0)")
+                arguments.append(f"(cffi:mem-ref {pointer} :uint64 8)")
+        return emit_call(function["raw_lisp_name"], arguments)
+    if not has_by_value_struct(function):
+        return build(windows=False)
+    return f"{SYSV_GUARD} {build(False)} {WIN_GUARD} {build(True)}"
 
 
 def emit_type_section(types: dict[str, dict]) -> list[str]:
@@ -339,14 +397,15 @@ def emit_public_wrapper(function: dict) -> list[str]:
     )
     lines = [f"(defun {function['public_lisp_name']} ({' '.join(parameter['lisp_name'] for parameter in signature)})"]
     if not auto_wrap:
+        call = raw_call(function, lambda parameter: parameter["lisp_name"])
         if function["return_spec"] == "daq-err-code":
-            lines.append(f'  (%check-error {emit_call(function["raw_lisp_name"], (parameter["lisp_name"] for parameter in function["parameters"]))} "{function["c_name"]}")')
+            lines.append(f'  (%check-error {call} "{function["c_name"]}")')
             lines.append("  nil)")
         elif function["return_spec"] == ":void":
-            lines.append(f'  {emit_call(function["raw_lisp_name"], (parameter["lisp_name"] for parameter in function["parameters"]))}')
+            lines.append(f'  {call}')
             lines.append("  nil)")
         else:
-            lines.append(f'  {emit_call(function["raw_lisp_name"], (parameter["lisp_name"] for parameter in function["parameters"]))})')
+            lines.append(f'  {call})')
         return lines
     out_parameters = [parameter for parameter in function["parameters"] if parameter_mode(function, parameter) != "in"]
     slot_names = {parameter["lisp_name"]: f'{parameter["lisp_name"]}-slot' for parameter in out_parameters}
@@ -357,14 +416,17 @@ def emit_public_wrapper(function: dict) -> list[str]:
     for parameter in out_parameters:
         if parameter_mode(function, parameter) == "in-out":
             lines.append(f"{indent}(setf (cffi:mem-ref {slot_names[parameter['lisp_name']]} '{parameter['pointee_cffi_spec']}) {parameter['lisp_name']})")
-    call_arguments = [parameter["lisp_name"] if parameter_mode(function, parameter) == "in" else slot_names[parameter["lisp_name"]] for parameter in function["parameters"]]
+    def arg_form(parameter):
+        return (parameter["lisp_name"] if parameter_mode(function, parameter) == "in"
+                else slot_names[parameter["lisp_name"]])
+    call = raw_call(function, arg_form)
     if function["return_spec"] == "daq-err-code":
-        lines.append(f'{indent}(%check-error {emit_call(function["raw_lisp_name"], call_arguments)} "{function["c_name"]}")')
+        lines.append(f'{indent}(%check-error {call} "{function["c_name"]}")')
     elif function["return_spec"] != ":void":
-        lines.append(f'{indent}(let ((result {emit_call(function["raw_lisp_name"], call_arguments)}))')
+        lines.append(f'{indent}(let ((result {call}))')
         indent += "  "
     else:
-        lines.append(f'{indent}{emit_call(function["raw_lisp_name"], call_arguments)}')
+        lines.append(f'{indent}{call}')
     result_forms = [f"(cffi:mem-ref {slot_names[parameter['lisp_name']]} '{parameter['pointee_cffi_spec']})" for parameter in out_parameters]
     if function["return_spec"] in {"daq-err-code", ":void"}:
         result = "nil" if not result_forms else result_forms[0] if len(result_forms) == 1 else f"(values {' '.join(result_forms)})"
@@ -384,10 +446,8 @@ def emit_public_wrapper(function: dict) -> list[str]:
 def emit_function_section(functions: list[dict], skipped: list[tuple[str, str]]) -> list[str]:
     lines = ["", ";;; Functions"]
     for function in functions:
-        lines.extend(["", f'(cffi:defcfun ("{function["c_name"]}" {function["raw_lisp_name"]}) {function["return_spec"]}'])
-        if function["parameters"]:
-            lines.extend(f'  ({parameter["lisp_name"]} {parameter["cffi_spec"]})' for parameter in function["parameters"])
-        lines.extend(["  )", ""])
+        lines.extend(emit_defcfun(function))
+        lines.append("")
         lines.extend(emit_public_wrapper(function))
     lines.extend(["", ";;; Public wrapper exports", "(export '("])
     lines.extend(f"  {function['public_lisp_name']}" for function in functions)
