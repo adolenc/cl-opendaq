@@ -117,7 +117,7 @@ FUNCTION_OVERRIDES: dict[str, dict] = {
     "function-block/get-signals-recursive": {"optional_defaults": (("search-filter", "nil"),)},
     # Extra args of UNIFY_OPTIONAL members that openDAQ makes nullptr-defaulted
     # (strictness rule 3): the unified generic must NOT require them.  See the
-    # UNIFY_OPTIONAL comment and docs/method-name-unification.md.
+    # UNIFY_OPTIONAL comment below.
     "data-packet/get-last-value": {"optional_defaults": (("type-manager", "nil"),)},
     "function-block/get-input-ports": {"optional_defaults": (("search-filter", "nil"),)},
     "user-lock/lock": {"optional_defaults": (("user", "nil"),)},
@@ -139,7 +139,7 @@ FUNCTION_OVERRIDES: dict[str, dict] = {
 #
 # Excluded on purpose: signal/component/address (coincidental name reuse -- they
 # nest but mean unrelated things) and the genuinely divergent Group-2 names
-# (clone, type, remove, read, ...).  See docs/method-name-unification.md.
+# (clone, type, remove, read, ...).
 UNIFY_OPTIONAL = {
     "last-value",
     "offset",
