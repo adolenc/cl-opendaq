@@ -15,8 +15,9 @@
        (signal (first (daq:signals channel)))
        (reader (make-instance 'daq:stream-reader :signal signal)))
   (multiple-value-bind (values domain) (daq:read-with-domain reader 10 :timeout-ms 2000)
-    (let ((timestamps (map 'vector (daq:domain-time-converter signal) domain)))
-      (format t "Read ~D sample~:P:~%" (length values))
-      (loop for value across values
-            for timestamp across timestamps
-            do (format t "  ~,6F @ ~A~%" value (timestamp->string timestamp))))))
+    (format t "Read ~D sample~:P:~%" (length values))
+    (loop for value across values
+          for tick across domain
+          do (format t "  ~,6F @ ~A~%"
+                     value
+                     (timestamp->string (daq:domain-tick->timestamp signal tick))))))
