@@ -59,17 +59,21 @@
             address-info-private
             address-info-private-interface-id
             address-info-type
+            address-info/from-builder
             addresses
             all-properties
             allocate
             allocator
             allocator-interface-id
+            allocator/malloc
             allow
             allow-different-sampling-rates
             allowed
             argument-info
             argument-info-interface-id
             argument-info-type
+            argument-info/dict
+            argument-info/list
             arguments
             as-dictionary
             as-hashtable-of
@@ -82,6 +86,9 @@
             authenticated-only
             authentication-provider
             authentication-provider-interface-id
+            authentication-provider/json-file
+            authentication-provider/json-string
+            authentication-provider/static
             available-count
             available-device-types
             available-devices
@@ -107,6 +114,8 @@
             block-reader-read-with-domain
             block-reader-status
             block-reader-status-interface-id
+            block-reader/from-existing
+            block-reader/from-port
             block-size
             build
             call
@@ -164,6 +173,7 @@
             component-holder
             component-holder-component
             component-holder-interface-id
+            component-holder/with-ids
             component-interface-id
             component-log-level
             component-private
@@ -175,6 +185,10 @@
             component-type
             component-type-builder
             component-type-builder-interface-id
+            component-type-builder/device
+            component-type-builder/function-block
+            component-type-builder/server
+            component-type-builder/streaming
             component-type-interface-id
             component-type-private
             component-type-private-interface-id
@@ -185,6 +199,8 @@
             components-log-level
             config-provider
             config-provider-interface-id
+            config-provider/env
+            config-provider/json
             configuration-connection-info
             connect
             connect-signal-scheduler-notification
@@ -192,6 +208,7 @@
             connected-client-info
             connected-client-info-address
             connected-client-info-interface-id
+            connected-client-info/with-params
             connected-clients-info
             connection
             connection-interface-id
@@ -217,139 +234,28 @@
             convertible-interface-id
             core-event-args
             core-event-args-interface-id
+            core-event-args/property-added
+            core-event-args/property-object-update-end
+            core-event-args/property-order-changed
+            core-event-args/property-removed
+            core-event-args/property-value-changed
+            core-event-args/type-added
+            core-event-args/type-removed
             core-event-callback
             core-event-trigger
             core-events-enabled
             core-type
             count
-            create-address-info-from-builder
-            create-any-search-filter
-            create-block-reader-from-existing
-            create-block-reader-from-port
-            create-bool-property
-            create-bool-property-builder
-            create-boolean
-            create-component-deserialize-context
-            create-component-holder-with-ids
-            create-connected-client-info-with-params
-            create-constant-data-packet-with-domain
-            create-constant-data-rule
-            create-core-event-args-property-added
-            create-core-event-args-property-object-update-end
-            create-core-event-args-property-order-changed
-            create-core-event-args-property-removed
-            create-core-event-args-property-value-changed
-            create-core-event-args-type-added
-            create-core-event-args-type-removed
-            create-custom-search-filter
-            create-data-descriptor-builder-from-existing
-            create-data-descriptor-changed-event-packet
-            create-data-packet-with-domain
-            create-data-packet-with-external-memory
-            create-data-rule-builder-from-existing
-            create-data-rule-from-builder
             create-default-add-device-config
             create-default-config
             create-default-configuration
             create-device
-            create-device-domain-with-reference-domain-info
-            create-device-info-config-with-custom-sdk-version
-            create-device-type-builder
             create-devices
-            create-dict-argument-info
-            create-dict-property
-            create-dict-property-builder
-            create-dimension-builder-from-existing
-            create-dimension-from-builder
-            create-dimension-rule-builder-from-existing
-            create-dimension-rule-from-builder
             create-end-iterator
-            create-enumeration-property
-            create-enumeration-property-builder
-            create-enumeration-type-with-values
-            create-enumeration-with-int-value
-            create-enumeration-with-int-value-and-type
-            create-enumeration-with-type
-            create-env-config-provider
-            create-eval-value-args
-            create-eval-value-func
-            create-excluded-tags-search-filter
-            create-explicit-data-rule
-            create-explicit-domain-data-rule
-            create-float-property
-            create-float-property-builder
             create-function-block
-            create-function-block-type-builder
-            create-function-property
-            create-function-property-builder
-            create-implicit-domain-gap-detected-event-packet
-            create-instance
-            create-int-property
-            create-int-property-builder
-            create-io-folder
-            create-json-config-provider
-            create-json-file-authentication-provider
-            create-json-string-authentication-provider
-            create-linear-data-rule
-            create-linear-dimension-rule
-            create-linear-scaling
-            create-list-argument-info
-            create-list-dimension-rule
-            create-list-property
-            create-list-property-builder
-            create-local-id-search-filter
-            create-logarithmic-dimension-rule
-            create-malloc-allocator
-            create-module-manager-multiple-paths
-            create-multi-reader-ex
-            create-multi-reader-from-existing
-            create-not-search-filter
-            create-object-property
-            create-object-property-builder
-            create-or-search-filter
-            create-packet-reader-from-port
-            create-permission-mask-builder-from-mask
-            create-property-object-class-builder-with-manager
-            create-property-object-with-class-and-manager
-            create-ratio-property
-            create-ratio-property-builder
-            create-recursive-search-filter
-            create-reference-domain-info-builder-from-existing
-            create-reference-property
-            create-reference-property-builder
-            create-required-tags-search-filter
-            create-rotating-file-logger-sink
-            create-scaling-builder-from-existing
-            create-scaling-from-builder
-            create-scheduler-with-main-loop
-            create-selection-property
-            create-selection-property-builder
             create-server
-            create-server-type-builder
-            create-signal-with-descriptor
-            create-sparse-selection-property
-            create-sparse-selection-property-builder
             create-start-iterator
-            create-static-authentication-provider
-            create-std-err-logger-sink
-            create-std-out-logger-sink
-            create-stream-reader-from-existing
-            create-stream-reader-from-port
             create-streaming
-            create-streaming-type-builder
-            create-string-n
-            create-string-property
-            create-string-property-builder
-            create-struct-builder-from-struct
-            create-struct-from-builder
-            create-struct-property
-            create-struct-property-builder
-            create-struct-type-no-defaults
-            create-tail-reader-from-existing
-            create-tail-reader-from-port
-            create-unit-builder-from-existing
-            create-visible-search-filter
-            create-win-debug-logger-sink
             current
             current-item-type
             custom-components
@@ -368,21 +274,32 @@
             daq-ratio-interface-id
             daq-string-object
             daq-string-object-interface-id
+            daq-string-object/string-n
             daq-type
             daq-type-interface-id
             data
             data-descriptor
             data-descriptor-builder
             data-descriptor-builder-interface-id
+            data-descriptor-builder/from-existing
             data-descriptor-interface-id
             data-packet
             data-packet-interface-id
+            data-packet/constant-with-domain
+            data-packet/with-domain
+            data-packet/with-external-memory
             data-rule
             data-rule-builder
             data-rule-builder-interface-id
             data-rule-builder-type
+            data-rule-builder/from-existing
             data-rule-interface-id
             data-rule-type
+            data-rule/constant
+            data-rule/explicit
+            data-rule/explicit-domain
+            data-rule/from-builder
+            data-rule/linear
             data-size
             deactivate-streaming
             default-config
@@ -418,9 +335,11 @@
             device-config
             device-domain
             device-domain-interface-id
+            device-domain/with-reference-domain-info
             device-info
             device-info-config
             device-info-config-interface-id
+            device-info-config/with-custom-sdk-version
             device-info-interface-id
             device-info-internal
             device-info-internal-interface-id
@@ -445,13 +364,20 @@
             dimension
             dimension-builder
             dimension-builder-interface-id
+            dimension-builder/from-existing
             dimension-interface-id
             dimension-rule
             dimension-rule-builder
             dimension-rule-builder-interface-id
             dimension-rule-builder-type
+            dimension-rule-builder/from-existing
             dimension-rule-interface-id
             dimension-rule-type
+            dimension-rule/from-builder
+            dimension-rule/linear
+            dimension-rule/list
+            dimension-rule/logarithmic
+            dimension/from-builder
             dimensions
             disable-core-event-trigger
             disable-discovery
@@ -496,6 +422,10 @@
             enumeration-interface-id
             enumeration-type
             enumeration-type-interface-id
+            enumeration-type/with-values
+            enumeration/with-int-value
+            enumeration/with-int-value-and-type
+            enumeration/with-type
             enumerator-int-value
             enumerator-names
             equals
@@ -504,6 +434,8 @@
             eval
             eval-value
             eval-value-interface-id
+            eval-value/args
+            eval-value/func
             event
             event-args
             event-args-interface-id
@@ -514,6 +446,8 @@
             event-name
             event-packet
             event-packet-interface-id
+            event-packet/data-descriptor-changed
+            event-packet/implicit-domain-gap-detected
             event-packets
             execute
             extend
@@ -533,6 +467,7 @@
             folder
             folder-config
             folder-config-interface-id
+            folder-config/io-folder
             folder-interface-id
             force-unlock
             free
@@ -605,6 +540,7 @@
             instance-builder-root-device
             instance-interface-id
             instance-root-device
+            instance/with-context
             int-value
             interfaces
             internal-state
@@ -695,6 +631,10 @@
             logger-component-interface-id
             logger-interface-id
             logger-sink
+            logger-sink/rotating-file
+            logger-sink/std-err
+            logger-sink/std-out
+            logger-sink/win-debug
             logger-sinks
             logger-thread-pool
             logger-thread-pool-interface-id
@@ -739,6 +679,7 @@
             module-manager-interface-id
             module-manager-utils
             module-manager-utils-interface-id
+            module-manager/multiple-paths
             module-options
             module-path
             module-paths-list
@@ -755,6 +696,8 @@
             multi-reader-read-with-domain
             multi-reader-status
             multi-reader-status-interface-id
+            multi-reader/ex
+            multi-reader/from-existing
             mute
             mute-listener
             mutex
@@ -815,6 +758,7 @@
             packet-reader
             packet-reader-interface-id
             packet-reader-read
+            packet-reader/from-port
             packet-received
             packet-type
             parameters
@@ -836,6 +780,7 @@
             permission-mask-builder
             permission-mask-builder-interface-id
             permission-mask-builder-read
+            permission-mask-builder/from-mask
             permissions
             permissions-builder
             permissions-builder-interface-id
@@ -857,6 +802,20 @@
             property
             property-builder
             property-builder-interface-id
+            property-builder/bool
+            property-builder/dict
+            property-builder/enumeration
+            property-builder/float
+            property-builder/function
+            property-builder/int
+            property-builder/list
+            property-builder/object
+            property-builder/ratio
+            property-builder/reference
+            property-builder/selection
+            property-builder/sparse-selection
+            property-builder/string
+            property-builder/struct
             property-event-type
             property-interface-id
             property-internal
@@ -866,6 +825,7 @@
             property-object-class
             property-object-class-builder
             property-object-class-builder-interface-id
+            property-object-class-builder/with-manager
             property-object-class-interface-id
             property-object-class-internal
             property-object-class-internal-clone
@@ -876,6 +836,7 @@
             property-object-internal-interface-id
             property-object-protected
             property-object-protected-interface-id
+            property-object/with-class-and-manager
             property-order
             property-references
             property-selection-value
@@ -884,6 +845,20 @@
             property-value
             property-value-event-args
             property-value-no-lock
+            property/bool
+            property/dict
+            property/enumeration
+            property/float
+            property/function
+            property/int
+            property/list
+            property/object
+            property/ratio
+            property/reference
+            property/selection
+            property/sparse-selection
+            property/string
+            property/struct
             protected-property-selection-value
             protected-property-value
             protected-property-value-no-lock
@@ -938,6 +913,7 @@
             reference-domain-info
             reference-domain-info-builder
             reference-domain-info-builder-interface-id
+            reference-domain-info-builder/from-existing
             reference-domain-info-interface-id
             reference-domain-offset
             reference-time-protocol
@@ -1015,10 +991,13 @@
             scaling
             scaling-builder
             scaling-builder-interface-id
+            scaling-builder/from-existing
             scaling-calc-private
             scaling-calc-private-interface-id
             scaling-interface-id
             scaling-type
+            scaling/from-builder
+            scaling/linear
             schedule-function
             schedule-graph
             schedule-work
@@ -1026,9 +1005,19 @@
             scheduler
             scheduler-interface-id
             scheduler-worker-num
+            scheduler/with-main-loop
             sdk-version
             search-filter
             search-filter-interface-id
+            search-filter/any
+            search-filter/custom
+            search-filter/excluded-tags
+            search-filter/local-id
+            search-filter/not
+            search-filter/or
+            search-filter/recursive
+            search-filter/required-tags
+            search-filter/visible
             selected-source
             selection-values
             selection-values-no-lock
@@ -1070,6 +1059,7 @@
             signal
             signal-config
             signal-config-interface-id
+            signal-config/with-descriptor
             signal-dependency
             signal-events
             signal-events-interface-id
@@ -1110,6 +1100,8 @@
             stream-reader-interface-id
             stream-reader-read
             stream-reader-read-with-domain
+            stream-reader/from-existing
+            stream-reader/from-port
             streamed
             streaming
             streaming-connection-string
@@ -1120,11 +1112,14 @@
             struct
             struct-builder
             struct-builder-interface-id
+            struct-builder/from-struct
             struct-fields
             struct-interface-id
             struct-type
             struct-type-interface-id
             struct-type-no-lock
+            struct-type/no-defaults
+            struct/from-builder
             submit-configuration
             submit-network-configuration
             subscribe-completed
@@ -1160,6 +1155,8 @@
             tail-reader-read-with-domain
             tail-reader-status
             tail-reader-status-interface-id
+            tail-reader/from-existing
+            tail-reader/from-port
             task
             task-graph
             task-graph-interface-id
@@ -1188,6 +1185,7 @@
             unit
             unit-builder
             unit-builder-interface-id
+            unit-builder/from-existing
             unit-interface-id
             unit-no-lock
             unit-unresolved
@@ -1303,6 +1301,26 @@ Constructs the instance via the openDAQ C function daqAddressInfoBuilder_createA
 
 
 
+(defclass address-info/from-builder (address-info)
+  (
+   (%builder-initarg :initarg :builder :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object address-info/from-builder)
+                                       &key (pointer nil pointer-p)
+                                            (builder nil builder-p)
+                                       &allow-other-keys)
+  "Creates an Address using the builder's configuration parameters.
+@param builder The address info builder.
+
+Constructs the instance via the openDAQ C function daqAddressInfo_createAddressInfoFromBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) builder-p)
+  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:address-info/create-address-info-from-builder coerced-builder)))
+    ))
+
 (defclass allocator (base-object)
   (
    (%data-initarg :initarg :data :initform nil)
@@ -1321,6 +1339,20 @@ Constructs the instance via the openDAQ C function daqAddressInfoBuilder_createA
   (with-daq-boxed-values ((coerced-data data nil)
                           (coerced-deleter deleter :managed-pointer))
     (%adopt-pointer object (opendaq.low-level:allocator/create-external-allocator coerced-data coerced-deleter)))
+    ))
+
+(defclass allocator/malloc (allocator)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object allocator/malloc)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqAllocator_createMallocAllocator()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:allocator/create-malloc-allocator))
     ))
 
 (defclass argument-info (base-object)
@@ -1347,6 +1379,58 @@ Constructs the instance via the openDAQ C function daqArgumentInfo_createArgumen
     (%adopt-pointer object (opendaq.low-level:argument-info/create-argument-info coerced-name coerced-type)))
     ))
 
+(defclass argument-info/dict (argument-info)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%key-type-initarg :initarg :key-type :initform nil)
+   (%item-type-initarg :initarg :item-type :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object argument-info/dict)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (key-type nil key-type-p)
+                                            (item-type nil item-type-p)
+                                       &allow-other-keys)
+  "Creates a dict-type Argument info object with the specified name, key type and item type.
+@param name The name of the argument.
+@param keyType Corresponds to the expected type of key in the dictionary argument.
+@param itemType Corresponds to the expected type of items in the dictionary argument.
+
+Constructs the instance via the openDAQ C function daqArgumentInfo_createDictArgumentInfo()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p key-type-p item-type-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-key-type key-type nil)
+                          (coerced-item-type item-type nil))
+    (%adopt-pointer object (opendaq.low-level:argument-info/create-dict-argument-info coerced-name coerced-key-type coerced-item-type)))
+    ))
+
+(defclass argument-info/list (argument-info)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%item-type-initarg :initarg :item-type :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object argument-info/list)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (item-type nil item-type-p)
+                                       &allow-other-keys)
+  "Creates a list-type Argument info object with the specified name and item type.
+@param name The name of the argument.
+@param itemType Corresponds to the expected type of items in the list argument.
+
+Constructs the instance via the openDAQ C function daqArgumentInfo_createListArgumentInfo()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p item-type-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-item-type item-type nil))
+    (%adopt-pointer object (opendaq.low-level:argument-info/create-list-argument-info coerced-name coerced-item-type)))
+    ))
+
 (defclass authentication-provider (base-object)
   (
    (%allow-anonymous-initarg :initarg :allow-anonymous :initform nil)
@@ -1365,6 +1449,70 @@ Constructs the instance via the openDAQ C function daqAuthenticationProvider_cre
   (when (and (not pointer-p) allow-anonymous-p)
   (with-daq-boxed-values ((coerced-allow-anonymous allow-anonymous :daq-bool))
     (%adopt-pointer object (opendaq.low-level:authentication-provider/create-authentication-provider coerced-allow-anonymous)))
+    ))
+
+(defclass authentication-provider/json-file (authentication-provider)
+  (
+   (%filename-initarg :initarg :filename :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object authentication-provider/json-file)
+                                       &key (pointer nil pointer-p)
+                                            (filename nil filename-p)
+                                       &allow-other-keys)
+  "Creates an authentication provider out of json file.
+@param filename File path to a json file containing a list of serialized User objects.
+
+Constructs the instance via the openDAQ C function daqAuthenticationProvider_createJsonFileAuthenticationProvider()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) filename-p)
+  (with-daq-boxed-values ((coerced-filename filename :daq-string))
+    (%adopt-pointer object (opendaq.low-level:authentication-provider/create-json-file-authentication-provider coerced-filename)))
+    ))
+
+(defclass authentication-provider/json-string (authentication-provider)
+  (
+   (%json-string-initarg :initarg :json-string :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object authentication-provider/json-string)
+                                       &key (pointer nil pointer-p)
+                                            (json-string nil json-string-p)
+                                       &allow-other-keys)
+  "Creates an authentication provider out of json string.
+@param jsonString Json string containg a list of serialized User objects.
+
+Constructs the instance via the openDAQ C function daqAuthenticationProvider_createJsonStringAuthenticationProvider()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) json-string-p)
+  (with-daq-boxed-values ((coerced-json-string json-string :daq-string))
+    (%adopt-pointer object (opendaq.low-level:authentication-provider/create-json-string-authentication-provider coerced-json-string)))
+    ))
+
+(defclass authentication-provider/static (authentication-provider)
+  (
+   (%allow-anonymous-initarg :initarg :allow-anonymous :initform nil)
+   (%user-list-initarg :initarg :user-list :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object authentication-provider/static)
+                                       &key (pointer nil pointer-p)
+                                            (allow-anonymous nil allow-anonymous-p)
+                                            (user-list nil user-list-p)
+                                       &allow-other-keys)
+  "Creates an authentication provider out of static list of users.
+@param allowAnonymous True if anonymous authentication is allowed.
+@param userList List of User objects.
+
+Constructs the instance via the openDAQ C function daqAuthenticationProvider_createStaticAuthenticationProvider()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) allow-anonymous-p user-list-p)
+  (with-daq-boxed-values ((coerced-allow-anonymous allow-anonymous :daq-bool)
+                          (coerced-user-list user-list :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:authentication-provider/create-static-authentication-provider coerced-allow-anonymous coerced-user-list)))
     ))
 
 (defclass awaitable (base-object)
@@ -1445,6 +1593,61 @@ Constructs the instance via the openDAQ C function daqAuthenticationProvider_cre
                           (coerced-offset offset :daq-base-object)
                           (coerced-read-samples read-samples nil))
     (%adopt-pointer object (opendaq.low-level:block-reader-status/create-block-reader-status coerced-event-packet coerced-valid coerced-offset coerced-read-samples)))
+    ))
+
+(defclass block-reader/from-existing (block-reader)
+  (
+   (%invalidated-reader-initarg :initarg :invalidated-reader :initform nil)
+   (%value-read-type-initarg :initarg :value-read-type :initform nil)
+   (%domain-read-type-initarg :initarg :domain-read-type :initform nil)
+   (%block-size-initarg :initarg :block-size :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object block-reader/from-existing)
+                                       &key (pointer nil pointer-p)
+                                            (invalidated-reader nil invalidated-reader-p)
+                                            (value-read-type nil value-read-type-p)
+                                            (domain-read-type nil domain-read-type-p)
+                                            (block-size nil block-size-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqBlockReader_createBlockReaderFromExisting()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) invalidated-reader-p value-read-type-p domain-read-type-p block-size-p)
+  (with-daq-boxed-values ((coerced-invalidated-reader invalidated-reader :managed-pointer)
+                          (coerced-value-read-type value-read-type nil)
+                          (coerced-domain-read-type domain-read-type nil)
+                          (coerced-block-size block-size nil))
+    (%adopt-pointer object (opendaq.low-level:block-reader/create-block-reader-from-existing coerced-invalidated-reader coerced-value-read-type coerced-domain-read-type coerced-block-size)))
+    ))
+
+(defclass block-reader/from-port (block-reader)
+  (
+   (%port-initarg :initarg :port :initform nil)
+   (%block-size-initarg :initarg :block-size :initform nil)
+   (%value-read-type-initarg :initarg :value-read-type :initform nil)
+   (%domain-read-type-initarg :initarg :domain-read-type :initform nil)
+   (%mode-initarg :initarg :mode :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object block-reader/from-port)
+                                       &key (pointer nil pointer-p)
+                                            (port nil port-p)
+                                            (block-size nil block-size-p)
+                                            (value-read-type nil value-read-type-p)
+                                            (domain-read-type nil domain-read-type-p)
+                                            (mode nil mode-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqBlockReader_createBlockReaderFromPort()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) port-p block-size-p value-read-type-p domain-read-type-p mode-p)
+  (with-daq-boxed-values ((coerced-port port :managed-pointer)
+                          (coerced-block-size block-size nil)
+                          (coerced-value-read-type value-read-type nil)
+                          (coerced-domain-read-type domain-read-type nil)
+                          (coerced-mode mode nil))
+    (%adopt-pointer object (opendaq.low-level:block-reader/create-block-reader-from-port coerced-port coerced-block-size coerced-value-read-type coerced-domain-read-type coerced-mode)))
     ))
 
 (defclass callable-info (base-object)
@@ -1593,6 +1796,29 @@ Constructs the instance via the openDAQ C function daqComponent_createComponent(
     (%adopt-pointer object (opendaq.low-level:component-holder/create-component-holder coerced-component)))
     ))
 
+(defclass component-holder/with-ids (component-holder)
+  (
+   (%id-initarg :initarg :id :initform nil)
+   (%parent-global-id-initarg :initarg :parent-global-id :initform nil)
+   (%component-initarg :initarg :component :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object component-holder/with-ids)
+                                       &key (pointer nil pointer-p)
+                                            (id nil id-p)
+                                            (parent-global-id nil parent-global-id-p)
+                                            (component nil component-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqComponentHolder_createComponentHolderWithIds()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) id-p parent-global-id-p component-p)
+  (with-daq-boxed-values ((coerced-id id :daq-string)
+                          (coerced-parent-global-id parent-global-id :daq-string)
+                          (coerced-component component :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:component-holder/create-component-holder-with-ids coerced-id coerced-parent-global-id coerced-component)))
+    ))
+
 (defclass component-private (base-object)
   (
    ))
@@ -1641,6 +1867,70 @@ Constructs the instance via the openDAQ C function daqComponentTypeBuilder_creat
   (%adopt-pointer object (opendaq.low-level:component-type-builder/create-component-type-builder))
     ))
 
+(defclass component-type-builder/device (component-type-builder)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object component-type-builder/device)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Creates a ComponentTypeBuilder with the type sort set to \"Device\".
+
+Constructs the instance via the openDAQ C function daqComponentTypeBuilder_createDeviceTypeBuilder()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:component-type-builder/create-device-type-builder))
+    ))
+
+(defclass component-type-builder/function-block (component-type-builder)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object component-type-builder/function-block)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Creates a ComponentTypeBuilder with the type sort set to \"FunctionBlock\".
+
+Constructs the instance via the openDAQ C function daqComponentTypeBuilder_createFunctionBlockTypeBuilder()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:component-type-builder/create-function-block-type-builder))
+    ))
+
+(defclass component-type-builder/server (component-type-builder)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object component-type-builder/server)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Creates a ComponentTypeBuilder with the type sort set to \"Server\".
+
+Constructs the instance via the openDAQ C function daqComponentTypeBuilder_createServerTypeBuilder()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:component-type-builder/create-server-type-builder))
+    ))
+
+(defclass component-type-builder/streaming (component-type-builder)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object component-type-builder/streaming)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Creates a ComponentTypeBuilder with the type sort set to \"Streaming\".
+
+Constructs the instance via the openDAQ C function daqComponentTypeBuilder_createStreamingTypeBuilder()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:component-type-builder/create-streaming-type-builder))
+    ))
+
 (defclass component-type-private (base-object)
   (
    ))
@@ -1670,6 +1960,37 @@ Constructs the instance via the openDAQ C function daqComponentTypeBuilder_creat
     (%adopt-pointer object (opendaq.low-level:config-provider/create-cmd-line-args-config-provider coerced-cmd-line-args)))
     ))
 
+(defclass config-provider/env (config-provider)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object config-provider/env)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqConfigProvider_createEnvConfigProvider()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:config-provider/create-env-config-provider))
+    ))
+
+(defclass config-provider/json (config-provider)
+  (
+   (%filename-initarg :initarg :filename :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object config-provider/json)
+                                       &key (pointer nil pointer-p)
+                                            (filename nil filename-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqConfigProvider_createJsonConfigProvider()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) filename-p)
+  (with-daq-boxed-values ((coerced-filename filename :daq-string))
+    (%adopt-pointer object (opendaq.low-level:config-provider/create-json-config-provider coerced-filename)))
+    ))
+
 (defclass connected-client-info (property-object)
   (
    ))
@@ -1684,6 +2005,42 @@ Constructs the instance via the openDAQ C function daqConnectedClientInfo_create
   (declare (ignore pointer))
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:connected-client-info/create-connected-client-info))
+    ))
+
+(defclass connected-client-info/with-params (connected-client-info)
+  (
+   (%address-initarg :initarg :address :initform nil)
+   (%protocol-type-initarg :initarg :protocol-type :initform nil)
+   (%protocol-name-initarg :initarg :protocol-name :initform nil)
+   (%client-type-initarg :initarg :client-type :initform nil)
+   (%host-name-initarg :initarg :host-name :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object connected-client-info/with-params)
+                                       &key (pointer nil pointer-p)
+                                            (address nil address-p)
+                                            (protocol-type nil protocol-type-p)
+                                            (protocol-name nil protocol-name-p)
+                                            (client-type nil client-type-p)
+                                            (host-name nil host-name-p)
+                                       &allow-other-keys)
+  "Creates a Connected client info using the provided parameters.
+@param address The address of connected client.
+@param protocolType The type of the protocol type used by the client.
+@param protocolName The name of the protocol name used by the client.
+@param clientType The configuration connection client type name.
+@param hostName The host name of connected client.
+
+Constructs the instance via the openDAQ C function daqConnectedClientInfo_createConnectedClientInfoWithParams()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) address-p protocol-type-p protocol-name-p client-type-p host-name-p)
+  (with-daq-boxed-values ((coerced-address address :daq-string)
+                          (coerced-protocol-type protocol-type nil)
+                          (coerced-protocol-name protocol-name :daq-string)
+                          (coerced-client-type client-type :daq-string)
+                          (coerced-host-name host-name :daq-string))
+    (%adopt-pointer object (opendaq.low-level:connected-client-info/create-connected-client-info-with-params coerced-address coerced-protocol-type coerced-protocol-name coerced-client-type coerced-host-name)))
     ))
 
 (defclass connection (base-object)
@@ -1804,6 +2161,198 @@ Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEv
     (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args coerced-event-id coerced-event-name coerced-parameters)))
     ))
 
+(defclass core-event-args/property-added (core-event-args)
+  (
+   (%prop-owner-initarg :initarg :prop-owner :initform nil)
+   (%prop-initarg :initarg :prop :initform nil)
+   (%path-initarg :initarg :path :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/property-added)
+                                       &key (pointer nil pointer-p)
+                                            (prop-owner nil prop-owner-p)
+                                            (prop nil prop-p)
+                                            (path nil path-p)
+                                       &allow-other-keys)
+  "Creates Core event args that are passed as argument when a property is added to a component.
+@param propOwner The property object that owns the added property.
+@param prop The property that was added.
+@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\". Does not include the Component id and property name.
+The ID of the event is 20, and the event name is \"PropertyAdded\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsPropertyAdded()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) prop-owner-p prop-p path-p)
+  (with-daq-boxed-values ((coerced-prop-owner prop-owner :managed-pointer)
+                          (coerced-prop prop :managed-pointer)
+                          (coerced-path path :daq-string))
+    (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-property-added coerced-prop-owner coerced-prop coerced-path)))
+    ))
+
+(defclass core-event-args/property-object-update-end (core-event-args)
+  (
+   (%prop-owner-initarg :initarg :prop-owner :initform nil)
+   (%updated-properties-initarg :initarg :updated-properties :initform nil)
+   (%path-initarg :initarg :path :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/property-object-update-end)
+                                       &key (pointer nil pointer-p)
+                                            (prop-owner nil prop-owner-p)
+                                            (updated-properties nil updated-properties-p)
+                                            (path nil path-p)
+                                       &allow-other-keys)
+  "Creates Core event args that are passed as argument when a property object is finished updating.
+@param propOwner The property object that was updated.
+@param updatedProperties The dictionary of updated properties. Contains the name (string) of a property as key, and the new value (base object) as the dictionary value.
+@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\". Does not include the Component id.
+A property object finished updating when `endUpdate` is called, or at the end of the `update` call.
+The ID of the event is 10, and the event name is \"PropertyObjectUpdateEnd\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsPropertyObjectUpdateEnd()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) prop-owner-p updated-properties-p path-p)
+  (with-daq-boxed-values ((coerced-prop-owner prop-owner :managed-pointer)
+                          (coerced-updated-properties updated-properties :managed-pointer)
+                          (coerced-path path :daq-string))
+    (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-property-object-update-end coerced-prop-owner coerced-updated-properties coerced-path)))
+    ))
+
+(defclass core-event-args/property-order-changed (core-event-args)
+  (
+   (%prop-owner-initarg :initarg :prop-owner :initform nil)
+   (%property-order-initarg :initarg :property-order :initform nil)
+   (%path-initarg :initarg :path :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/property-order-changed)
+                                       &key (pointer nil pointer-p)
+                                            (prop-owner nil prop-owner-p)
+                                            (property-order nil property-order-p)
+                                            (path nil path-p)
+                                       &allow-other-keys)
+  "Creates Core event args that property order of a component is changed.
+@param propOwner The property object that owns the properties whose order was changed.
+@param propertyOrder The list of property names in the new order.
+@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\".
+The ID of the event is 190, and the event name is \"PropertyOrderChanged\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsPropertyOrderChanged()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) prop-owner-p property-order-p path-p)
+  (with-daq-boxed-values ((coerced-prop-owner prop-owner :managed-pointer)
+                          (coerced-property-order property-order :managed-pointer)
+                          (coerced-path path :daq-string))
+    (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-property-order-changed coerced-prop-owner coerced-property-order coerced-path)))
+    ))
+
+(defclass core-event-args/property-removed (core-event-args)
+  (
+   (%prop-owner-initarg :initarg :prop-owner :initform nil)
+   (%prop-name-initarg :initarg :prop-name :initform nil)
+   (%path-initarg :initarg :path :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/property-removed)
+                                       &key (pointer nil pointer-p)
+                                            (prop-owner nil prop-owner-p)
+                                            (prop-name nil prop-name-p)
+                                            (path nil path-p)
+                                       &allow-other-keys)
+  "Creates Core event args that are passed as argument when a property is removed from a component.
+@param propOwner The property object that owned the removed property.
+@param propName The name of the property that was removed.
+@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\". Does not include the Component id and property name.
+The ID of the event is 30, and the event name is \"PropertyRemoved\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsPropertyRemoved()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) prop-owner-p prop-name-p path-p)
+  (with-daq-boxed-values ((coerced-prop-owner prop-owner :managed-pointer)
+                          (coerced-prop-name prop-name :daq-string)
+                          (coerced-path path :daq-string))
+    (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-property-removed coerced-prop-owner coerced-prop-name coerced-path)))
+    ))
+
+(defclass core-event-args/property-value-changed (core-event-args)
+  (
+   (%prop-owner-initarg :initarg :prop-owner :initform nil)
+   (%prop-name-initarg :initarg :prop-name :initform nil)
+   (%value-initarg :initarg :value :initform nil)
+   (%path-initarg :initarg :path :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/property-value-changed)
+                                       &key (pointer nil pointer-p)
+                                            (prop-owner nil prop-owner-p)
+                                            (prop-name nil prop-name-p)
+                                            (value nil value-p)
+                                            (path nil path-p)
+                                       &allow-other-keys)
+  "Creates Core event args that are passed as argument when a property value of a component is changed.
+@param propOwner The property object that owns the changed property.
+@param propName The name of the property of which value was changed.
+@param value The new value of the property.
+@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\". Does not include the Component id and property name.
+The ID of the event is 0, and the event name is \"PropertyValueChanged\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsPropertyValueChanged()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) prop-owner-p prop-name-p value-p path-p)
+  (with-daq-boxed-values ((coerced-prop-owner prop-owner :managed-pointer)
+                          (coerced-prop-name prop-name :daq-string)
+                          (coerced-value value :daq-base-object)
+                          (coerced-path path :daq-string))
+    (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-property-value-changed coerced-prop-owner coerced-prop-name coerced-value coerced-path)))
+    ))
+
+(defclass core-event-args/type-added (core-event-args)
+  (
+   (%type-initarg :initarg :type :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/type-added)
+                                       &key (pointer nil pointer-p)
+                                            (type nil type-p)
+                                       &allow-other-keys)
+  "Creates Core event args that are passed as argument when a type is added to the type manager.
+@param type The type that was added.
+The ID of the event is 130, and the event name is \"TypeAdded\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsTypeAdded()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) type-p)
+  (with-daq-boxed-values ((coerced-type type :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-type-added coerced-type)))
+    ))
+
+(defclass core-event-args/type-removed (core-event-args)
+  (
+   (%type-name-initarg :initarg :type-name :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/type-removed)
+                                       &key (pointer nil pointer-p)
+                                            (type-name nil type-name-p)
+                                       &allow-other-keys)
+  "Creates Core event args that are passed as argument when a type is removed from the type manager.
+@param typeName The name of the removed type
+The ID of the event is 140, and the event name is \"TypeRemoved\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsTypeRemoved()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) type-name-p)
+  (with-daq-boxed-values ((coerced-type-name type-name :daq-string))
+    (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-type-removed coerced-type-name)))
+    ))
+
 (defclass core-type (base-object)
   (
    ))
@@ -1921,6 +2470,26 @@ Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEv
     (%adopt-pointer object (opendaq.low-level:string/create-string coerced-str)))
     ))
 
+(defclass daq-string-object/string-n (daq-string-object)
+  (
+   (%str-initarg :initarg :str :initform nil)
+   (%length-initarg :initarg :length :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object daq-string-object/string-n)
+                                       &key (pointer nil pointer-p)
+                                            (str nil str-p)
+                                            (length nil length-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqString_createStringN()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) str-p length-p)
+  (with-daq-boxed-values ((coerced-str str nil)
+                          (coerced-length length nil))
+    (%adopt-pointer object (opendaq.low-level:string/create-string-n coerced-str coerced-length)))
+    ))
+
 (defclass daq-type (base-object)
   (
    ))
@@ -1963,6 +2532,26 @@ Constructs the instance via the openDAQ C function daqDataDescriptorBuilder_crea
   (%adopt-pointer object (opendaq.low-level:data-descriptor-builder/create-data-descriptor-builder))
     ))
 
+(defclass data-descriptor-builder/from-existing (data-descriptor-builder)
+  (
+   (%descriptor-to-copy-initarg :initarg :descriptor-to-copy :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object data-descriptor-builder/from-existing)
+                                       &key (pointer nil pointer-p)
+                                            (descriptor-to-copy nil descriptor-to-copy-p)
+                                       &allow-other-keys)
+  "Data descriptor copy factory that creates a Data descriptor builder object from a different Data descriptor, copying its parameters.
+@param descriptorToCopy The Data descriptor of which configuration should be copied.
+
+Constructs the instance via the openDAQ C function daqDataDescriptorBuilder_createDataDescriptorBuilderFromExisting()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) descriptor-to-copy-p)
+  (with-daq-boxed-values ((coerced-descriptor-to-copy descriptor-to-copy :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:data-descriptor-builder/create-data-descriptor-builder-from-existing coerced-descriptor-to-copy)))
+    ))
+
 (defclass data-packet (packet)
   (
    (%descriptor-initarg :initarg :descriptor :initform nil)
@@ -1989,6 +2578,129 @@ Constructs the instance via the openDAQ C function daqDataPacket_createDataPacke
                           (coerced-sample-count sample-count nil)
                           (coerced-offset offset :daq-base-object))
     (%adopt-pointer object (opendaq.low-level:data-packet/create-data-packet coerced-descriptor coerced-sample-count coerced-offset)))
+    ))
+
+(defclass data-packet/constant-with-domain (data-packet)
+  (
+   (%domain-packet-initarg :initarg :domain-packet :initform nil)
+   (%descriptor-initarg :initarg :descriptor :initform nil)
+   (%sample-count-initarg :initarg :sample-count :initform nil)
+   (%initial-value-initarg :initarg :initial-value :initform nil)
+   (%other-values-initarg :initarg :other-values :initform nil)
+   (%other-value-count-initarg :initarg :other-value-count :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object data-packet/constant-with-domain)
+                                       &key (pointer nil pointer-p)
+                                            (domain-packet nil domain-packet-p)
+                                            (descriptor nil descriptor-p)
+                                            (sample-count nil sample-count-p)
+                                            (initial-value nil initial-value-p)
+                                            (other-values nil other-values-p)
+                                            (other-value-count nil other-value-count-p)
+                                       &allow-other-keys)
+  "Creates a Data packet with a given constat rule descriptor, initial constant value, and other constant values.
+@param domainPacket The Data packet carrying domain data.
+@param descriptor The descriptor of the signal sending the data.
+@param sampleCount The number of samples in the packet.
+@param initialValue The initial constant value.
+@param otherValues The other constant values.
+@param otherValueCount The number of other constant values.
+The values in the packet are calculated by constant rule. The initial value is taken as a constant.
+Other values are used to change the constant value within the packet. Any number of other constant values
+can be used. Other values are passed as an array of struct with uint32_t sample position field and value field.
+Value field (as well as initial value) are of type defined as sample type in the descriptor.
+
+Constructs the instance via the openDAQ C function daqDataPacket_createConstantDataPacketWithDomain()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) domain-packet-p descriptor-p sample-count-p initial-value-p other-values-p other-value-count-p)
+  (with-daq-boxed-values ((coerced-domain-packet domain-packet :managed-pointer)
+                          (coerced-descriptor descriptor :managed-pointer)
+                          (coerced-sample-count sample-count nil)
+                          (coerced-initial-value initial-value nil)
+                          (coerced-other-values other-values nil)
+                          (coerced-other-value-count other-value-count nil))
+    (%adopt-pointer object (opendaq.low-level:data-packet/create-constant-data-packet-with-domain coerced-domain-packet coerced-descriptor coerced-sample-count coerced-initial-value coerced-other-values coerced-other-value-count)))
+    ))
+
+(defclass data-packet/with-domain (data-packet)
+  (
+   (%domain-packet-initarg :initarg :domain-packet :initform nil)
+   (%descriptor-initarg :initarg :descriptor :initform nil)
+   (%sample-count-initarg :initarg :sample-count :initform nil)
+   (%offset-initarg :initarg :offset :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object data-packet/with-domain)
+                                       &key (pointer nil pointer-p)
+                                            (domain-packet nil domain-packet-p)
+                                            (descriptor nil descriptor-p)
+                                            (sample-count nil sample-count-p)
+                                            (offset nil offset-p)
+                                       &allow-other-keys)
+  "Creates a Data packet with a given descriptor, sample count, memory size of each sample, and an optional implicit value.
+@param domainPacket The Data packet carrying domain data.
+@param descriptor The descriptor of the signal sending the data.
+@param sampleCount The number of samples in the packet.
+@param offset Optional packet offset parameter, used to calculate the data of the packet if the Data rule of the Signal descriptor is not explicit.
+
+Constructs the instance via the openDAQ C function daqDataPacket_createDataPacketWithDomain()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) domain-packet-p descriptor-p sample-count-p offset-p)
+  (with-daq-boxed-values ((coerced-domain-packet domain-packet :managed-pointer)
+                          (coerced-descriptor descriptor :managed-pointer)
+                          (coerced-sample-count sample-count nil)
+                          (coerced-offset offset :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:data-packet/create-data-packet-with-domain coerced-domain-packet coerced-descriptor coerced-sample-count coerced-offset)))
+    ))
+
+(defclass data-packet/with-external-memory (data-packet)
+  (
+   (%domain-packet-initarg :initarg :domain-packet :initform nil)
+   (%descriptor-initarg :initarg :descriptor :initform nil)
+   (%sample-count-initarg :initarg :sample-count :initform nil)
+   (%offset-initarg :initarg :offset :initform nil)
+   (%external-memory-initarg :initarg :external-memory :initform nil)
+   (%deleter-initarg :initarg :deleter :initform nil)
+   (%buffer-size-initarg :initarg :buffer-size :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object data-packet/with-external-memory)
+                                       &key (pointer nil pointer-p)
+                                            (domain-packet nil domain-packet-p)
+                                            (descriptor nil descriptor-p)
+                                            (sample-count nil sample-count-p)
+                                            (offset nil offset-p)
+                                            (external-memory nil external-memory-p)
+                                            (deleter nil deleter-p)
+                                            (buffer-size nil buffer-size-p)
+                                       &allow-other-keys)
+  "Creates a Data packet with a given descriptor, sample count, an optional packet offset, external memory location for data, custom deleter function and buffer size of external memory.
+@param descriptor The descriptor of the signal sending the data.
+@param sampleCount The number of samples in the packet.
+@param offset Optional packet offset parameter, used to calculate the data of the packet if the Data rule of the Signal descriptor is not explicit.
+@param externalMemory The pointer to the location of buffer data.
+@param deleter Custom deleter callback that is called when the packet is destroyed
+@param bufferSize The size of the external memory.
+Use this factory when pointer to create a packet which uses an existing memory. The memory should not be
+freed or written until the packet is destroyed. A deleter callback should be passed as a parameter that
+is called when the packet is destroyed. The callback should free the memory provided. If bufferSize parameter
+is equal to SizeT max, the buffer size will be calculated from the descriptor.
+
+Constructs the instance via the openDAQ C function daqDataPacket_createDataPacketWithExternalMemory()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) domain-packet-p descriptor-p sample-count-p offset-p external-memory-p deleter-p buffer-size-p)
+  (with-daq-boxed-values ((coerced-domain-packet domain-packet :managed-pointer)
+                          (coerced-descriptor descriptor :managed-pointer)
+                          (coerced-sample-count sample-count nil)
+                          (coerced-offset offset :daq-base-object)
+                          (coerced-external-memory external-memory nil)
+                          (coerced-deleter deleter :managed-pointer)
+                          (coerced-buffer-size buffer-size nil))
+    (%adopt-pointer object (opendaq.low-level:data-packet/create-data-packet-with-external-memory coerced-domain-packet coerced-descriptor coerced-sample-count coerced-offset coerced-external-memory coerced-deleter coerced-buffer-size)))
     ))
 
 (defclass data-rule (base-object)
@@ -2029,6 +2741,130 @@ Constructs the instance via the openDAQ C function daqDataRuleBuilder_createData
   (declare (ignore pointer))
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:data-rule-builder/create-data-rule-builder))
+    ))
+
+(defclass data-rule-builder/from-existing (data-rule-builder)
+  (
+   (%rule-to-copy-initarg :initarg :rule-to-copy :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object data-rule-builder/from-existing)
+                                       &key (pointer nil pointer-p)
+                                            (rule-to-copy nil rule-to-copy-p)
+                                       &allow-other-keys)
+  "Data rule copy factory that creates a configurable Data rule builder object from a possibly non-configurable Data rule.
+@param ruleToCopy The rule of which configuration should be copied.
+
+Constructs the instance via the openDAQ C function daqDataRuleBuilder_createDataRuleBuilderFromExisting()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) rule-to-copy-p)
+  (with-daq-boxed-values ((coerced-rule-to-copy rule-to-copy :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:data-rule-builder/create-data-rule-builder-from-existing coerced-rule-to-copy)))
+    ))
+
+(defclass data-rule/constant (data-rule)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object data-rule/constant)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Creates a DataRule with a Constant rule type configuration.
+
+Constructs the instance via the openDAQ C function daqDataRule_createConstantDataRule()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:data-rule/create-constant-data-rule))
+    ))
+
+(defclass data-rule/explicit (data-rule)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object data-rule/explicit)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Creates a DataRule with an Explicit rule type configuration and no parameters.
+
+Constructs the instance via the openDAQ C function daqDataRule_createExplicitDataRule()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:data-rule/create-explicit-data-rule))
+    ))
+
+(defclass data-rule/explicit-domain (data-rule)
+  (
+   (%min-expected-delta-initarg :initarg :min-expected-delta :initform nil)
+   (%max-expected-delta-initarg :initarg :max-expected-delta :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object data-rule/explicit-domain)
+                                       &key (pointer nil pointer-p)
+                                            (min-expected-delta nil min-expected-delta-p)
+                                            (max-expected-delta nil max-expected-delta-p)
+                                       &allow-other-keys)
+  "Creates a DataRule with an Explicit rule type configuration two optional parameters.
+@param minExpectedDelta The lowest expected distance between two samples.
+@param maxExpectedDelta The highest expected distance between two samples.
+Most often used for domain signals to specify estimates on how close together/far apart two
+subsequent samples might be.
+
+Constructs the instance via the openDAQ C function daqDataRule_createExplicitDomainDataRule()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) min-expected-delta-p max-expected-delta-p)
+  (with-daq-boxed-values ((coerced-min-expected-delta min-expected-delta :daq-base-object)
+                          (coerced-max-expected-delta max-expected-delta :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:data-rule/create-explicit-domain-data-rule coerced-min-expected-delta coerced-max-expected-delta)))
+    ))
+
+(defclass data-rule/from-builder (data-rule)
+  (
+   (%builder-initarg :initarg :builder :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object data-rule/from-builder)
+                                       &key (pointer nil pointer-p)
+                                            (builder nil builder-p)
+                                       &allow-other-keys)
+  "Creates a DataRulePtr from Builder.
+@param builder DataRule Builder
+
+Constructs the instance via the openDAQ C function daqDataRule_createDataRuleFromBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) builder-p)
+  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:data-rule/create-data-rule-from-builder coerced-builder)))
+    ))
+
+(defclass data-rule/linear (data-rule)
+  (
+   (%delta-initarg :initarg :delta :initform nil)
+   (%start-initarg :initarg :start :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object data-rule/linear)
+                                       &key (pointer nil pointer-p)
+                                            (delta nil delta-p)
+                                            (start nil start-p)
+                                       &allow-other-keys)
+  "Creates a DataRule with a Linear rule type configuration.
+@param delta Coefficient by which the input data is to be multiplied.
+@param start Constant that is added to the <em>scale * value</em> multiplication result.
+The scale and offset are stored within the `parameters` member of the Rule object
+with the scale being at the first position of the list, and the offset at the second.
+
+Constructs the instance via the openDAQ C function daqDataRule_createLinearDataRule()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) delta-p start-p)
+  (with-daq-boxed-values ((coerced-delta delta :daq-base-object)
+                          (coerced-start start :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:data-rule/create-linear-data-rule coerced-delta coerced-start)))
     ))
 
 (defclass deleter (base-object)
@@ -2104,6 +2940,32 @@ Constructs the instance via the openDAQ C function daqDevice_createClient()."
     (%adopt-pointer object (opendaq.low-level:device-domain/create-device-domain coerced-tick-resolution coerced-origin coerced-unit)))
     ))
 
+(defclass device-domain/with-reference-domain-info (device-domain)
+  (
+   (%tick-resolution-initarg :initarg :tick-resolution :initform nil)
+   (%origin-initarg :initarg :origin :initform nil)
+   (%unit-initarg :initarg :unit :initform nil)
+   (%reference-domain-info-initarg :initarg :reference-domain-info :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object device-domain/with-reference-domain-info)
+                                       &key (pointer nil pointer-p)
+                                            (tick-resolution nil tick-resolution-p)
+                                            (origin nil origin-p)
+                                            (unit nil unit-p)
+                                            (reference-domain-info nil reference-domain-info-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqDeviceDomain_createDeviceDomainWithReferenceDomainInfo()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) tick-resolution-p origin-p unit-p reference-domain-info-p)
+  (with-daq-boxed-values ((coerced-tick-resolution tick-resolution :daq-base-object)
+                          (coerced-origin origin :daq-string)
+                          (coerced-unit unit :managed-pointer)
+                          (coerced-reference-domain-info reference-domain-info :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:device-domain/create-device-domain-with-reference-domain-info coerced-tick-resolution coerced-origin coerced-unit coerced-reference-domain-info)))
+    ))
+
 (defclass device-info (property-object)
   (
    ))
@@ -2128,6 +2990,29 @@ Constructs the instance via the openDAQ C function daqDevice_createClient()."
   (with-daq-boxed-values ((coerced-name name :daq-string)
                           (coerced-connection-string connection-string :daq-string))
     (%adopt-pointer object (opendaq.low-level:device-info-config/create-device-info-config coerced-name coerced-connection-string)))
+    ))
+
+(defclass device-info-config/with-custom-sdk-version (device-info-config)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%connection-string-initarg :initarg :connection-string :initform nil)
+   (%sdk-version-initarg :initarg :sdk-version :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object device-info-config/with-custom-sdk-version)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (connection-string nil connection-string-p)
+                                            (sdk-version nil sdk-version-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqDeviceInfoConfig_createDeviceInfoConfigWithCustomSdkVersion()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p connection-string-p sdk-version-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-connection-string connection-string :daq-string)
+                          (coerced-sdk-version sdk-version :daq-string))
+    (%adopt-pointer object (opendaq.low-level:device-info-config/create-device-info-config-with-custom-sdk-version coerced-name coerced-connection-string coerced-sdk-version)))
     ))
 
 (defclass device-info-internal (base-object)
@@ -2264,6 +3149,26 @@ Constructs the instance via the openDAQ C function daqDimensionBuilder_createDim
   (%adopt-pointer object (opendaq.low-level:dimension-builder/create-dimension-builder))
     ))
 
+(defclass dimension-builder/from-existing (dimension-builder)
+  (
+   (%dimension-to-copy-initarg :initarg :dimension-to-copy :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object dimension-builder/from-existing)
+                                       &key (pointer nil pointer-p)
+                                            (dimension-to-copy nil dimension-to-copy-p)
+                                       &allow-other-keys)
+  "Creates a builder copy of the dimension object passed as parameter.
+@param dimensionToCopy The dimension object to be copied.
+
+Constructs the instance via the openDAQ C function daqDimensionBuilder_createDimensionBuilderFromExisting()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) dimension-to-copy-p)
+  (with-daq-boxed-values ((coerced-dimension-to-copy dimension-to-copy :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:dimension-builder/create-dimension-builder-from-existing coerced-dimension-to-copy)))
+    ))
+
 (defclass dimension-rule (base-object)
   (
    (%type-initarg :initarg :type :initform nil)
@@ -2302,6 +3207,149 @@ Constructs the instance via the openDAQ C function daqDimensionRuleBuilder_creat
   (declare (ignore pointer))
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:dimension-rule-builder/create-dimension-rule-builder))
+    ))
+
+(defclass dimension-rule-builder/from-existing (dimension-rule-builder)
+  (
+   (%rule-to-copy-initarg :initarg :rule-to-copy :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object dimension-rule-builder/from-existing)
+                                       &key (pointer nil pointer-p)
+                                            (rule-to-copy nil rule-to-copy-p)
+                                       &allow-other-keys)
+  "Dimension rule copy factory that creates a builder Rule object from a possibly non-configurable Rule.
+@param ruleToCopy The rule of which configuration should be copied.
+
+Constructs the instance via the openDAQ C function daqDimensionRuleBuilder_createDimensionRuleBuilderFromExisting()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) rule-to-copy-p)
+  (with-daq-boxed-values ((coerced-rule-to-copy rule-to-copy :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:dimension-rule-builder/create-dimension-rule-builder-from-existing coerced-rule-to-copy)))
+    ))
+
+(defclass dimension-rule/from-builder (dimension-rule)
+  (
+   (%builder-initarg :initarg :builder :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object dimension-rule/from-builder)
+                                       &key (pointer nil pointer-p)
+                                            (builder nil builder-p)
+                                       &allow-other-keys)
+  "Creates a DimensionRule using Builder
+@param builder DimensionRule Builder
+
+Constructs the instance via the openDAQ C function daqDimensionRule_createDimensionRuleFromBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) builder-p)
+  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:dimension-rule/create-dimension-rule-from-builder coerced-builder)))
+    ))
+
+(defclass dimension-rule/linear (dimension-rule)
+  (
+   (%delta-initarg :initarg :delta :initform nil)
+   (%start-initarg :initarg :start :initform nil)
+   (%size-initarg :initarg :size :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object dimension-rule/linear)
+                                       &key (pointer nil pointer-p)
+                                            (delta nil delta-p)
+                                            (start nil start-p)
+                                            (size nil size-p)
+                                       &allow-other-keys)
+  "Creates a Rule with a Linear rule type configuration.
+@param delta Coefficient by which the input data is to be multiplied.
+@param start Constant that is added to the <em>scale * value</em> multiplication result.
+@param size The size of the dimension described by the rule
+The scale and offset are stored within the `parameters` member of the Rule object
+with the scale being at the first position of the list, and the offset at the second.
+
+Constructs the instance via the openDAQ C function daqDimensionRule_createLinearDimensionRule()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) delta-p start-p size-p)
+  (with-daq-boxed-values ((coerced-delta delta :daq-base-object)
+                          (coerced-start start :daq-base-object)
+                          (coerced-size size nil))
+    (%adopt-pointer object (opendaq.low-level:dimension-rule/create-linear-dimension-rule coerced-delta coerced-start coerced-size)))
+    ))
+
+(defclass dimension-rule/list (dimension-rule)
+  (
+   (%list-initarg :initarg :list :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object dimension-rule/list)
+                                       &key (pointer nil pointer-p)
+                                            (list nil list-p)
+                                       &allow-other-keys)
+  "Creates a Rule with a List rule type configuration.
+@param list The list of dimension labels.
+The list is stored within the `parameters` member of the Rule object.
+
+Constructs the instance via the openDAQ C function daqDimensionRule_createListDimensionRule()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) list-p)
+  (with-daq-boxed-values ((coerced-list list :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:dimension-rule/create-list-dimension-rule coerced-list)))
+    ))
+
+(defclass dimension-rule/logarithmic (dimension-rule)
+  (
+   (%delta-initarg :initarg :delta :initform nil)
+   (%start-initarg :initarg :start :initform nil)
+   (%base-initarg :initarg :base :initform nil)
+   (%size-initarg :initarg :size :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object dimension-rule/logarithmic)
+                                       &key (pointer nil pointer-p)
+                                            (delta nil delta-p)
+                                            (start nil start-p)
+                                            (base nil base-p)
+                                            (size nil size-p)
+                                       &allow-other-keys)
+  "Creates a Rule with a Logarithmic rule type configuration.
+@param delta Coefficient by which the input data is to be multiplied.
+@param start Constant that is added to the <em>scale * value</em> multiplication result.
+@param base The base of the logarithm.
+@param size The size of the dimension described by the rule.
+
+Constructs the instance via the openDAQ C function daqDimensionRule_createLogarithmicDimensionRule()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) delta-p start-p base-p size-p)
+  (with-daq-boxed-values ((coerced-delta delta :daq-base-object)
+                          (coerced-start start :daq-base-object)
+                          (coerced-base base :daq-base-object)
+                          (coerced-size size nil))
+    (%adopt-pointer object (opendaq.low-level:dimension-rule/create-logarithmic-dimension-rule coerced-delta coerced-start coerced-base coerced-size)))
+    ))
+
+(defclass dimension/from-builder (dimension)
+  (
+   (%builder-initarg :initarg :builder :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object dimension/from-builder)
+                                       &key (pointer nil pointer-p)
+                                            (builder nil builder-p)
+                                       &allow-other-keys)
+  "Creates a Dimension using Builder
+@param builder Dimension Builder
+
+Constructs the instance via the openDAQ C function daqDimension_createDimensionFromBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) builder-p)
+  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:dimension/create-dimension-from-builder coerced-builder)))
     ))
 
 (defclass discovery-server (base-object)
@@ -2387,6 +3435,89 @@ Constructs the instance via the openDAQ C function daqDimensionRuleBuilder_creat
     (%adopt-pointer object (opendaq.low-level:enumeration-type/create-enumeration-type coerced-type-name coerced-enumerator-names coerced-first-enumerator-int-value)))
     ))
 
+(defclass enumeration-type/with-values (enumeration-type)
+  (
+   (%type-name-initarg :initarg :type-name :initform nil)
+   (%enumerators-initarg :initarg :enumerators :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object enumeration-type/with-values)
+                                       &key (pointer nil pointer-p)
+                                            (type-name nil type-name-p)
+                                            (enumerators nil enumerators-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqEnumerationType_createEnumerationTypeWithValues()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) type-name-p enumerators-p)
+  (with-daq-boxed-values ((coerced-type-name type-name :daq-string)
+                          (coerced-enumerators enumerators :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:enumeration-type/create-enumeration-type-with-values coerced-type-name coerced-enumerators)))
+    ))
+
+(defclass enumeration/with-int-value (enumeration)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%value-initarg :initarg :value :initform nil)
+   (%type-manager-initarg :initarg :type-manager :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object enumeration/with-int-value)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (value nil value-p)
+                                            (type-manager nil type-manager-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqEnumeration_createEnumerationWithIntValue()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p value-p type-manager-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-value value :daq-base-object)
+                          (coerced-type-manager type-manager :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:enumeration/create-enumeration-with-int-value coerced-name coerced-value coerced-type-manager)))
+    ))
+
+(defclass enumeration/with-int-value-and-type (enumeration)
+  (
+   (%type-initarg :initarg :type :initform nil)
+   (%value-initarg :initarg :value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object enumeration/with-int-value-and-type)
+                                       &key (pointer nil pointer-p)
+                                            (type nil type-p)
+                                            (value nil value-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqEnumeration_createEnumerationWithIntValueAndType()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) type-p value-p)
+  (with-daq-boxed-values ((coerced-type type :managed-pointer)
+                          (coerced-value value :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:enumeration/create-enumeration-with-int-value-and-type coerced-type coerced-value)))
+    ))
+
+(defclass enumeration/with-type (enumeration)
+  (
+   (%type-initarg :initarg :type :initform nil)
+   (%value-initarg :initarg :value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object enumeration/with-type)
+                                       &key (pointer nil pointer-p)
+                                            (type nil type-p)
+                                            (value nil value-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqEnumeration_createEnumerationWithType()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) type-p value-p)
+  (with-daq-boxed-values ((coerced-type type :managed-pointer)
+                          (coerced-value value :daq-string))
+    (%adopt-pointer object (opendaq.low-level:enumeration/create-enumeration-with-type coerced-type coerced-value)))
+    ))
+
 (defclass error-info (base-object)
   (
    ))
@@ -2416,6 +3547,46 @@ Constructs the instance via the openDAQ C function daqDimensionRuleBuilder_creat
   (when (and (not pointer-p) eval-p)
   (with-daq-boxed-values ((coerced-eval eval :daq-string))
     (%adopt-pointer object (opendaq.low-level:eval-value/create-eval-value coerced-eval)))
+    ))
+
+(defclass eval-value/args (eval-value)
+  (
+   (%eval-initarg :initarg :eval :initform nil)
+   (%args-initarg :initarg :args :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object eval-value/args)
+                                       &key (pointer nil pointer-p)
+                                            (eval nil eval-p)
+                                            (args nil args-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqEvalValue_createEvalValueArgs()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) eval-p args-p)
+  (with-daq-boxed-values ((coerced-eval eval :daq-string)
+                          (coerced-args args :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:eval-value/create-eval-value-args coerced-eval coerced-args)))
+    ))
+
+(defclass eval-value/func (eval-value)
+  (
+   (%eval-initarg :initarg :eval :initform nil)
+   (%func-initarg :initarg :func :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object eval-value/func)
+                                       &key (pointer nil pointer-p)
+                                            (eval nil eval-p)
+                                            (func nil func-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqEvalValue_createEvalValueFunc()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) eval-p func-p)
+  (with-daq-boxed-values ((coerced-eval eval :daq-string)
+                          (coerced-func func :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:eval-value/create-eval-value-func coerced-eval coerced-func)))
     ))
 
 (defclass event (base-object)
@@ -2493,6 +3664,54 @@ Constructs the instance via the openDAQ C function daqEventPacket_createEventPac
     (%adopt-pointer object (opendaq.low-level:event-packet/create-event-packet coerced-id coerced-params)))
     ))
 
+(defclass event-packet/data-descriptor-changed (event-packet)
+  (
+   (%data-descriptor-initarg :initarg :data-descriptor :initform nil)
+   (%domain-data-descriptor-initarg :initarg :domain-data-descriptor :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object event-packet/data-descriptor-changed)
+                                       &key (pointer nil pointer-p)
+                                            (data-descriptor nil data-descriptor-p)
+                                            (domain-data-descriptor nil domain-data-descriptor-p)
+                                       &allow-other-keys)
+  "Creates a DataDescriptorChanged Event packet.
+@param dataDescriptor The data descriptor of the value signal.
+@param domainDataDescriptor The data descriptor of the domain signal that carries domain data of the value signal.
+The ID of the packet is \"DATA_DESCRIPTOR_CHANGED\". Its parameters dictionary contains the keys \"DataDescriptor\"
+and \"DomainDataDescriptor\", carrying their respective Signal descriptor objects as values.
+
+Constructs the instance via the openDAQ C function daqEventPacket_createDataDescriptorChangedEventPacket()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) data-descriptor-p domain-data-descriptor-p)
+  (with-daq-boxed-values ((coerced-data-descriptor data-descriptor :managed-pointer)
+                          (coerced-domain-data-descriptor domain-data-descriptor :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:event-packet/create-data-descriptor-changed-event-packet coerced-data-descriptor coerced-domain-data-descriptor)))
+    ))
+
+(defclass event-packet/implicit-domain-gap-detected (event-packet)
+  (
+   (%diff-initarg :initarg :diff :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object event-packet/implicit-domain-gap-detected)
+                                       &key (pointer nil pointer-p)
+                                            (diff nil diff-p)
+                                       &allow-other-keys)
+  "Creates a ImplicitDomainGapDetected Event packet.
+@param diff The size of the gap in ticks or value
+The ID of the packet is \"IMPLICIT_DOMAIN_GAP_DETECTED\". Its parameters dictionary contains the key \"Diff\", which holds
+the size of the gap. The size can be negative, in which case it is an overlap of samples.
+
+Constructs the instance via the openDAQ C function daqEventPacket_createImplicitDomainGapDetectedEventPacket()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) diff-p)
+  (with-daq-boxed-values ((coerced-diff diff :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:event-packet/create-implicit-domain-gap-detected-event-packet coerced-diff)))
+    ))
+
 (defclass folder (component)
   (
    ))
@@ -2525,6 +3744,35 @@ Constructs the instance via the openDAQ C function daqFolderConfig_createFolder(
                           (coerced-parent parent :managed-pointer)
                           (coerced-local-id local-id :daq-string))
     (%adopt-pointer object (opendaq.low-level:folder-config/create-folder coerced-context coerced-parent coerced-local-id)))
+    ))
+
+(defclass folder-config/io-folder (folder-config)
+  (
+   (%context-initarg :initarg :context :initform nil)
+   (%parent-initarg :initarg :parent :initform nil)
+   (%local-id-initarg :initarg :local-id :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object folder-config/io-folder)
+                                       &key (pointer nil pointer-p)
+                                            (context nil context-p)
+                                            (parent nil parent-p)
+                                            (local-id nil local-id-p)
+                                       &allow-other-keys)
+  "Creates an IO folder.
+@param context The Context. Most often the creating function-block/device passes its own Context to the Folder.
+@param parent The parent component.
+@param localId The local ID of the parent.
+IO folders are folder created by device and may contain only channels and other IO folders.
+
+Constructs the instance via the openDAQ C function daqFolderConfig_createIoFolder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) context-p parent-p local-id-p)
+  (with-daq-boxed-values ((coerced-context context :managed-pointer)
+                          (coerced-parent parent :managed-pointer)
+                          (coerced-local-id local-id :daq-string))
+    (%adopt-pointer object (opendaq.low-level:folder-config/create-io-folder coerced-context coerced-parent coerced-local-id)))
     ))
 
 (defclass freezable (base-object)
@@ -2663,6 +3911,35 @@ Constructs the instance via the openDAQ C function daqInstanceBuilder_createInst
   (%adopt-pointer object (opendaq.low-level:instance-builder/create-instance-builder))
     ))
 
+(defclass instance/with-context (instance)
+  (
+   (%context-initarg :initarg :context :initform nil)
+   (%local-id-initarg :initarg :local-id :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object instance/with-context)
+                                       &key (pointer nil pointer-p)
+                                            (context nil context-p)
+                                            (local-id nil local-id-p)
+                                       &allow-other-keys)
+  "Creates an openDAQ instance.
+@param context The context object.
+@param localId The localID of the instance.
+openDAQ application uses instance as an entry point and a root component. The instance is the first openDAQ object
+that is created in the application.
+The caller should provide a localID that is a string that should be unique across multiple instances. If the
+instance sets a root device, the localID of the root device is automatically used as localID of the instance.
+The caller should provide configured module manager and context.
+
+Constructs the instance via the openDAQ C function daqInstance_createInstance()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) context-p local-id-p)
+  (with-daq-boxed-values ((coerced-context context :managed-pointer)
+                          (coerced-local-id local-id :daq-string))
+    (%adopt-pointer object (opendaq.low-level:instance/create-instance coerced-context coerced-local-id)))
+    ))
+
 (defclass io-folder-config (folder-config)
   (
    ))
@@ -2798,6 +4075,71 @@ Constructs the instance via the openDAQ C function daqLogFileInfoBuilder_createL
     (%adopt-pointer object (opendaq.low-level:logger-sink/create-basic-file-logger-sink coerced-file-name)))
     ))
 
+(defclass logger-sink/rotating-file (logger-sink)
+  (
+   (%file-name-initarg :initarg :file-name :initform nil)
+   (%max-file-byte-size-initarg :initarg :max-file-byte-size :initform nil)
+   (%max-files-initarg :initarg :max-files :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object logger-sink/rotating-file)
+                                       &key (pointer nil pointer-p)
+                                            (file-name nil file-name-p)
+                                            (max-file-byte-size nil max-file-byte-size-p)
+                                            (max-files nil max-files-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqLoggerSink_createRotatingFileLoggerSink()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) file-name-p max-file-byte-size-p max-files-p)
+  (with-daq-boxed-values ((coerced-file-name file-name :daq-string)
+                          (coerced-max-file-byte-size max-file-byte-size nil)
+                          (coerced-max-files max-files nil))
+    (%adopt-pointer object (opendaq.low-level:logger-sink/create-rotating-file-logger-sink coerced-file-name coerced-max-file-byte-size coerced-max-files)))
+    ))
+
+(defclass logger-sink/std-err (logger-sink)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object logger-sink/std-err)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqLoggerSink_createStdErrLoggerSink()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:logger-sink/create-std-err-logger-sink))
+    ))
+
+(defclass logger-sink/std-out (logger-sink)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object logger-sink/std-out)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqLoggerSink_createStdOutLoggerSink()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:logger-sink/create-std-out-logger-sink))
+    ))
+
+(defclass logger-sink/win-debug (logger-sink)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object logger-sink/win-debug)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqLoggerSink_createWinDebugLoggerSink()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:logger-sink/create-win-debug-logger-sink))
+    ))
+
 (defclass logger-thread-pool (base-object)
   (
    ))
@@ -2900,6 +4242,23 @@ Constructs the instance via the openDAQ C function daqLogFileInfoBuilder_createL
 
 
 
+(defclass module-manager/multiple-paths (module-manager)
+  (
+   (%paths-initarg :initarg :paths :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object module-manager/multiple-paths)
+                                       &key (pointer nil pointer-p)
+                                            (paths nil paths-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqModuleManager_createModuleManagerMultiplePaths()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) paths-p)
+  (with-daq-boxed-values ((coerced-paths paths :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:module-manager/create-module-manager-multiple-paths coerced-paths)))
+    ))
+
 (defclass multi-reader (sample-reader)
   (
    (%signals-initarg :initarg :signals :initform nil)
@@ -2967,6 +4326,67 @@ Constructs the instance via the openDAQ C function daqLogFileInfoBuilder_createL
                           (coerced-valid valid :daq-bool)
                           (coerced-offset offset :daq-base-object))
     (%adopt-pointer object (opendaq.low-level:multi-reader-status/create-multi-reader-status coerced-main-descriptor coerced-event-packets coerced-valid coerced-offset)))
+    ))
+
+(defclass multi-reader/ex (multi-reader)
+  (
+   (%signals-initarg :initarg :signals :initform nil)
+   (%value-read-type-initarg :initarg :value-read-type :initform nil)
+   (%domain-read-type-initarg :initarg :domain-read-type :initform nil)
+   (%mode-initarg :initarg :mode :initform nil)
+   (%timeout-type-initarg :initarg :timeout-type :initform nil)
+   (%required-common-sample-rate-initarg :initarg :required-common-sample-rate :initform nil)
+   (%start-on-full-unit-of-domain-initarg :initarg :start-on-full-unit-of-domain :initform nil)
+   (%min-read-count-initarg :initarg :min-read-count :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object multi-reader/ex)
+                                       &key (pointer nil pointer-p)
+                                            (signals nil signals-p)
+                                            (value-read-type nil value-read-type-p)
+                                            (domain-read-type nil domain-read-type-p)
+                                            (mode nil mode-p)
+                                            (timeout-type nil timeout-type-p)
+                                            (required-common-sample-rate nil required-common-sample-rate-p)
+                                            (start-on-full-unit-of-domain nil start-on-full-unit-of-domain-p)
+                                            (min-read-count nil min-read-count-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqMultiReader_createMultiReaderEx()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) signals-p value-read-type-p domain-read-type-p mode-p timeout-type-p required-common-sample-rate-p start-on-full-unit-of-domain-p min-read-count-p)
+  (with-daq-boxed-values ((coerced-signals signals :managed-pointer)
+                          (coerced-value-read-type value-read-type nil)
+                          (coerced-domain-read-type domain-read-type nil)
+                          (coerced-mode mode nil)
+                          (coerced-timeout-type timeout-type nil)
+                          (coerced-required-common-sample-rate required-common-sample-rate nil)
+                          (coerced-start-on-full-unit-of-domain start-on-full-unit-of-domain :daq-bool)
+                          (coerced-min-read-count min-read-count nil))
+    (%adopt-pointer object (opendaq.low-level:multi-reader/create-multi-reader-ex coerced-signals coerced-value-read-type coerced-domain-read-type coerced-mode coerced-timeout-type coerced-required-common-sample-rate coerced-start-on-full-unit-of-domain coerced-min-read-count)))
+    ))
+
+(defclass multi-reader/from-existing (multi-reader)
+  (
+   (%invalidated-reader-initarg :initarg :invalidated-reader :initform nil)
+   (%value-read-type-initarg :initarg :value-read-type :initform nil)
+   (%domain-read-type-initarg :initarg :domain-read-type :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object multi-reader/from-existing)
+                                       &key (pointer nil pointer-p)
+                                            (invalidated-reader nil invalidated-reader-p)
+                                            (value-read-type nil value-read-type-p)
+                                            (domain-read-type nil domain-read-type-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqMultiReader_createMultiReaderFromExisting()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) invalidated-reader-p value-read-type-p domain-read-type-p)
+  (with-daq-boxed-values ((coerced-invalidated-reader invalidated-reader :managed-pointer)
+                          (coerced-value-read-type value-read-type nil)
+                          (coerced-domain-read-type domain-read-type nil))
+    (%adopt-pointer object (opendaq.low-level:multi-reader/create-multi-reader-from-existing coerced-invalidated-reader coerced-value-read-type coerced-domain-read-type)))
     ))
 
 (defclass mutex (base-object)
@@ -3050,6 +4470,23 @@ Constructs the instance via the openDAQ C function daqLogFileInfoBuilder_createL
     (%adopt-pointer object (opendaq.low-level:packet-reader/create-packet-reader coerced-signal)))
     ))
 
+(defclass packet-reader/from-port (packet-reader)
+  (
+   (%port-initarg :initarg :port :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object packet-reader/from-port)
+                                       &key (pointer nil pointer-p)
+                                            (port nil port-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqPacketReader_createPacketReaderFromPort()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) port-p)
+  (with-daq-boxed-values ((coerced-port port :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:packet-reader/create-packet-reader-from-port coerced-port)))
+    ))
+
 (defclass permission-manager (base-object)
   (
    (%parent-initarg :initarg :parent :initform nil)
@@ -3090,6 +4527,26 @@ Constructs the instance via the openDAQ C function daqPermissionMaskBuilder_crea
   (declare (ignore pointer))
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:permission-mask-builder/create-permission-mask-builder))
+    ))
+
+(defclass permission-mask-builder/from-mask (permission-mask-builder)
+  (
+   (%permission-mask-initarg :initarg :permission-mask :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object permission-mask-builder/from-mask)
+                                       &key (pointer nil pointer-p)
+                                            (permission-mask nil permission-mask-p)
+                                       &allow-other-keys)
+  "Creates a permission mask builder object from integer permission mask.
+@param permissionMask Permission mask defined as 64-bit integer where each bit corresponds to a specific permission defined in Permission enum.
+
+Constructs the instance via the openDAQ C function daqPermissionMaskBuilder_createPermissionMaskBuilderFromMask()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) permission-mask-p)
+  (with-daq-boxed-values ((coerced-permission-mask permission-mask nil))
+    (%adopt-pointer object (opendaq.low-level:permission-mask-builder/create-permission-mask-builder-from-mask coerced-permission-mask)))
     ))
 
 (defclass permissions (base-object)
@@ -3164,6 +4621,374 @@ Constructs the instance via the openDAQ C function daqPropertyBuilder_createProp
     (%adopt-pointer object (opendaq.low-level:property-builder/create-property-builder coerced-name)))
     ))
 
+(defclass property-builder/bool (property-builder)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-builder/bool)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                       &allow-other-keys)
+  "Creates a boolean Property builder object with a specified name and default value.
+@param name The name of the Property.
+@param defaultValue The boolean default value. Can be an EvalValue.
+The Property Value type is `ctBool`. Note that the defaultValue parameter can be EvalValue.
+
+Constructs the instance via the openDAQ C function daqPropertyBuilder_createBoolPropertyBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property-builder/create-bool-property-builder coerced-name coerced-default-value)))
+    ))
+
+(defclass property-builder/dict (property-builder)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-builder/dict)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                       &allow-other-keys)
+  "Creates a dictionary Property builder object with a specified name and default value.
+@param name The name of the Property.
+@param defaultValue The dictionary default value.
+The Property Value type is `ctDict`. The dictionary passed as default value must have homogeneous key
+and value lists (all dictionary keys/values must be of the same type).
+The Property's Item type field will be set according to defaultValue dictionary Item type. The same goes for
+the Key type.
+TODO: defaultValue can be an EvalValue once dictionaries are supported.
+
+Constructs the instance via the openDAQ C function daqPropertyBuilder_createDictPropertyBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:property-builder/create-dict-property-builder coerced-name coerced-default-value)))
+    ))
+
+(defclass property-builder/enumeration (property-builder)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-builder/enumeration)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                       &allow-other-keys)
+  "Creates an Enumeration Property builder object with a specified name and default value.
+@param name The name of the Property.
+@param defaultValue The default structure value.
+The Property Value type is `ctEnumeration`.
+
+Constructs the instance via the openDAQ C function daqPropertyBuilder_createEnumerationPropertyBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:property-builder/create-enumeration-property-builder coerced-name coerced-default-value)))
+    ))
+
+(defclass property-builder/float (property-builder)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-builder/float)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                       &allow-other-keys)
+  "Creates a floating point value Property builder object with a specified name and default value.
+@param name The name of the Property.
+@param defaultValue The float default value. Can be an EvalValue
+The Property Value type is `ctFloat`. Note that the defaultValue parameter can be EvalValue.
+
+Constructs the instance via the openDAQ C function daqPropertyBuilder_createFloatPropertyBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property-builder/create-float-property-builder coerced-name coerced-default-value)))
+    ))
+
+(defclass property-builder/function (property-builder)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%callable-info-initarg :initarg :callable-info :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-builder/function)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (callable-info nil callable-info-p)
+                                       &allow-other-keys)
+  "Creates a function- or procedure-type Property builder object. Requires the a CallableInfo object to specify the argument type/count and function return type.
+@param name The name of the Property.
+@param callableInfo Information about the callable argument type/count and return type.
+The Property Value type is `ctFunction` or `ctProc`, depending on if `callableInfo` contains information
+on the return type or not.
+
+Constructs the instance via the openDAQ C function daqPropertyBuilder_createFunctionPropertyBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p callable-info-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-callable-info callable-info :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:property-builder/create-function-property-builder coerced-name coerced-callable-info)))
+    ))
+
+(defclass property-builder/int (property-builder)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-builder/int)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                       &allow-other-keys)
+  "Creates an integer Property builder object with a specified name and default value.
+@param name The name of the Property.
+@param defaultValue The integer default value. Can be an EvalValue.
+The Property Value type is `ctInt`. Note that the defaultValue parameter can be EvalValue.
+
+Constructs the instance via the openDAQ C function daqPropertyBuilder_createIntPropertyBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property-builder/create-int-property-builder coerced-name coerced-default-value)))
+    ))
+
+(defclass property-builder/list (property-builder)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-builder/list)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                       &allow-other-keys)
+  "Creates a list Property builder object with a specified name and default value.
+@param name The name of the Property.
+@param defaultValue The list default value. Can be an EvalValue.
+The Property Value type is `ctList`. Note that the defaultValue parameter can be EvalValue.
+The list passed as `defaultValue` must be homogeneous.
+The Property's Item type field will be set according to defaultValue list type.
+
+Constructs the instance via the openDAQ C function daqPropertyBuilder_createListPropertyBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:property-builder/create-list-property-builder coerced-name coerced-default-value)))
+    ))
+
+(defclass property-builder/object (property-builder)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-builder/object)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                       &allow-other-keys)
+  "Creates an object-type Property builder object with a specified name and default value..
+@param name The name of the Property.
+@param defaultValue The Property object default value.
+The Property Value type is `ctObject`. Object properties cannot be have any metadata other than
+their name, description, and default value configured. The PropertyObject default value can only
+be a base PropertyObject type (not a descendant type).
+If the defaultValue is not specified, it will automatically be configured to an empty Property Object.
+
+Constructs the instance via the openDAQ C function daqPropertyBuilder_createObjectPropertyBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:property-builder/create-object-property-builder coerced-name coerced-default-value)))
+    ))
+
+(defclass property-builder/ratio (property-builder)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-builder/ratio)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                       &allow-other-keys)
+  "Creates a ratio Property builder object with a specified name and default value.
+@param name The name of the Property.
+@param defaultValue The ratio default value.
+The Property Value type is `ctRatio`.
+TODO: defaultValue can be an EvalValue once ratios are supported.
+
+Constructs the instance via the openDAQ C function daqPropertyBuilder_createRatioPropertyBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property-builder/create-ratio-property-builder coerced-name coerced-default-value)))
+    ))
+
+(defclass property-builder/reference (property-builder)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%referenced-property-eval-initarg :initarg :referenced-property-eval :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-builder/reference)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (referenced-property-eval nil referenced-property-eval-p)
+                                       &allow-other-keys)
+  "Creates a Reference Property builder object that points at a property specified in the `referencedProperty` parameter.
+@param name The name of the Property.
+@param referencedPropertyEval The evaluation expression that evaluates to another property.
+
+Constructs the instance via the openDAQ C function daqPropertyBuilder_createReferencePropertyBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p referenced-property-eval-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-referenced-property-eval referenced-property-eval :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:property-builder/create-reference-property-builder coerced-name coerced-referenced-property-eval)))
+    ))
+
+(defclass property-builder/selection (property-builder)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%selection-values-initarg :initarg :selection-values :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-builder/selection)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (selection-values nil selection-values-p)
+                                            (default-value nil default-value-p)
+                                       &allow-other-keys)
+  "Creates a Selection Property builder object with a list of selection values. The default value is an integer index into the default selected value.
+@param name The name of the Property.
+@param selectionValues The list of selectable values.
+@param defaultValue The default index into the list of selection values.
+The Property Value type is `ctInt`.
+
+Constructs the instance via the openDAQ C function daqPropertyBuilder_createSelectionPropertyBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p selection-values-p default-value-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-selection-values selection-values :managed-pointer)
+                          (coerced-default-value default-value :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property-builder/create-selection-property-builder coerced-name coerced-selection-values coerced-default-value)))
+    ))
+
+(defclass property-builder/sparse-selection (property-builder)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%selection-values-initarg :initarg :selection-values :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-builder/sparse-selection)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (selection-values nil selection-values-p)
+                                            (default-value nil default-value-p)
+                                       &allow-other-keys)
+  "Creates a Selection Property builder object with a dictionary of selection values. The default value is an integer key into the provided dictionary.
+@param name The name of the Property.
+@param selectionValues The dictionary of selectable values. The key type must be `ctInt`.
+@param defaultValue The default key into the list of selection values.
+The Property Value type is `ctInt`. The key type of the Selection values dictionary must be `ctInt`.
+
+Constructs the instance via the openDAQ C function daqPropertyBuilder_createSparseSelectionPropertyBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p selection-values-p default-value-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-selection-values selection-values :managed-pointer)
+                          (coerced-default-value default-value :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property-builder/create-sparse-selection-property-builder coerced-name coerced-selection-values coerced-default-value)))
+    ))
+
+(defclass property-builder/string (property-builder)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-builder/string)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                       &allow-other-keys)
+  "Creates a string Property builder object with a specified name and default value.
+@param name The name of the Property.
+@param defaultValue The integer default value. Can be an EvalValue.
+The Property Value type is `ctString`. Note that the defaultValue parameter can be EvalValue.
+
+Constructs the instance via the openDAQ C function daqPropertyBuilder_createStringPropertyBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :daq-string))
+    (%adopt-pointer object (opendaq.low-level:property-builder/create-string-property-builder coerced-name coerced-default-value)))
+    ))
+
+(defclass property-builder/struct (property-builder)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-builder/struct)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                       &allow-other-keys)
+  "Creates a Struct Property builder object with a specified name and default value.
+@param name The name of the Property.
+@param defaultValue The default structure value.
+The Property Value type is `ctStruct`.
+
+Constructs the instance via the openDAQ C function daqPropertyBuilder_createStructPropertyBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:property-builder/create-struct-property-builder coerced-name coerced-default-value)))
+    ))
+
 (defclass property-internal (base-object)
   (
    ))
@@ -3226,6 +5051,30 @@ Constructs the instance via the openDAQ C function daqPropertyObjectClassBuilder
     (%adopt-pointer object (opendaq.low-level:property-object-class-builder/create-property-object-class-builder coerced-name)))
     ))
 
+(defclass property-object-class-builder/with-manager (property-object-class-builder)
+  (
+   (%manager-initarg :initarg :manager :initform nil)
+   (%name-initarg :initarg :name :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-object-class-builder/with-manager)
+                                       &key (pointer nil pointer-p)
+                                            (manager nil manager-p)
+                                            (name nil name-p)
+                                       &allow-other-keys)
+  "Creates a Property object class configuration object with a given name, and a reference to the Type manager.
+@param manager The Property object class manager object.
+@param name The name of the class.
+
+Constructs the instance via the openDAQ C function daqPropertyObjectClassBuilder_createPropertyObjectClassBuilderWithManager()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) manager-p name-p)
+  (with-daq-boxed-values ((coerced-manager manager :managed-pointer)
+                          (coerced-name name :daq-string))
+    (%adopt-pointer object (opendaq.low-level:property-object-class-builder/create-property-object-class-builder-with-manager coerced-manager coerced-name)))
+    ))
+
 (defclass property-object-class-internal (base-object)
   (
    ))
@@ -3243,6 +5092,30 @@ Constructs the instance via the openDAQ C function daqPropertyObjectClassBuilder
    ))
 
 
+
+(defclass property-object/with-class-and-manager (property-object)
+  (
+   (%manager-initarg :initarg :manager :initform nil)
+   (%class-name-initarg :initarg :class-name :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-object/with-class-and-manager)
+                                       &key (pointer nil pointer-p)
+                                            (manager nil manager-p)
+                                            (class-name nil class-name-p)
+                                       &allow-other-keys)
+  "Creates a Property object that inherits the properties of a class added to the Type manager with the specified name.
+@param manager The Type manager manager.
+@param className The name of the class from which the Property object inherits its properties.
+
+Constructs the instance via the openDAQ C function daqPropertyObject_createPropertyObjectWithClassAndManager()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) manager-p class-name-p)
+  (with-daq-boxed-values ((coerced-manager manager :managed-pointer)
+                          (coerced-class-name class-name :daq-string))
+    (%adopt-pointer object (opendaq.low-level:property-object/create-property-object-with-class-and-manager coerced-manager coerced-class-name)))
+    ))
 
 (defclass property-value-event-args (event-args)
   (
@@ -3271,6 +5144,422 @@ Constructs the instance via the openDAQ C function daqPropertyObjectClassBuilder
                           (coerced-type type nil)
                           (coerced-is-updating is-updating :daq-bool))
     (%adopt-pointer object (opendaq.low-level:property-value-event-args/create-property-value-event-args coerced-prop coerced-value coerced-old-value coerced-type coerced-is-updating)))
+    ))
+
+(defclass property/bool (property)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   (%visible-initarg :initarg :visible :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property/bool)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                            (visible nil visible-p)
+                                       &allow-other-keys)
+  "Creates a boolean Property object with a default value and Visible state.
+@param name The name of the Property.
+@param defaultValue The boolean default value. Can be an EvalValue.
+@param visible If true, the Property is visible. Can be an EvalValue.
+The Property Value type is `ctBool`. Note that the defaultValue and visible parameters can be EvalValues.
+
+Constructs the instance via the openDAQ C function daqProperty_createBoolProperty()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p visible-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :daq-base-object)
+                          (coerced-visible visible :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property/create-bool-property coerced-name coerced-default-value coerced-visible)))
+    ))
+
+(defclass property/dict (property)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   (%visible-initarg :initarg :visible :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property/dict)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                            (visible nil visible-p)
+                                       &allow-other-keys)
+  "Creates a dictionary Property object with a default value and Visible state.
+@param name The name of the Property.
+@param defaultValue The dictionary default value.
+@param visible If true, the Property is visible.  Can be an EvalValue.
+The Property Value type is `ctDict`. The visible parameter can be an EvalValue. The dictionary passed as
+default value must have homogeneous key and value lists.
+The Property's Item type field will be set according to defaultValue dictionary Item type. The same goes for
+the Key type.
+TODO: defaultValue can be an EvalValue once dictionaries are supported.
+
+Constructs the instance via the openDAQ C function daqProperty_createDictProperty()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p visible-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :managed-pointer)
+                          (coerced-visible visible :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property/create-dict-property coerced-name coerced-default-value coerced-visible)))
+    ))
+
+(defclass property/enumeration (property)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   (%visible-initarg :initarg :visible :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property/enumeration)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                            (visible nil visible-p)
+                                       &allow-other-keys)
+  "Creates an Enumeration Property object with a default value and its visible state.
+@param name The name of the Property.
+@param defaultValue The default structure value.
+@param visible If true, the Property is visible. Can be an EvalValue.
+The Property Value type is `ctEnumeration`.
+
+Constructs the instance via the openDAQ C function daqProperty_createEnumerationProperty()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p visible-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :managed-pointer)
+                          (coerced-visible visible :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property/create-enumeration-property coerced-name coerced-default-value coerced-visible)))
+    ))
+
+(defclass property/float (property)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   (%visible-initarg :initarg :visible :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property/float)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                            (visible nil visible-p)
+                                       &allow-other-keys)
+  "Creates a floating point value Property object with a default value and Visible state.
+@param name The name of the Property.
+@param defaultValue The float default value. Can be an EvalValue.
+@param visible If true, the Property is visible. Can be an EvalValue.
+The Property Value type is `ctFloat`. Note that the defaultValue and visible parameters can be EvalValues.
+
+Constructs the instance via the openDAQ C function daqProperty_createFloatProperty()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p visible-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :daq-base-object)
+                          (coerced-visible visible :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property/create-float-property coerced-name coerced-default-value coerced-visible)))
+    ))
+
+(defclass property/function (property)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%callable-info-initarg :initarg :callable-info :initform nil)
+   (%visible-initarg :initarg :visible :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property/function)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (callable-info nil callable-info-p)
+                                            (visible nil visible-p)
+                                       &allow-other-keys)
+  "Creates a function- or procedure-type Property object. Requires the a CallableInfo object to specify the argument type/count and function return type.
+@param name The name of the Property.
+@param callableInfo Information about the callable argument type/count and return type.
+@param visible If true, the Property is visible. Can be an EvalValue.
+The Property Value type is `ctFunction` or `ctProc`, depending on if `callableInfo` contains information
+on the return type or not. Note that the visible parameter can be an EvalValue.
+
+Constructs the instance via the openDAQ C function daqProperty_createFunctionProperty()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p callable-info-p visible-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-callable-info callable-info :managed-pointer)
+                          (coerced-visible visible :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property/create-function-property coerced-name coerced-callable-info coerced-visible)))
+    ))
+
+(defclass property/int (property)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   (%visible-initarg :initarg :visible :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property/int)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                            (visible nil visible-p)
+                                       &allow-other-keys)
+  "Creates an integer Property object with a default value and Visible state.
+@param name The name of the Property.
+@param defaultValue The integer default value. Can be an EvalValue.
+@param visible If true, the Property is visible. Can be an EvalValue.
+The Property Value type is `ctInt`. Note that the defaultValue and visible parameters can be EvalValues.
+
+Constructs the instance via the openDAQ C function daqProperty_createIntProperty()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p visible-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :daq-base-object)
+                          (coerced-visible visible :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property/create-int-property coerced-name coerced-default-value coerced-visible)))
+    ))
+
+(defclass property/list (property)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   (%visible-initarg :initarg :visible :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property/list)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                            (visible nil visible-p)
+                                       &allow-other-keys)
+  "Creates a list Property object with a default value and Visible state.
+@param name The name of the Property.
+@param defaultValue The list default value. Can be an EvalValue.
+@param visible If true, the Property is visible. Can be an EvalValue.
+The Property Value type is `ctList`. Note that the defaultValue and visible parameters can be EvalValues.
+The list passed as `defaultValue` must be homogeneous.
+The Property's Item type field will be set according to defaultValue list type.
+
+Constructs the instance via the openDAQ C function daqProperty_createListProperty()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p visible-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :managed-pointer)
+                          (coerced-visible visible :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property/create-list-property coerced-name coerced-default-value coerced-visible)))
+    ))
+
+(defclass property/object (property)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property/object)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                       &allow-other-keys)
+  "Creates an object-type Property object with a default value and optional Visible state.
+@param name The name of the Property.
+@param defaultValue The Property object default value.
+The Property Value type is `ctObject`. Object properties cannot be have any metadata other than
+their name, description, and default value configured. The PropertyObject default value can only
+be a base PropertyObject type (not a descendant type).
+If the defaultValue is not specified, it will automatically be configured to an empty Property Object.
+
+Constructs the instance via the openDAQ C function daqProperty_createObjectProperty()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:property/create-object-property coerced-name coerced-default-value)))
+    ))
+
+(defclass property/ratio (property)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   (%visible-initarg :initarg :visible :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property/ratio)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                            (visible nil visible-p)
+                                       &allow-other-keys)
+  "Creates a ratio Property object with a default value and Visible state.
+@param name The name of the Property.
+@param defaultValue The ratio default value.
+@param visible If true, the Property is visible. Can be an EvalValue.
+The Property Value type is `ctRatio`. Note that the visible parameter can be an EvalValue.
+TODO: defaultValue can be an EvalValue once ratios are supported.
+
+Constructs the instance via the openDAQ C function daqProperty_createRatioProperty()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p visible-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :daq-base-object)
+                          (coerced-visible visible :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property/create-ratio-property coerced-name coerced-default-value coerced-visible)))
+    ))
+
+(defclass property/reference (property)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%referenced-property-eval-initarg :initarg :referenced-property-eval :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property/reference)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (referenced-property-eval nil referenced-property-eval-p)
+                                       &allow-other-keys)
+  "Creates a Reference Property object that points at a property specified in the `referencedProperty` parameter.
+@param name The name of the Property.
+@param referencedPropertyEval The evaluation expression that evaluates to another property.
+
+Constructs the instance via the openDAQ C function daqProperty_createReferenceProperty()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p referenced-property-eval-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-referenced-property-eval referenced-property-eval :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:property/create-reference-property coerced-name coerced-referenced-property-eval)))
+    ))
+
+(defclass property/selection (property)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%selection-values-initarg :initarg :selection-values :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   (%visible-initarg :initarg :visible :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property/selection)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (selection-values nil selection-values-p)
+                                            (default-value nil default-value-p)
+                                            (visible nil visible-p)
+                                       &allow-other-keys)
+  "Creates a Selection Property object with a list of selection values. The default value is an integer index into the default selected value.
+@param name The name of the Property.
+@param selectionValues The list of selectable values.
+@param defaultValue The default index into the list of selection values.
+@param visible If true, the Property is visible. Can be an EvalValue.
+The Property Value type is `ctInt`.
+
+Constructs the instance via the openDAQ C function daqProperty_createSelectionProperty()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p selection-values-p default-value-p visible-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-selection-values selection-values :managed-pointer)
+                          (coerced-default-value default-value :daq-base-object)
+                          (coerced-visible visible :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property/create-selection-property coerced-name coerced-selection-values coerced-default-value coerced-visible)))
+    ))
+
+(defclass property/sparse-selection (property)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%selection-values-initarg :initarg :selection-values :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   (%visible-initarg :initarg :visible :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property/sparse-selection)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (selection-values nil selection-values-p)
+                                            (default-value nil default-value-p)
+                                            (visible nil visible-p)
+                                       &allow-other-keys)
+  "Creates a Selection Property object with a dictionary of selection values. The default value is an integer key into the provided dictionary.
+@param name The name of the Property.
+@param selectionValues The dictionary of selectable values. The key type must be `ctInt`.
+@param defaultValue The default key into the list of selection values.
+@param visible If true, the Property is visible. Can be an EvalValue.
+The Property Value type is `ctInt`. The key type of the Selection values dictionary must be `ctInt`.
+
+Constructs the instance via the openDAQ C function daqProperty_createSparseSelectionProperty()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p selection-values-p default-value-p visible-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-selection-values selection-values :managed-pointer)
+                          (coerced-default-value default-value :daq-base-object)
+                          (coerced-visible visible :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property/create-sparse-selection-property coerced-name coerced-selection-values coerced-default-value coerced-visible)))
+    ))
+
+(defclass property/string (property)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   (%visible-initarg :initarg :visible :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property/string)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                            (visible nil visible-p)
+                                       &allow-other-keys)
+  "Creates a string Property object with a default value and Visible state.
+@param name The name of the Property.
+@param defaultValue The integer default value. Can be an EvalValue.
+@param visible If true, the Property is visible. Can be an EvalValue.
+The Property Value type is `ctString`. Note that the defaultValue and visible parameters can be EvalValues.
+
+Constructs the instance via the openDAQ C function daqProperty_createStringProperty()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p visible-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :daq-string)
+                          (coerced-visible visible :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property/create-string-property coerced-name coerced-default-value coerced-visible)))
+    ))
+
+(defclass property/struct (property)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%default-value-initarg :initarg :default-value :initform nil)
+   (%visible-initarg :initarg :visible :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property/struct)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (default-value nil default-value-p)
+                                            (visible nil visible-p)
+                                       &allow-other-keys)
+  "Creates a Struct Property object with a default value and its visible state.
+@param name The name of the Property.
+@param defaultValue The default structure value.
+@param visible If true, the Property is visible. Can be an EvalValue.
+The Property Value type is `ctStruct`.
+
+Constructs the instance via the openDAQ C function daqProperty_createStructProperty()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p default-value-p visible-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-default-value default-value :managed-pointer)
+                          (coerced-visible visible :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:property/create-struct-property coerced-name coerced-default-value coerced-visible)))
     ))
 
 (defclass range (base-object)
@@ -3381,6 +5670,26 @@ Constructs the instance via the openDAQ C function daqReferenceDomainInfoBuilder
   (%adopt-pointer object (opendaq.low-level:reference-domain-info-builder/create-reference-domain-info-builder))
     ))
 
+(defclass reference-domain-info-builder/from-existing (reference-domain-info-builder)
+  (
+   (%reference-domain-info-to-copy-initarg :initarg :reference-domain-info-to-copy :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object reference-domain-info-builder/from-existing)
+                                       &key (pointer nil pointer-p)
+                                            (reference-domain-info-to-copy nil reference-domain-info-to-copy-p)
+                                       &allow-other-keys)
+  "Reference Domain Info copy factory that creates a Reference Domain Info builder object from a different Reference Domain Info, copying its parameters.
+@param referenceDomainInfoToCopy The Reference Domain Info of which configuration should be copied.
+
+Constructs the instance via the openDAQ C function daqReferenceDomainInfoBuilder_createReferenceDomainInfoBuilderFromExisting()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) reference-domain-info-to-copy-p)
+  (with-daq-boxed-values ((coerced-reference-domain-info-to-copy reference-domain-info-to-copy :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:reference-domain-info-builder/create-reference-domain-info-builder-from-existing coerced-reference-domain-info-to-copy)))
+    ))
+
 (defclass removable (base-object)
   (
    ))
@@ -3453,11 +5762,83 @@ Constructs the instance via the openDAQ C function daqScalingBuilder_createScali
   (%adopt-pointer object (opendaq.low-level:scaling-builder/create-scaling-builder))
     ))
 
+(defclass scaling-builder/from-existing (scaling-builder)
+  (
+   (%scaling-to-copy-initarg :initarg :scaling-to-copy :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object scaling-builder/from-existing)
+                                       &key (pointer nil pointer-p)
+                                            (scaling-to-copy nil scaling-to-copy-p)
+                                       &allow-other-keys)
+  "Scaling builder copy factory that creates a configurable Scaling object from a non-configurable one.
+@param scalingToCopy The scaling of which configuration should be copied.
+
+Constructs the instance via the openDAQ C function daqScalingBuilder_createScalingBuilderFromExisting()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) scaling-to-copy-p)
+  (with-daq-boxed-values ((coerced-scaling-to-copy scaling-to-copy :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:scaling-builder/create-scaling-builder-from-existing coerced-scaling-to-copy)))
+    ))
+
 (defclass scaling-calc-private (base-object)
   (
    ))
 
 
+
+(defclass scaling/from-builder (scaling)
+  (
+   (%builder-initarg :initarg :builder :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object scaling/from-builder)
+                                       &key (pointer nil pointer-p)
+                                            (builder nil builder-p)
+                                       &allow-other-keys)
+  "Creates a Scaling object from Builder
+@param builder Scaling Builder
+
+Constructs the instance via the openDAQ C function daqScaling_createScalingFromBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) builder-p)
+  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:scaling/create-scaling-from-builder coerced-builder)))
+    ))
+
+(defclass scaling/linear (scaling)
+  (
+   (%scale-initarg :initarg :scale :initform nil)
+   (%offset-initarg :initarg :offset :initform nil)
+   (%input-data-type-initarg :initarg :input-data-type :initform nil)
+   (%output-data-type-initarg :initarg :output-data-type :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object scaling/linear)
+                                       &key (pointer nil pointer-p)
+                                            (scale nil scale-p)
+                                            (offset nil offset-p)
+                                            (input-data-type nil input-data-type-p)
+                                            (output-data-type nil output-data-type-p)
+                                       &allow-other-keys)
+  "Creates a Scaling with a Linear scaling type configuration. The returned Scaling object is already frozen.
+@param scale Coefficient by which the input data is to be multiplied.
+@param offset Constant that is added to the <em>scale * value</em> multiplication result.
+@param inputDataType The scaling's input data type.
+@param outputDataType The scaling's output data type.
+
+Constructs the instance via the openDAQ C function daqScaling_createLinearScaling()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) scale-p offset-p input-data-type-p output-data-type-p)
+  (with-daq-boxed-values ((coerced-scale scale :daq-base-object)
+                          (coerced-offset offset :daq-base-object)
+                          (coerced-input-data-type input-data-type nil)
+                          (coerced-output-data-type output-data-type nil))
+    (%adopt-pointer object (opendaq.low-level:scaling/create-linear-scaling coerced-scale coerced-offset coerced-input-data-type coerced-output-data-type)))
+    ))
 
 (defclass scheduler (base-object)
   (
@@ -3477,6 +5858,29 @@ Constructs the instance via the openDAQ C function daqScalingBuilder_createScali
   (with-daq-boxed-values ((coerced-logger logger :managed-pointer)
                           (coerced-num-workers num-workers nil))
     (%adopt-pointer object (opendaq.low-level:scheduler/create-scheduler coerced-logger coerced-num-workers)))
+    ))
+
+(defclass scheduler/with-main-loop (scheduler)
+  (
+   (%logger-initarg :initarg :logger :initform nil)
+   (%num-workers-initarg :initarg :num-workers :initform nil)
+   (%use-main-loop-initarg :initarg :use-main-loop :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object scheduler/with-main-loop)
+                                       &key (pointer nil pointer-p)
+                                            (logger nil logger-p)
+                                            (num-workers nil num-workers-p)
+                                            (use-main-loop nil use-main-loop-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqScheduler_createSchedulerWithMainLoop()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) logger-p num-workers-p use-main-loop-p)
+  (with-daq-boxed-values ((coerced-logger logger :managed-pointer)
+                          (coerced-num-workers num-workers nil)
+                          (coerced-use-main-loop use-main-loop :daq-bool))
+    (%adopt-pointer object (opendaq.low-level:scheduler/create-scheduler-with-main-loop coerced-logger coerced-num-workers coerced-use-main-loop)))
     ))
 
 (defclass search-filter (base-object)
@@ -3501,6 +5905,175 @@ Constructs the instance via the openDAQ C function daqSearchFilter_createAndSear
   (with-daq-boxed-values ((coerced-left left :managed-pointer)
                           (coerced-right right :managed-pointer))
     (%adopt-pointer object (opendaq.low-level:search-filter/create-and-search-filter coerced-left coerced-right)))
+    ))
+
+(defclass search-filter/any (search-filter)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object search-filter/any)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Creates a search filter that accepts all objects. \"Visit children\" always returns `true`.
+
+Constructs the instance via the openDAQ C function daqSearchFilter_createAnySearchFilter()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:search-filter/create-any-search-filter))
+    ))
+
+(defclass search-filter/custom (search-filter)
+  (
+   (%accepts-function-initarg :initarg :accepts-function :initform nil)
+   (%visit-function-initarg :initarg :visit-function :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object search-filter/custom)
+                                       &key (pointer nil pointer-p)
+                                            (accepts-function nil accepts-function-p)
+                                            (visit-function nil visit-function-p)
+                                       &allow-other-keys)
+  "Creates a custom search filter with a user-defined \"accepts object\" and \"visit children\" function.
+@param acceptsFunction The function to be called when \"accepts object\" is called. Should return `true` or `false`.
+@param visitFunction The function to be called when \"visit children\" is called. Should return `true` or `false`.
+
+Constructs the instance via the openDAQ C function daqSearchFilter_createCustomSearchFilter()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) accepts-function-p visit-function-p)
+  (with-daq-boxed-values ((coerced-accepts-function accepts-function :managed-pointer)
+                          (coerced-visit-function visit-function :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:search-filter/create-custom-search-filter coerced-accepts-function coerced-visit-function)))
+    ))
+
+(defclass search-filter/excluded-tags (search-filter)
+  (
+   (%excluded-tags-initarg :initarg :excluded-tags :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object search-filter/excluded-tags)
+                                       &key (pointer nil pointer-p)
+                                            (excluded-tags nil excluded-tags-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqSearchFilter_createExcludedTagsSearchFilter()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) excluded-tags-p)
+  (with-daq-boxed-values ((coerced-excluded-tags excluded-tags :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:search-filter/create-excluded-tags-search-filter coerced-excluded-tags)))
+    ))
+
+(defclass search-filter/local-id (search-filter)
+  (
+   (%local-id-initarg :initarg :local-id :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object search-filter/local-id)
+                                       &key (pointer nil pointer-p)
+                                            (local-id nil local-id-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqSearchFilter_createLocalIdSearchFilter()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) local-id-p)
+  (with-daq-boxed-values ((coerced-local-id local-id :daq-string))
+    (%adopt-pointer object (opendaq.low-level:search-filter/create-local-id-search-filter coerced-local-id)))
+    ))
+
+(defclass search-filter/not (search-filter)
+  (
+   (%filter-initarg :initarg :filter :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object search-filter/not)
+                                       &key (pointer nil pointer-p)
+                                            (filter nil filter-p)
+                                       &allow-other-keys)
+  "Creates a search filter that negates the \"accepts object\" result of the filter provided as construction argument. Does not negate the \"visit children\" result.
+@param filter The filter of which results should be negated.
+
+Constructs the instance via the openDAQ C function daqSearchFilter_createNotSearchFilter()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) filter-p)
+  (with-daq-boxed-values ((coerced-filter filter :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:search-filter/create-not-search-filter coerced-filter)))
+    ))
+
+(defclass search-filter/or (search-filter)
+  (
+   (%left-initarg :initarg :left :initform nil)
+   (%right-initarg :initarg :right :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object search-filter/or)
+                                       &key (pointer nil pointer-p)
+                                            (left nil left-p)
+                                            (right nil right-p)
+                                       &allow-other-keys)
+  "Creates a \"disjunction\" search filter that combines 2 filters, accepting an object if any of the two filters accepts it. \"Visit children\" returns `true` if any of the two filters accepts does so.
+@param left The first argument of the disjunction operation.
+@param right The second argument of the disjunction operation.
+
+Constructs the instance via the openDAQ C function daqSearchFilter_createOrSearchFilter()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) left-p right-p)
+  (with-daq-boxed-values ((coerced-left left :managed-pointer)
+                          (coerced-right right :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:search-filter/create-or-search-filter coerced-left coerced-right)))
+    ))
+
+(defclass search-filter/recursive (search-filter)
+  (
+   (%filter-initarg :initarg :filter :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object search-filter/recursive)
+                                       &key (pointer nil pointer-p)
+                                            (filter nil filter-p)
+                                       &allow-other-keys)
+  "Creates a search filter that indicates that the search method should recursively search through the object's child elements. This filter constructor should always be the final filter wrapper, and should not be used as a constructor argument for another filter.
+@param filter The filter to be wrapped with a \"recursive\" flag.
+
+Constructs the instance via the openDAQ C function daqSearchFilter_createRecursiveSearchFilter()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) filter-p)
+  (with-daq-boxed-values ((coerced-filter filter :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:search-filter/create-recursive-search-filter coerced-filter)))
+    ))
+
+(defclass search-filter/required-tags (search-filter)
+  (
+   (%required-tags-initarg :initarg :required-tags :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object search-filter/required-tags)
+                                       &key (pointer nil pointer-p)
+                                            (required-tags nil required-tags-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqSearchFilter_createRequiredTagsSearchFilter()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) required-tags-p)
+  (with-daq-boxed-values ((coerced-required-tags required-tags :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:search-filter/create-required-tags-search-filter coerced-required-tags)))
+    ))
+
+(defclass search-filter/visible (search-filter)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object search-filter/visible)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqSearchFilter_createVisibleSearchFilter()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:search-filter/create-visible-search-filter))
     ))
 
 (defclass serializable (base-object)
@@ -3637,6 +6210,35 @@ Constructs the instance via the openDAQ C function daqServerType_createServerTyp
     (%adopt-pointer object (opendaq.low-level:signal-config/create-signal coerced-context coerced-parent coerced-local-id coerced-class-name)))
     ))
 
+(defclass signal-config/with-descriptor (signal-config)
+  (
+   (%context-initarg :initarg :context :initform nil)
+   (%descriptor-initarg :initarg :descriptor :initform nil)
+   (%parent-initarg :initarg :parent :initform nil)
+   (%local-id-initarg :initarg :local-id :initform nil)
+   (%class-name-initarg :initarg :class-name :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object signal-config/with-descriptor)
+                                       &key (pointer nil pointer-p)
+                                            (context nil context-p)
+                                            (descriptor nil descriptor-p)
+                                            (parent nil parent-p)
+                                            (local-id nil local-id-p)
+                                            (class-name nil class-name-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqSignalConfig_createSignalWithDescriptor()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) context-p descriptor-p parent-p local-id-p class-name-p)
+  (with-daq-boxed-values ((coerced-context context :managed-pointer)
+                          (coerced-descriptor descriptor :managed-pointer)
+                          (coerced-parent parent :managed-pointer)
+                          (coerced-local-id local-id :daq-string)
+                          (coerced-class-name class-name :daq-string))
+    (%adopt-pointer object (opendaq.low-level:signal-config/create-signal-with-descriptor coerced-context coerced-descriptor coerced-parent coerced-local-id coerced-class-name)))
+    ))
+
 (defclass signal-events (base-object)
   (
    ))
@@ -3689,6 +6291,58 @@ Constructs the instance via the openDAQ C function daqServerType_createServerTyp
   (declare (ignore pointer))
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:stream-reader-builder/create-stream-reader-builder))
+    ))
+
+(defclass stream-reader/from-existing (stream-reader)
+  (
+   (%invalidated-reader-initarg :initarg :invalidated-reader :initform nil)
+   (%value-read-type-initarg :initarg :value-read-type :initform nil)
+   (%domain-read-type-initarg :initarg :domain-read-type :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object stream-reader/from-existing)
+                                       &key (pointer nil pointer-p)
+                                            (invalidated-reader nil invalidated-reader-p)
+                                            (value-read-type nil value-read-type-p)
+                                            (domain-read-type nil domain-read-type-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqStreamReader_createStreamReaderFromExisting()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) invalidated-reader-p value-read-type-p domain-read-type-p)
+  (with-daq-boxed-values ((coerced-invalidated-reader invalidated-reader :managed-pointer)
+                          (coerced-value-read-type value-read-type nil)
+                          (coerced-domain-read-type domain-read-type nil))
+    (%adopt-pointer object (opendaq.low-level:stream-reader/create-stream-reader-from-existing coerced-invalidated-reader coerced-value-read-type coerced-domain-read-type)))
+    ))
+
+(defclass stream-reader/from-port (stream-reader)
+  (
+   (%port-initarg :initarg :port :initform nil)
+   (%value-read-type-initarg :initarg :value-read-type :initform nil)
+   (%domain-read-type-initarg :initarg :domain-read-type :initform nil)
+   (%read-mode-initarg :initarg :read-mode :initform nil)
+   (%timeout-type-initarg :initarg :timeout-type :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object stream-reader/from-port)
+                                       &key (pointer nil pointer-p)
+                                            (port nil port-p)
+                                            (value-read-type nil value-read-type-p)
+                                            (domain-read-type nil domain-read-type-p)
+                                            (read-mode nil read-mode-p)
+                                            (timeout-type nil timeout-type-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqStreamReader_createStreamReaderFromPort()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) port-p value-read-type-p domain-read-type-p read-mode-p timeout-type-p)
+  (with-daq-boxed-values ((coerced-port port :managed-pointer)
+                          (coerced-value-read-type value-read-type nil)
+                          (coerced-domain-read-type domain-read-type nil)
+                          (coerced-read-mode read-mode nil)
+                          (coerced-timeout-type timeout-type nil))
+    (%adopt-pointer object (opendaq.low-level:stream-reader/create-stream-reader-from-port coerced-port coerced-value-read-type coerced-domain-read-type coerced-read-mode coerced-timeout-type)))
     ))
 
 (defclass streaming (base-object)
@@ -3775,6 +6429,23 @@ Constructs the instance via the openDAQ C function daqStreamingType_createStream
     (%adopt-pointer object (opendaq.low-level:struct-builder/create-struct-builder coerced-name coerced-type-manager)))
     ))
 
+(defclass struct-builder/from-struct (struct-builder)
+  (
+   (%struct-initarg :initarg :struct :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object struct-builder/from-struct)
+                                       &key (pointer nil pointer-p)
+                                            (struct nil struct-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqStructBuilder_createStructBuilderFromStruct()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) struct-p)
+  (with-daq-boxed-values ((coerced-struct struct :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:struct-builder/create-struct-builder-from-struct coerced-struct)))
+    ))
+
 (defclass struct-type (daq-type)
   (
    (%name-initarg :initarg :name :initform nil)
@@ -3799,6 +6470,46 @@ Constructs the instance via the openDAQ C function daqStreamingType_createStream
                           (coerced-default-values default-values :managed-pointer)
                           (coerced-types types :managed-pointer))
     (%adopt-pointer object (opendaq.low-level:struct-type/create-struct-type coerced-name coerced-names coerced-default-values coerced-types)))
+    ))
+
+(defclass struct-type/no-defaults (struct-type)
+  (
+   (%name-initarg :initarg :name :initform nil)
+   (%names-initarg :initarg :names :initform nil)
+   (%types-initarg :initarg :types :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object struct-type/no-defaults)
+                                       &key (pointer nil pointer-p)
+                                            (name nil name-p)
+                                            (names nil names-p)
+                                            (types nil types-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqStructType_createStructTypeNoDefaults()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) name-p names-p types-p)
+  (with-daq-boxed-values ((coerced-name name :daq-string)
+                          (coerced-names names :managed-pointer)
+                          (coerced-types types :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:struct-type/create-struct-type-no-defaults coerced-name coerced-names coerced-types)))
+    ))
+
+(defclass struct/from-builder (struct)
+  (
+   (%builder-initarg :initarg :builder :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object struct/from-builder)
+                                       &key (pointer nil pointer-p)
+                                            (builder nil builder-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqStruct_createStructFromBuilder()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) builder-p)
+  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:struct/create-struct-from-builder coerced-builder)))
     ))
 
 (defclass subscription-event-args (event-args)
@@ -3921,6 +6632,61 @@ Constructs the instance via the openDAQ C function daqStreamingType_createStream
     (%adopt-pointer object (opendaq.low-level:tail-reader-status/create-tail-reader-status coerced-event-packet coerced-valid coerced-offset coerced-sufficient-history)))
     ))
 
+(defclass tail-reader/from-existing (tail-reader)
+  (
+   (%invalidated-reader-initarg :initarg :invalidated-reader :initform nil)
+   (%history-size-initarg :initarg :history-size :initform nil)
+   (%value-read-type-initarg :initarg :value-read-type :initform nil)
+   (%domain-read-type-initarg :initarg :domain-read-type :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object tail-reader/from-existing)
+                                       &key (pointer nil pointer-p)
+                                            (invalidated-reader nil invalidated-reader-p)
+                                            (history-size nil history-size-p)
+                                            (value-read-type nil value-read-type-p)
+                                            (domain-read-type nil domain-read-type-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqTailReader_createTailReaderFromExisting()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) invalidated-reader-p history-size-p value-read-type-p domain-read-type-p)
+  (with-daq-boxed-values ((coerced-invalidated-reader invalidated-reader :managed-pointer)
+                          (coerced-history-size history-size nil)
+                          (coerced-value-read-type value-read-type nil)
+                          (coerced-domain-read-type domain-read-type nil))
+    (%adopt-pointer object (opendaq.low-level:tail-reader/create-tail-reader-from-existing coerced-invalidated-reader coerced-history-size coerced-value-read-type coerced-domain-read-type)))
+    ))
+
+(defclass tail-reader/from-port (tail-reader)
+  (
+   (%port-initarg :initarg :port :initform nil)
+   (%history-size-initarg :initarg :history-size :initform nil)
+   (%value-read-type-initarg :initarg :value-read-type :initform nil)
+   (%domain-read-type-initarg :initarg :domain-read-type :initform nil)
+   (%mode-initarg :initarg :mode :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object tail-reader/from-port)
+                                       &key (pointer nil pointer-p)
+                                            (port nil port-p)
+                                            (history-size nil history-size-p)
+                                            (value-read-type nil value-read-type-p)
+                                            (domain-read-type nil domain-read-type-p)
+                                            (mode nil mode-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqTailReader_createTailReaderFromPort()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) port-p history-size-p value-read-type-p domain-read-type-p mode-p)
+  (with-daq-boxed-values ((coerced-port port :managed-pointer)
+                          (coerced-history-size history-size nil)
+                          (coerced-value-read-type value-read-type nil)
+                          (coerced-domain-read-type domain-read-type nil)
+                          (coerced-mode mode nil))
+    (%adopt-pointer object (opendaq.low-level:tail-reader/create-tail-reader-from-port coerced-port coerced-history-size coerced-value-read-type coerced-domain-read-type coerced-mode)))
+    ))
+
 (defclass task (base-object)
   (
    (%work-initarg :initarg :work :initform nil)
@@ -4027,6 +6793,26 @@ Constructs the instance via the openDAQ C function daqUnitBuilder_createUnitBuil
   (declare (ignore pointer))
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:unit-builder/create-unit-builder))
+    ))
+
+(defclass unit-builder/from-existing (unit-builder)
+  (
+   (%unit-to-copy-initarg :initarg :unit-to-copy :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object unit-builder/from-existing)
+                                       &key (pointer nil pointer-p)
+                                            (unit-to-copy nil unit-to-copy-p)
+                                       &allow-other-keys)
+  "UnitConfig copy factory that creates a configurable Unit object from a possibly non-configurable Unit.
+@param unitToCopy The Unit of which configuration should be copied.
+
+Constructs the instance via the openDAQ C function daqUnitBuilder_createUnitBuilderFromExisting()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) unit-to-copy-p)
+  (with-daq-boxed-values ((coerced-unit-to-copy unit-to-copy :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:unit-builder/create-unit-builder-from-existing coerced-unit-to-copy)))
     ))
 
 (defclass updatable (base-object)
@@ -4392,15 +7178,6 @@ Calls the openDAQ C function daqAddressInfoPrivate_setReachabilityStatusPrivate(
     (opendaq.low-level:address-info-private/set-reachability-status-private (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun create-address-info-from-builder (builder)
-  "Creates an Address using the builder's configuration parameters.
-@param builder The address info builder.
-
-Calls the openDAQ C function daqAddressInfo_createAddressInfoFromBuilder()."
-  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (wrap (opendaq.low-level:address-info/create-address-info-from-builder coerced-builder) 'address-info))
-)
-
 (defgeneric address-info-address (object)
   (:documentation "Gets the server address as a string.
 @param[out] address The server address as a string.
@@ -4484,11 +7261,6 @@ Calls the openDAQ C function daqAllocator_allocate()."
     (opendaq.low-level:allocator/allocate (%require-live-pointer object) coerced-descriptor coerced-bytes coerced-align coerced-address))
 )
 
-(defun create-malloc-allocator ()
-  "Calls the openDAQ C function daqAllocator_createMallocAllocator()."
-  (wrap (opendaq.low-level:allocator/create-malloc-allocator) 'allocator)
-)
-
 (defgeneric free (object address)
   (:documentation "Releases a chunk of memory allocated by allocate().
 @param address The address of the allocated memory to release.
@@ -4511,30 +7283,6 @@ Calls the openDAQ C function daqAllocator_free()."
     (opendaq.low-level:allocator/get-interface-id intf-id-slot)
     nil
   )
-)
-
-(defun create-dict-argument-info (name key-type item-type)
-  "Creates a dict-type Argument info object with the specified name, key type and item type.
-@param name The name of the argument.
-@param keyType Corresponds to the expected type of key in the dictionary argument.
-@param itemType Corresponds to the expected type of items in the dictionary argument.
-
-Calls the openDAQ C function daqArgumentInfo_createDictArgumentInfo()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-key-type key-type nil)
-                          (coerced-item-type item-type nil))
-    (wrap (opendaq.low-level:argument-info/create-dict-argument-info coerced-name coerced-key-type coerced-item-type) 'argument-info))
-)
-
-(defun create-list-argument-info (name item-type)
-  "Creates a list-type Argument info object with the specified name and item type.
-@param name The name of the argument.
-@param itemType Corresponds to the expected type of items in the list argument.
-
-Calls the openDAQ C function daqArgumentInfo_createListArgumentInfo()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-item-type item-type nil))
-    (wrap (opendaq.low-level:argument-info/create-list-argument-info coerced-name coerced-item-type) 'argument-info))
 )
 
 (defun argument-info-interface-id ()
@@ -4693,35 +7441,6 @@ Calls the openDAQ C function daqAuthenticationProvider_authenticateAnonymous()."
 
 Calls the openDAQ C function daqAuthenticationProvider_authenticateAnonymous()."
   (wrap (opendaq.low-level:authentication-provider/authenticate-anonymous (%require-live-pointer object)) 'user)
-)
-
-(defun create-json-file-authentication-provider (filename)
-  "Creates an authentication provider out of json file.
-@param filename File path to a json file containing a list of serialized User objects.
-
-Calls the openDAQ C function daqAuthenticationProvider_createJsonFileAuthenticationProvider()."
-  (with-daq-boxed-values ((coerced-filename filename :daq-string))
-    (wrap (opendaq.low-level:authentication-provider/create-json-file-authentication-provider coerced-filename) 'authentication-provider))
-)
-
-(defun create-json-string-authentication-provider (json-string)
-  "Creates an authentication provider out of json string.
-@param jsonString Json string containg a list of serialized User objects.
-
-Calls the openDAQ C function daqAuthenticationProvider_createJsonStringAuthenticationProvider()."
-  (with-daq-boxed-values ((coerced-json-string json-string :daq-string))
-    (wrap (opendaq.low-level:authentication-provider/create-json-string-authentication-provider coerced-json-string) 'authentication-provider))
-)
-
-(defun create-static-authentication-provider (allow-anonymous user-list)
-  "Creates an authentication provider out of static list of users.
-@param allowAnonymous True if anonymous authentication is allowed.
-@param userList List of User objects.
-
-Calls the openDAQ C function daqAuthenticationProvider_createStaticAuthenticationProvider()."
-  (with-daq-boxed-values ((coerced-allow-anonymous allow-anonymous :daq-bool)
-                          (coerced-user-list user-list :managed-pointer))
-    (wrap (opendaq.low-level:authentication-provider/create-static-authentication-provider coerced-allow-anonymous coerced-user-list) 'authentication-provider))
 )
 
 (defgeneric find-user (object username)
@@ -5263,25 +7982,6 @@ Calls the openDAQ C function daqBlockReaderStatus_getReadSamples()."
   (opendaq.low-level:block-reader-status/get-read-samples (%require-live-pointer object))
 )
 
-(defun create-block-reader-from-existing (invalidated-reader value-read-type domain-read-type block-size)
-  "Calls the openDAQ C function daqBlockReader_createBlockReaderFromExisting()."
-  (with-daq-boxed-values ((coerced-invalidated-reader invalidated-reader :managed-pointer)
-                          (coerced-value-read-type value-read-type nil)
-                          (coerced-domain-read-type domain-read-type nil)
-                          (coerced-block-size block-size nil))
-    (wrap (opendaq.low-level:block-reader/create-block-reader-from-existing coerced-invalidated-reader coerced-value-read-type coerced-domain-read-type coerced-block-size) 'block-reader))
-)
-
-(defun create-block-reader-from-port (port block-size value-read-type domain-read-type mode)
-  "Calls the openDAQ C function daqBlockReader_createBlockReaderFromPort()."
-  (with-daq-boxed-values ((coerced-port port :managed-pointer)
-                          (coerced-block-size block-size nil)
-                          (coerced-value-read-type value-read-type nil)
-                          (coerced-domain-read-type domain-read-type nil)
-                          (coerced-mode mode nil))
-    (wrap (opendaq.low-level:block-reader/create-block-reader-from-port coerced-port coerced-block-size coerced-value-read-type coerced-domain-read-type coerced-mode) 'block-reader))
-)
-
 (defmethod block-size ((object block-reader))
   "The amount of samples the reader considers as one block.
 @param[out] size The number of samples in a block.
@@ -5359,12 +8059,6 @@ Calls the openDAQ C function daqBlockReader_readWithDomain()."
       (cl:values
         value-0
         (wrap value-1 'block-reader-status))))
-)
-
-(defun create-boolean (value)
-  "Calls the openDAQ C function daqBoolean_createBoolean()."
-  (with-daq-boxed-values ((coerced-value value :daq-bool))
-    (wrap (opendaq.low-level:boolean/create-boolean coerced-value) 'daq-boolean))
 )
 
 (defgeneric equals-value (object value)
@@ -5638,23 +8332,6 @@ Calls the openDAQ C function daqComplexNumber_getReal()."
     ))
 )
 
-(defun create-component-deserialize-context (context root parent local-id trigger-core-event)
-  "Calls the openDAQ C function daqComponentDeserializeContext_createComponentDeserializeContext()."
-  (with-daq-boxed-values ((coerced-context context :managed-pointer)
-                          (coerced-root root :managed-pointer)
-                          (coerced-parent parent :managed-pointer)
-                          (coerced-local-id local-id :daq-string)
-                          (coerced-trigger-core-event trigger-core-event :managed-pointer))
-    (cffi:with-foreign-object (obj-slot 'opendaq.low-level::daq-component-deserialize-context)
-      (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-        (opendaq.low-level:component-deserialize-context/create-component-deserialize-context obj-slot coerced-context coerced-root coerced-parent coerced-local-id intf-id-slot coerced-trigger-core-event)
-        (cl:values
-          (wrap (cffi:mem-ref obj-slot 'opendaq.low-level::daq-component-deserialize-context) 'component-deserialize-context)
-          (cffi:mem-ref intf-id-slot 'opendaq.low-level::daq-intf-id))
-      )
-    ))
-)
-
 (defgeneric context (object)
   (:documentation "component-deserialize-context => daqComponentDeserializeContext_getContext()
 
@@ -5723,14 +8400,6 @@ component => daqComponent_getParent()
 (defmethod trigger-core-event ((object component-deserialize-context))
   "Calls the openDAQ C function daqComponentDeserializeContext_getTriggerCoreEvent()."
   (wrap (opendaq.low-level:component-deserialize-context/get-trigger-core-event (%require-live-pointer object)) 'procedure)
-)
-
-(defun create-component-holder-with-ids (id parent-global-id component)
-  "Calls the openDAQ C function daqComponentHolder_createComponentHolderWithIds()."
-  (with-daq-boxed-values ((coerced-id id :daq-string)
-                          (coerced-parent-global-id parent-global-id :daq-string)
-                          (coerced-component component :managed-pointer))
-    (wrap (opendaq.low-level:component-holder/create-component-holder-with-ids coerced-id coerced-parent-global-id coerced-component) 'component-holder))
 )
 
 (defgeneric component-holder-component (object)
@@ -6038,34 +8707,6 @@ Device type, Function block type, or Server type
 
 Calls the openDAQ C function daqComponentTypeBuilder_build()."
   (wrap (opendaq.low-level:component-type-builder/build (%require-live-pointer object)) 'component-type)
-)
-
-(defun create-device-type-builder ()
-  "Creates a ComponentTypeBuilder with the type sort set to \"Device\".
-
-Calls the openDAQ C function daqComponentTypeBuilder_createDeviceTypeBuilder()."
-  (wrap (opendaq.low-level:component-type-builder/create-device-type-builder) 'component-type-builder)
-)
-
-(defun create-function-block-type-builder ()
-  "Creates a ComponentTypeBuilder with the type sort set to \"FunctionBlock\".
-
-Calls the openDAQ C function daqComponentTypeBuilder_createFunctionBlockTypeBuilder()."
-  (wrap (opendaq.low-level:component-type-builder/create-function-block-type-builder) 'component-type-builder)
-)
-
-(defun create-server-type-builder ()
-  "Creates a ComponentTypeBuilder with the type sort set to \"Server\".
-
-Calls the openDAQ C function daqComponentTypeBuilder_createServerTypeBuilder()."
-  (wrap (opendaq.low-level:component-type-builder/create-server-type-builder) 'component-type-builder)
-)
-
-(defun create-streaming-type-builder ()
-  "Creates a ComponentTypeBuilder with the type sort set to \"Streaming\".
-
-Calls the openDAQ C function daqComponentTypeBuilder_createStreamingTypeBuilder()."
-  (wrap (opendaq.low-level:component-type-builder/create-streaming-type-builder) 'component-type-builder)
 )
 
 (defgeneric connection-string-prefix (object)
@@ -6905,17 +9546,6 @@ Calls the openDAQ C function daqComponent_setVisible()."
     (opendaq.low-level:component/set-visible (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun create-env-config-provider ()
-  "Calls the openDAQ C function daqConfigProvider_createEnvConfigProvider()."
-  (wrap (opendaq.low-level:config-provider/create-env-config-provider) 'config-provider)
-)
-
-(defun create-json-config-provider (filename)
-  "Calls the openDAQ C function daqConfigProvider_createJsonConfigProvider()."
-  (with-daq-boxed-values ((coerced-filename filename :daq-string))
-    (wrap (opendaq.low-level:config-provider/create-json-config-provider coerced-filename) 'config-provider))
-)
-
 (defun config-provider-interface-id ()
   "Calls the openDAQ C function daqConfigProvider_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
@@ -6936,23 +9566,6 @@ Calls the openDAQ C function daqConfigProvider_populateOptions()."))
 Calls the openDAQ C function daqConfigProvider_populateOptions()."
   (with-daq-boxed-values ((coerced-options options :managed-pointer))
     (opendaq.low-level:config-provider/populate-options (%require-live-pointer object) coerced-options))
-)
-
-(defun create-connected-client-info-with-params (address protocol-type protocol-name client-type host-name)
-  "Creates a Connected client info using the provided parameters.
-@param address The address of connected client.
-@param protocolType The type of the protocol type used by the client.
-@param protocolName The name of the protocol name used by the client.
-@param clientType The configuration connection client type name.
-@param hostName The host name of connected client.
-
-Calls the openDAQ C function daqConnectedClientInfo_createConnectedClientInfoWithParams()."
-  (with-daq-boxed-values ((coerced-address address :daq-string)
-                          (coerced-protocol-type protocol-type nil)
-                          (coerced-protocol-name protocol-name :daq-string)
-                          (coerced-client-type client-type :daq-string)
-                          (coerced-host-name host-name :daq-string))
-    (wrap (opendaq.low-level:connected-client-info/create-connected-client-info-with-params coerced-address coerced-protocol-type coerced-protocol-name coerced-client-type coerced-host-name) 'connected-client-info))
 )
 
 (defgeneric connected-client-info-address (object)
@@ -7668,99 +10281,6 @@ Calls the openDAQ C function daqConvertible_toInt()."
   (opendaq.low-level:convertible/to-int (%require-live-pointer object))
 )
 
-(defun create-core-event-args-property-added (prop-owner prop path)
-  "Creates Core event args that are passed as argument when a property is added to a component.
-@param propOwner The property object that owns the added property.
-@param prop The property that was added.
-@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\". Does not include the Component id and property name.
-The ID of the event is 20, and the event name is \"PropertyAdded\".
-
-Calls the openDAQ C function daqCoreEventArgs_createCoreEventArgsPropertyAdded()."
-  (with-daq-boxed-values ((coerced-prop-owner prop-owner :managed-pointer)
-                          (coerced-prop prop :managed-pointer)
-                          (coerced-path path :daq-string))
-    (wrap (opendaq.low-level:core-event-args/create-core-event-args-property-added coerced-prop-owner coerced-prop coerced-path) 'core-event-args))
-)
-
-(defun create-core-event-args-property-object-update-end (prop-owner updated-properties path)
-  "Creates Core event args that are passed as argument when a property object is finished updating.
-@param propOwner The property object that was updated.
-@param updatedProperties The dictionary of updated properties. Contains the name (string) of a property as key, and the new value (base object) as the dictionary value.
-@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\". Does not include the Component id.
-A property object finished updating when `endUpdate` is called, or at the end of the `update` call.
-The ID of the event is 10, and the event name is \"PropertyObjectUpdateEnd\".
-
-Calls the openDAQ C function daqCoreEventArgs_createCoreEventArgsPropertyObjectUpdateEnd()."
-  (with-daq-boxed-values ((coerced-prop-owner prop-owner :managed-pointer)
-                          (coerced-updated-properties updated-properties :managed-pointer)
-                          (coerced-path path :daq-string))
-    (wrap (opendaq.low-level:core-event-args/create-core-event-args-property-object-update-end coerced-prop-owner coerced-updated-properties coerced-path) 'core-event-args))
-)
-
-(defun create-core-event-args-property-order-changed (prop-owner property-order path)
-  "Creates Core event args that property order of a component is changed.
-@param propOwner The property object that owns the properties whose order was changed.
-@param propertyOrder The list of property names in the new order.
-@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\".
-The ID of the event is 190, and the event name is \"PropertyOrderChanged\".
-
-Calls the openDAQ C function daqCoreEventArgs_createCoreEventArgsPropertyOrderChanged()."
-  (with-daq-boxed-values ((coerced-prop-owner prop-owner :managed-pointer)
-                          (coerced-property-order property-order :managed-pointer)
-                          (coerced-path path :daq-string))
-    (wrap (opendaq.low-level:core-event-args/create-core-event-args-property-order-changed coerced-prop-owner coerced-property-order coerced-path) 'core-event-args))
-)
-
-(defun create-core-event-args-property-removed (prop-owner prop-name path)
-  "Creates Core event args that are passed as argument when a property is removed from a component.
-@param propOwner The property object that owned the removed property.
-@param propName The name of the property that was removed.
-@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\". Does not include the Component id and property name.
-The ID of the event is 30, and the event name is \"PropertyRemoved\".
-
-Calls the openDAQ C function daqCoreEventArgs_createCoreEventArgsPropertyRemoved()."
-  (with-daq-boxed-values ((coerced-prop-owner prop-owner :managed-pointer)
-                          (coerced-prop-name prop-name :daq-string)
-                          (coerced-path path :daq-string))
-    (wrap (opendaq.low-level:core-event-args/create-core-event-args-property-removed coerced-prop-owner coerced-prop-name coerced-path) 'core-event-args))
-)
-
-(defun create-core-event-args-property-value-changed (prop-owner prop-name value path)
-  "Creates Core event args that are passed as argument when a property value of a component is changed.
-@param propOwner The property object that owns the changed property.
-@param propName The name of the property of which value was changed.
-@param value The new value of the property.
-@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\". Does not include the Component id and property name.
-The ID of the event is 0, and the event name is \"PropertyValueChanged\".
-
-Calls the openDAQ C function daqCoreEventArgs_createCoreEventArgsPropertyValueChanged()."
-  (with-daq-boxed-values ((coerced-prop-owner prop-owner :managed-pointer)
-                          (coerced-prop-name prop-name :daq-string)
-                          (coerced-value value :daq-base-object)
-                          (coerced-path path :daq-string))
-    (wrap (opendaq.low-level:core-event-args/create-core-event-args-property-value-changed coerced-prop-owner coerced-prop-name coerced-value coerced-path) 'core-event-args))
-)
-
-(defun create-core-event-args-type-added (type)
-  "Creates Core event args that are passed as argument when a type is added to the type manager.
-@param type The type that was added.
-The ID of the event is 130, and the event name is \"TypeAdded\".
-
-Calls the openDAQ C function daqCoreEventArgs_createCoreEventArgsTypeAdded()."
-  (with-daq-boxed-values ((coerced-type type :managed-pointer))
-    (wrap (opendaq.low-level:core-event-args/create-core-event-args-type-added coerced-type) 'core-event-args))
-)
-
-(defun create-core-event-args-type-removed (type-name)
-  "Creates Core event args that are passed as argument when a type is removed from the type manager.
-@param typeName The name of the removed type
-The ID of the event is 140, and the event name is \"TypeRemoved\".
-
-Calls the openDAQ C function daqCoreEventArgs_createCoreEventArgsTypeRemoved()."
-  (with-daq-boxed-values ((coerced-type-name type-name :daq-string))
-    (wrap (opendaq.low-level:core-event-args/create-core-event-args-type-removed coerced-type-name) 'core-event-args))
-)
-
 (defun core-event-args-interface-id ()
   "Calls the openDAQ C function daqCoreEventArgs_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
@@ -7814,15 +10334,6 @@ Calls the openDAQ C function daqCoreEventArgs_getParameters()."
 
 Calls the openDAQ C function daqDataDescriptorBuilder_build()."
   (wrap (opendaq.low-level:data-descriptor-builder/build (%require-live-pointer object)) 'data-descriptor)
-)
-
-(defun create-data-descriptor-builder-from-existing (descriptor-to-copy)
-  "Data descriptor copy factory that creates a Data descriptor builder object from a different Data descriptor, copying its parameters.
-@param descriptorToCopy The Data descriptor of which configuration should be copied.
-
-Calls the openDAQ C function daqDataDescriptorBuilder_createDataDescriptorBuilderFromExisting()."
-  (with-daq-boxed-values ((coerced-descriptor-to-copy descriptor-to-copy :managed-pointer))
-    (wrap (opendaq.low-level:data-descriptor-builder/create-data-descriptor-builder-from-existing coerced-descriptor-to-copy) 'data-descriptor-builder))
 )
 
 (defgeneric dimensions (object)
@@ -8374,68 +10885,6 @@ Calls the openDAQ C function daqDataDescriptor_getValueRange()."
   (wrap (opendaq.low-level:data-descriptor/get-value-range (%require-live-pointer object)) 'range)
 )
 
-(defun create-constant-data-packet-with-domain (domain-packet descriptor sample-count initial-value other-values other-value-count)
-  "Creates a Data packet with a given constat rule descriptor, initial constant value, and other constant values.
-@param domainPacket The Data packet carrying domain data.
-@param descriptor The descriptor of the signal sending the data.
-@param sampleCount The number of samples in the packet.
-@param initialValue The initial constant value.
-@param otherValues The other constant values.
-@param otherValueCount The number of other constant values.
-The values in the packet are calculated by constant rule. The initial value is taken as a constant.
-Other values are used to change the constant value within the packet. Any number of other constant values
-can be used. Other values are passed as an array of struct with uint32_t sample position field and value field.
-Value field (as well as initial value) are of type defined as sample type in the descriptor.
-
-Calls the openDAQ C function daqDataPacket_createConstantDataPacketWithDomain()."
-  (with-daq-boxed-values ((coerced-domain-packet domain-packet :managed-pointer)
-                          (coerced-descriptor descriptor :managed-pointer)
-                          (coerced-sample-count sample-count nil)
-                          (coerced-initial-value initial-value nil)
-                          (coerced-other-values other-values nil)
-                          (coerced-other-value-count other-value-count nil))
-    (wrap (opendaq.low-level:data-packet/create-constant-data-packet-with-domain coerced-domain-packet coerced-descriptor coerced-sample-count coerced-initial-value coerced-other-values coerced-other-value-count) 'data-packet))
-)
-
-(defun create-data-packet-with-domain (domain-packet descriptor sample-count offset)
-  "Creates a Data packet with a given descriptor, sample count, memory size of each sample, and an optional implicit value.
-@param domainPacket The Data packet carrying domain data.
-@param descriptor The descriptor of the signal sending the data.
-@param sampleCount The number of samples in the packet.
-@param offset Optional packet offset parameter, used to calculate the data of the packet if the Data rule of the Signal descriptor is not explicit.
-
-Calls the openDAQ C function daqDataPacket_createDataPacketWithDomain()."
-  (with-daq-boxed-values ((coerced-domain-packet domain-packet :managed-pointer)
-                          (coerced-descriptor descriptor :managed-pointer)
-                          (coerced-sample-count sample-count nil)
-                          (coerced-offset offset :daq-base-object))
-    (wrap (opendaq.low-level:data-packet/create-data-packet-with-domain coerced-domain-packet coerced-descriptor coerced-sample-count coerced-offset) 'data-packet))
-)
-
-(defun create-data-packet-with-external-memory (domain-packet descriptor sample-count offset external-memory deleter buffer-size)
-  "Creates a Data packet with a given descriptor, sample count, an optional packet offset, external memory location for data, custom deleter function and buffer size of external memory.
-@param descriptor The descriptor of the signal sending the data.
-@param sampleCount The number of samples in the packet.
-@param offset Optional packet offset parameter, used to calculate the data of the packet if the Data rule of the Signal descriptor is not explicit.
-@param externalMemory The pointer to the location of buffer data.
-@param deleter Custom deleter callback that is called when the packet is destroyed
-@param bufferSize The size of the external memory.
-Use this factory when pointer to create a packet which uses an existing memory. The memory should not be
-freed or written until the packet is destroyed. A deleter callback should be passed as a parameter that
-is called when the packet is destroyed. The callback should free the memory provided. If bufferSize parameter
-is equal to SizeT max, the buffer size will be calculated from the descriptor.
-
-Calls the openDAQ C function daqDataPacket_createDataPacketWithExternalMemory()."
-  (with-daq-boxed-values ((coerced-domain-packet domain-packet :managed-pointer)
-                          (coerced-descriptor descriptor :managed-pointer)
-                          (coerced-sample-count sample-count nil)
-                          (coerced-offset offset :daq-base-object)
-                          (coerced-external-memory external-memory nil)
-                          (coerced-deleter deleter :managed-pointer)
-                          (coerced-buffer-size buffer-size nil))
-    (wrap (opendaq.low-level:data-packet/create-data-packet-with-external-memory coerced-domain-packet coerced-descriptor coerced-sample-count coerced-offset coerced-external-memory coerced-deleter coerced-buffer-size) 'data-packet))
-)
-
 (defgeneric data-descriptor (object)
   (:documentation "Gets the signal descriptor of the signal that sent the packet at the time of sending.
 @param[out] descriptor The signal descriptor.
@@ -8677,15 +11126,6 @@ Calls the openDAQ C function daqDataRuleBuilder_build()."
   (wrap (opendaq.low-level:data-rule-builder/build (%require-live-pointer object)) 'data-rule)
 )
 
-(defun create-data-rule-builder-from-existing (rule-to-copy)
-  "Data rule copy factory that creates a configurable Data rule builder object from a possibly non-configurable Data rule.
-@param ruleToCopy The rule of which configuration should be copied.
-
-Calls the openDAQ C function daqDataRuleBuilder_createDataRuleBuilderFromExisting()."
-  (with-daq-boxed-values ((coerced-rule-to-copy rule-to-copy :managed-pointer))
-    (wrap (opendaq.low-level:data-rule-builder/create-data-rule-builder-from-existing coerced-rule-to-copy) 'data-rule-builder))
-)
-
 (defun data-rule-builder-interface-id ()
   "Calls the openDAQ C function daqDataRuleBuilder_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
@@ -8758,55 +11198,6 @@ Calls the openDAQ C function daqDataRuleBuilder_setType()."
   (with-daq-boxed-values ((coerced-new-value new-value nil))
     (opendaq.low-level:data-rule-builder/set-type (%require-live-pointer object) coerced-new-value))
   new-value)
-
-(defun create-constant-data-rule ()
-  "Creates a DataRule with a Constant rule type configuration.
-
-Calls the openDAQ C function daqDataRule_createConstantDataRule()."
-  (wrap (opendaq.low-level:data-rule/create-constant-data-rule) 'data-rule)
-)
-
-(defun create-data-rule-from-builder (builder)
-  "Creates a DataRulePtr from Builder.
-@param builder DataRule Builder
-
-Calls the openDAQ C function daqDataRule_createDataRuleFromBuilder()."
-  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (wrap (opendaq.low-level:data-rule/create-data-rule-from-builder coerced-builder) 'data-rule))
-)
-
-(defun create-explicit-data-rule ()
-  "Creates a DataRule with an Explicit rule type configuration and no parameters.
-
-Calls the openDAQ C function daqDataRule_createExplicitDataRule()."
-  (wrap (opendaq.low-level:data-rule/create-explicit-data-rule) 'data-rule)
-)
-
-(defun create-explicit-domain-data-rule (min-expected-delta max-expected-delta)
-  "Creates a DataRule with an Explicit rule type configuration two optional parameters.
-@param minExpectedDelta The lowest expected distance between two samples.
-@param maxExpectedDelta The highest expected distance between two samples.
-Most often used for domain signals to specify estimates on how close together/far apart two
-subsequent samples might be.
-
-Calls the openDAQ C function daqDataRule_createExplicitDomainDataRule()."
-  (with-daq-boxed-values ((coerced-min-expected-delta min-expected-delta :daq-base-object)
-                          (coerced-max-expected-delta max-expected-delta :daq-base-object))
-    (wrap (opendaq.low-level:data-rule/create-explicit-domain-data-rule coerced-min-expected-delta coerced-max-expected-delta) 'data-rule))
-)
-
-(defun create-linear-data-rule (delta start)
-  "Creates a DataRule with a Linear rule type configuration.
-@param delta Coefficient by which the input data is to be multiplied.
-@param start Constant that is added to the <em>scale * value</em> multiplication result.
-The scale and offset are stored within the `parameters` member of the Rule object
-with the scale being at the first position of the list, and the offset at the second.
-
-Calls the openDAQ C function daqDataRule_createLinearDataRule()."
-  (with-daq-boxed-values ((coerced-delta delta :daq-base-object)
-                          (coerced-start start :daq-base-object))
-    (wrap (opendaq.low-level:data-rule/create-linear-data-rule coerced-delta coerced-start) 'data-rule))
-)
 
 (defun data-rule-interface-id ()
   "Calls the openDAQ C function daqDataRule_getInterfaceId()."
@@ -8921,15 +11312,6 @@ Calls the openDAQ C function daqDeleter_deleteMemory()."
     (opendaq.low-level:deserializer/update (%require-live-pointer object) coerced-updatable coerced-serialized coerced-config))
 )
 
-(defun create-device-domain-with-reference-domain-info (tick-resolution origin unit reference-domain-info)
-  "Calls the openDAQ C function daqDeviceDomain_createDeviceDomainWithReferenceDomainInfo()."
-  (with-daq-boxed-values ((coerced-tick-resolution tick-resolution :daq-base-object)
-                          (coerced-origin origin :daq-string)
-                          (coerced-unit unit :managed-pointer)
-                          (coerced-reference-domain-info reference-domain-info :managed-pointer))
-    (wrap (opendaq.low-level:device-domain/create-device-domain-with-reference-domain-info coerced-tick-resolution coerced-origin coerced-unit coerced-reference-domain-info) 'device-domain))
-)
-
 (defun device-domain-interface-id ()
   "Calls the openDAQ C function daqDeviceDomain_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
@@ -8969,14 +11351,6 @@ Calls the openDAQ C function daqDeviceDomain_getTickResolution()."
 
 Calls the openDAQ C function daqDeviceDomain_getUnit()."
   (wrap (opendaq.low-level:device-domain/get-unit (%require-live-pointer object)) 'unit)
-)
-
-(defun create-device-info-config-with-custom-sdk-version (name connection-string sdk-version)
-  "Calls the openDAQ C function daqDeviceInfoConfig_createDeviceInfoConfigWithCustomSdkVersion()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-connection-string connection-string :daq-string)
-                          (coerced-sdk-version sdk-version :daq-string))
-    (wrap (opendaq.low-level:device-info-config/create-device-info-config-with-custom-sdk-version coerced-name coerced-connection-string coerced-sdk-version) 'device-info-config))
 )
 
 (defun device-info-config-interface-id ()
@@ -11071,15 +13445,6 @@ Calls the openDAQ C function daqDimensionBuilder_build()."
   (wrap (opendaq.low-level:dimension-builder/build (%require-live-pointer object)) 'dimension)
 )
 
-(defun create-dimension-builder-from-existing (dimension-to-copy)
-  "Creates a builder copy of the dimension object passed as parameter.
-@param dimensionToCopy The dimension object to be copied.
-
-Calls the openDAQ C function daqDimensionBuilder_createDimensionBuilderFromExisting()."
-  (with-daq-boxed-values ((coerced-dimension-to-copy dimension-to-copy :managed-pointer))
-    (wrap (opendaq.low-level:dimension-builder/create-dimension-builder-from-existing coerced-dimension-to-copy) 'dimension-builder))
-)
-
 (defun dimension-builder-interface-id ()
   "Calls the openDAQ C function daqDimensionBuilder_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
@@ -11162,15 +13527,6 @@ Calls the openDAQ C function daqDimensionRuleBuilder_build()."
   (wrap (opendaq.low-level:dimension-rule-builder/build (%require-live-pointer object)) 'dimension-rule)
 )
 
-(defun create-dimension-rule-builder-from-existing (rule-to-copy)
-  "Dimension rule copy factory that creates a builder Rule object from a possibly non-configurable Rule.
-@param ruleToCopy The rule of which configuration should be copied.
-
-Calls the openDAQ C function daqDimensionRuleBuilder_createDimensionRuleBuilderFromExisting()."
-  (with-daq-boxed-values ((coerced-rule-to-copy rule-to-copy :managed-pointer))
-    (wrap (opendaq.low-level:dimension-rule-builder/create-dimension-rule-builder-from-existing coerced-rule-to-copy) 'dimension-rule-builder))
-)
-
 (defun dimension-rule-builder-interface-id ()
   "Calls the openDAQ C function daqDimensionRuleBuilder_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
@@ -11230,55 +13586,6 @@ Calls the openDAQ C function daqDimensionRuleBuilder_setType()."
     (opendaq.low-level:dimension-rule-builder/set-type (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun create-dimension-rule-from-builder (builder)
-  "Creates a DimensionRule using Builder
-@param builder DimensionRule Builder
-
-Calls the openDAQ C function daqDimensionRule_createDimensionRuleFromBuilder()."
-  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (wrap (opendaq.low-level:dimension-rule/create-dimension-rule-from-builder coerced-builder) 'dimension-rule))
-)
-
-(defun create-linear-dimension-rule (delta start size)
-  "Creates a Rule with a Linear rule type configuration.
-@param delta Coefficient by which the input data is to be multiplied.
-@param start Constant that is added to the <em>scale * value</em> multiplication result.
-@param size The size of the dimension described by the rule
-The scale and offset are stored within the `parameters` member of the Rule object
-with the scale being at the first position of the list, and the offset at the second.
-
-Calls the openDAQ C function daqDimensionRule_createLinearDimensionRule()."
-  (with-daq-boxed-values ((coerced-delta delta :daq-base-object)
-                          (coerced-start start :daq-base-object)
-                          (coerced-size size nil))
-    (wrap (opendaq.low-level:dimension-rule/create-linear-dimension-rule coerced-delta coerced-start coerced-size) 'dimension-rule))
-)
-
-(defun create-list-dimension-rule (list)
-  "Creates a Rule with a List rule type configuration.
-@param list The list of dimension labels.
-The list is stored within the `parameters` member of the Rule object.
-
-Calls the openDAQ C function daqDimensionRule_createListDimensionRule()."
-  (with-daq-boxed-values ((coerced-list list :managed-pointer))
-    (wrap (opendaq.low-level:dimension-rule/create-list-dimension-rule coerced-list) 'dimension-rule))
-)
-
-(defun create-logarithmic-dimension-rule (delta start base size)
-  "Creates a Rule with a Logarithmic rule type configuration.
-@param delta Coefficient by which the input data is to be multiplied.
-@param start Constant that is added to the <em>scale * value</em> multiplication result.
-@param base The base of the logarithm.
-@param size The size of the dimension described by the rule.
-
-Calls the openDAQ C function daqDimensionRule_createLogarithmicDimensionRule()."
-  (with-daq-boxed-values ((coerced-delta delta :daq-base-object)
-                          (coerced-start start :daq-base-object)
-                          (coerced-base base :daq-base-object)
-                          (coerced-size size nil))
-    (wrap (opendaq.low-level:dimension-rule/create-logarithmic-dimension-rule coerced-delta coerced-start coerced-base coerced-size) 'dimension-rule))
-)
-
 (defun dimension-rule-interface-id ()
   "Calls the openDAQ C function daqDimensionRule_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
@@ -11306,15 +13613,6 @@ Calls the openDAQ C function daqDimensionRule_getType()."))
 
 Calls the openDAQ C function daqDimensionRule_getType()."
   (opendaq.low-level:dimension-rule/get-type (%require-live-pointer object))
-)
-
-(defun create-dimension-from-builder (builder)
-  "Creates a Dimension using Builder
-@param builder Dimension Builder
-
-Calls the openDAQ C function daqDimension_createDimensionFromBuilder()."
-  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (wrap (opendaq.low-level:dimension/create-dimension-from-builder coerced-builder) 'dimension))
 )
 
 (defun dimension-interface-id ()
@@ -11444,13 +13742,6 @@ property-object-class => daqPropertyObjectClass_getProperties()
   (as-list-of (wrap (opendaq.low-level:end-update-event-args/get-properties (%require-live-pointer object)) 'object-list) 'daq-string-object)
 )
 
-(defun create-enumeration-type-with-values (type-name enumerators)
-  "Calls the openDAQ C function daqEnumerationType_createEnumerationTypeWithValues()."
-  (with-daq-boxed-values ((coerced-type-name type-name :daq-string)
-                          (coerced-enumerators enumerators :managed-pointer))
-    (wrap (opendaq.low-level:enumeration-type/create-enumeration-type-with-values coerced-type-name coerced-enumerators) 'enumeration-type))
-)
-
 (defgeneric as-dictionary (object)
   (:documentation "enumeration-type => daqEnumerationType_getAsDictionary()
     Gets the enumerator names and values as a Dictionary.
@@ -11511,28 +13802,6 @@ Calls the openDAQ C function daqEnumerationType_getEnumeratorNames()."
     (opendaq.low-level:enumeration-type/get-interface-id intf-id-slot)
     nil
   )
-)
-
-(defun create-enumeration-with-int-value (name value type-manager)
-  "Calls the openDAQ C function daqEnumeration_createEnumerationWithIntValue()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-value value :daq-base-object)
-                          (coerced-type-manager type-manager :managed-pointer))
-    (wrap (opendaq.low-level:enumeration/create-enumeration-with-int-value coerced-name coerced-value coerced-type-manager) 'enumeration))
-)
-
-(defun create-enumeration-with-int-value-and-type (type value)
-  "Calls the openDAQ C function daqEnumeration_createEnumerationWithIntValueAndType()."
-  (with-daq-boxed-values ((coerced-type type :managed-pointer)
-                          (coerced-value value :daq-base-object))
-    (wrap (opendaq.low-level:enumeration/create-enumeration-with-int-value-and-type coerced-type coerced-value) 'enumeration))
-)
-
-(defun create-enumeration-with-type (type value)
-  "Calls the openDAQ C function daqEnumeration_createEnumerationWithType()."
-  (with-daq-boxed-values ((coerced-type type :managed-pointer)
-                          (coerced-value value :daq-string))
-    (wrap (opendaq.low-level:enumeration/create-enumeration-with-type coerced-type coerced-value) 'enumeration))
 )
 
 (defgeneric enumeration-type (object)
@@ -11657,20 +13926,6 @@ Calls the openDAQ C function daqEvalValue_cloneWithOwner()."
     (wrap (opendaq.low-level:eval-value/clone-with-owner (%require-live-pointer object) coerced-owner) 'eval-value))
 )
 
-(defun create-eval-value-args (eval args)
-  "Calls the openDAQ C function daqEvalValue_createEvalValueArgs()."
-  (with-daq-boxed-values ((coerced-eval eval :daq-string)
-                          (coerced-args args :managed-pointer))
-    (wrap (opendaq.low-level:eval-value/create-eval-value-args coerced-eval coerced-args) 'eval-value))
-)
-
-(defun create-eval-value-func (eval func)
-  "Calls the openDAQ C function daqEvalValue_createEvalValueFunc()."
-  (with-daq-boxed-values ((coerced-eval eval :daq-string)
-                          (coerced-func func :managed-pointer))
-    (wrap (opendaq.low-level:eval-value/create-eval-value-func coerced-eval coerced-func) 'eval-value))
-)
-
 (defmethod eval ((object eval-value))
   "Gets the expression.
 @param[out] eval The expression.
@@ -11780,30 +14035,6 @@ event-packet => daqEventPacket_getEventId()
   (with-daq-boxed-values ((coerced-sender sender :daq-base-object)
                           (coerced-event-args event-args :managed-pointer))
     (opendaq.low-level:event-handler/handle-event (%require-live-pointer object) coerced-sender coerced-event-args))
-)
-
-(defun create-data-descriptor-changed-event-packet (data-descriptor domain-data-descriptor)
-  "Creates a DataDescriptorChanged Event packet.
-@param dataDescriptor The data descriptor of the value signal.
-@param domainDataDescriptor The data descriptor of the domain signal that carries domain data of the value signal.
-The ID of the packet is \"DATA_DESCRIPTOR_CHANGED\". Its parameters dictionary contains the keys \"DataDescriptor\"
-and \"DomainDataDescriptor\", carrying their respective Signal descriptor objects as values.
-
-Calls the openDAQ C function daqEventPacket_createDataDescriptorChangedEventPacket()."
-  (with-daq-boxed-values ((coerced-data-descriptor data-descriptor :managed-pointer)
-                          (coerced-domain-data-descriptor domain-data-descriptor :managed-pointer))
-    (wrap (opendaq.low-level:event-packet/create-data-descriptor-changed-event-packet coerced-data-descriptor coerced-domain-data-descriptor) 'event-packet))
-)
-
-(defun create-implicit-domain-gap-detected-event-packet (diff)
-  "Creates a ImplicitDomainGapDetected Event packet.
-@param diff The size of the gap in ticks or value
-The ID of the packet is \"IMPLICIT_DOMAIN_GAP_DETECTED\". Its parameters dictionary contains the key \"Diff\", which holds
-the size of the gap. The size can be negative, in which case it is an overlap of samples.
-
-Calls the openDAQ C function daqEventPacket_createImplicitDomainGapDetectedEventPacket()."
-  (with-daq-boxed-values ((coerced-diff diff :daq-base-object))
-    (wrap (opendaq.low-level:event-packet/create-implicit-domain-gap-detected-event-packet coerced-diff) 'event-packet))
 )
 
 (defmethod event-id ((object event-packet))
@@ -11950,20 +14181,6 @@ Calls the openDAQ C function daqFolderConfig_addItem()."
 
 Calls the openDAQ C function daqFolderConfig_clear()."
   (opendaq.low-level:folder-config/clear (%require-live-pointer object))
-)
-
-(defun create-io-folder (context parent local-id)
-  "Creates an IO folder.
-@param context The Context. Most often the creating function-block/device passes its own Context to the Folder.
-@param parent The parent component.
-@param localId The local ID of the parent.
-IO folders are folder created by device and may contain only channels and other IO folders.
-
-Calls the openDAQ C function daqFolderConfig_createIoFolder()."
-  (with-daq-boxed-values ((coerced-context context :managed-pointer)
-                          (coerced-parent parent :managed-pointer)
-                          (coerced-local-id local-id :daq-string))
-    (wrap (opendaq.low-level:folder-config/create-io-folder coerced-context coerced-parent coerced-local-id) 'folder-config))
 )
 
 (defun folder-config-interface-id ()
@@ -13223,22 +15440,6 @@ Calls the openDAQ C function daqInstance_addStandardServers()."
   (as-list-of (wrap (opendaq.low-level:instance/add-standard-servers (%require-live-pointer object)) 'object-list) 'server)
 )
 
-(defun create-instance (context local-id)
-  "Creates an openDAQ instance.
-@param context The context object.
-@param localId The localID of the instance.
-openDAQ application uses instance as an entry point and a root component. The instance is the first openDAQ object
-that is created in the application.
-The caller should provide a localID that is a string that should be unique across multiple instances. If the
-instance sets a root device, the localID of the root device is automatically used as localID of the instance.
-The caller should provide configured module manager and context.
-
-Calls the openDAQ C function daqInstance_createInstance()."
-  (with-daq-boxed-values ((coerced-context context :managed-pointer)
-                          (coerced-local-id local-id :daq-string))
-    (wrap (opendaq.low-level:instance/create-instance coerced-context coerced-local-id) 'instance))
-)
-
 (defgeneric available-server-types (object)
   (:documentation "instance => daqInstance_getAvailableServerTypes()
     Get a dictionary of available server types as <IString, IServerType> pairs
@@ -14052,29 +16253,6 @@ logger-sink => daqLoggerSink_shouldLog()"))
 Calls the openDAQ C function daqLoggerComponent_shouldLog()."
   (with-daq-boxed-values ((coerced-level level nil))
     (not (zerop (opendaq.low-level:logger-component/should-log (%require-live-pointer object) coerced-level))))
-)
-
-(defun create-rotating-file-logger-sink (file-name max-file-byte-size max-files)
-  "Calls the openDAQ C function daqLoggerSink_createRotatingFileLoggerSink()."
-  (with-daq-boxed-values ((coerced-file-name file-name :daq-string)
-                          (coerced-max-file-byte-size max-file-byte-size nil)
-                          (coerced-max-files max-files nil))
-    (wrap (opendaq.low-level:logger-sink/create-rotating-file-logger-sink coerced-file-name coerced-max-file-byte-size coerced-max-files) 'logger-sink))
-)
-
-(defun create-std-err-logger-sink ()
-  "Calls the openDAQ C function daqLoggerSink_createStdErrLoggerSink()."
-  (wrap (opendaq.low-level:logger-sink/create-std-err-logger-sink) 'logger-sink)
-)
-
-(defun create-std-out-logger-sink ()
-  "Calls the openDAQ C function daqLoggerSink_createStdOutLoggerSink()."
-  (wrap (opendaq.low-level:logger-sink/create-std-out-logger-sink) 'logger-sink)
-)
-
-(defun create-win-debug-logger-sink ()
-  "Calls the openDAQ C function daqLoggerSink_createWinDebugLoggerSink()."
-  (wrap (opendaq.low-level:logger-sink/create-win-debug-logger-sink) 'logger-sink)
 )
 
 (defmethod flush ((object logger-sink))
@@ -14933,12 +17111,6 @@ Calls the openDAQ C function daqModuleManager_addModule()."
     (opendaq.low-level:module-manager/add-module (%require-live-pointer object) coerced-module))
 )
 
-(defun create-module-manager-multiple-paths (paths)
-  "Calls the openDAQ C function daqModuleManager_createModuleManagerMultiplePaths()."
-  (with-daq-boxed-values ((coerced-paths paths :managed-pointer))
-    (wrap (opendaq.low-level:module-manager/create-module-manager-multiple-paths coerced-paths) 'module-manager))
-)
-
 (defun module-manager-interface-id ()
   "Calls the openDAQ C function daqModuleManager_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
@@ -15629,27 +17801,6 @@ Calls the openDAQ C function daqMultiReader_addInput()."
     (opendaq.low-level:multi-reader/add-input (%require-live-pointer object) coerced-input))
 )
 
-(defun create-multi-reader-ex (signals value-read-type domain-read-type mode timeout-type required-common-sample-rate start-on-full-unit-of-domain min-read-count)
-  "Calls the openDAQ C function daqMultiReader_createMultiReaderEx()."
-  (with-daq-boxed-values ((coerced-signals signals :managed-pointer)
-                          (coerced-value-read-type value-read-type nil)
-                          (coerced-domain-read-type domain-read-type nil)
-                          (coerced-mode mode nil)
-                          (coerced-timeout-type timeout-type nil)
-                          (coerced-required-common-sample-rate required-common-sample-rate nil)
-                          (coerced-start-on-full-unit-of-domain start-on-full-unit-of-domain :daq-bool)
-                          (coerced-min-read-count min-read-count nil))
-    (wrap (opendaq.low-level:multi-reader/create-multi-reader-ex coerced-signals coerced-value-read-type coerced-domain-read-type coerced-mode coerced-timeout-type coerced-required-common-sample-rate coerced-start-on-full-unit-of-domain coerced-min-read-count) 'multi-reader))
-)
-
-(defun create-multi-reader-from-existing (invalidated-reader value-read-type domain-read-type)
-  "Calls the openDAQ C function daqMultiReader_createMultiReaderFromExisting()."
-  (with-daq-boxed-values ((coerced-invalidated-reader invalidated-reader :managed-pointer)
-                          (coerced-value-read-type value-read-type nil)
-                          (coerced-domain-read-type domain-read-type nil))
-    (wrap (opendaq.low-level:multi-reader/create-multi-reader-from-existing coerced-invalidated-reader coerced-value-read-type coerced-domain-read-type) 'multi-reader))
-)
-
 (defmethod active ((object multi-reader))
   "Gets active or inactive MultiReader state. In inactive state MultiReader will receive only event packets.
 
@@ -15984,12 +18135,6 @@ Calls the openDAQ C function daqPacketDestructCallback_onPacketDestroyed()."
   (opendaq.low-level:packet-destruct-callback/on-packet-destroyed (%require-live-pointer object))
 )
 
-(defun create-packet-reader-from-port (port)
-  "Calls the openDAQ C function daqPacketReader_createPacketReaderFromPort()."
-  (with-daq-boxed-values ((coerced-port port :managed-pointer))
-    (wrap (opendaq.low-level:packet-reader/create-packet-reader-from-port coerced-port) 'packet-reader))
-)
-
 (defun packet-reader-interface-id ()
   "Calls the openDAQ C function daqPacketReader_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
@@ -16200,15 +18345,6 @@ Calls the openDAQ C function daqPermissionMaskBuilder_build()."
 
 Calls the openDAQ C function daqPermissionMaskBuilder_clear()."
   (opendaq.low-level:permission-mask-builder/clear (%require-live-pointer object))
-)
-
-(defun create-permission-mask-builder-from-mask (permission-mask)
-  "Creates a permission mask builder object from integer permission mask.
-@param permissionMask Permission mask defined as 64-bit integer where each bit corresponds to a specific permission defined in Permission enum.
-
-Calls the openDAQ C function daqPermissionMaskBuilder_createPermissionMaskBuilderFromMask()."
-  (with-daq-boxed-values ((coerced-permission-mask permission-mask nil))
-    (wrap (opendaq.low-level:permission-mask-builder/create-permission-mask-builder-from-mask coerced-permission-mask) 'permission-mask-builder))
 )
 
 (defgeneric execute (object)
@@ -16431,188 +18567,6 @@ Calls the openDAQ C function daqPermissions_getInherited()."
 
 Calls the openDAQ C function daqPropertyBuilder_build()."
   (wrap (opendaq.low-level:property-builder/build (%require-live-pointer object)) 'property)
-)
-
-(defun create-bool-property-builder (name default-value)
-  "Creates a boolean Property builder object with a specified name and default value.
-@param name The name of the Property.
-@param defaultValue The boolean default value. Can be an EvalValue.
-The Property Value type is `ctBool`. Note that the defaultValue parameter can be EvalValue.
-
-Calls the openDAQ C function daqPropertyBuilder_createBoolPropertyBuilder()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :daq-base-object))
-    (wrap (opendaq.low-level:property-builder/create-bool-property-builder coerced-name coerced-default-value) 'property-builder))
-)
-
-(defun create-dict-property-builder (name default-value)
-  "Creates a dictionary Property builder object with a specified name and default value.
-@param name The name of the Property.
-@param defaultValue The dictionary default value.
-The Property Value type is `ctDict`. The dictionary passed as default value must have homogeneous key
-and value lists (all dictionary keys/values must be of the same type).
-The Property's Item type field will be set according to defaultValue dictionary Item type. The same goes for
-the Key type.
-TODO: defaultValue can be an EvalValue once dictionaries are supported.
-
-Calls the openDAQ C function daqPropertyBuilder_createDictPropertyBuilder()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer))
-    (wrap (opendaq.low-level:property-builder/create-dict-property-builder coerced-name coerced-default-value) 'property-builder))
-)
-
-(defun create-enumeration-property-builder (name default-value)
-  "Creates an Enumeration Property builder object with a specified name and default value.
-@param name The name of the Property.
-@param defaultValue The default structure value.
-The Property Value type is `ctEnumeration`.
-
-Calls the openDAQ C function daqPropertyBuilder_createEnumerationPropertyBuilder()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer))
-    (wrap (opendaq.low-level:property-builder/create-enumeration-property-builder coerced-name coerced-default-value) 'property-builder))
-)
-
-(defun create-float-property-builder (name default-value)
-  "Creates a floating point value Property builder object with a specified name and default value.
-@param name The name of the Property.
-@param defaultValue The float default value. Can be an EvalValue
-The Property Value type is `ctFloat`. Note that the defaultValue parameter can be EvalValue.
-
-Calls the openDAQ C function daqPropertyBuilder_createFloatPropertyBuilder()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :daq-base-object))
-    (wrap (opendaq.low-level:property-builder/create-float-property-builder coerced-name coerced-default-value) 'property-builder))
-)
-
-(defun create-function-property-builder (name callable-info)
-  "Creates a function- or procedure-type Property builder object. Requires the a CallableInfo object to specify the argument type/count and function return type.
-@param name The name of the Property.
-@param callableInfo Information about the callable argument type/count and return type.
-The Property Value type is `ctFunction` or `ctProc`, depending on if `callableInfo` contains information
-on the return type or not.
-
-Calls the openDAQ C function daqPropertyBuilder_createFunctionPropertyBuilder()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-callable-info callable-info :managed-pointer))
-    (wrap (opendaq.low-level:property-builder/create-function-property-builder coerced-name coerced-callable-info) 'property-builder))
-)
-
-(defun create-int-property-builder (name default-value)
-  "Creates an integer Property builder object with a specified name and default value.
-@param name The name of the Property.
-@param defaultValue The integer default value. Can be an EvalValue.
-The Property Value type is `ctInt`. Note that the defaultValue parameter can be EvalValue.
-
-Calls the openDAQ C function daqPropertyBuilder_createIntPropertyBuilder()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :daq-base-object))
-    (wrap (opendaq.low-level:property-builder/create-int-property-builder coerced-name coerced-default-value) 'property-builder))
-)
-
-(defun create-list-property-builder (name default-value)
-  "Creates a list Property builder object with a specified name and default value.
-@param name The name of the Property.
-@param defaultValue The list default value. Can be an EvalValue.
-The Property Value type is `ctList`. Note that the defaultValue parameter can be EvalValue.
-The list passed as `defaultValue` must be homogeneous.
-The Property's Item type field will be set according to defaultValue list type.
-
-Calls the openDAQ C function daqPropertyBuilder_createListPropertyBuilder()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer))
-    (wrap (opendaq.low-level:property-builder/create-list-property-builder coerced-name coerced-default-value) 'property-builder))
-)
-
-(defun create-object-property-builder (name default-value)
-  "Creates an object-type Property builder object with a specified name and default value..
-@param name The name of the Property.
-@param defaultValue The Property object default value.
-The Property Value type is `ctObject`. Object properties cannot be have any metadata other than
-their name, description, and default value configured. The PropertyObject default value can only
-be a base PropertyObject type (not a descendant type).
-If the defaultValue is not specified, it will automatically be configured to an empty Property Object.
-
-Calls the openDAQ C function daqPropertyBuilder_createObjectPropertyBuilder()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer))
-    (wrap (opendaq.low-level:property-builder/create-object-property-builder coerced-name coerced-default-value) 'property-builder))
-)
-
-(defun create-ratio-property-builder (name default-value)
-  "Creates a ratio Property builder object with a specified name and default value.
-@param name The name of the Property.
-@param defaultValue The ratio default value.
-The Property Value type is `ctRatio`.
-TODO: defaultValue can be an EvalValue once ratios are supported.
-
-Calls the openDAQ C function daqPropertyBuilder_createRatioPropertyBuilder()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :daq-base-object))
-    (wrap (opendaq.low-level:property-builder/create-ratio-property-builder coerced-name coerced-default-value) 'property-builder))
-)
-
-(defun create-reference-property-builder (name referenced-property-eval)
-  "Creates a Reference Property builder object that points at a property specified in the `referencedProperty` parameter.
-@param name The name of the Property.
-@param referencedPropertyEval The evaluation expression that evaluates to another property.
-
-Calls the openDAQ C function daqPropertyBuilder_createReferencePropertyBuilder()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-referenced-property-eval referenced-property-eval :managed-pointer))
-    (wrap (opendaq.low-level:property-builder/create-reference-property-builder coerced-name coerced-referenced-property-eval) 'property-builder))
-)
-
-(defun create-selection-property-builder (name selection-values default-value)
-  "Creates a Selection Property builder object with a list of selection values. The default value is an integer index into the default selected value.
-@param name The name of the Property.
-@param selectionValues The list of selectable values.
-@param defaultValue The default index into the list of selection values.
-The Property Value type is `ctInt`.
-
-Calls the openDAQ C function daqPropertyBuilder_createSelectionPropertyBuilder()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-selection-values selection-values :managed-pointer)
-                          (coerced-default-value default-value :daq-base-object))
-    (wrap (opendaq.low-level:property-builder/create-selection-property-builder coerced-name coerced-selection-values coerced-default-value) 'property-builder))
-)
-
-(defun create-sparse-selection-property-builder (name selection-values default-value)
-  "Creates a Selection Property builder object with a dictionary of selection values. The default value is an integer key into the provided dictionary.
-@param name The name of the Property.
-@param selectionValues The dictionary of selectable values. The key type must be `ctInt`.
-@param defaultValue The default key into the list of selection values.
-The Property Value type is `ctInt`. The key type of the Selection values dictionary must be `ctInt`.
-
-Calls the openDAQ C function daqPropertyBuilder_createSparseSelectionPropertyBuilder()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-selection-values selection-values :managed-pointer)
-                          (coerced-default-value default-value :daq-base-object))
-    (wrap (opendaq.low-level:property-builder/create-sparse-selection-property-builder coerced-name coerced-selection-values coerced-default-value) 'property-builder))
-)
-
-(defun create-string-property-builder (name default-value)
-  "Creates a string Property builder object with a specified name and default value.
-@param name The name of the Property.
-@param defaultValue The integer default value. Can be an EvalValue.
-The Property Value type is `ctString`. Note that the defaultValue parameter can be EvalValue.
-
-Calls the openDAQ C function daqPropertyBuilder_createStringPropertyBuilder()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :daq-string))
-    (wrap (opendaq.low-level:property-builder/create-string-property-builder coerced-name coerced-default-value) 'property-builder))
-)
-
-(defun create-struct-property-builder (name default-value)
-  "Creates a Struct Property builder object with a specified name and default value.
-@param name The name of the Property.
-@param defaultValue The default structure value.
-The Property Value type is `ctStruct`.
-
-Calls the openDAQ C function daqPropertyBuilder_createStructPropertyBuilder()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer))
-    (wrap (opendaq.low-level:property-builder/create-struct-property-builder coerced-name coerced-default-value) 'property-builder))
 )
 
 (defgeneric callable-info (object)
@@ -17533,17 +19487,6 @@ Calls the openDAQ C function daqPropertyObjectClassBuilder_build()."
   (wrap (opendaq.low-level:property-object-class-builder/build (%require-live-pointer object)) 'property-object-class)
 )
 
-(defun create-property-object-class-builder-with-manager (manager name)
-  "Creates a Property object class configuration object with a given name, and a reference to the Type manager.
-@param manager The Property object class manager object.
-@param name The name of the class.
-
-Calls the openDAQ C function daqPropertyObjectClassBuilder_createPropertyObjectClassBuilderWithManager()."
-  (with-daq-boxed-values ((coerced-manager manager :managed-pointer)
-                          (coerced-name name :daq-string))
-    (wrap (opendaq.low-level:property-object-class-builder/create-property-object-class-builder-with-manager coerced-manager coerced-name) 'property-object-class-builder))
-)
-
 (defun property-object-class-builder-interface-id ()
   "Calls the openDAQ C function daqPropertyObjectClassBuilder_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
@@ -18106,17 +20049,6 @@ Calls the openDAQ C function daqPropertyObject_clearPropertyValues()."
   (opendaq.low-level:property-object/clear-property-values (%require-live-pointer object))
 )
 
-(defun create-property-object-with-class-and-manager (manager class-name)
-  "Creates a Property object that inherits the properties of a class added to the Type manager with the specified name.
-@param manager The Type manager manager.
-@param className The name of the class from which the Property object inherits its properties.
-
-Calls the openDAQ C function daqPropertyObject_createPropertyObjectWithClassAndManager()."
-  (with-daq-boxed-values ((coerced-manager manager :managed-pointer)
-                          (coerced-class-name class-name :daq-string))
-    (wrap (opendaq.low-level:property-object/create-property-object-with-class-and-manager coerced-manager coerced-class-name) 'property-object))
-)
-
 (defgeneric end-update (object)
   (:documentation "Ends batch configuration of the object.
 Batched configuration is used to apply several settings at once. To begin batch configuration, call `beginUpdate`.
@@ -18652,212 +20584,6 @@ property => daqProperty_setValue()
   (with-daq-boxed-values ((coerced-new-value new-value :daq-base-object))
     (opendaq.low-level:property-value-event-args/set-value (%require-live-pointer object) coerced-new-value))
   new-value)
-
-(defun create-bool-property (name default-value visible)
-  "Creates a boolean Property object with a default value and Visible state.
-@param name The name of the Property.
-@param defaultValue The boolean default value. Can be an EvalValue.
-@param visible If true, the Property is visible. Can be an EvalValue.
-The Property Value type is `ctBool`. Note that the defaultValue and visible parameters can be EvalValues.
-
-Calls the openDAQ C function daqProperty_createBoolProperty()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :daq-base-object)
-                          (coerced-visible visible :daq-base-object))
-    (wrap (opendaq.low-level:property/create-bool-property coerced-name coerced-default-value coerced-visible) 'property))
-)
-
-(defun create-dict-property (name default-value visible)
-  "Creates a dictionary Property object with a default value and Visible state.
-@param name The name of the Property.
-@param defaultValue The dictionary default value.
-@param visible If true, the Property is visible.  Can be an EvalValue.
-The Property Value type is `ctDict`. The visible parameter can be an EvalValue. The dictionary passed as
-default value must have homogeneous key and value lists.
-The Property's Item type field will be set according to defaultValue dictionary Item type. The same goes for
-the Key type.
-TODO: defaultValue can be an EvalValue once dictionaries are supported.
-
-Calls the openDAQ C function daqProperty_createDictProperty()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer)
-                          (coerced-visible visible :daq-base-object))
-    (wrap (opendaq.low-level:property/create-dict-property coerced-name coerced-default-value coerced-visible) 'property))
-)
-
-(defun create-enumeration-property (name default-value visible)
-  "Creates an Enumeration Property object with a default value and its visible state.
-@param name The name of the Property.
-@param defaultValue The default structure value.
-@param visible If true, the Property is visible. Can be an EvalValue.
-The Property Value type is `ctEnumeration`.
-
-Calls the openDAQ C function daqProperty_createEnumerationProperty()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer)
-                          (coerced-visible visible :daq-base-object))
-    (wrap (opendaq.low-level:property/create-enumeration-property coerced-name coerced-default-value coerced-visible) 'property))
-)
-
-(defun create-float-property (name default-value visible)
-  "Creates a floating point value Property object with a default value and Visible state.
-@param name The name of the Property.
-@param defaultValue The float default value. Can be an EvalValue.
-@param visible If true, the Property is visible. Can be an EvalValue.
-The Property Value type is `ctFloat`. Note that the defaultValue and visible parameters can be EvalValues.
-
-Calls the openDAQ C function daqProperty_createFloatProperty()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :daq-base-object)
-                          (coerced-visible visible :daq-base-object))
-    (wrap (opendaq.low-level:property/create-float-property coerced-name coerced-default-value coerced-visible) 'property))
-)
-
-(defun create-function-property (name callable-info visible)
-  "Creates a function- or procedure-type Property object. Requires the a CallableInfo object to specify the argument type/count and function return type.
-@param name The name of the Property.
-@param callableInfo Information about the callable argument type/count and return type.
-@param visible If true, the Property is visible. Can be an EvalValue.
-The Property Value type is `ctFunction` or `ctProc`, depending on if `callableInfo` contains information
-on the return type or not. Note that the visible parameter can be an EvalValue.
-
-Calls the openDAQ C function daqProperty_createFunctionProperty()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-callable-info callable-info :managed-pointer)
-                          (coerced-visible visible :daq-base-object))
-    (wrap (opendaq.low-level:property/create-function-property coerced-name coerced-callable-info coerced-visible) 'property))
-)
-
-(defun create-int-property (name default-value visible)
-  "Creates an integer Property object with a default value and Visible state.
-@param name The name of the Property.
-@param defaultValue The integer default value. Can be an EvalValue.
-@param visible If true, the Property is visible. Can be an EvalValue.
-The Property Value type is `ctInt`. Note that the defaultValue and visible parameters can be EvalValues.
-
-Calls the openDAQ C function daqProperty_createIntProperty()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :daq-base-object)
-                          (coerced-visible visible :daq-base-object))
-    (wrap (opendaq.low-level:property/create-int-property coerced-name coerced-default-value coerced-visible) 'property))
-)
-
-(defun create-list-property (name default-value visible)
-  "Creates a list Property object with a default value and Visible state.
-@param name The name of the Property.
-@param defaultValue The list default value. Can be an EvalValue.
-@param visible If true, the Property is visible. Can be an EvalValue.
-The Property Value type is `ctList`. Note that the defaultValue and visible parameters can be EvalValues.
-The list passed as `defaultValue` must be homogeneous.
-The Property's Item type field will be set according to defaultValue list type.
-
-Calls the openDAQ C function daqProperty_createListProperty()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer)
-                          (coerced-visible visible :daq-base-object))
-    (wrap (opendaq.low-level:property/create-list-property coerced-name coerced-default-value coerced-visible) 'property))
-)
-
-(defun create-object-property (name default-value)
-  "Creates an object-type Property object with a default value and optional Visible state.
-@param name The name of the Property.
-@param defaultValue The Property object default value.
-The Property Value type is `ctObject`. Object properties cannot be have any metadata other than
-their name, description, and default value configured. The PropertyObject default value can only
-be a base PropertyObject type (not a descendant type).
-If the defaultValue is not specified, it will automatically be configured to an empty Property Object.
-
-Calls the openDAQ C function daqProperty_createObjectProperty()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer))
-    (wrap (opendaq.low-level:property/create-object-property coerced-name coerced-default-value) 'property))
-)
-
-(defun create-ratio-property (name default-value visible)
-  "Creates a ratio Property object with a default value and Visible state.
-@param name The name of the Property.
-@param defaultValue The ratio default value.
-@param visible If true, the Property is visible. Can be an EvalValue.
-The Property Value type is `ctRatio`. Note that the visible parameter can be an EvalValue.
-TODO: defaultValue can be an EvalValue once ratios are supported.
-
-Calls the openDAQ C function daqProperty_createRatioProperty()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :daq-base-object)
-                          (coerced-visible visible :daq-base-object))
-    (wrap (opendaq.low-level:property/create-ratio-property coerced-name coerced-default-value coerced-visible) 'property))
-)
-
-(defun create-reference-property (name referenced-property-eval)
-  "Creates a Reference Property object that points at a property specified in the `referencedProperty` parameter.
-@param name The name of the Property.
-@param referencedPropertyEval The evaluation expression that evaluates to another property.
-
-Calls the openDAQ C function daqProperty_createReferenceProperty()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-referenced-property-eval referenced-property-eval :managed-pointer))
-    (wrap (opendaq.low-level:property/create-reference-property coerced-name coerced-referenced-property-eval) 'property))
-)
-
-(defun create-selection-property (name selection-values default-value visible)
-  "Creates a Selection Property object with a list of selection values. The default value is an integer index into the default selected value.
-@param name The name of the Property.
-@param selectionValues The list of selectable values.
-@param defaultValue The default index into the list of selection values.
-@param visible If true, the Property is visible. Can be an EvalValue.
-The Property Value type is `ctInt`.
-
-Calls the openDAQ C function daqProperty_createSelectionProperty()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-selection-values selection-values :managed-pointer)
-                          (coerced-default-value default-value :daq-base-object)
-                          (coerced-visible visible :daq-base-object))
-    (wrap (opendaq.low-level:property/create-selection-property coerced-name coerced-selection-values coerced-default-value coerced-visible) 'property))
-)
-
-(defun create-sparse-selection-property (name selection-values default-value visible)
-  "Creates a Selection Property object with a dictionary of selection values. The default value is an integer key into the provided dictionary.
-@param name The name of the Property.
-@param selectionValues The dictionary of selectable values. The key type must be `ctInt`.
-@param defaultValue The default key into the list of selection values.
-@param visible If true, the Property is visible. Can be an EvalValue.
-The Property Value type is `ctInt`. The key type of the Selection values dictionary must be `ctInt`.
-
-Calls the openDAQ C function daqProperty_createSparseSelectionProperty()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-selection-values selection-values :managed-pointer)
-                          (coerced-default-value default-value :daq-base-object)
-                          (coerced-visible visible :daq-base-object))
-    (wrap (opendaq.low-level:property/create-sparse-selection-property coerced-name coerced-selection-values coerced-default-value coerced-visible) 'property))
-)
-
-(defun create-string-property (name default-value visible)
-  "Creates a string Property object with a default value and Visible state.
-@param name The name of the Property.
-@param defaultValue The integer default value. Can be an EvalValue.
-@param visible If true, the Property is visible. Can be an EvalValue.
-The Property Value type is `ctString`. Note that the defaultValue and visible parameters can be EvalValues.
-
-Calls the openDAQ C function daqProperty_createStringProperty()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :daq-string)
-                          (coerced-visible visible :daq-base-object))
-    (wrap (opendaq.low-level:property/create-string-property coerced-name coerced-default-value coerced-visible) 'property))
-)
-
-(defun create-struct-property (name default-value visible)
-  "Creates a Struct Property object with a default value and its visible state.
-@param name The name of the Property.
-@param defaultValue The default structure value.
-@param visible If true, the Property is visible. Can be an EvalValue.
-The Property Value type is `ctStruct`.
-
-Calls the openDAQ C function daqProperty_createStructProperty()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-default-value default-value :managed-pointer)
-                          (coerced-visible visible :daq-base-object))
-    (wrap (opendaq.low-level:property/create-struct-property coerced-name coerced-default-value coerced-visible) 'property))
-)
 
 (defmethod callable-info ((object property))
   "Gets the Callable information objects of the Property that specifies the argument and return types of the callable object stored as the Property value.
@@ -19475,15 +21201,6 @@ Calls the openDAQ C function daqReferenceDomainInfoBuilder_build()."
   (wrap (opendaq.low-level:reference-domain-info-builder/build (%require-live-pointer object)) 'reference-domain-info)
 )
 
-(defun create-reference-domain-info-builder-from-existing (reference-domain-info-to-copy)
-  "Reference Domain Info copy factory that creates a Reference Domain Info builder object from a different Reference Domain Info, copying its parameters.
-@param referenceDomainInfoToCopy The Reference Domain Info of which configuration should be copied.
-
-Calls the openDAQ C function daqReferenceDomainInfoBuilder_createReferenceDomainInfoBuilderFromExisting()."
-  (with-daq-boxed-values ((coerced-reference-domain-info-to-copy reference-domain-info-to-copy :managed-pointer))
-    (wrap (opendaq.low-level:reference-domain-info-builder/create-reference-domain-info-builder-from-existing coerced-reference-domain-info-to-copy) 'reference-domain-info-builder))
-)
-
 (defun reference-domain-info-builder-interface-id ()
   "Calls the openDAQ C function daqReferenceDomainInfoBuilder_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
@@ -19898,15 +21615,6 @@ Calls the openDAQ C function daqScalingBuilder_build()."
   (wrap (opendaq.low-level:scaling-builder/build (%require-live-pointer object)) 'scaling)
 )
 
-(defun create-scaling-builder-from-existing (scaling-to-copy)
-  "Scaling builder copy factory that creates a configurable Scaling object from a non-configurable one.
-@param scalingToCopy The scaling of which configuration should be copied.
-
-Calls the openDAQ C function daqScalingBuilder_createScalingBuilderFromExisting()."
-  (with-daq-boxed-values ((coerced-scaling-to-copy scaling-to-copy :managed-pointer))
-    (wrap (opendaq.low-level:scaling-builder/create-scaling-builder-from-existing coerced-scaling-to-copy) 'scaling-builder))
-)
-
 (defgeneric input-data-type (object)
   (:documentation "Gets the scaling's input data type.
 @param[out] type The input data type.
@@ -20093,30 +21801,6 @@ Calls the openDAQ C function daqScalingCalcPrivate_scaleDataOutput()."
     (opendaq.low-level:scaling-calc-private/scale-data-output (%require-live-pointer object) coerced-data coerced-sample-count coerced-output))
 )
 
-(defun create-linear-scaling (scale offset input-data-type output-data-type)
-  "Creates a Scaling with a Linear scaling type configuration. The returned Scaling object is already frozen.
-@param scale Coefficient by which the input data is to be multiplied.
-@param offset Constant that is added to the <em>scale * value</em> multiplication result.
-@param inputDataType The scaling's input data type.
-@param outputDataType The scaling's output data type.
-
-Calls the openDAQ C function daqScaling_createLinearScaling()."
-  (with-daq-boxed-values ((coerced-scale scale :daq-base-object)
-                          (coerced-offset offset :daq-base-object)
-                          (coerced-input-data-type input-data-type nil)
-                          (coerced-output-data-type output-data-type nil))
-    (wrap (opendaq.low-level:scaling/create-linear-scaling coerced-scale coerced-offset coerced-input-data-type coerced-output-data-type) 'scaling))
-)
-
-(defun create-scaling-from-builder (builder)
-  "Creates a Scaling object from Builder
-@param builder Scaling Builder
-
-Calls the openDAQ C function daqScaling_createScalingFromBuilder()."
-  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (wrap (opendaq.low-level:scaling/create-scaling-from-builder coerced-builder) 'scaling))
-)
-
 (defgeneric input-sample-type (object)
   (:documentation "Gets the scaling's input data type.
 @param[out] type The input data type
@@ -20175,14 +21859,6 @@ Calls the openDAQ C function daqScaling_getParameters()."
 
 Calls the openDAQ C function daqScaling_getType()."
   (opendaq.low-level:scaling/get-type (%require-live-pointer object))
-)
-
-(defun create-scheduler-with-main-loop (logger num-workers use-main-loop)
-  "Calls the openDAQ C function daqScheduler_createSchedulerWithMainLoop()."
-  (with-daq-boxed-values ((coerced-logger logger :managed-pointer)
-                          (coerced-num-workers num-workers nil)
-                          (coerced-use-main-loop use-main-loop :daq-bool))
-    (wrap (opendaq.low-level:scheduler/create-scheduler-with-main-loop coerced-logger coerced-num-workers coerced-use-main-loop) 'scheduler))
 )
 
 (defun scheduler-interface-id ()
@@ -20387,76 +22063,6 @@ Calls the openDAQ C function daqSearchFilter_acceptsObject()."))
 Calls the openDAQ C function daqSearchFilter_acceptsObject()."
   (with-daq-boxed-values ((coerced-obj obj :daq-base-object))
     (not (zerop (opendaq.low-level:search-filter/accepts-object (%require-live-pointer object) coerced-obj))))
-)
-
-(defun create-any-search-filter ()
-  "Creates a search filter that accepts all objects. \"Visit children\" always returns `true`.
-
-Calls the openDAQ C function daqSearchFilter_createAnySearchFilter()."
-  (wrap (opendaq.low-level:search-filter/create-any-search-filter) 'search-filter)
-)
-
-(defun create-custom-search-filter (accepts-function visit-function)
-  "Creates a custom search filter with a user-defined \"accepts object\" and \"visit children\" function.
-@param acceptsFunction The function to be called when \"accepts object\" is called. Should return `true` or `false`.
-@param visitFunction The function to be called when \"visit children\" is called. Should return `true` or `false`.
-
-Calls the openDAQ C function daqSearchFilter_createCustomSearchFilter()."
-  (with-daq-boxed-values ((coerced-accepts-function accepts-function :managed-pointer)
-                          (coerced-visit-function visit-function :managed-pointer))
-    (wrap (opendaq.low-level:search-filter/create-custom-search-filter coerced-accepts-function coerced-visit-function) 'search-filter))
-)
-
-(defun create-excluded-tags-search-filter (excluded-tags)
-  "Calls the openDAQ C function daqSearchFilter_createExcludedTagsSearchFilter()."
-  (with-daq-boxed-values ((coerced-excluded-tags excluded-tags :managed-pointer))
-    (wrap (opendaq.low-level:search-filter/create-excluded-tags-search-filter coerced-excluded-tags) 'search-filter))
-)
-
-(defun create-local-id-search-filter (local-id)
-  "Calls the openDAQ C function daqSearchFilter_createLocalIdSearchFilter()."
-  (with-daq-boxed-values ((coerced-local-id local-id :daq-string))
-    (wrap (opendaq.low-level:search-filter/create-local-id-search-filter coerced-local-id) 'search-filter))
-)
-
-(defun create-not-search-filter (filter)
-  "Creates a search filter that negates the \"accepts object\" result of the filter provided as construction argument. Does not negate the \"visit children\" result.
-@param filter The filter of which results should be negated.
-
-Calls the openDAQ C function daqSearchFilter_createNotSearchFilter()."
-  (with-daq-boxed-values ((coerced-filter filter :managed-pointer))
-    (wrap (opendaq.low-level:search-filter/create-not-search-filter coerced-filter) 'search-filter))
-)
-
-(defun create-or-search-filter (left right)
-  "Creates a \"disjunction\" search filter that combines 2 filters, accepting an object if any of the two filters accepts it. \"Visit children\" returns `true` if any of the two filters accepts does so.
-@param left The first argument of the disjunction operation.
-@param right The second argument of the disjunction operation.
-
-Calls the openDAQ C function daqSearchFilter_createOrSearchFilter()."
-  (with-daq-boxed-values ((coerced-left left :managed-pointer)
-                          (coerced-right right :managed-pointer))
-    (wrap (opendaq.low-level:search-filter/create-or-search-filter coerced-left coerced-right) 'search-filter))
-)
-
-(defun create-recursive-search-filter (filter)
-  "Creates a search filter that indicates that the search method should recursively search through the object's child elements. This filter constructor should always be the final filter wrapper, and should not be used as a constructor argument for another filter.
-@param filter The filter to be wrapped with a \"recursive\" flag.
-
-Calls the openDAQ C function daqSearchFilter_createRecursiveSearchFilter()."
-  (with-daq-boxed-values ((coerced-filter filter :managed-pointer))
-    (wrap (opendaq.low-level:search-filter/create-recursive-search-filter coerced-filter) 'search-filter))
-)
-
-(defun create-required-tags-search-filter (required-tags)
-  "Calls the openDAQ C function daqSearchFilter_createRequiredTagsSearchFilter()."
-  (with-daq-boxed-values ((coerced-required-tags required-tags :managed-pointer))
-    (wrap (opendaq.low-level:search-filter/create-required-tags-search-filter coerced-required-tags) 'search-filter))
-)
-
-(defun create-visible-search-filter ()
-  "Calls the openDAQ C function daqSearchFilter_createVisibleSearchFilter()."
-  (wrap (opendaq.low-level:search-filter/create-visible-search-filter) 'search-filter)
 )
 
 (defun search-filter-interface-id ()
@@ -21297,16 +22903,6 @@ Calls the openDAQ C function daqSignalConfig_clearRelatedSignals()."
   (opendaq.low-level:signal-config/clear-related-signals (%require-live-pointer object))
 )
 
-(defun create-signal-with-descriptor (context descriptor parent local-id class-name)
-  "Calls the openDAQ C function daqSignalConfig_createSignalWithDescriptor()."
-  (with-daq-boxed-values ((coerced-context context :managed-pointer)
-                          (coerced-descriptor descriptor :managed-pointer)
-                          (coerced-parent parent :managed-pointer)
-                          (coerced-local-id local-id :daq-string)
-                          (coerced-class-name class-name :daq-string))
-    (wrap (opendaq.low-level:signal-config/create-signal-with-descriptor coerced-context coerced-descriptor coerced-parent coerced-local-id coerced-class-name) 'signal-config))
-)
-
 (defun signal-config-interface-id ()
   "Calls the openDAQ C function daqSignalConfig_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
@@ -21937,24 +23533,6 @@ Calls the openDAQ C function daqStreamReaderBuilder_setValueReadType()."
     (opendaq.low-level:stream-reader-builder/set-value-read-type (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun create-stream-reader-from-existing (invalidated-reader value-read-type domain-read-type)
-  "Calls the openDAQ C function daqStreamReader_createStreamReaderFromExisting()."
-  (with-daq-boxed-values ((coerced-invalidated-reader invalidated-reader :managed-pointer)
-                          (coerced-value-read-type value-read-type nil)
-                          (coerced-domain-read-type domain-read-type nil))
-    (wrap (opendaq.low-level:stream-reader/create-stream-reader-from-existing coerced-invalidated-reader coerced-value-read-type coerced-domain-read-type) 'stream-reader))
-)
-
-(defun create-stream-reader-from-port (port value-read-type domain-read-type read-mode timeout-type)
-  "Calls the openDAQ C function daqStreamReader_createStreamReaderFromPort()."
-  (with-daq-boxed-values ((coerced-port port :managed-pointer)
-                          (coerced-value-read-type value-read-type nil)
-                          (coerced-domain-read-type domain-read-type nil)
-                          (coerced-read-mode read-mode nil)
-                          (coerced-timeout-type timeout-type nil))
-    (wrap (opendaq.low-level:stream-reader/create-stream-reader-from-port coerced-port coerced-value-read-type coerced-domain-read-type coerced-read-mode coerced-timeout-type) 'stream-reader))
-)
-
 (defun stream-reader-interface-id ()
   "Calls the openDAQ C function daqStreamReader_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
@@ -22213,13 +23791,6 @@ Calls the openDAQ C function daqStreaming_setActive()."
     (opendaq.low-level:streaming/set-active (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun create-string-n (str length)
-  "Calls the openDAQ C function daqString_createStringN()."
-  (with-daq-boxed-values ((coerced-str str nil)
-                          (coerced-length length nil))
-    (%daq-string-to-lisp-and-release (opendaq.low-level:string/create-string-n coerced-str coerced-length)))
-)
-
 (defgeneric char-ptr (object)
   (:documentation "Gets a string value stored in the object.
 @param[out] value Stored string value.
@@ -22272,12 +23843,6 @@ Calls the openDAQ C function daqString_getLength()."
 
 Calls the openDAQ C function daqStructBuilder_build()."
   (wrap (opendaq.low-level:struct-builder/build (%require-live-pointer object)) 'struct)
-)
-
-(defun create-struct-builder-from-struct (struct)
-  "Calls the openDAQ C function daqStructBuilder_createStructBuilderFromStruct()."
-  (with-daq-boxed-values ((coerced-struct struct :managed-pointer))
-    (wrap (opendaq.low-level:struct-builder/create-struct-builder-from-struct coerced-struct) 'struct-builder))
 )
 
 (defmethod get ((object struct-builder) name)
@@ -22395,14 +23960,6 @@ Calls the openDAQ C function daqStructBuilder_setFieldValues()."
     (opendaq.low-level:struct-builder/set-field-values (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun create-struct-type-no-defaults (name names types)
-  "Calls the openDAQ C function daqStructType_createStructTypeNoDefaults()."
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-names names :managed-pointer)
-                          (coerced-types types :managed-pointer))
-    (wrap (opendaq.low-level:struct-type/create-struct-type-no-defaults coerced-name coerced-names coerced-types) 'struct-type))
-)
-
 (defgeneric field-default-values (object)
   (:documentation "Gets the list of field default values.
 @param[out] defaultValues The list of field default values (Base objects)
@@ -22443,12 +24000,6 @@ Calls the openDAQ C function daqStructType_getFieldTypes()."
     (opendaq.low-level:struct-type/get-interface-id intf-id-slot)
     nil
   )
-)
-
-(defun create-struct-from-builder (builder)
-  "Calls the openDAQ C function daqStruct_createStructFromBuilder()."
-  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (wrap (opendaq.low-level:struct/create-struct-from-builder coerced-builder) 'struct))
 )
 
 (defmethod get ((object struct) name)
@@ -22922,25 +24473,6 @@ Calls the openDAQ C function daqTailReaderBuilder_setValueReadType()."
   (not (zerop (opendaq.low-level:tail-reader-status/get-sufficient-history (%require-live-pointer object))))
 )
 
-(defun create-tail-reader-from-existing (invalidated-reader history-size value-read-type domain-read-type)
-  "Calls the openDAQ C function daqTailReader_createTailReaderFromExisting()."
-  (with-daq-boxed-values ((coerced-invalidated-reader invalidated-reader :managed-pointer)
-                          (coerced-history-size history-size nil)
-                          (coerced-value-read-type value-read-type nil)
-                          (coerced-domain-read-type domain-read-type nil))
-    (wrap (opendaq.low-level:tail-reader/create-tail-reader-from-existing coerced-invalidated-reader coerced-history-size coerced-value-read-type coerced-domain-read-type) 'tail-reader))
-)
-
-(defun create-tail-reader-from-port (port history-size value-read-type domain-read-type mode)
-  "Calls the openDAQ C function daqTailReader_createTailReaderFromPort()."
-  (with-daq-boxed-values ((coerced-port port :managed-pointer)
-                          (coerced-history-size history-size nil)
-                          (coerced-value-read-type value-read-type nil)
-                          (coerced-domain-read-type domain-read-type nil)
-                          (coerced-mode mode nil))
-    (wrap (opendaq.low-level:tail-reader/create-tail-reader-from-port coerced-port coerced-history-size coerced-value-read-type coerced-domain-read-type coerced-mode) 'tail-reader))
-)
-
 (defmethod history-size ((object tail-reader))
   "The maximum amount of samples in history to keep.
 @param[out] size The history size.
@@ -23190,15 +24722,6 @@ Calls the openDAQ C function daqType_getName()."
 
 Calls the openDAQ C function daqUnitBuilder_build()."
   (wrap (opendaq.low-level:unit-builder/build (%require-live-pointer object)) 'unit)
-)
-
-(defun create-unit-builder-from-existing (unit-to-copy)
-  "UnitConfig copy factory that creates a configurable Unit object from a possibly non-configurable Unit.
-@param unitToCopy The Unit of which configuration should be copied.
-
-Calls the openDAQ C function daqUnitBuilder_createUnitBuilderFromExisting()."
-  (with-daq-boxed-values ((coerced-unit-to-copy unit-to-copy :managed-pointer))
-    (wrap (opendaq.low-level:unit-builder/create-unit-builder-from-existing coerced-unit-to-copy) 'unit-builder))
 )
 
 (defmethod id ((object unit-builder))
@@ -23695,17 +25218,21 @@ Calls the openDAQ C function daqWork_execute()."
          address-info-private
          address-info-private-interface-id
          address-info-type
+         address-info/from-builder
          addresses
          all-properties
          allocate
          allocator
          allocator-interface-id
+         allocator/malloc
          allow
          allow-different-sampling-rates
          allowed
          argument-info
          argument-info-interface-id
          argument-info-type
+         argument-info/dict
+         argument-info/list
          arguments
          as-dictionary
          as-hashtable-of
@@ -23718,6 +25245,9 @@ Calls the openDAQ C function daqWork_execute()."
          authenticated-only
          authentication-provider
          authentication-provider-interface-id
+         authentication-provider/json-file
+         authentication-provider/json-string
+         authentication-provider/static
          available-count
          available-device-types
          available-devices
@@ -23743,6 +25273,8 @@ Calls the openDAQ C function daqWork_execute()."
          block-reader-read-with-domain
          block-reader-status
          block-reader-status-interface-id
+         block-reader/from-existing
+         block-reader/from-port
          block-size
          build
          call
@@ -23800,6 +25332,7 @@ Calls the openDAQ C function daqWork_execute()."
          component-holder
          component-holder-component
          component-holder-interface-id
+         component-holder/with-ids
          component-interface-id
          component-log-level
          component-private
@@ -23811,6 +25344,10 @@ Calls the openDAQ C function daqWork_execute()."
          component-type
          component-type-builder
          component-type-builder-interface-id
+         component-type-builder/device
+         component-type-builder/function-block
+         component-type-builder/server
+         component-type-builder/streaming
          component-type-interface-id
          component-type-private
          component-type-private-interface-id
@@ -23821,6 +25358,8 @@ Calls the openDAQ C function daqWork_execute()."
          components-log-level
          config-provider
          config-provider-interface-id
+         config-provider/env
+         config-provider/json
          configuration-connection-info
          connect
          connect-signal-scheduler-notification
@@ -23828,6 +25367,7 @@ Calls the openDAQ C function daqWork_execute()."
          connected-client-info
          connected-client-info-address
          connected-client-info-interface-id
+         connected-client-info/with-params
          connected-clients-info
          connection
          connection-interface-id
@@ -23853,139 +25393,28 @@ Calls the openDAQ C function daqWork_execute()."
          convertible-interface-id
          core-event-args
          core-event-args-interface-id
+         core-event-args/property-added
+         core-event-args/property-object-update-end
+         core-event-args/property-order-changed
+         core-event-args/property-removed
+         core-event-args/property-value-changed
+         core-event-args/type-added
+         core-event-args/type-removed
          core-event-callback
          core-event-trigger
          core-events-enabled
          core-type
          count
-         create-address-info-from-builder
-         create-any-search-filter
-         create-block-reader-from-existing
-         create-block-reader-from-port
-         create-bool-property
-         create-bool-property-builder
-         create-boolean
-         create-component-deserialize-context
-         create-component-holder-with-ids
-         create-connected-client-info-with-params
-         create-constant-data-packet-with-domain
-         create-constant-data-rule
-         create-core-event-args-property-added
-         create-core-event-args-property-object-update-end
-         create-core-event-args-property-order-changed
-         create-core-event-args-property-removed
-         create-core-event-args-property-value-changed
-         create-core-event-args-type-added
-         create-core-event-args-type-removed
-         create-custom-search-filter
-         create-data-descriptor-builder-from-existing
-         create-data-descriptor-changed-event-packet
-         create-data-packet-with-domain
-         create-data-packet-with-external-memory
-         create-data-rule-builder-from-existing
-         create-data-rule-from-builder
          create-default-add-device-config
          create-default-config
          create-default-configuration
          create-device
-         create-device-domain-with-reference-domain-info
-         create-device-info-config-with-custom-sdk-version
-         create-device-type-builder
          create-devices
-         create-dict-argument-info
-         create-dict-property
-         create-dict-property-builder
-         create-dimension-builder-from-existing
-         create-dimension-from-builder
-         create-dimension-rule-builder-from-existing
-         create-dimension-rule-from-builder
          create-end-iterator
-         create-enumeration-property
-         create-enumeration-property-builder
-         create-enumeration-type-with-values
-         create-enumeration-with-int-value
-         create-enumeration-with-int-value-and-type
-         create-enumeration-with-type
-         create-env-config-provider
-         create-eval-value-args
-         create-eval-value-func
-         create-excluded-tags-search-filter
-         create-explicit-data-rule
-         create-explicit-domain-data-rule
-         create-float-property
-         create-float-property-builder
          create-function-block
-         create-function-block-type-builder
-         create-function-property
-         create-function-property-builder
-         create-implicit-domain-gap-detected-event-packet
-         create-instance
-         create-int-property
-         create-int-property-builder
-         create-io-folder
-         create-json-config-provider
-         create-json-file-authentication-provider
-         create-json-string-authentication-provider
-         create-linear-data-rule
-         create-linear-dimension-rule
-         create-linear-scaling
-         create-list-argument-info
-         create-list-dimension-rule
-         create-list-property
-         create-list-property-builder
-         create-local-id-search-filter
-         create-logarithmic-dimension-rule
-         create-malloc-allocator
-         create-module-manager-multiple-paths
-         create-multi-reader-ex
-         create-multi-reader-from-existing
-         create-not-search-filter
-         create-object-property
-         create-object-property-builder
-         create-or-search-filter
-         create-packet-reader-from-port
-         create-permission-mask-builder-from-mask
-         create-property-object-class-builder-with-manager
-         create-property-object-with-class-and-manager
-         create-ratio-property
-         create-ratio-property-builder
-         create-recursive-search-filter
-         create-reference-domain-info-builder-from-existing
-         create-reference-property
-         create-reference-property-builder
-         create-required-tags-search-filter
-         create-rotating-file-logger-sink
-         create-scaling-builder-from-existing
-         create-scaling-from-builder
-         create-scheduler-with-main-loop
-         create-selection-property
-         create-selection-property-builder
          create-server
-         create-server-type-builder
-         create-signal-with-descriptor
-         create-sparse-selection-property
-         create-sparse-selection-property-builder
          create-start-iterator
-         create-static-authentication-provider
-         create-std-err-logger-sink
-         create-std-out-logger-sink
-         create-stream-reader-from-existing
-         create-stream-reader-from-port
          create-streaming
-         create-streaming-type-builder
-         create-string-n
-         create-string-property
-         create-string-property-builder
-         create-struct-builder-from-struct
-         create-struct-from-builder
-         create-struct-property
-         create-struct-property-builder
-         create-struct-type-no-defaults
-         create-tail-reader-from-existing
-         create-tail-reader-from-port
-         create-unit-builder-from-existing
-         create-visible-search-filter
-         create-win-debug-logger-sink
          current
          current-item-type
          custom-components
@@ -24004,21 +25433,32 @@ Calls the openDAQ C function daqWork_execute()."
          daq-ratio-interface-id
          daq-string-object
          daq-string-object-interface-id
+         daq-string-object/string-n
          daq-type
          daq-type-interface-id
          data
          data-descriptor
          data-descriptor-builder
          data-descriptor-builder-interface-id
+         data-descriptor-builder/from-existing
          data-descriptor-interface-id
          data-packet
          data-packet-interface-id
+         data-packet/constant-with-domain
+         data-packet/with-domain
+         data-packet/with-external-memory
          data-rule
          data-rule-builder
          data-rule-builder-interface-id
          data-rule-builder-type
+         data-rule-builder/from-existing
          data-rule-interface-id
          data-rule-type
+         data-rule/constant
+         data-rule/explicit
+         data-rule/explicit-domain
+         data-rule/from-builder
+         data-rule/linear
          data-size
          deactivate-streaming
          default-config
@@ -24054,9 +25494,11 @@ Calls the openDAQ C function daqWork_execute()."
          device-config
          device-domain
          device-domain-interface-id
+         device-domain/with-reference-domain-info
          device-info
          device-info-config
          device-info-config-interface-id
+         device-info-config/with-custom-sdk-version
          device-info-interface-id
          device-info-internal
          device-info-internal-interface-id
@@ -24081,13 +25523,20 @@ Calls the openDAQ C function daqWork_execute()."
          dimension
          dimension-builder
          dimension-builder-interface-id
+         dimension-builder/from-existing
          dimension-interface-id
          dimension-rule
          dimension-rule-builder
          dimension-rule-builder-interface-id
          dimension-rule-builder-type
+         dimension-rule-builder/from-existing
          dimension-rule-interface-id
          dimension-rule-type
+         dimension-rule/from-builder
+         dimension-rule/linear
+         dimension-rule/list
+         dimension-rule/logarithmic
+         dimension/from-builder
          dimensions
          disable-core-event-trigger
          disable-discovery
@@ -24132,6 +25581,10 @@ Calls the openDAQ C function daqWork_execute()."
          enumeration-interface-id
          enumeration-type
          enumeration-type-interface-id
+         enumeration-type/with-values
+         enumeration/with-int-value
+         enumeration/with-int-value-and-type
+         enumeration/with-type
          enumerator-int-value
          enumerator-names
          equals
@@ -24140,6 +25593,8 @@ Calls the openDAQ C function daqWork_execute()."
          eval
          eval-value
          eval-value-interface-id
+         eval-value/args
+         eval-value/func
          event
          event-args
          event-args-interface-id
@@ -24150,6 +25605,8 @@ Calls the openDAQ C function daqWork_execute()."
          event-name
          event-packet
          event-packet-interface-id
+         event-packet/data-descriptor-changed
+         event-packet/implicit-domain-gap-detected
          event-packets
          execute
          extend
@@ -24169,6 +25626,7 @@ Calls the openDAQ C function daqWork_execute()."
          folder
          folder-config
          folder-config-interface-id
+         folder-config/io-folder
          folder-interface-id
          force-unlock
          free
@@ -24241,6 +25699,7 @@ Calls the openDAQ C function daqWork_execute()."
          instance-builder-root-device
          instance-interface-id
          instance-root-device
+         instance/with-context
          int-value
          interfaces
          internal-state
@@ -24331,6 +25790,10 @@ Calls the openDAQ C function daqWork_execute()."
          logger-component-interface-id
          logger-interface-id
          logger-sink
+         logger-sink/rotating-file
+         logger-sink/std-err
+         logger-sink/std-out
+         logger-sink/win-debug
          logger-sinks
          logger-thread-pool
          logger-thread-pool-interface-id
@@ -24375,6 +25838,7 @@ Calls the openDAQ C function daqWork_execute()."
          module-manager-interface-id
          module-manager-utils
          module-manager-utils-interface-id
+         module-manager/multiple-paths
          module-options
          module-path
          module-paths-list
@@ -24391,6 +25855,8 @@ Calls the openDAQ C function daqWork_execute()."
          multi-reader-read-with-domain
          multi-reader-status
          multi-reader-status-interface-id
+         multi-reader/ex
+         multi-reader/from-existing
          mute
          mute-listener
          mutex
@@ -24451,6 +25917,7 @@ Calls the openDAQ C function daqWork_execute()."
          packet-reader
          packet-reader-interface-id
          packet-reader-read
+         packet-reader/from-port
          packet-received
          packet-type
          parameters
@@ -24472,6 +25939,7 @@ Calls the openDAQ C function daqWork_execute()."
          permission-mask-builder
          permission-mask-builder-interface-id
          permission-mask-builder-read
+         permission-mask-builder/from-mask
          permissions
          permissions-builder
          permissions-builder-interface-id
@@ -24493,6 +25961,20 @@ Calls the openDAQ C function daqWork_execute()."
          property
          property-builder
          property-builder-interface-id
+         property-builder/bool
+         property-builder/dict
+         property-builder/enumeration
+         property-builder/float
+         property-builder/function
+         property-builder/int
+         property-builder/list
+         property-builder/object
+         property-builder/ratio
+         property-builder/reference
+         property-builder/selection
+         property-builder/sparse-selection
+         property-builder/string
+         property-builder/struct
          property-event-type
          property-interface-id
          property-internal
@@ -24502,6 +25984,7 @@ Calls the openDAQ C function daqWork_execute()."
          property-object-class
          property-object-class-builder
          property-object-class-builder-interface-id
+         property-object-class-builder/with-manager
          property-object-class-interface-id
          property-object-class-internal
          property-object-class-internal-clone
@@ -24512,6 +25995,7 @@ Calls the openDAQ C function daqWork_execute()."
          property-object-internal-interface-id
          property-object-protected
          property-object-protected-interface-id
+         property-object/with-class-and-manager
          property-order
          property-references
          property-selection-value
@@ -24520,6 +26004,20 @@ Calls the openDAQ C function daqWork_execute()."
          property-value
          property-value-event-args
          property-value-no-lock
+         property/bool
+         property/dict
+         property/enumeration
+         property/float
+         property/function
+         property/int
+         property/list
+         property/object
+         property/ratio
+         property/reference
+         property/selection
+         property/sparse-selection
+         property/string
+         property/struct
          protected-property-selection-value
          protected-property-value
          protected-property-value-no-lock
@@ -24574,6 +26072,7 @@ Calls the openDAQ C function daqWork_execute()."
          reference-domain-info
          reference-domain-info-builder
          reference-domain-info-builder-interface-id
+         reference-domain-info-builder/from-existing
          reference-domain-info-interface-id
          reference-domain-offset
          reference-time-protocol
@@ -24651,10 +26150,13 @@ Calls the openDAQ C function daqWork_execute()."
          scaling
          scaling-builder
          scaling-builder-interface-id
+         scaling-builder/from-existing
          scaling-calc-private
          scaling-calc-private-interface-id
          scaling-interface-id
          scaling-type
+         scaling/from-builder
+         scaling/linear
          schedule-function
          schedule-graph
          schedule-work
@@ -24662,9 +26164,19 @@ Calls the openDAQ C function daqWork_execute()."
          scheduler
          scheduler-interface-id
          scheduler-worker-num
+         scheduler/with-main-loop
          sdk-version
          search-filter
          search-filter-interface-id
+         search-filter/any
+         search-filter/custom
+         search-filter/excluded-tags
+         search-filter/local-id
+         search-filter/not
+         search-filter/or
+         search-filter/recursive
+         search-filter/required-tags
+         search-filter/visible
          selected-source
          selection-values
          selection-values-no-lock
@@ -24706,6 +26218,7 @@ Calls the openDAQ C function daqWork_execute()."
          signal
          signal-config
          signal-config-interface-id
+         signal-config/with-descriptor
          signal-dependency
          signal-events
          signal-events-interface-id
@@ -24746,6 +26259,8 @@ Calls the openDAQ C function daqWork_execute()."
          stream-reader-interface-id
          stream-reader-read
          stream-reader-read-with-domain
+         stream-reader/from-existing
+         stream-reader/from-port
          streamed
          streaming
          streaming-connection-string
@@ -24756,11 +26271,14 @@ Calls the openDAQ C function daqWork_execute()."
          struct
          struct-builder
          struct-builder-interface-id
+         struct-builder/from-struct
          struct-fields
          struct-interface-id
          struct-type
          struct-type-interface-id
          struct-type-no-lock
+         struct-type/no-defaults
+         struct/from-builder
          submit-configuration
          submit-network-configuration
          subscribe-completed
@@ -24796,6 +26314,8 @@ Calls the openDAQ C function daqWork_execute()."
          tail-reader-read-with-domain
          tail-reader-status
          tail-reader-status-interface-id
+         tail-reader/from-existing
+         tail-reader/from-port
          task
          task-graph
          task-graph-interface-id
@@ -24824,6 +26344,7 @@ Calls the openDAQ C function daqWork_execute()."
          unit
          unit-builder
          unit-builder-interface-id
+         unit-builder/from-existing
          unit-interface-id
          unit-no-lock
          unit-unresolved

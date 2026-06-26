@@ -4,7 +4,7 @@
 
 (test high-level-context-construction
   (let* ((sinks (make-instance 'daq:object-list))
-         (sink (daq:create-std-err-logger-sink)))
+         (sink (make-instance 'daq:logger-sink/std-err)))
     (daq:push-back sinks sink)
     (let* ((logger (make-instance 'daq:logger :sinks sinks :level :daq-log-level-debug))
            (type-manager (make-instance 'daq:type-manager))

@@ -4,7 +4,7 @@
 
 (test high-level-logger-construction
   (let* ((sinks (make-instance 'daq:object-list))
-         (sink (daq:create-std-out-logger-sink)))
+         (sink (make-instance 'daq:logger-sink/std-out)))
     (daq:push-back sinks sink)
     (let ((logger (make-instance 'daq:logger :sinks sinks :level :daq-log-level-debug)))
       (is (not (cffi:null-pointer-p (daq:raw-pointer logger)))

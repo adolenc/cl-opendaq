@@ -73,18 +73,19 @@ The high-level API insulates you from openDAQ's C types. Arguments accept plain 
 
 ### Construction
 
-Most objects are created with `make-instance`, e.g. `(make-instance 'daq:stream-reader :signal signal)`.
+Everything is built with `make-instance`, e.g. `(make-instance 'daq:stream-reader :signal signal)`.
 
-Some things, though, are not distinct openDAQ interfaces but *variants* of one type that openDAQ builds through factory functions - for example a property is always an int/string/selection/… property, never a bare `Property`. These have no `make-instance` constructor; you create them with the matching `create-*` factory function, mirroring openDAQ's own API:
+Some things are not distinct openDAQ interfaces but *variants* of one type that openDAQ builds through factory functions - for example a property is always an int/string/selection/… property, never a bare `Property`. These (and a type's alternate constructors) are exposed as `base/variant` subclasses you build the same way, with keyword arguments:
 
 ```lisp
-(daq:create-int-property "Frequency" 10 t)        ; name, default, visible
-(daq:create-selection-property "Mode" modes 0 t)
-(daq:create-linear-data-rule 2 0)
-(daq:create-std-err-logger-sink)
+(make-instance 'daq:property/int :name "Frequency" :default-value 10 :visible t)
+(make-instance 'daq:property/selection :name "Mode" :selection-values modes :default-value 0 :visible t)
+(make-instance 'daq:data-rule/linear :delta 2 :start 0)
+(make-instance 'daq:logger-sink/std-err)
+(make-instance 'daq:stream-reader/from-port :port port)   ; an alternate stream-reader constructor
 ```
 
-The same applies to property builders, data/dimension rules, search filters, scalings, logger sinks, and similar factory-built types. (`apropos` for `create-` lists them.)
+Each such class is a subclass of the type it builds (`(typep (make-instance 'daq:property/int …) 'daq:property)` is true), so the result works anywhere that type is expected. This covers property builders, data/dimension rules, search filters, scalings, logger sinks, and similar factory-built types. (`apropos` for `/` lists them.)
 
 ### Events
 

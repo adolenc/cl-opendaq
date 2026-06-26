@@ -105,6 +105,34 @@ MANUAL_METHODS = {
 # createFloatObject a redundant CREATE-FLOAT-OBJECT free factory -- suppress it.
 SUPPRESSED_FUNCTIONS = {
     "float-object/create-float-object",
+    # createBoolean(value) duplicates createBoolObject(value) (the daq-boolean
+    # make-instance primary, also what the boxing layer uses); drop the dup so it
+    # does not surface as a redundant daq-boolean/boolean proxy.
+    "boolean/create-boolean",
+    # createComponentDeserializeContext returns two values (the context plus an
+    # out intf-id GUID), so it does not fit the single-object make-instance model.
+    # It is an internal deserialization primitive, unused here; drop it (the class
+    # is still wrappable and keeps its clone / interface-id methods).
+    "component-deserialize-context/create-component-deserialize-context",
+}
+
+# Curated make-instance proxy names (BASE/SUFFIX) for factory constructors whose
+# C name does not embed the type they build, so proxy_class_name cannot derive a
+# clean suffix automatically (e.g. createIoFolder builds a folder-config).
+PROXY_NAME_OVERRIDES: dict[str, str] = {
+    # instance's primary make-instance is createInstanceFromBuilder (see
+    # CLASS_OVERRIDES); the bare createInstance(context, localId) is the explicit
+    # lower-level alternate, whose stem would otherwise reduce to an empty suffix.
+    "instance/create-instance": "instance/with-context",
+    # These build a component-type-builder; the shared "-type-builder" tail is not
+    # a contiguous run with the receiver, so it survives auto-derivation as a
+    # redundant suffix (component-type-builder/device-type-builder).  Trim it.
+    "component-type-builder/create-device-type-builder": "component-type-builder/device",
+    "component-type-builder/create-function-block-type-builder": "component-type-builder/function-block",
+    "component-type-builder/create-server-type-builder": "component-type-builder/server",
+    "component-type-builder/create-streaming-type-builder": "component-type-builder/streaming",
+    # Shared leading "signal-" token, likewise not stripped by the contiguous-run rule.
+    "signal-config/create-signal-with-descriptor": "signal-config/with-descriptor",
 }
 
 FUNCTION_OVERRIDES: dict[str, dict] = {
@@ -350,18 +378,55 @@ def qualified_name(function: dict, kind: str) -> str:
 def factory_function_name(function: dict, kind: str) -> str:
     """Public name for a *static* (no-receiver) function.
 
-    openDAQ exposes object construction as free factory functions (C++
-    IntProperty(), LinearDataRule(), ...; Python opendaq.IntProperty(), ...).  A
-    static `createXxx` therefore reads better -- and mirrors openDAQ -- as its
-    bare stem CREATE-XXX rather than the qualified RECEIVER-CREATE-XXX, since
-    there is no per-variant interface/class to attach it to.  Non-create static
-    functions keep the qualified name.  The create-* stems are globally unique,
-    so dropping the receiver introduces no collisions.
+    Constructor-shaped createXxx factories become make-instance proxy classes
+    (see proxy_class_name), so they do not reach here.  A static createXxx that
+    is *not* a clean constructor (e.g. an extra out-parameter makes it multi-
+    valued) falls through to its bare stem CREATE-XXX -- mirroring openDAQ's free
+    factory functions -- rather than the qualified RECEIVER-CREATE-XXX.  Other
+    static functions keep the qualified name.
     """
     stem = exposed_name(function, kind)
     if stem.startswith("create-"):
         return stem
     return qualified_name(function, kind)
+
+
+def _strip_token_run(body: str, tokens: str) -> str:
+    """Remove the hyphen-delimited token run TOKENS from BODY wherever it appears
+    contiguously, returning the remaining hyphen-joined tokens (cleaned up)."""
+    bt = body.split("-")
+    rt = tokens.split("-")
+    for i in range(len(bt) - len(rt) + 1):
+        if bt[i:i + len(rt)] == rt:
+            del bt[i:i + len(rt)]
+            break
+    return "-".join(bt)
+
+
+def proxy_class_name(function: dict) -> str:
+    """make-instance proxy name BASE/SUFFIX for a non-primary factory constructor.
+
+    openDAQ builds the variants of a polymorphic type, and a type's alternate
+    constructors, through free factory functions (createIntProperty,
+    createStreamReaderFromPort, ...).  Rather than expose those as detached
+    create-* functions, each becomes a CLOS subclass of the type it builds, named
+    BASE/SUFFIX, constructed via make-instance.  SUFFIX is the factory stem with
+    the leading create- and the base type's own name removed (create-int-property
+    -> property/int, create-stream-reader-from-port -> stream-reader/from-port).
+    The handful whose names don't embed the base type are curated in
+    PROXY_NAME_OVERRIDES.
+    """
+    pln = function["public_lisp_name"]
+    if pln in PROXY_NAME_OVERRIDES:
+        return PROXY_NAME_OVERRIDES[pln]
+    receiver = receiver_name(function)
+    stem = method_name(function)
+    body = stem[len("create-"):] if stem.startswith("create-") else stem
+    suffix = _strip_token_run(body, receiver)
+    if not suffix:
+        raise ValueError(
+            f"empty proxy suffix for {pln!r}; add a PROXY_NAME_OVERRIDES entry")
+    return f"{receiver}/{suffix}"
 
 
 def select_class_constructors(functions: list[dict]) -> dict[str, dict]:
@@ -485,11 +550,25 @@ def build_specs(functions: list[dict]) -> tuple[list[dict], list[dict]]:
 
         if kind == "constructor":
             if class_constructors.get(receiver) != function:
-                methods.append({
-                    "function": function, "kind": "method",
-                    "name": factory_function_name(function, "method"),
-                    "specializer": receiver, "optional_defaults": (),
+                # A non-primary variant/alternate factory (createIntProperty,
+                # createStreamReaderFromPort, ...): emit it as a make-instance
+                # proxy subclass BASE/SUFFIX of the type it builds, so the whole
+                # factory surface is reached through make-instance rather than a
+                # detached create-* function.
+                proxy = proxy_class_name(function)
+                if proxy in classes:
+                    raise ValueError(
+                        f"proxy class name collision on {proxy!r} "
+                        f"({function['public_lisp_name']})")
+                classes.setdefault(receiver, {
+                    "name": receiver,
+                    "constructor": constructors.get(f"{receiver}/create-{receiver}"),
+                    "constructor_defaults": CLASS_OVERRIDES.get(receiver, {}).get("constructor_defaults", ()),
                 })
+                classes[proxy] = {
+                    "name": proxy, "parent": receiver, "constructor": function,
+                    "constructor_defaults": (),
+                }
                 continue
             co = CLASS_OVERRIDES.get(receiver, {})
             classes[receiver] = {
@@ -585,7 +664,7 @@ def constructor_lambda_lines(spec: dict) -> list[str]:
 
 
 def emit_class_definition(spec: dict) -> list[str]:
-    parent = class_parent(spec["name"])
+    parent = spec.get("parent") or class_parent(spec["name"])
     slots = (
         [f"   (%{p['lisp_name']}-initarg :initarg :{p['lisp_name']} :initform nil)"
          for p in constructor_parameters(spec["constructor"])]

@@ -3,7 +3,7 @@
 (in-suite high-level-opendaq-api-suite)
 
 (test high-level-opendaq-config-provider
-  (let ((config-provider (daq:create-env-config-provider)))
+  (let ((config-provider (make-instance 'daq:config-provider/env)))
     (is (typep config-provider 'daq:config-provider)
         "High-level config-provider helpers should return a generated wrapper.")
     (is (not (cffi:null-pointer-p (daq:raw-pointer config-provider)))
