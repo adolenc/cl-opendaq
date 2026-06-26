@@ -18,11 +18,25 @@
 (defparameter +native-directory-env-var+ "OPENDAQ_LISP_NATIVE_DIR")
 (defparameter +modules-directory-env-var+ "OPENDAQ_MODULES_PATH")
 
-(defparameter +native-library-base-names+
-  '("daqcoretypes"
-    "daqcoreobjects"
-    "opendaq"
-    "copendaq"))
+(defparameter +native-library-file-names+
+  ;; Exact file names shipped in bin/<platform>/, in dependency load order.
+  #+linux
+  '("libdaqcoretypes-64-3.so"
+    "libdaqcoreobjects-64-3.so"
+    "libopendaq-64-3.so"
+    "libcopendaq.so")
+  #+darwin
+  '("libdaqcoretypes-64-3.dylib"
+    "libdaqcoreobjects-64-3.dylib"
+    "libopendaq-64-3.dylib"
+    "libcopendaq.dylib")
+  #+(or windows win32)
+  '("daqcoretypes-64-3.dll"
+    "daqcoreobjects-64-3.dll"
+    "opendaq-64-3.dll"
+    "copendaq.dll")
+  #-(or linux darwin windows win32)
+  (error "Unsupported OS for openDAQ native libraries: ~A" (software-type)))
 
 (defvar *loaded-native-directory* nil)
 (defvar *loaded-library-paths* nil)
@@ -90,40 +104,14 @@ time rather than sniffed from SOFTWARE-TYPE / MACHINE-TYPE strings."
    :test #'equal
    :key #'namestring))
 
-(defun %shared-library-patterns (base-name)
-  #+linux (list (format nil "lib~A*.so" base-name))
-  #+darwin (list (format nil "lib~A*.dylib" base-name)
-                 (format nil "lib~A*.so" base-name))
-  #+(or windows win32) (list (format nil "~A*.dll" base-name)
-                             (format nil "lib~A*.dll" base-name))
-  #-(or linux darwin windows win32)
-  (error "Unsupported OS for openDAQ native libraries: ~A" (software-type)))
-
-(defun %sort-pathnames (pathnames)
-  (sort (copy-list pathnames) #'string< :key #'namestring))
-
-(defun %resolve-library-path (directory base-name)
-  (let* ((matches
-          (%sort-pathnames
-           (remove-duplicates
-            (mapcan (lambda (pattern)
-                      (directory (merge-pathnames pattern directory)))
-                    (%shared-library-patterns base-name))
-            :test #'equal
-            :key #'namestring)))
-        (patterns (%shared-library-patterns base-name)))
-    (or (first matches)
-       (if (string= base-name "copendaq")
-           (error
-            "Could not find ~A in ~A matching any of ~{~A~^, ~}. Build openDAQ with OPENDAQ_GENERATE_C_BINDINGS=ON so the C wrapper library is produced."
-            base-name
-            (namestring directory)
-            patterns)
-           (error
-            "Could not find ~A in ~A matching any of ~{~A~^, ~}."
-            base-name
-            (namestring directory)
-            patterns)))))
+(defun %resolve-library-path (directory file-name)
+  (or (probe-file (merge-pathnames file-name directory))
+      (if (search "copendaq" file-name)
+          (error
+           "Could not find ~A in ~A. Build openDAQ with OPENDAQ_GENERATE_C_BINDINGS=ON so the C wrapper library is produced."
+           file-name (namestring directory))
+          (error
+           "Could not find ~A in ~A." file-name (namestring directory)))))
 
 (defun native-library-directory ()
   (or (first (%candidate-native-directories))
@@ -159,10 +147,10 @@ time rather than sniffed from SOFTWARE-TYPE / MACHINE-TYPE strings."
       (t
        (%configure-modules-directory resolved-directory)
        (setf *loaded-library-paths*
-             (mapcar (lambda (base-name)
+             (mapcar (lambda (file-name)
                        (%load-native-library
-                        (%resolve-library-path resolved-directory base-name)))
-                     +native-library-base-names+)
+                        (%resolve-library-path resolved-directory file-name)))
+                     +native-library-file-names+)
              *loaded-native-directory* resolved-directory
              *autoload-error* nil)))))
 
@@ -192,16 +180,16 @@ time rather than sniffed from SOFTWARE-TYPE / MACHINE-TYPE strings."
 
 (defun %healthcheck-library-status (directory)
   (when directory
-    (mapcar (lambda (base-name)
+    (mapcar (lambda (file-name)
              (handler-case
-                 (list :stem base-name
+                 (list :name file-name
                        :ok t
-                       :path (namestring (%resolve-library-path directory base-name)))
+                       :path (namestring (%resolve-library-path directory file-name)))
                (error (condition)
-                 (list :stem base-name
+                 (list :name file-name
                        :ok nil
                        :error (%condition-string condition)))))
-           +native-library-base-names+)))
+           +native-library-file-names+)))
 
 (defun healthcheck (&optional (stream *standard-output*))
   (let* ((resolved-directory
@@ -245,10 +233,10 @@ time rather than sniffed from SOFTWARE-TYPE / MACHINE-TYPE strings."
       (dolist (library (getf report :libraries))
        (if (getf library :ok)
            (format stream "  library ~A: ~A~%"
-                   (getf library :stem)
+                   (getf library :name)
                    (getf library :path))
            (format stream "  library ~A: ERROR: ~A~%"
-                   (getf library :stem)
+                   (getf library :name)
                    (getf library :error))))
       (when (getf report :autoload-error)
        (format stream "  autoload error: ~A~%"
