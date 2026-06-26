@@ -28,6 +28,8 @@
            #:read)
   (:export #:as
            #:wrap
+           #:supports-interface-p
+           #:component-type
            #:domain-time-converter
            #:domain-tick->timestamp
            #:clear-error-info

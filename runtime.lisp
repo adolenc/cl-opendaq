@@ -443,6 +443,54 @@ Uses direct FFI calls to avoid re-entering %check-error during error reporting."
     (string/create-string cstring)))
 
 ;;; ===========================================================================
+;;; Interface query (hand-written: the generator skips it)
+;;; ===========================================================================
+;;;
+;;; daqBaseObject_borrowInterface(self, daqIntfID intfId, out) passes the 16-byte
+;;; GUID by value.  Plain CFFI cannot describe a by-value struct argument (that
+;;; would need cffi-libffi, hence the generator skip), so we follow the platform
+;;; ABI by hand.  The GUID bytes stay opaque -- we never interpret them, only
+;;; move them into the registers/slot the callee reads from:
+;;;
+;;;   - System V AMD64 (Linux x64) / AAPCS64 (macOS arm64): a 16-byte all-integer
+;;;     struct is passed in two general-purpose registers, so we declare it as
+;;;     two :uint64 in its place.
+;;;   - Microsoft x64 (Windows): a struct that is not 1/2/4/8 bytes is passed by
+;;;     hidden pointer, so we declare it as a pointer to the struct.
+;;;
+;;; borrowInterface (rather than queryInterface) does not add a reference, so a
+;;; supports check needs no cleanup.
+
+#-(or windows win32)
+(cffi:defcfun ("daqBaseObject_borrowInterface" %daq-borrow-interface) daq-err-code
+  (self :pointer)
+  (intf-id-lo :uint64)
+  (intf-id-hi :uint64)
+  (interface-ptr (:pointer :pointer)))
+
+#+(or windows win32)
+(cffi:defcfun ("daqBaseObject_borrowInterface" %daq-borrow-interface) daq-err-code
+  (self :pointer)
+  (intf-id (:pointer (:struct daq-intf-id)))
+  (interface-ptr (:pointer :pointer)))
+
+(defun %supports-interface-p (self interface-id-getter)
+  "True if the object at pointer SELF implements the interface whose id
+INTERFACE-ID-GETTER writes into a daqIntfID buffer (a low-level
+<type>/get-interface-id function)."
+  (cffi:with-foreign-object (id '(:struct daq-intf-id))
+    (funcall interface-id-getter id)
+    (cffi:with-foreign-object (out :pointer)
+      (zerop
+       #-(or windows win32)
+       (%daq-borrow-interface self
+                              (cffi:mem-ref id :uint64 0)
+                              (cffi:mem-ref id :uint64 8)
+                              out)
+       #+(or windows win32)
+       (%daq-borrow-interface self id out)))))
+
+;;; ===========================================================================
 ;;; High-level runtime (was high-level-runtime.lisp)
 ;;; ===========================================================================
 (in-package #:opendaq.high-level)

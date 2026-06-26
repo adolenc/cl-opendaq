@@ -46,6 +46,22 @@
                                          (daq:domain-tick->timestamp signal (aref domain 0)))
                   "domain-tick->timestamp should agree with the domain-time-converter closure."))))))))
 
+(test high-level-component-type-detection
+  (let* ((instance (make-instance 'daq:instance))
+         (device (daq:add-device (daq:root-device instance) "daqref://device0"))
+         (channel (daq:find-component device "IO/AI/RefCh0"))
+         (signal (first (daq:signals-recursive (daq:as channel 'daq:channel)))))
+    (is (eq 'daq:device (daq:component-type device))
+        "component-type should identify the reference device as DEVICE.")
+    (is (eq 'daq:channel (daq:component-type channel))
+        "component-type should identify a reference channel as CHANNEL.")
+    (is (eq 'daq:signal (daq:component-type signal))
+        "component-type should identify a channel's signal as SIGNAL.")
+    (is (daq:supports-interface-p channel 'daq:folder)
+        "A channel should support IFolder (a channel is a function block).")
+    (is (not (daq:supports-interface-p signal 'daq:folder))
+        "A signal should not support IFolder (the failure path must not crash).")))
+
 (test high-level-multi-reader
   (locally (declare (optimize (debug 3)))
     (let* ((instance (make-instance 'daq:instance))

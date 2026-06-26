@@ -355,6 +355,30 @@ TARGET-TYPE is a symbol naming the wrapper class (e.g. 'DEVICE-INFO)."
     (add-ref object)
     (make-instance class :pointer (raw-pointer object))))
 
+(defparameter *queryable-component-types*
+  '(channel function-block device signal input-port folder component)
+  "Component interface types, most-derived first, that COMPONENT-TYPE tries.")
+
+(defun %interface-id-getter (type)
+  "The low-level <TYPE>/get-interface-id function for the class symbol TYPE."
+  (or (find-symbol (concatenate 'string (symbol-name type) "/GET-INTERFACE-ID")
+                   '#:opendaq.low-level)
+      (error "No interface-id getter for type ~S." type)))
+
+(defun supports-interface-p (object type)
+  "True if OBJECT implements the openDAQ interface named by the class symbol
+TYPE (e.g. 'CHANNEL, 'SIGNAL, 'FOLDER).  Unlike AS, this performs a real
+interface query, so it is safe to ask about any type."
+  (opendaq.low-level::%supports-interface-p
+   (%require-live-pointer object)
+   (%interface-id-getter type)))
+
+(defun component-type (object &optional (candidates *queryable-component-types*))
+  "The most-derived interface among CANDIDATES that OBJECT implements, as a
+class symbol (e.g. CHANNEL), or NIL if none.  Lets you discover a component's
+concrete type without an unsafe reinterpreting cast."
+  (find-if (lambda (type) (supports-interface-p object type)) candidates))
+
 (defun as-list-of (object-list target-type)
   "Convert an openDAQ object-list into a proper Lisp list, unboxing primitives
 (integers, booleans, floats, strings, ratios, complex numbers) into
