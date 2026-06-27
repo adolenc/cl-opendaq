@@ -91,6 +91,8 @@ Some things are not distinct openDAQ interfaces but *variants* of one type that 
 
 Each such class is a subclass of the type it builds (`(typep (make-instance 'daq:property/int …) 'daq:property)` is true), so the result works anywhere that type is expected. This covers property builders, data/dimension rules, search filters, scalings, logger sinks, and similar factory-built types. (`apropos` for `/` lists them.)
 
+Types that openDAQ constructs from a `Builder` object instead take a `:builder` keyword on their regular `make-instance` rather than a separate class (e.g. `(make-instance 'daq:scaling :builder b)`, with `:builder` taking precedence if the type's direct arguments are also supplied); for `daq:instance` the builder defaults to one pointing at the bundled native modules, so `(make-instance 'daq:instance)` needs no arguments.
+
 ### Events
 
 openDAQ events (core/structure events, property change notifications, …) are subscribed to by passing a Lisp function straight to `daq:add-handler`; it is called with the sender and event args (already wrapped) each time the event fires, and reference counting is handled for you:

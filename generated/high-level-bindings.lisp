@@ -59,7 +59,6 @@
             address-info-private
             address-info-private-interface-id
             address-info-type
-            address-info/from-builder
             addresses
             all-properties
             allocate
@@ -298,7 +297,6 @@
             data-rule/constant
             data-rule/explicit
             data-rule/explicit-domain
-            data-rule/from-builder
             data-rule/linear
             data-size
             deactivate-streaming
@@ -373,11 +371,9 @@
             dimension-rule-builder/from-existing
             dimension-rule-interface-id
             dimension-rule-type
-            dimension-rule/from-builder
             dimension-rule/linear
             dimension-rule/list
             dimension-rule/logarithmic
-            dimension/from-builder
             dimensions
             disable-core-event-trigger
             disable-discovery
@@ -540,7 +536,6 @@
             instance-builder-root-device
             instance-interface-id
             instance-root-device
-            instance/with-context
             int-value
             interfaces
             internal-state
@@ -996,7 +991,6 @@
             scaling-calc-private-interface-id
             scaling-interface-id
             scaling-type
-            scaling/from-builder
             scaling/linear
             schedule-function
             schedule-graph
@@ -1119,7 +1113,6 @@
             struct-type-interface-id
             struct-type-no-lock
             struct-type/no-defaults
-            struct/from-builder
             submit-configuration
             submit-network-configuration
             subscribe-completed
@@ -1265,19 +1258,25 @@
 
 (defclass address-info (property-object)
   (
+   (%builder-initarg :initarg :builder :initform nil)
    ))
 
 
 (defmethod initialize-instance :after ((object address-info)
                                        &key (pointer nil pointer-p)
+                                            (builder nil builder-p)
                                        &allow-other-keys)
   "Creates an Address with no parameters configured.
 
-Constructs the instance via the openDAQ C function daqAddressInfo_createAddressInfo()."
+Constructs the instance via the openDAQ C function daqAddressInfo_createAddressInfo(), or from a builder via daqAddressInfo_createAddressInfoFromBuilder() when :builder is supplied."
   (declare (ignore pointer))
   (unless pointer-p
-  (%adopt-pointer object (opendaq.low-level:address-info/create-address-info))
-    ))
+    (cond
+      (builder-p
+       (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
+         (%adopt-pointer object (opendaq.low-level:address-info/create-address-info-from-builder coerced-builder))))
+      (t
+       (%adopt-pointer object (opendaq.low-level:address-info/create-address-info))))))
 
 (defclass address-info-builder (base-object)
   (
@@ -1300,26 +1299,6 @@ Constructs the instance via the openDAQ C function daqAddressInfoBuilder_createA
    ))
 
 
-
-(defclass address-info/from-builder (address-info)
-  (
-   (%builder-initarg :initarg :builder :initform nil)
-   ))
-
-
-(defmethod initialize-instance :after ((object address-info/from-builder)
-                                       &key (pointer nil pointer-p)
-                                            (builder nil builder-p)
-                                       &allow-other-keys)
-  "Creates an Address using the builder's configuration parameters.
-@param builder The address info builder.
-
-Constructs the instance via the openDAQ C function daqAddressInfo_createAddressInfoFromBuilder()."
-  (declare (ignore pointer))
-  (when (and (not pointer-p) builder-p)
-  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (%adopt-pointer object (opendaq.low-level:address-info/create-address-info-from-builder coerced-builder)))
-    ))
 
 (defclass allocator (base-object)
   (
@@ -2707,11 +2686,13 @@ Constructs the instance via the openDAQ C function daqDataPacket_createDataPacke
   (
    (%rule-type-initarg :initarg :rule-type :initform nil)
    (%parameters-initarg :initarg :parameters :initform nil)
+   (%builder-initarg :initarg :builder :initform nil)
    ))
 
 
 (defmethod initialize-instance :after ((object data-rule)
                                        &key (pointer nil pointer-p)
+                                            (builder nil builder-p)
                                             (rule-type nil rule-type-p)
                                             (parameters nil parameters-p)
                                        &allow-other-keys)
@@ -2719,13 +2700,17 @@ Constructs the instance via the openDAQ C function daqDataPacket_createDataPacke
 @param ruleType .
 @param parameters .
 
-Constructs the instance via the openDAQ C function daqDataRule_createDataRule()."
+Constructs the instance via the openDAQ C function daqDataRule_createDataRule(), or from a builder via daqDataRule_createDataRuleFromBuilder() when :builder is supplied."
   (declare (ignore pointer))
-  (when (and (not pointer-p) rule-type-p parameters-p)
-  (with-daq-boxed-values ((coerced-rule-type rule-type nil)
-                          (coerced-parameters parameters :managed-pointer))
-    (%adopt-pointer object (opendaq.low-level:data-rule/create-data-rule coerced-rule-type coerced-parameters)))
-    ))
+  (unless pointer-p
+    (cond
+      (builder-p
+       (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
+         (%adopt-pointer object (opendaq.low-level:data-rule/create-data-rule-from-builder coerced-builder))))
+      ((and rule-type-p parameters-p)
+       (with-daq-boxed-values ((coerced-rule-type rule-type nil)
+                               (coerced-parameters parameters :managed-pointer))
+         (%adopt-pointer object (opendaq.low-level:data-rule/create-data-rule coerced-rule-type coerced-parameters)))))))
 
 (defclass data-rule-builder (base-object)
   (
@@ -2819,26 +2804,6 @@ Constructs the instance via the openDAQ C function daqDataRule_createExplicitDom
   (with-daq-boxed-values ((coerced-min-expected-delta min-expected-delta :daq-base-object)
                           (coerced-max-expected-delta max-expected-delta :daq-base-object))
     (%adopt-pointer object (opendaq.low-level:data-rule/create-explicit-domain-data-rule coerced-min-expected-delta coerced-max-expected-delta)))
-    ))
-
-(defclass data-rule/from-builder (data-rule)
-  (
-   (%builder-initarg :initarg :builder :initform nil)
-   ))
-
-
-(defmethod initialize-instance :after ((object data-rule/from-builder)
-                                       &key (pointer nil pointer-p)
-                                            (builder nil builder-p)
-                                       &allow-other-keys)
-  "Creates a DataRulePtr from Builder.
-@param builder DataRule Builder
-
-Constructs the instance via the openDAQ C function daqDataRule_createDataRuleFromBuilder()."
-  (declare (ignore pointer))
-  (when (and (not pointer-p) builder-p)
-  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (%adopt-pointer object (opendaq.low-level:data-rule/create-data-rule-from-builder coerced-builder)))
     ))
 
 (defclass data-rule/linear (data-rule)
@@ -3110,11 +3075,13 @@ Constructs the instance via the openDAQ C function daqDeviceType_createDeviceTyp
    (%rule-initarg :initarg :rule :initform nil)
    (%unit-initarg :initarg :unit :initform nil)
    (%name-initarg :initarg :name :initform nil)
+   (%builder-initarg :initarg :builder :initform nil)
    ))
 
 
 (defmethod initialize-instance :after ((object dimension)
                                        &key (pointer nil pointer-p)
+                                            (builder nil builder-p)
                                             (rule nil rule-p)
                                             (unit nil unit-p)
                                             (name nil name-p)
@@ -3124,14 +3091,18 @@ Constructs the instance via the openDAQ C function daqDeviceType_createDeviceTyp
 @param unit The unit of the dimension's labels.
 @param name The name the dimension.
 
-Constructs the instance via the openDAQ C function daqDimension_createDimension()."
+Constructs the instance via the openDAQ C function daqDimension_createDimension(), or from a builder via daqDimension_createDimensionFromBuilder() when :builder is supplied."
   (declare (ignore pointer))
-  (when (and (not pointer-p) rule-p unit-p name-p)
-  (with-daq-boxed-values ((coerced-rule rule :managed-pointer)
-                          (coerced-unit unit :managed-pointer)
-                          (coerced-name name :daq-string))
-    (%adopt-pointer object (opendaq.low-level:dimension/create-dimension coerced-rule coerced-unit coerced-name)))
-    ))
+  (unless pointer-p
+    (cond
+      (builder-p
+       (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
+         (%adopt-pointer object (opendaq.low-level:dimension/create-dimension-from-builder coerced-builder))))
+      ((and rule-p unit-p name-p)
+       (with-daq-boxed-values ((coerced-rule rule :managed-pointer)
+                               (coerced-unit unit :managed-pointer)
+                               (coerced-name name :daq-string))
+         (%adopt-pointer object (opendaq.low-level:dimension/create-dimension coerced-rule coerced-unit coerced-name)))))))
 
 (defclass dimension-builder (base-object)
   (
@@ -3173,11 +3144,13 @@ Constructs the instance via the openDAQ C function daqDimensionBuilder_createDim
   (
    (%type-initarg :initarg :type :initform nil)
    (%parameters-initarg :initarg :parameters :initform nil)
+   (%builder-initarg :initarg :builder :initform nil)
    ))
 
 
 (defmethod initialize-instance :after ((object dimension-rule)
                                        &key (pointer nil pointer-p)
+                                            (builder nil builder-p)
                                             (type nil type-p)
                                             (parameters nil parameters-p)
                                        &allow-other-keys)
@@ -3185,13 +3158,17 @@ Constructs the instance via the openDAQ C function daqDimensionBuilder_createDim
 @param type The type of the Dimension rule
 @param parameters Tha parameters of the Dimension rule
 
-Constructs the instance via the openDAQ C function daqDimensionRule_createDimensionRule()."
+Constructs the instance via the openDAQ C function daqDimensionRule_createDimensionRule(), or from a builder via daqDimensionRule_createDimensionRuleFromBuilder() when :builder is supplied."
   (declare (ignore pointer))
-  (when (and (not pointer-p) type-p parameters-p)
-  (with-daq-boxed-values ((coerced-type type nil)
-                          (coerced-parameters parameters :managed-pointer))
-    (%adopt-pointer object (opendaq.low-level:dimension-rule/create-dimension-rule coerced-type coerced-parameters)))
-    ))
+  (unless pointer-p
+    (cond
+      (builder-p
+       (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
+         (%adopt-pointer object (opendaq.low-level:dimension-rule/create-dimension-rule-from-builder coerced-builder))))
+      ((and type-p parameters-p)
+       (with-daq-boxed-values ((coerced-type type nil)
+                               (coerced-parameters parameters :managed-pointer))
+         (%adopt-pointer object (opendaq.low-level:dimension-rule/create-dimension-rule coerced-type coerced-parameters)))))))
 
 (defclass dimension-rule-builder (base-object)
   (
@@ -3227,26 +3204,6 @@ Constructs the instance via the openDAQ C function daqDimensionRuleBuilder_creat
   (when (and (not pointer-p) rule-to-copy-p)
   (with-daq-boxed-values ((coerced-rule-to-copy rule-to-copy :managed-pointer))
     (%adopt-pointer object (opendaq.low-level:dimension-rule-builder/create-dimension-rule-builder-from-existing coerced-rule-to-copy)))
-    ))
-
-(defclass dimension-rule/from-builder (dimension-rule)
-  (
-   (%builder-initarg :initarg :builder :initform nil)
-   ))
-
-
-(defmethod initialize-instance :after ((object dimension-rule/from-builder)
-                                       &key (pointer nil pointer-p)
-                                            (builder nil builder-p)
-                                       &allow-other-keys)
-  "Creates a DimensionRule using Builder
-@param builder DimensionRule Builder
-
-Constructs the instance via the openDAQ C function daqDimensionRule_createDimensionRuleFromBuilder()."
-  (declare (ignore pointer))
-  (when (and (not pointer-p) builder-p)
-  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (%adopt-pointer object (opendaq.low-level:dimension-rule/create-dimension-rule-from-builder coerced-builder)))
     ))
 
 (defclass dimension-rule/linear (dimension-rule)
@@ -3330,26 +3287,6 @@ Constructs the instance via the openDAQ C function daqDimensionRule_createLogari
                           (coerced-base base :daq-base-object)
                           (coerced-size size nil))
     (%adopt-pointer object (opendaq.low-level:dimension-rule/create-logarithmic-dimension-rule coerced-delta coerced-start coerced-base coerced-size)))
-    ))
-
-(defclass dimension/from-builder (dimension)
-  (
-   (%builder-initarg :initarg :builder :initform nil)
-   ))
-
-
-(defmethod initialize-instance :after ((object dimension/from-builder)
-                                       &key (pointer nil pointer-p)
-                                            (builder nil builder-p)
-                                       &allow-other-keys)
-  "Creates a Dimension using Builder
-@param builder Dimension Builder
-
-Constructs the instance via the openDAQ C function daqDimension_createDimensionFromBuilder()."
-  (declare (ignore pointer))
-  (when (and (not pointer-p) builder-p)
-  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (%adopt-pointer object (opendaq.low-level:dimension/create-dimension-from-builder coerced-builder)))
     ))
 
 (defclass discovery-server (base-object)
@@ -3877,6 +3814,8 @@ Constructs the instance via the openDAQ C function daqFunctionBlockType_createFu
 
 (defclass instance (device)
   (
+   (%context-initarg :initarg :context :initform nil)
+   (%local-id-initarg :initarg :local-id :initform nil)
    (%builder-initarg :initarg :builder :initform nil)
    ))
 
@@ -3884,16 +3823,32 @@ Constructs the instance via the openDAQ C function daqFunctionBlockType_createFu
 (defmethod initialize-instance :after ((object instance)
                                        &key (pointer nil pointer-p)
                                             (builder (let ((builder (make-instance 'instance-builder))) (setf (module-path builder) (native-library-directory)) builder) builder-p)
+                                            (context nil context-p)
+                                            (local-id nil local-id-p)
                                        &allow-other-keys)
-  "Creates a Instance with Builder
-@param builder Instance Builder
+  "Creates an openDAQ instance.
+@param context The context object.
+@param localId The localID of the instance.
+openDAQ application uses instance as an entry point and a root component. The instance is the first openDAQ object
+that is created in the application.
+The caller should provide a localID that is a string that should be unique across multiple instances. If the
+instance sets a root device, the localID of the root device is automatically used as localID of the instance.
+The caller should provide configured module manager and context.
 
-Constructs the instance via the openDAQ C function daqInstance_createInstanceFromBuilder()."
-  (declare (ignore pointer builder-p))
+Constructs the instance via the openDAQ C function daqInstance_createInstance(), or from a builder via daqInstance_createInstanceFromBuilder() when :builder is supplied."
+  (declare (ignore pointer))
   (unless pointer-p
-  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (%adopt-pointer object (opendaq.low-level:instance/create-instance-from-builder coerced-builder)))
-    ))
+    (cond
+      (builder-p
+       (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
+         (%adopt-pointer object (opendaq.low-level:instance/create-instance-from-builder coerced-builder))))
+      ((and context-p local-id-p)
+       (with-daq-boxed-values ((coerced-context context :managed-pointer)
+                               (coerced-local-id local-id :daq-string))
+         (%adopt-pointer object (opendaq.low-level:instance/create-instance coerced-context coerced-local-id))))
+      (t
+       (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
+         (%adopt-pointer object (opendaq.low-level:instance/create-instance-from-builder coerced-builder)))))))
 
 (defclass instance-builder (base-object)
   (
@@ -3909,35 +3864,6 @@ Constructs the instance via the openDAQ C function daqInstanceBuilder_createInst
   (declare (ignore pointer))
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:instance-builder/create-instance-builder))
-    ))
-
-(defclass instance/with-context (instance)
-  (
-   (%context-initarg :initarg :context :initform nil)
-   (%local-id-initarg :initarg :local-id :initform nil)
-   ))
-
-
-(defmethod initialize-instance :after ((object instance/with-context)
-                                       &key (pointer nil pointer-p)
-                                            (context nil context-p)
-                                            (local-id nil local-id-p)
-                                       &allow-other-keys)
-  "Creates an openDAQ instance.
-@param context The context object.
-@param localId The localID of the instance.
-openDAQ application uses instance as an entry point and a root component. The instance is the first openDAQ object
-that is created in the application.
-The caller should provide a localID that is a string that should be unique across multiple instances. If the
-instance sets a root device, the localID of the root device is automatically used as localID of the instance.
-The caller should provide configured module manager and context.
-
-Constructs the instance via the openDAQ C function daqInstance_createInstance()."
-  (declare (ignore pointer))
-  (when (and (not pointer-p) context-p local-id-p)
-  (with-daq-boxed-values ((coerced-context context :managed-pointer)
-                          (coerced-local-id local-id :daq-string))
-    (%adopt-pointer object (opendaq.low-level:instance/create-instance coerced-context coerced-local-id)))
     ))
 
 (defclass io-folder-config (folder-config)
@@ -5720,11 +5646,13 @@ Constructs the instance via the openDAQ C function daqReferenceDomainInfoBuilder
    (%output-data-type-initarg :initarg :output-data-type :initform nil)
    (%scaling-type-initarg :initarg :scaling-type :initform nil)
    (%parameters-initarg :initarg :parameters :initform nil)
+   (%builder-initarg :initarg :builder :initform nil)
    ))
 
 
 (defmethod initialize-instance :after ((object scaling)
                                        &key (pointer nil pointer-p)
+                                            (builder nil builder-p)
                                             (input-data-type nil input-data-type-p)
                                             (output-data-type nil output-data-type-p)
                                             (scaling-type nil scaling-type-p)
@@ -5736,15 +5664,19 @@ Constructs the instance via the openDAQ C function daqReferenceDomainInfoBuilder
 @param scalingType The type of the scaling.
 @param parameters Tha parameters of the Dimension rule.
 
-Constructs the instance via the openDAQ C function daqScaling_createScaling()."
+Constructs the instance via the openDAQ C function daqScaling_createScaling(), or from a builder via daqScaling_createScalingFromBuilder() when :builder is supplied."
   (declare (ignore pointer))
-  (when (and (not pointer-p) input-data-type-p output-data-type-p scaling-type-p parameters-p)
-  (with-daq-boxed-values ((coerced-input-data-type input-data-type nil)
-                          (coerced-output-data-type output-data-type nil)
-                          (coerced-scaling-type scaling-type nil)
-                          (coerced-parameters parameters :managed-pointer))
-    (%adopt-pointer object (opendaq.low-level:scaling/create-scaling coerced-input-data-type coerced-output-data-type coerced-scaling-type coerced-parameters)))
-    ))
+  (unless pointer-p
+    (cond
+      (builder-p
+       (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
+         (%adopt-pointer object (opendaq.low-level:scaling/create-scaling-from-builder coerced-builder))))
+      ((and input-data-type-p output-data-type-p scaling-type-p parameters-p)
+       (with-daq-boxed-values ((coerced-input-data-type input-data-type nil)
+                               (coerced-output-data-type output-data-type nil)
+                               (coerced-scaling-type scaling-type nil)
+                               (coerced-parameters parameters :managed-pointer))
+         (%adopt-pointer object (opendaq.low-level:scaling/create-scaling coerced-input-data-type coerced-output-data-type coerced-scaling-type coerced-parameters)))))))
 
 (defclass scaling-builder (base-object)
   (
@@ -5787,26 +5719,6 @@ Constructs the instance via the openDAQ C function daqScalingBuilder_createScali
    ))
 
 
-
-(defclass scaling/from-builder (scaling)
-  (
-   (%builder-initarg :initarg :builder :initform nil)
-   ))
-
-
-(defmethod initialize-instance :after ((object scaling/from-builder)
-                                       &key (pointer nil pointer-p)
-                                            (builder nil builder-p)
-                                       &allow-other-keys)
-  "Creates a Scaling object from Builder
-@param builder Scaling Builder
-
-Constructs the instance via the openDAQ C function daqScaling_createScalingFromBuilder()."
-  (declare (ignore pointer))
-  (when (and (not pointer-p) builder-p)
-  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (%adopt-pointer object (opendaq.low-level:scaling/create-scaling-from-builder coerced-builder)))
-    ))
 
 (defclass scaling/linear (scaling)
   (
@@ -6391,23 +6303,29 @@ Constructs the instance via the openDAQ C function daqStreamingType_createStream
    (%name-initarg :initarg :name :initform nil)
    (%fields-initarg :initarg :fields :initform nil)
    (%type-manager-initarg :initarg :type-manager :initform nil)
+   (%builder-initarg :initarg :builder :initform nil)
    ))
 
 
 (defmethod initialize-instance :after ((object struct)
                                        &key (pointer nil pointer-p)
+                                            (builder nil builder-p)
                                             (name nil name-p)
                                             (fields nil fields-p)
                                             (type-manager nil type-manager-p)
                                        &allow-other-keys)
-  "Constructs the instance via the openDAQ C function daqStruct_createStruct()."
+  "Constructs the instance via the openDAQ C function daqStruct_createStruct(), or from a builder via daqStruct_createStructFromBuilder() when :builder is supplied."
   (declare (ignore pointer))
-  (when (and (not pointer-p) name-p fields-p type-manager-p)
-  (with-daq-boxed-values ((coerced-name name :daq-string)
-                          (coerced-fields fields :managed-pointer)
-                          (coerced-type-manager type-manager :managed-pointer))
-    (%adopt-pointer object (opendaq.low-level:struct/create-struct coerced-name coerced-fields coerced-type-manager)))
-    ))
+  (unless pointer-p
+    (cond
+      (builder-p
+       (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
+         (%adopt-pointer object (opendaq.low-level:struct/create-struct-from-builder coerced-builder))))
+      ((and name-p fields-p type-manager-p)
+       (with-daq-boxed-values ((coerced-name name :daq-string)
+                               (coerced-fields fields :managed-pointer)
+                               (coerced-type-manager type-manager :managed-pointer))
+         (%adopt-pointer object (opendaq.low-level:struct/create-struct coerced-name coerced-fields coerced-type-manager)))))))
 
 (defclass struct-builder (base-object)
   (
@@ -6493,23 +6411,6 @@ Constructs the instance via the openDAQ C function daqStreamingType_createStream
                           (coerced-names names :managed-pointer)
                           (coerced-types types :managed-pointer))
     (%adopt-pointer object (opendaq.low-level:struct-type/create-struct-type-no-defaults coerced-name coerced-names coerced-types)))
-    ))
-
-(defclass struct/from-builder (struct)
-  (
-   (%builder-initarg :initarg :builder :initform nil)
-   ))
-
-
-(defmethod initialize-instance :after ((object struct/from-builder)
-                                       &key (pointer nil pointer-p)
-                                            (builder nil builder-p)
-                                       &allow-other-keys)
-  "Constructs the instance via the openDAQ C function daqStruct_createStructFromBuilder()."
-  (declare (ignore pointer))
-  (when (and (not pointer-p) builder-p)
-  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
-    (%adopt-pointer object (opendaq.low-level:struct/create-struct-from-builder coerced-builder)))
     ))
 
 (defclass subscription-event-args (event-args)
@@ -25218,7 +25119,6 @@ Calls the openDAQ C function daqWork_execute()."
          address-info-private
          address-info-private-interface-id
          address-info-type
-         address-info/from-builder
          addresses
          all-properties
          allocate
@@ -25457,7 +25357,6 @@ Calls the openDAQ C function daqWork_execute()."
          data-rule/constant
          data-rule/explicit
          data-rule/explicit-domain
-         data-rule/from-builder
          data-rule/linear
          data-size
          deactivate-streaming
@@ -25532,11 +25431,9 @@ Calls the openDAQ C function daqWork_execute()."
          dimension-rule-builder/from-existing
          dimension-rule-interface-id
          dimension-rule-type
-         dimension-rule/from-builder
          dimension-rule/linear
          dimension-rule/list
          dimension-rule/logarithmic
-         dimension/from-builder
          dimensions
          disable-core-event-trigger
          disable-discovery
@@ -25699,7 +25596,6 @@ Calls the openDAQ C function daqWork_execute()."
          instance-builder-root-device
          instance-interface-id
          instance-root-device
-         instance/with-context
          int-value
          interfaces
          internal-state
@@ -26155,7 +26051,6 @@ Calls the openDAQ C function daqWork_execute()."
          scaling-calc-private-interface-id
          scaling-interface-id
          scaling-type
-         scaling/from-builder
          scaling/linear
          schedule-function
          schedule-graph
@@ -26278,7 +26173,6 @@ Calls the openDAQ C function daqWork_execute()."
          struct-type-interface-id
          struct-type-no-lock
          struct-type/no-defaults
-         struct/from-builder
          submit-configuration
          submit-network-configuration
          subscribe-completed

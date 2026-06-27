@@ -38,8 +38,11 @@ CLASS_NAME_OVERRIDES = {
 }
 
 CLASS_OVERRIDES: dict[str, dict] = {
+    # instance is a builder-backed type like any other -- its :builder kwarg folds in
+    # createInstanceFromBuilder (see build_specs / constructor_lambda_lines).  Its only
+    # specialness is that the builder defaults to one carrying the bundled native-module
+    # path, so (make-instance 'instance) with no arguments yields a ready-to-use instance.
     "instance": {
-        "constructor_name": "instance/create-instance-from-builder",
         "constructor_defaults": (
             (
                 "builder",
@@ -79,13 +82,13 @@ MANUAL_CONSTRUCTORS = {
     "block-reader",
 }
 
-# Classes that intentionally get NO direct make-instance constructor.  openDAQ gives
-# a property no plain createProperty(): it is built only through one of its typed
-# factory functions (create-int-property, ...).  With no canonical constructor the
-# generator used to silently pick the first create-* it saw (bool), so make-instance
-# arbitrarily produced a bool property.  Suppress that; the class is still wrappable
-# from a pointer and its create-* factories are emitted as free factory functions.
-# (property-builder is NOT here: it has a real createPropertyBuilder(name).)
+# Classes that intentionally get NO generated make-instance constructor.  openDAQ
+# gives a property no plain createProperty(): it is built only through a typed factory
+# (create-int-property, ...).  With no canonical constructor the generator used to
+# silently pick the first create-* it saw (bool); suppress that.  The bare class stays
+# wrappable from a pointer, and each typed create-* factory becomes a make-instance
+# proxy subclass (property/int, property/bool, ...) like any other non-primary
+# constructor.  (property-builder is NOT here: it has a real createPropertyBuilder(name).)
 NO_DIRECT_CONSTRUCTOR = {
     "property",
 }
@@ -131,10 +134,6 @@ SUPPRESSED_FUNCTIONS = {
 # C name does not embed the type they build, so proxy_class_name cannot derive a
 # clean suffix automatically (e.g. createIoFolder builds a folder-config).
 PROXY_NAME_OVERRIDES: dict[str, str] = {
-    # instance's primary make-instance is createInstanceFromBuilder (see
-    # CLASS_OVERRIDES); the bare createInstance(context, localId) is the explicit
-    # lower-level alternate, whose stem would otherwise reduce to an empty suffix.
-    "instance/create-instance": "instance/with-context",
     # These build a component-type-builder; the shared "-type-builder" tail is not
     # a contiguous run with the receiver, so it survives auto-derivation as a
     # redundant suffix (component-type-builder/device-type-builder).  Trim it.
@@ -544,6 +543,15 @@ def select_method_names(functions: list[dict]) -> tuple[dict[str, str], dict[str
     return names, unify
 
 
+def base_class_constructor(name: str, constructors: dict) -> dict | None:
+    """The canonical create-<name> constructor that fills a bare class's
+    make-instance, or None for a NO_DIRECT_CONSTRUCTOR class (which gets no
+    generated constructor -- it is wrappable from a pointer and/or hand-written)."""
+    if name in NO_DIRECT_CONSTRUCTOR:
+        return None
+    return constructors.get(f"{name}/create-{name}")
+
+
 def build_specs(functions: list[dict]) -> tuple[list[dict], list[dict]]:
     method_names, unify_specs = select_method_names(functions)
     class_constructors = select_class_constructors(functions)
@@ -560,39 +568,39 @@ def build_specs(functions: list[dict]) -> tuple[list[dict], list[dict]]:
         receiver = receiver_name(function)
 
         if kind == "constructor":
-            if class_constructors.get(receiver) != function:
-                # A non-primary variant/alternate factory (createIntProperty,
-                # createStreamReaderFromPort, ...): emit it as a make-instance
-                # proxy subclass BASE/SUFFIX of the type it builds, so the whole
-                # factory surface is reached through make-instance rather than a
-                # detached create-* function.
+            base = classes.setdefault(receiver, {
+                "name": receiver,
+                "constructor": base_class_constructor(receiver, constructors),
+                "constructor_defaults": CLASS_OVERRIDES.get(receiver, {}).get("constructor_defaults", ()),
+            })
+            if class_constructors.get(receiver) == function:
+                base["constructor"] = function
+            elif function["public_lisp_name"].endswith("-from-builder"):
+                # Fold the builder factory into the base class as a :builder kwarg
+                # (see constructor_lambda_lines) rather than a separate /from-builder
+                # subclass, so every builder-backed type constructs the same idiomatic
+                # way: (make-instance 'foo :builder b).
+                base["builder_constructor"] = function
+            else:
+                # Another non-primary factory (createIntProperty,
+                # createStreamReaderFromPort, ...): a make-instance proxy subclass
+                # BASE/SUFFIX of the type it builds.
                 proxy = proxy_class_name(function)
                 if proxy in classes:
                     raise ValueError(
                         f"proxy class name collision on {proxy!r} "
                         f"({function['public_lisp_name']})")
-                classes.setdefault(receiver, {
-                    "name": receiver,
-                    "constructor": constructors.get(f"{receiver}/create-{receiver}"),
-                    "constructor_defaults": CLASS_OVERRIDES.get(receiver, {}).get("constructor_defaults", ()),
-                })
                 classes[proxy] = {
                     "name": proxy, "parent": receiver, "constructor": function,
                     "constructor_defaults": (),
                 }
-                continue
-            co = CLASS_OVERRIDES.get(receiver, {})
-            classes[receiver] = {
-                "name": receiver, "constructor": function,
-                "constructor_defaults": co.get("constructor_defaults", ()),
-            }
             continue
 
         for result_class in result_class_names(function):
             co = CLASS_OVERRIDES.get(result_class, {})
             classes.setdefault(result_class, {
                 "name": result_class,
-                "constructor": constructors.get(f"{result_class}/create-{result_class}"),
+                "constructor": base_class_constructor(result_class, constructors),
                 "constructor_defaults": co.get("constructor_defaults", ()),
             })
 
@@ -612,7 +620,7 @@ def build_specs(functions: list[dict]) -> tuple[list[dict], list[dict]]:
             co = CLASS_OVERRIDES.get(spec["specializer"], {})
             classes[spec["specializer"]] = {
                 "name": spec["specializer"],
-                "constructor": constructors.get(f"{spec['specializer']}/create-{spec['specializer']}"),
+                "constructor": base_class_constructor(spec["specializer"], constructors),
                 "constructor_defaults": co.get("constructor_defaults", ()),
             }
 
@@ -632,11 +640,30 @@ def export_symbols(classes: list[dict], methods: list[dict]) -> list[str]:
     return sorted(exports)
 
 
-def constructor_lambda_lines(spec: dict) -> list[str]:
-    if spec["constructor"] is None or spec["name"] in MANUAL_CONSTRUCTORS:
-        return [""]
+def _adopt_call(ctor: dict, params: list[dict], indent: str) -> list[str]:
+    """The (%adopt-pointer object (low-level:CTOR coerced-args...)) form, with each
+    PARAM boxed via WITH-DAQ-BOXED-VALUES, emitted at INDENT as one balanced expr."""
+    return emit_coerced_call(
+        params,
+        [f"(%adopt-pointer object (opendaq.low-level:{ctor['public_lisp_name']}"
+         + "".join(f" coerced-{p['lisp_name']}" for p in params) + "))"],
+        indent=indent,
+    )
 
-    constructor = spec["constructor"]
+
+def constructor_lambda_lines(spec: dict) -> list[str]:
+    if spec["name"] in MANUAL_CONSTRUCTORS:
+        return [""]
+    constructor = spec.get("constructor")
+    builder_constructor = spec.get("builder_constructor")
+    if constructor is None and builder_constructor is None:
+        return [""]
+    if builder_constructor is None:
+        return _plain_constructor_lines(spec, constructor)
+    return _builder_constructor_lines(spec, constructor, builder_constructor)
+
+
+def _plain_constructor_lines(spec: dict, constructor: dict) -> list[str]:
     parameters = constructor_parameters(constructor)
     defaults = default_map(spec.get("constructor_defaults", ()))
     required = tuple(p for p in parameters if p["lisp_name"] not in defaults)
@@ -654,13 +681,7 @@ def constructor_lambda_lines(spec: dict) -> list[str]:
     lines.extend(_string_literal_lines(_compose_doc_text(constructor, construct_sentence), "  "))
     lines.append(f"  (declare (ignore pointer{(' ' + ignore_clause) if ignore_clause else ''}))")
 
-    call_body = emit_coerced_call(
-        parameters,
-        [f"(%adopt-pointer object (opendaq.low-level:{constructor['public_lisp_name']}"
-         + "".join(f" coerced-{p['lisp_name']}" for p in parameters) + "))"],
-        indent="  ",
-    )
-
+    call_body = _adopt_call(constructor, parameters, indent="  ")
     if required:
         checks = " ".join(f"{p['lisp_name']}-p" for p in required)
         lines.append(f"  (when (and (not pointer-p) {checks})")
@@ -674,14 +695,75 @@ def constructor_lambda_lines(spec: dict) -> list[str]:
     return lines
 
 
+def _builder_constructor_lines(spec: dict, constructor: dict | None, builder_constructor: dict) -> list[str]:
+    """A constructor that folds in a <type>FromBuilder factory as a :builder kwarg.
+    The body dispatches: an explicit :builder always wins; otherwise the regular
+    constructor's required initargs build it directly; and when :builder carries a
+    default (e.g. instance's bundled-module-path builder) or the regular constructor
+    takes no args, a trailing fallback covers the no-args case."""
+    defaults = default_map(spec.get("constructor_defaults", ()))
+    regular_params = list(constructor_parameters(constructor)) if constructor is not None else []
+    builder_params = list(constructor_parameters(builder_constructor))
+    regular_required = [p for p in regular_params if p["lisp_name"] not in defaults]
+    builder_has_default = any(p["lisp_name"] in defaults for p in builder_params)
+
+    lines = [
+        f"(defmethod initialize-instance :after ((object {spec['name']})",
+        "                                       &key (pointer nil pointer-p)",
+    ]
+    for p in builder_params + regular_params:
+        lines.append(f"                                            ({p['lisp_name']} {defaults.get(p['lisp_name'], 'nil')} {p['lisp_name']}-p)")
+    lines.append("                                       &allow-other-keys)")
+    if constructor is not None:
+        construct_sentence = (
+            f"Constructs the instance via the openDAQ C function {constructor['c_name']}(), "
+            f"or from a builder via {builder_constructor['c_name']}() when :builder is supplied.")
+        doc_source = constructor
+    else:
+        construct_sentence = f"Constructs the instance from a builder via {builder_constructor['c_name']}()."
+        doc_source = builder_constructor
+    lines.extend(_string_literal_lines(_compose_doc_text(doc_source, construct_sentence), "  "))
+    lines.append("  (declare (ignore pointer))")
+
+    builder_check = " ".join(f"{p['lisp_name']}-p" for p in builder_params)
+    # (test, constructor, params) clauses; an explicit builder always wins.
+    clauses = [(builder_check if len(builder_params) == 1 else f"(and {builder_check})",
+                builder_constructor, builder_params)]
+    if constructor is not None and regular_required:
+        clauses.append(("(and " + " ".join(f"{p['lisp_name']}-p" for p in regular_required) + ")",
+                        constructor, regular_params))
+    if builder_has_default:
+        clauses.append(("t", builder_constructor, builder_params))
+    elif constructor is not None and not regular_required:
+        clauses.append(("t", constructor, regular_params))
+
+    lines.append("  (unless pointer-p")
+    lines.append("    (cond")
+    last = len(clauses) - 1
+    for index, (test, ctor, params) in enumerate(clauses):
+        lines.append(f"      ({test}")
+        body = _adopt_call(ctor, params, indent="       ")
+        # Last clause closes itself + the COND + the UNLESS + the DEFMETHOD.
+        body[-1] = body[-1] + ("))))" if index == last else ")")
+        lines.extend(body)
+    lines.append("")
+    return lines
+
+
 def emit_class_definition(spec: dict) -> list[str]:
     parent = spec.get("parent") or class_parent(spec["name"])
-    slots = (
-        [f"   (%{p['lisp_name']}-initarg :initarg :{p['lisp_name']} :initform nil)"
-         for p in constructor_parameters(spec["constructor"])]
-        if spec["constructor"] is not None
-        else []
-    )
+    params: list[dict] = []
+    if spec.get("constructor") is not None:
+        params.extend(constructor_parameters(spec["constructor"]))
+    if spec.get("builder_constructor") is not None:
+        params.extend(constructor_parameters(spec["builder_constructor"]))
+    seen: set[str] = set()
+    slots = []
+    for p in params:
+        if p["lisp_name"] in seen:
+            continue
+        seen.add(p["lisp_name"])
+        slots.append(f"   (%{p['lisp_name']}-initarg :initarg :{p['lisp_name']} :initform nil)")
     return [f"(defclass {spec['name']} ({parent})", "  (", *slots, "   ))", "", ""]
 
 
