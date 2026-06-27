@@ -12,5 +12,4 @@
     (setf default-config (opendaq.low-level:property-object/create-property-object))
     (setf server-type
           (opendaq.low-level:server-type/create-server-type id name description default-config))
-    (is (not (cffi:null-pointer-p server-type))
-        "opendaq/server ServerType returned a null object")))
+    (is (not (cffi:null-pointer-p server-type)) "opendaq/server ServerType returned a null object")))

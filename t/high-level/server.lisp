@@ -9,7 +9,5 @@
                                      :name "serverTypeName"
                                      :description "serverTypeDescription"
                                      :default-config default-config)))
-    (is (typep server-type 'daq:server-type)
-        "High-level server-type wrappers should construct generated server-type objects.")
-    (is (not (cffi:null-pointer-p (daq:raw-pointer server-type)))
-        "High-level server-type wrappers should hold a native pointer after construction.")))
+    (is (typep server-type 'daq:server-type) "High-level server-type wrappers should construct generated server-type objects.")
+    (is (not (cffi:null-pointer-p (daq:raw-pointer server-type))) "High-level server-type wrappers should hold a native pointer after construction.")))

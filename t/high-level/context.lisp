@@ -18,11 +18,7 @@
                                    :authentication-provider nil
                                    :options options
                                    :discovery-servers discovery-servers)))
-      (is (typep (daq:logger context) 'daq:logger)
-          "High-level contexts should expose their logger wrapper.")
-      (is (typep (daq:type-manager context) 'daq:type-manager)
-          "High-level contexts should expose their type manager wrapper.")
-      (is (hash-table-p (daq:options context))
-          "High-level contexts should expose their options as a hash-table.")
-      (is (hash-table-p (daq:discovery-servers context))
-          "High-level contexts should expose their discovery-servers as a hash-table."))))
+      (is (typep (daq:logger context) 'daq:logger) "High-level contexts should expose their logger wrapper.")
+      (is (typep (daq:type-manager context) 'daq:type-manager) "High-level contexts should expose their type manager wrapper.")
+      (is (hash-table-p (daq:options context)) "High-level contexts should expose their options as a hash-table.")
+      (is (hash-table-p (daq:discovery-servers context)) "High-level contexts should expose their discovery-servers as a hash-table."))))

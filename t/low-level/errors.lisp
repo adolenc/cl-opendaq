@@ -9,10 +9,8 @@
                               :message "Failed to create device from connection string 'daqref://device1'"))
          (report (with-output-to-string (s)
                    (princ err s))))
-    (is (search "OPENDAQ_ERR_ALREADYEXISTS" report)
-        "Error report should include the code name, not 'an unknown error'.")
-    (is (search "Failed to create device" report)
-        "Error report should include the descriptive message.")))
+    (is (search "OPENDAQ_ERR_ALREADYEXISTS" report) "Error report should include the code name, not 'an unknown error'.")
+    (is (search "Failed to create device" report) "Error report should include the descriptive message.")))
 
 (test duplicating-device-reports-readable-error
   (locally (declare (optimize (debug 3)))

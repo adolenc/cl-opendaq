@@ -3,9 +3,9 @@
 (defun timestamp->string (timestamp)
   "Render TIMESTAMP as a readable time-of-day, e.g. \"21:05:28.401836\"."
   (local-time:format-timestring
-   nil timestamp
-   :format '((:hour 2) ":" (:min 2) ":" (:sec 2) "." (:usec 6))
-   :timezone local-time:+utc-zone+))
+    nil timestamp
+    :format '((:hour 2) ":" (:min 2) ":" (:sec 2) "." (:usec 6))
+    :timezone local-time:+utc-zone+))
 
 (defparameter *instance* (make-instance 'daq:instance))
 (daq:add-device *instance* "daqref://device0")
@@ -13,11 +13,10 @@
 (let* ((channels (list (daq:as (daq:find-component *instance* "Dev/RefDev0/IO/AI/RefCh0") 'daq:channel)
                        (daq:as (daq:find-component *instance* "Dev/RefDev0/IO/AI/RefCh1") 'daq:channel)))
        (signal-count (length channels)))
-  (setf (daq:property-value (first channels) "Frequency") 0.5
+  (setf (daq:property-value (first channels)  "Frequency") 0.5
         (daq:property-value (second channels) "Frequency") 2.0)
   (let ((reader (make-instance 'daq:multi-reader
-                               :signals (mapcar (lambda (channel) (first (daq:signals channel)))
-                                                channels))))
+                               :signals (mapcar (lambda (channel) (first (daq:signals channel))) channels))))
     (loop for attempt below 10 do
       (multiple-value-bind (values domain) (daq:read-with-domain reader 8 :timeout-ms 1000)
         (when (plusp (length (first domain)))

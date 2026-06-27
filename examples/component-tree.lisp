@@ -5,14 +5,16 @@
 
 (defun type-label (component)
   "Readable type name for COMPONENT, e.g. \"Channel\" or \"FunctionBlock\"."
-  (remove #\- (string-capitalize
-               (symbol-name (or (daq:component-type component) 'component)))))
+  (remove #\- (string-capitalize (symbol-name
+                                   (or (daq:component-type component) 'component)))))
 
 (defun type-name (value-type)
   "Readable name for a property's core type, e.g. :DAQ-CT-INT => \"Int\"."
   (let ((s (symbol-name value-type)))
     (remove #\- (string-capitalize
-                 (if (eql 0 (search "DAQ-CT-" s)) (subseq s 7) s)))))
+                  (if (eql 0 (search "DAQ-CT-" s))
+                      (subseq s 7)
+                      s)))))
 
 (defparameter *boxed-types*
   '((:daq-ct-bool   . daq:daq-boolean)
@@ -40,7 +42,8 @@ their native Lisp value; structured ones are shown as \"<Type>\"."
     (let ((object (daq:as component 'daq:property-object)))
       (dolist (property (daq:visible-properties object))
         (format t "~A• ~A : ~A = ~A~%"
-                prefix (daq:name property)
+                prefix
+                (daq:name property)
                 (type-name (daq:value-type property))
                 (property-value-string object property))))))
 
@@ -57,13 +60,15 @@ their native Lisp value; structured ones are shown as \"<Type>\"."
           for last = (= i n)
           for child-prefix = (concatenate 'string prefix (if last "   " "│  "))
           do (format t "~A~A~A : ~A (~A)~%"
-                     prefix (if last "└─ " "├─ ")
-                     (daq:name child) (type-label child) (daq:local-id child))
+                     prefix
+                     (if last "└─ " "├─ ")
+                     (daq:name child)
+                     (type-label child)
+                     (daq:local-id child))
              (draw-properties child child-prefix)
              (draw-children child child-prefix))))
 
 (let ((root (daq:root-device *instance*)))
-  (format t "~A : ~A (~A)~%"
-          (daq:name root) (type-label root) (daq:local-id root))
+  (format t "~A : ~A (~A)~%" (daq:name root) (type-label root) (daq:local-id root))
   (draw-properties root "")
   (draw-children root ""))

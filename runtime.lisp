@@ -89,8 +89,7 @@ time rather than sniffed from SOFTWARE-TYPE / MACHINE-TYPE strings."
                   (%native-search-paths-for-root root))))
 
 (defun %native-search-roots ()
-  (remove nil (list (%environment-native-directory)
-                    (%system-native-directory))))
+  (remove nil (list (%environment-native-directory) (%system-native-directory))))
 
 (defun %candidate-native-directories ()
   (remove-duplicates
@@ -250,7 +249,7 @@ time rather than sniffed from SOFTWARE-TYPE / MACHINE-TYPE strings."
 ;;; Error codes and handling (was errors.lisp)
 ;;; ===========================================================================
 
-;; --- FFI binding for retrieving the descriptive error message ---------------
+;;; --- FFI binding for retrieving the descriptive error message ---------------
 (cffi:defcfun ("daqGetErrorInfoMessage" %daq-get-error-info-message) daq-err-code
   (error-message (:pointer daq-string)))
 
@@ -275,7 +274,7 @@ Uses direct FFI calls to avoid re-entering %check-error during error reporting."
                                (cffi:foreign-string-to-lisp c-str))))))
               (base-object/release-ref msg-ptr))))))))
 
-;; --- Condition and checking -------------------------------------------------
+;;; --- Condition and checking -------------------------------------------------
 
 (define-condition opendaq-error (error)
   ((code :initarg :code :reader opendaq-error-code)
@@ -328,8 +327,7 @@ Uses direct FFI calls to avoid re-entering %check-error during error reporting."
   nil)
 
 (defun make-daq-string (value)
-  (cffi:with-foreign-string (cstring value)
-    (string/create-string cstring)))
+  (cffi:with-foreign-string (cstring value) (string/create-string cstring)))
 
 ;;; ===========================================================================
 ;;; Interface query

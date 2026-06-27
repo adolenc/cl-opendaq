@@ -10,10 +10,8 @@
                                         :description "streamingTypeDescription"
                                         :prefix "streamingTypePrefix"
                                         :default-config default-config)))
-    (is (typep streaming-type 'daq:streaming-type)
-        "High-level streaming-type wrappers should construct generated objects.")
-    (is (string= "streamingTypePrefix" (daq:connection-string-prefix streaming-type))
-        "High-level streaming-type wrappers should expose their connection-string prefix.")))
+    (is (typep streaming-type 'daq:streaming-type) "High-level streaming-type wrappers should construct generated objects.")
+    (is (string= "streamingTypePrefix" (daq:connection-string-prefix streaming-type)) "High-level streaming-type wrappers should expose their connection-string prefix.")))
 
 (test high-level-subscription-event-args
   (let ((subscription-event-args

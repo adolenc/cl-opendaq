@@ -24,8 +24,6 @@
            child-id
            (cffi:null-pointer)))
     (setf child-local-id (opendaq.low-level:component/get-local-id child))
-    (is (string= "child" (%daq-string-value child-local-id))
-        "opendaq/component child local id mismatch")
+    (is (string= "child" (%daq-string-value child-local-id)) "opendaq/component child local id mismatch")
     (setf child-global-id (opendaq.low-level:component/get-global-id child))
-    (is (string= "/parent/child" (%daq-string-value child-global-id))
-        "opendaq/component child global id mismatch")))
+    (is (string= "/parent/child" (%daq-string-value child-global-id)) "opendaq/component child global id mismatch")))

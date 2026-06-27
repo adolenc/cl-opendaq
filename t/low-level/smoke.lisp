@@ -41,8 +41,7 @@
 
     (setf signals (opendaq.low-level:device/get-signals-recursive device (cffi:null-pointer)))
     (let ((signal-count (opendaq.low-level:list/get-count signals)))
-      (is (plusp signal-count)
-          "Simulator device exposes no signals.")
+      (is (plusp signal-count) "Simulator device exposes no signals.")
       (setf signal (opendaq.low-level:list/get-item-at signals 0))
       (setf reader
             (opendaq.low-level:stream-reader/create-stream-reader
@@ -51,30 +50,23 @@
              opendaq.low-level::+daq-sample-type-int-64+
              :daq-read-mode-scaled
              :daq-read-timeout-type-all))
-      (is (not (cffi:null-pointer-p reader))
-          "Failed to create a low-level stream reader.")
+      (is (not (cffi:null-pointer-p reader)) "Failed to create a low-level stream reader.")
       signal-count)))
 
 (test generated-ratio-api
   (opendaq.low-level:with-daq-objects (raw-ratio raw-simplified)
     (setf raw-ratio (opendaq.low-level:ratio/create-ratio 3 9))
-    (is (= 3 (opendaq.low-level:ratio/get-numerator raw-ratio))
-        "Raw numerator mismatch")
-    (is (= 9 (opendaq.low-level:ratio/get-denominator raw-ratio))
-        "Raw denominator mismatch")
+    (is (= 3 (opendaq.low-level:ratio/get-numerator raw-ratio)) "Raw numerator mismatch")
+    (is (= 9 (opendaq.low-level:ratio/get-denominator raw-ratio)) "Raw denominator mismatch")
 
     (setf raw-simplified (opendaq.low-level:ratio/simplify raw-ratio))
-    (is (= 1 (opendaq.low-level:ratio/get-numerator raw-simplified))
-        "Raw simplified numerator mismatch")
-    (is (= 3 (opendaq.low-level:ratio/get-denominator raw-simplified))
-        "Raw simplified denominator mismatch")))
+    (is (= 1 (opendaq.low-level:ratio/get-numerator raw-simplified)) "Raw simplified numerator mismatch")
+    (is (= 3 (opendaq.low-level:ratio/get-denominator raw-simplified)) "Raw simplified denominator mismatch")))
 
 (test autoload-healthcheck
   (let ((report (daq:healthcheck nil)))
-    (is (eq :loaded (getf report :status))
-        "Library should autoload during system load.")
-    (is (not (null (getf report :loaded-native-directory)))
-        "Healthcheck did not report a loaded native directory.")))
+    (is (eq :loaded (getf report :status)) "Library should autoload during system load.")
+    (is (not (null (getf report :loaded-native-directory))) "Healthcheck did not report a loaded native directory.")))
 
 (test native-directory-prefers-platform-subdirectory
   (with-temporary-test-directory (root)
@@ -116,5 +108,4 @@
             (sb-posix:unsetenv opendaq.low-level::+native-directory-env-var+))))))
 
 (test simulator-probe
-  (is (plusp (%probe-low-level-simulator))
-      "Simulator probe found no signals"))
+  (is (plusp (%probe-low-level-simulator)) "Simulator probe found no signals"))

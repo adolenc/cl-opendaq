@@ -3,10 +3,9 @@
 (defun timestamp->string (timestamp)
   "Render TIMESTAMP as e.g. \"2026-06-16 21:03:22.060001 UTC\"."
   (local-time:format-timestring
-   nil timestamp
-   :format '((:year 4) "-" (:month 2) "-" (:day 2) " "
-             (:hour 2) ":" (:min 2) ":" (:sec 2) "." (:usec 6) " UTC")
-   :timezone local-time:+utc-zone+))
+    nil timestamp
+    :format '((:year 4) "-" (:month 2) "-" (:day 2) " " (:hour 2) ":" (:min 2) ":" (:sec 2) "." (:usec 6) " UTC")
+    :timezone local-time:+utc-zone+))
 
 (defparameter *instance* (make-instance 'daq:instance))
 (daq:add-device *instance* "daqref://device0")

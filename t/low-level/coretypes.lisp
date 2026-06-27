@@ -34,10 +34,8 @@
 (test coretypes-base-object
   (opendaq.low-level:with-daq-objects (obj)
     (setf obj (opendaq.low-level:base-object/create))
-    (is (not (cffi:null-pointer-p obj))
-        "coretypes/BaseObject returned a null object")
-    (is (= 0 (opendaq.low-level:base-object/release-ref obj))
-        "coretypes/BaseObject release refcount mismatch")
+    (is (not (cffi:null-pointer-p obj)) "coretypes/BaseObject returned a null object")
+    (is (= 0 (opendaq.low-level:base-object/release-ref obj)) "coretypes/BaseObject release refcount mismatch")
     (setf obj nil)))
 
 (test coretypes-binary-data
@@ -45,24 +43,19 @@
     (setf binary-data (opendaq.low-level:binary-data/create-binary-data 10))
     (cffi:with-foreign-object (data-slot :pointer)
       (opendaq.low-level:binary-data/get-address binary-data data-slot)
-      (is (not (cffi:null-pointer-p (cffi:mem-ref data-slot :pointer)))
-          "coretypes/Binarydata returned a null data pointer"))
-    (is (= 10 (opendaq.low-level:binary-data/get-size binary-data))
-        "coretypes/Binarydata size mismatch")))
+      (is (not (cffi:null-pointer-p (cffi:mem-ref data-slot :pointer))) "coretypes/Binarydata returned a null data pointer"))
+    (is (= 10 (opendaq.low-level:binary-data/get-size binary-data)) "coretypes/Binarydata size mismatch")))
 
 (test coretypes-boolean
   (opendaq.low-level:with-daq-objects (boolean)
     (setf boolean (opendaq.low-level:boolean/create-boolean 0))
-    (is (= 0 (opendaq.low-level:boolean/get-value boolean))
-        "coretypes/Boolean value mismatch")))
+    (is (= 0 (opendaq.low-level:boolean/get-value boolean)) "coretypes/Boolean value mismatch")))
 
 (test coretypes-complex-number
   (opendaq.low-level:with-daq-objects (complex-number)
     (setf complex-number (opendaq.low-level:complex-number/create-complex-number 1.0d0 2.0d0))
-    (is (= 1.0d0 (opendaq.low-level:complex-number/get-real complex-number))
-        "coretypes/ComplexNumber real mismatch")
-    (is (= 2.0d0 (opendaq.low-level:complex-number/get-imaginary complex-number))
-        "coretypes/ComplexNumber imaginary mismatch")))
+    (is (= 1.0d0 (opendaq.low-level:complex-number/get-real complex-number)) "coretypes/ComplexNumber real mismatch")
+    (is (= 2.0d0 (opendaq.low-level:complex-number/get-imaginary complex-number)) "coretypes/ComplexNumber imaginary mismatch")))
 
 (test coretypes-dictobject
   (opendaq.low-level:with-daq-objects (dict dict-key dict-value dict-value-copy)
@@ -70,11 +63,9 @@
     (setf dict-value (opendaq.low-level:make-daq-string "value"))
     (setf dict (opendaq.low-level:dict/create-dict))
     (opendaq.low-level:dict/set dict dict-key dict-value)
-    (is (= 1 (opendaq.low-level:dict/get-count dict))
-        "coretypes/Dictobject count mismatch")
+    (is (= 1 (opendaq.low-level:dict/get-count dict)) "coretypes/Dictobject count mismatch")
     (setf dict-value-copy (opendaq.low-level:dict/get dict dict-key))
-    (is (string= "value" (%daq-string-value dict-value-copy))
-        "coretypes/Dictobject value mismatch")))
+    (is (string= "value" (%daq-string-value dict-value-copy)) "coretypes/Dictobject value mismatch")))
 
 (test coretypes-enumerations
   (opendaq.low-level:with-daq-objects (enumerators enum-one enum-two enum-one-name enum-two-name enum-type-name enum-type enum-value)
@@ -90,27 +81,22 @@
           (opendaq.low-level:enumeration-type/create-enumeration-type-with-values
            enum-type-name
            enumerators))
-    (is (= 2 (opendaq.low-level:enumeration-type/get-count enum-type))
-        "coretypes/Enumerations count mismatch")
+    (is (= 2 (opendaq.low-level:enumeration-type/get-count enum-type)) "coretypes/Enumerations count mismatch")
     (setf enum-value (opendaq.low-level:enumeration/create-enumeration-with-type enum-type enum-two-name))
-    (is (= 2 (opendaq.low-level:enumeration/get-int-value enum-value))
-        "coretypes/Enumerations value mismatch")))
+    (is (= 2 (opendaq.low-level:enumeration/get-int-value enum-value)) "coretypes/Enumerations value mismatch")))
 
 (test coretypes-event
   (opendaq.low-level:with-daq-objects (event)
     (setf event (opendaq.low-level:event/create-event))
-    (is (= 0 (opendaq.low-level:event/get-subscriber-count event))
-        "coretypes/Event subscriber count mismatch")))
+    (is (= 0 (opendaq.low-level:event/get-subscriber-count event)) "coretypes/Event subscriber count mismatch")))
 
 (test coretypes-event-args
   (opendaq.low-level:with-daq-objects (event-name event-args event-name-copy)
     (setf event-name (opendaq.low-level:make-daq-string "test_event"))
     (setf event-args (opendaq.low-level:event-args/create-event-args 10 event-name))
-    (is (= 10 (opendaq.low-level:event-args/get-event-id event-args))
-        "coretypes/EventArgs id mismatch")
+    (is (= 10 (opendaq.low-level:event-args/get-event-id event-args)) "coretypes/EventArgs id mismatch")
     (setf event-name-copy (opendaq.low-level:event-args/get-event-name event-args))
-    (is (string= "test_event" (%daq-string-value event-name-copy))
-        "coretypes/EventArgs name mismatch")))
+    (is (string= "test_event" (%daq-string-value event-name-copy)) "coretypes/EventArgs name mismatch")))
 
 (test coretypes-event-handler
   (opendaq.low-level:with-daq-objects (event-sender event-handler-args event-handler)
@@ -119,14 +105,12 @@
     (setf event-handler-args (opendaq.low-level:base-object/create))
     (setf event-handler (opendaq.low-level:event-handler/create-event-handler (cffi:callback %coretypes-on-event)))
     (opendaq.low-level:event-handler/handle-event event-handler event-sender event-handler-args)
-    (is (not (null *coretypes-event-called*))
-        "coretypes/EventHandler callback was not invoked")))
+    (is (not (null *coretypes-event-called*)) "coretypes/EventHandler callback was not invoked")))
 
 (test coretypes-float
   (opendaq.low-level:with-daq-objects (float-object)
     (setf float-object (opendaq.low-level:float-object/create-float 1.0d0))
-    (is (= 1.0d0 (opendaq.low-level:float-object/get-value float-object))
-        "coretypes/Float value mismatch")))
+    (is (= 1.0d0 (opendaq.low-level:float-object/get-value float-object)) "coretypes/Float value mismatch")))
 
 (test coretypes-function
   (opendaq.low-level:with-daq-objects (function-object function-params function-result)
@@ -135,14 +119,12 @@
     (setf function-params (opendaq.low-level:base-object/create))
     (setf function-result (opendaq.low-level:base-object/create))
     (setf function-result (opendaq.low-level:function/call function-object function-params function-result))
-    (is (not (null *coretypes-function-called*))
-        "coretypes/Function callback was not invoked")))
+    (is (not (null *coretypes-function-called*)) "coretypes/Function callback was not invoked")))
 
 (test coretypes-integer
   (opendaq.low-level:with-daq-objects (integer)
     (setf integer (opendaq.low-level:integer/create-integer 1))
-    (is (= 1 (opendaq.low-level:integer/get-value integer))
-        "coretypes/Integer value mismatch")))
+    (is (= 1 (opendaq.low-level:integer/get-value integer)) "coretypes/Integer value mismatch")))
 
 (test coretypes-listobject
   (opendaq.low-level:with-daq-objects (list list-i1 list-i2 list-i3 list-front list-removed)
@@ -153,47 +135,38 @@
     (opendaq.low-level:list/push-back list list-i1)
     (opendaq.low-level:list/push-back list list-i2)
     (opendaq.low-level:list/push-back list list-i3)
-    (is (= 3 (opendaq.low-level:list/get-count list))
-        "coretypes/Listobject count mismatch")
+    (is (= 3 (opendaq.low-level:list/get-count list)) "coretypes/Listobject count mismatch")
     (setf list-front (opendaq.low-level:list/pop-front list))
-    (is (= 1 (opendaq.low-level:integer/get-value list-front))
-        "coretypes/Listobject pop-front mismatch")
+    (is (= 1 (opendaq.low-level:integer/get-value list-front)) "coretypes/Listobject pop-front mismatch")
     (setf list-front nil)
     (setf list-removed (opendaq.low-level:list/remove-at list 1))
-    (is (= 3 (opendaq.low-level:integer/get-value list-removed))
-        "coretypes/Listobject remove-at mismatch")
+    (is (= 3 (opendaq.low-level:integer/get-value list-removed)) "coretypes/Listobject remove-at mismatch")
     (setf list-removed nil)
     (opendaq.low-level:list/clear list)
-    (is (= 0 (opendaq.low-level:list/get-count list))
-        "coretypes/Listobject clear mismatch")))
+    (is (= 0 (opendaq.low-level:list/get-count list)) "coretypes/Listobject clear mismatch")))
 
 (test coretypes-procedure
   (opendaq.low-level:with-daq-objects (procedure-object)
     (setf *coretypes-procedure-called* nil)
     (setf procedure-object (opendaq.low-level:procedure/create-procedure (cffi:callback %coretypes-proc-call)))
     (opendaq.low-level:procedure/dispatch procedure-object (cffi:null-pointer))
-    (is (not (null *coretypes-procedure-called*))
-        "coretypes/Procedure callback was not invoked")))
+    (is (not (null *coretypes-procedure-called*)) "coretypes/Procedure callback was not invoked")))
 
 (test coretypes-ratio
   (opendaq.low-level:with-daq-objects (ratio)
     (setf ratio (opendaq.low-level:ratio/create-ratio 1 2))
-    (is (= 1 (opendaq.low-level:ratio/get-numerator ratio))
-        "coretypes/Ratio numerator mismatch")
-    (is (= 2 (opendaq.low-level:ratio/get-denominator ratio))
-        "coretypes/Ratio denominator mismatch")))
+    (is (= 1 (opendaq.low-level:ratio/get-numerator ratio)) "coretypes/Ratio numerator mismatch")
+    (is (= 2 (opendaq.low-level:ratio/get-denominator ratio)) "coretypes/Ratio denominator mismatch")))
 
 (test coretypes-simple-type
   (opendaq.low-level:with-daq-objects (simple-type)
     (setf simple-type (opendaq.low-level:simple-type/create-simple-type :daq-ct-bool))
-    (is (not (cffi:null-pointer-p simple-type))
-        "coretypes/SimpleType returned a null object")))
+    (is (not (cffi:null-pointer-p simple-type)) "coretypes/SimpleType returned a null object")))
 
 (test coretypes-stringobject
   (opendaq.low-level:with-daq-objects (string-object)
     (setf string-object (opendaq.low-level:make-daq-string "Hello"))
-    (is (string= "Hello" (%daq-string-value string-object))
-        "coretypes/Stringobject value mismatch")))
+    (is (string= "Hello" (%daq-string-value string-object)) "coretypes/Stringobject value mismatch")))
 
 (test coretypes-struct
   (opendaq.low-level:with-daq-objects (field-names field-types field-name field-simple-type field-value struct-type-name
@@ -217,8 +190,7 @@
     (opendaq.low-level:struct-builder/set struct-builder field-name field-value)
     (setf struct-object (opendaq.low-level:struct-builder/build struct-builder))
     (setf field-value-copy (opendaq.low-level:struct/get struct-object field-name))
-    (is (= 10 (opendaq.low-level:integer/get-value field-value-copy))
-        "coretypes/Struct field mismatch")))
+    (is (= 10 (opendaq.low-level:integer/get-value field-value-copy)) "coretypes/Struct field mismatch")))
 
 (test coretypes-type-manager
   (opendaq.low-level:with-daq-objects (field-names field-types field-name field-simple-type struct-type-name struct-type type-manager)
@@ -241,9 +213,6 @@
 (test coretypes-version-info
   (opendaq.low-level:with-daq-objects (version-info)
     (setf version-info (opendaq.low-level:version-info/create-version-info 1 2 3))
-    (is (= 1 (opendaq.low-level:version-info/get-major version-info))
-        "coretypes/VersionInfo major mismatch")
-    (is (= 2 (opendaq.low-level:version-info/get-minor version-info))
-        "coretypes/VersionInfo minor mismatch")
-    (is (= 3 (opendaq.low-level:version-info/get-patch version-info))
-        "coretypes/VersionInfo patch mismatch")))
+    (is (= 1 (opendaq.low-level:version-info/get-major version-info)) "coretypes/VersionInfo major mismatch")
+    (is (= 2 (opendaq.low-level:version-info/get-minor version-info)) "coretypes/VersionInfo minor mismatch")
+    (is (= 3 (opendaq.low-level:version-info/get-patch version-info)) "coretypes/VersionInfo patch mismatch")))

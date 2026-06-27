@@ -18,8 +18,7 @@
         (cffi:with-foreign-object (address-slot :pointer)
           (daq:allocate allocator descriptor 32 4 address-slot)
           (let ((address (cffi:mem-ref address-slot :pointer)))
-            (is (not (cffi:null-pointer-p address))
-                "High-level allocators should allocate native sample buffers.")
+            (is (not (cffi:null-pointer-p address)) "High-level allocators should allocate native sample buffers.")
             (daq:free allocator address))))))
 
 (test high-level-data-descriptor
@@ -34,12 +33,9 @@
     (let* ((unit (daq:build unit-builder)))
       (setf (daq:unit builder) unit)
       (let* ((descriptor (daq:build builder)))
-        (is (string= "vals" (daq:name descriptor))
-            "High-level data-descriptor builders should preserve the descriptor name.")
-        (is (string= "V" (daq:symbol (daq:unit descriptor)))
-            "High-level data descriptors should expose the generated unit symbol.")
-        (is (= opendaq.low-level::+daq-sample-type-int-64+ (daq:sample-type descriptor))
-            "High-level data descriptors should preserve the configured sample type.")))))
+        (is (string= "vals" (daq:name descriptor)) "High-level data-descriptor builders should preserve the descriptor name.")
+        (is (string= "V" (daq:symbol (daq:unit descriptor))) "High-level data descriptors should expose the generated unit symbol.")
+        (is (= opendaq.low-level::+daq-sample-type-int-64+ (daq:sample-type descriptor)) "High-level data descriptors should preserve the configured sample type.")))))
 
 (test high-level-input-port-config
   (let* ((sinks (make-instance 'daq:object-list))
@@ -62,10 +58,8 @@
                                              :parent nil
                                              :local-id "daqInputPort"
                                              :gap-checking nil)))
-      (is (typep input-port-config 'daq:input-port-config)
-          "High-level input-port-config wrappers should construct generated objects.")
-      (is (null (daq:gap-checking-enabled input-port-config))
-          "High-level input-port-config wrappers should decode disabled gap checking into NIL."))))
+      (is (typep input-port-config 'daq:input-port-config) "High-level input-port-config wrappers should construct generated objects.")
+      (is (null (daq:gap-checking-enabled input-port-config)) "High-level input-port-config wrappers should decode disabled gap checking into NIL."))))
 
 (test high-level-scaling
   (let* ((parameters (make-instance 'daq:dict))
@@ -80,16 +74,11 @@
            (scaling-parameters (daq:parameters scaling))
            (scale-value (daq:get scaling-parameters "scale"))
            (offset-value (daq:get scaling-parameters "offset")))
-      (is (= opendaq.low-level::+daq-sample-type-int-16+ (daq:input-sample-type scaling))
-          "High-level scaling wrappers should preserve the input sample type.")
-      (is (eql :daq-scaled-sample-type-float-32 (daq:output-sample-type scaling))
-          "High-level scaling wrappers should preserve the output sample type.")
-      (is (eql :daq-scaling-type-linear (daq:scaling-type scaling))
-          "High-level scaling wrappers should preserve the scaling type.")
-      (is (= 10 (%boxed-integer-value scale-value))
-          "High-level scaling parameter dictionaries should preserve boxed numeric values.")
-      (is (= 10 (%boxed-integer-value offset-value))
-          "High-level scaling parameter dictionaries should preserve boxed numeric values."))))
+      (is (= opendaq.low-level::+daq-sample-type-int-16+ (daq:input-sample-type scaling)) "High-level scaling wrappers should preserve the input sample type.")
+      (is (eql :daq-scaled-sample-type-float-32 (daq:output-sample-type scaling)) "High-level scaling wrappers should preserve the output sample type.")
+      (is (eql :daq-scaling-type-linear (daq:scaling-type scaling)) "High-level scaling wrappers should preserve the scaling type.")
+      (is (= 10 (%boxed-integer-value scale-value)) "High-level scaling parameter dictionaries should preserve boxed numeric values.")
+      (is (= 10 (%boxed-integer-value offset-value)) "High-level scaling parameter dictionaries should preserve boxed numeric values."))))
 
 (test high-level-signal-config
   (let* ((sinks (make-instance 'daq:object-list))
@@ -121,7 +110,5 @@
                (signal-config (make-instance 'daq:signal-config/with-descriptor
                                              :context context :descriptor descriptor
                                              :parent nil :local-id "sig" :class-name nil)))
-          (is (typep signal-config 'daq:signal-config)
-              "High-level signal helpers should construct generated signal-config wrappers.")
-          (is (not (cffi:null-pointer-p (daq:raw-pointer signal-config)))
-              "High-level signal-config wrappers should hold a native pointer after construction.")))))))
+          (is (typep signal-config 'daq:signal-config) "High-level signal helpers should construct generated signal-config wrappers.")
+          (is (not (cffi:null-pointer-p (daq:raw-pointer signal-config))) "High-level signal-config wrappers should hold a native pointer after construction.")))))))

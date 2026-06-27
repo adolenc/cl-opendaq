@@ -1,18 +1,18 @@
-;;; Hand-written high-level layer, loaded after generated/high-level-bindings.lisp.
-;;;
-;;; The generated bindings are a mechanical 1:1 mapping of the C API.  This file
-;;; holds the hand-written pieces that build on top of them:
-;;;
-;;;   * sample-buffer helpers  — convert openDAQ's untyped (void*) buffers, whose
-;;;                              element type is only known at runtime, into typed
-;;;                              Lisp vectors
-;;;   * reader convenience API — READ / READ-WITH-DOMAIN / READ-SAMPLES
-;;;   * data packet accessors  — DATA / RAW-DATA (excluded from generation; see
-;;;                              MANUAL_METHODS in the generator)
-;;;   * object helpers         — AS / AS-LIST
-;;;
-;;; Code that must load *before* the generated bindings lives in runtime.lisp
-;;; (its high-level runtime section).
+;;;; Hand-written high-level layer, loaded after generated/high-level-bindings.lisp.
+;;;;
+;;;; The generated bindings are a mechanical 1:1 mapping of the C API.  This file
+;;;; holds the hand-written pieces that build on top of them:
+;;;;
+;;;;   * sample-buffer helpers  — convert openDAQ's untyped (void*) buffers, whose
+;;;;                              element type is only known at runtime, into typed
+;;;;                              Lisp vectors
+;;;;   * reader convenience API — READ / READ-WITH-DOMAIN / READ-SAMPLES
+;;;;   * data packet accessors  — DATA / RAW-DATA (excluded from generation; see
+;;;;                              MANUAL_METHODS in the generator)
+;;;;   * object helpers         — AS / AS-LIST
+;;;;
+;;;; Code that must load *before* the generated bindings lives in runtime.lisp
+;;;; (its high-level runtime section).
 
 (in-package #:opendaq.high-level)
 
