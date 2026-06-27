@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 parse_bindings.py - Walk openDAQ C binding headers and emit a JSONL stream
-of parsed bindings (functions, interfaces, enums, typedefs).
+of parsed bindings (functions, interfaces, enums, typedefs, error codes).
 
 Usage:
     python parse_bindings.py --opendaq-repo tmp/openDAQ/
@@ -43,6 +43,12 @@ JSON schema (per kind):
     base_type      : str     - (alias only) underlying type name
     enum_entries[] : { name: str, value: int|null }
     struct_fields[]: { name: str, type: TypeDesc }
+
+  error_code:
+    name           : str     - symbolic name, normalized to the OPENDAQ_ spelling
+                               (e.g. "OPENDAQ_ERR_NOTFOUND", "OPENDAQ_SUCCESS")
+    code           : int     - full 32-bit status code (0x80000000 | type<<16 | code)
+    source_file    : str     - relative path from the repo root
 
   TypeDesc  (inline object, never appears as a top-level record):
     name           : str     - base type (e.g. "daqDict", "uint32_t", "void")
@@ -94,6 +100,17 @@ DEFINE_RE = re.compile(
     r"^\s*#define\s+(?P<name>[A-Za-z_]\w*)\s+(?P<value>\(?[-+]?0[xX][0-9A-Fa-f]+|\(?[-+]?\d+\)?)\s*$",
     re.M,
 )
+
+# Error-code macros.  A status code is built by the DAQ_ERROR_CODE(type, code)
+# macro as 0x80000000 | (type << 16) | code; the headers spell the macros with
+# either a DAQ_ or OPENDAQ_ prefix interchangeably, and key the type by the
+# suffix after ERRTYPE_ (e.g. GENERIC, OPENDAQ, COREOBJECTS).
+ERRTYPE_DEFINE_RE = re.compile(r"#define\s+(?:OPENDAQ|DAQ)_ERRTYPE_(\w+)\s+0x([0-9A-Fa-f]+)u?")
+ERROR_CODE_RE = re.compile(
+    r"#define\s+(?:OPENDAQ|DAQ)_ERR_(\w+)\s+"
+    r"(?:OPENDAQ|DAQ)_ERROR_CODE\(\s*(?:OPENDAQ|DAQ)_ERRTYPE_(\w+)\s*,\s*0x([0-9A-Fa-f]+)u?\s*\)"
+)
+SUCCESS_DEFINE_RE = re.compile(r"#define\s+(?:OPENDAQ|DAQ)_SUCCESS\s+0x([0-9A-Fa-f]+)u?")
 
 # Opaque struct typedef: typedef struct daqFoo daqFoo;
 OPAQUE_STRUCT_RE = re.compile(r"typedef\s+struct\s+(\w+)\s+(\w+)\s*;", re.S)
@@ -181,6 +198,15 @@ class InterfaceDesc:
     name: str = ""                    # e.g. daqDevice
     parent: str = ""                  # e.g. daqFolder
     docstring: str = ""
+    source_file: str = ""
+
+
+@dataclass
+class ErrorCodeDesc:
+    """Describes one openDAQ status code and its symbolic name."""
+    kind: str = "error_code"
+    name: str = ""                    # normalized to the OPENDAQ_ spelling, e.g. OPENDAQ_ERR_NOTFOUND
+    code: int = 0                     # full 32-bit status code (0x80000000 | type<<16 | code)
     source_file: str = ""
 
 
@@ -394,6 +420,7 @@ class HeaderParser:
         self.interfaces: list[InterfaceDesc] = []
         self.functions: list[FunctionDesc] = []
         self.typedefs: list[TypedefDesc] = []
+        self.error_codes: list[ErrorCodeDesc] = []
 
     def parse(self, raw_text: str) -> None:
         """Parse raw header text and populate self.{interfaces, functions, typedefs}."""
@@ -560,6 +587,22 @@ class HeaderParser:
                 source_file=self.source_file,
             ))
 
+        # --- Phase 6: error-code macros (DAQ_ERROR_CODE arithmetic) ---
+        # Every openDAQ error header defines the ERRTYPE families it references,
+        # so resolving them within the file is sufficient.
+        families = {name: int(value, 16) for name, value in ERRTYPE_DEFINE_RE.findall(raw_text)}
+        for value in SUCCESS_DEFINE_RE.findall(raw_text):
+            self.error_codes.append(ErrorCodeDesc(
+                name="OPENDAQ_SUCCESS", code=int(value, 16), source_file=self.source_file,
+            ))
+        for name, family, code in ERROR_CODE_RE.findall(raw_text):
+            if family in families:
+                self.error_codes.append(ErrorCodeDesc(
+                    name=f"OPENDAQ_ERR_{name}",
+                    code=0x80000000 | (families[family] << 16) | int(code, 16),
+                    source_file=self.source_file,
+                ))
+
 
 # ---------------------------------------------------------------------------
 # JSONL emitter
@@ -614,14 +657,14 @@ def collect_headers(repo_root: Path) -> list[Path]:
     return headers
 
 
-def parse_repo(repo_root: Path) -> list[InterfaceDesc | FunctionDesc | TypedefDesc]:
+def parse_repo(repo_root: Path) -> list[InterfaceDesc | FunctionDesc | TypedefDesc | ErrorCodeDesc]:
     """Parse all headers in the repo and return a flat list of binding records."""
     headers = collect_headers(repo_root)
     if not headers:
         print(f"Warning: No headers found under {repo_root}", file=sys.stderr)
         return []
 
-    records: list[InterfaceDesc | FunctionDesc | TypedefDesc] = []
+    records: list[InterfaceDesc | FunctionDesc | TypedefDesc | ErrorCodeDesc] = []
     for header_path in headers:
         try:
             rel_path = str(header_path.relative_to(repo_root))
@@ -634,6 +677,7 @@ def parse_repo(repo_root: Path) -> list[InterfaceDesc | FunctionDesc | TypedefDe
         records.extend(parser.interfaces)
         records.extend(parser.typedefs)
         records.extend(parser.functions)
+        records.extend(parser.error_codes)
 
     return records
 
@@ -652,8 +696,8 @@ def main() -> None:
     ap.add_argument(
         "--kinds",
         nargs="+",
-        choices=["function", "interface", "typedef"],
-        default=["function", "interface", "typedef"],
+        choices=["function", "interface", "typedef", "error_code"],
+        default=["function", "interface", "typedef", "error_code"],
         help="Which kinds of binding records to emit (default: all).",
     )
     args = ap.parse_args()
