@@ -1,16 +1,10 @@
 (ql:quickload :opendaq :silent t)
 
-;; The statistics block lives in the reference function-block module
-;; (libref_fb_module-*.module.*). openDAQ finds its module binaries through the
-;; instance builder's module path, so building the instance from a builder lets
-;; us choose where to look: ADD-MODULE-PATH with NATIVE-LIBRARY-DIRECTORY keeps
-;; the modules bundled in this repo's bin/<platform>/ folder, and you add your
-;; own directories the same way. Plain (make-instance 'daq:instance) just does
-;; the first of these for you.
+
 (defparameter *instance*
   (let ((builder (make-instance 'daq:instance-builder)))
-    (daq:add-module-path builder (daq:native-library-directory))  ; the bundled modules
-    ; (daq:add-module-path builder "/path/to/your/modules")      ; <- your own modules
+    (setf (daq:module-path builder) (daq:native-library-directory))  ; the bundled modules (use setf to override opendaq's default cwd)
+    ; (daq:add-module-path builder "/path/to/your/modules")         ; your own modules folder
     (make-instance 'daq:instance :builder builder)))
 (daq:add-device *instance* "daqref://device0")
 
