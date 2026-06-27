@@ -124,13 +124,6 @@ time rather than sniffed from SOFTWARE-TYPE / MACHINE-TYPE strings."
   (cffi:load-foreign-library path)
   (namestring path))
 
-(defun %configure-modules-directory (directory)
-  (unless (uiop:getenv +modules-directory-env-var+)
-    #+sbcl
-    (sb-posix:setenv +modules-directory-env-var+ (namestring directory) 1)
-    #-sbcl
-    (error "Automatic module-path configuration is currently implemented for SBCL only.")))
-
 (defun ensure-opendaq-loaded (&optional (directory (native-library-directory)))
   (let ((resolved-directory (uiop:ensure-directory-pathname directory)))
     (setf *autoload-attempted-p* t)
@@ -145,7 +138,6 @@ time rather than sniffed from SOFTWARE-TYPE / MACHINE-TYPE strings."
         (namestring *loaded-native-directory*)
         (namestring resolved-directory)))
       (t
-       (%configure-modules-directory resolved-directory)
        (setf *loaded-library-paths*
              (mapcar (lambda (file-name)
                        (%load-native-library
