@@ -47,7 +47,7 @@
   ;; daqRatio should unbox back into a native Lisp ratio through the primitive path.
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list 2/3)
-    (is (= 2/3 (daq:as (daq:pop-front list) 'daq:ratio-object)) "A boxed daqRatio should unbox into a native Lisp ratio via AS (primitive target)."))
+    (is (= 2/3 (daq:unbox (daq:as (daq:pop-front list) 'daq:ratio-object))) "A boxed daqRatio should unbox into a native Lisp ratio via UNBOX."))
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list 1/4)
     (daq:push-back list 3/8)
@@ -58,21 +58,21 @@
   ;; mirroring the daqComplexNumber -> Lisp complex unboxing in %BOXED-VALUE.
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list #C(1.0d0 2.0d0))
-    (is (= #C(1.0d0 2.0d0) (daq:as (daq:pop-front list) 'daq:complex-number-object)) "A boxed complexNumber should unbox into a native Lisp complex via AS (primitive target)."))
+    (is (= #C(1.0d0 2.0d0) (daq:unbox (daq:as (daq:pop-front list) 'daq:complex-number-object))) "A boxed complexNumber should unbox into a native Lisp complex via UNBOX."))
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list #C(3.0d0 -4.0d0))
     (is (equal '(#C(3.0d0 -4.0d0)) (daq:as-list-of list 'daq:complex-number-object)) "complexNumbers should unbox into native Lisp complexes via AS-LIST-OF.")))
 
-(test high-level-coretypes-as-unbox
-  ;; AS with a boxed-primitive type unboxes to a native Lisp value (managed types cast
-  ;; to a wrapper instead -- covered elsewhere).  It reads a typed wrapper or a generic
-  ;; base-object alike, given the target type.
-  (is (= 42 (daq:as (make-instance 'daq:integer-object :value 42) 'daq:integer-object)) "as should unbox an integer-object to an integer.")
-  (is (= 1.5d0 (daq:as (make-instance 'daq:float-object :value 1.5d0) 'daq:float-object)) "as should unbox a float-object to a float.")
-  (is (null (daq:as (make-instance 'daq:boolean-object :value nil) 'daq:boolean-object)) "as should unbox a false boolean-object to NIL.")
-  (is (= 1/2 (daq:as (make-instance 'daq:ratio-object :numerator 1 :denominator 2) 'daq:ratio-object)) "as should unbox a ratio-object to a Lisp ratio.")
+(test high-level-coretypes-unbox
+  ;; UNBOX reads the native Lisp value of a boxed-primitive wrapper, using the
+  ;; wrapper's own class; a generic base-object is AS'd to the right type first.
+  (is (= 42 (daq:unbox (make-instance 'daq:integer-object :value 42))) "unbox should read an integer-object as an integer.")
+  (is (= 1.5d0 (daq:unbox (make-instance 'daq:float-object :value 1.5d0))) "unbox should read a float-object as a float.")
+  (is (null (daq:unbox (make-instance 'daq:boolean-object :value nil))) "unbox should read a false boolean-object as NIL.")
+  (is (= 1/2 (daq:unbox (make-instance 'daq:ratio-object :numerator 1 :denominator 2))) "unbox should read a ratio-object as a Lisp ratio.")
   (let ((boxed-string (daq::wrap (opendaq.low-level:make-daq-string "hello") 'daq:base-object)))
-    (is (string= "hello" (daq:as boxed-string 'daq:string-object)) "as should unbox a generic base-object as a string given the type.")))
+    (is (string= "hello" (daq:unbox (daq:as boxed-string 'daq:string-object))) "unbox should read a base-object AS'd to string-object as a string."))
+  (signals error (daq:unbox (make-instance 'daq:object-list)) "unbox should reject a non-primitive wrapper."))
 
 (test high-level-coretypes-core-type->class
   ;; CORE-TYPE->CLASS bridges a DAQ-CORE-TYPE keyword (as VALUE-TYPE reports) to the
@@ -81,12 +81,11 @@
   (is (eq 'daq:string-object (daq:core-type->class :daq-ct-string)) "core-type->class should map :daq-ct-string to string-object.")
   (is (eq 'daq:complex-number-object (daq:core-type->class :daq-ct-complex-number)) "core-type->class should map :daq-ct-complex-number to complex-number-object.")
   (is (null (daq:core-type->class :daq-ct-list)) "core-type->class should map a non-scalar core type to NIL.")
-  ;; Round-trip: the class it returns is exactly what AS needs to unbox a value
-  ;; of that core type.
+  ;; Round-trip: the class it returns is exactly what AS needs to cast a value of that
+  ;; core type so UNBOX can read it.
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list 7)
-    (is (= 7 (daq:as (daq:pop-front list) (daq:core-type->class :daq-ct-int)))
-        "as should unbox using the class core-type->class returns.")))
+    (is (= 7 (daq:unbox (daq:as (daq:pop-front list) (daq:core-type->class :daq-ct-int)))) "unbox of (as value class) should read the value, with class from core-type->class.")))
 
 (test high-level-coretypes-collections
   (let ((list (make-instance 'daq:object-list)))

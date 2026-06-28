@@ -67,8 +67,9 @@ The high-level API insulates you from openDAQ's C types. Arguments accept plain 
 
 A few functions are implemented manually to help you get out of tricky situations:
 
-- `(daq:as daq-obj 'daq-type)` - reinterpret an object as `daq-type`: a managed type casts the wrapper to that more specific type (only valid when `obj` really is that type), while a boxed-primitive type (`daq:integer-object`, `daq:string-object`, …) unboxes to the native Lisp value
-- `(daq:core-type->class core-type)` - the boxed type (per the table above) a value of `core-type` unboxes as, or `nil` when it is not a scalar (useful for e.g.`(daq:as v (daq:core-type->class (daq:value-type prop)))`)
+- `(daq:as daq-obj 'daq-type)` - reinterpret an object as the more specific `daq-type`, returning a wrapper of that type (an unchecked cast; only valid when `obj` really is that type). For a boxed primitive it returns the typed wrapper, not the value - `daq:unbox` it to get the value
+- `(daq:unbox daq-obj)` - the native Lisp value of a boxed-primitive wrapper (`daq:integer-object` → integer, `daq:string-object` → string, …), read from its own class; cast a generic base-object first, e.g. `(daq:unbox (daq:as v 'daq:string-object))`
+- `(daq:core-type->class core-type)` - the boxed type (per the table above) a value of `core-type` casts to, or `nil` when it is not a scalar (useful for e.g. `(daq:unbox (daq:as v (daq:core-type->class (daq:value-type prop))))`)
 - `(daq:supports-interface-p daq-obj 'daq-type)` - test whether `daq-obj` implements an interface
 - `(daq:component-type daq-obj)` - the most-derived component interface `daq-obj` implements (`daq:channel`, `daq:signal`, `daq:device`, …) as a class symbol, or `nil`
 - `(daq:domain-tick->timestamp source tick)` - convert a domain tick to a `local-time` timestamp (`source` is a signal, data descriptor, or multi reader; `(daq:domain-time-converter source)` returns a reusable per-tick closure)

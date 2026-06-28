@@ -27,6 +27,7 @@
            #:denominator
            #:read)
   (:export #:as
+           #:unbox
            #:supports-interface-p
            #:component-type
            #:core-type->class

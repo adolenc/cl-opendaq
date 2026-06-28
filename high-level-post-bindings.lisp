@@ -345,25 +345,37 @@ values use DATA."))
 ;;; ---------------------------------------------------------------------------
 
 (defun as (object target-type)
-  "Reinterpret a base openDAQ OBJECT as TARGET-TYPE.
+  "Reinterpret a base openDAQ OBJECT as the more specific type TARGET-TYPE, returning
+a wrapper of that type.  Adds a reference so the result owns its own lifetime.  Only
+valid when OBJECT really is that type (it is an unchecked cast, not a query -- see
+SUPPORTS-INTERFACE-P / COMPONENT-TYPE to test first).  TARGET-TYPE is a symbol naming
+the class (e.g. 'DEVICE-INFO).
 
-If TARGET-TYPE names a boxed primitive (INTEGER-OBJECT, STRING-OBJECT, RATIO-OBJECT,
-COMPLEX-NUMBER-OBJECT, …) the boxed value is unboxed and returned as a native Lisp
-value, and OBJECT is left intact.  Otherwise OBJECT is reinterpreted as the more
-specific wrapper class TARGET-TYPE, adding a reference so the returned wrapper owns
-its own lifetime.
+For a boxed primitive this returns the typed wrapper (e.g. an INTEGER-OBJECT), not
+the Lisp value; UNBOX the result to get the value: (unbox (as x 'integer-object))."
+  (let ((class (if (symbolp target-type)
+                   (find-class target-type)
+                   target-type)))
+    (add-ref object)
+    (make-instance class :pointer (raw-pointer object))))
 
-This is the same primitive-vs-wrapper choice AS-LIST-OF / AS-HASHTABLE-OF make per
-element, so scalars and collections convert by one consistent rule: a primitive
-TARGET-TYPE yields a value, a managed one yields a wrapper.  TARGET-TYPE is a symbol
-naming the class (e.g. 'DEVICE-INFO)."
-  (if (primitive-type-p target-type)
-      (%boxed-value object target-type)         ; non-consuming read (OBJECT is left intact)
-      (let ((class (if (symbolp target-type)
-                       (find-class target-type)
-                       target-type)))
-        (add-ref object)
-        (make-instance class :pointer (raw-pointer object)))))
+(defun unbox (object)
+  "Return the native Lisp value of a boxed-primitive wrapper OBJECT: an integer,
+float, string, boolean, ratio, or complex number.  OBJECT's own class names the
+primitive, so for a generic BASE-OBJECT (e.g. a property value, or a value pulled
+from a dict or a core event's PARAMETERS) cast it to the expected type first:
+
+  (unbox an-integer-object)                       => 42
+  (unbox (as (gethash \"Name\" params) 'string-object)) => \"Frequency\"
+
+OBJECT is left intact (its reference is still released by the GC)."
+  ;; CL:CLASS-NAME: the high-level package shadows CLASS-NAME with openDAQ's
+  ;; getClassName generic, so the Lisp accessor must be qualified.
+  (let ((type (cl:class-name (class-of object))))
+    (unless (primitive-type-p type)
+      (error "UNBOX needs a boxed-primitive wrapper, but ~S is a ~S.  AS it to a ~
+primitive type first, e.g. (unbox (as object 'integer-object))." object type))
+    (%boxed-value object type)))
 
 (defun %as-consuming (object target-type)
   "Like AS, but for a fresh ITEM-AT / DICT temporary the caller owns and will not
@@ -436,19 +448,19 @@ unboxed if their type is a primitive, or cast via AS otherwise.
     (:daq-ct-string         . string-object)
     (:daq-ct-ratio          . ratio-object)
     (:daq-ct-complex-number . complex-number-object))
-  "Maps a DAQ-CORE-TYPE keyword to the boxed-primitive class AS unboxes it as.
-Only the scalar core types appear; the rest (list, dict, struct, object, proc,
-func, ...) are not single boxed values and so map to NIL.")
+  "Maps a DAQ-CORE-TYPE keyword to the boxed-primitive class a value of that type
+casts to.  Only the scalar core types appear; the rest (list, dict, struct, object,
+proc, func, ...) are not single boxed values and so map to NIL.")
 
 (defun core-type->class (core-type)
-  "The boxed-primitive class a value of CORE-TYPE unboxes as, or NIL when CORE-TYPE
-is not a scalar.  CORE-TYPE is a DAQ-CORE-TYPE keyword (:daq-ct-int, :daq-ct-string,
+  "The boxed-primitive class a value of CORE-TYPE casts to, or NIL when CORE-TYPE is
+not a scalar.  CORE-TYPE is a DAQ-CORE-TYPE keyword (:daq-ct-int, :daq-ct-string,
 ...), as returned by VALUE-TYPE; the result is the class symbol to hand to AS:
 
   (let ((class (core-type->class (value-type property))))
     (if class
-        (as (property-value object (name property)) class)  ; a scalar value
-        ...))                                                ; structured
+        (unbox (as (property-value object (name property)) class))  ; a scalar value
+        ...))                                                       ; structured
 
 This is the bridge between the type a property/list/dict reports and the wrapper
 class the conversion functions take; NIL doubles as a \"not a scalar\" predicate."
