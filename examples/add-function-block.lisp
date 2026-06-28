@@ -20,8 +20,10 @@
   (daq:connect port signal))
 
 (let* ((signals (daq:signals *statistics*))
-       (avg (find "avg" signals :key #'daq:name :test #'string=))
-       (rms (find "rms" signals :key #'daq:name :test #'string=))
+       ;; Match on local-id, not name: a signal's name is a mutable display label,
+       ;; while its local-id is the stable identifier within its parent.
+       (avg (find "avg" signals :key #'daq:local-id :test #'string=))
+       (rms (find "rms" signals :key #'daq:local-id :test #'string=))
        (reader (make-instance 'daq:multi-reader :signals (list avg rms))))
   ;; The first reads may return nothing while the block waits for a complete
   ;; input descriptor (multireader by default doesn't skip events), so retry until samples arrive.
