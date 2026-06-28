@@ -16,24 +16,14 @@
                       (subseq s 7)
                       s)))))
 
-(defparameter *boxed-types*
-  '((:daq-ct-bool   . daq:boolean-object)
-    (:daq-ct-int    . daq:integer-object)
-    (:daq-ct-float  . daq:float-object)
-    (:daq-ct-string . daq:string-object)
-    (:daq-ct-ratio  . daq:ratio-object)
-    (:daq-ct-complex-number . daq:complex-number-object))
-  "Maps a property's core type to the boxed-primitive class VALUE-OF reads it as.
-Types absent here (lists, dicts, structs, nested objects, ...) are not scalars.")
-
 (defun property-value-string (property-object property)
   "Printable value of PROPERTY on PROPERTY-OBJECT.  Scalar values are unboxed to
 their native Lisp value; structured ones are shown as \"<Type>\"."
-  (let ((boxed (cdr (assoc (daq:value-type property) *boxed-types*))))
-    (if boxed
+  (let ((class (daq:core-type->class (daq:value-type property))))
+    (if class
         (format nil "~S" (daq:value-of (daq:property-value property-object
                                                            (daq:name property))
-                                       boxed))
+                                       class))
         (format nil "<~A>" (type-name (daq:value-type property))))))
 
 (defun draw-properties (component prefix)

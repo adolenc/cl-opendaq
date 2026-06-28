@@ -429,6 +429,31 @@ unboxed if their type is a primitive, or cast via AS otherwise.
           do (setf (gethash key ht) val))
     ht))
 
+(defparameter *core-type-classes*
+  '((:daq-ct-bool           . boolean-object)
+    (:daq-ct-int            . integer-object)
+    (:daq-ct-float          . float-object)
+    (:daq-ct-string         . string-object)
+    (:daq-ct-ratio          . ratio-object)
+    (:daq-ct-complex-number . complex-number-object))
+  "Maps a DAQ-CORE-TYPE keyword to the boxed-primitive class VALUE-OF reads it as.
+Only the scalar core types appear; the rest (list, dict, struct, object, proc,
+func, ...) are not single boxed values and so map to NIL.")
+
+(defun core-type->class (core-type)
+  "The boxed-primitive class a value of CORE-TYPE unboxes as, or NIL when CORE-TYPE
+is not a scalar.  CORE-TYPE is a DAQ-CORE-TYPE keyword (:daq-ct-int, :daq-ct-string,
+...), as returned by VALUE-TYPE; the result is the class symbol to hand to VALUE-OF:
+
+  (let ((class (core-type->class (value-type property))))
+    (if class
+        (value-of (property-value object (name property)) class)  ; a scalar
+        ...))                                                      ; structured
+
+This is the bridge between the type a property/list/dict reports and the wrapper
+class the conversion functions take; NIL doubles as a \"not a scalar\" predicate."
+  (cdr (assoc core-type *core-type-classes*)))
+
 ;;; ---------------------------------------------------------------------------
 ;;; Domain timestamps
 ;;;

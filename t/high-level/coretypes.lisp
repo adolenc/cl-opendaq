@@ -75,6 +75,20 @@
   (signals error (daq:value-of (make-instance 'daq:integer-object :value 1) 'daq:signal)
     "value-of should reject a non-primitive target type."))
 
+(test high-level-coretypes-core-type->class
+  ;; CORE-TYPE->CLASS bridges a DAQ-CORE-TYPE keyword (as VALUE-TYPE reports) to the
+  ;; boxed-primitive class VALUE-OF takes; non-scalar core types map to NIL.
+  (is (eq 'daq:integer-object (daq:core-type->class :daq-ct-int)) "core-type->class should map :daq-ct-int to integer-object.")
+  (is (eq 'daq:string-object (daq:core-type->class :daq-ct-string)) "core-type->class should map :daq-ct-string to string-object.")
+  (is (eq 'daq:complex-number-object (daq:core-type->class :daq-ct-complex-number)) "core-type->class should map :daq-ct-complex-number to complex-number-object.")
+  (is (null (daq:core-type->class :daq-ct-list)) "core-type->class should map a non-scalar core type to NIL.")
+  ;; Round-trip: the class it returns is exactly what VALUE-OF needs to unbox a value
+  ;; of that core type.
+  (let ((list (make-instance 'daq:object-list)))
+    (daq:push-back list 7)
+    (is (= 7 (daq:value-of (daq:pop-front list) (daq:core-type->class :daq-ct-int)))
+        "value-of should unbox using the class core-type->class returns.")))
+
 (test high-level-coretypes-collections
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list 1)

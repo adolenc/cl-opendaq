@@ -51,14 +51,14 @@ The bindings depend only on plain `cffi`. For the one C type passed by value, th
 
 The high-level API insulates you from openDAQ's C types. Arguments accept plain Lisp values (boxing, on input) and return values are plain Lisp types (unboxing, on output); the two directions are inverses, so one table covers both:
 
-| Lisp value | openDAQ type | Boxed type |
+| Lisp value | openDAQ core type | Boxed type |
 |------------|--------------|------------|
-| `string`   | `daqString` | `daq:string-object` |
-| `integer`  | `daqInteger` | `daq:integer-object` |
-| `float`    | `daqFloat` | `daq:float-object` |
-| `ratio`    | `daqRatio` | `daq:ratio-object` |
-| `t` / `nil` | `daqBool` | `daq:boolean-object` |
-| `(complex re im)` | `complexNumber` | `daq:complex-number-object` |
+| `string`   | `:daq-ct-string` | `daq:string-object` |
+| `integer`  | `:daq-ct-int` | `daq:integer-object` |
+| `float`    | `:daq-ct-float` | `daq:float-object` |
+| `ratio`    | `:daq-ct-ratio` | `daq:ratio-object` |
+| `t` / `nil` | `:daq-ct-bool` | `daq:boolean-object` |
+| `(complex re im)` | `:daq-ct-complex-number` | `daq:complex-number-object` |
 | any `daq` object | its raw pointer | `daq` object |
 
 `daqNumber` is output-only: it unboxes to a `float`, but no Lisp type boxes to it specifically (a `float` always boxes to `daq:float-object`).
@@ -68,6 +68,7 @@ The high-level API insulates you from openDAQ's C types. Arguments accept plain 
 A few functions are implemented manually to help you get out of tricky situations:
 
 - `(daq:as daq-obj 'daq-type)` - reinterpret an object as `daq-type`: a managed type casts the wrapper to that more specific type (only valid when `obj` really is that type), while a boxed-primitive type (`daq:integer-object`, `daq:string-object`, …) unboxes to the native Lisp value
+- `(daq:core-type->class core-type)` - the boxed type (per the table above) a value of `core-type` unboxes as, or `nil` when it is not a scalar (useful for e.g.`(daq:value-of v (daq:core-type->class (daq:value-type prop)))`)
 - `(daq:supports-interface-p daq-obj 'daq-type)` - test whether `daq-obj` implements an interface
 - `(daq:component-type daq-obj)` - the most-derived component interface `daq-obj` implements (`daq:channel`, `daq:signal`, `daq:device`, …) as a class symbol, or `nil`
 - `(daq:domain-tick->timestamp source tick)` - convert a domain tick to a `local-time` timestamp (`source` is a signal, data descriptor, or multi reader; `(daq:domain-time-converter source)` returns a reusable per-tick closure)

@@ -29,6 +29,7 @@
   (:export #:as
            #:supports-interface-p
            #:component-type
+           #:core-type->class
            #:domain-time-converter
            #:domain-tick->timestamp
            #:clear-error-info
