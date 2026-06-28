@@ -15,8 +15,6 @@
   (:nicknames #:daq #:opendaq)
   (:use #:cl)
   (:import-from #:opendaq.low-level
-                #:clear-error-info
-                #:ensure-opendaq-loaded
                 #:healthcheck
                 #:native-library-directory
                 #:opendaq-error
@@ -33,8 +31,6 @@
            #:core-type->class
            #:domain-time-converter
            #:domain-tick->timestamp
-           #:clear-error-info
-           #:ensure-opendaq-loaded
            #:healthcheck
            #:native-library-directory
            #:opendaq-error

@@ -214,5 +214,5 @@
           (opendaq.low-level:validator/validate validator (cffi:null-pointer) invalid-value)
         (daq:opendaq-error ()
           (setf saw-error t)))
-      (daq:clear-error-info)
+      (opendaq.low-level::clear-error-info)
       (is (not (null saw-error)) "coreobjects/Validator expected validation error for invalid value"))))
