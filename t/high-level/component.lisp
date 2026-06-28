@@ -31,5 +31,5 @@
       (is (string= "child" (daq:local-id child)) "High-level components should expose their local identifier.")
       (is (string= "/parent/child" (daq:global-id child)) "High-level child components should synthesize the expected global identifier.")
       (is (eq 'daq:component (daq:component-type child)) "component-type should report a plain component as COMPONENT.")
-      (is (daq:supports-interface-p child 'daq:component) "supports-interface-p should confirm a component implements IComponent.")
-      (is (not (daq:supports-interface-p child 'daq:channel)) "supports-interface-p should return NIL (not crash) for an unsupported interface."))))
+      (is (daq:is-p child 'daq:component) "is-p should confirm a component implements IComponent.")
+      (is (not (daq:is-p child 'daq:channel)) "is-p should return NIL (not crash) for an unsupported interface."))))

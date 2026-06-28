@@ -131,7 +131,7 @@ SUPPRESSED_FUNCTIONS = {
     "component-deserialize-context/create-component-deserialize-context",
     # These take a daqIntfID GUID by value.  The low-level layer now binds them
     # (passed per-ABI; see generate_low_level_bindings), but they are plumbing:
-    # the GUID query is exposed idiomatically as supports-interface-p /
+    # the GUID query is exposed idiomatically as is-p /
     # component-type, and the untyped list/dict/folder constructors cover the
     # rest, so they need no high-level wrapper.
     "base-object/query-interface",

@@ -28,7 +28,7 @@
            #:read)
   (:export #:as
            #:unbox
-           #:supports-interface-p
+           #:is-p
            #:component-type
            #:core-type->class
            #:domain-time-converter

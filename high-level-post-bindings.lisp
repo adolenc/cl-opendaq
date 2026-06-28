@@ -348,7 +348,7 @@ values use DATA."))
   "Reinterpret a base openDAQ OBJECT as the more specific type TARGET-TYPE, returning
 a wrapper of that type.  Adds a reference so the result owns its own lifetime.  Only
 valid when OBJECT really is that type (it is an unchecked cast, not a query -- see
-SUPPORTS-INTERFACE-P / COMPONENT-TYPE to test first).  TARGET-TYPE is a symbol naming
+IS-P / COMPONENT-TYPE to test first).  TARGET-TYPE is a symbol naming
 the class (e.g. 'DEVICE-INFO).
 
 For a boxed primitive this returns the typed wrapper (e.g. an INTEGER-OBJECT), not
@@ -396,10 +396,10 @@ its own reference and the temporary is released by the GC, as before."
                    '#:opendaq.low-level)
       (error "No interface-id getter for type ~S." type)))
 
-(defun supports-interface-p (object type)
-  "True if OBJECT implements the openDAQ interface named by the class symbol
-TYPE (e.g. 'CHANNEL, 'SIGNAL, 'FOLDER).  Unlike AS, this performs a real
-interface query, so it is safe to ask about any type."
+(defun is-p (object type)
+  "True if OBJECT is a TYPE, i.e. implements the openDAQ interface named by the
+class symbol TYPE (e.g. 'CHANNEL, 'SIGNAL, 'FOLDER).  Unlike AS, this performs a
+real interface query, so it is safe to ask about any type."
   (opendaq.low-level::%supports-interface-p
    (%require-live-pointer object)
    (%interface-id-getter type)))
@@ -408,7 +408,7 @@ interface query, so it is safe to ask about any type."
   "The most-derived interface among CANDIDATES that OBJECT implements, as a
 class symbol (e.g. CHANNEL), or NIL if none.  Lets you discover a component's
 concrete type without an unsafe reinterpreting cast."
-  (find-if (lambda (type) (supports-interface-p object type)) candidates))
+  (find-if (lambda (type) (is-p object type)) candidates))
 
 (defun as-list-of (object-list target-type)
   "Convert an openDAQ object-list into a proper Lisp list, unboxing primitives
