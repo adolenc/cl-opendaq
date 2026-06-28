@@ -15,7 +15,7 @@
                    (let ((event (daq:as args 'daq:core-event-args)))
                      (format t "  ~A: ~A~%"
                              (daq:event-name event)
-                             (daq:value-of (gethash "Name" (daq:parameters event)) 'daq:string-object)))))))
+                             (daq:as (gethash "Name" (daq:parameters event)) 'daq:string-object)))))))
   ;; While subscribed, each property change is reported by the handler above.
   (format t "subscribed:~%")
   (setf (daq:property-value *channel* "Frequency") 25.0)

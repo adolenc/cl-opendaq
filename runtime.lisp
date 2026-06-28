@@ -558,7 +558,7 @@ arguments; see EMIT_COERCED_CALL in tools/generate_high_level_bindings.py."
       (%consume-release-state release-state))
     nil))
 
-(export '(release raw-pointer value-of))
+(export '(release raw-pointer))
 
 (defun primitive-type-p (type-name)
   "Return T if TYPE-NAME names a boxed primitive (integer, boolean,
@@ -581,24 +581,6 @@ TARGET-TYPE (a primitive class symbol, e.g. INTEGER-OBJECT), without releasing i
       (string-object  (cffi:foreign-string-to-lisp (opendaq.low-level:string/get-char-ptr ptr)))
       (complex-number-object (complex (opendaq.low-level:complex-number/get-real ptr)
                                       (opendaq.low-level:complex-number/get-imaginary ptr))))))
-
-(defun value-of (object &optional (target-type (class-name (class-of object))))
-  "Return the native Lisp value of a boxed openDAQ OBJECT: an integer, float,
-string, boolean, ratio, or complex number.
-
-TARGET-TYPE names the boxed-primitive class to read OBJECT as.  It defaults to
-OBJECT's own class, so for the typed wrappers (INTEGER-OBJECT, STRING-OBJECT, …)
-it may be omitted; a generic BASE-OBJECT -- e.g. a value pulled from a dict or
-from a core event's PARAMETERS -- must be given the expected TYPE:
-
-  (value-of an-integer-wrapper)                          => 42
-  (value-of (gethash \"Name\" params) 'string-object) => \"Frequency\"
-
-OBJECT is left intact (its reference is still released by the GC)."
-  (unless (primitive-type-p target-type)
-    (error "VALUE-OF needs a boxed-primitive type, but ~S is not one.  Pass the ~
-expected type, e.g. (value-of object 'string-object)." target-type))
-  (%boxed-value object target-type))
 
 (defun %unbox-primitive (object target-type)
   "Extract the Lisp value from a boxed primitive wrapper and release the temporary

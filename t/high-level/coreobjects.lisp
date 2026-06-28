@@ -81,7 +81,7 @@
         (linear-rule (make-instance 'daq:data-rule/linear :delta 2 :start 0)))
     (is (typep int-property 'daq:property) "A property/int proxy should be a subclass instance of property.")
     (is (= 10 (%boxed-integer-value (daq:default-value int-property))) "property/int should box a plain integer default value.")
-    (is (= 1.5d0 (daq:value-of (daq:default-value float-property) 'daq:float-object)) "property/float should box a plain float default value.")
+    (is (= 1.5d0 (daq:as (daq:default-value float-property) 'daq:float-object)) "property/float should box a plain float default value.")
     (is (not (%boxed-boolean-value (daq:default-value bool-property))) "property/bool should box a plain boolean default value.")
     (is (typep linear-rule 'daq:data-rule) "data-rule/linear should accept plain numeric arguments and build a data-rule.")))
 
