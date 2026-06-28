@@ -17,12 +17,12 @@
                       s)))))
 
 (defparameter *boxed-types*
-  '((:daq-ct-bool   . daq:daq-boolean)
-    (:daq-ct-int    . daq:daq-integer)
-    (:daq-ct-float  . daq:daq-float)
-    (:daq-ct-string . daq:daq-string-object)
-    (:daq-ct-ratio  . daq:daq-ratio)
-    (:daq-ct-complex-number . daq:complex-number))
+  '((:daq-ct-bool   . daq:boolean-object)
+    (:daq-ct-int    . daq:integer-object)
+    (:daq-ct-float  . daq:float-object)
+    (:daq-ct-string . daq:string-object)
+    (:daq-ct-ratio  . daq:ratio-object)
+    (:daq-ct-complex-number . daq:complex-number-object))
   "Maps a property's core type to the boxed-primitive class VALUE-OF reads it as.
 Types absent here (lists, dicts, structs, nested objects, ...) are not scalars.")
 

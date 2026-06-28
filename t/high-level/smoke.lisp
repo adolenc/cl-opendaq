@@ -87,7 +87,7 @@
   (let ((builder (make-instance 'daq:data-descriptor-builder)))
     (setf (daq:sample-type builder) opendaq.low-level::+daq-sample-type-float-64+)
     (let* ((descriptor (daq:build builder))
-           (offset (make-instance 'daq:daq-integer :value 0))
+           (offset (make-instance 'daq:integer-object :value 0))
            (packet (make-instance 'daq:data-packet
                                   :descriptor descriptor :sample-count 8 :offset offset))
            (values (daq:data packet))

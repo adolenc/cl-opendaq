@@ -116,6 +116,8 @@
             block-reader/from-existing
             block-reader/from-port
             block-size
+            boolean-object
+            boolean-object-interface-id
             build
             call
             call-custom-proc
@@ -162,8 +164,8 @@
             complete
             complete-device-capabilities
             complete-server-capability
-            complex-number
-            complex-number-interface-id
+            complex-number-object
+            complex-number-object-interface-id
             component
             component-config
             component-deserialize-context
@@ -260,22 +262,6 @@
             custom-components
             custom-data
             custom-info-property-names
-            daq-boolean
-            daq-boolean-interface-id
-            daq-float
-            daq-float-interface-id
-            daq-function
-            daq-integer
-            daq-integer-interface-id
-            daq-number
-            daq-number-interface-id
-            daq-ratio
-            daq-ratio-interface-id
-            daq-string-object
-            daq-string-object-interface-id
-            daq-string-object/string-n
-            daq-type
-            daq-type-interface-id
             data
             data-descriptor
             data-descriptor-builder
@@ -457,6 +443,8 @@
             find-component
             find-properties
             find-user
+            float-object
+            float-object-interface-id
             float-value
             flush
             flush-on-level
@@ -475,6 +463,7 @@
             function-block-type
             function-block-type-interface-id
             function-blocks
+            function-object
             gap-checking-enabled
             get
             get-read-samples
@@ -537,6 +526,8 @@
             instance-interface-id
             instance-root-device
             int-value
+            integer-object
+            integer-object-interface-id
             interfaces
             internal-state
             intf-id
@@ -710,6 +701,8 @@
             notify-packet-enqueued
             notify-packet-enqueued-on-this-thread
             notify-packet-enqueued-with-scheduler
+            number-object
+            number-object-interface-id
             numerator
             object-list
             object-list-interface-id
@@ -868,6 +861,8 @@
             query
             range
             range-interface-id
+            ratio-object
+            ratio-object-interface-id
             raw-data
             raw-data-size
             raw-last-value
@@ -1103,6 +1098,9 @@
             streaming-sources
             streaming-type
             streaming-type-interface-id
+            string-object
+            string-object-interface-id
+            string-object/string-n
             struct
             struct-builder
             struct-builder-interface-id
@@ -1173,6 +1171,8 @@
             type-manager-private
             type-manager-private-interface-id
             type-manager-type
+            type-object
+            type-object-interface-id
             type-sort
             types
             unit
@@ -1629,6 +1629,23 @@ Constructs the instance via the openDAQ C function daqAuthenticationProvider_cre
     (%adopt-pointer object (opendaq.low-level:block-reader/create-block-reader-from-port coerced-port coerced-block-size coerced-value-read-type coerced-domain-read-type coerced-mode)))
     ))
 
+(defclass boolean-object (base-object)
+  (
+   (%value-initarg :initarg :value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object boolean-object)
+                                       &key (pointer nil pointer-p)
+                                            (value nil value-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqBoolean_createBoolObject()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) value-p)
+  (with-daq-boxed-values ((coerced-value value :daq-bool))
+    (%adopt-pointer object (opendaq.low-level:boolean/create-bool-object coerced-value)))
+    ))
+
 (defclass callable-info (base-object)
   (
    (%argument-info-initarg :initarg :argument-info :initform nil)
@@ -1701,14 +1718,14 @@ Constructs the instance via the openDAQ C function daqCoercer_createCoercer()."
 
 
 
-(defclass complex-number (base-object)
+(defclass complex-number-object (base-object)
   (
    (%real-initarg :initarg :real :initform nil)
    (%imaginary-initarg :initarg :imaginary :initform nil)
    ))
 
 
-(defmethod initialize-instance :after ((object complex-number)
+(defmethod initialize-instance :after ((object complex-number-object)
                                        &key (pointer nil pointer-p)
                                             (real nil real-p)
                                             (imaginary nil imaginary-p)
@@ -2333,143 +2350,6 @@ Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEv
     ))
 
 (defclass core-type (base-object)
-  (
-   ))
-
-
-
-(defclass daq-boolean (base-object)
-  (
-   (%value-initarg :initarg :value :initform nil)
-   ))
-
-
-(defmethod initialize-instance :after ((object daq-boolean)
-                                       &key (pointer nil pointer-p)
-                                            (value nil value-p)
-                                       &allow-other-keys)
-  "Constructs the instance via the openDAQ C function daqBoolean_createBoolObject()."
-  (declare (ignore pointer))
-  (when (and (not pointer-p) value-p)
-  (with-daq-boxed-values ((coerced-value value :daq-bool))
-    (%adopt-pointer object (opendaq.low-level:boolean/create-bool-object coerced-value)))
-    ))
-
-(defclass daq-float (base-object)
-  (
-   (%value-initarg :initarg :value :initform nil)
-   ))
-
-
-(defmethod initialize-instance :after ((object daq-float)
-                                       &key (pointer nil pointer-p)
-                                            (value nil value-p)
-                                       &allow-other-keys)
-  "Constructs the instance via the openDAQ C function daqFloatObject_createFloat()."
-  (declare (ignore pointer))
-  (when (and (not pointer-p) value-p)
-  (with-daq-boxed-values ((coerced-value value nil))
-    (%adopt-pointer object (opendaq.low-level:float-object/create-float coerced-value)))
-    ))
-
-(defclass daq-function (base-object)
-  (
-   (%value-initarg :initarg :value :initform nil)
-   ))
-
-
-(defmethod initialize-instance :after ((object daq-function)
-                                       &key (pointer nil pointer-p)
-                                            (value nil value-p)
-                                       &allow-other-keys)
-  "Constructs the instance via the openDAQ C function daqFunction_createFunction()."
-  (declare (ignore pointer))
-  (when (and (not pointer-p) value-p)
-  (with-daq-boxed-values ((coerced-value value nil))
-    (%adopt-pointer object (opendaq.low-level:function/create-function coerced-value)))
-    ))
-
-(defclass daq-integer (base-object)
-  (
-   (%value-initarg :initarg :value :initform nil)
-   ))
-
-
-(defmethod initialize-instance :after ((object daq-integer)
-                                       &key (pointer nil pointer-p)
-                                            (value nil value-p)
-                                       &allow-other-keys)
-  "Constructs the instance via the openDAQ C function daqInteger_createInteger()."
-  (declare (ignore pointer))
-  (when (and (not pointer-p) value-p)
-  (with-daq-boxed-values ((coerced-value value nil))
-    (%adopt-pointer object (opendaq.low-level:integer/create-integer coerced-value)))
-    ))
-
-(defclass daq-number (base-object)
-  (
-   ))
-
-
-
-(defclass daq-ratio (base-object)
-  (
-   (%numerator-initarg :initarg :numerator :initform nil)
-   (%denominator-initarg :initarg :denominator :initform nil)
-   ))
-
-
-(defmethod initialize-instance :after ((object daq-ratio)
-                                       &key (pointer nil pointer-p)
-                                            (numerator nil numerator-p)
-                                            (denominator nil denominator-p)
-                                       &allow-other-keys)
-  "Constructs the instance via the openDAQ C function daqRatio_createRatio()."
-  (declare (ignore pointer))
-  (when (and (not pointer-p) numerator-p denominator-p)
-  (with-daq-boxed-values ((coerced-numerator numerator nil)
-                          (coerced-denominator denominator nil))
-    (%adopt-pointer object (opendaq.low-level:ratio/create-ratio coerced-numerator coerced-denominator)))
-    ))
-
-(defclass daq-string-object (base-object)
-  (
-   (%str-initarg :initarg :str :initform nil)
-   ))
-
-
-(defmethod initialize-instance :after ((object daq-string-object)
-                                       &key (pointer nil pointer-p)
-                                            (str nil str-p)
-                                       &allow-other-keys)
-  "Constructs the instance via the openDAQ C function daqString_createString()."
-  (declare (ignore pointer))
-  (when (and (not pointer-p) str-p)
-  (with-daq-boxed-values ((coerced-str str nil))
-    (%adopt-pointer object (opendaq.low-level:string/create-string coerced-str)))
-    ))
-
-(defclass daq-string-object/string-n (daq-string-object)
-  (
-   (%str-initarg :initarg :str :initform nil)
-   (%length-initarg :initarg :length :initform nil)
-   ))
-
-
-(defmethod initialize-instance :after ((object daq-string-object/string-n)
-                                       &key (pointer nil pointer-p)
-                                            (str nil str-p)
-                                            (length nil length-p)
-                                       &allow-other-keys)
-  "Constructs the instance via the openDAQ C function daqString_createStringN()."
-  (declare (ignore pointer))
-  (when (and (not pointer-p) str-p length-p)
-  (with-daq-boxed-values ((coerced-str str nil)
-                          (coerced-length length nil))
-    (%adopt-pointer object (opendaq.low-level:string/create-string-n coerced-str coerced-length)))
-    ))
-
-(defclass daq-type (base-object)
   (
    ))
 
@@ -3349,7 +3229,7 @@ Constructs the instance via the openDAQ C function daqDimensionRule_createLogari
     (%adopt-pointer object (opendaq.low-level:enumeration/create-enumeration coerced-name coerced-value coerced-type-manager)))
     ))
 
-(defclass enumeration-type (daq-type)
+(defclass enumeration-type (type-object)
   (
    (%type-name-initarg :initarg :type-name :initform nil)
    (%enumerator-names-initarg :initarg :enumerator-names :initform nil)
@@ -3649,6 +3529,23 @@ Constructs the instance via the openDAQ C function daqEventPacket_createImplicit
     (%adopt-pointer object (opendaq.low-level:event-packet/create-implicit-domain-gap-detected-event-packet coerced-diff)))
     ))
 
+(defclass float-object (base-object)
+  (
+   (%value-initarg :initarg :value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object float-object)
+                                       &key (pointer nil pointer-p)
+                                            (value nil value-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqFloatObject_createFloatObject()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) value-p)
+  (with-daq-boxed-values ((coerced-value value nil))
+    (%adopt-pointer object (opendaq.low-level:float-object/create-float-object coerced-value)))
+    ))
+
 (defclass folder (component)
   (
    ))
@@ -3754,6 +3651,23 @@ Constructs the instance via the openDAQ C function daqFunctionBlockType_createFu
                           (coerced-description description :daq-string)
                           (coerced-default-config default-config :managed-pointer))
     (%adopt-pointer object (opendaq.low-level:function-block-type/create-function-block-type coerced-id coerced-name coerced-description coerced-default-config)))
+    ))
+
+(defclass function-object (base-object)
+  (
+   (%value-initarg :initarg :value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object function-object)
+                                       &key (pointer nil pointer-p)
+                                            (value nil value-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqFunction_createFunction()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) value-p)
+  (with-daq-boxed-values ((coerced-value value nil))
+    (%adopt-pointer object (opendaq.low-level:function/create-function coerced-value)))
     ))
 
 (defclass graph-visualization (base-object)
@@ -3864,6 +3778,23 @@ Constructs the instance via the openDAQ C function daqInstanceBuilder_createInst
   (declare (ignore pointer))
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:instance-builder/create-instance-builder))
+    ))
+
+(defclass integer-object (base-object)
+  (
+   (%value-initarg :initarg :value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object integer-object)
+                                       &key (pointer nil pointer-p)
+                                            (value nil value-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqInteger_createInteger()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) value-p)
+  (with-daq-boxed-values ((coerced-value value nil))
+    (%adopt-pointer object (opendaq.low-level:integer/create-integer coerced-value)))
     ))
 
 (defclass io-folder-config (folder-config)
@@ -4346,6 +4277,12 @@ Constructs the instance via the openDAQ C function daqLogFileInfoBuilder_createL
                           (coerced-module-manager module-manager :daq-base-object))
     (%adopt-pointer object (opendaq.low-level:network-interface/create-network-interface coerced-name coerced-owner-device-manufacturer-name coerced-owner-device-serial-number coerced-module-manager)))
     ))
+
+(defclass number-object (base-object)
+  (
+   ))
+
+
 
 (defclass object-list (base-object)
   (
@@ -4937,7 +4874,7 @@ Constructs the instance via the openDAQ C function daqPropertyObject_createPrope
   (%adopt-pointer object (opendaq.low-level:property-object/create-property-object))
     ))
 
-(defclass property-object-class (daq-type)
+(defclass property-object-class (type-object)
   (
    (%builder-initarg :initarg :builder :initform nil)
    ))
@@ -5511,6 +5448,26 @@ Constructs the instance via the openDAQ C function daqRange_createRange()."
   (with-daq-boxed-values ((coerced-low-value low-value :daq-base-object)
                           (coerced-high-value high-value :daq-base-object))
     (%adopt-pointer object (opendaq.low-level:range/create-range coerced-low-value coerced-high-value)))
+    ))
+
+(defclass ratio-object (base-object)
+  (
+   (%numerator-initarg :initarg :numerator :initform nil)
+   (%denominator-initarg :initarg :denominator :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object ratio-object)
+                                       &key (pointer nil pointer-p)
+                                            (numerator nil numerator-p)
+                                            (denominator nil denominator-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqRatio_createRatio()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) numerator-p denominator-p)
+  (with-daq-boxed-values ((coerced-numerator numerator nil)
+                          (coerced-denominator denominator nil))
+    (%adopt-pointer object (opendaq.low-level:ratio/create-ratio coerced-numerator coerced-denominator)))
     ))
 
 (defclass reader (base-object)
@@ -6163,7 +6120,7 @@ Constructs the instance via the openDAQ C function daqServerType_createServerTyp
 
 
 
-(defclass simple-type (daq-type)
+(defclass simple-type (type-object)
   (
    (%core-type-initarg :initarg :core-type :initform nil)
    ))
@@ -6298,6 +6255,43 @@ Constructs the instance via the openDAQ C function daqStreamingType_createStream
     (%adopt-pointer object (opendaq.low-level:streaming-type/create-streaming-type coerced-id coerced-name coerced-description coerced-prefix coerced-default-config)))
     ))
 
+(defclass string-object (base-object)
+  (
+   (%str-initarg :initarg :str :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object string-object)
+                                       &key (pointer nil pointer-p)
+                                            (str nil str-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqString_createString()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) str-p)
+  (with-daq-boxed-values ((coerced-str str nil))
+    (%adopt-pointer object (opendaq.low-level:string/create-string coerced-str)))
+    ))
+
+(defclass string-object/string-n (string-object)
+  (
+   (%str-initarg :initarg :str :initform nil)
+   (%length-initarg :initarg :length :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object string-object/string-n)
+                                       &key (pointer nil pointer-p)
+                                            (str nil str-p)
+                                            (length nil length-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqString_createStringN()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) str-p length-p)
+  (with-daq-boxed-values ((coerced-str str nil)
+                          (coerced-length length nil))
+    (%adopt-pointer object (opendaq.low-level:string/create-string-n coerced-str coerced-length)))
+    ))
+
 (defclass struct (base-object)
   (
    (%name-initarg :initarg :name :initform nil)
@@ -6364,7 +6358,7 @@ Constructs the instance via the openDAQ C function daqStreamingType_createStream
     (%adopt-pointer object (opendaq.low-level:struct-builder/create-struct-builder-from-struct coerced-struct)))
     ))
 
-(defclass struct-type (daq-type)
+(defclass struct-type (type-object)
   (
    (%name-initarg :initarg :name :initform nil)
    (%names-initarg :initarg :names :initform nil)
@@ -6643,6 +6637,12 @@ Constructs the instance via the openDAQ C function daqStreamingType_createStream
     ))
 
 (defclass type-manager-private (base-object)
+  (
+   ))
+
+
+
+(defclass type-object (base-object)
   (
    ))
 
@@ -7277,7 +7277,7 @@ property => daqProperty_getName()
 task => daqTask_getName()
     Gets the task name.
 
-daq-type => daqType_getName()
+type-object => daqType_getName()
     Gets the name of the Type
 
 unit-builder => daqUnitBuilder_getName()
@@ -7963,14 +7963,14 @@ Calls the openDAQ C function daqBlockReader_readWithDomain()."
 )
 
 (defgeneric equals-value (object value)
-  (:documentation "daq-boolean => daqBoolean_equalsValue()
+  (:documentation "boolean-object => daqBoolean_equalsValue()
     Compares stored boolean value to the boolean parameter.
 
-daq-float => daqFloatObject_equalsValue()
+float-object => daqFloatObject_equalsValue()
 
-daq-integer => daqInteger_equalsValue()
+integer-object => daqInteger_equalsValue()
     Compares stored int value to the int parameter."))
-(defmethod equals-value ((object daq-boolean) value)
+(defmethod equals-value ((object boolean-object) value)
   "Compares stored boolean value to the boolean parameter.
 @param value Value for comparison.
 @param[out] equal The result of the comparison.
@@ -7981,7 +7981,7 @@ Calls the openDAQ C function daqBoolean_equalsValue()."
     (not (zerop (opendaq.low-level:boolean/equals-value (%require-live-pointer object) coerced-value))))
 )
 
-(defun daq-boolean-interface-id ()
+(defun boolean-object-interface-id ()
   "Calls the openDAQ C function daqBoolean_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
     (opendaq.low-level:boolean/get-interface-id intf-id-slot)
@@ -7990,22 +7990,22 @@ Calls the openDAQ C function daqBoolean_equalsValue()."
 )
 
 (defgeneric value (object)
-  (:documentation "daq-boolean => daqBoolean_getValue()
+  (:documentation "boolean-object => daqBoolean_getValue()
     Gets a boolean value stored in the object.
 
 enumeration => daqEnumeration_getValue()
     Gets the Enumeration value as String containing the name of the enumerator constant.
 
-daq-float => daqFloatObject_getValue()
+float-object => daqFloatObject_getValue()
 
-daq-integer => daqInteger_getValue()
+integer-object => daqInteger_getValue()
     Gets an int value stored in the object.
 
 property-value-event-args => daqPropertyValueEventArgs_getValue()
 
 property => daqProperty_getValue()
     Gets the value of the Property. Available only if the Property is bound to a Property object."))
-(defmethod value ((object daq-boolean))
+(defmethod value ((object boolean-object))
   "Gets a boolean value stored in the object.
 @param[out] value Stored boolean value.
 @return OPENDAQ_SUCCESS if succeeded, error code otherwise.
@@ -8187,7 +8187,7 @@ Calls the openDAQ C function daqComparable_compareTo()."
 @param[out] imaginary The imaginary part of the complex value.
 
 Calls the openDAQ C function daqComplexNumber_getImaginary()."))
-(defmethod imaginary ((object complex-number))
+(defmethod imaginary ((object complex-number-object))
   "Gets the imaginary part of the complex number value.
 @param[out] imaginary The imaginary part of the complex value.
 
@@ -8195,7 +8195,7 @@ Calls the openDAQ C function daqComplexNumber_getImaginary()."
   (opendaq.low-level:complex-number/get-imaginary (%require-live-pointer object))
 )
 
-(defun complex-number-interface-id ()
+(defun complex-number-object-interface-id ()
   "Calls the openDAQ C function daqComplexNumber_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
     (opendaq.low-level:complex-number/get-interface-id intf-id-slot)
@@ -8208,7 +8208,7 @@ Calls the openDAQ C function daqComplexNumber_getImaginary()."
 @param[out] real The real part of the complex value.
 
 Calls the openDAQ C function daqComplexNumber_getReal()."))
-(defmethod real ((object complex-number))
+(defmethod real ((object complex-number-object))
   "Gets the real part of the complex number value.
 @param[out] real The real part of the complex value.
 
@@ -8597,7 +8597,7 @@ Calls the openDAQ C function daqComponentStatusContainer_getStatuses()."))
 All objects in the statuses dictionary are key value pairs of <IString, IEnumeration>.
 
 Calls the openDAQ C function daqComponentStatusContainer_getStatuses()."
-  (as-hashtable-of (wrap (opendaq.low-level:component-status-container/get-statuses (%require-live-pointer object)) 'dict) 'daq-string-object 'enumeration)
+  (as-hashtable-of (wrap (opendaq.low-level:component-status-container/get-statuses (%require-live-pointer object)) 'dict) 'string-object 'enumeration)
 )
 
 (defmethod build ((object component-type-builder))
@@ -8988,7 +8988,7 @@ Calls the openDAQ C function daqComponentUpdateContext_getInputPortConnections()
 
 Calls the openDAQ C function daqComponentUpdateContext_getInputPortConnections()."
   (with-daq-boxed-values ((coerced-parent-id parent-id :daq-string))
-    (as-hashtable-of (wrap (opendaq.low-level:component-update-context/get-input-port-connections (%require-live-pointer object) coerced-parent-id) 'dict) 'daq-string-object 'daq-string-object))
+    (as-hashtable-of (wrap (opendaq.low-level:component-update-context/get-input-port-connections (%require-live-pointer object) coerced-parent-id) 'dict) 'string-object 'string-object))
 )
 
 (defun component-update-context-interface-id ()
@@ -9003,7 +9003,7 @@ Calls the openDAQ C function daqComponentUpdateContext_getInputPortConnections()
   (:documentation "Calls the openDAQ C function daqComponentUpdateContext_getInternalState()."))
 (defmethod internal-state ((object component-update-context))
   "Calls the openDAQ C function daqComponentUpdateContext_getInternalState()."
-  (as-hashtable-of (wrap (opendaq.low-level:component-update-context/get-internal-state (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:component-update-context/get-internal-state (%require-live-pointer object)) 'dict) 'string-object 'base-object)
 )
 
 (defgeneric root-component (object)
@@ -9270,7 +9270,7 @@ Calls the openDAQ C function daqComponent_getLockedAttributes()."))
 @param[out] attributes A list of strings containing the names of locked attributes in capital case (eg. \"Name\", \"Description\").
 
 Calls the openDAQ C function daqComponent_getLockedAttributes()."
-  (as-list-of (wrap (opendaq.low-level:component/get-locked-attributes (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:component/get-locked-attributes (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defmethod name ((object component))
@@ -10007,7 +10007,7 @@ instance-builder => daqInstanceBuilder_getDiscoveryServers()
 @param[out] servers The dictionary of available discovery servers.
 
 Calls the openDAQ C function daqContext_getDiscoveryServers()."
-  (as-hashtable-of (wrap (opendaq.low-level:context/get-discovery-servers (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:context/get-discovery-servers (%require-live-pointer object)) 'dict) 'string-object 'base-object)
 )
 
 (defun context-interface-id ()
@@ -10062,7 +10062,7 @@ Calls the openDAQ C function daqContext_getModuleOptions()."))
 
 Calls the openDAQ C function daqContext_getModuleOptions()."
   (with-daq-boxed-values ((coerced-module-id module-id :daq-string))
-    (as-hashtable-of (wrap (opendaq.low-level:context/get-module-options (%require-live-pointer object) coerced-module-id) 'dict) 'daq-string-object 'base-object))
+    (as-hashtable-of (wrap (opendaq.low-level:context/get-module-options (%require-live-pointer object) coerced-module-id) 'dict) 'string-object 'base-object))
 )
 
 (defgeneric on-core-event (object)
@@ -10099,7 +10099,7 @@ instance-builder => daqInstanceBuilder_getOptions()
 @param[out] options The dictionary of options
 
 Calls the openDAQ C function daqContext_getOptions()."
-  (as-hashtable-of (wrap (opendaq.low-level:context/get-options (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:context/get-options (%require-live-pointer object)) 'dict) 'string-object 'base-object)
 )
 
 (defgeneric scheduler (object)
@@ -10219,7 +10219,7 @@ scaling => daqScaling_getParameters()
 @param[out] parameters The parameters of the core event.
 
 Calls the openDAQ C function daqCoreEventArgs_getParameters()."
-  (as-hashtable-of (wrap (opendaq.low-level:core-event-args/get-parameters (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:core-event-args/get-parameters (%require-live-pointer object)) 'dict) 'string-object 'base-object)
 )
 
 (defgeneric core-type (object)
@@ -10270,7 +10270,7 @@ data-descriptor => daqDataDescriptor_getMetadata()
 @param[out] metadata Additional metadata of the descriptor as a dictionary.
 
 Calls the openDAQ C function daqDataDescriptorBuilder_getMetadata()."
-  (as-hashtable-of (wrap (opendaq.low-level:data-descriptor-builder/get-metadata (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-string-object)
+  (as-hashtable-of (wrap (opendaq.low-level:data-descriptor-builder/get-metadata (%require-live-pointer object)) 'dict) 'string-object 'string-object)
 )
 
 (defmethod name ((object data-descriptor-builder))
@@ -10397,7 +10397,7 @@ multi-reader => daqMultiReader_getTickResolution()
 @param[out] tickResolution The Resolution.
 
 Calls the openDAQ C function daqDataDescriptorBuilder_getTickResolution()."
-  (wrap (opendaq.low-level:data-descriptor-builder/get-tick-resolution (%require-live-pointer object)) 'daq-ratio)
+  (wrap (opendaq.low-level:data-descriptor-builder/get-tick-resolution (%require-live-pointer object)) 'ratio-object)
 )
 
 (defgeneric unit (object)
@@ -10661,7 +10661,7 @@ Calls the openDAQ C function daqDataDescriptor_getDimensions()."
 All objects in the metadata dictionary must be key value pairs of <String, String>.
 
 Calls the openDAQ C function daqDataDescriptor_getMetadata()."
-  (as-hashtable-of (wrap (opendaq.low-level:data-descriptor/get-metadata (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-string-object)
+  (as-hashtable-of (wrap (opendaq.low-level:data-descriptor/get-metadata (%require-live-pointer object)) 'dict) 'string-object 'string-object)
 )
 
 (defmethod name ((object data-descriptor))
@@ -10766,7 +10766,7 @@ Calls the openDAQ C function daqDataDescriptor_getStructFields()."
 @param[out] tickResolution The Resolution.
 
 Calls the openDAQ C function daqDataDescriptor_getTickResolution()."
-  (wrap (opendaq.low-level:data-descriptor/get-tick-resolution (%require-live-pointer object)) 'daq-ratio)
+  (wrap (opendaq.low-level:data-descriptor/get-tick-resolution (%require-live-pointer object)) 'ratio-object)
 )
 
 (defmethod unit ((object data-descriptor))
@@ -10873,7 +10873,7 @@ Calls the openDAQ C function daqDataPacket_getOffset()."
   (declare (ignore domain-start))
   (when domain-start-suppliedp
     (error "OFFSET is not applicable with a DOMAIN-START argument for ~S." 'data-packet))
-  (wrap (opendaq.low-level:data-packet/get-offset (%require-live-pointer object)) 'daq-number)
+  (wrap (opendaq.low-level:data-packet/get-offset (%require-live-pointer object)) 'number-object)
 )
 
 (defgeneric packet-id (object)
@@ -11040,7 +11040,7 @@ Calls the openDAQ C function daqDataRuleBuilder_build()."
 @param[out] parameters The dictionary containing the rule parameter members.
 
 Calls the openDAQ C function daqDataRuleBuilder_getParameters()."
-  (as-hashtable-of (wrap (opendaq.low-level:data-rule-builder/get-parameters (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:data-rule-builder/get-parameters (%require-live-pointer object)) 'dict) 'string-object 'base-object)
 )
 
 (defgeneric data-rule-builder-type (object)
@@ -11113,7 +11113,7 @@ Calls the openDAQ C function daqDataRuleBuilder_setType()."
 @param[out] parameters The dictionary containing the rule parameter members.
 
 Calls the openDAQ C function daqDataRule_getParameters()."
-  (as-hashtable-of (wrap (opendaq.low-level:data-rule/get-parameters (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:data-rule/get-parameters (%require-live-pointer object)) 'dict) 'string-object 'base-object)
 )
 
 (defgeneric data-rule-type (object)
@@ -11243,7 +11243,7 @@ Calls the openDAQ C function daqDeviceDomain_getReferenceDomainInfo()."
 @param[out] tickResolution The device's resolution.
 
 Calls the openDAQ C function daqDeviceDomain_getTickResolution()."
-  (wrap (opendaq.low-level:device-domain/get-tick-resolution (%require-live-pointer object)) 'daq-ratio)
+  (wrap (opendaq.low-level:device-domain/get-tick-resolution (%require-live-pointer object)) 'ratio-object)
 )
 
 (defmethod unit ((object device-domain))
@@ -11763,7 +11763,7 @@ Calls the openDAQ C function daqDeviceInfo_getCustomInfoPropertyNames()."))
 @param[out] customInfoNames The list of names of custom properties.
 
 Calls the openDAQ C function daqDeviceInfo_getCustomInfoPropertyNames()."
-  (as-list-of (wrap (opendaq.low-level:device-info/get-custom-info-property-names (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:device-info/get-custom-info-property-names (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defgeneric device-class (object)
@@ -11951,7 +11951,7 @@ Obtained dictionary contains INetworkInterface objects, representing the availab
 and allowing to manage their configurations. The dictionary key corresponds to interface identifier (e.g. \"eth0\").
 
 Calls the openDAQ C function daqDeviceInfo_getNetworkInterfaces()."
-  (as-hashtable-of (wrap (opendaq.low-level:device-info/get-network-interfaces (%require-live-pointer object)) 'dict) 'daq-string-object 'network-interface)
+  (as-hashtable-of (wrap (opendaq.low-level:device-info/get-network-interfaces (%require-live-pointer object)) 'dict) 'string-object 'network-interface)
 )
 
 (defgeneric parent-mac-address (object)
@@ -12197,7 +12197,7 @@ Calls the openDAQ C function daqDeviceNetworkConfig_getNetworkInterfaceNames()."
 @retval OPENDAQ_ERR_NOTIMPLEMENTED if the device does not support network configuration management.
 
 Calls the openDAQ C function daqDeviceNetworkConfig_getNetworkInterfaceNames()."
-  (as-list-of (wrap (opendaq.low-level:device-network-config/get-network-interface-names (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:device-network-config/get-network-interface-names (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defgeneric retrieve-network-configuration (object iface-name)
@@ -12539,7 +12539,7 @@ Calls the openDAQ C function daqDevice_addDevices()."
   (with-daq-boxed-values ((coerced-connection-args connection-args :managed-pointer)
                           (coerced-err-codes err-codes :managed-pointer)
                           (coerced-error-infos error-infos :managed-pointer))
-    (as-hashtable-of (wrap (opendaq.low-level:device/add-devices (%require-live-pointer object) coerced-connection-args coerced-err-codes coerced-error-infos) 'dict) 'daq-string-object 'device))
+    (as-hashtable-of (wrap (opendaq.low-level:device/add-devices (%require-live-pointer object) coerced-connection-args coerced-err-codes coerced-error-infos) 'dict) 'string-object 'device))
 )
 
 (defgeneric add-function-block (object type-id config)
@@ -12632,7 +12632,7 @@ module => daqModule_getAvailableDeviceTypes()
 @param[out] deviceTypes The dictionary of available device types.
 
 Calls the openDAQ C function daqDevice_getAvailableDeviceTypes()."
-  (as-hashtable-of (wrap (opendaq.low-level:device/get-available-device-types (%require-live-pointer object)) 'dict) 'daq-string-object 'device-type)
+  (as-hashtable-of (wrap (opendaq.low-level:device/get-available-device-types (%require-live-pointer object)) 'dict) 'string-object 'device-type)
 )
 
 (defgeneric available-devices (object)
@@ -12672,7 +12672,7 @@ module => daqModule_getAvailableFunctionBlockTypes()
 @param[out] functionBlockTypes A dictionary of available function block types.
 
 Calls the openDAQ C function daqDevice_getAvailableFunctionBlockTypes()."
-  (as-hashtable-of (wrap (opendaq.low-level:device/get-available-function-block-types (%require-live-pointer object)) 'dict) 'daq-string-object 'function-block-type)
+  (as-hashtable-of (wrap (opendaq.low-level:device/get-available-function-block-types (%require-live-pointer object)) 'dict) 'string-object 'function-block-type)
 )
 
 (defgeneric available-operation-modes (object)
@@ -12685,7 +12685,7 @@ Calls the openDAQ C function daqDevice_getAvailableOperationModes()."))
 @param[out] availableOpModes The list of available operation modes.
 
 Calls the openDAQ C function daqDevice_getAvailableOperationModes()."
-  (as-list-of (wrap (opendaq.low-level:device/get-available-operation-modes (%require-live-pointer object)) 'object-list) 'daq-integer)
+  (as-list-of (wrap (opendaq.low-level:device/get-available-operation-modes (%require-live-pointer object)) 'object-list) 'integer-object)
 )
 
 (defgeneric channels (object search-filter)
@@ -13441,7 +13441,7 @@ Calls the openDAQ C function daqDimensionRuleBuilder_build()."
 @param[out] parameters The dictionary containing the rule parameter members.
 
 Calls the openDAQ C function daqDimensionRuleBuilder_getParameters()."
-  (as-hashtable-of (wrap (opendaq.low-level:dimension-rule-builder/get-parameters (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:dimension-rule-builder/get-parameters (%require-live-pointer object)) 'dict) 'string-object 'base-object)
 )
 
 (defgeneric dimension-rule-builder-type (object)
@@ -13500,7 +13500,7 @@ Calls the openDAQ C function daqDimensionRuleBuilder_setType()."
 @param[out] parameters The dictionary containing the rule parameter members.
 
 Calls the openDAQ C function daqDimensionRule_getParameters()."
-  (as-hashtable-of (wrap (opendaq.low-level:dimension-rule/get-parameters (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:dimension-rule/get-parameters (%require-live-pointer object)) 'dict) 'string-object 'base-object)
 )
 
 (defgeneric dimension-rule-type (object)
@@ -13640,7 +13640,7 @@ property-object-class => daqPropertyObjectClass_getProperties()
   (declare (ignore include-inherited))
   (when include-inherited-suppliedp
     (error "PROPERTIES is not applicable with a INCLUDE-INHERITED argument for ~S." 'end-update-event-args))
-  (as-list-of (wrap (opendaq.low-level:end-update-event-args/get-properties (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:end-update-event-args/get-properties (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defgeneric as-dictionary (object)
@@ -13657,7 +13657,7 @@ struct => daqStruct_getAsDictionary()
 @param[out] dictionary The Dictionary object with enumerator names as keys, and enumerator values as its values.
 
 Calls the openDAQ C function daqEnumerationType_getAsDictionary()."
-  (as-hashtable-of (wrap (opendaq.low-level:enumeration-type/get-as-dictionary (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-integer)
+  (as-hashtable-of (wrap (opendaq.low-level:enumeration-type/get-as-dictionary (%require-live-pointer object)) 'dict) 'string-object 'integer-object)
 )
 
 (defmethod count ((object enumeration-type))
@@ -13694,7 +13694,7 @@ Calls the openDAQ C function daqEnumerationType_getEnumeratorNames()."))
 @param[out] names The list of enumerator names (String objects)
 
 Calls the openDAQ C function daqEnumerationType_getEnumeratorNames()."
-  (as-list-of (wrap (opendaq.low-level:enumeration-type/get-enumerator-names (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:enumeration-type/get-enumerator-names (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defun enumeration-type-interface-id ()
@@ -13722,7 +13722,7 @@ Calls the openDAQ C function daqEnumeration_getEnumerationType()."
   (:documentation "enumeration => daqEnumeration_getIntValue()
     Gets the Enumeration value as Integer enumerator constant.
 
-daq-number => daqNumber_getIntValue()
+number-object => daqNumber_getIntValue()
     Gets a value stored in the object as an integer value."))
 (defmethod int-value ((object enumeration))
   "Gets the Enumeration value as Integer enumerator constant.
@@ -13873,7 +13873,7 @@ Calls the openDAQ C function daqEvalValue_getPropertyReferences()."))
 Referenced properties are all occurrences matching the '\"%\" propref' pattern in the evaluation string.
 
 Calls the openDAQ C function daqEvalValue_getPropertyReferences()."
-  (as-list-of (wrap (opendaq.low-level:eval-value/get-property-references (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:eval-value/get-property-references (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defmethod result ((object eval-value))
@@ -13959,7 +13959,7 @@ Calls the openDAQ C function daqEventPacket_getEventId()."
 @param[out] parameters The event parameters dictionary.
 
 Calls the openDAQ C function daqEventPacket_getParameters()."
-  (as-hashtable-of (wrap (opendaq.low-level:event-packet/get-parameters (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:event-packet/get-parameters (%require-live-pointer object)) 'dict) 'string-object 'base-object)
 )
 
 (defgeneric add-handler (object event-handler)
@@ -14044,13 +14044,13 @@ Calls the openDAQ C function daqEventPacket_getParameters()."
     (opendaq.low-level:event/unmute-listener (%require-live-pointer object) coerced-event-handler))
 )
 
-(defmethod equals-value ((object daq-float) value)
+(defmethod equals-value ((object float-object) value)
   "Calls the openDAQ C function daqFloatObject_equalsValue()."
   (with-daq-boxed-values ((coerced-value value nil))
     (not (zerop (opendaq.low-level:float-object/equals-value (%require-live-pointer object) coerced-value))))
 )
 
-(defun daq-float-interface-id ()
+(defun float-object-interface-id ()
   "Calls the openDAQ C function daqFloatObject_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
     (opendaq.low-level:float-object/get-interface-id intf-id-slot)
@@ -14058,7 +14058,7 @@ Calls the openDAQ C function daqEventPacket_getParameters()."
   )
 )
 
-(defmethod value ((object daq-float))
+(defmethod value ((object float-object))
   "Calls the openDAQ C function daqFloatObject_getValue()."
   (opendaq.low-level:float-object/get-value (%require-live-pointer object))
 )
@@ -14252,7 +14252,7 @@ Calls the openDAQ C function daqFunctionBlock_addFunctionBlock()."
 @param[out] functionBlockTypes A dictionary of available function block types.
 
 Calls the openDAQ C function daqFunctionBlock_getAvailableFunctionBlockTypes()."
-  (as-hashtable-of (wrap (opendaq.low-level:function-block/get-available-function-block-types (%require-live-pointer object)) 'dict) 'daq-string-object 'function-block-type)
+  (as-hashtable-of (wrap (opendaq.low-level:function-block/get-available-function-block-types (%require-live-pointer object)) 'dict) 'string-object 'function-block-type)
 )
 
 (defgeneric function-block-type (object)
@@ -14356,7 +14356,7 @@ Calls the openDAQ C function daqFunctionBlock_removeFunctionBlock()."
 
 (defgeneric call (object params result)
   (:documentation "Calls the openDAQ C function daqFunction_call()."))
-(defmethod call ((object daq-function) params result)
+(defmethod call ((object function-object) params result)
   "Calls the openDAQ C function daqFunction_call()."
   (with-daq-boxed-values ((coerced-params params :daq-base-object)
                           (coerced-result result :daq-base-object))
@@ -14669,7 +14669,7 @@ Calls the openDAQ C function daqInputPort_acceptsSignals()."))
 
 Calls the openDAQ C function daqInputPort_acceptsSignals()."
   (with-daq-boxed-values ((coerced-signals signals :managed-pointer))
-    (as-list-of (wrap (opendaq.low-level:input-port/accepts-signals (%require-live-pointer object) coerced-signals) 'object-list) 'daq-boolean))
+    (as-list-of (wrap (opendaq.low-level:input-port/accepts-signals (%require-live-pointer object) coerced-signals) 'object-list) 'boolean-object))
 )
 
 (defgeneric connect (object signal)
@@ -14884,7 +14884,7 @@ Calls the openDAQ C function daqInstanceBuilder_getComponentsLogLevel()."))
 @param[out] components The dictionary of component names and log level
 
 Calls the openDAQ C function daqInstanceBuilder_getComponentsLogLevel()."
-  (as-hashtable-of (wrap (opendaq.low-level:instance-builder/get-components-log-level (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-number)
+  (as-hashtable-of (wrap (opendaq.low-level:instance-builder/get-components-log-level (%require-live-pointer object)) 'dict) 'string-object 'number-object)
 )
 
 (defmethod context ((object instance-builder))
@@ -14926,7 +14926,7 @@ Calls the openDAQ C function daqInstanceBuilder_getDefaultRootDeviceLocalId()."
 @param[out] serverNames The dictionary of discovery server names
 
 Calls the openDAQ C function daqInstanceBuilder_getDiscoveryServers()."
-  (as-list-of (wrap (opendaq.low-level:instance-builder/get-discovery-servers (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:instance-builder/get-discovery-servers (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defgeneric global-log-level (object)
@@ -15022,7 +15022,7 @@ Calls the openDAQ C function daqInstanceBuilder_getModulePathsList()."))
 @param paths The paths for the default ModuleManager of Instance
 
 Calls the openDAQ C function daqInstanceBuilder_getModulePathsList()."
-  (as-list-of (wrap (opendaq.low-level:instance-builder/get-module-paths-list (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:instance-builder/get-module-paths-list (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defmethod options ((object instance-builder))
@@ -15030,7 +15030,7 @@ Calls the openDAQ C function daqInstanceBuilder_getModulePathsList()."
 @param[out] options The dictionary of instance options
 
 Calls the openDAQ C function daqInstanceBuilder_getOptions()."
-  (as-hashtable-of (wrap (opendaq.low-level:instance-builder/get-options (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:instance-builder/get-options (%require-live-pointer object)) 'dict) 'string-object 'base-object)
 )
 
 (defgeneric root-device (object)
@@ -15352,7 +15352,7 @@ module => daqModule_getAvailableServerTypes()
 @param[out] serverTypes The dictionary of available server types.
 
 Calls the openDAQ C function daqInstance_getAvailableServerTypes()."
-  (as-hashtable-of (wrap (opendaq.low-level:instance/get-available-server-types (%require-live-pointer object)) 'dict) 'daq-string-object 'server-type)
+  (as-hashtable-of (wrap (opendaq.low-level:instance/get-available-server-types (%require-live-pointer object)) 'dict) 'string-object 'server-type)
 )
 
 (defun instance-interface-id ()
@@ -15399,7 +15399,7 @@ Calls the openDAQ C function daqInstance_setRootDevice()."
     (opendaq.low-level:instance/set-root-device (%require-live-pointer object) coerced-connection-string coerced-new-value))
   new-value)
 
-(defmethod equals-value ((object daq-integer) value)
+(defmethod equals-value ((object integer-object) value)
   "Compares stored int value to the int parameter.
 @param value Value for comparison.
 @param[out] equals The result of the comparison.
@@ -15410,7 +15410,7 @@ Calls the openDAQ C function daqInteger_equalsValue()."
     (not (zerop (opendaq.low-level:integer/equals-value (%require-live-pointer object) coerced-value))))
 )
 
-(defun daq-integer-interface-id ()
+(defun integer-object-interface-id ()
   "Calls the openDAQ C function daqInteger_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
     (opendaq.low-level:integer/get-interface-id intf-id-slot)
@@ -15418,7 +15418,7 @@ Calls the openDAQ C function daqInteger_equalsValue()."
   )
 )
 
-(defmethod value ((object daq-integer))
+(defmethod value ((object integer-object))
   "Gets an int value stored in the object.
 @param[out] value Stored int value.
 Call this method to extract the int value that is stored in the object.
@@ -16458,7 +16458,7 @@ Calls the openDAQ C function daqMirroredInputPortConfig_getRemoteId()."
 @param[out] streamingConnectionStrings The list of streaming connection strings.
 
 Calls the openDAQ C function daqMirroredInputPortConfig_getStreamingSources()."
-  (as-list-of (wrap (opendaq.low-level:mirrored-input-port-config/get-streaming-sources (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:mirrored-input-port-config/get-streaming-sources (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defgeneric (setf active-streaming-source) (new-value object)
@@ -16567,7 +16567,7 @@ Calls the openDAQ C function daqMirroredSignalConfig_getRemoteId()."
 @param[out] streamingConnectionStrings The list of streaming connection strings.
 
 Calls the openDAQ C function daqMirroredSignalConfig_getStreamingSources()."
-  (as-list-of (wrap (opendaq.low-level:mirrored-signal-config/get-streaming-sources (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:mirrored-signal-config/get-streaming-sources (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defmethod (setf active-streaming-source) (new-value (object mirrored-signal-config))
@@ -16826,7 +16826,7 @@ Calls the openDAQ C function daqModuleManagerUtils_createDevices()."
                           (coerced-parent parent :managed-pointer)
                           (coerced-err-codes err-codes :managed-pointer)
                           (coerced-error-infos error-infos :managed-pointer))
-    (as-hashtable-of (wrap (opendaq.low-level:module-manager-utils/create-devices (%require-live-pointer object) coerced-connection-args coerced-parent coerced-err-codes coerced-error-infos) 'dict) 'daq-string-object 'device))
+    (as-hashtable-of (wrap (opendaq.low-level:module-manager-utils/create-devices (%require-live-pointer object) coerced-connection-args coerced-parent coerced-err-codes coerced-error-infos) 'dict) 'string-object 'device))
 )
 
 (defgeneric create-function-block (object id parent config local-id)
@@ -16904,7 +16904,7 @@ Calls the openDAQ C function daqModuleManagerUtils_createStreaming()."
 Contains information on devices available in all loaded modules.
 
 Calls the openDAQ C function daqModuleManagerUtils_getAvailableDeviceTypes()."
-  (as-hashtable-of (wrap (opendaq.low-level:module-manager-utils/get-available-device-types (%require-live-pointer object)) 'dict) 'daq-string-object 'device-type)
+  (as-hashtable-of (wrap (opendaq.low-level:module-manager-utils/get-available-device-types (%require-live-pointer object)) 'dict) 'string-object 'device-type)
 )
 
 (defmethod available-devices ((object module-manager-utils))
@@ -16922,7 +16922,7 @@ Calls the openDAQ C function daqModuleManagerUtils_getAvailableDevices()."
 Contains information on function blocks available in all loaded modules.
 
 Calls the openDAQ C function daqModuleManagerUtils_getAvailableFunctionBlockTypes()."
-  (as-hashtable-of (wrap (opendaq.low-level:module-manager-utils/get-available-function-block-types (%require-live-pointer object)) 'dict) 'daq-string-object 'function-block-type)
+  (as-hashtable-of (wrap (opendaq.low-level:module-manager-utils/get-available-function-block-types (%require-live-pointer object)) 'dict) 'string-object 'function-block-type)
 )
 
 (defgeneric available-streaming-types (object)
@@ -16932,7 +16932,7 @@ module => daqModule_getAvailableStreamingTypes()
     Returns a dictionary of known and available streaming types that this module (client) can create."))
 (defmethod available-streaming-types ((object module-manager-utils))
   "Calls the openDAQ C function daqModuleManagerUtils_getAvailableStreamingTypes()."
-  (as-hashtable-of (wrap (opendaq.low-level:module-manager-utils/get-available-streaming-types (%require-live-pointer object)) 'dict) 'daq-string-object 'streaming-type)
+  (as-hashtable-of (wrap (opendaq.low-level:module-manager-utils/get-available-streaming-types (%require-live-pointer object)) 'dict) 'string-object 'streaming-type)
 )
 
 (defgeneric discovery-info (object manufacturer serial-number)
@@ -17045,7 +17045,7 @@ Calls the openDAQ C function daqModuleManager_getVendorKeys()."))
 Used to identify which authenticator/certificate was used to authenticate the module.
 
 Calls the openDAQ C function daqModuleManager_getVendorKeys()."
-  (as-hashtable-of (wrap (opendaq.low-level:module-manager/get-vendor-keys (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-string-object)
+  (as-hashtable-of (wrap (opendaq.low-level:module-manager/get-vendor-keys (%require-live-pointer object)) 'dict) 'string-object 'string-object)
 )
 
 (defgeneric load-module (object path)
@@ -17175,7 +17175,7 @@ Calls the openDAQ C function daqModule_createStreaming()."
 @param[out] deviceTypes The dictionary of known device types.
 
 Calls the openDAQ C function daqModule_getAvailableDeviceTypes()."
-  (as-hashtable-of (wrap (opendaq.low-level:module/get-available-device-types (%require-live-pointer object)) 'dict) 'daq-string-object 'device-type)
+  (as-hashtable-of (wrap (opendaq.low-level:module/get-available-device-types (%require-live-pointer object)) 'dict) 'string-object 'device-type)
 )
 
 (defmethod available-devices ((object module))
@@ -17191,7 +17191,7 @@ Calls the openDAQ C function daqModule_getAvailableDevices()."
 @param[out] functionBlockTypes The dictionary of known function block types.
 
 Calls the openDAQ C function daqModule_getAvailableFunctionBlockTypes()."
-  (as-hashtable-of (wrap (opendaq.low-level:module/get-available-function-block-types (%require-live-pointer object)) 'dict) 'daq-string-object 'function-block-type)
+  (as-hashtable-of (wrap (opendaq.low-level:module/get-available-function-block-types (%require-live-pointer object)) 'dict) 'string-object 'function-block-type)
 )
 
 (defmethod available-server-types ((object module))
@@ -17199,7 +17199,7 @@ Calls the openDAQ C function daqModule_getAvailableFunctionBlockTypes()."
 @param[out] serverTypes The dictionary of known server types.
 
 Calls the openDAQ C function daqModule_getAvailableServerTypes()."
-  (as-hashtable-of (wrap (opendaq.low-level:module/get-available-server-types (%require-live-pointer object)) 'dict) 'daq-string-object 'server-type)
+  (as-hashtable-of (wrap (opendaq.low-level:module/get-available-server-types (%require-live-pointer object)) 'dict) 'string-object 'server-type)
 )
 
 (defmethod available-streaming-types ((object module))
@@ -17207,7 +17207,7 @@ Calls the openDAQ C function daqModule_getAvailableServerTypes()."
 @param[out] streamingTypes The dictionary of known streaming types.
 
 Calls the openDAQ C function daqModule_getAvailableStreamingTypes()."
-  (as-hashtable-of (wrap (opendaq.low-level:module/get-available-streaming-types (%require-live-pointer object)) 'dict) 'daq-string-object 'streaming-type)
+  (as-hashtable-of (wrap (opendaq.low-level:module/get-available-streaming-types (%require-live-pointer object)) 'dict) 'string-object 'streaming-type)
 )
 
 (defun module-interface-id ()
@@ -17228,7 +17228,7 @@ Calls the openDAQ C function daqModule_getLicenseConfig()."))
 @param[out] licenseConfig Previously used config.
 
 Calls the openDAQ C function daqModule_getLicenseConfig()."
-  (as-hashtable-of (wrap (opendaq.low-level:module/get-license-config (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-string-object)
+  (as-hashtable-of (wrap (opendaq.low-level:module/get-license-config (%require-live-pointer object)) 'dict) 'string-object 'string-object)
 )
 
 (defmethod module-info ((object module))
@@ -17490,7 +17490,7 @@ Calls the openDAQ C function daqMultiReaderBuilder_getTickOffsetTolerance()."))
 @param offsetTolerance[out] Ratio that define offset tolerance as a fraction of domain unit.
 
 Calls the openDAQ C function daqMultiReaderBuilder_getTickOffsetTolerance()."
-  (wrap (opendaq.low-level:multi-reader-builder/get-tick-offset-tolerance (%require-live-pointer object)) 'daq-ratio)
+  (wrap (opendaq.low-level:multi-reader-builder/get-tick-offset-tolerance (%require-live-pointer object)) 'ratio-object)
 )
 
 (defmethod value-read-type ((object multi-reader-builder))
@@ -17664,7 +17664,7 @@ Calls the openDAQ C function daqMultiReaderStatus_getEventPackets()."))
 @param[out] eventPackets The dictionary with global id of input port and the corresponding event packet.
 
 Calls the openDAQ C function daqMultiReaderStatus_getEventPackets()."
-  (as-hashtable-of (wrap (opendaq.low-level:multi-reader-status/get-event-packets (%require-live-pointer object)) 'dict) 'daq-string-object 'event-packet)
+  (as-hashtable-of (wrap (opendaq.low-level:multi-reader-status/get-event-packets (%require-live-pointer object)) 'dict) 'string-object 'event-packet)
 )
 
 (defun multi-reader-status-interface-id ()
@@ -17787,7 +17787,7 @@ Calls the openDAQ C function daqMultiReader_getOrigin()."
 @param resolution The aligned resolution used for all read signals.
 
 Calls the openDAQ C function daqMultiReader_getTickResolution()."
-  (wrap (opendaq.low-level:multi-reader/get-tick-resolution (%require-live-pointer object)) 'daq-ratio)
+  (wrap (opendaq.low-level:multi-reader/get-tick-resolution (%require-live-pointer object)) 'ratio-object)
 )
 
 (defgeneric multi-reader-read (object samples count timeout-ms)
@@ -17969,7 +17969,7 @@ Calls the openDAQ C function daqNetworkInterface_submitConfiguration()."
 @return OPENDAQ_SUCCESS if succeeded, error code otherwise.
 
 Calls the openDAQ C function daqNumber_getFloatValue()."))
-(defmethod float-value ((object daq-number))
+(defmethod float-value ((object number-object))
   "Gets a value stored in the object as a floating point value.
 @param[out] value Stored value as a floating point.
 @return OPENDAQ_SUCCESS if succeeded, error code otherwise.
@@ -17978,7 +17978,7 @@ Calls the openDAQ C function daqNumber_getFloatValue()."
   (opendaq.low-level:number/get-float-value (%require-live-pointer object))
 )
 
-(defmethod int-value ((object daq-number))
+(defmethod int-value ((object number-object))
   "Gets a value stored in the object as an integer value.
 @param[out] value Stored value as an integer.
 @return OPENDAQ_SUCCESS if succeeded, error code otherwise.
@@ -17987,7 +17987,7 @@ Calls the openDAQ C function daqNumber_getIntValue()."
   (opendaq.low-level:number/get-int-value (%require-live-pointer object))
 )
 
-(defun daq-number-interface-id ()
+(defun number-object-interface-id ()
   "Calls the openDAQ C function daqNumber_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
     (opendaq.low-level:number/get-interface-id intf-id-slot)
@@ -18396,7 +18396,7 @@ Calls the openDAQ C function daqPermissionsInternal_getAssigned()."))
 @param permissions[out] A dictionary of assigned permissions for each group.
 
 Calls the openDAQ C function daqPermissionsInternal_getAssigned()."
-  (as-hashtable-of (wrap (opendaq.low-level:permissions-internal/get-assigned (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-integer)
+  (as-hashtable-of (wrap (opendaq.low-level:permissions-internal/get-assigned (%require-live-pointer object)) 'dict) 'string-object 'integer-object)
 )
 
 (defun permissions-internal-interface-id ()
@@ -18417,7 +18417,7 @@ Calls the openDAQ C function daqPermissions_getAllowed()."))
 @param permissions[out] A dictionary of allowed permissions for each group.
 
 Calls the openDAQ C function daqPermissions_getAllowed()."
-  (as-hashtable-of (wrap (opendaq.low-level:permissions/get-allowed (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-integer)
+  (as-hashtable-of (wrap (opendaq.low-level:permissions/get-allowed (%require-live-pointer object)) 'dict) 'string-object 'integer-object)
 )
 
 (defgeneric denied (object)
@@ -18430,7 +18430,7 @@ Calls the openDAQ C function daqPermissions_getDenied()."))
 @param permissions[out] A dictionary of denied permissions for each group.
 
 Calls the openDAQ C function daqPermissions_getDenied()."
-  (as-hashtable-of (wrap (opendaq.low-level:permissions/get-denied (%require-live-pointer object)) 'dict) 'daq-string-object 'daq-integer)
+  (as-hashtable-of (wrap (opendaq.low-level:permissions/get-denied (%require-live-pointer object)) 'dict) 'string-object 'integer-object)
 )
 
 (defgeneric inherited (object)
@@ -18560,7 +18560,7 @@ property => daqProperty_getMaxValue()
 @param[out] max The Maximum value of the Property.
 
 Calls the openDAQ C function daqPropertyBuilder_getMaxValue()."
-  (wrap (opendaq.low-level:property-builder/get-max-value (%require-live-pointer object)) 'daq-number)
+  (wrap (opendaq.low-level:property-builder/get-max-value (%require-live-pointer object)) 'number-object)
 )
 
 (defgeneric min-value (object)
@@ -18574,7 +18574,7 @@ property => daqProperty_getMinValue()
 @param[out] min The Minimum value of the Property.
 
 Calls the openDAQ C function daqPropertyBuilder_getMinValue()."
-  (wrap (opendaq.low-level:property-builder/get-min-value (%require-live-pointer object)) 'daq-number)
+  (wrap (opendaq.low-level:property-builder/get-min-value (%require-live-pointer object)) 'number-object)
 )
 
 (defmethod name ((object property-builder))
@@ -18664,7 +18664,7 @@ property => daqProperty_getReadOnly()
 @param[out] readOnly True if the Property is a read-only property; false otherwise.
 
 Calls the openDAQ C function daqPropertyBuilder_getReadOnly()."
-  (wrap (opendaq.low-level:property-builder/get-read-only (%require-live-pointer object)) 'daq-boolean)
+  (wrap (opendaq.low-level:property-builder/get-read-only (%require-live-pointer object)) 'boolean-object)
 )
 
 (defgeneric referenced-property (object)
@@ -18752,7 +18752,7 @@ Calls the openDAQ C function daqPropertyBuilder_getValueType()."
 @param[out] visible True if the Property is visible; false otherwise.
 
 Calls the openDAQ C function daqPropertyBuilder_getVisible()."
-  (wrap (opendaq.low-level:property-builder/get-visible (%require-live-pointer object)) 'daq-boolean)
+  (wrap (opendaq.low-level:property-builder/get-visible (%require-live-pointer object)) 'boolean-object)
 )
 
 (defgeneric (setf callable-info) (new-value object)
@@ -19170,7 +19170,7 @@ Calls the openDAQ C function daqPropertyInternal_getDescriptionUnresolved()."
   (:documentation "Calls the openDAQ C function daqPropertyInternal_getMaxValueNoLock()."))
 (defmethod max-value-no-lock ((object property-internal))
   "Calls the openDAQ C function daqPropertyInternal_getMaxValueNoLock()."
-  (wrap (opendaq.low-level:property-internal/get-max-value-no-lock (%require-live-pointer object)) 'daq-number)
+  (wrap (opendaq.low-level:property-internal/get-max-value-no-lock (%require-live-pointer object)) 'number-object)
 )
 
 (defgeneric max-value-unresolved (object)
@@ -19181,14 +19181,14 @@ Calls the openDAQ C function daqPropertyInternal_getMaxValueUnresolved()."))
   "Gets the Property max value in an as either a Number or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getMaxValueUnresolved()."
-  (wrap (opendaq.low-level:property-internal/get-max-value-unresolved (%require-live-pointer object)) 'daq-number)
+  (wrap (opendaq.low-level:property-internal/get-max-value-unresolved (%require-live-pointer object)) 'number-object)
 )
 
 (defgeneric min-value-no-lock (object)
   (:documentation "Calls the openDAQ C function daqPropertyInternal_getMinValueNoLock()."))
 (defmethod min-value-no-lock ((object property-internal))
   "Calls the openDAQ C function daqPropertyInternal_getMinValueNoLock()."
-  (wrap (opendaq.low-level:property-internal/get-min-value-no-lock (%require-live-pointer object)) 'daq-number)
+  (wrap (opendaq.low-level:property-internal/get-min-value-no-lock (%require-live-pointer object)) 'number-object)
 )
 
 (defgeneric min-value-unresolved (object)
@@ -19199,7 +19199,7 @@ Calls the openDAQ C function daqPropertyInternal_getMinValueUnresolved()."))
   "Gets the Property min value in an as either a Number or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getMinValueUnresolved()."
-  (wrap (opendaq.low-level:property-internal/get-min-value-unresolved (%require-live-pointer object)) 'daq-number)
+  (wrap (opendaq.low-level:property-internal/get-min-value-unresolved (%require-live-pointer object)) 'number-object)
 )
 
 (defgeneric read-only-no-lock (object)
@@ -19217,7 +19217,7 @@ Calls the openDAQ C function daqPropertyInternal_getReadOnlyUnresolved()."))
   "Gets the Property read-only field in an as either a Boolean or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getReadOnlyUnresolved()."
-  (wrap (opendaq.low-level:property-internal/get-read-only-unresolved (%require-live-pointer object)) 'daq-boolean)
+  (wrap (opendaq.low-level:property-internal/get-read-only-unresolved (%require-live-pointer object)) 'boolean-object)
 )
 
 (defgeneric referenced-property-no-lock (object)
@@ -19343,7 +19343,7 @@ Calls the openDAQ C function daqPropertyInternal_getVisibleUnresolved()."))
   "Gets the Property visible field in an as either a Boolean or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getVisibleUnresolved()."
-  (wrap (opendaq.low-level:property-internal/get-visible-unresolved (%require-live-pointer object)) 'daq-boolean)
+  (wrap (opendaq.low-level:property-internal/get-visible-unresolved (%require-live-pointer object)) 'boolean-object)
 )
 
 (defgeneric override-default-value (object new-default-value)
@@ -19439,7 +19439,7 @@ Calls the openDAQ C function daqPropertyObjectClassBuilder_getProperties()."
   (declare (ignore include-inherited))
   (when include-inherited-suppliedp
     (error "PROPERTIES is not applicable with a INCLUDE-INHERITED argument for ~S." 'property-object-class-builder))
-  (as-hashtable-of (wrap (opendaq.low-level:property-object-class-builder/get-properties (%require-live-pointer object)) 'dict) 'daq-string-object 'property)
+  (as-hashtable-of (wrap (opendaq.low-level:property-object-class-builder/get-properties (%require-live-pointer object)) 'dict) 'string-object 'property)
 )
 
 (defgeneric property-order (object)
@@ -19452,7 +19452,7 @@ Calls the openDAQ C function daqPropertyObjectClassBuilder_getPropertyOrder().")
 @param[out] orderedPropertyNames A list of names of properties. The order of the list is applied to the class's properties.
 
 Calls the openDAQ C function daqPropertyObjectClassBuilder_getPropertyOrder()."
-  (as-list-of (wrap (opendaq.low-level:property-object-class-builder/get-property-order (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:property-object-class-builder/get-property-order (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defgeneric remove-property (object property-name)
@@ -20561,7 +20561,7 @@ Calls the openDAQ C function daqProperty_getKeyType()."
 @param[out] max The Maximum value of the Property.
 
 Calls the openDAQ C function daqProperty_getMaxValue()."
-  (wrap (opendaq.low-level:property/get-max-value (%require-live-pointer object)) 'daq-number)
+  (wrap (opendaq.low-level:property/get-max-value (%require-live-pointer object)) 'number-object)
 )
 
 (defmethod min-value ((object property))
@@ -20569,7 +20569,7 @@ Calls the openDAQ C function daqProperty_getMaxValue()."
 @param[out] min The Minimum value of the Property.
 
 Calls the openDAQ C function daqProperty_getMinValue()."
-  (wrap (opendaq.low-level:property/get-min-value (%require-live-pointer object)) 'daq-number)
+  (wrap (opendaq.low-level:property/get-min-value (%require-live-pointer object)) 'number-object)
 )
 
 (defmethod name ((object property))
@@ -20759,7 +20759,7 @@ Calls the openDAQ C function daqRange_getHighValue()."))
   "Gets the upper boundary value of the range.
 
 Calls the openDAQ C function daqRange_getHighValue()."
-  (wrap (opendaq.low-level:range/get-high-value (%require-live-pointer object)) 'daq-number)
+  (wrap (opendaq.low-level:range/get-high-value (%require-live-pointer object)) 'number-object)
 )
 
 (defun range-interface-id ()
@@ -20778,7 +20778,7 @@ Calls the openDAQ C function daqRange_getLowValue()."))
   "Gets the lower boundary value of the range.
 
 Calls the openDAQ C function daqRange_getLowValue()."
-  (wrap (opendaq.low-level:range/get-low-value (%require-live-pointer object)) 'daq-number)
+  (wrap (opendaq.low-level:range/get-low-value (%require-live-pointer object)) 'number-object)
 )
 
 (defgeneric denominator (object)
@@ -20786,7 +20786,7 @@ Calls the openDAQ C function daqRange_getLowValue()."
 @param[out] denominator Denominator value.
 
 Calls the openDAQ C function daqRatio_getDenominator()."))
-(defmethod denominator ((object daq-ratio))
+(defmethod denominator ((object ratio-object))
   "Gets denominator part.
 @param[out] denominator Denominator value.
 
@@ -20794,7 +20794,7 @@ Calls the openDAQ C function daqRatio_getDenominator()."
   (opendaq.low-level:ratio/get-denominator (%require-live-pointer object))
 )
 
-(defun daq-ratio-interface-id ()
+(defun ratio-object-interface-id ()
   "Calls the openDAQ C function daqRatio_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
     (opendaq.low-level:ratio/get-interface-id intf-id-slot)
@@ -20807,7 +20807,7 @@ Calls the openDAQ C function daqRatio_getDenominator()."
 @param[out] numerator Numerator value.
 
 Calls the openDAQ C function daqRatio_getNumerator()."))
-(defmethod numerator ((object daq-ratio))
+(defmethod numerator ((object ratio-object))
   "Gets numerator part.
 @param[out] numerator Numerator value.
 
@@ -20822,14 +20822,14 @@ Call this method to reduce stored rational number to the lowest terms possible.
 Example: 10/100 is reduced to 1/10.
 
 Calls the openDAQ C function daqRatio_simplify()."))
-(defmethod simplify ((object daq-ratio))
+(defmethod simplify ((object ratio-object))
   "Simplifies rational number if possible and returns the simplified ratio as a new object.
 @param[out] simplifiedRatio the simplified ratio.
 Call this method to reduce stored rational number to the lowest terms possible.
 Example: 10/100 is reduced to 1/10.
 
 Calls the openDAQ C function daqRatio_simplify()."
-  (wrap (opendaq.low-level:ratio/simplify (%require-live-pointer object)) 'daq-ratio)
+  (wrap (opendaq.low-level:ratio/simplify (%require-live-pointer object)) 'ratio-object)
 )
 
 (defgeneric domain-transform-function (object)
@@ -20842,7 +20842,7 @@ Calls the openDAQ C function daqReaderConfig_getDomainTransformFunction()."))
 @param[out] transform The function performing the post-processing or @c nullptr if not assigned.
 
 Calls the openDAQ C function daqReaderConfig_getDomainTransformFunction()."
-  (wrap (opendaq.low-level:reader-config/get-domain-transform-function (%require-live-pointer object)) 'daq-function)
+  (wrap (opendaq.low-level:reader-config/get-domain-transform-function (%require-live-pointer object)) 'function-object)
 )
 
 (defmethod input-ports ((object reader-config) &optional (search-filter nil search-filter-suppliedp))
@@ -20889,7 +20889,7 @@ Calls the openDAQ C function daqReaderConfig_getValueTransformFunction()."))
 @param[out] transform The function performing the post-processing or @c nullptr if not assigned.
 
 Calls the openDAQ C function daqReaderConfig_getValueTransformFunction()."
-  (wrap (opendaq.low-level:reader-config/get-value-transform-function (%require-live-pointer object)) 'daq-function)
+  (wrap (opendaq.low-level:reader-config/get-value-transform-function (%require-live-pointer object)) 'function-object)
 )
 
 (defgeneric mark-as-invalid (object)
@@ -20932,7 +20932,7 @@ Calls the openDAQ C function daqReaderStatus_getOffset()."
   (declare (ignore domain-start))
   (when domain-start-suppliedp
     (error "OFFSET is not applicable with a DOMAIN-START argument for ~S." 'reader-status))
-  (wrap (opendaq.low-level:reader-status/get-offset (%require-live-pointer object)) 'daq-number)
+  (wrap (opendaq.low-level:reader-status/get-offset (%require-live-pointer object)) 'number-object)
 )
 
 (defgeneric read-status (object)
@@ -21149,7 +21149,7 @@ between errors (data loss) and resync events. Additionally, if the offset is not
 clients have no way of detecting a resync event in the case of asynchronous signals.
 
 Calls the openDAQ C function daqReferenceDomainInfoBuilder_getReferenceDomainOffset()."
-  (wrap (opendaq.low-level:reference-domain-info-builder/get-reference-domain-offset (%require-live-pointer object)) 'daq-integer)
+  (wrap (opendaq.low-level:reference-domain-info-builder/get-reference-domain-offset (%require-live-pointer object)) 'integer-object)
 )
 
 (defgeneric reference-time-protocol (object)
@@ -21320,7 +21320,7 @@ between errors (data loss) and resync events. Additionally, if the offset is not
 clients have no way of detecting a resync event in the case of asynchronous signals.
 
 Calls the openDAQ C function daqReferenceDomainInfo_getReferenceDomainOffset()."
-  (wrap (opendaq.low-level:reference-domain-info/get-reference-domain-offset (%require-live-pointer object)) 'daq-integer)
+  (wrap (opendaq.low-level:reference-domain-info/get-reference-domain-offset (%require-live-pointer object)) 'integer-object)
 )
 
 (defmethod reference-time-protocol ((object reference-domain-info))
@@ -21555,7 +21555,7 @@ Calls the openDAQ C function daqScalingBuilder_getOutputDataType()."
 @param[out] parameters The list of parameters. All elements are Number types.
 
 Calls the openDAQ C function daqScalingBuilder_getParameters()."
-  (as-hashtable-of (wrap (opendaq.low-level:scaling-builder/get-parameters (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:scaling-builder/get-parameters (%require-live-pointer object)) 'dict) 'string-object 'base-object)
 )
 
 (defgeneric scaling-type (object)
@@ -21751,7 +21751,7 @@ Calls the openDAQ C function daqScaling_getOutputSampleType()."
 @param[out] parameters The dictionary of parameters.
 
 Calls the openDAQ C function daqScaling_getParameters()."
-  (as-hashtable-of (wrap (opendaq.low-level:scaling/get-parameters (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:scaling/get-parameters (%require-live-pointer object)) 'dict) 'string-object 'base-object)
 )
 
 (defmethod scaling-type ((object scaling))
@@ -22568,7 +22568,7 @@ Calls the openDAQ C function daqServerCapability_getAddresses()."))
 @param[out] addresses The device's list of addresses (hosts)
 
 Calls the openDAQ C function daqServerCapability_getAddresses()."
-  (as-list-of (wrap (opendaq.low-level:server-capability/get-addresses (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:server-capability/get-addresses (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defmethod connection-string ((object server-capability))
@@ -22589,7 +22589,7 @@ Calls the openDAQ C function daqServerCapability_getConnectionStrings()."))
 @param[out] connectionStrings The connection string of the device (URL to connect).
 
 Calls the openDAQ C function daqServerCapability_getConnectionStrings()."
-  (as-list-of (wrap (opendaq.low-level:server-capability/get-connection-strings (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:server-capability/get-connection-strings (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defgeneric connection-type (object)
@@ -22636,7 +22636,7 @@ Calls the openDAQ C function daqServerCapability_getPort()."))
 @param[out] port The port of the device.
 
 Calls the openDAQ C function daqServerCapability_getPort()."
-  (wrap (opendaq.low-level:server-capability/get-port (%require-live-pointer object)) 'daq-integer)
+  (wrap (opendaq.low-level:server-capability/get-port (%require-live-pointer object)) 'integer-object)
 )
 
 (defgeneric prefix (object)
@@ -23700,7 +23700,7 @@ Call this method to extract the string value that is stored in the object. Metho
 value as a pointer to 8-bit char type.
 
 Calls the openDAQ C function daqString_getCharPtr()."))
-(defmethod char-ptr ((object daq-string-object))
+(defmethod char-ptr ((object string-object))
   "Gets a string value stored in the object.
 @param[out] value Stored string value.
 @return OPENDAQ_SUCCESS if succeeded, error code otherwise.
@@ -23711,7 +23711,7 @@ Calls the openDAQ C function daqString_getCharPtr()."
   (wrap (opendaq.low-level:string/get-char-ptr (%require-live-pointer object)) 'const-char-ptr)
 )
 
-(defun daq-string-object-interface-id ()
+(defun string-object-interface-id ()
   "Calls the openDAQ C function daqString_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
     (opendaq.low-level:string/get-interface-id intf-id-slot)
@@ -23727,7 +23727,7 @@ Call this method to get the length of the string. Null char terminator is not in
 the size of the string.
 
 Calls the openDAQ C function daqString_getLength()."))
-(defmethod length ((object daq-string-object))
+(defmethod length ((object string-object))
   "Gets length of string.
 @param[out] size The size of the string.
 @return OPENDAQ_SUCCESS if succeeded, error code otherwise.
@@ -23761,7 +23761,7 @@ Calls the openDAQ C function daqStructBuilder_get()."
 @param[out] dictionary The Dictionary object with field names as keys, and field values as its values.
 
 Calls the openDAQ C function daqStructBuilder_getAsDictionary()."
-  (as-hashtable-of (wrap (opendaq.low-level:struct-builder/get-as-dictionary (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:struct-builder/get-as-dictionary (%require-live-pointer object)) 'dict) 'string-object 'base-object)
 )
 
 (defgeneric field-names (object)
@@ -23780,7 +23780,7 @@ The list of names will be of equal length to the list of values. Additionally, t
 index corresponds to the value stored in the list of values.
 
 Calls the openDAQ C function daqStructBuilder_getFieldNames()."
-  (as-list-of (wrap (opendaq.low-level:struct-builder/get-field-names (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:struct-builder/get-field-names (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defgeneric field-values (object values)
@@ -23879,7 +23879,7 @@ Calls the openDAQ C function daqStructType_getFieldDefaultValues()."
 @param[out] names The list of field names (String objects)
 
 Calls the openDAQ C function daqStructType_getFieldNames()."
-  (as-list-of (wrap (opendaq.low-level:struct-type/get-field-names (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:struct-type/get-field-names (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defgeneric field-types (object)
@@ -23892,7 +23892,7 @@ Calls the openDAQ C function daqStructType_getFieldTypes()."))
 @param[out] types The list of field types (Type objects)
 
 Calls the openDAQ C function daqStructType_getFieldTypes()."
-  (as-list-of (wrap (opendaq.low-level:struct-type/get-field-types (%require-live-pointer object)) 'object-list) 'daq-type)
+  (as-list-of (wrap (opendaq.low-level:struct-type/get-field-types (%require-live-pointer object)) 'object-list) 'type-object)
 )
 
 (defun struct-type-interface-id ()
@@ -23918,7 +23918,7 @@ Calls the openDAQ C function daqStruct_get()."
 @param[out] dictionary The Dictionary object with field names as keys, and field values as its values.
 
 Calls the openDAQ C function daqStruct_getAsDictionary()."
-  (as-hashtable-of (wrap (opendaq.low-level:struct/get-as-dictionary (%require-live-pointer object)) 'dict) 'daq-string-object 'base-object)
+  (as-hashtable-of (wrap (opendaq.low-level:struct/get-as-dictionary (%require-live-pointer object)) 'dict) 'string-object 'base-object)
 )
 
 (defmethod field-names ((object struct))
@@ -23928,7 +23928,7 @@ The list of names will be of equal length to the list of values. Additionally, t
 index corresponds to the value stored in the list of values.
 
 Calls the openDAQ C function daqStruct_getFieldNames()."
-  (as-list-of (wrap (opendaq.low-level:struct/get-field-names (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:struct/get-field-names (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defmethod field-values ((object struct) values)
@@ -24058,7 +24058,7 @@ Calls the openDAQ C function daqSyncComponent_getInterfaces()."))
 @param[out] interfaces List of interfaces associated with this component.
 
 Calls the openDAQ C function daqSyncComponent_getInterfaces()."
-  (as-hashtable-of (wrap (opendaq.low-level:sync-component/get-interfaces (%require-live-pointer object)) 'dict) 'daq-string-object 'property-object)
+  (as-hashtable-of (wrap (opendaq.low-level:sync-component/get-interfaces (%require-live-pointer object)) 'dict) 'string-object 'property-object)
 )
 
 (defgeneric selected-source (object)
@@ -24189,7 +24189,7 @@ Calls the openDAQ C function daqTags_getList()."))
 @param[out] value The list of tag strings.
 
 Calls the openDAQ C function daqTags_getList()."
-  (as-list-of (wrap (opendaq.low-level:tags/get-list (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:tags/get-list (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defgeneric query (object query)
@@ -24549,7 +24549,7 @@ Calls the openDAQ C function daqTypeManager_getType()."))
 
 Calls the openDAQ C function daqTypeManager_getType()."
   (with-daq-boxed-values ((coerced-type-name type-name :daq-string))
-    (wrap (opendaq.low-level:type-manager/get-type (%require-live-pointer object) coerced-type-name) 'daq-type))
+    (wrap (opendaq.low-level:type-manager/get-type (%require-live-pointer object) coerced-type-name) 'type-object))
 )
 
 (defgeneric types (object)
@@ -24562,7 +24562,7 @@ Calls the openDAQ C function daqTypeManager_getTypes()."))
 @param[out] types The list of all added Types.
 
 Calls the openDAQ C function daqTypeManager_getTypes()."
-  (as-list-of (wrap (opendaq.low-level:type-manager/get-types (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:type-manager/get-types (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defgeneric has-type (object type-name)
@@ -24601,7 +24601,7 @@ Calls the openDAQ C function daqTypeManager_removeType()."
     (opendaq.low-level:type-manager/remove-type (%require-live-pointer object) coerced-type-name))
 )
 
-(defun daq-type-interface-id ()
+(defun type-object-interface-id ()
   "Calls the openDAQ C function daqType_getInterfaceId()."
   (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
     (opendaq.low-level:type/get-interface-id intf-id-slot)
@@ -24609,7 +24609,7 @@ Calls the openDAQ C function daqTypeManager_removeType()."
   )
 )
 
-(defmethod name ((object daq-type))
+(defmethod name ((object type-object))
   "Gets the name of the Type
 @param[out] typeName The name of the Type.
 
@@ -24932,7 +24932,7 @@ Calls the openDAQ C function daqUser_getGroups()."))
 @param password[out] groups The list of group IDs which the user belongs to.
 
 Calls the openDAQ C function daqUser_getGroups()."
-  (as-list-of (wrap (opendaq.low-level:user/get-groups (%require-live-pointer object)) 'object-list) 'daq-string-object)
+  (as-list-of (wrap (opendaq.low-level:user/get-groups (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defun user-interface-id ()
@@ -25176,6 +25176,8 @@ Calls the openDAQ C function daqWork_execute()."
          block-reader/from-existing
          block-reader/from-port
          block-size
+         boolean-object
+         boolean-object-interface-id
          build
          call
          call-custom-proc
@@ -25222,8 +25224,8 @@ Calls the openDAQ C function daqWork_execute()."
          complete
          complete-device-capabilities
          complete-server-capability
-         complex-number
-         complex-number-interface-id
+         complex-number-object
+         complex-number-object-interface-id
          component
          component-config
          component-deserialize-context
@@ -25320,22 +25322,6 @@ Calls the openDAQ C function daqWork_execute()."
          custom-components
          custom-data
          custom-info-property-names
-         daq-boolean
-         daq-boolean-interface-id
-         daq-float
-         daq-float-interface-id
-         daq-function
-         daq-integer
-         daq-integer-interface-id
-         daq-number
-         daq-number-interface-id
-         daq-ratio
-         daq-ratio-interface-id
-         daq-string-object
-         daq-string-object-interface-id
-         daq-string-object/string-n
-         daq-type
-         daq-type-interface-id
          data
          data-descriptor
          data-descriptor-builder
@@ -25517,6 +25503,8 @@ Calls the openDAQ C function daqWork_execute()."
          find-component
          find-properties
          find-user
+         float-object
+         float-object-interface-id
          float-value
          flush
          flush-on-level
@@ -25535,6 +25523,7 @@ Calls the openDAQ C function daqWork_execute()."
          function-block-type
          function-block-type-interface-id
          function-blocks
+         function-object
          gap-checking-enabled
          get
          get-read-samples
@@ -25597,6 +25586,8 @@ Calls the openDAQ C function daqWork_execute()."
          instance-interface-id
          instance-root-device
          int-value
+         integer-object
+         integer-object-interface-id
          interfaces
          internal-state
          intf-id
@@ -25770,6 +25761,8 @@ Calls the openDAQ C function daqWork_execute()."
          notify-packet-enqueued
          notify-packet-enqueued-on-this-thread
          notify-packet-enqueued-with-scheduler
+         number-object
+         number-object-interface-id
          numerator
          object-list
          object-list-interface-id
@@ -25928,6 +25921,8 @@ Calls the openDAQ C function daqWork_execute()."
          query
          range
          range-interface-id
+         ratio-object
+         ratio-object-interface-id
          raw-data
          raw-data-size
          raw-last-value
@@ -26163,6 +26158,9 @@ Calls the openDAQ C function daqWork_execute()."
          streaming-sources
          streaming-type
          streaming-type-interface-id
+         string-object
+         string-object-interface-id
+         string-object/string-n
          struct
          struct-builder
          struct-builder-interface-id
@@ -26233,6 +26231,8 @@ Calls the openDAQ C function daqWork_execute()."
          type-manager-private
          type-manager-private-interface-id
          type-manager-type
+         type-object
+         type-object-interface-id
          type-sort
          types
          unit

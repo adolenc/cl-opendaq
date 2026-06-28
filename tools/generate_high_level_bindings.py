@@ -19,22 +19,32 @@ from generate_low_level_bindings import (
 DEFAULT_INCLUDE_DIR = Path(__file__).resolve().parents[1] / "include"
 
 
+# High-level class names that can't use their natural openDAQ-derived name because
+# it collides with a COMMON-LISP symbol (every key here is a CL type specifier, so a
+# CLOS class of that name would force shadowing cl:integer, cl:float, ... and hijack
+# the type specifier package-wide).  We disambiguate with an "-object" suffix instead
+# of shadowing.  Names that don't collide (e.g. complex-number from IComplexNumber)
+# are not listed and keep their natural name.
 CLASS_NAME_OVERRIDES = {
-    "boolean": "daq-boolean",
+    "boolean": "boolean-object",
+    # complex-number (from IComplexNumber) does not collide with any CL symbol, so it
+    # needs no rename for correctness -- it is listed only to carry the "-object" suffix
+    # for consistency with the other boxed primitives (integer-object, float-object, ...).
+    "complex-number": "complex-number-object",
     # openDAQ names the boxed-float interface IFloatObject (so its functions are
-    # daqFloatObject_*, which would derive the class FLOAT-OBJECT) while the value
-    # type is daqFloat (which derives FLOAT).  Map both onto DAQ-FLOAT so the class,
-    # the daqFloat type, and the unboxer (see PRIMITIVE-TYPE-P) all agree, matching
-    # the DAQ-INTEGER / DAQ-NUMBER family.
-    "float": "daq-float",
-    "float-object": "daq-float",
-    "function": "daq-function",
-    "integer": "daq-integer",
+    # daqFloatObject_*, which already derive the class FLOAT-OBJECT) while the value
+    # type is daqFloat (which would derive FLOAT, a CL collision).  Map both onto
+    # FLOAT-OBJECT so the class, the daqFloat type, and the unboxer (see
+    # PRIMITIVE-TYPE-P) all agree, matching the INTEGER-OBJECT / NUMBER-OBJECT family.
+    "float": "float-object",
+    "float-object": "float-object",
+    "function": "function-object",
+    "integer": "integer-object",
     "list": "object-list",
-    "number": "daq-number",
-    "ratio": "daq-ratio",
-    "string": "daq-string-object",
-    "type": "daq-type",
+    "number": "number-object",
+    "ratio": "ratio-object",
+    "string": "string-object",
+    "type": "type-object",
 }
 
 CLASS_OVERRIDES: dict[str, dict] = {
@@ -103,14 +113,16 @@ MANUAL_METHODS = {
 
 # Functions intentionally dropped because they are exact duplicates of another
 # generated entry.  openDAQ exposes both daqFloatObject_createFloat and
-# daqFloatObject_createFloatObject with identical (obj, value) signatures;
-# createFloat is adopted as the DAQ-FLOAT make-instance constructor, which leaves
-# createFloatObject a redundant CREATE-FLOAT-OBJECT free factory -- suppress it.
+# daqFloatObject_createFloatObject with identical (obj, value) signatures.  Since the
+# class is FLOAT-OBJECT, createFloatObject is the natural make-instance primary (it is
+# the {receiver}/create-{receiver} form select_class_constructors prefers), so suppress
+# the createFloat duplicate -- otherwise it would surface as a redundant FLOAT-OBJECT/FLOAT
+# proxy subclass.
 SUPPRESSED_FUNCTIONS = {
-    "float-object/create-float-object",
-    # createBoolean(value) duplicates createBoolObject(value) (the daq-boolean
+    "float-object/create-float",
+    # createBoolean(value) duplicates createBoolObject(value) (the boolean-object
     # make-instance primary, also what the boxing layer uses); drop the dup so it
-    # does not surface as a redundant daq-boolean/boolean proxy.
+    # does not surface as a redundant boolean-object/boolean proxy.
     "boolean/create-boolean",
     # createComponentDeserializeContext returns two values (the context plus an
     # out intf-id GUID), so it does not fit the single-object make-instance model.

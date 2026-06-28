@@ -49,8 +49,8 @@
         (is (string= "test_user" (daq:username found-user)) "High-level authentication providers should resolve users by name.")))))
 
 (test high-level-coreobjects-property-builders
-  (let* ((default-value (make-instance 'daq:daq-integer :value 10))
-         (visible-flag (make-instance 'daq:daq-boolean :value t))
+  (let* ((default-value (make-instance 'daq:integer-object :value 10))
+         (visible-flag (make-instance 'daq:boolean-object :value t))
          (property (make-instance 'daq:property/int :name "test_property" :default-value default-value :visible visible-flag))
          (property-builder (make-instance 'daq:property-builder/int :name "test_property" :default-value default-value)))
     (setf (daq:visible property-builder) visible-flag)
@@ -81,14 +81,14 @@
         (linear-rule (make-instance 'daq:data-rule/linear :delta 2 :start 0)))
     (is (typep int-property 'daq:property) "A property/int proxy should be a subclass instance of property.")
     (is (= 10 (%boxed-integer-value (daq:default-value int-property))) "property/int should box a plain integer default value.")
-    (is (= 1.5d0 (daq:value-of (daq:default-value float-property) 'daq:daq-float)) "property/float should box a plain float default value.")
+    (is (= 1.5d0 (daq:value-of (daq:default-value float-property) 'daq:float-object)) "property/float should box a plain float default value.")
     (is (not (%boxed-boolean-value (daq:default-value bool-property))) "property/bool should box a plain boolean default value.")
     (is (typep linear-rule 'daq:data-rule) "data-rule/linear should accept plain numeric arguments and build a data-rule.")))
 
 (test high-level-coreobjects-eval-coercer-validator
   (let* ((property-object (make-instance 'daq:property-object))
-         (default-value (make-instance 'daq:daq-integer :value 10))
-         (visible-flag (make-instance 'daq:daq-boolean :value t))
+         (default-value (make-instance 'daq:integer-object :value 10))
+         (visible-flag (make-instance 'daq:boolean-object :value t))
          (property (make-instance 'daq:property/int :name "test_property" :default-value default-value :visible visible-flag))
          (coercer (make-instance 'daq:coercer :eval "value + 2"))
          (validator (make-instance 'daq:validator :eval "value > 5")))
@@ -96,8 +96,8 @@
     (let ((eval-value (make-instance 'daq:eval-value :eval "%test_property")))
       (daq:add-property property-object
                         (make-instance 'daq:property/reference :name "ref_property" :referenced-property-eval eval-value))
-      (let* ((valid-value (make-instance 'daq:daq-integer :value 10))
-             (invalid-value (make-instance 'daq:daq-integer :value 5))
+      (let* ((valid-value (make-instance 'daq:integer-object :value 10))
+             (invalid-value (make-instance 'daq:integer-object :value 5))
              (reference-property (daq:property-value property-object "ref_property"))
              (coerced-value (daq:coerce coercer property-object valid-value)))
         (is (= 10 (%boxed-integer-value reference-property)) "High-level eval-value references should resolve through property-object/property-value.")
@@ -114,11 +114,11 @@
             (pass "High-level validators should signal an openDAQ error for invalid values.")))))))
 
 (test high-level-coreobjects-property-value-event-args
-  (let* ((default-value (make-instance 'daq:daq-integer :value 10))
-         (visible-flag (make-instance 'daq:daq-boolean :value t))
+  (let* ((default-value (make-instance 'daq:integer-object :value 10))
+         (visible-flag (make-instance 'daq:boolean-object :value t))
          (property (make-instance 'daq:property/int :name "test_property" :default-value default-value :visible visible-flag))
-         (old-value (make-instance 'daq:daq-integer :value 20))
-         (new-value (make-instance 'daq:daq-integer :value 30))
+         (old-value (make-instance 'daq:integer-object :value 20))
+         (new-value (make-instance 'daq:integer-object :value 30))
          (event-args (make-instance 'daq:property-value-event-args
                                     :prop property
                                     :value new-value
@@ -140,14 +140,14 @@
   ;; zero-arg specializer (property-value-event-args, padding) and an extra-arg
   ;; specializer (property-object, required PROPERTY-NAME).  Exercise both correct
   ;; arities and both misuse errors (supplied-p rejection / required omission).
-  (let* ((default-value (make-instance 'daq:daq-integer :value 10))
-         (visible-flag (make-instance 'daq:daq-boolean :value t))
+  (let* ((default-value (make-instance 'daq:integer-object :value 10))
+         (visible-flag (make-instance 'daq:boolean-object :value t))
          (property (make-instance 'daq:property/int :name "test_property" :default-value default-value :visible visible-flag))
          (property-object (make-instance 'daq:property-object))
          (event-args (make-instance 'daq:property-value-event-args
                                     :prop property
-                                    :value (make-instance 'daq:daq-integer :value 30)
-                                    :old-value (make-instance 'daq:daq-integer :value 20)
+                                    :value (make-instance 'daq:integer-object :value 30)
+                                    :old-value (make-instance 'daq:integer-object :value 20)
                                     :type :daq-property-event-type-event-type-update
                                     :is-updating nil)))
     (daq:add-property property-object property)

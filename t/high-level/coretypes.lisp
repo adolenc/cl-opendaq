@@ -11,15 +11,15 @@
   (opendaq.low-level:base-object/release-ref args))
 
 (test high-level-coretypes-primitives
-  (let* ((base-object (daq:wrap (opendaq.low-level:base-object/create) 'daq:base-object))
-         (wrapped-ratio (daq:wrap (opendaq.low-level:ratio/create-ratio 8 12) 'daq:daq-ratio))
-         (ratio (make-instance 'daq:daq-ratio :numerator 6 :denominator 9))
+  (let* ((base-object (daq::wrap (opendaq.low-level:base-object/create) 'daq:base-object))
+         (wrapped-ratio (daq::wrap (opendaq.low-level:ratio/create-ratio 8 12) 'daq:ratio-object))
+         (ratio (make-instance 'daq:ratio-object :numerator 6 :denominator 9))
          (simplified (daq:simplify ratio))
-         (boolean (make-instance 'daq:daq-boolean :value nil))
-         (complex-number (make-instance 'daq:complex-number :real 1.0d0 :imaginary 2.0d0))
-         (integer (make-instance 'daq:daq-integer :value 1))
-         (float-object (make-instance 'daq:daq-float :value 1.0d0))
-         (string-object (daq:wrap (opendaq.low-level:make-daq-string "test") 'daq:daq-string-object))
+         (boolean (make-instance 'daq:boolean-object :value nil))
+         (complex-number (make-instance 'daq:complex-number-object :real 1.0d0 :imaginary 2.0d0))
+         (integer (make-instance 'daq:integer-object :value 1))
+         (float-object (make-instance 'daq:float-object :value 1.0d0))
+         (string-object (daq::wrap (opendaq.low-level:make-daq-string "test") 'daq:string-object))
          (simple-type (make-instance 'daq:simple-type :core-type :daq-ct-int))
          (version-info (make-instance 'daq:version-info :major 1 :minor 2 :patch 3))
          (binary-data (make-instance 'daq:binary-data :size 16)))
@@ -47,32 +47,32 @@
   ;; daqRatio should unbox back into a native Lisp ratio through the primitive path.
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list 2/3)
-    (is (= 2/3 (daq:as (daq:pop-front list) 'daq:daq-ratio)) "A boxed daqRatio should unbox into a native Lisp ratio via AS (primitive target)."))
+    (is (= 2/3 (daq:as (daq:pop-front list) 'daq:ratio-object)) "A boxed daqRatio should unbox into a native Lisp ratio via AS (primitive target)."))
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list 1/4)
     (daq:push-back list 3/8)
-    (is (equal '(1/4 3/8) (daq:as-list-of list 'daq:daq-ratio)) "daqRatios should unbox into native Lisp ratios via AS-LIST-OF.")))
+    (is (equal '(1/4 3/8) (daq:as-list-of list 'daq:ratio-object)) "daqRatios should unbox into native Lisp ratios via AS-LIST-OF.")))
 
 (test high-level-coretypes-complex-boxing
   ;; A native Lisp complex passed as an argument should box into a complexNumber,
   ;; mirroring the daqComplexNumber -> Lisp complex unboxing in %BOXED-VALUE.
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list #C(1.0d0 2.0d0))
-    (is (= #C(1.0d0 2.0d0) (daq:as (daq:pop-front list) 'daq:complex-number)) "A boxed complexNumber should unbox into a native Lisp complex via AS (primitive target)."))
+    (is (= #C(1.0d0 2.0d0) (daq:as (daq:pop-front list) 'daq:complex-number-object)) "A boxed complexNumber should unbox into a native Lisp complex via AS (primitive target)."))
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list #C(3.0d0 -4.0d0))
-    (is (equal '(#C(3.0d0 -4.0d0)) (daq:as-list-of list 'daq:complex-number)) "complexNumbers should unbox into native Lisp complexes via AS-LIST-OF.")))
+    (is (equal '(#C(3.0d0 -4.0d0)) (daq:as-list-of list 'daq:complex-number-object)) "complexNumbers should unbox into native Lisp complexes via AS-LIST-OF.")))
 
 (test high-level-coretypes-value-of
   ;; VALUE-OF reads a Lisp value out of a boxed object: from a typed wrapper its
   ;; class is enough, while a generic base-object needs the expected type.
-  (is (= 42 (daq:value-of (make-instance 'daq:daq-integer :value 42))) "value-of should read a daq-integer wrapper as an integer.")
-  (is (= 1.5d0 (daq:value-of (make-instance 'daq:daq-float :value 1.5d0))) "value-of should read a daq-float wrapper as a float.")
-  (is (null (daq:value-of (make-instance 'daq:daq-boolean :value nil))) "value-of should read a false daq-boolean as NIL.")
-  (is (= 1/2 (daq:value-of (make-instance 'daq:daq-ratio :numerator 1 :denominator 2))) "value-of should read a daq-ratio wrapper as a Lisp ratio.")
-  (let ((boxed-string (daq:wrap (opendaq.low-level:make-daq-string "hello") 'daq:base-object)))
-    (is (string= "hello" (daq:value-of boxed-string 'daq:daq-string-object)) "value-of should read a generic base-object as a string given the type."))
-  (signals error (daq:value-of (make-instance 'daq:daq-integer :value 1) 'daq:signal)
+  (is (= 42 (daq:value-of (make-instance 'daq:integer-object :value 42))) "value-of should read a integer-object wrapper as an integer.")
+  (is (= 1.5d0 (daq:value-of (make-instance 'daq:float-object :value 1.5d0))) "value-of should read a float-object wrapper as a float.")
+  (is (null (daq:value-of (make-instance 'daq:boolean-object :value nil))) "value-of should read a false boolean-object as NIL.")
+  (is (= 1/2 (daq:value-of (make-instance 'daq:ratio-object :numerator 1 :denominator 2))) "value-of should read a ratio-object wrapper as a Lisp ratio.")
+  (let ((boxed-string (daq::wrap (opendaq.low-level:make-daq-string "hello") 'daq:base-object)))
+    (is (string= "hello" (daq:value-of boxed-string 'daq:string-object)) "value-of should read a generic base-object as a string given the type."))
+  (signals error (daq:value-of (make-instance 'daq:integer-object :value 1) 'daq:signal)
     "value-of should reject a non-primitive target type."))
 
 (test high-level-coretypes-collections
@@ -125,7 +125,7 @@
   (let* ((event (make-instance 'daq:event))
          (event-args (make-instance 'daq:event-args :event-id 10 :event-name "test_event"))
          (handler (make-instance 'daq:event-handler :call (cffi:callback %high-level-coretypes-on-event)))
-         (sender (daq:wrap (opendaq.low-level:base-object/create) 'daq:base-object)))
+         (sender (daq::wrap (opendaq.low-level:base-object/create) 'daq:base-object)))
     (setf *high-level-coretypes-event-called* nil)
     (is (= 0 (daq:subscriber-count event)) "High-level events should start without subscribers.")
     (is (= 10 (daq:event-id event-args)) "High-level event arguments should expose their numeric event identifier.")
@@ -146,7 +146,7 @@
                                      (declare (ignore sender))
                                      (setf (first captured)
                                            (daq:event-name (daq:as args 'daq:event-args))))))
-         (sender (daq:wrap (opendaq.low-level:base-object/create) 'daq:base-object))
+         (sender (daq::wrap (opendaq.low-level:base-object/create) 'daq:base-object))
          (event-args (make-instance 'daq:event-args :event-id 42 :event-name "fn_event")))
     (is (typep handler 'daq:event-handler) "add-handler with a function should return the created event-handler.")
     (is (= 1 (daq:subscriber-count event)) "add-handler with a function should subscribe it like any other handler.")
@@ -159,7 +159,7 @@
   (let* ((event (make-instance 'daq:event))
          (a nil) (b nil)
          (handler-a (daq:add-handler event (lambda (s args) (declare (ignore s args)) (setf a t))))
-         (sender (daq:wrap (opendaq.low-level:base-object/create) 'daq:base-object))
+         (sender (daq::wrap (opendaq.low-level:base-object/create) 'daq:base-object))
          (event-args (make-instance 'daq:event-args :event-id 1 :event-name "e")))
     (daq:add-handler event (lambda (s args) (declare (ignore s args)) (setf b t)))
     (is (= 2 (daq:subscriber-count event)) "Two function handlers should both subscribe.")
@@ -175,7 +175,7 @@
   (eval
    '(let* ((release-state (list nil))
           (weak-pointer
-            (let ((ratio (make-instance 'daq:daq-ratio
+            (let ((ratio (make-instance 'daq:ratio-object
                                         :numerator 14
                                         :denominator 21
                                         :release-hook (lambda ()

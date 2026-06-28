@@ -27,7 +27,6 @@
            #:denominator
            #:read)
   (:export #:as
-           #:wrap
            #:supports-interface-p
            #:component-type
            #:domain-time-converter

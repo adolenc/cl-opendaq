@@ -51,28 +51,25 @@ The bindings depend only on plain `cffi`. For the one C type passed by value, th
 
 The high-level API insulates you from openDAQ's C types. Arguments accept plain Lisp values (boxing, on input) and return values are plain Lisp types (unboxing, on output); the two directions are inverses, so one table covers both:
 
-| Lisp value | openDAQ type |
-|------------|--------------|
-| `string`   | `daqString` |
-| `integer`  | `daqInteger` |
-| `float`    | `daqFloat` |
-| `ratio`    | `daqRatio` |
-| `t` / `nil` | `daqBool` |
-| `(complex re im)` | `complexNumber` |
-| any `daq` object | the openDAQ object itself (its raw pointer is extracted on input, the result re-wrapped on output) |
+| Lisp value | openDAQ type | Boxed type |
+|------------|--------------|------------|
+| `string`   | `daqString` | `daq:string-object` |
+| `integer`  | `daqInteger` | `daq:integer-object` |
+| `float`    | `daqFloat` | `daq:float-object` |
+| `ratio`    | `daqRatio` | `daq:ratio-object` |
+| `t` / `nil` | `daqBool` | `daq:boolean-object` |
+| `(complex re im)` | `complexNumber` | `daq:complex-number-object` |
+| any `daq` object | its raw pointer | `daq` object |
 
-`daqNumber` is output-only: it unboxes to a `float`, but no Lisp type boxes to it specifically (a `float` always boxes to `daqFloat`).
+`daqNumber` is output-only: it unboxes to a `float`, but no Lisp type boxes to it specifically (a `float` always boxes to `daq:float-object`).
 
-**Manual conversion.** A few functions let you cross the boundary explicitly when needed:
+### Helper functions
 
-- `(daq:as opendaq-obj 'opendaq-type)` - reinterpret an object as `opendaq-type`: a managed type casts the wrapper to that more specific type (only valid when `obj` really is that type), while a boxed-primitive type (`daq-integer`, `daq-string-object`, …) unboxes to the native Lisp value, exactly like `value-of`. This is the same primitive-vs-wrapper rule `as-list-of`/`as-hashtable-of` apply per element.
-- `(daq:supports-interface-p opendaq-obj 'opendaq-type)` - test whether `opendaq-obj` implements an interface
-- `(daq:component-type opendaq-obj)` - the most-derived component interface `opendaq-obj` implements (`daq:channel`, `daq:signal`, `daq:device`, …) as a class symbol, or `nil`
-- `(daq:as-list-of opendaq-obj-list 'opendaq-type)` - object-list to a plain Lisp list, with each element cast/unboxed to the given type
-- `(daq:as-hashtable-of dict 'opendaq-key-type 'opendaq-value-type)` - same, for dicts
-- `(daq:value-of opendaq-obj)` / `(daq:value-of opendaq-obj 'opendaq-type)` - unbox a boxed primitive (number, string, bool, ratio, …) to its Lisp value; the type can be omitted for a typed wrapper but is needed for a generic base-object
-- `(daq:raw-pointer opendaq-obj)` - get the underlying C pointer from any wrapper
-- `(daq:release opendaq-obj)` - manually drop the reference (normally handled by GC finalizers)
+A few functions are implemented manually to help you get out of tricky situations:
+
+- `(daq:as daq-obj 'daq-type)` - reinterpret an object as `daq-type`: a managed type casts the wrapper to that more specific type (only valid when `obj` really is that type), while a boxed-primitive type (`daq:integer-object`, `daq:string-object`, …) unboxes to the native Lisp value
+- `(daq:supports-interface-p daq-obj 'daq-type)` - test whether `daq-obj` implements an interface
+- `(daq:component-type daq-obj)` - the most-derived component interface `daq-obj` implements (`daq:channel`, `daq:signal`, `daq:device`, …) as a class symbol, or `nil`
 - `(daq:domain-tick->timestamp source tick)` - convert a domain tick to a `local-time` timestamp (`source` is a signal, data descriptor, or multi reader; `(daq:domain-time-converter source)` returns a reusable per-tick closure)
 
 ### openDAQ Object Construction
@@ -89,7 +86,7 @@ Some things are not distinct openDAQ interfaces but *variants* of one type that 
 (make-instance 'daq:stream-reader/from-port :port port)   ; an alternate stream-reader constructor
 ```
 
-Each such class is a subclass of the type it builds (`(typep (make-instance 'daq:property/int …) 'daq:property)` is true), so the result works anywhere that type is expected. This covers property builders, data/dimension rules, search filters, scalings, logger sinks, and similar factory-built types. (`apropos` for `/` lists them.)
+Each such class is a subclass of the type it builds (i.e. `(typep (make-instance 'daq:property/int …) 'daq:property)` is true), so the result works anywhere that type is expected. This covers property builders, data/dimension rules, search filters, scalings, logger sinks, and similar factory-built types. (`apropos` for `/` lists them.)
 
 Types that openDAQ constructs from a `Builder` object instead take a `:builder` keyword on their regular `make-instance` rather than a separate class (e.g. `(make-instance 'daq:scaling :builder b)`, with `:builder` taking precedence if the type's direct arguments are also supplied); for `daq:instance` the builder defaults to one pointing at the bundled native modules, so `(make-instance 'daq:instance)` needs no arguments.
 

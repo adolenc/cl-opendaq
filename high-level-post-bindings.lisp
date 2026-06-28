@@ -347,8 +347,8 @@ values use DATA."))
 (defun as (object target-type)
   "Reinterpret a base openDAQ OBJECT as TARGET-TYPE.
 
-If TARGET-TYPE names a boxed primitive (DAQ-INTEGER, DAQ-STRING-OBJECT, DAQ-RATIO,
-COMPLEX-NUMBER, …) the boxed value is unboxed and returned as a native Lisp value,
+If TARGET-TYPE names a boxed primitive (INTEGER-OBJECT, STRING-OBJECT, RATIO-OBJECT,
+COMPLEX-NUMBER-OBJECT, …) the boxed value is unboxed and returned as a native Lisp value,
 exactly as VALUE-OF would, and OBJECT is left intact.  Otherwise OBJECT is
 reinterpreted as the more specific wrapper class TARGET-TYPE, adding a reference so
 the returned wrapper owns its own lifetime.
@@ -406,7 +406,7 @@ their native Lisp equivalents and casting objects to TARGET-TYPE.
   Example: (as-list-of (wrap pointer 'object-list) 'device-info)
             => (#<DEVICE-INFO ...> #<DEVICE-INFO ...>)
 
-  Example: (as-list-of (wrap pointer 'object-list) 'daq-integer)
+  Example: (as-list-of (wrap pointer 'object-list) 'integer-object)
             => (1 2 3)"
   (loop for i below (count object-list)
         collect (%as-consuming (item-at object-list i) target-type)))
