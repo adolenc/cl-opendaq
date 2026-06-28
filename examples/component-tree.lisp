@@ -21,9 +21,7 @@
 their native Lisp value; structured ones are shown as \"<Type>\"."
   (let ((class (daq:core-type->class (daq:value-type property))))
     (if class
-        (format nil "~S" (daq:value-of (daq:property-value property-object
-                                                           (daq:name property))
-                                       class))
+        (format nil "~S" (daq:as (daq:property-value property-object (daq:name property)) class))
         (format nil "<~A>" (type-name (daq:value-type property))))))
 
 (defun draw-properties (component prefix)
