@@ -47,9 +47,7 @@
   ;; daqRatio should unbox back into a native Lisp ratio through the primitive path.
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list 2/3)
-    (let ((popped (daq:as (daq:pop-front list) 'daq:daq-ratio)))
-      (is (= 2 (daq:numerator popped)) "A Lisp ratio argument should box into a daqRatio (numerator preserved).")
-      (is (= 3 (daq:denominator popped)) "A Lisp ratio argument should box into a daqRatio (denominator preserved.)")))
+    (is (= 2/3 (daq:as (daq:pop-front list) 'daq:daq-ratio)) "A boxed daqRatio should unbox into a native Lisp ratio via AS (primitive target)."))
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list 1/4)
     (daq:push-back list 3/8)
@@ -60,9 +58,7 @@
   ;; mirroring the daqComplexNumber -> Lisp complex unboxing in %BOXED-VALUE.
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list #C(1.0d0 2.0d0))
-    (let ((popped (daq:as (daq:pop-front list) 'daq:complex-number)))
-      (is (= 1.0d0 (daq:real popped)) "A Lisp complex argument should box into a complexNumber (real preserved).")
-      (is (= 2.0d0 (daq:imaginary popped)) "A Lisp complex argument should box into a complexNumber (imaginary preserved.)")))
+    (is (= #C(1.0d0 2.0d0) (daq:as (daq:pop-front list) 'daq:complex-number)) "A boxed complexNumber should unbox into a native Lisp complex via AS (primitive target)."))
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list #C(3.0d0 -4.0d0))
     (is (equal '(#C(3.0d0 -4.0d0)) (daq:as-list-of list 'daq:complex-number)) "complexNumbers should unbox into native Lisp complexes via AS-LIST-OF.")))

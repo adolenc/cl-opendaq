@@ -65,7 +65,7 @@ The high-level API insulates you from openDAQ's C types. Arguments accept plain 
 
 **Manual conversion.** A few functions let you cross the boundary explicitly when needed:
 
-- `(daq:as opendaq-obj 'opendaq-type)` - cast a wrapper to a more specific type (only valid when `obj` really is that type)
+- `(daq:as opendaq-obj 'opendaq-type)` - reinterpret an object as `opendaq-type`: a managed type casts the wrapper to that more specific type (only valid when `obj` really is that type), while a boxed-primitive type (`daq-integer`, `daq-string-object`, …) unboxes to the native Lisp value, exactly like `value-of`. This is the same primitive-vs-wrapper rule `as-list-of`/`as-hashtable-of` apply per element.
 - `(daq:supports-interface-p opendaq-obj 'opendaq-type)` - test whether `opendaq-obj` implements an interface
 - `(daq:component-type opendaq-obj)` - the most-derived component interface `opendaq-obj` implements (`daq:channel`, `daq:signal`, `daq:device`, …) as a class symbol, or `nil`
 - `(daq:as-list-of opendaq-obj-list 'opendaq-type)` - object-list to a plain Lisp list, with each element cast/unboxed to the given type

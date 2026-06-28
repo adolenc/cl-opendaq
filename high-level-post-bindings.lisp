@@ -345,15 +345,34 @@ values use DATA."))
 ;;; ---------------------------------------------------------------------------
 
 (defun as (object target-type)
-  "Reinterpret a base openDAQ object as a more specific type.
+  "Reinterpret a base openDAQ OBJECT as TARGET-TYPE.
 
-Adds a reference so the returned wrapper owns its own lifetime.
-TARGET-TYPE is a symbol naming the wrapper class (e.g. 'DEVICE-INFO)."
-  (let ((class (if (symbolp target-type)
-                   (find-class target-type)
-                   target-type)))
-    (add-ref object)
-    (make-instance class :pointer (raw-pointer object))))
+If TARGET-TYPE names a boxed primitive (DAQ-INTEGER, DAQ-STRING-OBJECT, DAQ-RATIO,
+COMPLEX-NUMBER, …) the boxed value is unboxed and returned as a native Lisp value,
+exactly as VALUE-OF would, and OBJECT is left intact.  Otherwise OBJECT is
+reinterpreted as the more specific wrapper class TARGET-TYPE, adding a reference so
+the returned wrapper owns its own lifetime.
+
+This is the same primitive-vs-wrapper choice AS-LIST-OF / AS-HASHTABLE-OF make per
+element, so scalars and collections now convert by one consistent rule: a primitive
+TARGET-TYPE yields a value, a managed one yields a wrapper.  TARGET-TYPE is a symbol
+naming the class (e.g. 'DEVICE-INFO)."
+  (if (primitive-type-p target-type)
+      (%boxed-value object target-type)         ; non-consuming read, like VALUE-OF
+      (let ((class (if (symbolp target-type)
+                       (find-class target-type)
+                       target-type)))
+        (add-ref object)
+        (make-instance class :pointer (raw-pointer object)))))
+
+(defun %as-consuming (object target-type)
+  "Like AS, but for a fresh ITEM-AT / DICT temporary the caller owns and will not
+otherwise release.  For a primitive TARGET-TYPE the value is read and the temporary
+released immediately, rather than left to the GC; for a managed TARGET-TYPE AS adds
+its own reference and the temporary is released by the GC, as before."
+  (if (primitive-type-p target-type)
+      (%unbox-primitive object target-type)
+      (as object target-type)))
 
 (defparameter *queryable-component-types*
   '(channel function-block device signal input-port folder component)
@@ -389,12 +408,8 @@ their native Lisp equivalents and casting objects to TARGET-TYPE.
 
   Example: (as-list-of (wrap pointer 'object-list) 'daq-integer)
             => (1 2 3)"
-  (if (primitive-type-p target-type)
-      (loop for i below (count object-list)
-            for obj = (item-at object-list i)
-            collect (%unbox-primitive obj target-type))
-      (loop for i below (count object-list)
-            collect (as (item-at object-list i) target-type))))
+  (loop for i below (count object-list)
+        collect (%as-consuming (item-at object-list i) target-type)))
 
 (defun as-hashtable-of (dict key-type value-type)
   "Convert an openDAQ dict into a Lisp hash-table.  Keys and values are
@@ -409,14 +424,8 @@ unboxed if their type is a primitive, or cast via AS otherwise.
     (loop for i below n
           for key-ptr = (opendaq.low-level:list/get-item-at key-list i)
           for val-ptr = (opendaq.low-level:dict/get raw key-ptr)
-          for key-obj = (wrap key-ptr 'base-object)
-          for key = (if (primitive-type-p key-type)
-                       (%unbox-primitive key-obj key-type)
-                       (as key-obj key-type))
-          for val-obj = (wrap val-ptr 'base-object)
-          for val = (if (primitive-type-p value-type)
-                       (%unbox-primitive val-obj value-type)
-                       (as val-obj value-type))
+          for key = (%as-consuming (wrap key-ptr 'base-object) key-type)
+          for val = (%as-consuming (wrap val-ptr 'base-object) value-type)
           do (setf (gethash key ht) val))
     ht))
 
