@@ -487,15 +487,60 @@ class the conversion functions take; NIL doubles as a \"not a scalar\" predicate
 ;;; interface id for Function or Procedure, so IS-P cannot be used to detect them.
 ;;; ---------------------------------------------------------------------------
 
-(defun %callable-params (args)
-  "Encode ARGS as the params an openDAQ callable expects: NIL for no arguments,
-the single (auto-boxed) value for one, and an OBJECT-LIST for several."
+(defun %box-collection (value core-type item-type key-type)
+  "Box a Lisp VALUE for an openDAQ argument or container element of CORE-TYPE.  A
+:LIST boxes a Lisp list into an OBJECT-LIST; a :DICT boxes a Lisp hash-table into a
+DICT.  ITEM-TYPE (and, for a dict, KEY-TYPE) are the element core types the argument
+info reports, and box each element/key/value in turn; a nested :LIST / :DICT element,
+whose own element types the argument info does not carry, is boxed from the Lisp
+value's shape with scalar leaves (pass :UNDEFINED).  A scalar, or a value that is
+already a wrapped openDAQ object, is returned unchanged for the :daq-base-object
+coercion to box or pass through."
+  (flet ((element (v type) (%box-collection v type :undefined :undefined)))
+    (case core-type
+      (:list (if (listp value)         ; NIL -> empty list; a wrapped object passes through
+                 (let ((list (make-instance 'object-list)))
+                   (dolist (e value list)
+                     (push-back list (element e item-type))))
+                 value))
+      (:dict (if (hash-table-p value)
+                 (let ((dict (make-instance 'dict)))
+                   (maphash (lambda (k v) (set dict (element k key-type) (element v item-type))) value)
+                   dict)
+                 value))
+      (t value))))
+
+(defun %box-callable-argument (value info)
+  "Box a single Lisp VALUE as the argument an openDAQ callable expects, using its
+declared ARGUMENT-INFO: a list argument boxes a Lisp list into an OBJECT-LIST and a
+dict argument boxes a Lisp hash-table into a DICT -- each element boxed by the item
+(and key) core type the info reports.  Every other type is left for the
+:daq-base-object coercion to box (a scalar) or pass through (an already-wrapped
+object the caller built by hand).
+
+openDAQ reports the core type of *both* list and dict arguments as :LIST; a dict is
+told apart only by carrying a defined key type (getKeyType), so that -- not the core
+type alone -- is what selects dict boxing."
+  (let ((type (argument-info-type info)))
+    (cond ((or (eq type :dict)
+               (and (eq type :list) (not (eq (key-type info) :undefined))))
+           (%box-collection value :dict (item-type info) (key-type info)))
+          ((eq type :list)
+           (%box-collection value :list (item-type info) :undefined))
+          (t value))))
+
+(defun %callable-params (args arg-infos)
+  "Encode ARGS -- each boxed per its declared ARGUMENT-INFO in ARG-INFOS -- as the
+params an openDAQ callable expects: NIL for no arguments, the single boxed value for
+one, and an OBJECT-LIST for several."
   (case (cl:length args)
     (0 nil)
-    (1 (first args))
+    (1 (%box-callable-argument (first args) (first arg-infos)))
     (t (let ((list (make-instance 'object-list)))
-         (dolist (arg args list)
-           (push-back list arg))))))
+         (loop for arg in args
+               for info in arg-infos
+               do (push-back list (%box-callable-argument arg info)))
+         list))))
 
 (defun %check-callable-arity (name expected args)
   "Signal an error unless ARGS supplies the EXPECTED number of arguments of the
@@ -511,13 +556,14 @@ supplies the callable info: the argument count is checked before each call, and
 the return type selects how the result is unboxed (a non-scalar return type leaves
 the raw wrapper)."
   (let* ((info (callable-info property))
-         (arity (cl:length (arguments info)))
+         (arg-infos (arguments info))
+         (arity (cl:length arg-infos))
          (return-class (core-type->class (return-type info)))
          (name (name property))
          (function (as value 'function-object)))
     (lambda (&rest args)
       (%check-callable-arity name arity args)
-      (let ((result (call function (%callable-params args) nil)))
+      (let ((result (call function (%callable-params args arg-infos) nil)))
         (if return-class
             (unbox (as result return-class))
             result)))))
@@ -527,12 +573,13 @@ the raw wrapper)."
 argument count is checked against PROPERTY's callable info before each call; a
 procedure has no return value, so the function returns NIL."
   (let* ((info (callable-info property))
-         (arity (cl:length (arguments info)))
+         (arg-infos (arguments info))
+         (arity (cl:length arg-infos))
          (name (name property))
          (procedure (as value 'procedure)))
     (lambda (&rest args)
       (%check-callable-arity name arity args)
-      (dispatch procedure (%callable-params args))
+      (dispatch procedure (%callable-params args arg-infos))
       nil)))
 
 (defmethod property-value :around ((object property-object) property-name)

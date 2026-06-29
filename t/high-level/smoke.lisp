@@ -110,6 +110,14 @@
       (is (= 12 (funcall sum 7 5)) "Calling a FUNC property should box the args, invoke it, and unbox the result.")
       (is (= 42 (funcall sum 40 2)) "The returned function should be reusable across calls.")
       (signals error (funcall sum 1) "Calling a FUNC property with the wrong number of arguments should signal an error."))
+    ;; FUNC property taking a LIST argument: a Lisp list is boxed into an
+    ;; OBJECT-LIST, and an explicit OBJECT-LIST is passed through unchanged.
+    (let ((sum-list (daq:property-value object "Protected.SumList")))
+      (is (= 10 (funcall sum-list '(1 2 3 4))) "A LIST argument should accept a plain Lisp list, boxing it into an OBJECT-LIST.")
+      (is (= 10 (let ((boxed (make-instance 'daq:object-list)))
+                  (dolist (x '(1 2 3 4)) (daq:push-back boxed x))
+                  (funcall sum-list boxed)))
+          "A LIST argument should also accept an explicit OBJECT-LIST."))
     ;; Scalar property: unaffected by the callable :around -- still a boxed value.
     (let ((number-of-channels (daq:property-value object "NumberOfChannels")))
       (is (not (functionp number-of-channels)) "PROPERTY-VALUE of a scalar property should not be wrapped as a function.")
@@ -122,6 +130,39 @@
     ;; FUNC property with a single argument: the bare-value param encoding.
     (let ((get-and-set (daq:property-value channel "GetAndSetCounter")))
       (is (integerp (funcall get-and-set 0)) "A single-argument FUNC property should encode its lone arg and unbox the INT result."))))
+
+(test high-level-callable-argument-boxing
+  ;; No reference-device property takes a dict argument, so exercise the boxing
+  ;; that PROPERTY-VALUE's callable wrapper performs directly: a Lisp hash-table is
+  ;; boxed into a DICT according to the argument info's key/item types.  The list
+  ;; path is covered end-to-end by Protected.SumList in HIGH-LEVEL-CALLABLE-PROPERTIES.
+  (flet ((box (value info) (opendaq.high-level::%box-callable-argument value info)))
+    ;; DICT argument: hash-table -> DICT, keys/values boxed per key/item type.
+    (let ((table (make-hash-table :test 'equal)))
+      (setf (gethash "x" table) 10 (gethash "y" table) 20)
+      (let* ((info (make-instance 'daq:argument-info/dict :name "D" :key-type :string :item-type :int))
+             (dict (box table info))
+             (round-trip (daq:as-hashtable-of dict 'daq:string-object 'daq:integer-object)))
+        (is (typep dict 'daq:dict) "A dict argument should box a Lisp hash-table into a DICT.")
+        (is (= 2 (hash-table-count round-trip)) "The boxed dict should preserve the entry count.")
+        (is (= 10 (gethash "x" round-trip)) "The boxed dict should preserve its string->int entries.")
+        (is (= 20 (gethash "y" round-trip)) "The boxed dict should preserve its string->int entries.")))
+    ;; openDAQ reports a dict argument's core type as :LIST -- the key type is what
+    ;; marks it as a dict, so detection must not rely on the core type alone.
+    (is (eq :list (daq:argument-info-type
+                   (make-instance 'daq:argument-info/dict :name "D" :key-type :string :item-type :int)))
+        "openDAQ reports a dict argument's core type as :LIST.")
+    ;; LIST argument: an empty Lisp list boxes to an empty OBJECT-LIST (unambiguous
+    ;; because boxing is driven by the declared type, not the value's shape).
+    (let* ((info (make-instance 'daq:argument-info/list :name "L" :item-type :int))
+           (empty (box nil info)))
+      (is (typep empty 'daq:object-list) "An empty list argument should box NIL into an empty OBJECT-LIST.")
+      (is (zerop (daq:count empty)) "The boxed empty list should have no elements."))
+    ;; An already-wrapped collection passes through unchanged.
+    (let ((info (make-instance 'daq:argument-info/list :name "L" :item-type :int))
+          (explicit (make-instance 'daq:object-list)))
+      (daq:push-back explicit 99)
+      (is (eq explicit (box explicit info)) "An explicit OBJECT-LIST argument should pass through unchanged."))))
 
 (test high-level-autoload-healthcheck
   (let* ((status (daq:healthcheck nil))
