@@ -158,20 +158,20 @@ PROXY_NAME_OVERRIDES: dict[str, str] = {
 }
 
 FUNCTION_OVERRIDES: dict[str, dict] = {
+    # flag has no C default (openDAQ does not default it), but the binding chooses
+    # to make it optional defaulting to t.  Args the C++ API itself defaults --
+    # e.g. searchFilter = nullptr, config = nullptr -- no longer need an entry
+    # here: optional_defaults_for derives them from the // [defaultValue(...)]
+    # annotations carried on each parameter.
     "instance-builder/enable-standard-providers": {"optional_defaults": (("flag", "t"),)},
-    "device/add-device": {"optional_defaults": (("config", "nil"),)},
-    "device/get-signals": {"optional_defaults": (("search-filter", "nil"),)},
-    "device/get-signals-recursive": {"optional_defaults": (("search-filter", "nil"),)},
-    "server/get-signals": {"optional_defaults": (("search-filter", "nil"),)},
-    "function-block/get-signals": {"optional_defaults": (("search-filter", "nil"),)},
-    "function-block/get-signals-recursive": {"optional_defaults": (("search-filter", "nil"),)},
-    # Extra args of UNIFY_OPTIONAL members that openDAQ makes nullptr-defaulted
-    # (strictness rule 3): the unified generic must NOT require them.  See the
-    # UNIFY_OPTIONAL comment below.
-    "data-packet/get-last-value": {"optional_defaults": (("type-manager", "nil"),)},
-    "function-block/get-input-ports": {"optional_defaults": (("search-filter", "nil"),)},
-    "user-lock/lock": {"optional_defaults": (("user", "nil"),)},
-    "user-lock/unlock": {"optional_defaults": (("user", "nil"),)},
+    # createFunctionBlock has two interface variants whose defaulted args differ in
+    # order and count (module: id parent localId config=nullptr; module-manager-
+    # utils: id parent config=nullptr localId=nullptr).  Honoring the defaults gives
+    # them incongruent &optional shapes, which would split the shared
+    # create-function-block generic into two qualified names.  Ignore the optionality
+    # so both keep every argument required and stay unified under one generic.
+    "module/create-function-block": {"ignore_default_values": True},
+    "module-manager-utils/create-function-block": {"ignore_default_values": True},
 }
 
 # Curated set of instance-method base names that are unified into a single CLOS
@@ -319,6 +319,60 @@ def default_map(defaults: tuple[tuple[str, str], ...]) -> dict[str, str]:
     return dict(defaults)
 
 
+# C has no default arguments, so RTGen records each one as a
+# // [defaultValue(arg, literal)] annotation (see tools/parse_bindings.py),
+# surfaced here as a parameter's "default_value".  These are the non-numeric
+# literals; integer literals are translated by int(..., 0) below.
+_C_DEFAULT_TO_LISP = {"nullptr": "nil", "true": "t", "false": "nil"}
+
+
+def c_default_to_lisp(value: str) -> str:
+    """Translate a C default-value literal into the Lisp form for an &optional."""
+    if value in _C_DEFAULT_TO_LISP:
+        return _C_DEFAULT_TO_LISP[value]
+    if value.startswith('"') and value.endswith('"'):
+        return value  # a C string literal is also a valid Lisp string
+    try:
+        return str(int(value, 0))  # decimal / hex / binary / octal integer literal
+    except ValueError:
+        raise ValueError(f"no Lisp mapping for C default value {value!r}")
+
+
+def optional_defaults_for(function: dict, override: dict) -> tuple[tuple[str, str], ...]:
+    """The (lisp_name, lisp_default) pairs for the function's trailing &optional args.
+
+    Derived automatically from the C default-value annotations carried on each
+    parameter, so an argument the C++ API defaults (e.g. searchFilter = nullptr)
+    becomes optional without curation.  A manual FUNCTION_OVERRIDES["optional_defaults"]
+    entry wins per parameter, and may also add an optional the C headers do not
+    annotate (e.g. instance-builder/enable-standard-providers flag = t).  An
+    override may set "ignore_default_values" to opt a function out of auto-derived
+    optionals entirely (e.g. to keep a unified generic congruent)."""
+    manual = dict(override.get("optional_defaults", ()))
+    # A setf writer assigns a value to a place: its trailing parameter maps to
+    # new-value and cannot be &optional (setter_lambda_list forbids it), so a C
+    # default on it is not expressible -- don't auto-derive for writers.  An
+    # "ignore_default_values" override opts a function out of auto-derivation too.
+    auto = (
+        classify_function(function) != "writer"
+        and not override.get("ignore_default_values")
+    )
+    pairs: list[tuple[str, str]] = []
+    seen: set[str] = set()
+    for parameter in function["parameters"]:
+        name = parameter["lisp_name"]
+        if name in manual:
+            pairs.append((name, manual[name]))
+            seen.add(name)
+        elif auto and parameter.get("default_value") is not None:
+            pairs.append((name, c_default_to_lisp(parameter["default_value"])))
+            seen.add(name)
+    for name, default in manual.items():
+        if name not in seen:
+            pairs.append((name, default))
+    return tuple(pairs)
+
+
 BOXED_PRIMITIVE_TYPES = frozenset((
     "daq-base-object",
     "daq-integer",
@@ -390,7 +444,7 @@ def method_signature_shape(function: dict, override: dict) -> tuple[int, int]:
         if not params:
             raise ValueError("Writers require at least one value parameter.")
         return (2 + len(params) - 1, 0)
-    return generic_shape(params, override.get("optional_defaults", ()))
+    return generic_shape(params, optional_defaults_for(function, override))
 
 
 def qualified_name(function: dict, kind: str) -> str:
@@ -508,7 +562,7 @@ def _unify_method_group(
 
         params = method_parameters(func)
         override = FUNCTION_OVERRIDES.get(pln, {})
-        required, _optional = _split_optional_params(params, override.get("optional_defaults", ()))
+        required, _optional = _split_optional_params(params, optional_defaults_for(func, override))
         classification = []
         for index in range(len(union_params)):
             if index < len(required):
@@ -621,7 +675,7 @@ def build_specs(functions: list[dict]) -> tuple[list[dict], list[dict]]:
             "function": function, "kind": kind,
             "name": method_names[function["public_lisp_name"]],
             "specializer": override.get("specializer") or receiver,
-            "optional_defaults": override.get("optional_defaults", ()),
+            "optional_defaults": optional_defaults_for(function, override),
             "unify": unify_specs.get(function["public_lisp_name"]),
         })
 

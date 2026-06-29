@@ -7907,7 +7907,7 @@ Calls the openDAQ C function daqBlockReader_getOverlap()."
   (opendaq.low-level:block-reader/get-overlap (%require-live-pointer object))
 )
 
-(defgeneric block-reader-read (object blocks count timeout-ms)
+(defgeneric block-reader-read (object blocks count &optional timeout-ms)
   (:documentation "Copies at maximum the next `count` blocks of unread samples to the values buffer. The amount actually read is returned through the `count` parameter.
 @param blocks The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of samples.
 @param count The maximum amount of blocks to be read. If the `count` is less than available the parameter value is set to the actual amount and only the available blocks are returned. The rest of the buffer is not modified or cleared.
@@ -7915,7 +7915,7 @@ Calls the openDAQ C function daqBlockReader_getOverlap()."
 @param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::isEventEncountered returns true. - If the reading process is successful, ReaderStatus::isOk returns true, indicating that IReaderStatus::getValid is true and IReaderStatus::isEventEncountered is false.
 
 Calls the openDAQ C function daqBlockReader_read()."))
-(defmethod block-reader-read ((object block-reader) blocks count timeout-ms)
+(defmethod block-reader-read ((object block-reader) blocks count &optional (timeout-ms 0))
   "Copies at maximum the next `count` blocks of unread samples to the values buffer. The amount actually read is returned through the `count` parameter.
 @param blocks The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of samples.
 @param count The maximum amount of blocks to be read. If the `count` is less than available the parameter value is set to the actual amount and only the available blocks are returned. The rest of the buffer is not modified or cleared.
@@ -7933,7 +7933,7 @@ Calls the openDAQ C function daqBlockReader_read()."
         (wrap value-1 'block-reader-status))))
 )
 
-(defgeneric block-reader-read-with-domain (object data-blocks domain-blocks count timeout-ms)
+(defgeneric block-reader-read-with-domain (object data-blocks domain-blocks count &optional timeout-ms)
   (:documentation "Copies at maximum the next `count` blocks of unread samples and clock-stamps to the `dataBlocks` and `domainBlocks` buffers. The amount actually read is returned through the `count` parameter.
 @param dataBlocks The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of samples.
 @param domainBlocks The buffer that the domain values will be copied to. The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of clock-stamps.
@@ -7942,7 +7942,7 @@ Calls the openDAQ C function daqBlockReader_read()."
 @param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::isEventEncountered returns true. - If the reading process is successful, ReaderStatus::isOk returns true, indicating that IReaderStatus::getValid is true and IReaderStatus::isEventEncountered is false.
 
 Calls the openDAQ C function daqBlockReader_readWithDomain()."))
-(defmethod block-reader-read-with-domain ((object block-reader) data-blocks domain-blocks count timeout-ms)
+(defmethod block-reader-read-with-domain ((object block-reader) data-blocks domain-blocks count &optional (timeout-ms 0))
   "Copies at maximum the next `count` blocks of unread samples and clock-stamps to the `dataBlocks` and `domainBlocks` buffers. The amount actually read is returned through the `count` parameter.
 @param dataBlocks The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of samples.
 @param domainBlocks The buffer that the domain values will be copied to. The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of clock-stamps.
@@ -8216,9 +8216,9 @@ Calls the openDAQ C function daqComplexNumber_getReal()."
   (opendaq.low-level:complex-number/get-real (%require-live-pointer object))
 )
 
-(defgeneric component-deserialize-context-clone (object new-parent new-local-id new-trigger-core-event)
+(defgeneric component-deserialize-context-clone (object new-parent new-local-id &optional new-trigger-core-event)
   (:documentation "Calls the openDAQ C function daqComponentDeserializeContext_clone()."))
-(defmethod component-deserialize-context-clone ((object component-deserialize-context) new-parent new-local-id new-trigger-core-event)
+(defmethod component-deserialize-context-clone ((object component-deserialize-context) new-parent new-local-id &optional (new-trigger-core-event nil))
   "Calls the openDAQ C function daqComponentDeserializeContext_clone()."
   (with-daq-boxed-values ((coerced-new-parent new-parent :managed-pointer)
                           (coerced-new-local-id new-local-id :daq-string)
@@ -10966,7 +10966,7 @@ Calls the openDAQ C function daqDataPacket_getSampleCount()."
   (opendaq.low-level:data-packet/get-sample-count (%require-live-pointer object))
 )
 
-(defgeneric value-by-index (object index type-manager)
+(defgeneric value-by-index (object index &optional type-manager)
   (:documentation "Gets the data packet value at the specified index.
 @param[out] value The IBaseObject value can be a nullptr if there is no value, or if the data type is not supported by the function.
 @param index Index of the sample to obtain.
@@ -10980,7 +10980,7 @@ determined by the sample size, and the string does not need to be null-terminate
 from the packet data and returns it as an IString object.
 
 Calls the openDAQ C function daqDataPacket_getValueByIndex()."))
-(defmethod value-by-index ((object data-packet) index type-manager)
+(defmethod value-by-index ((object data-packet) index &optional (type-manager nil))
   "Gets the data packet value at the specified index.
 @param[out] value The IBaseObject value can be a nullptr if there is no value, or if the data type is not supported by the function.
 @param index Index of the sample to obtain.
@@ -12514,7 +12514,7 @@ Calls the openDAQ C function daqDevice_addDevice()."
     (wrap (opendaq.low-level:device/add-device (%require-live-pointer object) coerced-connection-string coerced-config) 'device))
 )
 
-(defgeneric add-devices (object connection-args err-codes error-infos)
+(defgeneric add-devices (object connection-args &optional err-codes error-infos)
   (:documentation "Connects to multiple devices in parallel using the provided connection strings and returns the connected devices. Each connection is established concurrently to improve performance when handling multiple devices. The additions, in turn, are performed sequentially in the order specified by connectionArgs.
 @param[out] devices A dictionary that maps each connection string to the corresponding added device object. If a device connection or addition attempt fails, the value will be `nullptr` for that entry.
 @param connectionArgs A dictionary where each key is a connection string identifying the target device (e.g., IPv4/IPv6), and each value is a configuration object that customizes the connection. The configuration may specify parameters such as maximum sample rate, communication port, number of channels, or other device-specific settings. A `nullptr` value indicates that the default configuration should be used.
@@ -12525,7 +12525,7 @@ OPENDAQ_ERR_GENERALERROR if no devices were created or added;
 OPENDAQ_IGNORED if adding the devices from modules is not allowed within the device.
 
 Calls the openDAQ C function daqDevice_addDevices()."))
-(defmethod add-devices ((object device) connection-args err-codes error-infos)
+(defmethod add-devices ((object device) connection-args &optional (err-codes nil) (error-infos nil))
   "Connects to multiple devices in parallel using the provided connection strings and returns the connected devices. Each connection is established concurrently to improve performance when handling multiple devices. The additions, in turn, are performed sequentially in the order specified by connectionArgs.
 @param[out] devices A dictionary that maps each connection string to the corresponding added device object. If a device connection or addition attempt fails, the value will be `nullptr` for that entry.
 @param connectionArgs A dictionary where each key is a connection string identifying the target device (e.g., IPv4/IPv6), and each value is a configuration object that customizes the connection. The configuration may specify parameters such as maximum sample rate, communication port, number of channels, or other device-specific settings. A `nullptr` value indicates that the default configuration should be used.
@@ -12542,13 +12542,13 @@ Calls the openDAQ C function daqDevice_addDevices()."
     (as-hashtable-of (wrap (opendaq.low-level:device/add-devices (%require-live-pointer object) coerced-connection-args coerced-err-codes coerced-error-infos) 'dict) 'string-object 'device))
 )
 
-(defgeneric add-function-block (object type-id config)
+(defgeneric add-function-block (object type-id &optional config)
   (:documentation "device => daqDevice_addFunctionBlock()
     Creates and adds a function block to the device with the provided unique ID and returns it.
 
 function-block => daqFunctionBlock_addFunctionBlock()
     Creates and adds a function block as the nested of current function block with the provided unique ID and returns it."))
-(defmethod add-function-block ((object device) type-id config)
+(defmethod add-function-block ((object device) type-id &optional (config nil))
   "Creates and adds a function block to the device with the provided unique ID and returns it.
 @param[out] functionBlock The added function block.
 @param typeId The unique ID of the function block. Can be obtained from its corresponding Function Block Info object.
@@ -12579,14 +12579,14 @@ Calls the openDAQ C function daqDevice_addServer()."
     (wrap (opendaq.low-level:device/add-server (%require-live-pointer object) coerced-type-id coerced-config) 'server))
 )
 
-(defgeneric add-streaming (object connection-string config)
+(defgeneric add-streaming (object connection-string &optional config)
   (:documentation "Connects to a streaming at the given connection string, adds it as a streaming source of device and returns created streaming object.
 @param[out] streaming The added streaming source.
 @param connectionString The connection string containing the address of the streaming. In example an IPv4/IPv6 address. The connection string can be found in the Server Capability objects returned by `getInfo().getServerCapabilities()`.
 @param config A config object to configure a streaming connection. This object can contain properties like various connection timeouts or other streaming protocol specific settings. Can be created from its corresponding Streaming type object. In case of a null value, it will use the default configuration.
 
 Calls the openDAQ C function daqDevice_addStreaming()."))
-(defmethod add-streaming ((object device) connection-string config)
+(defmethod add-streaming ((object device) connection-string &optional (config nil))
   "Connects to a streaming at the given connection string, adds it as a streaming source of device and returns created streaming object.
 @param[out] streaming The added streaming source.
 @param connectionString The connection string containing the address of the streaming. In example an IPv4/IPv6 address. The connection string can be found in the Server Capability objects returned by `getInfo().getServerCapabilities()`.
@@ -12688,7 +12688,7 @@ Calls the openDAQ C function daqDevice_getAvailableOperationModes()."
   (as-list-of (wrap (opendaq.low-level:device/get-available-operation-modes (%require-live-pointer object)) 'object-list) 'integer-object)
 )
 
-(defgeneric channels (object search-filter)
+(defgeneric channels (object &optional search-filter)
   (:documentation "Gets a flat list of the device's physical channels.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] channels The flat list of channels.
@@ -12696,7 +12696,7 @@ If searchFilter is not provided, the returned list contains only visible channel
 child devices.
 
 Calls the openDAQ C function daqDevice_getChannels()."))
-(defmethod channels ((object device) search-filter)
+(defmethod channels ((object device) &optional (search-filter nil))
   "Gets a flat list of the device's physical channels.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] channels The flat list of channels.
@@ -12708,13 +12708,13 @@ Calls the openDAQ C function daqDevice_getChannels()."
     (as-list-of (wrap (opendaq.low-level:device/get-channels (%require-live-pointer object) coerced-search-filter) 'object-list) 'channel))
 )
 
-(defgeneric channels-recursive (object search-filter)
+(defgeneric channels-recursive (object &optional search-filter)
   (:documentation "Gets a flat list of the device's physical channels. Also finds all visible channels of visible child devices
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] channels The flat list of channels.
 
 Calls the openDAQ C function daqDevice_getChannelsRecursive()."))
-(defmethod channels-recursive ((object device) search-filter)
+(defmethod channels-recursive ((object device) &optional (search-filter nil))
   "Gets a flat list of the device's physical channels. Also finds all visible channels of visible child devices
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] channels The flat list of channels.
@@ -12750,7 +12750,7 @@ Calls the openDAQ C function daqDevice_getCustomComponents()."
   (as-list-of (wrap (opendaq.low-level:device/get-custom-components (%require-live-pointer object)) 'object-list) 'component)
 )
 
-(defgeneric devices (object search-filter)
+(defgeneric devices (object &optional search-filter)
   (:documentation "Gets a list of child devices that the device is connected to.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] devices The list of devices.
@@ -12758,7 +12758,7 @@ If searchFilter is not provided, the returned list contains only visible devices
 child devices.
 
 Calls the openDAQ C function daqDevice_getDevices()."))
-(defmethod devices ((object device) search-filter)
+(defmethod devices ((object device) &optional (search-filter nil))
   "Gets a list of child devices that the device is connected to.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] devices The list of devices.
@@ -12784,13 +12784,13 @@ Calls the openDAQ C function daqDevice_getDomain()."
     (opendaq.low-level:device/get-domain (%require-live-pointer object) coerced-domain))
 )
 
-(defgeneric function-blocks (object search-filter)
+(defgeneric function-blocks (object &optional search-filter)
   (:documentation "device => daqDevice_getFunctionBlocks()
     Gets the list of added function blocks.
 
 function-block => daqFunctionBlock_getFunctionBlocks()
     Gets a list of sub-function blocks."))
-(defmethod function-blocks ((object device) search-filter)
+(defmethod function-blocks ((object device) &optional (search-filter nil))
   "Gets the list of added function blocks.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] functionBlocks The list of added function blocks.
@@ -12838,7 +12838,7 @@ Calls the openDAQ C function daqDevice_getInputsOutputsFolder()."
   )
 )
 
-(defgeneric log (object id size offset)
+(defgeneric log (object id &optional size offset)
   (:documentation "Retrieves a chunk of the log file with the provided ID.
 This function extracts a specified portion (or the entire content) of the log file, starting at the given offset.
 If the size and offset are not specified, it will attempt to return the entire log file by default.
@@ -12849,7 +12849,7 @@ If the size and offset are not specified, it will attempt to return the entire l
 If size is set to -1, and offset is 0, the entire log file will be returned.
 
 Calls the openDAQ C function daqDevice_getLog()."))
-(defmethod log ((object device) id size offset)
+(defmethod log ((object device) id &optional (size -1) (offset 0))
   "Retrieves a chunk of the log file with the provided ID.
 This function extracts a specified portion (or the entire content) of the log file, starting at the given offset.
 If the size and offset are not specified, it will attempt to return the entire log file by default.
@@ -12974,12 +12974,12 @@ Calls the openDAQ C function daqDevice_isLocked()."
   (not (zerop (opendaq.low-level:device/is-locked (%require-live-pointer object))))
 )
 
-(defgeneric load-configuration (object configuration config)
+(defgeneric load-configuration (object configuration &optional config)
   (:documentation "Loads the configuration of the device from string.
 @param configuration Serialized configuration of the device.
 
 Calls the openDAQ C function daqDevice_loadConfiguration()."))
-(defmethod load-configuration ((object device) configuration config)
+(defmethod load-configuration ((object device) configuration &optional (config nil))
   "Loads the configuration of the device from string.
 @param configuration Serialized configuration of the device.
 
@@ -14148,14 +14148,14 @@ Calls the openDAQ C function daqFolder_getItem()."
     (wrap (opendaq.low-level:folder/get-item (%require-live-pointer object) coerced-local-id) 'component))
 )
 
-(defgeneric items (object search-filter)
+(defgeneric items (object &optional search-filter)
   (:documentation "Gets the list of the items in the folder.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] items The list of the items.
 If searchFilter is not provided, the returned list contains only immediate children with visible set to `true`.
 
 Calls the openDAQ C function daqFolder_getItems()."))
-(defmethod items ((object folder) search-filter)
+(defmethod items ((object folder) &optional (search-filter nil))
   "Gets the list of the items in the folder.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] items The list of the items.
@@ -14235,7 +14235,7 @@ Calls the openDAQ C function daqFreezable_isFrozen()."
   )
 )
 
-(defmethod add-function-block ((object function-block) type-id config)
+(defmethod add-function-block ((object function-block) type-id &optional (config nil))
   "Creates and adds a function block as the nested of current function block with the provided unique ID and returns it.
 @param[out] functionBlock The added function block.
 @param typeId The unique ID of the function block. Can be obtained from its corresponding Function Block Info object.
@@ -14268,7 +14268,7 @@ Calls the openDAQ C function daqFunctionBlock_getFunctionBlockType()."
   (wrap (opendaq.low-level:function-block/get-function-block-type (%require-live-pointer object)) 'function-block-type)
 )
 
-(defmethod function-blocks ((object function-block) search-filter)
+(defmethod function-blocks ((object function-block) &optional (search-filter nil))
   "Gets a list of sub-function blocks.
 @param searchFilter Provides optional parameters such as \"recursive\" and \"visibleOnly\" to modify the search pattern.
 @param[out] functionBlocks The list of sub-function blocks.
@@ -16779,13 +16779,13 @@ Calls the openDAQ C function daqModuleManagerUtils_completeDeviceCapabilities().
   (wrap (opendaq.low-level:module-manager-utils/create-default-add-device-config (%require-live-pointer object)) 'property-object)
 )
 
-(defgeneric create-device (object connection-string parent config)
+(defgeneric create-device (object connection-string parent &optional config)
   (:documentation "module-manager-utils => daqModuleManagerUtils_createDevice()
     Creates a device object that can communicate with the device described in the specified connection string. The device object is not automatically added as a sub-device of the caller, but only returned by reference.
 
 module => daqModule_createDevice()
     Creates a device object that can communicate with the device described in the specified connection string. The device object is not automatically added as a sub-device of the caller, but only returned by reference."))
-(defmethod create-device ((object module-manager-utils) connection-string parent config)
+(defmethod create-device ((object module-manager-utils) connection-string parent &optional (config nil))
   "Creates a device object that can communicate with the device described in the specified connection string. The device object is not automatically added as a sub-device of the caller, but only returned by reference.
 @param[out] device The device object created to communicate with and control the device.
 @param connectionString Describes the connection info of the device to connect to.
@@ -16800,7 +16800,7 @@ Calls the openDAQ C function daqModuleManagerUtils_createDevice()."
     (wrap (opendaq.low-level:module-manager-utils/create-device (%require-live-pointer object) coerced-connection-string coerced-parent coerced-config) 'device))
 )
 
-(defgeneric create-devices (object connection-args parent err-codes error-infos)
+(defgeneric create-devices (object connection-args parent &optional err-codes error-infos)
   (:documentation "Creates multiple device objects in parallel using the specified connection strings. Each device is created concurrently. None of the created device object are automatically added as a sub-device of the caller, but only returned by reference.
 @param[out] devices A dictionary which maps each connection string to the corresponding created device object. If a device creation attempt fails, the value will be `nullptr` for that entry.
 @param connectionArgs A dictionary where each key is a connection string identifying the target device (e.g., IPv4/IPv6), and each value is a configuration object that customizes the connection. The configuration may specify parameters such as maximum sample rate, communication port, number of channels, or other device-specific settings. A `nullptr` value indicates that the default configuration should be used.
@@ -16811,7 +16811,7 @@ Calls the openDAQ C function daqModuleManagerUtils_createDevice()."
 OPENDAQ_ERR_GENERALERROR if no devices were created.
 
 Calls the openDAQ C function daqModuleManagerUtils_createDevices()."))
-(defmethod create-devices ((object module-manager-utils) connection-args parent err-codes error-infos)
+(defmethod create-devices ((object module-manager-utils) connection-args parent &optional (err-codes nil) (error-infos nil))
   "Creates multiple device objects in parallel using the specified connection strings. Each device is created concurrently. None of the created device object are automatically added as a sub-device of the caller, but only returned by reference.
 @param[out] devices A dictionary which maps each connection string to the corresponding created device object. If a device creation attempt fails, the value will be `nullptr` for that entry.
 @param connectionArgs A dictionary where each key is a connection string identifying the target device (e.g., IPv4/IPv6), and each value is a configuration object that customizes the connection. The configuration may specify parameters such as maximum sample rate, communication port, number of channels, or other device-specific settings. A `nullptr` value indicates that the default configuration should be used.
@@ -16856,13 +16856,13 @@ Calls the openDAQ C function daqModuleManagerUtils_createFunctionBlock()."
     (wrap (opendaq.low-level:module-manager-utils/create-function-block (%require-live-pointer object) coerced-id coerced-parent coerced-config coerced-local-id) 'function-block))
 )
 
-(defgeneric create-server (object server-type-id root-device server-config)
+(defgeneric create-server (object server-type-id root-device &optional server-config)
   (:documentation "module-manager-utils => daqModuleManagerUtils_createServer()
     Creates and returns a server with the provided serverType and configuration.
 
 module => daqModule_createServer()
     Creates and returns a server with the specified server type."))
-(defmethod create-server ((object module-manager-utils) server-type-id root-device server-config)
+(defmethod create-server ((object module-manager-utils) server-type-id root-device &optional (server-config nil))
   "Creates and returns a server with the provided serverType and configuration.
 @param serverTypeId Type id of the server. Can be obtained from its corresponding Server type object.
 @param rootDevice The root device
@@ -16879,13 +16879,13 @@ Calls the openDAQ C function daqModuleManagerUtils_createServer()."
     (wrap (opendaq.low-level:module-manager-utils/create-server (%require-live-pointer object) coerced-server-type-id coerced-root-device coerced-server-config) 'server))
 )
 
-(defgeneric create-streaming (object connection-string config)
+(defgeneric create-streaming (object connection-string &optional config)
   (:documentation "module-manager-utils => daqModuleManagerUtils_createStreaming()
     Creates a streaming object using the specified connection string and config object.
 
 module => daqModule_createStreaming()
     Creates and returns a streaming object using the specified connection string and config object."))
-(defmethod create-streaming ((object module-manager-utils) connection-string config)
+(defmethod create-streaming ((object module-manager-utils) connection-string &optional (config nil))
   "Creates a streaming object using the specified connection string and config object.
 @param[out] streaming The created streaming object.
 @param connectionString Describes the connection parameters of the streaming.
@@ -17114,7 +17114,7 @@ Calls the openDAQ C function daqModuleManager_setModuleAuthenticator()."
     (not (zerop (opendaq.low-level:module/complete-server-capability (%require-live-pointer object) coerced-source coerced-target))))
 )
 
-(defmethod create-device ((object module) connection-string parent config)
+(defmethod create-device ((object module) connection-string parent &optional (config nil))
   "Creates a device object that can communicate with the device described in the specified connection string. The device object is not automatically added as a sub-device of the caller, but only returned by reference.
 @param[out] device The device object created to communicate with and control the device.
 @param connectionString Describes the connection info of the device to connect to.
@@ -17144,7 +17144,7 @@ Calls the openDAQ C function daqModule_createFunctionBlock()."
     (wrap (opendaq.low-level:module/create-function-block (%require-live-pointer object) coerced-id coerced-parent coerced-local-id coerced-config) 'function-block))
 )
 
-(defmethod create-server ((object module) server-type-id root-device config)
+(defmethod create-server ((object module) server-type-id root-device &optional (config nil))
   "Creates and returns a server with the specified server type.
 @param serverTypeId The id of the server type to create. ServerType can be retrieved by calling `getAvailableServerTypes()`.
 @param config Server configuration. In case of a null value, implementation should use default configuration.
@@ -17158,7 +17158,7 @@ Calls the openDAQ C function daqModule_createServer()."
     (wrap (opendaq.low-level:module/create-server (%require-live-pointer object) coerced-server-type-id coerced-root-device coerced-config) 'server))
 )
 
-(defmethod create-streaming ((object module) connection-string config)
+(defmethod create-streaming ((object module) connection-string &optional (config nil))
   "Creates and returns a streaming object using the specified connection string and config object.
 @param connectionString Typically a connection string usually has a well known prefix, such as `daq.lt//`.
 @param config A config object that contains parameters used to configure a streaming connection. In case of a null value, implementation should use default configuration.
@@ -17790,7 +17790,7 @@ Calls the openDAQ C function daqMultiReader_getTickResolution()."
   (wrap (opendaq.low-level:multi-reader/get-tick-resolution (%require-live-pointer object)) 'ratio-object)
 )
 
-(defgeneric multi-reader-read (object samples count timeout-ms)
+(defgeneric multi-reader-read (object samples count &optional timeout-ms)
   (:documentation "Copies at maximum the next `count` unread samples to the values buffer. The amount actually read is returned through the `count` parameter.
 @param samples The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples. This should be a jagged array (array of pointers to arrays) where the size is equal to the Signal count and each Signal buffer is at least `count` size long. E.g: reading the next 5 samples of 3 signals samples | ˇ     0  1  2  3  4  5  <-- count [0] = [0, 0, 0, 0, 0, 0] [1] = [0, 0, 0, 0, 0, 0] [2] = [0, 0, 0, 0, 0, 0]
 @param count The maximum amount of samples to be read expressed in commonSampleRate. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are returned. The rest of the buffer is not modified or cleared. In case of different sample rates, the number of read samples may be different for each individual signal.
@@ -17798,7 +17798,7 @@ Calls the openDAQ C function daqMultiReader_getTickResolution()."
 @param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event - If the reading process is successful, IReaderStatus::getReadStatus returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
 
 Calls the openDAQ C function daqMultiReader_read()."))
-(defmethod multi-reader-read ((object multi-reader) samples count timeout-ms)
+(defmethod multi-reader-read ((object multi-reader) samples count &optional (timeout-ms 0))
   "Copies at maximum the next `count` unread samples to the values buffer. The amount actually read is returned through the `count` parameter.
 @param samples The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples. This should be a jagged array (array of pointers to arrays) where the size is equal to the Signal count and each Signal buffer is at least `count` size long. E.g: reading the next 5 samples of 3 signals samples | ˇ     0  1  2  3  4  5  <-- count [0] = [0, 0, 0, 0, 0, 0] [1] = [0, 0, 0, 0, 0, 0] [2] = [0, 0, 0, 0, 0, 0]
 @param count The maximum amount of samples to be read expressed in commonSampleRate. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are returned. The rest of the buffer is not modified or cleared. In case of different sample rates, the number of read samples may be different for each individual signal.
@@ -17816,7 +17816,7 @@ Calls the openDAQ C function daqMultiReader_read()."
         (wrap value-1 'multi-reader-status))))
 )
 
-(defgeneric multi-reader-read-with-domain (object samples domain count timeout-ms)
+(defgeneric multi-reader-read-with-domain (object samples domain count &optional timeout-ms)
   (:documentation "Copies at maximum the next `count` unread samples and clock-stamps to the `samples` and `domain` buffers. The amount actually read is returned through the `count` parameter.
 @param samples The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples. This should be a jagged array (array of pointers to arrays) where the size is equal to the Signal count and each Signal buffer is at least `count` size long. E.g: reading the next 5 samples of 3 signals samples | ˇ     0  1  2  3  4  5  <-- count [0] = [0, 0, 0, 0, 0, 0] [1] = [0, 0, 0, 0, 0, 0] [2] = [0, 0, 0, 0, 0, 0]
 @param domain The buffer that the domain values will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of clock-stamps. This should be a jagged array (array of pointers to arrays) where the size is equal to the Signal count and each Signal buffer is at least `count` size long. E.g: reading the next 5 samples of 3 signals domain | ˇ     0  1  2  3  4  5  <-- count [0] = [0, 0, 0, 0, 0, 0] [1] = [0, 0, 0, 0, 0, 0] [2] = [0, 0, 0, 0, 0, 0]
@@ -17825,7 +17825,7 @@ Calls the openDAQ C function daqMultiReader_read()."
 @param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event - If the reading process is successful, IReaderStatus::getReadStatus returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
 
 Calls the openDAQ C function daqMultiReader_readWithDomain()."))
-(defmethod multi-reader-read-with-domain ((object multi-reader) samples domain count timeout-ms)
+(defmethod multi-reader-read-with-domain ((object multi-reader) samples domain count &optional (timeout-ms 0))
   "Copies at maximum the next `count` unread samples and clock-stamps to the `samples` and `domain` buffers. The amount actually read is returned through the `count` parameter.
 @param samples The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples. This should be a jagged array (array of pointers to arrays) where the size is equal to the Signal count and each Signal buffer is at least `count` size long. E.g: reading the next 5 samples of 3 signals samples | ˇ     0  1  2  3  4  5  <-- count [0] = [0, 0, 0, 0, 0, 0] [1] = [0, 0, 0, 0, 0, 0] [2] = [0, 0, 0, 0, 0, 0]
 @param domain The buffer that the domain values will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of clock-stamps. This should be a jagged array (array of pointers to arrays) where the size is equal to the Signal count and each Signal buffer is at least `count` size long. E.g: reading the next 5 samples of 3 signals domain | ˇ     0  1  2  3  4  5  <-- count [0] = [0, 0, 0, 0, 0, 0] [1] = [0, 0, 0, 0, 0, 0] [2] = [0, 0, 0, 0, 0, 0]
@@ -19512,13 +19512,13 @@ Calls the openDAQ C function daqPropertyObjectClassBuilder_setPropertyOrder()."
     (opendaq.low-level:property-object-class-builder/set-property-order (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defgeneric property-object-class-internal-clone (object type-manager)
+(defgeneric property-object-class-internal-clone (object &optional type-manager)
   (:documentation "Clones the property object class.
 @param[out] cloned The cloned property object class.
 @param typeManager The type manager to use for the cloned property object class. if type manager is not provided, cloned class will store a type manager from the original class.
 
 Calls the openDAQ C function daqPropertyObjectClassInternal_clone()."))
-(defmethod property-object-class-internal-clone ((object property-object-class-internal) type-manager)
+(defmethod property-object-class-internal-clone ((object property-object-class-internal) &optional (type-manager nil))
   "Clones the property object class.
 @param[out] cloned The cloned property object class.
 @param typeManager The type manager to use for the cloned property object class. if type manager is not provided, cloned class will store a type manager from the original class.
@@ -19971,7 +19971,7 @@ Calls the openDAQ C function daqPropertyObject_endUpdate()."
   (opendaq.low-level:property-object/end-update (%require-live-pointer object))
 )
 
-(defgeneric find-properties (object property-filter component-filter)
+(defgeneric find-properties (object property-filter &optional component-filter)
   (:documentation "Retrieves a list of properties from the Property object that match the given property filter.
 @param propertyFilter A filter used to select relevant properties. Can include a recursive wrapper to search thru nested property objects.
 @param componentFilter An optional filter to determine which components' properties are included in the search. A recursive wrapper can be used to enable tree-traversal search.
@@ -19981,7 +19981,7 @@ When searching for properties within a component, if no componentFilter is provi
 If a componentFilter is provided but the current component does not match it, the result will be an empty list.
 
 Calls the openDAQ C function daqPropertyObject_findProperties()."))
-(defmethod find-properties ((object property-object) property-filter component-filter)
+(defmethod find-properties ((object property-object) property-filter &optional (component-filter nil))
   "Retrieves a list of properties from the Property object that match the given property filter.
 @param propertyFilter A filter used to select relevant properties. Can include a recursive wrapper to search thru nested property objects.
 @param componentFilter An optional filter to determine which components' properties are included in the search. A recursive wrapper can be used to enable tree-traversal search.
@@ -21798,14 +21798,14 @@ Calls the openDAQ C function daqScheduler_isMultiThreaded()."
   (not (zerop (opendaq.low-level:scheduler/is-multi-threaded (%require-live-pointer object))))
 )
 
-(defgeneric run-main-loop (object loop-time)
+(defgeneric run-main-loop (object &optional loop-time)
   (:documentation "Starts and blocks the main event loop, executing scheduled tasks.
 @param loopTime The maximum time to block the loop, in milliseconds.
 This method runs the main loop, processing all enqueued work (including repetitive tasks)
 until @ref stopMainLoop is called. Typically executed on the main thread or in a dedicated loop thread.
 
 Calls the openDAQ C function daqScheduler_runMainLoop()."))
-(defmethod run-main-loop ((object scheduler) loop-time)
+(defmethod run-main-loop ((object scheduler) &optional (loop-time 1))
   "Starts and blocks the main event loop, executing scheduled tasks.
 @param loopTime The maximum time to block the loop, in milliseconds.
 This method runs the main loop, processing all enqueued work (including repetitive tasks)
@@ -23442,7 +23442,7 @@ Calls the openDAQ C function daqStreamReaderBuilder_setValueReadType()."
   )
 )
 
-(defgeneric stream-reader-read (object samples count timeout-ms)
+(defgeneric stream-reader-read (object samples count &optional timeout-ms)
   (:documentation "Copies at maximum the next `count` unread samples to the values buffer. The amount actually read is returned through the `count` parameter.
 @param samples The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples.
 @param count The maximum amount of samples to be read. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are returned. The rest of the buffer is not modified or cleared.
@@ -23450,7 +23450,7 @@ Calls the openDAQ C function daqStreamReaderBuilder_setValueReadType()."
 @param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event - If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
 
 Calls the openDAQ C function daqStreamReader_read()."))
-(defmethod stream-reader-read ((object stream-reader) samples count timeout-ms)
+(defmethod stream-reader-read ((object stream-reader) samples count &optional (timeout-ms 0))
   "Copies at maximum the next `count` unread samples to the values buffer. The amount actually read is returned through the `count` parameter.
 @param samples The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples.
 @param count The maximum amount of samples to be read. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are returned. The rest of the buffer is not modified or cleared.
@@ -23468,7 +23468,7 @@ Calls the openDAQ C function daqStreamReader_read()."
         (wrap value-1 'reader-status))))
 )
 
-(defgeneric stream-reader-read-with-domain (object samples domain count timeout-ms)
+(defgeneric stream-reader-read-with-domain (object samples domain count &optional timeout-ms)
   (:documentation "Copies at maximum the next `count` unread samples and clock-stamps to the `samples` and `domain` buffers. The amount actually read is returned through the `count` parameter.
 @param samples The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples.
 @param domain The buffer that the domain values will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of clock-stamps.
@@ -23477,7 +23477,7 @@ Calls the openDAQ C function daqStreamReader_read()."
 @param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event - If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
 
 Calls the openDAQ C function daqStreamReader_readWithDomain()."))
-(defmethod stream-reader-read-with-domain ((object stream-reader) samples domain count timeout-ms)
+(defmethod stream-reader-read-with-domain ((object stream-reader) samples domain count &optional (timeout-ms 0))
   "Copies at maximum the next `count` unread samples and clock-stamps to the `samples` and `domain` buffers. The amount actually read is returned through the `count` parameter.
 @param samples The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples.
 @param domain The buffer that the domain values will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of clock-stamps.

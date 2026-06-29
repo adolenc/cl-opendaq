@@ -285,6 +285,7 @@ def build_functions(records: list[dict], types: dict[str, dict]) -> tuple[list[d
                         "value_type": arg_type.get("value_type"),
                         "key_type": arg_type.get("key_type"),
                         "by_value_struct": by_value,
+                        "default_value": argument.get("default_value"),
                     }
                 )
             functions.append(
