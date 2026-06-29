@@ -419,9 +419,13 @@ their native Lisp equivalents and casting objects to TARGET-TYPE.
             => (#<DEVICE-INFO ...> #<DEVICE-INFO ...>)
 
   Example: (as-list-of (wrap pointer 'object-list) 'integer-object)
-            => (1 2 3)"
-  (loop for i below (count object-list)
-        collect (%as-consuming (item-at object-list i) target-type)))
+            => (1 2 3)
+
+A NIL OBJECT-LIST (e.g. from a getter that returns a null list for the empty
+case, like daqCallableInfo_getArguments) is treated as the empty list."
+  (when object-list
+    (loop for i below (count object-list)
+          collect (%as-consuming (item-at object-list i) target-type))))
 
 (defun as-hashtable-of (dict key-type value-type)
   "Convert an openDAQ dict into a Lisp hash-table.  Keys and values are
@@ -465,6 +469,83 @@ not a scalar.  CORE-TYPE is a DAQ-CORE-TYPE keyword (:int, :string,
 This is the bridge between the type a property/list/dict reports and the wrapper
 class the conversion functions take; NIL doubles as a \"not a scalar\" predicate."
   (cdr (assoc core-type *core-type-classes*)))
+
+;;; ---------------------------------------------------------------------------
+;;; Function / procedure properties
+;;;
+;;; A property whose value type is FUNC or PROC holds a callable rather than
+;;; data.  Instead of handing callers the raw Function/Procedure object -- which
+;;; they would have to feed a hand-built argument list and then unbox the result
+;;; of -- PROPERTY-VALUE returns an ordinary Lisp function: FUNCALL it with native
+;;; Lisp arguments and it boxes them, invokes the openDAQ callable, and returns
+;;; the unboxed result.  The property's callable info supplies the declared
+;;; argument count (checked before each call) and, for a FUNC, the return type
+;;; used to unbox the result; a FUNC whose return type is non-scalar yields the
+;;; raw wrapper, and a PROC (no return value) yields NIL.
+;;;
+;;; FUNC/PROC are recognised from the property's VALUE-TYPE: openDAQ exposes no
+;;; interface id for Function or Procedure, so IS-P cannot be used to detect them.
+;;; ---------------------------------------------------------------------------
+
+(defun %callable-params (args)
+  "Encode ARGS as the params an openDAQ callable expects: NIL for no arguments,
+the single (auto-boxed) value for one, and an OBJECT-LIST for several."
+  (case (cl:length args)
+    (0 nil)
+    (1 (first args))
+    (t (let ((list (make-instance 'object-list)))
+         (dolist (arg args list)
+           (push-back list arg))))))
+
+(defun %check-callable-arity (name expected args)
+  "Signal an error unless ARGS supplies the EXPECTED number of arguments of the
+callable property NAME."
+  (let ((got (cl:length args)))
+    (unless (= got expected)
+      (error "openDAQ callable property ~S expects ~D argument~:P but was called ~
+with ~D." name expected got))))
+
+(defun %function-property-caller (value property)
+  "A Lisp function wrapping the FUNC-property VALUE (an openDAQ Function).  PROPERTY
+supplies the callable info: the argument count is checked before each call, and
+the return type selects how the result is unboxed (a non-scalar return type leaves
+the raw wrapper)."
+  (let* ((info (callable-info property))
+         (arity (cl:length (arguments info)))
+         (return-class (core-type->class (return-type info)))
+         (name (name property))
+         (function (as value 'function-object)))
+    (lambda (&rest args)
+      (%check-callable-arity name arity args)
+      (let ((result (call function (%callable-params args) nil)))
+        (if return-class
+            (unbox (as result return-class))
+            result)))))
+
+(defun %procedure-property-caller (value property)
+  "A Lisp function wrapping the PROC-property VALUE (an openDAQ Procedure).  The
+argument count is checked against PROPERTY's callable info before each call; a
+procedure has no return value, so the function returns NIL."
+  (let* ((info (callable-info property))
+         (arity (cl:length (arguments info)))
+         (name (name property))
+         (procedure (as value 'procedure)))
+    (lambda (&rest args)
+      (%check-callable-arity name arity args)
+      (dispatch procedure (%callable-params args))
+      nil)))
+
+(defmethod property-value :around ((object property-object) property-name)
+  "When PROPERTY-NAME names a FUNC or PROC property, return a Lisp function that
+invokes the openDAQ callable (boxing its arguments and unboxing its result)
+instead of the raw Function/Procedure object; otherwise return the value
+unchanged.  The metadata lookup used to recognise a callable is skipped silently
+if it fails, leaving the normal value getter (and its error reporting) in charge."
+  (let ((prop (ignore-errors (property object property-name))))
+    (case (and prop (value-type prop))
+      (:func (%function-property-caller (call-next-method) prop))
+      (:proc (%procedure-property-caller (call-next-method) prop))
+      (t (call-next-method)))))
 
 ;;; ---------------------------------------------------------------------------
 ;;; Domain timestamps

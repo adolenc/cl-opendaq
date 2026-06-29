@@ -98,6 +98,31 @@
       (is (equal '(unsigned-byte 8) (array-element-type raw)) "data-packet RAW-DATA should be an (unsigned-byte 8) vector.")
       (is (= 64 (cl:length raw)) "data-packet RAW-DATA size should be sample-count * element-size bytes."))))
 
+(test high-level-callable-properties
+  (let* ((instance (make-instance 'daq:instance))
+         (device (daq:add-device (daq:root-device instance) "daqref://device0"))
+         (object (daq:as device 'daq:property-object))
+         (channel (daq:as (daq:find-component device "IO/AI/RefCh0") 'daq:property-object)))
+    ;; FUNC property: PROPERTY-VALUE returns a Lisp function that boxes the
+    ;; arguments, invokes the callable, and unboxes the (INT) result.
+    (let ((sum (daq:property-value object "Protected.Sum")))
+      (is (functionp sum) "PROPERTY-VALUE of a FUNC property should return a Lisp function.")
+      (is (= 12 (funcall sum 7 5)) "Calling a FUNC property should box the args, invoke it, and unbox the result.")
+      (is (= 42 (funcall sum 40 2)) "The returned function should be reusable across calls.")
+      (signals error (funcall sum 1) "Calling a FUNC property with the wrong number of arguments should signal an error."))
+    ;; Scalar property: unaffected by the callable :around -- still a boxed value.
+    (let ((number-of-channels (daq:property-value object "NumberOfChannels")))
+      (is (not (functionp number-of-channels)) "PROPERTY-VALUE of a scalar property should not be wrapped as a function.")
+      (is (integerp (daq:unbox (daq:as number-of-channels 'daq:integer-object))) "A scalar property value should still unbox to its native value."))
+    ;; PROC property with no arguments: dispatched for its side effect, yields NIL.
+    (let ((reset (daq:property-value channel "ResetCounter")))
+      (is (functionp reset) "PROPERTY-VALUE of a PROC property should return a Lisp function.")
+      (is (null (funcall reset)) "Calling a PROC property should dispatch it and return NIL.")
+      (signals error (funcall reset 1) "A zero-argument PROC property should reject surplus arguments."))
+    ;; FUNC property with a single argument: the bare-value param encoding.
+    (let ((get-and-set (daq:property-value channel "GetAndSetCounter")))
+      (is (integerp (funcall get-and-set 0)) "A single-argument FUNC property should encode its lone arg and unbox the INT result."))))
+
 (test high-level-autoload-healthcheck
   (let* ((status (daq:healthcheck nil))
          (loaded (getf status :status))
