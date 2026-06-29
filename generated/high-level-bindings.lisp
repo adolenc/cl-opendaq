@@ -59,6 +59,7 @@
             address-info-private
             address-info-private-interface-id
             address-info-type
+            address-reachability-status
             addresses
             all-properties
             allocate
@@ -193,6 +194,7 @@
             component-type-interface-id
             component-type-private
             component-type-private-interface-id
+            component-type-sort
             component-update-context
             component-update-context-interface-id
             component-update-context-signal
@@ -243,6 +245,7 @@
             core-event-args/type-added
             core-event-args/type-removed
             core-event-callback
+            core-event-id
             core-event-trigger
             core-events-enabled
             core-type
@@ -336,6 +339,7 @@
             device-revision
             device-type
             device-type-interface-id
+            device-update-mode
             device-update-options
             device-update-options-interface-id
             device-update-options-with-local-id-or-null
@@ -612,6 +616,7 @@
             log-file-info-builder-interface-id
             log-file-info-interface-id
             log-file-infos
+            log-level
             logger
             logger-component
             logger-component-interface-id
@@ -724,6 +729,7 @@
             on-unsubscribe-complete
             operation-mode
             operation-mode-recursive
+            operation-mode-type
             options
             or-add-component
             origin
@@ -747,6 +753,7 @@
             packet-reader-interface-id
             packet-reader-read
             packet-reader/from-port
+            packet-ready-notification
             packet-received
             packet-type
             parameters
@@ -761,6 +768,7 @@
             path
             pattern
             peek
+            permission
             permission-manager
             permission-manager-interface-id
             permission-manager-internal
@@ -978,6 +986,7 @@
             save-configuration
             scale-data
             scale-data-output
+            scaled-sample-type
             scaling
             scaling-builder
             scaling-builder-interface-id
@@ -1156,6 +1165,7 @@
             tick-offset-tolerance
             tick-resolution
             ticks-since-origin
+            time-protocol
             to-bool
             to-float
             to-int
@@ -25064,6 +25074,34 @@ Calls the openDAQ C function daqWork_execute()."
   )
 )
 
+;;; Enum type aliases: prefix-free names for the low-level cenums, so the enum
+;;; types themselves (not just their keywords) are usable from this package,
+;;; e.g. (cffi:foreign-enum-keyword 'operation-mode-type code).
+(cffi:defctype address-reachability-status opendaq.low-level::daq-address-reachability-status)
+(cffi:defctype component-type-sort opendaq.low-level::daq-component-type-sort)
+(cffi:defctype core-event-id opendaq.low-level::daq-core-event-id)
+(cffi:defctype core-type opendaq.low-level::daq-core-type)
+(cffi:defctype data-rule-type opendaq.low-level::daq-data-rule-type)
+(cffi:defctype device-update-mode opendaq.low-level::daq-device-update-mode)
+(cffi:defctype dimension-rule-type opendaq.low-level::daq-dimension-rule-type)
+(cffi:defctype locking-strategy opendaq.low-level::daq-locking-strategy)
+(cffi:defctype log-level opendaq.low-level::daq-log-level)
+(cffi:defctype operation-mode-type opendaq.low-level::daq-operation-mode-type)
+(cffi:defctype packet-ready-notification opendaq.low-level::daq-packet-ready-notification)
+(cffi:defctype packet-type opendaq.low-level::daq-packet-type)
+(cffi:defctype permission opendaq.low-level::daq-permission)
+(cffi:defctype property-event-type opendaq.low-level::daq-property-event-type)
+(cffi:defctype property-type opendaq.low-level::daq-property-type)
+(cffi:defctype protocol-type opendaq.low-level::daq-protocol-type)
+(cffi:defctype read-mode opendaq.low-level::daq-read-mode)
+(cffi:defctype read-status opendaq.low-level::daq-read-status)
+(cffi:defctype read-timeout-type opendaq.low-level::daq-read-timeout-type)
+(cffi:defctype scaled-sample-type opendaq.low-level::daq-scaled-sample-type)
+(cffi:defctype scaling-type opendaq.low-level::daq-scaling-type)
+(cffi:defctype subscription-event-type opendaq.low-level::daq-subscription-event-type)
+(cffi:defctype time-protocol opendaq.low-level::daq-time-protocol)
+(cffi:defctype uses-offset opendaq.low-level::daq-uses-offset)
+
 (export '(
          accepts-object
          accepts-signals
@@ -25119,6 +25157,7 @@ Calls the openDAQ C function daqWork_execute()."
          address-info-private
          address-info-private-interface-id
          address-info-type
+         address-reachability-status
          addresses
          all-properties
          allocate
@@ -25253,6 +25292,7 @@ Calls the openDAQ C function daqWork_execute()."
          component-type-interface-id
          component-type-private
          component-type-private-interface-id
+         component-type-sort
          component-update-context
          component-update-context-interface-id
          component-update-context-signal
@@ -25303,6 +25343,7 @@ Calls the openDAQ C function daqWork_execute()."
          core-event-args/type-added
          core-event-args/type-removed
          core-event-callback
+         core-event-id
          core-event-trigger
          core-events-enabled
          core-type
@@ -25396,6 +25437,7 @@ Calls the openDAQ C function daqWork_execute()."
          device-revision
          device-type
          device-type-interface-id
+         device-update-mode
          device-update-options
          device-update-options-interface-id
          device-update-options-with-local-id-or-null
@@ -25672,6 +25714,7 @@ Calls the openDAQ C function daqWork_execute()."
          log-file-info-builder-interface-id
          log-file-info-interface-id
          log-file-infos
+         log-level
          logger
          logger-component
          logger-component-interface-id
@@ -25784,6 +25827,7 @@ Calls the openDAQ C function daqWork_execute()."
          on-unsubscribe-complete
          operation-mode
          operation-mode-recursive
+         operation-mode-type
          options
          or-add-component
          origin
@@ -25807,6 +25851,7 @@ Calls the openDAQ C function daqWork_execute()."
          packet-reader-interface-id
          packet-reader-read
          packet-reader/from-port
+         packet-ready-notification
          packet-received
          packet-type
          parameters
@@ -25821,6 +25866,7 @@ Calls the openDAQ C function daqWork_execute()."
          path
          pattern
          peek
+         permission
          permission-manager
          permission-manager-interface-id
          permission-manager-internal
@@ -26038,6 +26084,7 @@ Calls the openDAQ C function daqWork_execute()."
          save-configuration
          scale-data
          scale-data-output
+         scaled-sample-type
          scaling
          scaling-builder
          scaling-builder-interface-id
@@ -26216,6 +26263,7 @@ Calls the openDAQ C function daqWork_execute()."
          tick-offset-tolerance
          tick-resolution
          ticks-since-origin
+         time-protocol
          to-bool
          to-float
          to-int
