@@ -20,7 +20,7 @@
          (integer (make-instance 'daq:integer-object :value 1))
          (float-object (make-instance 'daq:float-object :value 1.0d0))
          (string-object (daq::wrap (opendaq.low-level:make-daq-string "test") 'daq:string-object))
-         (simple-type (make-instance 'daq:simple-type :core-type :daq-ct-int))
+         (simple-type (make-instance 'daq:simple-type :core-type :int))
          (version-info (make-instance 'daq:version-info :major 1 :minor 2 :patch 3))
          (binary-data (make-instance 'daq:binary-data :size 16)))
     (is (typep base-object 'daq:base-object) "High-level wrappers should be able to adopt low-level base-object pointers.")
@@ -77,15 +77,15 @@
 (test high-level-coretypes-core-type->class
   ;; CORE-TYPE->CLASS bridges a DAQ-CORE-TYPE keyword (as VALUE-TYPE reports) to the
   ;; boxed-primitive class AS takes; non-scalar core types map to NIL.
-  (is (eq 'daq:integer-object (daq:core-type->class :daq-ct-int)) "core-type->class should map :daq-ct-int to integer-object.")
-  (is (eq 'daq:string-object (daq:core-type->class :daq-ct-string)) "core-type->class should map :daq-ct-string to string-object.")
-  (is (eq 'daq:complex-number-object (daq:core-type->class :daq-ct-complex-number)) "core-type->class should map :daq-ct-complex-number to complex-number-object.")
-  (is (null (daq:core-type->class :daq-ct-list)) "core-type->class should map a non-scalar core type to NIL.")
+  (is (eq 'daq:integer-object (daq:core-type->class :int)) "core-type->class should map :int to integer-object.")
+  (is (eq 'daq:string-object (daq:core-type->class :string)) "core-type->class should map :string to string-object.")
+  (is (eq 'daq:complex-number-object (daq:core-type->class :complex-number)) "core-type->class should map :complex-number to complex-number-object.")
+  (is (null (daq:core-type->class :list)) "core-type->class should map a non-scalar core type to NIL.")
   ;; Round-trip: the class it returns is exactly what AS needs to cast a value of that
   ;; core type so UNBOX can read it.
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list 7)
-    (is (= 7 (daq:unbox (daq:as (daq:pop-front list) (daq:core-type->class :daq-ct-int)))) "unbox of (as value class) should read the value, with class from core-type->class.")))
+    (is (= 7 (daq:unbox (daq:as (daq:pop-front list) (daq:core-type->class :int)))) "unbox of (as value class) should read the value, with class from core-type->class.")))
 
 (test high-level-coretypes-collections
   (let ((list (make-instance 'daq:object-list)))
@@ -108,7 +108,7 @@
 (test high-level-coretypes-enumeration-and-structs
   (let* ((enumerators (make-instance 'daq:dict))
          (field-names (make-instance 'daq:object-list))
-         (field-type (make-instance 'daq:simple-type :core-type :daq-ct-int))
+         (field-type (make-instance 'daq:simple-type :core-type :int))
          (field-types (make-instance 'daq:object-list))
          (type-manager (make-instance 'daq:type-manager)))
     (daq:set enumerators "One" 1)

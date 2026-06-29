@@ -160,7 +160,7 @@
 
 (test coretypes-simple-type
   (opendaq.low-level:with-daq-objects (simple-type)
-    (setf simple-type (opendaq.low-level:simple-type/create-simple-type :daq-ct-bool))
+    (setf simple-type (opendaq.low-level:simple-type/create-simple-type :bool))
     (is (not (cffi:null-pointer-p simple-type)) "coretypes/SimpleType returned a null object")))
 
 (test coretypes-stringobject
@@ -174,7 +174,7 @@
     (setf field-names (opendaq.low-level:list/create-list))
     (setf field-types (opendaq.low-level:list/create-list))
     (setf field-name (opendaq.low-level:make-daq-string "int"))
-    (setf field-simple-type (opendaq.low-level:simple-type/create-simple-type :daq-ct-int))
+    (setf field-simple-type (opendaq.low-level:simple-type/create-simple-type :int))
     (setf field-value (opendaq.low-level:integer/create-integer 10))
     (opendaq.low-level:list/push-back field-types field-simple-type)
     (opendaq.low-level:list/push-back field-names field-name)
@@ -197,7 +197,7 @@
     (setf field-names (opendaq.low-level:list/create-list))
     (setf field-types (opendaq.low-level:list/create-list))
     (setf field-name (opendaq.low-level:make-daq-string "int"))
-    (setf field-simple-type (opendaq.low-level:simple-type/create-simple-type :daq-ct-int))
+    (setf field-simple-type (opendaq.low-level:simple-type/create-simple-type :int))
     (opendaq.low-level:list/push-back field-types field-simple-type)
     (opendaq.low-level:list/push-back field-names field-name)
     (setf struct-type-name (opendaq.low-level:make-daq-string "test"))

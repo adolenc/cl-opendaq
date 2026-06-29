@@ -66,8 +66,8 @@ CLASS_OVERRIDES: dict[str, dict] = {
         "constructor_defaults": (
             ("value-read-type", "opendaq.low-level::+daq-sample-type-float-64+"),
             ("domain-read-type", "opendaq.low-level::+daq-sample-type-int-64+"),
-            ("mode", ":daq-read-mode-scaled"),
-            ("timeout-type", ":daq-read-timeout-type-all"),
+            ("mode", ":scaled"),
+            ("timeout-type", ":all"),
         )
     },
     # stream-reader, tail-reader and block-reader are constructed by hand via their

@@ -17,10 +17,10 @@
   (let ((subscription-event-args
           (make-instance 'daq:subscription-event-args
                          :streaming-connection-string "streamingConnectionString"
-                         :type :daq-subscription-event-type-subscribed)))
+                         :type :subscribed)))
     (is (string= "streamingConnectionString"
                  (daq:streaming-connection-string subscription-event-args))
         "High-level subscription-event-args should expose the connection string.")
-    (is (eql :daq-subscription-event-type-subscribed
+    (is (eql :subscribed
              (daq:subscription-event-type subscription-event-args))
         "High-level subscription-event-args should preserve the subscription event type.")))

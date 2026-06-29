@@ -6,7 +6,7 @@
   (let* ((sinks (make-instance 'daq:object-list))
          (sink (make-instance 'daq:logger-sink/std-err)))
     (daq:push-back sinks sink)
-    (let* ((logger (make-instance 'daq:logger :sinks sinks :level :daq-log-level-debug))
+    (let* ((logger (make-instance 'daq:logger :sinks sinks :level :debug))
            (type-manager (make-instance 'daq:type-manager))
            (options (make-instance 'daq:dict))
            (discovery-servers (make-instance 'daq:dict))

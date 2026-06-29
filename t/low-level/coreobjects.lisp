@@ -26,10 +26,10 @@
 (test coreobjects-argument-info
   (opendaq.low-level:with-daq-objects (arg-info name name-out)
     (setf name (opendaq.low-level:make-daq-string "test_argument"))
-    (setf arg-info (opendaq.low-level:argument-info/create-argument-info name :daq-ct-int))
+    (setf arg-info (opendaq.low-level:argument-info/create-argument-info name :int))
     (setf name-out (opendaq.low-level:argument-info/get-name arg-info))
     (is (string= "test_argument" (%daq-string-value name-out)) "coreobjects/ArgumentInfo name mismatch")
-    (is (eq :daq-ct-int (opendaq.low-level:argument-info/get-type arg-info)) "coreobjects/ArgumentInfo type mismatch")))
+    (is (eq :int (opendaq.low-level:argument-info/get-type arg-info)) "coreobjects/ArgumentInfo type mismatch")))
 
 (test coreobjects-authentication-provider
   (opendaq.low-level:with-daq-objects (username password-hash groups user user-list auth-provider user-out)
@@ -57,12 +57,12 @@
   (opendaq.low-level:with-daq-objects (argument-info-list name arg-info callable-info arguments)
     (setf argument-info-list (opendaq.low-level:list/create-list))
     (setf name (opendaq.low-level:make-daq-string "test_argument"))
-    (setf arg-info (opendaq.low-level:argument-info/create-argument-info name :daq-ct-int))
+    (setf arg-info (opendaq.low-level:argument-info/create-argument-info name :int))
     (opendaq.low-level:list/push-back argument-info-list arg-info)
     (setf callable-info
-          (opendaq.low-level:callable-info/create-callable-info argument-info-list :daq-ct-int 1))
+          (opendaq.low-level:callable-info/create-callable-info argument-info-list :int 1))
     (is (= 1 (opendaq.low-level:callable-info/is-const callable-info)) "coreobjects/CallableInfo const flag mismatch")
-    (is (eq :daq-ct-int (opendaq.low-level:callable-info/get-return-type callable-info)) "coreobjects/CallableInfo return type mismatch")
+    (is (eq :int (opendaq.low-level:callable-info/get-return-type callable-info)) "coreobjects/CallableInfo return type mismatch")
     (setf arguments (opendaq.low-level:callable-info/get-arguments callable-info))
     (is (= 1 (opendaq.low-level:list/get-count arguments)) "coreobjects/CallableInfo arguments mismatch")))
 
@@ -172,7 +172,7 @@
            prop
            value2
            value1
-           :daq-property-event-type-event-type-update
+           :update
            0))
     (setf value-out (opendaq.low-level:property-value-event-args/get-value event-args))
     (is (= 1 (opendaq.low-level:base-object/equals value-out value2)) "coreobjects/PropertyValueEventArgs value mismatch")

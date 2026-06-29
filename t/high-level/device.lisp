@@ -5,7 +5,7 @@
 (test high-level-address-info-builder
   (let ((builder (make-instance 'daq:address-info-builder)))
     (setf (daq:connection-string builder) "daqref://device0"
-          (daq:reachability-status builder) :daq-address-reachability-status-unknown
+          (daq:reachability-status builder) :unknown
           (daq:type builder) "Type"
           (daq:address builder) "Address")
     (let ((address-info (daq:build builder)))

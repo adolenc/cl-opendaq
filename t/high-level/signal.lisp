@@ -41,7 +41,7 @@
   (let* ((sinks (make-instance 'daq:object-list))
          (sink (make-instance 'daq:logger-sink/std-err)))
     (daq:push-back sinks sink)
-    (let* ((logger (make-instance 'daq:logger :sinks sinks :level :daq-log-level-debug))
+    (let* ((logger (make-instance 'daq:logger :sinks sinks :level :debug))
            (type-manager (make-instance 'daq:type-manager))
            (options (make-instance 'daq:dict))
            (discovery-servers (make-instance 'daq:dict))
@@ -68,15 +68,15 @@
     (daq:set parameters "offset" 10)
     (setf (daq:input-data-type builder) opendaq.low-level::+daq-sample-type-int-16+
           (daq:output-data-type builder) opendaq.low-level::+daq-sample-type-float-32+
-          (daq:scaling-type builder) :daq-scaling-type-linear
+          (daq:scaling-type builder) :linear
           (daq:parameters builder) parameters)
     (let* ((scaling (daq:build builder))
            (scaling-parameters (daq:parameters scaling))
            (scale-value (daq:get scaling-parameters "scale"))
            (offset-value (daq:get scaling-parameters "offset")))
       (is (= opendaq.low-level::+daq-sample-type-int-16+ (daq:input-sample-type scaling)) "High-level scaling wrappers should preserve the input sample type.")
-      (is (eql :daq-scaled-sample-type-float-32 (daq:output-sample-type scaling)) "High-level scaling wrappers should preserve the output sample type.")
-      (is (eql :daq-scaling-type-linear (daq:scaling-type scaling)) "High-level scaling wrappers should preserve the scaling type.")
+      (is (eql :float-32 (daq:output-sample-type scaling)) "High-level scaling wrappers should preserve the output sample type.")
+      (is (eql :linear (daq:scaling-type scaling)) "High-level scaling wrappers should preserve the scaling type.")
       (is (= 10 (%boxed-integer-value scale-value)) "High-level scaling parameter dictionaries should preserve boxed numeric values.")
       (is (= 10 (%boxed-integer-value offset-value)) "High-level scaling parameter dictionaries should preserve boxed numeric values."))))
 
@@ -84,7 +84,7 @@
   (let* ((sinks (make-instance 'daq:object-list))
          (sink (make-instance 'daq:logger-sink/std-err)))
     (daq:push-back sinks sink)
-    (let* ((logger (make-instance 'daq:logger :sinks sinks :level :daq-log-level-debug))
+    (let* ((logger (make-instance 'daq:logger :sinks sinks :level :debug))
            (type-manager (make-instance 'daq:type-manager))
            (options (make-instance 'daq:dict))
            (discovery-servers (make-instance 'daq:dict))

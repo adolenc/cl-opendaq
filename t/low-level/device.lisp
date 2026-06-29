@@ -12,7 +12,7 @@
     (opendaq.low-level:address-info-builder/set-connection-string builder connection-string)
     (opendaq.low-level:address-info-builder/set-reachability-status
      builder
-     :daq-address-reachability-status-unknown)
+     :unknown)
     (setf type (opendaq.low-level:make-daq-string "Type"))
     (opendaq.low-level:address-info-builder/set-type builder type)
     (setf address (opendaq.low-level:make-daq-string "Address"))

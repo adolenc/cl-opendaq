@@ -48,8 +48,8 @@
              signal
              opendaq.low-level::+daq-sample-type-float-64+
              opendaq.low-level::+daq-sample-type-int-64+
-             :daq-read-mode-scaled
-             :daq-read-timeout-type-all))
+             :scaled
+             :all))
       (is (not (cffi:null-pointer-p reader)) "Failed to create a low-level stream reader.")
       signal-count)))
 

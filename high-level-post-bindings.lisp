@@ -95,8 +95,8 @@ builder, and adopts the resulting reader pointer into OBJECT."
      &key (pointer nil pointer-p) (signal nil signal-p)
           (value-read-type opendaq.low-level::+daq-sample-type-float-64+)
           (domain-read-type opendaq.low-level::+daq-sample-type-int-64+)
-          (mode :daq-read-mode-scaled)
-          (timeout-type :daq-read-timeout-type-all)
+          (mode :scaled)
+          (timeout-type :all)
           (skip-events t)
      &allow-other-keys)
   (declare (ignore pointer))
@@ -119,7 +119,7 @@ builder, and adopts the resulting reader pointer into OBJECT."
           (history-size nil history-size-p)
           (value-read-type opendaq.low-level::+daq-sample-type-float-64+)
           (domain-read-type opendaq.low-level::+daq-sample-type-int-64+)
-          (mode :daq-read-mode-scaled)
+          (mode :scaled)
           (skip-events t)
      &allow-other-keys)
   (declare (ignore pointer))
@@ -142,7 +142,7 @@ builder, and adopts the resulting reader pointer into OBJECT."
           (block-size nil block-size-p)
           (value-read-type opendaq.low-level::+daq-sample-type-float-64+)
           (domain-read-type opendaq.low-level::+daq-sample-type-int-64+)
-          (mode :daq-read-mode-scaled)
+          (mode :scaled)
           (skip-events t)
      &allow-other-keys)
   (declare (ignore pointer))
@@ -442,19 +442,19 @@ unboxed if their type is a primitive, or cast via AS otherwise.
     ht))
 
 (defparameter *core-type-classes*
-  '((:daq-ct-bool           . boolean-object)
-    (:daq-ct-int            . integer-object)
-    (:daq-ct-float          . float-object)
-    (:daq-ct-string         . string-object)
-    (:daq-ct-ratio          . ratio-object)
-    (:daq-ct-complex-number . complex-number-object))
+  '((:bool           . boolean-object)
+    (:int            . integer-object)
+    (:float          . float-object)
+    (:string         . string-object)
+    (:ratio          . ratio-object)
+    (:complex-number . complex-number-object))
   "Maps a DAQ-CORE-TYPE keyword to the boxed-primitive class a value of that type
 casts to.  Only the scalar core types appear; the rest (list, dict, struct, object,
 proc, func, ...) are not single boxed values and so map to NIL.")
 
 (defun core-type->class (core-type)
   "The boxed-primitive class a value of CORE-TYPE casts to, or NIL when CORE-TYPE is
-not a scalar.  CORE-TYPE is a DAQ-CORE-TYPE keyword (:daq-ct-int, :daq-ct-string,
+not a scalar.  CORE-TYPE is a DAQ-CORE-TYPE keyword (:int, :string,
 ...), as returned by VALUE-TYPE; the result is the class symbol to hand to AS:
 
   (let ((class (core-type->class (value-type property))))

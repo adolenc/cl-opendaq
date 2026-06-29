@@ -25,9 +25,9 @@
     (setf subscription-event-args
           (opendaq.low-level:subscription-event-args/create-subscription-event-args
            streaming-connection-string
-           :daq-subscription-event-type-unsubscribed))
+           :unsubscribed))
     (is (not (cffi:null-pointer-p subscription-event-args)) "opendaq/streaming SubscriptionEventArgs returned a null object")
-    (is (eq :daq-subscription-event-type-unsubscribed
+    (is (eq :unsubscribed
             (opendaq.low-level:subscription-event-args/get-subscription-event-type
              subscription-event-args))
         "opendaq/streaming subscription event type mismatch")

@@ -73,7 +73,7 @@
     (opendaq.low-level:scaling-builder/set-output-data-type
      builder
      opendaq.low-level::+daq-sample-type-float-32+)
-    (opendaq.low-level:scaling-builder/set-scaling-type builder :daq-scaling-type-linear)
+    (opendaq.low-level:scaling-builder/set-scaling-type builder :linear)
 
     (setf params (opendaq.low-level:dict/create-dict))
     (setf scale-str (opendaq.low-level:make-daq-string "scale"))
@@ -86,9 +86,9 @@
 
     (setf scaling (opendaq.low-level:scaling-builder/build builder))
     (is (not (cffi:null-pointer-p scaling)) "opendaq/signal Scaling returned a null object")
-    (is (eq :daq-scaling-type-linear (opendaq.low-level:scaling/get-type scaling)) "opendaq/signal Scaling type mismatch")
+    (is (eq :linear (opendaq.low-level:scaling/get-type scaling)) "opendaq/signal Scaling type mismatch")
     (is (= opendaq.low-level::+daq-sample-type-int-16+ (opendaq.low-level:scaling/get-input-sample-type scaling)) "opendaq/signal Scaling input sample type mismatch")
-    (is (eq :daq-scaled-sample-type-float-32
+    (is (eq :float-32
             (opendaq.low-level:scaling/get-output-sample-type scaling))
         "opendaq/signal Scaling output sample type mismatch")
 

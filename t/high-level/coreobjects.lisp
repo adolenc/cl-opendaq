@@ -14,17 +14,17 @@
     (opendaq.low-level:base-object/release-ref args)))
 
 (test high-level-coreobjects-argument-and-callable-info
-  (let* ((argument-info (make-instance 'daq:argument-info :name "test_argument" :type :daq-ct-int))
+  (let* ((argument-info (make-instance 'daq:argument-info :name "test_argument" :type :int))
          (arguments (make-instance 'daq:object-list)))
     (daq:push-back arguments argument-info)
     (let ((callable-info (make-instance 'daq:callable-info
                                         :argument-info arguments
-                                        :return-type :daq-ct-int
+                                        :return-type :int
                                         :const-flag t)))
       (is (string= "test_argument" (daq:name argument-info)) "High-level argument info wrappers should expose their name.")
-      (is (eql :daq-ct-int (daq:argument-info-type argument-info)) "High-level argument info wrappers should expose their core type.")
+      (is (eql :int (daq:argument-info-type argument-info)) "High-level argument info wrappers should expose their core type.")
       (is (= 1 (list-length (daq:arguments callable-info))) "High-level callable-info wrappers should preserve their argument list.")
-      (is (eql :daq-ct-int (daq:return-type callable-info)) "High-level callable-info wrappers should expose their return type.")
+      (is (eql :int (daq:return-type callable-info)) "High-level callable-info wrappers should expose their return type.")
       (is (daq:is-const callable-info) "High-level callable-info wrappers should preserve the const flag."))))
 
 (test high-level-coreobjects-authentication-provider
@@ -123,7 +123,7 @@
                                     :prop property
                                     :value new-value
                                     :old-value old-value
-                                    :type :daq-property-event-type-event-type-update
+                                    :type :update
                                     :is-updating nil))
          (event-value (daq:value event-args))
          (event-old-value (daq:old-value event-args)))
@@ -132,7 +132,7 @@
         "High-level property-value-event-args should expose their property.")
     (is (= 30 (%boxed-integer-value event-value)) "High-level property-value-event-args should expose the new boxed value.")
     (is (= 20 (%boxed-integer-value event-old-value)) "High-level property-value-event-args should expose the previous boxed value.")
-    (is (eql :daq-property-event-type-event-type-update (daq:property-event-type event-args)) "High-level property-value-event-args should preserve the event type symbol.")
+    (is (eql :update (daq:property-event-type event-args)) "High-level property-value-event-args should preserve the event type symbol.")
     (is (null (daq:is-updating event-args)) "High-level property-value-event-args should decode false updating flags into NIL.")))
 
 (test high-level-coreobjects-unified-optional-generic
@@ -148,7 +148,7 @@
                                     :prop property
                                     :value (make-instance 'daq:integer-object :value 30)
                                     :old-value (make-instance 'daq:integer-object :value 20)
-                                    :type :daq-property-event-type-event-type-update
+                                    :type :update
                                     :is-updating nil)))
     (daq:add-property property-object property)
     (is (string= "test_property" (daq:name (daq:property property-object "test_property"))) "Unified PROPERTY should accept the extra PROPERTY-NAME argument on property-object.")

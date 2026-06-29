@@ -4131,8 +4131,8 @@ Constructs the instance via the openDAQ C function daqLogFileInfoBuilder_createL
                                             (signals nil signals-p)
                                             (value-read-type opendaq.low-level::+daq-sample-type-float-64+ value-read-type-p)
                                             (domain-read-type opendaq.low-level::+daq-sample-type-int-64+ domain-read-type-p)
-                                            (mode :daq-read-mode-scaled mode-p)
-                                            (timeout-type :daq-read-timeout-type-all timeout-type-p)
+                                            (mode :scaled mode-p)
+                                            (timeout-type :all timeout-type-p)
                                        &allow-other-keys)
   "Constructs the instance via the openDAQ C function daqMultiReader_createMultiReader()."
   (declare (ignore pointer value-read-type-p domain-read-type-p mode-p timeout-type-p))

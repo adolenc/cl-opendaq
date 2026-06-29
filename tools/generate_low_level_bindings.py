@@ -83,6 +83,36 @@ def c_identifier_to_lisp(name: str) -> str:
     return "-".join(token for token in tokens if token)
 
 
+def strip_common_enum_prefix(names: list[str]) -> list[str]:
+    """Drop the hyphen-delimited prefix shared by every entry of an enum so the
+    CFFI keywords read as plain values: the daqOperationModeType entries become
+    :idle, :operation, :safe-operation, ... instead of
+    :daq-operation-mode-type-idle and friends.
+
+    CFFI cenum keywords are bidirectional -- the same keyword translates a C
+    result back to Lisp and marshals a Lisp argument to C -- so shortening them
+    here is all it takes for every scalar enum getter and setter to speak the
+    short keyword.
+
+    The prefix is the longest run of leading tokens common to all entries, capped
+    so each entry keeps at least one token, and backed off if stripping would
+    leave a keyword that is empty or starts with a digit (so :float-32 survives)."""
+    if len(names) < 2:
+        return names
+    token_lists = [name.split("-") for name in names]
+    shortest = min(len(tokens) for tokens in token_lists)
+    common = 0
+    while common < shortest and len({tokens[common] for tokens in token_lists}) == 1:
+        common += 1
+    common = min(common, shortest - 1)  # never strip an entry down to nothing
+    while common > 0:
+        candidates = ["-".join(tokens[common:]) for tokens in token_lists]
+        if all(candidate and not candidate[0].isdigit() for candidate in candidates):
+            break
+        common -= 1
+    return ["-".join(tokens[common:]) for tokens in token_lists]
+
+
 def c_function_to_public_lisp(name: str) -> str:
     receiver, separator, method = name.partition("_")
     if receiver.startswith("daq") and len(receiver) > 3 and receiver[3].isupper():
@@ -405,7 +435,9 @@ def emit_type_section(types: dict[str, dict]) -> list[str]:
                         lines.append(f"(defconstant +{c_identifier_to_lisp(entry_name)}+ {entry_value})")
         else:
             lines.append(f"(cffi:defcenum {type_info['lisp_name']}")
-            lines.extend(f"  (:{c_identifier_to_lisp(entry_name)} {entry_value})" for entry_name, entry_value in type_info["numeric_enum_entries"])
+            entries = type_info["numeric_enum_entries"]
+            keywords = strip_common_enum_prefix([c_identifier_to_lisp(entry_name) for entry_name, _ in entries])
+            lines.extend(f"  (:{keyword} {entry_value})" for keyword, (_, entry_value) in zip(keywords, entries))
             lines.append("  )")
     return lines
 

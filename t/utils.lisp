@@ -134,7 +134,7 @@
       (setf sinks (opendaq.low-level:list/create-list))
       (setf sink (opendaq.low-level:logger-sink/create-std-err-logger-sink))
       (opendaq.low-level:list/push-back sinks sink)
-      (setf logger (opendaq.low-level:logger/create-logger sinks :daq-log-level-debug))
+      (setf logger (opendaq.low-level:logger/create-logger sinks :debug))
       (setf type-manager (opendaq.low-level:type-manager/create-type-manager))
       (setf options (opendaq.low-level:dict/create-dict))
       (setf discovery-servers (opendaq.low-level:dict/create-dict))
