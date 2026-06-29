@@ -26,7 +26,9 @@ JSON schema (per kind):
     name           : str     — full C function name (e.g. "daqDevice_addDevices")
                                class / method split on the first '_'
     return_type    : TypeDesc
-    arguments[]    : { name: str, type: TypeDesc }
+    arguments[]    : { name: str, type: TypeDesc, default_value: str? }
+                               default_value present only for arguments that
+                               carry a // [defaultValue(...)] annotation
     docstring      : str     - raw doxygen text with newlines preserved
     source_file    : str     - relative path from the repo root
 
@@ -65,7 +67,9 @@ import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable
+from typing import Iterable, TypeVar
+
+T = TypeVar("T")
 
 
 # ---------------------------------------------------------------------------
@@ -81,6 +85,14 @@ IFACE_COMMENT_RE = re.compile(
 # Single-line [templateType(param, Key, Value)] or [elementType(param, Elem)]
 _TEMPLATE_TYPE_RE = re.compile(
     r"^\s*//\s*\[(templateType|elementType)\s*\(\s*(\w+)\s*,\s*([\w,\s]+)\)\s*\]\s*$",
+    re.M,
+)
+
+# Single-line [defaultValue(param, value)] — the source-language default for an
+# argument (e.g. nullptr, 0, -1).  C has no default arguments, so RTGen preserves
+# them as comment annotations alongside the templateType/elementType ones.
+_DEFAULT_VALUE_RE = re.compile(
+    r"^\s*//\s*\[defaultValue\s*\(\s*(\w+)\s*,\s*(.+?)\s*\)\s*\]\s*$",
     re.M,
 )
 
@@ -177,7 +189,7 @@ class ArgumentDesc:
     """Describes one function argument."""
     name: str
     type: TypeDesc
-    doc_param: str | None = None    # @param description text
+    default_value: str | None = None    # source-language default, from a // [defaultValue(...)] annotation
 
 
 @dataclass
@@ -395,13 +407,12 @@ def _find_doc_for_decl(
     return extract_docstring_summary(best_raw)
 
 
-def _collect_tts_before(
-    func_ln: int, annotations: dict[int, list[tuple[str, str | None, str | None]]]
-) -> list[tuple[str, str | None, str | None]]:
-    """Return all templateType/elementType annotations before *func_ln*.
-    Each annotation is (param_name, key_type, value_type).
-    Clears consumed annotations so they aren't reused."""
-    result: list[tuple[str, str | None, str | None]] = []
+def _collect_annotations_before(
+    func_ln: int, annotations: dict[int, list[T]]
+) -> list[T]:
+    """Return all annotations on lines before *func_ln*, flattened in line order.
+    Clears consumed lines so they aren't reused by a later declaration."""
+    result: list[T] = []
     consumed: list[int] = []
     for ln in sorted(annotations.keys()):
         if ln < func_ln:
@@ -455,6 +466,14 @@ class HeaderParser:
                 template_annotations.setdefault(ln, []).append(
                     (param_name, None, type_parts[0])
                 )
+
+        # defaultValue annotations: line -> list of (param_name, value)
+        default_value_annotations: dict[int, list[tuple[str, str]]] = {}
+        for m in _DEFAULT_VALUE_RE.finditer(raw_text):
+            ln = raw_text[: m.start()].count("\n")
+            default_value_annotations.setdefault(ln, []).append(
+                (m.group(1), m.group(2).strip())
+            )
 
         # Function declarations — match on raw text with single-line comments blanked out
         # (to avoid matching commented-out declarations)
@@ -568,12 +587,20 @@ class HeaderParser:
                     arguments.append(ArgumentDesc(name=arg_name, type=arg_td))
 
             # Find templateType annotations between previous function and this one
-            func_tts = _collect_tts_before(func_ln, template_annotations)
+            func_tts = _collect_annotations_before(func_ln, template_annotations)
             for pname, kt, vt in func_tts:
                 for arg in arguments:
                     if arg.name == pname:
                         arg.type.key_type = kt
                         arg.type.value_type = vt
+                        break
+
+            # Attach default values from [defaultValue(...)] annotations
+            func_defaults = _collect_annotations_before(func_ln, default_value_annotations)
+            for pname, value in func_defaults:
+                for arg in arguments:
+                    if arg.name == pname:
+                        arg.default_value = value
                         break
 
             # Find docstring
