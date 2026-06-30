@@ -15,9 +15,19 @@
 (defparameter *statistics* (daq:add-function-block *instance* "RefFBModuleStatistics" nil))
 (setf (daq:property-value *statistics* "BlockSize") 100)
 
+(let ((status (daq:status-container *statistics*)))
+  (format t "Before connect: ~A (~A)~%"
+          (daq:value (daq:status status "ComponentStatus"))
+          (daq:status-message status "ComponentStatus")))
+
 (let ((port (first (daq:input-ports *statistics*)))
       (signal (first (daq:signals *channel*))))
   (daq:connect port signal))
+
+(let ((status (daq:status-container *statistics*)))
+  (format t "After connect:  ~A (~A)~%"
+          (daq:value (daq:status status "ComponentStatus"))
+          (daq:status-message status "ComponentStatus")))
 
 (let* ((signals (daq:signals *statistics*))
        ;; Match on local-id, not name: a signal's name is a mutable display label,
