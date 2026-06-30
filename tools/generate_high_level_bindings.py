@@ -387,6 +387,12 @@ BOXED_PRIMITIVE_TYPES = frozenset((
 def coerce_category(parameter: dict) -> str | None:
     if parameter["base_lisp_name"] == "daq-string":
         return ":daq-string"
+    # A daqNumber* parameter needs a genuine INumber pointer: boxing a Lisp value
+    # yields a concrete IInteger/IFloat/IRatio, which is not interface-compatible
+    # with INumber and must be queried.  The :daq-number coercion does that; the
+    # other boxed primitives already match their own interface.
+    if parameter["base_lisp_name"] == "daq-number":
+        return ":daq-number"
     if parameter["base_lisp_name"] in BOXED_PRIMITIVE_TYPES:
         return ":daq-base-object"
     if parameter["base_lisp_name"] == "daq-bool":

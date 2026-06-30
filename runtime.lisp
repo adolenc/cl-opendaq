@@ -470,6 +470,16 @@ arguments; see EMIT_COERCED_CALL in tools/generate_high_level_bindings.py."
                      (with-daq-boxed-values ,rest ,@body)
                    (%cleanup-coerced-argument ,cleanup))))))))
 
+(defun %query-number-interface (pointer)
+  "Return the INumber interface pointer of POINTER, a daq object that implements
+INumber (Integer and Float do; Ratio does not).  openDAQ's C ABI requires a genuine
+INumber pointer where a Number is expected -- a raw IInteger pointer is not
+interface-compatible and corrupts the call -- so the value must be queried, not
+merely reinterpreted.  Adds a reference; the caller owns the returned pointer."
+  (cffi:with-foreign-object (interface-id :uint64 2)   ; daqIntfID is 16 bytes
+    (opendaq.low-level:number/get-interface-id interface-id)
+    (opendaq.low-level:base-object/query-interface pointer interface-id)))
+
 (defun %coerce-argument (value category)
   (flet ((make-cleanup (pointer)
            (lambda ()
@@ -541,6 +551,31 @@ arguments; see EMIT_COERCED_CALL in tools/generate_high_level_bindings.py."
                   (values pointer (make-cleanup pointer))))
                (t
                 (values value nil))))
+        (:daq-number
+         ;; openDAQ Number parameters (e.g. a linear data rule's delta/start, or
+         ;; a data packet's offset) need a genuine INumber pointer.  Only Integer
+         ;; and Float implement INumber (a Ratio is not a Number), so box the Lisp
+         ;; value into one of those and query it to INumber; a managed-object is
+         ;; queried in place (pinned, its query reference freed on cleanup).
+         (cond ((typep value 'managed-object)
+                (let ((number (%query-number-interface (%require-live-pointer value))))
+                  (values number
+                          (let ((v value))
+                            (lambda () v (%release-pointer number))))))
+               ((null value)
+                (values (cffi:null-pointer) nil))
+               (t
+                (let ((boxed
+                        (cond ((integerp value)
+                               (opendaq.low-level:integer/create-integer value))
+                              ((realp value)
+                               (opendaq.low-level:float-object/create-float
+                                (coerce value 'double-float)))
+                              (t
+                               (error "Cannot coerce ~S to an openDAQ Number." value)))))
+                  (let ((number (%query-number-interface boxed)))
+                    (%release-pointer boxed)
+                    (values number (make-cleanup number)))))))
         (:daq-bool
          (values (if value 1 0) nil))
         (otherwise

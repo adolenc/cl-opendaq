@@ -1579,7 +1579,7 @@ Constructs the instance via the openDAQ C function daqAuthenticationProvider_cre
   (when (and (not pointer-p) event-packet-p valid-p offset-p read-samples-p)
   (with-daq-boxed-values ((coerced-event-packet event-packet :managed-pointer)
                           (coerced-valid valid :daq-bool)
-                          (coerced-offset offset :daq-base-object)
+                          (coerced-offset offset :daq-number)
                           (coerced-read-samples read-samples nil))
     (%adopt-pointer object (opendaq.low-level:block-reader-status/create-block-reader-status coerced-event-packet coerced-valid coerced-offset coerced-read-samples)))
     ))
@@ -2445,7 +2445,7 @@ Constructs the instance via the openDAQ C function daqDataPacket_createDataPacke
   (when (and (not pointer-p) descriptor-p sample-count-p offset-p)
   (with-daq-boxed-values ((coerced-descriptor descriptor :managed-pointer)
                           (coerced-sample-count sample-count nil)
-                          (coerced-offset offset :daq-base-object))
+                          (coerced-offset offset :daq-number))
     (%adopt-pointer object (opendaq.low-level:data-packet/create-data-packet coerced-descriptor coerced-sample-count coerced-offset)))
     ))
 
@@ -2521,7 +2521,7 @@ Constructs the instance via the openDAQ C function daqDataPacket_createDataPacke
   (with-daq-boxed-values ((coerced-domain-packet domain-packet :managed-pointer)
                           (coerced-descriptor descriptor :managed-pointer)
                           (coerced-sample-count sample-count nil)
-                          (coerced-offset offset :daq-base-object))
+                          (coerced-offset offset :daq-number))
     (%adopt-pointer object (opendaq.low-level:data-packet/create-data-packet-with-domain coerced-domain-packet coerced-descriptor coerced-sample-count coerced-offset)))
     ))
 
@@ -2565,7 +2565,7 @@ Constructs the instance via the openDAQ C function daqDataPacket_createDataPacke
   (with-daq-boxed-values ((coerced-domain-packet domain-packet :managed-pointer)
                           (coerced-descriptor descriptor :managed-pointer)
                           (coerced-sample-count sample-count nil)
-                          (coerced-offset offset :daq-base-object)
+                          (coerced-offset offset :daq-number)
                           (coerced-external-memory external-memory nil)
                           (coerced-deleter deleter :managed-pointer)
                           (coerced-buffer-size buffer-size nil))
@@ -2691,8 +2691,8 @@ subsequent samples might be.
 Constructs the instance via the openDAQ C function daqDataRule_createExplicitDomainDataRule()."
   (declare (ignore pointer))
   (when (and (not pointer-p) min-expected-delta-p max-expected-delta-p)
-  (with-daq-boxed-values ((coerced-min-expected-delta min-expected-delta :daq-base-object)
-                          (coerced-max-expected-delta max-expected-delta :daq-base-object))
+  (with-daq-boxed-values ((coerced-min-expected-delta min-expected-delta :daq-number)
+                          (coerced-max-expected-delta max-expected-delta :daq-number))
     (%adopt-pointer object (opendaq.low-level:data-rule/create-explicit-domain-data-rule coerced-min-expected-delta coerced-max-expected-delta)))
     ))
 
@@ -2717,8 +2717,8 @@ with the scale being at the first position of the list, and the offset at the se
 Constructs the instance via the openDAQ C function daqDataRule_createLinearDataRule()."
   (declare (ignore pointer))
   (when (and (not pointer-p) delta-p start-p)
-  (with-daq-boxed-values ((coerced-delta delta :daq-base-object)
-                          (coerced-start start :daq-base-object))
+  (with-daq-boxed-values ((coerced-delta delta :daq-number)
+                          (coerced-start start :daq-number))
     (%adopt-pointer object (opendaq.low-level:data-rule/create-linear-data-rule coerced-delta coerced-start)))
     ))
 
@@ -3120,8 +3120,8 @@ with the scale being at the first position of the list, and the offset at the se
 Constructs the instance via the openDAQ C function daqDimensionRule_createLinearDimensionRule()."
   (declare (ignore pointer))
   (when (and (not pointer-p) delta-p start-p size-p)
-  (with-daq-boxed-values ((coerced-delta delta :daq-base-object)
-                          (coerced-start start :daq-base-object)
+  (with-daq-boxed-values ((coerced-delta delta :daq-number)
+                          (coerced-start start :daq-number)
                           (coerced-size size nil))
     (%adopt-pointer object (opendaq.low-level:dimension-rule/create-linear-dimension-rule coerced-delta coerced-start coerced-size)))
     ))
@@ -3172,9 +3172,9 @@ Constructs the instance via the openDAQ C function daqDimensionRule_createListDi
 Constructs the instance via the openDAQ C function daqDimensionRule_createLogarithmicDimensionRule()."
   (declare (ignore pointer))
   (when (and (not pointer-p) delta-p start-p base-p size-p)
-  (with-daq-boxed-values ((coerced-delta delta :daq-base-object)
-                          (coerced-start start :daq-base-object)
-                          (coerced-base base :daq-base-object)
+  (with-daq-boxed-values ((coerced-delta delta :daq-number)
+                          (coerced-start start :daq-number)
+                          (coerced-base base :daq-number)
                           (coerced-size size nil))
     (%adopt-pointer object (opendaq.low-level:dimension-rule/create-logarithmic-dimension-rule coerced-delta coerced-start coerced-base coerced-size)))
     ))
@@ -3535,7 +3535,7 @@ the size of the gap. The size can be negative, in which case it is an overlap of
 Constructs the instance via the openDAQ C function daqEventPacket_createImplicitDomainGapDetectedEventPacket()."
   (declare (ignore pointer))
   (when (and (not pointer-p) diff-p)
-  (with-daq-boxed-values ((coerced-diff diff :daq-base-object))
+  (with-daq-boxed-values ((coerced-diff diff :daq-number))
     (%adopt-pointer object (opendaq.low-level:event-packet/create-implicit-domain-gap-detected-event-packet coerced-diff)))
     ))
 
@@ -4191,7 +4191,7 @@ Constructs the instance via the openDAQ C function daqLogFileInfoBuilder_createL
   (with-daq-boxed-values ((coerced-main-descriptor main-descriptor :managed-pointer)
                           (coerced-event-packets event-packets :managed-pointer)
                           (coerced-valid valid :daq-bool)
-                          (coerced-offset offset :daq-base-object))
+                          (coerced-offset offset :daq-number))
     (%adopt-pointer object (opendaq.low-level:multi-reader-status/create-multi-reader-status coerced-main-descriptor coerced-event-packets coerced-valid coerced-offset)))
     ))
 
@@ -5455,8 +5455,8 @@ Constructs the instance via the openDAQ C function daqProperty_createStructPrope
 Constructs the instance via the openDAQ C function daqRange_createRange()."
   (declare (ignore pointer))
   (when (and (not pointer-p) low-value-p high-value-p)
-  (with-daq-boxed-values ((coerced-low-value low-value :daq-base-object)
-                          (coerced-high-value high-value :daq-base-object))
+  (with-daq-boxed-values ((coerced-low-value low-value :daq-number)
+                          (coerced-high-value high-value :daq-number))
     (%adopt-pointer object (opendaq.low-level:range/create-range coerced-low-value coerced-high-value)))
     ))
 
@@ -5511,7 +5511,7 @@ Constructs the instance via the openDAQ C function daqRange_createRange()."
   (when (and (not pointer-p) event-packet-p valid-p offset-p)
   (with-daq-boxed-values ((coerced-event-packet event-packet :managed-pointer)
                           (coerced-valid valid :daq-bool)
-                          (coerced-offset offset :daq-base-object))
+                          (coerced-offset offset :daq-number))
     (%adopt-pointer object (opendaq.low-level:reader-status/create-reader-status coerced-event-packet coerced-valid coerced-offset)))
     ))
 
@@ -5712,8 +5712,8 @@ Constructs the instance via the openDAQ C function daqScalingBuilder_createScali
 Constructs the instance via the openDAQ C function daqScaling_createLinearScaling()."
   (declare (ignore pointer))
   (when (and (not pointer-p) scale-p offset-p input-data-type-p output-data-type-p)
-  (with-daq-boxed-values ((coerced-scale scale :daq-base-object)
-                          (coerced-offset offset :daq-base-object)
+  (with-daq-boxed-values ((coerced-scale scale :daq-number)
+                          (coerced-offset offset :daq-number)
                           (coerced-input-data-type input-data-type nil)
                           (coerced-output-data-type output-data-type nil))
     (%adopt-pointer object (opendaq.low-level:scaling/create-linear-scaling coerced-scale coerced-offset coerced-input-data-type coerced-output-data-type)))
@@ -6532,7 +6532,7 @@ Constructs the instance via the openDAQ C function daqStreamingType_createStream
   (when (and (not pointer-p) event-packet-p valid-p offset-p sufficient-history-p)
   (with-daq-boxed-values ((coerced-event-packet event-packet :managed-pointer)
                           (coerced-valid valid :daq-bool)
-                          (coerced-offset offset :daq-base-object)
+                          (coerced-offset offset :daq-number)
                           (coerced-sufficient-history sufficient-history :daq-bool))
     (%adopt-pointer object (opendaq.low-level:tail-reader-status/create-tail-reader-status coerced-event-packet coerced-valid coerced-offset coerced-sufficient-history)))
     ))
@@ -18850,7 +18850,7 @@ Calls the openDAQ C function daqPropertyBuilder_setMaxValue()."))
 @param max The Maximum value of the Property.
 
 Calls the openDAQ C function daqPropertyBuilder_setMaxValue()."
-  (with-daq-boxed-values ((coerced-new-value new-value :daq-base-object))
+  (with-daq-boxed-values ((coerced-new-value new-value :daq-number))
     (opendaq.low-level:property-builder/set-max-value (%require-live-pointer object) coerced-new-value))
   new-value)
 
@@ -18864,7 +18864,7 @@ Calls the openDAQ C function daqPropertyBuilder_setMinValue()."))
 @param min The Minimum value of the Property.
 
 Calls the openDAQ C function daqPropertyBuilder_setMinValue()."
-  (with-daq-boxed-values ((coerced-new-value new-value :daq-base-object))
+  (with-daq-boxed-values ((coerced-new-value new-value :daq-number))
     (opendaq.low-level:property-builder/set-min-value (%require-live-pointer object) coerced-new-value))
   new-value)
 
@@ -21408,7 +21408,7 @@ Calls the openDAQ C function daqRemovable_remove()."
   "Calls the openDAQ C function daqReusableDataPacket_reuse()."
   (with-daq-boxed-values ((coerced-new-descriptor new-descriptor :managed-pointer)
                           (coerced-new-sample-count new-sample-count nil)
-                          (coerced-new-offset new-offset :daq-base-object)
+                          (coerced-new-offset new-offset :daq-number)
                           (coerced-new-domain-packet new-domain-packet :managed-pointer)
                           (coerced-can-realloc-memory can-realloc-memory :daq-bool))
     (not (zerop (opendaq.low-level:reusable-data-packet/reuse (%require-live-pointer object) coerced-new-descriptor coerced-new-sample-count coerced-new-offset coerced-new-domain-packet coerced-can-realloc-memory))))

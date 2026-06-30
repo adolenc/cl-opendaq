@@ -98,6 +98,58 @@
       (is (equal '(unsigned-byte 8) (array-element-type raw)) "data-packet RAW-DATA should be an (unsigned-byte 8) vector.")
       (is (= 64 (cl:length raw)) "data-packet RAW-DATA size should be sample-count * element-size bytes."))))
 
+(test high-level-create-signal-and-read
+  ;; Build a signal by hand, push packets into it, and read them back with a
+  ;; StreamReader.  The domain uses an implicit linear rule, so the rule's
+  ;; delta/start and the packets' offsets are passed as plain Lisp integers --
+  ;; the :DAQ-NUMBER coercion queries them to INumber, which is what openDAQ's
+  ;; DataRule and DataPacket factories require (a raw Integer pointer corrupts
+  ;; the later read).
+  (let* ((context (daq:context (make-instance 'daq:instance)))
+         (domain-descriptor
+           (let ((b (make-instance 'daq:data-descriptor-builder)))
+             (setf (daq:sample-type b) opendaq.low-level::+daq-sample-type-int-64+
+                   (daq:name b) "time"
+                   (daq:rule b) (make-instance 'daq:data-rule/linear :delta 1 :start 0))
+             (daq:build b)))
+         (value-descriptor
+           (let ((b (make-instance 'daq:data-descriptor-builder)))
+             (setf (daq:sample-type b) opendaq.low-level::+daq-sample-type-float-64+
+                   (daq:name b) "values")
+             (daq:build b)))
+         (domain-signal (make-instance 'daq:signal-config
+                                       :context context :parent nil :local-id "time" :class-name nil))
+         (signal (make-instance 'daq:signal-config
+                                :context context :parent nil :local-id "values" :class-name nil)))
+    (setf (daq:descriptor domain-signal) domain-descriptor
+          (daq:descriptor signal) value-descriptor
+          (daq:domain-signal signal) domain-signal)
+    (let ((reader (make-instance 'daq:stream-reader :signal signal :timeout-type :any)))
+      (flet ((send (offset samples)
+               (let* ((count (cl:length samples))
+                      (domain-packet (make-instance 'daq:data-packet
+                                                    :descriptor domain-descriptor
+                                                    :sample-count count :offset offset))
+                      (packet (make-instance 'daq:data-packet/with-domain
+                                             :domain-packet domain-packet
+                                             :descriptor value-descriptor
+                                             :sample-count count :offset 0)))
+                 (cffi:with-foreign-object (address :pointer)
+                   (opendaq.low-level:data-packet/get-data (daq:raw-pointer packet) address)
+                   (let ((buffer (cffi:mem-ref address :pointer)))
+                     (loop for v in samples for i from 0
+                           do (setf (cffi:mem-aref buffer :double i) (coerce v 'double-float)))))
+                 (daq:send-packet signal packet))))
+        (send 0 '(1.0 2.0 3.0 4.0))
+        (send 4 '(5.0 6.0 7.0 8.0))
+        (send 8 '(9.0 10.0)))
+      (multiple-value-bind (values ticks) (daq:read-with-domain reader 100 :timeout-ms 1000)
+        (is (= 10 (cl:length values)) "Reading a hand-built signal should return every sent sample.")
+        (is (equalp #(1.0d0 2.0d0 3.0d0 4.0d0 5.0d0 6.0d0 7.0d0 8.0d0 9.0d0 10.0d0) values)
+            "The read values should match the samples written into the packets.")
+        (is (equalp #(0 1 2 3 4 5 6 7 8 9) ticks)
+            "The implicit linear domain should yield contiguous ticks across packets.")))))
+
 (test high-level-callable-properties
   (let* ((instance (make-instance 'daq:instance))
          (device (daq:add-device (daq:root-device instance) "daqref://device0"))
