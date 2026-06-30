@@ -176,6 +176,46 @@
     (signals (error "Unified PROPERTY should require the PROPERTY-NAME argument on property-object.")
       (daq:property property-object))))
 
+(test high-level-coreobjects-selection-property
+  (let ((labels (make-instance 'daq:object-list)))
+    (daq:push-back labels "Low")
+    (daq:push-back labels "Mid")
+    (daq:push-back labels "High")
+    (let* ((property (make-instance 'daq:property/selection
+                                    :name "Gain"
+                                    :selection-values labels
+                                    :default-value 1
+                                    :visible t))
+           (choices (daq:as-list-of (daq:as (daq:selection-values property) 'daq:object-list) 'daq:string-object))
+           (builder (make-instance 'daq:property-builder/selection :name "Gain" :selection-values labels :default-value 0))
+           (builder-choices (daq:as-list-of (daq:as (daq:selection-values builder) 'daq:object-list) 'daq:string-object))
+           (property-object (make-instance 'daq:property-object)))
+      (is (equal '("Low" "Mid" "High") choices) "A list Selection property should read its choices back, in order.")
+      (is (equal '("Low" "Mid" "High") builder-choices) "A Selection property *builder* should read its choices back too.")
+      (daq:add-property property-object property)
+      (is (eql 1 (daq:property-value property-object "Gain")) "A Selection property's value should be the default index, unboxed to an integer.")
+      (setf (daq:property-value property-object "Gain") 2)
+      (is (eql 2 (daq:property-value property-object "Gain")) "Setting a Selection property's index should round-trip."))))
+
+(test high-level-coreobjects-sparse-selection-property
+  (let ((labels (make-instance 'daq:dict)))
+    (daq:set labels 1 "Control")
+    (daq:set labels 3 "ViewOnly")
+    (daq:set labels 7 "Other")
+    (let* ((property (make-instance 'daq:property/sparse-selection
+                                    :name "Mode"
+                                    :selection-values labels
+                                    :default-value 3
+                                    :visible t))
+           (choices (daq:as-hashtable-of (daq:as (daq:selection-values property) 'daq:dict) 'daq:integer-object 'daq:string-object))
+           (property-object (make-instance 'daq:property-object)))
+      (is (= 3 (hash-table-count choices)) "A sparse Selection property should read all of its choices back.")
+      (is (string= "Control" (gethash 1 choices)) "A sparse Selection property should preserve its key->label mappings (key 1).")
+      (is (string= "ViewOnly" (gethash 3 choices)) "A sparse Selection property should preserve its key->label mappings (key 3).")
+      (is (string= "Other" (gethash 7 choices)) "A sparse Selection property should preserve its key->label mappings (key 7).")
+      (daq:add-property property-object property)
+      (is (eql 3 (daq:property-value property-object "Mode")) "A sparse Selection property's value should be the default key, unboxed to an integer."))))
+
 (test high-level-coreobjects-end-update-event
   (let* ((property-object (make-instance 'daq:property-object))
          (event (daq:on-end-update property-object))
