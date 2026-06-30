@@ -98,6 +98,35 @@
       (is (equal '(unsigned-byte 8) (array-element-type raw)) "data-packet RAW-DATA should be an (unsigned-byte 8) vector.")
       (is (= 64 (cl:length raw)) "data-packet RAW-DATA size should be sample-count * element-size bytes."))))
 
+(test high-level-data-packet-write
+  ;; (SETF DATA) accepts any sequence and coerces each element to the descriptor's
+  ;; sample type; DATA reads it back.  Cover a float vector, integer rounding, a
+  ;; complex round-trip, and the error raised for a non-numeric-buffer sample type.
+  (flet ((make-packet (sample-type count)
+           (let ((builder (make-instance 'daq:data-descriptor-builder)))
+             (setf (daq:sample-type builder) sample-type)
+             (make-instance 'daq:data-packet
+                            :descriptor (daq:build builder)
+                            :sample-count count
+                            :offset (make-instance 'daq:integer-object :value 0)))))
+    ;; Float64 written from a VECTOR (not just a list).
+    (let ((packet (make-packet :float64 4)))
+      (setf (daq:data packet) #(1.5 2.5 3.5 4.5))
+      (let ((back (daq:data packet)))
+        (is (eq 'double-float (array-element-type back)) "float64 DATA should be a double-float vector.")
+        (is (every #'= #(1.5 2.5 3.5 4.5) back) "(SETF DATA) should accept a vector and round-trip float samples.")))
+    ;; Int32: reals are rounded into the integer buffer.
+    (let ((packet (make-packet :int32 3)))
+      (setf (daq:data packet) '(1 2.6 -3.2))
+      (is (every #'= #(1 3 -3) (daq:data packet)) "(SETF DATA) should round reals into an integer sample buffer."))
+    ;; Complex float64: samples are stored as interleaved (real, imaginary) pairs.
+    (let ((packet (make-packet :complexfloat64 2)))
+      (setf (daq:data packet) (vector #C(1.0d0 2.0d0) #C(3.0d0 -4.0d0)))
+      (is (every #'= #(#C(1.0d0 2.0d0) #C(3.0d0 -4.0d0)) (daq:data packet))
+          "(SETF DATA) and DATA should round-trip complex samples."))
+    ;; A sample type that is not a flat numeric buffer errors rather than corrupting.
+    (signals error (daq:data (make-packet :struct 1)))))
+
 (test high-level-create-signal-and-read
   ;; Build a signal by hand, push packets into it, and read them back with a
   ;; StreamReader.  The domain uses an implicit linear rule, so the rule's
@@ -134,11 +163,7 @@
                                              :domain-packet domain-packet
                                              :descriptor value-descriptor
                                              :sample-count count :offset 0)))
-                 (cffi:with-foreign-object (address :pointer)
-                   (opendaq.low-level:data-packet/get-data (daq:raw-pointer packet) address)
-                   (let ((buffer (cffi:mem-ref address :pointer)))
-                     (loop for v in samples for i from 0
-                           do (setf (cffi:mem-aref buffer :double i) (coerce v 'double-float)))))
+                 (setf (daq:data packet) samples)
                  (daq:send-packet signal packet))))
         (send 0 '(1.0 2.0 3.0 4.0))
         (send 4 '(5.0 6.0 7.0 8.0))

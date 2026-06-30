@@ -25,20 +25,39 @@
 ;;; reader API and the data packet accessors below.
 ;;; ---------------------------------------------------------------------------
 
-(defun %sample-array-type (sample-type)
-  "Map an openDAQ SAMPLE-TYPE keyword to (VALUES cffi-type lisp-element-type)."
+(defun %numeric-sample-layout (sample-type)
+  "Describe how SAMPLE-TYPE's samples sit in a flat numeric buffer, as
+(VALUES cffi-type element-type complexp): the foreign element type, the Lisp type
+of one component, and whether each sample is a COMPLEX number stored as an
+interleaved (real, imaginary) pair of that element type.  Signals an error for
+sample types that are not a flat numeric buffer (e.g. binary, string, struct,
+range, or the invalid/undefined sentinels), which these accessors cannot model."
   (case sample-type
-    (:float64 (cl:values :double 'double-float))
-    (:float32 (cl:values :float 'single-float))
-    (:int8    (cl:values :int8 '(signed-byte 8)))
-    (:uint8   (cl:values :uint8 '(unsigned-byte 8)))
-    (:int16   (cl:values :int16 '(signed-byte 16)))
-    (:uint16  (cl:values :uint16 '(unsigned-byte 16)))
-    (:int32   (cl:values :int32 '(signed-byte 32)))
-    (:uint32  (cl:values :uint32 '(unsigned-byte 32)))
-    (:int64   (cl:values :int64 '(signed-byte 64)))
-    (:uint64  (cl:values :uint64 '(unsigned-byte 64)))
-    (t (cl:values :double 'double-float))))
+    (:float64        (cl:values :double 'double-float nil))
+    (:float32        (cl:values :float  'single-float nil))
+    (:int8           (cl:values :int8   '(signed-byte 8) nil))
+    (:uint8          (cl:values :uint8  '(unsigned-byte 8) nil))
+    (:int16          (cl:values :int16  '(signed-byte 16) nil))
+    (:uint16         (cl:values :uint16 '(unsigned-byte 16) nil))
+    (:int32          (cl:values :int32  '(signed-byte 32) nil))
+    (:uint32         (cl:values :uint32 '(unsigned-byte 32) nil))
+    (:int64          (cl:values :int64  '(signed-byte 64) nil))
+    (:uint64         (cl:values :uint64 '(unsigned-byte 64) nil))
+    (:complexfloat32 (cl:values :float  'single-float t))
+    (:complexfloat64 (cl:values :double 'double-float t))
+    (t (error "openDAQ sample type ~S is not a flat numeric buffer; the data ~
+accessors handle the integer, float, and complex-float sample types."
+              sample-type))))
+
+(defun %sample-array-type (sample-type)
+  "Map a scalar (non-complex) openDAQ SAMPLE-TYPE keyword to (VALUES cffi-type
+lisp-element-type), as the streaming readers need (they read one element per
+sample).  Errors on complex and non-numeric sample types."
+  (multiple-value-bind (cffi-type element-type complexp) (%numeric-sample-layout sample-type)
+    (when complexp
+      (error "openDAQ sample type ~S is complex; the streaming readers read one ~
+component per sample and cannot return complex samples." sample-type))
+    (cl:values cffi-type element-type)))
 
 (defun %buffer->vector (buffer cffi-type element-type count)
   "Copy COUNT elements out of a foreign BUFFER into a fresh typed Lisp vector."
@@ -56,16 +75,41 @@ of the ROWS blocks holds COLUMNS (= block size) samples."
         (setf (aref result row column)
               (cffi:mem-aref buffer cffi-type (+ (* row columns) column)))))))
 
+(defun %buffer->complex-vector (buffer cffi-type element-type count)
+  "Build a COUNT-element vector of COMPLEX numbers from BUFFER, which holds COUNT
+interleaved (real, imaginary) pairs of CFFI-TYPE."
+  (let ((result (make-array count :element-type (cl:list 'cl:complex element-type))))
+    (dotimes (index count result)
+      (setf (aref result index)
+            (cl:complex (cffi:mem-aref buffer cffi-type (* 2 index))
+                        (cffi:mem-aref buffer cffi-type (1+ (* 2 index))))))))
+
 (defun %sequence->buffer (buffer cffi-type element-type sequence)
-  "Write SEQUENCE's elements into the foreign BUFFER as CFFI-TYPE, coercing each to
-ELEMENT-TYPE (a real to the buffer's float type, or rounded to its integer type).
-The buffer must be large enough to hold them; returns the count written."
+  "Write SEQUENCE's elements (any Lisp sequence -- list or vector) into the foreign
+BUFFER as CFFI-TYPE, coercing each to ELEMENT-TYPE (a real to the buffer's float
+type, or rounded to its integer type).  The buffer must be large enough to hold
+them; returns the count written."
   (let ((index 0)
         (floatp (subtypep element-type 'cl:float)))
     (map nil
          (lambda (value)
            (setf (cffi:mem-aref buffer cffi-type index)
                  (if floatp (cl:coerce value element-type) (round value)))
+           (incf index))
+         sequence)
+    index))
+
+(defun %complex-sequence->buffer (buffer cffi-type element-type sequence)
+  "Write SEQUENCE's elements (any Lisp sequence) into BUFFER as interleaved
+(real, imaginary) pairs of CFFI-TYPE, coercing each component to ELEMENT-TYPE.  A
+real element is written with a zero imaginary part.  Returns the count written."
+  (let ((index 0))
+    (map nil
+         (lambda (value)
+           (setf (cffi:mem-aref buffer cffi-type (* 2 index))
+                 (cl:coerce (realpart value) element-type)
+                 (cffi:mem-aref buffer cffi-type (1+ (* 2 index)))
+                 (cl:coerce (imagpart value) element-type))
            (incf index))
          sequence)
     index))
@@ -335,14 +379,35 @@ return the sample buffer pointer it writes."
 
 (defgeneric data (packet)
   (:documentation
-   "Return the packet's sample data as a Lisp vector whose element type matches
-the packet's data descriptor sample type, sized to the packet's sample count."))
+   "Return the packet's sample data as a Lisp vector, sized to the packet's sample
+count, whose element type follows the packet's data descriptor sample type: a
+typed vector of integers or floats for the scalar numeric sample types, or a
+vector of COMPLEX numbers for the complex-float sample types.  Signals an error for
+sample types that are not a flat numeric buffer (binary, string, struct, range)."))
 
 (defmethod data ((packet data-packet))
-  (multiple-value-bind (cffi-type element-type)
-      (%sample-array-type (sample-type (data-descriptor packet)))
-    (%buffer->vector (%data-packet-buffer packet #'opendaq.low-level:data-packet/get-data)
-                     cffi-type element-type (sample-count packet))))
+  (multiple-value-bind (cffi-type element-type complexp)
+      (%numeric-sample-layout (sample-type (data-descriptor packet)))
+    (let ((buffer (%data-packet-buffer packet #'opendaq.low-level:data-packet/get-data))
+          (count (sample-count packet)))
+      (if complexp
+          (%buffer->complex-vector buffer cffi-type element-type count)
+          (%buffer->vector buffer cffi-type element-type count)))))
+
+(defmethod (setf data) (samples (packet data-packet))
+  "Write SAMPLES into PACKET's sample buffer in place.  SAMPLES is any Lisp sequence
+(a list or a vector); each element is coerced to the packet's data descriptor
+sample type -- a real to a float type, a rounded integer to an integer type, or a
+real/complex split into an interleaved (real, imaginary) pair for the complex-float
+sample types.  The packet owns the buffer and must already be sized to hold them
+(i.e. its sample count); SAMPLES is returned."
+  (multiple-value-bind (cffi-type element-type complexp)
+      (%numeric-sample-layout (sample-type (data-descriptor packet)))
+    (let ((buffer (%data-packet-buffer packet #'opendaq.low-level:data-packet/get-data)))
+      (if complexp
+          (%complex-sequence->buffer buffer cffi-type element-type samples)
+          (%sequence->buffer buffer cffi-type element-type samples))))
+  samples)
 
 (defgeneric raw-data (packet)
   (:documentation
