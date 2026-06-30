@@ -26,7 +26,7 @@ shown as \"<Type>\" instead."
 
 (defun draw-properties (component prefix)
   "Print the visible properties of COMPONENT, each line indented with PREFIX."
-  (when (daq:is-p component 'daq:property-object)
+  (when (daq:typep component 'daq:property-object)
     (let ((object (daq:as component 'daq:property-object)))
       (dolist (property (daq:visible-properties object))
         (format t "~A• ~A : ~A = ~A~%"
@@ -37,7 +37,7 @@ shown as \"<Type>\" instead."
 
 (defun children (component)
   "The immediate child components of COMPONENT if it is a folder, else NIL."
-  (when (daq:is-p component 'daq:folder)
+  (when (daq:typep component 'daq:folder)
     (daq:items (daq:as component 'daq:folder) nil)))
 
 (defun draw-children (component prefix)

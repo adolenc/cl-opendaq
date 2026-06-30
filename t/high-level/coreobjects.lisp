@@ -101,7 +101,7 @@
     (is (string= "hi" (daq:property-value property-object "astring")) "A scalar STRING property should come back as a native string.")
     (is (eq t (daq:property-value property-object "abool")) "A scalar BOOL property should come back as a native boolean.")
     (is (= 1/2 (daq:property-value property-object "aratio")) "A scalar RATIO property should come back as a native ratio.")
-    (is (daq:is-p (daq:property-value property-object "anobject") 'daq:property-object) "An OBJECT property has no scalar value to unbox, so it stays a daq wrapper.")))
+    (is (daq:typep (daq:property-value property-object "anobject") 'daq:property-object) "An OBJECT property has no scalar value to unbox, so it stays a daq wrapper.")))
 
 (test high-level-coreobjects-eval-coercer-validator
   (let* ((property-object (make-instance 'daq:property-object))

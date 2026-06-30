@@ -475,7 +475,7 @@ its own reference and the temporary is released by the GC, as before."
                    '#:opendaq.low-level)
       (error "No interface-id getter for type ~S." type)))
 
-(defun is-p (object type)
+(defun typep (object type)
   "True if OBJECT is a TYPE, i.e. implements the openDAQ interface named by the
 class symbol TYPE (e.g. 'CHANNEL, 'SIGNAL, 'FOLDER).  Unlike AS, this performs a
 real interface query, so it is safe to ask about any type."
@@ -487,7 +487,7 @@ real interface query, so it is safe to ask about any type."
   "The most-derived interface among CANDIDATES that OBJECT implements, as a
 class symbol (e.g. CHANNEL), or NIL if none.  Lets you discover a component's
 concrete type without an unsafe reinterpreting cast."
-  (find-if (lambda (type) (is-p object type)) candidates))
+  (find-if (lambda (type) (typep object type)) candidates))
 
 (defun as-list-of (object-list target-type)
   "Convert an openDAQ object-list into a proper Lisp list, unboxing primitives

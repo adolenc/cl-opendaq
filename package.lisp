@@ -23,10 +23,11 @@
                 #:opendaq-error-operation)
   (:shadow #:numerator
            #:denominator
-           #:read)
+           #:read
+           #:typep)
   (:export #:as
            #:unbox
-           #:is-p
+           #:typep
            #:component-type
            #:core-type->class
            #:domain-time-converter

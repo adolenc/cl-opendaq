@@ -488,7 +488,7 @@ merely reinterpreted.  Adds a reference; the caller owns the returned pointer."
                  ;; When VALUE is a managed-object, the cleanup closure
                  ;; closes over VALUE to pin it against GC while the raw
                  ;; pointer is in flight during an FFI call.
-                 `(cond ((typep value 'managed-object)
+                 `(cond ((cl:typep value 'managed-object)
                          (let ((raw ,raw-value-form))
                            (values raw
                                    (let ((v value))
@@ -504,7 +504,7 @@ merely reinterpreted.  Adds a reference; the caller owns the returned pointer."
         (:managed-pointer
          (managed-result (%require-live-pointer value)))
         (:daq-string
-         (cond ((typep value 'managed-object)
+         (cond ((cl:typep value 'managed-object)
                 (let ((raw (%require-live-pointer value)))
                   (values raw (let ((v value))
                                 (lambda () v nil)))))
@@ -519,7 +519,7 @@ merely reinterpreted.  Adds a reference; the caller owns the returned pointer."
                (t
                 (values value nil))))
         (:daq-base-object
-         (cond ((typep value 'managed-object)
+         (cond ((cl:typep value 'managed-object)
                 (let ((raw (%require-live-pointer value)))
                   (values raw (let ((v value))
                                 (lambda () v nil)))))
@@ -536,11 +536,11 @@ merely reinterpreted.  Adds a reference; the caller owns the returned pointer."
                ((integerp value)
                 (let ((pointer (opendaq.low-level:integer/create-integer value)))
                   (values pointer (make-cleanup pointer))))
-               ((typep value 'cl:ratio)
+               ((cl:typep value 'cl:ratio)
                 (let ((pointer (opendaq.low-level:ratio/create-ratio
                                 (cl:numerator value) (cl:denominator value))))
                   (values pointer (make-cleanup pointer))))
-               ((typep value 'cl:complex)
+               ((cl:typep value 'cl:complex)
                 (let ((pointer (opendaq.low-level:complex-number/create-complex-number
                                 (coerce (realpart value) 'double-float)
                                 (coerce (imagpart value) 'double-float))))
@@ -557,7 +557,7 @@ merely reinterpreted.  Adds a reference; the caller owns the returned pointer."
          ;; and Float implement INumber (a Ratio is not a Number), so box the Lisp
          ;; value into one of those and query it to INumber; a managed-object is
          ;; queried in place (pinned, its query reference freed on cleanup).
-         (cond ((typep value 'managed-object)
+         (cond ((cl:typep value 'managed-object)
                 (let ((number (%query-number-interface (%require-live-pointer value))))
                   (values number
                           (let ((v value))

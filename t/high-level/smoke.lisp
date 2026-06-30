@@ -42,8 +42,8 @@
     (is (eq 'daq:device (daq:component-type device)) "component-type should identify the reference device as DEVICE.")
     (is (eq 'daq:channel (daq:component-type channel)) "component-type should identify a reference channel as CHANNEL.")
     (is (eq 'daq:signal (daq:component-type signal)) "component-type should identify a channel's signal as SIGNAL.")
-    (is (daq:is-p channel 'daq:folder) "A channel should support IFolder (a channel is a function block).")
-    (is (not (daq:is-p signal 'daq:folder)) "A signal should not support IFolder (the failure path must not crash).")))
+    (is (daq:typep channel 'daq:folder) "A channel should support IFolder (a channel is a function block).")
+    (is (not (daq:typep signal 'daq:folder)) "A signal should not support IFolder (the failure path must not crash).")))
 
 (test high-level-multi-reader
   (locally (declare (optimize (debug 3)))
