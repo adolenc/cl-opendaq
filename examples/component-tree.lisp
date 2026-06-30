@@ -5,16 +5,11 @@
 
 (defun type-label (component)
   "Readable type name for COMPONENT, e.g. \"Channel\" or \"FunctionBlock\"."
-  (remove #\- (string-capitalize (symbol-name
-                                   (or (daq:component-type component) 'component)))))
+  (remove #\- (string-capitalize (symbol-name (or (daq:component-type component) 'component)))))
 
 (defun type-name (value-type)
-  "Readable name for a property's core type, e.g. :DAQ-CT-INT => \"Int\"."
-  (let ((s (symbol-name value-type)))
-    (remove #\- (string-capitalize
-                  (if (eql 0 (search "DAQ-CT-" s))
-                      (subseq s 7)
-                      s)))))
+  "Readable name for a property's core type, e.g. :int => \"Int\"."
+  (remove #\- (string-capitalize (symbol-name value-type))))
 
 (defun property-value-string (property-object property)
   "Printable value of PROPERTY on PROPERTY-OBJECT.  PROPERTY-VALUE already returns

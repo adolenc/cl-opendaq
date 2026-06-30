@@ -13260,22 +13260,21 @@ Calls the openDAQ C function daqDict_getKeys()."
   (wrap (opendaq.low-level:dict/get-keys (%require-live-pointer object)) 'iterable)
 )
 
-(defgeneric value-list (object values)
+(defgeneric value-list (object)
   (:documentation "Gets the list of all elements in the dictionary.
 @param[out] values The list of the elements.
 The order of the elements is not defined.
 The client is responsible for calling `releaseRef` when the list is no longer needed.
 
 Calls the openDAQ C function daqDict_getValueList()."))
-(defmethod value-list ((object dict) values)
+(defmethod value-list ((object dict))
   "Gets the list of all elements in the dictionary.
 @param[out] values The list of the elements.
 The order of the elements is not defined.
 The client is responsible for calling `releaseRef` when the list is no longer needed.
 
 Calls the openDAQ C function daqDict_getValueList()."
-  (with-daq-boxed-values ((coerced-values values nil))
-    (opendaq.low-level:dict/get-value-list (%require-live-pointer object) coerced-values))
+  (wrap (opendaq.low-level:dict/get-value-list (%require-live-pointer object)) 'object-list)
 )
 
 (defgeneric values (object)
@@ -18691,34 +18690,32 @@ Calls the openDAQ C function daqPropertyBuilder_getReferencedProperty()."
   (wrap (opendaq.low-level:property-builder/get-referenced-property (%require-live-pointer object)) 'eval-value)
 )
 
-(defgeneric selection-values (object values)
+(defgeneric selection-values (object)
   (:documentation "property-builder => daqPropertyBuilder_getSelectionValues()
     Gets the list or dictionary of selection values.
 
 property => daqProperty_getSelectionValues()
     Gets the list or dictionary of selection values. If the list/dictionary is not empty, the property is a Selection property, and must have the Value type `ctInt`."))
-(defmethod selection-values ((object property-builder) values)
+(defmethod selection-values ((object property-builder))
   "Gets the list or dictionary of selection values.
 @param[out] values The list/dictionary of possible selection values.
 
 Calls the openDAQ C function daqPropertyBuilder_getSelectionValues()."
-  (with-daq-boxed-values ((coerced-values values :daq-base-object))
-    (opendaq.low-level:property-builder/get-selection-values (%require-live-pointer object) coerced-values))
+  (wrap (opendaq.low-level:property-builder/get-selection-values (%require-live-pointer object)) 'base-object)
 )
 
-(defgeneric suggested-values (object values)
+(defgeneric suggested-values (object)
   (:documentation "property-builder => daqPropertyBuilder_getSuggestedValues()
     Gets the list of Suggested values. Contains values that are the optimal gettings for the corresponding Property value. These values, however, are not enforced when getting a new Property value.
 
 property => daqProperty_getSuggestedValues()
     Gets the list of Suggested values. Contains values that are the optimal settings for the corresponding Property value. These values, however, are not enforced when setting a new Property value."))
-(defmethod suggested-values ((object property-builder) values)
+(defmethod suggested-values ((object property-builder))
   "Gets the list of Suggested values. Contains values that are the optimal gettings for the corresponding Property value. These values, however, are not enforced when getting a new Property value.
 @param[out] values The Suggested values of the Property.
 
 Calls the openDAQ C function daqPropertyBuilder_getSuggestedValues()."
-  (with-daq-boxed-values ((coerced-values values nil))
-    (opendaq.low-level:property-builder/get-suggested-values (%require-live-pointer object) coerced-values))
+  (as-list-of (wrap (opendaq.low-level:property-builder/get-suggested-values (%require-live-pointer object)) 'object-list) 'base-object)
 )
 
 (defmethod unit ((object property-builder))
@@ -19248,24 +19245,22 @@ Calls the openDAQ C function daqPropertyInternal_getReferencedPropertyUnresolved
   (wrap (opendaq.low-level:property-internal/get-referenced-property-unresolved (%require-live-pointer object)) 'eval-value)
 )
 
-(defgeneric selection-values-no-lock (object values)
+(defgeneric selection-values-no-lock (object)
   (:documentation "Calls the openDAQ C function daqPropertyInternal_getSelectionValuesNoLock()."))
-(defmethod selection-values-no-lock ((object property-internal) values)
+(defmethod selection-values-no-lock ((object property-internal))
   "Calls the openDAQ C function daqPropertyInternal_getSelectionValuesNoLock()."
-  (with-daq-boxed-values ((coerced-values values :daq-base-object))
-    (opendaq.low-level:property-internal/get-selection-values-no-lock (%require-live-pointer object) coerced-values))
+  (wrap (opendaq.low-level:property-internal/get-selection-values-no-lock (%require-live-pointer object)) 'base-object)
 )
 
-(defgeneric selection-values-unresolved (object values)
+(defgeneric selection-values-unresolved (object)
   (:documentation "Gets the Property selection values in an as either a Dictionary of Int-BaseObject pairs, List of BaseObjects, or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getSelectionValuesUnresolved()."))
-(defmethod selection-values-unresolved ((object property-internal) values)
+(defmethod selection-values-unresolved ((object property-internal))
   "Gets the Property selection values in an as either a Dictionary of Int-BaseObject pairs, List of BaseObjects, or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getSelectionValuesUnresolved()."
-  (with-daq-boxed-values ((coerced-values values :daq-base-object))
-    (opendaq.low-level:property-internal/get-selection-values-unresolved (%require-live-pointer object) coerced-values))
+  (wrap (opendaq.low-level:property-internal/get-selection-values-unresolved (%require-live-pointer object)) 'base-object)
 )
 
 (defgeneric struct-type-no-lock (object)
@@ -19275,24 +19270,22 @@ Calls the openDAQ C function daqPropertyInternal_getSelectionValuesUnresolved().
   (wrap (opendaq.low-level:property-internal/get-struct-type-no-lock (%require-live-pointer object)) 'struct-type)
 )
 
-(defgeneric suggested-values-no-lock (object values)
+(defgeneric suggested-values-no-lock (object)
   (:documentation "Calls the openDAQ C function daqPropertyInternal_getSuggestedValuesNoLock()."))
-(defmethod suggested-values-no-lock ((object property-internal) values)
+(defmethod suggested-values-no-lock ((object property-internal))
   "Calls the openDAQ C function daqPropertyInternal_getSuggestedValuesNoLock()."
-  (with-daq-boxed-values ((coerced-values values nil))
-    (opendaq.low-level:property-internal/get-suggested-values-no-lock (%require-live-pointer object) coerced-values))
+  (as-list-of (wrap (opendaq.low-level:property-internal/get-suggested-values-no-lock (%require-live-pointer object)) 'object-list) 'base-object)
 )
 
-(defgeneric suggested-values-unresolved (object values)
+(defgeneric suggested-values-unresolved (object)
   (:documentation "Gets the Property suggested values in an as either a List of BaseObjects or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getSuggestedValuesUnresolved()."))
-(defmethod suggested-values-unresolved ((object property-internal) values)
+(defmethod suggested-values-unresolved ((object property-internal))
   "Gets the Property suggested values in an as either a List of BaseObjects or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getSuggestedValuesUnresolved()."
-  (with-daq-boxed-values ((coerced-values values nil))
-    (opendaq.low-level:property-internal/get-suggested-values-unresolved (%require-live-pointer object) coerced-values))
+  (as-list-of (wrap (opendaq.low-level:property-internal/get-suggested-values-unresolved (%require-live-pointer object)) 'object-list) 'base-object)
 )
 
 (defgeneric unit-no-lock (object)
@@ -20669,13 +20662,12 @@ Calls the openDAQ C function daqProperty_getReferencedProperty()."
   (wrap (opendaq.low-level:property/get-referenced-property (%require-live-pointer object)) 'property)
 )
 
-(defmethod selection-values ((object property) values)
+(defmethod selection-values ((object property))
   "Gets the list or dictionary of selection values. If the list/dictionary is not empty, the property is a Selection property, and must have the Value type `ctInt`.
 @param[out] values The list/dictionary of possible selection values.
 
 Calls the openDAQ C function daqProperty_getSelectionValues()."
-  (with-daq-boxed-values ((coerced-values values :daq-base-object))
-    (opendaq.low-level:property/get-selection-values (%require-live-pointer object) coerced-values))
+  (wrap (opendaq.low-level:property/get-selection-values (%require-live-pointer object)) 'base-object)
 )
 
 (defgeneric struct-type (object)
@@ -20695,14 +20687,13 @@ Calls the openDAQ C function daqProperty_getStructType()."
   (wrap (opendaq.low-level:property/get-struct-type (%require-live-pointer object)) 'struct-type)
 )
 
-(defmethod suggested-values ((object property) values)
+(defmethod suggested-values ((object property))
   "Gets the list of Suggested values. Contains values that are the optimal settings for the corresponding Property value. These values, however, are not enforced when setting a new Property value.
 @param[out] values The Suggested values of the Property.
 Only numerical and string-type properties can have suggested values.
 
 Calls the openDAQ C function daqProperty_getSuggestedValues()."
-  (with-daq-boxed-values ((coerced-values values nil))
-    (opendaq.low-level:property/get-suggested-values (%require-live-pointer object) coerced-values))
+  (as-list-of (wrap (opendaq.low-level:property/get-suggested-values (%require-live-pointer object)) 'object-list) 'base-object)
 )
 
 (defmethod unit ((object property))
@@ -23793,21 +23784,20 @@ Calls the openDAQ C function daqStructBuilder_getFieldNames()."
   (as-list-of (wrap (opendaq.low-level:struct-builder/get-field-names (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
-(defgeneric field-values (object values)
+(defgeneric field-values (object)
   (:documentation "struct-builder => daqStructBuilder_getFieldValues()
     Gets a list of all Struct field values.
 
 struct => daqStruct_getFieldValues()
     Gets a list of all Struct field values."))
-(defmethod field-values ((object struct-builder) values)
+(defmethod field-values ((object struct-builder))
   "Gets a list of all Struct field values.
 @param[out] values The list of field values.
 The list of names will be of equal length to the list of values. Additionally, the name of a field at any given
 index corresponds to the value stored in the list of values.
 
 Calls the openDAQ C function daqStructBuilder_getFieldValues()."
-  (with-daq-boxed-values ((coerced-values values nil))
-    (opendaq.low-level:struct-builder/get-field-values (%require-live-pointer object) coerced-values))
+  (as-list-of (wrap (opendaq.low-level:struct-builder/get-field-values (%require-live-pointer object)) 'object-list) 'base-object)
 )
 
 (defun struct-builder-interface-id ()
@@ -23941,15 +23931,14 @@ Calls the openDAQ C function daqStruct_getFieldNames()."
   (as-list-of (wrap (opendaq.low-level:struct/get-field-names (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
-(defmethod field-values ((object struct) values)
+(defmethod field-values ((object struct))
   "Gets a list of all Struct field values.
 @param[out] values The list of field values.
 The list of names will be of equal length to the list of values. Additionally, the name of a field at any given
 index corresponds to the value stored in the list of values.
 
 Calls the openDAQ C function daqStruct_getFieldValues()."
-  (with-daq-boxed-values ((coerced-values values nil))
-    (opendaq.low-level:struct/get-field-values (%require-live-pointer object) coerced-values))
+  (as-list-of (wrap (opendaq.low-level:struct/get-field-values (%require-live-pointer object)) 'object-list) 'base-object)
 )
 
 (defun struct-interface-id ()

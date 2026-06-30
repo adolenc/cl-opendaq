@@ -34,7 +34,6 @@ RAW_BUFFER_PARAMETER_NAMES = {
     "domain",
     "domain-blocks",
     "samples",
-    "values",
 }
 
 IN_OUT_PARAMETER_OVERRIDES = {

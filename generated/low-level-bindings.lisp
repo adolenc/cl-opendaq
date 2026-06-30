@@ -6587,9 +6587,11 @@
   (values (:pointer daq-list))
   )
 
-(defun dict/get-value-list (self values)
-  (%check-error (%daq-dict-get-value-list self values) "daqDict_getValueList")
-  nil
+(defun dict/get-value-list (self)
+  (cffi:with-foreign-object (values-slot 'daq-list)
+    (%check-error (%daq-dict-get-value-list self values-slot) "daqDict_getValueList")
+    (cffi:mem-ref values-slot 'daq-list)
+  )
 )
 
 (cffi:defcfun ("daqDict_getValues" %daq-dict-get-values) daq-err-code
@@ -12645,9 +12647,11 @@
   (values (:pointer daq-base-object))
   )
 
-(defun property-builder/get-selection-values (self values)
-  (%check-error (%daq-property-builder-get-selection-values self values) "daqPropertyBuilder_getSelectionValues")
-  nil
+(defun property-builder/get-selection-values (self)
+  (cffi:with-foreign-object (values-slot 'daq-base-object)
+    (%check-error (%daq-property-builder-get-selection-values self values-slot) "daqPropertyBuilder_getSelectionValues")
+    (cffi:mem-ref values-slot 'daq-base-object)
+  )
 )
 
 (cffi:defcfun ("daqPropertyBuilder_getSuggestedValues" %daq-property-builder-get-suggested-values) daq-err-code
@@ -12655,9 +12659,11 @@
   (values (:pointer daq-list))
   )
 
-(defun property-builder/get-suggested-values (self values)
-  (%check-error (%daq-property-builder-get-suggested-values self values) "daqPropertyBuilder_getSuggestedValues")
-  nil
+(defun property-builder/get-suggested-values (self)
+  (cffi:with-foreign-object (values-slot 'daq-list)
+    (%check-error (%daq-property-builder-get-suggested-values self values-slot) "daqPropertyBuilder_getSuggestedValues")
+    (cffi:mem-ref values-slot 'daq-list)
+  )
 )
 
 (cffi:defcfun ("daqPropertyBuilder_getUnit" %daq-property-builder-get-unit) daq-err-code
@@ -13210,9 +13216,11 @@
   (values (:pointer daq-base-object))
   )
 
-(defun property-internal/get-selection-values-no-lock (self values)
-  (%check-error (%daq-property-internal-get-selection-values-no-lock self values) "daqPropertyInternal_getSelectionValuesNoLock")
-  nil
+(defun property-internal/get-selection-values-no-lock (self)
+  (cffi:with-foreign-object (values-slot 'daq-base-object)
+    (%check-error (%daq-property-internal-get-selection-values-no-lock self values-slot) "daqPropertyInternal_getSelectionValuesNoLock")
+    (cffi:mem-ref values-slot 'daq-base-object)
+  )
 )
 
 (cffi:defcfun ("daqPropertyInternal_getSelectionValuesUnresolved" %daq-property-internal-get-selection-values-unresolved) daq-err-code
@@ -13220,9 +13228,11 @@
   (values (:pointer daq-base-object))
   )
 
-(defun property-internal/get-selection-values-unresolved (self values)
-  (%check-error (%daq-property-internal-get-selection-values-unresolved self values) "daqPropertyInternal_getSelectionValuesUnresolved")
-  nil
+(defun property-internal/get-selection-values-unresolved (self)
+  (cffi:with-foreign-object (values-slot 'daq-base-object)
+    (%check-error (%daq-property-internal-get-selection-values-unresolved self values-slot) "daqPropertyInternal_getSelectionValuesUnresolved")
+    (cffi:mem-ref values-slot 'daq-base-object)
+  )
 )
 
 (cffi:defcfun ("daqPropertyInternal_getStructTypeNoLock" %daq-property-internal-get-struct-type-no-lock) daq-err-code
@@ -13242,9 +13252,11 @@
   (values (:pointer daq-list))
   )
 
-(defun property-internal/get-suggested-values-no-lock (self values)
-  (%check-error (%daq-property-internal-get-suggested-values-no-lock self values) "daqPropertyInternal_getSuggestedValuesNoLock")
-  nil
+(defun property-internal/get-suggested-values-no-lock (self)
+  (cffi:with-foreign-object (values-slot 'daq-list)
+    (%check-error (%daq-property-internal-get-suggested-values-no-lock self values-slot) "daqPropertyInternal_getSuggestedValuesNoLock")
+    (cffi:mem-ref values-slot 'daq-list)
+  )
 )
 
 (cffi:defcfun ("daqPropertyInternal_getSuggestedValuesUnresolved" %daq-property-internal-get-suggested-values-unresolved) daq-err-code
@@ -13252,9 +13264,11 @@
   (values (:pointer daq-list))
   )
 
-(defun property-internal/get-suggested-values-unresolved (self values)
-  (%check-error (%daq-property-internal-get-suggested-values-unresolved self values) "daqPropertyInternal_getSuggestedValuesUnresolved")
-  nil
+(defun property-internal/get-suggested-values-unresolved (self)
+  (cffi:with-foreign-object (values-slot 'daq-list)
+    (%check-error (%daq-property-internal-get-suggested-values-unresolved self values-slot) "daqPropertyInternal_getSuggestedValuesUnresolved")
+    (cffi:mem-ref values-slot 'daq-list)
+  )
 )
 
 (cffi:defcfun ("daqPropertyInternal_getUnitNoLock" %daq-property-internal-get-unit-no-lock) daq-err-code
@@ -14726,9 +14740,11 @@
   (values (:pointer daq-base-object))
   )
 
-(defun property/get-selection-values (self values)
-  (%check-error (%daq-property-get-selection-values self values) "daqProperty_getSelectionValues")
-  nil
+(defun property/get-selection-values (self)
+  (cffi:with-foreign-object (values-slot 'daq-base-object)
+    (%check-error (%daq-property-get-selection-values self values-slot) "daqProperty_getSelectionValues")
+    (cffi:mem-ref values-slot 'daq-base-object)
+  )
 )
 
 (cffi:defcfun ("daqProperty_getStructType" %daq-property-get-struct-type) daq-err-code
@@ -14748,9 +14764,11 @@
   (values (:pointer daq-list))
   )
 
-(defun property/get-suggested-values (self values)
-  (%check-error (%daq-property-get-suggested-values self values) "daqProperty_getSuggestedValues")
-  nil
+(defun property/get-suggested-values (self)
+  (cffi:with-foreign-object (values-slot 'daq-list)
+    (%check-error (%daq-property-get-suggested-values self values-slot) "daqProperty_getSuggestedValues")
+    (cffi:mem-ref values-slot 'daq-list)
+  )
 )
 
 (cffi:defcfun ("daqProperty_getUnit" %daq-property-get-unit) daq-err-code
@@ -18089,9 +18107,11 @@
   (values (:pointer daq-list))
   )
 
-(defun struct-builder/get-field-values (self values)
-  (%check-error (%daq-struct-builder-get-field-values self values) "daqStructBuilder_getFieldValues")
-  nil
+(defun struct-builder/get-field-values (self)
+  (cffi:with-foreign-object (values-slot 'daq-list)
+    (%check-error (%daq-struct-builder-get-field-values self values-slot) "daqStructBuilder_getFieldValues")
+    (cffi:mem-ref values-slot 'daq-list)
+  )
 )
 
 (cffi:defcfun ("daqStructBuilder_getInterfaceId" %daq-struct-builder-get-interface-id) :void
@@ -18289,9 +18309,11 @@
   (values (:pointer daq-list))
   )
 
-(defun struct/get-field-values (self values)
-  (%check-error (%daq-struct-get-field-values self values) "daqStruct_getFieldValues")
-  nil
+(defun struct/get-field-values (self)
+  (cffi:with-foreign-object (values-slot 'daq-list)
+    (%check-error (%daq-struct-get-field-values self values-slot) "daqStruct_getFieldValues")
+    (cffi:mem-ref values-slot 'daq-list)
+  )
 )
 
 (cffi:defcfun ("daqStruct_getInterfaceId" %daq-struct-get-interface-id) :void
