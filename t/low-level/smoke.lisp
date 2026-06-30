@@ -46,8 +46,8 @@
       (setf reader
             (opendaq.low-level:stream-reader/create-stream-reader
              signal
-             opendaq.low-level::+daq-sample-type-float-64+
-             opendaq.low-level::+daq-sample-type-int-64+
+             :float64
+             :int64
              :scaled
              :all))
       (is (not (cffi:null-pointer-p reader)) "Failed to create a low-level stream reader.")

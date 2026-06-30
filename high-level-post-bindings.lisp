@@ -26,18 +26,18 @@
 ;;; ---------------------------------------------------------------------------
 
 (defun %sample-array-type (sample-type)
-  "Map an openDAQ sample-type constant to (VALUES cffi-type lisp-element-type)."
-  (cond
-    ((= sample-type opendaq.low-level::+daq-sample-type-float-64+) (cl:values :double 'double-float))
-    ((= sample-type opendaq.low-level::+daq-sample-type-float-32+) (cl:values :float 'single-float))
-    ((= sample-type opendaq.low-level::+daq-sample-type-int-8+)    (cl:values :int8 '(signed-byte 8)))
-    ((= sample-type opendaq.low-level::+daq-sample-type-u-int-8+)  (cl:values :uint8 '(unsigned-byte 8)))
-    ((= sample-type opendaq.low-level::+daq-sample-type-int-16+)   (cl:values :int16 '(signed-byte 16)))
-    ((= sample-type opendaq.low-level::+daq-sample-type-u-int-16+) (cl:values :uint16 '(unsigned-byte 16)))
-    ((= sample-type opendaq.low-level::+daq-sample-type-int-32+)   (cl:values :int32 '(signed-byte 32)))
-    ((= sample-type opendaq.low-level::+daq-sample-type-u-int-32+) (cl:values :uint32 '(unsigned-byte 32)))
-    ((= sample-type opendaq.low-level::+daq-sample-type-int-64+)   (cl:values :int64 '(signed-byte 64)))
-    ((= sample-type opendaq.low-level::+daq-sample-type-u-int-64+) (cl:values :uint64 '(unsigned-byte 64)))
+  "Map an openDAQ SAMPLE-TYPE keyword to (VALUES cffi-type lisp-element-type)."
+  (case sample-type
+    (:float64 (cl:values :double 'double-float))
+    (:float32 (cl:values :float 'single-float))
+    (:int8    (cl:values :int8 '(signed-byte 8)))
+    (:uint8   (cl:values :uint8 '(unsigned-byte 8)))
+    (:int16   (cl:values :int16 '(signed-byte 16)))
+    (:uint16  (cl:values :uint16 '(unsigned-byte 16)))
+    (:int32   (cl:values :int32 '(signed-byte 32)))
+    (:uint32  (cl:values :uint32 '(unsigned-byte 32)))
+    (:int64   (cl:values :int64 '(signed-byte 64)))
+    (:uint64  (cl:values :uint64 '(unsigned-byte 64)))
     (t (cl:values :double 'double-float))))
 
 (defun %buffer->vector (buffer cffi-type element-type count)
@@ -55,6 +55,20 @@ of the ROWS blocks holds COLUMNS (= block size) samples."
       (dotimes (column columns)
         (setf (aref result row column)
               (cffi:mem-aref buffer cffi-type (+ (* row columns) column)))))))
+
+(defun %sequence->buffer (buffer cffi-type element-type sequence)
+  "Write SEQUENCE's elements into the foreign BUFFER as CFFI-TYPE, coercing each to
+ELEMENT-TYPE (a real to the buffer's float type, or rounded to its integer type).
+The buffer must be large enough to hold them; returns the count written."
+  (let ((index 0)
+        (floatp (subtypep element-type 'cl:float)))
+    (map nil
+         (lambda (value)
+           (setf (cffi:mem-aref buffer cffi-type index)
+                 (if floatp (cl:coerce value element-type) (round value)))
+           (incf index))
+         sequence)
+    index))
 
 ;;; ---------------------------------------------------------------------------
 ;;; Reader convenience API
@@ -93,8 +107,8 @@ builder, and adopts the resulting reader pointer into OBJECT."
 (defmethod initialize-instance :after
     ((object stream-reader)
      &key (pointer nil pointer-p) (signal nil signal-p)
-          (value-read-type opendaq.low-level::+daq-sample-type-float-64+)
-          (domain-read-type opendaq.low-level::+daq-sample-type-int-64+)
+          (value-read-type :float64)
+          (domain-read-type :int64)
           (mode :scaled)
           (timeout-type :all)
           (skip-events t)
@@ -117,8 +131,8 @@ builder, and adopts the resulting reader pointer into OBJECT."
     ((object tail-reader)
      &key (pointer nil pointer-p) (signal nil signal-p)
           (history-size nil history-size-p)
-          (value-read-type opendaq.low-level::+daq-sample-type-float-64+)
-          (domain-read-type opendaq.low-level::+daq-sample-type-int-64+)
+          (value-read-type :float64)
+          (domain-read-type :int64)
           (mode :scaled)
           (skip-events t)
      &allow-other-keys)
@@ -140,8 +154,8 @@ builder, and adopts the resulting reader pointer into OBJECT."
     ((object block-reader)
      &key (pointer nil pointer-p) (signal nil signal-p)
           (block-size nil block-size-p)
-          (value-read-type opendaq.low-level::+daq-sample-type-float-64+)
-          (domain-read-type opendaq.low-level::+daq-sample-type-int-64+)
+          (value-read-type :float64)
+          (domain-read-type :int64)
           (mode :scaled)
           (skip-events t)
      &allow-other-keys)

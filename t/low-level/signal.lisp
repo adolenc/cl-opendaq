@@ -12,7 +12,7 @@
       (setf builder (opendaq.low-level:data-descriptor-builder/create-data-descriptor-builder))
       (opendaq.low-level:data-descriptor-builder/set-sample-type
        builder
-       opendaq.low-level::+daq-sample-type-int-64+)
+       :int64)
 
       (setf unit-builder (opendaq.low-level:unit-builder/create-unit-builder))
       (setf unit-name (opendaq.low-level:make-daq-string "volts"))
@@ -50,8 +50,8 @@
     (setf unit (opendaq.low-level:data-descriptor/get-unit value-descriptor))
     (setf symbol (opendaq.low-level:unit/get-symbol unit))
     (is (string= "V" (%daq-string-value symbol)) "opendaq/signal DataDescriptor unit symbol mismatch")
-    (is (= opendaq.low-level::+daq-sample-type-int-64+
-           (opendaq.low-level:data-descriptor/get-sample-type value-descriptor))
+    (is (eq :int64
+            (opendaq.low-level:data-descriptor/get-sample-type value-descriptor))
         "opendaq/signal DataDescriptor sample type mismatch")))
 
 (test opendaq-input-port
@@ -69,10 +69,10 @@
 (test opendaq-scaling
   (opendaq.low-level:with-daq-objects (builder params scale-str offset-str scale offset scaling scaling-params)
     (setf builder (opendaq.low-level:scaling-builder/create-scaling-builder))
-    (opendaq.low-level:scaling-builder/set-input-data-type builder opendaq.low-level::+daq-sample-type-int-16+)
+    (opendaq.low-level:scaling-builder/set-input-data-type builder :int16)
     (opendaq.low-level:scaling-builder/set-output-data-type
      builder
-     opendaq.low-level::+daq-sample-type-float-32+)
+     :float32)
     (opendaq.low-level:scaling-builder/set-scaling-type builder :linear)
 
     (setf params (opendaq.low-level:dict/create-dict))
@@ -87,8 +87,8 @@
     (setf scaling (opendaq.low-level:scaling-builder/build builder))
     (is (not (cffi:null-pointer-p scaling)) "opendaq/signal Scaling returned a null object")
     (is (eq :linear (opendaq.low-level:scaling/get-type scaling)) "opendaq/signal Scaling type mismatch")
-    (is (= opendaq.low-level::+daq-sample-type-int-16+ (opendaq.low-level:scaling/get-input-sample-type scaling)) "opendaq/signal Scaling input sample type mismatch")
-    (is (eq :float-32
+    (is (eq :int16 (opendaq.low-level:scaling/get-input-sample-type scaling)) "opendaq/signal Scaling input sample type mismatch")
+    (is (eq :float32
             (opendaq.low-level:scaling/get-output-sample-type scaling))
         "opendaq/signal Scaling output sample type mismatch")
 

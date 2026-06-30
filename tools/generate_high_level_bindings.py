@@ -64,8 +64,8 @@ CLASS_OVERRIDES: dict[str, dict] = {
     },
     "multi-reader": {
         "constructor_defaults": (
-            ("value-read-type", "opendaq.low-level::+daq-sample-type-float-64+"),
-            ("domain-read-type", "opendaq.low-level::+daq-sample-type-int-64+"),
+            ("value-read-type", ":float64"),
+            ("domain-read-type", ":int64"),
             ("mode", ":scaled"),
             ("timeout-type", ":all"),
         )
@@ -718,11 +718,11 @@ def enum_type_aliases(types: dict) -> list[tuple[str, str]]:
     values -- are usable here, e.g. (cffi:foreign-enum-keyword 'operation-mode-type c).
 
     Only the cenums qualify: enums the low level had to emit as bare constants
-    because of duplicate or unsupported values (e.g. daqSampleType) have no CFFI
-    keyword mapping, so an alias would buy nothing and is skipped."""
+    because of unsupported (non-integer) values have no CFFI keyword mapping, so an
+    alias would buy nothing and is skipped."""
     aliases = []
     for info in sorted(types.values(), key=lambda t: t["lisp_name"]):
-        if info.get("kind") != "enum" or info["enum_has_duplicates"] or info["enum_has_unsupported_values"]:
+        if info.get("kind") != "enum" or info["enum_has_unsupported_values"]:
             continue
         low = info["lisp_name"]
         aliases.append((low[len("daq-"):] if low.startswith("daq-") else low, low))

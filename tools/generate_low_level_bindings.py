@@ -52,6 +52,15 @@ IN_OUT_PARAMETER_OVERRIDES = {
     "daqTailReader_readWithDomain": {"count": "in-out"},
 }
 
+# Enums (by lisp name) whose cenum keywords drop the hyphens the default naming
+# inserts around digits, so the sample-type tags read :float64 / :uint64 rather
+# than :float-64 / :u-int-64.  Both "sample type" enums are listed so the scaling
+# API stays consistent (input is daqSampleType, output is daqScaledSampleType).
+DEHYPHENATED_ENUM_KEYWORDS = {
+    "daq-sample-type",
+    "daq-scaled-sample-type",
+}
+
 
 def emit_error_code_section(error_codes: list[tuple[int, str]]) -> list[str]:
     entries = [f'(#x{code:08X} . "{name}")' for code, name in error_codes]
@@ -420,8 +429,8 @@ def emit_type_section(types: dict[str, dict]) -> list[str]:
         if type_info["kind"] != "enum":
             continue
         lines.append("")
-        if type_info["enum_has_duplicates"] or type_info["enum_has_unsupported_values"]:
-            lines.append(f";; {type_info['c_name']} uses duplicate or unsupported enum values; emit a raw enum alias plus constants/comments.")
+        if type_info["enum_has_unsupported_values"]:
+            lines.append(f";; {type_info['c_name']} uses unsupported (non-integer) enum values; emit a raw enum alias plus constants/comments.")
             lines.append(f"(cffi:defctype {type_info['lisp_name']} daq-enum-type)")
             for entry_name, entry_value in type_info["enum_entries"]:
                 if entry_value.startswith("<"):
@@ -437,6 +446,8 @@ def emit_type_section(types: dict[str, dict]) -> list[str]:
             lines.append(f"(cffi:defcenum {type_info['lisp_name']}")
             entries = type_info["numeric_enum_entries"]
             keywords = strip_common_enum_prefix([c_identifier_to_lisp(entry_name) for entry_name, _ in entries])
+            if type_info["lisp_name"] in DEHYPHENATED_ENUM_KEYWORDS:
+                keywords = [keyword.replace("-", "") for keyword in keywords]
             lines.extend(f"  (:{keyword} {entry_value})" for keyword, (_, entry_value) in zip(keywords, entries))
             lines.append("  )")
     return lines

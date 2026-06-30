@@ -85,7 +85,7 @@
 
 (test high-level-data-packet-buffers
   (let ((builder (make-instance 'daq:data-descriptor-builder)))
-    (setf (daq:sample-type builder) opendaq.low-level::+daq-sample-type-float-64+)
+    (setf (daq:sample-type builder) :float64)
     (let* ((descriptor (daq:build builder))
            (offset (make-instance 'daq:integer-object :value 0))
            (packet (make-instance 'daq:data-packet
@@ -108,13 +108,13 @@
   (let* ((context (daq:context (make-instance 'daq:instance)))
          (domain-descriptor
            (let ((b (make-instance 'daq:data-descriptor-builder)))
-             (setf (daq:sample-type b) opendaq.low-level::+daq-sample-type-int-64+
+             (setf (daq:sample-type b) :int64
                    (daq:name b) "time"
                    (daq:rule b) (make-instance 'daq:data-rule/linear :delta 1 :start 0))
              (daq:build b)))
          (value-descriptor
            (let ((b (make-instance 'daq:data-descriptor-builder)))
-             (setf (daq:sample-type b) opendaq.low-level::+daq-sample-type-float-64+
+             (setf (daq:sample-type b) :float64
                    (daq:name b) "values")
              (daq:build b)))
          (domain-signal (make-instance 'daq:signal-config
