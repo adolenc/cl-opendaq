@@ -85,6 +85,24 @@
     (is (not (%boxed-boolean-value (daq:default-value bool-property))) "property/bool should box a plain boolean default value.")
     (is (typep linear-rule 'daq:data-rule) "data-rule/linear should accept plain numeric arguments and build a data-rule.")))
 
+(test high-level-coreobjects-property-value-unboxes-scalars
+  ;; PROPERTY-VALUE's :around converts a scalar property to its native Lisp value,
+  ;; so the caller needs no AS/UNBOX; a non-scalar (here an object property) has no
+  ;; single value to unbox and is handed back as the raw wrapper.
+  (let ((property-object (make-instance 'daq:property-object)))
+    (daq:add-property property-object (make-instance 'daq:property/int :name "anint" :default-value 10 :visible t))
+    (daq:add-property property-object (make-instance 'daq:property/float :name "afloat" :default-value 1.5d0 :visible t))
+    (daq:add-property property-object (make-instance 'daq:property/string :name "astring" :default-value "hi" :visible t))
+    (daq:add-property property-object (make-instance 'daq:property/bool :name "abool" :default-value t :visible t))
+    (daq:add-property property-object (make-instance 'daq:property/ratio :name "aratio" :default-value (make-instance 'daq:ratio-object :numerator 1 :denominator 2) :visible t))
+    (daq:add-property property-object (make-instance 'daq:property/object :name "anobject" :default-value (make-instance 'daq:property-object)))
+    (is (eql 10 (daq:property-value property-object "anint")) "A scalar INT property should come back as a native integer.")
+    (is (= 1.5d0 (daq:property-value property-object "afloat")) "A scalar FLOAT property should come back as a native float.")
+    (is (string= "hi" (daq:property-value property-object "astring")) "A scalar STRING property should come back as a native string.")
+    (is (eq t (daq:property-value property-object "abool")) "A scalar BOOL property should come back as a native boolean.")
+    (is (= 1/2 (daq:property-value property-object "aratio")) "A scalar RATIO property should come back as a native ratio.")
+    (is (daq:is-p (daq:property-value property-object "anobject") 'daq:property-object) "An OBJECT property has no scalar value to unbox, so it stays a daq wrapper.")))
+
 (test high-level-coreobjects-eval-coercer-validator
   (let* ((property-object (make-instance 'daq:property-object))
          (default-value (make-instance 'daq:integer-object :value 10))
@@ -100,7 +118,7 @@
              (invalid-value (make-instance 'daq:integer-object :value 5))
              (reference-property (daq:property-value property-object "ref_property"))
              (coerced-value (daq:coerce coercer property-object valid-value)))
-        (is (= 10 (%boxed-integer-value reference-property)) "High-level eval-value references should resolve through property-object/property-value.")
+        (is (= 10 reference-property) "High-level eval-value references should resolve through property-object/property-value, unboxed to a native value.")
         (is (string= "value + 2" (daq:eval coercer)) "High-level coercers should expose their configured expression.")
         (is (= 12 (%boxed-integer-value coerced-value)) "High-level coercers should transform the boxed value through the generated API.")
         (finishes

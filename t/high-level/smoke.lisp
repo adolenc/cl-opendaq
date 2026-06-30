@@ -195,10 +195,11 @@
                   (dolist (x '(1 2 3 4)) (daq:push-back boxed x))
                   (funcall sum-list boxed)))
           "A LIST argument should also accept an explicit OBJECT-LIST."))
-    ;; Scalar property: unaffected by the callable :around -- still a boxed value.
+    ;; Scalar property: the :around unboxes it to its native Lisp value, so no
+    ;; AS/UNBOX is needed and the result is a plain integer, not a function.
     (let ((number-of-channels (daq:property-value object "NumberOfChannels")))
       (is (not (functionp number-of-channels)) "PROPERTY-VALUE of a scalar property should not be wrapped as a function.")
-      (is (integerp (daq:unbox (daq:as number-of-channels 'daq:integer-object))) "A scalar property value should still unbox to its native value."))
+      (is (integerp number-of-channels) "PROPERTY-VALUE of a scalar property should return its native Lisp value directly."))
     ;; PROC property with no arguments: dispatched for its side effect, yields NIL.
     (let ((reset (daq:property-value channel "ResetCounter")))
       (is (functionp reset) "PROPERTY-VALUE of a PROC property should return a Lisp function.")

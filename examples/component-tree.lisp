@@ -17,12 +17,12 @@
                       s)))))
 
 (defun property-value-string (property-object property)
-  "Printable value of PROPERTY on PROPERTY-OBJECT.  Scalar values are unboxed to
-their native Lisp value; structured ones are shown as \"<Type>\"."
-  (let ((class (daq:core-type->class (daq:value-type property))))
-    (if class
-        (format nil "~S" (daq:unbox (daq:as (daq:property-value property-object (daq:name property)) class)))
-        (format nil "<~A>" (type-name (daq:value-type property))))))
+  "Printable value of PROPERTY on PROPERTY-OBJECT.  PROPERTY-VALUE already returns
+scalars as their native Lisp value; structured ones come back as wrappers and are
+shown as \"<Type>\" instead."
+  (if (daq:core-type->class (daq:value-type property))
+      (format nil "~S" (daq:property-value property-object (daq:name property)))
+      (format nil "<~A>" (type-name (daq:value-type property)))))
 
 (defun draw-properties (component prefix)
   "Print the visible properties of COMPONENT, each line indented with PREFIX."

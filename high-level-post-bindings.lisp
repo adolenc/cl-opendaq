@@ -542,15 +542,31 @@ not a scalar.  CORE-TYPE is a DAQ-CORE-TYPE keyword (:int, :string,
 
   (let ((class (core-type->class (value-type property))))
     (if class
-        (unbox (as (property-value object (name property)) class))  ; a scalar value
-        ...))                                                       ; structured
+        (unbox (as some-base-object class))  ; a scalar value
+        ...))                                ; structured
 
 This is the bridge between the type a property/list/dict reports and the wrapper
-class the conversion functions take; NIL doubles as a \"not a scalar\" predicate."
+class the conversion functions take; NIL doubles as a \"not a scalar\" predicate.
+(PROPERTY-VALUE already applies this conversion itself, returning scalars unboxed;
+this helper is for the cases that hand you a raw BASE-OBJECT -- e.g. a dict value
+or a core event's PARAMETERS.)"
   (cdr (assoc core-type *core-type-classes*)))
 
 ;;; ---------------------------------------------------------------------------
-;;; Function / procedure properties
+;;; Property-value conversion
+;;;
+;;; PROPERTY-VALUE's raw getter returns a generic BASE-OBJECT, leaving the caller
+;;; to recover the useful value with a hand-written (UNBOX (AS value 'class)) (or,
+;;; for a callable, a hand-built argument list).  An :AROUND method instead reads
+;;; the property's VALUE-TYPE and converts the result to its natural Lisp form, so
+;;; that getting a property value mirrors the "plain Lisp values out" contract the
+;;; rest of the high-level API follows:
+;;;
+;;;   * a scalar (BOOL/INT/FLOAT/STRING/RATIO/COMPLEX-NUMBER) is unboxed to its
+;;;     native Lisp value -- no AS, no UNBOX needed by the caller;
+;;;   * a FUNC or PROC (a callable, not data -- see below) becomes a Lisp function;
+;;;   * everything else (OBJECT, STRUCT, LIST, DICT, ...) is left as the wrapper,
+;;;     since it has no single scalar value to unbox.
 ;;;
 ;;; A property whose value type is FUNC or PROC holds a callable rather than
 ;;; data.  Instead of handing callers the raw Function/Procedure object -- which
@@ -662,16 +678,20 @@ procedure has no return value, so the function returns NIL."
       nil)))
 
 (defmethod property-value :around ((object property-object) property-name)
-  "When PROPERTY-NAME names a FUNC or PROC property, return a Lisp function that
-invokes the openDAQ callable (boxing its arguments and unboxing its result)
-instead of the raw Function/Procedure object; otherwise return the value
-unchanged.  The metadata lookup used to recognise a callable is skipped silently
-if it fails, leaving the normal value getter (and its error reporting) in charge."
-  (let ((prop (ignore-errors (property object property-name))))
-    (case (and prop (value-type prop))
-      (:func (%function-property-caller (call-next-method) prop))
-      (:proc (%procedure-property-caller (call-next-method) prop))
-      (t (call-next-method)))))
+  "Convert the value of PROPERTY-NAME to its natural Lisp form based on the
+property's VALUE-TYPE: a scalar value is unboxed to its native Lisp value (so the
+caller needs no AS/UNBOX), a FUNC or PROC property yields a Lisp function that
+invokes the openDAQ callable (boxing its arguments and unboxing its result), and
+any other type (OBJECT, STRUCT, LIST, DICT, ...) is returned as the raw wrapper.
+The metadata lookup used to classify the property is skipped silently if it fails,
+leaving the normal value getter (and its error reporting) in charge."
+  (let* ((prop (ignore-errors (property object property-name)))
+         (type (and prop (value-type prop)))
+         (scalar-class (core-type->class type)))
+    (cond ((eq type :func) (%function-property-caller (call-next-method) prop))
+          ((eq type :proc) (%procedure-property-caller (call-next-method) prop))
+          (scalar-class (%unbox-primitive (call-next-method) scalar-class))
+          (t (call-next-method)))))
 
 ;;; ---------------------------------------------------------------------------
 ;;; Domain timestamps
