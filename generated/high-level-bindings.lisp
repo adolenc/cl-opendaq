@@ -9813,18 +9813,17 @@ Calls the openDAQ C function daqConnection_enqueueWithScheduler()."
     (opendaq.low-level:connection/enqueue-with-scheduler (%require-live-pointer object) coerced-packet))
 )
 
-(defgeneric available-samples (object samples)
+(defgeneric available-samples (object)
   (:documentation "Gets the number of samples available in the queued packets. The returned value ignores any Sample-Descriptor changes.
 @param[out] samples The total amount of samples currently available in the stored packets.
 
 Calls the openDAQ C function daqConnection_getAvailableSamples()."))
-(defmethod available-samples ((object connection) samples)
+(defmethod available-samples ((object connection))
   "Gets the number of samples available in the queued packets. The returned value ignores any Sample-Descriptor changes.
 @param[out] samples The total amount of samples currently available in the stored packets.
 
 Calls the openDAQ C function daqConnection_getAvailableSamples()."
-  (with-daq-boxed-values ((coerced-samples samples nil))
-    (opendaq.low-level:connection/get-available-samples (%require-live-pointer object) coerced-samples))
+  (opendaq.low-level:connection/get-available-samples (%require-live-pointer object))
 )
 
 (defmethod input-port ((object connection))
@@ -9856,46 +9855,43 @@ Calls the openDAQ C function daqConnection_getPacketCount()."
   (opendaq.low-level:connection/get-packet-count (%require-live-pointer object))
 )
 
-(defgeneric samples-until-next-descriptor (object samples)
+(defgeneric samples-until-next-descriptor (object)
   (:documentation "Gets the number of same-type samples available in the queued packets. The returned value is up-to the next Sample-Descriptor-Changed packet if any.
 @param[out] samples The total amount of same-type samples currently available in the stored packets.
 
 Calls the openDAQ C function daqConnection_getSamplesUntilNextDescriptor()."))
-(defmethod samples-until-next-descriptor ((object connection) samples)
+(defmethod samples-until-next-descriptor ((object connection))
   "Gets the number of same-type samples available in the queued packets. The returned value is up-to the next Sample-Descriptor-Changed packet if any.
 @param[out] samples The total amount of same-type samples currently available in the stored packets.
 
 Calls the openDAQ C function daqConnection_getSamplesUntilNextDescriptor()."
-  (with-daq-boxed-values ((coerced-samples samples nil))
-    (opendaq.low-level:connection/get-samples-until-next-descriptor (%require-live-pointer object) coerced-samples))
+  (opendaq.low-level:connection/get-samples-until-next-descriptor (%require-live-pointer object))
 )
 
-(defgeneric samples-until-next-event-packet (object samples)
+(defgeneric samples-until-next-event-packet (object)
   (:documentation "Gets the number of samples available in the queued packets until the next event packet. The returned value is up-to the next Event packet if any.
 @param[out] samples The total amount of samples currently available in the stored packets until the next event packet.
 
 Calls the openDAQ C function daqConnection_getSamplesUntilNextEventPacket()."))
-(defmethod samples-until-next-event-packet ((object connection) samples)
+(defmethod samples-until-next-event-packet ((object connection))
   "Gets the number of samples available in the queued packets until the next event packet. The returned value is up-to the next Event packet if any.
 @param[out] samples The total amount of samples currently available in the stored packets until the next event packet.
 
 Calls the openDAQ C function daqConnection_getSamplesUntilNextEventPacket()."
-  (with-daq-boxed-values ((coerced-samples samples nil))
-    (opendaq.low-level:connection/get-samples-until-next-event-packet (%require-live-pointer object) coerced-samples))
+  (opendaq.low-level:connection/get-samples-until-next-event-packet (%require-live-pointer object))
 )
 
-(defgeneric samples-until-next-gap-packet (object samples)
+(defgeneric samples-until-next-gap-packet (object)
   (:documentation "Gets the number of samples available in the queued packets until the next gap packet. The returned value is up-to the next Gap packet if any.
 @param[out] samples The total amount of samples currently available in the stored packets until the next gap packet.
 
 Calls the openDAQ C function daqConnection_getSamplesUntilNextGapPacket()."))
-(defmethod samples-until-next-gap-packet ((object connection) samples)
+(defmethod samples-until-next-gap-packet ((object connection))
   "Gets the number of samples available in the queued packets until the next gap packet. The returned value is up-to the next Gap packet if any.
 @param[out] samples The total amount of samples currently available in the stored packets until the next gap packet.
 
 Calls the openDAQ C function daqConnection_getSamplesUntilNextGapPacket()."
-  (with-daq-boxed-values ((coerced-samples samples nil))
-    (opendaq.low-level:connection/get-samples-until-next-gap-packet (%require-live-pointer object) coerced-samples))
+  (opendaq.low-level:connection/get-samples-until-next-gap-packet (%require-live-pointer object))
 )
 
 (defgeneric connection-signal (object)
@@ -12780,18 +12776,17 @@ Calls the openDAQ C function daqDevice_getDevices()."
     (as-list-of (wrap (opendaq.low-level:device/get-devices (%require-live-pointer object) coerced-search-filter) 'object-list) 'device))
 )
 
-(defgeneric domain (object domain)
+(defgeneric domain (object)
   (:documentation "Gets the device's domain data. It allows for querying the device for its domain (time) values.
 @param[out] domain The device domain.
 
 Calls the openDAQ C function daqDevice_getDomain()."))
-(defmethod domain ((object device) domain)
+(defmethod domain ((object device))
   "Gets the device's domain data. It allows for querying the device for its domain (time) values.
 @param[out] domain The device domain.
 
 Calls the openDAQ C function daqDevice_getDomain()."
-  (with-daq-boxed-values ((coerced-domain domain nil))
-    (opendaq.low-level:device/get-domain (%require-live-pointer object) coerced-domain))
+  (wrap (opendaq.low-level:device/get-domain (%require-live-pointer object)) 'device-domain)
 )
 
 (defgeneric function-blocks (object &optional search-filter)

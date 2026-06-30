@@ -27,15 +27,6 @@ BUILTIN_TYPE_MAP = {
     "void": ":void",
 }
 
-RAW_BUFFER_PARAMETER_NAMES = {
-    "blocks",
-    "data",
-    "data-blocks",
-    "domain",
-    "domain-blocks",
-    "samples",
-}
-
 IN_OUT_PARAMETER_OVERRIDES = {
     "daqBlockReader_read": {"count": "in-out"},
     "daqBlockReader_readWithDomain": {"count": "in-out"},
@@ -263,14 +254,24 @@ def resolve_cffi_type(base_type: str, pointer_depth: int, types: dict[str, dict]
 
 
 def parameter_mode(function: dict, parameter: dict) -> str:
+    # Classify a parameter as a passed-in argument ("in") or a returned out-slot
+    # ("out") purely from its C type
     override = IN_OUT_PARAMETER_OVERRIDES.get(function["c_name"], {}).get(parameter["lisp_name"])
     if override:
         return override
+    # A non-pointer is always passed by value.
     if parameter["pointer_depth"] == 0:
         return "in"
+    # A single pointer to an interface/callback is the object itself passed in
+    # (an `Interface**` out-parameter has pointer_depth 2 and falls through to
+    # "out").  daqBaseObject is the pointer-aliased generic interface, so its
+    # one-pointer form is likewise an input value.
     if parameter["pointer_depth"] == 1 and (parameter["base_kind"] in {"opaque", "callback"} or parameter["base_type"] == "daqBaseObject"):
         return "in"
-    if parameter["base_type"] == "void" or parameter["lisp_name"] in RAW_BUFFER_PARAMETER_NAMES:
+    # A `void*` is an opaque, caller-allocated raw buffer (reader sample/domain
+    # buffers, packet data addresses) -- CFFI cannot allocate a typed slot for it,
+    # so it stays a pass-through argument.
+    if parameter["base_type"] == "void":
         return "in"
     return "out"
 

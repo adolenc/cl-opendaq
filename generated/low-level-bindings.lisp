@@ -3315,9 +3315,11 @@
   (samples (:pointer daq-size-t))
   )
 
-(defun connection/get-available-samples (self samples)
-  (%check-error (%daq-connection-get-available-samples self samples) "daqConnection_getAvailableSamples")
-  nil
+(defun connection/get-available-samples (self)
+  (cffi:with-foreign-object (samples-slot 'daq-size-t)
+    (%check-error (%daq-connection-get-available-samples self samples-slot) "daqConnection_getAvailableSamples")
+    (cffi:mem-ref samples-slot 'daq-size-t)
+  )
 )
 
 (cffi:defcfun ("daqConnection_getInputPort" %daq-connection-get-input-port) daq-err-code
@@ -3357,9 +3359,11 @@
   (samples (:pointer daq-size-t))
   )
 
-(defun connection/get-samples-until-next-descriptor (self samples)
-  (%check-error (%daq-connection-get-samples-until-next-descriptor self samples) "daqConnection_getSamplesUntilNextDescriptor")
-  nil
+(defun connection/get-samples-until-next-descriptor (self)
+  (cffi:with-foreign-object (samples-slot 'daq-size-t)
+    (%check-error (%daq-connection-get-samples-until-next-descriptor self samples-slot) "daqConnection_getSamplesUntilNextDescriptor")
+    (cffi:mem-ref samples-slot 'daq-size-t)
+  )
 )
 
 (cffi:defcfun ("daqConnection_getSamplesUntilNextEventPacket" %daq-connection-get-samples-until-next-event-packet) daq-err-code
@@ -3367,9 +3371,11 @@
   (samples (:pointer daq-size-t))
   )
 
-(defun connection/get-samples-until-next-event-packet (self samples)
-  (%check-error (%daq-connection-get-samples-until-next-event-packet self samples) "daqConnection_getSamplesUntilNextEventPacket")
-  nil
+(defun connection/get-samples-until-next-event-packet (self)
+  (cffi:with-foreign-object (samples-slot 'daq-size-t)
+    (%check-error (%daq-connection-get-samples-until-next-event-packet self samples-slot) "daqConnection_getSamplesUntilNextEventPacket")
+    (cffi:mem-ref samples-slot 'daq-size-t)
+  )
 )
 
 (cffi:defcfun ("daqConnection_getSamplesUntilNextGapPacket" %daq-connection-get-samples-until-next-gap-packet) daq-err-code
@@ -3377,9 +3383,11 @@
   (samples (:pointer daq-size-t))
   )
 
-(defun connection/get-samples-until-next-gap-packet (self samples)
-  (%check-error (%daq-connection-get-samples-until-next-gap-packet self samples) "daqConnection_getSamplesUntilNextGapPacket")
-  nil
+(defun connection/get-samples-until-next-gap-packet (self)
+  (cffi:with-foreign-object (samples-slot 'daq-size-t)
+    (%check-error (%daq-connection-get-samples-until-next-gap-packet self samples-slot) "daqConnection_getSamplesUntilNextGapPacket")
+    (cffi:mem-ref samples-slot 'daq-size-t)
+  )
 )
 
 (cffi:defcfun ("daqConnection_getSignal" %daq-connection-get-signal) daq-err-code
@@ -6204,9 +6212,11 @@
   (domain (:pointer daq-device-domain))
   )
 
-(defun device/get-domain (self domain)
-  (%check-error (%daq-device-get-domain self domain) "daqDevice_getDomain")
-  nil
+(defun device/get-domain (self)
+  (cffi:with-foreign-object (domain-slot 'daq-device-domain)
+    (%check-error (%daq-device-get-domain self domain-slot) "daqDevice_getDomain")
+    (cffi:mem-ref domain-slot 'daq-device-domain)
+  )
 )
 
 (cffi:defcfun ("daqDevice_getFunctionBlocks" %daq-device-get-function-blocks) daq-err-code
