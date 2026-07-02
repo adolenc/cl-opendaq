@@ -703,7 +703,7 @@ def build_specs(functions: list[dict]) -> tuple[list[dict], list[dict]]:
 
 
 def export_symbols(classes: list[dict], methods: list[dict]) -> list[str]:
-    exports = {"as-hashtable-of", "as-list-of", "release", "raw-pointer", "read", "read-with-domain",
+    exports = {"release", "raw-pointer", "read", "read-with-domain",
                "data", "raw-data"}
     for spec in classes:
         exports.add(spec["name"])
@@ -900,11 +900,11 @@ def value_expression(parameter: dict, value_form: str) -> str:
         key_type = parameter.get("key_type")
         if value_type and cn == "object-list":
             element_type = _camel_to_kebab(value_type)
-            return f"(as-list-of (wrap {value_form} '{cn}) '{element_type})"
+            return f"(%list-of (wrap {value_form} '{cn}) '{element_type})"
         if key_type and cn == "dict":
             key_type_lisp = _camel_to_kebab(key_type)
-            val_type_lisp = _camel_to_kebab(value_type) if value_type else "t"
-            return f"(as-hashtable-of (wrap {value_form} '{cn}) '{key_type_lisp} '{val_type_lisp})"
+            val_type_lisp = _camel_to_kebab(value_type) if value_type else "base-object"
+            return f"(%hashtable-of (wrap {value_form} '{cn}) '{key_type_lisp} '{val_type_lisp})"
         return f"(wrap {value_form} '{cn})"
     return value_form
 

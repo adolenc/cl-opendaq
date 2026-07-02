@@ -9,7 +9,7 @@
 ;;;;   * reader convenience API — READ / READ-WITH-DOMAIN / READ-SAMPLES
 ;;;;   * data packet accessors  — DATA / RAW-DATA (excluded from generation; see
 ;;;;                              MANUAL_METHODS in the generator)
-;;;;   * object helpers         — AS / AS-LIST
+;;;;   * object helpers         — AS / UNBOX / TYPEP / COMPONENT-TYPE
 ;;;;
 ;;;; Code that must load *before* the generated bindings lives in runtime.lisp
 ;;;; (its high-level runtime section).
@@ -421,40 +421,119 @@ values use DATA."))
 
 ;;; ---------------------------------------------------------------------------
 ;;; Object helpers
+;;;
+;;; The two conversion verbs are split by which world the result lives in: AS
+;;; recasts between openDAQ wrappers and never leaves openDAQ; UNBOX crosses into
+;;; Lisp, discovering the value's type from the object itself at runtime, so it
+;;; needs no type argument.  TYPEP / COMPONENT-TYPE are the safe queries.
+;;; %LIST-OF / %HASHTABLE-OF are the statically-typed container converters the
+;;; generated getters use; end-user code reaches for UNBOX instead.
 ;;; ---------------------------------------------------------------------------
 
 (defun as (object target-type)
   "Reinterpret a base openDAQ OBJECT as the more specific type TARGET-TYPE, returning
 a wrapper of that type.  Adds a reference so the result owns its own lifetime.  Only
 valid when OBJECT really is that type (it is an unchecked cast, not a query -- see
-IS-P / COMPONENT-TYPE to test first).  TARGET-TYPE is a symbol naming
-the class (e.g. 'DEVICE-INFO).
+TYPEP / COMPONENT-TYPE to test first).  TARGET-TYPE is a symbol naming the class
+(e.g. 'DEVICE-INFO).
 
-For a boxed primitive this returns the typed wrapper (e.g. an INTEGER-OBJECT), not
-the Lisp value; UNBOX the result to get the value: (unbox (as x 'integer-object))."
+AS never leaves openDAQ: both the input and the result are wrappers.  To get the
+native Lisp value of an object, use UNBOX."
+  (when (keywordp target-type)
+    (error "AS casts to an openDAQ class named by a symbol, e.g. (as x 'signal); ~
+to get the native Lisp value of ~S use (unbox ~:*~S) instead." object))
   (let ((class (if (symbolp target-type)
                    (find-class target-type)
                    target-type)))
     (add-ref object)
     (make-instance class :pointer (raw-pointer object))))
 
+(defparameter *unboxable-interfaces*
+  '((opendaq.low-level:string/get-interface-id         . string-object)
+    (opendaq.low-level:integer/get-interface-id        . integer-object)
+    (opendaq.low-level:float-object/get-interface-id   . float-object)
+    (opendaq.low-level:boolean/get-interface-id        . boolean-object)
+    (opendaq.low-level:ratio/get-interface-id          . ratio-object)
+    (opendaq.low-level:complex-number/get-interface-id . complex-number-object)
+    (opendaq.low-level:list/get-interface-id           . :list)
+    (opendaq.low-level:dict/get-interface-id           . :dict))
+  "The openDAQ interfaces UNBOX probes for, in probe order, each mapped to how its
+value converts to Lisp: a boxed-primitive class symbol (read via %READ-BOXED-VALUE)
+or :LIST / :DICT for the containers.  Each entry's car is the low-level
+<type>/get-interface-id function naming the interface.")
+
+(defun %unboxed-kind (object)
+  "Probe the openDAQ OBJECT for an interface with a natural Lisp form.  Returns
+(VALUES kind interface): KIND is a boxed-primitive class symbol, :LIST, :DICT, or
+NIL when OBJECT has no Lisp form; INTERFACE is the borrowed interface pointer the
+value must be read through (not a new reference -- valid only while OBJECT is)."
+  (loop with raw = (%require-live-pointer object)
+        for (getter . kind) in *unboxable-interfaces*
+        for interface = (opendaq.low-level::%borrowed-interface raw getter)
+        when interface
+          return (cl:values kind interface)
+        finally (return (cl:values nil nil))))
+
+(defun %unbox-daq-list (list-interface)
+  "The Lisp list held by LIST-INTERFACE, a borrowed IList pointer, with each
+element converted by %UNBOX-FRESH."
+  (loop for i below (opendaq.low-level:list/get-count list-interface)
+        collect (%unbox-fresh (opendaq.low-level:list/get-item-at list-interface i))))
+
+(defun %unbox-daq-dict (dict-interface)
+  "The Lisp hash-table held by DICT-INTERFACE, a borrowed IDict pointer, with each
+key and value converted by %UNBOX-FRESH."
+  (let* ((key-list (opendaq.low-level:dict/get-key-list dict-interface))
+         (n (opendaq.low-level:list/get-count key-list))
+         (ht (make-hash-table :test 'equal :size n)))
+    (unwind-protect
+        (loop for i below n
+              for key-pointer = (opendaq.low-level:list/get-item-at key-list i)
+              for value-pointer = (opendaq.low-level:dict/get dict-interface key-pointer)
+              do (setf (gethash (%unbox-fresh key-pointer) ht)
+                       (%unbox-fresh value-pointer)))
+      (%release-pointer key-list))
+    ht))
+
+(defun %unbox-fresh (pointer)
+  "UNBOX the object at POINTER, a fresh reference this code owns (a list element or
+dict key/value temporary), releasing it once the value is read.  An object with no
+Lisp form is instead adopted as a BASE-OBJECT wrapper (owned by the GC) and returned
+for the caller to AS-cast.  A null POINTER (an empty getter slot) is NIL."
+  (let ((object (wrap pointer 'base-object)))
+    (when object
+      (multiple-value-bind (kind interface) (%unboxed-kind object)
+        (case kind
+          ((nil) object)
+          (:list (prog1 (%unbox-daq-list interface) (release object)))
+          (:dict (prog1 (%unbox-daq-dict interface) (release object)))
+          (t (prog1 (%read-boxed-value interface kind) (release object))))))))
+
 (defun unbox (object)
-  "Return the native Lisp value of a boxed-primitive wrapper OBJECT: an integer,
-float, string, boolean, ratio, or complex number.  OBJECT's own class names the
-primitive, so for a generic BASE-OBJECT (e.g. a property value, or a value pulled
-from a dict or a core event's PARAMETERS) cast it to the expected type first:
+  "Return the natural Lisp value of the openDAQ OBJECT: a boxed scalar yields its
+native value (an integer, float, string, boolean, ratio, or complex number), a daq
+list yields a Lisp list and a daq dict a Lisp hash-table, with their elements, keys
+and values unboxed recursively (an element with no Lisp form -- e.g. a device
+sitting in a list -- stays an openDAQ wrapper, for the caller to AS-cast).  The
+value's type is discovered from the object itself at runtime, so a generic
+BASE-OBJECT needs no cast first:
 
-  (unbox an-integer-object)                       => 42
-  (unbox (as (gethash \"Name\" params) 'string-object)) => \"Frequency\"
+  (unbox (gethash \"Name\" (parameters event)))  => \"Frequency\"
+  (unbox (selection-values property))            => (\"Low\" \"Mid\" \"High\")
 
-OBJECT is left intact (its reference is still released by the GC)."
-  ;; CL:CLASS-NAME: the high-level package shadows CLASS-NAME with openDAQ's
-  ;; getClassName generic, so the Lisp accessor must be qualified.
-  (let ((type (cl:class-name (class-of object))))
-    (unless (primitive-type-p type)
-      (error "UNBOX needs a boxed-primitive wrapper, but ~S is a ~S.  AS it to a ~
-primitive type first, e.g. (unbox (as object 'integer-object))." object type))
-    (%boxed-value object type)))
+A value that is already a native Lisp value is returned unchanged, so UNBOX is
+idempotent.  Signals an error for an openDAQ object with no natural Lisp form (a
+device, a property object, ...) -- those are what AS / TYPEP are for.  OBJECT is
+left intact (its reference is still released by the GC)."
+  (if (cl:typep object 'managed-object)
+      (multiple-value-bind (kind interface) (%unboxed-kind object)
+        (case kind
+          ((nil) (error "~S has no natural Lisp form to UNBOX; keep it wrapped and ~
+AS it to the openDAQ interface you expect instead." object))
+          (:list (%unbox-daq-list interface))
+          (:dict (%unbox-daq-dict interface))
+          (t (%read-boxed-value interface kind))))
+      object))
 
 (defun %as-consuming (object target-type)
   "Like AS, but for a fresh ITEM-AT / DICT temporary the caller owns and will not
@@ -489,39 +568,34 @@ class symbol (e.g. CHANNEL), or NIL if none.  Lets you discover a component's
 concrete type without an unsafe reinterpreting cast."
   (find-if (lambda (type) (typep object type)) candidates))
 
-(defun as-list-of (object-list target-type)
-  "Convert an openDAQ object-list into a proper Lisp list, unboxing primitives
-(integers, booleans, floats, strings, ratios, complex numbers) into
-their native Lisp equivalents and casting objects to TARGET-TYPE.
-
-  Example: (as-list-of (wrap pointer 'object-list) 'device-info)
-            => (#<DEVICE-INFO ...> #<DEVICE-INFO ...>)
-
-  Example: (as-list-of (wrap pointer 'object-list) 'integer-object)
-            => (1 2 3)
-
-A NIL OBJECT-LIST (e.g. from a getter that returns a null list for the empty
-case, like daqCallableInfo_getArguments) is treated as the empty list."
+(defun %list-of (object-list element-type)
+  "Convert an openDAQ object-list into a proper Lisp list for the generated
+getters, which know their element type statically: a boxed-primitive ELEMENT-TYPE
+(e.g. STRING-OBJECT) unboxes each element to its native Lisp value, any other class
+symbol casts each element to a wrapper of that class.  A NIL OBJECT-LIST (e.g. from
+a getter that returns a null list for the empty case, like
+daqCallableInfo_getArguments) is treated as the empty list.  (End-user code wanting
+the Lisp view of a daq list it holds should reach for UNBOX instead.)"
   (when object-list
     (loop for i below (count object-list)
-          collect (%as-consuming (item-at object-list i) target-type))))
+          collect (%as-consuming (item-at object-list i) element-type))))
 
-(defun as-hashtable-of (dict key-type value-type)
-  "Convert an openDAQ dict into a Lisp hash-table.  Keys and values are
-unboxed if their type is a primitive, or cast via AS otherwise.
-
-  Example: (as-hashtable-of (wrap pointer 'dict) 'string 'device-info)
-            => #<HASH-TABLE>"
+(defun %hashtable-of (dict key-type value-type)
+  "Convert an openDAQ dict into a Lisp hash-table for the generated getters, with
+each key and value converted per its statically-known KEY-TYPE / VALUE-TYPE exactly
+as %LIST-OF converts elements."
   (let* ((raw (%require-live-pointer dict))
          (key-list (opendaq.low-level:dict/get-key-list raw))
          (n (opendaq.low-level:list/get-count key-list))
          (ht (make-hash-table :test 'equal :size n)))
-    (loop for i below n
-          for key-ptr = (opendaq.low-level:list/get-item-at key-list i)
-          for val-ptr = (opendaq.low-level:dict/get raw key-ptr)
-          for key = (%as-consuming (wrap key-ptr 'base-object) key-type)
-          for val = (%as-consuming (wrap val-ptr 'base-object) value-type)
-          do (setf (gethash key ht) val))
+    (unwind-protect
+        (loop for i below n
+              for key-ptr = (opendaq.low-level:list/get-item-at key-list i)
+              for val-ptr = (opendaq.low-level:dict/get raw key-ptr)
+              for key = (%as-consuming (wrap key-ptr 'base-object) key-type)
+              for val = (%as-consuming (wrap val-ptr 'base-object) value-type)
+              do (setf (gethash key ht) val))
+      (%release-pointer key-list))
     ht))
 
 (defparameter *core-type-classes*
@@ -535,21 +609,11 @@ unboxed if their type is a primitive, or cast via AS otherwise.
 casts to.  Only the scalar core types appear; the rest (list, dict, struct, object,
 proc, func, ...) are not single boxed values and so map to NIL.")
 
-(defun core-type->class (core-type)
-  "The boxed-primitive class a value of CORE-TYPE casts to, or NIL when CORE-TYPE is
-not a scalar.  CORE-TYPE is a DAQ-CORE-TYPE keyword (:int, :string,
-...), as returned by VALUE-TYPE; the result is the class symbol to hand to AS:
-
-  (let ((class (core-type->class (value-type property))))
-    (if class
-        (unbox (as some-base-object class))  ; a scalar value
-        ...))                                ; structured
-
-This is the bridge between the type a property/list/dict reports and the wrapper
-class the conversion functions take; NIL doubles as a \"not a scalar\" predicate.
-(PROPERTY-VALUE already applies this conversion itself, returning scalars unboxed;
-this helper is for the cases that hand you a raw BASE-OBJECT -- e.g. a dict value
-or a core event's PARAMETERS.)"
+(defun %core-type->class (core-type)
+  "The boxed-primitive class a value of CORE-TYPE casts to, or NIL when CORE-TYPE
+is not a scalar.  CORE-TYPE is a DAQ-CORE-TYPE keyword (:int, :string, ...), as
+returned by VALUE-TYPE; NIL doubles as a \"not a scalar\" predicate for the
+property-value conversion below."
   (cdr (assoc core-type *core-type-classes*)))
 
 ;;; ---------------------------------------------------------------------------
@@ -653,14 +717,14 @@ the raw wrapper)."
   (let* ((info (callable-info property))
          (arg-infos (arguments info))
          (arity (cl:length arg-infos))
-         (return-class (core-type->class (return-type info)))
+         (return-class (%core-type->class (return-type info)))
          (name (name property))
          (function (as value 'function-object)))
     (lambda (&rest args)
       (%check-callable-arity name arity args)
       (let ((result (call function (%callable-params args arg-infos) nil)))
         (if return-class
-            (unbox (as result return-class))
+            (unbox result)
             result)))))
 
 (defun %procedure-property-caller (value property)
@@ -687,7 +751,7 @@ The metadata lookup used to classify the property is skipped silently if it fail
 leaving the normal value getter (and its error reporting) in charge."
   (let* ((prop (ignore-errors (property object property-name)))
          (type (and prop (value-type prop)))
-         (scalar-class (core-type->class type)))
+         (scalar-class (%core-type->class type)))
     (cond ((eq type :func) (%function-property-caller (call-next-method) prop))
           ((eq type :proc) (%procedure-property-caller (call-next-method) prop))
           (scalar-class (%unbox-primitive (call-next-method) scalar-class))

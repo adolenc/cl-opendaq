@@ -341,21 +341,30 @@ Uses direct FFI calls to avoid re-entering %check-error during error reporting."
 ;;; reference, so there is nothing to release.  The raw binding's arity differs
 ;;; per platform (two :uint64 words vs a pointer), so the call splits the same way.
 
+(defun %borrowed-interface (self interface-id-getter)
+  "The interface pointer of the object at SELF for the interface whose id
+INTERFACE-ID-GETTER writes into a daqIntfID buffer (a low-level
+<type>/get-interface-id function), or NIL when the object does not implement it.
+The pointer is borrowed: it carries no reference of its own, must not be
+released, and is only valid while SELF is."
+  (cffi:with-foreign-object (id '(:struct daq-intf-id))
+    (funcall interface-id-getter id)
+    (cffi:with-foreign-object (out 'daq-base-object)
+      (when (zerop
+             #-(or windows win32)
+             (%daq-base-object-borrow-interface self
+                                                (cffi:mem-ref id :uint64 0)
+                                                (cffi:mem-ref id :uint64 8)
+                                                out)
+             #+(or windows win32)
+             (%daq-base-object-borrow-interface self id out))
+        (cffi:mem-ref out 'daq-base-object)))))
+
 (defun %supports-interface-p (self interface-id-getter)
   "True if the object at pointer SELF implements the interface whose id
 INTERFACE-ID-GETTER writes into a daqIntfID buffer (a low-level
 <type>/get-interface-id function)."
-  (cffi:with-foreign-object (id '(:struct daq-intf-id))
-    (funcall interface-id-getter id)
-    (cffi:with-foreign-object (out 'daq-base-object)
-      (zerop
-       #-(or windows win32)
-       (%daq-base-object-borrow-interface self
-                                          (cffi:mem-ref id :uint64 0)
-                                          (cffi:mem-ref id :uint64 8)
-                                          out)
-       #+(or windows win32)
-       (%daq-base-object-borrow-interface self id out)))))
+  (not (null (%borrowed-interface self interface-id-getter))))
 
 ;;; ===========================================================================
 ;;; High-level runtime (was high-level-runtime.lisp)
@@ -602,20 +611,24 @@ a full managed-object class like DEVICE or SIGNAL."
   (member type-name '(boolean-object float-object integer-object number-object
                       ratio-object string-object complex-number-object)))
 
+(defun %read-boxed-value (ptr target-type)
+  "Read the native Lisp value of the boxed primitive at PTR, a pointer to the
+interface TARGET-TYPE names (a primitive class symbol, e.g. INTEGER-OBJECT)."
+  (ecase target-type
+    (boolean-object        (not (zerop (opendaq.low-level:boolean/get-value ptr))))
+    (float-object          (opendaq.low-level:float-object/get-value ptr))
+    (integer-object        (opendaq.low-level:integer/get-value ptr))
+    (number-object         (opendaq.low-level:number/get-float-value ptr))
+    (ratio-object          (/ (opendaq.low-level:ratio/get-numerator ptr)
+                           (opendaq.low-level:ratio/get-denominator ptr)))
+    (string-object  (cffi:foreign-string-to-lisp (opendaq.low-level:string/get-char-ptr ptr)))
+    (complex-number-object (complex (opendaq.low-level:complex-number/get-real ptr)
+                                    (opendaq.low-level:complex-number/get-imaginary ptr)))))
+
 (defun %boxed-value (object target-type)
   "Extract the native Lisp value from a boxed primitive OBJECT, reading it as
 TARGET-TYPE (a primitive class symbol, e.g. INTEGER-OBJECT), without releasing it."
-  (let ((ptr (%require-live-pointer object)))
-    (ecase target-type
-      (boolean-object        (not (zerop (opendaq.low-level:boolean/get-value ptr))))
-      (float-object          (opendaq.low-level:float-object/get-value ptr))
-      (integer-object        (opendaq.low-level:integer/get-value ptr))
-      (number-object         (opendaq.low-level:number/get-float-value ptr))
-      (ratio-object          (/ (opendaq.low-level:ratio/get-numerator ptr)
-                             (opendaq.low-level:ratio/get-denominator ptr)))
-      (string-object  (cffi:foreign-string-to-lisp (opendaq.low-level:string/get-char-ptr ptr)))
-      (complex-number-object (complex (opendaq.low-level:complex-number/get-real ptr)
-                                      (opendaq.low-level:complex-number/get-imaginary ptr))))))
+  (%read-boxed-value (%require-live-pointer object) target-type))
 
 (defun %unbox-primitive (object target-type)
   "Extract the Lisp value from a boxed primitive wrapper and release the temporary

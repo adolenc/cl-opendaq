@@ -53,28 +53,27 @@ The high-level API insulates you from openDAQ's C types. Arguments accept plain 
 
 | Lisp value | openDAQ core type | Boxed type |
 |------------|--------------|------------|
-| `string`   | `:daq-ct-string` | `daq:string-object` |
-| `integer`  | `:daq-ct-int` | `daq:integer-object` |
-| `float`    | `:daq-ct-float` | `daq:float-object` |
-| `ratio`    | `:daq-ct-ratio` | `daq:ratio-object` |
-| `t` / `nil` | `:daq-ct-bool` | `daq:boolean-object` |
-| `(complex re im)` | `:daq-ct-complex-number` | `daq:complex-number-object` |
+| `string`   | `:string` | `daq:string-object` |
+| `integer`  | `:int` | `daq:integer-object` |
+| `float`    | `:float` | `daq:float-object` |
+| `t` / `nil` | `:bool` | `daq:boolean-object` |
+| `ratio`    | `:ratio` | `daq:ratio-object` |
+| `(complex re im)` | `:complex-number` | `daq:complex-number-object` |
 | any `daq` object | its raw pointer | `daq` object |
 
 `daqNumber` is output-only: it unboxes to a `float`, but no Lisp type boxes to it specifically (a `float` always boxes to `daq:float-object`).
 
 ### Helper functions
 
-A few functions are implemented manually to help you get out of tricky situations:
+A few functions are implemented manually to help you get out of tricky situations. The two conversion functions are split by which world the result lives in - `daq:as` recasts between openDAQ wrappers and never leaves openDAQ, while `daq:unbox` crosses into Lisp, discovering the value's type from the object itself so it needs no type argument:
 
-- `(daq:as daq-obj 'daq-type)` - reinterpret an object as the more specific `daq-type`, returning a wrapper of that type (an unchecked cast; only valid when `obj` really is that type). For a boxed primitive it returns the typed wrapper, not the value - `daq:unbox` it to get the value
-- `(daq:unbox daq-obj)` - the native Lisp value of a boxed-primitive wrapper (`daq:integer-object` → integer, `daq:string-object` → string, …), read from its own class; cast a generic base-object first, e.g. `(daq:unbox (daq:as daq-obj 'daq:string-object))`
-- `(daq:core-type->class core-type)` - the boxed type (per the table above) a value of `core-type` casts to, or `nil` when it is not a scalar (useful for e.g. `(daq:unbox (daq:as daq-obj (daq:core-type->class (daq:value-type prop))))`)
-
-`daq:property-value` already applies this conversion for you: reading a property returns its value in natural Lisp form - a scalar comes back unboxed (a plain integer, float, string, …), a `func`/`proc` property comes back as a Lisp function you can `funcall`, and anything else (object, struct, list, dict) comes back as a wrapper. So `(daq:unbox (daq:as ...))` is only needed for raw base-objects from elsewhere (a dict value, a core event's `parameters`, …).
+- `(daq:as daq-obj 'daq-type)` - reinterpret an object as the more specific `daq-type`, returning a wrapper of that type (an unchecked cast; only valid when `obj` really is that type - see `daq:typep` below)
+- `(daq:unbox daq-obj)` - the natural Lisp value of `daq-obj`: a boxed scalar yields its native value (per the table above), a daq list a Lisp list, and a daq dict a hash-table, with elements unboxed recursively; an element with no Lisp form (e.g. a device sitting in a list) stays a wrapper for you to `daq:as`-cast. Works on a generic base-object with no cast needed - `(daq:unbox (gethash "Name" (daq:parameters event)))` ⇒ `"Frequency"`, `(daq:unbox (daq:selection-values prop))` ⇒ `("Low" "Mid" "High")` - and returns an already-native Lisp value unchanged
 - `(daq:typep daq-obj 'daq-type)` - test whether `daq-obj` is a `daq-type`, i.e. implements that interface (a real query, unlike the unchecked `daq:as`)
 - `(daq:component-type daq-obj)` - the most-derived component interface `daq-obj` implements (`daq:channel`, `daq:signal`, `daq:device`, …) as a class symbol, or `nil`
 - `(daq:domain-tick->timestamp source tick)` - convert a domain tick to a `local-time` timestamp (`source` is a signal, data descriptor, or multi reader; `(daq:domain-time-converter source)` returns a reusable per-tick closure)
+
+Note that `daq:property-value` already applies the unboxing for you: reading a property returns its value in natural Lisp form - a scalar comes back unboxed (a plain integer, float, string, …), a `func`/`proc` property comes back as a Lisp function you can `funcall`, and anything else (object, struct, list, dict) comes back as a wrapper. So `daq:unbox` is only needed for raw base-objects from elsewhere (a dict value, a core event's `parameters`, a property's `default-value`, …).
 
 ### openDAQ Object Construction
 

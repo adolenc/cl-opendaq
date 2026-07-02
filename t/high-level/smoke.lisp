@@ -220,7 +220,7 @@
       (setf (gethash "x" table) 10 (gethash "y" table) 20)
       (let* ((info (make-instance 'daq:argument-info/dict :name "D" :key-type :string :item-type :int))
              (dict (box table info))
-             (round-trip (daq:as-hashtable-of dict 'daq:string-object 'daq:integer-object)))
+             (round-trip (daq:unbox dict)))
         (is (typep dict 'daq:dict) "A dict argument should box a Lisp hash-table into a DICT.")
         (is (= 2 (hash-table-count round-trip)) "The boxed dict should preserve the entry count.")
         (is (= 10 (gethash "x" round-trip)) "The boxed dict should preserve its string->int entries.")

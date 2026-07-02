@@ -29,7 +29,6 @@
            #:unbox
            #:typep
            #:component-type
-           #:core-type->class
            #:domain-time-converter
            #:domain-tick->timestamp
            #:healthcheck

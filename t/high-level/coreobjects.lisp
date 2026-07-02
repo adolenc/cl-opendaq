@@ -81,7 +81,7 @@
         (linear-rule (make-instance 'daq:data-rule/linear :delta 2 :start 0)))
     (is (typep int-property 'daq:property) "A property/int proxy should be a subclass instance of property.")
     (is (= 10 (%boxed-integer-value (daq:default-value int-property))) "property/int should box a plain integer default value.")
-    (is (= 1.5d0 (daq:unbox (daq:as (daq:default-value float-property) 'daq:float-object))) "property/float should box a plain float default value.")
+    (is (= 1.5d0 (daq:unbox (daq:default-value float-property))) "property/float should box a plain float default value.")
     (is (not (%boxed-boolean-value (daq:default-value bool-property))) "property/bool should box a plain boolean default value.")
     (is (typep linear-rule 'daq:data-rule) "data-rule/linear should accept plain numeric arguments and build a data-rule.")))
 
@@ -186,9 +186,9 @@
                                     :selection-values labels
                                     :default-value 1
                                     :visible t))
-           (choices (daq:as-list-of (daq:as (daq:selection-values property) 'daq:object-list) 'daq:string-object))
+           (choices (daq:unbox (daq:selection-values property)))
            (builder (make-instance 'daq:property-builder/selection :name "Gain" :selection-values labels :default-value 0))
-           (builder-choices (daq:as-list-of (daq:as (daq:selection-values builder) 'daq:object-list) 'daq:string-object))
+           (builder-choices (daq:unbox (daq:selection-values builder)))
            (property-object (make-instance 'daq:property-object)))
       (is (equal '("Low" "Mid" "High") choices) "A list Selection property should read its choices back, in order.")
       (is (equal '("Low" "Mid" "High") builder-choices) "A Selection property *builder* should read its choices back too.")
@@ -207,7 +207,7 @@
                                     :selection-values labels
                                     :default-value 3
                                     :visible t))
-           (choices (daq:as-hashtable-of (daq:as (daq:selection-values property) 'daq:dict) 'daq:integer-object 'daq:string-object))
+           (choices (daq:unbox (daq:selection-values property)))
            (property-object (make-instance 'daq:property-object)))
       (is (= 3 (hash-table-count choices)) "A sparse Selection property should read all of its choices back.")
       (is (string= "Control" (gethash 1 choices)) "A sparse Selection property should preserve its key->label mappings (key 1).")

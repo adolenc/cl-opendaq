@@ -15,7 +15,7 @@
   "Printable value of PROPERTY on PROPERTY-OBJECT.  PROPERTY-VALUE already returns
 scalars as their native Lisp value; structured ones come back as wrappers and are
 shown as \"<Type>\" instead."
-  (if (daq:core-type->class (daq:value-type property))
+  (if (member (daq:value-type property) '(:bool :int :float :string :ratio :complex-number))
       (format nil "~S" (daq:property-value property-object (daq:name property)))
       (format nil "<~A>" (type-name (daq:value-type property)))))
 
