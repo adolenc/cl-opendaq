@@ -101,6 +101,14 @@ MANUAL_CONSTRUCTORS = {
 # constructor.  (property-builder is NOT here: it has a real createPropertyBuilder(name).)
 NO_DIRECT_CONSTRUCTOR = {
     "property",
+    # SearchFilter has no plain createSearchFilter(): it is built only through the
+    # peer factories createAndSearchFilter / createOrSearchFilter / createNot... /
+    # etc.  With no canonical constructor the generator would fall back to the
+    # first create-* it saw -- alphabetically createAndSearchFilter -- and promote
+    # "and" to the unlabelled base class, leaving the asymmetric pair
+    # (make-instance 'search-filter ...) for "and" vs 'search-filter/or for "or".
+    # Suppress that so both surface as proxies: search-filter/and, search-filter/or.
+    "search-filter",
 }
 
 # Functions intentionally not auto-generated because they are hand-written in the

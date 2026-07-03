@@ -860,6 +860,7 @@
             scheduler/with-main-loop
             sdk-version
             search-filter
+            search-filter/and
             search-filter/any
             search-filter/custom
             search-filter/excluded-tags
@@ -5574,12 +5575,18 @@ Constructs the instance via the openDAQ C function daqScaling_createLinearScalin
 
 (defclass search-filter (base-object)
   (
+   ))
+
+
+
+(defclass search-filter/and (search-filter)
+  (
    (%left-initarg :initarg :left :initform nil)
    (%right-initarg :initarg :right :initform nil)
    ))
 
 
-(defmethod initialize-instance :after ((object search-filter)
+(defmethod initialize-instance :after ((object search-filter/and)
                                        &key (pointer nil pointer-p)
                                             (left nil left-p)
                                             (right nil right-p)
@@ -24249,6 +24256,7 @@ Calls the openDAQ C function daqWork_execute()."
          scheduler/with-main-loop
          sdk-version
          search-filter
+         search-filter/and
          search-filter/any
          search-filter/custom
          search-filter/excluded-tags
