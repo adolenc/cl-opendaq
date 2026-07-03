@@ -28,6 +28,7 @@
   (:export #:as
            #:unbox
            #:typep
+           #:with-batch-property-updates
            #:component-type
            #:domain-time-converter
            #:domain-tick->timestamp

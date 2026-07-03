@@ -616,6 +616,33 @@ returned by VALUE-TYPE; NIL doubles as a \"not a scalar\" predicate for the
 property-value conversion below."
   (cdr (assoc core-type *core-type-classes*)))
 
+(defmacro with-batch-property-updates ((&rest objects) &body body)
+  "Batch the property writes in BODY into one update per object in OBJECTS.
+
+Each object is any property object (device, channel, function block, ...).
+Property values set on it -- or on any of its descendant property objects --
+within BODY are staged rather than applied: reads still return the old values
+and no OnPropertyValueWrite / OnEndUpdate events fire until the batch closes.
+On leaving BODY -- whether normally or via a non-local exit -- each object's
+staged values are committed at once, the objects closing in reverse order.
+Returns BODY's value.
+
+With a single object this is one atomic update of that object (and its subtree).
+Listing several brackets each independently -- convenient for opening and
+closing several batches together -- but each object commits its own batch; there
+is no atomic commit spanning unrelated objects (for that, bracket a common
+ancestor instead).
+
+Wraps BEGIN-UPDATE / END-UPDATE (daqPropertyObject_beginUpdate / _endUpdate)."
+  (if (null objects)
+      `(progn ,@body)
+      (let ((obj (gensym "OBJECT")))
+        `(let ((,obj ,(first objects)))
+           (begin-update ,obj)
+           (unwind-protect
+                (with-batch-property-updates ,(rest objects) ,@body)
+             (end-update ,obj))))))
+
 ;;; ---------------------------------------------------------------------------
 ;;; Property-value conversion
 ;;;
