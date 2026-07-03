@@ -1,13 +1,12 @@
 (ql:quickload :opendaq :silent t)
 
+
 (defparameter *instance* (make-instance 'daq:instance))
 (daq:add-device *instance* "daqref://device0")
 
 (defparameter *channel* (daq:as (daq:find-component *instance* "Dev/RefDev0/IO/AI/RefCh0") 'daq:channel))
 
 (let* ((core-event (daq:on-core-event (daq:context *instance*)))
-       ;; ADD-HANDLER returns the EVENT-HANDLER it created, so we keep it to
-       ;; unsubscribe later.
        (handler (daq:add-handler
                  core-event
                  (lambda (sender args)

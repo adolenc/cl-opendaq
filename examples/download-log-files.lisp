@@ -1,5 +1,3 @@
-(ql:quickload :opendaq :silent t)
-
 ;; Download a device's log files: enumerate them with DEVICE/getLogFileInfos and
 ;; pull each one's contents with DEVICE/getLog.  On a real (often remote) device
 ;; the logs already exist; the bundled reference device only produces one when you
@@ -10,6 +8,8 @@
 ;;     same file -- that is the file the reference device reports and serves.
 ;;
 ;; LOG-FILE-INFOS / LOG then behave exactly as they would against a remote device.
+(ql:quickload :opendaq :silent t)
+
 
 (defparameter *work-dir* (ensure-directories-exist (merge-pathnames "cl-opendaq-log-example/" (uiop:temporary-directory))))
 (defparameter *device-log* (namestring (merge-pathnames "ref_device_simulator.log" *work-dir*)))

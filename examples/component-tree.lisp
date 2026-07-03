@@ -1,5 +1,6 @@
 (ql:quickload :opendaq :silent t)
 
+
 (defparameter *instance* (make-instance 'daq:instance))
 (daq:add-device *instance* "daqref://device0")
 
