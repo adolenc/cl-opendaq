@@ -154,16 +154,6 @@ FUNCTION_RE = re.compile(
     re.S,
 )
 
-# Interface ID declaration: EXPORTED extern const daqIntfID DAQ_XXX_INTF_ID;
-INTF_ID_RE = re.compile(
-    r"EXPORTED\s+extern\s+const\s+daqIntfID\s+(\w+)\s*;"
-)
-
-# getInterfaceId function
-GET_INTF_ID_RE = re.compile(
-    r"void\s+EXPORTED\s+(\w+)_getInterfaceId\s*\(daqIntfID\*\s*\w+\)\s*;"
-)
-
 # Argument split: type_and_name
 ARG_SPLIT_RE = re.compile(r"^(?P<type>.+?)(?P<name>[A-Za-z_]\w*)$")
 

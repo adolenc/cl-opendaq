@@ -430,8 +430,9 @@ add a reference -- so this is the correct way to wrap a pointer returned from an
 OPENDAQ.LOW-LEVEL call.  Returns NIL for a null pointer.  TARGET-TYPE is a symbol
 (or class) naming the wrapper class, e.g. 'BASE-OBJECT.
 
-This is the raw-pointer counterpart to AS: AS reinterprets an already-wrapped
-object and adds its own reference; WRAP adopts a bare pointer without one."
+This is the raw-pointer counterpart to AS: AS queries an already-wrapped object
+for the target interface and owns the reference the query adds; WRAP adopts a
+bare pointer without one."
   (unless (or (null pointer) (cffi:null-pointer-p pointer))
     (make-instance target-type :pointer pointer)))
 
@@ -468,15 +469,25 @@ arguments; see EMIT_COERCED_CALL in tools/generate_high_level_bindings.py."
                      (with-daq-boxed-values ,rest ,@body)
                    (%cleanup-coerced-argument ,cleanup))))))))
 
+(defun %query-interface (pointer interface-id-getter)
+  "The interface pointer of the object at POINTER for the interface whose id
+INTERFACE-ID-GETTER writes into a daqIntfID buffer (a low-level
+<type>/get-interface-id function).  An object's interfaces live at different
+vtable offsets, so a pointer to one is not interface-compatible with another --
+the target interface must be queried, not merely reinterpreted.  Signals an
+openDAQ error when the object does not implement the interface.  Adds a
+reference; the caller owns the returned pointer."
+  (cffi:with-foreign-object (interface-id :uint64 2)   ; daqIntfID is 16 bytes
+    (funcall interface-id-getter interface-id)
+    (opendaq.low-level:base-object/query-interface pointer interface-id)))
+
 (defun %query-number-interface (pointer)
   "Return the INumber interface pointer of POINTER, a daq object that implements
 INumber (Integer and Float do; Ratio does not).  openDAQ's C ABI requires a genuine
 INumber pointer where a Number is expected -- a raw IInteger pointer is not
-interface-compatible and corrupts the call -- so the value must be queried, not
-merely reinterpreted.  Adds a reference; the caller owns the returned pointer."
-  (cffi:with-foreign-object (interface-id :uint64 2)   ; daqIntfID is 16 bytes
-    (opendaq.low-level:number/get-interface-id interface-id)
-    (opendaq.low-level:base-object/query-interface pointer interface-id)))
+interface-compatible and corrupts the call.  Adds a reference; the caller owns the
+returned pointer."
+  (%query-interface pointer #'opendaq.low-level:number/get-interface-id))
 
 (defun %coerce-argument (value category)
   (flet ((make-cleanup (pointer)

@@ -127,13 +127,13 @@ SUPPRESSED_FUNCTIONS = {
     # createComponentDeserializeContext returns two values (the context plus an
     # out intf-id GUID), so it does not fit the single-object make-instance model.
     # It is an internal deserialization primitive, unused here; drop it (the class
-    # is still wrappable and keeps its clone / interface-id methods).
+    # is still wrappable and keeps its clone / intf-id methods).
     "component-deserialize-context/create-component-deserialize-context",
     # These take a daqIntfID GUID by value.  The low-level layer now binds them
     # (passed per-ABI; see generate_low_level_bindings), but they are plumbing:
-    # the GUID query is exposed idiomatically as typep /
-    # component-type, and the untyped list/dict/folder constructors cover the
-    # rest, so they need no high-level wrapper.
+    # the GUID query is exposed idiomatically as typep / component-type / as,
+    # and the untyped list/dict/folder constructors cover the rest, so they
+    # need no high-level wrapper.
     "base-object/query-interface",
     "base-object/borrow-interface",
     "list/create-list-with-element-type",
@@ -638,6 +638,24 @@ def build_specs(functions: list[dict]) -> tuple[list[dict], list[dict]]:
             continue
         kind = classify_function(function)
         receiver = receiver_name(function)
+
+        # Every <Class>_getInterfaceId writes an opaque GUID the high level never
+        # exposes directly: TYPEP / AS resolve interface ids straight through the
+        # low-level getters.  The wrapper this would generate is a receiver-less
+        # defun that discards its out-param and returns nil, so suppress the whole
+        # family.  (getElementInterfaceId and friends are instance methods with a
+        # different stem and are kept.)  Still register the receiver class: for
+        # marker-like interfaces with no methods of their own (channel,
+        # io-folder-config, recursive-search) this is the only mention that
+        # materializes the class TYPEP / AS need.
+        if method_name(function) == "get-interface-id":
+            co = CLASS_OVERRIDES.get(receiver, {})
+            classes.setdefault(receiver, {
+                "name": receiver,
+                "constructor": base_class_constructor(receiver, constructors),
+                "constructor_defaults": co.get("constructor_defaults", ()),
+            })
+            continue
 
         if kind == "constructor":
             base = classes.setdefault(receiver, {

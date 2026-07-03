@@ -100,6 +100,21 @@
     (let ((element (first (daq:unbox list))))
       (is (daq:typep element 'daq:property-object) "a list element with no Lisp form should stay an openDAQ wrapper."))))
 
+(test high-level-coretypes-as-cast-failure
+  ;; AS is a real interface query, so casting to an interface the object does
+  ;; not implement must signal an openDAQ error -- not hand back a wrapper whose
+  ;; method calls would dispatch through the wrong vtable.
+  (let ((boxed (make-instance 'daq:integer-object :value 42)))
+    (signals daq:opendaq-error (daq:as boxed 'daq:string-object) "as to an unsupported interface should signal an opendaq-error.")
+    (is (= 42 (daq:unbox boxed)) "a failed as cast should leave the object intact and usable.")
+    ;; INumber sits at a different vtable offset than IInteger, so the queried
+    ;; wrapper must read correctly through its own interface pointer.
+    (is (= 42 (daq:unbox (daq:as boxed 'daq:number-object))) "as to a secondary interface (INumber) should yield a working wrapper."))
+  (signals error (daq:as (make-instance 'daq:integer-object :value 1) :integer-object) "as with a keyword target should signal the error pointing at UNBOX.")
+  (let ((released (make-instance 'daq:integer-object :value 1)))
+    (daq:release released)
+    (signals error (daq:as released 'daq:number-object) "as on an already-released object should signal instead of querying a dead pointer.")))
+
 (test high-level-coretypes-collections
   (let ((list (make-instance 'daq:object-list)))
     (daq:push-back list 1)

@@ -430,23 +430,66 @@ values use DATA."))
 ;;; generated getters use; end-user code reaches for UNBOX instead.
 ;;; ---------------------------------------------------------------------------
 
+(defparameter *interface-name-overrides*
+  '((boolean-object        . "BOOLEAN")
+    (complex-number-object . "COMPLEX-NUMBER")
+    (function-object       . "FUNCTION")
+    (integer-object        . "INTEGER")
+    (number-object         . "NUMBER")
+    (object-list           . "LIST")
+    (ratio-object          . "RATIO")
+    (string-object         . "STRING")
+    (type-object           . "TYPE"))
+  "High-level class symbols whose name differs from their openDAQ interface's
+low-level prefix, mapped to that prefix.  These are the CLASS_NAME_OVERRIDES
+renames in tools/generate_high_level_bindings.py, which suffix CL-colliding names
+with -OBJECT.  (FLOAT-OBJECT needs no entry: openDAQ itself names that interface
+IFloatObject.)")
+
+(defun %find-interface-id-getter (type)
+  "The low-level <TYPE>/get-interface-id function for the class symbol TYPE, or
+NIL when the C API exposes no interface id for it (BASE-OBJECT, FUNCTION-OBJECT,
+PROCEDURE, and a few other coretypes plumbing interfaces have none)."
+  (let ((prefix (or (cdr (assoc type *interface-name-overrides*))
+                    (symbol-name type))))
+    (find-symbol (concatenate 'string prefix "/GET-INTERFACE-ID")
+                 '#:opendaq.low-level)))
+
+(defun %interface-id-getter (type)
+  "Like %FIND-INTERFACE-ID-GETTER, but signals an error when TYPE has no
+interface-id getter."
+  (or (%find-interface-id-getter type)
+      (error "No interface-id getter for type ~S." type)))
+
 (defun as (object target-type)
-  "Reinterpret a base openDAQ OBJECT as the more specific type TARGET-TYPE, returning
-a wrapper of that type.  Adds a reference so the result owns its own lifetime.  Only
-valid when OBJECT really is that type (it is an unchecked cast, not a query -- see
-TYPEP / COMPONENT-TYPE to test first).  TARGET-TYPE is a symbol naming the class
-(e.g. 'DEVICE-INFO).
+  "Cast the openDAQ OBJECT to the more specific type TARGET-TYPE, returning a
+wrapper of that type that owns its own reference.  This is a real interface query
+(queryInterface): the wrapper holds the genuine interface pointer -- required
+because an object's interfaces live at different vtable offsets, so the pointer
+for one is not interface-compatible with another -- and an unsupported
+TARGET-TYPE signals an openDAQ error (see TYPEP / COMPONENT-TYPE to test first).
+TARGET-TYPE is a symbol naming the class (e.g. 'DEVICE-INFO).
+
+The few coretypes interfaces with no interface id in the C API (BASE-OBJECT,
+FUNCTION-OBJECT, PROCEDURE, ...) cannot be queried; for those the pointer is
+reinterpreted unchecked, which is sound only when TARGET-TYPE lies on the same
+interface inheritance chain as the pointer's current type.
 
 AS never leaves openDAQ: both the input and the result are wrappers.  To get the
 native Lisp value of an object, use UNBOX."
   (when (keywordp target-type)
     (error "AS casts to an openDAQ class named by a symbol, e.g. (as x 'signal); ~
 to get the native Lisp value of ~S use (unbox ~:*~S) instead." object))
-  (let ((class (if (symbolp target-type)
-                   (find-class target-type)
-                   target-type)))
-    (add-ref object)
-    (make-instance class :pointer (raw-pointer object))))
+  (let* ((class (if (symbolp target-type)
+                    (find-class target-type)
+                    target-type))
+         (getter (%find-interface-id-getter (cl:class-name class))))
+    (if getter
+        (make-instance class :pointer (%query-interface (%require-live-pointer object)
+                                                        getter))
+        (progn
+          (add-ref object)
+          (make-instance class :pointer (raw-pointer object))))))
 
 (defparameter *unboxable-interfaces*
   '((opendaq.low-level:string/get-interface-id         . string-object)
@@ -548,16 +591,11 @@ its own reference and the temporary is released by the GC, as before."
   '(channel function-block device signal input-port folder component)
   "Component interface types, most-derived first, that COMPONENT-TYPE tries.")
 
-(defun %interface-id-getter (type)
-  "The low-level <TYPE>/get-interface-id function for the class symbol TYPE."
-  (or (find-symbol (concatenate 'string (symbol-name type) "/GET-INTERFACE-ID")
-                   '#:opendaq.low-level)
-      (error "No interface-id getter for type ~S." type)))
-
 (defun typep (object type)
   "True if OBJECT is a TYPE, i.e. implements the openDAQ interface named by the
-class symbol TYPE (e.g. 'CHANNEL, 'SIGNAL, 'FOLDER).  Unlike AS, this performs a
-real interface query, so it is safe to ask about any type."
+class symbol TYPE (e.g. 'CHANNEL, 'SIGNAL, 'FOLDER).  The same interface query
+AS performs, but returning a boolean instead of signalling on failure, so it is
+safe to ask about any type."
   (opendaq.low-level::%supports-interface-p
    (%require-live-pointer object)
    (%interface-id-getter type)))
@@ -565,7 +603,7 @@ real interface query, so it is safe to ask about any type."
 (defun component-type (object &optional (candidates *queryable-component-types*))
   "The most-derived interface among CANDIDATES that OBJECT implements, as a
 class symbol (e.g. CHANNEL), or NIL if none.  Lets you discover a component's
-concrete type without an unsafe reinterpreting cast."
+concrete type before committing to an AS cast."
   (find-if (lambda (type) (typep object type)) candidates))
 
 (defun %list-of (object-list element-type)

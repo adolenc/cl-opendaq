@@ -53,24 +53,19 @@
             address-info-address
             address-info-builder
             address-info-builder-address
-            address-info-builder-interface-id
             address-info-builder-type
-            address-info-interface-id
             address-info-private
-            address-info-private-interface-id
             address-info-type
             address-reachability-status
             addresses
             all-properties
             allocate
             allocator
-            allocator-interface-id
             allocator/malloc
             allow
             allow-different-sampling-rates
             allowed
             argument-info
-            argument-info-interface-id
             argument-info-type
             argument-info/dict
             argument-info/list
@@ -83,7 +78,6 @@
             authenticate-anonymous
             authenticated-only
             authentication-provider
-            authentication-provider-interface-id
             authentication-provider/json-file
             authentication-provider/json-string
             authentication-provider/static
@@ -96,37 +90,29 @@
             available-server-types
             available-streaming-types
             awaitable
-            awaitable-interface-id
             base-object
             base-object-create
             begin-update
             binary-data
             binary-data-address
-            binary-data-interface-id
             block-reader
             block-reader-builder
-            block-reader-builder-interface-id
             block-reader-builder-signal
-            block-reader-interface-id
             block-reader-read
             block-reader-read-with-domain
             block-reader-status
-            block-reader-status-interface-id
             block-reader/from-existing
             block-reader/from-port
             block-size
             boolean-object
-            boolean-object-interface-id
             build
             call
             call-custom-proc
             callable-info
-            callable-info-interface-id
             callable-info-no-lock
             cancel
             change-ip-config
             channel
-            channel-interface-id
             channels
             channels-recursive
             char-ptr
@@ -150,56 +136,41 @@
             clone-with-owner
             cloneable
             cloneable-clone
-            cloneable-interface-id
             coerce
             coerce-no-lock
             coercer
-            coercer-interface-id
             coercer-no-lock
             common-sample-rate
             comparable
-            comparable-interface-id
             compare-to
             complete
             complete-device-capabilities
             complete-server-capability
             complex-number-object
-            complex-number-object-interface-id
             component
             component-config
             component-deserialize-context
             component-deserialize-context-clone
-            component-deserialize-context-interface-id
             component-holder
             component-holder-component
-            component-holder-interface-id
             component-holder/with-ids
-            component-interface-id
             component-log-level
             component-private
-            component-private-interface-id
             component-status-container
-            component-status-container-interface-id
             component-status-container-private
-            component-status-container-private-interface-id
             component-type
             component-type-builder
-            component-type-builder-interface-id
             component-type-builder/device
             component-type-builder/function-block
             component-type-builder/server
             component-type-builder/streaming
-            component-type-interface-id
             component-type-private
-            component-type-private-interface-id
             component-type-sort
             component-update-context
-            component-update-context-interface-id
             component-update-context-signal
             components
             components-log-level
             config-provider
-            config-provider-interface-id
             config-provider/env
             config-provider/json
             configuration-connection-info
@@ -208,18 +179,14 @@
             connected
             connected-client-info
             connected-client-info-address
-            connected-client-info-interface-id
             connected-client-info/with-params
             connected-clients-info
             connection
-            connection-interface-id
             connection-internal
-            connection-internal-interface-id
             connection-signal
             connection-status
             connection-status-container
             connection-status-container-private
-            connection-status-container-private-interface-id
             connection-string
             connection-string-prefix
             connection-strings
@@ -228,13 +195,9 @@
             const-char-ptr
             contains
             context
-            context-interface-id
             context-internal
-            context-internal-interface-id
             convertible
-            convertible-interface-id
             core-event-args
-            core-event-args-interface-id
             core-event-args/property-added
             core-event-args/property-object-update-end
             core-event-args/property-order-changed
@@ -266,20 +229,15 @@
             data
             data-descriptor
             data-descriptor-builder
-            data-descriptor-builder-interface-id
             data-descriptor-builder/from-existing
-            data-descriptor-interface-id
             data-packet
-            data-packet-interface-id
             data-packet/constant-with-domain
             data-packet/with-domain
             data-packet/with-external-memory
             data-rule
             data-rule-builder
-            data-rule-builder-interface-id
             data-rule-builder-type
             data-rule-builder/from-existing
-            data-rule-interface-id
             data-rule-type
             data-rule/constant
             data-rule/explicit
@@ -297,7 +255,6 @@
             delete-item
             delete-memory
             deleter
-            deleter-interface-id
             denied
             denominator
             deny
@@ -310,7 +267,6 @@
             descriptor
             deserialize
             deserialize-component
-            deserialize-component-interface-id
             deserialize-values
             deserialized-parameter
             deserializer
@@ -319,45 +275,30 @@
             device-class
             device-config
             device-domain
-            device-domain-interface-id
             device-domain/with-reference-domain-info
             device-info
             device-info-config
-            device-info-config-interface-id
             device-info-config/with-custom-sdk-version
-            device-info-interface-id
             device-info-internal
-            device-info-internal-interface-id
-            device-interface-id
             device-manual
             device-network-config
-            device-network-config-interface-id
             device-private
-            device-private-interface-id
             device-revision
             device-type
-            device-type-interface-id
             device-update-mode
             device-update-options
-            device-update-options-interface-id
             device-update-options-with-local-id-or-null
             devices
             dict
             dict-element-type
-            dict-element-type-interface-id
-            dict-interface-id
             dict-remove
             dimension
             dimension-builder
-            dimension-builder-interface-id
             dimension-builder/from-existing
-            dimension-interface-id
             dimension-rule
             dimension-rule-builder
-            dimension-rule-builder-interface-id
             dimension-rule-builder-type
             dimension-rule-builder/from-existing
-            dimension-rule-interface-id
             dimension-rule-type
             dimension-rule/linear
             dimension-rule/list
@@ -370,7 +311,6 @@
             disconnected
             discovery-info
             discovery-server
-            discovery-server-interface-id
             discovery-server-root-device
             discovery-servers
             dispatch
@@ -394,7 +334,6 @@
             end-object
             end-update
             end-update-event-args
-            end-update-event-args-interface-id
             enqueue
             enqueue-and-steal-ref
             enqueue-last-descriptor
@@ -403,9 +342,7 @@
             enqueue-on-this-thread
             enqueue-with-scheduler
             enumeration
-            enumeration-interface-id
             enumeration-type
-            enumeration-type-interface-id
             enumeration-type/with-values
             enumeration/with-int-value
             enumeration/with-int-value-and-type
@@ -417,19 +354,14 @@
             error-info
             eval
             eval-value
-            eval-value-interface-id
             eval-value/args
             eval-value/func
             event
             event-args
-            event-args-interface-id
             event-handler
-            event-handler-interface-id
             event-id
-            event-interface-id
             event-name
             event-packet
-            event-packet-interface-id
             event-packet/data-descriptor-changed
             event-packet/implicit-domain-gap-detected
             event-packets
@@ -446,24 +378,18 @@
             find-properties
             find-user
             float-object
-            float-object-interface-id
             float-value
             flush
             flush-on-level
             folder
             folder-config
-            folder-config-interface-id
             folder-config/io-folder
-            folder-interface-id
             force-unlock
             free
             freezable
-            freezable-interface-id
             freeze
             function-block
-            function-block-interface-id
             function-block-type
-            function-block-type-interface-id
             function-blocks
             function-object
             gap-checking-enabled
@@ -472,7 +398,6 @@
             global-id
             global-log-level
             graph-visualization
-            graph-visualization-interface-id
             groups
             handle-event
             hardware-revision
@@ -503,17 +428,13 @@
             input-port
             input-port-accepts-signal
             input-port-config
-            input-port-config-interface-id
             input-port-connection
             input-port-connections
-            input-port-interface-id
             input-port-notification-method
             input-port-notification-methods
             input-port-notifications
             input-port-notifications-accepts-signal
-            input-port-notifications-interface-id
             input-port-private
-            input-port-private-interface-id
             input-port-signal
             input-ports
             input-sample-type
@@ -523,18 +444,14 @@
             inspectable
             instance
             instance-builder
-            instance-builder-interface-id
             instance-builder-root-device
-            instance-interface-id
             instance-root-device
             int-value
             integer-object
-            integer-object-interface-id
             interfaces
             internal-state
             intf-id
             io-folder-config
-            io-folder-config-interface-id
             is-anonymous
             is-anonymous-allowed
             is-authorized
@@ -563,9 +480,7 @@
             item-type-no-lock
             items
             iterable
-            iterable-interface-id
             iterator
-            iterator-interface-id
             keep-last-value
             key
             key-interface-id
@@ -578,7 +493,6 @@
             labels
             last-message
             last-message-logger-sink-private
-            last-message-logger-sink-private-interface-id
             last-modified
             last-value
             length
@@ -587,7 +501,6 @@
             license-loaded
             list
             list-element-type
-            list-element-type-interface-id
             listener
             listener-connected
             listener-connected-scheduled
@@ -605,20 +518,15 @@
             lock-all-attributes
             lock-attributes
             lock-guard
-            lock-guard-interface-id
             locked-attributes
             locking-strategy
             log
             log-file-info
             log-file-info-builder
-            log-file-info-builder-interface-id
-            log-file-info-interface-id
             log-file-infos
             log-level
             logger
             logger-component
-            logger-component-interface-id
-            logger-interface-id
             logger-sink
             logger-sink/rotating-file
             logger-sink/std-err
@@ -626,7 +534,6 @@
             logger-sink/win-debug
             logger-sinks
             logger-thread-pool
-            logger-thread-pool-interface-id
             low-value
             mac-address
             main-descriptor
@@ -648,26 +555,17 @@
             mirrored-data-descriptor
             mirrored-device
             mirrored-device-config
-            mirrored-device-config-interface-id
-            mirrored-device-interface-id
             mirrored-device-type
             mirrored-domain-signal
             mirrored-input-port-config
-            mirrored-input-port-config-interface-id
             mirrored-signal-config
-            mirrored-signal-config-interface-id
             mirrored-signal-private
-            mirrored-signal-private-interface-id
             model
             module
             module-authenticator
             module-info
-            module-info-interface-id
-            module-interface-id
             module-manager
-            module-manager-interface-id
             module-manager-utils
-            module-manager-utils-interface-id
             module-manager/multiple-paths
             module-options
             module-path
@@ -679,12 +577,9 @@
             move-next
             multi-reader
             multi-reader-builder
-            multi-reader-builder-interface-id
-            multi-reader-interface-id
             multi-reader-read
             multi-reader-read-with-domain
             multi-reader-status
-            multi-reader-status-interface-id
             multi-reader/ex
             multi-reader/from-existing
             mute
@@ -694,7 +589,6 @@
             name
             network-configuration-enabled
             network-interface
-            network-interface-interface-id
             network-interface-names
             network-interfaces
             new-connection-string
@@ -705,10 +599,8 @@
             notify-packet-enqueued-on-this-thread
             notify-packet-enqueued-with-scheduler
             number-object
-            number-object-interface-id
             numerator
             object-list
-            object-list-interface-id
             offset
             old-block-reader
             old-value
@@ -738,17 +630,13 @@
             override-default-value
             override-state
             ownable
-            ownable-interface-id
             owner
             owner-device-remote-id
             packet
             packet-count
             packet-destruct-callback
-            packet-destruct-callback-interface-id
             packet-id
-            packet-interface-id
             packet-reader
-            packet-reader-interface-id
             packet-reader-read
             packet-reader/from-port
             packet-ready-notification
@@ -768,19 +656,13 @@
             peek
             permission
             permission-manager
-            permission-manager-interface-id
             permission-manager-internal
-            permission-manager-internal-interface-id
             permission-mask-builder
-            permission-mask-builder-interface-id
             permission-mask-builder-read
             permission-mask-builder/from-mask
             permissions
             permissions-builder
-            permissions-builder-interface-id
-            permissions-interface-id
             permissions-internal
-            permissions-internal-interface-id
             platform
             pop-back
             pop-front
@@ -795,7 +677,6 @@
             properties
             property
             property-builder
-            property-builder-interface-id
             property-builder/bool
             property-builder/dict
             property-builder/enumeration
@@ -811,25 +692,17 @@
             property-builder/string
             property-builder/struct
             property-event-type
-            property-interface-id
             property-internal
             property-internal-clone
-            property-internal-interface-id
             property-object
             property-object-class
             property-object-class-builder
-            property-object-class-builder-interface-id
             property-object-class-builder/with-manager
-            property-object-class-interface-id
             property-object-class-internal
             property-object-class-internal-clone
-            property-object-class-internal-interface-id
-            property-object-interface-id
             property-object-internal
             property-object-internal-clone
-            property-object-internal-interface-id
             property-object-protected
-            property-object-protected-interface-id
             property-object/with-class-and-manager
             property-order
             property-references
@@ -866,9 +739,7 @@
             quantity
             query
             range
-            range-interface-id
             ratio-object
-            ratio-object-interface-id
             raw-data
             raw-data-size
             raw-last-value
@@ -894,23 +765,16 @@
             read-with-domain
             reader
             reader-config
-            reader-config-interface-id
-            reader-interface-id
             reader-status
-            reader-status-interface-id
             real
             recorder
-            recorder-interface-id
             recursive-lock-guard
             recursive-search
-            recursive-search-interface-id
             ref-count
             reference-domain-id
             reference-domain-info
             reference-domain-info-builder
-            reference-domain-info-builder-interface-id
             reference-domain-info-builder/from-existing
-            reference-domain-info-interface-id
             reference-domain-offset
             reference-time-protocol
             referenced-property
@@ -923,7 +787,6 @@
             remap-input-port-connections
             remote-id
             removable
-            removable-interface-id
             removable-remove
             remove-all-input-ports
             remove-all-signals
@@ -960,7 +823,6 @@
             retrieve-network-configuration
             return-type
             reusable-data-packet
-            reusable-data-packet-interface-id
             reuse
             revision-counter
             root
@@ -969,13 +831,11 @@
             root-device-config
             rule
             rule-private
-            rule-private-interface-id
             run-main-loop
             run-main-loop-iteration
             runtime-class-name
             sample-count
             sample-reader
-            sample-reader-interface-id
             sample-size
             sample-type
             samples-until-next-descriptor
@@ -987,11 +847,8 @@
             scaled-sample-type
             scaling
             scaling-builder
-            scaling-builder-interface-id
             scaling-builder/from-existing
             scaling-calc-private
-            scaling-calc-private-interface-id
-            scaling-interface-id
             scaling-type
             scaling/linear
             schedule-function
@@ -999,12 +856,10 @@
             schedule-work
             schedule-work-on-main-loop
             scheduler
-            scheduler-interface-id
             scheduler-worker-num
             scheduler/with-main-loop
             sdk-version
             search-filter
-            search-filter-interface-id
             search-filter/any
             search-filter/custom
             search-filter/excluded-tags
@@ -1025,16 +880,13 @@
             send-packets-and-steal-ref
             serial-number
             serializable
-            serializable-interface-id
             serialize
             serialize-for-update
             serialize-id
             serialized-list
-            serialized-list-interface-id
             serialized-list-read-list
             serialized-list-read-object
             serialized-object
-            serialized-object-interface-id
             serialized-object-read-list
             serialized-object-read-object
             serialized-object-type
@@ -1043,30 +895,21 @@
             server-capabilities
             server-capability
             server-capability-config
-            server-capability-config-interface-id
-            server-capability-interface-id
-            server-interface-id
             server-type
-            server-type-interface-id
             servers
             set
             set-as-root
             should-log
             signal
             signal-config
-            signal-config-interface-id
             signal-config/with-descriptor
             signal-dependency
             signal-events
-            signal-events-interface-id
-            signal-interface-id
             signal-private
-            signal-private-interface-id
             signal-serialize-id
             signals
             signals-recursive
             simple-type
-            simple-type-interface-id
             simplify
             sink-log-level
             size
@@ -1091,9 +934,7 @@
             stop-recording
             stream-reader
             stream-reader-builder
-            stream-reader-builder-interface-id
             stream-reader-builder-signal
-            stream-reader-interface-id
             stream-reader-read
             stream-reader-read-with-domain
             stream-reader/from-existing
@@ -1101,21 +942,15 @@
             streamed
             streaming
             streaming-connection-string
-            streaming-interface-id
             streaming-sources
             streaming-type
-            streaming-type-interface-id
             string-object
-            string-object-interface-id
             string-object/string-n
             struct
             struct-builder
-            struct-builder-interface-id
             struct-builder/from-struct
             struct-fields
-            struct-interface-id
             struct-type
-            struct-type-interface-id
             struct-type-no-lock
             struct-type/no-defaults
             submit-configuration
@@ -1125,7 +960,6 @@
             subscriber-count
             subscribers
             subscription-event-args
-            subscription-event-args-interface-id
             subscription-event-type
             sufficient-history
             suggested-values
@@ -1133,32 +967,23 @@
             suggested-values-unresolved
             symbol
             sync-component
-            sync-component-interface-id
             sync-component-private
-            sync-component-private-interface-id
             sync-locked
             system-type
             system-uuid
             tags
-            tags-interface-id
             tags-private
-            tags-private-interface-id
             tags-private-remove
             tail-reader
             tail-reader-builder
-            tail-reader-builder-interface-id
             tail-reader-builder-signal
-            tail-reader-interface-id
             tail-reader-read
             tail-reader-read-with-domain
             tail-reader-status
-            tail-reader-status-interface-id
             tail-reader/from-existing
             tail-reader/from-port
             task
             task-graph
-            task-graph-interface-id
-            task-interface-id
             then
             tick-offset-tolerance
             tick-resolution
@@ -1175,19 +1000,14 @@
             trigger-event
             type
             type-manager
-            type-manager-interface-id
             type-manager-private
-            type-manager-private-interface-id
             type-manager-type
             type-object
-            type-object-interface-id
             type-sort
             types
             unit
             unit-builder
-            unit-builder-interface-id
             unit-builder/from-existing
-            unit-interface-id
             unit-no-lock
             unit-unresolved
             unlock
@@ -1199,7 +1019,6 @@
             unsubscribe-completed
             unsubscribe-completed-no-lock
             updatable
-            updatable-interface-id
             updatable-update
             update-connection-status
             update-connection-status-with-message
@@ -1209,14 +1028,10 @@
             update-mode
             update-operation-mode
             update-parameters
-            update-parameters-interface-id
             updating
             user
-            user-interface-id
             user-internal
-            user-internal-interface-id
             user-lock
-            user-lock-interface-id
             user-name
             username
             uses-offset
@@ -1225,7 +1040,6 @@
             validate
             validate-no-lock
             validator
-            validator-interface-id
             validator-no-lock
             value
             value-by-index
@@ -1243,7 +1057,6 @@
             verify-parameters
             version
             version-info
-            version-info-interface-id
             visible
             visible-no-lock
             visible-properties
@@ -1253,7 +1066,6 @@
             wait-all
             wait-for-message
             work
-            work-interface-id
             write
             write-bool
             write-float
@@ -6953,14 +6765,6 @@ Calls the openDAQ C function daqAddressInfoBuilder_getConnectionString()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:address-info-builder/get-connection-string (%require-live-pointer object)))
 )
 
-(defun address-info-builder-interface-id ()
-  "Calls the openDAQ C function daqAddressInfoBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:address-info-builder/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric reachability-status (object)
   (:documentation "address-info-builder => daqAddressInfoBuilder_getReachabilityStatus()
     Gets the reachability status of the address.
@@ -7061,14 +6865,6 @@ Calls the openDAQ C function daqAddressInfoBuilder_setType()."
     (opendaq.low-level:address-info-builder/set-type (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun address-info-private-interface-id ()
-  "Calls the openDAQ C function daqAddressInfoPrivate_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:address-info-private/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric (setf reachability-status-private) (new-value object)
   (:documentation "Sets the reachability status of the address, ignoring the \"Frozen\" status of the address.
 @param addressReachability The reachability status of the address.
@@ -7106,14 +6902,6 @@ Calls the openDAQ C function daqAddressInfo_getAddress()."
 
 Calls the openDAQ C function daqAddressInfo_getConnectionString()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:address-info/get-connection-string (%require-live-pointer object)))
-)
-
-(defun address-info-interface-id ()
-  "Calls the openDAQ C function daqAddressInfo_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:address-info/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod reachability-status ((object address-info))
@@ -7184,22 +6972,6 @@ The implementation MUST ignore calls where @p address is null.
 Calls the openDAQ C function daqAllocator_free()."
   (with-daq-boxed-values ((coerced-address address nil))
     (opendaq.low-level:allocator/free (%require-live-pointer object) coerced-address))
-)
-
-(defun allocator-interface-id ()
-  "Calls the openDAQ C function daqAllocator_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:allocator/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
-(defun argument-info-interface-id ()
-  "Calls the openDAQ C function daqArgumentInfo_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:argument-info/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric item-type (object)
@@ -7368,14 +7140,6 @@ Calls the openDAQ C function daqAuthenticationProvider_findUser()."
     (wrap (opendaq.low-level:authentication-provider/find-user (%require-live-pointer object) coerced-username) 'user))
 )
 
-(defun authentication-provider-interface-id ()
-  "Calls the openDAQ C function daqAuthenticationProvider_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:authentication-provider/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric is-anonymous-allowed (object)
   (:documentation "Returns true if anonymous authentication is allowed. When anonymous authentication is enabled, user can connect to the server without providing username or password.
 @param allowedOut[out] True if anonymous authentication is allowed.
@@ -7400,14 +7164,6 @@ Calls the openDAQ C function daqAwaitable_cancel()."))
 
 Calls the openDAQ C function daqAwaitable_cancel()."
   (not (zerop (opendaq.low-level:awaitable/cancel (%require-live-pointer object))))
-)
-
-(defun awaitable-interface-id ()
-  "Calls the openDAQ C function daqAwaitable_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:awaitable/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric result (object)
@@ -7507,14 +7263,6 @@ Calls the openDAQ C function daqBinaryData_getAddress()."
     (opendaq.low-level:binary-data/get-address (%require-live-pointer object) coerced-data))
 )
 
-(defun binary-data-interface-id ()
-  "Calls the openDAQ C function daqBinaryData_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:binary-data/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric size (object)
   (:documentation "binary-data => daqBinaryData_getSize()
     Gets the size of the buffer.
@@ -7598,14 +7346,6 @@ tail-reader-builder => daqTailReaderBuilder_getInputPort()
 
 Calls the openDAQ C function daqBlockReaderBuilder_getInputPort()."
   (wrap (opendaq.low-level:block-reader-builder/get-input-port (%require-live-pointer object)) 'input-port)
-)
-
-(defun block-reader-builder-interface-id ()
-  "Calls the openDAQ C function daqBlockReaderBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:block-reader-builder/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric old-block-reader (object)
@@ -7870,14 +7610,6 @@ Calls the openDAQ C function daqBlockReaderBuilder_setValueReadType()."
     (opendaq.low-level:block-reader-builder/set-value-read-type (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun block-reader-status-interface-id ()
-  "Calls the openDAQ C function daqBlockReaderStatus_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:block-reader-status/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric get-read-samples (object)
   (:documentation "Returns the number of samples that were read. Sometimes, during the process of reading, an event packet may occur that stops the reading of remaining samples. Developers can use this function to determine how many samples were actually read.
 @param[out] samplesCount the amount of samples that were read.
@@ -7897,14 +7629,6 @@ Calls the openDAQ C function daqBlockReaderStatus_getReadSamples()."
 
 Calls the openDAQ C function daqBlockReader_getBlockSize()."
   (opendaq.low-level:block-reader/get-block-size (%require-live-pointer object))
-)
-
-(defun block-reader-interface-id ()
-  "Calls the openDAQ C function daqBlockReader_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:block-reader/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod overlap ((object block-reader))
@@ -7989,14 +7713,6 @@ Calls the openDAQ C function daqBoolean_equalsValue()."
     (not (zerop (opendaq.low-level:boolean/equals-value (%require-live-pointer object) coerced-value))))
 )
 
-(defun boolean-object-interface-id ()
-  "Calls the openDAQ C function daqBoolean_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:boolean/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric value (object)
   (:documentation "boolean-object => daqBoolean_getValue()
     Gets a boolean value stored in the object.
@@ -8036,14 +7752,6 @@ Calls the openDAQ C function daqCallableInfo_getArguments()."
   (%list-of (wrap (opendaq.low-level:callable-info/get-arguments (%require-live-pointer object)) 'object-list) 'argument-info)
 )
 
-(defun callable-info-interface-id ()
-  "Calls the openDAQ C function daqCallableInfo_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:callable-info/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric return-type (object)
   (:documentation "Gets the return type of the callable function.
 @param[out] type The return type of the callable.
@@ -8070,14 +7778,6 @@ Calls the openDAQ C function daqCallableInfo_isConst()."
   (not (zerop (opendaq.low-level:callable-info/is-const (%require-live-pointer object))))
 )
 
-(defun channel-interface-id ()
-  "Calls the openDAQ C function daqChannel_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:channel/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric cloneable-clone (object)
   (:documentation "Clones the object.
 @param[out] cloned The cloned object.
@@ -8089,14 +7789,6 @@ Calls the openDAQ C function daqCloneable_clone()."))
 
 Calls the openDAQ C function daqCloneable_clone()."
   (wrap (opendaq.low-level:cloneable/clone (%require-live-pointer object)) 'base-object)
-)
-
-(defun cloneable-interface-id ()
-  "Calls the openDAQ C function daqCloneable_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:cloneable/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric coerce (object prop-obj value)
@@ -8148,14 +7840,6 @@ Calls the openDAQ C function daqCoercer_getEval()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:coercer/get-eval (%require-live-pointer object)))
 )
 
-(defun coercer-interface-id ()
-  "Calls the openDAQ C function daqCoercer_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:coercer/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric compare-to (object obj)
   (:documentation "Compares the object to another object.
 @param obj Object for comparison.
@@ -8182,14 +7866,6 @@ Calls the openDAQ C function daqComparable_compareTo()."
     (opendaq.low-level:comparable/compare-to (%require-live-pointer object) coerced-obj))
 )
 
-(defun comparable-interface-id ()
-  "Calls the openDAQ C function daqComparable_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:comparable/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric imaginary (object)
   (:documentation "Gets the imaginary part of the complex number value.
 @param[out] imaginary The imaginary part of the complex value.
@@ -8201,14 +7877,6 @@ Calls the openDAQ C function daqComplexNumber_getImaginary()."))
 
 Calls the openDAQ C function daqComplexNumber_getImaginary()."
   (opendaq.low-level:complex-number/get-imaginary (%require-live-pointer object))
-)
-
-(defun complex-number-object-interface-id ()
-  "Calls the openDAQ C function daqComplexNumber_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:complex-number/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric real (object)
@@ -8252,14 +7920,6 @@ instance-builder => daqInstanceBuilder_getContext()
 (defmethod context ((object component-deserialize-context))
   "Calls the openDAQ C function daqComponentDeserializeContext_getContext()."
   (wrap (opendaq.low-level:component-deserialize-context/get-context (%require-live-pointer object)) 'context)
-)
-
-(defun component-deserialize-context-interface-id ()
-  "Calls the openDAQ C function daqComponentDeserializeContext_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:component-deserialize-context/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric intf-id (object)
@@ -8318,14 +7978,6 @@ component => daqComponent_getParent()
   (wrap (opendaq.low-level:component-holder/get-component (%require-live-pointer object)) 'component)
 )
 
-(defun component-holder-interface-id ()
-  "Calls the openDAQ C function daqComponentHolder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:component-holder/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod local-id ((object component-holder))
   "Calls the openDAQ C function daqComponentHolder_getLocalId()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:component-holder/get-local-id (%require-live-pointer object)))
@@ -8349,14 +8001,6 @@ Calls the openDAQ C function daqComponentPrivate_getComponentConfig()."))
 
 Calls the openDAQ C function daqComponentPrivate_getComponentConfig()."
   (wrap (opendaq.low-level:component-private/get-component-config (%require-live-pointer object)) 'property-object)
-)
-
-(defun component-private-interface-id ()
-  "Calls the openDAQ C function daqComponentPrivate_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:component-private/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric lock-all-attributes (object)
@@ -8508,14 +8152,6 @@ Calls the openDAQ C function daqComponentStatusContainerPrivate_addStatusWithMes
     (opendaq.low-level:component-status-container-private/add-status-with-message (%require-live-pointer object) coerced-name coerced-initial-value coerced-message))
 )
 
-(defun component-status-container-private-interface-id ()
-  "Calls the openDAQ C function daqComponentStatusContainerPrivate_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:component-status-container-private/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric (setf status) (new-value object name)
   (:documentation "Sets the value for the existing component status.
 @param name The name of the component status.
@@ -8552,14 +8188,6 @@ Calls the openDAQ C function daqComponentStatusContainerPrivate_setStatusWithMes
                           (coerced-new-value new-value :daq-string))
     (opendaq.low-level:component-status-container-private/set-status-with-message (%require-live-pointer object) coerced-name coerced-value coerced-new-value))
   new-value)
-
-(defun component-status-container-interface-id ()
-  "Calls the openDAQ C function daqComponentStatusContainer_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:component-status-container/get-interface-id intf-id-slot)
-    nil
-  )
-)
 
 (defgeneric status (object name)
   (:documentation "Gets the current value of Component status with a given name.
@@ -8709,14 +8337,6 @@ Calls the openDAQ C function daqComponentTypeBuilder_getId()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:component-type-builder/get-id (%require-live-pointer object)))
 )
 
-(defun component-type-builder-interface-id ()
-  "Calls the openDAQ C function daqComponentTypeBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:component-type-builder/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod name ((object component-type-builder))
   "Gets the user-friendly name of a component type.
 @param[out] name The user-friendly name of a component type.
@@ -8860,14 +8480,6 @@ Calls the openDAQ C function daqComponentTypeBuilder_setTypeSort()."
     (opendaq.low-level:component-type-builder/set-type-sort (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun component-type-private-interface-id ()
-  "Calls the openDAQ C function daqComponentTypePrivate_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:component-type-private/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric (setf module-info) (new-value object)
   (:documentation "Sets the module information.
 @param info The module information.
@@ -8915,14 +8527,6 @@ Unique id should not be presented on the UI.
 
 Calls the openDAQ C function daqComponentType_getId()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:component-type/get-id (%require-live-pointer object)))
-)
-
-(defun component-type-interface-id ()
-  "Calls the openDAQ C function daqComponentType_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:component-type/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric module-info (object)
@@ -8997,14 +8601,6 @@ Calls the openDAQ C function daqComponentUpdateContext_getInputPortConnections()
 Calls the openDAQ C function daqComponentUpdateContext_getInputPortConnections()."
   (with-daq-boxed-values ((coerced-parent-id parent-id :daq-string))
     (%hashtable-of (wrap (opendaq.low-level:component-update-context/get-input-port-connections (%require-live-pointer object) coerced-parent-id) 'dict) 'string-object 'string-object))
-)
-
-(defun component-update-context-interface-id ()
-  "Calls the openDAQ C function daqComponentUpdateContext_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:component-update-context/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric internal-state (object)
@@ -9232,14 +8828,6 @@ Calls the openDAQ C function daqComponent_getGlobalId()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:component/get-global-id (%require-live-pointer object)))
 )
 
-(defun component-interface-id ()
-  "Calls the openDAQ C function daqComponent_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:component/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric local-active (object)
   (:documentation "Returns true if the component is local active; false otherwise.
 @param[out] localActive True if the component is local active; false otherwise.
@@ -9455,14 +9043,6 @@ Calls the openDAQ C function daqComponent_setVisible()."
     (opendaq.low-level:component/set-visible (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun config-provider-interface-id ()
-  "Calls the openDAQ C function daqConfigProvider_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:config-provider/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric populate-options (object options)
   (:documentation "Populate the existing options dictionary with variables from config provider
 @param options The options dictionary
@@ -9516,14 +9096,6 @@ Calls the openDAQ C function daqConnectedClientInfo_getHostName()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:connected-client-info/get-host-name (%require-live-pointer object)))
 )
 
-(defun connected-client-info-interface-id ()
-  "Calls the openDAQ C function daqConnectedClientInfo_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:connected-client-info/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric protocol-name (object)
   (:documentation "connected-client-info => daqConnectedClientInfo_getProtocolName()
     Gets the name of the protocol used by the client.
@@ -9575,14 +9147,6 @@ Calls the openDAQ C function daqConnectionInternal_enqueueLastDescriptor()."
   (opendaq.low-level:connection-internal/enqueue-last-descriptor (%require-live-pointer object))
 )
 
-(defun connection-internal-interface-id ()
-  "Calls the openDAQ C function daqConnectionInternal_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:connection-internal/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric add-configuration-connection-status (object connection-string initial-value)
   (:documentation "Adds a new configuration connection status with the specified connection string and initial value.
 @param connectionString The connection string identifying the status.
@@ -9618,14 +9182,6 @@ Calls the openDAQ C function daqConnectionStatusContainerPrivate_addStreamingCon
                           (coerced-initial-value initial-value :managed-pointer)
                           (coerced-streaming-object streaming-object :managed-pointer))
     (opendaq.low-level:connection-status-container-private/add-streaming-connection-status (%require-live-pointer object) coerced-connection-string coerced-initial-value coerced-streaming-object))
-)
-
-(defun connection-status-container-private-interface-id ()
-  "Calls the openDAQ C function daqConnectionStatusContainerPrivate_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:connection-status-container-private/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric remove-streaming-connection-status (object connection-string)
@@ -9832,14 +9388,6 @@ Calls the openDAQ C function daqConnection_getInputPort()."
   (wrap (opendaq.low-level:connection/get-input-port (%require-live-pointer object)) 'input-port)
 )
 
-(defun connection-interface-id ()
-  "Calls the openDAQ C function daqConnection_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:connection/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric packet-count (object)
   (:documentation "Gets the number of queued packets.
 @param[out] packetCount The number of queued packets.
@@ -9963,14 +9511,6 @@ Calls the openDAQ C function daqConnection_peek()."
   (wrap (opendaq.low-level:connection/peek (%require-live-pointer object)) 'packet)
 )
 
-(defun context-internal-interface-id ()
-  "Calls the openDAQ C function daqContextInternal_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:context-internal/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric move-module-manager (object)
   (:documentation "Gets the Module Manager. Moves the strong reference to the manager to the first caller and retains a weak reference internally.
 @param[out] manager The module manager.
@@ -10012,14 +9552,6 @@ instance-builder => daqInstanceBuilder_getDiscoveryServers()
 
 Calls the openDAQ C function daqContext_getDiscoveryServers()."
   (%hashtable-of (wrap (opendaq.low-level:context/get-discovery-servers (%require-live-pointer object)) 'dict) 'string-object 'base-object)
-)
-
-(defun context-interface-id ()
-  "Calls the openDAQ C function daqContext_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:context/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric logger (object)
@@ -10133,14 +9665,6 @@ Calls the openDAQ C function daqContext_getTypeManager()."
   (wrap (opendaq.low-level:context/get-type-manager (%require-live-pointer object)) 'type-manager)
 )
 
-(defun convertible-interface-id ()
-  "Calls the openDAQ C function daqConvertible_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:convertible/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric to-bool (object)
   (:documentation "Converts the object to Bool type.
 @param[out] val Bool value
@@ -10184,14 +9708,6 @@ Calls the openDAQ C function daqConvertible_toInt()."))
 
 Calls the openDAQ C function daqConvertible_toInt()."
   (opendaq.low-level:convertible/to-int (%require-live-pointer object))
-)
-
-(defun core-event-args-interface-id ()
-  "Calls the openDAQ C function daqCoreEventArgs_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:core-event-args/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric parameters (object)
@@ -10253,14 +9769,6 @@ data-descriptor => daqDataDescriptor_getDimensions()
 
 Calls the openDAQ C function daqDataDescriptorBuilder_getDimensions()."
   (%list-of (wrap (opendaq.low-level:data-descriptor-builder/get-dimensions (%require-live-pointer object)) 'object-list) 'dimension)
-)
-
-(defun data-descriptor-builder-interface-id ()
-  "Calls the openDAQ C function daqDataDescriptorBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:data-descriptor-builder/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric metadata (object)
@@ -10651,14 +10159,6 @@ Calls the openDAQ C function daqDataDescriptor_getDimensions()."
   (%list-of (wrap (opendaq.low-level:data-descriptor/get-dimensions (%require-live-pointer object)) 'object-list) 'dimension)
 )
 
-(defun data-descriptor-interface-id ()
-  "Calls the openDAQ C function daqDataDescriptor_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:data-descriptor/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod metadata ((object data-descriptor))
   "Gets any extra metadata defined by the data descriptor.
 @param[out] metadata Additional metadata of the descriptor as a dictionary.
@@ -10827,14 +10327,6 @@ Calls the openDAQ C function daqDataPacket_getDomainPacket()."))
 
 Calls the openDAQ C function daqDataPacket_getDomainPacket()."
   (wrap (opendaq.low-level:data-packet/get-domain-packet (%require-live-pointer object)) 'data-packet)
-)
-
-(defun data-packet-interface-id ()
-  "Calls the openDAQ C function daqDataPacket_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:data-packet/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric last-value (object &optional type-manager)
@@ -11031,14 +10523,6 @@ Calls the openDAQ C function daqDataRuleBuilder_build()."
   (wrap (opendaq.low-level:data-rule-builder/build (%require-live-pointer object)) 'data-rule)
 )
 
-(defun data-rule-builder-interface-id ()
-  "Calls the openDAQ C function daqDataRuleBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:data-rule-builder/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod parameters ((object data-rule-builder))
   "Gets a dictionary of string-object key-value pairs representing the parameters used to evaluate the rule.
 @param[out] parameters The dictionary containing the rule parameter members.
@@ -11104,14 +10588,6 @@ Calls the openDAQ C function daqDataRuleBuilder_setType()."
     (opendaq.low-level:data-rule-builder/set-type (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun data-rule-interface-id ()
-  "Calls the openDAQ C function daqDataRule_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:data-rule/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod parameters ((object data-rule))
   "Gets a dictionary of string-object key-value pairs representing the parameters used to evaluate the rule.
 @param[out] parameters The dictionary containing the rule parameter members.
@@ -11147,14 +10623,6 @@ Calls the openDAQ C function daqDeleter_deleteMemory()."
     (opendaq.low-level:deleter/delete-memory (%require-live-pointer object) coerced-address))
 )
 
-(defun deleter-interface-id ()
-  "Calls the openDAQ C function daqDeleter_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:deleter/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric complete (object)
   (:documentation "Calls the openDAQ C function daqDeserializeComponent_complete()."))
 (defmethod complete ((object deserialize-component))
@@ -11178,14 +10646,6 @@ Calls the openDAQ C function daqDeleter_deleteMemory()."
   "Calls the openDAQ C function daqDeserializeComponent_getDeserializedParameter()."
   (with-daq-boxed-values ((coerced-parameter parameter :daq-string))
     (wrap (opendaq.low-level:deserialize-component/get-deserialized-parameter (%require-live-pointer object) coerced-parameter) 'base-object))
-)
-
-(defun deserialize-component-interface-id ()
-  "Calls the openDAQ C function daqDeserializeComponent_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:deserialize-component/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric call-custom-proc (object custom-deserialize serialized)
@@ -11215,14 +10675,6 @@ Calls the openDAQ C function daqDeleter_deleteMemory()."
                           (coerced-serialized serialized :daq-string)
                           (coerced-config config :daq-base-object))
     (opendaq.low-level:deserializer/update (%require-live-pointer object) coerced-updatable coerced-serialized coerced-config))
-)
-
-(defun device-domain-interface-id ()
-  "Calls the openDAQ C function daqDeviceDomain_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:device-domain/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod origin ((object device-domain))
@@ -11256,14 +10708,6 @@ Calls the openDAQ C function daqDeviceDomain_getTickResolution()."
 
 Calls the openDAQ C function daqDeviceDomain_getUnit()."
   (wrap (opendaq.low-level:device-domain/get-unit (%require-live-pointer object)) 'unit)
-)
-
-(defun device-info-config-interface-id ()
-  "Calls the openDAQ C function daqDeviceInfoConfig_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:device-info-config/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric (setf asset-id) (new-value object)
@@ -11664,14 +11108,6 @@ Calls the openDAQ C function daqDeviceInfoInternal_clearServerStreamingCapabilit
   (opendaq.low-level:device-info-internal/clear-server-streaming-capabilities (%require-live-pointer object))
 )
 
-(defun device-info-internal-interface-id ()
-  "Calls the openDAQ C function daqDeviceInfoInternal_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:device-info-internal/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric remove-connected-client (object client-number)
   (:documentation "Unregisters a previously connected client upon disconnection.
 @param clientNumber The number identifying the disconnected client.
@@ -11833,14 +11269,6 @@ Calls the openDAQ C function daqDeviceInfo_getHardwareRevision()."))
 
 Calls the openDAQ C function daqDeviceInfo_getHardwareRevision()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:device-info/get-hardware-revision (%require-live-pointer object)))
-)
-
-(defun device-info-interface-id ()
-  "Calls the openDAQ C function daqDeviceInfo_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:device-info/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric location (object)
@@ -12168,14 +11596,6 @@ Calls the openDAQ C function daqDeviceInfo_hasServerCapability()."
     (not (zerop (opendaq.low-level:device-info/has-server-capability (%require-live-pointer object) coerced-protocol-id))))
 )
 
-(defun device-network-config-interface-id ()
-  "Calls the openDAQ C function daqDeviceNetworkConfig_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:device-network-config/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric network-configuration-enabled (object)
   (:documentation "Checks if the device supports network configuration management.
 @param[out] enabled A flag indicating whether the device supports managing network configurations.
@@ -12258,14 +11678,6 @@ user-lock => daqUserLock_forceUnlock()
   (wrap (opendaq.low-level:device-private/get-device-config (%require-live-pointer object)) 'property-object)
 )
 
-(defun device-private-interface-id ()
-  "Calls the openDAQ C function daqDevicePrivate_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:device-private/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric is-locked-internal (object)
   (:documentation "Calls the openDAQ C function daqDevicePrivate_isLockedInternal()."))
 (defmethod is-locked-internal ((object device-private))
@@ -12325,14 +11737,6 @@ user-lock => daqUserLock_unlock()
   (%daq-string-to-lisp-and-release (opendaq.low-level:device-type/get-connection-string-prefix (%require-live-pointer object)))
 )
 
-(defun device-type-interface-id ()
-  "Calls the openDAQ C function daqDeviceType_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:device-type/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric child-device-options (object)
   (:documentation "Gets the list of child device options for the device. These are used to configure subdevices of the current device.
 @param childDeviceOptions The list of child device options for the device.
@@ -12352,14 +11756,6 @@ Calls the openDAQ C function daqDeviceUpdateOptions_getChildDeviceOptions()."
 
 Calls the openDAQ C function daqDeviceUpdateOptions_getConnectionString()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:device-update-options/get-connection-string (%require-live-pointer object)))
-)
-
-(defun device-update-options-interface-id ()
-  "Calls the openDAQ C function daqDeviceUpdateOptions_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:device-update-options/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod local-id ((object device-update-options))
@@ -12833,14 +12229,6 @@ Calls the openDAQ C function daqDevice_getInputsOutputsFolder()."
   (wrap (opendaq.low-level:device/get-inputs-outputs-folder (%require-live-pointer object)) 'folder)
 )
 
-(defun device-interface-id ()
-  "Calls the openDAQ C function daqDevice_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:device/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric log (object id &optional size offset)
   (:documentation "Retrieves a chunk of the log file with the provided ID.
 This function extracts a specified portion (or the entire content) of the log file, starting at the given offset.
@@ -13096,14 +12484,6 @@ Calls the openDAQ C function daqDevice_unlock()."
   (opendaq.low-level:device/unlock (%require-live-pointer object))
 )
 
-(defun dict-element-type-interface-id ()
-  "Calls the openDAQ C function daqDictElementType_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:dict-element-type/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric key-interface-id (object)
   (:documentation "Returns the interface id of the expected key type.
 @param[out] id The interface id of the expected key type otherwise returns the id of `IUnknown`.
@@ -13211,14 +12591,6 @@ serialized-list => daqSerializedList_getCount()"))
 
 Calls the openDAQ C function daqDict_getCount()."
   (opendaq.low-level:dict/get-count (%require-live-pointer object))
-)
-
-(defun dict-interface-id ()
-  "Calls the openDAQ C function daqDict_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:dict/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric key-list (object)
@@ -13348,14 +12720,6 @@ Calls the openDAQ C function daqDimensionBuilder_build()."
   (wrap (opendaq.low-level:dimension-builder/build (%require-live-pointer object)) 'dimension)
 )
 
-(defun dimension-builder-interface-id ()
-  "Calls the openDAQ C function daqDimensionBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:dimension-builder/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod name ((object dimension-builder))
   "Gets the name of the dimension.
 @param[out] name The name of the dimension.
@@ -13430,14 +12794,6 @@ Calls the openDAQ C function daqDimensionRuleBuilder_build()."
   (wrap (opendaq.low-level:dimension-rule-builder/build (%require-live-pointer object)) 'dimension-rule)
 )
 
-(defun dimension-rule-builder-interface-id ()
-  "Calls the openDAQ C function daqDimensionRuleBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:dimension-rule-builder/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod parameters ((object dimension-rule-builder))
   "Gets a dictionary of string-object key-value pairs representing the parameters used to evaluate the rule.
 @param[out] parameters The dictionary containing the rule parameter members.
@@ -13489,14 +12845,6 @@ Calls the openDAQ C function daqDimensionRuleBuilder_setType()."
     (opendaq.low-level:dimension-rule-builder/set-type (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun dimension-rule-interface-id ()
-  "Calls the openDAQ C function daqDimensionRule_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:dimension-rule/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod parameters ((object dimension-rule))
   "Gets a dictionary of string-object key-value pairs representing the parameters used to evaluate the rule.
 @param[out] parameters The dictionary containing the rule parameter members.
@@ -13516,14 +12864,6 @@ Calls the openDAQ C function daqDimensionRule_getType()."))
 
 Calls the openDAQ C function daqDimensionRule_getType()."
   (opendaq.low-level:dimension-rule/get-type (%require-live-pointer object))
-)
-
-(defun dimension-interface-id ()
-  "Calls the openDAQ C function daqDimension_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:dimension/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric labels (object)
@@ -13580,14 +12920,6 @@ Calls the openDAQ C function daqDimension_getUnit()."
   (wrap (opendaq.low-level:dimension/get-unit (%require-live-pointer object)) 'unit)
 )
 
-(defun discovery-server-interface-id ()
-  "Calls the openDAQ C function daqDiscoveryServer_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:discovery-server/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric register-service (object id config device-info)
   (:documentation "Calls the openDAQ C function daqDiscoveryServer_registerService()."))
 (defmethod register-service ((object discovery-server) id config device-info)
@@ -13612,14 +12944,6 @@ Calls the openDAQ C function daqDimension_getUnit()."
   "Calls the openDAQ C function daqDiscoveryServer_unregisterService()."
   (with-daq-boxed-values ((coerced-id id :daq-string))
     (opendaq.low-level:discovery-server/unregister-service (%require-live-pointer object) coerced-id))
-)
-
-(defun end-update-event-args-interface-id ()
-  "Calls the openDAQ C function daqEndUpdateEventArgs_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:end-update-event-args/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric is-parent-updating (object)
@@ -13699,14 +13023,6 @@ Calls the openDAQ C function daqEnumerationType_getEnumeratorNames()."
   (%list-of (wrap (opendaq.low-level:enumeration-type/get-enumerator-names (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
-(defun enumeration-type-interface-id ()
-  "Calls the openDAQ C function daqEnumerationType_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:enumeration-type/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric enumeration-type (object)
   (:documentation "Gets the Enumeration's type.
 @param[out] type The Enumeration type
@@ -13732,14 +13048,6 @@ number-object => daqNumber_getIntValue()
 
 Calls the openDAQ C function daqEnumeration_getIntValue()."
   (opendaq.low-level:enumeration/get-int-value (%require-live-pointer object))
-)
-
-(defun enumeration-interface-id ()
-  "Calls the openDAQ C function daqEnumeration_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:enumeration/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod value ((object enumeration))
@@ -13838,14 +13146,6 @@ Calls the openDAQ C function daqEvalValue_getEval()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:eval-value/get-eval (%require-live-pointer object)))
 )
 
-(defun eval-value-interface-id ()
-  "Calls the openDAQ C function daqEvalValue_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:eval-value/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric parse-error-code (object)
   (:documentation "Returns the parse error code.
 When an eval value object is created, the expression is passed as an argument to the factory
@@ -13915,22 +13215,6 @@ event-packet => daqEventPacket_getEventId()
   (%daq-string-to-lisp-and-release (opendaq.low-level:event-args/get-event-name (%require-live-pointer object)))
 )
 
-(defun event-args-interface-id ()
-  "Calls the openDAQ C function daqEventArgs_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:event-args/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
-(defun event-handler-interface-id ()
-  "Calls the openDAQ C function daqEventHandler_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:event-handler/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric handle-event (object sender event-args)
   (:documentation "Calls the openDAQ C function daqEventHandler_handleEvent()."))
 (defmethod handle-event ((object event-handler) sender event-args)
@@ -13946,14 +13230,6 @@ event-packet => daqEventPacket_getEventId()
 
 Calls the openDAQ C function daqEventPacket_getEventId()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:event-packet/get-event-id (%require-live-pointer object)))
-)
-
-(defun event-packet-interface-id ()
-  "Calls the openDAQ C function daqEventPacket_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:event-packet/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod parameters ((object event-packet))
@@ -13975,14 +13251,6 @@ Calls the openDAQ C function daqEventPacket_getParameters()."
 (defmethod clear ((object event))
   "Calls the openDAQ C function daqEvent_clear()."
   (opendaq.low-level:event/clear (%require-live-pointer object))
-)
-
-(defun event-interface-id ()
-  "Calls the openDAQ C function daqEvent_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:event/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric subscriber-count (object)
@@ -14052,14 +13320,6 @@ Calls the openDAQ C function daqEventPacket_getParameters()."
     (not (zerop (opendaq.low-level:float-object/equals-value (%require-live-pointer object) coerced-value))))
 )
 
-(defun float-object-interface-id ()
-  "Calls the openDAQ C function daqFloatObject_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:float-object/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod value ((object float-object))
   "Calls the openDAQ C function daqFloatObject_getValue()."
   (opendaq.low-level:float-object/get-value (%require-live-pointer object))
@@ -14084,14 +13344,6 @@ Calls the openDAQ C function daqFolderConfig_addItem()."
 
 Calls the openDAQ C function daqFolderConfig_clear()."
   (opendaq.low-level:folder-config/clear (%require-live-pointer object))
-)
-
-(defun folder-config-interface-id ()
-  "Calls the openDAQ C function daqFolderConfig_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:folder-config/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric remove-item (object item)
@@ -14120,14 +13372,6 @@ Calls the openDAQ C function daqFolderConfig_removeItemWithLocalId()."))
 Calls the openDAQ C function daqFolderConfig_removeItemWithLocalId()."
   (with-daq-boxed-values ((coerced-local-id local-id :daq-string))
     (opendaq.low-level:folder-config/remove-item-with-local-id (%require-live-pointer object) coerced-local-id))
-)
-
-(defun folder-interface-id ()
-  "Calls the openDAQ C function daqFolder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:folder/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric item (object local-id)
@@ -14208,14 +13452,6 @@ Calls the openDAQ C function daqFreezable_freeze()."
   (opendaq.low-level:freezable/freeze (%require-live-pointer object))
 )
 
-(defun freezable-interface-id ()
-  "Calls the openDAQ C function daqFreezable_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:freezable/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric is-frozen (object)
   (:documentation "Checks if the objects is frozen/immutable.
 @param[out] isFrozen The object's frozen/immutable state.
@@ -14227,14 +13463,6 @@ Calls the openDAQ C function daqFreezable_isFrozen()."))
 
 Calls the openDAQ C function daqFreezable_isFrozen()."
   (not (zerop (opendaq.low-level:freezable/is-frozen (%require-live-pointer object))))
-)
-
-(defun function-block-type-interface-id ()
-  "Calls the openDAQ C function daqFunctionBlockType_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:function-block-type/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod add-function-block ((object function-block) type-id &optional (config nil))
@@ -14298,14 +13526,6 @@ child function blocks.
 Calls the openDAQ C function daqFunctionBlock_getInputPorts()."
   (with-daq-boxed-values ((coerced-search-filter search-filter :managed-pointer))
     (%list-of (wrap (opendaq.low-level:function-block/get-input-ports (%require-live-pointer object) coerced-search-filter) 'object-list) 'input-port))
-)
-
-(defun function-block-interface-id ()
-  "Calls the openDAQ C function daqFunctionBlock_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:function-block/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod signals ((object function-block) &optional (search-filter nil))
@@ -14378,14 +13598,6 @@ Calls the openDAQ C function daqGraphVisualization_dump()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:graph-visualization/dump (%require-live-pointer object)))
 )
 
-(defun graph-visualization-interface-id ()
-  "Calls the openDAQ C function daqGraphVisualization_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:graph-visualization/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric custom-data (object)
   (:documentation "Get a custom data attached to the object.
 
@@ -14408,14 +13620,6 @@ Calls the openDAQ C function daqInputPortConfig_getGapCheckingEnabled()."))
 
 Calls the openDAQ C function daqInputPortConfig_getGapCheckingEnabled()."
   (not (zerop (opendaq.low-level:input-port-config/get-gap-checking-enabled (%require-live-pointer object))))
-)
-
-(defun input-port-config-interface-id ()
-  "Calls the openDAQ C function daqInputPortConfig_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:input-port-config/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric listener (object)
@@ -14581,14 +13785,6 @@ Calls the openDAQ C function daqInputPortNotifications_disconnected()."
     (opendaq.low-level:input-port-notifications/disconnected (%require-live-pointer object) coerced-port))
 )
 
-(defun input-port-notifications-interface-id ()
-  "Calls the openDAQ C function daqInputPortNotifications_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:input-port-notifications/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric packet-received (object port)
   (:documentation "Notifies the listener of the newly received packet on the specified input-port.
 @param port The port on which the new packet was received.
@@ -14630,14 +13826,6 @@ Calls the openDAQ C function daqInputPortPrivate_disconnectWithoutSignalNotifica
 
 Calls the openDAQ C function daqInputPortPrivate_disconnectWithoutSignalNotification()."
   (opendaq.low-level:input-port-private/disconnect-without-signal-notification (%require-live-pointer object))
-)
-
-(defun input-port-private-interface-id ()
-  "Calls the openDAQ C function daqInputPortPrivate_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:input-port-private/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric input-port-accepts-signal (object signal)
@@ -14716,14 +13904,6 @@ Calls the openDAQ C function daqInputPort_getConnection()."))
 
 Calls the openDAQ C function daqInputPort_getConnection()."
   (wrap (opendaq.low-level:input-port/get-connection (%require-live-pointer object)) 'connection)
-)
-
-(defun input-port-interface-id ()
-  "Calls the openDAQ C function daqInputPort_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:input-port/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric public (object)
@@ -14942,14 +14122,6 @@ Calls the openDAQ C function daqInstanceBuilder_getGlobalLogLevel()."))
 
 Calls the openDAQ C function daqInstanceBuilder_getGlobalLogLevel()."
   (opendaq.low-level:instance-builder/get-global-log-level (%require-live-pointer object))
-)
-
-(defun instance-builder-interface-id ()
-  "Calls the openDAQ C function daqInstanceBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:instance-builder/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric load-authenticated-modules-only (object)
@@ -15357,14 +14529,6 @@ Calls the openDAQ C function daqInstance_getAvailableServerTypes()."
   (%hashtable-of (wrap (opendaq.low-level:instance/get-available-server-types (%require-live-pointer object)) 'dict) 'string-object 'server-type)
 )
 
-(defun instance-interface-id ()
-  "Calls the openDAQ C function daqInstance_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:instance/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod module-manager ((object instance))
   "Gets the Module manager.
 @param[out] manager The module manager.
@@ -15412,14 +14576,6 @@ Calls the openDAQ C function daqInteger_equalsValue()."
     (not (zerop (opendaq.low-level:integer/equals-value (%require-live-pointer object) coerced-value))))
 )
 
-(defun integer-object-interface-id ()
-  "Calls the openDAQ C function daqInteger_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:integer/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod value ((object integer-object))
   "Gets an int value stored in the object.
 @param[out] value Stored int value.
@@ -15427,14 +14583,6 @@ Call this method to extract the int value that is stored in the object.
 
 Calls the openDAQ C function daqInteger_getValue()."
   (opendaq.low-level:integer/get-value (%require-live-pointer object))
-)
-
-(defun io-folder-config-interface-id ()
-  "Calls the openDAQ C function daqIoFolderConfig_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:io-folder-config/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric create-end-iterator (object)
@@ -15465,14 +14613,6 @@ Calls the openDAQ C function daqIterable_createStartIterator()."
   (wrap (opendaq.low-level:iterable/create-start-iterator (%require-live-pointer object)) 'iterator)
 )
 
-(defun iterable-interface-id ()
-  "Calls the openDAQ C function daqIterable_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:iterable/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric current (object)
   (:documentation "Gets the object at current iterator position.
 @param[out] obj Object at current iterator position.
@@ -15488,14 +14628,6 @@ Calls the openDAQ C function daqIterator_getCurrent()."
   (wrap (opendaq.low-level:iterator/get-current (%require-live-pointer object)) 'base-object)
 )
 
-(defun iterator-interface-id ()
-  "Calls the openDAQ C function daqIterator_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:iterator/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric move-next (object)
   (:documentation "Moves iterator to next position.
 
@@ -15505,14 +14637,6 @@ Calls the openDAQ C function daqIterator_moveNext()."))
 
 Calls the openDAQ C function daqIterator_moveNext()."
   (opendaq.low-level:iterator/move-next (%require-live-pointer object))
-)
-
-(defun last-message-logger-sink-private-interface-id ()
-  "Calls the openDAQ C function daqLastMessageLoggerSinkPrivate_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:last-message-logger-sink-private/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric last-message (object)
@@ -15557,14 +14681,6 @@ Calls the openDAQ C function daqListElementType_getElementInterfaceId()."
   (cffi:with-foreign-object (id-slot 'opendaq.low-level::daq-intf-id)
     (opendaq.low-level:list-element-type/get-element-interface-id (%require-live-pointer object) id-slot)
     (cffi:mem-ref id-slot 'opendaq.low-level::daq-intf-id)
-  )
-)
-
-(defun list-element-type-interface-id ()
-  "Calls the openDAQ C function daqListElementType_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:list-element-type/get-interface-id intf-id-slot)
-    nil
   )
 )
 
@@ -15615,14 +14731,6 @@ Calls the openDAQ C function daqList_deleteAt()."
 
 Calls the openDAQ C function daqList_getCount()."
   (opendaq.low-level:list/get-count (%require-live-pointer object))
-)
-
-(defun object-list-interface-id ()
-  "Calls the openDAQ C function daqList_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:list/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric item-at (object index)
@@ -15805,14 +14913,6 @@ Calls the openDAQ C function daqList_setItemAt()."
     (opendaq.low-level:list/set-item-at (%require-live-pointer object) coerced-index coerced-new-value))
   new-value)
 
-(defun lock-guard-interface-id ()
-  "Calls the openDAQ C function daqLockGuard_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:lock-guard/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod build ((object log-file-info-builder))
   "Builds the log file info.
 @param[out] logFileInfo The log file info.
@@ -15849,14 +14949,6 @@ Calls the openDAQ C function daqLogFileInfoBuilder_getEncoding()."
 
 Calls the openDAQ C function daqLogFileInfoBuilder_getId()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:log-file-info-builder/get-id (%require-live-pointer object)))
-)
-
-(defun log-file-info-builder-interface-id ()
-  "Calls the openDAQ C function daqLogFileInfoBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:log-file-info-builder/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric last-modified (object)
@@ -16010,14 +15102,6 @@ Calls the openDAQ C function daqLogFileInfo_getId()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:log-file-info/get-id (%require-live-pointer object)))
 )
 
-(defun log-file-info-interface-id ()
-  "Calls the openDAQ C function daqLogFileInfo_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:log-file-info/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod last-modified ((object log-file-info))
   "Gets the date of the last modification of the log file in ISO 8601 format.
 @param[out] lastModified The date of the last modification of the log file.
@@ -16078,14 +15162,6 @@ logger => daqLogger_flushOnLevel()
 Calls the openDAQ C function daqLoggerComponent_flushOnLevel()."
   (with-daq-boxed-values ((coerced-level level nil))
     (opendaq.low-level:logger-component/flush-on-level (%require-live-pointer object) coerced-level))
-)
-
-(defun logger-component-interface-id ()
-  "Calls the openDAQ C function daqLoggerComponent_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:logger-component/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric level (object)
@@ -16186,14 +15262,6 @@ Calls the openDAQ C function daqLoggerComponent_shouldLog()."
     (not (zerop (opendaq.low-level:logger-sink/should-log (%require-live-pointer object) coerced-level))))
 )
 
-(defun logger-thread-pool-interface-id ()
-  "Calls the openDAQ C function daqLoggerThreadPool_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:logger-thread-pool/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric add-component (object name)
   (:documentation "Creates a component with a given name and adds it to the Logger object.
 @param name The component's name.
@@ -16257,14 +15325,6 @@ Calls the openDAQ C function daqLogger_getComponents()."))
 
 Calls the openDAQ C function daqLogger_getComponents()."
   (%list-of (wrap (opendaq.low-level:logger/get-components (%require-live-pointer object)) 'object-list) 'logger-component)
-)
-
-(defun logger-interface-id ()
-  "Calls the openDAQ C function daqLogger_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:logger/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod level ((object logger))
@@ -16333,14 +15393,6 @@ Calls the openDAQ C function daqMirroredDeviceConfig_addStreamingSource()."
     (opendaq.low-level:mirrored-device-config/add-streaming-source (%require-live-pointer object) coerced-streaming-source))
 )
 
-(defun mirrored-device-config-interface-id ()
-  "Calls the openDAQ C function daqMirroredDeviceConfig_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:mirrored-device-config/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric remove-streaming-source (object streaming-connection-string)
   (:documentation "mirrored-device-config => daqMirroredDeviceConfig_removeStreamingSource()
     Removes streaming source for device e.g. when the streaming source is no longer available.
@@ -16369,14 +15421,6 @@ Calls the openDAQ C function daqMirroredDeviceConfig_setMirroredDeviceType()."
   (with-daq-boxed-values ((coerced-new-value new-value :managed-pointer))
     (opendaq.low-level:mirrored-device-config/set-mirrored-device-type (%require-live-pointer object) coerced-new-value))
   new-value)
-
-(defun mirrored-device-interface-id ()
-  "Calls the openDAQ C function daqMirroredDevice_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:mirrored-device/get-interface-id intf-id-slot)
-    nil
-  )
-)
 
 (defgeneric mirrored-device-type (object)
   (:documentation "Gets the device's type that corresponds to the client-side device module.
@@ -16439,14 +15483,6 @@ Calls the openDAQ C function daqMirroredInputPortConfig_getActiveStreamingSource
   (%daq-string-to-lisp-and-release (opendaq.low-level:mirrored-input-port-config/get-active-streaming-source (%require-live-pointer object)))
 )
 
-(defun mirrored-input-port-config-interface-id ()
-  "Calls the openDAQ C function daqMirroredInputPortConfig_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:mirrored-input-port-config/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod remote-id ((object mirrored-input-port-config))
   "Gets the global ID of the input port as it appears on the remote device.
 @param[out] id The input port ID.
@@ -16496,14 +15532,6 @@ Calls the openDAQ C function daqMirroredSignalConfig_deactivateStreaming()."
 
 Calls the openDAQ C function daqMirroredSignalConfig_getActiveStreamingSource()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:mirrored-signal-config/get-active-streaming-source (%require-live-pointer object)))
-)
-
-(defun mirrored-signal-config-interface-id ()
-  "Calls the openDAQ C function daqMirroredSignalConfig_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:mirrored-signal-config/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric on-subscribe-complete (object)
@@ -16589,14 +15617,6 @@ Calls the openDAQ C function daqMirroredSignalConfig_setActiveStreamingSource().
 Calls the openDAQ C function daqMirroredSignalPrivate_addStreamingSource()."
   (with-daq-boxed-values ((coerced-streaming streaming :managed-pointer))
     (opendaq.low-level:mirrored-signal-private/add-streaming-source (%require-live-pointer object) coerced-streaming))
-)
-
-(defun mirrored-signal-private-interface-id ()
-  "Calls the openDAQ C function daqMirroredSignalPrivate_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:mirrored-signal-private/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric mirrored-data-descriptor (object)
@@ -16702,14 +15722,6 @@ Calls the openDAQ C function daqMirroredSignalPrivate_unsubscribeCompletedNoLock
 
 Calls the openDAQ C function daqModuleInfo_getId()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:module-info/get-id (%require-live-pointer object)))
-)
-
-(defun module-info-interface-id ()
-  "Calls the openDAQ C function daqModuleInfo_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:module-info/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod name ((object module-info))
@@ -16960,14 +15972,6 @@ Calls the openDAQ C function daqModuleManagerUtils_getDiscoveryInfo()."
     (wrap (opendaq.low-level:module-manager-utils/get-discovery-info (%require-live-pointer object) coerced-manufacturer coerced-serial-number) 'device-info))
 )
 
-(defun module-manager-utils-interface-id ()
-  "Calls the openDAQ C function daqModuleManagerUtils_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:module-manager-utils/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric request-ip-config (object iface manufacturer serial-number)
   (:documentation "Attempts to retrieve the current IP configuration parameters for a specified network interface associated with a target device.
 @param iface The name of the network interface whose IP configuration parameters are to be retrieved.
@@ -17012,14 +16016,6 @@ Calls the openDAQ C function daqModuleManager_addModule()."))
 Calls the openDAQ C function daqModuleManager_addModule()."
   (with-daq-boxed-values ((coerced-module module :managed-pointer))
     (opendaq.low-level:module-manager/add-module (%require-live-pointer object) coerced-module))
-)
-
-(defun module-manager-interface-id ()
-  "Calls the openDAQ C function daqModuleManager_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:module-manager/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric modules (object)
@@ -17212,14 +16208,6 @@ Calls the openDAQ C function daqModule_getAvailableStreamingTypes()."
   (%hashtable-of (wrap (opendaq.low-level:module/get-available-streaming-types (%require-live-pointer object)) 'dict) 'string-object 'streaming-type)
 )
 
-(defun module-interface-id ()
-  "Calls the openDAQ C function daqModule_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:module/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric license-config (object)
   (:documentation "Used to retrieve the license config template.
 @param[out] licenseConfig Previously used config.
@@ -17389,14 +16377,6 @@ If a method is set to \"Unspecified\", the reader keeps the mode of the input po
 
 Calls the openDAQ C function daqMultiReaderBuilder_getInputPortNotificationMethods()."
   (%list-of (wrap (opendaq.low-level:multi-reader-builder/get-input-port-notification-methods (%require-live-pointer object)) 'object-list) 'packet-ready-notification)
-)
-
-(defun multi-reader-builder-interface-id ()
-  "Calls the openDAQ C function daqMultiReaderBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:multi-reader-builder/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric min-read-count (object)
@@ -17669,14 +16649,6 @@ Calls the openDAQ C function daqMultiReaderStatus_getEventPackets()."
   (%hashtable-of (wrap (opendaq.low-level:multi-reader-status/get-event-packets (%require-live-pointer object)) 'dict) 'string-object 'event-packet)
 )
 
-(defun multi-reader-status-interface-id ()
-  "Calls the openDAQ C function daqMultiReaderStatus_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:multi-reader-status/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric main-descriptor (object)
   (:documentation "Retrieves the descriptor of main signal. The main signal is the first signal in the list of signals.
 @param[out] descriptor The descriptor of the main signal.
@@ -17738,14 +16710,6 @@ Calls the openDAQ C function daqMultiReader_getInputUsed()."))
 Calls the openDAQ C function daqMultiReader_getInputUsed()."
   (with-daq-boxed-values ((coerced-id id :daq-string))
     (not (zerop (opendaq.low-level:multi-reader/get-input-used (%require-live-pointer object) coerced-id))))
-)
-
-(defun multi-reader-interface-id ()
-  "Calls the openDAQ C function daqMultiReader_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:multi-reader/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric is-synchronized (object)
@@ -17922,14 +16886,6 @@ Calls the openDAQ C function daqNetworkInterface_createDefaultConfiguration()."
   (wrap (opendaq.low-level:network-interface/create-default-configuration (%require-live-pointer object)) 'property-object)
 )
 
-(defun network-interface-interface-id ()
-  "Calls the openDAQ C function daqNetworkInterface_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:network-interface/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric request-current-configuration (object)
   (:documentation "Requests the currently active configuration for the network interface.
 @param[out] config The property object containing the currently active configuration.
@@ -17989,22 +16945,6 @@ Calls the openDAQ C function daqNumber_getIntValue()."
   (opendaq.low-level:number/get-int-value (%require-live-pointer object))
 )
 
-(defun number-object-interface-id ()
-  "Calls the openDAQ C function daqNumber_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:number/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
-(defun ownable-interface-id ()
-  "Calls the openDAQ C function daqOwnable_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:ownable/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric (setf owner) (new-value object)
   (:documentation "Sets the owner of the object.
 @param owner The object that will own this object.
@@ -18019,14 +16959,6 @@ Calls the openDAQ C function daqOwnable_setOwner()."
     (opendaq.low-level:ownable/set-owner (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun packet-destruct-callback-interface-id ()
-  "Calls the openDAQ C function daqPacketDestructCallback_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:packet-destruct-callback/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric on-packet-destroyed (object)
   (:documentation "Called when packet is destroyed.
 
@@ -18036,14 +16968,6 @@ Calls the openDAQ C function daqPacketDestructCallback_onPacketDestroyed()."))
 
 Calls the openDAQ C function daqPacketDestructCallback_onPacketDestroyed()."
   (opendaq.low-level:packet-destruct-callback/on-packet-destroyed (%require-live-pointer object))
-)
-
-(defun packet-reader-interface-id ()
-  "Calls the openDAQ C function daqPacketReader_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:packet-reader/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric packet-reader-read (object)
@@ -18070,14 +16994,6 @@ Calls the openDAQ C function daqPacketReader_readAll()."))
 
 Calls the openDAQ C function daqPacketReader_readAll()."
   (%list-of (wrap (opendaq.low-level:packet-reader/read-all (%require-live-pointer object)) 'object-list) 'packet)
-)
-
-(defun packet-interface-id ()
-  "Calls the openDAQ C function daqPacket_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:packet/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric ref-count (object)
@@ -18134,14 +17050,6 @@ Calls the openDAQ C function daqPermissionManagerInternal_addChildManager()."
     (opendaq.low-level:permission-manager-internal/add-child-manager (%require-live-pointer object) coerced-child-manager))
 )
 
-(defun permission-manager-internal-interface-id ()
-  "Calls the openDAQ C function daqPermissionManagerInternal_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:permission-manager-internal/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric permissions (object)
   (:documentation "Returns permisisons configuration object.
 @param permissionsOut[out] A Permissions configuration object.
@@ -18192,14 +17100,6 @@ Calls the openDAQ C function daqPermissionManagerInternal_updateInheritedPermiss
 
 Calls the openDAQ C function daqPermissionManagerInternal_updateInheritedPermissions()."
   (opendaq.low-level:permission-manager-internal/update-inherited-permissions (%require-live-pointer object))
-)
-
-(defun permission-manager-interface-id ()
-  "Calls the openDAQ C function daqPermissionManager_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:permission-manager/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric is-authorized (object user permission)
@@ -18261,14 +17161,6 @@ work => daqWork_execute()
 
 Calls the openDAQ C function daqPermissionMaskBuilder_execute()."
   (opendaq.low-level:permission-mask-builder/execute (%require-live-pointer object))
-)
-
-(defun permission-mask-builder-interface-id ()
-  "Calls the openDAQ C function daqPermissionMaskBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:permission-mask-builder/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric permission-mask-builder-read (object)
@@ -18366,14 +17258,6 @@ Calls the openDAQ C function daqPermissionsBuilder_extend()."
     (opendaq.low-level:permissions-builder/extend (%require-live-pointer object) coerced-config))
 )
 
-(defun permissions-builder-interface-id ()
-  "Calls the openDAQ C function daqPermissionsBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:permissions-builder/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric inherit (object inherit)
   (:documentation "Configure component to inherit or ignore permissions from the parent object.
 @param inherit Flag signifying if component should inherit permissions from its parent object.
@@ -18399,14 +17283,6 @@ Calls the openDAQ C function daqPermissionsInternal_getAssigned()."))
 
 Calls the openDAQ C function daqPermissionsInternal_getAssigned()."
   (%hashtable-of (wrap (opendaq.low-level:permissions-internal/get-assigned (%require-live-pointer object)) 'dict) 'string-object 'integer-object)
-)
-
-(defun permissions-internal-interface-id ()
-  "Calls the openDAQ C function daqPermissionsInternal_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:permissions-internal/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric allowed (object)
@@ -18446,14 +17322,6 @@ Calls the openDAQ C function daqPermissions_getInherited()."))
 
 Calls the openDAQ C function daqPermissions_getInherited()."
   (not (zerop (opendaq.low-level:permissions/get-inherited (%require-live-pointer object))))
-)
-
-(defun permissions-interface-id ()
-  "Calls the openDAQ C function daqPermissions_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:permissions/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric dispatch (object params)
@@ -18520,14 +17388,6 @@ Calls the openDAQ C function daqPropertyBuilder_getDefaultValue()."
 
 Calls the openDAQ C function daqPropertyBuilder_getDescription()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:property-builder/get-description (%require-live-pointer object)))
-)
-
-(defun property-builder-interface-id ()
-  "Calls the openDAQ C function daqPropertyBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:property-builder/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric is-integer-value-selection (object)
@@ -19137,14 +17997,6 @@ Calls the openDAQ C function daqPropertyInternal_getDescriptionUnresolved()."
   (not (zerop (opendaq.low-level:property-internal/get-has-on-read-listeners (%require-live-pointer object))))
 )
 
-(defun property-internal-interface-id ()
-  "Calls the openDAQ C function daqPropertyInternal_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:property-internal/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric is-referenced-no-lock (object)
   (:documentation "Calls the openDAQ C function daqPropertyInternal_getIsReferencedNoLock()."))
 (defmethod is-referenced-no-lock ((object property-internal))
@@ -19384,14 +18236,6 @@ Calls the openDAQ C function daqPropertyObjectClassBuilder_build()."
   (wrap (opendaq.low-level:property-object-class-builder/build (%require-live-pointer object)) 'property-object-class)
 )
 
-(defun property-object-class-builder-interface-id ()
-  "Calls the openDAQ C function daqPropertyObjectClassBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:property-object-class-builder/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric manager (object)
   (:documentation "Gets a type manager
 @param[out] manager a type manager
@@ -19524,22 +18368,6 @@ Calls the openDAQ C function daqPropertyObjectClassInternal_clone()."
     (wrap (opendaq.low-level:property-object-class-internal/clone (%require-live-pointer object) coerced-type-manager) 'property-object-class))
 )
 
-(defun property-object-class-internal-interface-id ()
-  "Calls the openDAQ C function daqPropertyObjectClassInternal_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:property-object-class-internal/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
-(defun property-object-class-interface-id ()
-  "Calls the openDAQ C function daqPropertyObjectClass_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:property-object-class/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod parent-name ((object property-object-class))
   "Gets the name of the parent of the property class.
 @param[out] parentName The parent class's name.
@@ -19652,14 +18480,6 @@ Calls the openDAQ C function daqPropertyObjectClass_hasProperty()."
 (defmethod core-event-trigger ((object property-object-internal))
   "Calls the openDAQ C function daqPropertyObjectInternal_getCoreEventTrigger()."
   (wrap (opendaq.low-level:property-object-internal/get-core-event-trigger (%require-live-pointer object)) 'procedure)
-)
-
-(defun property-object-internal-interface-id ()
-  "Calls the openDAQ C function daqPropertyObjectInternal_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:property-object-internal/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric lock-guard (object)
@@ -19824,14 +18644,6 @@ This function behaves similarly to `IPropertyObject::clearPropertyValues()`, but
 
 Calls the openDAQ C function daqPropertyObjectProtected_clearProtectedPropertyValues()."
   (opendaq.low-level:property-object-protected/clear-protected-property-values (%require-live-pointer object))
-)
-
-(defun property-object-protected-interface-id ()
-  "Calls the openDAQ C function daqPropertyObjectProtected_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:property-object-protected/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric (setf protected-property-selection-value) (new-value object property-name)
@@ -20024,14 +18836,6 @@ have access to the Type manager from which they can retrieve its class type and 
 
 Calls the openDAQ C function daqPropertyObject_getClassName()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:property-object/get-class-name (%require-live-pointer object)))
-)
-
-(defun property-object-interface-id ()
-  "Calls the openDAQ C function daqPropertyObject_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:property-object/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric on-any-property-value-read (object)
@@ -20515,14 +19319,6 @@ Calls the openDAQ C function daqProperty_getDescription()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:property/get-description (%require-live-pointer object)))
 )
 
-(defun property-interface-id ()
-  "Calls the openDAQ C function daqProperty_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:property/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric is-referenced (object)
   (:documentation "Used to determine whether the Property is referenced by another property.
 @param[out] isReferenced True if the Property is referenced by another property; false otherwise.
@@ -20756,14 +19552,6 @@ Calls the openDAQ C function daqRange_getHighValue()."
   (wrap (opendaq.low-level:range/get-high-value (%require-live-pointer object)) 'number-object)
 )
 
-(defun range-interface-id ()
-  "Calls the openDAQ C function daqRange_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:range/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric low-value (object)
   (:documentation "Gets the lower boundary value of the range.
 
@@ -20786,14 +19574,6 @@ Calls the openDAQ C function daqRatio_getDenominator()."))
 
 Calls the openDAQ C function daqRatio_getDenominator()."
   (opendaq.low-level:ratio/get-denominator (%require-live-pointer object))
-)
-
-(defun ratio-object-interface-id ()
-  "Calls the openDAQ C function daqRatio_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:ratio/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric numerator (object)
@@ -20850,14 +19630,6 @@ Calls the openDAQ C function daqReaderConfig_getInputPorts()."
   (%list-of (wrap (opendaq.low-level:reader-config/get-input-ports (%require-live-pointer object)) 'object-list) 'input-port-config)
 )
 
-(defun reader-config-interface-id ()
-  "Calls the openDAQ C function daqReaderConfig_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:reader-config/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric is-valid (object)
   (:documentation "Calls the openDAQ C function daqReaderConfig_getIsValid()."))
 (defmethod is-valid ((object reader-config))
@@ -20908,14 +19680,6 @@ Calls the openDAQ C function daqReaderStatus_getEventPacket()."))
 
 Calls the openDAQ C function daqReaderStatus_getEventPacket()."
   (wrap (opendaq.low-level:reader-status/get-event-packet (%require-live-pointer object)) 'event-packet)
-)
-
-(defun reader-status-interface-id ()
-  "Calls the openDAQ C function daqReaderStatus_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:reader-status/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod offset ((object reader-status) &optional (domain-start nil domain-start-suppliedp))
@@ -20985,14 +19749,6 @@ Calls the openDAQ C function daqReader_getEmpty()."
   (not (zerop (opendaq.low-level:reader/get-empty (%require-live-pointer object))))
 )
 
-(defun reader-interface-id ()
-  "Calls the openDAQ C function daqReader_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:reader/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric (setf external-listener) (new-value object)
   (:documentation "Sets an external listener to the reader.
 @param listener The external listener.
@@ -21026,14 +19782,6 @@ Calls the openDAQ C function daqReader_setOnDataAvailable()."
   (with-daq-boxed-values ((coerced-new-value new-value :managed-pointer))
     (opendaq.low-level:reader/set-on-data-available (%require-live-pointer object) coerced-new-value))
   new-value)
-
-(defun recorder-interface-id ()
-  "Calls the openDAQ C function daqRecorder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:recorder/get-interface-id intf-id-slot)
-    nil
-  )
-)
 
 (defgeneric is-recording (object)
   (:documentation "Checks whether data from connected signals is currently being recorded to the persistent storage medium.
@@ -21080,28 +19828,12 @@ Calls the openDAQ C function daqRecorder_stopRecording()."
   (opendaq.low-level:recorder/stop-recording (%require-live-pointer object))
 )
 
-(defun recursive-search-interface-id ()
-  "Calls the openDAQ C function daqRecursiveSearch_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:recursive-search/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod build ((object reference-domain-info-builder))
   "Builds and returns a Reference Domain Info object using the currently set values of the Builder.
 @param[out] referenceDomainInfo The built Reference Domain Info.
 
 Calls the openDAQ C function daqReferenceDomainInfoBuilder_build()."
   (wrap (opendaq.low-level:reference-domain-info-builder/build (%require-live-pointer object)) 'reference-domain-info)
-)
-
-(defun reference-domain-info-builder-interface-id ()
-  "Calls the openDAQ C function daqReferenceDomainInfoBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:reference-domain-info-builder/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric reference-domain-id (object)
@@ -21279,14 +20011,6 @@ Calls the openDAQ C function daqReferenceDomainInfoBuilder_setUsesOffset()."
     (opendaq.low-level:reference-domain-info-builder/set-uses-offset (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun reference-domain-info-interface-id ()
-  "Calls the openDAQ C function daqReferenceDomainInfo_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:reference-domain-info/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod reference-domain-id ((object reference-domain-info))
   "Gets the Reference Domain ID.
 @param[out] referenceDomainId The Reference Domain ID.
@@ -21340,14 +20064,6 @@ Calls the openDAQ C function daqReferenceDomainInfo_getUsesOffset()."
   (opendaq.low-level:reference-domain-info/get-uses-offset (%require-live-pointer object))
 )
 
-(defun removable-interface-id ()
-  "Calls the openDAQ C function daqRemovable_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:removable/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric is-removed (object)
   (:documentation "Returns True if component was removed.
 @param[out] removed True if component was removed; otherwise False.
@@ -21378,14 +20094,6 @@ Calls the openDAQ C function daqRemovable_remove()."
   (opendaq.low-level:removable/remove (%require-live-pointer object))
 )
 
-(defun reusable-data-packet-interface-id ()
-  "Calls the openDAQ C function daqReusableDataPacket_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:reusable-data-packet/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric reuse (object new-descriptor new-sample-count new-offset new-domain-packet can-realloc-memory)
   (:documentation "Calls the openDAQ C function daqReusableDataPacket_reuse()."))
 (defmethod reuse ((object reusable-data-packet) new-descriptor new-sample-count new-offset new-domain-packet can-realloc-memory)
@@ -21396,14 +20104,6 @@ Calls the openDAQ C function daqRemovable_remove()."
                           (coerced-new-domain-packet new-domain-packet :managed-pointer)
                           (coerced-can-realloc-memory can-realloc-memory :daq-bool))
     (not (zerop (opendaq.low-level:reusable-data-packet/reuse (%require-live-pointer object) coerced-new-descriptor coerced-new-sample-count coerced-new-offset coerced-new-domain-packet coerced-can-realloc-memory))))
-)
-
-(defun rule-private-interface-id ()
-  "Calls the openDAQ C function daqRulePrivate_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:rule-private/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric verify-parameters (object)
@@ -21425,14 +20125,6 @@ Calls the openDAQ C function daqRulePrivate_verifyParameters()."
 
 Calls the openDAQ C function daqSampleReader_getDomainReadType()."
   (opendaq.low-level:sample-reader/get-domain-read-type (%require-live-pointer object))
-)
-
-(defun sample-reader-interface-id ()
-  "Calls the openDAQ C function daqSampleReader_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:sample-reader/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod read-mode ((object sample-reader))
@@ -21521,14 +20213,6 @@ Calls the openDAQ C function daqScalingBuilder_getInputDataType()."))
 
 Calls the openDAQ C function daqScalingBuilder_getInputDataType()."
   (opendaq.low-level:scaling-builder/get-input-data-type (%require-live-pointer object))
-)
-
-(defun scaling-builder-interface-id ()
-  "Calls the openDAQ C function daqScalingBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:scaling-builder/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric output-data-type (object)
@@ -21636,14 +20320,6 @@ Calls the openDAQ C function daqScalingBuilder_setScalingType()."
     (opendaq.low-level:scaling-builder/set-scaling-type (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun scaling-calc-private-interface-id ()
-  "Calls the openDAQ C function daqScalingCalcPrivate_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:scaling-calc-private/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric has-scaling-calc (object)
   (:documentation "Checks whether the Scaling Calculator is available for packet or not.
 @return True if the Scaling Calculator is initialized within the implementation; false otherwise.
@@ -21713,14 +20389,6 @@ Calls the openDAQ C function daqScaling_getInputSampleType()."
   (opendaq.low-level:scaling/get-input-sample-type (%require-live-pointer object))
 )
 
-(defun scaling-interface-id ()
-  "Calls the openDAQ C function daqScaling_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:scaling/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric output-sample-type (object)
   (:documentation "Gets the scaling's output data type.
 @param[out] type The output data type
@@ -21754,14 +20422,6 @@ Calls the openDAQ C function daqScaling_getParameters()."
 
 Calls the openDAQ C function daqScaling_getType()."
   (opendaq.low-level:scaling/get-type (%require-live-pointer object))
-)
-
-(defun scheduler-interface-id ()
-  "Calls the openDAQ C function daqScheduler_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:scheduler/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric is-main-loop-set (object)
@@ -21960,14 +20620,6 @@ Calls the openDAQ C function daqSearchFilter_acceptsObject()."
     (not (zerop (opendaq.low-level:search-filter/accepts-object (%require-live-pointer object) coerced-obj))))
 )
 
-(defun search-filter-interface-id ()
-  "Calls the openDAQ C function daqSearchFilter_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:search-filter/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric visit-children (object obj)
   (:documentation "Defines whether or not the children of said object should be traversed during a recursive search.
 @param obj The object being evaluated.
@@ -21982,14 +20634,6 @@ Calls the openDAQ C function daqSearchFilter_visitChildren()."))
 Calls the openDAQ C function daqSearchFilter_visitChildren()."
   (with-daq-boxed-values ((coerced-obj obj :daq-base-object))
     (not (zerop (opendaq.low-level:search-filter/visit-children (%require-live-pointer object) coerced-obj))))
-)
-
-(defun serializable-interface-id ()
-  "Calls the openDAQ C function daqSerializable_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:serializable/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric serialize-id (object)
@@ -22017,14 +20661,6 @@ Calls the openDAQ C function daqSearchFilter_visitChildren()."
 (defmethod current-item-type ((object serialized-list))
   "Calls the openDAQ C function daqSerializedList_getCurrentItemType()."
   (opendaq.low-level:serialized-list/get-current-item-type (%require-live-pointer object))
-)
-
-(defun serialized-list-interface-id ()
-  "Calls the openDAQ C function daqSerializedList_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:serialized-list/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric read-bool (object &optional key)
@@ -22115,14 +20751,6 @@ serialized-object => daqSerializedObject_readString()"))
   (when key-suppliedp
     (error "READ-STRING is not applicable with a KEY argument for ~S." 'serialized-list))
   (%daq-string-to-lisp-and-release (opendaq.low-level:serialized-list/read-string (%require-live-pointer object)))
-)
-
-(defun serialized-object-interface-id ()
-  "Calls the openDAQ C function daqSerializedObject_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:serialized-object/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod keys ((object serialized-object))
@@ -22406,14 +21034,6 @@ Calls the openDAQ C function daqServerCapabilityConfig_addConnectionString()."
     (opendaq.low-level:server-capability-config/add-connection-string (%require-live-pointer object) coerced-connection-string))
 )
 
-(defun server-capability-config-interface-id ()
-  "Calls the openDAQ C function daqServerCapabilityConfig_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:server-capability-config/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod (setf connection-string) (new-value (object server-capability-config))
   "Sets the connection string of device with current protocol
 @param connectionString The connection string of device
@@ -22612,14 +21232,6 @@ Calls the openDAQ C function daqServerCapability_getCoreEventsEnabled()."
   (not (zerop (opendaq.low-level:server-capability/get-core-events-enabled (%require-live-pointer object))))
 )
 
-(defun server-capability-interface-id ()
-  "Calls the openDAQ C function daqServerCapability_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:server-capability/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric port (object)
   (:documentation "Gets the port of the device with the current protocol.
 @param[out] port The port of the device.
@@ -22689,14 +21301,6 @@ Calls the openDAQ C function daqServerCapability_getProtocolVersion()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:server-capability/get-protocol-version (%require-live-pointer object)))
 )
 
-(defun server-type-interface-id ()
-  "Calls the openDAQ C function daqServerType_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:server-type/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric disable-discovery (object)
   (:documentation "Disables the server to be discovered by the clients.
 
@@ -22725,14 +21329,6 @@ Calls the openDAQ C function daqServer_enableDiscovery()."
 
 Calls the openDAQ C function daqServer_getId()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:server/get-id (%require-live-pointer object)))
-)
-
-(defun server-interface-id ()
-  "Calls the openDAQ C function daqServer_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:server/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod signals ((object server) &optional (search-filter nil))
@@ -22796,14 +21392,6 @@ Calls the openDAQ C function daqSignalConfig_clearRelatedSignals()."))
 
 Calls the openDAQ C function daqSignalConfig_clearRelatedSignals()."
   (opendaq.low-level:signal-config/clear-related-signals (%require-live-pointer object))
-)
-
-(defun signal-config-interface-id ()
-  "Calls the openDAQ C function daqSignalConfig_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:signal-config/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric remove-related-signal (object signal)
@@ -22986,14 +21574,6 @@ Calls the openDAQ C function daqSignalEvents_domainSignalReferenceSet()."
     (opendaq.low-level:signal-events/domain-signal-reference-set (%require-live-pointer object) coerced-signal))
 )
 
-(defun signal-events-interface-id ()
-  "Calls the openDAQ C function daqSignalEvents_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:signal-events/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric listener-connected (object connection)
   (:documentation "Notifies the signal that it has been connected to an input port forming a new connection.
 @param connection The formed connection.
@@ -23067,14 +21647,6 @@ Calls the openDAQ C function daqSignalPrivate_enableKeepLastValue()."))
 Calls the openDAQ C function daqSignalPrivate_enableKeepLastValue()."
   (with-daq-boxed-values ((coerced-enabled enabled :daq-bool))
     (opendaq.low-level:signal-private/enable-keep-last-value (%require-live-pointer object) coerced-enabled))
-)
-
-(defun signal-private-interface-id ()
-  "Calls the openDAQ C function daqSignalPrivate_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:signal-private/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric keep-last-value (object)
@@ -23162,14 +21734,6 @@ a given domain. It has the same sampling rate as the signal.
 
 Calls the openDAQ C function daqSignal_getDomainSignal()."
   (wrap (opendaq.low-level:signal/get-domain-signal (%require-live-pointer object)) 'signal)
-)
-
-(defun signal-interface-id ()
-  "Calls the openDAQ C function daqSignal_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:signal/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod last-value ((object signal) &optional (type-manager nil type-manager-suppliedp))
@@ -23263,14 +21827,6 @@ Calls the openDAQ C function daqSignal_setStreamed()."
     (opendaq.low-level:signal/set-streamed (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun simple-type-interface-id ()
-  "Calls the openDAQ C function daqSimpleType_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:simple-type/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod build ((object stream-reader-builder))
   "Builds and returns a Stream reader object using the currently set values of the Builder.
 @param[out] streamReader The built Stream reader.
@@ -23301,14 +21857,6 @@ Calls the openDAQ C function daqStreamReaderBuilder_getInputPort()."
 
 Calls the openDAQ C function daqStreamReaderBuilder_getInputPortNotificationMethod()."
   (opendaq.low-level:stream-reader-builder/get-input-port-notification-method (%require-live-pointer object))
-)
-
-(defun stream-reader-builder-interface-id ()
-  "Calls the openDAQ C function daqStreamReaderBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:stream-reader-builder/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod read-mode ((object stream-reader-builder))
@@ -23428,14 +21976,6 @@ Calls the openDAQ C function daqStreamReaderBuilder_setValueReadType()."
     (opendaq.low-level:stream-reader-builder/set-value-read-type (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun stream-reader-interface-id ()
-  "Calls the openDAQ C function daqStreamReader_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:stream-reader/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric stream-reader-read (object samples count &optional timeout-ms)
   (:documentation "Copies at maximum the next `count` unread samples to the values buffer. The amount actually read is returned through the `count` parameter.
 @param samples The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples.
@@ -23509,14 +22049,6 @@ Calls the openDAQ C function daqStreamReader_skipSamples()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:streaming-type/get-connection-string-prefix (%require-live-pointer object)))
 )
 
-(defun streaming-type-interface-id ()
-  "Calls the openDAQ C function daqStreamingType_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:streaming-type/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod add-input-ports ((object streaming) input-ports)
   "Adds input ports to the Streaming.
 @param inputPorts The list of input ports to be added.
@@ -23584,14 +22116,6 @@ Calls the openDAQ C function daqStreaming_getConnectionStatus()."
 
 Calls the openDAQ C function daqStreaming_getConnectionString()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:streaming/get-connection-string (%require-live-pointer object)))
-)
-
-(defun streaming-interface-id ()
-  "Calls the openDAQ C function daqStreaming_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:streaming/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric owner-device-remote-id (object)
@@ -23705,14 +22229,6 @@ Calls the openDAQ C function daqString_getCharPtr()."
   (wrap (opendaq.low-level:string/get-char-ptr (%require-live-pointer object)) 'const-char-ptr)
 )
 
-(defun string-object-interface-id ()
-  "Calls the openDAQ C function daqString_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:string/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric length (object)
   (:documentation "Gets length of string.
 @param[out] size The size of the string.
@@ -23791,14 +22307,6 @@ index corresponds to the value stored in the list of values.
 
 Calls the openDAQ C function daqStructBuilder_getFieldValues()."
   (%list-of (wrap (opendaq.low-level:struct-builder/get-field-values (%require-live-pointer object)) 'object-list) 'base-object)
-)
-
-(defun struct-builder-interface-id ()
-  "Calls the openDAQ C function daqStructBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:struct-builder/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod struct-type ((object struct-builder))
@@ -23888,14 +22396,6 @@ Calls the openDAQ C function daqStructType_getFieldTypes()."
   (%list-of (wrap (opendaq.low-level:struct-type/get-field-types (%require-live-pointer object)) 'object-list) 'type-object)
 )
 
-(defun struct-type-interface-id ()
-  "Calls the openDAQ C function daqStructType_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:struct-type/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod get ((object struct) name)
   "Gets the value of a field with the given name.
 @param name The name of the queried field.
@@ -23934,14 +22434,6 @@ Calls the openDAQ C function daqStruct_getFieldValues()."
   (%list-of (wrap (opendaq.low-level:struct/get-field-values (%require-live-pointer object)) 'object-list) 'base-object)
 )
 
-(defun struct-interface-id ()
-  "Calls the openDAQ C function daqStruct_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:struct/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod struct-type ((object struct))
   "Gets the Struct's type.
 @param[out] type The Struct type
@@ -23958,14 +22450,6 @@ Calls the openDAQ C function daqStruct_getStructType()."
 Calls the openDAQ C function daqStruct_hasField()."
   (with-daq-boxed-values ((coerced-name name :daq-string))
     (not (zerop (opendaq.low-level:struct/has-field (%require-live-pointer object) coerced-name))))
-)
-
-(defun subscription-event-args-interface-id ()
-  "Calls the openDAQ C function daqSubscriptionEventArgs_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:subscription-event-args/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric streaming-connection-string (object)
@@ -23996,14 +22480,6 @@ Calls the openDAQ C function daqSyncComponentPrivate_addInterface()."
     (opendaq.low-level:sync-component-private/add-interface (%require-live-pointer object) coerced-sync-interface))
 )
 
-(defun sync-component-private-interface-id ()
-  "Calls the openDAQ C function daqSyncComponentPrivate_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:sync-component-private/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric remove-interface (object sync-interface-name)
   (:documentation "Removes an interface from the synchronization component.
 @param interfaceName The name of the interface to be removed.
@@ -24031,14 +22507,6 @@ Calls the openDAQ C function daqSyncComponentPrivate_setSyncLocked()."
   (with-daq-boxed-values ((coerced-new-value new-value :daq-bool))
     (opendaq.low-level:sync-component-private/set-sync-locked (%require-live-pointer object) coerced-new-value))
   new-value)
-
-(defun sync-component-interface-id ()
-  "Calls the openDAQ C function daqSyncComponent_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:sync-component/get-interface-id intf-id-slot)
-    nil
-  )
-)
 
 (defgeneric interfaces (object)
   (:documentation "Retrieves the list of interfaces associated with this synchronization component.
@@ -24109,14 +22577,6 @@ Calls the openDAQ C function daqTagsPrivate_add()."
     (opendaq.low-level:tags-private/add (%require-live-pointer object) coerced-name))
 )
 
-(defun tags-private-interface-id ()
-  "Calls the openDAQ C function daqTagsPrivate_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:tags-private/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric tags-private-remove (object name)
   (:documentation "Removes a new tag from the list.
 @param name The name of the tag to be removed.
@@ -24161,14 +22621,6 @@ Calls the openDAQ C function daqTags_contains()."))
 Calls the openDAQ C function daqTags_contains()."
   (with-daq-boxed-values ((coerced-name name :daq-string))
     (not (zerop (opendaq.low-level:tags/contains (%require-live-pointer object) coerced-name))))
-)
-
-(defun tags-interface-id ()
-  "Calls the openDAQ C function daqTags_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:tags/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric list (object)
@@ -24236,14 +22688,6 @@ Calls the openDAQ C function daqTailReaderBuilder_getHistorySize()."
 
 Calls the openDAQ C function daqTailReaderBuilder_getInputPort()."
   (wrap (opendaq.low-level:tail-reader-builder/get-input-port (%require-live-pointer object)) 'input-port)
-)
-
-(defun tail-reader-builder-interface-id ()
-  "Calls the openDAQ C function daqTailReaderBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:tail-reader-builder/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod read-mode ((object tail-reader-builder))
@@ -24351,14 +22795,6 @@ Calls the openDAQ C function daqTailReaderBuilder_setValueReadType()."
     (opendaq.low-level:tail-reader-builder/set-value-read-type (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun tail-reader-status-interface-id ()
-  "Calls the openDAQ C function daqTailReaderStatus_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:tail-reader-status/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric sufficient-history (object)
   (:documentation "Calls the openDAQ C function daqTailReaderStatus_getSufficientHistory()."))
 (defmethod sufficient-history ((object tail-reader-status))
@@ -24372,14 +22808,6 @@ Calls the openDAQ C function daqTailReaderBuilder_setValueReadType()."
 
 Calls the openDAQ C function daqTailReader_getHistorySize()."
   (opendaq.low-level:tail-reader/get-history-size (%require-live-pointer object))
-)
-
-(defun tail-reader-interface-id ()
-  "Calls the openDAQ C function daqTailReader_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:tail-reader/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric tail-reader-read (object values count)
@@ -24431,22 +22859,6 @@ Calls the openDAQ C function daqTailReader_readWithDomain()."
         (wrap value-1 'tail-reader-status))))
 )
 
-(defun task-graph-interface-id ()
-  "Calls the openDAQ C function daqTaskGraph_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:task-graph/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
-(defun task-interface-id ()
-  "Calls the openDAQ C function daqTask_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:task/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod name ((object task))
   "Gets the task name.
 @param[out] name The task name.
@@ -24480,14 +22892,6 @@ Calls the openDAQ C function daqTask_then()."
     (opendaq.low-level:task/then (%require-live-pointer object) coerced-continuation))
 )
 
-(defun type-manager-private-interface-id ()
-  "Calls the openDAQ C function daqTypeManagerPrivate_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:type-manager-private/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric (setf core-event-callback) (new-value object)
   (:documentation "Calls the openDAQ C function daqTypeManagerPrivate_setCoreEventCallback()."))
 (defmethod (setf core-event-callback) (new-value (object type-manager-private))
@@ -24516,14 +22920,6 @@ then the parent class must be added before it.
 Calls the openDAQ C function daqTypeManager_addType()."
   (with-daq-boxed-values ((coerced-type type :managed-pointer))
     (opendaq.low-level:type-manager/add-type (%require-live-pointer object) coerced-type))
-)
-
-(defun type-manager-interface-id ()
-  "Calls the openDAQ C function daqTypeManager_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:type-manager/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric type-manager-type (object type-name)
@@ -24593,14 +22989,6 @@ Calls the openDAQ C function daqTypeManager_removeType()."
     (opendaq.low-level:type-manager/remove-type (%require-live-pointer object) coerced-type-name))
 )
 
-(defun type-object-interface-id ()
-  "Calls the openDAQ C function daqType_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:type/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod name ((object type-object))
   "Gets the name of the Type
 @param[out] typeName The name of the Type.
@@ -24624,14 +23012,6 @@ Returns -1 if the unit id is not available.
 
 Calls the openDAQ C function daqUnitBuilder_getId()."
   (opendaq.low-level:unit-builder/get-id (%require-live-pointer object))
-)
-
-(defun unit-builder-interface-id ()
-  "Calls the openDAQ C function daqUnitBuilder_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:unit-builder/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod name ((object unit-builder))
@@ -24728,14 +23108,6 @@ Calls the openDAQ C function daqUnit_getId()."
   (opendaq.low-level:unit/get-id (%require-live-pointer object))
 )
 
-(defun unit-interface-id ()
-  "Calls the openDAQ C function daqUnit_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:unit/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defmethod name ((object unit))
   "Gets the full name of the unit, i.e. \"meters per second\".
 @param[out] name The unit's full name.
@@ -24760,14 +23132,6 @@ Calls the openDAQ C function daqUnit_getQuantity()."
 
 Calls the openDAQ C function daqUnit_getSymbol()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:unit/get-symbol (%require-live-pointer object)))
-)
-
-(defun updatable-interface-id ()
-  "Calls the openDAQ C function daqUpdatable_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:updatable/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric serialize-for-update (object serializer)
@@ -24817,14 +23181,6 @@ Calls the openDAQ C function daqUpdateParameters_getDeviceUpdateOptions()."
   (wrap (opendaq.low-level:update-parameters/get-device-update-options (%require-live-pointer object)) 'device-update-options)
 )
 
-(defun update-parameters-interface-id ()
-  "Calls the openDAQ C function daqUpdateParameters_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:update-parameters/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric (setf device-update-options) (new-value object)
   (:documentation "Sets the device update options object that allows for specifying how a device and its subdevices are to be updated.
 @param options The device update options object.
@@ -24838,14 +23194,6 @@ Calls the openDAQ C function daqUpdateParameters_setDeviceUpdateOptions()."
   (with-daq-boxed-values ((coerced-new-value new-value :managed-pointer))
     (opendaq.low-level:update-parameters/set-device-update-options (%require-live-pointer object) coerced-new-value))
   new-value)
-
-(defun user-internal-interface-id ()
-  "Calls the openDAQ C function daqUserInternal_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:user-internal/get-interface-id intf-id-slot)
-    nil
-  )
-)
 
 (defgeneric password-hash (object)
   (:documentation "Returns the user's password, which can either be in plain text or hashed using the Bcrypt algorithm. Hashed passwords should follow the Modular Crypt Format. For security purposes, hashed passwords are preferred.
@@ -24878,14 +23226,6 @@ Calls the openDAQ C function daqUserInternal_isAnonymous()."
 
 Calls the openDAQ C function daqUserLock_forceUnlock()."
   (opendaq.low-level:user-lock/force-unlock (%require-live-pointer object))
-)
-
-(defun user-lock-interface-id ()
-  "Calls the openDAQ C function daqUserLock_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:user-lock/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defmethod is-locked ((object user-lock))
@@ -24927,14 +23267,6 @@ Calls the openDAQ C function daqUser_getGroups()."
   (%list-of (wrap (opendaq.low-level:user/get-groups (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
-(defun user-interface-id ()
-  "Calls the openDAQ C function daqUser_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:user/get-interface-id intf-id-slot)
-    nil
-  )
-)
-
 (defgeneric username (object)
   (:documentation "Returns the username as a string.
 @param username[out] The username.
@@ -24954,14 +23286,6 @@ Calls the openDAQ C function daqUser_getUsername()."
 
 Calls the openDAQ C function daqValidator_getEval()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:validator/get-eval (%require-live-pointer object)))
-)
-
-(defun validator-interface-id ()
-  "Calls the openDAQ C function daqValidator_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:validator/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric validate (object prop-obj value)
@@ -24992,14 +23316,6 @@ Calls the openDAQ C function daqValidator_validate()."
   (with-daq-boxed-values ((coerced-prop-obj prop-obj :daq-base-object)
                           (coerced-value value :daq-base-object))
     (opendaq.low-level:validator/validate-no-lock (%require-live-pointer object) coerced-prop-obj coerced-value))
-)
-
-(defun version-info-interface-id ()
-  "Calls the openDAQ C function daqVersionInfo_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:version-info/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 (defgeneric major (object)
@@ -25046,14 +23362,6 @@ Calls the openDAQ C function daqVersionInfo_getPatch()."
 
 Calls the openDAQ C function daqWork_execute()."
   (opendaq.low-level:work/execute (%require-live-pointer object))
-)
-
-(defun work-interface-id ()
-  "Calls the openDAQ C function daqWork_getInterfaceId()."
-  (cffi:with-foreign-object (intf-id-slot 'opendaq.low-level::daq-intf-id)
-    (opendaq.low-level:work/get-interface-id intf-id-slot)
-    nil
-  )
 )
 
 ;;; Enum type aliases: prefix-free names for the low-level cenums, so the enum
@@ -25134,24 +23442,19 @@ Calls the openDAQ C function daqWork_execute()."
          address-info-address
          address-info-builder
          address-info-builder-address
-         address-info-builder-interface-id
          address-info-builder-type
-         address-info-interface-id
          address-info-private
-         address-info-private-interface-id
          address-info-type
          address-reachability-status
          addresses
          all-properties
          allocate
          allocator
-         allocator-interface-id
          allocator/malloc
          allow
          allow-different-sampling-rates
          allowed
          argument-info
-         argument-info-interface-id
          argument-info-type
          argument-info/dict
          argument-info/list
@@ -25164,7 +23467,6 @@ Calls the openDAQ C function daqWork_execute()."
          authenticate-anonymous
          authenticated-only
          authentication-provider
-         authentication-provider-interface-id
          authentication-provider/json-file
          authentication-provider/json-string
          authentication-provider/static
@@ -25177,37 +23479,29 @@ Calls the openDAQ C function daqWork_execute()."
          available-server-types
          available-streaming-types
          awaitable
-         awaitable-interface-id
          base-object
          base-object-create
          begin-update
          binary-data
          binary-data-address
-         binary-data-interface-id
          block-reader
          block-reader-builder
-         block-reader-builder-interface-id
          block-reader-builder-signal
-         block-reader-interface-id
          block-reader-read
          block-reader-read-with-domain
          block-reader-status
-         block-reader-status-interface-id
          block-reader/from-existing
          block-reader/from-port
          block-size
          boolean-object
-         boolean-object-interface-id
          build
          call
          call-custom-proc
          callable-info
-         callable-info-interface-id
          callable-info-no-lock
          cancel
          change-ip-config
          channel
-         channel-interface-id
          channels
          channels-recursive
          char-ptr
@@ -25231,56 +23525,41 @@ Calls the openDAQ C function daqWork_execute()."
          clone-with-owner
          cloneable
          cloneable-clone
-         cloneable-interface-id
          coerce
          coerce-no-lock
          coercer
-         coercer-interface-id
          coercer-no-lock
          common-sample-rate
          comparable
-         comparable-interface-id
          compare-to
          complete
          complete-device-capabilities
          complete-server-capability
          complex-number-object
-         complex-number-object-interface-id
          component
          component-config
          component-deserialize-context
          component-deserialize-context-clone
-         component-deserialize-context-interface-id
          component-holder
          component-holder-component
-         component-holder-interface-id
          component-holder/with-ids
-         component-interface-id
          component-log-level
          component-private
-         component-private-interface-id
          component-status-container
-         component-status-container-interface-id
          component-status-container-private
-         component-status-container-private-interface-id
          component-type
          component-type-builder
-         component-type-builder-interface-id
          component-type-builder/device
          component-type-builder/function-block
          component-type-builder/server
          component-type-builder/streaming
-         component-type-interface-id
          component-type-private
-         component-type-private-interface-id
          component-type-sort
          component-update-context
-         component-update-context-interface-id
          component-update-context-signal
          components
          components-log-level
          config-provider
-         config-provider-interface-id
          config-provider/env
          config-provider/json
          configuration-connection-info
@@ -25289,18 +23568,14 @@ Calls the openDAQ C function daqWork_execute()."
          connected
          connected-client-info
          connected-client-info-address
-         connected-client-info-interface-id
          connected-client-info/with-params
          connected-clients-info
          connection
-         connection-interface-id
          connection-internal
-         connection-internal-interface-id
          connection-signal
          connection-status
          connection-status-container
          connection-status-container-private
-         connection-status-container-private-interface-id
          connection-string
          connection-string-prefix
          connection-strings
@@ -25309,13 +23584,9 @@ Calls the openDAQ C function daqWork_execute()."
          const-char-ptr
          contains
          context
-         context-interface-id
          context-internal
-         context-internal-interface-id
          convertible
-         convertible-interface-id
          core-event-args
-         core-event-args-interface-id
          core-event-args/property-added
          core-event-args/property-object-update-end
          core-event-args/property-order-changed
@@ -25347,20 +23618,15 @@ Calls the openDAQ C function daqWork_execute()."
          data
          data-descriptor
          data-descriptor-builder
-         data-descriptor-builder-interface-id
          data-descriptor-builder/from-existing
-         data-descriptor-interface-id
          data-packet
-         data-packet-interface-id
          data-packet/constant-with-domain
          data-packet/with-domain
          data-packet/with-external-memory
          data-rule
          data-rule-builder
-         data-rule-builder-interface-id
          data-rule-builder-type
          data-rule-builder/from-existing
-         data-rule-interface-id
          data-rule-type
          data-rule/constant
          data-rule/explicit
@@ -25378,7 +23644,6 @@ Calls the openDAQ C function daqWork_execute()."
          delete-item
          delete-memory
          deleter
-         deleter-interface-id
          denied
          denominator
          deny
@@ -25391,7 +23656,6 @@ Calls the openDAQ C function daqWork_execute()."
          descriptor
          deserialize
          deserialize-component
-         deserialize-component-interface-id
          deserialize-values
          deserialized-parameter
          deserializer
@@ -25400,45 +23664,30 @@ Calls the openDAQ C function daqWork_execute()."
          device-class
          device-config
          device-domain
-         device-domain-interface-id
          device-domain/with-reference-domain-info
          device-info
          device-info-config
-         device-info-config-interface-id
          device-info-config/with-custom-sdk-version
-         device-info-interface-id
          device-info-internal
-         device-info-internal-interface-id
-         device-interface-id
          device-manual
          device-network-config
-         device-network-config-interface-id
          device-private
-         device-private-interface-id
          device-revision
          device-type
-         device-type-interface-id
          device-update-mode
          device-update-options
-         device-update-options-interface-id
          device-update-options-with-local-id-or-null
          devices
          dict
          dict-element-type
-         dict-element-type-interface-id
-         dict-interface-id
          dict-remove
          dimension
          dimension-builder
-         dimension-builder-interface-id
          dimension-builder/from-existing
-         dimension-interface-id
          dimension-rule
          dimension-rule-builder
-         dimension-rule-builder-interface-id
          dimension-rule-builder-type
          dimension-rule-builder/from-existing
-         dimension-rule-interface-id
          dimension-rule-type
          dimension-rule/linear
          dimension-rule/list
@@ -25451,7 +23700,6 @@ Calls the openDAQ C function daqWork_execute()."
          disconnected
          discovery-info
          discovery-server
-         discovery-server-interface-id
          discovery-server-root-device
          discovery-servers
          dispatch
@@ -25475,7 +23723,6 @@ Calls the openDAQ C function daqWork_execute()."
          end-object
          end-update
          end-update-event-args
-         end-update-event-args-interface-id
          enqueue
          enqueue-and-steal-ref
          enqueue-last-descriptor
@@ -25484,9 +23731,7 @@ Calls the openDAQ C function daqWork_execute()."
          enqueue-on-this-thread
          enqueue-with-scheduler
          enumeration
-         enumeration-interface-id
          enumeration-type
-         enumeration-type-interface-id
          enumeration-type/with-values
          enumeration/with-int-value
          enumeration/with-int-value-and-type
@@ -25498,19 +23743,14 @@ Calls the openDAQ C function daqWork_execute()."
          error-info
          eval
          eval-value
-         eval-value-interface-id
          eval-value/args
          eval-value/func
          event
          event-args
-         event-args-interface-id
          event-handler
-         event-handler-interface-id
          event-id
-         event-interface-id
          event-name
          event-packet
-         event-packet-interface-id
          event-packet/data-descriptor-changed
          event-packet/implicit-domain-gap-detected
          event-packets
@@ -25527,24 +23767,18 @@ Calls the openDAQ C function daqWork_execute()."
          find-properties
          find-user
          float-object
-         float-object-interface-id
          float-value
          flush
          flush-on-level
          folder
          folder-config
-         folder-config-interface-id
          folder-config/io-folder
-         folder-interface-id
          force-unlock
          free
          freezable
-         freezable-interface-id
          freeze
          function-block
-         function-block-interface-id
          function-block-type
-         function-block-type-interface-id
          function-blocks
          function-object
          gap-checking-enabled
@@ -25553,7 +23787,6 @@ Calls the openDAQ C function daqWork_execute()."
          global-id
          global-log-level
          graph-visualization
-         graph-visualization-interface-id
          groups
          handle-event
          hardware-revision
@@ -25584,17 +23817,13 @@ Calls the openDAQ C function daqWork_execute()."
          input-port
          input-port-accepts-signal
          input-port-config
-         input-port-config-interface-id
          input-port-connection
          input-port-connections
-         input-port-interface-id
          input-port-notification-method
          input-port-notification-methods
          input-port-notifications
          input-port-notifications-accepts-signal
-         input-port-notifications-interface-id
          input-port-private
-         input-port-private-interface-id
          input-port-signal
          input-ports
          input-sample-type
@@ -25604,18 +23833,14 @@ Calls the openDAQ C function daqWork_execute()."
          inspectable
          instance
          instance-builder
-         instance-builder-interface-id
          instance-builder-root-device
-         instance-interface-id
          instance-root-device
          int-value
          integer-object
-         integer-object-interface-id
          interfaces
          internal-state
          intf-id
          io-folder-config
-         io-folder-config-interface-id
          is-anonymous
          is-anonymous-allowed
          is-authorized
@@ -25644,9 +23869,7 @@ Calls the openDAQ C function daqWork_execute()."
          item-type-no-lock
          items
          iterable
-         iterable-interface-id
          iterator
-         iterator-interface-id
          keep-last-value
          key
          key-interface-id
@@ -25659,7 +23882,6 @@ Calls the openDAQ C function daqWork_execute()."
          labels
          last-message
          last-message-logger-sink-private
-         last-message-logger-sink-private-interface-id
          last-modified
          last-value
          length
@@ -25668,7 +23890,6 @@ Calls the openDAQ C function daqWork_execute()."
          license-loaded
          list
          list-element-type
-         list-element-type-interface-id
          listener
          listener-connected
          listener-connected-scheduled
@@ -25686,20 +23907,15 @@ Calls the openDAQ C function daqWork_execute()."
          lock-all-attributes
          lock-attributes
          lock-guard
-         lock-guard-interface-id
          locked-attributes
          locking-strategy
          log
          log-file-info
          log-file-info-builder
-         log-file-info-builder-interface-id
-         log-file-info-interface-id
          log-file-infos
          log-level
          logger
          logger-component
-         logger-component-interface-id
-         logger-interface-id
          logger-sink
          logger-sink/rotating-file
          logger-sink/std-err
@@ -25707,7 +23923,6 @@ Calls the openDAQ C function daqWork_execute()."
          logger-sink/win-debug
          logger-sinks
          logger-thread-pool
-         logger-thread-pool-interface-id
          low-value
          mac-address
          main-descriptor
@@ -25729,26 +23944,17 @@ Calls the openDAQ C function daqWork_execute()."
          mirrored-data-descriptor
          mirrored-device
          mirrored-device-config
-         mirrored-device-config-interface-id
-         mirrored-device-interface-id
          mirrored-device-type
          mirrored-domain-signal
          mirrored-input-port-config
-         mirrored-input-port-config-interface-id
          mirrored-signal-config
-         mirrored-signal-config-interface-id
          mirrored-signal-private
-         mirrored-signal-private-interface-id
          model
          module
          module-authenticator
          module-info
-         module-info-interface-id
-         module-interface-id
          module-manager
-         module-manager-interface-id
          module-manager-utils
-         module-manager-utils-interface-id
          module-manager/multiple-paths
          module-options
          module-path
@@ -25760,12 +23966,9 @@ Calls the openDAQ C function daqWork_execute()."
          move-next
          multi-reader
          multi-reader-builder
-         multi-reader-builder-interface-id
-         multi-reader-interface-id
          multi-reader-read
          multi-reader-read-with-domain
          multi-reader-status
-         multi-reader-status-interface-id
          multi-reader/ex
          multi-reader/from-existing
          mute
@@ -25775,7 +23978,6 @@ Calls the openDAQ C function daqWork_execute()."
          name
          network-configuration-enabled
          network-interface
-         network-interface-interface-id
          network-interface-names
          network-interfaces
          new-connection-string
@@ -25786,10 +23988,8 @@ Calls the openDAQ C function daqWork_execute()."
          notify-packet-enqueued-on-this-thread
          notify-packet-enqueued-with-scheduler
          number-object
-         number-object-interface-id
          numerator
          object-list
-         object-list-interface-id
          offset
          old-block-reader
          old-value
@@ -25819,17 +24019,13 @@ Calls the openDAQ C function daqWork_execute()."
          override-default-value
          override-state
          ownable
-         ownable-interface-id
          owner
          owner-device-remote-id
          packet
          packet-count
          packet-destruct-callback
-         packet-destruct-callback-interface-id
          packet-id
-         packet-interface-id
          packet-reader
-         packet-reader-interface-id
          packet-reader-read
          packet-reader/from-port
          packet-ready-notification
@@ -25849,19 +24045,13 @@ Calls the openDAQ C function daqWork_execute()."
          peek
          permission
          permission-manager
-         permission-manager-interface-id
          permission-manager-internal
-         permission-manager-internal-interface-id
          permission-mask-builder
-         permission-mask-builder-interface-id
          permission-mask-builder-read
          permission-mask-builder/from-mask
          permissions
          permissions-builder
-         permissions-builder-interface-id
-         permissions-interface-id
          permissions-internal
-         permissions-internal-interface-id
          platform
          pop-back
          pop-front
@@ -25876,7 +24066,6 @@ Calls the openDAQ C function daqWork_execute()."
          properties
          property
          property-builder
-         property-builder-interface-id
          property-builder/bool
          property-builder/dict
          property-builder/enumeration
@@ -25892,25 +24081,17 @@ Calls the openDAQ C function daqWork_execute()."
          property-builder/string
          property-builder/struct
          property-event-type
-         property-interface-id
          property-internal
          property-internal-clone
-         property-internal-interface-id
          property-object
          property-object-class
          property-object-class-builder
-         property-object-class-builder-interface-id
          property-object-class-builder/with-manager
-         property-object-class-interface-id
          property-object-class-internal
          property-object-class-internal-clone
-         property-object-class-internal-interface-id
-         property-object-interface-id
          property-object-internal
          property-object-internal-clone
-         property-object-internal-interface-id
          property-object-protected
-         property-object-protected-interface-id
          property-object/with-class-and-manager
          property-order
          property-references
@@ -25947,9 +24128,7 @@ Calls the openDAQ C function daqWork_execute()."
          quantity
          query
          range
-         range-interface-id
          ratio-object
-         ratio-object-interface-id
          raw-data
          raw-data-size
          raw-last-value
@@ -25975,23 +24154,16 @@ Calls the openDAQ C function daqWork_execute()."
          read-with-domain
          reader
          reader-config
-         reader-config-interface-id
-         reader-interface-id
          reader-status
-         reader-status-interface-id
          real
          recorder
-         recorder-interface-id
          recursive-lock-guard
          recursive-search
-         recursive-search-interface-id
          ref-count
          reference-domain-id
          reference-domain-info
          reference-domain-info-builder
-         reference-domain-info-builder-interface-id
          reference-domain-info-builder/from-existing
-         reference-domain-info-interface-id
          reference-domain-offset
          reference-time-protocol
          referenced-property
@@ -26004,7 +24176,6 @@ Calls the openDAQ C function daqWork_execute()."
          remap-input-port-connections
          remote-id
          removable
-         removable-interface-id
          removable-remove
          remove-all-input-ports
          remove-all-signals
@@ -26041,7 +24212,6 @@ Calls the openDAQ C function daqWork_execute()."
          retrieve-network-configuration
          return-type
          reusable-data-packet
-         reusable-data-packet-interface-id
          reuse
          revision-counter
          root
@@ -26050,13 +24220,11 @@ Calls the openDAQ C function daqWork_execute()."
          root-device-config
          rule
          rule-private
-         rule-private-interface-id
          run-main-loop
          run-main-loop-iteration
          runtime-class-name
          sample-count
          sample-reader
-         sample-reader-interface-id
          sample-size
          sample-type
          samples-until-next-descriptor
@@ -26068,11 +24236,8 @@ Calls the openDAQ C function daqWork_execute()."
          scaled-sample-type
          scaling
          scaling-builder
-         scaling-builder-interface-id
          scaling-builder/from-existing
          scaling-calc-private
-         scaling-calc-private-interface-id
-         scaling-interface-id
          scaling-type
          scaling/linear
          schedule-function
@@ -26080,12 +24245,10 @@ Calls the openDAQ C function daqWork_execute()."
          schedule-work
          schedule-work-on-main-loop
          scheduler
-         scheduler-interface-id
          scheduler-worker-num
          scheduler/with-main-loop
          sdk-version
          search-filter
-         search-filter-interface-id
          search-filter/any
          search-filter/custom
          search-filter/excluded-tags
@@ -26106,16 +24269,13 @@ Calls the openDAQ C function daqWork_execute()."
          send-packets-and-steal-ref
          serial-number
          serializable
-         serializable-interface-id
          serialize
          serialize-for-update
          serialize-id
          serialized-list
-         serialized-list-interface-id
          serialized-list-read-list
          serialized-list-read-object
          serialized-object
-         serialized-object-interface-id
          serialized-object-read-list
          serialized-object-read-object
          serialized-object-type
@@ -26124,30 +24284,21 @@ Calls the openDAQ C function daqWork_execute()."
          server-capabilities
          server-capability
          server-capability-config
-         server-capability-config-interface-id
-         server-capability-interface-id
-         server-interface-id
          server-type
-         server-type-interface-id
          servers
          set
          set-as-root
          should-log
          signal
          signal-config
-         signal-config-interface-id
          signal-config/with-descriptor
          signal-dependency
          signal-events
-         signal-events-interface-id
-         signal-interface-id
          signal-private
-         signal-private-interface-id
          signal-serialize-id
          signals
          signals-recursive
          simple-type
-         simple-type-interface-id
          simplify
          sink-log-level
          size
@@ -26172,9 +24323,7 @@ Calls the openDAQ C function daqWork_execute()."
          stop-recording
          stream-reader
          stream-reader-builder
-         stream-reader-builder-interface-id
          stream-reader-builder-signal
-         stream-reader-interface-id
          stream-reader-read
          stream-reader-read-with-domain
          stream-reader/from-existing
@@ -26182,21 +24331,15 @@ Calls the openDAQ C function daqWork_execute()."
          streamed
          streaming
          streaming-connection-string
-         streaming-interface-id
          streaming-sources
          streaming-type
-         streaming-type-interface-id
          string-object
-         string-object-interface-id
          string-object/string-n
          struct
          struct-builder
-         struct-builder-interface-id
          struct-builder/from-struct
          struct-fields
-         struct-interface-id
          struct-type
-         struct-type-interface-id
          struct-type-no-lock
          struct-type/no-defaults
          submit-configuration
@@ -26206,7 +24349,6 @@ Calls the openDAQ C function daqWork_execute()."
          subscriber-count
          subscribers
          subscription-event-args
-         subscription-event-args-interface-id
          subscription-event-type
          sufficient-history
          suggested-values
@@ -26214,32 +24356,23 @@ Calls the openDAQ C function daqWork_execute()."
          suggested-values-unresolved
          symbol
          sync-component
-         sync-component-interface-id
          sync-component-private
-         sync-component-private-interface-id
          sync-locked
          system-type
          system-uuid
          tags
-         tags-interface-id
          tags-private
-         tags-private-interface-id
          tags-private-remove
          tail-reader
          tail-reader-builder
-         tail-reader-builder-interface-id
          tail-reader-builder-signal
-         tail-reader-interface-id
          tail-reader-read
          tail-reader-read-with-domain
          tail-reader-status
-         tail-reader-status-interface-id
          tail-reader/from-existing
          tail-reader/from-port
          task
          task-graph
-         task-graph-interface-id
-         task-interface-id
          then
          tick-offset-tolerance
          tick-resolution
@@ -26256,19 +24389,14 @@ Calls the openDAQ C function daqWork_execute()."
          trigger-event
          type
          type-manager
-         type-manager-interface-id
          type-manager-private
-         type-manager-private-interface-id
          type-manager-type
          type-object
-         type-object-interface-id
          type-sort
          types
          unit
          unit-builder
-         unit-builder-interface-id
          unit-builder/from-existing
-         unit-interface-id
          unit-no-lock
          unit-unresolved
          unlock
@@ -26280,7 +24408,6 @@ Calls the openDAQ C function daqWork_execute()."
          unsubscribe-completed
          unsubscribe-completed-no-lock
          updatable
-         updatable-interface-id
          updatable-update
          update-connection-status
          update-connection-status-with-message
@@ -26290,14 +24417,10 @@ Calls the openDAQ C function daqWork_execute()."
          update-mode
          update-operation-mode
          update-parameters
-         update-parameters-interface-id
          updating
          user
-         user-interface-id
          user-internal
-         user-internal-interface-id
          user-lock
-         user-lock-interface-id
          user-name
          username
          uses-offset
@@ -26306,7 +24429,6 @@ Calls the openDAQ C function daqWork_execute()."
          validate
          validate-no-lock
          validator
-         validator-interface-id
          validator-no-lock
          value
          value-by-index
@@ -26324,7 +24446,6 @@ Calls the openDAQ C function daqWork_execute()."
          verify-parameters
          version
          version-info
-         version-info-interface-id
          visible
          visible-no-lock
          visible-properties
@@ -26334,7 +24455,6 @@ Calls the openDAQ C function daqWork_execute()."
          wait-all
          wait-for-message
          work
-         work-interface-id
          write
          write-bool
          write-float
