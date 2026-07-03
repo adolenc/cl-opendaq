@@ -11,8 +11,9 @@ OPENDAQ_REF ?= c-bindings-docstrings
 GENERATED_BINDINGS_DIR := $(CURDIR)/generated
 GENERATED_LOW_LEVEL_BINDINGS := $(GENERATED_BINDINGS_DIR)/low-level-bindings.lisp
 GENERATED_HIGH_LEVEL_BINDINGS := $(GENERATED_BINDINGS_DIR)//high-level-bindings.lisp
+DIST_DIR := $(CURDIR)/dist
 
-.PHONY: bindings repl test clean
+.PHONY: bindings regenerate-bindings pack-binaries repl test clean
 
 bindings:
 	rm -rf $(TMP_DIR) $(LISP_BIN_DIR)
@@ -41,6 +42,16 @@ regenerate-bindings:
 	$(PYTHON) $(CURDIR)/tools/generate_low_level_bindings.py --include-dir $(OPENDAQ_SRC_DIR)/bindings/c/include --output $(GENERATED_LOW_LEVEL_BINDINGS)
 	$(PYTHON) $(CURDIR)/tools/generate_high_level_bindings.py --include-dir $(OPENDAQ_SRC_DIR)/bindings/c/include --output $(GENERATED_HIGH_LEVEL_BINDINGS)
 
+pack-binaries:
+	rm -rf $(DIST_DIR)
+	mkdir -p $(DIST_DIR)
+	set -e; for platform_dir in $(LISP_BIN_DIR)/*/; do \
+	  platform=$$(basename "$$platform_dir"); \
+	  archive=$(DIST_DIR)/opendaq-bin-$$platform.tar.gz; \
+	  tar -czf "$$archive" -C "$$platform_dir" .; \
+	done
+	cd $(DIST_DIR) && sha256sum opendaq-bin-*.tar.gz | tee SHA256SUMS
+
 repl:
 	sbcl --noinform \
 	  --eval '(require :asdf)' \
@@ -62,4 +73,4 @@ test:
 	  --eval '(asdf:test-system :opendaq)'
 
 clean:
-	rm -rf $(LISP_BIN_DIR) $(TMP_DIR)
+	rm -rf $(LISP_BIN_DIR) $(TMP_DIR) $(DIST_DIR)

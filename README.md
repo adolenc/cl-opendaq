@@ -1,6 +1,6 @@
 # openDAQ Common Lisp bindings
 
-Common Lisp bindings for interacting with [openDAQ](https://opendaq.com/) devices. Developed against SBCL, and comes bundled with binaries for x64 Linux, x64 Windows, and ARM macOS.
+Common Lisp bindings for interacting with [openDAQ](https://opendaq.com/) devices. Developed against SBCL. Prebuilt native binaries for x64 Linux, x64 Windows, and ARM macOS are downloaded automatically on first load (only for your platform, ~15 MB).
 
 ## Quickstart
 
@@ -32,6 +32,17 @@ If that fails, run a healthcheck to verify that the library can find and load th
 ```
 
 See the [`examples/`](./examples/) folder for some more example scripts.
+
+### Native binaries
+
+The first `(ql:quickload :opendaq)` downloads the prebuilt openDAQ libraries for your platform from this repository's GitHub release pinned in `native-binaries.sexp`, verifies their SHA256 checksum, and caches them under `~/.cache/cl-opendaq/` (`%LOCALAPPDATA%\cache\cl-opendaq\` on Windows). Subsequent loads reuse the cache. The download needs `curl` and `tar`, which ship with Linux, macOS, and Windows 10+.
+
+The loader looks for the libraries in this order:
+1. the directory named by the `OPENDAQ_LISP_NATIVE_DIR` environment variable,
+2. `bin/<platform>/` inside the system directory (a local `make bindings` build),
+3. the per-user download cache, downloading into it when necessary.
+
+Set `OPENDAQ_NO_DOWNLOAD` to forbid the automatic download (e.g. in offline or CI environments); you can still trigger it explicitly with `(daq:install-native-libraries)`. Set `OPENDAQ_NATIVE_ARCHIVE_URL` to fetch the archive from a mirror instead of GitHub (checksum verification is skipped for mirrors).
 
 ## Some details
 
@@ -116,9 +127,10 @@ The attached makefile is used for simplification of development. It handles clon
 ```bash
 make bindings # clone pinned openDAQ source, build native libs, copy them into bin/linux-x64/, and call `make regenerate-bindings`
 make regenerate-bindings # regenerate generated/low-level-bindings.lisp and generated/high-level-bindings.lisp from the C headers in the cloned openDAQ source
+make pack-binaries # pack each bin/<platform>/ into dist/opendaq-bin-<platform>.tar.gz release archives with a SHA256SUMS file
 make repl     # start SBCL with the opendaq system loaded
 make test     # run the FiveAM test suite
-make clean    # remove bin/ and tmp/
+make clean    # remove bin/, tmp/ and dist/
 ```
 
 Override `OPENDAQ_REF` in the Makefile if you want a different upstream version. Override `OPENDAQ_RUNTIME_TRIPLE` if you want `make bindings`, `make repl`, and `make test` to use a different `bin/<platform>/` directory name.
@@ -130,5 +142,5 @@ Override `OPENDAQ_REF` in the Makefile if you want a different upstream version.
 - `examples/` - some stand-alone example scripts
 - `tools/` - scripts used to generate the bindings in `generated/` (note that `tools/parse_bindings.py` is a generic python script that can be used to generate bindings for any language)
 - `t/` - FiveAM test files, mostly ported from the c bindings test suite
-- `bin/` - bundled native openDAQ libraries loaded at runtime, split by platform subdirectory
+- `bin/` - locally built native openDAQ libraries (not committed; produced by `make bindings`), split by platform subdirectory. End users instead get the release archives pinned in `native-binaries.sexp`, which the `Build native binaries` GitHub Actions workflow publishes as release assets
 - `tmp/` - temporary clone/build workspace used by `make bindings`

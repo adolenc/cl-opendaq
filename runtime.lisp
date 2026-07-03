@@ -4,6 +4,8 @@
 ;;;; bindings.  Consolidates what used to be loader.lisp, errors.lisp,
 ;;;; utils.lisp and high-level-runtime.lisp.  The first three sections are in
 ;;;; the OPENDAQ.LOW-LEVEL package; the last switches to OPENDAQ.HIGH-LEVEL.
+;;;; The on-demand download of the native libraries that the loader section
+;;;; falls back to lives in fetch-binaries.lisp.
 
 (in-package #:opendaq.low-level)
 
@@ -15,28 +17,7 @@
   #+sbcl
   (require :sb-posix))
 
-(defparameter +native-directory-env-var+ "OPENDAQ_LISP_NATIVE_DIR")
 (defparameter +modules-directory-env-var+ "OPENDAQ_MODULES_PATH")
-
-(defparameter +native-library-file-names+
-  ;; Exact file names shipped in bin/<platform>/, in dependency load order.
-  #+linux
-  '("libdaqcoretypes-64-3.so"
-    "libdaqcoreobjects-64-3.so"
-    "libopendaq-64-3.so"
-    "libcopendaq.so")
-  #+darwin
-  '("libdaqcoretypes-64-3.dylib"
-    "libdaqcoreobjects-64-3.dylib"
-    "libopendaq-64-3.dylib"
-    "libcopendaq.dylib")
-  #+(or windows win32)
-  '("daqcoretypes-64-3.dll"
-    "daqcoreobjects-64-3.dll"
-    "opendaq-64-3.dll"
-    "copendaq.dll")
-  #-(or linux darwin windows win32)
-  (error "Unsupported OS for openDAQ native libraries: ~A" (software-type)))
 
 (defvar *loaded-native-directory* nil)
 (defvar *loaded-library-paths* nil)
@@ -59,23 +40,6 @@
 
 (defun %system-native-directory ()
   (ignore-errors (asdf:system-relative-pathname "opendaq" "bin/")))
-
-(defun %current-platform-directory-name ()
-  "Name of the bin/ subdirectory holding this host's native libraries, e.g.
-\"linux-x64\".  The OS and architecture are selected from *FEATURES* at read
-time rather than sniffed from SOFTWARE-TYPE / MACHINE-TYPE strings."
-  (let ((os #+linux "linux"
-            #+darwin "darwin"
-            #+(or windows win32) "windows"
-            #-(or linux darwin windows win32)
-            (error "Unsupported OS for openDAQ native libraries: ~A"
-                   (software-type)))
-        (arch #+(or x86-64 x86_64 amd64) "x64"
-              #+(or arm64 aarch64) "arm64"
-              #-(or x86-64 x86_64 amd64 arm64 aarch64)
-              (error "Unsupported architecture for openDAQ native libraries: ~A"
-                     (machine-type))))
-    (format nil "~A-~A" os arch)))
 
 (defun %native-search-paths-for-root (root)
   (let ((directory (uiop:ensure-directory-pathname root)))
@@ -113,11 +77,31 @@ time rather than sniffed from SOFTWARE-TYPE / MACHINE-TYPE strings."
            "Could not find ~A in ~A." file-name (namestring directory)))))
 
 (defun native-library-directory ()
-  (or (first (%candidate-native-directories))
-      (error
-       "Unable to locate openDAQ native libraries. Checked ~{~A~^, ~}. Set ~A to override the search path."
-       (mapcar #'namestring (%configured-native-search-paths))
-       +native-directory-env-var+)))
+  (let ((manifest (%native-archive-manifest)))
+    (or (first (%candidate-native-directories))
+        (and manifest (%cached-native-directory manifest))
+        (and manifest
+             (not (%downloads-disabled-p))
+             (install-native-libraries))
+        (error
+         "Unable to locate openDAQ native libraries. Checked ~{~A~^, ~}.~@[~A~] Set ~A to override the search path."
+         (mapcar #'namestring
+                 (append (%configured-native-search-paths)
+                         (when manifest
+                           (list (%cache-platform-directory
+                                  manifest
+                                  (%current-platform-directory-name))))))
+         (cond
+           ((null manifest)
+            (format nil " No ~A manifest is present, so they cannot be ~
+                         downloaded automatically; build them with `make ~
+                         bindings`."
+                    +native-manifest-file-name+))
+           ((%downloads-disabled-p)
+            (format nil " Automatic download is disabled because ~A is set; ~
+                         unset it or call INSTALL-NATIVE-LIBRARIES yourself."
+                    +no-download-env-var+)))
+         +native-directory-env-var+))))
 
 (defun %load-native-library (path)
   (cffi:load-foreign-library path)
@@ -167,7 +151,12 @@ time rather than sniffed from SOFTWARE-TYPE / MACHINE-TYPE strings."
                  (uiop:ensure-directory-pathname environment-value)))
            (%healthcheck-candidate-entries
             :system-bin
-            (%system-native-directory)))))
+            (%system-native-directory))
+           (let ((manifest (%native-archive-manifest)))
+             (when manifest
+               (%healthcheck-candidate-entries
+                :download-cache
+                (%cache-native-root manifest)))))))
 
 (defun %healthcheck-library-status (directory)
   (when directory

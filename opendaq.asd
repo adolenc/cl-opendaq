@@ -5,6 +5,7 @@
   :depends-on ("cffi" "trivial-garbage" "local-time")
   :serial t
   :components ((:file "package")
+               (:file "fetch-binaries")
                (:file "generated/low-level-bindings")
                (:file "runtime")
                (:file "generated/high-level-bindings")

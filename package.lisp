@@ -3,6 +3,7 @@
   (:intern #:clear-error-info
            #:ensure-opendaq-loaded
            #:healthcheck
+           #:install-native-libraries
            #:native-library-directory
            #:opendaq-error
            #:opendaq-error-code
@@ -16,6 +17,7 @@
   (:use #:cl)
   (:import-from #:opendaq.low-level
                 #:healthcheck
+                #:install-native-libraries
                 #:native-library-directory
                 #:opendaq-error
                 #:opendaq-error-code
@@ -33,6 +35,7 @@
            #:domain-time-converter
            #:domain-tick->timestamp
            #:healthcheck
+           #:install-native-libraries
            #:native-library-directory
            #:opendaq-error
            #:opendaq-error-code

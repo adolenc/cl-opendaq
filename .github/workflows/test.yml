@@ -18,6 +18,15 @@ jobs:
         with:
           lfs: true
 
+      - name: Prefer release binaries over bundled ones
+        shell: bash
+        run: |
+          # Once a pinned binaries release exists, test what end-users get:
+          # the loader downloading the release archive on first load.
+          if [ -f native-binaries.sexp ]; then
+            rm -rf bin
+          fi
+
       - name: Install SBCL
         shell: bash
         run: |
