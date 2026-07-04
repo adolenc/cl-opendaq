@@ -40,4 +40,6 @@
            #:opendaq-error
            #:opendaq-error-code
            #:opendaq-error-message
-           #:opendaq-error-operation))
+           #:opendaq-error-operation
+           #:reader-invalidated
+           #:reader-invalidated-reader))

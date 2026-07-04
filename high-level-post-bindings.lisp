@@ -49,15 +49,15 @@ range, or the invalid/undefined sentinels), which these accessors cannot model."
 accessors handle the integer, float, and complex-float sample types."
               sample-type))))
 
-(defun %sample-array-type (sample-type)
-  "Map a scalar (non-complex) openDAQ SAMPLE-TYPE keyword to (VALUES cffi-type
-lisp-element-type), as the streaming readers need (they read one element per
-sample).  Errors on complex and non-numeric sample types."
+(defun %sample-array-type (sample-type &optional allow-complex)
+  "Map a numeric openDAQ SAMPLE-TYPE keyword to (VALUES cffi-type
+lisp-element-type complexp), as the streaming readers need.  Unless
+ALLOW-COMPLEX, errors on complex sample types (which the caller cannot return)."
   (multiple-value-bind (cffi-type element-type complexp) (%numeric-sample-layout sample-type)
-    (when complexp
-      (error "openDAQ sample type ~S is complex; the streaming readers read one ~
-component per sample and cannot return complex samples." sample-type))
-    (cl:values cffi-type element-type)))
+    (when (and complexp (not allow-complex))
+      (error "openDAQ sample type ~S is complex; this reader cannot return ~
+complex samples." sample-type))
+    (cl:values cffi-type element-type complexp)))
 
 (defun %buffer->vector (buffer cffi-type element-type count)
   "Copy COUNT elements out of a foreign BUFFER into a fresh typed Lisp vector."
@@ -83,6 +83,16 @@ interleaved (real, imaginary) pairs of CFFI-TYPE."
       (setf (aref result index)
             (cl:complex (cffi:mem-aref buffer cffi-type (* 2 index))
                         (cffi:mem-aref buffer cffi-type (1+ (* 2 index))))))))
+
+(defun %buffer->samples (buffer cffi-type element-type samples width &optional complexp)
+  "Copy SAMPLES samples of WIDTH values each out of foreign BUFFER: a flat vector
+when WIDTH is 1, else a (SAMPLES x WIDTH) matrix with one row per sample.  With
+COMPLEXP the buffer holds interleaved (real, imaginary) pairs per value instead."
+  (cond ((and complexp (> width 1))
+         (error "Reading complex samples from a dimensioned signal is not supported."))
+        (complexp (%buffer->complex-vector buffer cffi-type element-type samples))
+        ((= width 1) (%buffer->vector buffer cffi-type element-type samples))
+        (t (%buffer->matrix buffer cffi-type element-type samples width))))
 
 (defun %sequence->buffer (buffer cffi-type element-type sequence)
   "Write SEQUENCE's elements (any Lisp sequence -- list or vector) into the foreign
@@ -155,7 +165,9 @@ builder, and adopts the resulting reader pointer into OBJECT."
           (domain-read-type :int64)
           (mode :scaled)
           (timeout-type :all)
-          (skip-events t)
+          ;; Off so READ sees descriptor-changed events and can track the value
+          ;; sample width (see the "Value sample width" section below).
+          (skip-events nil)
      &allow-other-keys)
   (declare (ignore pointer))
   (when (and (not pointer-p) signal-p)
@@ -217,27 +229,115 @@ builder, and adopts the resulting reader pointer into OBJECT."
        (opendaq.low-level:block-reader-builder/set-skip-events builder (if skip-events 1 0)))
      #'opendaq.low-level:block-reader-builder/build)))
 
+;;; ---------------------------------------------------------------------------
+;;; Value sample width (dimensioned "2-D" signals, e.g. FFT amplitude spectra)
+;;;
+;;; Each sample of a dimensioned signal packs one value per dimension point, so
+;;; reads must size their buffer to COUNT * width and return a (samples x width)
+;;; matrix.  The width must match the descriptor the *reader* is decoding, which
+;;; can lag the signal's (the reader drains a packet queue); sizing from the
+;;; signal would race a mid-stream descriptor change and overflow the buffer.
+;;; So stream readers keep skip-events off and track the width from their own
+;;; DATA_DESCRIPTOR_CHANGED events: the samples a read returns belong to the
+;;; pre-event descriptor, and the event announces the width of the next batch.
+;;; ---------------------------------------------------------------------------
+
+(defun %descriptor-sample-width (descriptor)
+  "Number of scalar values in one sample described by DESCRIPTOR: the size of its
+single dimension (e.g. a spectrum's bin count), or 1 otherwise -- mirroring the
+openDAQ readers, which only unpack exactly one dimension."
+  (let ((dimensions (and descriptor (dimensions descriptor))))
+    (if (= 1 (cl:length dimensions))
+        (size (first dimensions))
+        1)))
+
+(defun %reader-value-sample-width (reader)
+  "Value sample width per READER's signal's current descriptor (1 without a signal)."
+  (let ((signal (slot-value reader '%signal-initarg)))
+    (if signal (%descriptor-sample-width (descriptor signal)) 1)))
+
+(defvar *stream-reader-value-width*
+  (trivial-garbage:make-weak-hash-table :weakness :key :test 'eq)
+  "Per-stream-reader cache of the width the reader is currently decoding, advanced
+from its descriptor-changed events.  Weak so it never keeps a reader alive.")
+
+(defun %event-value-width (status)
+  "The value sample width announced by reader STATUS's descriptor-changed event,
+or NIL when STATUS is not an event or its event carries no value descriptor."
+  (when (and status (eq (read-status status) :event))
+    (let* ((event (event-packet status))
+           (descriptor (and event (gethash "DataDescriptor" (parameters event)))))
+      (when descriptor
+        (%descriptor-sample-width (as descriptor 'data-descriptor))))))
+
+(define-condition reader-invalidated (error)
+  ((reader :initarg :reader :reader reader-invalidated-reader))
+  (:report (lambda (condition stream)
+             (format stream "openDAQ reader ~S was invalidated by a descriptor ~
+change it cannot convert; recover by building a FROM-EXISTING reader from it ~
+with matching read types."
+                     (reader-invalidated-reader condition))))
+  (:documentation "Signalled by READ / READ-WITH-DOMAIN when a signal's data
+descriptor changed to a sample type the reader cannot convert to its read type.
+The reader keeps the unread packets; build e.g. a STREAM-READER/FROM-EXISTING
+from it (with read types matching the new descriptor) to continue reading."))
+
+(defun %stream-read-tracking-width (reader read-into-buffer)
+  "Call READ-INTO-BUFFER with the value sample width to size the read by, and
+return its RESULT.  READ-INTO-BUFFER performs one low-level read into a buffer of
+that width and returns (VALUES RESULT SAMPLES-READ STATUS).  Any descriptor event
+in STATUS announces the width of the *next* batch, so we cache it per reader and
+only re-read to skip a pure zero-sample event (e.g. the reader's initial one)."
+  (loop with width = (multiple-value-bind (cached presentp)
+                         (gethash reader *stream-reader-value-width*)
+                       ;; The signal is only the initial guess; events take over.
+                       (if presentp cached (%reader-value-sample-width reader)))
+        repeat 1024
+        for (result samples-read status) = (multiple-value-list (funcall read-into-buffer width))
+        for event-width = (%event-value-width status)
+        do (cond
+             ((plusp samples-read)
+              (when event-width (setf (gethash reader *stream-reader-value-width*) event-width))
+              (return result))
+             ;; Checked before EVENT-WIDTH: an invalidating event also carries a
+             ;; descriptor, but re-reading an invalid reader can never succeed.
+             ((and status (not (valid status)))
+              (error 'reader-invalidated :reader reader))
+             (event-width
+              (setf width event-width
+                    (gethash reader *stream-reader-value-width*) event-width))
+             (t (return result)))
+        finally (return result)))
+
 (defgeneric read (reader count &key timeout-ms)
   (:documentation
    "Read up to COUNT samples (or COUNT blocks, for a block reader) from READER.
-Returns a Lisp array whose element type matches the reader's VALUE-READ-TYPE: a
-vector for stream/tail readers, a 2-D (blocks x block-size) array for block
-readers, or a list of one vector per signal for multi readers."))
+Returns a Lisp array whose element type matches the reader's VALUE-READ-TYPE:
+a vector for stream/tail readers on a scalar signal; a 2-D (samples x sample-width)
+array, one row per sample, for stream/tail readers on a dimensioned signal (e.g.
+an FFT amplitude spectrum); a 2-D (blocks x block-size) array for block readers;
+or a list of one vector per signal for multi readers."))
 
 (defmethod read ((reader stream-reader) count &key (timeout-ms 0))
-  (multiple-value-bind (cffi-type element-type)
-      (%sample-array-type (value-read-type reader))
-    (cffi:with-foreign-object (buffer cffi-type (max count 1))
-      (%buffer->vector buffer cffi-type element-type
-                       (stream-reader-read reader buffer count timeout-ms)))))
+  (multiple-value-bind (cffi-type element-type complexp)
+      (%sample-array-type (value-read-type reader) t)
+    (%stream-read-tracking-width
+     reader
+     (lambda (width)
+       (cffi:with-foreign-object (buffer cffi-type (max (* count width (if complexp 2 1)) 1))
+         (multiple-value-bind (samples-read status)
+             (stream-reader-read reader buffer count timeout-ms)
+           (cl:values (%buffer->samples buffer cffi-type element-type samples-read width complexp)
+                      samples-read status)))))))
 
 (defmethod read ((reader tail-reader) count &key timeout-ms)
   (declare (ignore timeout-ms))
   (multiple-value-bind (cffi-type element-type)
       (%sample-array-type (value-read-type reader))
-    (cffi:with-foreign-object (buffer cffi-type (max count 1))
-      (%buffer->vector buffer cffi-type element-type
-                       (tail-reader-read reader buffer count)))))
+    (let ((width (%reader-value-sample-width reader)))
+      (cffi:with-foreign-object (buffer cffi-type (max (* count width) 1))
+        (%buffer->samples buffer cffi-type element-type
+                          (tail-reader-read reader buffer count) width)))))
 
 (defmethod read ((reader block-reader) count &key (timeout-ms 0))
   (let ((block-size (block-size reader)))
@@ -250,20 +350,28 @@ readers, or a list of one vector per signal for multi readers."))
 (defgeneric read-with-domain (reader count &key timeout-ms)
   (:documentation
    "Like READ, but also reads the domain (e.g. timestamp) values.  Returns the
-sample values and the domain values as two parallel results (multiple values),
-each sized to the same actual sample count: vectors for the single-signal
-readers, or a list of one vector per signal for multi readers."))
+sample values and the domain values as two parallel results (multiple values):
+for the single-signal readers the values follow READ's shape (a vector, or a
+(samples x sample-width) matrix for a dimensioned signal) while the domain is
+always a vector of one tick per sample; for multi readers, a list of one vector
+per signal for each.  Both results are sized to the same actual sample count."))
 
 (defmethod read-with-domain ((reader stream-reader) count &key (timeout-ms 0))
-  (multiple-value-bind (value-type value-element-type)
-      (%sample-array-type (value-read-type reader))
+  (multiple-value-bind (value-type value-element-type complexp)
+      (%sample-array-type (value-read-type reader) t)
     (multiple-value-bind (domain-type domain-element-type)
         (%sample-array-type (domain-read-type reader))
-      (cffi:with-foreign-object (values value-type (max count 1))
-        (cffi:with-foreign-object (domain domain-type (max count 1))
-          (let ((read-count (stream-reader-read-with-domain reader values domain count timeout-ms)))
-            (cl:values (%buffer->vector values value-type value-element-type read-count)
-                       (%buffer->vector domain domain-type domain-element-type read-count))))))))
+      (cl:values-list
+       (%stream-read-tracking-width
+        reader
+        (lambda (width)
+          (cffi:with-foreign-object (values value-type (max (* count width (if complexp 2 1)) 1))
+            (cffi:with-foreign-object (domain domain-type (max count 1))
+              (multiple-value-bind (samples-read status)
+                  (stream-reader-read-with-domain reader values domain count timeout-ms)
+                (cl:values (cl:list (%buffer->samples values value-type value-element-type samples-read width complexp)
+                                    (%buffer->vector domain domain-type domain-element-type samples-read))
+                           samples-read status))))))))))
 
 (defmethod read-with-domain ((reader tail-reader) count &key timeout-ms)
   (declare (ignore timeout-ms))
@@ -271,11 +379,12 @@ readers, or a list of one vector per signal for multi readers."))
       (%sample-array-type (value-read-type reader))
     (multiple-value-bind (domain-type domain-element-type)
         (%sample-array-type (domain-read-type reader))
-      (cffi:with-foreign-object (values value-type (max count 1))
-        (cffi:with-foreign-object (domain domain-type (max count 1))
-          (let ((read-count (tail-reader-read-with-domain reader values domain count)))
-            (cl:values (%buffer->vector values value-type value-element-type read-count)
-                       (%buffer->vector domain domain-type domain-element-type read-count))))))))
+      (let ((width (%reader-value-sample-width reader)))
+        (cffi:with-foreign-object (values value-type (max (* count width) 1))
+          (cffi:with-foreign-object (domain domain-type (max count 1))
+            (let ((samples-read (tail-reader-read-with-domain reader values domain count)))
+              (cl:values (%buffer->samples values value-type value-element-type samples-read width)
+                         (%buffer->vector domain domain-type domain-element-type samples-read)))))))))
 
 (defmethod read-with-domain ((reader block-reader) count &key (timeout-ms 0))
   (let ((block-size (block-size reader)))
@@ -621,7 +730,8 @@ the Lisp view of a daq list it holds should reach for UNBOX instead.)"
 (defun %hashtable-of (dict key-type value-type)
   "Convert an openDAQ dict into a Lisp hash-table for the generated getters, with
 each key and value converted per its statically-known KEY-TYPE / VALUE-TYPE exactly
-as %LIST-OF converts elements."
+as %LIST-OF converts elements.  A null value (e.g. a descriptor-changed event's
+unchanged domain descriptor) maps to NIL."
   (let* ((raw (%require-live-pointer dict))
          (key-list (opendaq.low-level:dict/get-key-list raw))
          (n (opendaq.low-level:list/get-count key-list))
@@ -631,7 +741,8 @@ as %LIST-OF converts elements."
               for key-ptr = (opendaq.low-level:list/get-item-at key-list i)
               for val-ptr = (opendaq.low-level:dict/get raw key-ptr)
               for key = (%as-consuming (wrap key-ptr 'base-object) key-type)
-              for val = (%as-consuming (wrap val-ptr 'base-object) value-type)
+              for wrapped-val = (wrap val-ptr 'base-object)
+              for val = (and wrapped-val (%as-consuming wrapped-val value-type))
               do (setf (gethash key ht) val))
       (%release-pointer key-list))
     ht))

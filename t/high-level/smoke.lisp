@@ -83,6 +83,49 @@
         (is (= 10 (array-dimension blocks 1)) "block reader READ columns should equal the block size.")
         (is (eq 'double-float (array-element-type blocks)) "block reader default value-type should be double-float.")))))
 
+(test high-level-stream-reader-2d-signal
+  (locally (declare (optimize (debug 3)))
+    (let* ((instance (make-instance 'daq:instance))
+           (device (daq:add-device (daq:root-device instance) "daqref://device0"))
+           (channel (daq:as (daq:find-component device "IO/AI/RefCh0") 'daq:channel))
+           ;; The FFT block emits a dimensioned (2-D) signal: each sample is a
+           ;; whole amplitude spectrum, one value per frequency bin.
+           (fft (daq:add-function-block instance "RefFBModuleFFT" nil)))
+      (setf (daq:property-value fft "BlockSize") 16)
+      (daq:connect (first (daq:input-ports fft)) (first (daq:signals channel)))
+      (let* ((signal (first (daq:signals fft)))
+             (reader (make-instance 'daq:stream-reader :signal signal)))
+        ;; Wait for the block to publish its output descriptor before reading, so
+        ;; the reader knows each sample is a spectrum (not a scalar).
+        (loop for attempt below 50
+              until (daq:descriptor signal)
+              do (sleep 0.05)
+              finally (is (daq:descriptor signal) "The FFT block should publish an output descriptor."))
+        (let ((dimensions (daq:dimensions (daq:descriptor signal))))
+          (is (= 1 (cl:length dimensions)) "The FFT signal should carry a single dimension (the frequency axis).")
+          (is (= 16 (daq:size (first dimensions))) "The dimension size should match the configured FFT block size."))
+        ;; The first reads may be short while the stream warms up; loop until 5
+        ;; whole spectra arrive as a (samples x bins) matrix.
+        (loop for attempt below 50
+              do (let ((spectra (daq:read reader 5 :timeout-ms 1000)))
+                   (when (= 5 (array-dimension spectra 0))
+                     (is (= 2 (array-rank spectra)) "A 2-D signal READ should return a 2-D array.")
+                     (is (= 5 (array-dimension spectra 0)) "READ should return the requested number of samples as rows.")
+                     (is (= 16 (array-dimension spectra 1)) "Each row should hold one value per frequency bin.")
+                     (is (eq 'double-float (array-element-type spectra)) "Stream reader default value-type should be double-float.")
+                     (return)))
+              finally (fail "The FFT stream did not produce 5 spectra within the attempt budget."))
+        ;; read-with-domain pairs the (samples x bins) matrix with one tick per sample.
+        (loop for attempt below 50
+              do (multiple-value-bind (spectra domain) (daq:read-with-domain reader 3 :timeout-ms 1000)
+                   (when (= 3 (array-dimension spectra 0))
+                     (is (= 2 (array-rank spectra)) "read-with-domain values should be a 2-D array for a 2-D signal.")
+                     (is (= 16 (array-dimension spectra 1)) "read-with-domain rows should hold one value per frequency bin.")
+                     (is (vectorp domain) "read-with-domain domain should be a flat vector.")
+                     (is (= 3 (cl:length domain)) "read-with-domain should return one domain tick per sample.")
+                     (return)))
+              finally (fail "The FFT stream did not produce 3 spectra with domain within the attempt budget."))))))
+
 (test high-level-data-packet-buffers
   (let ((builder (make-instance 'daq:data-descriptor-builder)))
     (setf (daq:sample-type builder) :float64)
