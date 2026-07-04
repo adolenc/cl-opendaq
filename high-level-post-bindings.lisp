@@ -870,7 +870,11 @@ params an openDAQ callable expects: NIL for no arguments, the single boxed value
 one, and an OBJECT-LIST for several."
   (case (cl:length args)
     (0 nil)
-    (1 (%box-callable-argument (first args) (first arg-infos)))
+    ;; A sole NIL argument must be boxed to a Boolean here: left bare it would
+    ;; read as the no-arguments encoding (a null params) at the DISPATCH/CALL
+    ;; layer.  Inside a list NIL needs no such care -- PUSH-BACK boxes it.
+    (1 (or (%box-callable-argument (first args) (first arg-infos))
+           (make-instance 'boolean-object :value nil)))
     (t (let ((list (make-instance 'object-list)))
          (loop for arg in args
                for info in arg-infos
@@ -981,16 +985,55 @@ SOURCE's domain metadata each time, e.g.:
   (funcall (domain-time-converter source) tick))
 
 ;;; ---------------------------------------------------------------------------
-;;; Event handlers from Lisp functions
+;;; C trampolines for Lisp closures
 ;;;
-;;; openDAQ's event callback (daqEventCall) is `void (BaseObject* sender,
-;;; BaseObject* args)' with no user-data argument, and portable CFFI cannot turn
-;;; a Lisp closure into a C function pointer.  So each subscribed function needs
-;;; its own C trampoline that knows which function to call.  We COMPILE one on
-;;; demand -- a CFFI:DEFCALLBACK baked with a slot index that routes to the
-;;; stored function -- and return its slot to a free list on REMOVE-HANDLER for
-;;; reuse.  There is thus no fixed limit; a stable set of handlers settles on a
-;;; stable set of trampolines (one per concurrently-live handler at the peak).
+;;; openDAQ's C callback types (daqEventCall, daqProcCall, daqFuncCall) carry no
+;;; user-data argument, and portable CFFI cannot turn a Lisp closure into a bare
+;;; C function pointer.  So each closure handed to openDAQ needs its own C
+;;; trampoline that knows which closure to call.  A trampoline table COMPILEs
+;;; one on demand -- a CFFI:DEFCALLBACK baked with a slot index that routes to
+;;; the stored closure -- so any number of distinct closures is supported on any
+;;; CFFI-capable Lisp.  Each table holds one callback signature's trampolines;
+;;; slots whose closure is dropped (e.g. by REMOVE-HANDLER) return to a free
+;;; list, so a stable set of callbacks settles on a stable set of trampolines
+;;; (one per concurrently-live closure at the peak).
+;;; ---------------------------------------------------------------------------
+
+(defstruct (%trampoline-table (:constructor %make-trampoline-table (compiler)))
+  "Routes the C trampolines of one callback signature to their Lisp closures.
+COMPILER builds the trampoline foreign pointer for a given slot index; FUNCTIONS
+holds each slot's closure (NIL when free), POINTERS its compiled trampoline, and
+FREE-SLOTS the indices whose closure was dropped and whose trampoline can be
+reused."
+  (compiler nil :read-only t)
+  (functions (make-array 16 :adjustable t :fill-pointer 0))
+  (pointers (make-array 16 :adjustable t :fill-pointer 0))
+  (free-slots '()))
+
+(defun %trampoline-closure (table index)
+  (aref (%trampoline-table-functions table) index))
+
+(defun %allocate-trampoline (table function)
+  "Reserve a slot of TABLE for FUNCTION -- reusing a freed slot or growing the
+table by compiling a new trampoline -- and return its foreign pointer and index."
+  (let ((index (or (pop (%trampoline-table-free-slots table))
+                   (let ((new-index (fill-pointer (%trampoline-table-functions table))))
+                     (vector-push-extend nil (%trampoline-table-functions table))
+                     (vector-push-extend (funcall (%trampoline-table-compiler table) new-index)
+                                         (%trampoline-table-pointers table))
+                     new-index))))
+    (setf (aref (%trampoline-table-functions table) index) function)
+    (cl:values (aref (%trampoline-table-pointers table) index) index)))
+
+(defun %free-trampoline (table index)
+  "Return slot INDEX of TABLE to the free list, dropping its closure; the
+compiled trampoline stays behind for the next allocation to reuse."
+  (setf (aref (%trampoline-table-functions table) index) nil)
+  (push index (%trampoline-table-free-slots table))
+  nil)
+
+;;; ---------------------------------------------------------------------------
+;;; Event handlers from Lisp functions
 ;;;
 ;;; Refcounts take care of themselves: the C binding add-refs sender and args
 ;;; before calling us (handing the callback ownership of one reference to each),
@@ -998,44 +1041,24 @@ SOURCE's domain metadata each time, e.g.:
 ;;; those references -- so a handler function never has to release anything.
 ;;; ---------------------------------------------------------------------------
 
-(defvar *event-callback-functions* (make-array 16 :adjustable t :fill-pointer 0)
-  "Slot vector: entry I holds the Lisp function invoked by trampoline I, or NIL when free.")
-
-(defvar *event-callback-pointers* (make-array 16 :adjustable t :fill-pointer 0)
-  "Foreign pointer of the trampoline compiled for each slot, indexed by slot.")
-
-(defvar *free-event-callback-slots* '()
-  "Indices of slots whose handler was removed and whose trampoline can be reused.")
+(defvar *event-trampolines*
+  (%make-trampoline-table
+   (lambda (index)
+     (let ((name (gensym "EVENT-CALLBACK")))
+       (funcall (compile nil `(lambda ()
+                                (cffi:defcallback ,name :void ((sender :pointer) (args :pointer))
+                                  (%dispatch-event-callback ,index sender args)))))
+       (cffi:get-callback name))))
+  "Trampolines for daqEventCall: `void (BaseObject* sender, BaseObject* args)'.")
 
 (defvar *event-handler-callback-indices*
   (trivial-garbage:make-weak-hash-table :weakness :key :test 'eq)
   "Maps a function-backed EVENT-HANDLER to its slot, so REMOVE-HANDLER can free it.")
 
 (defun %dispatch-event-callback (index sender args)
-  (let ((function (aref *event-callback-functions* index)))
+  (let ((function (%trampoline-closure *event-trampolines* index)))
     (when function
       (funcall function (wrap sender 'base-object) (wrap args 'base-object)))))
-
-(defun %make-event-trampoline (index)
-  "Compile a fresh daqEventCall C trampoline routing to slot INDEX.  Built with
-COMPILE (rather than a fixed pre-built pool) so any number of distinct handlers
-is supported on any CFFI-capable Lisp."
-  (let ((name (gensym "EVENT-CALLBACK")))
-    (funcall (compile nil `(lambda ()
-                             (cffi:defcallback ,name :void ((sender :pointer) (args :pointer))
-                               (%dispatch-event-callback ,index sender args)))))
-    (cffi:get-callback name)))
-
-(defun %allocate-event-callback (function)
-  "Reserve a trampoline slot for FUNCTION -- reusing a freed slot or growing the
-table by compiling a new trampoline -- and return its foreign pointer and index."
-  (let ((index (or (pop *free-event-callback-slots*)
-                   (let ((new-index (fill-pointer *event-callback-functions*)))
-                     (vector-push-extend nil *event-callback-functions*)
-                     (vector-push-extend (%make-event-trampoline new-index) *event-callback-pointers*)
-                     new-index))))
-    (setf (aref *event-callback-functions* index) function)
-    (cl:values (aref *event-callback-pointers* index) index)))
 
 (defmethod initialize-instance :around ((handler event-handler) &rest initargs &key function &allow-other-keys)
   "Let :FUNCTION be a Lisp function of (SENDER ARGS), called when the event fires,
@@ -1043,7 +1066,7 @@ as an alternative to the raw :CALL foreign pointer.  SENDER and ARGS arrive as
 managed objects whose references the GC releases, so the function need not clean
 anything up; cast ARGS with AS for typed event args (e.g. to CORE-EVENT-ARGS)."
   (if function
-      (multiple-value-bind (pointer index) (%allocate-event-callback function)
+      (multiple-value-bind (pointer index) (%allocate-trampoline *event-trampolines* function)
         (let ((instance (apply #'call-next-method handler :call pointer initargs)))
           (setf (gethash instance *event-handler-callback-indices*) index)
           instance))
@@ -1061,6 +1084,152 @@ created EVENT-HANDLER, which may be passed to REMOVE-HANDLER to unsubscribe."
   "Free HANDLER's trampoline slot for reuse once it is unsubscribed."
   (let ((index (gethash handler *event-handler-callback-indices*)))
     (when index
-      (setf (aref *event-callback-functions* index) nil)
-      (push index *free-event-callback-slots*)
+      (%free-trampoline *event-trampolines* index)
       (remhash handler *event-handler-callback-indices*))))
+
+;;; ---------------------------------------------------------------------------
+;;; Procedures and functions from Lisp closures
+;;;
+;;; (make-instance 'procedure :value fn) and (make-instance 'function-object
+;;; :value fn) accept a Lisp function as an alternative to the raw daqProcCall /
+;;; daqFuncCall foreign pointer the C API takes.  openDAQ then invokes FN
+;;; whenever the callable is dispatched -- from Lisp or from native code (a
+;;; function property's value, a custom search filter, ...).
+;;;
+;;; The closure is APPLYed to the decoded params (see %CALLABLE-ARGS), so it
+;;; declares its natural lambda list; a function's return value is boxed like a
+;;; :daq-base-object argument and its reference handed to the native caller.
+;;; Unlike the event callback, nothing is add-ref'd for us: the native side
+;;; passes params BORROWED and expects a daqErrCode back.  A condition the
+;;; closure signals must not unwind across the C boundary, so it is caught and
+;;; reported as OPENDAQ_ERR_GENERALERROR, which the call site then surfaces as
+;;; an OPENDAQ-ERROR.
+;;;
+;;; Lifetime: openDAQ offers no destruction hook for a callable, so -- unlike an
+;;; event handler's slot, which REMOVE-HANDLER frees -- a closure-backed
+;;; procedure or function pins its closure and trampoline slot for the life of
+;;; the image (the native object, e.g. one stored as a property value, can
+;;; outlive every Lisp reference to it).
+;;; ---------------------------------------------------------------------------
+
+(defconstant +opendaq-success+ 0)
+
+(defconstant +opendaq-err-general-error+ #x80000014
+  "OPENDAQ_ERR_GENERALERROR: reported to the native caller when a Lisp-implemented
+callable signals a condition.")
+
+(defun %callable-args (params)
+  "Decode PARAMS -- the borrowed daqBaseObject* openDAQ hands a callable's
+implementation -- into the list of Lisp arguments to APPLY the closure to,
+inverting %CALLABLE-PARAMS' encoding: a null params means no arguments, a daq
+list one argument per element, anything else the single argument.  Each argument
+converts by UNBOX's rules -- scalars and containers to native Lisp values,
+anything else left wrapped for the closure to AS-cast.  (The encoding is
+openDAQ's own convention, so a single argument that IS a daq list still arrives
+unpacked into several.)"
+  (if (cffi:null-pointer-p params)
+      '()
+      (progn
+        ;; PARAMS is borrowed: add the reference the wrapper's GC finalizer
+        ;; releases.
+        (opendaq.low-level:base-object/add-ref params)
+        (let ((object (wrap params 'base-object)))
+          (multiple-value-bind (kind interface) (%unboxed-kind object)
+            (case kind
+              (:list (%unbox-daq-list interface))
+              ((nil) (cl:list object))
+              (:dict (cl:list (%unbox-daq-dict interface)))
+              (t (cl:list (%read-boxed-value interface kind)))))))))
+
+(defun %box-transferring-reference (value)
+  "Box VALUE -- what a closure-backed function returned -- into a daq object
+pointer whose single reference is transferred to the native caller: an openDAQ
+wrapper is add-ref'd and its pointer returned; a Lisp list or hash-table boxes
+to a daq list/dict; anything else boxes exactly as a :daq-base-object argument
+would (NIL to Boolean false).  Signals an error for a value openDAQ cannot box."
+  (cond ((cl:typep value 'managed-object)
+         (let ((raw (%require-live-pointer value)))
+           (opendaq.low-level:base-object/add-ref raw)
+           raw))
+        ((and value (listp value))
+         (%box-transferring-reference (%box-collection value :list :undefined :undefined)))
+        ((hash-table-p value)
+         (%box-transferring-reference (%box-collection value :dict :undefined :undefined)))
+        (t
+         (multiple-value-bind (pointer cleanup) (%coerce-argument value :daq-base-object)
+           ;; A fresh box arrives holding the one reference CLEANUP would
+           ;; release; skipping the cleanup is exactly the transfer.
+           (declare (ignore cleanup))
+           (if (cffi:pointerp pointer)
+               pointer
+               (error "Cannot box ~S as an openDAQ object." value))))))
+
+(defvar *procedure-trampolines*
+  (%make-trampoline-table
+   (lambda (index)
+     (let ((name (gensym "PROCEDURE-CALLBACK")))
+       (funcall (compile nil `(lambda ()
+                                (cffi:defcallback ,name opendaq.low-level::daq-err-code
+                                    ((params :pointer))
+                                  (%dispatch-procedure-callback ,index params)))))
+       (cffi:get-callback name))))
+  "Trampolines for daqProcCall: `daqErrCode (BaseObject* params)'.")
+
+(defvar *function-trampolines*
+  (%make-trampoline-table
+   (lambda (index)
+     (let ((name (gensym "FUNCTION-CALLBACK")))
+       (funcall (compile nil `(lambda ()
+                                (cffi:defcallback ,name opendaq.low-level::daq-err-code
+                                    ((params :pointer) (result :pointer))
+                                  (%dispatch-function-callback ,index params result)))))
+       (cffi:get-callback name))))
+  "Trampolines for daqFuncCall: `daqErrCode (BaseObject* params, BaseObject** result)'.")
+
+(defun %dispatch-procedure-callback (index params)
+  (handler-case
+      (progn
+        (apply (%trampoline-closure *procedure-trampolines* index) (%callable-args params))
+        +opendaq-success+)
+    (serious-condition () +opendaq-err-general-error+)))
+
+(defun %dispatch-function-callback (index params result)
+  (handler-case
+      (let ((value (apply (%trampoline-closure *function-trampolines* index)
+                          (%callable-args params))))
+        (setf (cffi:mem-ref result :pointer) (%box-transferring-reference value))
+        +opendaq-success+)
+    (serious-condition () +opendaq-err-general-error+)))
+
+(defmethod initialize-instance :around ((object procedure) &rest initargs &key value &allow-other-keys)
+  "Let :VALUE be a Lisp function, invoked with the decoded params (see
+%CALLABLE-ARGS) each time the procedure is dispatched, as an alternative to the
+raw daqProcCall foreign pointer."
+  (if (functionp value)
+      (apply #'call-next-method object
+             :value (%allocate-trampoline *procedure-trampolines* value)
+             initargs)
+      (call-next-method)))
+
+(defmethod initialize-instance :around ((object function-object) &rest initargs &key value &allow-other-keys)
+  "Let :VALUE be a Lisp function, invoked with the decoded params (see
+%CALLABLE-ARGS) each time the function is called and whose return value becomes
+the call's boxed result, as an alternative to the raw daqFuncCall foreign
+pointer."
+  (if (functionp value)
+      (apply #'call-next-method object
+             :value (%allocate-trampoline *function-trampolines* value)
+             initargs)
+      (call-next-method)))
+
+(defmethod dispatch :around ((object procedure) params)
+  "A NIL params means \"no arguments\" -- openDAQ's null params, matching
+%CALLABLE-PARAMS' encoding -- rather than the Boolean false the :daq-base-object
+boxing would otherwise make of it.  Pass a BOOLEAN-OBJECT to give a procedure a
+single false argument."
+  (call-next-method object (if (null params) (cffi:null-pointer) params)))
+
+(defmethod call :around ((object function-object) params result)
+  "As with DISPATCH: a NIL params encodes \"no arguments\" (a null params), not a
+single Boolean false argument."
+  (call-next-method object (if (null params) (cffi:null-pointer) params) result))

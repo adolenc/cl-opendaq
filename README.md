@@ -118,6 +118,21 @@ openDAQ events (core/structure events, property change notifications, …) are s
 
 `daq:add-handler` returns the created `daq:event-handler`, which can be passed to `daq:remove-handler` to unsubscribe.
 
+### Procedures and functions from Lisp closures
+
+Wherever openDAQ expects a `Procedure` or `Function` object (a `func`/`proc` property's value, a custom search filter, …), pass a Lisp function as the `:value`:
+
+```lisp
+(setf (daq:property-value obj "Sum") (make-instance 'daq:function-object :value (lambda (a b) (+ a b))))
+
+(make-instance 'daq:search-filter/custom
+               :accepts-function (make-instance 'daq:function-object
+                                                :value (lambda (prop) (daq:visible (daq:as prop 'daq:property))))
+               :visit-function (make-instance 'daq:function-object :value (constantly nil)))
+```
+
+openDAQ invokes the closure - from Lisp or from native code - with the params decoded to natural Lisp values (scalars and containers unboxed, anything else wrapped for `daq:as`); a `daq:function-object`'s return value is boxed back for the caller the same way. A condition signalled inside the closure is reported to the caller as an openDAQ error rather than unwinding across the C boundary. Since openDAQ has no destruction hook for callables, each closure-backed procedure/function keeps its closure (and a small compiled trampoline) alive for the rest of the session.
+
 ## Development
 
 The attached makefile is used for simplification of development. It handles cloning the pinned openDAQ source, building the native libraries, copying them into `bin/linux-x64/`, and regenerating the generated Lisp bindings. It also has targets for starting a REPL with the system loaded and running the test suite.

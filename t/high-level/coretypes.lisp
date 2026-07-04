@@ -211,6 +211,61 @@
       (daq:handle-event handler-c sender event-args)
       (is (eql 42 a) "A handler subscribed after a removal (reusing a freed slot) should still work."))))
 
+(test high-level-coretypes-procedure-from-lisp-function
+  ;; A Lisp closure can back an openDAQ Procedure directly: openDAQ invokes it
+  ;; through a compiled trampoline with the params decoded to Lisp values.
+  (let* ((seen '())
+         (procedure (make-instance 'daq:procedure :value (lambda (x) (push x seen)))))
+    (daq:dispatch procedure 5)
+    (daq:dispatch procedure "hello")
+    (is (equal '("hello" 5) seen)
+        "A closure-backed procedure should receive scalar params as native Lisp values.")))
+
+(test high-level-coretypes-callable-params-conventions
+  ;; openDAQ encodes callable params as null / single value / list of values;
+  ;; each must decode to the natural Lisp argument list.
+  (let* ((calls '())
+         (procedure (make-instance 'daq:procedure
+                                   :value (lambda (&rest args) (push args calls)))))
+    (daq:dispatch procedure nil)
+    (let ((params (make-instance 'daq:object-list)))
+      (daq:push-back params 1)
+      (daq:push-back params "two")
+      (daq:dispatch procedure params))
+    (is (equal '((1 "two") ()) calls)
+        "NIL params should dispatch no arguments, and a daq list one argument per element.")))
+
+(test high-level-coretypes-function-from-lisp-function
+  ;; A closure-backed Function computes its result from the decoded arguments;
+  ;; the result is boxed for the caller and unboxes back to a Lisp value.
+  (let ((function (make-instance 'daq:function-object :value (lambda (a b) (+ a b))))
+        (params (make-instance 'daq:object-list)))
+    (daq:push-back params 2)
+    (daq:push-back params 3)
+    (is (= 5 (daq:unbox (daq:call function params nil)))
+        "A closure-backed function should box its computed result for the caller."))
+  ;; A Lisp list result boxes into a daq list.
+  (let ((function (make-instance 'daq:function-object :value (lambda () (list 1 2 3)))))
+    (is (equal '(1 2 3) (daq:unbox (daq:call function nil nil)))
+        "A closure-backed function should box a Lisp list result into a daq list."))
+  ;; A param with no scalar Lisp form arrives wrapped, for the closure to AS-cast.
+  (let ((function (make-instance 'daq:function-object
+                                 :value (lambda (args)
+                                          (daq:event-id (daq:as args 'daq:event-args))))))
+    (is (= 7 (daq:unbox (daq:call function
+                                  (make-instance 'daq:event-args :event-id 7 :event-name "x")
+                                  nil)))
+        "A non-scalar param should arrive as a wrapper the closure can AS-cast.")))
+
+(test high-level-coretypes-callable-error-propagation
+  ;; A condition signalled inside the closure must not unwind across the C
+  ;; boundary: it is reported as an error code, which the call site surfaces
+  ;; as an OPENDAQ-ERROR.
+  (let ((procedure (make-instance 'daq:procedure :value (lambda () (error "boom"))))
+        (function (make-instance 'daq:function-object :value (lambda () (error "boom")))))
+    (signals daq:opendaq-error (daq:dispatch procedure nil))
+    (signals daq:opendaq-error (daq:call function nil nil))))
+
 (defun %probe-ratio-finalization ()
   (eval
    '(let* ((release-state (list nil))

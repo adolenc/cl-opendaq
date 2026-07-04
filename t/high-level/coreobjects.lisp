@@ -27,6 +27,30 @@
       (is (eql :int (daq:return-type callable-info)) "High-level callable-info wrappers should expose their return type.")
       (is (daq:is-const callable-info) "High-level callable-info wrappers should preserve the const flag."))))
 
+(test high-level-coreobjects-function-property-from-lisp-function
+  ;; End to end: a FUNC property whose value is a closure-backed Function reads
+  ;; back through PROPERTY-VALUE's conversion as a plain Lisp function, and a
+  ;; call round-trips Lisp -> openDAQ -> Lisp (args boxed by the caller, decoded
+  ;; by the trampoline; the result boxed by the closure side, unboxed by the
+  ;; caller).
+  (let ((arguments (make-instance 'daq:object-list))
+        (object (make-instance 'daq:property-object)))
+    (daq:push-back arguments (make-instance 'daq:argument-info :name "a" :type :int))
+    (daq:push-back arguments (make-instance 'daq:argument-info :name "b" :type :int))
+    (daq:add-property object (make-instance 'daq:property/function
+                                            :name "Sum"
+                                            :callable-info (make-instance 'daq:callable-info
+                                                                          :argument-info arguments
+                                                                          :return-type :int
+                                                                          :const-flag nil)
+                                            :visible t))
+    (setf (daq:property-value object "Sum")
+          (make-instance 'daq:function-object :value (lambda (a b) (+ a b))))
+    (let ((sum (daq:property-value object "Sum")))
+      (is (functionp sum) "A closure-backed FUNC property should read back as a Lisp function.")
+      (is (= 5 (funcall sum 2 3)) "Calling it should round-trip the arguments and result through openDAQ.")
+      (is (= 42 (funcall sum 40 2)) "The round-tripping function should be reusable across calls."))))
+
 (test high-level-coreobjects-authentication-provider
   (let ((groups (make-instance 'daq:object-list)))
     (daq:push-back groups "guest")
