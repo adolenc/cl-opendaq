@@ -286,8 +286,10 @@ from it (with read types matching the new descriptor) to continue reading."))
   "Call READ-INTO-BUFFER with the value sample width to size the read by, and
 return its RESULT.  READ-INTO-BUFFER performs one low-level read into a buffer of
 that width and returns (VALUES RESULT SAMPLES-READ STATUS).  Any descriptor event
-in STATUS announces the width of the *next* batch, so we cache it per reader and
-only re-read to skip a pure zero-sample event (e.g. the reader's initial one)."
+in STATUS announces the width of the *next* batch, so we cache it per reader; we
+re-read past every zero-sample event (the reader's initial one, and any later
+descriptor change such as a sample-rate change whose event carries no value
+descriptor), and only surface an empty result for a genuine no-data read."
   (loop with width = (multiple-value-bind (cached presentp)
                          (gethash reader *stream-reader-value-width*)
                        ;; The signal is only the initial guess; events take over.
@@ -299,13 +301,21 @@ only re-read to skip a pure zero-sample event (e.g. the reader's initial one)."
              ((plusp samples-read)
               (when event-width (setf (gethash reader *stream-reader-value-width*) event-width))
               (return result))
-             ;; Checked before EVENT-WIDTH: an invalidating event also carries a
-             ;; descriptor, but re-reading an invalid reader can never succeed.
+             ;; Checked before the event branch: an invalidating event also
+             ;; carries a descriptor, but re-reading an invalid reader can never
+             ;; succeed.
              ((and status (not (valid status)))
               (error 'reader-invalidated :reader reader))
-             (event-width
-              (setf width event-width
-                    (gethash reader *stream-reader-value-width*) event-width))
+             ;; A zero-sample descriptor-changed event: skip past it and re-read.
+             ;; It may announce a new value width (dimensioned signal) or only a
+             ;; domain change (e.g. a sample-rate change, whose value descriptor
+             ;; is null and so yields no EVENT-WIDTH) -- either way keep reading
+             ;; rather than surface an empty result.
+             ((and status (eq (read-status status) :event))
+              (when event-width
+                (setf width event-width
+                      (gethash reader *stream-reader-value-width*) event-width)))
+             ;; Genuine zero-sample read (e.g. a timeout with no data).
              (t (return result)))
         finally (return result)))
 

@@ -34,6 +34,24 @@
                                          (daq:domain-tick->timestamp signal (aref domain 0)))
                   "domain-tick->timestamp should agree with the domain-time-converter closure."))))))))
 
+(test high-level-stream-reader-skips-domain-only-events
+  (locally (declare (optimize (debug 3)))
+    (let* ((instance (make-instance 'daq:instance))
+           (root-device (daq:root-device instance))
+           (device (daq:add-device root-device "daqref://device0"))
+           (channel (daq:as (daq:find-component device "IO/AI/RefCh0") 'daq:channel))
+           (signal (first (daq:signals channel)))
+           (reader (make-instance 'daq:stream-reader :signal signal)))
+      (setf (daq:property-value device "GlobalSampleRate") 100
+            (daq:property-value channel "Frequency") 0.5)
+      (is (= 100 (cl:length (daq:read reader 100 :timeout-ms 2000))) "First READ must skip the initial and the sample-rate-change events and still return samples.")
+      (setf (daq:property-value device "GlobalSampleRate") 200)
+      (let ((total 0))
+        (loop for attempt below 20
+              while (< total 100)
+              do (incf total (cl:length (daq:read reader 100 :timeout-ms 2000))))
+        (is (>= total 100) "READs after a mid-stream sample-rate change must keep returning samples, not wedge on the domain-only event.")))))
+
 (test high-level-component-type-detection
   (let* ((instance (make-instance 'daq:instance))
          (device (daq:add-device (daq:root-device instance) "daqref://device0"))
