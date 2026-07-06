@@ -171,16 +171,13 @@ provides, or NIL when none is available."
      (let ((actual (%file-sha256 archive)))
        (cond
          ((null actual)
-          (warn "No SHA256 tool (sha256sum, shasum or certutil) is available; ~
-                 skipping checksum verification of ~A."
+          (warn "No SHA256 tool (sha256sum, shasum or certutil) is available; skipping checksum verification of ~A."
                 (namestring archive)))
          ((string-equal actual expected-sha256)
           t)
          (t
           (delete-file archive)
-          (error "SHA256 mismatch for ~A: expected ~A but got ~A. The ~
-                  download may be corrupted or tampered with; the file has ~
-                  been deleted."
+          (error "SHA256 mismatch for ~A: expected ~A but got ~A. The download may be corrupted or tampered with; the file has been deleted."
                  (namestring archive) expected-sha256 actual)))))))
 
 (defun install-native-libraries (&key (platform
@@ -193,14 +190,10 @@ is true.  Set OPENDAQ_NATIVE_ARCHIVE_URL to fetch the archive from a mirror
 instead of the pinned release."
   (let ((manifest (%native-archive-manifest)))
     (unless manifest
-      (error "This copy of the opendaq system ships no ~A manifest, so there ~
-              is no pinned release to download native libraries from. Build ~
-              them locally with `make bindings` or set ~A to an existing ~
-              openDAQ installation."
+      (error "This copy of the opendaq system ships no ~A manifest, so there is no pinned release to download native libraries from. Build them locally with `make bindings` or set ~A to an existing openDAQ installation."
              +native-manifest-file-name+ +native-directory-env-var+))
     (let* ((entry (or (%manifest-archive-entry manifest platform)
-                      (error "Release ~A has no native library archive for ~
-                              platform ~A (available: ~{~A~^, ~})."
+                      (error "Release ~A has no native library archive for platform ~A (available: ~{~A~^, ~})."
                              (getf manifest :tag) platform
                              (mapcar #'first (getf manifest :archives)))))
            (file-name (second entry))
@@ -219,8 +212,7 @@ instead of the pinned release."
              (archive (merge-pathnames file-name
                                        (%cache-native-root manifest))))
         (format *error-output*
-                "~&; opendaq: downloading native libraries (~A, release ~A)~%~
-                 ;   from ~A~%;   into ~A~%"
+                "~&; opendaq: downloading native libraries (~A, release ~A)~%   from ~A~%   into ~A~%"
                 platform (getf manifest :tag) url (namestring target))
         (%download-file url archive)
         (%verify-archive-checksum
@@ -232,8 +224,7 @@ instead of the pinned release."
         (delete-file archive)
         (when (and current-platform-p
                    (not (%directory-has-all-libraries-p target)))
-          (error "The downloaded archive ~A did not contain all expected ~
-                  openDAQ libraries (~{~A~^, ~})."
+          (error "The downloaded archive ~A did not contain all expected openDAQ libraries (~{~A~^, ~})."
                  file-name +native-library-file-names+))
         target))))
 

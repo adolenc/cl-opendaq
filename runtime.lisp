@@ -93,13 +93,10 @@
                                   (%current-platform-directory-name))))))
          (cond
            ((null manifest)
-            (format nil " No ~A manifest is present, so they cannot be ~
-                         downloaded automatically; build them with `make ~
-                         bindings`."
+            (format nil " No ~A manifest is present, so they cannot be downloaded automatically; build them with `make bindings`."
                     +native-manifest-file-name+))
            ((%downloads-disabled-p)
-            (format nil " Automatic download is disabled because ~A is set; ~
-                         unset it or call INSTALL-NATIVE-LIBRARIES yourself."
+            (format nil " Automatic download is disabled because ~A is set; unset it or call INSTALL-NATIVE-LIBRARIES yourself."
                     +no-download-env-var+)))
          +native-directory-env-var+))))
 

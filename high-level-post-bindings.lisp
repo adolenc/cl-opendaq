@@ -45,8 +45,7 @@ range, or the invalid/undefined sentinels), which these accessors cannot model."
     (:uint64         (cl:values :uint64 '(unsigned-byte 64) nil))
     (:complexfloat32 (cl:values :float  'single-float t))
     (:complexfloat64 (cl:values :double 'double-float t))
-    (t (error "openDAQ sample type ~S is not a flat numeric buffer; the data ~
-accessors handle the integer, float, and complex-float sample types."
+    (t (error "openDAQ sample type ~S is not a flat numeric buffer; the data accessors handle the integer, float, and complex-float sample types."
               sample-type))))
 
 (defun %sample-array-type (sample-type &optional allow-complex)
@@ -55,8 +54,7 @@ lisp-element-type complexp), as the streaming readers need.  Unless
 ALLOW-COMPLEX, errors on complex sample types (which the caller cannot return)."
   (multiple-value-bind (cffi-type element-type complexp) (%numeric-sample-layout sample-type)
     (when (and complexp (not allow-complex))
-      (error "openDAQ sample type ~S is complex; this reader cannot return ~
-complex samples." sample-type))
+      (error "openDAQ sample type ~S is complex; this reader cannot return complex samples." sample-type))
     (cl:values cffi-type element-type complexp)))
 
 (defun %buffer->vector (buffer cffi-type element-type count)
@@ -273,9 +271,7 @@ or NIL when STATUS is not an event or its event carries no value descriptor."
 (define-condition reader-invalidated (error)
   ((reader :initarg :reader :reader reader-invalidated-reader))
   (:report (lambda (condition stream)
-             (format stream "openDAQ reader ~S was invalidated by a descriptor ~
-change it cannot convert; recover by building a FROM-EXISTING reader from it ~
-with matching read types."
+             (format stream "openDAQ reader ~S was invalidated by a descriptor change it cannot convert; recover by building a FROM-EXISTING reader from it with matching read types."
                      (reader-invalidated-reader condition))))
   (:documentation "Signalled by READ / READ-WITH-DOMAIN when a signal's data
 descriptor changed to a sample type the reader cannot convert to its read type.
@@ -436,8 +432,7 @@ signal-count accessor, so we count the :SIGNALS object-list the constructor
 stashed in the class slot of the same name."
   (let ((signals (slot-value reader '%signals-initarg)))
     (unless signals
-      (error "Cannot determine the signal count of ~S; multi-reader READ needs a ~
-reader created with MAKE-INSTANCE and :SIGNALS." reader))
+      (error "Cannot determine the signal count of ~S; multi-reader READ needs a reader created with MAKE-INSTANCE and :SIGNALS." reader))
     (count signals)))
 
 (defmacro %with-multi-reader-buffers ((array-var buffers-var signal-count cffi-type sample-count) &body body)
@@ -597,8 +592,7 @@ interface inheritance chain as the pointer's current type.
 AS never leaves openDAQ: both the input and the result are wrappers.  To get the
 native Lisp value of an object, use UNBOX."
   (when (keywordp target-type)
-    (error "AS casts to an openDAQ class named by a symbol, e.g. (as x 'signal); ~
-to get the native Lisp value of ~S use (unbox ~:*~S) instead." object))
+    (error "AS casts to an openDAQ class named by a symbol, e.g. (as x 'signal); to get the native Lisp value of ~S use (unbox ~:*~S) instead." object))
   (let* ((class (if (symbolp target-type)
                     (find-class target-type)
                     target-type))
@@ -690,8 +684,7 @@ left intact (its reference is still released by the GC)."
   (if (cl:typep object 'managed-object)
       (multiple-value-bind (kind interface) (%unboxed-kind object)
         (case kind
-          ((nil) (error "~S has no natural Lisp form to UNBOX; keep it wrapped and ~
-AS it to the openDAQ interface you expect instead." object))
+          ((nil) (error "~S has no natural Lisp form to UNBOX; keep it wrapped and AS it to the openDAQ interface you expect instead." object))
           (:list (%unbox-daq-list interface))
           (:dict (%unbox-daq-dict interface))
           (t (%read-boxed-value interface kind))))
@@ -896,8 +889,7 @@ one, and an OBJECT-LIST for several."
 callable property NAME."
   (let ((got (cl:length args)))
     (unless (= got expected)
-      (error "openDAQ callable property ~S expects ~D argument~:P but was called ~
-with ~D." name expected got))))
+      (error "openDAQ callable property ~S expects ~D argument~:P but was called with ~D." name expected got))))
 
 (defun %function-property-caller (value property)
   "A Lisp function wrapping the FUNC-property VALUE (an openDAQ Function).  PROPERTY
