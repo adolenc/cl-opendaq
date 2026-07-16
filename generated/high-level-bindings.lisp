@@ -312,6 +312,7 @@
             discovery-info
             discovery-server
             discovery-server-root-device
+            discovery-server/mdns-with-options
             discovery-servers
             dispatch
             dispose
@@ -812,6 +813,7 @@
             remove-streaming-connection-status
             remove-streaming-source
             remove-type
+            remove-unused-devices
             replace
             request-current-configuration
             request-ip-config
@@ -3005,6 +3007,26 @@ Constructs the instance via the openDAQ C function daqDimensionRule_createLogari
   (when (and (not pointer-p) logger-p)
   (with-daq-boxed-values ((coerced-logger logger :managed-pointer))
     (%adopt-pointer object (opendaq.low-level:discovery-server/create-mdns-discovery-server coerced-logger)))
+    ))
+
+(defclass discovery-server/mdns-with-options (discovery-server)
+  (
+   (%logger-initarg :initarg :logger :initform nil)
+   (%options-initarg :initarg :options :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object discovery-server/mdns-with-options)
+                                       &key (pointer nil pointer-p)
+                                            (logger nil logger-p)
+                                            (options nil options-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqDiscoveryServer_createMdnsDiscoveryServerWithOptions()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) logger-p options-p)
+  (with-daq-boxed-values ((coerced-logger logger :managed-pointer)
+                          (coerced-options options :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:discovery-server/create-mdns-discovery-server-with-options coerced-logger coerced-options)))
     ))
 
 (defclass end-update-event-args (event-args)
@@ -8049,24 +8071,27 @@ Calls the openDAQ C function daqComponentPrivate_setComponentConfig()."
     (opendaq.low-level:component-private/set-component-config (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defgeneric (setf parent-active) (new-value object)
+(defgeneric (setf parent-active) (new-value object parent-active)
   (:documentation "Called by parent component to notify this component about parent's active state change.
 @param parentActive True if parent is active.
+@param onUpdate True if the call is triggered from config update, false if the call is triggered by a change of the active state.
 The component updates its internal parentActive flag and recomputes its effective active state.
 If the effective active state changes, triggers an AttributeChanged event.
 Container components (folders, devices) propagate this call to their children.
 
 Calls the openDAQ C function daqComponentPrivate_setParentActive()."))
-(defmethod (setf parent-active) (new-value (object component-private))
+(defmethod (setf parent-active) (new-value (object component-private) parent-active)
   "Called by parent component to notify this component about parent's active state change.
 @param parentActive True if parent is active.
+@param onUpdate True if the call is triggered from config update, false if the call is triggered by a change of the active state.
 The component updates its internal parentActive flag and recomputes its effective active state.
 If the effective active state changes, triggers an AttributeChanged event.
 Container components (folders, devices) propagate this call to their children.
 
 Calls the openDAQ C function daqComponentPrivate_setParentActive()."
-  (with-daq-boxed-values ((coerced-new-value new-value :daq-bool))
-    (opendaq.low-level:component-private/set-parent-active (%require-live-pointer object) coerced-new-value))
+  (with-daq-boxed-values ((coerced-parent-active parent-active :daq-bool)
+                          (coerced-new-value new-value :daq-bool))
+    (opendaq.low-level:component-private/set-parent-active (%require-live-pointer object) coerced-parent-active coerced-new-value))
   new-value)
 
 (defgeneric trigger-component-core-event (object args)
@@ -23188,6 +23213,19 @@ Calls the openDAQ C function daqUpdateParameters_getDeviceUpdateOptions()."
   (wrap (opendaq.low-level:update-parameters/get-device-update-options (%require-live-pointer object)) 'device-update-options)
 )
 
+(defgeneric remove-unused-devices (object)
+  (:documentation "Gets the removeUnusedDevices flag. When true, connected devices not mentioned in the loading config will be removed.
+@param remove The current value of the removeUnusedDevices flag.
+
+Calls the openDAQ C function daqUpdateParameters_getRemoveUnusedDevices()."))
+(defmethod remove-unused-devices ((object update-parameters))
+  "Gets the removeUnusedDevices flag. When true, connected devices not mentioned in the loading config will be removed.
+@param remove The current value of the removeUnusedDevices flag.
+
+Calls the openDAQ C function daqUpdateParameters_getRemoveUnusedDevices()."
+  (not (zerop (opendaq.low-level:update-parameters/get-remove-unused-devices (%require-live-pointer object))))
+)
+
 (defgeneric (setf device-update-options) (new-value object)
   (:documentation "Sets the device update options object that allows for specifying how a device and its subdevices are to be updated.
 @param options The device update options object.
@@ -23200,6 +23238,20 @@ Calls the openDAQ C function daqUpdateParameters_setDeviceUpdateOptions()."))
 Calls the openDAQ C function daqUpdateParameters_setDeviceUpdateOptions()."
   (with-daq-boxed-values ((coerced-new-value new-value :managed-pointer))
     (opendaq.low-level:update-parameters/set-device-update-options (%require-live-pointer object) coerced-new-value))
+  new-value)
+
+(defgeneric (setf remove-unused-devices) (new-value object)
+  (:documentation "Sets the removeUnusedDevices flag. When set to true, connected devices not mentioned in the loading config will be removed.
+@param mode The new value for the removeUnusedDevices flag.
+
+Calls the openDAQ C function daqUpdateParameters_setRemoveUnusedDevices()."))
+(defmethod (setf remove-unused-devices) (new-value (object update-parameters))
+  "Sets the removeUnusedDevices flag. When set to true, connected devices not mentioned in the loading config will be removed.
+@param mode The new value for the removeUnusedDevices flag.
+
+Calls the openDAQ C function daqUpdateParameters_setRemoveUnusedDevices()."
+  (with-daq-boxed-values ((coerced-new-value new-value :daq-bool))
+    (opendaq.low-level:update-parameters/set-remove-unused-devices (%require-live-pointer object) coerced-new-value))
   new-value)
 
 (defgeneric password-hash (object)
@@ -23708,6 +23760,7 @@ Calls the openDAQ C function daqWork_execute()."
          discovery-info
          discovery-server
          discovery-server-root-device
+         discovery-server/mdns-with-options
          discovery-servers
          dispatch
          dispose
@@ -24208,6 +24261,7 @@ Calls the openDAQ C function daqWork_execute()."
          remove-streaming-connection-status
          remove-streaming-source
          remove-type
+         remove-unused-devices
          replace
          request-current-configuration
          request-ip-config

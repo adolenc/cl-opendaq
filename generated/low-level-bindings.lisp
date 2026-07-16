@@ -2102,10 +2102,11 @@
 (cffi:defcfun ("daqComponentPrivate_setParentActive" %daq-component-private-set-parent-active) daq-err-code
   (self daq-component-private)
   (parent-active daq-bool)
+  (on-update daq-bool)
   )
 
-(defun component-private/set-parent-active (self parent-active)
-  (%check-error (%daq-component-private-set-parent-active self parent-active) "daqComponentPrivate_setParentActive")
+(defun component-private/set-parent-active (self parent-active on-update)
+  (%check-error (%daq-component-private-set-parent-active self parent-active on-update) "daqComponentPrivate_setParentActive")
   nil
 )
 
@@ -7070,6 +7071,19 @@
 (defun discovery-server/create-mdns-discovery-server (logger)
   (cffi:with-foreign-object (obj-slot 'daq-discovery-server)
     (%check-error (%daq-discovery-server-create-mdns-discovery-server obj-slot logger) "daqDiscoveryServer_createMdnsDiscoveryServer")
+    (cffi:mem-ref obj-slot 'daq-discovery-server)
+  )
+)
+
+(cffi:defcfun ("daqDiscoveryServer_createMdnsDiscoveryServerWithOptions" %daq-discovery-server-create-mdns-discovery-server-with-options) daq-err-code
+  (obj (:pointer daq-discovery-server))
+  (logger daq-logger)
+  (options daq-dict)
+  )
+
+(defun discovery-server/create-mdns-discovery-server-with-options (logger options)
+  (cffi:with-foreign-object (obj-slot 'daq-discovery-server)
+    (%check-error (%daq-discovery-server-create-mdns-discovery-server-with-options obj-slot logger options) "daqDiscoveryServer_createMdnsDiscoveryServerWithOptions")
     (cffi:mem-ref obj-slot 'daq-discovery-server)
   )
 )
@@ -19399,6 +19413,18 @@
   (%daq-update-parameters-get-interface-id intf-id)
   nil)
 
+(cffi:defcfun ("daqUpdateParameters_getRemoveUnusedDevices" %daq-update-parameters-get-remove-unused-devices) daq-err-code
+  (self daq-update-parameters)
+  (remove (:pointer daq-bool))
+  )
+
+(defun update-parameters/get-remove-unused-devices (self)
+  (cffi:with-foreign-object (remove-slot 'daq-bool)
+    (%check-error (%daq-update-parameters-get-remove-unused-devices self remove-slot) "daqUpdateParameters_getRemoveUnusedDevices")
+    (cffi:mem-ref remove-slot 'daq-bool)
+  )
+)
+
 (cffi:defcfun ("daqUpdateParameters_setDeviceUpdateOptions" %daq-update-parameters-set-device-update-options) daq-err-code
   (self daq-update-parameters)
   (options daq-device-update-options)
@@ -19406,6 +19432,16 @@
 
 (defun update-parameters/set-device-update-options (self options)
   (%check-error (%daq-update-parameters-set-device-update-options self options) "daqUpdateParameters_setDeviceUpdateOptions")
+  nil
+)
+
+(cffi:defcfun ("daqUpdateParameters_setRemoveUnusedDevices" %daq-update-parameters-set-remove-unused-devices) daq-err-code
+  (self daq-update-parameters)
+  (remove daq-bool)
+  )
+
+(defun update-parameters/set-remove-unused-devices (self remove)
+  (%check-error (%daq-update-parameters-set-remove-unused-devices self remove) "daqUpdateParameters_setRemoveUnusedDevices")
   nil
 )
 
@@ -20251,6 +20287,7 @@
   dimension/get-size
   dimension/get-unit
   discovery-server/create-mdns-discovery-server
+  discovery-server/create-mdns-discovery-server-with-options
   discovery-server/get-interface-id
   discovery-server/register-service
   discovery-server/set-root-device
@@ -21345,7 +21382,9 @@
   update-parameters/create-update-parameters
   update-parameters/get-device-update-options
   update-parameters/get-interface-id
+  update-parameters/get-remove-unused-devices
   update-parameters/set-device-update-options
+  update-parameters/set-remove-unused-devices
   user-internal/get-interface-id
   user-internal/get-password-hash
   user-internal/is-anonymous
