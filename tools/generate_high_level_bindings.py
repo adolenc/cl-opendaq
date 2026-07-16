@@ -911,7 +911,11 @@ def emit_coerced_call(parameters: tuple[dict, ...], inner_lines: list[str], inde
 
 
 def _camel_to_kebab(name: str) -> str:
+    """Map a C type name from a key_type/value_type annotation (e.g. daqLoggerSink)
+    to the lisp class name (logger-sink)."""
     hyphenated = re.sub(r"([a-z])([A-Z])", r"\1-\2", name).lower()
+    if hyphenated.startswith("daq-"):
+        hyphenated = hyphenated[4:]
     return CLASS_NAME_OVERRIDES.get(hyphenated, hyphenated)
 
 

@@ -14,8 +14,8 @@ Each line of stdout is a JSON object with a "kind" discriminator.  Example:
    "return_type": {"name": "daqErrCode"},
    "arguments": [
      {"name": "self",           "type": {"name": "daqDevice"}},
-     {"name": "devices",        "type": {"name": "daqDict", "pointer_depth": 2, "key_type": "String", "value_type": "Device"}},
-     {"name": "connectionArgs", "type": {"name": "daqDict", "pointer_depth": 1, "key_type": "String", "value_type": "PropertyObject"}}
+     {"name": "devices",        "type": {"name": "daqDict", "pointer_depth": 2, "key_type": "daqString", "value_type": "daqDevice"}},
+     {"name": "connectionArgs", "type": {"name": "daqDict", "pointer_depth": 1, "key_type": "daqString", "value_type": "daqPropertyObject"}}
    ],
    "docstring": "@brief Connects to multiple devices in parallel ...\\n...",
    "source_file": "bindings/c/include/copendaq/device/device.h"}
@@ -272,12 +272,6 @@ def split_top_level_args(args_str: str) -> list[str]:
             start = i + 1
     parts.append(args_str[start:])
     return parts
-
-
-def strip_daq_prefix(name: str) -> str:
-    """daqString -> String; annotation macros spell types with the daq prefix,
-    the emitted JSON keeps the historical unprefixed spelling."""
-    return name[3:] if name.startswith("daq") else name
 
 
 def parse_enum_entries(body: str, defines: dict[str, int] | None = None) -> list[dict]:
@@ -564,8 +558,7 @@ class HeaderParser:
                         if macro == "DEFAULT_VALUE":
                             arg.default_value = macro_args.strip()
                             continue
-                        types = [strip_daq_prefix(t.strip())
-                                 for t in macro_args.split(",") if t.strip()]
+                        types = [t.strip() for t in macro_args.split(",") if t.strip()]
                         if macro == "DICT_TEMPLATE_TYPE" or (
                             macro == "TEMPLATE_TYPE" and len(types) >= 2
                         ):
