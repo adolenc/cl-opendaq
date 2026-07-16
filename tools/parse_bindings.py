@@ -28,13 +28,13 @@ JSON schema (per kind):
     return_type    : TypeDesc
     arguments[]    : { name: str, type: TypeDesc, default_value: str? }
                                default_value present only for arguments that
-                               carry a // [defaultValue(...)] annotation
+                               carry a DAQ_DEFAULT_VALUE(...) annotation
     docstring      : str     - raw doxygen text with newlines preserved
     source_file    : str     - relative path from the repo root
 
   interface:
     name           : str     - e.g. "daqDevice"
-    parent         : str     - parent interface from DECLARE_OPENDAQ_INTERFACE
+    parent         : str     - parent interface from DAQ_EXTENDS_INTERFACE
     docstring      : str
     source_file    : str
 
@@ -67,33 +67,31 @@ import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, TypeVar
-
-T = TypeVar("T")
+from typing import Iterable
 
 
 # ---------------------------------------------------------------------------
 # Patterns (compiled once)
 # ---------------------------------------------------------------------------
 
-# Single-line comment that wraps DECLARE_OPENDAQ_INTERFACE
-IFACE_COMMENT_RE = re.compile(
-    r"^\s*//\s*DECLARE_OPENDAQ_INTERFACE\s*\(\s*(\w+)\s*,\s*(\w+)\s*\)\s*$",
+# DAQ_EXTENDS_INTERFACE(daqFoo, daqParent); macro invocation (expands to
+# `struct daqFoo`, so it is real code — the `^\s*` / `$` anchors keep the
+# #define in ccommon.h from matching)
+IFACE_MACRO_RE = re.compile(
+    r"^\s*DAQ_EXTENDS_INTERFACE\s*\(\s*(\w+)\s*,\s*(\w+)\s*\)\s*;\s*$",
     re.M,
 )
 
-# Single-line [templateType(param, Key, Value)] or [elementType(param, Elem)]
-_TEMPLATE_TYPE_RE = re.compile(
-    r"^\s*//\s*\[(templateType|elementType)\s*\(\s*(\w+)\s*,\s*([\w,\s]+)\)\s*\]\s*$",
-    re.M,
-)
-
-# Single-line [defaultValue(param, value)] — the source-language default for an
-# argument (e.g. nullptr, 0, -1).  C has no default arguments, so RTGen preserves
-# them as comment annotations alongside the templateType/elementType ones.
-_DEFAULT_VALUE_RE = re.compile(
-    r"^\s*//\s*\[defaultValue\s*\(\s*(\w+)\s*,\s*(.+?)\s*\)\s*\]\s*$",
-    re.M,
+# Inline parameter annotation macros, attached after the parameter name inside
+# a function declaration (all expand to nothing in C):
+#   DAQ_DEFAULT_VALUE(value)          — source-language default (nullptr, 0, -1)
+#   DAQ_LIST_ELEMENT_TYPE(daqElem)    — daqList element type
+#   DAQ_DICT_TEMPLATE_TYPE(daqK, daqV)— daqDict key/value types
+#   DAQ_TEMPLATE_TYPE(daqA[, daqB])   — generic template args (e.g. daqEvent)
+# The args never contain nested parentheses, so [^()]* is sufficient.
+_PARAM_ANNOTATION_RE = re.compile(
+    r"\s*DAQ_(DEFAULT_VALUE|LIST_ELEMENT_TYPE|DICT_TEMPLATE_TYPE|TEMPLATE_TYPE)"
+    r"\s*\(\s*([^()]*?)\s*\)"
 )
 
 # Doxygen /** ... @brief ... */ block (greedy across lines)
@@ -179,7 +177,7 @@ class ArgumentDesc:
     """Describes one function argument."""
     name: str
     type: TypeDesc
-    default_value: str | None = None    # source-language default, from a // [defaultValue(...)] annotation
+    default_value: str | None = None    # source-language default, from a DAQ_DEFAULT_VALUE(...) annotation
 
 
 @dataclass
@@ -195,7 +193,7 @@ class FunctionDesc:
 
 @dataclass
 class InterfaceDesc:
-    """Describes a DECLARE_OPENDAQ_INTERFACE declaration."""
+    """Describes a DAQ_EXTENDS_INTERFACE declaration."""
     kind: str = "interface"
     name: str = ""                    # e.g. daqDevice
     parent: str = ""                  # e.g. daqFolder
@@ -255,6 +253,31 @@ def split_arg_decl(declaration: str) -> tuple[str, str]:
     if not m:
         raise ValueError(f"Cannot split argument declaration: {declaration}")
     return m.group("type").strip(), m.group("name")
+
+
+def split_top_level_args(args_str: str) -> list[str]:
+    """Split an argument list on commas that are not nested inside parentheses
+    (annotation macros like DAQ_DICT_TEMPLATE_TYPE(daqString, daqBaseObject)
+    carry commas of their own)."""
+    parts: list[str] = []
+    depth = 0
+    start = 0
+    for i, ch in enumerate(args_str):
+        if ch == "(":
+            depth += 1
+        elif ch == ")":
+            depth -= 1
+        elif ch == "," and depth == 0:
+            parts.append(args_str[start:i])
+            start = i + 1
+    parts.append(args_str[start:])
+    return parts
+
+
+def strip_daq_prefix(name: str) -> str:
+    """daqString -> String; annotation macros spell types with the daq prefix,
+    the emitted JSON keeps the historical unprefixed spelling."""
+    return name[3:] if name.startswith("daq") else name
 
 
 def parse_enum_entries(body: str, defines: dict[str, int] | None = None) -> list[dict]:
@@ -397,22 +420,6 @@ def _find_doc_for_decl(
     return extract_docstring_summary(best_raw)
 
 
-def _collect_annotations_before(
-    func_ln: int, annotations: dict[int, list[T]]
-) -> list[T]:
-    """Return all annotations on lines before *func_ln*, flattened in line order.
-    Clears consumed lines so they aren't reused by a later declaration."""
-    result: list[T] = []
-    consumed: list[int] = []
-    for ln in sorted(annotations.keys()):
-        if ln < func_ln:
-            result.extend(annotations[ln])
-            consumed.append(ln)
-    for ln in consumed:
-        del annotations[ln]
-    return result
-
-
 class HeaderParser:
     """Parses a single C header file and extracts bindings."""
 
@@ -426,8 +433,8 @@ class HeaderParser:
     def parse(self, raw_text: str) -> None:
         """Parse raw header text and populate self.{interfaces, functions, typedefs}."""
 
-        # --- Phase 1: scan raw text for doxygen blocks, DECLARE_OPENDAQ_INTERFACE,
-        #     templateType annotations, and function declarations ---
+        # --- Phase 1: scan raw text for doxygen blocks, DAQ_EXTENDS_INTERFACE,
+        #     and function declarations ---
         # We do this on raw text so positions are accurate for association.
 
         # Doxygen blocks: list of (end_offset, raw text), in source order.
@@ -435,35 +442,10 @@ class HeaderParser:
         for m in DOXY_BLOCK_RE.finditer(raw_text):
             doxy_blocks.append((m.end(), m.group(0)))
 
-        # DECLARE_OPENDAQ_INTERFACE: list of (name, parent, decl_offset)
+        # DAQ_EXTENDS_INTERFACE: list of (name, parent, decl_offset)
         ifaces: list[tuple[str, str, int]] = []
-        for m in IFACE_COMMENT_RE.finditer(raw_text):
+        for m in IFACE_MACRO_RE.finditer(raw_text):
             ifaces.append((m.group(1), m.group(2), m.start()))
-
-        # templateType / elementType annotations: line -> list
-        template_annotations: dict[int, list[tuple[str, str | None, str | None]]] = {}
-        for m in _TEMPLATE_TYPE_RE.finditer(raw_text):
-            ln = raw_text[: m.start()].count("\n")
-            kind = m.group(1)
-            param_name = m.group(2)
-            types_str = m.group(3)
-            type_parts = [t.strip() for t in types_str.split(",")]
-            if kind == "templateType" and len(type_parts) >= 2:
-                template_annotations.setdefault(ln, []).append(
-                    (param_name, type_parts[0], type_parts[-1])
-                )
-            elif kind == "elementType" or kind == "templateType":
-                template_annotations.setdefault(ln, []).append(
-                    (param_name, None, type_parts[0])
-                )
-
-        # defaultValue annotations: line -> list of (param_name, value)
-        default_value_annotations: dict[int, list[tuple[str, str]]] = {}
-        for m in _DEFAULT_VALUE_RE.finditer(raw_text):
-            ln = raw_text[: m.start()].count("\n")
-            default_value_annotations.setdefault(ln, []).append(
-                (m.group(1), m.group(2).strip())
-            )
 
         # Function declarations — match on raw text with single-line comments blanked out
         # (to avoid matching commented-out declarations)
@@ -473,10 +455,9 @@ class HeaderParser:
                 REGULAR_BLOCK_COMMENT_RE.sub(lambda m: _blank_non_newlines(m.group(0)), raw_text),
             )
         )
-        func_matches: list[tuple[int, int, str, str, str]] = []  # (offset, line, return_str, name, args_str)
+        func_matches: list[tuple[int, str, str, str]] = []  # (offset, return_str, name, args_str)
         for m in FUNCTION_RE.finditer(raw_no_sl):
-            ln = raw_no_sl[: m.start()].count("\n")
-            func_matches.append((m.start(), ln, m.group(1).strip(), m.group(2), m.group(3).strip()))
+            func_matches.append((m.start(), m.group(1).strip(), m.group(2), m.group(3).strip()))
 
         # Code-only view (all comments, doxygen and preprocessor blanked, length
         # preserved) used to verify a docstring sits immediately before a
@@ -559,39 +540,40 @@ class HeaderParser:
                 source_file=self.source_file,
             ))
 
-        # --- Phase 5: functions with accurate docstring / templateType association ---
-        for func_off, func_ln, return_type_str, func_name, args_str in func_matches:
+        # --- Phase 5: functions with accurate docstring association ---
+        for func_off, return_type_str, func_name, args_str in func_matches:
             return_td = make_type_desc(return_type_str)
 
-            # Parse arguments
+            # Parse arguments; annotation macros (DAQ_DEFAULT_VALUE etc.) sit
+            # inline after the parameter name, so extract them before splitting
+            # the declaration into type and name.
             arguments: list[ArgumentDesc] = []
             if args_str and args_str != "void":
-                for idx, raw_arg in enumerate(args_str.split(","), start=1):
+                for idx, raw_arg in enumerate(split_top_level_args(args_str), start=1):
                     raw_arg = raw_arg.strip()
+                    annotations = _PARAM_ANNOTATION_RE.findall(raw_arg)
+                    if annotations:
+                        raw_arg = _PARAM_ANNOTATION_RE.sub("", raw_arg).strip()
                     try:
                         type_part, arg_name = split_arg_decl(raw_arg)
                     except ValueError:
                         arg_name = f"arg{idx}"
                         type_part = raw_arg
-                    arg_td = make_type_desc(type_part)
-                    arguments.append(ArgumentDesc(name=arg_name, type=arg_td))
-
-            # Find templateType annotations between previous function and this one
-            func_tts = _collect_annotations_before(func_ln, template_annotations)
-            for pname, kt, vt in func_tts:
-                for arg in arguments:
-                    if arg.name == pname:
-                        arg.type.key_type = kt
-                        arg.type.value_type = vt
-                        break
-
-            # Attach default values from [defaultValue(...)] annotations
-            func_defaults = _collect_annotations_before(func_ln, default_value_annotations)
-            for pname, value in func_defaults:
-                for arg in arguments:
-                    if arg.name == pname:
-                        arg.default_value = value
-                        break
+                    arg = ArgumentDesc(name=arg_name, type=make_type_desc(type_part))
+                    for macro, macro_args in annotations:
+                        if macro == "DEFAULT_VALUE":
+                            arg.default_value = macro_args.strip()
+                            continue
+                        types = [strip_daq_prefix(t.strip())
+                                 for t in macro_args.split(",") if t.strip()]
+                        if macro == "DICT_TEMPLATE_TYPE" or (
+                            macro == "TEMPLATE_TYPE" and len(types) >= 2
+                        ):
+                            arg.type.key_type = types[0]
+                            arg.type.value_type = types[-1]
+                        else:  # LIST_ELEMENT_TYPE or single-type TEMPLATE_TYPE
+                            arg.type.value_type = types[0]
+                    arguments.append(arg)
 
             # Find docstring
             doc = _find_doc_for_decl(func_off, doxy_blocks, fully_stripped)
