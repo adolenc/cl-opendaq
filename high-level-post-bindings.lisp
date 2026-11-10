@@ -607,7 +607,7 @@ native Lisp value of an object, use UNBOX."
 (defparameter *unboxable-interfaces*
   '((opendaq.low-level:string/get-interface-id         . string-object)
     (opendaq.low-level:integer/get-interface-id        . integer-object)
-    (opendaq.low-level:float-object/get-interface-id   . float-object)
+    (opendaq.low-level:float/get-interface-id   . float-object)
     (opendaq.low-level:boolean/get-interface-id        . boolean-object)
     (opendaq.low-level:ratio/get-interface-id          . ratio-object)
     (opendaq.low-level:complex-number/get-interface-id . complex-number-object)
@@ -1134,7 +1134,7 @@ unpacked into several.)"
       (progn
         ;; PARAMS is borrowed: add the reference the wrapper's GC finalizer
         ;; releases.
-        (opendaq.low-level:base-object/add-ref params)
+        (opendaq.low-level:unknown/add-ref params)
         (let ((object (wrap params 'base-object)))
           (multiple-value-bind (kind interface) (%unboxed-kind object)
             (case kind
@@ -1151,7 +1151,7 @@ to a daq list/dict; anything else boxes exactly as a :daq-base-object argument
 would (NIL to Boolean false).  Signals an error for a value openDAQ cannot box."
   (cond ((cl:typep value 'managed-object)
          (let ((raw (%require-live-pointer value)))
-           (opendaq.low-level:base-object/add-ref raw)
+           (opendaq.low-level:unknown/add-ref raw)
            raw))
         ((and value (listp value))
          (%box-transferring-reference (%box-collection value :list :undefined :undefined)))
