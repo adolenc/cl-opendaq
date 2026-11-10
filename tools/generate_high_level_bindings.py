@@ -16,7 +16,6 @@ from generate_low_level_bindings import (
 )
 
 
-DEFAULT_INCLUDE_DIR = Path(__file__).resolve().parents[1] / "include"
 
 
 # High-level class names that can't use their natural openDAQ-derived name because
@@ -31,13 +30,10 @@ CLASS_NAME_OVERRIDES = {
     # needs no rename for correctness -- it is listed only to carry the "-object" suffix
     # for consistency with the other boxed primitives (integer-object, float-object, ...).
     "complex-number": "complex-number-object",
-    # openDAQ names the boxed-float interface IFloatObject (so its functions are
-    # daqFloatObject_*, which already derive the class FLOAT-OBJECT) while the value
-    # type is daqFloat (which would derive FLOAT, a CL collision).  Map both onto
-    # FLOAT-OBJECT so the class, the daqFloat type, and the unboxer (see
-    # PRIMITIVE-TYPE-P) all agree, matching the INTEGER-OBJECT / NUMBER-OBJECT family.
+    # The boxed-float interface IFloat gives the C handle daqFloat, whose natural class
+    # name FLOAT collides with cl:float; FLOAT-OBJECT matches the INTEGER-OBJECT /
+    # NUMBER-OBJECT family.
     "float": "float-object",
-    "float-object": "float-object",
     "function": "function-object",
     "integer": "integer-object",
     "list": "object-list",
@@ -45,6 +41,10 @@ CLASS_NAME_OVERRIDES = {
     "ratio": "ratio-object",
     "string": "string-object",
     "type": "type-object",
+    # IUnknown (reference counting, interface queries) is the base of IBaseObject and
+    # has no objects of its own.  Its functions (daqUnknown_addRef, ...) are folded into
+    # BASE-OBJECT, where they have always lived on the Lisp side.
+    "unknown": "base-object",
 }
 
 CLASS_OVERRIDES: dict[str, dict] = {
@@ -120,14 +120,13 @@ MANUAL_METHODS = {
 }
 
 # Functions intentionally dropped because they are exact duplicates of another
-# generated entry.  openDAQ exposes both daqFloatObject_createFloat and
-# daqFloatObject_createFloatObject with identical (obj, value) signatures.  Since the
-# class is FLOAT-OBJECT, createFloatObject is the natural make-instance primary (it is
-# the {receiver}/create-{receiver} form select_class_constructors prefers), so suppress
-# the createFloat duplicate -- otherwise it would surface as a redundant FLOAT-OBJECT/FLOAT
-# proxy subclass.
+# generated entry.  openDAQ exposes both daqFloat_createFloat and
+# daqFloat_createFloatObject with identical (obj, value) signatures.  createFloat is
+# the natural make-instance primary (it is the {receiver}/create-{receiver} form
+# select_class_constructors prefers), so suppress the createFloatObject duplicate --
+# otherwise it would surface as a redundant FLOAT-OBJECT proxy subclass.
 SUPPRESSED_FUNCTIONS = {
-    "float-object/create-float",
+    "float/create-float-object",
     # createBoolean(value) duplicates createBoolObject(value) (the boolean-object
     # make-instance primary, also what the boxing layer uses); drop the dup so it
     # does not surface as a redundant boolean-object/boolean proxy.
@@ -264,33 +263,35 @@ def classify_function(function: dict) -> str:
 HIERARCHY_CACHE: dict[str, str] | None = None
 
 
-def _scan_interface_hierarchy(cpp_root: Path) -> dict[str, str]:
-    def to_lisp_name(camel: str) -> str:
+def _interface_hierarchy(records: list[dict]) -> dict[str, str]:
+    """Class -> parent class, from the spec's interface records.
+
+    IUnknown is folded into BASE-OBJECT (see CLASS_NAME_OVERRIDES), which therefore
+    has no parent of its own and hangs off MANAGED-OBJECT."""
+    def to_lisp_name(c_name: str) -> str:
+        camel = c_name[len("daq"):] if c_name.startswith("daq") else c_name
         hyphenated = re.sub(r"([a-z])([A-Z])", r"\1-\2", camel).lower()
         return CLASS_NAME_OVERRIDES.get(hyphenated, hyphenated)
 
     hierarchy: dict[str, str] = {}
-    rx = re.compile(r"DECLARE_OPENDAQ_INTERFACE\s*\(\s*I(\w+)\s*,\s*I(\w+)\s*\)")
-    for header in sorted(cpp_root.rglob("*.h")):
-        if "gmock" in str(header) or "test" in str(header):
+    for record in records:
+        if record["kind"] != "interface" or not record.get("parent"):
             continue
-        try:
-            text = header.read_text(errors="ignore")
-        except OSError:
-            continue
-        for match in rx.finditer(text):
-            child = to_lisp_name(match.group(1))
-            parent = to_lisp_name(match.group(2))
+        child = to_lisp_name(record["name"])
+        parent = to_lisp_name(record["parent"])
+        if parent != child:
             hierarchy[child] = parent
     return hierarchy
 
 
-def class_parent(class_name: str, cpp_root: Path | None = None) -> str:
+def set_interface_hierarchy(records: list[dict]) -> None:
     global HIERARCHY_CACHE
+    HIERARCHY_CACHE = _interface_hierarchy(records)
+
+
+def class_parent(class_name: str) -> str:
     if HIERARCHY_CACHE is None:
-        if cpp_root is None:
-            cpp_root = DEFAULT_INCLUDE_DIR.parent / "tmp" / "openDAQ" / "core"
-        HIERARCHY_CACHE = _scan_interface_hierarchy(cpp_root)
+        raise RuntimeError("set_interface_hierarchy() has not been called")
     if class_name == "managed-object":
         return "standard-object"
     return HIERARCHY_CACHE.get(class_name, "managed-object")
@@ -384,7 +385,7 @@ def optional_defaults_for(function: dict, override: dict) -> tuple[tuple[str, st
 BOXED_PRIMITIVE_TYPES = frozenset((
     "daq-base-object",
     "daq-integer",
-    "daq-float-object",
+    "daq-float",
     "daq-boolean",
     "daq-number",
     "daq-ratio",
@@ -403,7 +404,7 @@ def coerce_category(parameter: dict) -> str | None:
         return ":daq-number"
     if parameter["base_lisp_name"] in BOXED_PRIMITIVE_TYPES:
         return ":daq-base-object"
-    if parameter["base_lisp_name"] == "daq-bool":
+    if parameter["base_lisp_name"] == "daq-c-bool":
         return ":daq-bool"
     if parameter.get("pointer_like") and parameter["pointer_depth"] == 1:
         return ":managed-pointer"
@@ -922,7 +923,7 @@ def _camel_to_kebab(name: str) -> str:
 def value_expression(parameter: dict, value_form: str) -> str:
     if parameter["base_lisp_name"] == "daq-string":
         return f"(%daq-string-to-lisp-and-release {value_form})"
-    if parameter["base_lisp_name"] == "daq-bool":
+    if parameter["base_lisp_name"] == "daq-c-bool":
         return f"(not (zerop {value_form}))"
     cn = class_name_for_type(parameter["base_lisp_name"])
     if parameter.get("pointer_like") and cn is not None:
@@ -1311,8 +1312,9 @@ def _emit_writer(spec: dict, generic_docs: dict[str, tuple[tuple[str, str], ...]
 
 
 
-def render_output(include_dir: Path) -> str:
-    records = parse_records(include_dir)
+def render_output(spec: Path) -> str:
+    records = parse_records(spec)
+    set_interface_hierarchy(records)
     types = build_types(records)
     functions, _ = build_raw_functions(records, types)
     classes, methods = build_specs(functions)
@@ -1371,17 +1373,14 @@ def render_output(include_dir: Path) -> str:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Generate the high-level Common Lisp bindings layer.")
     parser.add_argument("--output", required=True, type=Path, help="Path to the generated high-level Lisp file.")
-    parser.add_argument(
-        "--include-dir", type=Path, default=DEFAULT_INCLUDE_DIR,
-        help="Path to the openDAQ C headers used to derive the high-level wrappers.",
-    )
+    parser.add_argument("--spec", type=Path, required=True, help="Path to opendaq.json, the openDAQ API spec.")
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
     try:
-        generated = render_output(args.include_dir)
+        generated = render_output(args.spec)
     except Exception as exc:  # noqa: BLE001
         print(f"error: {exc}", file=sys.stderr)
         return 1

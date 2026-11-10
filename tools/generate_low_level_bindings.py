@@ -129,25 +129,18 @@ def wrap_pointer(type_spec: str, depth: int) -> str:
     return type_spec
 
 
-def repo_root(path: Path) -> Path:
-    path = path.resolve()
-    if path.name != "include":
-        return path
-    if path.parent.name == "c" and path.parent.parent.name == "bindings":
-        return path.parent.parent.parent
-    return path.parent
-
-
-def parse_records(include_dir: Path) -> list[dict]:
+def parse_records(spec: Path) -> list[dict]:
+    """The binding records of an opendaq.json (see tools/spec_bindings.py)."""
     output = subprocess.run(
         [
             sys.executable,
-            str(Path(__file__).with_name("parse_bindings.py")),
-            "--opendaq-repo",
-            str(repo_root(include_dir)),
+            str(Path(__file__).with_name("spec_bindings.py")),
+            "--spec",
+            str(spec),
             "--kinds",
             "typedef",
             "function",
+            "interface",
             "error_code",
         ],
         check=True,
@@ -195,7 +188,7 @@ def build_types(records: list[dict]) -> dict[str, dict]:
                 "c_name": name,
                 "lisp_name": lisp_name,
                 "kind": "enum",
-                "cffi_spec": lisp_name if not duplicates and all(value is not None for _, value in values) else "daq-enum-type",
+                "cffi_spec": lisp_name if not duplicates and all(value is not None for _, value in values) else "daq-c-enum-type",
                 "enum_entries": tuple(
                     (entry_name, "<implicit-after-unsupported>" if entry_value is None else str(entry_value))
                     for entry_name, entry_value in values
@@ -216,7 +209,7 @@ def build_types(records: list[dict]) -> dict[str, dict]:
             return types[name]
         base_type = record.get("base_type")
         pointer_depth = record.get("pointer_depth", 0)
-        if name == "daqBaseObject" or pointer_depth > 0:
+        if name in {"daqBaseObject", "daqUnknown"} or pointer_depth > 0:
             types[name] = {
                 "c_name": name,
                 "lisp_name": lisp_name,
@@ -264,9 +257,9 @@ def parameter_mode(function: dict, parameter: dict) -> str:
         return "in"
     # A single pointer to an interface/callback is the object itself passed in
     # (an `Interface**` out-parameter has pointer_depth 2 and falls through to
-    # "out").  daqBaseObject is the pointer-aliased generic interface, so its
-    # one-pointer form is likewise an input value.
-    if parameter["pointer_depth"] == 1 and (parameter["base_kind"] in {"opaque", "callback"} or parameter["base_type"] == "daqBaseObject"):
+    # "out").  daqBaseObject and daqUnknown are the pointer-aliased generic
+    # interfaces, so their one-pointer form is likewise an input value.
+    if parameter["pointer_depth"] == 1 and (parameter["base_kind"] in {"opaque", "callback"} or parameter["base_type"] in {"daqBaseObject", "daqUnknown"}):
         return "in"
     # A `void*` is an opaque, caller-allocated raw buffer (reader sample/domain
     # buffers, packet data addresses) -- CFFI cannot allocate a typed slot for it,
@@ -431,7 +424,7 @@ def emit_type_section(types: dict[str, dict]) -> list[str]:
         lines.append("")
         if type_info["enum_has_unsupported_values"]:
             lines.append(f";; {type_info['c_name']} uses unsupported (non-integer) enum values; emit a raw enum alias plus constants/comments.")
-            lines.append(f"(cffi:defctype {type_info['lisp_name']} daq-enum-type)")
+            lines.append(f"(cffi:defctype {type_info['lisp_name']} daq-c-enum-type)")
             for entry_name, entry_value in type_info["enum_entries"]:
                 if entry_value.startswith("<"):
                     lines.append(f";; {entry_name} = {entry_value}")
@@ -523,8 +516,8 @@ def emit_function_section(functions: list[dict], skipped: list[tuple[str, str]])
     return lines
 
 
-def generate_low_level_bindings(include_dir: Path) -> str:
-    records = parse_records(include_dir)
+def generate_low_level_bindings(spec: Path) -> str:
+    records = parse_records(spec)
     types = build_types(records)
     functions, skipped = build_functions(records, types)
     # Dedup by code (a code is defined once across the headers) and sort.
@@ -546,8 +539,8 @@ def generate_low_level_bindings(include_dir: Path) -> str:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Generate low-level Common Lisp CFFI bindings from openDAQ C headers.")
-    parser.add_argument("--include-dir", type=Path, required=True, help="Directory containing the openDAQ C headers.")
+    parser = argparse.ArgumentParser(description="Generate low-level Common Lisp CFFI bindings from the openDAQ API spec.")
+    parser.add_argument("--spec", type=Path, required=True, help="Path to opendaq.json, the openDAQ API spec.")
     parser.add_argument("--output", type=Path, default=Path(__file__).resolve().parents[1] / "generated" / "low-level-bindings.lisp", help="Output Lisp file.")
     return parser.parse_args()
 
@@ -555,7 +548,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     try:
-        generated = generate_low_level_bindings(args.include_dir)
+        generated = generate_low_level_bindings(args.spec)
     except Exception as exc:  # noqa: BLE001
         print(f"error: {exc}", file=sys.stderr)
         return 1
