@@ -9,6 +9,7 @@
             accepts-signals
             active
             active-streaming-source
+            active-streaming-source-object
             add
             add-address
             add-address-info
@@ -59,6 +60,7 @@
             address-reachability-status
             addresses
             all-properties
+            all-properties-no-lock
             allocate
             allocator
             allocator/malloc
@@ -71,11 +73,13 @@
             argument-info/list
             arguments
             as-dictionary
+            as-source
             asset-id
             assign
             assigned
             authenticate
             authenticate-anonymous
+            authenticate-module-binary
             authenticated-only
             authentication-provider
             authentication-provider/json-file
@@ -85,13 +89,15 @@
             available-device-types
             available-devices
             available-function-block-types
+            available-modes
             available-operation-modes
+            available-sample-count
             available-samples
             available-server-types
+            available-sources
             available-streaming-types
             awaitable
             base-object
-            base-object-create
             begin-update
             binary-data
             binary-data-address
@@ -105,7 +111,11 @@
             block-reader/from-port
             block-size
             boolean-object
+            branch-name
             build
+            c-char-ptr
+            c-const-char-ptr
+            c-core-type
             call
             call-custom-proc
             callable-info
@@ -136,6 +146,7 @@
             clone-with-owner
             cloneable
             cloneable-clone
+            close-queue
             coerce
             coerce-no-lock
             coercer
@@ -156,6 +167,7 @@
             component-holder/with-ids
             component-log-level
             component-private
+            component-status
             component-status-container
             component-status-container-private
             component-type
@@ -170,6 +182,7 @@
             component-update-context-signal
             components
             components-log-level
+            config
             config-provider
             config-provider/env
             config-provider/json
@@ -192,17 +205,28 @@
             connection-strings
             connection-type
             connections
-            const-char-ptr
             contains
             context
             context-internal
+            context-internal-root-device
             convertible
             core-event-args
+            core-event-args/attribute-changed
+            core-event-args/component-added
+            core-event-args/component-removed
+            core-event-args/component-update-end
+            core-event-args/data-descriptor-changed
+            core-event-args/device-domain-changed
+            core-event-args/device-lock-state-changed
+            core-event-args/device-operation-mode-changed
             core-event-args/property-added
             core-event-args/property-object-update-end
             core-event-args/property-order-changed
             core-event-args/property-removed
             core-event-args/property-value-changed
+            core-event-args/signal-connected
+            core-event-args/signal-disconnected
+            core-event-args/tags-changed
             core-event-args/type-added
             core-event-args/type-removed
             core-event-callback
@@ -218,6 +242,7 @@
             create-devices
             create-end-iterator
             create-function-block
+            create-packet
             create-server
             create-start-iterator
             create-streaming
@@ -231,9 +256,12 @@
             data-descriptor-builder
             data-descriptor-builder/from-existing
             data-packet
+            data-packet/binary
+            data-packet/binary-with-external-memory
             data-packet/constant-with-domain
             data-packet/with-domain
             data-packet/with-external-memory
+            data-packet/wrapped
             data-rule
             data-rule-builder
             data-rule-builder-type
@@ -270,7 +298,9 @@
             deserialize-values
             deserialized-parameter
             deserializer
+            deserializer-unregister-serializer-factory
             deserializer-update
+            development-version-info
             device
             device-class
             device-config
@@ -292,6 +322,7 @@
             dict
             dict-element-type
             dict-remove
+            dict/owning
             dimension
             dimension-builder
             dimension-builder/from-existing
@@ -352,7 +383,15 @@
             enumerator-names
             equals
             equals-value
+            error-code
+            error-guard
             error-info
+            error-info-clear-error-info
+            error-info-error-info
+            error-info-error-info-list
+            error-info-error-info-message
+            error-info-extend-error-info
+            error-info-list
             eval
             eval-value
             eval-value/args
@@ -367,6 +406,7 @@
             event-packet/implicit-domain-gap-detected
             event-packets
             execute
+            execute-repetitively
             extend
             external-listener
             field-default-values
@@ -379,6 +419,7 @@
             find-properties
             find-user
             float-object
+            float-object/float-from-pool
             float-value
             flush
             flush-on-level
@@ -386,6 +427,7 @@
             folder-config
             folder-config/io-folder
             force-unlock
+            formatted-message
             free
             freezable
             freeze
@@ -412,11 +454,12 @@
             has-on-get-suggested-values-listeners
             has-on-read-listeners
             has-property
-            has-scaling-calc
+            has-property-no-lock
             has-server-capability
             has-type
             has-user-read-access
             hash-code
+            hash-digest
             high-value
             history-size
             host-name
@@ -449,6 +492,8 @@
             instance-root-device
             int-value
             integer-object
+            integer-object/integer-from-pool
+            interface-ids
             interfaces
             internal-state
             intf-id
@@ -492,10 +537,12 @@
             key-type-no-lock
             keys
             labels
+            last-error-info
             last-message
             last-message-logger-sink-private
             last-modified
             last-value
+            last-value-with-timestamp
             length
             level
             license-config
@@ -526,13 +573,13 @@
             log-file-info-builder
             log-file-infos
             log-level
+            log-message
             logger
             logger-component
             logger-sink
             logger-sink/rotating-file
             logger-sink/std-err
             logger-sink/std-out
-            logger-sink/win-debug
             logger-sinks
             logger-thread-pool
             low-value
@@ -543,6 +590,7 @@
             manufacturer
             manufacturer-uri
             mark-as-invalid
+            max-available-continous-sample-count
             max-value
             max-value-no-lock
             max-value-unresolved
@@ -559,8 +607,10 @@
             mirrored-device-type
             mirrored-domain-signal
             mirrored-input-port-config
+            mirrored-input-port-private
             mirrored-signal-config
             mirrored-signal-private
+            mode
             model
             module
             module-authenticator
@@ -602,6 +652,7 @@
             number-object
             numerator
             object-list
+            object-list/owning-list
             offset
             old-block-reader
             old-value
@@ -634,6 +685,8 @@
             owner
             owner-device-remote-id
             packet
+            packet-buffer
+            packet-buffer-builder
             packet-count
             packet-destruct-callback
             packet-id
@@ -672,6 +725,7 @@
             position
             post-scaling
             prefix
+            previous-error-code
             procedure
             product-code
             product-instance-uri
@@ -695,14 +749,21 @@
             property-event-type
             property-internal
             property-internal-clone
+            property-metadata-read-args
+            property-no-lock
             property-object
             property-object-class
             property-object-class-builder
             property-object-class-builder/with-manager
             property-object-class-internal
             property-object-class-internal-clone
+            property-object-core
+            property-object-core-lock-guard
+            property-object-core-recursive-lock-guard
             property-object-internal
             property-object-internal-clone
+            property-object-internal-lock-guard
+            property-object-internal-recursive-lock-guard
             property-object-protected
             property-object/with-class-and-manager
             property-order
@@ -730,8 +791,10 @@
             protected-property-selection-value
             protected-property-value
             protected-property-value-no-lock
+            protocol-group-id
             protocol-id
             protocol-name
+            protocol-security-level
             protocol-type
             protocol-version
             public
@@ -739,6 +802,7 @@
             push-front
             quantity
             query
+            query-interface
             range
             ratio-object
             raw-data
@@ -769,10 +833,12 @@
             reader-status
             real
             recorder
-            recursive-lock-guard
             recursive-search
+            ref
+            ref-as
             ref-count
             reference-domain-id
+            reference-domain-ids
             reference-domain-info
             reference-domain-info-builder
             reference-domain-info-builder/from-existing
@@ -820,6 +886,7 @@
             required-common-sample-rate
             requires-signal
             reset
+            resize
             result
             result-no-lock
             retrieve-network-configuration
@@ -844,13 +911,10 @@
             samples-until-next-event-packet
             samples-until-next-gap-packet
             save-configuration
-            scale-data
-            scale-data-output
             scaled-sample-type
             scaling
             scaling-builder
             scaling-builder/from-existing
-            scaling-calc-private
             scaling-type
             scaling/linear
             schedule-function
@@ -867,11 +931,14 @@
             search-filter/custom
             search-filter/excluded-tags
             search-filter/local-id
+            search-filter/name-property-filter
             search-filter/not
             search-filter/or
+            search-filter/read-only-property-filter
             search-filter/recursive
             search-filter/required-tags
             search-filter/visible
+            search-filter/visible-property-filter
             selected-source
             selection-values
             selection-values-no-lock
@@ -894,6 +961,7 @@
             serialized-object-read-object
             serialized-object-type
             serializer
+            serializer/json-with-version
             server
             server-capabilities
             server-capability
@@ -916,11 +984,15 @@
             simplify
             sink-log-level
             size
+            size-in-bytes
             skip-events
             skip-samples
             software-revision
             source
+            source-changed
             source-components
+            source-packet
+            source-supported
             start-list
             start-object
             start-on-full-unit-of-domain
@@ -945,6 +1017,7 @@
             streamed
             streaming
             streaming-connection-string
+            streaming-source-objects
             streaming-sources
             streaming-type
             string-object
@@ -968,10 +1041,19 @@
             suggested-values
             suggested-values-no-lock
             suggested-values-unresolved
+            supports-weak-ref
             symbol
             sync-component
             sync-component-private
+            sync-interface
+            sync-interface-internal
             sync-locked
+            sync-mode
+            sync-role-status
+            sync-source-status
+            sync-type
+            synchronization
+            synchronization-private
             system-type
             system-uuid
             tags
@@ -1001,6 +1083,8 @@
             trigger-component-core-event
             trigger-core-event
             trigger-event
+            try-lock
+            tweak
             type
             type-manager
             type-manager-private
@@ -1037,7 +1121,6 @@
             user-lock
             user-name
             username
-            uses-offset
             using-scheduler-main-loop
             valid
             validate
@@ -1063,12 +1146,16 @@
             visible
             visible-no-lock
             visible-properties
+            visible-properties-no-lock
             visible-unresolved
             visit-children
             wait
             wait-all
             wait-for-message
+            weak-ref
             work
+            work-repetitive
+            wrapped-data-packet
             write
             write-bool
             write-float
@@ -1328,6 +1415,14 @@ Constructs the instance via the openDAQ C function daqAuthenticationProvider_cre
    ))
 
 
+(defmethod initialize-instance :after ((object base-object)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqBaseObject_createBaseObject()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:base-object/create-base-object))
+    ))
 
 (defclass binary-data (base-object)
   (
@@ -1469,6 +1564,18 @@ Constructs the instance via the openDAQ C function daqAuthenticationProvider_cre
     (%adopt-pointer object (opendaq.low-level:boolean/create-bool-object coerced-value)))
     ))
 
+(defclass c-char-ptr (managed-object)
+  (
+   ))
+
+
+
+(defclass c-const-char-ptr (managed-object)
+  (
+   ))
+
+
+
 (defclass callable-info (base-object)
   (
    (%argument-info-initarg :initarg :argument-info :initform nil)
@@ -1486,7 +1593,8 @@ Constructs the instance via the openDAQ C function daqAuthenticationProvider_cre
   "Creates a CallableInfo object with the specified arguments and return type.
 @param argumentInfo The list of `ArgumentInfo` type argument information.
 @param returnType The return type of the described callable object.
-@param constFlag A flag indicating if the function is marked as const or not. A const function promises not to modify the state of the device or any other objects under the openDAQ instance.
+@param constFlag A flag indicating if the function is marked as const or not. A const function promises not to modify the state
+of the device or any other objects under the openDAQ instance.
 
 Constructs the instance via the openDAQ C function daqCallableInfo_createCallableInfo()."
   (declare (ignore pointer))
@@ -1498,12 +1606,6 @@ Constructs the instance via the openDAQ C function daqCallableInfo_createCallabl
     ))
 
 (defclass channel (function-block)
-  (
-   ))
-
-
-
-(defclass char-ptr (managed-object)
   (
    ))
 
@@ -1897,12 +1999,6 @@ Constructs the instance via the openDAQ C function daqConnectedClientInfo_create
 
 
 
-(defclass const-char-ptr (managed-object)
-  (
-   ))
-
-
-
 (defclass context (base-object)
   (
    (%scheduler-initarg :initarg :scheduler :initform nil)
@@ -1925,10 +2021,7 @@ Constructs the instance via the openDAQ C function daqConnectedClientInfo_create
                                             (options nil options-p)
                                             (discovery-servers nil discovery-servers-p)
                                        &allow-other-keys)
-  "@ingroup opendaq_context
-@addtogroup opendaq_context_factories Factories
-
-Constructs the instance via the openDAQ C function daqContext_createContext()."
+  "Constructs the instance via the openDAQ C function daqContext_createContext()."
   (declare (ignore pointer))
   (when (and (not pointer-p) scheduler-p logger-p type-manager-p module-manager-p authentication-provider-p options-p discovery-servers-p)
   (with-daq-boxed-values ((coerced-scheduler scheduler :managed-pointer)
@@ -1980,6 +2073,191 @@ Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEv
     (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args coerced-event-id coerced-event-name coerced-parameters)))
     ))
 
+(defclass core-event-args/attribute-changed (core-event-args)
+  (
+   (%attribute-name-initarg :initarg :attribute-name :initform nil)
+   (%attribute-value-initarg :initarg :attribute-value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/attribute-changed)
+                                       &key (pointer nil pointer-p)
+                                            (attribute-name nil attribute-name-p)
+                                            (attribute-value nil attribute-value-p)
+                                       &allow-other-keys)
+  "Creates Core event args that are passed as argument when a component's internal attribute
+is modified.
+@param attributeName The name of the changed attribute.
+@param attributeValue The new value of the attribute.
+
+An example of such attribute are the \"Active\" and \"Visible\" states of a component.
+
+The ID of the event is 100, and the event name is \"AttributeChanged\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsAttributeChanged()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) attribute-name-p attribute-value-p)
+  (with-daq-boxed-values ((coerced-attribute-name attribute-name :daq-string)
+                          (coerced-attribute-value attribute-value :daq-base-object))
+    (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-attribute-changed coerced-attribute-name coerced-attribute-value)))
+    ))
+
+(defclass core-event-args/component-added (core-event-args)
+  (
+   (%component-initarg :initarg :component :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/component-added)
+                                       &key (pointer nil pointer-p)
+                                            (component nil component-p)
+                                       &allow-other-keys)
+  "Creates Core event args that are passed as argument when a new component is added as a child.
+@param component The added component.
+
+The sender of the event is always the parent component.
+The ID of the event is 40, and the event name is \"ComponentAdded\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsComponentAdded()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) component-p)
+  (with-daq-boxed-values ((coerced-component component :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-component-added coerced-component)))
+    ))
+
+(defclass core-event-args/component-removed (core-event-args)
+  (
+   (%component-id-initarg :initarg :component-id :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/component-removed)
+                                       &key (pointer nil pointer-p)
+                                            (component-id nil component-id-p)
+                                       &allow-other-keys)
+  "Creates Core event args that are passed as argument when a component is removed from the list of children.
+@param componentId The local ID of the removed component.
+
+The sender of the event is always the parent of the removed component.
+
+The ID of the event is 50, and the event name is \"ComponentRemoved\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsComponentRemoved()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) component-id-p)
+  (with-daq-boxed-values ((coerced-component-id component-id :daq-string))
+    (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-component-removed coerced-component-id)))
+    ))
+
+(defclass core-event-args/component-update-end (core-event-args)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/component-update-end)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Creates Core event args that are passed as argument when a component is finished updating.
+
+A component finished updating at the end of the `update` call.
+The ID of the event is 90, and the event name is \"ComponentUpdateEnd\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsComponentUpdateEnd()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-component-update-end))
+    ))
+
+(defclass core-event-args/data-descriptor-changed (core-event-args)
+  (
+   (%descriptor-initarg :initarg :descriptor :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/data-descriptor-changed)
+                                       &key (pointer nil pointer-p)
+                                            (descriptor nil descriptor-p)
+                                       &allow-other-keys)
+  "Creates Core event args that are passed as argument when the descriptor of a signal changes.
+@param descriptor The new descriptor.
+
+The sender of the event is always the signal of which descriptor was changed.
+
+The ID of the event is 80, and the event name is \"DataDescriptorChanged\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsDataDescriptorChanged()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) descriptor-p)
+  (with-daq-boxed-values ((coerced-descriptor descriptor :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-data-descriptor-changed coerced-descriptor)))
+    ))
+
+(defclass core-event-args/device-domain-changed (core-event-args)
+  (
+   (%device-domain-initarg :initarg :device-domain :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/device-domain-changed)
+                                       &key (pointer nil pointer-p)
+                                            (device-domain nil device-domain-p)
+                                       &allow-other-keys)
+  "Creates Core event args that are passed as argument when the domain of a device changes.
+@param deviceDomain The new device domain
+
+The ID of the event is 150, and the event name is \"DeviceDomainChanged\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsDeviceDomainChanged()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) device-domain-p)
+  (with-daq-boxed-values ((coerced-device-domain device-domain :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-device-domain-changed coerced-device-domain)))
+    ))
+
+(defclass core-event-args/device-lock-state-changed (core-event-args)
+  (
+   (%is-locked-initarg :initarg :is-locked :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/device-lock-state-changed)
+                                       &key (pointer nil pointer-p)
+                                            (is-locked nil is-locked-p)
+                                       &allow-other-keys)
+  "Creates Core event args that are passed as argument when the device is locked or unlocked.
+@param isLocked New lock state of the device.
+
+The ID of the event is 160, and the event name is \"DeviceLockStateChanged\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsDeviceLockStateChanged()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) is-locked-p)
+  (with-daq-boxed-values ((coerced-is-locked is-locked :daq-bool))
+    (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-device-lock-state-changed coerced-is-locked)))
+    ))
+
+(defclass core-event-args/device-operation-mode-changed (core-event-args)
+  (
+   (%operation-mode-initarg :initarg :operation-mode :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/device-operation-mode-changed)
+                                       &key (pointer nil pointer-p)
+                                            (operation-mode nil operation-mode-p)
+                                       &allow-other-keys)
+  "Creates Core event args that are passed as argument when the device operation mode changes.
+@param operationMode The new operation mode of the device.
+
+The ID of the event is 180, and the event name is \"DeviceOperationModeChanged\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsDeviceOperationModeChanged()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) operation-mode-p)
+  (with-daq-boxed-values ((coerced-operation-mode operation-mode nil))
+    (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-device-operation-mode-changed coerced-operation-mode)))
+    ))
+
 (defclass core-event-args/property-added (core-event-args)
   (
    (%prop-owner-initarg :initarg :prop-owner :initform nil)
@@ -1997,7 +2275,9 @@ Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEv
   "Creates Core event args that are passed as argument when a property is added to a component.
 @param propOwner The property object that owns the added property.
 @param prop The property that was added.
-@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\". Does not include the Component id and property name.
+@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\".
+Does not include the Component id and property name.
+
 The ID of the event is 20, and the event name is \"PropertyAdded\".
 
 Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsPropertyAdded()."
@@ -2025,8 +2305,11 @@ Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEv
                                        &allow-other-keys)
   "Creates Core event args that are passed as argument when a property object is finished updating.
 @param propOwner The property object that was updated.
-@param updatedProperties The dictionary of updated properties. Contains the name (string) of a property as key, and the new value (base object) as the dictionary value.
-@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\". Does not include the Component id.
+@param updatedProperties The dictionary of updated properties. Contains the name (string) of a property
+as key, and the new value (base object) as the dictionary value.
+@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\".
+Does not include the Component id.
+
 A property object finished updating when `endUpdate` is called, or at the end of the `update` call.
 The ID of the event is 10, and the event name is \"PropertyObjectUpdateEnd\".
 
@@ -2057,6 +2340,7 @@ Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEv
 @param propOwner The property object that owns the properties whose order was changed.
 @param propertyOrder The list of property names in the new order.
 @param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\".
+
 The ID of the event is 190, and the event name is \"PropertyOrderChanged\".
 
 Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsPropertyOrderChanged()."
@@ -2085,7 +2369,9 @@ Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEv
   "Creates Core event args that are passed as argument when a property is removed from a component.
 @param propOwner The property object that owned the removed property.
 @param propName The name of the property that was removed.
-@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\". Does not include the Component id and property name.
+@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\".
+Does not include the Component id and property name.
+
 The ID of the event is 30, and the event name is \"PropertyRemoved\".
 
 Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsPropertyRemoved()."
@@ -2117,7 +2403,9 @@ Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEv
 @param propOwner The property object that owns the changed property.
 @param propName The name of the property of which value was changed.
 @param value The new value of the property.
-@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\". Does not include the Component id and property name.
+@param path The relative path to the property owner from the sender component. Used for object-type properties. Eg. \"child1.child2\".
+Does not include the Component id and property name.
+
 The ID of the event is 0, and the event name is \"PropertyValueChanged\".
 
 Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsPropertyValueChanged()."
@@ -2128,6 +2416,73 @@ Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEv
                           (coerced-value value :daq-base-object)
                           (coerced-path path :daq-string))
     (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-property-value-changed coerced-prop-owner coerced-prop-name coerced-value coerced-path)))
+    ))
+
+(defclass core-event-args/signal-connected (core-event-args)
+  (
+   (%signal-initarg :initarg :signal :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/signal-connected)
+                                       &key (pointer nil pointer-p)
+                                            (signal nil signal-p)
+                                       &allow-other-keys)
+  "Creates Core event args that are passed as argument when a signal is connected to an input port.
+@param signal The connected signal.
+
+The sender of the event is always the input port into which the signal was connected.
+
+The ID of the event is 60, and the event name is \"SignalConnected\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsSignalConnected()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) signal-p)
+  (with-daq-boxed-values ((coerced-signal signal :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-signal-connected coerced-signal)))
+    ))
+
+(defclass core-event-args/signal-disconnected (core-event-args)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/signal-disconnected)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Creates Core event args that are passed as argument when a signal is connected to an input port.
+
+The sender of the event is always the input port from which the signal was disconnected. The parameters
+of this event are empty.
+
+The ID of the event is 70, and the event name is \"SignalDisconnected\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsSignalDisconnected()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-signal-disconnected))
+    ))
+
+(defclass core-event-args/tags-changed (core-event-args)
+  (
+   (%tags-initarg :initarg :tags :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object core-event-args/tags-changed)
+                                       &key (pointer nil pointer-p)
+                                            (tags nil tags-p)
+                                       &allow-other-keys)
+  "Creates Core event args that are passed as argument when a tag is added/removed from a component.
+@param tags The list of tags (as strings).
+
+The ID of the event is 110, and the event name is \"TagsChanged\".
+
+Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsTagsChanged()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) tags-p)
+  (with-daq-boxed-values ((coerced-tags tags :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:core-event-args/create-core-event-args-tags-changed coerced-tags)))
     ))
 
 (defclass core-event-args/type-added (core-event-args)
@@ -2142,6 +2497,7 @@ Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEv
                                        &allow-other-keys)
   "Creates Core event args that are passed as argument when a type is added to the type manager.
 @param type The type that was added.
+
 The ID of the event is 130, and the event name is \"TypeAdded\".
 
 Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsTypeAdded()."
@@ -2163,6 +2519,7 @@ Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEv
                                        &allow-other-keys)
   "Creates Core event args that are passed as argument when a type is removed from the type manager.
 @param typeName The name of the removed type
+
 The ID of the event is 140, and the event name is \"TypeRemoved\".
 
 Constructs the instance via the openDAQ C function daqCoreEventArgs_createCoreEventArgsTypeRemoved()."
@@ -2224,7 +2581,8 @@ Constructs the instance via the openDAQ C function daqDataDescriptorBuilder_crea
                                        &key (pointer nil pointer-p)
                                             (descriptor-to-copy nil descriptor-to-copy-p)
                                        &allow-other-keys)
-  "Data descriptor copy factory that creates a Data descriptor builder object from a different Data descriptor, copying its parameters.
+  "Data descriptor copy factory that creates a Data descriptor builder object from a
+different Data descriptor, copying its parameters.
 @param descriptorToCopy The Data descriptor of which configuration should be copied.
 
 Constructs the instance via the openDAQ C function daqDataDescriptorBuilder_createDataDescriptorBuilderFromExisting()."
@@ -2248,10 +2606,12 @@ Constructs the instance via the openDAQ C function daqDataDescriptorBuilder_crea
                                             (sample-count nil sample-count-p)
                                             (offset nil offset-p)
                                        &allow-other-keys)
-  "Creates a Data packet with a given descriptor, sample count, memory size of each sample, and an optional packet offset.
+  "Creates a Data packet with a given descriptor, sample count, memory size of each sample,
+and an optional packet offset.
 @param descriptor The descriptor of the signal sending the data.
 @param sampleCount The number of samples in the packet.
-@param offset Optional packet offset parameter, used to calculate the data of the packet if the Data rule of the Signal descriptor is not explicit.
+@param offset Optional packet offset parameter, used to calculate the data of the packet
+if the Data rule of the Signal descriptor is not explicit.
 
 Constructs the instance via the openDAQ C function daqDataPacket_createDataPacket()."
   (declare (ignore pointer))
@@ -2260,6 +2620,83 @@ Constructs the instance via the openDAQ C function daqDataPacket_createDataPacke
                           (coerced-sample-count sample-count nil)
                           (coerced-offset offset :daq-number))
     (%adopt-pointer object (opendaq.low-level:data-packet/create-data-packet coerced-descriptor coerced-sample-count coerced-offset)))
+    ))
+
+(defclass data-packet/binary (data-packet)
+  (
+   (%domain-packet-initarg :initarg :domain-packet :initform nil)
+   (%descriptor-initarg :initarg :descriptor :initform nil)
+   (%sample-mem-size-initarg :initarg :sample-mem-size :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object data-packet/binary)
+                                       &key (pointer nil pointer-p)
+                                            (domain-packet nil domain-packet-p)
+                                            (descriptor nil descriptor-p)
+                                            (sample-mem-size nil sample-mem-size-p)
+                                       &allow-other-keys)
+  "Creates a binary value packet that contains exactly one sample.
+@param domainPacket The Data packet carrying domain data (can be nullptr).
+@param descriptor The descriptor of the signal sending the data.
+@param sampleMemSize The memory size of a sample.
+
+Binary value packet should contain exactly one sample of `SampleType::Binary` or `SampleType::String`
+sample type.
+
+For String type signals, the string data must be encoded as UTF-8 strings. The string length is
+determined by the `sampleMemSize` parameter, and the string does not need to be null-terminated.
+
+Constructs the instance via the openDAQ C function daqDataPacket_createBinaryDataPacket()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) domain-packet-p descriptor-p sample-mem-size-p)
+  (with-daq-boxed-values ((coerced-domain-packet domain-packet :managed-pointer)
+                          (coerced-descriptor descriptor :managed-pointer)
+                          (coerced-sample-mem-size sample-mem-size nil))
+    (%adopt-pointer object (opendaq.low-level:data-packet/create-binary-data-packet coerced-domain-packet coerced-descriptor coerced-sample-mem-size)))
+    ))
+
+(defclass data-packet/binary-with-external-memory (data-packet)
+  (
+   (%domain-packet-initarg :initarg :domain-packet :initform nil)
+   (%descriptor-initarg :initarg :descriptor :initform nil)
+   (%sample-mem-size-initarg :initarg :sample-mem-size :initform nil)
+   (%data-initarg :initarg :data :initform nil)
+   (%deleter-initarg :initarg :deleter :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object data-packet/binary-with-external-memory)
+                                       &key (pointer nil pointer-p)
+                                            (domain-packet nil domain-packet-p)
+                                            (descriptor nil descriptor-p)
+                                            (sample-mem-size nil sample-mem-size-p)
+                                            (data nil data-p)
+                                            (deleter nil deleter-p)
+                                       &allow-other-keys)
+  "Creates a binary value packet with external memory and a deleter that contains exactly one sample.
+@param domainPacket The Data packet carrying domain data (can be nullptr).
+@param descriptor The descriptor of the signal sending the data.
+@param sampleMemSize The memory size of a sample.
+@param data Pointer to the external memory buffer.
+@param deleter Custom deleter callback that is called when the packet is destroyed.
+
+Binary value packet should contain exactly one sample of `SampleType::Binary` or `SampleType::String`
+sample type. Memory should be allocated by the caller and a custom deleter callback
+should be provided.
+
+For String type signals, the string data must be encoded as UTF-8 strings. The string length is
+determined by the `sampleMemSize` parameter, and the string does not need to be null-terminated.
+
+Constructs the instance via the openDAQ C function daqDataPacket_createBinaryDataPacketWithExternalMemory()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) domain-packet-p descriptor-p sample-mem-size-p data-p deleter-p)
+  (with-daq-boxed-values ((coerced-domain-packet domain-packet :managed-pointer)
+                          (coerced-descriptor descriptor :managed-pointer)
+                          (coerced-sample-mem-size sample-mem-size nil)
+                          (coerced-data data nil)
+                          (coerced-deleter deleter :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:data-packet/create-binary-data-packet-with-external-memory coerced-domain-packet coerced-descriptor coerced-sample-mem-size coerced-data coerced-deleter)))
     ))
 
 (defclass data-packet/constant-with-domain (data-packet)
@@ -2282,13 +2719,15 @@ Constructs the instance via the openDAQ C function daqDataPacket_createDataPacke
                                             (other-values nil other-values-p)
                                             (other-value-count nil other-value-count-p)
                                        &allow-other-keys)
-  "Creates a Data packet with a given constat rule descriptor, initial constant value, and other constant values.
+  "Creates a Data packet with a given constat rule descriptor, initial constant value,
+and other constant values.
 @param domainPacket The Data packet carrying domain data.
 @param descriptor The descriptor of the signal sending the data.
 @param sampleCount The number of samples in the packet.
 @param initialValue The initial constant value.
 @param otherValues The other constant values.
 @param otherValueCount The number of other constant values.
+
 The values in the packet are calculated by constant rule. The initial value is taken as a constant.
 Other values are used to change the constant value within the packet. Any number of other constant values
 can be used. Other values are passed as an array of struct with uint32_t sample position field and value field.
@@ -2322,11 +2761,13 @@ Constructs the instance via the openDAQ C function daqDataPacket_createConstantD
                                             (sample-count nil sample-count-p)
                                             (offset nil offset-p)
                                        &allow-other-keys)
-  "Creates a Data packet with a given descriptor, sample count, memory size of each sample, and an optional implicit value.
+  "Creates a Data packet with a given descriptor, sample count, memory size of each sample,
+and an optional implicit value.
 @param domainPacket The Data packet carrying domain data.
 @param descriptor The descriptor of the signal sending the data.
 @param sampleCount The number of samples in the packet.
-@param offset Optional packet offset parameter, used to calculate the data of the packet if the Data rule of the Signal descriptor is not explicit.
+@param offset Optional packet offset parameter, used to calculate the data of the packet
+if the Data rule of the Signal descriptor is not explicit.
 
 Constructs the instance via the openDAQ C function daqDataPacket_createDataPacketWithDomain()."
   (declare (ignore pointer))
@@ -2360,13 +2801,16 @@ Constructs the instance via the openDAQ C function daqDataPacket_createDataPacke
                                             (deleter nil deleter-p)
                                             (buffer-size nil buffer-size-p)
                                        &allow-other-keys)
-  "Creates a Data packet with a given descriptor, sample count, an optional packet offset, external memory location for data, custom deleter function and buffer size of external memory.
+  "Creates a Data packet with a given descriptor, sample count, an optional packet offset,
+external memory location for data, custom deleter function and buffer size of external memory.
 @param descriptor The descriptor of the signal sending the data.
 @param sampleCount The number of samples in the packet.
-@param offset Optional packet offset parameter, used to calculate the data of the packet if the Data rule of the Signal descriptor is not explicit.
+@param offset Optional packet offset parameter, used to calculate the data of the packet
+if the Data rule of the Signal descriptor is not explicit.
 @param externalMemory The pointer to the location of buffer data.
 @param deleter Custom deleter callback that is called when the packet is destroyed
 @param bufferSize The size of the external memory.
+
 Use this factory when pointer to create a packet which uses an existing memory. The memory should not be
 freed or written until the packet is destroyed. A deleter callback should be passed as a parameter that
 is called when the packet is destroyed. The callback should free the memory provided. If bufferSize parameter
@@ -2383,6 +2827,30 @@ Constructs the instance via the openDAQ C function daqDataPacket_createDataPacke
                           (coerced-deleter deleter :managed-pointer)
                           (coerced-buffer-size buffer-size nil))
     (%adopt-pointer object (opendaq.low-level:data-packet/create-data-packet-with-external-memory coerced-domain-packet coerced-descriptor coerced-sample-count coerced-offset coerced-external-memory coerced-deleter coerced-buffer-size)))
+    ))
+
+(defclass data-packet/wrapped (data-packet)
+  (
+   (%source-packet-initarg :initarg :source-packet :initform nil)
+   (%descriptor-initarg :initarg :descriptor :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object data-packet/wrapped)
+                                       &key (pointer nil pointer-p)
+                                            (source-packet nil source-packet-p)
+                                            (descriptor nil descriptor-p)
+                                       &allow-other-keys)
+  "Creates a wrapped data packet.
+@param sourcePacket The source packet being wrapped.
+@param descriptor The descriptor of the packet.
+
+Constructs the instance via the openDAQ C function daqDataPacket_createWrappedDataPacket()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) source-packet-p descriptor-p)
+  (with-daq-boxed-values ((coerced-source-packet source-packet :managed-pointer)
+                          (coerced-descriptor descriptor :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:data-packet/create-wrapped-data-packet coerced-source-packet coerced-descriptor)))
     ))
 
 (defclass data-rule (base-object)
@@ -2441,7 +2909,8 @@ Constructs the instance via the openDAQ C function daqDataRuleBuilder_createData
                                        &key (pointer nil pointer-p)
                                             (rule-to-copy nil rule-to-copy-p)
                                        &allow-other-keys)
-  "Data rule copy factory that creates a configurable Data rule builder object from a possibly non-configurable Data rule.
+  "Data rule copy factory that creates a configurable Data rule builder object from a
+possibly non-configurable Data rule.
 @param ruleToCopy The rule of which configuration should be copied.
 
 Constructs the instance via the openDAQ C function daqDataRuleBuilder_createDataRuleBuilderFromExisting()."
@@ -2498,6 +2967,7 @@ Constructs the instance via the openDAQ C function daqDataRule_createExplicitDat
   "Creates a DataRule with an Explicit rule type configuration two optional parameters.
 @param minExpectedDelta The lowest expected distance between two samples.
 @param maxExpectedDelta The highest expected distance between two samples.
+
 Most often used for domain signals to specify estimates on how close together/far apart two
 subsequent samples might be.
 
@@ -2524,6 +2994,7 @@ Constructs the instance via the openDAQ C function daqDataRule_createExplicitDom
   "Creates a DataRule with a Linear rule type configuration.
 @param delta Coefficient by which the input data is to be multiplied.
 @param start Constant that is added to the <em>scale * value</em> multiplication result.
+
 The scale and offset are stored within the `parameters` member of the Rule object
 with the scale being at the first position of the list, and the offset at the second.
 
@@ -2552,6 +3023,46 @@ Constructs the instance via the openDAQ C function daqDataRule_createLinearDataR
    ))
 
 
+(defmethod initialize-instance :after ((object deserializer)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqDeserializer_createJsonDeserializer()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:deserializer/create-json-deserializer))
+    ))
+
+(defclass development-version-info (base-object)
+  (
+   (%major-initarg :initarg :major :initform nil)
+   (%minor-initarg :initarg :minor :initform nil)
+   (%patch-initarg :initarg :patch :initform nil)
+   (%tweak-initarg :initarg :tweak :initform nil)
+   (%branch-initarg :initarg :branch :initform nil)
+   (%hash-initarg :initarg :hash :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object development-version-info)
+                                       &key (pointer nil pointer-p)
+                                            (major nil major-p)
+                                            (minor nil minor-p)
+                                            (patch nil patch-p)
+                                            (tweak nil tweak-p)
+                                            (branch nil branch-p)
+                                            (hash nil hash-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqDevelopmentVersionInfo_createDevelopmentVersionInfo()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) major-p minor-p patch-p tweak-p branch-p hash-p)
+  (with-daq-boxed-values ((coerced-major major nil)
+                          (coerced-minor minor nil)
+                          (coerced-patch patch nil)
+                          (coerced-tweak tweak nil)
+                          (coerced-branch branch :daq-string)
+                          (coerced-hash hash :daq-string))
+    (%adopt-pointer object (opendaq.low-level:development-version-info/create-development-version-info coerced-major coerced-minor coerced-patch coerced-tweak coerced-branch coerced-hash)))
+    ))
 
 (defclass device (folder)
   (
@@ -2723,7 +3234,8 @@ Constructs the instance via the openDAQ C function daqDevice_createClient()."
 @param id The unique type ID of the device.
 @param name The name of the device type.
 @param description A short description of the device type.
-@param defaultConfig The property object, to be cloned and returned, each time user creates default configuration object. This way each instance of the device has its own configuration object.
+@param defaultConfig The property object, to be cloned and returned, each time user creates default
+configuration object. This way each instance of the device has its own configuration object.
 
 Constructs the instance via the openDAQ C function daqDeviceType_createDeviceType()."
   (declare (ignore pointer))
@@ -2772,6 +3284,26 @@ Constructs the instance via the openDAQ C function daqDeviceType_createDeviceTyp
    ))
 
 
+
+(defclass dict/owning (dict)
+  (
+   (%owner-initarg :initarg :owner :initform nil)
+   (%ref-initarg :initarg :ref :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object dict/owning)
+                                       &key (pointer nil pointer-p)
+                                            (owner nil owner-p)
+                                            (ref nil ref-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqDict_createOwningDict()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) owner-p ref-p)
+  (with-daq-boxed-values ((coerced-owner owner :managed-pointer)
+                          (coerced-ref ref :daq-string))
+    (%adopt-pointer object (opendaq.low-level:dict/create-owning-dict coerced-owner coerced-ref)))
+    ))
 
 (defclass dimension (base-object)
   (
@@ -2927,6 +3459,7 @@ Constructs the instance via the openDAQ C function daqDimensionRuleBuilder_creat
 @param delta Coefficient by which the input data is to be multiplied.
 @param start Constant that is added to the <em>scale * value</em> multiplication result.
 @param size The size of the dimension described by the rule
+
 The scale and offset are stored within the `parameters` member of the Rule object
 with the scale being at the first position of the list, and the offset at the second.
 
@@ -2951,6 +3484,7 @@ Constructs the instance via the openDAQ C function daqDimensionRule_createLinear
                                        &allow-other-keys)
   "Creates a Rule with a List rule type configuration.
 @param list The list of dimension labels.
+
 The list is stored within the `parameters` member of the Rule object.
 
 Constructs the instance via the openDAQ C function daqDimensionRule_createListDimensionRule()."
@@ -3178,6 +3712,26 @@ Constructs the instance via the openDAQ C function daqDimensionRule_createLogari
     (%adopt-pointer object (opendaq.low-level:enumeration/create-enumeration-with-type coerced-type coerced-value)))
     ))
 
+(defclass error-guard (base-object)
+  (
+   (%file-name-initarg :initarg :file-name :initform nil)
+   (%file-line-initarg :initarg :file-line :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object error-guard)
+                                       &key (pointer nil pointer-p)
+                                            (file-name nil file-name-p)
+                                            (file-line nil file-line-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqErrorGuard_createErrorGuard()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) file-name-p file-line-p)
+  (with-daq-boxed-values ((coerced-file-name file-name nil)
+                          (coerced-file-line file-line nil))
+    (%adopt-pointer object (opendaq.low-level:error-guard/create-error-guard coerced-file-name coerced-file-line)))
+    ))
+
 (defclass error-info (base-object)
   (
    ))
@@ -3293,7 +3847,12 @@ Constructs the instance via the openDAQ C function daqDimensionRule_createLogari
                                        &key (pointer nil pointer-p)
                                             (call nil call-p)
                                        &allow-other-keys)
-  "Constructs the instance via the openDAQ C function daqEventHandler_createEventHandler()."
+  "Creates an event handler that calls a C function.
+@param call The function to call with the sender and the arguments of the event.
+
+C++ creates event handlers from callables through templates, which have no exported symbol; this factory is provided by the C bindings.
+
+Constructs the instance via the openDAQ C function daqEventHandler_createEventHandler()."
   (declare (ignore pointer))
   (when (and (not pointer-p) call-p)
   (with-daq-boxed-values ((coerced-call call nil))
@@ -3339,6 +3898,7 @@ Constructs the instance via the openDAQ C function daqEventPacket_createEventPac
   "Creates a DataDescriptorChanged Event packet.
 @param dataDescriptor The data descriptor of the value signal.
 @param domainDataDescriptor The data descriptor of the domain signal that carries domain data of the value signal.
+
 The ID of the packet is \"DATA_DESCRIPTOR_CHANGED\". Its parameters dictionary contains the keys \"DataDescriptor\"
 and \"DomainDataDescriptor\", carrying their respective Signal descriptor objects as values.
 
@@ -3362,6 +3922,7 @@ Constructs the instance via the openDAQ C function daqEventPacket_createDataDesc
                                        &allow-other-keys)
   "Creates a ImplicitDomainGapDetected Event packet.
 @param diff The size of the gap in ticks or value
+
 The ID of the packet is \"IMPLICIT_DOMAIN_GAP_DETECTED\". Its parameters dictionary contains the key \"Diff\", which holds
 the size of the gap. The size can be negative, in which case it is an overlap of samples.
 
@@ -3382,11 +3943,28 @@ Constructs the instance via the openDAQ C function daqEventPacket_createImplicit
                                        &key (pointer nil pointer-p)
                                             (value nil value-p)
                                        &allow-other-keys)
-  "Constructs the instance via the openDAQ C function daqFloatObject_createFloatObject()."
+  "Constructs the instance via the openDAQ C function daqFloat_createFloat()."
   (declare (ignore pointer))
   (when (and (not pointer-p) value-p)
   (with-daq-boxed-values ((coerced-value value nil))
-    (%adopt-pointer object (opendaq.low-level:float-object/create-float-object coerced-value)))
+    (%adopt-pointer object (opendaq.low-level:float/create-float coerced-value)))
+    ))
+
+(defclass float-object/float-from-pool (float-object)
+  (
+   (%value-initarg :initarg :value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object float-object/float-from-pool)
+                                       &key (pointer nil pointer-p)
+                                            (value nil value-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqFloat_createFloatFromPool()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) value-p)
+  (with-daq-boxed-values ((coerced-value value nil))
+    (%adopt-pointer object (opendaq.low-level:float/create-float-from-pool coerced-value)))
     ))
 
 (defclass folder (component)
@@ -3441,6 +4019,7 @@ Constructs the instance via the openDAQ C function daqFolderConfig_createFolder(
 @param context The Context. Most often the creating function-block/device passes its own Context to the Folder.
 @param parent The parent component.
 @param localId The local ID of the parent.
+
 IO folders are folder created by device and may contain only channels and other IO folders.
 
 Constructs the instance via the openDAQ C function daqFolderConfig_createIoFolder()."
@@ -3484,7 +4063,8 @@ Constructs the instance via the openDAQ C function daqFolderConfig_createIoFolde
 @param id The unique type ID of the function block.
 @param name The name of the function block. Eg. FFT.
 @param description A short description of the function block and its behaviour.
-@param defaultConfig The property object, to be cloned and returned, each time user creates default configuration object. This way each instance of the function block has its own configuration object.
+@param defaultConfig The property object, to be cloned and returned, each time user creates default
+configuration object. This way each instance of the function block has its own configuration object.
 
 Constructs the instance via the openDAQ C function daqFunctionBlockType_createFunctionBlockType()."
   (declare (ignore pointer))
@@ -3586,10 +4166,13 @@ Constructs the instance via the openDAQ C function daqFunctionBlockType_createFu
   "Creates an openDAQ instance.
 @param context The context object.
 @param localId The localID of the instance.
+
 openDAQ application uses instance as an entry point and a root component. The instance is the first openDAQ object
 that is created in the application.
+
 The caller should provide a localID that is a string that should be unique across multiple instances. If the
 instance sets a root device, the localID of the root device is automatically used as localID of the instance.
+
 The caller should provide configured module manager and context.
 
 Constructs the instance via the openDAQ C function daqInstance_createInstance(), or from a builder via daqInstance_createInstanceFromBuilder() when :builder is supplied."
@@ -3638,6 +4221,23 @@ Constructs the instance via the openDAQ C function daqInstanceBuilder_createInst
   (when (and (not pointer-p) value-p)
   (with-daq-boxed-values ((coerced-value value nil))
     (%adopt-pointer object (opendaq.low-level:integer/create-integer coerced-value)))
+    ))
+
+(defclass integer-object/integer-from-pool (integer-object)
+  (
+   (%value-initarg :initarg :value :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object integer-object/integer-from-pool)
+                                       &key (pointer nil pointer-p)
+                                            (value nil value-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqInteger_createIntegerFromPool()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) value-p)
+  (with-daq-boxed-values ((coerced-value value nil))
+    (%adopt-pointer object (opendaq.low-level:integer/create-integer-from-pool coerced-value)))
     ))
 
 (defclass io-folder-config (folder-config)
@@ -3826,20 +4426,6 @@ Constructs the instance via the openDAQ C function daqLogFileInfoBuilder_createL
   (%adopt-pointer object (opendaq.low-level:logger-sink/create-std-out-logger-sink))
     ))
 
-(defclass logger-sink/win-debug (logger-sink)
-  (
-   ))
-
-
-(defmethod initialize-instance :after ((object logger-sink/win-debug)
-                                       &key (pointer nil pointer-p)
-                                       &allow-other-keys)
-  "Constructs the instance via the openDAQ C function daqLoggerSink_createWinDebugLoggerSink()."
-  (declare (ignore pointer))
-  (unless pointer-p
-  (%adopt-pointer object (opendaq.low-level:logger-sink/create-win-debug-logger-sink))
-    ))
-
 (defclass logger-thread-pool (base-object)
   (
    ))
@@ -3872,6 +4458,12 @@ Constructs the instance via the openDAQ C function daqLogFileInfoBuilder_createL
 
 
 
+(defclass mirrored-input-port-private (base-object)
+  (
+   ))
+
+
+
 (defclass mirrored-signal-config (signal-config)
   (
    ))
@@ -3892,9 +4484,20 @@ Constructs the instance via the openDAQ C function daqLogFileInfoBuilder_createL
 
 (defclass module-authenticator (base-object)
   (
+   (%function-initarg :initarg :function :initform nil)
    ))
 
 
+(defmethod initialize-instance :after ((object module-authenticator)
+                                       &key (pointer nil pointer-p)
+                                            (function nil function-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqModuleAuthenticator_createFunctionModuleAuthenticator()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) function-p)
+  (with-daq-boxed-values ((coerced-function function :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:module-authenticator/create-function-module-authenticator coerced-function)))
+    ))
 
 (defclass module-info (base-object)
   (
@@ -4094,6 +4697,14 @@ Constructs the instance via the openDAQ C function daqLogFileInfoBuilder_createL
    ))
 
 
+(defmethod initialize-instance :after ((object mutex)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqMutex_createMutex()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:mutex/create-mutex))
+    ))
 
 (defclass network-interface (base-object)
   (
@@ -4141,6 +4752,26 @@ Constructs the instance via the openDAQ C function daqLogFileInfoBuilder_createL
   (%adopt-pointer object (opendaq.low-level:list/create-list))
     ))
 
+(defclass object-list/owning-list (object-list)
+  (
+   (%owner-initarg :initarg :owner :initform nil)
+   (%ref-initarg :initarg :ref :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object object-list/owning-list)
+                                       &key (pointer nil pointer-p)
+                                            (owner nil owner-p)
+                                            (ref nil ref-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqList_createOwningList()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) owner-p ref-p)
+  (with-daq-boxed-values ((coerced-owner owner :managed-pointer)
+                          (coerced-ref ref :daq-string))
+    (%adopt-pointer object (opendaq.low-level:list/create-owning-list coerced-owner coerced-ref)))
+    ))
+
 (defclass ownable (base-object)
   (
    ))
@@ -4152,6 +4783,42 @@ Constructs the instance via the openDAQ C function daqLogFileInfoBuilder_createL
    ))
 
 
+
+(defclass packet-buffer (base-object)
+  (
+   (%builder-initarg :initarg :builder :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object packet-buffer)
+                                       &key (pointer nil pointer-p)
+                                            (builder nil builder-p)
+                                       &allow-other-keys)
+  "Creates a Packet Buffer with the given builder specifics
+@param builder The builder that describes the specifics of the current implementation
+
+Constructs the instance via the openDAQ C function daqPacketBuffer_createPacketBuffer()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) builder-p)
+  (with-daq-boxed-values ((coerced-builder builder :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:packet-buffer/create-packet-buffer coerced-builder)))
+    ))
+
+(defclass packet-buffer-builder (base-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object packet-buffer-builder)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Create an empty default PacketBufferBuilder (default sizeInBytes in set to 0)
+
+Constructs the instance via the openDAQ C function daqPacketBufferBuilder_createPacketBufferBuilder()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:packet-buffer-builder/create-packet-buffer-builder))
+    ))
 
 (defclass packet-destruct-callback (base-object)
   (
@@ -4246,7 +4913,8 @@ Constructs the instance via the openDAQ C function daqPermissionMaskBuilder_crea
                                             (permission-mask nil permission-mask-p)
                                        &allow-other-keys)
   "Creates a permission mask builder object from integer permission mask.
-@param permissionMask Permission mask defined as 64-bit integer where each bit corresponds to a specific permission defined in Permission enum.
+@param permissionMask Permission mask defined as 64-bit integer where each bit corresponds
+to a specific permission defined in Permission enum.
 
 Constructs the instance via the openDAQ C function daqPermissionMaskBuilder_createPermissionMaskBuilderFromMask()."
   (declare (ignore pointer))
@@ -4318,6 +4986,7 @@ Constructs the instance via the openDAQ C function daqPermissionsBuilder_createP
                                        &allow-other-keys)
   "Creates an Property builder object with only the name field configured.
 @param name The name of the Property.
+
 The default Value type is `ctUndefined`.
 
 Constructs the instance via the openDAQ C function daqPropertyBuilder_createPropertyBuilder()."
@@ -4342,6 +5011,7 @@ Constructs the instance via the openDAQ C function daqPropertyBuilder_createProp
   "Creates a boolean Property builder object with a specified name and default value.
 @param name The name of the Property.
 @param defaultValue The boolean default value. Can be an EvalValue.
+
 The Property Value type is `ctBool`. Note that the defaultValue parameter can be EvalValue.
 
 Constructs the instance via the openDAQ C function daqPropertyBuilder_createBoolPropertyBuilder()."
@@ -4367,10 +5037,13 @@ Constructs the instance via the openDAQ C function daqPropertyBuilder_createBool
   "Creates a dictionary Property builder object with a specified name and default value.
 @param name The name of the Property.
 @param defaultValue The dictionary default value.
+
 The Property Value type is `ctDict`. The dictionary passed as default value must have homogeneous key
 and value lists (all dictionary keys/values must be of the same type).
+
 The Property's Item type field will be set according to defaultValue dictionary Item type. The same goes for
 the Key type.
+
 TODO: defaultValue can be an EvalValue once dictionaries are supported.
 
 Constructs the instance via the openDAQ C function daqPropertyBuilder_createDictPropertyBuilder()."
@@ -4396,6 +5069,7 @@ Constructs the instance via the openDAQ C function daqPropertyBuilder_createDict
   "Creates an Enumeration Property builder object with a specified name and default value.
 @param name The name of the Property.
 @param defaultValue The default structure value.
+
 The Property Value type is `ctEnumeration`.
 
 Constructs the instance via the openDAQ C function daqPropertyBuilder_createEnumerationPropertyBuilder()."
@@ -4421,6 +5095,7 @@ Constructs the instance via the openDAQ C function daqPropertyBuilder_createEnum
   "Creates a floating point value Property builder object with a specified name and default value.
 @param name The name of the Property.
 @param defaultValue The float default value. Can be an EvalValue
+
 The Property Value type is `ctFloat`. Note that the defaultValue parameter can be EvalValue.
 
 Constructs the instance via the openDAQ C function daqPropertyBuilder_createFloatPropertyBuilder()."
@@ -4443,9 +5118,11 @@ Constructs the instance via the openDAQ C function daqPropertyBuilder_createFloa
                                             (name nil name-p)
                                             (callable-info nil callable-info-p)
                                        &allow-other-keys)
-  "Creates a function- or procedure-type Property builder object. Requires the a CallableInfo object to specify the argument type/count and function return type.
+  "Creates a function- or procedure-type Property builder object. Requires the a CallableInfo object
+to specify the argument type/count and function return type.
 @param name The name of the Property.
 @param callableInfo Information about the callable argument type/count and return type.
+
 The Property Value type is `ctFunction` or `ctProc`, depending on if `callableInfo` contains information
 on the return type or not.
 
@@ -4472,6 +5149,7 @@ Constructs the instance via the openDAQ C function daqPropertyBuilder_createFunc
   "Creates an integer Property builder object with a specified name and default value.
 @param name The name of the Property.
 @param defaultValue The integer default value. Can be an EvalValue.
+
 The Property Value type is `ctInt`. Note that the defaultValue parameter can be EvalValue.
 
 Constructs the instance via the openDAQ C function daqPropertyBuilder_createIntPropertyBuilder()."
@@ -4497,8 +5175,10 @@ Constructs the instance via the openDAQ C function daqPropertyBuilder_createIntP
   "Creates a list Property builder object with a specified name and default value.
 @param name The name of the Property.
 @param defaultValue The list default value. Can be an EvalValue.
+
 The Property Value type is `ctList`. Note that the defaultValue parameter can be EvalValue.
 The list passed as `defaultValue` must be homogeneous.
+
 The Property's Item type field will be set according to defaultValue list type.
 
 Constructs the instance via the openDAQ C function daqPropertyBuilder_createListPropertyBuilder()."
@@ -4524,9 +5204,11 @@ Constructs the instance via the openDAQ C function daqPropertyBuilder_createList
   "Creates an object-type Property builder object with a specified name and default value..
 @param name The name of the Property.
 @param defaultValue The Property object default value.
+
 The Property Value type is `ctObject`. Object properties cannot be have any metadata other than
 their name, description, and default value configured. The PropertyObject default value can only
 be a base PropertyObject type (not a descendant type).
+
 If the defaultValue is not specified, it will automatically be configured to an empty Property Object.
 
 Constructs the instance via the openDAQ C function daqPropertyBuilder_createObjectPropertyBuilder()."
@@ -4552,7 +5234,9 @@ Constructs the instance via the openDAQ C function daqPropertyBuilder_createObje
   "Creates a ratio Property builder object with a specified name and default value.
 @param name The name of the Property.
 @param defaultValue The ratio default value.
+
 The Property Value type is `ctRatio`.
+
 TODO: defaultValue can be an EvalValue once ratios are supported.
 
 Constructs the instance via the openDAQ C function daqPropertyBuilder_createRatioPropertyBuilder()."
@@ -4575,7 +5259,8 @@ Constructs the instance via the openDAQ C function daqPropertyBuilder_createRati
                                             (name nil name-p)
                                             (referenced-property-eval nil referenced-property-eval-p)
                                        &allow-other-keys)
-  "Creates a Reference Property builder object that points at a property specified in the `referencedProperty` parameter.
+  "Creates a Reference Property builder object that points at a property specified in the `referencedProperty`
+parameter.
 @param name The name of the Property.
 @param referencedPropertyEval The evaluation expression that evaluates to another property.
 
@@ -4601,10 +5286,12 @@ Constructs the instance via the openDAQ C function daqPropertyBuilder_createRefe
                                             (selection-values nil selection-values-p)
                                             (default-value nil default-value-p)
                                        &allow-other-keys)
-  "Creates a Selection Property builder object with a list of selection values. The default value is an integer index into the default selected value.
+  "Creates a Selection Property builder object with a list of selection values. The default value
+is an integer index into the default selected value.
 @param name The name of the Property.
 @param selectionValues The list of selectable values.
 @param defaultValue The default index into the list of selection values.
+
 The Property Value type is `ctInt`.
 
 Constructs the instance via the openDAQ C function daqPropertyBuilder_createSelectionPropertyBuilder()."
@@ -4630,10 +5317,12 @@ Constructs the instance via the openDAQ C function daqPropertyBuilder_createSele
                                             (selection-values nil selection-values-p)
                                             (default-value nil default-value-p)
                                        &allow-other-keys)
-  "Creates a Selection Property builder object with a dictionary of selection values. The default value is an integer key into the provided dictionary.
+  "Creates a Selection Property builder object with a dictionary of selection values. The default value
+is an integer key into the provided dictionary.
 @param name The name of the Property.
 @param selectionValues The dictionary of selectable values. The key type must be `ctInt`.
 @param defaultValue The default key into the list of selection values.
+
 The Property Value type is `ctInt`. The key type of the Selection values dictionary must be `ctInt`.
 
 Constructs the instance via the openDAQ C function daqPropertyBuilder_createSparseSelectionPropertyBuilder()."
@@ -4660,6 +5349,7 @@ Constructs the instance via the openDAQ C function daqPropertyBuilder_createSpar
   "Creates a string Property builder object with a specified name and default value.
 @param name The name of the Property.
 @param defaultValue The integer default value. Can be an EvalValue.
+
 The Property Value type is `ctString`. Note that the defaultValue parameter can be EvalValue.
 
 Constructs the instance via the openDAQ C function daqPropertyBuilder_createStringPropertyBuilder()."
@@ -4685,6 +5375,7 @@ Constructs the instance via the openDAQ C function daqPropertyBuilder_createStri
   "Creates a Struct Property builder object with a specified name and default value.
 @param name The name of the Property.
 @param defaultValue The default structure value.
+
 The Property Value type is `ctStruct`.
 
 Constructs the instance via the openDAQ C function daqPropertyBuilder_createStructPropertyBuilder()."
@@ -4700,6 +5391,26 @@ Constructs the instance via the openDAQ C function daqPropertyBuilder_createStru
    ))
 
 
+
+(defclass property-metadata-read-args (event-args)
+  (
+   (%prop-initarg :initarg :prop :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object property-metadata-read-args)
+                                       &key (pointer nil pointer-p)
+                                            (prop nil prop-p)
+                                       &allow-other-keys)
+  "Creates a new PropertyMetadataReadArgs object with a given property that owns the metadata field.
+@param prop The property that owns the metadata field.
+
+Constructs the instance via the openDAQ C function daqPropertyMetadataReadArgs_createPropertyMetadataReadArgs()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) prop-p)
+  (with-daq-boxed-values ((coerced-prop prop :managed-pointer))
+    (%adopt-pointer object (opendaq.low-level:property-metadata-read-args/create-property-metadata-read-args coerced-prop)))
+    ))
 
 (defclass property-object (base-object)
   (
@@ -4787,6 +5498,20 @@ Constructs the instance via the openDAQ C function daqPropertyObjectClassBuilder
 
 
 
+(defclass property-object-core (base-object)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object property-object-core)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqPropertyObjectCore_createPropertyObjectCore()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:property-object-core/create-property-object-core))
+    ))
+
 (defclass property-object-internal (base-object)
   (
    ))
@@ -4870,6 +5595,7 @@ Constructs the instance via the openDAQ C function daqPropertyObject_createPrope
 @param name The name of the Property.
 @param defaultValue The boolean default value. Can be an EvalValue.
 @param visible If true, the Property is visible. Can be an EvalValue.
+
 The Property Value type is `ctBool`. Note that the defaultValue and visible parameters can be EvalValues.
 
 Constructs the instance via the openDAQ C function daqProperty_createBoolProperty()."
@@ -4899,10 +5625,13 @@ Constructs the instance via the openDAQ C function daqProperty_createBoolPropert
 @param name The name of the Property.
 @param defaultValue The dictionary default value.
 @param visible If true, the Property is visible.  Can be an EvalValue.
+
 The Property Value type is `ctDict`. The visible parameter can be an EvalValue. The dictionary passed as
 default value must have homogeneous key and value lists.
+
 The Property's Item type field will be set according to defaultValue dictionary Item type. The same goes for
 the Key type.
+
 TODO: defaultValue can be an EvalValue once dictionaries are supported.
 
 Constructs the instance via the openDAQ C function daqProperty_createDictProperty()."
@@ -4932,6 +5661,7 @@ Constructs the instance via the openDAQ C function daqProperty_createDictPropert
 @param name The name of the Property.
 @param defaultValue The default structure value.
 @param visible If true, the Property is visible. Can be an EvalValue.
+
 The Property Value type is `ctEnumeration`.
 
 Constructs the instance via the openDAQ C function daqProperty_createEnumerationProperty()."
@@ -4961,6 +5691,7 @@ Constructs the instance via the openDAQ C function daqProperty_createEnumeration
 @param name The name of the Property.
 @param defaultValue The float default value. Can be an EvalValue.
 @param visible If true, the Property is visible. Can be an EvalValue.
+
 The Property Value type is `ctFloat`. Note that the defaultValue and visible parameters can be EvalValues.
 
 Constructs the instance via the openDAQ C function daqProperty_createFloatProperty()."
@@ -4986,10 +5717,12 @@ Constructs the instance via the openDAQ C function daqProperty_createFloatProper
                                             (callable-info nil callable-info-p)
                                             (visible nil visible-p)
                                        &allow-other-keys)
-  "Creates a function- or procedure-type Property object. Requires the a CallableInfo object to specify the argument type/count and function return type.
+  "Creates a function- or procedure-type Property object. Requires the a CallableInfo object
+to specify the argument type/count and function return type.
 @param name The name of the Property.
 @param callableInfo Information about the callable argument type/count and return type.
 @param visible If true, the Property is visible. Can be an EvalValue.
+
 The Property Value type is `ctFunction` or `ctProc`, depending on if `callableInfo` contains information
 on the return type or not. Note that the visible parameter can be an EvalValue.
 
@@ -5020,6 +5753,7 @@ Constructs the instance via the openDAQ C function daqProperty_createFunctionPro
 @param name The name of the Property.
 @param defaultValue The integer default value. Can be an EvalValue.
 @param visible If true, the Property is visible. Can be an EvalValue.
+
 The Property Value type is `ctInt`. Note that the defaultValue and visible parameters can be EvalValues.
 
 Constructs the instance via the openDAQ C function daqProperty_createIntProperty()."
@@ -5049,8 +5783,10 @@ Constructs the instance via the openDAQ C function daqProperty_createIntProperty
 @param name The name of the Property.
 @param defaultValue The list default value. Can be an EvalValue.
 @param visible If true, the Property is visible. Can be an EvalValue.
+
 The Property Value type is `ctList`. Note that the defaultValue and visible parameters can be EvalValues.
 The list passed as `defaultValue` must be homogeneous.
+
 The Property's Item type field will be set according to defaultValue list type.
 
 Constructs the instance via the openDAQ C function daqProperty_createListProperty()."
@@ -5077,9 +5813,11 @@ Constructs the instance via the openDAQ C function daqProperty_createListPropert
   "Creates an object-type Property object with a default value and optional Visible state.
 @param name The name of the Property.
 @param defaultValue The Property object default value.
+
 The Property Value type is `ctObject`. Object properties cannot be have any metadata other than
 their name, description, and default value configured. The PropertyObject default value can only
 be a base PropertyObject type (not a descendant type).
+
 If the defaultValue is not specified, it will automatically be configured to an empty Property Object.
 
 Constructs the instance via the openDAQ C function daqProperty_createObjectProperty()."
@@ -5108,7 +5846,9 @@ Constructs the instance via the openDAQ C function daqProperty_createObjectPrope
 @param name The name of the Property.
 @param defaultValue The ratio default value.
 @param visible If true, the Property is visible. Can be an EvalValue.
+
 The Property Value type is `ctRatio`. Note that the visible parameter can be an EvalValue.
+
 TODO: defaultValue can be an EvalValue once ratios are supported.
 
 Constructs the instance via the openDAQ C function daqProperty_createRatioProperty()."
@@ -5132,7 +5872,8 @@ Constructs the instance via the openDAQ C function daqProperty_createRatioProper
                                             (name nil name-p)
                                             (referenced-property-eval nil referenced-property-eval-p)
                                        &allow-other-keys)
-  "Creates a Reference Property object that points at a property specified in the `referencedProperty` parameter.
+  "Creates a Reference Property object that points at a property specified in the `referencedProperty`
+parameter.
 @param name The name of the Property.
 @param referencedPropertyEval The evaluation expression that evaluates to another property.
 
@@ -5160,11 +5901,13 @@ Constructs the instance via the openDAQ C function daqProperty_createReferencePr
                                             (default-value nil default-value-p)
                                             (visible nil visible-p)
                                        &allow-other-keys)
-  "Creates a Selection Property object with a list of selection values. The default value is an integer index into the default selected value.
+  "Creates a Selection Property object with a list of selection values. The default value
+is an integer index into the default selected value.
 @param name The name of the Property.
 @param selectionValues The list of selectable values.
 @param defaultValue The default index into the list of selection values.
 @param visible If true, the Property is visible. Can be an EvalValue.
+
 The Property Value type is `ctInt`.
 
 Constructs the instance via the openDAQ C function daqProperty_createSelectionProperty()."
@@ -5193,11 +5936,13 @@ Constructs the instance via the openDAQ C function daqProperty_createSelectionPr
                                             (default-value nil default-value-p)
                                             (visible nil visible-p)
                                        &allow-other-keys)
-  "Creates a Selection Property object with a dictionary of selection values. The default value is an integer key into the provided dictionary.
+  "Creates a Selection Property object with a dictionary of selection values. The default value
+is an integer key into the provided dictionary.
 @param name The name of the Property.
 @param selectionValues The dictionary of selectable values. The key type must be `ctInt`.
 @param defaultValue The default key into the list of selection values.
 @param visible If true, the Property is visible. Can be an EvalValue.
+
 The Property Value type is `ctInt`. The key type of the Selection values dictionary must be `ctInt`.
 
 Constructs the instance via the openDAQ C function daqProperty_createSparseSelectionProperty()."
@@ -5228,6 +5973,7 @@ Constructs the instance via the openDAQ C function daqProperty_createSparseSelec
 @param name The name of the Property.
 @param defaultValue The integer default value. Can be an EvalValue.
 @param visible If true, the Property is visible. Can be an EvalValue.
+
 The Property Value type is `ctString`. Note that the defaultValue and visible parameters can be EvalValues.
 
 Constructs the instance via the openDAQ C function daqProperty_createStringProperty()."
@@ -5257,6 +6003,7 @@ Constructs the instance via the openDAQ C function daqProperty_createStringPrope
 @param name The name of the Property.
 @param defaultValue The default structure value.
 @param visible If true, the Property is visible. Can be an EvalValue.
+
 The Property Value type is `ctStruct`.
 
 Constructs the instance via the openDAQ C function daqProperty_createStructProperty()."
@@ -5406,7 +6153,8 @@ Constructs the instance via the openDAQ C function daqReferenceDomainInfoBuilder
                                        &key (pointer nil pointer-p)
                                             (reference-domain-info-to-copy nil reference-domain-info-to-copy-p)
                                        &allow-other-keys)
-  "Reference Domain Info copy factory that creates a Reference Domain Info builder object from a different Reference Domain Info, copying its parameters.
+  "Reference Domain Info copy factory that creates a Reference Domain Info builder object from a
+different Reference Domain Info, copying its parameters.
 @param referenceDomainInfoToCopy The Reference Domain Info of which configuration should be copied.
 
 Constructs the instance via the openDAQ C function daqReferenceDomainInfoBuilder_createReferenceDomainInfoBuilderFromExisting()."
@@ -5504,7 +6252,8 @@ Constructs the instance via the openDAQ C function daqScalingBuilder_createScali
                                        &key (pointer nil pointer-p)
                                             (scaling-to-copy nil scaling-to-copy-p)
                                        &allow-other-keys)
-  "Scaling builder copy factory that creates a configurable Scaling object from a non-configurable one.
+  "Scaling builder copy factory that creates a configurable Scaling object from a
+non-configurable one.
 @param scalingToCopy The scaling of which configuration should be copied.
 
 Constructs the instance via the openDAQ C function daqScalingBuilder_createScalingBuilderFromExisting()."
@@ -5513,12 +6262,6 @@ Constructs the instance via the openDAQ C function daqScalingBuilder_createScali
   (with-daq-boxed-values ((coerced-scaling-to-copy scaling-to-copy :managed-pointer))
     (%adopt-pointer object (opendaq.low-level:scaling-builder/create-scaling-builder-from-existing coerced-scaling-to-copy)))
     ))
-
-(defclass scaling-calc-private (base-object)
-  (
-   ))
-
-
 
 (defclass scaling/linear (scaling)
   (
@@ -5536,7 +6279,8 @@ Constructs the instance via the openDAQ C function daqScalingBuilder_createScali
                                             (input-data-type nil input-data-type-p)
                                             (output-data-type nil output-data-type-p)
                                        &allow-other-keys)
-  "Creates a Scaling with a Linear scaling type configuration. The returned Scaling object is already frozen.
+  "Creates a Scaling with a Linear scaling type configuration.
+The returned Scaling object is already frozen.
 @param scale Coefficient by which the input data is to be multiplied.
 @param offset Constant that is added to the <em>scale * value</em> multiplication result.
 @param inputDataType The scaling's input data type.
@@ -5613,7 +6357,8 @@ Constructs the instance via the openDAQ C function daqScaling_createLinearScalin
                                             (left nil left-p)
                                             (right nil right-p)
                                        &allow-other-keys)
-  "Creates a \"conjunction\" search filter that combines 2 filters, accepting an object only if both filters accept it. \"Visit children\" returns `true` only if both filters do so.
+  "Creates a \"conjunction\" search filter that combines 2 filters, accepting an object only if both filters accept it.
+\"Visit children\" returns `true` only if both filters do so.
 @param left The first argument of the conjunction operation.
 @param right The second argument of the conjunction operation.
 
@@ -5675,7 +6420,11 @@ Constructs the instance via the openDAQ C function daqSearchFilter_createCustomS
                                        &key (pointer nil pointer-p)
                                             (excluded-tags nil excluded-tags-p)
                                        &allow-other-keys)
-  "Constructs the instance via the openDAQ C function daqSearchFilter_createExcludedTagsSearchFilter()."
+  "Creates a search filter that accepts components that do not have any of the excluded tags. \"Visit children\"
+always returns `true`.
+@param excludedTags A list of strings containing the tags that a component must not have to be accepted.
+
+Constructs the instance via the openDAQ C function daqSearchFilter_createExcludedTagsSearchFilter()."
   (declare (ignore pointer))
   (when (and (not pointer-p) excluded-tags-p)
   (with-daq-boxed-values ((coerced-excluded-tags excluded-tags :managed-pointer))
@@ -5692,11 +6441,35 @@ Constructs the instance via the openDAQ C function daqSearchFilter_createCustomS
                                        &key (pointer nil pointer-p)
                                             (local-id nil local-id-p)
                                        &allow-other-keys)
-  "Constructs the instance via the openDAQ C function daqSearchFilter_createLocalIdSearchFilter()."
+  "Creates a search filter that accepts components with the specified local ID. \"Visit children\"
+always returns `true`.
+@param localId The local ID of the accepted components.
+
+Constructs the instance via the openDAQ C function daqSearchFilter_createLocalIdSearchFilter()."
   (declare (ignore pointer))
   (when (and (not pointer-p) local-id-p)
   (with-daq-boxed-values ((coerced-local-id local-id :daq-string))
     (%adopt-pointer object (opendaq.low-level:search-filter/create-local-id-search-filter coerced-local-id)))
+    ))
+
+(defclass search-filter/name-property-filter (search-filter)
+  (
+   (%regex-initarg :initarg :regex :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object search-filter/name-property-filter)
+                                       &key (pointer nil pointer-p)
+                                            (regex nil regex-p)
+                                       &allow-other-keys)
+  "Creates a search filter that accepts properties whose names match the specified pattern.
+@param regex A regular expression pattern used to match property names.
+
+Constructs the instance via the openDAQ C function daqSearchFilter_createNamePropertyFilter()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) regex-p)
+  (with-daq-boxed-values ((coerced-regex regex :daq-string))
+    (%adopt-pointer object (opendaq.low-level:search-filter/create-name-property-filter coerced-regex)))
     ))
 
 (defclass search-filter/not (search-filter)
@@ -5709,7 +6482,8 @@ Constructs the instance via the openDAQ C function daqSearchFilter_createCustomS
                                        &key (pointer nil pointer-p)
                                             (filter nil filter-p)
                                        &allow-other-keys)
-  "Creates a search filter that negates the \"accepts object\" result of the filter provided as construction argument. Does not negate the \"visit children\" result.
+  "Creates a search filter that negates the \"accepts object\" result of the filter provided as construction argument.
+Does not negate the \"visit children\" result.
 @param filter The filter of which results should be negated.
 
 Constructs the instance via the openDAQ C function daqSearchFilter_createNotSearchFilter()."
@@ -5731,7 +6505,8 @@ Constructs the instance via the openDAQ C function daqSearchFilter_createNotSear
                                             (left nil left-p)
                                             (right nil right-p)
                                        &allow-other-keys)
-  "Creates a \"disjunction\" search filter that combines 2 filters, accepting an object if any of the two filters accepts it. \"Visit children\" returns `true` if any of the two filters accepts does so.
+  "Creates a \"disjunction\" search filter that combines 2 filters, accepting an object if any of the two filters accepts it.
+\"Visit children\" returns `true` if any of the two filters accepts does so.
 @param left The first argument of the disjunction operation.
 @param right The second argument of the disjunction operation.
 
@@ -5741,6 +6516,22 @@ Constructs the instance via the openDAQ C function daqSearchFilter_createOrSearc
   (with-daq-boxed-values ((coerced-left left :managed-pointer)
                           (coerced-right right :managed-pointer))
     (%adopt-pointer object (opendaq.low-level:search-filter/create-or-search-filter coerced-left coerced-right)))
+    ))
+
+(defclass search-filter/read-only-property-filter (search-filter)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object search-filter/read-only-property-filter)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Creates a search filter that accepts only read-only properties.
+
+Constructs the instance via the openDAQ C function daqSearchFilter_createReadOnlyPropertyFilter()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:search-filter/create-read-only-property-filter))
     ))
 
 (defclass search-filter/recursive (search-filter)
@@ -5753,7 +6544,9 @@ Constructs the instance via the openDAQ C function daqSearchFilter_createOrSearc
                                        &key (pointer nil pointer-p)
                                             (filter nil filter-p)
                                        &allow-other-keys)
-  "Creates a search filter that indicates that the search method should recursively search through the object's child elements. This filter constructor should always be the final filter wrapper, and should not be used as a constructor argument for another filter.
+  "Creates a search filter that indicates that the search method should recursively search through the object's child elements.
+This filter constructor should always be the final filter wrapper, and should not be used as a constructor argument
+for another filter.
 @param filter The filter to be wrapped with a \"recursive\" flag.
 
 Constructs the instance via the openDAQ C function daqSearchFilter_createRecursiveSearchFilter()."
@@ -5773,7 +6566,11 @@ Constructs the instance via the openDAQ C function daqSearchFilter_createRecursi
                                        &key (pointer nil pointer-p)
                                             (required-tags nil required-tags-p)
                                        &allow-other-keys)
-  "Constructs the instance via the openDAQ C function daqSearchFilter_createRequiredTagsSearchFilter()."
+  "Creates a search filter that accepts components that have all the required tags. \"Visit children\"
+always returns `true`.
+@param requiredTags A list of strings containing the tags that a component must have to be accepted.
+
+Constructs the instance via the openDAQ C function daqSearchFilter_createRequiredTagsSearchFilter()."
   (declare (ignore pointer))
   (when (and (not pointer-p) required-tags-p)
   (with-daq-boxed-values ((coerced-required-tags required-tags :managed-pointer))
@@ -5788,10 +6585,30 @@ Constructs the instance via the openDAQ C function daqSearchFilter_createRecursi
 (defmethod initialize-instance :after ((object search-filter/visible)
                                        &key (pointer nil pointer-p)
                                        &allow-other-keys)
-  "Constructs the instance via the openDAQ C function daqSearchFilter_createVisibleSearchFilter()."
+  "Creates a search filter that accepts only visible components. \"Visit children\" returns `true`
+only if the component being evaluated is visible.
+
+Constructs the instance via the openDAQ C function daqSearchFilter_createVisibleSearchFilter()."
   (declare (ignore pointer))
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:search-filter/create-visible-search-filter))
+    ))
+
+(defclass search-filter/visible-property-filter (search-filter)
+  (
+   ))
+
+
+(defmethod initialize-instance :after ((object search-filter/visible-property-filter)
+                                       &key (pointer nil pointer-p)
+                                       &allow-other-keys)
+  "Creates a search filter that accepts only visible properties. \"Visit children\" returns `true`
+only if the property being evaluated is visible.
+
+Constructs the instance via the openDAQ C function daqSearchFilter_createVisiblePropertyFilter()."
+  (declare (ignore pointer))
+  (unless pointer-p
+  (%adopt-pointer object (opendaq.low-level:search-filter/create-visible-property-filter))
     ))
 
 (defclass serializable (base-object)
@@ -5827,6 +6644,26 @@ Constructs the instance via the openDAQ C function daqSearchFilter_createRecursi
   (when (and (not pointer-p) pretty-p)
   (with-daq-boxed-values ((coerced-pretty pretty :daq-bool))
     (%adopt-pointer object (opendaq.low-level:serializer/create-json-serializer coerced-pretty)))
+    ))
+
+(defclass serializer/json-with-version (serializer)
+  (
+   (%version-initarg :initarg :version :initform nil)
+   (%pretty-initarg :initarg :pretty :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object serializer/json-with-version)
+                                       &key (pointer nil pointer-p)
+                                            (version nil version-p)
+                                            (pretty nil pretty-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqSerializer_createJsonSerializerWithVersion()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) version-p pretty-p)
+  (with-daq-boxed-values ((coerced-version version nil)
+                          (coerced-pretty pretty :daq-bool))
+    (%adopt-pointer object (opendaq.low-level:serializer/create-json-serializer-with-version coerced-version coerced-pretty)))
     ))
 
 (defclass server (folder)
@@ -5884,7 +6721,8 @@ Constructs the instance via the openDAQ C function daqSearchFilter_createRecursi
 @param id The unique type ID of the server.
 @param name The name of the server type.
 @param description A short description of the server type.
-@param defaultConfig The property object, to be cloned and returned, each time user creates default configuration object. This way each instance of the server has its own configuration object.
+@param defaultConfig The property object, to be cloned and returned, each time user creates default
+configuration object. This way each instance of the server has its own configuration object.
 
 Constructs the instance via the openDAQ C function daqServerType_createServerType()."
   (declare (ignore pointer))
@@ -6091,7 +6929,8 @@ Constructs the instance via the openDAQ C function daqServerType_createServerTyp
 @param id The unique type ID of the Streaming.
 @param name The name of the Streaming. Eg. FFT.
 @param description A short description of the Streaming and its behaviour.
-@param defaultConfig The property object, to be cloned and returned, each time user creates default configuration object. This way each instance of the Streaming has its own configuration object.
+@param defaultConfig The property object, to be cloned and returned, each time user creates default
+configuration object. This way each instance of the Streaming has its own configuration object.
 
 Constructs the instance via the openDAQ C function daqStreamingType_createStreamingType()."
   (declare (ignore pointer))
@@ -6276,10 +7115,16 @@ Constructs the instance via the openDAQ C function daqStreamingType_createStream
     (%adopt-pointer object (opendaq.low-level:subscription-event-args/create-subscription-event-args coerced-streaming-connection-string coerced-type)))
     ))
 
+(defclass supports-weak-ref (base-object)
+  (
+   ))
+
+
+
 (defclass sync-component (component)
   (
    (%context-initarg :initarg :context :initform nil)
-   (%parse-failed-exception-initarg :initarg :parse-failed-exception :initform nil)
+   (%parent-initarg :initarg :parent :initform nil)
    (%local-id-initarg :initarg :local-id :initform nil)
    ))
 
@@ -6287,19 +7132,57 @@ Constructs the instance via the openDAQ C function daqStreamingType_createStream
 (defmethod initialize-instance :after ((object sync-component)
                                        &key (pointer nil pointer-p)
                                             (context nil context-p)
-                                            (parse-failed-exception nil parse-failed-exception-p)
+                                            (parent nil parent-p)
                                             (local-id nil local-id-p)
                                        &allow-other-keys)
   "Constructs the instance via the openDAQ C function daqSyncComponent_createSyncComponent()."
   (declare (ignore pointer))
-  (when (and (not pointer-p) context-p parse-failed-exception-p local-id-p)
+  (when (and (not pointer-p) context-p parent-p local-id-p)
   (with-daq-boxed-values ((coerced-context context :managed-pointer)
-                          (coerced-parse-failed-exception parse-failed-exception :managed-pointer)
+                          (coerced-parent parent :managed-pointer)
                           (coerced-local-id local-id :daq-string))
-    (%adopt-pointer object (opendaq.low-level:sync-component/create-sync-component coerced-context coerced-parse-failed-exception coerced-local-id)))
+    (%adopt-pointer object (opendaq.low-level:sync-component/create-sync-component coerced-context coerced-parent coerced-local-id)))
     ))
 
 (defclass sync-component-private (base-object)
+  (
+   ))
+
+
+
+(defclass sync-interface (base-object)
+  (
+   ))
+
+
+
+(defclass sync-interface-internal (base-object)
+  (
+   ))
+
+
+
+(defclass synchronization (base-object)
+  (
+   (%manager-initarg :initarg :manager :initform nil)
+   (%device-id-initarg :initarg :device-id :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object synchronization)
+                                       &key (pointer nil pointer-p)
+                                            (manager nil manager-p)
+                                            (device-id nil device-id-p)
+                                       &allow-other-keys)
+  "Constructs the instance via the openDAQ C function daqSynchronization_createSynchronization()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) manager-p device-id-p)
+  (with-daq-boxed-values ((coerced-manager manager :managed-pointer)
+                          (coerced-device-id device-id :daq-string))
+    (%adopt-pointer object (opendaq.low-level:synchronization/create-synchronization coerced-manager coerced-device-id)))
+    ))
+
+(defclass synchronization-private (base-object)
   (
    ))
 
@@ -6514,7 +7397,8 @@ Constructs the instance via the openDAQ C function daqStreamingType_createStream
                                             (quantity nil quantity-p)
                                        &allow-other-keys)
   "Creates a Unit struct with its `id`, `symbol`, `name`, and `quantity` fields configured.
-@param id The unit ID as defined in <a href=\"https://unece.org/trade/cefact/UNLOCODE-Download\">Codes for Units of Measurement used in International Trade</a>.
+@param id The unit ID as defined in <a href=\"https://unece.org/trade/cefact/UNLOCODE-Download\">Codes for Units of Measurement used in
+International Trade</a>.
 @param symbol The symbol of the unit, i.e. \"m/s\".
 @param name The full name of the unit, i.e. \"meters per second\". (optional)
 @param quantity The quantity represented by the unit, i.e. \"Velocity\". (optional)
@@ -6579,10 +7463,7 @@ Constructs the instance via the openDAQ C function daqUnitBuilder_createUnitBuil
 (defmethod initialize-instance :after ((object update-parameters)
                                        &key (pointer nil pointer-p)
                                        &allow-other-keys)
-  "@ingroup opendaq_update_parameters
-@addtogroup opendaq_update_parameters Factories
-
-Constructs the instance via the openDAQ C function daqUpdateParameters_createUpdateParameters()."
+  "Constructs the instance via the openDAQ C function daqUpdateParameters_createUpdateParameters()."
   (declare (ignore pointer))
   (unless pointer-p
   (%adopt-pointer object (opendaq.low-level:update-parameters/create-update-parameters))
@@ -6681,7 +7562,25 @@ Constructs the instance via the openDAQ C function daqValidator_createValidator(
     (%adopt-pointer object (opendaq.low-level:version-info/create-version-info coerced-major coerced-minor coerced-patch)))
     ))
 
+(defclass weak-ref (base-object)
+  (
+   ))
+
+
+
 (defclass work (base-object)
+  (
+   ))
+
+
+
+(defclass work-repetitive (base-object)
+  (
+   ))
+
+
+
+(defclass wrapped-data-packet (base-object)
   (
    ))
 
@@ -6717,6 +7616,9 @@ log-file-info-builder => daqLogFileInfoBuilder_build()
 
 multi-reader-builder => daqMultiReaderBuilder_build()
     Builds and returns a Multi reader object using the currently set values of the Builder.
+
+packet-buffer-builder => daqPacketBufferBuilder_build()
+    Builds the Packet Buffer with the internally specified size and context
 
 permission-mask-builder => daqPermissionMaskBuilder_build()
     Build permission mask and return it as 64-bit integer.
@@ -6785,7 +7687,7 @@ server-capability => daqServerCapability_getConnectionString()
     Gets the connection string of the device with the current protocol.
 
 streaming => daqStreaming_getConnectionString()
-    Gets the string representation of a connection address used to connect to the streaming service of the device."))
+    Gets the string representation of a connection address used to connect to the streaming"))
 (defmethod connection-string ((object address-info-builder))
   "Gets the connection string corresponding to the address.
 @param[out] connectionString The connection string.
@@ -6803,6 +7705,7 @@ address-info => daqAddressInfo_getReachabilityStatus()
 (defmethod reachability-status ((object address-info-builder))
   "Gets the reachability status of the address.
 @param addressReachability The reachability status of the address.
+
 This status is set to \"Unknown\" by default. For IPv4 address types, the module manager checks
 reachability when querying for available devices.
 
@@ -6813,12 +7716,14 @@ Calls the openDAQ C function daqAddressInfoBuilder_getReachabilityStatus()."
 (defgeneric address-info-builder-type (object)
   (:documentation "Gets the type of the address.
 @param[out] type The type the address.
+
 Currently available address types in the main openDAQ modules are: IPv4 and IPv6.
 
 Calls the openDAQ C function daqAddressInfoBuilder_getType()."))
 (defmethod address-info-builder-type ((object address-info-builder))
   "Gets the type of the address.
 @param[out] type The type the address.
+
 Currently available address types in the main openDAQ modules are: IPv4 and IPv6.
 
 Calls the openDAQ C function daqAddressInfoBuilder_getType()."
@@ -6860,6 +7765,7 @@ Calls the openDAQ C function daqAddressInfoBuilder_setConnectionString()."
 (defgeneric (setf reachability-status) (new-value object)
   (:documentation "Sets the reachability status of the address.
 @param addressReachability The reachability status of the address.
+
 This status is set to \"Unknown\" by default. For IPv4 address types, the module manager checks
 reachability when querying for available devices.
 
@@ -6867,6 +7773,7 @@ Calls the openDAQ C function daqAddressInfoBuilder_setReachabilityStatus()."))
 (defmethod (setf reachability-status) (new-value (object address-info-builder))
   "Sets the reachability status of the address.
 @param addressReachability The reachability status of the address.
+
 This status is set to \"Unknown\" by default. For IPv4 address types, the module manager checks
 reachability when querying for available devices.
 
@@ -6887,6 +7794,7 @@ dimension-rule-builder => daqDimensionRuleBuilder_setType()
 (defmethod (setf type) (new-value (object address-info-builder))
   "Sets the type of the address.
 @param type The type the address.
+
 Currently available address types in the main openDAQ modules are: IPv4 and IPv6.
 
 Calls the openDAQ C function daqAddressInfoBuilder_setType()."
@@ -6897,6 +7805,7 @@ Calls the openDAQ C function daqAddressInfoBuilder_setType()."
 (defgeneric (setf reachability-status-private) (new-value object)
   (:documentation "Sets the reachability status of the address, ignoring the \"Frozen\" status of the address.
 @param addressReachability The reachability status of the address.
+
 This status is set to \"Unknown\" by default. For IPv4 address types, the module manager checks
 reachability when querying for available devices.
 
@@ -6904,6 +7813,7 @@ Calls the openDAQ C function daqAddressInfoPrivate_setReachabilityStatusPrivate(
 (defmethod (setf reachability-status-private) (new-value (object address-info-private))
   "Sets the reachability status of the address, ignoring the \"Frozen\" status of the address.
 @param addressReachability The reachability status of the address.
+
 This status is set to \"Unknown\" by default. For IPv4 address types, the module manager checks
 reachability when querying for available devices.
 
@@ -6936,6 +7846,7 @@ Calls the openDAQ C function daqAddressInfo_getConnectionString()."
 (defmethod reachability-status ((object address-info))
   "Gets the reachability status of the address.
 @param addressReachability The reachability status of the address.
+
 This status is set to \"Unknown\" by default. For IPv4 address types, the module manager checks
 reachability when querying for available devices.
 
@@ -6946,12 +7857,14 @@ Calls the openDAQ C function daqAddressInfo_getReachabilityStatus()."
 (defgeneric address-info-type (object)
   (:documentation "Gets the type of the address.
 @param type The type the address.
+
 Currently available address types in the main openDAQ modules are: IPv4 and IPv6.
 
 Calls the openDAQ C function daqAddressInfo_getType()."))
 (defmethod address-info-type ((object address-info))
   "Gets the type of the address.
 @param type The type the address.
+
 Currently available address types in the main openDAQ modules are: IPv4 and IPv6.
 
 Calls the openDAQ C function daqAddressInfo_getType()."
@@ -6960,10 +7873,15 @@ Calls the openDAQ C function daqAddressInfo_getType()."
 
 (defgeneric allocate (object descriptor bytes align address)
   (:documentation "Allocates a chunk of memory for a packet.
-@param descriptor The OPTIONAL data descriptor of the signal for which memory is to be allocated. This can provide hints to the allocator. However, allocator implementations MUST accept null values.
+@param descriptor The OPTIONAL data descriptor of the signal for which memory is to be
+allocated. This can provide hints to the allocator. However, allocator
+implementations MUST accept null values.
 @param bytes The number of bytes to allocate.
-@param align The alignment requirement of the caller (typically the element size). This value may be zero if the caller does not need to specify an alignment requirement.
+@param align The alignment requirement of the caller (typically the element size). This
+value may be zero if the caller does not need to specify an alignment
+requirement.
 @param[out] address The address of the allocated memory.
+
 The implementation MAY set address value to `nullptr` without returning an error code,
 if the allocator is out of memory. Alternatively, the implementation MAY return an error
 code in this case.
@@ -6971,10 +7889,15 @@ code in this case.
 Calls the openDAQ C function daqAllocator_allocate()."))
 (defmethod allocate ((object allocator) descriptor bytes align address)
   "Allocates a chunk of memory for a packet.
-@param descriptor The OPTIONAL data descriptor of the signal for which memory is to be allocated. This can provide hints to the allocator. However, allocator implementations MUST accept null values.
+@param descriptor The OPTIONAL data descriptor of the signal for which memory is to be
+allocated. This can provide hints to the allocator. However, allocator
+implementations MUST accept null values.
 @param bytes The number of bytes to allocate.
-@param align The alignment requirement of the caller (typically the element size). This value may be zero if the caller does not need to specify an alignment requirement.
+@param align The alignment requirement of the caller (typically the element size). This
+value may be zero if the caller does not need to specify an alignment
+requirement.
 @param[out] address The address of the allocated memory.
+
 The implementation MAY set address value to `nullptr` without returning an error code,
 if the allocator is out of memory. Alternatively, the implementation MAY return an error
 code in this case.
@@ -6990,12 +7913,14 @@ Calls the openDAQ C function daqAllocator_allocate()."
 (defgeneric free (object address)
   (:documentation "Releases a chunk of memory allocated by allocate().
 @param address The address of the allocated memory to release.
+
 The implementation MUST ignore calls where @p address is null.
 
 Calls the openDAQ C function daqAllocator_free()."))
 (defmethod free ((object allocator) address)
   "Releases a chunk of memory allocated by allocate().
 @param address The address of the allocated memory to release.
+
 The implementation MUST ignore calls where @p address is null.
 
 Calls the openDAQ C function daqAllocator_free()."
@@ -7005,14 +7930,17 @@ Calls the openDAQ C function daqAllocator_free()."
 
 (defgeneric item-type (object)
   (:documentation "argument-info => daqArgumentInfo_getItemType()
-    Gets the item type of list/dict-type Argument Info objects. The item type specifies the type of values in the list or dictionary arguments.
+    Gets the item type of list/dict-type Argument Info objects. The item type specifies the
 
 property => daqProperty_getItemType()
-    Gets the Item type of the Property. Configured only if the Value type is `ctDict` or `ctList`. If so, the item types of the list/dictionary must match the Property's Item type."))
+    Gets the Item type of the Property. Configured only if the Value type is `ctDict` or `ctList`. If so,"))
 (defmethod item-type ((object argument-info))
-  "Gets the item type of list/dict-type Argument Info objects. The item type specifies the type of values in the list or dictionary arguments.
+  "Gets the item type of list/dict-type Argument Info objects. The item type specifies the
+type of values in the list or dictionary arguments.
 @param[out] itemType The item type of the list/dictionary argument.
+
 In list-type Argument Info, the type of each item corresponds to the item type.
+
 In dict-type Argument Info, the type of each value in the <key, value> pairing corresponds to the
 item type.
 
@@ -7022,12 +7950,13 @@ Calls the openDAQ C function daqArgumentInfo_getItemType()."
 
 (defgeneric key-type (object)
   (:documentation "argument-info => daqArgumentInfo_getKeyType()
-    Gets the key type of dict-type Argument Info objects. The item type specifies the type of keys in dictionary arguments.
+    Gets the key type of dict-type Argument Info objects. The item type specifies the type of
 
 property => daqProperty_getKeyType()
-    Gets the Key type of the Property. Configured only if the Value type is `ctDict`. If so, the key type of the dictionary Property values must match the Property's Key type."))
+    Gets the Key type of the Property. Configured only if the Value type is `ctDict`. If so,"))
 (defmethod key-type ((object argument-info))
-  "Gets the key type of dict-type Argument Info objects. The item type specifies the type of keys in dictionary arguments.
+  "Gets the key type of dict-type Argument Info objects. The item type specifies the type of
+keys in dictionary arguments.
 @param[out] keyType The key type of the dictionary argument.
 
 Calls the openDAQ C function daqArgumentInfo_getKeyType()."
@@ -7081,7 +8010,7 @@ property-object-class-builder => daqPropertyObjectClassBuilder_getName()
     Gets the name of the property class.
 
 property => daqProperty_getName()
-    Gets the Name of the Property. The names of Properties in a Property object must be unique. The name is used as the key to the corresponding Property value when getting/setting the value.
+    Gets the Name of the Property. The names of Properties in a Property object must be unique.
 
 task => daqTask_getName()
     Gets the task name.
@@ -7105,6 +8034,7 @@ Calls the openDAQ C function daqArgumentInfo_getName()."
 (defgeneric argument-info-type (object)
   (:documentation "Gets the core type of the argument.
 @param[out] type The type of the argument.
+
 Dictionary, List and Object types should be avoided in public function/procedure callable objects
 as their key, item, or base interface type cannot be determined without internal knowledge
 of the function/procedure.
@@ -7113,6 +8043,7 @@ Calls the openDAQ C function daqArgumentInfo_getType()."))
 (defmethod argument-info-type ((object argument-info))
   "Gets the core type of the argument.
 @param[out] type The type of the argument.
+
 Dictionary, List and Object types should be avoided in public function/procedure callable objects
 as their key, item, or base interface type cannot be determined without internal knowledge
 of the function/procedure.
@@ -7122,14 +8053,16 @@ Calls the openDAQ C function daqArgumentInfo_getType()."
 )
 
 (defgeneric authenticate (object username password)
-  (:documentation "Authenticate user using username and password. If authentication is successful, a User instance is returned. Otherwise an exception is thrown.
+  (:documentation "Authenticate user using username and password. If authentication is successful, a User instance is returned.
+Otherwise an exception is thrown.
 @param username The username.
 @param password The password in plain text.
 @param user[out] And instance of successfully authenticated user. If authentication is not successful, an exception is thrown.
 
 Calls the openDAQ C function daqAuthenticationProvider_authenticate()."))
 (defmethod authenticate ((object authentication-provider) username password)
-  "Authenticate user using username and password. If authentication is successful, a User instance is returned. Otherwise an exception is thrown.
+  "Authenticate user using username and password. If authentication is successful, a User instance is returned.
+Otherwise an exception is thrown.
 @param username The username.
 @param password The password in plain text.
 @param user[out] And instance of successfully authenticated user. If authentication is not successful, an exception is thrown.
@@ -7170,12 +8103,14 @@ Calls the openDAQ C function daqAuthenticationProvider_findUser()."
 )
 
 (defgeneric is-anonymous-allowed (object)
-  (:documentation "Returns true if anonymous authentication is allowed. When anonymous authentication is enabled, user can connect to the server without providing username or password.
+  (:documentation "Returns true if anonymous authentication is allowed. When anonymous authentication is enabled, user can connect
+to the server without providing username or password.
 @param allowedOut[out] True if anonymous authentication is allowed.
 
 Calls the openDAQ C function daqAuthenticationProvider_isAnonymousAllowed()."))
 (defmethod is-anonymous-allowed ((object authentication-provider))
-  "Returns true if anonymous authentication is allowed. When anonymous authentication is enabled, user can connect to the server without providing username or password.
+  "Returns true if anonymous authentication is allowed. When anonymous authentication is enabled, user can connect
+to the server without providing username or password.
 @param allowedOut[out] True if anonymous authentication is allowed.
 
 Calls the openDAQ C function daqAuthenticationProvider_isAnonymousAllowed()."
@@ -7184,12 +8119,14 @@ Calls the openDAQ C function daqAuthenticationProvider_isAnonymousAllowed()."
 
 (defgeneric cancel (object)
   (:documentation "Cancels the outstanding work if it has not already started.
-@param[out] canceled Is @c true if the execution was canceled or @c false if the execution has already completed
+@param[out] canceled Is @c true if the execution was canceled
+or @c false if the execution has already completed
 
 Calls the openDAQ C function daqAwaitable_cancel()."))
 (defmethod cancel ((object awaitable))
   "Cancels the outstanding work if it has not already started.
-@param[out] canceled Is @c true if the execution was canceled or @c false if the execution has already completed
+@param[out] canceled Is @c true if the execution was canceled
+or @c false if the execution has already completed
 
 Calls the openDAQ C function daqAwaitable_cancel()."
   (not (zerop (opendaq.low-level:awaitable/cancel (%require-live-pointer object))))
@@ -7197,12 +8134,13 @@ Calls the openDAQ C function daqAwaitable_cancel()."
 
 (defgeneric result (object)
   (:documentation "awaitable => daqAwaitable_getResult()
-    Waits until the awaitable has a valid result and retrieves it or re-throws the exception that occurred during the execution.
+    Waits until the awaitable has a valid result and retrieves it or
 
 eval-value => daqEvalValue_getResult()
     Gets the result of the expression."))
 (defmethod result ((object awaitable))
-  "Waits until the awaitable has a valid result and retrieves it or re-throws the exception that occurred during the execution.
+  "Waits until the awaitable has a valid result and retrieves it or
+re-throws the exception that occurred during the execution.
 @param[out] result The execution result if any otherwise @c nullptr.
 @retval OPENDAQ_ERR_EMPTY_AWAITABLE when there is no work associated with the awaitable.
 
@@ -7212,12 +8150,14 @@ Calls the openDAQ C function daqAwaitable_getResult()."
 
 (defgeneric has-completed (object)
   (:documentation "Checks if the execution has already finished.
-@param[out] completed Is @c true if the execution has finished or @c false if the execution is in progress or there is no work associated
+@param[out] completed Is @c true if the execution has finished
+or @c false if the execution is in progress or there is no work associated
 
 Calls the openDAQ C function daqAwaitable_hasCompleted()."))
 (defmethod has-completed ((object awaitable))
   "Checks if the execution has already finished.
-@param[out] completed Is @c true if the execution has finished or @c false if the execution is in progress or there is no work associated
+@param[out] completed Is @c true if the execution has finished
+or @c false if the execution is in progress or there is no work associated
 
 Calls the openDAQ C function daqAwaitable_hasCompleted()."
   (not (zerop (opendaq.low-level:awaitable/has-completed (%require-live-pointer object))))
@@ -7230,52 +8170,129 @@ Calls the openDAQ C function daqAwaitable_hasCompleted()."
   (opendaq.low-level:awaitable/wait (%require-live-pointer object))
 )
 
-(defgeneric add-ref (object)
-  (:documentation "Calls the openDAQ C function daqBaseObject_addRef()."))
-(defmethod add-ref ((object base-object))
-  "Calls the openDAQ C function daqBaseObject_addRef()."
-  (opendaq.low-level:base-object/add-ref (%require-live-pointer object))
-)
-
-(defun base-object-create ()
-  "Calls the openDAQ C function daqBaseObject_create()."
-  (wrap (opendaq.low-level:base-object/create) 'base-object)
-)
-
 (defgeneric dispose (object)
-  (:documentation "Calls the openDAQ C function daqBaseObject_dispose()."))
+  (:documentation "Disposes all references held by the object.
+@return OPENDAQ_SUCCESS if succeeded, error code if failed.
+
+An object that holds references to other interfaces must reset these references to null in `dispose`.
+This method is called automatically when the reference count drops to zero.
+
+Call this method manually to break cycle references. If two objects have reference to each other,
+calling `dispose` will break cycle references.
+
+After `dispose` is called, the object should not be accessed again, except by calling `releaseRef`
+function.
+
+Calls the openDAQ C function daqBaseObject_dispose()."))
 (defmethod dispose ((object base-object))
-  "Calls the openDAQ C function daqBaseObject_dispose()."
+  "Disposes all references held by the object.
+@return OPENDAQ_SUCCESS if succeeded, error code if failed.
+
+An object that holds references to other interfaces must reset these references to null in `dispose`.
+This method is called automatically when the reference count drops to zero.
+
+Call this method manually to break cycle references. If two objects have reference to each other,
+calling `dispose` will break cycle references.
+
+After `dispose` is called, the object should not be accessed again, except by calling `releaseRef`
+function.
+
+Calls the openDAQ C function daqBaseObject_dispose()."
   (opendaq.low-level:base-object/dispose (%require-live-pointer object))
 )
 
 (defgeneric equals (object other)
-  (:documentation "Calls the openDAQ C function daqBaseObject_equals()."))
+  (:documentation "Compares object to another object for equality.
+@param other Interface to another object for comparison.
+@param equal Value indicating if the @c other is equivalent to this one.
+
+For reference objects, it compares the address of the object. For value objects, such as numbers and
+strings, it compares values.
+
+`ImplementationOf` which provides default implementation of `IBaseObject` uses
+pointer address to compare for equality.
+
+Calls the openDAQ C function daqBaseObject_equals()."))
 (defmethod equals ((object base-object) other)
-  "Calls the openDAQ C function daqBaseObject_equals()."
+  "Compares object to another object for equality.
+@param other Interface to another object for comparison.
+@param equal Value indicating if the @c other is equivalent to this one.
+
+For reference objects, it compares the address of the object. For value objects, such as numbers and
+strings, it compares values.
+
+`ImplementationOf` which provides default implementation of `IBaseObject` uses
+pointer address to compare for equality.
+
+Calls the openDAQ C function daqBaseObject_equals()."
   (with-daq-boxed-values ((coerced-other other :daq-base-object))
     (not (zerop (opendaq.low-level:base-object/equals (%require-live-pointer object) coerced-other))))
 )
 
 (defgeneric hash-code (object)
-  (:documentation "Calls the openDAQ C function daqBaseObject_getHashCode()."))
+  (:documentation "Returns hash code of the object.
+@param[out] hashCode Hash code.
+@return OPENDAQ_SUCCESS if succeeded, error code otherwise.
+
+The object should calculate and return the hash code. For reference objects, it is usually
+calculated from pointer address. For value objects, such as numbers and strings, it is
+calculated from value.
+
+`ImplementationOf` object which provides default implementation of `IBaseObject` uses
+pointer address to calculate hash code.
+
+If the object calculates the hash code from some value stored in the object, it is
+mandatory to make this value (or the object) immutable. The hash code of the object should
+not change. If a dictionary stores the object as a key, it will corrupt the hash table.
+
+Calls the openDAQ C function daqBaseObject_getHashCode()."))
 (defmethod hash-code ((object base-object))
-  "Calls the openDAQ C function daqBaseObject_getHashCode()."
+  "Returns hash code of the object.
+@param[out] hashCode Hash code.
+@return OPENDAQ_SUCCESS if succeeded, error code otherwise.
+
+The object should calculate and return the hash code. For reference objects, it is usually
+calculated from pointer address. For value objects, such as numbers and strings, it is
+calculated from value.
+
+`ImplementationOf` object which provides default implementation of `IBaseObject` uses
+pointer address to calculate hash code.
+
+If the object calculates the hash code from some value stored in the object, it is
+mandatory to make this value (or the object) immutable. The hash code of the object should
+not change. If a dictionary stores the object as a key, it will corrupt the hash table.
+
+Calls the openDAQ C function daqBaseObject_getHashCode()."
   (opendaq.low-level:base-object/get-hash-code (%require-live-pointer object))
 )
 
-(defgeneric release-ref (object)
-  (:documentation "Calls the openDAQ C function daqBaseObject_releaseRef()."))
-(defmethod release-ref ((object base-object))
-  "Calls the openDAQ C function daqBaseObject_releaseRef()."
-  (opendaq.low-level:base-object/release-ref (%require-live-pointer object))
-)
-
 (defgeneric to-string (object)
-  (:documentation "Calls the openDAQ C function daqBaseObject_toString()."))
+  (:documentation "Returns a string representation of the object.
+@param[out] str String representation of the object.
+@return OPENDAQ_SUCCESS if succeeded, error code otherwise.
+
+Call this method to convert the object to its string representation.
+
+`ImplementationOf` object which provides default implementation of `IBaseObject` uses
+pointer address for string representation.
+
+Return value `str` should be de-allocated by the caller using `daqFreeMemory` function.
+
+Calls the openDAQ C function daqBaseObject_toString()."))
 (defmethod to-string ((object base-object))
-  "Calls the openDAQ C function daqBaseObject_toString()."
-  (wrap (opendaq.low-level:base-object/to-string (%require-live-pointer object)) 'char-ptr)
+  "Returns a string representation of the object.
+@param[out] str String representation of the object.
+@return OPENDAQ_SUCCESS if succeeded, error code otherwise.
+
+Call this method to convert the object to its string representation.
+
+`ImplementationOf` object which provides default implementation of `IBaseObject` uses
+pointer address for string representation.
+
+Return value `str` should be de-allocated by the caller using `daqFreeMemory` function.
+
+Calls the openDAQ C function daqBaseObject_toString()."
+  (wrap (opendaq.low-level:base-object/to-string (%require-live-pointer object)) 'c-char-ptr)
 )
 
 (defgeneric binary-data-address (object data)
@@ -7342,7 +8359,7 @@ multi-reader-builder => daqMultiReaderBuilder_getDomainReadType()
     Gets the domain signal read type
 
 sample-reader => daqSampleReader_getDomainReadType()
-    Gets the sample-type the signal domain samples will be converted to when read or @c SampleType::Invalid if read-type has not been determined yet.
+    Gets the sample-type the signal domain samples will be converted to when read
 
 stream-reader-builder => daqStreamReaderBuilder_getDomainReadType()
     Gets the domain signal read type
@@ -7465,7 +8482,7 @@ multi-reader-builder => daqMultiReaderBuilder_getValueReadType()
     Gets the value signal read type
 
 sample-reader => daqSampleReader_getValueReadType()
-    Gets the sample-type the signal value samples will be converted to when read or @c SampleType::Invalid if read-type has not been determined yet.
+    Gets the sample-type the signal value samples will be converted to when read
 
 stream-reader-builder => daqStreamReaderBuilder_getValueReadType()
     Gets the value signal read type
@@ -7640,12 +8657,16 @@ Calls the openDAQ C function daqBlockReaderBuilder_setValueReadType()."
   new-value)
 
 (defgeneric get-read-samples (object)
-  (:documentation "Returns the number of samples that were read. Sometimes, during the process of reading, an event packet may occur that stops the reading of remaining samples. Developers can use this function to determine how many samples were actually read.
+  (:documentation "Returns the number of samples that were read.
+Sometimes, during the process of reading, an event packet may occur that stops the reading of remaining samples.
+Developers can use this function to determine how many samples were actually read.
 @param[out] samplesCount the amount of samples that were read.
 
 Calls the openDAQ C function daqBlockReaderStatus_getReadSamples()."))
 (defmethod get-read-samples ((object block-reader-status))
-  "Returns the number of samples that were read. Sometimes, during the process of reading, an event packet may occur that stops the reading of remaining samples. Developers can use this function to determine how many samples were actually read.
+  "Returns the number of samples that were read.
+Sometimes, during the process of reading, an event packet may occur that stops the reading of remaining samples.
+Developers can use this function to determine how many samples were actually read.
 @param[out] samplesCount the amount of samples that were read.
 
 Calls the openDAQ C function daqBlockReaderStatus_getReadSamples()."
@@ -7669,19 +8690,33 @@ Calls the openDAQ C function daqBlockReader_getOverlap()."
 )
 
 (defgeneric block-reader-read (object blocks count &optional timeout-ms)
-  (:documentation "Copies at maximum the next `count` blocks of unread samples to the values buffer. The amount actually read is returned through the `count` parameter.
-@param blocks The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of samples.
-@param count The maximum amount of blocks to be read. If the `count` is less than available the parameter value is set to the actual amount and only the available blocks are returned. The rest of the buffer is not modified or cleared.
+  (:documentation "Copies at maximum the next `count` blocks of unread samples to the values buffer.
+The amount actually read is returned through the `count` parameter.
+@param[in] blocks The buffer that the samples will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of samples.
+@param[in,out] count The maximum amount of blocks to be read. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+blocks are returned. The rest of the buffer is not modified or cleared.
 @param timeoutMs The maximum amount of time in milliseconds to wait for the requested amount of blocks before returning.
-@param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::isEventEncountered returns true. - If the reading process is successful, ReaderStatus::isOk returns true, indicating that IReaderStatus::getValid is true and IReaderStatus::isEventEncountered is false.
+@param[out] status: Represents the status of the reader.
+- If the reader is invalid, IReaderStatus::getValid returns false.
+- If an event packet was encountered during processing, IReaderStatus::isEventEncountered returns true.
+- If the reading process is successful, ReaderStatus::isOk returns true, indicating that IReaderStatus::getValid is true and IReaderStatus::isEventEncountered is false.
 
 Calls the openDAQ C function daqBlockReader_read()."))
 (defmethod block-reader-read ((object block-reader) blocks count &optional (timeout-ms 0))
-  "Copies at maximum the next `count` blocks of unread samples to the values buffer. The amount actually read is returned through the `count` parameter.
-@param blocks The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of samples.
-@param count The maximum amount of blocks to be read. If the `count` is less than available the parameter value is set to the actual amount and only the available blocks are returned. The rest of the buffer is not modified or cleared.
+  "Copies at maximum the next `count` blocks of unread samples to the values buffer.
+The amount actually read is returned through the `count` parameter.
+@param[in] blocks The buffer that the samples will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of samples.
+@param[in,out] count The maximum amount of blocks to be read. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+blocks are returned. The rest of the buffer is not modified or cleared.
 @param timeoutMs The maximum amount of time in milliseconds to wait for the requested amount of blocks before returning.
-@param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::isEventEncountered returns true. - If the reading process is successful, ReaderStatus::isOk returns true, indicating that IReaderStatus::getValid is true and IReaderStatus::isEventEncountered is false.
+@param[out] status: Represents the status of the reader.
+- If the reader is invalid, IReaderStatus::getValid returns false.
+- If an event packet was encountered during processing, IReaderStatus::isEventEncountered returns true.
+- If the reading process is successful, ReaderStatus::isOk returns true, indicating that IReaderStatus::getValid is true and IReaderStatus::isEventEncountered is false.
 
 Calls the openDAQ C function daqBlockReader_read()."
   (with-daq-boxed-values ((coerced-blocks blocks nil)
@@ -7695,21 +8730,37 @@ Calls the openDAQ C function daqBlockReader_read()."
 )
 
 (defgeneric block-reader-read-with-domain (object data-blocks domain-blocks count &optional timeout-ms)
-  (:documentation "Copies at maximum the next `count` blocks of unread samples and clock-stamps to the `dataBlocks` and `domainBlocks` buffers. The amount actually read is returned through the `count` parameter.
-@param dataBlocks The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of samples.
-@param domainBlocks The buffer that the domain values will be copied to. The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of clock-stamps.
-@param count The maximum amount of blocks to be read. If the `count` is less than available the parameter value is set to the actual amount and only the available blocks are returned. The rest of the buffer is not modified or cleared.
+  (:documentation "Copies at maximum the next `count` blocks of unread samples and clock-stamps to the `dataBlocks` and `domainBlocks` buffers.
+The amount actually read is returned through the `count` parameter.
+@param[in] dataBlocks The buffer that the samples will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of samples.
+@param[in] domainBlocks The buffer that the domain values will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of clock-stamps.
+@param[in,out] count The maximum amount of blocks to be read. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+blocks are returned. The rest of the buffer is not modified or cleared.
 @param timeoutMs The maximum amount of time in milliseconds to wait for the requested amount of blocks before returning.
-@param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::isEventEncountered returns true. - If the reading process is successful, ReaderStatus::isOk returns true, indicating that IReaderStatus::getValid is true and IReaderStatus::isEventEncountered is false.
+@param[out] status: Represents the status of the reader.
+- If the reader is invalid, IReaderStatus::getValid returns false.
+- If an event packet was encountered during processing, IReaderStatus::isEventEncountered returns true.
+- If the reading process is successful, ReaderStatus::isOk returns true, indicating that IReaderStatus::getValid is true and IReaderStatus::isEventEncountered is false.
 
 Calls the openDAQ C function daqBlockReader_readWithDomain()."))
 (defmethod block-reader-read-with-domain ((object block-reader) data-blocks domain-blocks count &optional (timeout-ms 0))
-  "Copies at maximum the next `count` blocks of unread samples and clock-stamps to the `dataBlocks` and `domainBlocks` buffers. The amount actually read is returned through the `count` parameter.
-@param dataBlocks The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of samples.
-@param domainBlocks The buffer that the domain values will be copied to. The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of clock-stamps.
-@param count The maximum amount of blocks to be read. If the `count` is less than available the parameter value is set to the actual amount and only the available blocks are returned. The rest of the buffer is not modified or cleared.
+  "Copies at maximum the next `count` blocks of unread samples and clock-stamps to the `dataBlocks` and `domainBlocks` buffers.
+The amount actually read is returned through the `count` parameter.
+@param[in] dataBlocks The buffer that the samples will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of samples.
+@param[in] domainBlocks The buffer that the domain values will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` * `blockSize` amount of clock-stamps.
+@param[in,out] count The maximum amount of blocks to be read. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+blocks are returned. The rest of the buffer is not modified or cleared.
 @param timeoutMs The maximum amount of time in milliseconds to wait for the requested amount of blocks before returning.
-@param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::isEventEncountered returns true. - If the reading process is successful, ReaderStatus::isOk returns true, indicating that IReaderStatus::getValid is true and IReaderStatus::isEventEncountered is false.
+@param[out] status: Represents the status of the reader.
+- If the reader is invalid, IReaderStatus::getValid returns false.
+- If an event packet was encountered during processing, IReaderStatus::isEventEncountered returns true.
+- If the reading process is successful, ReaderStatus::isOk returns true, indicating that IReaderStatus::getValid is true and IReaderStatus::isEventEncountered is false.
 
 Calls the openDAQ C function daqBlockReader_readWithDomain()."
   (with-daq-boxed-values ((coerced-data-blocks data-blocks nil)
@@ -7727,7 +8778,11 @@ Calls the openDAQ C function daqBlockReader_readWithDomain()."
   (:documentation "boolean-object => daqBoolean_equalsValue()
     Compares stored boolean value to the boolean parameter.
 
-float-object => daqFloatObject_equalsValue()
+complex-number-object => daqComplexNumber_equalsValue()
+    Compares stored complex value to the complex number parameter.
+
+float-object => daqFloat_equalsValue()
+    Compares stored float value to the float parameter.
 
 integer-object => daqInteger_equalsValue()
     Compares stored int value to the int parameter."))
@@ -7735,6 +8790,7 @@ integer-object => daqInteger_equalsValue()
   "Compares stored boolean value to the boolean parameter.
 @param value Value for comparison.
 @param[out] equal The result of the comparison.
+
 Call this method to directly compare the object to the boolean parameter.
 
 Calls the openDAQ C function daqBoolean_equalsValue()."
@@ -7746,13 +8802,20 @@ Calls the openDAQ C function daqBoolean_equalsValue()."
   (:documentation "boolean-object => daqBoolean_getValue()
     Gets a boolean value stored in the object.
 
+complex-number-object => daqComplexNumber_getValue()
+    Gets the number as ComplexFloat64 type.
+
 enumeration => daqEnumeration_getValue()
     Gets the Enumeration value as String containing the name of the enumerator constant.
 
-float-object => daqFloatObject_getValue()
+float-object => daqFloat_getValue()
+    Gets a float value stored in the object.
 
 integer-object => daqInteger_getValue()
     Gets an int value stored in the object.
+
+property-metadata-read-args => daqPropertyMetadataReadArgs_getValue()
+    Gets the current value of the metadata field.
 
 property-value-event-args => daqPropertyValueEventArgs_getValue()
 
@@ -7762,6 +8825,7 @@ property => daqProperty_getValue()
   "Gets a boolean value stored in the object.
 @param[out] value Stored boolean value.
 @return OPENDAQ_SUCCESS if succeeded, error code otherwise.
+
 Call this method to extract the boolean value that is stored in the object.
 
 Calls the openDAQ C function daqBoolean_getValue()."
@@ -7795,12 +8859,14 @@ Calls the openDAQ C function daqCallableInfo_getReturnType()."
 )
 
 (defgeneric is-const (object)
-  (:documentation "A flag indicating if function is marked as const. A const function promises not to modify the state of the device or any other objects under the openDAQ instance.
+  (:documentation "A flag indicating if function is marked as const. A const function promises not to modify the state
+of the device or any other objects under the openDAQ instance.
 @param[out] constFlag a flag indicating if the function is marked as const or not.
 
 Calls the openDAQ C function daqCallableInfo_isConst()."))
 (defmethod is-const ((object callable-info))
-  "A flag indicating if function is marked as const. A const function promises not to modify the state of the device or any other objects under the openDAQ instance.
+  "A flag indicating if function is marked as const. A const function promises not to modify the state
+of the device or any other objects under the openDAQ instance.
 @param[out] constFlag a flag indicating if the function is marked as const or not.
 
 Calls the openDAQ C function daqCallableInfo_isConst()."
@@ -7875,6 +8941,7 @@ Calls the openDAQ C function daqCoercer_getEval()."
 @retval OPENDAQ_LOWER The object's value is lower than the value of the compared object.
 @retval OPENDAQ_HIGHER The object's value is higher than the value of the compared object.
 @retval OPENDAQ_EQUAL The object's value is equal to the value of the compared object.
+
 Compares the current instance with another object of the same type and returns an integer that
 indicates whether the current instance precedes, follows, or occurs in the same position in the
 sort order as the other object.
@@ -7886,6 +8953,7 @@ Calls the openDAQ C function daqComparable_compareTo()."))
 @retval OPENDAQ_LOWER The object's value is lower than the value of the compared object.
 @retval OPENDAQ_HIGHER The object's value is higher than the value of the compared object.
 @retval OPENDAQ_EQUAL The object's value is equal to the value of the compared object.
+
 Compares the current instance with another object of the same type and returns an integer that
 indicates whether the current instance precedes, follows, or occurs in the same position in the
 sort order as the other object.
@@ -7893,6 +8961,18 @@ sort order as the other object.
 Calls the openDAQ C function daqComparable_compareTo()."
   (with-daq-boxed-values ((coerced-obj obj :daq-base-object))
     (opendaq.low-level:comparable/compare-to (%require-live-pointer object) coerced-obj))
+)
+
+(defmethod equals-value ((object complex-number-object) value)
+  "Compares stored complex value to the complex number parameter.
+@param value Value for comparison.
+@param[out] equal The result of the comparison.
+
+Call this method to directly compare the object to the value parameter.
+
+Calls the openDAQ C function daqComplexNumber_equalsValue()."
+  (with-daq-boxed-values ((coerced-value value nil))
+    (not (zerop (opendaq.low-level:complex-number/equals-value (%require-live-pointer object) coerced-value))))
 )
 
 (defgeneric imaginary (object)
@@ -7921,6 +9001,17 @@ Calls the openDAQ C function daqComplexNumber_getReal()."
   (opendaq.low-level:complex-number/get-real (%require-live-pointer object))
 )
 
+(defmethod value ((object complex-number-object))
+  "Gets the number as ComplexFloat64 type.
+@param[out] value Complex value.
+
+Calls the openDAQ C function daqComplexNumber_getValue()."
+  (cffi:with-foreign-object (value-slot 'opendaq.low-level::daq-complex-float-64)
+    (opendaq.low-level:complex-number/get-value (%require-live-pointer object) value-slot)
+    (cffi:mem-ref value-slot 'opendaq.low-level::daq-complex-float-64)
+  )
+)
+
 (defgeneric component-deserialize-context-clone (object new-parent new-local-id &optional new-trigger-core-event)
   (:documentation "Calls the openDAQ C function daqComponentDeserializeContext_clone()."))
 (defmethod component-deserialize-context-clone ((object component-deserialize-context) new-parent new-local-id &optional (new-trigger-core-event nil))
@@ -7945,7 +9036,10 @@ component => daqComponent_getContext()
     Gets the context object.
 
 instance-builder => daqInstanceBuilder_getContext()
-    Returns a context object of the instance."))
+    Returns a context object of the instance.
+
+packet-buffer-builder => daqPacketBufferBuilder_getContext()
+    Gets the context pointer"))
 (defmethod context ((object component-deserialize-context))
   "Calls the openDAQ C function daqComponentDeserializeContext_getContext()."
   (wrap (opendaq.low-level:component-deserialize-context/get-context (%require-live-pointer object)) 'context)
@@ -8075,6 +9169,7 @@ Calls the openDAQ C function daqComponentPrivate_setComponentConfig()."
   (:documentation "Called by parent component to notify this component about parent's active state change.
 @param parentActive True if parent is active.
 @param onUpdate True if the call is triggered from config update, false if the call is triggered by a change of the active state.
+
 The component updates its internal parentActive flag and recomputes its effective active state.
 If the effective active state changes, triggers an AttributeChanged event.
 Container components (folders, devices) propagate this call to their children.
@@ -8084,6 +9179,7 @@ Calls the openDAQ C function daqComponentPrivate_setParentActive()."))
   "Called by parent component to notify this component about parent's active state change.
 @param parentActive True if parent is active.
 @param onUpdate True if the call is triggered from config update, false if the call is triggered by a change of the active state.
+
 The component updates its internal parentActive flag and recomputes its effective active state.
 If the effective active state changes, triggers an AttributeChanged event.
 Container components (folders, devices) propagate this call to their children.
@@ -8256,12 +9352,14 @@ Calls the openDAQ C function daqComponentStatusContainer_getStatusMessage()."
 (defgeneric statuses (object)
   (:documentation "Gets the current values of all Component statuses.
 @param[out] statuses The Component statuses as a dictionary.
+
 All objects in the statuses dictionary are key value pairs of <IString, IEnumeration>.
 
 Calls the openDAQ C function daqComponentStatusContainer_getStatuses()."))
 (defmethod statuses ((object component-status-container))
   "Gets the current values of all Component statuses.
 @param[out] statuses The Component statuses as a dictionary.
+
 All objects in the statuses dictionary are key value pairs of <IString, IEnumeration>.
 
 Calls the openDAQ C function daqComponentStatusContainer_getStatuses()."
@@ -8271,6 +9369,7 @@ Calls the openDAQ C function daqComponentStatusContainer_getStatuses()."
 (defmethod build ((object component-type-builder))
   "Builds and returns a Component type object using the currently set values of the Builder.
 @param[out] componentType The built Component type.
+
 Depending on the set \"sort\" builder parameter, a different Component type is created - eg. Streaming type,
 Device type, Function block type, or Server type
 
@@ -8290,15 +9389,19 @@ streaming-type => daqStreamingType_getConnectionStringPrefix()"))
 )
 
 (defgeneric default-config (object)
-  (:documentation "Gets the default configuration object that will be cloned and passed to users by the built Component type when requested.
+  (:documentation "Gets the default configuration object that will be cloned and passed to users
+by the built Component type when requested.
 @param[out] defaultConfig The default configuration object.
+
 Configuration objects are property object with user-defined key-value pairs.
 For example: Port=1000, OutputRate=5000, ...
 
 Calls the openDAQ C function daqComponentTypeBuilder_getDefaultConfig()."))
 (defmethod default-config ((object component-type-builder))
-  "Gets the default configuration object that will be cloned and passed to users by the built Component type when requested.
+  "Gets the default configuration object that will be cloned and passed to users
+by the built Component type when requested.
 @param[out] defaultConfig The default configuration object.
+
 Configuration objects are property object with user-defined key-value pairs.
 For example: Port=1000, OutputRate=5000, ...
 
@@ -8330,6 +9433,7 @@ property => daqProperty_getDescription()
 (defmethod description ((object component-type-builder))
   "Gets the description of a component type.
 @param[out] description The description of a component type.
+
 A short description of a component type and the associated configuration parameters it offers.
 
 Calls the openDAQ C function daqComponentTypeBuilder_getDescription()."
@@ -8355,14 +9459,18 @@ module-info => daqModuleInfo_getId()
 server => daqServer_getId()
     Gets the server id.
 
+sync-interface => daqSyncInterface_getId()
+    Gets the ID of the synchronization interface.
+
 unit-builder => daqUnitBuilder_getId()
-    Gets the unit ID as defined in <a href=\"https://unece.org/trade/cefact/UNLOCODE-Download\">Codes for Units of Measurement used in International Trade</a>.
+    Gets the unit ID as defined in <a href=\"https://unece.org/trade/cefact/UNLOCODE-Download\">Codes for Units of Measurement used
 
 unit => daqUnit_getId()
     Gets the unit ID as defined in <a href=\"https://unece.org/trade/cefact/UNLOCODE-Download\">Codes for Units of Measurement used in International Trade</a>."))
 (defmethod id ((object component-type-builder))
   "Gets the unique component type id.
 @param[out] id The unique id of a component type.
+
 Unique id should not be presented on the UI.
 
 Calls the openDAQ C function daqComponentTypeBuilder_getId()."
@@ -8372,6 +9480,7 @@ Calls the openDAQ C function daqComponentTypeBuilder_getId()."
 (defmethod name ((object component-type-builder))
   "Gets the user-friendly name of a component type.
 @param[out] name The user-friendly name of a component type.
+
 Name is usually presented on the UI. Does not have to be unique.
 
 Calls the openDAQ C function daqComponentTypeBuilder_getName()."
@@ -8379,12 +9488,14 @@ Calls the openDAQ C function daqComponentTypeBuilder_getName()."
 )
 
 (defgeneric type-sort (object)
-  (:documentation "Gets the component type sort. Can be either Streaming, Function block, Device, or Server. Depending on the setting, the corresponding Component type object will be built.
+  (:documentation "Gets the component type sort. Can be either Streaming, Function block, Device, or Server.
+Depending on the setting, the corresponding Component type object will be built.
 @param sort The sort of the component type.
 
 Calls the openDAQ C function daqComponentTypeBuilder_getTypeSort()."))
 (defmethod type-sort ((object component-type-builder))
-  "Gets the component type sort. Can be either Streaming, Function block, Device, or Server. Depending on the setting, the corresponding Component type object will be built.
+  "Gets the component type sort. Can be either Streaming, Function block, Device, or Server.
+Depending on the setting, the corresponding Component type object will be built.
 @param sort The sort of the component type.
 
 Calls the openDAQ C function daqComponentTypeBuilder_getTypeSort()."
@@ -8400,15 +9511,19 @@ Calls the openDAQ C function daqComponentTypeBuilder_getTypeSort()."
   new-value)
 
 (defgeneric (setf default-config) (new-value object)
-  (:documentation "Sets the default configuration object that will be cloned and passed to users by the built Component type when requested.
+  (:documentation "Sets the default configuration object that will be cloned and passed to users
+by the built Component type when requested.
 @param defaultConfig The default configuration object.
+
 Configuration objects are property object with user-defined key-value pairs.
 For example: Port=1000, OutputRate=5000, ...
 
 Calls the openDAQ C function daqComponentTypeBuilder_setDefaultConfig()."))
 (defmethod (setf default-config) (new-value (object component-type-builder))
-  "Sets the default configuration object that will be cloned and passed to users by the built Component type when requested.
+  "Sets the default configuration object that will be cloned and passed to users
+by the built Component type when requested.
 @param defaultConfig The default configuration object.
+
 Configuration objects are property object with user-defined key-value pairs.
 For example: Port=1000, OutputRate=5000, ...
 
@@ -8432,6 +9547,7 @@ property-builder => daqPropertyBuilder_setDescription()
 (defmethod (setf description) (new-value (object component-type-builder))
   "Sets the description of a component type.
 @param description The description of a component type.
+
 A short description of a component type and the associated configuration parameters it offers.
 
 Calls the openDAQ C function daqComponentTypeBuilder_setDescription()."
@@ -8447,10 +9563,11 @@ log-file-info-builder => daqLogFileInfoBuilder_setId()
     Sets the id of the log file. Oth
 
 unit-builder => daqUnitBuilder_setId()
-    Sets the unit ID as defined in <a href=\"https://unece.org/trade/cefact/UNLOCODE-Download\">Codes for Units of Measurement used in International Trade</a>."))
+    Sets the unit ID as defined in <a href=\"https://unece.org/trade/cefact/UNLOCODE-Download\">Codes for Units of Measurement used"))
 (defmethod (setf id) (new-value (object component-type-builder))
   "Sets the unique component type id.
 @param id The unique id of a component type.
+
 Unique id should not be presented on the UI.
 
 Calls the openDAQ C function daqComponentTypeBuilder_setId()."
@@ -8478,7 +9595,7 @@ log-file-info-builder => daqLogFileInfoBuilder_setName()
     Sets the name of the log file.
 
 property-builder => daqPropertyBuilder_setName()
-    Sets the Name of the Property. The names of Properties in a Property object must be unique. The name is used as the key to the corresponding Property value when getting/setting the value.
+    Sets the Name of the Property. The names of Properties in a Property object must be unique.
 
 property-object-class-builder => daqPropertyObjectClassBuilder_setName()
     Sets the name of the property class.
@@ -8491,6 +9608,7 @@ unit-builder => daqUnitBuilder_setName()
 (defmethod (setf name) (new-value (object component-type-builder))
   "Sets the user-friendly name of a component type.
 @param name The user-friendly name of a component type.
+
 Name is usually presented on the UI. Does not have to be unique.
 
 Calls the openDAQ C function daqComponentTypeBuilder_setName()."
@@ -8499,12 +9617,14 @@ Calls the openDAQ C function daqComponentTypeBuilder_setName()."
   new-value)
 
 (defgeneric (setf type-sort) (new-value object)
-  (:documentation "Sets the component type sort. Can be either Streaming, Function block, Device, or Server. Depending on the setting, the corresponding Component type object will be built.
+  (:documentation "Sets the component type sort. Can be either Streaming, Function block, Device, or Server.
+Depending on the setting, the corresponding Component type object will be built.
 @param sort The sort of the component type.
 
 Calls the openDAQ C function daqComponentTypeBuilder_setTypeSort()."))
 (defmethod (setf type-sort) (new-value (object component-type-builder))
-  "Sets the component type sort. Can be either Streaming, Function block, Device, or Server. Depending on the setting, the corresponding Component type object will be built.
+  "Sets the component type sort. Can be either Streaming, Function block, Device, or Server.
+Depending on the setting, the corresponding Component type object will be built.
 @param sort The sort of the component type.
 
 Calls the openDAQ C function daqComponentTypeBuilder_setTypeSort()."
@@ -8527,15 +9647,19 @@ Calls the openDAQ C function daqComponentTypePrivate_setModuleInfo()."
   new-value)
 
 (defgeneric create-default-config (object)
-  (:documentation "The function clones and returns default configuration. On each call, we need to create new object, because we want that each instance of the component has its own configuration object.
+  (:documentation "The function clones and returns default configuration. On each call, we need to create new object,
+because we want that each instance of the component has its own configuration object.
 @param[out] defaultConfig Newly created configuration object.
+
 Configuration objects are property object with user-defined key-value pairs.
 For example: Port=1000, OutputRate=5000, ...
 
 Calls the openDAQ C function daqComponentType_createDefaultConfig()."))
 (defmethod create-default-config ((object component-type))
-  "The function clones and returns default configuration. On each call, we need to create new object, because we want that each instance of the component has its own configuration object.
+  "The function clones and returns default configuration. On each call, we need to create new object,
+because we want that each instance of the component has its own configuration object.
 @param[out] defaultConfig Newly created configuration object.
+
 Configuration objects are property object with user-defined key-value pairs.
 For example: Port=1000, OutputRate=5000, ...
 
@@ -8546,6 +9670,7 @@ Calls the openDAQ C function daqComponentType_createDefaultConfig()."
 (defmethod description ((object component-type))
   "Gets the description of a component type.
 @param[out] description The description of a component type.
+
 A short description of a component type and the associated configuration parameters it offers.
 
 Calls the openDAQ C function daqComponentType_getDescription()."
@@ -8555,6 +9680,7 @@ Calls the openDAQ C function daqComponentType_getDescription()."
 (defmethod id ((object component-type))
   "Gets the unique component type id.
 @param[out] id The unique id of a component type.
+
 Unique id should not be presented on the UI.
 
 Calls the openDAQ C function daqComponentType_getId()."
@@ -8578,6 +9704,7 @@ Calls the openDAQ C function daqComponentType_getModuleInfo()."
 (defmethod name ((object component-type))
   "Gets the user-friendly name of a component type.
 @param[out] name The user-friendly name of a component type.
+
 Name is usually presented on the UI. Does not have to be unique.
 
 Calls the openDAQ C function daqComponentType_getName()."
@@ -8588,6 +9715,7 @@ Calls the openDAQ C function daqComponentType_getName()."
   (:documentation "Adds a device remapping from the original device's local ID to the new device local ID.
 @param originalDeviceId The local ID of the original device to be remapped.
 @param newDeviceId The local ID of the new device to be used for remapping.
+
 Used to remap signal -> input port connections to the remapped device when loading.
 
 Calls the openDAQ C function daqComponentUpdateContext_addDeviceRemapping()."))
@@ -8595,6 +9723,7 @@ Calls the openDAQ C function daqComponentUpdateContext_addDeviceRemapping()."))
   "Adds a device remapping from the original device's local ID to the new device local ID.
 @param originalDeviceId The local ID of the original device to be remapped.
 @param newDeviceId The local ID of the new device to be used for remapping.
+
 Used to remap signal -> input port connections to the remapped device when loading.
 
 Calls the openDAQ C function daqComponentUpdateContext_addDeviceRemapping()."
@@ -8703,11 +9832,13 @@ Calls the openDAQ C function daqComponentUpdateContext_overrideState()."
 
 (defgeneric remap-input-port-connections (object)
   (:documentation "Internal method that uses the device mapping to remap the input port connections.
+
 Should be called after the initial update, but before `onUpdatableUpdateEnd`.
 
 Calls the openDAQ C function daqComponentUpdateContext_remapInputPortConnections()."))
 (defmethod remap-input-port-connections ((object component-update-context))
   "Internal method that uses the device mapping to remap the input port connections.
+
 Should be called after the initial update, but before `onUpdatableUpdateEnd`.
 
 Calls the openDAQ C function daqComponentUpdateContext_remapInputPortConnections()."
@@ -8749,15 +9880,19 @@ Calls the openDAQ C function daqComponentUpdateContext_setInputPortConnection().
   new-value)
 
 (defgeneric (setf root-component) (new-value object)
-  (:documentation "Sets the root component of the current component. Iterates through the parent components until the root is found and sets it as the root component for the context.
+  (:documentation "Sets the root component of the current component. Iterates through the parent components until the root is found and sets it
+as the root component for the context.
 @param baseComponent The base component from which we iterate to the openDAQ root.
+
 This method shortcuts the need for callers to provide the openDAQ root device as the component, by automatically iterating
 to the root component from any component in the hierarchy.
 
 Calls the openDAQ C function daqComponentUpdateContext_setRootComponent()."))
 (defmethod (setf root-component) (new-value (object component-update-context))
-  "Sets the root component of the current component. Iterates through the parent components until the root is found and sets it as the root component for the context.
+  "Sets the root component of the current component. Iterates through the parent components until the root is found and sets it
+as the root component for the context.
 @param baseComponent The base component from which we iterate to the openDAQ root.
+
 This method shortcuts the need for callers to provide the openDAQ root device as the component, by automatically iterating
 to the root component from any component in the hierarchy.
 
@@ -8787,7 +9922,9 @@ Calls the openDAQ C function daqComponentUpdateContext_setSignalDependency()."
   (:documentation "Finds the component (signal/device/function block) with the specified (global) id.
 @param id The id of the component to search for.
 @param[out] outComponent The resulting component.
+
 If the component parameter is true, the starting component is the root device.
+
 The id provided should be in relative form from the starting component. E.g., to find a signal in
 the starting component, the id should be in the form of \"Dev/dev_id/Ch/ch_id/Sig/sig_id.
 
@@ -8796,7 +9933,9 @@ Calls the openDAQ C function daqComponent_findComponent()."))
   "Finds the component (signal/device/function block) with the specified (global) id.
 @param id The id of the component to search for.
 @param[out] outComponent The resulting component.
+
 If the component parameter is true, the starting component is the root device.
+
 The id provided should be in relative form from the starting component. E.g., to find a signal in
 the starting component, the id should be in the form of \"Dev/dev_id/Ch/ch_id/Sig/sig_id.
 
@@ -8817,6 +9956,7 @@ streaming => daqStreaming_getActive()
 (defmethod active ((object component))
   "Returns true if the component is active; false otherwise.
 @param[out] active True if the component is active; false otherwise.
+
 A component is active if its local active state is true and its parent is active.
 An active component acquires data, performs calculations and send packets on the signal path.
 
@@ -8835,6 +9975,7 @@ Calls the openDAQ C function daqComponent_getContext()."
 (defmethod description ((object component))
   "Gets the description of the component.
 @param[out] description The description of the component. Empty if not configured.
+
 The object that implements this interface defines how the description is specified.
 
 Calls the openDAQ C function daqComponent_getDescription()."
@@ -8844,6 +9985,7 @@ Calls the openDAQ C function daqComponent_getDescription()."
 (defgeneric global-id (object)
   (:documentation "Gets the global ID of the component.
 @param[out] globalId The global ID of the component.
+
 Represents the identifier that is globally unique. Globally unique identifier is composed
 from local identifiers from the parent components separated by '/' character. Device component
 must make sure that its ID is globally unique.
@@ -8852,6 +9994,7 @@ Calls the openDAQ C function daqComponent_getGlobalId()."))
 (defmethod global-id ((object component))
   "Gets the global ID of the component.
 @param[out] globalId The global ID of the component.
+
 Represents the identifier that is globally unique. Globally unique identifier is composed
 from local identifiers from the parent components separated by '/' character. Device component
 must make sure that its ID is globally unique.
@@ -8863,6 +10006,7 @@ Calls the openDAQ C function daqComponent_getGlobalId()."
 (defgeneric local-active (object)
   (:documentation "Returns true if the component is local active; false otherwise.
 @param[out] localActive True if the component is local active; false otherwise.
+
 An active component acquires data, performs calculations and send packets on the signal path.
 Note that is local active is True, the component may still be inactive if its parents are inactive.
 
@@ -8870,6 +10014,7 @@ Calls the openDAQ C function daqComponent_getLocalActive()."))
 (defmethod local-active ((object component))
   "Returns true if the component is local active; false otherwise.
 @param[out] localActive True if the component is local active; false otherwise.
+
 An active component acquires data, performs calculations and send packets on the signal path.
 Note that is local active is True, the component may still be inactive if its parents are inactive.
 
@@ -8880,6 +10025,7 @@ Calls the openDAQ C function daqComponent_getLocalActive()."
 (defmethod local-id ((object component))
   "Gets the local ID of the component.
 @param[out] localId The local ID of the component.
+
 Represents the identifier that is unique in a relation to the
 parent component. There is no predefined format for local ID. It is a string defined
 by its parent component.
@@ -8890,11 +10036,15 @@ Calls the openDAQ C function daqComponent_getLocalId()."
 
 (defgeneric locked-attributes (object)
   (:documentation "Gets a list of the component's locked attributes. The locked attributes cannot be modified via their respective setters.
+
+The set is fixed when the component is constructed.
 @param[out] attributes A list of strings containing the names of locked attributes in capital case (eg. \"Name\", \"Description\").
 
 Calls the openDAQ C function daqComponent_getLockedAttributes()."))
 (defmethod locked-attributes ((object component))
   "Gets a list of the component's locked attributes. The locked attributes cannot be modified via their respective setters.
+
+The set is fixed when the component is constructed.
 @param[out] attributes A list of strings containing the names of locked attributes in capital case (eg. \"Name\", \"Description\").
 
 Calls the openDAQ C function daqComponent_getLockedAttributes()."
@@ -8904,6 +10054,7 @@ Calls the openDAQ C function daqComponent_getLockedAttributes()."
 (defmethod name ((object component))
   "Gets the name of the component.
 @param[out] name The name of the component. Local ID if name is not configured.
+
 The object that implements this interface defines how the name is specified.
 
 Calls the openDAQ C function daqComponent_getName()."
@@ -8913,6 +10064,7 @@ Calls the openDAQ C function daqComponent_getName()."
 (defgeneric on-component-core-event (object)
   (:documentation "Gets the Core Event object that triggers whenever a change to this component happens within the openDAQ core structure.
 @param[out] event The Core Event object. The event triggers with a Component reference and a CoreEventArgs object as arguments.
+
 The Core Event is triggered on various changes to the openDAQ Components. This includes changes to property values,
 addition/removal of child components, connecting signals to input ports and others. The event type can be identified
 via the event ID available within the CoreEventArgs object. Each event type has a set of predetermined parameters
@@ -8923,6 +10075,7 @@ Calls the openDAQ C function daqComponent_getOnComponentCoreEvent()."))
 (defmethod on-component-core-event ((object component))
   "Gets the Core Event object that triggers whenever a change to this component happens within the openDAQ core structure.
 @param[out] event The Core Event object. The event triggers with a Component reference and a CoreEventArgs object as arguments.
+
 The Core Event is triggered on various changes to the openDAQ Components. This includes changes to property values,
 addition/removal of child components, connecting signals to input ports and others. The event type can be identified
 via the event ID available within the CoreEventArgs object. Each event type has a set of predetermined parameters
@@ -8949,6 +10102,7 @@ Calls the openDAQ C function daqComponent_getOperationMode()."
 (defmethod parent ((object component))
   "Gets the parent of the component.
 @param[out] parent The parent of the component.
+
 Every openDAQ component has a parent, except for instance. Parent should be passed as
 a parameter to the constructor/factory. Once the component is created, the parent
 cannot be changed.
@@ -8971,10 +10125,11 @@ Calls the openDAQ C function daqComponent_getParentActive()."
 )
 
 (defgeneric status-container (object)
-  (:documentation "Gets the container of Component statuses.
-@param[out] statusContainer The container of Component statuses.
+  (:documentation "component => daqComponent_getStatusContainer()
+    Gets the container of Component statuses.
 
-Calls the openDAQ C function daqComponent_getStatusContainer()."))
+sync-interface => daqSyncInterface_getStatusContainer()
+    Gets the status container of the synchronization interface."))
 (defmethod status-container ((object component))
   "Gets the container of Component statuses.
 @param[out] statusContainer The container of Component statuses.
@@ -8986,12 +10141,14 @@ Calls the openDAQ C function daqComponent_getStatusContainer()."
 (defgeneric tags (object)
   (:documentation "Gets the tags of the component.
 @param[out] tags The tags of the component.
+
 Tags are user definable labels that can be attached to the component.
 
 Calls the openDAQ C function daqComponent_getTags()."))
 (defmethod tags ((object component))
   "Gets the tags of the component.
 @param[out] tags The tags of the component.
+
 Tags are user definable labels that can be attached to the component.
 
 Calls the openDAQ C function daqComponent_getTags()."
@@ -9010,6 +10167,7 @@ property => daqProperty_getVisible()
 (defmethod visible ((object component))
   "Gets `visible` metadata state of the component
 @param[out] visible True if the component is visible; False otherwise.
+
 Visible determines whether search/getter methods return find the component by default.
 
 Calls the openDAQ C function daqComponent_getVisible()."
@@ -9018,7 +10176,7 @@ Calls the openDAQ C function daqComponent_getVisible()."
 
 (defgeneric (setf active) (new-value object)
   (:documentation "component => daqComponent_setActive()
-    Sets the component to be either active or inactive. Sets the local active state and notifies children about the parent active state change.
+    Sets the component to be either active or inactive. Sets the local active state
 
 multi-reader => daqMultiReader_setActive()
     Sets active or inactive MultiReader state. In inactive state MultiReader will receive only event packets.
@@ -9026,9 +10184,12 @@ multi-reader => daqMultiReader_setActive()
 streaming => daqStreaming_setActive()
     Sets the Streaming to be either active or inactive."))
 (defmethod (setf active) (new-value (object component))
-  "Sets the component to be either active or inactive. Sets the local active state and notifies children about the parent active state change.
+  "Sets the component to be either active or inactive. Sets the local active state
+and notifies children about the parent active state change.
 @param active The new local active state of the component.
-@retval OPENDAQ_IGNORED if \"Active\" is part of the component's list of locked attributes, or if the new active value is equal to the previous.
+@retval OPENDAQ_IGNORED if \"Active\" is part of the component's list of locked attributes,
+or if the new active value is equal to the previous.
+
 An active component acquires data, performs calculations and send packets on the signal path.
 
 Calls the openDAQ C function daqComponent_setActive()."
@@ -9039,7 +10200,9 @@ Calls the openDAQ C function daqComponent_setActive()."
 (defmethod (setf description) (new-value (object component))
   "Sets the description of the component.
 @param description The description of the component.
-@retval OPENDAQ_IGNORED if \"Description\" is part of the component's list of locked attributes, or if the new description value is equal to the previous.
+@retval OPENDAQ_IGNORED if \"Description\" is part of the component's list of locked attributes,
+or if the new description value is equal to the previous.
+
 The object that implements this interface defines how the description is specified.
 
 Calls the openDAQ C function daqComponent_setDescription()."
@@ -9050,7 +10213,9 @@ Calls the openDAQ C function daqComponent_setDescription()."
 (defmethod (setf name) (new-value (object component))
   "Sets the name of the component.
 @param name The name of the component.
-@retval OPENDAQ_IGNORED if \"Name\" is part of the component's list of locked attributes, or if the new name value is equal to the previous.
+@retval OPENDAQ_IGNORED if \"Name\" is part of the component's list of locked attributes,
+or if the new name value is equal to the previous.
+
 The object that implements this interface defines how the name is specified.
 
 Calls the openDAQ C function daqComponent_setName()."
@@ -9068,6 +10233,7 @@ property-builder => daqPropertyBuilder_setVisible()
   "Sets `visible` attribute state of the component
 @param visible True if the component is visible; False otherwise.
 @retval OPENDAQ_IGNORED if \"Visible\" is part of the component's list of locked attributes.
+
 Visible determines whether search/getter methods return find the component by default.
 
 Calls the openDAQ C function daqComponent_setVisible()."
@@ -9156,6 +10322,25 @@ Calls the openDAQ C function daqConnectedClientInfo_getProtocolType()."
   (opendaq.low-level:connected-client-info/get-protocol-type (%require-live-pointer object))
 )
 
+(defgeneric close-queue (object)
+  (:documentation "Permanently closes the queue: drops all queued packets and rejects all future
+enqueues. Called by the signal when the connection is disconnected so that no packet
+can remain pinned in (or be added to) an orphaned queue. Unlike the enqueue and
+dequeue methods, disconnection is not covered by the owner-serialization rule, so
+this call tolerates concurrent producer/consumer operations.
+
+Calls the openDAQ C function daqConnectionInternal_closeQueue()."))
+(defmethod close-queue ((object connection-internal))
+  "Permanently closes the queue: drops all queued packets and rejects all future
+enqueues. Called by the signal when the connection is disconnected so that no packet
+can remain pinned in (or be added to) an orphaned queue. Unlike the enqueue and
+dequeue methods, disconnection is not covered by the owner-serialization rule, so
+this call tolerates concurrent producer/consumer operations.
+
+Calls the openDAQ C function daqConnectionInternal_closeQueue()."
+  (opendaq.low-level:connection-internal/close-queue (%require-live-pointer object))
+)
+
 (defgeneric dequeue-up-to (object count)
   (:documentation "Calls the openDAQ C function daqConnectionInternal_dequeueUpTo()."))
 (defmethod dequeue-up-to ((object connection-internal) count)
@@ -9234,14 +10419,16 @@ Calls the openDAQ C function daqConnectionStatusContainerPrivate_removeStreaming
   (:documentation "Updates the value of an existing connection status.
 @param connectionString The connection string identifying the status to update.
 @param value The new value of the status.
-@param streamingObject The streaming object associated with the connection, used in triggered Core events. Set to nullptr for configuration connections.
+@param streamingObject The streaming object associated with the connection, used in triggered Core events.
+Set to nullptr for configuration connections.
 
 Calls the openDAQ C function daqConnectionStatusContainerPrivate_updateConnectionStatus()."))
 (defmethod update-connection-status ((object connection-status-container-private) connection-string value streaming-object)
   "Updates the value of an existing connection status.
 @param connectionString The connection string identifying the status to update.
 @param value The new value of the status.
-@param streamingObject The streaming object associated with the connection, used in triggered Core events. Set to nullptr for configuration connections.
+@param streamingObject The streaming object associated with the connection, used in triggered Core events.
+Set to nullptr for configuration connections.
 
 Calls the openDAQ C function daqConnectionStatusContainerPrivate_updateConnectionStatus()."
   (with-daq-boxed-values ((coerced-connection-string connection-string :daq-string)
@@ -9254,7 +10441,8 @@ Calls the openDAQ C function daqConnectionStatusContainerPrivate_updateConnectio
   (:documentation "Updates the value of an existing connection status with a message.
 @param connectionString The connection string identifying the status to update.
 @param value The new value of the status.
-@param streamingObject The streaming object associated with the connection, used in triggered Core events. Set to nullptr for configuration connections.
+@param streamingObject The streaming object associated with the connection, used in triggered Core events.
+Set to nullptr for configuration connections.
 @param message The new message of the connection status. Usually describes last reconnect attempt failure.
 
 Calls the openDAQ C function daqConnectionStatusContainerPrivate_updateConnectionStatusWithMessage()."))
@@ -9262,7 +10450,8 @@ Calls the openDAQ C function daqConnectionStatusContainerPrivate_updateConnectio
   "Updates the value of an existing connection status with a message.
 @param connectionString The connection string identifying the status to update.
 @param value The new value of the status.
-@param streamingObject The streaming object associated with the connection, used in triggered Core events. Set to nullptr for configuration connections.
+@param streamingObject The streaming object associated with the connection, used in triggered Core events.
+Set to nullptr for configuration connections.
 @param message The new message of the connection status. Usually describes last reconnect attempt failure.
 
 Calls the openDAQ C function daqConnectionStatusContainerPrivate_updateConnectionStatusWithMessage()."
@@ -9291,12 +10480,14 @@ Calls the openDAQ C function daqConnection_dequeue()."
 (defgeneric dequeue-all (object)
   (:documentation "Removes all packets from the queue.
 @param[out] packets The removed packets.
+
 Removing all packets can be more efficient than dequeuing packet by packet in heavily loaded systems.
 
 Calls the openDAQ C function daqConnection_dequeueAll()."))
 (defmethod dequeue-all ((object connection))
   "Removes all packets from the queue.
 @param[out] packets The removed packets.
+
 Removing all packets can be more efficient than dequeuing packet by packet in heavily loaded systems.
 
 Calls the openDAQ C function daqConnection_dequeueAll()."
@@ -9320,6 +10511,7 @@ Calls the openDAQ C function daqConnection_enqueue()."
 (defgeneric enqueue-and-steal-ref (object packet)
   (:documentation "Places a packet at the back of the queue. The reference of the packet is stolen.
 @param packet The packet to be enqueued.
+
 After calling the method, the packet should not be touched again. The ownership of the packet
 is taken by underlying connections and it could be destroyed before the function returns.
 
@@ -9327,6 +10519,7 @@ Calls the openDAQ C function daqConnection_enqueueAndStealRef()."))
 (defmethod enqueue-and-steal-ref ((object connection) packet)
   "Places a packet at the back of the queue. The reference of the packet is stolen.
 @param packet The packet to be enqueued.
+
 After calling the method, the packet should not be touched again. The ownership of the packet
 is taken by underlying connections and it could be destroyed before the function returns.
 
@@ -9352,6 +10545,7 @@ Calls the openDAQ C function daqConnection_enqueueMultiple()."
 (defgeneric enqueue-multiple-and-steal-ref (object packets)
   (:documentation "Places multiple packets at the back of the queue. The references of the packets are stolen.
 @param packets The packets to be enqueued.
+
 After calling the method, the packets should not be touched again. The ownership of the packets
 is taken by underlying connections and it could be destroyed before the function returns.
 
@@ -9359,6 +10553,7 @@ Calls the openDAQ C function daqConnection_enqueueMultipleAndStealRef()."))
 (defmethod enqueue-multiple-and-steal-ref ((object connection) packets)
   "Places multiple packets at the back of the queue. The references of the packets are stolen.
 @param packets The packets to be enqueued.
+
 After calling the method, the packets should not be touched again. The ownership of the packets
 is taken by underlying connections and it could be destroyed before the function returns.
 
@@ -9370,12 +10565,14 @@ Calls the openDAQ C function daqConnection_enqueueMultipleAndStealRef()."
 (defgeneric enqueue-on-this-thread (object packet)
   (:documentation "Places a packet at the back of the queue.
 @param packet The packet to be enqueued.
+
 The connection notifies the listener on the same thread that this method was called.
 
 Calls the openDAQ C function daqConnection_enqueueOnThisThread()."))
 (defmethod enqueue-on-this-thread ((object connection) packet)
   "Places a packet at the back of the queue.
 @param packet The packet to be enqueued.
+
 The connection notifies the listener on the same thread that this method was called.
 
 Calls the openDAQ C function daqConnection_enqueueOnThisThread()."
@@ -9386,12 +10583,14 @@ Calls the openDAQ C function daqConnection_enqueueOnThisThread()."
 (defgeneric enqueue-with-scheduler (object packet)
   (:documentation "Places a packet at the back of the queue.
 @param packet The packet to be enqueued.
+
 The connection schedules the `onPacketReceived` notification.
 
 Calls the openDAQ C function daqConnection_enqueueWithScheduler()."))
 (defmethod enqueue-with-scheduler ((object connection) packet)
   "Places a packet at the back of the queue.
 @param packet The packet to be enqueued.
+
 The connection schedules the `onPacketReceived` notification.
 
 Calls the openDAQ C function daqConnection_enqueueWithScheduler()."
@@ -9400,12 +10599,14 @@ Calls the openDAQ C function daqConnection_enqueueWithScheduler()."
 )
 
 (defgeneric available-samples (object)
-  (:documentation "Gets the number of samples available in the queued packets. The returned value ignores any Sample-Descriptor changes.
+  (:documentation "Gets the number of samples available in the queued packets.
+The returned value ignores any Sample-Descriptor changes.
 @param[out] samples The total amount of samples currently available in the stored packets.
 
 Calls the openDAQ C function daqConnection_getAvailableSamples()."))
 (defmethod available-samples ((object connection))
-  "Gets the number of samples available in the queued packets. The returned value ignores any Sample-Descriptor changes.
+  "Gets the number of samples available in the queued packets.
+The returned value ignores any Sample-Descriptor changes.
 @param[out] samples The total amount of samples currently available in the stored packets.
 
 Calls the openDAQ C function daqConnection_getAvailableSamples()."
@@ -9434,12 +10635,14 @@ Calls the openDAQ C function daqConnection_getPacketCount()."
 )
 
 (defgeneric samples-until-next-descriptor (object)
-  (:documentation "Gets the number of same-type samples available in the queued packets. The returned value is up-to the next Sample-Descriptor-Changed packet if any.
+  (:documentation "Gets the number of same-type samples available in the queued packets.
+The returned value is up-to the next Sample-Descriptor-Changed packet if any.
 @param[out] samples The total amount of same-type samples currently available in the stored packets.
 
 Calls the openDAQ C function daqConnection_getSamplesUntilNextDescriptor()."))
 (defmethod samples-until-next-descriptor ((object connection))
-  "Gets the number of same-type samples available in the queued packets. The returned value is up-to the next Sample-Descriptor-Changed packet if any.
+  "Gets the number of same-type samples available in the queued packets.
+The returned value is up-to the next Sample-Descriptor-Changed packet if any.
 @param[out] samples The total amount of same-type samples currently available in the stored packets.
 
 Calls the openDAQ C function daqConnection_getSamplesUntilNextDescriptor()."
@@ -9447,12 +10650,14 @@ Calls the openDAQ C function daqConnection_getSamplesUntilNextDescriptor()."
 )
 
 (defgeneric samples-until-next-event-packet (object)
-  (:documentation "Gets the number of samples available in the queued packets until the next event packet. The returned value is up-to the next Event packet if any.
+  (:documentation "Gets the number of samples available in the queued packets until the next event packet.
+The returned value is up-to the next Event packet if any.
 @param[out] samples The total amount of samples currently available in the stored packets until the next event packet.
 
 Calls the openDAQ C function daqConnection_getSamplesUntilNextEventPacket()."))
 (defmethod samples-until-next-event-packet ((object connection))
-  "Gets the number of samples available in the queued packets until the next event packet. The returned value is up-to the next Event packet if any.
+  "Gets the number of samples available in the queued packets until the next event packet.
+The returned value is up-to the next Event packet if any.
 @param[out] samples The total amount of samples currently available in the stored packets until the next event packet.
 
 Calls the openDAQ C function daqConnection_getSamplesUntilNextEventPacket()."
@@ -9460,12 +10665,14 @@ Calls the openDAQ C function daqConnection_getSamplesUntilNextEventPacket()."
 )
 
 (defgeneric samples-until-next-gap-packet (object)
-  (:documentation "Gets the number of samples available in the queued packets until the next gap packet. The returned value is up-to the next Gap packet if any.
+  (:documentation "Gets the number of samples available in the queued packets until the next gap packet.
+The returned value is up-to the next Gap packet if any.
 @param[out] samples The total amount of samples currently available in the stored packets until the next gap packet.
 
 Calls the openDAQ C function daqConnection_getSamplesUntilNextGapPacket()."))
 (defmethod samples-until-next-gap-packet ((object connection))
-  "Gets the number of samples available in the queued packets until the next gap packet. The returned value is up-to the next Gap packet if any.
+  "Gets the number of samples available in the queued packets until the next gap packet.
+The returned value is up-to the next Gap packet if any.
 @param[out] samples The total amount of samples currently available in the stored packets until the next gap packet.
 
 Calls the openDAQ C function daqConnection_getSamplesUntilNextGapPacket()."
@@ -9514,6 +10721,7 @@ Calls the openDAQ C function daqConnection_hasGapPacket()."
 (defgeneric is-remote (object)
   (:documentation "Returns true if the type of connection is remote.
 @param[out] remote True if connection is remote.
+
 Remote connections do not pass any packets. They represent the connection between input ports and signals
 on remote devices.
 
@@ -9521,6 +10729,7 @@ Calls the openDAQ C function daqConnection_isRemote()."))
 (defmethod is-remote ((object connection))
   "Returns true if the type of connection is remote.
 @param[out] remote True if connection is remote.
+
 Remote connections do not pass any packets. They represent the connection between input ports and signals
 on remote devices.
 
@@ -9544,19 +10753,37 @@ Calls the openDAQ C function daqConnection_peek()."
 )
 
 (defgeneric move-module-manager (object)
-  (:documentation "Gets the Module Manager. Moves the strong reference to the manager to the first caller and retains a weak reference internally.
+  (:documentation "Gets the Module Manager. Moves the strong reference to the manager to the first
+caller and retains a weak reference internally.
 @param[out] manager The module manager.
+
 Returns a nullptr on subsequent invocations, and if the manager is not assigned.
 
 Calls the openDAQ C function daqContextInternal_moveModuleManager()."))
 (defmethod move-module-manager ((object context-internal))
-  "Gets the Module Manager. Moves the strong reference to the manager to the first caller and retains a weak reference internally.
+  "Gets the Module Manager. Moves the strong reference to the manager to the first
+caller and retains a weak reference internally.
 @param[out] manager The module manager.
+
 Returns a nullptr on subsequent invocations, and if the manager is not assigned.
 
 Calls the openDAQ C function daqContextInternal_moveModuleManager()."
   (wrap (opendaq.low-level:context-internal/move-module-manager (%require-live-pointer object)) 'module-manager)
 )
+
+(defgeneric (setf context-internal-root-device) (new-value object)
+  (:documentation "Sets the root device of the openDAQ instance.
+@param device The root device.
+
+Calls the openDAQ C function daqContextInternal_setRootDevice()."))
+(defmethod (setf context-internal-root-device) (new-value (object context-internal))
+  "Sets the root device of the openDAQ instance.
+@param device The root device.
+
+Calls the openDAQ C function daqContextInternal_setRootDevice()."
+  (with-daq-boxed-values ((coerced-new-value new-value :daq-base-object))
+    (opendaq.low-level:context-internal/set-root-device (%require-live-pointer object) coerced-new-value))
+  new-value)
 
 (defgeneric authentication-provider (object)
   (:documentation "context => daqContext_getAuthenticationProvider()
@@ -9636,6 +10863,7 @@ Calls the openDAQ C function daqContext_getModuleOptions()."
 (defgeneric on-core-event (object)
   (:documentation "Gets the Core Event object that triggers whenever a change happens within the openDAQ core structure.
 @param[out] event The Core Event object. The event triggers with a Component reference and a CoreEventArgs object as arguments.
+
 The Core Event is triggered on various changes to the openDAQ Components. This includes changes to property values,
 addition/removal of child components, connecting signals to input ports and others. The event type can be identified
 via the event ID available within the CoreEventArgs object. Each event type has a set of predetermined parameters
@@ -9646,6 +10874,7 @@ Calls the openDAQ C function daqContext_getOnCoreEvent()."))
 (defmethod on-core-event ((object context))
   "Gets the Core Event object that triggers whenever a change happens within the openDAQ core structure.
 @param[out] event The Core Event object. The event triggers with a Component reference and a CoreEventArgs object as arguments.
+
 The Core Event is triggered on various changes to the openDAQ Components. This includes changes to property values,
 addition/removal of child components, connecting signals to input ports and others. The event type can be identified
 via the event ID available within the CoreEventArgs object. Each event type has a set of predetermined parameters
@@ -9668,6 +10897,23 @@ instance-builder => daqInstanceBuilder_getOptions()
 
 Calls the openDAQ C function daqContext_getOptions()."
   (%hashtable-of (wrap (opendaq.low-level:context/get-options (%require-live-pointer object)) 'dict) 'string-object 'base-object)
+)
+
+(defgeneric root-device (object)
+  (:documentation "context => daqContext_getRootDevice()
+    Gets the root device of the openDAQ instance.
+
+instance-builder => daqInstanceBuilder_getRootDevice()
+    Gets the connection string for the default root device of Instance.
+
+instance => daqInstance_getRootDevice()
+    Gets the current root device."))
+(defmethod root-device ((object context))
+  "Gets the root device of the openDAQ instance.
+@param[out] device The root device.
+
+Calls the openDAQ C function daqContext_getRootDevice()."
+  (wrap (opendaq.low-level:context/get-root-device (%require-live-pointer object)) 'base-object)
 )
 
 (defgeneric scheduler (object)
@@ -9759,10 +11005,10 @@ dimension-rule => daqDimensionRule_getParameters()
     Gets a dictionary of string-object key-value pairs representing the parameters used to evaluate the rule.
 
 event-packet => daqEventPacket_getParameters()
-    Dictionary containing parameters as <String, BaseObject> pairs relevant to the event signalized by the Event packet.
+    Dictionary containing parameters as <String, BaseObject> pairs relevant to the event
 
 scaling-builder => daqScalingBuilder_getParameters()
-    Gets the list of parameters that are used to calculate the scaling in conjunction with the input data.
+    Gets the list of parameters that are used to calculate the scaling in conjunction with the
 
 scaling => daqScaling_getParameters()
     Gets the dictionary of parameters that are used to calculate the scaling in conjunction with the input data."))
@@ -9775,9 +11021,15 @@ Calls the openDAQ C function daqCoreEventArgs_getParameters()."
 )
 
 (defgeneric core-type (object)
-  (:documentation "Calls the openDAQ C function daqCoreType_getCoreType()."))
+  (:documentation "Gets the object's CoreType.
+@param[out] coreType The object's CoreType.
+
+Calls the openDAQ C function daqCoreType_getCoreType()."))
 (defmethod core-type ((object core-type))
-  "Calls the openDAQ C function daqCoreType_getCoreType()."
+  "Gets the object's CoreType.
+@param[out] coreType The object's CoreType.
+
+Calls the openDAQ C function daqCoreType_getCoreType()."
   (opendaq.low-level:core-type/get-core-type (%require-live-pointer object))
 )
 
@@ -9836,7 +11088,7 @@ device-domain => daqDeviceDomain_getOrigin()
     Gets the device's absolute origin. Most often this is a time epoch in the ISO 8601 format.
 
 multi-reader => daqMultiReader_getOrigin()
-    Gets the origin the reader aligned all the signals to. This is usually the earliest (lowest value) from all the signals."))
+    Gets the origin the reader aligned all the signals to."))
 (defmethod origin ((object data-descriptor-builder))
   "Gets the absolute origin of a signal value component.
 @param[out] origin The absolute origin.
@@ -9870,6 +11122,7 @@ device-domain => daqDeviceDomain_getReferenceDomainInfo()
 (defmethod reference-domain-info ((object data-descriptor-builder))
   "Gets the Reference Domain Info.
 @param[out] referenceDomainInfo The Reference Domain Info.
+
 If set, gives additional information about the reference domain.
 
 Calls the openDAQ C function daqDataDescriptorBuilder_getReferenceDomainInfo()."
@@ -9929,13 +11182,13 @@ Calls the openDAQ C function daqDataDescriptorBuilder_getStructFields()."
     Gets the Resolution which scales the an explicit or implicit value to the physical unit defined in `unit`.
 
 data-descriptor => daqDataDescriptor_getTickResolution()
-    Gets the Resolution which scales the explicit or implicit value to the physical unit defined in `unit`. It is defined as domain (usually time) between two consecutive ticks.
+    Gets the Resolution which scales the explicit or implicit value to the physical unit defined in `unit`.
 
 device-domain => daqDeviceDomain_getTickResolution()
     Gets domain (usually time) between two consecutive ticks. Resolution is provided in a domain unit.
 
 multi-reader => daqMultiReader_getTickResolution()
-    Gets the resolution the reader aligned all the signals to. This is the highest resolution (lowest value) of all the signals to not loose the precision."))
+    Gets the resolution the reader aligned all the signals to."))
 (defmethod tick-resolution ((object data-descriptor-builder))
   "Gets the Resolution which scales the an explicit or implicit value to the physical unit defined in `unit`.
 @param[out] tickResolution The Resolution.
@@ -9990,12 +11243,14 @@ Calls the openDAQ C function daqDataDescriptorBuilder_getValueRange()."
 (defgeneric (setf dimensions) (new-value object)
   (:documentation "Sets the list of the descriptor's dimension's.
 @param dimensions The list of dimensions.
+
 The number of dimensions defines the rank of the signal's data (eg. Vector, Matrix).
 
 Calls the openDAQ C function daqDataDescriptorBuilder_setDimensions()."))
 (defmethod (setf dimensions) (new-value (object data-descriptor-builder))
   "Sets the list of the descriptor's dimension's.
 @param dimensions The list of dimensions.
+
 The number of dimensions defines the rank of the signal's data (eg. Vector, Matrix).
 
 Calls the openDAQ C function daqDataDescriptorBuilder_setDimensions()."
@@ -10006,12 +11261,14 @@ Calls the openDAQ C function daqDataDescriptorBuilder_setDimensions()."
 (defgeneric (setf metadata) (new-value object)
   (:documentation "Sets any extra metadata defined by the data descriptor.
 @param metadata Additional metadata of the descriptor as a dictionary.
+
 All objects in the metadata dictionary must be serializable.
 
 Calls the openDAQ C function daqDataDescriptorBuilder_setMetadata()."))
 (defmethod (setf metadata) (new-value (object data-descriptor-builder))
   "Sets any extra metadata defined by the data descriptor.
 @param metadata Additional metadata of the descriptor as a dictionary.
+
 All objects in the metadata dictionary must be serializable.
 
 Calls the openDAQ C function daqDataDescriptorBuilder_setMetadata()."
@@ -10022,6 +11279,7 @@ Calls the openDAQ C function daqDataDescriptorBuilder_setMetadata()."
 (defmethod (setf name) (new-value (object data-descriptor-builder))
   "Sets a descriptive name for the signal's value.
 @param name The name of the signal value.
+
 When, for example, describing the amplitude values of spectrum data, the name would be `Amplitude`.
 
 Calls the openDAQ C function daqDataDescriptorBuilder_setName()."
@@ -10032,18 +11290,22 @@ Calls the openDAQ C function daqDataDescriptorBuilder_setName()."
 (defgeneric (setf origin) (new-value object)
   (:documentation "Sets the absolute origin of a signal value component.
 @param origin The absolute origin.
+
 An origin can be an arbitrary string that determines the starting point of the signal data.
 All explicit or implicit values are multiplied by the resolution and added to the origin to obtain
 absolute data instead of relative.
+
 Most commonly a time epoch is used, in which case it should be formatted according to the ISO 8601 standard.
 
 Calls the openDAQ C function daqDataDescriptorBuilder_setOrigin()."))
 (defmethod (setf origin) (new-value (object data-descriptor-builder))
   "Sets the absolute origin of a signal value component.
 @param origin The absolute origin.
+
 An origin can be an arbitrary string that determines the starting point of the signal data.
 All explicit or implicit values are multiplied by the resolution and added to the origin to obtain
 absolute data instead of relative.
+
 Most commonly a time epoch is used, in which case it should be formatted according to the ISO 8601 standard.
 
 Calls the openDAQ C function daqDataDescriptorBuilder_setOrigin()."
@@ -10054,6 +11316,7 @@ Calls the openDAQ C function daqDataDescriptorBuilder_setOrigin()."
 (defgeneric (setf post-scaling) (new-value object)
   (:documentation "Sets the scaling rule that needs to be applied to explicit/implicit data by readers.
 @param scaling The scaling rule.
+
 The OutputDataType of the rule matches the value descriptor's sample type. The InputDataType defines the sample type
 of either the explicit data in packet buffers, or the packet's implicit value's sample type.
 
@@ -10061,6 +11324,7 @@ Calls the openDAQ C function daqDataDescriptorBuilder_setPostScaling()."))
 (defmethod (setf post-scaling) (new-value (object data-descriptor-builder))
   "Sets the scaling rule that needs to be applied to explicit/implicit data by readers.
 @param scaling The scaling rule.
+
 The OutputDataType of the rule matches the value descriptor's sample type. The InputDataType defines the sample type
 of either the explicit data in packet buffers, or the packet's implicit value's sample type.
 
@@ -10072,12 +11336,14 @@ Calls the openDAQ C function daqDataDescriptorBuilder_setPostScaling()."
 (defgeneric (setf reference-domain-info) (new-value object)
   (:documentation "Sets the Reference Domain Info.
 @param referenceDomainInfo The Reference Domain Info.
+
 If set, gives additional information about the reference domain.
 
 Calls the openDAQ C function daqDataDescriptorBuilder_setReferenceDomainInfo()."))
 (defmethod (setf reference-domain-info) (new-value (object data-descriptor-builder))
   "Sets the Reference Domain Info.
 @param referenceDomainInfo The Reference Domain Info.
+
 If set, gives additional information about the reference domain.
 
 Calls the openDAQ C function daqDataDescriptorBuilder_setReferenceDomainInfo()."
@@ -10094,6 +11360,7 @@ dimension-builder => daqDimensionBuilder_setRule()
 (defmethod (setf rule) (new-value (object data-descriptor-builder))
   "Sets the value Data rule.
 @param rule The value Data rule.
+
 If explicit, the values will be contained in the packet buffer. Otherwise they are calculated
 using the packet parameter as the input into the rule.
 
@@ -10119,6 +11386,7 @@ Calls the openDAQ C function daqDataDescriptorBuilder_setSampleType()."
 (defgeneric (setf struct-fields) (new-value object)
   (:documentation "Sets the fields of the struct, forming a recursive value descriptor definition.
 @param structFields The list of data descriptors forming the struct fields.
+
 Contains a list of value descriptors, defining the data layout: the data described by the first DataDescriptor
 of the list is at the start, followed by the data described by the second and so on.
 
@@ -10126,6 +11394,7 @@ Calls the openDAQ C function daqDataDescriptorBuilder_setStructFields()."))
 (defmethod (setf struct-fields) (new-value (object data-descriptor-builder))
   "Sets the fields of the struct, forming a recursive value descriptor definition.
 @param structFields The list of data descriptors forming the struct fields.
+
 Contains a list of value descriptors, defining the data layout: the data described by the first DataDescriptor
 of the list is at the start, followed by the data described by the second and so on.
 
@@ -10169,12 +11438,14 @@ Calls the openDAQ C function daqDataDescriptorBuilder_setUnit()."
 (defgeneric (setf value-range) (new-value object)
   (:documentation "Sets the value range of the data in a signal's packets defining the lowest and highest expected values.
 @param range The value range the signal's data.
+
 The range is not enforced by openDAQ.
 
 Calls the openDAQ C function daqDataDescriptorBuilder_setValueRange()."))
 (defmethod (setf value-range) (new-value (object data-descriptor-builder))
   "Sets the value range of the data in a signal's packets defining the lowest and highest expected values.
 @param range The value range the signal's data.
+
 The range is not enforced by openDAQ.
 
 Calls the openDAQ C function daqDataDescriptorBuilder_setValueRange()."
@@ -10185,6 +11456,7 @@ Calls the openDAQ C function daqDataDescriptorBuilder_setValueRange()."
 (defmethod dimensions ((object data-descriptor))
   "Gets the list of the descriptor's dimension's.
 @param[out] dimensions The list of dimensions.
+
 The number of dimensions defines the rank of the signal's data (eg. Vector, Matrix).
 
 Calls the openDAQ C function daqDataDescriptor_getDimensions()."
@@ -10194,6 +11466,7 @@ Calls the openDAQ C function daqDataDescriptor_getDimensions()."
 (defmethod metadata ((object data-descriptor))
   "Gets any extra metadata defined by the data descriptor.
 @param[out] metadata Additional metadata of the descriptor as a dictionary.
+
 All objects in the metadata dictionary must be key value pairs of <String, String>.
 
 Calls the openDAQ C function daqDataDescriptor_getMetadata()."
@@ -10203,6 +11476,7 @@ Calls the openDAQ C function daqDataDescriptor_getMetadata()."
 (defmethod name ((object data-descriptor))
   "Gets a descriptive name of the signal value.
 @param[out] name The name of the signal value.
+
 When, for example, describing the amplitude values of spectrum data, the name would be `Amplitude`.
 
 Calls the openDAQ C function daqDataDescriptor_getName()."
@@ -10212,9 +11486,11 @@ Calls the openDAQ C function daqDataDescriptor_getName()."
 (defmethod origin ((object data-descriptor))
   "Gets the absolute origin of a signal value component.
 @param[out] origin The absolute origin.
+
 An origin can be an arbitrary string that determines the starting point of the signal data.
 All explicit or implicit values are multiplied by the resolution and added to the origin to obtain
 absolute data instead of relative.
+
 Most commonly a time reference is used, in which case it should be formatted according to the ISO 8601 standard.
 
 Calls the openDAQ C function daqDataDescriptor_getOrigin()."
@@ -10229,6 +11505,7 @@ Calls the openDAQ C function daqDataDescriptor_getOrigin()."
 (defgeneric raw-sample-size (object)
   (:documentation "Gets the actual sample size in buffer of one sample in bytes.
 @param[out] sampleSize The actual size of one sample in buffer in bytes.
+
 The actual size of one sample is calculated on constructor of the data descriptor object.
 Actual sample size is the sample size that is used in buffer. If the data descriptor includes
 implicitly generated samples, the actual sample size is less than sample size.
@@ -10237,6 +11514,7 @@ Calls the openDAQ C function daqDataDescriptor_getRawSampleSize()."))
 (defmethod raw-sample-size ((object data-descriptor))
   "Gets the actual sample size in buffer of one sample in bytes.
 @param[out] sampleSize The actual size of one sample in buffer in bytes.
+
 The actual size of one sample is calculated on constructor of the data descriptor object.
 Actual sample size is the sample size that is used in buffer. If the data descriptor includes
 implicitly generated samples, the actual sample size is less than sample size.
@@ -10248,6 +11526,7 @@ Calls the openDAQ C function daqDataDescriptor_getRawSampleSize()."
 (defmethod reference-domain-info ((object data-descriptor))
   "Gets the Reference Domain Info.
 @param[out] referenceDomainInfo The Reference Domain Info.
+
 If set, gives additional information about the reference domain.
 
 Calls the openDAQ C function daqDataDescriptor_getReferenceDomainInfo()."
@@ -10257,6 +11536,7 @@ Calls the openDAQ C function daqDataDescriptor_getReferenceDomainInfo()."
 (defmethod rule ((object data-descriptor))
   "Gets the value Data rule.
 @param[out] rule The value Data rule.
+
 If explicit, the values will be contained in the packet buffer. Otherwise they are calculated
 using the offset packet parameter as the input into the rule.
 
@@ -10267,12 +11547,14 @@ Calls the openDAQ C function daqDataDescriptor_getRule()."
 (defgeneric sample-size (object)
   (:documentation "Gets the size of one sample in bytes.
 @param[out] sampleSize The size of one sample in bytes.
+
 The size of one sample is calculated on constructor of the data descriptor object.
 
 Calls the openDAQ C function daqDataDescriptor_getSampleSize()."))
 (defmethod sample-size ((object data-descriptor))
   "Gets the size of one sample in bytes.
 @param[out] sampleSize The size of one sample in bytes.
+
 The size of one sample is calculated on constructor of the data descriptor object.
 
 Calls the openDAQ C function daqDataDescriptor_getSampleSize()."
@@ -10290,6 +11572,7 @@ Calls the openDAQ C function daqDataDescriptor_getSampleType()."
 (defmethod struct-fields ((object data-descriptor))
   "Gets the fields of the struct, forming a recursive value descriptor definition.
 @param[out] structFields The list of data descriptors forming the struct fields.
+
 Contains a list of value descriptors, defining the data layout: the data described by the first DataDescriptor
 of the list is at the start, followed by the data described by the second and so on.
 
@@ -10298,7 +11581,8 @@ Calls the openDAQ C function daqDataDescriptor_getStructFields()."
 )
 
 (defmethod tick-resolution ((object data-descriptor))
-  "Gets the Resolution which scales the explicit or implicit value to the physical unit defined in `unit`. It is defined as domain (usually time) between two consecutive ticks.
+  "Gets the Resolution which scales the explicit or implicit value to the physical unit defined in `unit`.
+It is defined as domain (usually time) between two consecutive ticks.
 @param[out] tickResolution The Resolution.
 
 Calls the openDAQ C function daqDataDescriptor_getTickResolution()."
@@ -10316,6 +11600,7 @@ Calls the openDAQ C function daqDataDescriptor_getUnit()."
 (defmethod value-range ((object data-descriptor))
   "Gets the value range of the data in a signal's packets defining the lowest and highest expected values.
 @param[out] range The value range the signal's data.
+
 The range is not enforced by openDAQ.
 
 Calls the openDAQ C function daqDataDescriptor_getValueRange()."
@@ -10371,10 +11656,12 @@ signal => daqSignal_getLastValue()
   "Gets the data packet last value.
 @param[out] value The IBaseObject value can be a nullptr if there is no value, or if the data type is not supported by the function.
 @param typeManager Optional ITypeManager value can be provided to enable getLastValue for IStruct.
+
 If a value is assigned, it can be cast based on the signal description to IFloat if the type is Float32 or Float64,
 to IInteger if the type is Int8 through Int64 or UInt8 through UInt64, to IComplexNumber if the type is ComplexFloat32 or ComplexFloat64,
 to IRange if the type is RangeInt64, to IString if the type is String, to IStruct if the type is Struct, and to IList of the forementioned types if there is exactly
 one dimension.
+
 For String type signals in binary data packets, the string data must be encoded as UTF-8 strings. The string length is
 determined by the sample size, and the string does not need to be null-terminated. The method extracts the string value
 from the packet data and returns it as an IString object.
@@ -10386,7 +11673,7 @@ Calls the openDAQ C function daqDataPacket_getLastValue()."
 
 (defgeneric offset (object &optional domain-start)
   (:documentation "data-packet => daqDataPacket_getOffset()
-    Gets current packet offset. This offset is later applied to the data rule used by a signal to calculate actual data value. This value is usually a time or other domain value. Packet offset is particularly useful when one wants to transfer a gap in otherwise equidistant samples. If we have a linear data rule, defined by equation f(x) = k*x + n, then the data value will be calculated by the equation g(x) = offset + f(x).
+    Gets current packet offset. This offset is later applied to the data rule used by a signal to calculate
 
 multi-reader => daqMultiReader_getOffset()
     Gets the domain value (offset) from the aligned origin at the point the reader starts to provide synchronized samples.
@@ -10394,7 +11681,11 @@ multi-reader => daqMultiReader_getOffset()
 reader-status => daqReaderStatus_getOffset()
     Retrieves the offset of the the read values"))
 (defmethod offset ((object data-packet) &optional (domain-start nil domain-start-suppliedp))
-  "Gets current packet offset. This offset is later applied to the data rule used by a signal to calculate actual data value. This value is usually a time or other domain value. Packet offset is particularly useful when one wants to transfer a gap in otherwise equidistant samples. If we have a linear data rule, defined by equation f(x) = k*x + n, then the data value will be calculated by the equation g(x) = offset + f(x).
+  "Gets current packet offset. This offset is later applied to the data rule used by a signal to calculate
+actual data value. This value is usually a time or other domain value. Packet offset is particularly useful when
+one wants to transfer a gap in otherwise equidistant samples.
+If we have a linear data rule, defined by equation f(x) = k*x + n, then the data value will be calculated
+by the equation g(x) = offset + f(x).
 @param[out] offset The packet offset
 
 Calls the openDAQ C function daqDataPacket_getOffset()."
@@ -10407,12 +11698,14 @@ Calls the openDAQ C function daqDataPacket_getOffset()."
 (defgeneric packet-id (object)
   (:documentation "Gets the unique packet id.
 @param[out] packetId The packet unique id.
+
 The packet id is automatically created on packet construction.
 
 Calls the openDAQ C function daqDataPacket_getPacketId()."))
 (defmethod packet-id ((object data-packet))
   "Gets the unique packet id.
 @param[out] packetId The packet unique id.
+
 The packet id is automatically created on packet construction.
 
 Calls the openDAQ C function daqDataPacket_getPacketId()."
@@ -10422,12 +11715,14 @@ Calls the openDAQ C function daqDataPacket_getPacketId()."
 (defgeneric raw-data-size (object)
   (:documentation "Gets size of raw data buffer in bytes.
 @param[out] dataSize the size of raw data buffer in bytes.
+
 Raw data size is 0 if signal's data rule is implicit.
 
 Calls the openDAQ C function daqDataPacket_getRawDataSize()."))
 (defmethod raw-data-size ((object data-packet))
   "Gets size of raw data buffer in bytes.
 @param[out] dataSize the size of raw data buffer in bytes.
+
 Raw data size is 0 if signal's data rule is implicit.
 
 Calls the openDAQ C function daqDataPacket_getRawDataSize()."
@@ -10437,6 +11732,7 @@ Calls the openDAQ C function daqDataPacket_getRawDataSize()."
 (defgeneric raw-last-value (object value)
   (:documentation "Gets the last raw value of the data packet.
 @param[out] value A pointer to a memory location where the raw value will be stored.
+
 This method writes the raw value of the last sample to the provided memory location.
 It does not allocate memory and assumes that sufficient memory has already been allocated.
 The value is not cast to any specific type; it remains a raw data pointer.
@@ -10446,6 +11742,7 @@ Calls the openDAQ C function daqDataPacket_getRawLastValue()."))
 (defmethod raw-last-value ((object data-packet) value)
   "Gets the last raw value of the data packet.
 @param[out] value A pointer to a memory location where the raw value will be stored.
+
 This method writes the raw value of the last sample to the provided memory location.
 It does not allocate memory and assumes that sufficient memory has already been allocated.
 The value is not cast to any specific type; it remains a raw data pointer.
@@ -10459,7 +11756,8 @@ Calls the openDAQ C function daqDataPacket_getRawLastValue()."
 (defgeneric raw-value-by-index (object value index)
   (:documentation "Gets the raw value of the data packet at the specified index.
 @param[out] value A pointer to a memory location where the raw value will be stored.
-@param index The index of the sample to retrieve.
+@param[in] index The index of the sample to retrieve.
+
 This method writes the raw value of the sample at the specified index to the provided memory location.
 It does not allocate memory and assumes that sufficient memory has already been allocated.
 The value is not cast to any specific type; it remains a raw data pointer.
@@ -10469,7 +11767,8 @@ Calls the openDAQ C function daqDataPacket_getRawValueByIndex()."))
 (defmethod raw-value-by-index ((object data-packet) value index)
   "Gets the raw value of the data packet at the specified index.
 @param[out] value A pointer to a memory location where the raw value will be stored.
-@param index The index of the sample to retrieve.
+@param[in] index The index of the sample to retrieve.
+
 This method writes the raw value of the sample at the specified index to the provided memory location.
 It does not allocate memory and assumes that sufficient memory has already been allocated.
 The value is not cast to any specific type; it remains a raw data pointer.
@@ -10497,12 +11796,14 @@ Calls the openDAQ C function daqDataPacket_getSampleCount()."
 (defgeneric value-by-index (object index &optional type-manager)
   (:documentation "Gets the data packet value at the specified index.
 @param[out] value The IBaseObject value can be a nullptr if there is no value, or if the data type is not supported by the function.
-@param index Index of the sample to obtain.
+@param[in] index Index of the sample to obtain.
 @param typeManager Optional ITypeManager value can be provided to enable getLastValue for IStruct.
+
 If a value is assigned, it can be cast based on the signal description to IFloat if the type is Float32 or Float64,
 to IInteger if the type is Int8 through Int64 or UInt8 through UInt64, to IComplexNumber if the type is ComplexFloat32 or
 ComplexFloat64, to IRange if the type is RangeInt64, to IString if the type is String, to IStruct if the type is Struct, and to IList of the forementioned types if
 there is exactly one dimension.
+
 For String type signals in binary data packets, the string data must be encoded as UTF-8 strings. The string length is
 determined by the sample size, and the string does not need to be null-terminated. The method extracts the string value
 from the packet data and returns it as an IString object.
@@ -10511,12 +11812,14 @@ Calls the openDAQ C function daqDataPacket_getValueByIndex()."))
 (defmethod value-by-index ((object data-packet) index &optional (type-manager nil))
   "Gets the data packet value at the specified index.
 @param[out] value The IBaseObject value can be a nullptr if there is no value, or if the data type is not supported by the function.
-@param index Index of the sample to obtain.
+@param[in] index Index of the sample to obtain.
 @param typeManager Optional ITypeManager value can be provided to enable getLastValue for IStruct.
+
 If a value is assigned, it can be cast based on the signal description to IFloat if the type is Float32 or Float64,
 to IInteger if the type is Int8 through Int64 or UInt8 through UInt64, to IComplexNumber if the type is ComplexFloat32 or
 ComplexFloat64, to IRange if the type is RangeInt64, to IString if the type is String, to IStruct if the type is Struct, and to IList of the forementioned types if
 there is exactly one dimension.
+
 For String type signals in binary data packets, the string data must be encoded as UTF-8 strings. The string length is
 determined by the sample size, and the string does not need to be null-terminated. The method extracts the string value
 from the packet data and returns it as an IString object.
@@ -10601,7 +11904,7 @@ dimension-rule-builder => daqDimensionRuleBuilder_setParameters()
     Sets a dictionary of string-object key-value pairs representing the parameters used to evaluate the rule.
 
 scaling-builder => daqScalingBuilder_setParameters()
-    Gets the list of parameters that are used to calculate the scaling in conjunction with the input data."))
+    Gets the list of parameters that are used to calculate the scaling in conjunction with the"))
 (defmethod (setf parameters) (new-value (object data-rule-builder))
   "Sets a dictionary of string-object key-value pairs representing the parameters used to evaluate the rule.
 @param parameters The dictionary containing the rule parameter members.
@@ -10699,6 +12002,12 @@ Calls the openDAQ C function daqDeleter_deleteMemory()."
     (wrap (opendaq.low-level:deserializer/deserialize (%require-live-pointer object) coerced-serialized coerced-context coerced-factory-callback) 'base-object))
 )
 
+(defun deserializer-unregister-serializer-factory (id)
+  "Calls the openDAQ C function daqDeserializer_unregisterSerializerFactory()."
+  (with-daq-boxed-values ((coerced-id id nil))
+    (opendaq.low-level:deserializer/unregister-serializer-factory coerced-id))
+)
+
 (defgeneric deserializer-update (object updatable serialized config)
   (:documentation "Calls the openDAQ C function daqDeserializer_update()."))
 (defmethod deserializer-update ((object deserializer) updatable serialized config)
@@ -10707,6 +12016,87 @@ Calls the openDAQ C function daqDeleter_deleteMemory()."
                           (coerced-serialized serialized :daq-string)
                           (coerced-config config :daq-base-object))
     (opendaq.low-level:deserializer/update (%require-live-pointer object) coerced-updatable coerced-serialized coerced-config))
+)
+
+(defgeneric branch-name (object)
+  (:documentation "The VCS branch name from which this was compiled from.
+@param[out] branchName The source branch name.
+
+Calls the openDAQ C function daqDevelopmentVersionInfo_getBranchName()."))
+(defmethod branch-name ((object development-version-info))
+  "The VCS branch name from which this was compiled from.
+@param[out] branchName The source branch name.
+
+Calls the openDAQ C function daqDevelopmentVersionInfo_getBranchName()."
+  (%daq-string-to-lisp-and-release (opendaq.low-level:development-version-info/get-branch-name (%require-live-pointer object)))
+)
+
+(defgeneric hash-digest (object)
+  (:documentation "The VCS hash/digest to uniquely identify the source this was compiled from.
+@param[out] hash Unique identifier of the source this was compiled from.
+
+Calls the openDAQ C function daqDevelopmentVersionInfo_getHashDigest()."))
+(defmethod hash-digest ((object development-version-info))
+  "The VCS hash/digest to uniquely identify the source this was compiled from.
+@param[out] hash Unique identifier of the source this was compiled from.
+
+Calls the openDAQ C function daqDevelopmentVersionInfo_getHashDigest()."
+  (%daq-string-to-lisp-and-release (opendaq.low-level:development-version-info/get-hash-digest (%require-live-pointer object)))
+)
+
+(defgeneric major (object)
+  (:documentation "development-version-info => daqDevelopmentVersionInfo_getMajor()
+    The major version incremented at breaking changes.
+
+version-info => daqVersionInfo_getMajor()
+    The major version incremented at breaking changes."))
+(defmethod major ((object development-version-info))
+  "The major version incremented at breaking changes.
+@param[out] major The major version component.
+
+Calls the openDAQ C function daqDevelopmentVersionInfo_getMajor()."
+  (opendaq.low-level:development-version-info/get-major (%require-live-pointer object))
+)
+
+(defgeneric minor (object)
+  (:documentation "development-version-info => daqDevelopmentVersionInfo_getMinor()
+    The minor version incremented at new features with full backwards compatibility.
+
+version-info => daqVersionInfo_getMinor()
+    The minor version incremented at new features with full backwards compatibility."))
+(defmethod minor ((object development-version-info))
+  "The minor version incremented at new features with full backwards compatibility.
+@param[out] minor The minor version component.
+
+Calls the openDAQ C function daqDevelopmentVersionInfo_getMinor()."
+  (opendaq.low-level:development-version-info/get-minor (%require-live-pointer object))
+)
+
+(defgeneric patch (object)
+  (:documentation "development-version-info => daqDevelopmentVersionInfo_getPatch()
+    The patch version incremented when only bug-fixes are added.
+
+version-info => daqVersionInfo_getPatch()
+    The patch version incremented when only bug-fixes are added."))
+(defmethod patch ((object development-version-info))
+  "The patch version incremented when only bug-fixes are added.
+@param[out] patch The patch version component.
+
+Calls the openDAQ C function daqDevelopmentVersionInfo_getPatch()."
+  (opendaq.low-level:development-version-info/get-patch (%require-live-pointer object))
+)
+
+(defgeneric tweak (object)
+  (:documentation "The patch version incremented when only build/development-fixes are added.
+@param[out] tweak The tweak version component.
+
+Calls the openDAQ C function daqDevelopmentVersionInfo_getTweak()."))
+(defmethod tweak ((object development-version-info))
+  "The patch version incremented when only build/development-fixes are added.
+@param[out] tweak The tweak version component.
+
+Calls the openDAQ C function daqDevelopmentVersionInfo_getTweak()."
+  (opendaq.low-level:development-version-info/get-tweak (%require-live-pointer object))
 )
 
 (defmethod origin ((object device-domain))
@@ -10720,6 +12110,7 @@ Calls the openDAQ C function daqDeviceDomain_getOrigin()."
 (defmethod reference-domain-info ((object device-domain))
   "Gets the Reference Domain Info.
 @param[out] referenceDomainInfo The Reference Domain Info.
+
 If set, gives additional information about the reference domain.
 
 Calls the openDAQ C function daqDeviceDomain_getReferenceDomainInfo()."
@@ -10743,16 +12134,20 @@ Calls the openDAQ C function daqDeviceDomain_getUnit()."
 )
 
 (defgeneric (setf asset-id) (new-value object)
-  (:documentation "Sets the asset ID of the device. Represents a user writable alphanumeric character sequence uniquely identifying a component.
+  (:documentation "Sets the asset ID of the device. Represents a user writable alphanumeric character
+sequence uniquely identifying a component.
 @param id The asset ID of the device.
+
 The ID is provided by the integrator or user of the device. It contains typically an identifier
 in a branch, use case or user specific naming scheme. This could be for example a reference to
 an electric scheme.
 
 Calls the openDAQ C function daqDeviceInfoConfig_setAssetId()."))
 (defmethod (setf asset-id) (new-value (object device-info-config))
-  "Sets the asset ID of the device. Represents a user writable alphanumeric character sequence uniquely identifying a component.
+  "Sets the asset ID of the device. Represents a user writable alphanumeric character
+sequence uniquely identifying a component.
 @param id The asset ID of the device.
+
 The ID is provided by the integrator or user of the device. It contains typically an identifier
 in a branch, use case or user specific naming scheme. This could be for example a reference to
 an electric scheme.
@@ -10786,12 +12181,14 @@ Calls the openDAQ C function daqDeviceInfoConfig_setDeviceClass()."
   new-value)
 
 (defgeneric (setf device-manual) (new-value object)
-  (:documentation "Sets the address of the user manual. It may be a pathname in the file system or a URL (Web address)
+  (:documentation "Sets the address of the user manual.
+It may be a pathname in the file system or a URL (Web address)
 @param deviceManual The manual of the device.
 
 Calls the openDAQ C function daqDeviceInfoConfig_setDeviceManual()."))
 (defmethod (setf device-manual) (new-value (object device-info-config))
-  "Sets the address of the user manual. It may be a pathname in the file system or a URL (Web address)
+  "Sets the address of the user manual.
+It may be a pathname in the file system or a URL (Web address)
 @param deviceManual The manual of the device.
 
 Calls the openDAQ C function daqDeviceInfoConfig_setDeviceManual()."
@@ -10814,12 +12211,14 @@ Calls the openDAQ C function daqDeviceInfoConfig_setDeviceRevision()."
   new-value)
 
 (defgeneric (setf device-type) (new-value object)
-  (:documentation "Sets a device type as an object providing type id, name, short description and default device configuration.
+  (:documentation "Sets a device type as an object providing type id, name, short description and
+default device configuration.
 @param[out] deviceType The device type object
 
 Calls the openDAQ C function daqDeviceInfoConfig_setDeviceType()."))
 (defmethod (setf device-type) (new-value (object device-info-config))
-  "Sets a device type as an object providing type id, name, short description and default device configuration.
+  "Sets a device type as an object providing type id, name, short description and
+default device configuration.
 @param[out] deviceType The device type object
 
 Calls the openDAQ C function daqDeviceInfoConfig_setDeviceType()."
@@ -10884,12 +12283,16 @@ Calls the openDAQ C function daqDeviceInfoConfig_setManufacturer()."
   new-value)
 
 (defgeneric (setf manufacturer-uri) (new-value object)
-  (:documentation "Sets the unique identifier of the company that manufactured the device. This identifier should be a fully qualified domain name; however, it may be a GUID or similar construct that ensures global uniqueness.
+  (:documentation "Sets the unique identifier of the company that manufactured the device.
+This identifier should be a fully qualified domain name;
+however, it may be a GUID or similar construct that ensures global uniqueness.
 @param manufacturerUri The manufacturer uri of the device.
 
 Calls the openDAQ C function daqDeviceInfoConfig_setManufacturerUri()."))
 (defmethod (setf manufacturer-uri) (new-value (object device-info-config))
-  "Sets the unique identifier of the company that manufactured the device. This identifier should be a fully qualified domain name; however, it may be a GUID or similar construct that ensures global uniqueness.
+  "Sets the unique identifier of the company that manufactured the device.
+This identifier should be a fully qualified domain name;
+however, it may be a GUID or similar construct that ensures global uniqueness.
 @param manufacturerUri The manufacturer uri of the device.
 
 Calls the openDAQ C function daqDeviceInfoConfig_setManufacturerUri()."
@@ -10935,12 +12338,14 @@ Calls the openDAQ C function daqDeviceInfoConfig_setParentMacAddress()."
   new-value)
 
 (defgeneric (setf platform) (new-value object)
-  (:documentation "Sets the platform of the device. The platform specifies whether real hardware is used or if the device is simulated.
+  (:documentation "Sets the platform of the device. The platform specifies whether real hardware
+is used or if the device is simulated.
 @param platform The platform of the device.
 
 Calls the openDAQ C function daqDeviceInfoConfig_setPlatform()."))
 (defmethod (setf platform) (new-value (object device-info-config))
-  "Sets the platform of the device. The platform specifies whether real hardware is used or if the device is simulated.
+  "Sets the platform of the device. The platform specifies whether real hardware
+is used or if the device is simulated.
 @param platform The platform of the device.
 
 Calls the openDAQ C function daqDeviceInfoConfig_setPlatform()."
@@ -10949,12 +12354,14 @@ Calls the openDAQ C function daqDeviceInfoConfig_setPlatform()."
   new-value)
 
 (defgeneric (setf position) (new-value object)
-  (:documentation "Sets the position of the device. The position specifies the position within a given system. For example in which slot or slice the device is in.
+  (:documentation "Sets the position of the device. The position specifies the position within a
+given system. For example in which slot or slice the device is in.
 @param position The position of the device.
 
 Calls the openDAQ C function daqDeviceInfoConfig_setPosition()."))
 (defmethod (setf position) (new-value (object device-info-config))
-  "Sets the position of the device. The position specifies the position within a given system. For example in which slot or slice the device is in.
+  "Sets the position of the device. The position specifies the position within a
+given system. For example in which slot or slice the device is in.
 @param position The position of the device.
 
 Calls the openDAQ C function daqDeviceInfoConfig_setPosition()."
@@ -10977,12 +12384,16 @@ Calls the openDAQ C function daqDeviceInfoConfig_setProductCode()."
   new-value)
 
 (defgeneric (setf product-instance-uri) (new-value object)
-  (:documentation "Sets the globally unique resource identifier provided by the manufacturer. The recommended syntax of the ProductInstanceUri is: <ManufacturerUri>/<any string> where <any string> is unique among all instances using the same ManufacturerUri.
+  (:documentation "Sets the globally unique resource identifier provided by the manufacturer.
+The recommended syntax of the ProductInstanceUri is: <ManufacturerUri>/<any string>
+where <any string> is unique among all instances using the same ManufacturerUri.
 @param productInstanceUri The product instance uri of the device.
 
 Calls the openDAQ C function daqDeviceInfoConfig_setProductInstanceUri()."))
 (defmethod (setf product-instance-uri) (new-value (object device-info-config))
-  "Sets the globally unique resource identifier provided by the manufacturer. The recommended syntax of the ProductInstanceUri is: <ManufacturerUri>/<any string> where <any string> is unique among all instances using the same ManufacturerUri.
+  "Sets the globally unique resource identifier provided by the manufacturer.
+The recommended syntax of the ProductInstanceUri is: <ManufacturerUri>/<any string>
+where <any string> is unique among all instances using the same ManufacturerUri.
 @param productInstanceUri The product instance uri of the device.
 
 Calls the openDAQ C function daqDeviceInfoConfig_setProductInstanceUri()."
@@ -10991,12 +12402,14 @@ Calls the openDAQ C function daqDeviceInfoConfig_setProductInstanceUri()."
   new-value)
 
 (defgeneric (setf revision-counter) (new-value object)
-  (:documentation "Sets the incremental counter indicating the number of times the configuration data has been modified.
+  (:documentation "Sets the incremental counter indicating the number of times the configuration
+data has been modified.
 @param revisionCounter The revision counter of the device.
 
 Calls the openDAQ C function daqDeviceInfoConfig_setRevisionCounter()."))
 (defmethod (setf revision-counter) (new-value (object device-info-config))
-  "Sets the incremental counter indicating the number of times the configuration data has been modified.
+  "Sets the incremental counter indicating the number of times the configuration
+data has been modified.
 @param revisionCounter The revision counter of the device.
 
 Calls the openDAQ C function daqDeviceInfoConfig_setRevisionCounter()."
@@ -11033,12 +12446,14 @@ Calls the openDAQ C function daqDeviceInfoConfig_setSoftwareRevision()."
   new-value)
 
 (defgeneric (setf system-type) (new-value object)
-  (:documentation "Sets the system type. The system type can, for example, be LayeredSystem, StandaloneSystem, or RackSystem.
+  (:documentation "Sets the system type. The system type can, for example, be LayeredSystem,
+StandaloneSystem, or RackSystem.
 @param type The system type of the device.
 
 Calls the openDAQ C function daqDeviceInfoConfig_setSystemType()."))
 (defmethod (setf system-type) (new-value (object device-info-config))
-  "Sets the system type. The system type can, for example, be LayeredSystem, StandaloneSystem, or RackSystem.
+  "Sets the system type. The system type can, for example, be LayeredSystem,
+StandaloneSystem, or RackSystem.
 @param type The system type of the device.
 
 Calls the openDAQ C function daqDeviceInfoConfig_setSystemType()."
@@ -11047,12 +12462,14 @@ Calls the openDAQ C function daqDeviceInfoConfig_setSystemType()."
   new-value)
 
 (defgeneric (setf system-uuid) (new-value object)
-  (:documentation "Sets the system UUID that represents a unique ID of a system. All devices in a system share this UUID.
+  (:documentation "Sets the system UUID that represents a unique ID of a system. All devices in a system
+share this UUID.
 @param uuid The unique ID of a system.
 
 Calls the openDAQ C function daqDeviceInfoConfig_setSystemUuid()."))
 (defmethod (setf system-uuid) (new-value (object device-info-config))
-  "Sets the system UUID that represents a unique ID of a system. All devices in a system share this UUID.
+  "Sets the system UUID that represents a unique ID of a system. All devices in a system
+share this UUID.
 @param uuid The unique ID of a system.
 
 Calls the openDAQ C function daqDeviceInfoConfig_setSystemUuid()."
@@ -11063,6 +12480,7 @@ Calls the openDAQ C function daqDeviceInfoConfig_setSystemUuid()."
 (defgeneric (setf user-name) (new-value object)
   (:documentation "Sets the name of the current user of the device.
 @param[out] userName The location of the device.
+
 If the info object is obtained from a device that is already added (not through discovery),
 the username string value matches that of the device's \"userName\" property.
 
@@ -11070,6 +12488,7 @@ Calls the openDAQ C function daqDeviceInfoConfig_setUserName()."))
 (defmethod (setf user-name) (new-value (object device-info-config))
   "Sets the name of the current user of the device.
 @param[out] userName The location of the device.
+
 If the info object is obtained from a device that is already added (not through discovery),
 the username string value matches that of the device's \"userName\" property.
 
@@ -11080,14 +12499,18 @@ Calls the openDAQ C function daqDeviceInfoConfig_setUserName()."
 
 (defgeneric add-connected-client (object client-info)
   (:documentation "Registers a newly connected client or re-registers a reconnected client.
-@param clientNumber If provided, represents the original ordinal number of the re-registered client. If unassigned or exceeding the total number of clients ever registered (including those that were later deregistered), it is set to the incremented total count; otherwise, the client is registered under the specified number.
+@param[in,out] clientNumber If provided, represents the original ordinal number of the re-registered client.
+If unassigned or exceeding the total number of clients ever registered (including those that were later deregistered),
+it is set to the incremented total count; otherwise, the client is registered under the specified number.
 @param clientInfo The connected client information object.
 @return OPENDAQ_ERR_ALREADYEXISTS if a client with the specified number already registered.
 
 Calls the openDAQ C function daqDeviceInfoInternal_addConnectedClient()."))
 (defmethod add-connected-client ((object device-info-internal) client-info)
   "Registers a newly connected client or re-registers a reconnected client.
-@param clientNumber If provided, represents the original ordinal number of the re-registered client. If unassigned or exceeding the total number of clients ever registered (including those that were later deregistered), it is set to the incremented total count; otherwise, the client is registered under the specified number.
+@param[in,out] clientNumber If provided, represents the original ordinal number of the re-registered client.
+If unassigned or exceeding the total number of clients ever registered (including those that were later deregistered),
+it is set to the incremented total count; otherwise, the client is registered under the specified number.
 @param clientInfo The connected client information object.
 @return OPENDAQ_ERR_ALREADYEXISTS if a client with the specified number already registered.
 
@@ -11100,6 +12523,7 @@ Calls the openDAQ C function daqDeviceInfoInternal_addConnectedClient()."
   (:documentation "Adds a network interface to the dictionary of available interfaces.
 @param networkInterface The available interface to add.
 @param name The name of available interface to add.
+
 The provided name should be unique within the device info as used as the key in the dictionary of available interfaces.
 
 Calls the openDAQ C function daqDeviceInfoInternal_addNetworkInteface()."))
@@ -11107,6 +12531,7 @@ Calls the openDAQ C function daqDeviceInfoInternal_addNetworkInteface()."))
   "Adds a network interface to the dictionary of available interfaces.
 @param networkInterface The available interface to add.
 @param name The name of available interface to add.
+
 The provided name should be unique within the device info as used as the key in the dictionary of available interfaces.
 
 Calls the openDAQ C function daqDeviceInfoInternal_addNetworkInteface()."
@@ -11169,16 +12594,20 @@ Calls the openDAQ C function daqDeviceInfoInternal_removeServerCapability()."
 )
 
 (defgeneric asset-id (object)
-  (:documentation "Gets the asset ID of the device. Represents a user writable alphanumeric character sequence uniquely identifying a component.
+  (:documentation "Gets the asset ID of the device. Represents a user writable alphanumeric character
+sequence uniquely identifying a component.
 @param[out] id The asset ID of the device.
+
 The ID is provided by the integrator or user of the device. It contains typically an identifier
 in a branch, use case or user specific naming scheme. This could be for example a reference to
 an electric scheme. The ID must be a string representation of an Int32 number.
 
 Calls the openDAQ C function daqDeviceInfo_getAssetId()."))
 (defmethod asset-id ((object device-info))
-  "Gets the asset ID of the device. Represents a user writable alphanumeric character sequence uniquely identifying a component.
+  "Gets the asset ID of the device. Represents a user writable alphanumeric character
+sequence uniquely identifying a component.
 @param[out] id The asset ID of the device.
+
 The ID is provided by the integrator or user of the device. It contains typically an identifier
 in a branch, use case or user specific naming scheme. This could be for example a reference to
 an electric scheme. The ID must be a string representation of an Int32 number.
@@ -11190,6 +12619,7 @@ Calls the openDAQ C function daqDeviceInfo_getAssetId()."
 (defgeneric configuration-connection-info (object)
   (:documentation "Retrieves the configuration connection information of the server to which the client is connected.
 @param[out] connectionInfo The server capability with the configuration connection information.
+
 This method returns the configuration connection information of the server to which the client is connected.
 If the connection to the server is not established, the fields of the server capability object are empty.
 
@@ -11197,6 +12627,7 @@ Calls the openDAQ C function daqDeviceInfo_getConfigurationConnectionInfo()."))
 (defmethod configuration-connection-info ((object device-info))
   "Retrieves the configuration connection information of the server to which the client is connected.
 @param[out] connectionInfo The server capability with the configuration connection information.
+
 This method returns the configuration connection information of the server to which the client is connected.
 If the connection to the server is not established, the fields of the server capability object are empty.
 
@@ -11226,12 +12657,14 @@ Calls the openDAQ C function daqDeviceInfo_getConnectionString()."
 )
 
 (defgeneric custom-info-property-names (object)
-  (:documentation "Gets the list of property names that are not in the default set of Device info properties. Default properties are all info properties that have a corresponding getter method.
+  (:documentation "Gets the list of property names that are not in the default set of Device info properties.
+Default properties are all info properties that have a corresponding getter method.
 @param[out] customInfoNames The list of names of custom properties.
 
 Calls the openDAQ C function daqDeviceInfo_getCustomInfoPropertyNames()."))
 (defmethod custom-info-property-names ((object device-info))
-  "Gets the list of property names that are not in the default set of Device info properties. Default properties are all info properties that have a corresponding getter method.
+  "Gets the list of property names that are not in the default set of Device info properties.
+Default properties are all info properties that have a corresponding getter method.
 @param[out] customInfoNames The list of names of custom properties.
 
 Calls the openDAQ C function daqDeviceInfo_getCustomInfoPropertyNames()."
@@ -11252,12 +12685,14 @@ Calls the openDAQ C function daqDeviceInfo_getDeviceClass()."
 )
 
 (defgeneric device-manual (object)
-  (:documentation "Gets the address of the user manual. It may be a pathname in the file system or a URL (Web address)
+  (:documentation "Gets the address of the user manual.
+It may be a pathname in the file system or a URL (Web address)
 @param[out] deviceManual The manual of the device.
 
 Calls the openDAQ C function daqDeviceInfo_getDeviceManual()."))
 (defmethod device-manual ((object device-info))
-  "Gets the address of the user manual. It may be a pathname in the file system or a URL (Web address)
+  "Gets the address of the user manual.
+It may be a pathname in the file system or a URL (Web address)
 @param[out] deviceManual The manual of the device.
 
 Calls the openDAQ C function daqDeviceInfo_getDeviceManual()."
@@ -11278,12 +12713,18 @@ Calls the openDAQ C function daqDeviceInfo_getDeviceRevision()."
 )
 
 (defgeneric device-type (object)
-  (:documentation "Gets a device type as an object providing type id, name, short description and default device configuration. By using default config object as a starting point, users can easily modify the preset properties to tailor the configuration of the client device accordingly.
+  (:documentation "Gets a device type as an object providing type id, name, short description and
+default device configuration.
+By using default config object as a starting point, users can easily modify the preset
+properties to tailor the configuration of the client device accordingly.
 @param[out] deviceType The device type object
 
 Calls the openDAQ C function daqDeviceInfo_getDeviceType()."))
 (defmethod device-type ((object device-info))
-  "Gets a device type as an object providing type id, name, short description and default device configuration. By using default config object as a starting point, users can easily modify the preset properties to tailor the configuration of the client device accordingly.
+  "Gets a device type as an object providing type id, name, short description and
+default device configuration.
+By using default config object as a starting point, users can easily modify the preset
+properties to tailor the configuration of the client device accordingly.
 @param[out] deviceType The device type object
 
 Calls the openDAQ C function daqDeviceInfo_getDeviceType()."
@@ -11306,6 +12747,7 @@ Calls the openDAQ C function daqDeviceInfo_getHardwareRevision()."
 (defgeneric location (object)
   (:documentation "Gets the location of the device.
 @param[out] location The location of the device.
+
 If the info object is obtained from a device that is already added (not through discovery),
 the location string value matches that of the device's \"location\" property.
 
@@ -11313,6 +12755,7 @@ Calls the openDAQ C function daqDeviceInfo_getLocation()."))
 (defmethod location ((object device-info))
   "Gets the location of the device.
 @param[out] location The location of the device.
+
 If the info object is obtained from a device that is already added (not through discovery),
 the location string value matches that of the device's \"location\" property.
 
@@ -11348,12 +12791,16 @@ Calls the openDAQ C function daqDeviceInfo_getManufacturer()."
 )
 
 (defgeneric manufacturer-uri (object)
-  (:documentation "Gets the unique identifier of the company that manufactured the device This identifier should be a fully qualified domain name; however, it may be a GUID or similar construct that ensures global uniqueness.
+  (:documentation "Gets the unique identifier of the company that manufactured the device
+This identifier should be a fully qualified domain name;
+however, it may be a GUID or similar construct that ensures global uniqueness.
 @param[out] manufacturerUri The manufacturer uri of the device.
 
 Calls the openDAQ C function daqDeviceInfo_getManufacturerUri()."))
 (defmethod manufacturer-uri ((object device-info))
-  "Gets the unique identifier of the company that manufactured the device This identifier should be a fully qualified domain name; however, it may be a GUID or similar construct that ensures global uniqueness.
+  "Gets the unique identifier of the company that manufactured the device
+This identifier should be a fully qualified domain name;
+however, it may be a GUID or similar construct that ensures global uniqueness.
 @param[out] manufacturerUri The manufacturer uri of the device.
 
 Calls the openDAQ C function daqDeviceInfo_getManufacturerUri()."
@@ -11376,6 +12823,7 @@ Calls the openDAQ C function daqDeviceInfo_getModel()."
 (defmethod name ((object device-info))
   "Gets the name of the device
 @param[out] name The name of the device.
+
 If the info object is obtained from a device that is already added (not through discovery),
 the name string value matches that of the device's \"Name\" attribute.
 
@@ -11404,6 +12852,7 @@ Calls the openDAQ C function daqDeviceInfo_getNetworkInterface()."
 (defgeneric network-interfaces (object)
   (:documentation "Gets the dictionary of network interfaces stored in device info.
 @param[out] interfaces The dictionary of device network interfaces.
+
 Obtained dictionary contains INetworkInterface objects, representing the available network interfaces
 and allowing to manage their configurations. The dictionary key corresponds to interface identifier (e.g. \"eth0\").
 
@@ -11411,6 +12860,7 @@ Calls the openDAQ C function daqDeviceInfo_getNetworkInterfaces()."))
 (defmethod network-interfaces ((object device-info))
   "Gets the dictionary of network interfaces stored in device info.
 @param[out] interfaces The dictionary of device network interfaces.
+
 Obtained dictionary contains INetworkInterface objects, representing the available network interfaces
 and allowing to manage their configurations. The dictionary key corresponds to interface identifier (e.g. \"eth0\").
 
@@ -11432,12 +12882,14 @@ Calls the openDAQ C function daqDeviceInfo_getParentMacAddress()."
 )
 
 (defgeneric platform (object)
-  (:documentation "Gets the platform of the device. The platform specifies whether real hardware is used or if the device is simulated.
+  (:documentation "Gets the platform of the device. The platform specifies whether real hardware
+is used or if the device is simulated.
 @param[out] platform The platform of the device.
 
 Calls the openDAQ C function daqDeviceInfo_getPlatform()."))
 (defmethod platform ((object device-info))
-  "Gets the platform of the device. The platform specifies whether real hardware is used or if the device is simulated.
+  "Gets the platform of the device. The platform specifies whether real hardware
+is used or if the device is simulated.
 @param[out] platform The platform of the device.
 
 Calls the openDAQ C function daqDeviceInfo_getPlatform()."
@@ -11445,14 +12897,18 @@ Calls the openDAQ C function daqDeviceInfo_getPlatform()."
 )
 
 (defgeneric position (object)
-  (:documentation "Gets the position of the device. The position specifies the position within a given system. For example in which slot or slice the device is in.
+  (:documentation "Gets the position of the device. The position specifies the position within a
+given system. For example in which slot or slice the device is in.
 @param[out] position The position of the device.
+
 The Position should be a positive integer in the range supported by the UInt16 data type.
 
 Calls the openDAQ C function daqDeviceInfo_getPosition()."))
 (defmethod position ((object device-info))
-  "Gets the position of the device. The position specifies the position within a given system. For example in which slot or slice the device is in.
+  "Gets the position of the device. The position specifies the position within a
+given system. For example in which slot or slice the device is in.
 @param[out] position The position of the device.
+
 The Position should be a positive integer in the range supported by the UInt16 data type.
 
 Calls the openDAQ C function daqDeviceInfo_getPosition()."
@@ -11473,12 +12929,16 @@ Calls the openDAQ C function daqDeviceInfo_getProductCode()."
 )
 
 (defgeneric product-instance-uri (object)
-  (:documentation "Gets the globally unique resource identifier provided by the manufacturer. The recommended syntax of the ProductInstanceUri is: <ManufacturerUri>/<any string> where <any string> is unique among all instances using the same ManufacturerUri.
+  (:documentation "Gets the globally unique resource identifier provided by the manufacturer.
+The recommended syntax of the ProductInstanceUri is: <ManufacturerUri>/<any string>
+where <any string> is unique among all instances using the same ManufacturerUri.
 @param[out] productInstanceUri The product instance uri of the device.
 
 Calls the openDAQ C function daqDeviceInfo_getProductInstanceUri()."))
 (defmethod product-instance-uri ((object device-info))
-  "Gets the globally unique resource identifier provided by the manufacturer. The recommended syntax of the ProductInstanceUri is: <ManufacturerUri>/<any string> where <any string> is unique among all instances using the same ManufacturerUri.
+  "Gets the globally unique resource identifier provided by the manufacturer.
+The recommended syntax of the ProductInstanceUri is: <ManufacturerUri>/<any string>
+where <any string> is unique among all instances using the same ManufacturerUri.
 @param[out] productInstanceUri The product instance uri of the device.
 
 Calls the openDAQ C function daqDeviceInfo_getProductInstanceUri()."
@@ -11486,12 +12946,14 @@ Calls the openDAQ C function daqDeviceInfo_getProductInstanceUri()."
 )
 
 (defgeneric revision-counter (object)
-  (:documentation "Gets the incremental counter indicating the number of times the configuration data has been modified.
+  (:documentation "Gets the incremental counter indicating the number of times the configuration
+data has been modified.
 @param[out] revisionCounter The revision counter of the device.
 
 Calls the openDAQ C function daqDeviceInfo_getRevisionCounter()."))
 (defmethod revision-counter ((object device-info))
-  "Gets the incremental counter indicating the number of times the configuration data has been modified.
+  "Gets the incremental counter indicating the number of times the configuration
+data has been modified.
 @param[out] revisionCounter The revision counter of the device.
 
 Calls the openDAQ C function daqDeviceInfo_getRevisionCounter()."
@@ -11499,12 +12961,14 @@ Calls the openDAQ C function daqDeviceInfo_getRevisionCounter()."
 )
 
 (defgeneric sdk-version (object)
-  (:documentation "Gets the version of the SDK used to build said device. Can be empty if the device does not use the SDK as its firmware/is implemented at a protocol-level.
+  (:documentation "Gets the version of the SDK used to build said device. Can be empty if the device does not use
+the SDK as its firmware/is implemented at a protocol-level.
 @param[out] version The SDK version.
 
 Calls the openDAQ C function daqDeviceInfo_getSdkVersion()."))
 (defmethod sdk-version ((object device-info))
-  "Gets the version of the SDK used to build said device. Can be empty if the device does not use the SDK as its firmware/is implemented at a protocol-level.
+  "Gets the version of the SDK used to build said device. Can be empty if the device does not use
+the SDK as its firmware/is implemented at a protocol-level.
 @param[out] version The SDK version.
 
 Calls the openDAQ C function daqDeviceInfo_getSdkVersion()."
@@ -11527,12 +12991,14 @@ Calls the openDAQ C function daqDeviceInfo_getSerialNumber()."
 
 (defgeneric server-capabilities (object)
   (:documentation "Gets the list of server capabilities stored in device info.
-@param[out] serverCapabilities The list of device supported protocols (List containing IServerCapability objects, representing the supported protocols along with their properties).
+@param[out] serverCapabilities The list of device supported protocols
+(List containing IServerCapability objects, representing the supported protocols along with their properties).
 
 Calls the openDAQ C function daqDeviceInfo_getServerCapabilities()."))
 (defmethod server-capabilities ((object device-info))
   "Gets the list of server capabilities stored in device info.
-@param[out] serverCapabilities The list of device supported protocols (List containing IServerCapability objects, representing the supported protocols along with their properties).
+@param[out] serverCapabilities The list of device supported protocols
+(List containing IServerCapability objects, representing the supported protocols along with their properties).
 
 Calls the openDAQ C function daqDeviceInfo_getServerCapabilities()."
   (%list-of (wrap (opendaq.low-level:device-info/get-server-capabilities (%require-live-pointer object)) 'object-list) 'server-capability)
@@ -11570,12 +13036,14 @@ Calls the openDAQ C function daqDeviceInfo_getSoftwareRevision()."
 )
 
 (defgeneric system-type (object)
-  (:documentation "Gets the system type. The system type can, for example, be LayeredSystem, StandaloneSystem, or RackSystem.
+  (:documentation "Gets the system type. The system type can, for example, be LayeredSystem,
+StandaloneSystem, or RackSystem.
 @param[out] type The system type of the device.
 
 Calls the openDAQ C function daqDeviceInfo_getSystemType()."))
 (defmethod system-type ((object device-info))
-  "Gets the system type. The system type can, for example, be LayeredSystem, StandaloneSystem, or RackSystem.
+  "Gets the system type. The system type can, for example, be LayeredSystem,
+StandaloneSystem, or RackSystem.
 @param[out] type The system type of the device.
 
 Calls the openDAQ C function daqDeviceInfo_getSystemType()."
@@ -11583,12 +13051,14 @@ Calls the openDAQ C function daqDeviceInfo_getSystemType()."
 )
 
 (defgeneric system-uuid (object)
-  (:documentation "Gets the system UUID that represents a unique ID of a system. All devices in a system share this UUID.
+  (:documentation "Gets the system UUID that represents a unique ID of a system. All devices in a system
+share this UUID.
 @param[out] uuid The unique ID of a system.
 
 Calls the openDAQ C function daqDeviceInfo_getSystemUuid()."))
 (defmethod system-uuid ((object device-info))
-  "Gets the system UUID that represents a unique ID of a system. All devices in a system share this UUID.
+  "Gets the system UUID that represents a unique ID of a system. All devices in a system
+share this UUID.
 @param[out] uuid The unique ID of a system.
 
 Calls the openDAQ C function daqDeviceInfo_getSystemUuid()."
@@ -11598,6 +13068,7 @@ Calls the openDAQ C function daqDeviceInfo_getSystemUuid()."
 (defgeneric user-name (object)
   (:documentation "Gets the name of the current user of the device.
 @param[out] userName The name of the current user of the device.
+
 If the info object is obtained from a device that is already added (not through discovery),
 the username string value matches that of the device's \"userName\" property.
 
@@ -11605,6 +13076,7 @@ Calls the openDAQ C function daqDeviceInfo_getUserName()."))
 (defmethod user-name ((object device-info))
   "Gets the name of the current user of the device.
 @param[out] userName The name of the current user of the device.
+
 If the info object is obtained from a device that is already added (not through discovery),
 the username string value matches that of the device's \"userName\" property.
 
@@ -11658,14 +13130,16 @@ Calls the openDAQ C function daqDeviceNetworkConfig_getNetworkInterfaceNames()."
 
 (defgeneric retrieve-network-configuration (object iface-name)
   (:documentation "Retrieves the currently active configuration of a specified network interface.
-@param ifaceName The name of the network interface adapter as registered in the operating system. Typically, this is a short symbolic identifier for the adapter, e.g. \"eth0\".
+@param ifaceName The name of the network interface adapter as registered in the operating system.
+Typically, this is a short symbolic identifier for the adapter, e.g. \"eth0\".
 @param[out] config The property object containing the active configuration of the network interface.
 @retval OPENDAQ_ERR_NOTIMPLEMENTED if the device does not support retrieving network configurations.
 
 Calls the openDAQ C function daqDeviceNetworkConfig_retrieveNetworkConfiguration()."))
 (defmethod retrieve-network-configuration ((object device-network-config) iface-name)
   "Retrieves the currently active configuration of a specified network interface.
-@param ifaceName The name of the network interface adapter as registered in the operating system. Typically, this is a short symbolic identifier for the adapter, e.g. \"eth0\".
+@param ifaceName The name of the network interface adapter as registered in the operating system.
+Typically, this is a short symbolic identifier for the adapter, e.g. \"eth0\".
 @param[out] config The property object containing the active configuration of the network interface.
 @retval OPENDAQ_ERR_NOTIMPLEMENTED if the device does not support retrieving network configurations.
 
@@ -11676,15 +13150,19 @@ Calls the openDAQ C function daqDeviceNetworkConfig_retrieveNetworkConfiguration
 
 (defgeneric submit-network-configuration (object iface-name config)
   (:documentation "Submits a new configuration parameters to a specified network interface.
-@param ifaceName The name of the network interface adapter as registered in the operating system. Typically, this is a short symbolic identifier for the adapter, e.g. \"eth0\".
-@param config The property object with new configuration parameters to submit. The format of the properties matches that used in INetworkInterface.
+@param ifaceName The name of the network interface adapter as registered in the operating system.
+Typically, this is a short symbolic identifier for the adapter, e.g. \"eth0\".
+@param config The property object with new configuration parameters to submit.
+The format of the properties matches that used in INetworkInterface.
 @retval OPENDAQ_ERR_NOTIMPLEMENTED if the device does not support network configuration management.
 
 Calls the openDAQ C function daqDeviceNetworkConfig_submitNetworkConfiguration()."))
 (defmethod submit-network-configuration ((object device-network-config) iface-name config)
   "Submits a new configuration parameters to a specified network interface.
-@param ifaceName The name of the network interface adapter as registered in the operating system. Typically, this is a short symbolic identifier for the adapter, e.g. \"eth0\".
-@param config The property object with new configuration parameters to submit. The format of the properties matches that used in INetworkInterface.
+@param ifaceName The name of the network interface adapter as registered in the operating system.
+Typically, this is a short symbolic identifier for the adapter, e.g. \"eth0\".
+@param config The property object with new configuration parameters to submit.
+The format of the properties matches that used in INetworkInterface.
 @retval OPENDAQ_ERR_NOTIMPLEMENTED if the device does not support network configuration management.
 
 Calls the openDAQ C function daqDeviceNetworkConfig_submitNetworkConfiguration()."
@@ -11721,10 +13199,13 @@ user-lock => daqUserLock_forceUnlock()
   (:documentation "device-private => daqDevicePrivate_lock()
 
 device => daqDevice_lock()
-    Lock a device with a session user. Once locked, no properties of the device can be changed via the protocol layer. Only the same user who locked the device can unlock it. If no user was specified when the device was locked, any user will be able to unlock it.
+    Lock a device with a session user. Once locked, no properties of the device can be changed via the protocol layer.
+
+mutex => daqMutex_lock()
+    Locks the mutex; blocking call.
 
 user-lock => daqUserLock_lock()
-    Lock the object. Only the user who locked the object can unlock it. If the object was locked without a specific user, or with an anonymous user, any user can unlock it."))
+    Lock the object. Only the user who locked the object can unlock it. If the object was locked without a specific user,"))
 (defmethod lock ((object device-private) &optional (user nil user-suppliedp))
   "Calls the openDAQ C function daqDevicePrivate_lock()."
   (unless user-suppliedp
@@ -11752,10 +13233,13 @@ user-lock => daqUserLock_lock()
   (:documentation "device-private => daqDevicePrivate_unlock()
 
 device => daqDevice_unlock()
-    Unlock a device with a session user. A device can only be unlocked by the same user who locked it. If no user was specified when the device was locked, any user will be able to unlock it.
+    Unlock a device with a session user. A device can only be unlocked by the same user who locked it.
+
+mutex => daqMutex_unlock()
+    Unlocks the mutex.
 
 user-lock => daqUserLock_unlock()
-    Unlock the object. Only the user who locked the object can unlock it. If the object was locked without a specific user, or with an anonymous user, any user can unlock it."))
+    Unlock the object. Only the user who locked the object can unlock it. If the object was locked without a specific user,"))
 (defmethod unlock ((object device-private) &optional (user nil user-suppliedp))
   "Calls the openDAQ C function daqDevicePrivate_unlock()."
   (unless user-suppliedp
@@ -11793,6 +13277,7 @@ Calls the openDAQ C function daqDeviceUpdateOptions_getConnectionString()."
 (defmethod local-id ((object device-update-options))
   "Gets the local ID of the device. The local ID is obtained from the JSON key for the device entry.
 @param localId The local ID of the device.
+
 The root device might not have the local ID configured. In this case the local ID will be set to \"Root\".
 
 Calls the openDAQ C function daqDeviceUpdateOptions_getLocalId()."
@@ -11810,12 +13295,14 @@ Calls the openDAQ C function daqDeviceUpdateOptions_getManufacturer()."
 (defgeneric new-connection-string (object)
   (:documentation "Gets the new connection string of the device to be used for remapping.
 @param connectionString The new connection string of the device to be used for remapping.
+
 The manufacturer and serial number combination has priority over the connection string when remapping.
 
 Calls the openDAQ C function daqDeviceUpdateOptions_getNewConnectionString()."))
 (defmethod new-connection-string ((object device-update-options))
   "Gets the new connection string of the device to be used for remapping.
 @param connectionString The new connection string of the device to be used for remapping.
+
 The manufacturer and serial number combination has priority over the connection string when remapping.
 
 Calls the openDAQ C function daqDeviceUpdateOptions_getNewConnectionString()."
@@ -11872,12 +13359,14 @@ Calls the openDAQ C function daqDeviceUpdateOptions_getUpdateMode()."
 (defgeneric (setf new-connection-string) (new-value object)
   (:documentation "Sets the new connection string of the device to be used for remapping.
 @param connectionString The new connection string of the device to be used for remapping.
+
 The manufacturer and serial number combination has priority over the connection string when remapping.
 
 Calls the openDAQ C function daqDeviceUpdateOptions_setNewConnectionString()."))
 (defmethod (setf new-connection-string) (new-value (object device-update-options))
   "Sets the new connection string of the device to be used for remapping.
 @param connectionString The new connection string of the device to be used for remapping.
+
 The manufacturer and serial number combination has priority over the connection string when remapping.
 
 Calls the openDAQ C function daqDeviceUpdateOptions_setNewConnectionString()."
@@ -11930,15 +13419,23 @@ Calls the openDAQ C function daqDeviceUpdateOptions_setUpdateMode()."
 (defgeneric add-device (object connection-string &optional config)
   (:documentation "Connects to a device at the given connection string and returns it.
 @param[out] device The added device.
-@param connectionString The connection string containing the address of the device. In example an IPv4/IPv6 address. The connection string can be found in the Device Info objects returned by `getAvailableDevices`.
-@param config A config object to configure a client device. This object can contain properties like max sample rate, port to use for 3rd party communication, number of channels to generate, or other device specific settings. Can be created from its corresponding Device type object. In case of a null value, it will use the default configuration.
+@param connectionString The connection string containing the address of the device. In example an
+IPv4/IPv6 address. The connection string can be found in the Device Info objects returned by
+`getAvailableDevices`.
+@param config A config object to configure a client device. This object can contain properties like max sample rate,
+port to use for 3rd party communication, number of channels to generate, or other device specific settings. Can be
+created from its corresponding Device type object. In case of a null value, it will use the default configuration.
 
 Calls the openDAQ C function daqDevice_addDevice()."))
 (defmethod add-device ((object device) connection-string &optional (config nil))
   "Connects to a device at the given connection string and returns it.
 @param[out] device The added device.
-@param connectionString The connection string containing the address of the device. In example an IPv4/IPv6 address. The connection string can be found in the Device Info objects returned by `getAvailableDevices`.
-@param config A config object to configure a client device. This object can contain properties like max sample rate, port to use for 3rd party communication, number of channels to generate, or other device specific settings. Can be created from its corresponding Device type object. In case of a null value, it will use the default configuration.
+@param connectionString The connection string containing the address of the device. In example an
+IPv4/IPv6 address. The connection string can be found in the Device Info objects returned by
+`getAvailableDevices`.
+@param config A config object to configure a client device. This object can contain properties like max sample rate,
+port to use for 3rd party communication, number of channels to generate, or other device specific settings. Can be
+created from its corresponding Device type object. In case of a null value, it will use the default configuration.
 
 Calls the openDAQ C function daqDevice_addDevice()."
   (with-daq-boxed-values ((coerced-connection-string connection-string :daq-string)
@@ -11947,22 +13444,38 @@ Calls the openDAQ C function daqDevice_addDevice()."
 )
 
 (defgeneric add-devices (object connection-args &optional err-codes error-infos)
-  (:documentation "Connects to multiple devices in parallel using the provided connection strings and returns the connected devices. Each connection is established concurrently to improve performance when handling multiple devices. The additions, in turn, are performed sequentially in the order specified by connectionArgs.
-@param[out] devices A dictionary that maps each connection string to the corresponding added device object. If a device connection or addition attempt fails, the value will be `nullptr` for that entry.
-@param connectionArgs A dictionary where each key is a connection string identifying the target device (e.g., IPv4/IPv6), and each value is a configuration object that customizes the connection. The configuration may specify parameters such as maximum sample rate, communication port, number of channels, or other device-specific settings. A `nullptr` value indicates that the default configuration should be used.
-@param errCodes An optional dictionary used to populate error codes for failed connection or addition attempts. For each failed attempt, the key is the connection string, and the value contains the error code.
-@param errorInfos An optional dictionary used to populate detailed error info for failed connection or addition attempts. For each failed attempt, the key is the connection string, and the value contains the error info object.
+  (:documentation "Connects to multiple devices in parallel using the provided connection strings and returns the connected devices.
+Each connection is established concurrently to improve performance when handling multiple devices. The additions, in turn,
+are performed sequentially in the order specified by connectionArgs.
+@param[out] devices A dictionary that maps each connection string to the corresponding added device object.
+If a device connection or addition attempt fails, the value will be `nullptr` for that entry.
+@param connectionArgs A dictionary where each key is a connection string identifying the target device
+(e.g., IPv4/IPv6), and each value is a configuration object that customizes the connection.
+The configuration may specify parameters such as maximum sample rate, communication port, number of channels,
+or other device-specific settings. A `nullptr` value indicates that the default configuration should be used.
+@param[in,out] errCodes An optional dictionary used to populate error codes for failed connection or addition attempts.
+For each failed attempt, the key is the connection string, and the value contains the error code.
+@param[in,out] errorInfos An optional dictionary used to populate detailed error info for failed connection or addition attempts.
+For each failed attempt, the key is the connection string, and the value contains the error info object.
 @return OPENDAQ_PARTIAL_SUCCESS if at least one device was successfully created and added, but not all of them;
 OPENDAQ_ERR_GENERALERROR if no devices were created or added;
 OPENDAQ_IGNORED if adding the devices from modules is not allowed within the device.
 
 Calls the openDAQ C function daqDevice_addDevices()."))
 (defmethod add-devices ((object device) connection-args &optional (err-codes nil) (error-infos nil))
-  "Connects to multiple devices in parallel using the provided connection strings and returns the connected devices. Each connection is established concurrently to improve performance when handling multiple devices. The additions, in turn, are performed sequentially in the order specified by connectionArgs.
-@param[out] devices A dictionary that maps each connection string to the corresponding added device object. If a device connection or addition attempt fails, the value will be `nullptr` for that entry.
-@param connectionArgs A dictionary where each key is a connection string identifying the target device (e.g., IPv4/IPv6), and each value is a configuration object that customizes the connection. The configuration may specify parameters such as maximum sample rate, communication port, number of channels, or other device-specific settings. A `nullptr` value indicates that the default configuration should be used.
-@param errCodes An optional dictionary used to populate error codes for failed connection or addition attempts. For each failed attempt, the key is the connection string, and the value contains the error code.
-@param errorInfos An optional dictionary used to populate detailed error info for failed connection or addition attempts. For each failed attempt, the key is the connection string, and the value contains the error info object.
+  "Connects to multiple devices in parallel using the provided connection strings and returns the connected devices.
+Each connection is established concurrently to improve performance when handling multiple devices. The additions, in turn,
+are performed sequentially in the order specified by connectionArgs.
+@param[out] devices A dictionary that maps each connection string to the corresponding added device object.
+If a device connection or addition attempt fails, the value will be `nullptr` for that entry.
+@param connectionArgs A dictionary where each key is a connection string identifying the target device
+(e.g., IPv4/IPv6), and each value is a configuration object that customizes the connection.
+The configuration may specify parameters such as maximum sample rate, communication port, number of channels,
+or other device-specific settings. A `nullptr` value indicates that the default configuration should be used.
+@param[in,out] errCodes An optional dictionary used to populate error codes for failed connection or addition attempts.
+For each failed attempt, the key is the connection string, and the value contains the error code.
+@param[in,out] errorInfos An optional dictionary used to populate detailed error info for failed connection or addition attempts.
+For each failed attempt, the key is the connection string, and the value contains the error info object.
 @return OPENDAQ_PARTIAL_SUCCESS if at least one device was successfully created and added, but not all of them;
 OPENDAQ_ERR_GENERALERROR if no devices were created or added;
 OPENDAQ_IGNORED if adding the devices from modules is not allowed within the device.
@@ -11983,7 +13496,8 @@ function-block => daqFunctionBlock_addFunctionBlock()
 (defmethod add-function-block ((object device) type-id &optional (config nil))
   "Creates and adds a function block to the device with the provided unique ID and returns it.
 @param[out] functionBlock The added function block.
-@param typeId The unique ID of the function block. Can be obtained from its corresponding Function Block Info object.
+@param typeId The unique ID of the function block. Can be obtained from its corresponding Function Block Info
+object.
 @param config A config object to configure a function block with custom settings specific to that function block type.
 
 Calls the openDAQ C function daqDevice_addFunctionBlock()."
@@ -12012,17 +13526,27 @@ Calls the openDAQ C function daqDevice_addServer()."
 )
 
 (defgeneric add-streaming (object connection-string &optional config)
-  (:documentation "Connects to a streaming at the given connection string, adds it as a streaming source of device and returns created streaming object.
+  (:documentation "Connects to a streaming at the given connection string, adds it as a streaming source of device
+and returns created streaming object.
 @param[out] streaming The added streaming source.
-@param connectionString The connection string containing the address of the streaming. In example an IPv4/IPv6 address. The connection string can be found in the Server Capability objects returned by `getInfo().getServerCapabilities()`.
-@param config A config object to configure a streaming connection. This object can contain properties like various connection timeouts or other streaming protocol specific settings. Can be created from its corresponding Streaming type object. In case of a null value, it will use the default configuration.
+@param connectionString The connection string containing the address of the streaming. In example an
+IPv4/IPv6 address. The connection string can be found in the Server Capability objects returned by
+`getInfo().getServerCapabilities()`.
+@param config A config object to configure a streaming connection. This object can contain properties like
+various connection timeouts or other streaming protocol specific settings. Can be created from its corresponding
+Streaming type object. In case of a null value, it will use the default configuration.
 
 Calls the openDAQ C function daqDevice_addStreaming()."))
 (defmethod add-streaming ((object device) connection-string &optional (config nil))
-  "Connects to a streaming at the given connection string, adds it as a streaming source of device and returns created streaming object.
+  "Connects to a streaming at the given connection string, adds it as a streaming source of device
+and returns created streaming object.
 @param[out] streaming The added streaming source.
-@param connectionString The connection string containing the address of the streaming. In example an IPv4/IPv6 address. The connection string can be found in the Server Capability objects returned by `getInfo().getServerCapabilities()`.
-@param config A config object to configure a streaming connection. This object can contain properties like various connection timeouts or other streaming protocol specific settings. Can be created from its corresponding Streaming type object. In case of a null value, it will use the default configuration.
+@param connectionString The connection string containing the address of the streaming. In example an
+IPv4/IPv6 address. The connection string can be found in the Server Capability objects returned by
+`getInfo().getServerCapabilities()`.
+@param config A config object to configure a streaming connection. This object can contain properties like
+various connection timeouts or other streaming protocol specific settings. Can be created from its corresponding
+Streaming type object. In case of a null value, it will use the default configuration.
 
 Calls the openDAQ C function daqDevice_addStreaming()."
   (with-daq-boxed-values ((coerced-connection-string connection-string :daq-string)
@@ -12032,12 +13556,14 @@ Calls the openDAQ C function daqDevice_addStreaming()."
 
 (defgeneric create-default-add-device-config (object)
   (:documentation "device => daqDevice_createDefaultAddDeviceConfig()
-    Creates config object that can be used when adding a device. Contains Device and Streaming default configuration for all available Device/Streaming types. Also contains general add-device configuration settings.
+    Creates config object that can be used when adding a device. Contains Device and Streaming default configuration
 
 module-manager-utils => daqModuleManagerUtils_createDefaultAddDeviceConfig()"))
 (defmethod create-default-add-device-config ((object device))
-  "Creates config object that can be used when adding a device. Contains Device and Streaming default configuration for all available Device/Streaming types. Also contains general add-device configuration settings.
+  "Creates config object that can be used when adding a device. Contains Device and Streaming default configuration
+for all available Device/Streaming types. Also contains general add-device configuration settings.
 @param[out] defaultConfig The configuration object containing default settings for adding a device.
+
 The default config object is organized to always have 3 object-type properties:
 - \"General\" Contains general properties such as \"AutomaticallyConnectStreaming\"
 - \"Device\": Contains a child object-type property for each available device type, with the key of each property
@@ -12072,13 +13598,14 @@ Calls the openDAQ C function daqDevice_getAvailableDeviceTypes()."
     Gets a list of available devices, containing their Device Info.
 
 module-manager-utils => daqModuleManagerUtils_getAvailableDevices()
-    Returns a list of known devices info. The implementation can start discovery in background and only return the results in this function.
+    Returns a list of known devices info.
 
 module => daqModule_getAvailableDevices()
-    Returns a list of known devices info. The implementation can start discovery in background and only return the results in this function."))
+    Returns a list of known devices info."))
 (defmethod available-devices ((object device))
   "Gets a list of available devices, containing their Device Info.
 @param[out] availableDevices The list of available devices.
+
 The getAvailableDevices most often runs a discovery client, querying for available devices that
 a device module can connect to. The replies are formed into Device Info objects and inserted to the
 list of available devices.
@@ -12124,6 +13651,7 @@ Calls the openDAQ C function daqDevice_getAvailableOperationModes()."
   (:documentation "Gets a flat list of the device's physical channels.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] channels The flat list of channels.
+
 If searchFilter is not provided, the returned list contains only visible channels and does not include those of
 child devices.
 
@@ -12132,6 +13660,7 @@ Calls the openDAQ C function daqDevice_getChannels()."))
   "Gets a flat list of the device's physical channels.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] channels The flat list of channels.
+
 If searchFilter is not provided, the returned list contains only visible channels and does not include those of
 child devices.
 
@@ -12186,6 +13715,7 @@ Calls the openDAQ C function daqDevice_getCustomComponents()."
   (:documentation "Gets a list of child devices that the device is connected to.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] devices The list of devices.
+
 If searchFilter is not provided, the returned list contains only visible devices and does not include those of
 child devices.
 
@@ -12194,6 +13724,7 @@ Calls the openDAQ C function daqDevice_getDevices()."))
   "Gets a list of child devices that the device is connected to.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] devices The list of devices.
+
 If searchFilter is not provided, the returned list contains only visible devices and does not include those of
 child devices.
 
@@ -12203,12 +13734,14 @@ Calls the openDAQ C function daqDevice_getDevices()."
 )
 
 (defgeneric domain (object)
-  (:documentation "Gets the device's domain data. It allows for querying the device for its domain (time) values.
+  (:documentation "Gets the device's domain data. It allows for querying the device for its
+domain (time) values.
 @param[out] domain The device domain.
 
 Calls the openDAQ C function daqDevice_getDomain()."))
 (defmethod domain ((object device))
-  "Gets the device's domain data. It allows for querying the device for its domain (time) values.
+  "Gets the device's domain data. It allows for querying the device for its
+domain (time) values.
 @param[out] domain The device domain.
 
 Calls the openDAQ C function daqDevice_getDomain()."
@@ -12225,6 +13758,7 @@ function-block => daqFunctionBlock_getFunctionBlocks()
   "Gets the list of added function blocks.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] functionBlocks The list of added function blocks.
+
 If searchFilter is not provided, the returned list contains only visible function blocks and does not include those of
 child function blocks, devices, or channels.
 
@@ -12234,12 +13768,14 @@ Calls the openDAQ C function daqDevice_getFunctionBlocks()."
 )
 
 (defgeneric info (object)
-  (:documentation "Gets the device info. It contains data about the device such as the device's serial number, location, and connection string.
+  (:documentation "Gets the device info. It contains data about the device such as the device's
+serial number, location, and connection string.
 @param[out] info The device info.
 
 Calls the openDAQ C function daqDevice_getInfo()."))
 (defmethod info ((object device))
-  "Gets the device info. It contains data about the device such as the device's serial number, location, and connection string.
+  "Gets the device info. It contains data about the device such as the device's
+serial number, location, and connection string.
 @param[out] info The device info.
 
 Calls the openDAQ C function daqDevice_getInfo()."
@@ -12249,12 +13785,14 @@ Calls the openDAQ C function daqDevice_getInfo()."
 (defgeneric inputs-outputs-folder (object)
   (:documentation "Gets a folder containing channels.
 @param[out] inputsOutputsFolder The folder that contains channels.
+
 The InputsOutputs folder can contain other folders that themselves contain channels.
 
 Calls the openDAQ C function daqDevice_getInputsOutputsFolder()."))
 (defmethod inputs-outputs-folder ((object device))
   "Gets a folder containing channels.
 @param[out] inputsOutputsFolder The folder that contains channels.
+
 The InputsOutputs folder can contain other folders that themselves contain channels.
 
 Calls the openDAQ C function daqDevice_getInputsOutputsFolder()."
@@ -12263,23 +13801,27 @@ Calls the openDAQ C function daqDevice_getInputsOutputsFolder()."
 
 (defgeneric log (object id &optional size offset)
   (:documentation "Retrieves a chunk of the log file with the provided ID.
+
 This function extracts a specified portion (or the entire content) of the log file, starting at the given offset.
 If the size and offset are not specified, it will attempt to return the entire log file by default.
 @param[out] log A string which stores requested log chunk.
 @param id Rhe ID of the log file to retrieve.
 @param size The size of the log chunk to retrieve in bytes. Defaults to -1, which means it will return all remaining bytes from the offset.
 @param offset The offset, in bytes, from where the log chunk should be read. Defaults to 0 (start of the file).
+
 If size is set to -1, and offset is 0, the entire log file will be returned.
 
 Calls the openDAQ C function daqDevice_getLog()."))
 (defmethod log ((object device) id &optional (size -1) (offset 0))
   "Retrieves a chunk of the log file with the provided ID.
+
 This function extracts a specified portion (or the entire content) of the log file, starting at the given offset.
 If the size and offset are not specified, it will attempt to return the entire log file by default.
 @param[out] log A string which stores requested log chunk.
 @param id Rhe ID of the log file to retrieve.
 @param size The size of the log chunk to retrieve in bytes. Defaults to -1, which means it will return all remaining bytes from the offset.
 @param offset The offset, in bytes, from where the log chunk should be read. Defaults to 0 (start of the file).
+
 If size is set to -1, and offset is 0, the entire log file will be returned.
 
 Calls the openDAQ C function daqDevice_getLog()."
@@ -12328,8 +13870,10 @@ server => daqServer_getSignals()
   "Gets a list of the device's signals.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] signals The flat list of signals.
+
 If searchFilter is not provided, the returned list contains only visible signals and does not include those of
 child function blocks, devices, or channels.
+
 Device signals are most often domain signals shared by other signals that belong to channels and/or function blocks.
 
 Calls the openDAQ C function daqDevice_getSignals()."
@@ -12347,6 +13891,7 @@ function-block => daqFunctionBlock_getSignalsRecursive()
   "Gets a list of the signals that belong to the device.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] signals The flat list of signals.
+
 The list includes visible signals that belong to visible channels, function blocks, or sub devices
 of the device.
 
@@ -12358,25 +13903,44 @@ Calls the openDAQ C function daqDevice_getSignalsRecursive()."
 (defgeneric sync-component (object)
   (:documentation "Gets the sync component of the device.
 @param[out] sync The sync component.
+@deprecated ISyncComponent and getSyncComponent are deprecated and will be removed in a future release.
 
 Calls the openDAQ C function daqDevice_getSyncComponent()."))
 (defmethod sync-component ((object device))
   "Gets the sync component of the device.
 @param[out] sync The sync component.
+@deprecated ISyncComponent and getSyncComponent are deprecated and will be removed in a future release.
 
 Calls the openDAQ C function daqDevice_getSyncComponent()."
   (wrap (opendaq.low-level:device/get-sync-component (%require-live-pointer object)) 'sync-component)
 )
 
+(defgeneric synchronization (object)
+  (:documentation "Gets the synchronization object of the device.
+@param[out] sync The synchronization object.
+@return OPENDAQ_IGNORED if the device has no clock; sync is set to nullptr.
+
+Calls the openDAQ C function daqDevice_getSynchronization()."))
+(defmethod synchronization ((object device))
+  "Gets the synchronization object of the device.
+@param[out] sync The synchronization object.
+@return OPENDAQ_IGNORED if the device has no clock; sync is set to nullptr.
+
+Calls the openDAQ C function daqDevice_getSynchronization()."
+  (wrap (opendaq.low-level:device/get-synchronization (%require-live-pointer object)) 'synchronization)
+)
+
 (defgeneric ticks-since-origin (object)
   (:documentation "Gets the number of ticks passed since the device's absolute origin.
 @param[out] ticks The number of ticks.
+
 To scale the ticks into a domain unit, the Device's Domain should be used.
 
 Calls the openDAQ C function daqDevice_getTicksSinceOrigin()."))
 (defmethod ticks-since-origin ((object device))
   "Gets the number of ticks passed since the device's absolute origin.
 @param[out] ticks The number of ticks.
+
 To scale the ticks into a domain unit, the Device's Domain should be used.
 
 Calls the openDAQ C function daqDevice_getTicksSinceOrigin()."
@@ -12413,7 +13977,9 @@ Calls the openDAQ C function daqDevice_loadConfiguration()."
 )
 
 (defmethod lock ((object device) &optional (user nil user-suppliedp))
-  "Lock a device with a session user. Once locked, no properties of the device can be changed via the protocol layer. Only the same user who locked the device can unlock it. If no user was specified when the device was locked, any user will be able to unlock it.
+  "Lock a device with a session user. Once locked, no properties of the device can be changed via the protocol layer.
+Only the same user who locked the device can unlock it. If no user was specified when the device was locked, any user
+will be able to unlock it.
 
 Calls the openDAQ C function daqDevice_lock()."
   (declare (ignore user))
@@ -12507,7 +14073,8 @@ Calls the openDAQ C function daqDevice_setOperationModeRecursive()."
   new-value)
 
 (defmethod unlock ((object device) &optional (user nil user-suppliedp))
-  "Unlock a device with a session user. A device can only be unlocked by the same user who locked it. If no user was specified when the device was locked, any user will be able to unlock it.
+  "Unlock a device with a session user. A device can only be unlocked by the same user who locked it.
+If no user was specified when the device was locked, any user will be able to unlock it.
 
 Calls the openDAQ C function daqDevice_unlock()."
   (declare (ignore user))
@@ -12572,12 +14139,14 @@ Calls the openDAQ C function daqDict_clear()."
 (defgeneric delete-item (object key)
   (:documentation "Deletes the element with the specified key.
 @param key The key of the element to delete.
+
 If the client needs the element deleted, it should use `removeAt` method.
 
 Calls the openDAQ C function daqDict_deleteItem()."))
 (defmethod delete-item ((object dict) key)
   "Deletes the element with the specified key.
 @param key The key of the element to delete.
+
 If the client needs the element deleted, it should use `removeAt` method.
 
 Calls the openDAQ C function daqDict_deleteItem()."
@@ -12598,6 +14167,7 @@ struct => daqStruct_get()
   "Gets the element with the specified key.
 @param key The key of the element to get.
 @param[out] value The element with the specified key.
+
 The reference count of the element that is retrieved is incremented. The client is
 responsible for calling `releaseRef` when the element is no longer needed.
 
@@ -12628,14 +14198,18 @@ Calls the openDAQ C function daqDict_getCount()."
 (defgeneric key-list (object)
   (:documentation "Gets the list of all keys in the dictionary.
 @param[out] keys The list of the keys.
+
 The order of the keys is not defined.
+
 The client is responsible for calling `releaseRef` when the list is no longer needed.
 
 Calls the openDAQ C function daqDict_getKeyList()."))
 (defmethod key-list ((object dict))
   "Gets the list of all keys in the dictionary.
 @param[out] keys The list of the keys.
+
 The order of the keys is not defined.
+
 The client is responsible for calling `releaseRef` when the list is no longer needed.
 
 Calls the openDAQ C function daqDict_getKeyList()."
@@ -12650,7 +14224,9 @@ serialized-object => daqSerializedObject_getKeys()"))
 (defmethod keys ((object dict))
   "Gets the iterable interface of the keys.
 @param[out] iterable The iterable interface of the keys.
+
 The Iterable interface enables iteration through the keys.
+
 The client is responsible for calling `releaseRef` when the interface is no longer needed.
 
 Calls the openDAQ C function daqDict_getKeys()."
@@ -12660,14 +14236,18 @@ Calls the openDAQ C function daqDict_getKeys()."
 (defgeneric value-list (object)
   (:documentation "Gets the list of all elements in the dictionary.
 @param[out] values The list of the elements.
+
 The order of the elements is not defined.
+
 The client is responsible for calling `releaseRef` when the list is no longer needed.
 
 Calls the openDAQ C function daqDict_getValueList()."))
 (defmethod value-list ((object dict))
   "Gets the list of all elements in the dictionary.
 @param[out] values The list of the elements.
+
 The order of the elements is not defined.
+
 The client is responsible for calling `releaseRef` when the list is no longer needed.
 
 Calls the openDAQ C function daqDict_getValueList()."
@@ -12677,14 +14257,18 @@ Calls the openDAQ C function daqDict_getValueList()."
 (defgeneric values (object)
   (:documentation "Gets the iterable interface of the elements.
 @param[out] iterable The iterable interface of the elements.
+
 The Iterable interface enables iteration through the elements.
+
 The client is responsible for calling `releaseRef` when the interface is no longer needed.
 
 Calls the openDAQ C function daqDict_getValues()."))
 (defmethod values ((object dict))
   "Gets the iterable interface of the elements.
 @param[out] iterable The iterable interface of the elements.
+
 The Iterable interface enables iteration through the elements.
+
 The client is responsible for calling `releaseRef` when the interface is no longer needed.
 
 Calls the openDAQ C function daqDict_getValues()."
@@ -12710,6 +14294,7 @@ Calls the openDAQ C function daqDict_hasKey()."
   (:documentation "Removes the element with the specified key.
 @param key The key of the element to remove.
 @param[out] value The element with the specified key.
+
 The client is responsible for calling `releaseRef` when the element is no longer needed.
 If the client does not need the element after it is removed, it should call `delete` method.
 
@@ -12718,6 +14303,7 @@ Calls the openDAQ C function daqDict_remove()."))
   "Removes the element with the specified key.
 @param key The key of the element to remove.
 @param[out] value The element with the specified key.
+
 The client is responsible for calling `releaseRef` when the element is no longer needed.
 If the client does not need the element after it is removed, it should call `delete` method.
 
@@ -12736,6 +14322,7 @@ struct-builder => daqStructBuilder_set()
   "Sets the element with the specified key.
 @param key The key of the element to set.
 @param value The element with the specified key.
+
 The reference count of the key and the element is incremented.
 
 Calls the openDAQ C function daqDict_set()."
@@ -12779,6 +14366,7 @@ Calls the openDAQ C function daqDimensionBuilder_getUnit()."
 (defmethod (setf name) (new-value (object dimension-builder))
   "Sets the name of the dimension.
 @param name The name of the dimension.
+
 The name that best describes the dimension, in example \"Frequency\" for spectrum data.
 
 Calls the openDAQ C function daqDimensionBuilder_setName()."
@@ -12790,6 +14378,7 @@ Calls the openDAQ C function daqDimensionBuilder_setName()."
   "Sets the rule that defines the labels and size of the dimension.
 @param rule The dimension rule.
 @retval OPENDAQ_ERR_FROZEN if the dimension object is frozen.
+
 The rule takes as input the index of data value in a sample and produces a label associated
 with that index.
 
@@ -12867,6 +14456,7 @@ Calls the openDAQ C function daqDimensionRuleBuilder_setParameters()."
 (defmethod (setf type) (new-value (object dimension-rule-builder))
   "Sets the type of the dimension rule. Rule parameters must be configured to match the requirements of the rule type.
 @param type The type of the dimension rule.
+
 The required rule parameters are as follows:
 - Linear: `delta`, `start`, and `size` number parameters. Calculated as: <em>index * delta + start</em> for `size` number of elements.
 - Logarithmic: `delta`, `start`, `base`, and `size` number parameters. Calculated as: <em>base ^ (index * delta + start)</em> for `size` number of elements.
@@ -12901,6 +14491,7 @@ Calls the openDAQ C function daqDimensionRule_getType()."
 (defgeneric labels (object)
   (:documentation "Gets a list of labels that defines the dimension.
 @param[out] labels The list of labels.
+
 The list is obtained from the dimension rule parameters by parsing and evaluating the parameters
 in conjunction with the rule type.
 
@@ -12908,6 +14499,7 @@ Calls the openDAQ C function daqDimension_getLabels()."))
 (defmethod labels ((object dimension))
   "Gets a list of labels that defines the dimension.
 @param[out] labels The list of labels.
+
 The list is obtained from the dimension rule parameters by parsing and evaluating the parameters
 in conjunction with the rule type.
 
@@ -12918,6 +14510,7 @@ Calls the openDAQ C function daqDimension_getLabels()."
 (defmethod name ((object dimension))
   "Gets the name of the dimension.
 @param[out] name The name of the dimension.
+
 The name that best describes the dimension, in example \"Frequency\" for spectrum data.
 
 Calls the openDAQ C function daqDimension_getName()."
@@ -12927,6 +14520,7 @@ Calls the openDAQ C function daqDimension_getName()."
 (defmethod rule ((object dimension))
   "Gets the rule that defines the labels and size of the dimension.
 @param[out] rule The dimension rule.
+
 The rule takes as input the index of data value in a sample and produces a label associated
 with that index.
 
@@ -12937,6 +14531,7 @@ Calls the openDAQ C function daqDimension_getRule()."
 (defmethod size ((object dimension))
   "Gets the size of the dimension.
 @param[out] size The size of the dimension.
+
 The size is obtained from the dimension rule parameters - either from the `size` parameter, or the
 count of elements in the `list` parameter.
 
@@ -13012,7 +14607,8 @@ struct => daqStruct_getAsDictionary()
     Gets the field names and values of the Struct as a Dictionary."))
 (defmethod as-dictionary ((object enumeration-type))
   "Gets the enumerator names and values as a Dictionary.
-@param[out] dictionary The Dictionary object with enumerator names as keys, and enumerator values as its values.
+@param[out] dictionary The Dictionary object with enumerator names as keys, and enumerator values
+as its values.
 
 Calls the openDAQ C function daqEnumerationType_getAsDictionary()."
   (%hashtable-of (wrap (opendaq.low-level:enumeration-type/get-as-dictionary (%require-live-pointer object)) 'dict) 'string-object 'integer-object)
@@ -13090,62 +14686,230 @@ Calls the openDAQ C function daqEnumeration_getValue()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:enumeration/get-value (%require-live-pointer object)))
 )
 
+(defgeneric error-info-list (object)
+  (:documentation "Calls the openDAQ C function daqErrorGuard_getErrorInfoList()."))
+(defmethod error-info-list ((object error-guard))
+  "Calls the openDAQ C function daqErrorGuard_getErrorInfoList()."
+  (wrap (opendaq.low-level:error-guard/get-error-info-list (%require-live-pointer object)) 'object-list)
+)
+
+(defgeneric formatted-message (object)
+  (:documentation "error-guard => daqErrorGuard_getFormattedMessage()
+
+error-info => daqErrorInfo_getFormattedMessage()
+    Gets a formatted error message containing the error description, file name, and line number."))
+(defmethod formatted-message ((object error-guard))
+  "Calls the openDAQ C function daqErrorGuard_getFormattedMessage()."
+  (%daq-string-to-lisp-and-release (opendaq.low-level:error-guard/get-formatted-message (%require-live-pointer object)))
+)
+
+(defgeneric last-error-info (object)
+  (:documentation "Calls the openDAQ C function daqErrorGuard_getLastErrorInfo()."))
+(defmethod last-error-info ((object error-guard))
+  "Calls the openDAQ C function daqErrorGuard_getLastErrorInfo()."
+  (wrap (opendaq.low-level:error-guard/get-last-error-info (%require-live-pointer object)) 'error-info)
+)
+
+(defun error-info-clear-error-info ()
+  "Calls the openDAQ C function daqErrorInfo_clearErrorInfo()."
+  (opendaq.low-level:error-info/clear-error-info)
+)
+
+(defun error-info-extend-error-info (error-info)
+  "Calls the openDAQ C function daqErrorInfo_extendErrorInfo()."
+  (with-daq-boxed-values ((coerced-error-info error-info :managed-pointer))
+    (opendaq.low-level:error-info/extend-error-info coerced-error-info))
+)
+
+(defgeneric error-code (object)
+  (:documentation "Gets the error code.
+@param errorCode A pointer to store the error code.
+
+Calls the openDAQ C function daqErrorInfo_getErrorCode()."))
+(defmethod error-code ((object error-info))
+  "Gets the error code.
+@param errorCode A pointer to store the error code.
+
+Calls the openDAQ C function daqErrorInfo_getErrorCode()."
+  (opendaq.low-level:error-info/get-error-code (%require-live-pointer object))
+)
+
+(defun error-info-error-info ()
+  "Calls the openDAQ C function daqErrorInfo_getErrorInfo()."
+  (wrap (opendaq.low-level:error-info/get-error-info) 'error-info)
+)
+
+(defun error-info-error-info-list ()
+  "Calls the openDAQ C function daqErrorInfo_getErrorInfoList()."
+  (wrap (opendaq.low-level:error-info/get-error-info-list) 'object-list)
+)
+
+(defun error-info-error-info-message ()
+  "Calls the openDAQ C function daqErrorInfo_getErrorInfoMessage()."
+  (%daq-string-to-lisp-and-release (opendaq.low-level:error-info/get-error-info-message))
+)
+
 (defgeneric file-line (object)
-  (:documentation "Calls the openDAQ C function daqErrorInfo_getFileLine()."))
+  (:documentation "Gets the line number in the file where the error occurred.
+@param fileLine Line number.
+
+Calls the openDAQ C function daqErrorInfo_getFileLine()."))
 (defmethod file-line ((object error-info))
-  "Calls the openDAQ C function daqErrorInfo_getFileLine()."
+  "Gets the line number in the file where the error occurred.
+@param fileLine Line number.
+
+Calls the openDAQ C function daqErrorInfo_getFileLine()."
   (opendaq.low-level:error-info/get-file-line (%require-live-pointer object))
 )
 
 (defgeneric file-name (object)
-  (:documentation "Calls the openDAQ C function daqErrorInfo_getFileName()."))
+  (:documentation "Gets the file name where the error occurred.
+@param fileName File name.
+
+Calls the openDAQ C function daqErrorInfo_getFileName()."))
 (defmethod file-name ((object error-info))
-  "Calls the openDAQ C function daqErrorInfo_getFileName()."
-  (wrap (opendaq.low-level:error-info/get-file-name (%require-live-pointer object)) 'const-char-ptr)
+  "Gets the file name where the error occurred.
+@param fileName File name.
+
+Calls the openDAQ C function daqErrorInfo_getFileName()."
+  (wrap (opendaq.low-level:error-info/get-file-name (%require-live-pointer object)) 'c-const-char-ptr)
+)
+
+(defmethod formatted-message ((object error-info))
+  "Gets a formatted error message containing the error description, file name, and line number.
+@param message A pointer to store the formatted error message.
+
+Calls the openDAQ C function daqErrorInfo_getFormattedMessage()."
+  (%daq-string-to-lisp-and-release (opendaq.low-level:error-info/get-formatted-message (%require-live-pointer object)))
 )
 
 (defgeneric message (object)
-  (:documentation "Calls the openDAQ C function daqErrorInfo_getMessage()."))
+  (:documentation "Gets the message of the error.
+@param message Error description.
+
+Calls the openDAQ C function daqErrorInfo_getMessage()."))
 (defmethod message ((object error-info))
-  "Calls the openDAQ C function daqErrorInfo_getMessage()."
+  "Gets the message of the error.
+@param message Error description.
+
+Calls the openDAQ C function daqErrorInfo_getMessage()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:error-info/get-message (%require-live-pointer object)))
 )
 
+(defgeneric previous-error-code (object)
+  (:documentation "Gets the error code of the preceding error in the chain.
+@param prevErrCode The error code of the previous error. If this error was not caused by a previous error, this will be OPENDAQ_SUCCESS.
+
+Calls the openDAQ C function daqErrorInfo_getPreviousErrorCode()."))
+(defmethod previous-error-code ((object error-info))
+  "Gets the error code of the preceding error in the chain.
+@param prevErrCode The error code of the previous error. If this error was not caused by a previous error, this will be OPENDAQ_SUCCESS.
+
+Calls the openDAQ C function daqErrorInfo_getPreviousErrorCode()."
+  (opendaq.low-level:error-info/get-previous-error-code (%require-live-pointer object))
+)
+
 (defgeneric source (object)
-  (:documentation "Calls the openDAQ C function daqErrorInfo_getSource()."))
+  (:documentation "error-info => daqErrorInfo_getSource()
+    Gets the source of the error.
+
+synchronization => daqSynchronization_getSource()
+    Gets the currently selected synchronization source."))
 (defmethod source ((object error-info))
-  "Calls the openDAQ C function daqErrorInfo_getSource()."
+  "Gets the source of the error.
+@param source Error source.
+
+Calls the openDAQ C function daqErrorInfo_getSource()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:error-info/get-source (%require-live-pointer object)))
 )
 
+(defgeneric (setf error-code) (new-value object)
+  (:documentation "Sets the error code.
+@param errorCode Error code.
+
+Calls the openDAQ C function daqErrorInfo_setErrorCode()."))
+(defmethod (setf error-code) (new-value (object error-info))
+  "Sets the error code.
+@param errorCode Error code.
+
+Calls the openDAQ C function daqErrorInfo_setErrorCode()."
+  (with-daq-boxed-values ((coerced-new-value new-value nil))
+    (opendaq.low-level:error-info/set-error-code (%require-live-pointer object) coerced-new-value))
+  new-value)
+
+(defun error-info-error-info (error-info)
+  "Calls the openDAQ C function daqErrorInfo_setErrorInfo()."
+  (with-daq-boxed-values ((coerced-error-info error-info :managed-pointer))
+    (opendaq.low-level:error-info/set-error-info coerced-error-info))
+)
+
 (defgeneric (setf file-line) (new-value object)
-  (:documentation "Calls the openDAQ C function daqErrorInfo_setFileLine()."))
+  (:documentation "Sets the line number in the file where the error occurred.
+@param fileLine Line number.
+
+Calls the openDAQ C function daqErrorInfo_setFileLine()."))
 (defmethod (setf file-line) (new-value (object error-info))
-  "Calls the openDAQ C function daqErrorInfo_setFileLine()."
+  "Sets the line number in the file where the error occurred.
+@param fileLine Line number.
+
+Calls the openDAQ C function daqErrorInfo_setFileLine()."
   (with-daq-boxed-values ((coerced-new-value new-value nil))
     (opendaq.low-level:error-info/set-file-line (%require-live-pointer object) coerced-new-value))
   new-value)
 
 (defgeneric (setf file-name) (new-value object)
-  (:documentation "Calls the openDAQ C function daqErrorInfo_setFileName()."))
+  (:documentation "Sets the file name where the error occurred.
+@param fileName File name.
+
+Calls the openDAQ C function daqErrorInfo_setFileName()."))
 (defmethod (setf file-name) (new-value (object error-info))
-  "Calls the openDAQ C function daqErrorInfo_setFileName()."
+  "Sets the file name where the error occurred.
+@param fileName File name.
+
+Calls the openDAQ C function daqErrorInfo_setFileName()."
   (with-daq-boxed-values ((coerced-new-value new-value nil))
     (opendaq.low-level:error-info/set-file-name (%require-live-pointer object) coerced-new-value))
   new-value)
 
 (defgeneric (setf message) (new-value object)
-  (:documentation "Calls the openDAQ C function daqErrorInfo_setMessage()."))
+  (:documentation "Sets the message of the error.
+@param message Error description.
+
+Calls the openDAQ C function daqErrorInfo_setMessage()."))
 (defmethod (setf message) (new-value (object error-info))
-  "Calls the openDAQ C function daqErrorInfo_setMessage()."
+  "Sets the message of the error.
+@param message Error description.
+
+Calls the openDAQ C function daqErrorInfo_setMessage()."
   (with-daq-boxed-values ((coerced-new-value new-value :daq-string))
     (opendaq.low-level:error-info/set-message (%require-live-pointer object) coerced-new-value))
   new-value)
 
+(defgeneric (setf previous-error-code) (new-value object)
+  (:documentation "Sets whether this error was caused by a previous error.
+@param prevErrCode The error code of the previous error.
+
+Calls the openDAQ C function daqErrorInfo_setPreviousErrorCode()."))
+(defmethod (setf previous-error-code) (new-value (object error-info))
+  "Sets whether this error was caused by a previous error.
+@param prevErrCode The error code of the previous error.
+
+Calls the openDAQ C function daqErrorInfo_setPreviousErrorCode()."
+  (with-daq-boxed-values ((coerced-new-value new-value nil))
+    (opendaq.low-level:error-info/set-previous-error-code (%require-live-pointer object) coerced-new-value))
+  new-value)
+
 (defgeneric (setf source) (new-value object)
-  (:documentation "Calls the openDAQ C function daqErrorInfo_setSource()."))
+  (:documentation "error-info => daqErrorInfo_setSource()
+    Sets the source of the error.
+
+synchronization => daqSynchronization_setSource()
+    Selects the synchronization interface with the given ID as the synchronization source."))
 (defmethod (setf source) (new-value (object error-info))
-  "Calls the openDAQ C function daqErrorInfo_setSource()."
+  "Sets the source of the error.
+@param source Error source.
+
+Calls the openDAQ C function daqErrorInfo_setSource()."
   (with-daq-boxed-values ((coerced-new-value new-value :daq-string))
     (opendaq.low-level:error-info/set-source (%require-live-pointer object) coerced-new-value))
   new-value)
@@ -13160,6 +14924,7 @@ property-internal => daqPropertyInternal_cloneWithOwner()
   "Clones the object and attaches an owner.
 @param owner The owner to attach to the cloned eval value.
 @param[out] clonedValue The cloned object.
+
 When the expression contains reference to some property object, then the expression cannot be
 evaluated unless an owner is attached to eval value. However, the object can be cloned with the
 specified owner attached. The client can then evaluate the cloned object.
@@ -13172,6 +14937,7 @@ Calls the openDAQ C function daqEvalValue_cloneWithOwner()."
 (defmethod eval ((object eval-value))
   "Gets the expression.
 @param[out] eval The expression.
+
 Expression is passed as a parameter to the factory function.
 
 Calls the openDAQ C function daqEvalValue_getEval()."
@@ -13180,6 +14946,7 @@ Calls the openDAQ C function daqEvalValue_getEval()."
 
 (defgeneric parse-error-code (object)
   (:documentation "Returns the parse error code.
+
 When an eval value object is created, the expression is passed as an argument to the factory
 function. Parsing of the expression can fail, but the factory function will always succeed. Use this
 function to check if the parsing of the expression succeeded without evaluating the expression.
@@ -13187,6 +14954,7 @@ function to check if the parsing of the expression succeeded without evaluating 
 Calls the openDAQ C function daqEvalValue_getParseErrorCode()."))
 (defmethod parse-error-code ((object eval-value))
   "Returns the parse error code.
+
 When an eval value object is created, the expression is passed as an argument to the factory
 function. Parsing of the expression can fail, but the factory function will always succeed. Use this
 function to check if the parsing of the expression succeeded without evaluating the expression.
@@ -13198,12 +14966,14 @@ Calls the openDAQ C function daqEvalValue_getParseErrorCode()."
 (defgeneric property-references (object)
   (:documentation "Returns the names of all properties referenced by the eval value.
 @param[out] propertyReferences The names of referenced properties.
+
 Referenced properties are all occurrences matching the '\"%\" propref' pattern in the evaluation string.
 
 Calls the openDAQ C function daqEvalValue_getPropertyReferences()."))
 (defmethod property-references ((object eval-value))
   "Returns the names of all properties referenced by the eval value.
 @param[out] propertyReferences The names of referenced properties.
+
 Referenced properties are all occurrences matching the '\"%\" propref' pattern in the evaluation string.
 
 Calls the openDAQ C function daqEvalValue_getPropertyReferences()."
@@ -13216,6 +14986,7 @@ Calls the openDAQ C function daqEvalValue_getPropertyReferences()."
 @retval OPENDAQ_ERR_CALCFAILED when calculation failed.
 @retval OPENDAQ_ERR_RESOLVEFAILED when reference resolution failed
 @retval OPENDAQ_ERR_PARSEFAILED when expression parsing failed
+
 When this method is called for the first time, the object will trigger
 execution and return result.
 
@@ -13265,7 +15036,8 @@ Calls the openDAQ C function daqEventPacket_getEventId()."
 )
 
 (defmethod parameters ((object event-packet))
-  "Dictionary containing parameters as <String, BaseObject> pairs relevant to the event signalized by the Event packet.
+  "Dictionary containing parameters as <String, BaseObject> pairs relevant to the event
+signalized by the Event packet.
 @param[out] parameters The event parameters dictionary.
 
 Calls the openDAQ C function daqEventPacket_getParameters()."
@@ -13347,14 +15119,26 @@ Calls the openDAQ C function daqEventPacket_getParameters()."
 )
 
 (defmethod equals-value ((object float-object) value)
-  "Calls the openDAQ C function daqFloatObject_equalsValue()."
+  "Compares stored float value to the float parameter.
+@param value Value for comparison.
+@param[out] equals The result of the comparison.
+
+Call this method to directly compare the object to the value parameter.
+
+Calls the openDAQ C function daqFloat_equalsValue()."
   (with-daq-boxed-values ((coerced-value value nil))
-    (not (zerop (opendaq.low-level:float-object/equals-value (%require-live-pointer object) coerced-value))))
+    (not (zerop (opendaq.low-level:float/equals-value (%require-live-pointer object) coerced-value))))
 )
 
 (defmethod value ((object float-object))
-  "Calls the openDAQ C function daqFloatObject_getValue()."
-  (opendaq.low-level:float-object/get-value (%require-live-pointer object))
+  "Gets a float value stored in the object.
+@param[out] value Stored float value.
+@return OPENDAQ_SUCCESS if succeeded, error code otherwise.
+
+Call this method to extract the float value that is stored in the object.
+
+Calls the openDAQ C function daqFloat_getValue()."
+  (opendaq.low-level:float/get-value (%require-live-pointer object))
 )
 
 (defgeneric add-item (object item)
@@ -13430,6 +15214,7 @@ Calls the openDAQ C function daqFolder_getItem()."
   (:documentation "Gets the list of the items in the folder.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] items The list of the items.
+
 If searchFilter is not provided, the returned list contains only immediate children with visible set to `true`.
 
 Calls the openDAQ C function daqFolder_getItems()."))
@@ -13437,6 +15222,7 @@ Calls the openDAQ C function daqFolder_getItems()."))
   "Gets the list of the items in the folder.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] items The list of the items.
+
 If searchFilter is not provided, the returned list contains only immediate children with visible set to `true`.
 
 Calls the openDAQ C function daqFolder_getItems()."
@@ -13474,11 +15260,13 @@ Calls the openDAQ C function daqFolder_isEmpty()."
 )
 
 (defgeneric freeze (object)
-  (:documentation "Makes the object frozen/immutable. It should return OPENDAQ_IGNORED value if the object is already frozen.
+  (:documentation "Makes the object frozen/immutable.
+It should return OPENDAQ_IGNORED value if the object is already frozen.
 
 Calls the openDAQ C function daqFreezable_freeze()."))
 (defmethod freeze ((object freezable))
-  "Makes the object frozen/immutable. It should return OPENDAQ_IGNORED value if the object is already frozen.
+  "Makes the object frozen/immutable.
+It should return OPENDAQ_IGNORED value if the object is already frozen.
 
 Calls the openDAQ C function daqFreezable_freeze()."
   (opendaq.low-level:freezable/freeze (%require-live-pointer object))
@@ -13500,7 +15288,8 @@ Calls the openDAQ C function daqFreezable_isFrozen()."
 (defmethod add-function-block ((object function-block) type-id &optional (config nil))
   "Creates and adds a function block as the nested of current function block with the provided unique ID and returns it.
 @param[out] functionBlock The added function block.
-@param typeId The unique ID of the function block. Can be obtained from its corresponding Function Block Info object.
+@param typeId The unique ID of the function block. Can be obtained from its corresponding Function Block Info
+object.
 @param config A config object to configure a function block with custom settings specific to that function block type.
 
 Calls the openDAQ C function daqFunctionBlock_addFunctionBlock()."
@@ -13534,6 +15323,7 @@ Calls the openDAQ C function daqFunctionBlock_getFunctionBlockType()."
   "Gets a list of sub-function blocks.
 @param searchFilter Provides optional parameters such as \"recursive\" and \"visibleOnly\" to modify the search pattern.
 @param[out] functionBlocks The list of sub-function blocks.
+
 If searchFilter is not provided, the returned list contains only visible function blocks and does not include those of
 child function blocks.
 
@@ -13552,6 +15342,7 @@ reader-config => daqReaderConfig_getInputPorts()
   "Gets a list of the function block's input ports.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] ports The list of input ports.
+
 If searchFilter is not provided, the returned list contains only visible input ports and does not include those of
 child function blocks.
 
@@ -13564,6 +15355,7 @@ Calls the openDAQ C function daqFunctionBlock_getInputPorts()."
   "Gets the list of the function block's output signals.
 @param searchFilter Provides an optional filter that filters out unwanted components and allows for recursion.
 @param[out] signals The list of output signals.
+
 If searchFilter is not provided, the returned list contains only visible signals and does not include those of
 child function blocks.
 
@@ -13585,6 +15377,7 @@ Calls the openDAQ C function daqFunctionBlock_getSignalsRecursive()."
 (defgeneric status-signal (object)
   (:documentation "Gets the function block's status signal.
 @param[out] statusSignal The status signal.
+
 The status signal sends out a status event packet every time it is connected to an input port.
 Additionally, a status event packet is sent whenever the status of the function block changes.
 
@@ -13592,6 +15385,7 @@ Calls the openDAQ C function daqFunctionBlock_getStatusSignal()."))
 (defmethod status-signal ((object function-block))
   "Gets the function block's status signal.
 @param[out] statusSignal The status signal.
+
 The status signal sends out a status event packet every time it is connected to an input port.
 Additionally, a status event packet is sent whenever the status of the function block changes.
 
@@ -13609,9 +15403,25 @@ Calls the openDAQ C function daqFunctionBlock_removeFunctionBlock()."
 )
 
 (defgeneric call (object params result)
-  (:documentation "Calls the openDAQ C function daqFunction_call()."))
+  (:documentation "Calls the stored callback.
+@param params Parameters passed to the callback.
+@param[out] result Return value of the callback.
+
+If the callback expects no parameters, the `params` parameter has to be `null`. If it
+expects a single parameter, pass any openDAQ object as the `params` parameter.
+If it expects multiple parameters, pass an IList<IBaseObject> as the `params` parameter.
+
+Calls the openDAQ C function daqFunction_call()."))
 (defmethod call ((object function-object) params result)
-  "Calls the openDAQ C function daqFunction_call()."
+  "Calls the stored callback.
+@param params Parameters passed to the callback.
+@param[out] result Return value of the callback.
+
+If the callback expects no parameters, the `params` parameter has to be `null`. If it
+expects a single parameter, pass any openDAQ object as the `params` parameter.
+If it expects multiple parameters, pass an IList<IBaseObject> as the `params` parameter.
+
+Calls the openDAQ C function daqFunction_call()."
   (with-daq-boxed-values ((coerced-params params :daq-base-object)
                           (coerced-result result :daq-base-object))
     (wrap (opendaq.low-level:function/call (%require-live-pointer object) coerced-params coerced-result) 'base-object))
@@ -13692,11 +15502,13 @@ Calls the openDAQ C function daqInputPortConfig_notifyPacketEnqueued()."
 
 (defgeneric notify-packet-enqueued-on-this-thread (object)
   (:documentation "Gets called when a packet was enqueued in a connection.
+
 The notification is called on the same thread that enqueued the packet.
 
 Calls the openDAQ C function daqInputPortConfig_notifyPacketEnqueuedOnThisThread()."))
 (defmethod notify-packet-enqueued-on-this-thread ((object input-port-config))
   "Gets called when a packet was enqueued in a connection.
+
 The notification is called on the same thread that enqueued the packet.
 
 Calls the openDAQ C function daqInputPortConfig_notifyPacketEnqueuedOnThisThread()."
@@ -13705,11 +15517,13 @@ Calls the openDAQ C function daqInputPortConfig_notifyPacketEnqueuedOnThisThread
 
 (defgeneric notify-packet-enqueued-with-scheduler (object)
   (:documentation "Gets called when a packet was enqueued in a connection.
+
 The notification is scheduled.
 
 Calls the openDAQ C function daqInputPortConfig_notifyPacketEnqueuedWithScheduler()."))
 (defmethod notify-packet-enqueued-with-scheduler ((object input-port-config))
   "Gets called when a packet was enqueued in a connection.
+
 The notification is scheduled.
 
 Calls the openDAQ C function daqInputPortConfig_notifyPacketEnqueuedWithScheduler()."
@@ -13755,6 +15569,7 @@ Calls the openDAQ C function daqInputPortConfig_setNotificationMethod()."
 (defgeneric (setf requires-signal) (new-value object)
   (:documentation "Sets requires signal flag of the input port.
 @param requiresSignal True if the input port requires a signal to be connected; false otherwise.
+
 If an input port requires a signal, then the input port must have a signal connected otherwise
 the owner of the input port (function block) should report an error.
 
@@ -13762,6 +15577,7 @@ Calls the openDAQ C function daqInputPortConfig_setRequiresSignal()."))
 (defmethod (setf requires-signal) (new-value (object input-port-config))
   "Sets requires signal flag of the input port.
 @param requiresSignal True if the input port requires a signal to be connected; false otherwise.
+
 If an input port requires a signal, then the input port must have a signal connected otherwise
 the owner of the input port (function block) should report an error.
 
@@ -13771,14 +15587,16 @@ Calls the openDAQ C function daqInputPortConfig_setRequiresSignal()."
   new-value)
 
 (defgeneric input-port-notifications-accepts-signal (object port signal)
-  (:documentation "Called when the Input port method `acceptsSignal` is called. Should return true if the signal is accepted; false otherwise.
+  (:documentation "Called when the Input port method `acceptsSignal` is called. Should return true if the signal is
+accepted; false otherwise.
 @param port The input port on which the method was called.
 @param signal The signal which is being checked for acceptance.
 @param[out] accept True if the signal is accepted; false otherwise.
 
 Calls the openDAQ C function daqInputPortNotifications_acceptsSignal()."))
 (defmethod input-port-notifications-accepts-signal ((object input-port-notifications) port signal)
-  "Called when the Input port method `acceptsSignal` is called. Should return true if the signal is accepted; false otherwise.
+  "Called when the Input port method `acceptsSignal` is called. Should return true if the signal is
+accepted; false otherwise.
 @param port The input port on which the method was called.
 @param signal The signal which is being checked for acceptance.
 @param[out] accept True if the signal is accepted; false otherwise.
@@ -13834,6 +15652,7 @@ Calls the openDAQ C function daqInputPortNotifications_packetReceived()."
 (defgeneric connect-signal-scheduler-notification (object signal)
   (:documentation "Connects the signal to the input port, forming a Connection.
 @param signal The signal to be connected to the input port.
+
 On connect, an event packet is enqueued in the connection. This method schedules the
 `onPacketReceived` notification instead of invoking it on the same thread.
 
@@ -13841,6 +15660,7 @@ Calls the openDAQ C function daqInputPortPrivate_connectSignalSchedulerNotificat
 (defmethod connect-signal-scheduler-notification ((object input-port-private) signal)
   "Connects the signal to the input port, forming a Connection.
 @param signal The signal to be connected to the input port.
+
 On connect, an event packet is enqueued in the connection. This method schedules the
 `onPacketReceived` notification instead of invoking it on the same thread.
 
@@ -13881,13 +15701,15 @@ Calls the openDAQ C function daqInputPort_acceptsSignal()."
 (defgeneric accepts-signals (object signals)
   (:documentation "Checks whether the given signals can be connected to the input port.
 @param signals The signals to check.
-@param[out] accepts Output list of boolean values matching @p signals by index. A value of `true` indicates that the corresponding signal can be connected; `false` otherwise.
+@param[out] accepts Output list of boolean values matching @p signals by index. A value of `true`
+indicates that the corresponding signal can be connected; `false` otherwise.
 
 Calls the openDAQ C function daqInputPort_acceptsSignals()."))
 (defmethod accepts-signals ((object input-port) signals)
   "Checks whether the given signals can be connected to the input port.
 @param signals The signals to check.
-@param[out] accepts Output list of boolean values matching @p signals by index. A value of `true` indicates that the corresponding signal can be connected; `false` otherwise.
+@param[out] accepts Output list of boolean values matching @p signals by index. A value of `true`
+indicates that the corresponding signal can be connected; `false` otherwise.
 
 Calls the openDAQ C function daqInputPort_acceptsSignals()."
   (with-daq-boxed-values ((coerced-signals signals :managed-pointer))
@@ -13899,6 +15721,7 @@ Calls the openDAQ C function daqInputPort_acceptsSignals()."
 @param signal The signal to be connected to the input port.
 @retval OPENDAQ_ERR_SIGNAL_NOT_ACCEPTED if the signal is not accepted.
 @retval OPENDAQ_ERR_NOTASSIGNED if the accepted signal criteria is not defined by the input port.
+
 The signal is notified of the connection formed between it and the input port.
 
 Calls the openDAQ C function daqInputPort_connect()."))
@@ -13907,6 +15730,7 @@ Calls the openDAQ C function daqInputPort_connect()."))
 @param signal The signal to be connected to the input port.
 @retval OPENDAQ_ERR_SIGNAL_NOT_ACCEPTED if the signal is not accepted.
 @retval OPENDAQ_ERR_NOTASSIGNED if the accepted signal criteria is not defined by the input port.
+
 The signal is notified of the connection formed between it and the input port.
 
 Calls the openDAQ C function daqInputPort_connect()."
@@ -13993,6 +15817,32 @@ Calls the openDAQ C function daqInputPort_setPublic()."
     (opendaq.low-level:input-port/set-public (%require-live-pointer object) coerced-new-value))
   new-value)
 
+(defgeneric interface-ids (object)
+  (:documentation "Retrieves the Ids of interfaces this object implements.
+To find out the number of interfaces implemented and the needed size of the @p ids you can first call
+the function with the @p ids as @c nullptr which will then only return the size over the @p idCount parameter.
+@param[out] idCount The number of interfaces implemented.
+@param[out] ids The interface ids represented as an IntfID struct, if @c nullptr it is not populated.
+
+Calls the openDAQ C function daqInspectable_getInterfaceIds()."))
+(defmethod interface-ids ((object inspectable))
+  "Retrieves the Ids of interfaces this object implements.
+To find out the number of interfaces implemented and the needed size of the @p ids you can first call
+the function with the @p ids as @c nullptr which will then only return the size over the @p idCount parameter.
+@param[out] idCount The number of interfaces implemented.
+@param[out] ids The interface ids represented as an IntfID struct, if @c nullptr it is not populated.
+
+Calls the openDAQ C function daqInspectable_getInterfaceIds()."
+  (cffi:with-foreign-object (id-count-slot 'opendaq.low-level::daq-c-size-t)
+    (cffi:with-foreign-object (ids-slot '(:pointer daq-intf-id))
+      (opendaq.low-level:inspectable/get-interface-ids (%require-live-pointer object) id-count-slot ids-slot)
+      (cl:values
+        (cffi:mem-ref id-count-slot 'opendaq.low-level::daq-c-size-t)
+        (cffi:mem-ref ids-slot '(:pointer daq-intf-id)))
+    )
+  )
+)
+
 (defgeneric runtime-class-name (object)
   (:documentation "Calls the openDAQ C function daqInspectable_getRuntimeClassName()."))
 (defmethod runtime-class-name ((object inspectable))
@@ -14017,12 +15867,14 @@ Calls the openDAQ C function daqInstanceBuilder_addConfigProvider()."
 (defgeneric add-discovery-server (object server-name)
   (:documentation "Adds a discovery server to the context
 @param serverName The discovery server to add
+
 openDAQ supports the \"mdns\" server by default, but must be added to the instance builder to be enabled.
 
 Calls the openDAQ C function daqInstanceBuilder_addDiscoveryServer()."))
 (defmethod add-discovery-server ((object instance-builder) server-name)
   "Adds a discovery server to the context
 @param serverName The discovery server to add
+
 openDAQ supports the \"mdns\" server by default, but must be added to the instance builder to be enabled.
 
 Calls the openDAQ C function daqInstanceBuilder_addDiscoveryServer()."
@@ -14239,12 +16091,6 @@ Calls the openDAQ C function daqInstanceBuilder_getOptions()."
   (%hashtable-of (wrap (opendaq.low-level:instance-builder/get-options (%require-live-pointer object)) 'dict) 'string-object 'base-object)
 )
 
-(defgeneric root-device (object)
-  (:documentation "instance-builder => daqInstanceBuilder_getRootDevice()
-    Gets the connection string for the default root device of Instance.
-
-instance => daqInstance_getRootDevice()
-    Gets the current root device."))
 (defmethod root-device ((object instance-builder))
   "Gets the connection string for the default root device of Instance.
 @param[out] connectionString The connection string for the root device of Instance. Returns nullptr, if root device connection string has not been set.
@@ -14255,12 +16101,14 @@ Calls the openDAQ C function daqInstanceBuilder_getRootDevice()."
 
 (defgeneric root-device-config (object)
   (:documentation "Gets the configuration property object for the default root device of Instance.
-@param[out] config The configuraton property object for the root device of Instance. Returns nullptr, for the default configuration property object.
+@param[out] config The configuraton property object for the root device of Instance. Returns nullptr, for the default
+configuration property object.
 
 Calls the openDAQ C function daqInstanceBuilder_getRootDeviceConfig()."))
 (defmethod root-device-config ((object instance-builder))
   "Gets the configuration property object for the default root device of Instance.
-@param[out] config The configuraton property object for the root device of Instance. Returns nullptr, for the default configuration property object.
+@param[out] config The configuraton property object for the root device of Instance. Returns nullptr, for the default
+configuration property object.
 
 Calls the openDAQ C function daqInstanceBuilder_getRootDeviceConfig()."
   (wrap (opendaq.low-level:instance-builder/get-root-device-config (%require-live-pointer object)) 'property-object)
@@ -14315,13 +16163,15 @@ Calls the openDAQ C function daqInstanceBuilder_setAuthenticationProvider()."
   new-value)
 
 (defgeneric (setf component-log-level) (new-value object component)
-  (:documentation "Sets The Logger level for a specific component of the Instance. Log messages related to that component will be processed according to the specified log level.
+  (:documentation "Sets The Logger level for a specific component of the Instance. Log messages related to
+that component will be processed according to the specified log level.
 @param component The name of Instance component
 @param logLevel The log level of Instance component
 
 Calls the openDAQ C function daqInstanceBuilder_setComponentLogLevel()."))
 (defmethod (setf component-log-level) (new-value (object instance-builder) component)
-  "Sets The Logger level for a specific component of the Instance. Log messages related to that component will be processed according to the specified log level.
+  "Sets The Logger level for a specific component of the Instance. Log messages related to
+that component will be processed according to the specified log level.
 @param component The name of Instance component
 @param logLevel The log level of Instance component
 
@@ -14332,12 +16182,14 @@ Calls the openDAQ C function daqInstanceBuilder_setComponentLogLevel()."
   new-value)
 
 (defgeneric (setf context) (new-value object)
-  (:documentation "Sets the Context object of the instance. This overwrites other context related settings such as logger, scheduler and module manager settings.
-@param context The Context object for instance.
+  (:documentation "instance-builder => daqInstanceBuilder_setContext()
+    Sets the Context object of the instance. This overwrites other context related
 
-Calls the openDAQ C function daqInstanceBuilder_setContext()."))
+packet-buffer-builder => daqPacketBufferBuilder_setContext()
+    Sets the context pointer"))
 (defmethod (setf context) (new-value (object instance-builder))
-  "Sets the Context object of the instance. This overwrites other context related settings such as logger, scheduler and module manager settings.
+  "Sets the Context object of the instance. This overwrites other context related
+settings such as logger, scheduler and module manager settings.
 @param context The Context object for instance.
 
 Calls the openDAQ C function daqInstanceBuilder_setContext()."
@@ -14374,12 +16226,14 @@ Calls the openDAQ C function daqInstanceBuilder_setDefaultRootDeviceLocalId()."
   new-value)
 
 (defgeneric (setf global-log-level) (new-value object)
-  (:documentation "Sets the Logger global log level for the Instance. All log messages with a severity level equal to or higher than the specified level will be processed.
+  (:documentation "Sets the Logger global log level for the Instance. All log messages with a severity
+level equal to or higher than the specified level will be processed.
 @param logLevel The Logger global level of Instance
 
 Calls the openDAQ C function daqInstanceBuilder_setGlobalLogLevel()."))
 (defmethod (setf global-log-level) (new-value (object instance-builder))
-  "Sets the Logger global log level for the Instance. All log messages with a severity level equal to or higher than the specified level will be processed.
+  "Sets the Logger global log level for the Instance. All log messages with a severity
+level equal to or higher than the specified level will be processed.
 @param logLevel The Logger global level of Instance
 
 Calls the openDAQ C function daqInstanceBuilder_setGlobalLogLevel()."
@@ -14396,12 +16250,14 @@ Calls the openDAQ C function daqInstanceBuilder_setGlobalLogLevel()."
   new-value)
 
 (defgeneric (setf logger) (new-value object)
-  (:documentation "Sets the custom Logger for the Instance. This logger will be used for logging messages related to the Instance and its components. When configured, the `Logger sink` will be ignored, as it is in use only with the default Instance logger.
-@param logger The custom Logger of Instance
+  (:documentation "instance-builder => daqInstanceBuilder_setLogger()
+    Sets the custom Logger for the Instance. This logger will be used for logging messages related to the Instance and its components.
 
-Calls the openDAQ C function daqInstanceBuilder_setLogger()."))
+module-authenticator => daqModuleAuthenticator_setLogger()
+    API call to add allow the openDAQ instance to add it's logger after during construction."))
 (defmethod (setf logger) (new-value (object instance-builder))
-  "Sets the custom Logger for the Instance. This logger will be used for logging messages related to the Instance and its components. When configured, the `Logger sink` will be ignored, as it is in use only with the default Instance logger.
+  "Sets the custom Logger for the Instance. This logger will be used for logging messages related to the Instance and its components.
+When configured, the `Logger sink` will be ignored, as it is in use only with the default Instance logger.
 @param logger The custom Logger of Instance
 
 Calls the openDAQ C function daqInstanceBuilder_setLogger()."
@@ -14453,15 +16309,23 @@ Calls the openDAQ C function daqInstanceBuilder_setModulePath()."
   new-value)
 
 (defgeneric (setf instance-builder-root-device) (new-value object connection-string)
-  (:documentation "Sets the connection string for a device that replaces the default openDAQ root device. When the instance is created, a connection to the device with the given connection string will be established, and the device will be placed at the root of the component tree structure.
+  (:documentation "Sets the connection string for a device that replaces the default openDAQ root device.
+When the instance is created, a connection to the device with the given connection string will be established,
+and the device will be placed at the root of the component tree structure.
 @param connectionString The connection string for the root device of the Instance.
-@param config A config object to configure a client device. This object can contain properties like max sample rate, port to use for 3rd party communication, number of channels to generate, or other device specific settings. In case of nullptr, a default configuration is used.
+@param config A config object to configure a client device. This object can contain properties like max sample rate,
+port to use for 3rd party communication, number of channels to generate, or other device specific settings. In case
+of nullptr, a default configuration is used.
 
 Calls the openDAQ C function daqInstanceBuilder_setRootDevice()."))
 (defmethod (setf instance-builder-root-device) (new-value (object instance-builder) connection-string)
-  "Sets the connection string for a device that replaces the default openDAQ root device. When the instance is created, a connection to the device with the given connection string will be established, and the device will be placed at the root of the component tree structure.
+  "Sets the connection string for a device that replaces the default openDAQ root device.
+When the instance is created, a connection to the device with the given connection string will be established,
+and the device will be placed at the root of the component tree structure.
 @param connectionString The connection string for the root device of the Instance.
-@param config A config object to configure a client device. This object can contain properties like max sample rate, port to use for 3rd party communication, number of channels to generate, or other device specific settings. In case of nullptr, a default configuration is used.
+@param config A config object to configure a client device. This object can contain properties like max sample rate,
+port to use for 3rd party communication, number of channels to generate, or other device specific settings. In case
+of nullptr, a default configuration is used.
 
 Calls the openDAQ C function daqInstanceBuilder_setRootDevice()."
   (with-daq-boxed-values ((coerced-connection-string connection-string :daq-string)
@@ -14517,6 +16381,7 @@ Calls the openDAQ C function daqInstanceBuilder_setSinkLogLevel()."
 (defgeneric (setf using-scheduler-main-loop) (new-value object)
   (:documentation "Enables or disables usage of the scheduler's main loop.
 @param useMainLoop Whether to construct the scheduler with main loop support.
+
 If enabled, the scheduler will be constructed with the main worker, allowing use of the main loop.
 Note that enabling this does not automatically start the main loop. To start it, you must call
 `IScheduler::runMainLoop()` or `IScheduler::runMainLoopIteration()`.
@@ -14525,6 +16390,7 @@ Calls the openDAQ C function daqInstanceBuilder_setUsingSchedulerMainLoop()."))
 (defmethod (setf using-scheduler-main-loop) (new-value (object instance-builder))
   "Enables or disables usage of the scheduler's main loop.
 @param useMainLoop Whether to construct the scheduler with main loop support.
+
 If enabled, the scheduler will be constructed with the main worker, allowing use of the main loop.
 Note that enabling this does not automatically start the main loop. To start it, you must call
 `IScheduler::runMainLoop()` or `IScheduler::runMainLoopIteration()`.
@@ -14572,6 +16438,7 @@ Calls the openDAQ C function daqInstance_getModuleManager()."
 (defmethod root-device ((object instance))
   "Gets the current root device.
 @param[out] rootDevice The current root device.
+
 All Device calls invoked on the Instance are forwarded to the current root device.
 
 Calls the openDAQ C function daqInstance_getRootDevice()."
@@ -14581,14 +16448,20 @@ Calls the openDAQ C function daqInstance_getRootDevice()."
 (defgeneric (setf instance-root-device) (new-value object connection-string)
   (:documentation "Adds a device with the connection string as root device.
 @param connectionString The connection string containing the address of the device.
-@param config A config object to configure a client device. This object can contain properties like max sample rate, port to use for 3rd party communication, number of channels to generate, or other device specific settings. In case of nullptr, a default configuration is used.
+@param config A config object to configure a client device. This object can contain properties like max sample rate,
+port to use for 3rd party communication, number of channels to generate, or other device specific settings. In case
+of nullptr, a default configuration is used.
+
 All Device calls invoked on the Instance are forwarded to the root device. The root device can only be set once.
 
 Calls the openDAQ C function daqInstance_setRootDevice()."))
 (defmethod (setf instance-root-device) (new-value (object instance) connection-string)
   "Adds a device with the connection string as root device.
 @param connectionString The connection string containing the address of the device.
-@param config A config object to configure a client device. This object can contain properties like max sample rate, port to use for 3rd party communication, number of channels to generate, or other device specific settings. In case of nullptr, a default configuration is used.
+@param config A config object to configure a client device. This object can contain properties like max sample rate,
+port to use for 3rd party communication, number of channels to generate, or other device specific settings. In case
+of nullptr, a default configuration is used.
+
 All Device calls invoked on the Instance are forwarded to the root device. The root device can only be set once.
 
 Calls the openDAQ C function daqInstance_setRootDevice()."
@@ -14601,6 +16474,7 @@ Calls the openDAQ C function daqInstance_setRootDevice()."
   "Compares stored int value to the int parameter.
 @param value Value for comparison.
 @param[out] equals The result of the comparison.
+
 Call this method to directly compare the object to the value parameter.
 
 Calls the openDAQ C function daqInteger_equalsValue()."
@@ -14611,6 +16485,7 @@ Calls the openDAQ C function daqInteger_equalsValue()."
 (defmethod value ((object integer-object))
   "Gets an int value stored in the object.
 @param[out] value Stored int value.
+
 Call this method to extract the int value that is stored in the object.
 
 Calls the openDAQ C function daqInteger_getValue()."
@@ -14687,13 +16562,15 @@ Calls the openDAQ C function daqLastMessageLoggerSinkPrivate_getLastMessage()."
 (defgeneric wait-for-message (object timeout-ms)
   (:documentation "Wait for receiving a new log message
 @param timeoutMs The timeout in milliseconds until which wait for a new log message. If timeout set as 0 ms waiting will be skipped.
-@param[out] success The success will return true if there was a new unread log message before waiting or sink got a new logger message before timeout. False if timeout was reached.
+@param[out] success The success will return true if there was a new unread log message before waiting
+or sink got a new logger message before timeout. False if timeout was reached.
 
 Calls the openDAQ C function daqLastMessageLoggerSinkPrivate_waitForMessage()."))
 (defmethod wait-for-message ((object last-message-logger-sink-private) timeout-ms)
   "Wait for receiving a new log message
 @param timeoutMs The timeout in milliseconds until which wait for a new log message. If timeout set as 0 ms waiting will be skipped.
-@param[out] success The success will return true if there was a new unread log message before waiting or sink got a new logger message before timeout. False if timeout was reached.
+@param[out] success The success will return true if there was a new unread log message before waiting
+or sink got a new logger message before timeout. False if timeout was reached.
 
 Calls the openDAQ C function daqLastMessageLoggerSinkPrivate_waitForMessage()."
   (with-daq-boxed-values ((coerced-timeout-ms timeout-ms nil))
@@ -14726,6 +16603,7 @@ Calls the openDAQ C function daqList_clear()."
 (defmethod create-end-iterator ((object object-list))
   "Creates and returns the stop iterator of the list.
 @param[out] iterator The stop iterator.
+
 Use iterators to iterate through the elements.
 
 Calls the openDAQ C function daqList_createEndIterator()."
@@ -14735,6 +16613,7 @@ Calls the openDAQ C function daqList_createEndIterator()."
 (defmethod create-start-iterator ((object object-list))
   "Creates and returns the start iterator of the list.
 @param[out] iterator The start iterator.
+
 Use iterators to iterate through the elements.
 
 Calls the openDAQ C function daqList_createStartIterator()."
@@ -14744,12 +16623,14 @@ Calls the openDAQ C function daqList_createStartIterator()."
 (defgeneric delete-at (object index)
   (:documentation "Deletes the element at a specific position.
 @param index The zero-based index of the element to remove.
+
 If the client needs the element deleted, it should use `removeAt` method.
 
 Calls the openDAQ C function daqList_deleteAt()."))
 (defmethod delete-at ((object object-list) index)
   "Deletes the element at a specific position.
 @param index The zero-based index of the element to remove.
+
 If the client needs the element deleted, it should use `removeAt` method.
 
 Calls the openDAQ C function daqList_deleteAt()."
@@ -14769,6 +16650,7 @@ Calls the openDAQ C function daqList_getCount()."
   (:documentation "Gets the element at a specific position.
 @param index The zero-based index of the element to get.
 @param[out] obj The element at the specified index.
+
 The reference count of the element that is retrieved is incremented. The client is
 responsible for calling `releaseRef` when the element is no longer needed.
 
@@ -14777,6 +16659,7 @@ Calls the openDAQ C function daqList_getItemAt()."))
   "Gets the element at a specific position.
 @param index The zero-based index of the element to get.
 @param[out] obj The element at the specified index.
+
 The reference count of the element that is retrieved is incremented. The client is
 responsible for calling `releaseRef` when the element is no longer needed.
 
@@ -14789,6 +16672,7 @@ Calls the openDAQ C function daqList_getItemAt()."
   (:documentation "Inserts the element at a specific position.
 @param index The zero-based index of the element to insert.
 @param obj The element to insert at the specified index.
+
 The reference count of the element is incremented.
 
 Calls the openDAQ C function daqList_insertAt()."))
@@ -14796,6 +16680,7 @@ Calls the openDAQ C function daqList_insertAt()."))
   "Inserts the element at a specific position.
 @param index The zero-based index of the element to insert.
 @param obj The element to insert at the specified index.
+
 The reference count of the element is incremented.
 
 Calls the openDAQ C function daqList_insertAt()."
@@ -14807,6 +16692,7 @@ Calls the openDAQ C function daqList_insertAt()."
 (defgeneric move-back (object obj)
   (:documentation "Inserts the element at the end of the list without incrementing the reference count.
 @param obj The element to insert.
+
 The reference count of the element is not incremented. The client can use this method when it no
 longer needs to access the element after calling the method.
 
@@ -14814,6 +16700,7 @@ Calls the openDAQ C function daqList_moveBack()."))
 (defmethod move-back ((object object-list) obj)
   "Inserts the element at the end of the list without incrementing the reference count.
 @param obj The element to insert.
+
 The reference count of the element is not incremented. The client can use this method when it no
 longer needs to access the element after calling the method.
 
@@ -14825,6 +16712,7 @@ Calls the openDAQ C function daqList_moveBack()."
 (defgeneric move-front (object obj)
   (:documentation "Inserts the element at the start of the list without incrementing the reference count.
 @param obj The element to insert.
+
 The reference count of the element is not incremented. The client can use this method when it no
 longer needs to access the element after calling the method.
 
@@ -14832,6 +16720,7 @@ Calls the openDAQ C function daqList_moveFront()."))
 (defmethod move-front ((object object-list) obj)
   "Inserts the element at the start of the list without incrementing the reference count.
 @param obj The element to insert.
+
 The reference count of the element is not incremented. The client can use this method when it no
 longer needs to access the element after calling the method.
 
@@ -14843,6 +16732,7 @@ Calls the openDAQ C function daqList_moveFront()."
 (defgeneric pop-back (object)
   (:documentation "Gets the element from the end of the list.
 @param[out] obj The extracted element.
+
 The reference count of the element that is retrieved is incremented. The client is
 responsible for calling `releaseRef` when the element is no longer needed.
 
@@ -14850,6 +16740,7 @@ Calls the openDAQ C function daqList_popBack()."))
 (defmethod pop-back ((object object-list))
   "Gets the element from the end of the list.
 @param[out] obj The extracted element.
+
 The reference count of the element that is retrieved is incremented. The client is
 responsible for calling `releaseRef` when the element is no longer needed.
 
@@ -14860,6 +16751,7 @@ Calls the openDAQ C function daqList_popBack()."
 (defgeneric pop-front (object)
   (:documentation "Gets the element from the start of the list.
 @param[out] obj The extracted element.
+
 The reference count of the element that is retrieved is incremented. The client is
 responsible for calling `releaseRef` when the element is no longer needed.
 
@@ -14867,6 +16759,7 @@ Calls the openDAQ C function daqList_popFront()."))
 (defmethod pop-front ((object object-list))
   "Gets the element from the start of the list.
 @param[out] obj The extracted element.
+
 The reference count of the element that is retrieved is incremented. The client is
 responsible for calling `releaseRef` when the element is no longer needed.
 
@@ -14877,12 +16770,14 @@ Calls the openDAQ C function daqList_popFront()."
 (defgeneric push-back (object obj)
   (:documentation "Inserts the element at the end of the list.
 @param obj The element to insert.
+
 The reference count of the element is incremented.
 
 Calls the openDAQ C function daqList_pushBack()."))
 (defmethod push-back ((object object-list) obj)
   "Inserts the element at the end of the list.
 @param obj The element to insert.
+
 The reference count of the element is incremented.
 
 Calls the openDAQ C function daqList_pushBack()."
@@ -14893,12 +16788,14 @@ Calls the openDAQ C function daqList_pushBack()."
 (defgeneric push-front (object obj)
   (:documentation "Inserts the element at the start of the list.
 @param obj The element to insert.
+
 The reference count of the element is incremented.
 
 Calls the openDAQ C function daqList_pushFront()."))
 (defmethod push-front ((object object-list) obj)
   "Inserts the element at the start of the list.
 @param obj The element to insert.
+
 The reference count of the element is incremented.
 
 Calls the openDAQ C function daqList_pushFront()."
@@ -14910,6 +16807,7 @@ Calls the openDAQ C function daqList_pushFront()."
   (:documentation "Removes the element at a specific position.
 @param index The zero-based index of the element to remove.
 @param[out] obj The removed element.
+
 The client is responsible for calling `releaseRef` when the element is no longer needed.
 If the client does not need the element after it is removed, it should call `delete` method.
 
@@ -14918,6 +16816,7 @@ Calls the openDAQ C function daqList_removeAt()."))
   "Removes the element at a specific position.
 @param index The zero-based index of the element to remove.
 @param[out] obj The removed element.
+
 The client is responsible for calling `releaseRef` when the element is no longer needed.
 If the client does not need the element after it is removed, it should call `delete` method.
 
@@ -14930,6 +16829,7 @@ Calls the openDAQ C function daqList_removeAt()."
   (:documentation "Sets the element at a specific position.
 @param index The zero-based index of the element to set.
 @param obj The element to set at the specified index.
+
 The reference count of the element is incremented.
 
 Calls the openDAQ C function daqList_setItemAt()."))
@@ -14937,6 +16837,7 @@ Calls the openDAQ C function daqList_setItemAt()."))
   "Sets the element at a specific position.
 @param index The zero-based index of the element to set.
 @param obj The element to set at the specified index.
+
 The reference count of the element is incremented.
 
 Calls the openDAQ C function daqList_setItemAt()."
@@ -15171,9 +17072,10 @@ Calls the openDAQ C function daqLogFileInfo_getSize()."
     Triggers writing out the messages stored in temporary buffers.
 
 logger-sink => daqLoggerSink_flush()
+    Triggers writing out the messages from temporary buffers to the target.
 
 logger => daqLogger_flush()
-    Triggers writing out the messages stored in temporary buffers for added components and sinks associated with the Logger object."))
+    Triggers writing out the messages stored in temporary buffers for added components"))
 (defmethod flush ((object logger-component))
   "Triggers writing out the messages stored in temporary buffers.
 
@@ -15183,12 +17085,13 @@ Calls the openDAQ C function daqLoggerComponent_flush()."
 
 (defgeneric flush-on-level (object level)
   (:documentation "logger-component => daqLoggerComponent_flushOnLevel()
-    Sets the minimum severity level of messages to be automatically written to the associated sinks bypassing the temporary buffers.
+    Sets the minimum severity level of messages to be automatically written to the associated
 
 logger => daqLogger_flushOnLevel()
     Sets the minimum severity level of messages to be automatically flushed by components of Logger object."))
 (defmethod flush-on-level ((object logger-component) level)
-  "Sets the minimum severity level of messages to be automatically written to the associated sinks bypassing the temporary buffers.
+  "Sets the minimum severity level of messages to be automatically written to the associated
+sinks bypassing the temporary buffers.
 @param level The severity level of messages.
 
 Calls the openDAQ C function daqLoggerComponent_flushOnLevel()."
@@ -15201,6 +17104,7 @@ Calls the openDAQ C function daqLoggerComponent_flushOnLevel()."
     Gets the minimal severity level of messages to be logged by the component.
 
 logger-sink => daqLoggerSink_getLevel()
+    Gets the minimal severity level of messages to be written to the target.
 
 logger => daqLogger_getLevel()
     Gets the default log severity level."))
@@ -15220,11 +17124,32 @@ Calls the openDAQ C function daqLoggerComponent_getName()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:logger-component/get-name (%require-live-pointer object)))
 )
 
+(defgeneric log-message (object location msg level)
+  (:documentation "Logs a message with the provided source location and severity level.
+@param location The source location.
+@param msg The message.
+@param level The severity level of the message.
+
+Calls the openDAQ C function daqLoggerComponent_logMessage()."))
+(defmethod log-message ((object logger-component) location msg level)
+  "Logs a message with the provided source location and severity level.
+@param location The source location.
+@param msg The message.
+@param level The severity level of the message.
+
+Calls the openDAQ C function daqLoggerComponent_logMessage()."
+  (with-daq-boxed-values ((coerced-location location nil)
+                          (coerced-msg msg nil)
+                          (coerced-level level nil))
+    (opendaq.low-level:logger-component/log-message (%require-live-pointer object) coerced-location coerced-msg coerced-level))
+)
+
 (defgeneric (setf level) (new-value object)
   (:documentation "logger-component => daqLoggerComponent_setLevel()
     Sets the minimal severity level of messages to be logged by the component.
 
 logger-sink => daqLoggerSink_setLevel()
+    Sets the minimal severity level of messages to be written to the target.
 
 logger => daqLogger_setLevel()
     Sets the default log severity level."))
@@ -15241,7 +17166,8 @@ Calls the openDAQ C function daqLoggerComponent_setLevel()."
   (:documentation "logger-component => daqLoggerComponent_setPattern()
     Sets the custom formatter pattern for the component.
 
-logger-sink => daqLoggerSink_setPattern()"))
+logger-sink => daqLoggerSink_setPattern()
+    Sets the custom formatter pattern for the sink."))
 (defmethod (setf pattern) (new-value (object logger-component))
   "Sets the custom formatter pattern for the component.
 @param pattern The format pattern string.
@@ -15255,7 +17181,8 @@ Calls the openDAQ C function daqLoggerComponent_setPattern()."
   (:documentation "logger-component => daqLoggerComponent_shouldLog()
     Checks whether the messages with given log severity level will be logged or not.
 
-logger-sink => daqLoggerSink_shouldLog()"))
+logger-sink => daqLoggerSink_shouldLog()
+    Checks whether the messages with given log severity level will be written to the target or not."))
 (defmethod should-log ((object logger-component) level)
   "Checks whether the messages with given log severity level will be logged or not.
 @param level The severity level of messages.
@@ -15267,29 +17194,44 @@ Calls the openDAQ C function daqLoggerComponent_shouldLog()."
 )
 
 (defmethod flush ((object logger-sink))
-  "Calls the openDAQ C function daqLoggerSink_flush()."
+  "Triggers writing out the messages from temporary buffers to the target.
+
+Calls the openDAQ C function daqLoggerSink_flush()."
   (opendaq.low-level:logger-sink/flush (%require-live-pointer object))
 )
 
 (defmethod level ((object logger-sink))
-  "Calls the openDAQ C function daqLoggerSink_getLevel()."
+  "Gets the minimal severity level of messages to be written to the target.
+@param[out] level The log severity level of the sink.
+
+Calls the openDAQ C function daqLoggerSink_getLevel()."
   (opendaq.low-level:logger-sink/get-level (%require-live-pointer object))
 )
 
 (defmethod (setf level) (new-value (object logger-sink))
-  "Calls the openDAQ C function daqLoggerSink_setLevel()."
+  "Sets the minimal severity level of messages to be written to the target.
+@param level The log severity level of the sink.
+
+Calls the openDAQ C function daqLoggerSink_setLevel()."
   (with-daq-boxed-values ((coerced-new-value new-value nil))
     (opendaq.low-level:logger-sink/set-level (%require-live-pointer object) coerced-new-value))
   new-value)
 
 (defmethod (setf pattern) (new-value (object logger-sink))
-  "Calls the openDAQ C function daqLoggerSink_setPattern()."
+  "Sets the custom formatter pattern for the sink.
+@param pattern The formatter pattern string.
+
+Calls the openDAQ C function daqLoggerSink_setPattern()."
   (with-daq-boxed-values ((coerced-new-value new-value :daq-string))
     (opendaq.low-level:logger-sink/set-pattern (%require-live-pointer object) coerced-new-value))
   new-value)
 
 (defmethod should-log ((object logger-sink) level)
-  "Calls the openDAQ C function daqLoggerSink_shouldLog()."
+  "Checks whether the messages with given log severity level will be written to the target or not.
+@param level The severity level of messages.
+@param[out] willLog True if the messages with @p level will be written to the target; false otherwise.
+
+Calls the openDAQ C function daqLoggerSink_shouldLog()."
   (with-daq-boxed-values ((coerced-level level nil))
     (not (zerop (opendaq.low-level:logger-sink/should-log (%require-live-pointer object) coerced-level))))
 )
@@ -15313,7 +17255,8 @@ Calls the openDAQ C function daqLogger_addComponent()."
 )
 
 (defmethod flush ((object logger))
-  "Triggers writing out the messages stored in temporary buffers for added components and sinks associated with the Logger object.
+  "Triggers writing out the messages stored in temporary buffers for added components
+and sinks associated with the Logger object.
 
 Calls the openDAQ C function daqLogger_flush()."
   (opendaq.low-level:logger/flush (%require-live-pointer object))
@@ -15414,6 +17357,9 @@ Calls the openDAQ C function daqLogger_setLevel()."
   (:documentation "mirrored-device-config => daqMirroredDeviceConfig_addStreamingSource()
     Adds streaming source for device.
 
+mirrored-input-port-private => daqMirroredInputPortPrivate_addStreamingSource()
+    Adds a streaming source for the input port.
+
 mirrored-signal-private => daqMirroredSignalPrivate_addStreamingSource()
     Adds streaming source for signal."))
 (defmethod add-streaming-source ((object mirrored-device-config) streaming-source)
@@ -15428,6 +17374,9 @@ Calls the openDAQ C function daqMirroredDeviceConfig_addStreamingSource()."
 (defgeneric remove-streaming-source (object streaming-connection-string)
   (:documentation "mirrored-device-config => daqMirroredDeviceConfig_removeStreamingSource()
     Removes streaming source for device e.g. when the streaming source is no longer available.
+
+mirrored-input-port-private => daqMirroredInputPortPrivate_removeStreamingSource()
+    Removes a streaming source from the input port.
 
 mirrored-signal-private => daqMirroredSignalPrivate_removeStreamingSource()
     Removes streaming source for signal."))
@@ -15540,12 +17489,57 @@ mirrored-signal-config => daqMirroredSignalConfig_setActiveStreamingSource()
 (defmethod (setf active-streaming-source) (new-value (object mirrored-input-port-config))
   "Sets the active streaming source of the input port.
 @param streamingConnectionString The connection string of streaming source to be set as active.
-@retval OPENDAQ_ERR_NOTFOUND if the streaming source with the corresponding connection string is not part of the available streaming sources for the input port.
+@retval OPENDAQ_ERR_NOTFOUND if the streaming source with the corresponding connection string is not
+part of the available streaming sources for the input port.
 
 Calls the openDAQ C function daqMirroredInputPortConfig_setActiveStreamingSource()."
   (with-daq-boxed-values ((coerced-new-value new-value :daq-string))
     (opendaq.low-level:mirrored-input-port-config/set-active-streaming-source (%require-live-pointer object) coerced-new-value))
   new-value)
+
+(defmethod add-streaming-source ((object mirrored-input-port-private) streaming)
+  "Adds a streaming source for the input port.
+@param streaming The streaming object representing a client-to-device streaming source.
+
+Calls the openDAQ C function daqMirroredInputPortPrivate_addStreamingSource()."
+  (with-daq-boxed-values ((coerced-streaming streaming :managed-pointer))
+    (opendaq.low-level:mirrored-input-port-private/add-streaming-source (%require-live-pointer object) coerced-streaming))
+)
+
+(defgeneric active-streaming-source-object (object)
+  (:documentation "Gets the active streaming source of the input port as a streaming object.
+@param[out] streaming The streaming object representing the active streaming source.
+
+Calls the openDAQ C function daqMirroredInputPortPrivate_getActiveStreamingSourceObject()."))
+(defmethod active-streaming-source-object ((object mirrored-input-port-private))
+  "Gets the active streaming source of the input port as a streaming object.
+@param[out] streaming The streaming object representing the active streaming source.
+
+Calls the openDAQ C function daqMirroredInputPortPrivate_getActiveStreamingSourceObject()."
+  (wrap (opendaq.low-level:mirrored-input-port-private/get-active-streaming-source-object (%require-live-pointer object)) 'streaming)
+)
+
+(defgeneric streaming-source-objects (object)
+  (:documentation "Gets a list of objects of all available streaming sources for the input port.
+@param[out] objects The list of streaming objects representing all streaming sources.
+
+Calls the openDAQ C function daqMirroredInputPortPrivate_getStreamingSourceObjects()."))
+(defmethod streaming-source-objects ((object mirrored-input-port-private))
+  "Gets a list of objects of all available streaming sources for the input port.
+@param[out] objects The list of streaming objects representing all streaming sources.
+
+Calls the openDAQ C function daqMirroredInputPortPrivate_getStreamingSourceObjects()."
+  (%list-of (wrap (opendaq.low-level:mirrored-input-port-private/get-streaming-source-objects (%require-live-pointer object)) 'object-list) 'streaming)
+)
+
+(defmethod remove-streaming-source ((object mirrored-input-port-private) streaming-connection-string)
+  "Removes a streaming source from the input port.
+@param streamingConnectionString The connection string of the streaming source to be removed.
+
+Calls the openDAQ C function daqMirroredInputPortPrivate_removeStreamingSource()."
+  (with-daq-boxed-values ((coerced-streaming-connection-string streaming-connection-string :daq-string))
+    (opendaq.low-level:mirrored-input-port-private/remove-streaming-source (%require-live-pointer object) coerced-streaming-connection-string))
+)
 
 (defgeneric deactivate-streaming (object)
   (:documentation "Stops the streaming and clears the active streaming source of the signal.
@@ -15567,8 +17561,10 @@ Calls the openDAQ C function daqMirroredSignalConfig_getActiveStreamingSource().
 )
 
 (defgeneric on-subscribe-complete (object)
-  (:documentation "Gets the Event that is triggered whenever the acknowledgment for signal subscription completion is received from the streaming server.
+  (:documentation "Gets the Event that is triggered whenever the acknowledgment for signal subscription
+completion is received from the streaming server.
 @param[out] event The Event representing the acknowledgment of signal subscription completion.
+
 A handler can be added to the event containing a callback function which is invoked whenever
 the event is triggered. The callback function requires two parameters - a MirroredSignalConfig
 object, as well as a \"Subscription event args\" object.
@@ -15578,8 +17574,10 @@ and the event type (Subscribed).
 
 Calls the openDAQ C function daqMirroredSignalConfig_getOnSubscribeComplete()."))
 (defmethod on-subscribe-complete ((object mirrored-signal-config))
-  "Gets the Event that is triggered whenever the acknowledgment for signal subscription completion is received from the streaming server.
+  "Gets the Event that is triggered whenever the acknowledgment for signal subscription
+completion is received from the streaming server.
 @param[out] event The Event representing the acknowledgment of signal subscription completion.
+
 A handler can be added to the event containing a callback function which is invoked whenever
 the event is triggered. The callback function requires two parameters - a MirroredSignalConfig
 object, as well as a \"Subscription event args\" object.
@@ -15592,8 +17590,10 @@ Calls the openDAQ C function daqMirroredSignalConfig_getOnSubscribeComplete()."
 )
 
 (defgeneric on-unsubscribe-complete (object)
-  (:documentation "Gets the Event that is triggered whenever the acknowledgment for signal unsubscription completion is received from the streaming server.
+  (:documentation "Gets the Event that is triggered whenever the acknowledgment for signal unsubscription
+completion is received from the streaming server.
 @param[out] event The Event representing the acknowledgment of signal unsubscription completion.
+
 A handler can be added to the event containing a callback function which is invoked whenever
 the event is triggered. The callback function requires two parameters - a MirroredSignalConfig
 object, as well as a \"Subscription event args\" object.
@@ -15603,8 +17603,10 @@ and the event type (Unsubscribed).
 
 Calls the openDAQ C function daqMirroredSignalConfig_getOnUnsubscribeComplete()."))
 (defmethod on-unsubscribe-complete ((object mirrored-signal-config))
-  "Gets the Event that is triggered whenever the acknowledgment for signal unsubscription completion is received from the streaming server.
+  "Gets the Event that is triggered whenever the acknowledgment for signal unsubscription
+completion is received from the streaming server.
 @param[out] event The Event representing the acknowledgment of signal unsubscription completion.
+
 A handler can be added to the event containing a callback function which is invoked whenever
 the event is triggered. The callback function requires two parameters - a MirroredSignalConfig
 object, as well as a \"Subscription event args\" object.
@@ -15635,7 +17637,8 @@ Calls the openDAQ C function daqMirroredSignalConfig_getStreamingSources()."
 (defmethod (setf active-streaming-source) (new-value (object mirrored-signal-config))
   "Sets the active streaming source of the signal.
 @param streamingConnectionString The connection string of streaming source to be set as active.
-@retval OPENDAQ_ERR_NOTFOUND if the streaming source with the corresponding connection string is not part of the available streaming sources for the signal.
+@retval OPENDAQ_ERR_NOTFOUND if the streaming source with the corresponding connection string is not
+part of the available streaming sources for the signal.
 
 Calls the openDAQ C function daqMirroredSignalConfig_setActiveStreamingSource()."
   (with-daq-boxed-values ((coerced-new-value new-value :daq-string))
@@ -15692,12 +17695,14 @@ Calls the openDAQ C function daqMirroredSignalPrivate_removeStreamingSource()."
 
 (defgeneric subscribe-completed (object streaming-connection-string)
   (:documentation "Handles the completion of subscription acknowledged by the specified streaming source.
-@param streamingConnectionString The connection string of the streaming source that completed the subscription for the signal.
+@param streamingConnectionString The connection string of the streaming source that completed
+the subscription for the signal.
 
 Calls the openDAQ C function daqMirroredSignalPrivate_subscribeCompleted()."))
 (defmethod subscribe-completed ((object mirrored-signal-private) streaming-connection-string)
   "Handles the completion of subscription acknowledged by the specified streaming source.
-@param streamingConnectionString The connection string of the streaming source that completed the subscription for the signal.
+@param streamingConnectionString The connection string of the streaming source that completed
+the subscription for the signal.
 
 Calls the openDAQ C function daqMirroredSignalPrivate_subscribeCompleted()."
   (with-daq-boxed-values ((coerced-streaming-connection-string streaming-connection-string :daq-string))
@@ -15705,13 +17710,15 @@ Calls the openDAQ C function daqMirroredSignalPrivate_subscribeCompleted()."
 )
 
 (defgeneric trigger-event (object event-packet)
-  (:documentation "Handles event packet e.g. packet with changes of the signals descriptors or signal properties
+  (:documentation "Handles event packet e.g. packet with changes of the signals descriptors or
+signal properties
 @param eventPacket The event packet to be handled.
 @returns True if the eventPacket should be sent along the signal path; False otherwise.
 
 Calls the openDAQ C function daqMirroredSignalPrivate_triggerEvent()."))
 (defmethod trigger-event ((object mirrored-signal-private) event-packet)
-  "Handles event packet e.g. packet with changes of the signals descriptors or signal properties
+  "Handles event packet e.g. packet with changes of the signals descriptors or
+signal properties
 @param eventPacket The event packet to be handled.
 @returns True if the eventPacket should be sent along the signal path; False otherwise.
 
@@ -15722,12 +17729,14 @@ Calls the openDAQ C function daqMirroredSignalPrivate_triggerEvent()."
 
 (defgeneric unsubscribe-completed (object streaming-connection-string)
   (:documentation "Handles the completion of unsubscription acknowledged by the specified streaming source.
-@param streamingConnectionString The connection string of the streaming source that completed the unsubscription for the signal.
+@param streamingConnectionString The connection string of the streaming source that completed
+the unsubscription for the signal.
 
 Calls the openDAQ C function daqMirroredSignalPrivate_unsubscribeCompleted()."))
 (defmethod unsubscribe-completed ((object mirrored-signal-private) streaming-connection-string)
   "Handles the completion of unsubscription acknowledged by the specified streaming source.
-@param streamingConnectionString The connection string of the streaming source that completed the unsubscription for the signal.
+@param streamingConnectionString The connection string of the streaming source that completed
+the unsubscription for the signal.
 
 Calls the openDAQ C function daqMirroredSignalPrivate_unsubscribeCompleted()."
   (with-daq-boxed-values ((coerced-streaming-connection-string streaming-connection-string :daq-string))
@@ -15736,17 +17745,54 @@ Calls the openDAQ C function daqMirroredSignalPrivate_unsubscribeCompleted()."
 
 (defgeneric unsubscribe-completed-no-lock (object streaming-connection-string)
   (:documentation "Acts the same as unsubscribeCompleted() but does not enter a critical section.
-@param streamingConnectionString The connection string of the streaming source that completed the unsubscription for the signal.
+@param streamingConnectionString The connection string of the streaming source that completed
+the unsubscription for the signal.
 
 Calls the openDAQ C function daqMirroredSignalPrivate_unsubscribeCompletedNoLock()."))
 (defmethod unsubscribe-completed-no-lock ((object mirrored-signal-private) streaming-connection-string)
   "Acts the same as unsubscribeCompleted() but does not enter a critical section.
-@param streamingConnectionString The connection string of the streaming source that completed the unsubscription for the signal.
+@param streamingConnectionString The connection string of the streaming source that completed
+the unsubscription for the signal.
 
 Calls the openDAQ C function daqMirroredSignalPrivate_unsubscribeCompletedNoLock()."
   (with-daq-boxed-values ((coerced-streaming-connection-string streaming-connection-string :daq-string))
     (opendaq.low-level:mirrored-signal-private/unsubscribe-completed-no-lock (%require-live-pointer object) coerced-streaming-connection-string))
 )
+
+(defgeneric authenticate-module-binary (object binary-path)
+  (:documentation "Verify the module binary with a certificate file.
+@param binaryPath Absolute path to the binary.
+@param[out] binaryValid The binarys checksum matches and it's considered valid.
+@param[out] vendorKey Key for the vendor to identify if their certificate was used to authenticate the module.
+
+Calls the openDAQ C function daqModuleAuthenticator_authenticateModuleBinary()."))
+(defmethod authenticate-module-binary ((object module-authenticator) binary-path)
+  "Verify the module binary with a certificate file.
+@param binaryPath Absolute path to the binary.
+@param[out] binaryValid The binarys checksum matches and it's considered valid.
+@param[out] vendorKey Key for the vendor to identify if their certificate was used to authenticate the module.
+
+Calls the openDAQ C function daqModuleAuthenticator_authenticateModuleBinary()."
+  (with-daq-boxed-values ((coerced-binary-path binary-path :daq-string))
+    (multiple-value-bind (value-0 value-1)
+        (opendaq.low-level:module-authenticator/authenticate-module-binary (%require-live-pointer object) coerced-binary-path)
+      (cl:values
+        (not (zerop value-0))
+        (%daq-string-to-lisp-and-release value-1))))
+)
+
+(defmethod (setf logger) (new-value (object module-authenticator))
+  "API call to add allow the openDAQ instance to add it's logger after during construction.
+
+Because the IModuleAuthenticator is constructed before the openDAQ IInstance and passed to the instance builder,
+the logger needs to be added seperately. To allow for this, the call needs to be added to the API, as
+the instance doesn't know the type of ModuleAuthenticatorImpl it's using.
+@param logger The instance's logger.
+
+Calls the openDAQ C function daqModuleAuthenticator_setLogger()."
+  (with-daq-boxed-values ((coerced-new-value new-value :managed-pointer))
+    (opendaq.low-level:module-authenticator/set-logger (%require-live-pointer object) coerced-new-value))
+  new-value)
 
 (defmethod id ((object module-info))
   "Gets the module id.
@@ -15783,6 +17829,7 @@ Calls the openDAQ C function daqModuleInfo_getVersionInfo()."
 @param manufacturer The manufacturer's name identifying the device owning the network interface.
 @param serialNumber The serial number of the device owning the network interface.
 @param config A property object containing the configuration parameters to be applied.
+
 The manufacturer name and serial number are used to uniquely identify the target device. Once the config modification is invoked,
 the new config parameters are advertised via multicast to all devices in the subnet. The target device compares the received
 identification parameters with its own and, if they match, attempts to apply the new configuration parameters for the specified interface.
@@ -15794,6 +17841,7 @@ Calls the openDAQ C function daqModuleManagerUtils_changeIpConfig()."))
 @param manufacturer The manufacturer's name identifying the device owning the network interface.
 @param serialNumber The serial number of the device owning the network interface.
 @param config A property object containing the configuration parameters to be applied.
+
 The manufacturer name and serial number are used to uniquely identify the target device. Once the config modification is invoked,
 the new config parameters are advertised via multicast to all devices in the subnet. The target device compares the received
 identification parameters with its own and, if they match, attempts to apply the new configuration parameters for the specified interface.
@@ -15827,16 +17875,18 @@ Calls the openDAQ C function daqModuleManagerUtils_completeDeviceCapabilities().
 
 (defgeneric create-device (object connection-string parent &optional config)
   (:documentation "module-manager-utils => daqModuleManagerUtils_createDevice()
-    Creates a device object that can communicate with the device described in the specified connection string. The device object is not automatically added as a sub-device of the caller, but only returned by reference.
+    Creates a device object that can communicate with the device described in the specified connection string.
 
 module => daqModule_createDevice()
-    Creates a device object that can communicate with the device described in the specified connection string. The device object is not automatically added as a sub-device of the caller, but only returned by reference."))
+    Creates a device object that can communicate with the device described in the specified connection string."))
 (defmethod create-device ((object module-manager-utils) connection-string parent &optional (config nil))
-  "Creates a device object that can communicate with the device described in the specified connection string. The device object is not automatically added as a sub-device of the caller, but only returned by reference.
+  "Creates a device object that can communicate with the device described in the specified connection string.
+The device object is not automatically added as a sub-device of the caller, but only returned by reference.
 @param[out] device The device object created to communicate with and control the device.
 @param connectionString Describes the connection info of the device to connect to.
 @param parent The parent component/device to which the device attaches.
 @param config A configuration object that contains parameters used to configure a device in the form of key-value pairs.
+
 Iterates through all loaded modules and creates a device with the first module that accepts the provided connection string.
 
 Calls the openDAQ C function daqModuleManagerUtils_createDevice()."
@@ -15847,23 +17897,37 @@ Calls the openDAQ C function daqModuleManagerUtils_createDevice()."
 )
 
 (defgeneric create-devices (object connection-args parent &optional err-codes error-infos)
-  (:documentation "Creates multiple device objects in parallel using the specified connection strings. Each device is created concurrently. None of the created device object are automatically added as a sub-device of the caller, but only returned by reference.
-@param[out] devices A dictionary which maps each connection string to the corresponding created device object. If a device creation attempt fails, the value will be `nullptr` for that entry.
-@param connectionArgs A dictionary where each key is a connection string identifying the target device (e.g., IPv4/IPv6), and each value is a configuration object that customizes the connection. The configuration may specify parameters such as maximum sample rate, communication port, number of channels, or other device-specific settings. A `nullptr` value indicates that the default configuration should be used.
+  (:documentation "Creates multiple device objects in parallel using the specified connection strings. Each device is created concurrently.
+None of the created device object are automatically added as a sub-device of the caller, but only returned by reference.
+@param[out] devices A dictionary which maps each connection string to the corresponding created device object.
+If a device creation attempt fails, the value will be `nullptr` for that entry.
+@param connectionArgs A dictionary where each key is a connection string identifying the target device
+(e.g., IPv4/IPv6), and each value is a configuration object that customizes the connection.
+The configuration may specify parameters such as maximum sample rate, communication port, number of channels,
+or other device-specific settings. A `nullptr` value indicates that the default configuration should be used.
 @param parent The parent component/device to which the created devices attach.
-@param errCodes An optional dictionary to populate error codes for failed connections. For each failed connection, the key is the connection string, and the value contains error code.
-@param errorInfos An optional dictionary to populate error info details for failed connections. For each failed connection, the key is the connection string, and the value contains error info object.
+@param[in,out] errCodes An optional dictionary to populate error codes for failed connections.
+For each failed connection, the key is the connection string, and the value contains error code.
+@param[in,out] errorInfos An optional dictionary to populate error info details for failed connections.
+For each failed connection, the key is the connection string, and the value contains error info object.
 @return OPENDAQ_PARTIAL_SUCCESS if at least one device was successfully created, but not all of them;
 OPENDAQ_ERR_GENERALERROR if no devices were created.
 
 Calls the openDAQ C function daqModuleManagerUtils_createDevices()."))
 (defmethod create-devices ((object module-manager-utils) connection-args parent &optional (err-codes nil) (error-infos nil))
-  "Creates multiple device objects in parallel using the specified connection strings. Each device is created concurrently. None of the created device object are automatically added as a sub-device of the caller, but only returned by reference.
-@param[out] devices A dictionary which maps each connection string to the corresponding created device object. If a device creation attempt fails, the value will be `nullptr` for that entry.
-@param connectionArgs A dictionary where each key is a connection string identifying the target device (e.g., IPv4/IPv6), and each value is a configuration object that customizes the connection. The configuration may specify parameters such as maximum sample rate, communication port, number of channels, or other device-specific settings. A `nullptr` value indicates that the default configuration should be used.
+  "Creates multiple device objects in parallel using the specified connection strings. Each device is created concurrently.
+None of the created device object are automatically added as a sub-device of the caller, but only returned by reference.
+@param[out] devices A dictionary which maps each connection string to the corresponding created device object.
+If a device creation attempt fails, the value will be `nullptr` for that entry.
+@param connectionArgs A dictionary where each key is a connection string identifying the target device
+(e.g., IPv4/IPv6), and each value is a configuration object that customizes the connection.
+The configuration may specify parameters such as maximum sample rate, communication port, number of channels,
+or other device-specific settings. A `nullptr` value indicates that the default configuration should be used.
 @param parent The parent component/device to which the created devices attach.
-@param errCodes An optional dictionary to populate error codes for failed connections. For each failed connection, the key is the connection string, and the value contains error code.
-@param errorInfos An optional dictionary to populate error info details for failed connections. For each failed connection, the key is the connection string, and the value contains error info object.
+@param[in,out] errCodes An optional dictionary to populate error codes for failed connections.
+For each failed connection, the key is the connection string, and the value contains error code.
+@param[in,out] errorInfos An optional dictionary to populate error info details for failed connections.
+For each failed connection, the key is the connection string, and the value contains error info object.
 @return OPENDAQ_PARTIAL_SUCCESS if at least one device was successfully created, but not all of them;
 OPENDAQ_ERR_GENERALERROR if no devices were created.
 
@@ -15877,17 +17941,19 @@ Calls the openDAQ C function daqModuleManagerUtils_createDevices()."
 
 (defgeneric create-function-block (object id parent config local-id)
   (:documentation "module-manager-utils => daqModuleManagerUtils_createFunctionBlock()
-    Creates and returns a function block with the specified id. The function block is not automatically added to the FB list of the caller.
+    Creates and returns a function block with the specified id.
 
 module => daqModule_createFunctionBlock()
-    Creates and returns a function block with the specified id. The function block is not automatically added to the FB list of the caller."))
+    Creates and returns a function block with the specified id."))
 (defmethod create-function-block ((object module-manager-utils) id parent config local-id)
-  "Creates and returns a function block with the specified id. The function block is not automatically added to the FB list of the caller.
+  "Creates and returns a function block with the specified id.
+The function block is not automatically added to the FB list of the caller.
 @param id The id of the function block to create. Ids can be retrieved by calling `getAvailableFunctionBlockTypes()`.
 @param parent The parent component/device to which the function block attaches.
 @param config Function block configuration. In case of a null value, implementation should use default configuration.
 @param localId Custom local ID for the function block. Overrides the \"LocalId\" property of the \"config\" object, if present.
 @param[out] functionBlock The created function block.
+
 Iterates through all loaded modules and creates a function block with the first module that accepts the provided connection string.
 The local ID is equal to the name of the function block type with a \"_n\" suffix, where \"n\" is an integer, equal to that of the greatest
 integer suffix amongst the function blocks of the same function block type already added to a given parent. The initial value of \"n\" is 0.
@@ -15912,8 +17978,10 @@ module => daqModule_createServer()
   "Creates and returns a server with the provided serverType and configuration.
 @param serverTypeId Type id of the server. Can be obtained from its corresponding Server type object.
 @param rootDevice The root device
-@param serverConfig Config of the server. Can be created from its corresponding Server type object. In case of a null value, it will use the default configuration.
+@param serverConfig Config of the server. Can be created from its corresponding Server type object.
+In case of a null value, it will use the default configuration.
 @param[out] server The created server.
+
 Iterates through all loaded modules and creates a server with the first module that accepts the provided serverTypeId.
 The servers folder of the root device is automatically assigned as parent for created server component.
 The local ID of created server component is equal to the name of the server type.
@@ -15936,6 +18004,7 @@ module => daqModule_createStreaming()
 @param[out] streaming The created streaming object.
 @param connectionString Describes the connection parameters of the streaming.
 @param config A configuration object that contains parameters used to configure a streaming connection in the form of key-value pairs.
+
 Iterates through all loaded modules and creates a streaming connection with the first module that accepts the provided connection string.
 
 Calls the openDAQ C function daqModuleManagerUtils_createStreaming()."
@@ -15947,6 +18016,7 @@ Calls the openDAQ C function daqModuleManagerUtils_createStreaming()."
 (defmethod available-device-types ((object module-manager-utils))
   "Returns a dictionary of known and available device types this module can create.
 @param[out] deviceTypes The dictionary of known device types.
+
 Contains information on devices available in all loaded modules.
 
 Calls the openDAQ C function daqModuleManagerUtils_getAvailableDeviceTypes()."
@@ -15954,8 +18024,10 @@ Calls the openDAQ C function daqModuleManagerUtils_getAvailableDeviceTypes()."
 )
 
 (defmethod available-devices ((object module-manager-utils))
-  "Returns a list of known devices info. The implementation can start discovery in background and only return the results in this function.
+  "Returns a list of known devices info.
+The implementation can start discovery in background and only return the results in this function.
 @param[out] availableDevices The list of known devices information.
+
 Contains information on devices available in all loaded modules.
 
 Calls the openDAQ C function daqModuleManagerUtils_getAvailableDevices()."
@@ -15965,6 +18037,7 @@ Calls the openDAQ C function daqModuleManagerUtils_getAvailableDevices()."
 (defmethod available-function-block-types ((object module-manager-utils))
   "Returns a dictionary of known and available function block types this module can create.
 @param[out] functionBlockTypes The dictionary of known function block types.
+
 Contains information on function blocks available in all loaded modules.
 
 Calls the openDAQ C function daqModuleManagerUtils_getAvailableFunctionBlockTypes()."
@@ -15986,6 +18059,7 @@ module => daqModule_getAvailableStreamingTypes()
 @param[out] deviceInfo The device information object containing discovery data.
 @param manufacturer The manufacturer's name identifying the device.
 @param serialNumber The serial number of the device.
+
 The manufacturer name and serial number are used to uniquely identify the target device.
 This method searches through the available devices discovered during the last scan.
 
@@ -15995,6 +18069,7 @@ Calls the openDAQ C function daqModuleManagerUtils_getDiscoveryInfo()."))
 @param[out] deviceInfo The device information object containing discovery data.
 @param manufacturer The manufacturer's name identifying the device.
 @param serialNumber The serial number of the device.
+
 The manufacturer name and serial number are used to uniquely identify the target device.
 This method searches through the available devices discovered during the last scan.
 
@@ -16010,6 +18085,7 @@ Calls the openDAQ C function daqModuleManagerUtils_getDiscoveryInfo()."
 @param manufacturer The manufacturer's name identifying the device owning the network interface.
 @param serialNumber The serial number of the device owning the network interface.
 @param[out] config A property object where the retrieved configuration parameters are stored.
+
 The manufacturer name and serial number are used to uniquely identify the target device. The method queries the current
 IP configuration parameters of the specified network interface via multicast addressing query to all devices in the subnet.
 The target device compares the received identification parameters with its own and, if they match, attempts to retrieve
@@ -16022,6 +18098,7 @@ Calls the openDAQ C function daqModuleManagerUtils_requestIpConfig()."))
 @param manufacturer The manufacturer's name identifying the device owning the network interface.
 @param serialNumber The serial number of the device owning the network interface.
 @param[out] config A property object where the retrieved configuration parameters are stored.
+
 The manufacturer name and serial number are used to uniquely identify the target device. The method queries the current
 IP configuration parameters of the specified network interface via multicast addressing query to all devices in the subnet.
 The target device compares the received identification parameters with its own and, if they match, attempts to retrieve
@@ -16066,12 +18143,14 @@ Calls the openDAQ C function daqModuleManager_getModules()."
 (defgeneric vendor-keys (object)
   (:documentation "Returns a dictionary of module IDs and the respective public keys of their vendors.
 @param[out] vendorKeys key (IString) - module ID, value (IString) - public vendor key
+
 Used to identify which authenticator/certificate was used to authenticate the module.
 
 Calls the openDAQ C function daqModuleManager_getVendorKeys()."))
 (defmethod vendor-keys ((object module-manager))
   "Returns a dictionary of module IDs and the respective public keys of their vendors.
 @param[out] vendorKeys key (IString) - module ID, value (IString) - public vendor key
+
 Used to identify which authenticator/certificate was used to authenticate the module.
 
 Calls the openDAQ C function daqModuleManager_getVendorKeys()."
@@ -16082,6 +18161,7 @@ Calls the openDAQ C function daqModuleManager_getVendorKeys()."
   (:documentation "Loads and adds a single module from the given absolute file system path.
 @param path The absolute path to the module file.
 @param[out] module The resulting loaded and added module object.
+
 This function should be used only after the default modules have been loaded using `loadModules`.
 The specified path must exist and reference a file with the proper extension.
 
@@ -16090,6 +18170,7 @@ Calls the openDAQ C function daqModuleManager_loadModule()."))
   "Loads and adds a single module from the given absolute file system path.
 @param path The absolute path to the module file.
 @param[out] module The resulting loaded and added module object.
+
 This function should be used only after the default modules have been loaded using `loadModules`.
 The specified path must exist and reference a file with the proper extension.
 
@@ -16099,12 +18180,14 @@ Calls the openDAQ C function daqModuleManager_loadModule()."
 )
 
 (defgeneric load-modules (object context)
-  (:documentation "Loads all modules from the directory path specified during manager construction. The Context is passed to all loaded modules for internal use.
+  (:documentation "Loads all modules from the directory path specified during manager construction. The
+Context is passed to all loaded modules for internal use.
 @param context The Context containing the Logger, Scheduler, Property Object Class Manager and Module Manager
 
 Calls the openDAQ C function daqModuleManager_loadModules()."))
 (defmethod load-modules ((object module-manager) context)
-  "Loads all modules from the directory path specified during manager construction. The Context is passed to all loaded modules for internal use.
+  "Loads all modules from the directory path specified during manager construction. The
+Context is passed to all loaded modules for internal use.
 @param context The Context containing the Logger, Scheduler, Property Object Class Manager and Module Manager
 
 Calls the openDAQ C function daqModuleManager_loadModules()."
@@ -16145,7 +18228,8 @@ Calls the openDAQ C function daqModuleManager_setModuleAuthenticator()."
 )
 
 (defmethod create-device ((object module) connection-string parent &optional (config nil))
-  "Creates a device object that can communicate with the device described in the specified connection string. The device object is not automatically added as a sub-device of the caller, but only returned by reference.
+  "Creates a device object that can communicate with the device described in the specified connection string.
+The device object is not automatically added as a sub-device of the caller, but only returned by reference.
 @param[out] device The device object created to communicate with and control the device.
 @param connectionString Describes the connection info of the device to connect to.
 @param parent The parent component/device to which the device attaches.
@@ -16159,7 +18243,8 @@ Calls the openDAQ C function daqModule_createDevice()."
 )
 
 (defmethod create-function-block ((object module) id parent local-id config)
-  "Creates and returns a function block with the specified id. The function block is not automatically added to the FB list of the caller.
+  "Creates and returns a function block with the specified id.
+The function block is not automatically added to the FB list of the caller.
 @param id The id of the function block to create. Ids can be retrieved by calling `getAvailableFunctionBlockTypes()`.
 @param parent The parent component/device to which the device attaches.
 @param localId The local id of the function block.
@@ -16191,7 +18276,8 @@ Calls the openDAQ C function daqModule_createServer()."
 (defmethod create-streaming ((object module) connection-string &optional (config nil))
   "Creates and returns a streaming object using the specified connection string and config object.
 @param connectionString Typically a connection string usually has a well known prefix, such as `daq.lt//`.
-@param config A config object that contains parameters used to configure a streaming connection. In case of a null value, implementation should use default configuration.
+@param config A config object that contains parameters used to configure a streaming connection.
+In case of a null value, implementation should use default configuration.
 @param[out] streaming The created streaming object.
 
 Calls the openDAQ C function daqModule_createStreaming()."
@@ -16209,7 +18295,8 @@ Calls the openDAQ C function daqModule_getAvailableDeviceTypes()."
 )
 
 (defmethod available-devices ((object module))
-  "Returns a list of known devices info. The implementation can start discovery in background and only return the results in this function.
+  "Returns a list of known devices info.
+The implementation can start discovery in background and only return the results in this function.
 @param[out] availableDevices The list of known devices information.
 
 Calls the openDAQ C function daqModule_getAvailableDevices()."
@@ -16264,12 +18351,14 @@ Calls the openDAQ C function daqModule_getModuleInfo()."
 (defgeneric license-loaded (object)
   (:documentation "Check whether the module license is loaded.
 @param[out] loaded True, if the module license is loaded.
+
 Always return True if no license is required by the module.
 
 Calls the openDAQ C function daqModule_licenseLoaded()."))
 (defmethod license-loaded ((object module))
   "Check whether the module license is loaded.
 @param[out] loaded True, if the module license is loaded.
+
 Always return True if no license is required by the module.
 
 Calls the openDAQ C function daqModule_licenseLoaded()."
@@ -16277,13 +18366,15 @@ Calls the openDAQ C function daqModule_licenseLoaded()."
 )
 
 (defgeneric load-license (object license-config)
-  (:documentation "Used for loading a license, when the module requires one. Licenses can specify the degree to which the module is unlocked to the user (i.e. which and/or how many concurrent function blocks from this modules are accessible with the license).
+  (:documentation "Used for loading a license, when the module requires one. Licenses can specify the degree to which the module is unlocked to the user
+(i.e. which and/or how many concurrent function blocks from this modules are accessible with the license).
 @param[out] succeeded License was accepted.
 @param licenseConfig Any information relevant to load the license (i.e. a path to the license file).
 
 Calls the openDAQ C function daqModule_loadLicense()."))
 (defmethod load-license ((object module) license-config)
-  "Used for loading a license, when the module requires one. Licenses can specify the degree to which the module is unlocked to the user (i.e. which and/or how many concurrent function blocks from this modules are accessible with the license).
+  "Used for loading a license, when the module requires one. Licenses can specify the degree to which the module is unlocked to the user
+(i.e. which and/or how many concurrent function blocks from this modules are accessible with the license).
 @param[out] succeeded License was accepted.
 @param licenseConfig Any information relevant to load the license (i.e. a path to the license file).
 
@@ -16388,6 +18479,7 @@ stream-reader-builder => daqStreamReaderBuilder_getInputPortNotificationMethod()
 (defmethod input-port-notification-method ((object multi-reader-builder))
   "Gets the notification method of ports created/owned by the multi reader. The default notification method is SameThread.
 @param notificationMethod The notification method to be used.
+
 If \"Unspecified\", the reader keeps the mode of the input port. When building with signals, \"Unspecified\" is an invalid configuration.
 
 Calls the openDAQ C function daqMultiReaderBuilder_getInputPortNotificationMethod()."
@@ -16397,6 +18489,7 @@ Calls the openDAQ C function daqMultiReaderBuilder_getInputPortNotificationMetho
 (defgeneric input-port-notification-methods (object)
   (:documentation "Gets the notification methods of ports created/owned by the multi reader. The default notification method is Unspecified.
 @param notificationMethods The notification methods to be used.
+
 The list of methods corresponds to the list of reader components (signals, input ports). Both the size and order of both must match if configured.
 If a method is set to \"Unspecified\", the reader keeps the mode of the input port. When building with signals, \"Unspecified\" is an invalid configuration.
 
@@ -16404,6 +18497,7 @@ Calls the openDAQ C function daqMultiReaderBuilder_getInputPortNotificationMetho
 (defmethod input-port-notification-methods ((object multi-reader-builder))
   "Gets the notification methods of ports created/owned by the multi reader. The default notification method is Unspecified.
 @param notificationMethods The notification methods to be used.
+
 The list of methods corresponds to the list of reader components (signals, input ports). Both the size and order of both must match if configured.
 If a method is set to \"Unspecified\", the reader keeps the mode of the input port. When building with signals, \"Unspecified\" is an invalid configuration.
 
@@ -16414,6 +18508,7 @@ Calls the openDAQ C function daqMultiReaderBuilder_getInputPortNotificationMetho
 (defgeneric min-read-count (object)
   (:documentation "Gets the minimal number of samples to read.
 @param[out] minReadCount The minimal number of samples to read.
+
 If set, the reader will return 0 for `getAvailableCount` if less than `minReadCount`
 samples are available. It will also never read less than `minReadCount` samples. The
 default value is 1.
@@ -16422,6 +18517,7 @@ Calls the openDAQ C function daqMultiReaderBuilder_getMinReadCount()."))
 (defmethod min-read-count ((object multi-reader-builder))
   "Gets the minimal number of samples to read.
 @param[out] minReadCount The minimal number of samples to read.
+
 If set, the reader will return 0 for `getAvailableCount` if less than `minReadCount`
 samples are available. It will also never read less than `minReadCount` samples. The
 default value is 1.
@@ -16449,7 +18545,9 @@ stream-reader-builder => daqStreamReaderBuilder_getReadTimeoutType()
     Gets the read timeout mode"))
 (defmethod read-timeout-type ((object multi-reader-builder))
   "Gets the read timeout mode
-@param type The timeout mode. if \"Any\" returns immediately if there is available data otherwise time-out is exceeded. if \"All\" waiting until timeout and returns available data if existing. otherwise time-out is exceeded.
+@param type The timeout mode.
+if \"Any\" returns immediately if there is available data otherwise time-out is exceeded.
+if \"All\" waiting until timeout and returns available data if existing. otherwise time-out is exceeded.
 
 Calls the openDAQ C function daqMultiReaderBuilder_getReadTimeoutType()."
   (opendaq.low-level:multi-reader-builder/get-read-timeout-type (%require-live-pointer object))
@@ -16547,6 +18645,7 @@ stream-reader-builder => daqStreamReaderBuilder_setInputPortNotificationMethod()
 (defmethod (setf input-port-notification-method) (new-value (object multi-reader-builder))
   "Sets the notification method of ports created/owned by the multi reader. The default notification method is Unspecified.
 @param notificationMethod The notification method to be used.
+
 If \"Unspecified\", the reader keeps the mode of the input port. When building with signals, \"Unspecified\" is an invalid configuration.
 
 Calls the openDAQ C function daqMultiReaderBuilder_setInputPortNotificationMethod()."
@@ -16557,6 +18656,7 @@ Calls the openDAQ C function daqMultiReaderBuilder_setInputPortNotificationMetho
 (defgeneric (setf input-port-notification-methods) (new-value object)
   (:documentation "Sets the notification methods of ports created/owned by the multi reader. The default notification method is Unspecified.
 @param notificationMethods The notification methods to be used.
+
 The list of methods corresponds to the list of reader components (signals, input ports). Both the size and order of both must match if configured.
 If a method is set to \"Unspecified\", the reader keeps the mode of the input port. When building with signals, \"Unspecified\" is an invalid configuration.
 
@@ -16564,6 +18664,7 @@ Calls the openDAQ C function daqMultiReaderBuilder_setInputPortNotificationMetho
 (defmethod (setf input-port-notification-methods) (new-value (object multi-reader-builder))
   "Sets the notification methods of ports created/owned by the multi reader. The default notification method is Unspecified.
 @param notificationMethods The notification methods to be used.
+
 The list of methods corresponds to the list of reader components (signals, input ports). Both the size and order of both must match if configured.
 If a method is set to \"Unspecified\", the reader keeps the mode of the input port. When building with signals, \"Unspecified\" is an invalid configuration.
 
@@ -16575,6 +18676,7 @@ Calls the openDAQ C function daqMultiReaderBuilder_setInputPortNotificationMetho
 (defgeneric (setf min-read-count) (new-value object)
   (:documentation "Sets the minimal number of samples to read.
 @param minReadCount The minimal number of samples to read.
+
 If set, the reader will return 0 for `getAvailableCount` if less than `minReadCount`
 samples are available. It will also never read less than `minReadCount` samples. The
 default value is 1.
@@ -16583,6 +18685,7 @@ Calls the openDAQ C function daqMultiReaderBuilder_setMinReadCount()."))
 (defmethod (setf min-read-count) (new-value (object multi-reader-builder))
   "Sets the minimal number of samples to read.
 @param minReadCount The minimal number of samples to read.
+
 If set, the reader will return 0 for `getAvailableCount` if less than `minReadCount`
 samples are available. It will also never read less than `minReadCount` samples. The
 default value is 1.
@@ -16609,7 +18712,10 @@ stream-reader-builder => daqStreamReaderBuilder_setReadTimeoutType()
     Sets the read timeout mode"))
 (defmethod (setf read-timeout-type) (new-value (object multi-reader-builder))
   "Sets the read timeout mode
-@param type The timeout mode. if \"Any\" returns immediately if there is available data otherwise time-out is exceeded. if \"All\" waiting until timeout and returns available data if existing. otherwise time-out is exceeded.
+@param type The timeout mode.
+if \"Any\" returns immediately if there is available data otherwise time-out is exceeded.
+if \"All\" waiting until timeout and returns available data if existing. otherwise time-out is exceeded.
+
 NOTE: THIS IS CURRENTLY IGNORED AND IS ALWAYS SET TO ReadTimeoutType::All
 
 Calls the openDAQ C function daqMultiReaderBuilder_setReadTimeoutType()."
@@ -16716,12 +18822,18 @@ Calls the openDAQ C function daqMultiReader_getActive()."
 )
 
 (defgeneric common-sample-rate (object)
-  (:documentation "Gets the common sample rate in case input signal have different rates. The value of common sample rate is such that sample rate of any individual signal can be represented as commonSampleRate / Div, where Div is an integer. Unless the required common sample rate is specified in the MultiReader constructor, common sample rate is lowest common multiple of individual signal's sample rates. The number of samples to be read is specified in common sample rate.
+  (:documentation "Gets the common sample rate in case input signal have different rates. The value of common sample rate is such
+that sample rate of any individual signal can be represented as commonSampleRate / Div, where Div is an integer. Unless
+the required common sample rate is specified in the MultiReader constructor, common sample rate is lowest common multiple
+of individual signal's sample rates. The number of samples to be read is specified in common sample rate.
 @param commonSampleRate The domain point at which the reader managed to synchronize all the signals.
 
 Calls the openDAQ C function daqMultiReader_getCommonSampleRate()."))
 (defmethod common-sample-rate ((object multi-reader))
-  "Gets the common sample rate in case input signal have different rates. The value of common sample rate is such that sample rate of any individual signal can be represented as commonSampleRate / Div, where Div is an integer. Unless the required common sample rate is specified in the MultiReader constructor, common sample rate is lowest common multiple of individual signal's sample rates. The number of samples to be read is specified in common sample rate.
+  "Gets the common sample rate in case input signal have different rates. The value of common sample rate is such
+that sample rate of any individual signal can be represented as commonSampleRate / Div, where Div is an integer. Unless
+the required common sample rate is specified in the MultiReader constructor, common sample rate is lowest common multiple
+of individual signal's sample rates. The number of samples to be read is specified in common sample rate.
 @param commonSampleRate The domain point at which the reader managed to synchronize all the signals.
 
 Calls the openDAQ C function daqMultiReader_getCommonSampleRate()."
@@ -16731,13 +18843,13 @@ Calls the openDAQ C function daqMultiReader_getCommonSampleRate()."
 (defgeneric input-used (object id)
   (:documentation "Get the used flag for the input component. If the result is false, the input is not used (ignored) by the MultiReader.
 @param id Global ID of a component previously added into the MultiReader.
-@param unused Output parameter
+@param isUsed Output parameter
 
 Calls the openDAQ C function daqMultiReader_getInputUsed()."))
 (defmethod input-used ((object multi-reader) id)
   "Get the used flag for the input component. If the result is false, the input is not used (ignored) by the MultiReader.
 @param id Global ID of a component previously added into the MultiReader.
-@param unused Output parameter
+@param isUsed Output parameter
 
 Calls the openDAQ C function daqMultiReader_getInputUsed()."
   (with-daq-boxed-values ((coerced-id id :daq-string))
@@ -16747,12 +18859,14 @@ Calls the openDAQ C function daqMultiReader_getInputUsed()."
 (defgeneric is-synchronized (object)
   (:documentation "Gets the synchronization status of the reader
 @param isSynchronized True if reader is synchronized, False otherwise.
+
 Reader will try to synchronize the data from the signals when `getAvailableCount` or any of the read methods is called.
 
 Calls the openDAQ C function daqMultiReader_getIsSynchronized()."))
 (defmethod is-synchronized ((object multi-reader))
   "Gets the synchronization status of the reader
 @param isSynchronized True if reader is synchronized, False otherwise.
+
 Reader will try to synchronize the data from the signals when `getAvailableCount` or any of the read methods is called.
 
 Calls the openDAQ C function daqMultiReader_getIsSynchronized()."
@@ -16773,7 +18887,8 @@ Calls the openDAQ C function daqMultiReader_getOffset()."
 )
 
 (defmethod origin ((object multi-reader))
-  "Gets the origin the reader aligned all the signals to. This is usually the earliest (lowest value) from all the signals.
+  "Gets the origin the reader aligned all the signals to.
+This is usually the earliest (lowest value) from all the signals.
 @param origin The origin all signals are aligned to.
 
 Calls the openDAQ C function daqMultiReader_getOrigin()."
@@ -16781,7 +18896,8 @@ Calls the openDAQ C function daqMultiReader_getOrigin()."
 )
 
 (defmethod tick-resolution ((object multi-reader))
-  "Gets the resolution the reader aligned all the signals to. This is the highest resolution (lowest value) of all the signals to not loose the precision.
+  "Gets the resolution the reader aligned all the signals to.
+This is the highest resolution (lowest value) of all the signals to not loose the precision.
 @param resolution The aligned resolution used for all read signals.
 
 Calls the openDAQ C function daqMultiReader_getTickResolution()."
@@ -16789,19 +18905,55 @@ Calls the openDAQ C function daqMultiReader_getTickResolution()."
 )
 
 (defgeneric multi-reader-read (object samples count &optional timeout-ms)
-  (:documentation "Copies at maximum the next `count` unread samples to the values buffer. The amount actually read is returned through the `count` parameter.
-@param samples The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples. This should be a jagged array (array of pointers to arrays) where the size is equal to the Signal count and each Signal buffer is at least `count` size long. E.g: reading the next 5 samples of 3 signals samples | ˇ     0  1  2  3  4  5  <-- count [0] = [0, 0, 0, 0, 0, 0] [1] = [0, 0, 0, 0, 0, 0] [2] = [0, 0, 0, 0, 0, 0]
-@param count The maximum amount of samples to be read expressed in commonSampleRate. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are returned. The rest of the buffer is not modified or cleared. In case of different sample rates, the number of read samples may be different for each individual signal.
+  (:documentation "Copies at maximum the next `count` unread samples to the values buffer.
+The amount actually read is returned through the `count` parameter.
+@param[in] samples The buffer that the samples will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of samples.
+This should be a jagged array (array of pointers to arrays) where the size is equal to
+the Signal count and each Signal buffer is at least `count` size long.
+E.g: reading the next 5 samples of 3 signals
+samples
+|
+ˇ     0  1  2  3  4  5  <-- count
+[0] = [0, 0, 0, 0, 0, 0]
+[1] = [0, 0, 0, 0, 0, 0]
+[2] = [0, 0, 0, 0, 0, 0]
+@param[in,out] count The maximum amount of samples to be read expressed in commonSampleRate. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+samples are returned. The rest of the buffer is not modified or cleared. In case of different sample rates,
+the number of read samples may be different for each individual signal.
 @param timeoutMs The maximum amount of time in milliseconds to wait for the requested amount of samples before returning.
-@param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event - If the reading process is successful, IReaderStatus::getReadStatus returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
+@param[out] status: Represents the status of the reader.
+- If the reader is invalid, IReaderStatus::getValid returns false.
+- If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event
+- If the reading process is successful, IReaderStatus::getReadStatus returns ReadStatus::Ok, indicating that
+IReaderStatus::getValid is true and there is no encountered events
 
 Calls the openDAQ C function daqMultiReader_read()."))
 (defmethod multi-reader-read ((object multi-reader) samples count &optional (timeout-ms 0))
-  "Copies at maximum the next `count` unread samples to the values buffer. The amount actually read is returned through the `count` parameter.
-@param samples The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples. This should be a jagged array (array of pointers to arrays) where the size is equal to the Signal count and each Signal buffer is at least `count` size long. E.g: reading the next 5 samples of 3 signals samples | ˇ     0  1  2  3  4  5  <-- count [0] = [0, 0, 0, 0, 0, 0] [1] = [0, 0, 0, 0, 0, 0] [2] = [0, 0, 0, 0, 0, 0]
-@param count The maximum amount of samples to be read expressed in commonSampleRate. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are returned. The rest of the buffer is not modified or cleared. In case of different sample rates, the number of read samples may be different for each individual signal.
+  "Copies at maximum the next `count` unread samples to the values buffer.
+The amount actually read is returned through the `count` parameter.
+@param[in] samples The buffer that the samples will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of samples.
+This should be a jagged array (array of pointers to arrays) where the size is equal to
+the Signal count and each Signal buffer is at least `count` size long.
+E.g: reading the next 5 samples of 3 signals
+samples
+|
+ˇ     0  1  2  3  4  5  <-- count
+[0] = [0, 0, 0, 0, 0, 0]
+[1] = [0, 0, 0, 0, 0, 0]
+[2] = [0, 0, 0, 0, 0, 0]
+@param[in,out] count The maximum amount of samples to be read expressed in commonSampleRate. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+samples are returned. The rest of the buffer is not modified or cleared. In case of different sample rates,
+the number of read samples may be different for each individual signal.
 @param timeoutMs The maximum amount of time in milliseconds to wait for the requested amount of samples before returning.
-@param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event - If the reading process is successful, IReaderStatus::getReadStatus returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
+@param[out] status: Represents the status of the reader.
+- If the reader is invalid, IReaderStatus::getValid returns false.
+- If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event
+- If the reading process is successful, IReaderStatus::getReadStatus returns ReadStatus::Ok, indicating that
+IReaderStatus::getValid is true and there is no encountered events
 
 Calls the openDAQ C function daqMultiReader_read()."
   (with-daq-boxed-values ((coerced-samples samples nil)
@@ -16815,21 +18967,75 @@ Calls the openDAQ C function daqMultiReader_read()."
 )
 
 (defgeneric multi-reader-read-with-domain (object samples domain count &optional timeout-ms)
-  (:documentation "Copies at maximum the next `count` unread samples and clock-stamps to the `samples` and `domain` buffers. The amount actually read is returned through the `count` parameter.
-@param samples The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples. This should be a jagged array (array of pointers to arrays) where the size is equal to the Signal count and each Signal buffer is at least `count` size long. E.g: reading the next 5 samples of 3 signals samples | ˇ     0  1  2  3  4  5  <-- count [0] = [0, 0, 0, 0, 0, 0] [1] = [0, 0, 0, 0, 0, 0] [2] = [0, 0, 0, 0, 0, 0]
-@param domain The buffer that the domain values will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of clock-stamps. This should be a jagged array (array of pointers to arrays) where the size is equal to the Signal count and each Signal buffer is at least `count` size long. E.g: reading the next 5 samples of 3 signals domain | ˇ     0  1  2  3  4  5  <-- count [0] = [0, 0, 0, 0, 0, 0] [1] = [0, 0, 0, 0, 0, 0] [2] = [0, 0, 0, 0, 0, 0]
-@param count The maximum amount of samples to be read expressed in commonSampleRate. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are returned. The rest of the buffer is not modified or cleared. In case of different sample rates, the number of read samples may be different for each individual signal.
+  (:documentation "Copies at maximum the next `count` unread samples and clock-stamps to the `samples` and `domain` buffers.
+The amount actually read is returned through the `count` parameter.
+@param[in] samples The buffer that the samples will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of samples.
+This should be a jagged array (array of pointers to arrays) where the size is equal to
+the Signal count and each Signal buffer is at least `count` size long.
+E.g: reading the next 5 samples of 3 signals
+samples
+|
+ˇ     0  1  2  3  4  5  <-- count
+[0] = [0, 0, 0, 0, 0, 0]
+[1] = [0, 0, 0, 0, 0, 0]
+[2] = [0, 0, 0, 0, 0, 0]
+@param[in] domain The buffer that the domain values will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of clock-stamps.
+This should be a jagged array (array of pointers to arrays) where the size is equal to
+the Signal count and each Signal buffer is at least `count` size long.
+E.g: reading the next 5 samples of 3 signals
+domain
+|
+ˇ     0  1  2  3  4  5  <-- count
+[0] = [0, 0, 0, 0, 0, 0]
+[1] = [0, 0, 0, 0, 0, 0]
+[2] = [0, 0, 0, 0, 0, 0]
+@param[in,out] count The maximum amount of samples to be read expressed in commonSampleRate. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+samples are returned. The rest of the buffer is not modified or cleared. In case of different sample rates,
+the number of read samples may be different for each individual signal.
 @param timeoutMs The maximum amount of time in milliseconds to wait for the requested amount of samples before returning.
-@param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event - If the reading process is successful, IReaderStatus::getReadStatus returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
+@param[out] status: Represents the status of the reader.
+- If the reader is invalid, IReaderStatus::getValid returns false.
+- If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event
+- If the reading process is successful, IReaderStatus::getReadStatus returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
 
 Calls the openDAQ C function daqMultiReader_readWithDomain()."))
 (defmethod multi-reader-read-with-domain ((object multi-reader) samples domain count &optional (timeout-ms 0))
-  "Copies at maximum the next `count` unread samples and clock-stamps to the `samples` and `domain` buffers. The amount actually read is returned through the `count` parameter.
-@param samples The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples. This should be a jagged array (array of pointers to arrays) where the size is equal to the Signal count and each Signal buffer is at least `count` size long. E.g: reading the next 5 samples of 3 signals samples | ˇ     0  1  2  3  4  5  <-- count [0] = [0, 0, 0, 0, 0, 0] [1] = [0, 0, 0, 0, 0, 0] [2] = [0, 0, 0, 0, 0, 0]
-@param domain The buffer that the domain values will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of clock-stamps. This should be a jagged array (array of pointers to arrays) where the size is equal to the Signal count and each Signal buffer is at least `count` size long. E.g: reading the next 5 samples of 3 signals domain | ˇ     0  1  2  3  4  5  <-- count [0] = [0, 0, 0, 0, 0, 0] [1] = [0, 0, 0, 0, 0, 0] [2] = [0, 0, 0, 0, 0, 0]
-@param count The maximum amount of samples to be read expressed in commonSampleRate. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are returned. The rest of the buffer is not modified or cleared. In case of different sample rates, the number of read samples may be different for each individual signal.
+  "Copies at maximum the next `count` unread samples and clock-stamps to the `samples` and `domain` buffers.
+The amount actually read is returned through the `count` parameter.
+@param[in] samples The buffer that the samples will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of samples.
+This should be a jagged array (array of pointers to arrays) where the size is equal to
+the Signal count and each Signal buffer is at least `count` size long.
+E.g: reading the next 5 samples of 3 signals
+samples
+|
+ˇ     0  1  2  3  4  5  <-- count
+[0] = [0, 0, 0, 0, 0, 0]
+[1] = [0, 0, 0, 0, 0, 0]
+[2] = [0, 0, 0, 0, 0, 0]
+@param[in] domain The buffer that the domain values will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of clock-stamps.
+This should be a jagged array (array of pointers to arrays) where the size is equal to
+the Signal count and each Signal buffer is at least `count` size long.
+E.g: reading the next 5 samples of 3 signals
+domain
+|
+ˇ     0  1  2  3  4  5  <-- count
+[0] = [0, 0, 0, 0, 0, 0]
+[1] = [0, 0, 0, 0, 0, 0]
+[2] = [0, 0, 0, 0, 0, 0]
+@param[in,out] count The maximum amount of samples to be read expressed in commonSampleRate. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+samples are returned. The rest of the buffer is not modified or cleared. In case of different sample rates,
+the number of read samples may be different for each individual signal.
 @param timeoutMs The maximum amount of time in milliseconds to wait for the requested amount of samples before returning.
-@param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event - If the reading process is successful, IReaderStatus::getReadStatus returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
+@param[out] status: Represents the status of the reader.
+- If the reader is invalid, IReaderStatus::getValid returns false.
+- If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event
+- If the reading process is successful, IReaderStatus::getReadStatus returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
 
 Calls the openDAQ C function daqMultiReader_readWithDomain()."
   (with-daq-boxed-values ((coerced-samples samples nil)
@@ -16869,13 +19075,15 @@ Calls the openDAQ C function daqMultiReader_setActive()."
 (defgeneric (setf input-used) (new-value object id)
   (:documentation "Set whether input with matching global ID is used in synchronization and reading.
 @param id Global ID of a component previously added into the MultiReader.
-@param unused If true, the component won't be synchronized or read from. An unused component cannot cause the MultiReader to enter invalid state. In reading operations, provide buffers for ALL inputs, even the unused ones.
+@param isUsed If false, the component won't be synchronized or read from. An unused (isUsed=false) component cannot cause the MultiReader to enter
+invalid state. In reading operations, provide buffers for ALL inputs, even the unused ones.
 
 Calls the openDAQ C function daqMultiReader_setInputUsed()."))
 (defmethod (setf input-used) (new-value (object multi-reader) id)
   "Set whether input with matching global ID is used in synchronization and reading.
 @param id Global ID of a component previously added into the MultiReader.
-@param unused If true, the component won't be synchronized or read from. An unused component cannot cause the MultiReader to enter invalid state. In reading operations, provide buffers for ALL inputs, even the unused ones.
+@param isUsed If false, the component won't be synchronized or read from. An unused (isUsed=false) component cannot cause the MultiReader to enter
+invalid state. In reading operations, provide buffers for ALL inputs, even the unused ones.
 
 Calls the openDAQ C function daqMultiReader_setInputUsed()."
   (with-daq-boxed-values ((coerced-id id :daq-string)
@@ -16891,8 +19099,13 @@ stream-reader => daqStreamReader_skipSamples()
     Skips the specified amount of samples."))
 (defmethod skip-samples ((object multi-reader) count)
   "Skips the specified amount of samples.
-@param count The maximum amount of samples to be skipped. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are skipped. The rest of the buffer is not modified or cleared.
-@param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event - If the reading process is successful, IReaderStatus::getReadStatus returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
+@param[in,out] count The maximum amount of samples to be skipped. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+samples are skipped. The rest of the buffer is not modified or cleared.
+@param[out] status: Represents the status of the reader.
+- If the reader is invalid, IReaderStatus::getValid returns false.
+- If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event
+- If the reading process is successful, IReaderStatus::getReadStatus returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
 
 Calls the openDAQ C function daqMultiReader_skipSamples()."
   (with-daq-boxed-values ((coerced-count count nil))
@@ -16903,15 +19116,48 @@ Calls the openDAQ C function daqMultiReader_skipSamples()."
         (wrap value-1 'multi-reader-status))))
 )
 
+(defmethod lock ((object mutex) &optional (user nil user-suppliedp))
+  "Locks the mutex; blocking call.
+
+Calls the openDAQ C function daqMutex_lock()."
+  (declare (ignore user))
+  (when user-suppliedp
+    (error "LOCK is not applicable with a USER argument for ~S." 'mutex))
+  (opendaq.low-level:mutex/lock (%require-live-pointer object))
+)
+
+(defgeneric try-lock (object)
+  (:documentation "Tries to lock the mutex and returns `true` if successful; non-blocking call.
+
+Calls the openDAQ C function daqMutex_tryLock()."))
+(defmethod try-lock ((object mutex))
+  "Tries to lock the mutex and returns `true` if successful; non-blocking call.
+
+Calls the openDAQ C function daqMutex_tryLock()."
+  (not (zerop (opendaq.low-level:mutex/try-lock (%require-live-pointer object))))
+)
+
+(defmethod unlock ((object mutex) &optional (user nil user-suppliedp))
+  "Unlocks the mutex.
+
+Calls the openDAQ C function daqMutex_unlock()."
+  (declare (ignore user))
+  (when user-suppliedp
+    (error "UNLOCK is not applicable with a USER argument for ~S." 'mutex))
+  (opendaq.low-level:mutex/unlock (%require-live-pointer object))
+)
+
 (defgeneric create-default-configuration (object)
   (:documentation "Creates a property object containing default configuration values for a network interface.
 @param[out] defaultConfig The configuration object containing default settings for configuring device's network interface.
+
 The created object can be modified or directly submitted using the `submitConfiguration` method.
 
 Calls the openDAQ C function daqNetworkInterface_createDefaultConfiguration()."))
 (defmethod create-default-configuration ((object network-interface))
   "Creates a property object containing default configuration values for a network interface.
 @param[out] defaultConfig The configuration object containing default settings for configuring device's network interface.
+
 The created object can be modified or directly submitted using the `submitConfiguration` method.
 
 Calls the openDAQ C function daqNetworkInterface_createDefaultConfiguration()."
@@ -16937,6 +19183,7 @@ Calls the openDAQ C function daqNetworkInterface_requestCurrentConfiguration()."
   (:documentation "Submits a new configuration for the network interface.
 @param config The new configuration to apply.
 @retval OPENDAQ_SUCCESS if the new configuration is applied successfully; otherwise, returns an informative error code.
+
 The provided configuration must adhere to the required properties, including \"dhcp4\", \"address4\", \"gateway4\", and their IPv6 equivalents,
 as described in the class-level documentation.
 
@@ -16945,6 +19192,7 @@ Calls the openDAQ C function daqNetworkInterface_submitConfiguration()."))
   "Submits a new configuration for the network interface.
 @param config The new configuration to apply.
 @retval OPENDAQ_SUCCESS if the new configuration is applied successfully; otherwise, returns an informative error code.
+
 The provided configuration must adhere to the required properties, including \"dhcp4\", \"address4\", \"gateway4\", and their IPv6 equivalents,
 as described in the class-level documentation.
 
@@ -16990,6 +19238,126 @@ Calls the openDAQ C function daqOwnable_setOwner()."
   (with-daq-boxed-values ((coerced-new-value new-value :managed-pointer))
     (opendaq.low-level:ownable/set-owner (%require-live-pointer object) coerced-new-value))
   new-value)
+
+(defmethod build ((object packet-buffer-builder))
+  "Builds the Packet Buffer with the internally specified size and context
+@param[out] buffer Returns the newly created buffer
+
+Calls the openDAQ C function daqPacketBufferBuilder_build()."
+  (wrap (opendaq.low-level:packet-buffer-builder/build (%require-live-pointer object)) 'packet-buffer)
+)
+
+(defmethod context ((object packet-buffer-builder))
+  "Gets the context pointer
+@param[out] context The returned ContextPtr
+
+Calls the openDAQ C function daqPacketBufferBuilder_getContext()."
+  (wrap (opendaq.low-level:packet-buffer-builder/get-context (%require-live-pointer object)) 'context)
+)
+
+(defgeneric size-in-bytes (object)
+  (:documentation "Gets the size of the underlying buffer in bytes
+@param[out] sizeInBytes Value of this variable will contain the size of the buffer in bytes
+
+Calls the openDAQ C function daqPacketBufferBuilder_getSizeInBytes()."))
+(defmethod size-in-bytes ((object packet-buffer-builder))
+  "Gets the size of the underlying buffer in bytes
+@param[out] sizeInBytes Value of this variable will contain the size of the buffer in bytes
+
+Calls the openDAQ C function daqPacketBufferBuilder_getSizeInBytes()."
+  (opendaq.low-level:packet-buffer-builder/get-size-in-bytes (%require-live-pointer object))
+)
+
+(defmethod (setf context) (new-value (object packet-buffer-builder))
+  "Sets the context pointer
+@param context The pointer that will be set
+
+Calls the openDAQ C function daqPacketBufferBuilder_setContext()."
+  (with-daq-boxed-values ((coerced-new-value new-value :managed-pointer))
+    (opendaq.low-level:packet-buffer-builder/set-context (%require-live-pointer object) coerced-new-value))
+  new-value)
+
+(defgeneric (setf size-in-bytes) (new-value object)
+  (:documentation "Sets the size of the underlying buffer in bytes
+@param sizeInBytes Sets the size of the buffer in bytes
+
+Calls the openDAQ C function daqPacketBufferBuilder_setSizeInBytes()."))
+(defmethod (setf size-in-bytes) (new-value (object packet-buffer-builder))
+  "Sets the size of the underlying buffer in bytes
+@param sizeInBytes Sets the size of the buffer in bytes
+
+Calls the openDAQ C function daqPacketBufferBuilder_setSizeInBytes()."
+  (with-daq-boxed-values ((coerced-new-value new-value nil))
+    (opendaq.low-level:packet-buffer-builder/set-size-in-bytes (%require-live-pointer object) coerced-new-value))
+  new-value)
+
+(defgeneric create-packet (object sample-count desc domain-packet)
+  (:documentation "Creates a Data Packet with external memory, whose
+@param sampleCount The amount of samples in the packet
+@param desc Description of the samples
+@param domainPacket A packet containing domain information
+@param[out] packet The returned packet
+
+Calls the openDAQ C function daqPacketBuffer_createPacket()."))
+(defmethod create-packet ((object packet-buffer) sample-count desc domain-packet)
+  "Creates a Data Packet with external memory, whose
+@param sampleCount The amount of samples in the packet
+@param desc Description of the samples
+@param domainPacket A packet containing domain information
+@param[out] packet The returned packet
+
+Calls the openDAQ C function daqPacketBuffer_createPacket()."
+  (with-daq-boxed-values ((coerced-sample-count sample-count nil)
+                          (coerced-desc desc :managed-pointer)
+                          (coerced-domain-packet domain-packet :managed-pointer))
+    (wrap (opendaq.low-level:packet-buffer/create-packet (%require-live-pointer object) coerced-sample-count coerced-desc coerced-domain-packet) 'data-packet))
+)
+
+(defgeneric available-sample-count (object desc)
+  (:documentation "Returns the amount of samples (whoose raw size is gained from desc) at the end of the buffer
+@param desc Description that contains the information about raw sample size
+@param[out] count The available amount
+
+Calls the openDAQ C function daqPacketBuffer_getAvailableSampleCount()."))
+(defmethod available-sample-count ((object packet-buffer) desc)
+  "Returns the amount of samples (whoose raw size is gained from desc) at the end of the buffer
+@param desc Description that contains the information about raw sample size
+@param[out] count The available amount
+
+Calls the openDAQ C function daqPacketBuffer_getAvailableSampleCount()."
+  (with-daq-boxed-values ((coerced-desc desc :managed-pointer))
+    (opendaq.low-level:packet-buffer/get-available-sample-count (%require-live-pointer object) coerced-desc))
+)
+
+(defgeneric max-available-continous-sample-count (object desc)
+  (:documentation "Returns the maximum continous amount of samples either at the beginning or the end of the buffer
+@param desc Description that contains the information about raw sample size
+@param[out] count Returns the amount of samples that can be fitted into the space available
+
+Calls the openDAQ C function daqPacketBuffer_getMaxAvailableContinousSampleCount()."))
+(defmethod max-available-continous-sample-count ((object packet-buffer) desc)
+  "Returns the maximum continous amount of samples either at the beginning or the end of the buffer
+@param desc Description that contains the information about raw sample size
+@param[out] count Returns the amount of samples that can be fitted into the space available
+
+Calls the openDAQ C function daqPacketBuffer_getMaxAvailableContinousSampleCount()."
+  (with-daq-boxed-values ((coerced-desc desc :managed-pointer))
+    (opendaq.low-level:packet-buffer/get-max-available-continous-sample-count (%require-live-pointer object) coerced-desc))
+)
+
+(defgeneric resize (object size-in-bytes)
+  (:documentation "Reallocates the underlying std::vector so that it size matches the new given size
+@param sizeInBytes The requested size of the new buffer in bytes
+
+Calls the openDAQ C function daqPacketBuffer_resize()."))
+(defmethod resize ((object packet-buffer) size-in-bytes)
+  "Reallocates the underlying std::vector so that it size matches the new given size
+@param sizeInBytes The requested size of the new buffer in bytes
+
+Calls the openDAQ C function daqPacketBuffer_resize()."
+  (with-daq-boxed-values ((coerced-size-in-bytes size-in-bytes nil))
+    (opendaq.low-level:packet-buffer/resize (%require-live-pointer object) coerced-size-in-bytes))
+)
 
 (defgeneric on-packet-destroyed (object)
   (:documentation "Called when packet is destroyed.
@@ -17169,7 +19537,8 @@ Calls the openDAQ C function daqPermissionManager_setPermissions()."
 
 (defmethod build ((object permission-mask-builder))
   "Build permission mask and return it as 64-bit integer.
-@param permissionMask[out] Permission mask defined as 64-bit integer where each bit corresponds to a specific permissoin defined by Permission enum.
+@param permissionMask[out] Permission mask defined as 64-bit integer where each bit corresponds
+to a specific permissoin defined by Permission enum.
 
 Calls the openDAQ C function daqPermissionMaskBuilder_build()."
   (opendaq.low-level:permission-mask-builder/build (%require-live-pointer object))
@@ -17218,13 +19587,17 @@ Calls the openDAQ C function daqPermissionMaskBuilder_write()."
 )
 
 (defgeneric allow (object group-id permissions)
-  (:documentation "Allow a specified set of permissions for a given group. If the inherit flag is enabled, this method will allow both the specified permissions and any permissions already allowed for the group on the parent component. Denied permissions will always overrule allowed permissions.
+  (:documentation "Allow a specified set of permissions for a given group. If the inherit flag is enabled, this method will
+allow both the specified permissions and any permissions already allowed for the group on the parent component.
+Denied permissions will always overrule allowed permissions.
 @param groupId The id of a group to allow permissions for.
 @param permissions A set of permissions to allow for given group.
 
 Calls the openDAQ C function daqPermissionsBuilder_allow()."))
 (defmethod allow ((object permissions-builder) group-id permissions)
-  "Allow a specified set of permissions for a given group. If the inherit flag is enabled, this method will allow both the specified permissions and any permissions already allowed for the group on the parent component. Denied permissions will always overrule allowed permissions.
+  "Allow a specified set of permissions for a given group. If the inherit flag is enabled, this method will
+allow both the specified permissions and any permissions already allowed for the group on the parent component.
+Denied permissions will always overrule allowed permissions.
 @param groupId The id of a group to allow permissions for.
 @param permissions A set of permissions to allow for given group.
 
@@ -17235,13 +19608,15 @@ Calls the openDAQ C function daqPermissionsBuilder_allow()."
 )
 
 (defgeneric assign (object group-id permissions)
-  (:documentation "Strictly assign a specified set of permissions for a given group. This method allows only the specified permissions and will not inherit any permissions from the parent object for the group, even if the inherit flag is enabled.
+  (:documentation "Strictly assign a specified set of permissions for a given group. This method allows only the specified
+permissions and will not inherit any permissions from the parent object for the group, even if the inherit flag is enabled.
 @param groupId The id of a group to set permissions for.
 @param permissions A set of permissions to allow for given group.
 
 Calls the openDAQ C function daqPermissionsBuilder_assign()."))
 (defmethod assign ((object permissions-builder) group-id permissions)
-  "Strictly assign a specified set of permissions for a given group. This method allows only the specified permissions and will not inherit any permissions from the parent object for the group, even if the inherit flag is enabled.
+  "Strictly assign a specified set of permissions for a given group. This method allows only the specified
+permissions and will not inherit any permissions from the parent object for the group, even if the inherit flag is enabled.
 @param groupId The id of a group to set permissions for.
 @param permissions A set of permissions to allow for given group.
 
@@ -17260,13 +19635,17 @@ Calls the openDAQ C function daqPermissionsBuilder_build()."
 )
 
 (defgeneric deny (object group-id permissions)
-  (:documentation "Deny a specified set of permissions for a given group. If the inherit flag is enabled, this method will deny both the specified permissions and any permissions already denied for the group on the parent component. Denied permissions will always overrule allowed permissions.
+  (:documentation "Deny a specified set of permissions for a given group. If the inherit flag is enabled, this method will
+deny both the specified permissions and any permissions already denied for the group on the parent component.
+Denied permissions will always overrule allowed permissions.
 @param groupId The id of a group to deny permissions for.
 @param permissions A set of permissions to deny for given group.
 
 Calls the openDAQ C function daqPermissionsBuilder_deny()."))
 (defmethod deny ((object permissions-builder) group-id permissions)
-  "Deny a specified set of permissions for a given group. If the inherit flag is enabled, this method will deny both the specified permissions and any permissions already denied for the group on the parent component. Denied permissions will always overrule allowed permissions.
+  "Deny a specified set of permissions for a given group. If the inherit flag is enabled, this method will
+deny both the specified permissions and any permissions already denied for the group on the parent component.
+Denied permissions will always overrule allowed permissions.
 @param groupId The id of a group to deny permissions for.
 @param permissions A set of permissions to deny for given group.
 
@@ -17357,9 +19736,23 @@ Calls the openDAQ C function daqPermissions_getInherited()."
 )
 
 (defgeneric dispatch (object params)
-  (:documentation "Calls the openDAQ C function daqProcedure_dispatch()."))
+  (:documentation "Calls the stored callback.
+@param params Parameters passed to the callback.
+
+If the callback expects no parameters, the `params` parameter has to be `nullptr`. If it
+expects a single parameter, pass any openDAQ object as the `params` parameter.
+If it expects multiple parameters, pass an IList<IBaseObject> as the `params` parameter.
+
+Calls the openDAQ C function daqProcedure_dispatch()."))
 (defmethod dispatch ((object procedure) params)
-  "Calls the openDAQ C function daqProcedure_dispatch()."
+  "Calls the stored callback.
+@param params Parameters passed to the callback.
+
+If the callback expects no parameters, the `params` parameter has to be `nullptr`. If it
+expects a single parameter, pass any openDAQ object as the `params` parameter.
+If it expects multiple parameters, pass an IList<IBaseObject> as the `params` parameter.
+
+Calls the openDAQ C function daqProcedure_dispatch()."
   (with-daq-boxed-values ((coerced-params params :daq-base-object))
     (opendaq.low-level:procedure/dispatch (%require-live-pointer object) coerced-params))
 )
@@ -17374,12 +19767,13 @@ Calls the openDAQ C function daqPropertyBuilder_build()."
 
 (defgeneric callable-info (object)
   (:documentation "property-builder => daqPropertyBuilder_getCallableInfo()
-    Gets the Callable information objects of the Property that specifies the argument and return types of the callable object stored as the Property value.
+    Gets the Callable information objects of the Property that specifies the argument and return types
 
 property => daqProperty_getCallableInfo()
-    Gets the Callable information objects of the Property that specifies the argument and return types of the callable object stored as the Property value."))
+    Gets the Callable information objects of the Property that specifies the argument and return types"))
 (defmethod callable-info ((object property-builder))
-  "Gets the Callable information objects of the Property that specifies the argument and return types of the callable object stored as the Property value.
+  "Gets the Callable information objects of the Property that specifies the argument and return types
+of the callable object stored as the Property value.
 @param[out] callable The Callable info object.
 
 Calls the openDAQ C function daqPropertyBuilder_getCallableInfo()."
@@ -17405,7 +19799,7 @@ Calls the openDAQ C function daqPropertyBuilder_getCoercer()."
     Gets the Default value of the Property.
 
 property => daqProperty_getDefaultValue()
-    Gets the Default value of the Property. The Default value must always be configured for a Property to be in a valid state. Exceptions are Function/Procedure and Reference properties."))
+    Gets the Default value of the Property. The Default value must always be configured for a Property to be"))
 (defmethod default-value ((object property-builder))
   "Gets the Default value of the Property.
 @param[out] value The Default value of the Property.
@@ -17424,8 +19818,10 @@ Calls the openDAQ C function daqPropertyBuilder_getDescription()."
 
 (defgeneric is-integer-value-selection (object)
   (:documentation "Gets the integer value selection flag for selection properties with valueType == ctInt.
+
 When true, the property stores the actual selected integer value (IntegerValueSelection).
 When false (default), the property stores the index of the selected entry (IndexSelection).
+
 This flag is ignored for sparse selection properties and for selection properties
 with a valueType other than ctInt.
 @param isIntegerValueSelection The current value of the flag.
@@ -17433,8 +19829,10 @@ with a valueType other than ctInt.
 Calls the openDAQ C function daqPropertyBuilder_getIsIntegerValueSelection()."))
 (defmethod is-integer-value-selection ((object property-builder))
   "Gets the integer value selection flag for selection properties with valueType == ctInt.
+
 When true, the property stores the actual selected integer value (IntegerValueSelection).
 When false (default), the property stores the index of the selected entry (IndexSelection).
+
 This flag is ignored for sparse selection properties and for selection properties
 with a valueType other than ctInt.
 @param isIntegerValueSelection The current value of the flag.
@@ -17524,7 +19922,7 @@ Calls the openDAQ C function daqPropertyBuilder_getOnPropertyValueWrite()."
     Gets a custom on-selection-values-read event. Used mostly when cloning properties.
 
 property => daqProperty_getOnSelectionValuesRead()
-    Gets the event triggered when a user retrieves the selection values field. Allows for overriding the returned value."))
+    Gets the event triggered when a user retrieves the selection values field. Allows for overriding"))
 (defmethod on-selection-values-read ((object property-builder))
   "Gets a custom on-selection-values-read event. Used mostly when cloning properties.
 @param event The on-read event.
@@ -17538,7 +19936,7 @@ Calls the openDAQ C function daqPropertyBuilder_getOnSelectionValuesRead()."
     Gets a custom on-suggested-values-read event. Used mostly when cloning properties.
 
 property => daqProperty_getOnSuggestedValuesRead()
-    Gets the event triggered when a user retrieves the suggested values field. Allows for overriding the returned value."))
+    Gets the event triggered when a user retrieves the suggested values field. Allows for overriding"))
 (defmethod on-suggested-values-read ((object property-builder))
   "Gets a custom on-suggested-values-read event. Used mostly when cloning properties.
 @param event The on-read event.
@@ -17566,7 +19964,7 @@ Calls the openDAQ C function daqPropertyBuilder_getReadOnly()."
     Gets the referenced property.
 
 property => daqProperty_getReferencedProperty()
-    Gets the referenced property. If set, all getters except for the `Name`, `Referenced property`, and `Is referenced` getters will return the value of the `Referenced property`."))
+    Gets the referenced property. If set, all getters except for the `Name`, `Referenced property`, and"))
 (defmethod referenced-property ((object property-builder))
   "Gets the referenced property.
 @param[out] propertyEval The referenced property.
@@ -17580,7 +19978,7 @@ Calls the openDAQ C function daqPropertyBuilder_getReferencedProperty()."
     Gets the list or dictionary of selection values.
 
 property => daqProperty_getSelectionValues()
-    Gets the list or dictionary of selection values. If the list/dictionary is not empty, the property is a Selection property, and must have the Value type `ctInt`."))
+    Gets the list or dictionary of selection values. If the list/dictionary is not empty, the property"))
 (defmethod selection-values ((object property-builder))
   "Gets the list or dictionary of selection values.
 @param[out] values The list/dictionary of possible selection values.
@@ -17591,12 +19989,13 @@ Calls the openDAQ C function daqPropertyBuilder_getSelectionValues()."
 
 (defgeneric suggested-values (object)
   (:documentation "property-builder => daqPropertyBuilder_getSuggestedValues()
-    Gets the list of Suggested values. Contains values that are the optimal gettings for the corresponding Property value. These values, however, are not enforced when getting a new Property value.
+    Gets the list of Suggested values. Contains values that are the optimal gettings for the corresponding
 
 property => daqProperty_getSuggestedValues()
-    Gets the list of Suggested values. Contains values that are the optimal settings for the corresponding Property value. These values, however, are not enforced when setting a new Property value."))
+    Gets the list of Suggested values. Contains values that are the optimal settings for the corresponding"))
 (defmethod suggested-values ((object property-builder))
-  "Gets the list of Suggested values. Contains values that are the optimal gettings for the corresponding Property value. These values, however, are not enforced when getting a new Property value.
+  "Gets the list of Suggested values. Contains values that are the optimal gettings for the corresponding
+Property value. These values, however, are not enforced when getting a new Property value.
 @param[out] values The Suggested values of the Property.
 
 Calls the openDAQ C function daqPropertyBuilder_getSuggestedValues()."
@@ -17630,7 +20029,7 @@ Calls the openDAQ C function daqPropertyBuilder_getValidator()."
     Gets the Value type of the Property.
 
 property => daqProperty_getValueType()
-    Gets the Value type of the Property. Values written to the corresponding Property value must be of the same type."))
+    Gets the Value type of the Property. Values written to the corresponding Property value"))
 (defmethod value-type ((object property-builder))
   "Gets the Value type of the Property.
 @param[out] type The value type.
@@ -17648,12 +20047,14 @@ Calls the openDAQ C function daqPropertyBuilder_getVisible()."
 )
 
 (defgeneric (setf callable-info) (new-value object)
-  (:documentation "Sets the Callable information objects of the Property that specifies the argument and return types of the callable object stored as the Property value.
+  (:documentation "Sets the Callable information objects of the Property that specifies the argument and return types
+of the callable object stored as the Property value.
 @param callable The Callable info object.
 
 Calls the openDAQ C function daqPropertyBuilder_setCallableInfo()."))
 (defmethod (setf callable-info) (new-value (object property-builder))
-  "Sets the Callable information objects of the Property that specifies the argument and return types of the callable object stored as the Property value.
+  "Sets the Callable information objects of the Property that specifies the argument and return types
+of the callable object stored as the Property value.
 @param callable The Callable info object.
 
 Calls the openDAQ C function daqPropertyBuilder_setCallableInfo()."
@@ -17664,12 +20065,14 @@ Calls the openDAQ C function daqPropertyBuilder_setCallableInfo()."
 (defgeneric (setf coercer) (new-value object)
   (:documentation "Sets the coercer of the Property.
 @param coercer The coercer.
+
 Used to coerce a value written to the corresponding Property value to the constraints specified by the coercer.
 
 Calls the openDAQ C function daqPropertyBuilder_setCoercer()."))
 (defmethod (setf coercer) (new-value (object property-builder))
   "Sets the coercer of the Property.
 @param coercer The coercer.
+
 Used to coerce a value written to the corresponding Property value to the constraints specified by the coercer.
 
 Calls the openDAQ C function daqPropertyBuilder_setCoercer()."
@@ -17678,12 +20081,16 @@ Calls the openDAQ C function daqPropertyBuilder_setCoercer()."
   new-value)
 
 (defgeneric (setf default-value) (new-value object)
-  (:documentation "Sets the Default value of the Property. The Default value must always be configured for a Property to be in a valid state. Exceptions are Function/Procedure and Reference properties. The function will freeze default value if it is freezable.
+  (:documentation "Sets the Default value of the Property. The Default value must always be configured for a Property to be
+in a valid state. Exceptions are Function/Procedure and Reference properties.
+The function will freeze default value if it is freezable.
 @param value The Default value of the Property.
 
 Calls the openDAQ C function daqPropertyBuilder_setDefaultValue()."))
 (defmethod (setf default-value) (new-value (object property-builder))
-  "Sets the Default value of the Property. The Default value must always be configured for a Property to be in a valid state. Exceptions are Function/Procedure and Reference properties. The function will freeze default value if it is freezable.
+  "Sets the Default value of the Property. The Default value must always be configured for a Property to be
+in a valid state. Exceptions are Function/Procedure and Reference properties.
+The function will freeze default value if it is freezable.
 @param value The Default value of the Property.
 
 Calls the openDAQ C function daqPropertyBuilder_setDefaultValue()."
@@ -17702,8 +20109,10 @@ Calls the openDAQ C function daqPropertyBuilder_setDescription()."
 
 (defgeneric (setf is-integer-value-selection) (new-value object)
   (:documentation "Sets the integer value selection flag for selection properties with valueType == ctInt.
+
 When true, the property stores the actual selected integer value (IntegerValueSelection).
 When false (default), the property stores the index of the selected entry (IndexSelection).
+
 This flag is ignored for sparse selection properties and for selection properties
 with a valueType other than ctInt.
 @param isIntegerValueSelection True to store the selected value; false to store the selection index.
@@ -17711,8 +20120,10 @@ with a valueType other than ctInt.
 Calls the openDAQ C function daqPropertyBuilder_setIsIntegerValueSelection()."))
 (defmethod (setf is-integer-value-selection) (new-value (object property-builder))
   "Sets the integer value selection flag for selection properties with valueType == ctInt.
+
 When true, the property stores the actual selected integer value (IntegerValueSelection).
 When false (default), the property stores the index of the selected entry (IndexSelection).
+
 This flag is ignored for sparse selection properties and for selection properties
 with a valueType other than ctInt.
 @param isIntegerValueSelection True to store the selected value; false to store the selection index.
@@ -17751,7 +20162,8 @@ Calls the openDAQ C function daqPropertyBuilder_setMinValue()."
   new-value)
 
 (defmethod (setf name) (new-value (object property-builder))
-  "Sets the Name of the Property. The names of Properties in a Property object must be unique. The name is used as the key to the corresponding Property value when getting/setting the value.
+  "Sets the Name of the Property. The names of Properties in a Property object must be unique.
+The name is used as the key to the corresponding Property value when getting/setting the value.
 @param name The Name of the Property.
 
 Calls the openDAQ C function daqPropertyBuilder_setName()."
@@ -17818,12 +20230,14 @@ Calls the openDAQ C function daqPropertyBuilder_setOnSuggestedValuesRead()."
 (defgeneric (setf read-only) (new-value object)
   (:documentation "Used to determine whether the Property is a read-only property or not.
 @param readOnly True if the Property is a read-only property; false otherwise.
+
 Read-only Property values can still be modified by using the `PropertyObjectProtected` interface methods.
 
 Calls the openDAQ C function daqPropertyBuilder_setReadOnly()."))
 (defmethod (setf read-only) (new-value (object property-builder))
   "Used to determine whether the Property is a read-only property or not.
 @param readOnly True if the Property is a read-only property; false otherwise.
+
 Read-only Property values can still be modified by using the `PropertyObjectProtected` interface methods.
 
 Calls the openDAQ C function daqPropertyBuilder_setReadOnly()."
@@ -17832,14 +20246,18 @@ Calls the openDAQ C function daqPropertyBuilder_setReadOnly()."
   new-value)
 
 (defgeneric (setf referenced-property) (new-value object)
-  (:documentation "Sets the referenced property. If set, all getters except for the `Name`, `Referenced property`, and `Is referenced` getters will return the value of the `Referenced property`.
+  (:documentation "Sets the referenced property. If set, all getters except for the `Name`, `Referenced property`, and
+`Is referenced` getters will return the value of the `Referenced property`.
 @param propertyEval The referenced property.
+
 If the Property is not bound to a Property object this call will not be able to return the Referenced property.
 
 Calls the openDAQ C function daqPropertyBuilder_setReferencedProperty()."))
 (defmethod (setf referenced-property) (new-value (object property-builder))
-  "Sets the referenced property. If set, all getters except for the `Name`, `Referenced property`, and `Is referenced` getters will return the value of the `Referenced property`.
+  "Sets the referenced property. If set, all getters except for the `Name`, `Referenced property`, and
+`Is referenced` getters will return the value of the `Referenced property`.
 @param propertyEval The referenced property.
+
 If the Property is not bound to a Property object this call will not be able to return the Referenced property.
 
 Calls the openDAQ C function daqPropertyBuilder_setReferencedProperty()."
@@ -17848,12 +20266,14 @@ Calls the openDAQ C function daqPropertyBuilder_setReferencedProperty()."
   new-value)
 
 (defgeneric (setf selection-values) (new-value object)
-  (:documentation "Sets the list or dictionary of selection values. If the list/dictionary is not empty, the property is a Selection property, and must have the Value type `ctInt`.
+  (:documentation "Sets the list or dictionary of selection values. If the list/dictionary is not empty, the property
+is a Selection property, and must have the Value type `ctInt`.
 @param values The list/dictionary of possible selection values.
 
 Calls the openDAQ C function daqPropertyBuilder_setSelectionValues()."))
 (defmethod (setf selection-values) (new-value (object property-builder))
-  "Sets the list or dictionary of selection values. If the list/dictionary is not empty, the property is a Selection property, and must have the Value type `ctInt`.
+  "Sets the list or dictionary of selection values. If the list/dictionary is not empty, the property
+is a Selection property, and must have the Value type `ctInt`.
 @param values The list/dictionary of possible selection values.
 
 Calls the openDAQ C function daqPropertyBuilder_setSelectionValues()."
@@ -17862,12 +20282,14 @@ Calls the openDAQ C function daqPropertyBuilder_setSelectionValues()."
   new-value)
 
 (defgeneric (setf suggested-values) (new-value object)
-  (:documentation "Sets the list of Suggested values. Contains values that are the optimal settings for the corresponding Property value. These values, however, are not enforced when setting a new Property value.
+  (:documentation "Sets the list of Suggested values. Contains values that are the optimal settings for the corresponding
+Property value. These values, however, are not enforced when setting a new Property value.
 @param values The Suggested values of the Property.
 
 Calls the openDAQ C function daqPropertyBuilder_setSuggestedValues()."))
 (defmethod (setf suggested-values) (new-value (object property-builder))
-  "Sets the list of Suggested values. Contains values that are the optimal settings for the corresponding Property value. These values, however, are not enforced when setting a new Property value.
+  "Sets the list of Suggested values. Contains values that are the optimal settings for the corresponding
+Property value. These values, however, are not enforced when setting a new Property value.
 @param values The Suggested values of the Property.
 
 Calls the openDAQ C function daqPropertyBuilder_setSuggestedValues()."
@@ -17887,12 +20309,14 @@ Calls the openDAQ C function daqPropertyBuilder_setUnit()."
 (defgeneric (setf validator) (new-value object)
   (:documentation "Sets the validator of the Property.
 @param validator The validator.
+
 Used to validate whether a value written to the corresponding Property value is valid or not.
 
 Calls the openDAQ C function daqPropertyBuilder_setValidator()."))
 (defmethod (setf validator) (new-value (object property-builder))
   "Sets the validator of the Property.
 @param validator The validator.
+
 Used to validate whether a value written to the corresponding Property value is valid or not.
 
 Calls the openDAQ C function daqPropertyBuilder_setValidator()."
@@ -17901,12 +20325,14 @@ Calls the openDAQ C function daqPropertyBuilder_setValidator()."
   new-value)
 
 (defgeneric (setf value-type) (new-value object)
-  (:documentation "Sets the Value type of the Property. Values written to the corresponding Property value must be of the same type.
+  (:documentation "Sets the Value type of the Property. Values written to the corresponding Property value
+must be of the same type.
 @param type The value type.
 
 Calls the openDAQ C function daqPropertyBuilder_setValueType()."))
 (defmethod (setf value-type) (new-value (object property-builder))
-  "Sets the Value type of the Property. Values written to the corresponding Property value must be of the same type.
+  "Sets the Value type of the Property. Values written to the corresponding Property value
+must be of the same type.
 @param type The value type.
 
 Calls the openDAQ C function daqPropertyBuilder_setValueType()."
@@ -17936,6 +20362,7 @@ Calls the openDAQ C function daqPropertyInternal_clone()."
 
 (defmethod clone-with-owner ((object property-internal) owner)
   "Clones the property, setting the passed PropertyObject as its owner.
+
 If the provided owner is the same as the current owner of the property, the property is not cloned.
 Instead the property itself is returned as-is.
 
@@ -17980,11 +20407,13 @@ Calls the openDAQ C function daqPropertyInternal_cloneWithOwner()."
 )
 
 (defgeneric default-value-unresolved (object)
-  (:documentation "Gets the Property default value in an as either a BaseObject or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  (:documentation "Gets the Property default value in an as either a BaseObject or unresolved EvalValue. The EvalValue
+is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getDefaultValueUnresolved()."))
 (defmethod default-value-unresolved ((object property-internal))
-  "Gets the Property default value in an as either a BaseObject or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  "Gets the Property default value in an as either a BaseObject or unresolved EvalValue. The EvalValue
+is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getDefaultValueUnresolved()."
   (wrap (opendaq.low-level:property-internal/get-default-value-unresolved (%require-live-pointer object)) 'base-object)
@@ -17998,11 +20427,13 @@ Calls the openDAQ C function daqPropertyInternal_getDefaultValueUnresolved()."
 )
 
 (defgeneric description-unresolved (object)
-  (:documentation "Gets the Property description in an as either a String or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  (:documentation "Gets the Property description in an as either a String or unresolved EvalValue. The EvalValue
+is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getDescriptionUnresolved()."))
 (defmethod description-unresolved ((object property-internal))
-  "Gets the Property description in an as either a String or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  "Gets the Property description in an as either a String or unresolved EvalValue. The EvalValue
+is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getDescriptionUnresolved()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:property-internal/get-description-unresolved (%require-live-pointer object)))
@@ -18058,11 +20489,13 @@ Calls the openDAQ C function daqPropertyInternal_getDescriptionUnresolved()."
 )
 
 (defgeneric max-value-unresolved (object)
-  (:documentation "Gets the Property max value in an as either a Number or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  (:documentation "Gets the Property max value in an as either a Number or unresolved EvalValue. The EvalValue
+is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getMaxValueUnresolved()."))
 (defmethod max-value-unresolved ((object property-internal))
-  "Gets the Property max value in an as either a Number or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  "Gets the Property max value in an as either a Number or unresolved EvalValue. The EvalValue
+is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getMaxValueUnresolved()."
   (wrap (opendaq.low-level:property-internal/get-max-value-unresolved (%require-live-pointer object)) 'number-object)
@@ -18076,11 +20509,13 @@ Calls the openDAQ C function daqPropertyInternal_getMaxValueUnresolved()."
 )
 
 (defgeneric min-value-unresolved (object)
-  (:documentation "Gets the Property min value in an as either a Number or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  (:documentation "Gets the Property min value in an as either a Number or unresolved EvalValue. The EvalValue
+is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getMinValueUnresolved()."))
 (defmethod min-value-unresolved ((object property-internal))
-  "Gets the Property min value in an as either a Number or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  "Gets the Property min value in an as either a Number or unresolved EvalValue. The EvalValue
+is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getMinValueUnresolved()."
   (wrap (opendaq.low-level:property-internal/get-min-value-unresolved (%require-live-pointer object)) 'number-object)
@@ -18094,11 +20529,13 @@ Calls the openDAQ C function daqPropertyInternal_getMinValueUnresolved()."
 )
 
 (defgeneric read-only-unresolved (object)
-  (:documentation "Gets the Property read-only field in an as either a Boolean or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  (:documentation "Gets the Property read-only field in an as either a Boolean or unresolved EvalValue. The EvalValue
+is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getReadOnlyUnresolved()."))
 (defmethod read-only-unresolved ((object property-internal))
-  "Gets the Property read-only field in an as either a Boolean or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  "Gets the Property read-only field in an as either a Boolean or unresolved EvalValue. The EvalValue
+is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getReadOnlyUnresolved()."
   (wrap (opendaq.low-level:property-internal/get-read-only-unresolved (%require-live-pointer object)) 'boolean-object)
@@ -18112,11 +20549,13 @@ Calls the openDAQ C function daqPropertyInternal_getReadOnlyUnresolved()."
 )
 
 (defgeneric referenced-property-unresolved (object)
-  (:documentation "Gets the Property referenced property in an as either a Property or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  (:documentation "Gets the Property referenced property in an as either a Property or unresolved EvalValue. The EvalValue
+is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getReferencedPropertyUnresolved()."))
 (defmethod referenced-property-unresolved ((object property-internal))
-  "Gets the Property referenced property in an as either a Property or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  "Gets the Property referenced property in an as either a Property or unresolved EvalValue. The EvalValue
+is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getReferencedPropertyUnresolved()."
   (wrap (opendaq.low-level:property-internal/get-referenced-property-unresolved (%require-live-pointer object)) 'eval-value)
@@ -18130,11 +20569,13 @@ Calls the openDAQ C function daqPropertyInternal_getReferencedPropertyUnresolved
 )
 
 (defgeneric selection-values-unresolved (object)
-  (:documentation "Gets the Property selection values in an as either a Dictionary of Int-BaseObject pairs, List of BaseObjects, or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  (:documentation "Gets the Property selection values in an as either a Dictionary of Int-BaseObject pairs, List of BaseObjects,
+or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getSelectionValuesUnresolved()."))
 (defmethod selection-values-unresolved ((object property-internal))
-  "Gets the Property selection values in an as either a Dictionary of Int-BaseObject pairs, List of BaseObjects, or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  "Gets the Property selection values in an as either a Dictionary of Int-BaseObject pairs, List of BaseObjects,
+or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getSelectionValuesUnresolved()."
   (wrap (opendaq.low-level:property-internal/get-selection-values-unresolved (%require-live-pointer object)) 'base-object)
@@ -18155,11 +20596,13 @@ Calls the openDAQ C function daqPropertyInternal_getSelectionValuesUnresolved().
 )
 
 (defgeneric suggested-values-unresolved (object)
-  (:documentation "Gets the Property suggested values in an as either a List of BaseObjects or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  (:documentation "Gets the Property suggested values in an as either a List of BaseObjects or unresolved EvalValue. The EvalValue
+is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getSuggestedValuesUnresolved()."))
 (defmethod suggested-values-unresolved ((object property-internal))
-  "Gets the Property suggested values in an as either a List of BaseObjects or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  "Gets the Property suggested values in an as either a List of BaseObjects or unresolved EvalValue. The EvalValue
+is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getSuggestedValuesUnresolved()."
   (%list-of (wrap (opendaq.low-level:property-internal/get-suggested-values-unresolved (%require-live-pointer object)) 'object-list) 'base-object)
@@ -18173,11 +20616,13 @@ Calls the openDAQ C function daqPropertyInternal_getSuggestedValuesUnresolved().
 )
 
 (defgeneric unit-unresolved (object)
-  (:documentation "Gets the Property unit in an as either a String (TODO: as an IUnit once supported) or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  (:documentation "Gets the Property unit in an as either a String (TODO: as an IUnit once supported)
+or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getUnitUnresolved()."))
 (defmethod unit-unresolved ((object property-internal))
-  "Gets the Property unit in an as either a String (TODO: as an IUnit once supported) or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  "Gets the Property unit in an as either a String (TODO: as an IUnit once supported)
+or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getUnitUnresolved()."
   (wrap (opendaq.low-level:property-internal/get-unit-unresolved (%require-live-pointer object)) 'base-object)
@@ -18216,11 +20661,13 @@ Calls the openDAQ C function daqPropertyInternal_getValueTypeUnresolved()."
 )
 
 (defgeneric visible-unresolved (object)
-  (:documentation "Gets the Property visible field in an as either a Boolean or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  (:documentation "Gets the Property visible field in an as either a Boolean or unresolved EvalValue. The EvalValue
+is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getVisibleUnresolved()."))
 (defmethod visible-unresolved ((object property-internal))
-  "Gets the Property visible field in an as either a Boolean or unresolved EvalValue. The EvalValue is bound to the owner, if the Property has an owner.
+  "Gets the Property visible field in an as either a Boolean or unresolved EvalValue. The EvalValue
+is bound to the owner, if the Property has an owner.
 
 Calls the openDAQ C function daqPropertyInternal_getVisibleUnresolved()."
   (wrap (opendaq.low-level:property-internal/get-visible-unresolved (%require-live-pointer object)) 'boolean-object)
@@ -18242,6 +20689,53 @@ Calls the openDAQ C function daqPropertyInternal_getVisibleUnresolved()."
     (opendaq.low-level:property-internal/set-value-protected (%require-live-pointer object) coerced-new-value))
   new-value)
 
+(defgeneric property (object &optional property-name)
+  (:documentation "property-metadata-read-args => daqPropertyMetadataReadArgs_getProperty()
+    Gets the property that owns the metadata field.
+
+property-object-class => daqPropertyObjectClass_getProperty()
+    Gets the class's property with the given name.
+
+property-object => daqPropertyObject_getProperty()
+    Gets the Property with the given `propertyName`.
+
+property-value-event-args => daqPropertyValueEventArgs_getProperty()"))
+(defmethod property ((object property-metadata-read-args) &optional (property-name nil property-name-suppliedp))
+  "Gets the property that owns the metadata field.
+@param property The property that owns the metadata field.
+
+Calls the openDAQ C function daqPropertyMetadataReadArgs_getProperty()."
+  (declare (ignore property-name))
+  (when property-name-suppliedp
+    (error "PROPERTY is not applicable with a PROPERTY-NAME argument for ~S." 'property-metadata-read-args))
+  (wrap (opendaq.low-level:property-metadata-read-args/get-property (%require-live-pointer object)) 'property)
+)
+
+(defmethod value ((object property-metadata-read-args))
+  "Gets the current value of the metadata field.
+@param value The value of the metadata field.
+
+Calls the openDAQ C function daqPropertyMetadataReadArgs_getValue()."
+  (wrap (opendaq.low-level:property-metadata-read-args/get-value (%require-live-pointer object)) 'base-object)
+)
+
+(defgeneric (setf value) (new-value object)
+  (:documentation "property-metadata-read-args => daqPropertyMetadataReadArgs_setValue()
+    Sets the current value of the metadata field.
+
+property-value-event-args => daqPropertyValueEventArgs_setValue()
+
+property => daqProperty_setValue()
+    Sets the value of the Property. Available only if the Property is bound to a Property object."))
+(defmethod (setf value) (new-value (object property-metadata-read-args))
+  "Sets the current value of the metadata field.
+@param value The value of the metadata field.
+
+Calls the openDAQ C function daqPropertyMetadataReadArgs_setValue()."
+  (with-daq-boxed-values ((coerced-new-value new-value :daq-base-object))
+    (opendaq.low-level:property-metadata-read-args/set-value (%require-live-pointer object) coerced-new-value))
+  new-value)
+
 (defgeneric add-property (object property)
   (:documentation "property-object-class-builder => daqPropertyObjectClassBuilder_addProperty()
     Adds a property to the class.
@@ -18253,6 +20747,7 @@ property-object => daqPropertyObject_addProperty()
 @param property The property to be added.
 @retval OPENDAQ_ERR_ALREADYEXISTS if a property with the same name already added to the class.
 @retval OPENDAQ_ERR_INVALIDTYPE if the property is an object type and is not atomic.
+
 The default value of object-type properties that are added to a class are frozen once added.
 
 Calls the openDAQ C function daqPropertyObjectClassBuilder_addProperty()."
@@ -18375,6 +20870,7 @@ property-object => daqPropertyObject_setPropertyOrder()
 (defmethod (setf property-order) (new-value (object property-object-class-builder))
   "Sets a custom order of properties as defined in the list of property names.
 @param orderedPropertyNames A list of names of properties. The order of the list is applied to the class's properties.
+
 The list should contain names of properties available in the class. When retrieving the class's properties, they will
 be sorted in the order in which the names appear in the provided list. Any class properties not in the custom order are
 kept in insertion order at the end of the class's list of properties.
@@ -18413,6 +20909,7 @@ Calls the openDAQ C function daqPropertyObjectClass_getParentName()."
 @param includeInherited If true, the returned list of properties also includes the properties of the class's ancestors.
 @param[out] properties The list of properties.
 @retval OPENDAQ_ERR_MANAGER_NOT_ASSIGNED if the parent name is set, but the Type manager is not available.
+
 The properties are sorted in insertion order, unless a custom sorting order is specified for the class. Any properties
 not listed in the custom sorting order are listed at the end of the properties list, sorted in insertion order.
 
@@ -18423,14 +20920,6 @@ Calls the openDAQ C function daqPropertyObjectClass_getProperties()."
     (%list-of (wrap (opendaq.low-level:property-object-class/get-properties (%require-live-pointer object) coerced-include-inherited) 'object-list) 'property))
 )
 
-(defgeneric property (object &optional property-name)
-  (:documentation "property-object-class => daqPropertyObjectClass_getProperty()
-    Gets the class's property with the given name.
-
-property-object => daqPropertyObject_getProperty()
-    Gets the Property with the given `propertyName`.
-
-property-value-event-args => daqPropertyValueEventArgs_getProperty()"))
 (defmethod property ((object property-object-class) &optional (property-name nil property-name-suppliedp))
   "Gets the class's property with the given name.
 @param propertyName The property's name.
@@ -18460,6 +20949,22 @@ property-object => daqPropertyObject_hasProperty()
 Calls the openDAQ C function daqPropertyObjectClass_hasProperty()."
   (with-daq-boxed-values ((coerced-property-name property-name :daq-string))
     (not (zerop (opendaq.low-level:property-object-class/has-property (%require-live-pointer object) coerced-property-name))))
+)
+
+(defgeneric property-object-core-lock-guard (object sync)
+  (:documentation "Calls the openDAQ C function daqPropertyObjectCore_getLockGuard()."))
+(defmethod property-object-core-lock-guard ((object property-object-core) sync)
+  "Calls the openDAQ C function daqPropertyObjectCore_getLockGuard()."
+  (with-daq-boxed-values ((coerced-sync sync :managed-pointer))
+    (wrap (opendaq.low-level:property-object-core/get-lock-guard (%require-live-pointer object) coerced-sync) 'lock-guard))
+)
+
+(defgeneric property-object-core-recursive-lock-guard (object sync)
+  (:documentation "Calls the openDAQ C function daqPropertyObjectCore_getRecursiveLockGuard()."))
+(defmethod property-object-core-recursive-lock-guard ((object property-object-core) sync)
+  "Calls the openDAQ C function daqPropertyObjectCore_getRecursiveLockGuard()."
+  (with-daq-boxed-values ((coerced-sync sync :managed-pointer))
+    (wrap (opendaq.low-level:property-object-core/get-recursive-lock-guard (%require-live-pointer object) coerced-sync) 'lock-guard))
 )
 
 (defgeneric check-for-references (object property)
@@ -18507,6 +21012,23 @@ Calls the openDAQ C function daqPropertyObjectClass_hasProperty()."
   (opendaq.low-level:property-object-internal/enable-core-event-trigger (%require-live-pointer object))
 )
 
+(defgeneric all-properties-no-lock (object)
+  (:documentation "Gets all properties as `IPropertyObject::getAllProperties` does, without locking the object's mutex.
+@param[out] properties The list of properties, bound to the object.
+
+Call it only while holding the object's lock.
+
+Calls the openDAQ C function daqPropertyObjectInternal_getAllPropertiesNoLock()."))
+(defmethod all-properties-no-lock ((object property-object-internal))
+  "Gets all properties as `IPropertyObject::getAllProperties` does, without locking the object's mutex.
+@param[out] properties The list of properties, bound to the object.
+
+Call it only while holding the object's lock.
+
+Calls the openDAQ C function daqPropertyObjectInternal_getAllPropertiesNoLock()."
+  (%list-of (wrap (opendaq.low-level:property-object-internal/get-all-properties-no-lock (%require-live-pointer object)) 'object-list) 'property)
+)
+
 (defgeneric core-event-trigger (object)
   (:documentation "Calls the openDAQ C function daqPropertyObjectInternal_getCoreEventTrigger()."))
 (defmethod core-event-trigger ((object property-object-internal))
@@ -18514,34 +21036,44 @@ Calls the openDAQ C function daqPropertyObjectClass_hasProperty()."
   (wrap (opendaq.low-level:property-object-internal/get-core-event-trigger (%require-live-pointer object)) 'procedure)
 )
 
-(defgeneric lock-guard (object)
-  (:documentation "Gets a lock guard that locks the object's mutex.
+(defgeneric property-object-internal-lock-guard (object)
+  (:documentation "Gets a lock guard that locks the object's mutex without recursion.
+
+While it is held, the thread must not call a method that takes the object's lock: the property value
+getters and setters, `getProperty`, `hasProperty`, `getAllProperties` and `getVisibleProperties` all do,
+so only their `NoLock` variants may be used. `clone` has no `NoLock` variant.
 
 Calls the openDAQ C function daqPropertyObjectInternal_getLockGuard()."))
-(defmethod lock-guard ((object property-object-internal))
-  "Gets a lock guard that locks the object's mutex.
+(defmethod property-object-internal-lock-guard ((object property-object-internal))
+  "Gets a lock guard that locks the object's mutex without recursion.
+
+While it is held, the thread must not call a method that takes the object's lock: the property value
+getters and setters, `getProperty`, `hasProperty`, `getAllProperties` and `getVisibleProperties` all do,
+so only their `NoLock` variants may be used. `clone` has no `NoLock` variant.
 
 Calls the openDAQ C function daqPropertyObjectInternal_getLockGuard()."
   (wrap (opendaq.low-level:property-object-internal/get-lock-guard (%require-live-pointer object)) 'lock-guard)
 )
 
 (defgeneric locking-strategy (object)
-  (:documentation "Gets the locking strategy of the object. The locking strategy must be set before the object gets and owner is added to a parent folder.
+  (:documentation "Gets the locking strategy of the object.
 
 Calls the openDAQ C function daqPropertyObjectInternal_getLockingStrategy()."))
 (defmethod locking-strategy ((object property-object-internal))
-  "Gets the locking strategy of the object. The locking strategy must be set before the object gets and owner is added to a parent folder.
+  "Gets the locking strategy of the object.
 
 Calls the openDAQ C function daqPropertyObjectInternal_getLockingStrategy()."
   (opendaq.low-level:property-object-internal/get-locking-strategy (%require-live-pointer object))
 )
 
 (defgeneric mutex (object)
-  (:documentation "Gets the object's mutex. Returns the mutex of the closest `OwnLock` strategy ancestor if using the `InheritLock` strategy.
+  (:documentation "Gets the object's mutex. Returns the mutex of the closest `OwnLock` strategy ancestor
+if using the `InheritLock` strategy.
 
 Calls the openDAQ C function daqPropertyObjectInternal_getMutex()."))
 (defmethod mutex ((object property-object-internal))
-  "Gets the object's mutex. Returns the mutex of the closest `OwnLock` strategy ancestor if using the `InheritLock` strategy.
+  "Gets the object's mutex. Returns the mutex of the closest `OwnLock` strategy ancestor
+if using the `InheritLock` strategy.
 
 Calls the openDAQ C function daqPropertyObjectInternal_getMutex()."
   (wrap (opendaq.low-level:property-object-internal/get-mutex (%require-live-pointer object)) 'mutex)
@@ -18561,6 +21093,26 @@ Calls the openDAQ C function daqPropertyObjectInternal_getMutex()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:property-object-internal/get-path (%require-live-pointer object)))
 )
 
+(defgeneric property-no-lock (object property-name)
+  (:documentation "Gets a property as `IPropertyObject::getProperty` does, without locking the object's mutex.
+@param propertyName The name of the property. Child properties are addressed with a dot (\"Child.Value\").
+@param[out] property The property, bound to the object.
+
+Call it only while holding the object's lock.
+
+Calls the openDAQ C function daqPropertyObjectInternal_getPropertyNoLock()."))
+(defmethod property-no-lock ((object property-object-internal) property-name)
+  "Gets a property as `IPropertyObject::getProperty` does, without locking the object's mutex.
+@param propertyName The name of the property. Child properties are addressed with a dot (\"Child.Value\").
+@param[out] property The property, bound to the object.
+
+Call it only while holding the object's lock.
+
+Calls the openDAQ C function daqPropertyObjectInternal_getPropertyNoLock()."
+  (with-daq-boxed-values ((coerced-property-name property-name :daq-string))
+    (wrap (opendaq.low-level:property-object-internal/get-property-no-lock (%require-live-pointer object) coerced-property-name) 'property))
+)
+
 (defgeneric property-selection-value-no-lock (object name)
   (:documentation "Calls the openDAQ C function daqPropertyObjectInternal_getPropertySelectionValueNoLock()."))
 (defmethod property-selection-value-no-lock ((object property-object-internal) name)
@@ -18577,15 +21129,56 @@ Calls the openDAQ C function daqPropertyObjectInternal_getMutex()."
     (wrap (opendaq.low-level:property-object-internal/get-property-value-no-lock (%require-live-pointer object) coerced-name) 'base-object))
 )
 
-(defgeneric recursive-lock-guard (object)
-  (:documentation "Gets a lock guard that locks the object's mutex. The mutex is wrapped to be recursive, allowing for multiple locks to be instantiated on the same thread. Fails if a non-recursive lock was already created on this thread.
+(defgeneric property-object-internal-recursive-lock-guard (object)
+  (:documentation "Gets a lock guard that locks the object's mutex. The mutex is wrapped to be recursive,
+allowing for multiple locks to be instantiated on the same thread. Fails if a non-recursive lock
+was already created on this thread.
 
 Calls the openDAQ C function daqPropertyObjectInternal_getRecursiveLockGuard()."))
-(defmethod recursive-lock-guard ((object property-object-internal))
-  "Gets a lock guard that locks the object's mutex. The mutex is wrapped to be recursive, allowing for multiple locks to be instantiated on the same thread. Fails if a non-recursive lock was already created on this thread.
+(defmethod property-object-internal-recursive-lock-guard ((object property-object-internal))
+  "Gets a lock guard that locks the object's mutex. The mutex is wrapped to be recursive,
+allowing for multiple locks to be instantiated on the same thread. Fails if a non-recursive lock
+was already created on this thread.
 
 Calls the openDAQ C function daqPropertyObjectInternal_getRecursiveLockGuard()."
   (wrap (opendaq.low-level:property-object-internal/get-recursive-lock-guard (%require-live-pointer object)) 'lock-guard)
+)
+
+(defgeneric visible-properties-no-lock (object)
+  (:documentation "Gets the visible properties as `IPropertyObject::getVisibleProperties` does, without locking the object's mutex.
+@param[out] properties The list of visible properties, bound to the object.
+
+Call it only while holding the object's lock.
+
+Calls the openDAQ C function daqPropertyObjectInternal_getVisiblePropertiesNoLock()."))
+(defmethod visible-properties-no-lock ((object property-object-internal))
+  "Gets the visible properties as `IPropertyObject::getVisibleProperties` does, without locking the object's mutex.
+@param[out] properties The list of visible properties, bound to the object.
+
+Call it only while holding the object's lock.
+
+Calls the openDAQ C function daqPropertyObjectInternal_getVisiblePropertiesNoLock()."
+  (%list-of (wrap (opendaq.low-level:property-object-internal/get-visible-properties-no-lock (%require-live-pointer object)) 'object-list) 'property)
+)
+
+(defgeneric has-property-no-lock (object property-name)
+  (:documentation "Checks for a property as `IPropertyObject::hasProperty` does, without locking the object's mutex.
+@param propertyName The name of the property. Child properties are addressed with a dot (\"Child.Value\").
+@param[out] hasProperty True if the property exists.
+
+Call it only while holding the object's lock.
+
+Calls the openDAQ C function daqPropertyObjectInternal_hasPropertyNoLock()."))
+(defmethod has-property-no-lock ((object property-object-internal) property-name)
+  "Checks for a property as `IPropertyObject::hasProperty` does, without locking the object's mutex.
+@param propertyName The name of the property. Child properties are addressed with a dot (\"Child.Value\").
+@param[out] hasProperty True if the property exists.
+
+Call it only while holding the object's lock.
+
+Calls the openDAQ C function daqPropertyObjectInternal_hasPropertyNoLock()."
+  (with-daq-boxed-values ((coerced-property-name property-name :daq-string))
+    (not (zerop (opendaq.low-level:property-object-internal/has-property-no-lock (%require-live-pointer object) coerced-property-name))))
 )
 
 (defgeneric has-user-read-access (object user-context)
@@ -18614,11 +21207,19 @@ property-value-event-args => daqPropertyValueEventArgs_getIsUpdating()"))
   new-value)
 
 (defgeneric (setf locking-strategy) (new-value object)
-  (:documentation "Sets the locking strategy of the object. The locking strategy must be set before the object gets and owner is added to a parent folder.
+  (:documentation "Sets the locking strategy of the object. The locking strategy must be set before the
+object gets an owner or is added to a parent folder.
+
+Property objects default to `InheritLock`, so an object stored in an object-type property shares the
+lock of the object that holds it. Components default to `OwnLock`. A clone keeps the strategy of its source.
 
 Calls the openDAQ C function daqPropertyObjectInternal_setLockingStrategy()."))
 (defmethod (setf locking-strategy) (new-value (object property-object-internal))
-  "Sets the locking strategy of the object. The locking strategy must be set before the object gets and owner is added to a parent folder.
+  "Sets the locking strategy of the object. The locking strategy must be set before the
+object gets an owner or is added to a parent folder.
+
+Property objects default to `InheritLock`, so an object stored in an object-type property shares the
+lock of the object that holds it. Components default to `OwnLock`. A clone keeps the strategy of its source.
 
 Calls the openDAQ C function daqPropertyObjectInternal_setLockingStrategy()."
   (with-daq-boxed-values ((coerced-new-value new-value nil))
@@ -18667,11 +21268,13 @@ Calls the openDAQ C function daqPropertyObjectProtected_clearProtectedPropertyVa
 
 (defgeneric clear-protected-property-values (object)
   (:documentation "Clears values of all properties contained in the Property object, including nested child properties.
+
 This function behaves similarly to `IPropertyObject::clearPropertyValues()`, but also clears read-only properties.
 
 Calls the openDAQ C function daqPropertyObjectProtected_clearProtectedPropertyValues()."))
 (defmethod clear-protected-property-values ((object property-object-protected))
   "Clears values of all properties contained in the Property object, including nested child properties.
+
 This function behaves similarly to `IPropertyObject::clearPropertyValues()`, but also clears read-only properties.
 
 Calls the openDAQ C function daqPropertyObjectProtected_clearProtectedPropertyValues()."
@@ -18718,6 +21321,7 @@ Calls the openDAQ C function daqPropertyObjectProtected_setProtectedPropertyValu
 @retval OPENDAQ_ERR_INVALIDVALUE if the property has no name.
 @retval OPENDAQ_ERR_ALREADYEXISTS if a property with the same name is already part of the Property object.
 @retval OPENDAQ_ERR_FROZEN if the Property object is frozen.
+
 The Property is frozen once added to the Property object, making it immutable. The same Property cannot
 be added to multiple different Property objects.
 
@@ -18728,19 +21332,23 @@ Calls the openDAQ C function daqPropertyObject_addProperty()."
 
 (defgeneric begin-update (object)
   (:documentation "Begins batch configuration of the object.
+
 Batched configuration is used to apply several settings at once. To begin batch configuration, call `beginUpdate`.
 When the `setPropertyValue` is called on the object, the changes are not immediately applied to it. When `endUpdate`
 is called, the property values set between the `beginUpdate` and `endUpdate` method calls are
 applied. It triggers the ˙OnPropertyWriteEvent` for each property value set, and the `OnEndUpdate` event.
+
 `beginUpdate` is called recursively for each child property object.
 
 Calls the openDAQ C function daqPropertyObject_beginUpdate()."))
 (defmethod begin-update ((object property-object))
   "Begins batch configuration of the object.
+
 Batched configuration is used to apply several settings at once. To begin batch configuration, call `beginUpdate`.
 When the `setPropertyValue` is called on the object, the changes are not immediately applied to it. When `endUpdate`
 is called, the property values set between the `beginUpdate` and `endUpdate` method calls are
 applied. It triggers the ˙OnPropertyWriteEvent` for each property value set, and the `OnEndUpdate` event.
+
 `beginUpdate` is called recursively for each child property object.
 
 Calls the openDAQ C function daqPropertyObject_beginUpdate()."
@@ -18752,9 +21360,11 @@ Calls the openDAQ C function daqPropertyObject_beginUpdate()."
 @param propertyName The name of the Property of which value should be cleared.
 @retval OPENDAQ_ERR_NOTFOUND if a Property with given `propertyName` is not part of the Property object.
 @retval OPENDAQ_ERR_FROZEN if the Property object is frozen.
+
 When a Property value is set, the value is written in the internal dictionary of Property values.
 This function will remove said value from the dictionary. If the tries to obtain the Property value of
 a property that does not have a set Property value, then the default value is returned.
+
 Importantly, clearing the value of an Object-type property will call `clear` on all the child object's properties.
 
 Calls the openDAQ C function daqPropertyObject_clearPropertyValue()."))
@@ -18763,9 +21373,11 @@ Calls the openDAQ C function daqPropertyObject_clearPropertyValue()."))
 @param propertyName The name of the Property of which value should be cleared.
 @retval OPENDAQ_ERR_NOTFOUND if a Property with given `propertyName` is not part of the Property object.
 @retval OPENDAQ_ERR_FROZEN if the Property object is frozen.
+
 When a Property value is set, the value is written in the internal dictionary of Property values.
 This function will remove said value from the dictionary. If the tries to obtain the Property value of
 a property that does not have a set Property value, then the default value is returned.
+
 Importantly, clearing the value of an Object-type property will call `clear` on all the child object's properties.
 
 Calls the openDAQ C function daqPropertyObject_clearPropertyValue()."
@@ -18775,6 +21387,7 @@ Calls the openDAQ C function daqPropertyObject_clearPropertyValue()."
 
 (defgeneric clear-property-values (object)
   (:documentation "Clears values of all properties contained in the Property object, including nested child properties.
+
 This function clears the values by internally invoking `clearPropertyValue(...)` for all properties returned by
 `getAllProperties()`; for object-type properties it therefore clears their child properties as well.
 Read-only properties and frozen objects are skipped.
@@ -18782,6 +21395,7 @@ Read-only properties and frozen objects are skipped.
 Calls the openDAQ C function daqPropertyObject_clearPropertyValues()."))
 (defmethod clear-property-values ((object property-object))
   "Clears values of all properties contained in the Property object, including nested child properties.
+
 This function clears the values by internally invoking `clearPropertyValue(...)` for all properties returned by
 `getAllProperties()`; for object-type properties it therefore clears their child properties as well.
 Read-only properties and frozen objects are skipped.
@@ -18792,19 +21406,23 @@ Calls the openDAQ C function daqPropertyObject_clearPropertyValues()."
 
 (defgeneric end-update (object)
   (:documentation "Ends batch configuration of the object.
+
 Batched configuration is used to apply several settings at once. To begin batch configuration, call `beginUpdate`.
 When the `setPropertyValue` is called on the object, the changes are not immediately applied to it. When `endUpdate`
 is called, the property values set between the `beginUpdate` and `endUpdate` method calls are
 applied. It triggers the ˙OnPropertyWriteEvent` for each property value set, and the `OnEndUpdate` event.
+
 `endUpdate` is called recursively for each child property object.
 
 Calls the openDAQ C function daqPropertyObject_endUpdate()."))
 (defmethod end-update ((object property-object))
   "Ends batch configuration of the object.
+
 Batched configuration is used to apply several settings at once. To begin batch configuration, call `beginUpdate`.
 When the `setPropertyValue` is called on the object, the changes are not immediately applied to it. When `endUpdate`
 is called, the property values set between the `beginUpdate` and `endUpdate` method calls are
 applied. It triggers the ˙OnPropertyWriteEvent` for each property value set, and the `OnEndUpdate` event.
+
 `endUpdate` is called recursively for each child property object.
 
 Calls the openDAQ C function daqPropertyObject_endUpdate()."
@@ -18813,9 +21431,12 @@ Calls the openDAQ C function daqPropertyObject_endUpdate()."
 
 (defgeneric find-properties (object property-filter &optional component-filter)
   (:documentation "Retrieves a list of properties from the Property object that match the given property filter.
-@param propertyFilter A filter used to select relevant properties. Can include a recursive wrapper to search thru nested property objects.
-@param componentFilter An optional filter to determine which components' properties are included in the search. A recursive wrapper can be used to enable tree-traversal search.
+@param propertyFilter A filter used to select relevant properties. Can include a recursive wrapper
+to search thru nested property objects.
+@param componentFilter An optional filter to determine which components' properties are included in the search.
+A recursive wrapper can be used to enable tree-traversal search.
 @param[out] properties The list containing the matching properties.
+
 If the propertyFilter is nullptr, only the visible properties directly associated with the current object are retrieved.
 When searching for properties within a component, if no componentFilter is provided, only the current component is searched.
 If a componentFilter is provided but the current component does not match it, the result will be an empty list.
@@ -18823,9 +21444,12 @@ If a componentFilter is provided but the current component does not match it, th
 Calls the openDAQ C function daqPropertyObject_findProperties()."))
 (defmethod find-properties ((object property-object) property-filter &optional (component-filter nil))
   "Retrieves a list of properties from the Property object that match the given property filter.
-@param propertyFilter A filter used to select relevant properties. Can include a recursive wrapper to search thru nested property objects.
-@param componentFilter An optional filter to determine which components' properties are included in the search. A recursive wrapper can be used to enable tree-traversal search.
+@param propertyFilter A filter used to select relevant properties. Can include a recursive wrapper
+to search thru nested property objects.
+@param componentFilter An optional filter to determine which components' properties are included in the search.
+A recursive wrapper can be used to enable tree-traversal search.
 @param[out] properties The list containing the matching properties.
+
 If the propertyFilter is nullptr, only the visible properties directly associated with the current object are retrieved.
 When searching for properties within a component, if no componentFilter is provided, only the current component is searched.
 If a componentFilter is provided but the current component does not match it, the result will be an empty list.
@@ -18839,14 +21463,18 @@ Calls the openDAQ C function daqPropertyObject_findProperties()."
 (defgeneric all-properties (object)
   (:documentation "Returns a list of all properties contained in the Property object.
 @param[out] properties The List of properties.
+
 Properties are retrieved regardless of their visibility. They are sorted in insertion order unless a custom order is specified.
+
 This function returns both the properties added to the Property object, as well as those of its class.
 
 Calls the openDAQ C function daqPropertyObject_getAllProperties()."))
 (defmethod all-properties ((object property-object))
   "Returns a list of all properties contained in the Property object.
 @param[out] properties The List of properties.
+
 Properties are retrieved regardless of their visibility. They are sorted in insertion order unless a custom order is specified.
+
 This function returns both the properties added to the Property object, as well as those of its class.
 
 Calls the openDAQ C function daqPropertyObject_getAllProperties()."
@@ -18856,6 +21484,7 @@ Calls the openDAQ C function daqPropertyObject_getAllProperties()."
 (defgeneric class-name (object)
   (:documentation "Gets the name of the class the Property object was constructed with.
 @param[out] className The class's name. Contains an empty string if the class name is not configured.
+
 A Property object inherits all properties of the Property object class of the same name. Such Property objects
 have access to the Type manager from which they can retrieve its class type and its properties.
 
@@ -18863,6 +21492,7 @@ Calls the openDAQ C function daqPropertyObject_getClassName()."))
 (defmethod class-name ((object property-object))
   "Gets the name of the class the Property object was constructed with.
 @param[out] className The class's name. Contains an empty string if the class name is not configured.
+
 A Property object inherits all properties of the Property object class of the same name. Such Property objects
 have access to the Type manager from which they can retrieve its class type and its properties.
 
@@ -18871,8 +21501,10 @@ Calls the openDAQ C function daqPropertyObject_getClassName()."
 )
 
 (defgeneric on-any-property-value-read (object)
-  (:documentation "Gets the Event that is triggered whenever any Property value is read.The event is triggered after the specific Property event.
+  (:documentation "Gets the Event that is triggered whenever any Property value is read.The event is triggered after the specific Property
+event.
 @param[out] event The read Event.
+
 A handler can be added to the event containing a callback function which is invoked whenever the event is triggered.
 The callback function requires two parameters - a Property object, as well as a \"Property value event args\" object.
 The callback will be invoked with the Property object holding the read value as the first argument. The second argument
@@ -18881,8 +21513,10 @@ If the read value is overridden, the overridden value is read instead.
 
 Calls the openDAQ C function daqPropertyObject_getOnAnyPropertyValueRead()."))
 (defmethod on-any-property-value-read ((object property-object))
-  "Gets the Event that is triggered whenever any Property value is read.The event is triggered after the specific Property event.
+  "Gets the Event that is triggered whenever any Property value is read.The event is triggered after the specific Property
+event.
 @param[out] event The read Event.
+
 A handler can be added to the event containing a callback function which is invoked whenever the event is triggered.
 The callback function requires two parameters - a Property object, as well as a \"Property value event args\" object.
 The callback will be invoked with the Property object holding the read value as the first argument. The second argument
@@ -18894,8 +21528,10 @@ Calls the openDAQ C function daqPropertyObject_getOnAnyPropertyValueRead()."
 )
 
 (defgeneric on-any-property-value-write (object)
-  (:documentation "Gets the Event that is triggered whenever any Property value is written. The event is triggered after the specific Property event.
+  (:documentation "Gets the Event that is triggered whenever any Property value is written. The event is triggered after the specific Property
+event.
 @param[out] event The write Event.
+
 A handler can be added to the event containing a callback function which is invoked whenever the event is triggered.
 The callback function requires two parameters - a Property object, as well as a \"Property value event args\" object.
 The callback will be invoked with the Property object holding the written-to property as the first argument The second argument
@@ -18904,8 +21540,10 @@ If the written value is overridden, the overridden value is stored in the Proper
 
 Calls the openDAQ C function daqPropertyObject_getOnAnyPropertyValueWrite()."))
 (defmethod on-any-property-value-write ((object property-object))
-  "Gets the Event that is triggered whenever any Property value is written. The event is triggered after the specific Property event.
+  "Gets the Event that is triggered whenever any Property value is written. The event is triggered after the specific Property
+event.
 @param[out] event The write Event.
+
 A handler can be added to the event containing a callback function which is invoked whenever the event is triggered.
 The callback function requires two parameters - a Property object, as well as a \"Property value event args\" object.
 The callback will be invoked with the Property object holding the written-to property as the first argument The second argument
@@ -18919,6 +21557,7 @@ Calls the openDAQ C function daqPropertyObject_getOnAnyPropertyValueWrite()."
 (defgeneric on-end-update (object)
   (:documentation "Gets the Event that is triggered whenever the batch configuration is applied.
 @param[out] event The Event.
+
 A handler can be added to the event containing a callback function which is invoked whenever the event is triggered.
 The callback function requires one parameter - a \"End update value event args\" object.
 The callback will be invoked with the batch configuration is applied, i.e. from the `endUpdate` method. The first argument
@@ -18928,6 +21567,7 @@ Calls the openDAQ C function daqPropertyObject_getOnEndUpdate()."))
 (defmethod on-end-update ((object property-object))
   "Gets the Event that is triggered whenever the batch configuration is applied.
 @param[out] event The Event.
+
 A handler can be added to the event containing a callback function which is invoked whenever the event is triggered.
 The callback function requires one parameter - a \"End update value event args\" object.
 The callback will be invoked with the batch configuration is applied, i.e. from the `endUpdate` method. The first argument
@@ -18942,6 +21582,7 @@ Calls the openDAQ C function daqPropertyObject_getOnEndUpdate()."
 @param propertyName The name of the property.
 @param[out] event The read Event.
 @retval OPENDAQ_ERR_NOTFOUND if the Property object does not contain a Property named `propertyName`.
+
 A handler can be added to the event containing a callback function which is invoked whenever the event is triggered.
 The callback function requires two parameters - a Property object, as well as a \"Property value event args\" object.
 The callback will be invoked with the Property object holding the read value as the first argument. The second argument
@@ -18960,6 +21601,7 @@ Calls the openDAQ C function daqPropertyObject_getOnPropertyValueRead()."
 @param propertyName The name of the property.
 @param[out] event The write Event.
 @retval OPENDAQ_ERR_NOTFOUND if the Property object does not contain a Property named `propertyName`.
+
 A handler can be added to the event containing a callback function which is invoked whenever the event is triggered.
 The callback function requires two parameters - a Property object, as well as a \"Property value event args\" object.
 The callback will be invoked with the Property object holding the written-to property as the first argument The second argument
@@ -18991,12 +21633,15 @@ Calls the openDAQ C function daqPropertyObject_getPermissionManager()."
 @param propertyName The name of the property.
 @param[out] property The retrieved Property.
 @retval OPENDAQ_ERR_NOTFOUND if the Property object does not contain the requested Property.
+
 The property is obtained from either the Property object class of the Property object, or the
 object's local list of properties. The Property held by the object/class is not returned directly,
 but is instead cloned, and bound to the Property object. This allows for evaluation of Property metadata
 that depends on other properties of the Property object.
+
 For example, a Property's visibility might depend on the value of another Property. To make evaluation
 of the visibility parameter possible, the Property must be able to access its owning Property object.
+
 Likewise, Reference properties always point at another Property of a Property object. Again, for this to
 be possible, the Property must be able to access its owning Property object, to be able to retrieve its
 referenced Property.
@@ -19015,6 +21660,7 @@ Calls the openDAQ C function daqPropertyObject_getProperty()."
 @retval OPENDAQ_ERR_NOTFOUND if a Property with given `propertyName` is not part of the Property object.
 @retval OPENDAQ_ERR_INVALIDPROPERTY if the Property either has no Selection values, or the Selection values are not a list or dictionary.
 @retval OPENDAQ_ERR_INVALIDTYPE if the retrieved value does not match the Property's item type.
+
 This function serves as a shortcut to obtaining the Property value of a Property, and using it to retrieve the currently
 selected value from the Selection values of the Property. For example, if the Selection values contain the following list
 \"[\"banana\", \"apple\", \"pear\"]\", and the corresponding Property value is set to 1, retrieving the Property selection value
@@ -19028,6 +21674,7 @@ Calls the openDAQ C function daqPropertyObject_getPropertySelectionValue()."))
 @retval OPENDAQ_ERR_NOTFOUND if a Property with given `propertyName` is not part of the Property object.
 @retval OPENDAQ_ERR_INVALIDPROPERTY if the Property either has no Selection values, or the Selection values are not a list or dictionary.
 @retval OPENDAQ_ERR_INVALIDTYPE if the retrieved value does not match the Property's item type.
+
 This function serves as a shortcut to obtaining the Property value of a Property, and using it to retrieve the currently
 selected value from the Selection values of the Property. For example, if the Selection values contain the following list
 \"[\"banana\", \"apple\", \"pear\"]\", and the corresponding Property value is set to 1, retrieving the Property selection value
@@ -19045,18 +21692,22 @@ Calls the openDAQ C function daqPropertyObject_getPropertySelectionValue()."
 @retval OPENDAQ_ERR_NOTFOUND if a property with given `propertyName` is not part of the Property object.
 @retval OPENDAQ_ERR_INVALIDPARAMETER if attempting to get a value at an index of a non-list Property.
 @retval OPENDAQ_ERR_OUTOFRANGE if attempting to get a value of a list Property at an out-of-bounds index.
+
 The value is retrieved from a local dictionary of Property values where they are stored when set. If a value is not
 present under the `propertyName` key, the default value of the corresponding Property is returned. If said property
 is not part of the Property object, an error occurs.
 @subsection value_get_child_property_objects Child Property objects
+
 The Property value getter allows for direct retrieval of values of child Property objects. To get the Property value of a
 child Property object, the `propertyName` parameter should be of the format: \"childName.propertyName\". This pattern can
 also be used to access nested properties - for example \"childName1.childName2.childName3.propertyName\".
 @subsection value_get_list_properties List properties
+
 If the requested Property is a list-type object, an item of the list at a selected index can be retrieved instead of the list
 itself. To do so, add a [index] suffix to the `propertyName` parameter. For example \"ListProperty[1]\" retrieves the 2nd item
 stored in the list Property value of the Property named \"ListProperty\".
 @subsection value_get_selection_properties Selection properties
+
 If the requested Property has the Selection values fields configured, the Property value getter returns an index/key of the
 selected item in the Selection values list/dictionary.
 
@@ -19068,18 +21719,22 @@ Calls the openDAQ C function daqPropertyObject_getPropertyValue()."))
 @retval OPENDAQ_ERR_NOTFOUND if a property with given `propertyName` is not part of the Property object.
 @retval OPENDAQ_ERR_INVALIDPARAMETER if attempting to get a value at an index of a non-list Property.
 @retval OPENDAQ_ERR_OUTOFRANGE if attempting to get a value of a list Property at an out-of-bounds index.
+
 The value is retrieved from a local dictionary of Property values where they are stored when set. If a value is not
 present under the `propertyName` key, the default value of the corresponding Property is returned. If said property
 is not part of the Property object, an error occurs.
 @subsection value_get_child_property_objects Child Property objects
+
 The Property value getter allows for direct retrieval of values of child Property objects. To get the Property value of a
 child Property object, the `propertyName` parameter should be of the format: \"childName.propertyName\". This pattern can
 also be used to access nested properties - for example \"childName1.childName2.childName3.propertyName\".
 @subsection value_get_list_properties List properties
+
 If the requested Property is a list-type object, an item of the list at a selected index can be retrieved instead of the list
 itself. To do so, add a [index] suffix to the `propertyName` parameter. For example \"ListProperty[1]\" retrieves the 2nd item
 stored in the list Property value of the Property named \"ListProperty\".
 @subsection value_get_selection_properties Selection properties
+
 If the requested Property has the Selection values fields configured, the Property value getter returns an index/key of the
 selected item in the Selection values list/dictionary.
 
@@ -19091,6 +21746,7 @@ Calls the openDAQ C function daqPropertyObject_getPropertyValue()."
 (defgeneric updating (object)
   (:documentation "Returns the state of batch configuration.
 @param[out] updating True if the object is performing batch update of its properties.
+
 Batched configuration is used to apply several settings at once. To begin batch configuration, call `beginUpdate`.
 When the `setPropertyValue` is called on the object, the changes are not immediately applied. When `endUpdate`
 is called, the property values set between the `beginUpdate` and `endUpdate` method calls are
@@ -19101,6 +21757,7 @@ Calls the openDAQ C function daqPropertyObject_getUpdating()."))
 (defmethod updating ((object property-object))
   "Returns the state of batch configuration.
 @param[out] updating True if the object is performing batch update of its properties.
+
 Batched configuration is used to apply several settings at once. To begin batch configuration, call `beginUpdate`.
 When the `setPropertyValue` is called on the object, the changes are not immediately applied. When `endUpdate`
 is called, the property values set between the `beginUpdate` and `endUpdate` method calls are
@@ -19114,16 +21771,20 @@ Calls the openDAQ C function daqPropertyObject_getUpdating()."
 (defgeneric visible-properties (object)
   (:documentation "Returns a list of visible properties contained in the Property object.
 @param[out] properties The List of properties.
+
 A Property is visible if both the Visible parameter is set to `true`, and IsReferenced is `false`. The properties
 are sorted in insertion order unless a custom order is specified.
+
 This function returns both the properties added to the Property object, as well as those of its class.
 
 Calls the openDAQ C function daqPropertyObject_getVisibleProperties()."))
 (defmethod visible-properties ((object property-object))
   "Returns a list of visible properties contained in the Property object.
 @param[out] properties The List of properties.
+
 A Property is visible if both the Visible parameter is set to `true`, and IsReferenced is `false`. The properties
 are sorted in insertion order unless a custom order is specified.
+
 This function returns both the properties added to the Property object, as well as those of its class.
 
 Calls the openDAQ C function daqPropertyObject_getVisibleProperties()."
@@ -19143,8 +21804,10 @@ Calls the openDAQ C function daqPropertyObject_hasProperty()."
 (defmethod remove-property ((object property-object) property-name)
   "Removes the Property named `propertyName` from the Property object.
 @param propertyName The name of the Property to be removed.
-@retval OPENDAQ_ERR_NOTFOUND if the Property object does not contain a Property named `propertyName`, or the Property is part of the Property object's Property object class.
+@retval OPENDAQ_ERR_NOTFOUND if the Property object does not contain a Property named `propertyName`, or the
+Property is part of the Property object's Property object class.
 @retval OPENDAQ_ERR_FROZEN if the Property object is frozen.
+
 A property can only be removed from a Property object, if it was added to the object, and not inherited from its class.
 
 Calls the openDAQ C function daqPropertyObject_removeProperty()."
@@ -19156,6 +21819,7 @@ Calls the openDAQ C function daqPropertyObject_removeProperty()."
   "Sets a custom order of properties as defined in the list of property names.
 @param orderedPropertyNames A list of names of properties. The order of the list is applied to the object's properties.
 @retval OPENDAQ_ERR_FROZEN if the Property object is frozen.
+
 The list should contain names of properties available in the object. When retrieving the Property object's properties, they will
 be sorted in the order in which the names appear in the provided list. Any properties not in the custom order are
 kept in insertion order at the end of the Property object's list of properties.
@@ -19173,6 +21837,7 @@ Calls the openDAQ C function daqPropertyObject_setPropertyOrder()."
 @retval OPENDAQ_ERR_INVALIDPROPERTY if the Property has no Selection values.
 @retval OPENDAQ_ERR_ACCESSDENIED if the property is Read-only.
 @retval OPENDAQ_ERR_FROZEN if the Property object is frozen.
+
 Works for all Selection properties (list or dictionary): the value is the actual selection item (e.g. a string from the list,
 or the value part of a key-value pair in the dictionary). Use setPropertyValue when setting by index/key.
 
@@ -19185,6 +21850,7 @@ Calls the openDAQ C function daqPropertyObject_setPropertySelectionValue()."))
 @retval OPENDAQ_ERR_INVALIDPROPERTY if the Property has no Selection values.
 @retval OPENDAQ_ERR_ACCESSDENIED if the property is Read-only.
 @retval OPENDAQ_ERR_FROZEN if the Property object is frozen.
+
 Works for all Selection properties (list or dictionary): the value is the actual selection item (e.g. a string from the list,
 or the value part of a key-value pair in the dictionary). Use setPropertyValue when setting by index/key.
 
@@ -19206,6 +21872,7 @@ Calls the openDAQ C function daqPropertyObject_setPropertySelectionValue()."
 @retval OPENDAQ_ERR_COERCION_FAILED if the Coercer fails to coerce the `value`.
 @retval OPENDAQ_ERR_FROZEN if the Property object is frozen.
 @retval OPENDAQ_ERR_IGNORED if the `value` is the same as the default, or the previously written value.
+
 Stores the provided `value` into an internal dictionary of property name and value pairs. This property value can
 later be retrieved through the corresponding getter method when invoked with the same `propertyName`. The provided
 `value` must adhere to the restrictions of the corresponding Property (that bears the name `propertyName`). If such
@@ -19217,8 +21884,10 @@ than the Max value.
 - The value will be validated by the Property validator causing the setter method to fail if validation is unsuccessful.
 - The value will be coerced to fit the coercion expression of the Property coercer before being written into the local
 dictionary of property values.
+
 Setting the value of a Property will override either its default value or the value that was set beforehand.
 @subsection patterns Behaviour patterns of note
+
 - When setting the value of a Property with the Selection values field configured (a Selection property), the `value`
 must be an integer type, and acts as an index/key into the list/dictionary of Selection values.
 - If the Property is a Reference property (the Referenced property field is configured), the `value` is actually written
@@ -19227,6 +21896,7 @@ under the key of the referenced Property, not the one specified through the `pro
 of the same type as specified by the item and key type of the Property.
 - Setting a Property value will invoke the corresponding `onPropertyValueWrite` event.
 @subsection value_set_child_property_objects Child Property objects
+
 The Property value setter allows for direct configuration of any child Property objects. To set the Property value of a
 child Property object, the `propertyName` parameter should be of the format: \"childName.propertyName\". This pattern
 can also be used to access nested properties - for example \"childName1.childName2.childName3.propertyName\".
@@ -19244,6 +21914,7 @@ Calls the openDAQ C function daqPropertyObject_setPropertyValue()."))
 @retval OPENDAQ_ERR_COERCION_FAILED if the Coercer fails to coerce the `value`.
 @retval OPENDAQ_ERR_FROZEN if the Property object is frozen.
 @retval OPENDAQ_ERR_IGNORED if the `value` is the same as the default, or the previously written value.
+
 Stores the provided `value` into an internal dictionary of property name and value pairs. This property value can
 later be retrieved through the corresponding getter method when invoked with the same `propertyName`. The provided
 `value` must adhere to the restrictions of the corresponding Property (that bears the name `propertyName`). If such
@@ -19255,8 +21926,10 @@ than the Max value.
 - The value will be validated by the Property validator causing the setter method to fail if validation is unsuccessful.
 - The value will be coerced to fit the coercion expression of the Property coercer before being written into the local
 dictionary of property values.
+
 Setting the value of a Property will override either its default value or the value that was set beforehand.
 @subsection patterns Behaviour patterns of note
+
 - When setting the value of a Property with the Selection values field configured (a Selection property), the `value`
 must be an integer type, and acts as an index/key into the list/dictionary of Selection values.
 - If the Property is a Reference property (the Referenced property field is configured), the `value` is actually written
@@ -19265,6 +21938,7 @@ under the key of the referenced Property, not the one specified through the `pro
 of the same type as specified by the item and key type of the Property.
 - Setting a Property value will invoke the corresponding `onPropertyValueWrite` event.
 @subsection value_set_child_property_objects Child Property objects
+
 The Property value setter allows for direct configuration of any child Property objects. To set the Property value of a
 child Property object, the `propertyName` parameter should be of the format: \"childName.propertyName\". This pattern
 can also be used to access nested properties - for example \"childName1.childName2.childName3.propertyName\".
@@ -19307,11 +21981,6 @@ Calls the openDAQ C function daqPropertyObject_setPropertyValue()."
   (wrap (opendaq.low-level:property-value-event-args/get-value (%require-live-pointer object)) 'base-object)
 )
 
-(defgeneric (setf value) (new-value object)
-  (:documentation "property-value-event-args => daqPropertyValueEventArgs_setValue()
-
-property => daqProperty_setValue()
-    Sets the value of the Property. Available only if the Property is bound to a Property object."))
 (defmethod (setf value) (new-value (object property-value-event-args))
   "Calls the openDAQ C function daqPropertyValueEventArgs_setValue()."
   (with-daq-boxed-values ((coerced-new-value new-value :daq-base-object))
@@ -19319,7 +21988,8 @@ property => daqProperty_setValue()
   new-value)
 
 (defmethod callable-info ((object property))
-  "Gets the Callable information objects of the Property that specifies the argument and return types of the callable object stored as the Property value.
+  "Gets the Callable information objects of the Property that specifies the argument and return types
+of the callable object stored as the Property value.
 @param[out] callable The Callable info object.
 
 Calls the openDAQ C function daqProperty_getCallableInfo()."
@@ -19329,6 +21999,7 @@ Calls the openDAQ C function daqProperty_getCallableInfo()."
 (defmethod coercer ((object property))
   "Gets the coercer of the Property.
 @param[out] coercer The coercer.
+
 Used to coerce a value written to the corresponding Property value to the constraints specified by the coercer.
 
 Calls the openDAQ C function daqProperty_getCoercer()."
@@ -19336,7 +22007,8 @@ Calls the openDAQ C function daqProperty_getCoercer()."
 )
 
 (defmethod default-value ((object property))
-  "Gets the Default value of the Property. The Default value must always be configured for a Property to be in a valid state. Exceptions are Function/Procedure and Reference properties.
+  "Gets the Default value of the Property. The Default value must always be configured for a Property to be
+in a valid state. Exceptions are Function/Procedure and Reference properties.
 @param[out] value The Default value of the Property.
 
 Calls the openDAQ C function daqProperty_getDefaultValue()."
@@ -19365,7 +22037,8 @@ Calls the openDAQ C function daqProperty_getIsReferenced()."
 )
 
 (defmethod item-type ((object property))
-  "Gets the Item type of the Property. Configured only if the Value type is `ctDict` or `ctList`. If so, the item types of the list/dictionary must match the Property's Item type.
+  "Gets the Item type of the Property. Configured only if the Value type is `ctDict` or `ctList`. If so,
+the item types of the list/dictionary must match the Property's Item type.
 @param[out] type The Item type of list/dictionary properties.
 
 Calls the openDAQ C function daqProperty_getItemType()."
@@ -19373,7 +22046,8 @@ Calls the openDAQ C function daqProperty_getItemType()."
 )
 
 (defmethod key-type ((object property))
-  "Gets the Key type of the Property. Configured only if the Value type is `ctDict`. If so, the key type of the dictionary Property values must match the Property's Key type.
+  "Gets the Key type of the Property. Configured only if the Value type is `ctDict`. If so,
+the key type of the dictionary Property values must match the Property's Key type.
 @param[out] type The Key type of dictionary properties.
 
 Calls the openDAQ C function daqProperty_getKeyType()."
@@ -19397,7 +22071,8 @@ Calls the openDAQ C function daqProperty_getMinValue()."
 )
 
 (defmethod name ((object property))
-  "Gets the Name of the Property. The names of Properties in a Property object must be unique. The name is used as the key to the corresponding Property value when getting/setting the value.
+  "Gets the Name of the Property. The names of Properties in a Property object must be unique.
+The name is used as the key to the corresponding Property value when getting/setting the value.
 @param[out] name The Name of the Property.
 
 Calls the openDAQ C function daqProperty_getName()."
@@ -19407,6 +22082,7 @@ Calls the openDAQ C function daqProperty_getName()."
 (defmethod on-property-value-read ((object property) &optional (property-name nil property-name-suppliedp))
   "Gets the event object that is triggered when the corresponding Property value is read.
 @param[out] event The On-read event.
+
 The event arguments contain a reference to the property object, as well as a function allowing for the read
 value to be overridden.
 
@@ -19420,6 +22096,7 @@ Calls the openDAQ C function daqProperty_getOnPropertyValueRead()."
 (defmethod on-property-value-write ((object property) &optional (property-name nil property-name-suppliedp))
   "Gets the event object that is triggered when a value is written to the corresponding Property value.
 @param[out] event The On-write event.
+
 The event arguments contain a reference to the property object, as well as a function allowing for the written
 value to be overridden.
 
@@ -19431,8 +22108,10 @@ Calls the openDAQ C function daqProperty_getOnPropertyValueWrite()."
 )
 
 (defmethod on-selection-values-read ((object property))
-  "Gets the event triggered when a user retrieves the selection values field. Allows for overriding the returned value.
+  "Gets the event triggered when a user retrieves the selection values field. Allows for overriding
+the returned value.
 @param[out] event The `onRead` event triggered when suggested values are read.
+
 There should at any point be a single listener that overrides the returned value. Any listeners are expected
 to always configure the returned value via the Property metadata read arguments object.
 
@@ -19441,8 +22120,10 @@ Calls the openDAQ C function daqProperty_getOnSelectionValuesRead()."
 )
 
 (defmethod on-suggested-values-read ((object property))
-  "Gets the event triggered when a user retrieves the suggested values field. Allows for overriding the returned value.
+  "Gets the event triggered when a user retrieves the suggested values field. Allows for overriding
+the returned value.
 @param[out] event The `onRead` event triggered when suggested values are read.
+
 There should at any point be a single listener that overrides the returned value. Any listeners are expected
 to always configure the returned value via the Property metadata read arguments object.
 
@@ -19453,12 +22134,14 @@ Calls the openDAQ C function daqProperty_getOnSuggestedValuesRead()."
 (defgeneric property-type (object)
   (:documentation "Gets the type of the Property.
 @param[out] type The type of the Property.
+
 The type of the Property is a combination of the CoreType and the additional property types.
 
 Calls the openDAQ C function daqProperty_getPropertyType()."))
 (defmethod property-type ((object property))
   "Gets the type of the Property.
 @param[out] type The type of the Property.
+
 The type of the Property is a combination of the CoreType and the additional property types.
 
 Calls the openDAQ C function daqProperty_getPropertyType()."
@@ -19468,6 +22151,7 @@ Calls the openDAQ C function daqProperty_getPropertyType()."
 (defmethod read-only ((object property))
   "Used to determine whether the Property is a read-only property or not.
 @param[out] readOnly True if the Property is a read-only property; false otherwise.
+
 Read-only Property values can still be modified by using the `PropertyObjectProtected` interface methods.
 
 Calls the openDAQ C function daqProperty_getReadOnly()."
@@ -19475,8 +22159,10 @@ Calls the openDAQ C function daqProperty_getReadOnly()."
 )
 
 (defmethod referenced-property ((object property))
-  "Gets the referenced property. If set, all getters except for the `Name`, `Referenced property`, and `Is referenced` getters will return the value of the `Referenced property`.
+  "Gets the referenced property. If set, all getters except for the `Name`, `Referenced property`, and
+`Is referenced` getters will return the value of the `Referenced property`.
 @param[out] property The referenced property.
+
 If the Property is not bound to a Property object this call will not be able to return the Referenced property.
 
 Calls the openDAQ C function daqProperty_getReferencedProperty()."
@@ -19484,7 +22170,8 @@ Calls the openDAQ C function daqProperty_getReferencedProperty()."
 )
 
 (defmethod selection-values ((object property))
-  "Gets the list or dictionary of selection values. If the list/dictionary is not empty, the property is a Selection property, and must have the Value type `ctInt`.
+  "Gets the list or dictionary of selection values. If the list/dictionary is not empty, the property
+is a Selection property, and must have the Value type `ctInt`.
 @param[out] values The list/dictionary of possible selection values.
 
 Calls the openDAQ C function daqProperty_getSelectionValues()."
@@ -19509,8 +22196,10 @@ Calls the openDAQ C function daqProperty_getStructType()."
 )
 
 (defmethod suggested-values ((object property))
-  "Gets the list of Suggested values. Contains values that are the optimal settings for the corresponding Property value. These values, however, are not enforced when setting a new Property value.
+  "Gets the list of Suggested values. Contains values that are the optimal settings for the corresponding
+Property value. These values, however, are not enforced when setting a new Property value.
 @param[out] values The Suggested values of the Property.
+
 Only numerical and string-type properties can have suggested values.
 
 Calls the openDAQ C function daqProperty_getSuggestedValues()."
@@ -19528,6 +22217,7 @@ Calls the openDAQ C function daqProperty_getUnit()."
 (defmethod validator ((object property))
   "Gets the validator of the Property.
 @param[out] validator The validator.
+
 Used to validate whether a value written to the corresponding Property value is valid or not.
 
 Calls the openDAQ C function daqProperty_getValidator()."
@@ -19538,6 +22228,7 @@ Calls the openDAQ C function daqProperty_getValidator()."
   "Gets the value of the Property. Available only if the Property is bound to a Property object.
 @param value The Property value.
 @return OPENDAQ_ERR_NO_OWNER if the Property is not bound to a Property object.
+
 The call is equivalent to calling `getPropertyValue` on the Property object and all the limitations
 and implications of that call still apply.
 
@@ -19546,7 +22237,8 @@ Calls the openDAQ C function daqProperty_getValue()."
 )
 
 (defmethod value-type ((object property))
-  "Gets the Value type of the Property. Values written to the corresponding Property value must be of the same type.
+  "Gets the Value type of the Property. Values written to the corresponding Property value
+must be of the same type.
 @param[out] type The value type.
 
 Calls the openDAQ C function daqProperty_getValueType()."
@@ -19565,6 +22257,7 @@ Calls the openDAQ C function daqProperty_getVisible()."
   "Sets the value of the Property. Available only if the Property is bound to a Property object.
 @param value The Property value.
 @return OPENDAQ_ERR_NO_OWNER if the Property is not bound to a Property object.
+
 The call is equivalent to calling `getPropertyValue` on the Property object and all the limitations
 and implications of that call still apply.
 
@@ -19624,6 +22317,7 @@ Calls the openDAQ C function daqRatio_getNumerator()."
 (defgeneric simplify (object)
   (:documentation "Simplifies rational number if possible and returns the simplified ratio as a new object.
 @param[out] simplifiedRatio the simplified ratio.
+
 Call this method to reduce stored rational number to the lowest terms possible.
 Example: 10/100 is reduced to 1/10.
 
@@ -19631,6 +22325,7 @@ Calls the openDAQ C function daqRatio_simplify()."))
 (defmethod simplify ((object ratio-object))
   "Simplifies rational number if possible and returns the simplified ratio as a new object.
 @param[out] simplifiedRatio the simplified ratio.
+
 Call this method to reduce stored rational number to the lowest terms possible.
 Example: 10/100 is reduced to 1/10.
 
@@ -19639,12 +22334,14 @@ Calls the openDAQ C function daqRatio_simplify()."
 )
 
 (defgeneric domain-transform-function (object)
-  (:documentation "Gets the transform function that will be called with the read domain-data and currently valid Signal-Descriptor giving the user the chance add a custom post-processing step.
+  (:documentation "Gets the transform function that will be called with the read domain-data and currently valid Signal-Descriptor
+giving the user the chance add a custom post-processing step.
 @param[out] transform The function performing the post-processing or @c nullptr if not assigned.
 
 Calls the openDAQ C function daqReaderConfig_getDomainTransformFunction()."))
 (defmethod domain-transform-function ((object reader-config))
-  "Gets the transform function that will be called with the read domain-data and currently valid Signal-Descriptor giving the user the chance add a custom post-processing step.
+  "Gets the transform function that will be called with the read domain-data and currently valid Signal-Descriptor
+giving the user the chance add a custom post-processing step.
 @param[out] transform The function performing the post-processing or @c nullptr if not assigned.
 
 Calls the openDAQ C function daqReaderConfig_getDomainTransformFunction()."
@@ -19678,12 +22375,14 @@ Calls the openDAQ C function daqReaderConfig_getReadTimeoutType()."
 )
 
 (defgeneric value-transform-function (object)
-  (:documentation "Gets the transform function that will be called with the read value-data and currently valid Signal-Descriptor giving the user the chance add a custom post-processing step.
+  (:documentation "Gets the transform function that will be called with the read value-data and currently valid Signal-Descriptor
+giving the user the chance add a custom post-processing step.
 @param[out] transform The function performing the post-processing or @c nullptr if not assigned.
 
 Calls the openDAQ C function daqReaderConfig_getValueTransformFunction()."))
 (defmethod value-transform-function ((object reader-config))
-  "Gets the transform function that will be called with the read value-data and currently valid Signal-Descriptor giving the user the chance add a custom post-processing step.
+  "Gets the transform function that will be called with the read value-data and currently valid Signal-Descriptor
+giving the user the chance add a custom post-processing step.
 @param[out] transform The function performing the post-processing or @c nullptr if not assigned.
 
 Calls the openDAQ C function daqReaderConfig_getValueTransformFunction()."
@@ -19691,11 +22390,13 @@ Calls the openDAQ C function daqReaderConfig_getValueTransformFunction()."
 )
 
 (defgeneric mark-as-invalid (object)
-  (:documentation "Marks the current reader as invalid preventing any additional operations to be performed on the reader except reusing its info and configuration in a new reader.
+  (:documentation "Marks the current reader as invalid preventing any additional operations to be performed on the reader
+except reusing its info and configuration in a new reader.
 
 Calls the openDAQ C function daqReaderConfig_markAsInvalid()."))
 (defmethod mark-as-invalid ((object reader-config))
-  "Marks the current reader as invalid preventing any additional operations to be performed on the reader except reusing its info and configuration in a new reader.
+  "Marks the current reader as invalid preventing any additional operations to be performed on the reader
+except reusing its info and configuration in a new reader.
 
 Calls the openDAQ C function daqReaderConfig_markAsInvalid()."
   (opendaq.low-level:reader-config/mark-as-invalid (%require-live-pointer object))
@@ -19726,13 +22427,15 @@ Calls the openDAQ C function daqReaderStatus_getOffset()."
 )
 
 (defgeneric read-status (object)
-  (:documentation "Retrieves the current reading status, indicating whether the reading process is in an \"Ok\" state, has encountered an Event, has failed, or is in an Unknown state.
-@param[out] status a ReadStatus enum variable where the current reading status will be stored.
+  (:documentation "Retrieves the current reading status, indicating whether the reading process is in an \"Ok\" state,
+has encountered an Event, has failed, or is in an Unknown state.
+@param[out] status  a ReadStatus enum variable where the current reading status will be stored.
 
 Calls the openDAQ C function daqReaderStatus_getReadStatus()."))
 (defmethod read-status ((object reader-status))
-  "Retrieves the current reading status, indicating whether the reading process is in an \"Ok\" state, has encountered an Event, has failed, or is in an Unknown state.
-@param[out] status a ReadStatus enum variable where the current reading status will be stored.
+  "Retrieves the current reading status, indicating whether the reading process is in an \"Ok\" state,
+has encountered an Event, has failed, or is in an Unknown state.
+@param[out] status  a ReadStatus enum variable where the current reading status will be stored.
 
 Calls the openDAQ C function daqReaderStatus_getReadStatus()."
   (opendaq.low-level:reader-status/get-read-status (%require-live-pointer object))
@@ -19767,6 +22470,7 @@ Calls the openDAQ C function daqReader_getAvailableCount()."
 (defgeneric empty (object)
   (:documentation "Checks if there is data to read.
 @param[out] empty Set to true if there is data to read, false otherwise.
+
 This method returns true if there is data available to read.
 The data can be an event packet or a sufficient amount of data samples for minimum reading.
 
@@ -19774,6 +22478,7 @@ Calls the openDAQ C function daqReader_getEmpty()."))
 (defmethod empty ((object reader))
   "Checks if there is data to read.
 @param[out] empty Set to true if there is data to read, false otherwise.
+
 This method returns true if there is data available to read.
 The data can be an event packet or a sufficient amount of data samples for minimum reading.
 
@@ -19784,6 +22489,7 @@ Calls the openDAQ C function daqReader_getEmpty()."
 (defgeneric (setf external-listener) (new-value object)
   (:documentation "Sets an external listener to the reader.
 @param listener The external listener.
+
 When an external listener is set, after the reader is done processing the input port notification methods,
 it also calls the methods of the external listener.
 
@@ -19791,6 +22497,7 @@ Calls the openDAQ C function daqReader_setExternalListener()."))
 (defmethod (setf external-listener) (new-value (object reader))
   "Sets an external listener to the reader.
 @param listener The external listener.
+
 When an external listener is set, after the reader is done processing the input port notification methods,
 it also calls the methods of the external listener.
 
@@ -19802,12 +22509,14 @@ Calls the openDAQ C function daqReader_setExternalListener()."
 (defgeneric (setf on-data-available) (new-value object)
   (:documentation "Sets the specified callback function to be called when there is available data in the reader.
 @param callback The callback function to be set or @c nullptr to unset it.
+
 Pass @c nullptr to unset the callback. The callback should take no arguments.
 
 Calls the openDAQ C function daqReader_setOnDataAvailable()."))
 (defmethod (setf on-data-available) (new-value (object reader))
   "Sets the specified callback function to be called when there is available data in the reader.
 @param callback The callback function to be set or @c nullptr to unset it.
+
 Pass @c nullptr to unset the callback. The callback should take no arguments.
 
 Calls the openDAQ C function daqReader_setOnDataAvailable()."
@@ -19816,13 +22525,15 @@ Calls the openDAQ C function daqReader_setOnDataAvailable()."
   new-value)
 
 (defgeneric is-recording (object)
-  (:documentation "Checks whether data from connected signals is currently being recorded to the persistent storage medium.
+  (:documentation "Checks whether data from connected signals is currently being recorded to the
+persistent storage medium.
 @param isRecording A pointer to a boolean which is populated with the recording state.
 @retval OPENDAQ_SUCCESS if the recording status was successfully returned.
 
 Calls the openDAQ C function daqRecorder_getIsRecording()."))
 (defmethod is-recording ((object recorder))
-  "Checks whether data from connected signals is currently being recorded to the persistent storage medium.
+  "Checks whether data from connected signals is currently being recorded to the
+persistent storage medium.
 @param isRecording A pointer to a boolean which is populated with the recording state.
 @retval OPENDAQ_SUCCESS if the recording status was successfully returned.
 
@@ -19833,13 +22544,15 @@ Calls the openDAQ C function daqRecorder_getIsRecording()."
 (defgeneric start-recording (object)
   (:documentation "Starts recording data from connected signals to the persistent storage medium.
 @retval OPENDAQ_SUCCESS if the recording successfully started.
-@retval OPENDAQ_ERR_INVALIDSTATE if the recording has already been started and the implementation chooses to treat this scenario as an error.
+@retval OPENDAQ_ERR_INVALIDSTATE if the recording has already been started and the
+implementation chooses to treat this scenario as an error.
 
 Calls the openDAQ C function daqRecorder_startRecording()."))
 (defmethod start-recording ((object recorder))
   "Starts recording data from connected signals to the persistent storage medium.
 @retval OPENDAQ_SUCCESS if the recording successfully started.
-@retval OPENDAQ_ERR_INVALIDSTATE if the recording has already been started and the implementation chooses to treat this scenario as an error.
+@retval OPENDAQ_ERR_INVALIDSTATE if the recording has already been started and the
+implementation chooses to treat this scenario as an error.
 
 Calls the openDAQ C function daqRecorder_startRecording()."
   (opendaq.low-level:recorder/start-recording (%require-live-pointer object))
@@ -19848,13 +22561,15 @@ Calls the openDAQ C function daqRecorder_startRecording()."
 (defgeneric stop-recording (object)
   (:documentation "Stops recording data from connected signals to the persistent storage medium.
 @retval OPENDAQ_SUCCESS if the recording successfully stopped.
-@retval OPENDAQ_ERR_INVALIDSTATE if the recording is not started and the implementation chooses to treat this scenario as an error.
+@retval OPENDAQ_ERR_INVALIDSTATE if the recording is not started and the implementation
+chooses to treat this scenario as an error.
 
 Calls the openDAQ C function daqRecorder_stopRecording()."))
 (defmethod stop-recording ((object recorder))
   "Stops recording data from connected signals to the persistent storage medium.
 @retval OPENDAQ_SUCCESS if the recording successfully stopped.
-@retval OPENDAQ_ERR_INVALIDSTATE if the recording is not started and the implementation chooses to treat this scenario as an error.
+@retval OPENDAQ_ERR_INVALIDSTATE if the recording is not started and the implementation
+chooses to treat this scenario as an error.
 
 Calls the openDAQ C function daqRecorder_stopRecording()."
   (opendaq.low-level:recorder/stop-recording (%require-live-pointer object))
@@ -19873,19 +22588,48 @@ Calls the openDAQ C function daqReferenceDomainInfoBuilder_build()."
     Gets the Reference Domain ID.
 
 reference-domain-info => daqReferenceDomainInfo_getReferenceDomainId()
-    Gets the Reference Domain ID."))
+    Gets the Reference Domain ID.
+
+sync-interface => daqSyncInterface_getReferenceDomainId()
+    Gets the reference domain ID of the synchronization interface."))
 (defmethod reference-domain-id ((object reference-domain-info-builder))
   "Gets the Reference Domain ID.
 @param[out] referenceDomainId The Reference Domain ID.
+
 If set, gives the common identifier of one domain group.
 Signals with the same Reference Domain ID share a common synchronization source
 (all the signals in a group either come from the same device
 or are synchronized using a protocol, such as PTP, NTP, IRIG, etc.).
 Those signals can always be read together, implying that a Multi Reader
 can be used to read the signals if their sampling rates are compatible.
+The ID has the form <reference-type>[:<type-specific-identity>]. PTP uses
+\"ptp:<domain-number>:<grandmaster identity as 16 lowercase hex digits>\", eg. \"ptp:0:001122fffe334455\".
+NTP uses \"ntp:<server IP address>\", eg. \"ntp:192.0.2.10\".
+While the device runs on its own clock, the ID is \"local:<device-local-id>\".
 
 Calls the openDAQ C function daqReferenceDomainInfoBuilder_getReferenceDomainId()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:reference-domain-info-builder/get-reference-domain-id (%require-live-pointer object)))
+)
+
+(defgeneric reference-domain-ids (object)
+  (:documentation "reference-domain-info-builder => daqReferenceDomainInfoBuilder_getReferenceDomainIds()
+    Gets the list of Reference Domain IDs.
+
+reference-domain-info => daqReferenceDomainInfo_getReferenceDomainIds()
+    Gets the list of Reference Domain IDs.
+
+synchronization => daqSynchronization_getReferenceDomainIds()
+    Gets the reference domain IDs of all interfaces not in `Off`: the source and the"))
+(defmethod reference-domain-ids ((object reference-domain-info-builder))
+  "Gets the list of Reference Domain IDs.
+@param[out] referenceDomainIds The list of Reference Domain IDs.
+
+If set, gives the list of Reference Domain IDs of this domain: the applied Reference Domain ID
+and the IDs of the other synchronization interfaces that are not Off and whose
+SyncSourceStatus is Synced, such as the outputs the device distributes its clock on.
+
+Calls the openDAQ C function daqReferenceDomainInfoBuilder_getReferenceDomainIds()."
+  (%list-of (wrap (opendaq.low-level:reference-domain-info-builder/get-reference-domain-ids (%require-live-pointer object)) 'object-list) 'string-object)
 )
 
 (defgeneric reference-domain-offset (object)
@@ -19897,6 +22641,7 @@ reference-domain-info => daqReferenceDomainInfo_getReferenceDomainOffset()
 (defmethod reference-domain-offset ((object reference-domain-info-builder))
   "Gets the Reference Domain Offset.
 @param[out] referenceDomainOffset The Reference Domain Offset.
+
 If set, denotes the offset in ticks that must be added to the domain values of the signal
 for them to be equal to that of the sync source. The sync source will always have an offset of 0.
 This offset is changed only if the sync source changes and should be kept at 0 otherwise,
@@ -19919,6 +22664,7 @@ reference-domain-info => daqReferenceDomainInfo_getReferenceTimeProtocol()
 (defmethod reference-time-protocol ((object reference-domain-info-builder))
   "Gets the value that indicates the Reference Time Source.
 @param[out] referenceTimeProtocol The value that indicates the Reference Time Source.
+
 If not set to Unknown, the domain quantity is “time”, and the timestamps are absolute according
 to the chosen time standard. The possible values are Gps, Tai, and Utc.
 This field is used to determine if two signals with different Domain IDs can be read
@@ -19930,50 +22676,68 @@ Calls the openDAQ C function daqReferenceDomainInfoBuilder_getReferenceTimeProto
   (opendaq.low-level:reference-domain-info-builder/get-reference-time-protocol (%require-live-pointer object))
 )
 
-(defgeneric uses-offset (object)
-  (:documentation "reference-domain-info-builder => daqReferenceDomainInfoBuilder_getUsesOffset()
-    Gets the value that indicates if offset is used.
-
-reference-domain-info => daqReferenceDomainInfo_getUsesOffset()
-    Gets the value that indicates if offset is used."))
-(defmethod uses-offset ((object reference-domain-info-builder))
-  "Gets the value that indicates if offset is used.
-@param[out] usesOffset The value that indicates if offset is used.
-If False, a device will contain time jumps due to resync in the domain signal data.
-
-Calls the openDAQ C function daqReferenceDomainInfoBuilder_getUsesOffset()."
-  (opendaq.low-level:reference-domain-info-builder/get-uses-offset (%require-live-pointer object))
-)
-
 (defgeneric (setf reference-domain-id) (new-value object)
   (:documentation "Sets the Reference Domain ID.
 @param referenceDomainId The Reference Domain ID.
+
 If set, gives the common identifier of one domain group.
 Signals with the same Reference Domain ID share a common synchronization source
 (all the signals in a group either come from the same device
 or are synchronized using a protocol, such as PTP, NTP, IRIG, etc.).
 Those signals can always be read together, implying that a Multi Reader
 can be used to read the signals if their sampling rates are compatible.
+The ID has the form <reference-type>[:<type-specific-identity>]. PTP uses
+\"ptp:<domain-number>:<grandmaster identity as 16 lowercase hex digits>\", eg. \"ptp:0:001122fffe334455\".
+NTP uses \"ntp:<server IP address>\", eg. \"ntp:192.0.2.10\".
+While the device runs on its own clock, the ID is \"local:<device-local-id>\".
 
 Calls the openDAQ C function daqReferenceDomainInfoBuilder_setReferenceDomainId()."))
 (defmethod (setf reference-domain-id) (new-value (object reference-domain-info-builder))
   "Sets the Reference Domain ID.
 @param referenceDomainId The Reference Domain ID.
+
 If set, gives the common identifier of one domain group.
 Signals with the same Reference Domain ID share a common synchronization source
 (all the signals in a group either come from the same device
 or are synchronized using a protocol, such as PTP, NTP, IRIG, etc.).
 Those signals can always be read together, implying that a Multi Reader
 can be used to read the signals if their sampling rates are compatible.
+The ID has the form <reference-type>[:<type-specific-identity>]. PTP uses
+\"ptp:<domain-number>:<grandmaster identity as 16 lowercase hex digits>\", eg. \"ptp:0:001122fffe334455\".
+NTP uses \"ntp:<server IP address>\", eg. \"ntp:192.0.2.10\".
+While the device runs on its own clock, the ID is \"local:<device-local-id>\".
 
 Calls the openDAQ C function daqReferenceDomainInfoBuilder_setReferenceDomainId()."
   (with-daq-boxed-values ((coerced-new-value new-value :daq-string))
     (opendaq.low-level:reference-domain-info-builder/set-reference-domain-id (%require-live-pointer object) coerced-new-value))
   new-value)
 
+(defgeneric (setf reference-domain-ids) (new-value object)
+  (:documentation "Sets the list of Reference Domain IDs.
+@param referenceDomainIds The list of Reference Domain IDs.
+
+If set, gives the list of Reference Domain IDs of this domain: the applied Reference Domain ID
+and the IDs of the other synchronization interfaces that are not Off and whose
+SyncSourceStatus is Synced, such as the outputs the device distributes its clock on.
+
+Calls the openDAQ C function daqReferenceDomainInfoBuilder_setReferenceDomainIds()."))
+(defmethod (setf reference-domain-ids) (new-value (object reference-domain-info-builder))
+  "Sets the list of Reference Domain IDs.
+@param referenceDomainIds The list of Reference Domain IDs.
+
+If set, gives the list of Reference Domain IDs of this domain: the applied Reference Domain ID
+and the IDs of the other synchronization interfaces that are not Off and whose
+SyncSourceStatus is Synced, such as the outputs the device distributes its clock on.
+
+Calls the openDAQ C function daqReferenceDomainInfoBuilder_setReferenceDomainIds()."
+  (with-daq-boxed-values ((coerced-new-value new-value :managed-pointer))
+    (opendaq.low-level:reference-domain-info-builder/set-reference-domain-ids (%require-live-pointer object) coerced-new-value))
+  new-value)
+
 (defgeneric (setf reference-domain-offset) (new-value object)
   (:documentation "Sets the Reference Domain Offset.
 @param referenceDomainOffset The Reference Domain Offset.
+
 If set, denotes the offset in ticks that must be added to the domain values of the signal
 for them to be equal to that of the sync source. The sync source will always have an offset of 0.
 This offset is changed only if the sync source changes and should be kept at 0 otherwise,
@@ -19987,6 +22751,7 @@ Calls the openDAQ C function daqReferenceDomainInfoBuilder_setReferenceDomainOff
 (defmethod (setf reference-domain-offset) (new-value (object reference-domain-info-builder))
   "Sets the Reference Domain Offset.
 @param referenceDomainOffset The Reference Domain Offset.
+
 If set, denotes the offset in ticks that must be added to the domain values of the signal
 for them to be equal to that of the sync source. The sync source will always have an offset of 0.
 This offset is changed only if the sync source changes and should be kept at 0 otherwise,
@@ -20004,6 +22769,7 @@ Calls the openDAQ C function daqReferenceDomainInfoBuilder_setReferenceDomainOff
 (defgeneric (setf reference-time-protocol) (new-value object)
   (:documentation "Sets the value that indicates the Reference Time Source.
 @param referenceTimeProtocol The value that indicates the Reference Time Source.
+
 If not set to Unknown, the domain quantity is “time”, and the timestamps are absolute according
 to the chosen time standard. The possible values are Gps, Tai, and Utc.
 This field is used to determine if two signals with different Domain IDs can be read
@@ -20015,6 +22781,7 @@ Calls the openDAQ C function daqReferenceDomainInfoBuilder_setReferenceTimeProto
 (defmethod (setf reference-time-protocol) (new-value (object reference-domain-info-builder))
   "Sets the value that indicates the Reference Time Source.
 @param referenceTimeProtocol The value that indicates the Reference Time Source.
+
 If not set to Unknown, the domain quantity is “time”, and the timestamps are absolute according
 to the chosen time standard. The possible values are Gps, Tai, and Utc.
 This field is used to determine if two signals with different Domain IDs can be read
@@ -20027,39 +22794,41 @@ Calls the openDAQ C function daqReferenceDomainInfoBuilder_setReferenceTimeProto
     (opendaq.low-level:reference-domain-info-builder/set-reference-time-protocol (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defgeneric (setf uses-offset) (new-value object)
-  (:documentation "Sets the value that indicates if offset is used.
-@param[out] usesOffset The value that indicates if offset is used.
-If False, a device will contain time jumps due to resync in the domain signal data.
-
-Calls the openDAQ C function daqReferenceDomainInfoBuilder_setUsesOffset()."))
-(defmethod (setf uses-offset) (new-value (object reference-domain-info-builder))
-  "Sets the value that indicates if offset is used.
-@param[out] usesOffset The value that indicates if offset is used.
-If False, a device will contain time jumps due to resync in the domain signal data.
-
-Calls the openDAQ C function daqReferenceDomainInfoBuilder_setUsesOffset()."
-  (with-daq-boxed-values ((coerced-new-value new-value nil))
-    (opendaq.low-level:reference-domain-info-builder/set-uses-offset (%require-live-pointer object) coerced-new-value))
-  new-value)
-
 (defmethod reference-domain-id ((object reference-domain-info))
   "Gets the Reference Domain ID.
 @param[out] referenceDomainId The Reference Domain ID.
+
 If set, gives the common identifier of one domain group.
 Signals with the same Reference Domain ID share a common synchronization source
 (all the signals in a group either come from the same device
 or are synchronized using a protocol, such as PTP, NTP, IRIG, etc.).
 Those signals can always be read together, implying that a Multi Reader
 can be used to read the signals if their sampling rates are compatible.
+The ID has the form <reference-type>[:<type-specific-identity>]. PTP uses
+\"ptp:<domain-number>:<grandmaster identity as 16 lowercase hex digits>\", eg. \"ptp:0:001122fffe334455\".
+NTP uses \"ntp:<server IP address>\", eg. \"ntp:192.0.2.10\".
+While the device runs on its own clock, the ID is \"local:<device-local-id>\".
 
 Calls the openDAQ C function daqReferenceDomainInfo_getReferenceDomainId()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:reference-domain-info/get-reference-domain-id (%require-live-pointer object)))
 )
 
+(defmethod reference-domain-ids ((object reference-domain-info))
+  "Gets the list of Reference Domain IDs.
+@param[out] referenceDomainIds The list of Reference Domain IDs.
+
+If set, gives the list of Reference Domain IDs of this domain: the applied Reference Domain ID
+and the IDs of the other synchronization interfaces that are not Off and whose
+SyncSourceStatus is Synced, such as the outputs the device distributes its clock on.
+
+Calls the openDAQ C function daqReferenceDomainInfo_getReferenceDomainIds()."
+  (%list-of (wrap (opendaq.low-level:reference-domain-info/get-reference-domain-ids (%require-live-pointer object)) 'object-list) 'string-object)
+)
+
 (defmethod reference-domain-offset ((object reference-domain-info))
   "Gets the Reference Domain Offset.
 @param[out] referenceDomainOffset The Reference Domain Offset.
+
 If set, denotes the offset in ticks that must be added to the domain values of the signal
 for them to be equal to that of the sync source. The sync source will always have an offset of 0.
 This offset is changed only if the sync source changes and should be kept at 0 otherwise,
@@ -20076,6 +22845,7 @@ Calls the openDAQ C function daqReferenceDomainInfo_getReferenceDomainOffset()."
 (defmethod reference-time-protocol ((object reference-domain-info))
   "Gets the value that indicates the Reference Time Source.
 @param[out] referenceTimeProtocol The value that indicates the Reference Time Source.
+
 If not set to Unknown, the domain quantity is “time”, and the timestamps are absolute according
 to the chosen time standard. The possible values are Gps, Tai, and Utc.
 This field is used to determine if two signals with different Domain IDs can be read
@@ -20085,15 +22855,6 @@ both driven through GPS can be read together, as their absolute time is the same
 
 Calls the openDAQ C function daqReferenceDomainInfo_getReferenceTimeProtocol()."
   (opendaq.low-level:reference-domain-info/get-reference-time-protocol (%require-live-pointer object))
-)
-
-(defmethod uses-offset ((object reference-domain-info))
-  "Gets the value that indicates if offset is used.
-@param[out] usesOffset The value that indicates if offset is used.
-If False, a device will contain time jumps due to resync in the domain signal data.
-
-Calls the openDAQ C function daqReferenceDomainInfo_getUsesOffset()."
-  (opendaq.low-level:reference-domain-info/get-uses-offset (%require-live-pointer object))
 )
 
 (defgeneric is-removed (object)
@@ -20111,6 +22872,7 @@ Calls the openDAQ C function daqRemovable_isRemoved()."
 
 (defgeneric removable-remove (object)
   (:documentation "Notifies the component that it is being removed.
+
 Call `remove` on the component to mark it as removed. It's up to the implementation
 to define what is does on the act of removal. Basic implementation of `Component`
 will switch it to inactive state and it cannot be activated again.
@@ -20118,6 +22880,7 @@ will switch it to inactive state and it cannot be activated again.
 Calls the openDAQ C function daqRemovable_remove()."))
 (defmethod removable-remove ((object removable))
   "Notifies the component that it is being removed.
+
 Call `remove` on the component to mark it as removed. It's up to the implementation
 to define what is does on the act of removal. Basic implementation of `Component`
 will switch it to inactive state and it cannot be activated again.
@@ -20152,7 +22915,8 @@ Calls the openDAQ C function daqRulePrivate_verifyParameters()."
 )
 
 (defmethod domain-read-type ((object sample-reader))
-  "Gets the sample-type the signal domain samples will be converted to when read or @c SampleType::Invalid if read-type has not been determined yet.
+  "Gets the sample-type the signal domain samples will be converted to when read
+or @c SampleType::Invalid if read-type has not been determined yet.
 @param[out] sampleType The sample-type type of the read samples otherwise @c SampleType::Invalid.
 
 Calls the openDAQ C function daqSampleReader_getDomainReadType()."
@@ -20168,7 +22932,8 @@ Calls the openDAQ C function daqSampleReader_getReadMode()."
 )
 
 (defmethod value-read-type ((object sample-reader))
-  "Gets the sample-type the signal value samples will be converted to when read or @c SampleType::Invalid if read-type has not been determined yet.
+  "Gets the sample-type the signal value samples will be converted to when read
+or @c SampleType::Invalid if read-type has not been determined yet.
 @param[out] sampleType The sample-type type of the read samples otherwise @c SampleType::Invalid.
 
 Calls the openDAQ C function daqSampleReader_getValueReadType()."
@@ -20176,7 +22941,8 @@ Calls the openDAQ C function daqSampleReader_getValueReadType()."
 )
 
 (defgeneric (setf domain-transform-function) (new-value object)
-  (:documentation "Sets the transform function that will be called with the read domain-data and currently valid Signal-Descriptor giving the user the chance add a custom post-processing step. The function should have a signature compatible with:
+  (:documentation "Sets the transform function that will be called with the read domain-data and currently valid Signal-Descriptor
+giving the user the chance add a custom post-processing step. The function should have a signature compatible with:
 @code
 transform(Int inputBuffer, Int outputBuffer, SizeT toRead, IDataDescriptor* descriptor)
 @endcode
@@ -20184,7 +22950,8 @@ transform(Int inputBuffer, Int outputBuffer, SizeT toRead, IDataDescriptor* desc
 
 Calls the openDAQ C function daqSampleReader_setDomainTransformFunction()."))
 (defmethod (setf domain-transform-function) (new-value (object sample-reader))
-  "Sets the transform function that will be called with the read domain-data and currently valid Signal-Descriptor giving the user the chance add a custom post-processing step. The function should have a signature compatible with:
+  "Sets the transform function that will be called with the read domain-data and currently valid Signal-Descriptor
+giving the user the chance add a custom post-processing step. The function should have a signature compatible with:
 @code
 transform(Int inputBuffer, Int outputBuffer, SizeT toRead, IDataDescriptor* descriptor)
 @endcode
@@ -20196,7 +22963,8 @@ Calls the openDAQ C function daqSampleReader_setDomainTransformFunction()."
   new-value)
 
 (defgeneric (setf value-transform-function) (new-value object)
-  (:documentation "Sets the transform function that will be called with the read value-data and currently valid Signal-Descriptor giving the user the chance add a custom post-processing step. The function should have a signature compatible with:
+  (:documentation "Sets the transform function that will be called with the read value-data and currently valid Signal-Descriptor
+giving the user the chance add a custom post-processing step. The function should have a signature compatible with:
 @code
 transform(Int inputBuffer, Int outputBuffer, SizeT toRead, IDataDescriptor* descriptor)
 @endcode
@@ -20204,7 +22972,8 @@ transform(Int inputBuffer, Int outputBuffer, SizeT toRead, IDataDescriptor* desc
 
 Calls the openDAQ C function daqSampleReader_setValueTransformFunction()."))
 (defmethod (setf value-transform-function) (new-value (object sample-reader))
-  "Sets the transform function that will be called with the read value-data and currently valid Signal-Descriptor giving the user the chance add a custom post-processing step. The function should have a signature compatible with:
+  "Sets the transform function that will be called with the read value-data and currently valid Signal-Descriptor
+giving the user the chance add a custom post-processing step. The function should have a signature compatible with:
 @code
 transform(Int inputBuffer, Int outputBuffer, SizeT toRead, IDataDescriptor* descriptor)
 @endcode
@@ -20261,7 +23030,8 @@ Calls the openDAQ C function daqScalingBuilder_getOutputDataType()."
 )
 
 (defmethod parameters ((object scaling-builder))
-  "Gets the list of parameters that are used to calculate the scaling in conjunction with the input data.
+  "Gets the list of parameters that are used to calculate the scaling in conjunction with the
+input data.
 @param[out] parameters The list of parameters. All elements are Number types.
 
 Calls the openDAQ C function daqScalingBuilder_getParameters()."
@@ -20270,12 +23040,13 @@ Calls the openDAQ C function daqScalingBuilder_getParameters()."
 
 (defgeneric scaling-type (object)
   (:documentation "scaling-builder => daqScalingBuilder_getScalingType()
-    Gets the type of the scaling that determines how the scaling parameters should be interpreted and how the scaling should be calculated.
+    Gets the type of the scaling that determines how the scaling parameters should be interpreted
 
 scaling => daqScaling_getType()
-    Gets the type of the scaling that determines how the scaling parameters should be interpreted and how the scaling should be calculated."))
+    Gets the type of the scaling that determines how the scaling parameters should be interpreted"))
 (defmethod scaling-type ((object scaling-builder))
-  "Gets the type of the scaling that determines how the scaling parameters should be interpreted and how the scaling should be calculated.
+  "Gets the type of the scaling that determines how the scaling parameters should be interpreted
+and how the scaling should be calculated.
 @param[out] type The type of the scaling.
 
 Calls the openDAQ C function daqScalingBuilder_getScalingType()."
@@ -20293,6 +23064,7 @@ Calls the openDAQ C function daqScalingBuilder_removeParameter()."
 (defgeneric (setf input-data-type) (new-value object)
   (:documentation "Sets the scaling's input data type.
 @param type The input data type.
+
 The input data type corresponds to the raw data passed through the signal path in
 data packets.
 
@@ -20300,6 +23072,7 @@ Calls the openDAQ C function daqScalingBuilder_setInputDataType()."))
 (defmethod (setf input-data-type) (new-value (object scaling-builder))
   "Sets the scaling's input data type.
 @param type The input data type.
+
 The input data type corresponds to the raw data passed through the signal path in
 data packets.
 
@@ -20311,6 +23084,7 @@ Calls the openDAQ C function daqScalingBuilder_setInputDataType()."
 (defgeneric (setf output-data-type) (new-value object)
   (:documentation "Sets the scaling's output data type.
 @param type The output data type
+
 The output data type corresponds to the type specified in the value descriptor of
 a signal, and is the type in which said signal's data should be read in after having
 the scaling applied to it.
@@ -20319,6 +23093,7 @@ Calls the openDAQ C function daqScalingBuilder_setOutputDataType()."))
 (defmethod (setf output-data-type) (new-value (object scaling-builder))
   "Sets the scaling's output data type.
 @param type The output data type
+
 The output data type corresponds to the type specified in the value descriptor of
 a signal, and is the type in which said signal's data should be read in after having
 the scaling applied to it.
@@ -20329,7 +23104,8 @@ Calls the openDAQ C function daqScalingBuilder_setOutputDataType()."
   new-value)
 
 (defmethod (setf parameters) (new-value (object scaling-builder))
-  "Gets the list of parameters that are used to calculate the scaling in conjunction with the input data.
+  "Gets the list of parameters that are used to calculate the scaling in conjunction with the
+input data.
 @param parameters The list of parameters. All elements are Number types.
 @retval OPENDAQ_ERR_FROZEN if the object is frozen.
 
@@ -20339,12 +23115,14 @@ Calls the openDAQ C function daqScalingBuilder_setParameters()."
   new-value)
 
 (defgeneric (setf scaling-type) (new-value object)
-  (:documentation "Sets the type of the scaling that determines how the scaling parameters should be interpreted and how the scaling should be calculated.
+  (:documentation "Sets the type of the scaling that determines how the scaling parameters should be interpreted
+and how the scaling should be calculated.
 @param type The type of the scaling.
 
 Calls the openDAQ C function daqScalingBuilder_setScalingType()."))
 (defmethod (setf scaling-type) (new-value (object scaling-builder))
-  "Sets the type of the scaling that determines how the scaling parameters should be interpreted and how the scaling should be calculated.
+  "Sets the type of the scaling that determines how the scaling parameters should be interpreted
+and how the scaling should be calculated.
 @param type The type of the scaling.
 
 Calls the openDAQ C function daqScalingBuilder_setScalingType()."
@@ -20352,61 +23130,10 @@ Calls the openDAQ C function daqScalingBuilder_setScalingType()."
     (opendaq.low-level:scaling-builder/set-scaling-type (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defgeneric has-scaling-calc (object)
-  (:documentation "Checks whether the Scaling Calculator is available for packet or not.
-@return True if the Scaling Calculator is initialized within the implementation; false otherwise.
-
-Calls the openDAQ C function daqScalingCalcPrivate_hasScalingCalc()."))
-(defmethod has-scaling-calc ((object scaling-calc-private))
-  "Checks whether the Scaling Calculator is available for packet or not.
-@return True if the Scaling Calculator is initialized within the implementation; false otherwise.
-
-Calls the openDAQ C function daqScalingCalcPrivate_hasScalingCalc()."
-  (opendaq.low-level:scaling-calc-private/has-scaling-calc (%require-live-pointer object))
-)
-
-(defgeneric scale-data (object data sample-count)
-  (:documentation "Scales the packet data.
-@param data Pointer to the packet data.
-@param sampleCount The number of samples in the packet.
-@returns A pointer to the scaled data.
-
-Calls the openDAQ C function daqScalingCalcPrivate_scaleData()."))
-(defmethod scale-data ((object scaling-calc-private) data sample-count)
-  "Scales the packet data.
-@param data Pointer to the packet data.
-@param sampleCount The number of samples in the packet.
-@returns A pointer to the scaled data.
-
-Calls the openDAQ C function daqScalingCalcPrivate_scaleData()."
-  (with-daq-boxed-values ((coerced-data data nil)
-                          (coerced-sample-count sample-count nil))
-    (opendaq.low-level:scaling-calc-private/scale-data (%require-live-pointer object) coerced-data coerced-sample-count))
-)
-
-(defgeneric scale-data-output (object data sample-count output)
-  (:documentation "Scales the packet data.
-@param data Pointer to the packet data.
-@param sampleCount The number of samples in the packet.
-@param[out] A pointer to the scaled data.
-
-Calls the openDAQ C function daqScalingCalcPrivate_scaleDataOutput()."))
-(defmethod scale-data-output ((object scaling-calc-private) data sample-count output)
-  "Scales the packet data.
-@param data Pointer to the packet data.
-@param sampleCount The number of samples in the packet.
-@param[out] A pointer to the scaled data.
-
-Calls the openDAQ C function daqScalingCalcPrivate_scaleDataOutput()."
-  (with-daq-boxed-values ((coerced-data data nil)
-                          (coerced-sample-count sample-count nil)
-                          (coerced-output output nil))
-    (opendaq.low-level:scaling-calc-private/scale-data-output (%require-live-pointer object) coerced-data coerced-sample-count coerced-output))
-)
-
 (defgeneric input-sample-type (object)
   (:documentation "Gets the scaling's input data type.
 @param[out] type The input data type
+
 The input data type corresponds to the raw values passed through the signal path in
 data packets.
 
@@ -20414,6 +23141,7 @@ Calls the openDAQ C function daqScaling_getInputSampleType()."))
 (defmethod input-sample-type ((object scaling))
   "Gets the scaling's input data type.
 @param[out] type The input data type
+
 The input data type corresponds to the raw values passed through the signal path in
 data packets.
 
@@ -20424,6 +23152,7 @@ Calls the openDAQ C function daqScaling_getInputSampleType()."
 (defgeneric output-sample-type (object)
   (:documentation "Gets the scaling's output data type.
 @param[out] type The output data type
+
 The output data type corresponds to the sample type specified in the value descriptor of
 a signal, and is the type in which said signal's data should be read in after having
 the scaling applied to it.
@@ -20432,6 +23161,7 @@ Calls the openDAQ C function daqScaling_getOutputSampleType()."))
 (defmethod output-sample-type ((object scaling))
   "Gets the scaling's output data type.
 @param[out] type The output data type
+
 The output data type corresponds to the sample type specified in the value descriptor of
 a signal, and is the type in which said signal's data should be read in after having
 the scaling applied to it.
@@ -20449,7 +23179,8 @@ Calls the openDAQ C function daqScaling_getParameters()."
 )
 
 (defmethod scaling-type ((object scaling))
-  "Gets the type of the scaling that determines how the scaling parameters should be interpreted and how the scaling should be calculated.
+  "Gets the type of the scaling that determines how the scaling parameters should be interpreted
+and how the scaling should be calculated.
 @param[out] type The type of the scaling.
 
 Calls the openDAQ C function daqScaling_getType()."
@@ -20459,12 +23190,14 @@ Calls the openDAQ C function daqScaling_getType()."
 (defgeneric is-main-loop-set (object)
   (:documentation "Checks if the main loop is currently set.
 @param[out] isSet Returns @c true if the main loop is set and running.
+
 This method does not gauarantee that the main loop is currently running, only that it has been set up.
 
 Calls the openDAQ C function daqScheduler_isMainLoopSet()."))
 (defmethod is-main-loop-set ((object scheduler))
   "Checks if the main loop is currently set.
 @param[out] isSet Returns @c true if the main loop is set and running.
+
 This method does not gauarantee that the main loop is currently running, only that it has been set up.
 
 Calls the openDAQ C function daqScheduler_isMainLoopSet()."
@@ -20487,6 +23220,7 @@ Calls the openDAQ C function daqScheduler_isMultiThreaded()."
 (defgeneric run-main-loop (object &optional loop-time)
   (:documentation "Starts and blocks the main event loop, executing scheduled tasks.
 @param loopTime The maximum time to block the loop, in milliseconds.
+
 This method runs the main loop, processing all enqueued work (including repetitive tasks)
 until @ref stopMainLoop is called. Typically executed on the main thread or in a dedicated loop thread.
 
@@ -20494,6 +23228,7 @@ Calls the openDAQ C function daqScheduler_runMainLoop()."))
 (defmethod run-main-loop ((object scheduler) &optional (loop-time 1))
   "Starts and blocks the main event loop, executing scheduled tasks.
 @param loopTime The maximum time to block the loop, in milliseconds.
+
 This method runs the main loop, processing all enqueued work (including repetitive tasks)
 until @ref stopMainLoop is called. Typically executed on the main thread or in a dedicated loop thread.
 
@@ -20504,6 +23239,7 @@ Calls the openDAQ C function daqScheduler_runMainLoop()."
 
 (defgeneric run-main-loop-iteration (object)
   (:documentation "Executes a single iteration of the main loop, processing scheduled tasks.
+
 This non-blocking method runs one iteration of the main loop, executing one-time tasks
 and advancing any repetitive tasks. Intended for cases where the main loop is polled manually,
 such as in GUI frameworks or embedded systems.
@@ -20511,6 +23247,7 @@ such as in GUI frameworks or embedded systems.
 Calls the openDAQ C function daqScheduler_runMainLoopIteration()."))
 (defmethod run-main-loop-iteration ((object scheduler))
   "Executes a single iteration of the main loop, processing scheduled tasks.
+
 This non-blocking method runs one iteration of the main loop, executing one-time tasks
 and advancing any repetitive tasks. Intended for cases where the main loop is polled manually,
 such as in GUI frameworks or embedded systems.
@@ -20520,14 +23257,18 @@ Calls the openDAQ C function daqScheduler_runMainLoopIteration()."
 )
 
 (defgeneric schedule-function (object function)
-  (:documentation "Schedules the specified @p work function to run on the thread-pool. The call does not block but immediately returns an @p awaitable that represents the asynchronous execution. It can be waited upon and queried for status and result.
+  (:documentation "Schedules the specified @p work function to run on the thread-pool.
+The call does not block but immediately returns an @p awaitable that represents
+the asynchronous execution. It can be waited upon and queried for status and result.
 @param function The function to schedule for execution.
 @param[out] awaitable The object representing the state and result of the execution.
 @retval OPENDAQ_ERR_SCHEDULER_STOPPED when the scheduler already stopped and is not accepting any more work.
 
 Calls the openDAQ C function daqScheduler_scheduleFunction()."))
 (defmethod schedule-function ((object scheduler) function)
-  "Schedules the specified @p work function to run on the thread-pool. The call does not block but immediately returns an @p awaitable that represents the asynchronous execution. It can be waited upon and queried for status and result.
+  "Schedules the specified @p work function to run on the thread-pool.
+The call does not block but immediately returns an @p awaitable that represents
+the asynchronous execution. It can be waited upon and queried for status and result.
 @param function The function to schedule for execution.
 @param[out] awaitable The object representing the state and result of the execution.
 @retval OPENDAQ_ERR_SCHEDULER_STOPPED when the scheduler already stopped and is not accepting any more work.
@@ -20538,14 +23279,20 @@ Calls the openDAQ C function daqScheduler_scheduleFunction()."
 )
 
 (defgeneric schedule-graph (object graph)
-  (:documentation "Schedules the specified dependency @p graph to run on the thread-pool. The call does not block but immediately returns an @p awaitable that represents the asynchronous execution. It can be waited upon and queried for status and result. <b>Any exceptions that occur during the graph execution are silently ignored.</b>
+  (:documentation "Schedules the specified dependency @p graph to run on the thread-pool.
+The call does not block but immediately returns an @p awaitable that represents
+the asynchronous execution. It can be waited upon and queried for status and result.
+<b>Any exceptions that occur during the graph execution are silently ignored.</b>
 @param graph The dependency graph (acyclic directed graph) to schedule.
 @param[out] awaitable The object representing the state and result of the execution.
 @retval OPENDAQ_ERR_SCHEDULER_STOPPED when the scheduler already stopped and is not accepting any more work.
 
 Calls the openDAQ C function daqScheduler_scheduleGraph()."))
 (defmethod schedule-graph ((object scheduler) graph)
-  "Schedules the specified dependency @p graph to run on the thread-pool. The call does not block but immediately returns an @p awaitable that represents the asynchronous execution. It can be waited upon and queried for status and result. <b>Any exceptions that occur during the graph execution are silently ignored.</b>
+  "Schedules the specified dependency @p graph to run on the thread-pool.
+The call does not block but immediately returns an @p awaitable that represents
+the asynchronous execution. It can be waited upon and queried for status and result.
+<b>Any exceptions that occur during the graph execution are silently ignored.</b>
 @param graph The dependency graph (acyclic directed graph) to schedule.
 @param[out] awaitable The object representing the state and result of the execution.
 @retval OPENDAQ_ERR_SCHEDULER_STOPPED when the scheduler already stopped and is not accepting any more work.
@@ -20556,17 +23303,21 @@ Calls the openDAQ C function daqScheduler_scheduleGraph()."
 )
 
 (defgeneric schedule-work (object work)
-  (:documentation "Schedules the specified work callback to run on the thread-pool. The call does not block.
+  (:documentation "Schedules the specified work callback to run on the thread-pool.
+The call does not block.
 @param work The function to schedule for execution.
 @retval OPENDAQ_ERR_SCHEDULER_STOPPED when the scheduler already stopped and is not accepting any more work.
+
 Work is a lightweight callback that returns no value and accepts no procedure. It has less overhead than
 function. The function does not return awaitable object.
 
 Calls the openDAQ C function daqScheduler_scheduleWork()."))
 (defmethod schedule-work ((object scheduler) work)
-  "Schedules the specified work callback to run on the thread-pool. The call does not block.
+  "Schedules the specified work callback to run on the thread-pool.
+The call does not block.
 @param work The function to schedule for execution.
 @retval OPENDAQ_ERR_SCHEDULER_STOPPED when the scheduler already stopped and is not accepting any more work.
+
 Work is a lightweight callback that returns no value and accepts no procedure. It has less overhead than
 function. The function does not return awaitable object.
 
@@ -20577,6 +23328,7 @@ Calls the openDAQ C function daqScheduler_scheduleWork()."
 
 (defgeneric schedule-work-on-main-loop (object work)
   (:documentation "Schedules a task to be executed by the main loop.
+
 The provided work object is queued for execution during a call to either
 @ref runMainLoop or @ref runMainLoopIteration. This mechanism is commonly used
 to marshal tasks from background threads to the main loop thread.
@@ -20585,6 +23337,7 @@ to marshal tasks from background threads to the main loop thread.
 Calls the openDAQ C function daqScheduler_scheduleWorkOnMainLoop()."))
 (defmethod schedule-work-on-main-loop ((object scheduler) work)
   "Schedules a task to be executed by the main loop.
+
 The provided work object is queued for execution during a call to either
 @ref runMainLoop or @ref runMainLoopIteration. This mechanism is commonly used
 to marshal tasks from background threads to the main loop thread.
@@ -20597,12 +23350,13 @@ Calls the openDAQ C function daqScheduler_scheduleWorkOnMainLoop()."
 
 (defgeneric stop (object)
   (:documentation "scheduler => daqScheduler_stop()
-    Cancels all outstanding work and waits for the remaining to complete. After this point the scheduler does not allow any new work or graphs for scheduling.
+    Cancels all outstanding work and waits for the remaining to complete.
 
 server => daqServer_stop()
     Stops the server. This is called when we remove the server from the Instance or Instance is closing."))
 (defmethod stop ((object scheduler))
-  "Cancels all outstanding work and waits for the remaining to complete. After this point the scheduler does not allow any new work or graphs for scheduling.
+  "Cancels all outstanding work and waits for the remaining to complete.
+After this point the scheduler does not allow any new work or graphs for scheduling.
 
 Calls the openDAQ C function daqScheduler_stop()."
   (opendaq.low-level:scheduler/stop (%require-live-pointer object))
@@ -20610,6 +23364,7 @@ Calls the openDAQ C function daqScheduler_stop()."
 
 (defgeneric stop-main-loop (object)
   (:documentation "Signals the main loop to stop processing and return from @ref runMainLoop.
+
 This method unblocks the loop and requests graceful shutdown. It is typically called
 from another thread or in response to an application shutdown signal.
 Has no effect if the loop is not currently running.
@@ -20617,6 +23372,7 @@ Has no effect if the loop is not currently running.
 Calls the openDAQ C function daqScheduler_stopMainLoop()."))
 (defmethod stop-main-loop ((object scheduler))
   "Signals the main loop to stop processing and return from @ref runMainLoop.
+
 This method unblocks the loop and requests graceful shutdown. It is typically called
 from another thread or in response to an application shutdown signal.
 Has no effect if the loop is not currently running.
@@ -20672,7 +23428,7 @@ Calls the openDAQ C function daqSearchFilter_visitChildren()."
   (:documentation "Calls the openDAQ C function daqSerializable_getSerializeId()."))
 (defmethod serialize-id ((object serializable))
   "Calls the openDAQ C function daqSerializable_getSerializeId()."
-  (wrap (opendaq.low-level:serializable/get-serialize-id (%require-live-pointer object)) 'const-char-ptr)
+  (wrap (opendaq.low-level:serializable/get-serialize-id (%require-live-pointer object)) 'c-const-char-ptr)
 )
 
 (defgeneric serialize (object serializer)
@@ -21131,6 +23887,20 @@ Calls the openDAQ C function daqServerCapabilityConfig_setPrefix()."
     (opendaq.low-level:server-capability-config/set-prefix (%require-live-pointer object) coerced-new-value))
   new-value)
 
+(defgeneric (setf protocol-group-id) (new-value object)
+  (:documentation "Sets the ID of protocol group. Empty protocol group ID means that the protocol is not part of any group.
+@param protocolGroupId The ID of protocol group
+
+Calls the openDAQ C function daqServerCapabilityConfig_setProtocolGroupId()."))
+(defmethod (setf protocol-group-id) (new-value (object server-capability-config))
+  "Sets the ID of protocol group. Empty protocol group ID means that the protocol is not part of any group.
+@param protocolGroupId The ID of protocol group
+
+Calls the openDAQ C function daqServerCapabilityConfig_setProtocolGroupId()."
+  (with-daq-boxed-values ((coerced-new-value new-value :daq-string))
+    (opendaq.low-level:server-capability-config/set-protocol-group-id (%require-live-pointer object) coerced-new-value))
+  new-value)
+
 (defgeneric (setf protocol-id) (new-value object)
   (:documentation "Sets the ID of protocol
 @param protocolId The ID of protocol
@@ -21157,6 +23927,28 @@ Calls the openDAQ C function daqServerCapabilityConfig_setProtocolName()."))
 Calls the openDAQ C function daqServerCapabilityConfig_setProtocolName()."
   (with-daq-boxed-values ((coerced-new-value new-value :daq-string))
     (opendaq.low-level:server-capability-config/set-protocol-name (%require-live-pointer object) coerced-new-value))
+  new-value)
+
+(defgeneric (setf protocol-security-level) (new-value object)
+  (:documentation "Sets the security level of the protocol.
+@param securityLevel The security level of the protocol.
+
+Could be '-1' if the protocol does not define any security level or if the security level is not known,
+'0' if the protocol is not secure, and positive integer values for different security levels defined by the protocol.
+The higher the value, the more secure the protocol is considered to be.
+
+Calls the openDAQ C function daqServerCapabilityConfig_setProtocolSecurityLevel()."))
+(defmethod (setf protocol-security-level) (new-value (object server-capability-config))
+  "Sets the security level of the protocol.
+@param securityLevel The security level of the protocol.
+
+Could be '-1' if the protocol does not define any security level or if the security level is not known,
+'0' if the protocol is not secure, and positive integer values for different security levels defined by the protocol.
+The higher the value, the more secure the protocol is considered to be.
+
+Calls the openDAQ C function daqServerCapabilityConfig_setProtocolSecurityLevel()."
+  (with-daq-boxed-values ((coerced-new-value new-value :daq-base-object))
+    (opendaq.low-level:server-capability-config/set-protocol-security-level (%require-live-pointer object) coerced-new-value))
   new-value)
 
 (defgeneric (setf protocol-type) (new-value object)
@@ -21190,6 +23982,7 @@ Calls the openDAQ C function daqServerCapabilityConfig_setProtocolVersion()."
 (defgeneric address-info (object)
   (:documentation "Gets the list of address information objects.
 @param[out] addressInfo The list of address information objects.
+
 Address information duplicates the connection string and address as available on the Server Capability object.
 Additionally, it provides information on what type of address it is (e.g., IPv4, IPv6), as well as whether the address is reachable.
 
@@ -21197,6 +23990,7 @@ Calls the openDAQ C function daqServerCapability_getAddressInfo()."))
 (defmethod address-info ((object server-capability))
   "Gets the list of address information objects.
 @param[out] addressInfo The list of address information objects.
+
 Address information duplicates the connection string and address as available on the Server Capability object.
 Additionally, it provides information on what type of address it is (e.g., IPv4, IPv6), as well as whether the address is reachable.
 
@@ -21290,12 +24084,27 @@ Calls the openDAQ C function daqServerCapability_getPrefix()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:server-capability/get-prefix (%require-live-pointer object)))
 )
 
+(defgeneric protocol-group-id (object)
+  (:documentation "server-capability => daqServerCapability_getProtocolGroupId()
+    Gets the id of the protocol group supported by the device. Should not contain spaces or special characters except for '_' and '-'.
+
+streaming => daqStreaming_getProtocolGroupId()
+    Gets the group identifier of the data transfer protocol (e.g., \"OpenDAQNativeStreamingGroup\", \"OpenDAQLTStreamingGroup\")"))
+(defmethod protocol-group-id ((object server-capability))
+  "Gets the id of the protocol group supported by the device. Should not contain spaces or special characters except for '_' and '-'.
+Could be empty if the protocol is not part of any group.
+@param[out] protocolGropuId The id of the protocol group.
+
+Calls the openDAQ C function daqServerCapability_getProtocolGroupId()."
+  (%daq-string-to-lisp-and-release (opendaq.low-level:server-capability/get-protocol-group-id (%require-live-pointer object)))
+)
+
 (defgeneric protocol-id (object)
   (:documentation "server-capability => daqServerCapability_getProtocolId()
     Gets the id of the protocol supported by the device. Should not contain spaces or special characters except for '_' and '-'.
 
 streaming => daqStreaming_getProtocolId()
-    Gets the identifier of the data transfer protocol (e.g., \"OpenDAQNativeStreaming\", \"OpenDAQLTStreaming\") used by this streaming object."))
+    Gets the identifier of the data transfer protocol (e.g., \"OpenDAQNativeStreaming\", \"OpenDAQLTStreaming\")"))
 (defmethod protocol-id ((object server-capability))
   "Gets the id of the protocol supported by the device. Should not contain spaces or special characters except for '_' and '-'.
 @param[out] protocolId The id of the protocol.
@@ -21310,6 +24119,27 @@ Calls the openDAQ C function daqServerCapability_getProtocolId()."
 
 Calls the openDAQ C function daqServerCapability_getProtocolName()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:server-capability/get-protocol-name (%require-live-pointer object)))
+)
+
+(defgeneric protocol-security-level (object)
+  (:documentation "Gets the security level of the protocol.
+@param[out] securityLevel The security level of the protocol.
+
+Could be '-1' if the protocol does not define any security level or if the security level is not known,
+'0' if the protocol is not secure, and positive integer values for different security levels defined by the protocol.
+The higher the value, the more secure the protocol is considered to be.
+
+Calls the openDAQ C function daqServerCapability_getProtocolSecurityLevel()."))
+(defmethod protocol-security-level ((object server-capability))
+  "Gets the security level of the protocol.
+@param[out] securityLevel The security level of the protocol.
+
+Could be '-1' if the protocol does not define any security level or if the security level is not known,
+'0' if the protocol is not secure, and positive integer values for different security levels defined by the protocol.
+The higher the value, the more secure the protocol is considered to be.
+
+Calls the openDAQ C function daqServerCapability_getProtocolSecurityLevel()."
+  (wrap (opendaq.low-level:server-capability/get-protocol-security-level (%require-live-pointer object)) 'integer-object)
 )
 
 (defmethod protocol-type ((object server-capability))
@@ -21366,6 +24196,7 @@ Calls the openDAQ C function daqServer_getId()."
 (defmethod signals ((object server) &optional (search-filter nil))
   "Gets a list of the server's signals.
 @param[out] signals The flat list of signals.
+
 Server signals are most often the mirrored representations of signals that belong to the client connected to the instance via this server.
 
 Calls the openDAQ C function daqServer_getSignals()."
@@ -21376,6 +24207,7 @@ Calls the openDAQ C function daqServer_getSignals()."
 (defgeneric streaming (object)
   (:documentation "Gets a streaming source associated with server.
 @param[out] streaming The streaming object that represents the server’s client-to-device streaming source.
+
 The streaming object is assigned on servers that support the generalized client-to-device streaming mechanism.
 The object is expected to be associated with mirrored server-side copies of client signals and is responsible for receiving
 their data sent from the client to the device.
@@ -21384,6 +24216,7 @@ Calls the openDAQ C function daqServer_getStreaming()."))
 (defmethod streaming ((object server))
   "Gets a streaming source associated with server.
 @param[out] streaming The streaming object that represents the server’s client-to-device streaming source.
+
 The streaming object is assigned on servers that support the generalized client-to-device streaming mechanism.
 The object is expected to be associated with mirrored server-side copies of client signals and is responsible for receiving
 their data sent from the client to the device.
@@ -21459,6 +24292,7 @@ Calls the openDAQ C function daqSignalConfig_sendPacket()."
 (defgeneric send-packet-and-steal-ref (object packet)
   (:documentation "Sends a packet through all connections of the signal. Ownership of the packet is transfered.
 @param packet The packet to be sent.
+
 After calling the method, the packet should not be touched again. The ownership of the packet
 is taken by underlying connections and it could be destroyed before the function returns.
 
@@ -21466,6 +24300,7 @@ Calls the openDAQ C function daqSignalConfig_sendPacketAndStealRef()."))
 (defmethod send-packet-and-steal-ref ((object signal-config) packet)
   "Sends a packet through all connections of the signal. Ownership of the packet is transfered.
 @param packet The packet to be sent.
+
 After calling the method, the packet should not be touched again. The ownership of the packet
 is taken by underlying connections and it could be destroyed before the function returns.
 
@@ -21477,12 +24312,14 @@ Calls the openDAQ C function daqSignalConfig_sendPacketAndStealRef()."
 (defgeneric send-packets (object packets)
   (:documentation "Sends multiple packets through all connections of the signal.
 @param packets The packets to be sent.
+
 Sending multiple packets creates a single notification to input port.
 
 Calls the openDAQ C function daqSignalConfig_sendPackets()."))
 (defmethod send-packets ((object signal-config) packets)
   "Sends multiple packets through all connections of the signal.
 @param packets The packets to be sent.
+
 Sending multiple packets creates a single notification to input port.
 
 Calls the openDAQ C function daqSignalConfig_sendPackets()."
@@ -21493,6 +24330,7 @@ Calls the openDAQ C function daqSignalConfig_sendPackets()."
 (defgeneric send-packets-and-steal-ref (object packets)
   (:documentation "Sends multiple packets through all connections of the signal. Ownership of the packets is transfered.
 @param packets The packets to be sent.
+
 After calling the method, the packets should not be touched again. The ownership of the packets
 is taken by underlying connections and they could be destroyed before the function returns.
 
@@ -21500,6 +24338,7 @@ Calls the openDAQ C function daqSignalConfig_sendPacketsAndStealRef()."))
 (defmethod send-packets-and-steal-ref ((object signal-config) packets)
   "Sends multiple packets through all connections of the signal. Ownership of the packets is transfered.
 @param packets The packets to be sent.
+
 After calling the method, the packets should not be touched again. The ownership of the packets
 is taken by underlying connections and they could be destroyed before the function returns.
 
@@ -21511,6 +24350,7 @@ Calls the openDAQ C function daqSignalConfig_sendPacketsAndStealRef()."
 (defgeneric (setf descriptor) (new-value object)
   (:documentation "Sets the data descriptor.
 @param descriptor The data descriptor.
+
 Setting the data descriptor triggers a Descriptor changed event packet to be sent to
 all connections of the signal. If the signal is a domain signal of another, that signal
 also sends a Descriptor changed event to all its connections.
@@ -21519,6 +24359,7 @@ Calls the openDAQ C function daqSignalConfig_setDescriptor()."))
 (defmethod (setf descriptor) (new-value (object signal-config))
   "Sets the data descriptor.
 @param descriptor The data descriptor.
+
 Setting the data descriptor triggers a Descriptor changed event packet to be sent to
 all connections of the signal. If the signal is a domain signal of another, that signal
 also sends a Descriptor changed event to all its connections.
@@ -21531,6 +24372,7 @@ Calls the openDAQ C function daqSignalConfig_setDescriptor()."
 (defgeneric (setf domain-signal) (new-value object)
   (:documentation "Sets the domain signal reference.
 @param signal The domain signal.
+
 Setting a new domain signal triggers a Descriptor changed event packet to be sent to
 all connections of the signal.
 
@@ -21538,6 +24380,7 @@ Calls the openDAQ C function daqSignalConfig_setDomainSignal()."))
 (defmethod (setf domain-signal) (new-value (object signal-config))
   "Sets the domain signal reference.
 @param signal The domain signal.
+
 Setting a new domain signal triggers a Descriptor changed event packet to be sent to
 all connections of the signal.
 
@@ -21549,6 +24392,7 @@ Calls the openDAQ C function daqSignalConfig_setDomainSignal()."
 (defgeneric (setf last-value) (new-value object)
   (:documentation "Sets the last value of the signal.
 @param lastValue The lastValue.
+
 This method is used to manually set the last value of the signal. Useful when automatic calculation of
 last value is disabled, usually due to performance reasons.
 
@@ -21556,6 +24400,7 @@ Calls the openDAQ C function daqSignalConfig_setLastValue()."))
 (defmethod (setf last-value) (new-value (object signal-config))
   "Sets the last value of the signal.
 @param lastValue The lastValue.
+
 This method is used to manually set the last value of the signal. Useful when automatic calculation of
 last value is disabled, usually due to performance reasons.
 
@@ -21579,12 +24424,14 @@ Calls the openDAQ C function daqSignalConfig_setRelatedSignals()."
   new-value)
 
 (defgeneric domain-signal-reference-removed (object signal)
-  (:documentation "Notifies the signal that it is no longer being used as a domain signal by the signal passed as the function argument.
+  (:documentation "Notifies the signal that it is no longer being used as a domain signal by the signal passed as
+the function argument.
 @param signal The callee signal on which the domain signal reference has been removed.
 
 Calls the openDAQ C function daqSignalEvents_domainSignalReferenceRemoved()."))
 (defmethod domain-signal-reference-removed ((object signal-events) signal)
-  "Notifies the signal that it is no longer being used as a domain signal by the signal passed as the function argument.
+  "Notifies the signal that it is no longer being used as a domain signal by the signal passed as
+the function argument.
 @param signal The callee signal on which the domain signal reference has been removed.
 
 Calls the openDAQ C function daqSignalEvents_domainSignalReferenceRemoved()."
@@ -21593,12 +24440,14 @@ Calls the openDAQ C function daqSignalEvents_domainSignalReferenceRemoved()."
 )
 
 (defgeneric domain-signal-reference-set (object signal)
-  (:documentation "Notifies the signal that it is being used as a domain signal by the signal passed as the function argument.
+  (:documentation "Notifies the signal that it is being used as a domain signal by the signal passed as the function
+argument.
 @param signal The callee signal on which the domain signal reference has been set.
 
 Calls the openDAQ C function daqSignalEvents_domainSignalReferenceSet()."))
 (defmethod domain-signal-reference-set ((object signal-events) signal)
-  "Notifies the signal that it is being used as a domain signal by the signal passed as the function argument.
+  "Notifies the signal that it is being used as a domain signal by the signal passed as the function
+argument.
 @param signal The callee signal on which the domain signal reference has been set.
 
 Calls the openDAQ C function daqSignalEvents_domainSignalReferenceSet()."
@@ -21609,6 +24458,7 @@ Calls the openDAQ C function daqSignalEvents_domainSignalReferenceSet()."
 (defgeneric listener-connected (object connection)
   (:documentation "Notifies the signal that it has been connected to an input port forming a new connection.
 @param connection The formed connection.
+
 The data descriptor of the signal is enqueued on the connection, triggering the `onPacketReceived`
 callback on the same thread.
 
@@ -21616,6 +24466,7 @@ Calls the openDAQ C function daqSignalEvents_listenerConnected()."))
 (defmethod listener-connected ((object signal-events) connection)
   "Notifies the signal that it has been connected to an input port forming a new connection.
 @param connection The formed connection.
+
 The data descriptor of the signal is enqueued on the connection, triggering the `onPacketReceived`
 callback on the same thread.
 
@@ -21627,6 +24478,7 @@ Calls the openDAQ C function daqSignalEvents_listenerConnected()."
 (defgeneric listener-connected-scheduled (object connection)
   (:documentation "Notifies the signal that it has been connected to an input port forming a new connection.
 @param connection The formed connection.
+
 The data descriptor of the signal is enqueued on the connection, scheduling the `onPacketReceived`
 callback.
 
@@ -21634,6 +24486,7 @@ Calls the openDAQ C function daqSignalEvents_listenerConnectedScheduled()."))
 (defmethod listener-connected-scheduled ((object signal-events) connection)
   "Notifies the signal that it has been connected to an input port forming a new connection.
 @param connection The formed connection.
+
 The data descriptor of the signal is enqueued on the connection, scheduling the `onPacketReceived`
 callback.
 
@@ -21737,6 +24590,7 @@ Calls the openDAQ C function daqSignal_getConnections()."
 (defgeneric descriptor (object)
   (:documentation "Gets the signal's data descriptor.
 @param[out] descriptor The signal's data descriptor.
+
 The descriptor contains metadata about the signal, providing information about its name, description,...
 and defines how the data in it's packet's buffers should be interpreted.
 
@@ -21744,6 +24598,7 @@ Calls the openDAQ C function daqSignal_getDescriptor()."))
 (defmethod descriptor ((object signal))
   "Gets the signal's data descriptor.
 @param[out] descriptor The signal's data descriptor.
+
 The descriptor contains metadata about the signal, providing information about its name, description,...
 and defines how the data in it's packet's buffers should be interpreted.
 
@@ -21754,6 +24609,7 @@ Calls the openDAQ C function daqSignal_getDescriptor()."
 (defgeneric domain-signal (object)
   (:documentation "Gets the signal that carries its domain data.
 @param[out] signal The domain signal.
+
 The domain signal contains domain (most often time) data that is used to interpret a signal's data in
 a given domain. It has the same sampling rate as the signal.
 
@@ -21761,6 +24617,7 @@ Calls the openDAQ C function daqSignal_getDomainSignal()."))
 (defmethod domain-signal ((object signal))
   "Gets the signal that carries its domain data.
 @param[out] signal The domain signal.
+
 The domain signal contains domain (most often time) data that is used to interpret a signal's data in
 a given domain. It has the same sampling rate as the signal.
 
@@ -21771,10 +24628,12 @@ Calls the openDAQ C function daqSignal_getDomainSignal()."
 (defmethod last-value ((object signal) &optional (type-manager nil type-manager-suppliedp))
   "Gets the signal last value.
 @param[out] value The IBaseObject value can be a nullptr if there is no value, or if the data type is not supported by the function.
+
 If a value is assigned, it can be cast based on the signal description to IFloat if the type is Float32 or Float64,
 to IInteger if the type is Int8 through Int64 or UInt8 through UInt64, to IComplexNumber if the type is ComplexFloat32 or ComplexFloat64,
 to IRange if the type is RangeInt64, to IString if the type is String, to IStruct if the type is Struct, and to IList of the forementioned types if there is exactly
 one dimension.
+
 For String type signals in binary data packets, the string data must be encoded as UTF-8 strings. The string length is
 determined by the sample size, and the string does not need to be null-terminated. The method extracts the string value
 from the packet data and returns it as an IString object.
@@ -21786,9 +24645,67 @@ Calls the openDAQ C function daqSignal_getLastValue()."
   (wrap (opendaq.low-level:signal/get-last-value (%require-live-pointer object)) 'base-object)
 )
 
+(defgeneric last-value-with-timestamp (object)
+  (:documentation "Gets the signal last value and its corresponding timestamp.
+@param[out] value The IBaseObject value can be a nullptr if there is no value, or if the data type is not supported by the function.
+@param[out] timestamp The IBaseObject timestamp corresponding to the returned value. It can be a nullptr if there is no timestamp available.
+
+If a value is assigned, it can be cast based on the signal description to IFloat if the type is Float32 or Float64,
+to IInteger if the type is Int8 through Int64 or UInt8 through UInt64, to IComplexNumber if the type is ComplexFloat32 or ComplexFloat64,
+to IRange if the type is RangeInt64, to IString if the type is String, to IStruct if the type is Struct, and to IList of the aforementioned types if there is exactly
+one dimension.
+
+If a timestamp is assigned, it can typically be cast to IInteger and represents the UNIX time since epoch in microseconds
+corresponding to the returned signal value.
+
+The timestamp is computed from the signal's domain signal and is only available when all of the
+following hold; otherwise `timestamp` is a nullptr:
+- the signal has an assigned domain signal with a domain descriptor,
+- the domain sample type is numeric (integer or floating point) and scalar (no dimensions),
+- the domain unit symbol is \"s\" (seconds),
+- the domain origin is assigned and is a valid ISO 8601 date-time (e.g. \"2024-01-01T00:00:00\").
+
+For String type signals in binary data packets, the string data must be encoded as UTF-8 strings. The string length is
+determined by the sample size, and the string does not need to be null-terminated. The method extracts the string value
+from the packet data and returns it as an IString object.
+
+Calls the openDAQ C function daqSignal_getLastValueWithTimestamp()."))
+(defmethod last-value-with-timestamp ((object signal))
+  "Gets the signal last value and its corresponding timestamp.
+@param[out] value The IBaseObject value can be a nullptr if there is no value, or if the data type is not supported by the function.
+@param[out] timestamp The IBaseObject timestamp corresponding to the returned value. It can be a nullptr if there is no timestamp available.
+
+If a value is assigned, it can be cast based on the signal description to IFloat if the type is Float32 or Float64,
+to IInteger if the type is Int8 through Int64 or UInt8 through UInt64, to IComplexNumber if the type is ComplexFloat32 or ComplexFloat64,
+to IRange if the type is RangeInt64, to IString if the type is String, to IStruct if the type is Struct, and to IList of the aforementioned types if there is exactly
+one dimension.
+
+If a timestamp is assigned, it can typically be cast to IInteger and represents the UNIX time since epoch in microseconds
+corresponding to the returned signal value.
+
+The timestamp is computed from the signal's domain signal and is only available when all of the
+following hold; otherwise `timestamp` is a nullptr:
+- the signal has an assigned domain signal with a domain descriptor,
+- the domain sample type is numeric (integer or floating point) and scalar (no dimensions),
+- the domain unit symbol is \"s\" (seconds),
+- the domain origin is assigned and is a valid ISO 8601 date-time (e.g. \"2024-01-01T00:00:00\").
+
+For String type signals in binary data packets, the string data must be encoded as UTF-8 strings. The string length is
+determined by the sample size, and the string does not need to be null-terminated. The method extracts the string value
+from the packet data and returns it as an IString object.
+
+Calls the openDAQ C function daqSignal_getLastValueWithTimestamp()."
+  (multiple-value-bind (value-0 value-1)
+      (opendaq.low-level:signal/get-last-value-with-timestamp (%require-live-pointer object))
+    (cl:values
+      (wrap value-0 'base-object)
+      (wrap value-1 'base-object)))
+)
+
 (defmethod public ((object signal))
   "Returns true if the signal is public; false otherwise.
 @param[out] isPublic True if the signal is public; false otherwise.
+
 Public signals are visible to clients connected to the device, and are streamed.
 
 Calls the openDAQ C function daqSignal_getPublic()."
@@ -21798,6 +24715,7 @@ Calls the openDAQ C function daqSignal_getPublic()."
 (defgeneric related-signals (object)
   (:documentation "Gets a list of related signals.
 @param[out] signals The list of related signals.
+
 Signals within the related signals list are facilitate the interpretation of a given signal's data, or
 are otherwise relevant when working with the signal.
 
@@ -21805,6 +24723,7 @@ Calls the openDAQ C function daqSignal_getRelatedSignals()."))
 (defmethod related-signals ((object signal))
   "Gets a list of related signals.
 @param[out] signals The list of related signals.
+
 Signals within the related signals list are facilitate the interpretation of a given signal's data, or
 are otherwise relevant when working with the signal.
 
@@ -21815,6 +24734,7 @@ Calls the openDAQ C function daqSignal_getRelatedSignals()."
 (defgeneric streamed (object)
   (:documentation "Returns true if the signal is streamed; false otherwise.
 @param[out] streamed True if the signal is streamed; false otherwise.
+
 A streamed signal receives packets from a streaming server and forwards packets on the signal path.
 Method always sets `streamed` parameter to False if the signal is local to the current Instance.
 
@@ -21822,6 +24742,7 @@ Calls the openDAQ C function daqSignal_getStreamed()."))
 (defmethod streamed ((object signal))
   "Returns true if the signal is streamed; false otherwise.
 @param[out] streamed True if the signal is streamed; false otherwise.
+
 A streamed signal receives packets from a streaming server and forwards packets on the signal path.
 Method always sets `streamed` parameter to False if the signal is local to the current Instance.
 
@@ -21832,6 +24753,7 @@ Calls the openDAQ C function daqSignal_getStreamed()."
 (defmethod (setf public) (new-value (object signal))
   "Sets the signal to be either public or private.
 @param isPublic If false, the signal is set to private; if true, the signal is set to be public.
+
 Public signals are visible to clients connected to the device, and are streamed.
 
 Calls the openDAQ C function daqSignal_setPublic()."
@@ -21842,6 +24764,7 @@ Calls the openDAQ C function daqSignal_setPublic()."
 (defgeneric (setf streamed) (new-value object)
   (:documentation "Sets the signal to be either streamed or not.
 @param streamed The new streamed state of the signal.
+
 A streamed signal receives packets from a streaming server and forwards packets on the signal path.
 Setting the \"Streamed\" flag has no effect if the signal is local to the current Instance.
 Method returns OPENDAQ_IGNORED if that is the case.
@@ -21850,6 +24773,7 @@ Calls the openDAQ C function daqSignal_setStreamed()."))
 (defmethod (setf streamed) (new-value (object signal))
   "Sets the signal to be either streamed or not.
 @param streamed The new streamed state of the signal.
+
 A streamed signal receives packets from a streaming server and forwards packets on the signal path.
 Setting the \"Streamed\" flag has no effect if the signal is local to the current Instance.
 Method returns OPENDAQ_IGNORED if that is the case.
@@ -21901,7 +24825,9 @@ Calls the openDAQ C function daqStreamReaderBuilder_getReadMode()."
 
 (defmethod read-timeout-type ((object stream-reader-builder))
   "Gets the read timeout mode
-@param type The timeout mode. if \"Any\" returns immediately if there is available data otherwise time-out is exceeded. if \"All\" waiting until timeout and returns available data if existing. otherwise time-out is exceeded.
+@param type The timeout mode.
+if \"Any\" returns immediately if there is available data otherwise time-out is exceeded.
+if \"All\" waiting until timeout and returns available data if existing. otherwise time-out is exceeded.
 
 Calls the openDAQ C function daqStreamReaderBuilder_getReadTimeoutType()."
   (opendaq.low-level:stream-reader-builder/get-read-timeout-type (%require-live-pointer object))
@@ -21974,7 +24900,9 @@ Calls the openDAQ C function daqStreamReaderBuilder_setReadMode()."
 
 (defmethod (setf read-timeout-type) (new-value (object stream-reader-builder))
   "Sets the read timeout mode
-@param type The timeout mode. if \"Any\" returns immediately if there is available data otherwise time-out is exceeded. if \"All\" waiting until timeout and returns available data if existing. otherwise time-out is exceeded.
+@param type The timeout mode.
+if \"Any\" returns immediately if there is available data otherwise time-out is exceeded.
+if \"All\" waiting until timeout and returns available data if existing. otherwise time-out is exceeded.
 
 Calls the openDAQ C function daqStreamReaderBuilder_setReadTimeoutType()."
   (with-daq-boxed-values ((coerced-new-value new-value nil))
@@ -22009,19 +24937,33 @@ Calls the openDAQ C function daqStreamReaderBuilder_setValueReadType()."
   new-value)
 
 (defgeneric stream-reader-read (object samples count &optional timeout-ms)
-  (:documentation "Copies at maximum the next `count` unread samples to the values buffer. The amount actually read is returned through the `count` parameter.
-@param samples The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples.
-@param count The maximum amount of samples to be read. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are returned. The rest of the buffer is not modified or cleared.
+  (:documentation "Copies at maximum the next `count` unread samples to the values buffer.
+The amount actually read is returned through the `count` parameter.
+@param[in] samples The buffer that the samples will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of samples.
+@param[in,out] count The maximum amount of samples to be read. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+samples are returned. The rest of the buffer is not modified or cleared.
 @param timeoutMs The maximum amount of time in milliseconds to wait for the requested amount of samples before returning.
-@param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event - If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
+@param[out] status: Represents the status of the reader.
+- If the reader is invalid, IReaderStatus::getValid returns false.
+- If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event
+- If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
 
 Calls the openDAQ C function daqStreamReader_read()."))
 (defmethod stream-reader-read ((object stream-reader) samples count &optional (timeout-ms 0))
-  "Copies at maximum the next `count` unread samples to the values buffer. The amount actually read is returned through the `count` parameter.
-@param samples The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples.
-@param count The maximum amount of samples to be read. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are returned. The rest of the buffer is not modified or cleared.
+  "Copies at maximum the next `count` unread samples to the values buffer.
+The amount actually read is returned through the `count` parameter.
+@param[in] samples The buffer that the samples will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of samples.
+@param[in,out] count The maximum amount of samples to be read. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+samples are returned. The rest of the buffer is not modified or cleared.
 @param timeoutMs The maximum amount of time in milliseconds to wait for the requested amount of samples before returning.
-@param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event - If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
+@param[out] status: Represents the status of the reader.
+- If the reader is invalid, IReaderStatus::getValid returns false.
+- If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event
+- If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
 
 Calls the openDAQ C function daqStreamReader_read()."
   (with-daq-boxed-values ((coerced-samples samples nil)
@@ -22035,21 +24977,37 @@ Calls the openDAQ C function daqStreamReader_read()."
 )
 
 (defgeneric stream-reader-read-with-domain (object samples domain count &optional timeout-ms)
-  (:documentation "Copies at maximum the next `count` unread samples and clock-stamps to the `samples` and `domain` buffers. The amount actually read is returned through the `count` parameter.
-@param samples The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples.
-@param domain The buffer that the domain values will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of clock-stamps.
-@param count The maximum amount of samples to be read. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are returned. The rest of the buffer is not modified or cleared.
+  (:documentation "Copies at maximum the next `count` unread samples and clock-stamps to the `samples` and `domain` buffers.
+The amount actually read is returned through the `count` parameter.
+@param[in] samples The buffer that the samples will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of samples.
+@param[in] domain The buffer that the domain values will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of clock-stamps.
+@param[in,out] count The maximum amount of samples to be read. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+samples are returned. The rest of the buffer is not modified or cleared.
 @param timeoutMs The maximum amount of time in milliseconds to wait for the requested amount of samples before returning.
-@param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event - If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
+@param[out] status: Represents the status of the reader.
+- If the reader is invalid, IReaderStatus::getValid returns false.
+- If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event
+- If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
 
 Calls the openDAQ C function daqStreamReader_readWithDomain()."))
 (defmethod stream-reader-read-with-domain ((object stream-reader) samples domain count &optional (timeout-ms 0))
-  "Copies at maximum the next `count` unread samples and clock-stamps to the `samples` and `domain` buffers. The amount actually read is returned through the `count` parameter.
-@param samples The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples.
-@param domain The buffer that the domain values will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of clock-stamps.
-@param count The maximum amount of samples to be read. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are returned. The rest of the buffer is not modified or cleared.
+  "Copies at maximum the next `count` unread samples and clock-stamps to the `samples` and `domain` buffers.
+The amount actually read is returned through the `count` parameter.
+@param[in] samples The buffer that the samples will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of samples.
+@param[in] domain The buffer that the domain values will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of clock-stamps.
+@param[in,out] count The maximum amount of samples to be read. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+samples are returned. The rest of the buffer is not modified or cleared.
 @param timeoutMs The maximum amount of time in milliseconds to wait for the requested amount of samples before returning.
-@param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event - If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
+@param[out] status: Represents the status of the reader.
+- If the reader is invalid, IReaderStatus::getValid returns false.
+- If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event
+- If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
 
 Calls the openDAQ C function daqStreamReader_readWithDomain()."
   (with-daq-boxed-values ((coerced-samples samples nil)
@@ -22065,7 +25023,9 @@ Calls the openDAQ C function daqStreamReader_readWithDomain()."
 
 (defmethod skip-samples ((object stream-reader) count)
   "Skips the specified amount of samples.
-@param count The maximum amount of samples to be skipped. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are skipped. The rest of the buffer is not modified or cleared.
+@param[in,out] count The maximum amount of samples to be skipped. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+samples are skipped. The rest of the buffer is not modified or cleared.
 
 Calls the openDAQ C function daqStreamReader_skipSamples()."
   (with-daq-boxed-values ((coerced-count count nil))
@@ -22086,6 +25046,7 @@ Calls the openDAQ C function daqStreamReader_skipSamples()."
 @param inputPorts The list of input ports to be added.
 @retval OPENDAQ_ERR_DUPLICATEITEM if an input port on the list is already added to the Streaming.
 @retval OPENDAQ_ERR_NOINTERFACE if an input port on the list is not a mirrored signal.
+
 After an input port is added to the Streaming, the Streaming automatically appears in the list of
 available streaming sources of an input port.
 
@@ -22099,6 +25060,7 @@ Calls the openDAQ C function daqStreaming_addInputPorts()."
 @param signals The list of signals to be added.
 @retval OPENDAQ_ERR_DUPLICATEITEM if a signal on the list is already added to the Streaming.
 @retval OPENDAQ_ERR_NOINTERFACE if a signal on the list is not a mirrored signal.
+
 After a signal is added to the Streaming, the Streaming automatically appears in the list of
 available streaming sources of a signal. Some signals, however, may be silently ignored
 without triggering an error - for example, private signals are excluded by default.
@@ -22131,19 +25093,22 @@ Calls the openDAQ C function daqStreaming_getClientToDeviceStreamingEnabled()."
 
 (defgeneric connection-status (object)
   (:documentation "Retrieves the current status of the streaming connection.
-@param[out] connectionStatus The connection status, represented as an enumeration of type \"ConnectionStatusType\" with possible values: \"Connected\", \"Reconnecting\", or \"Unrecoverable\".
+@param[out] connectionStatus The connection status, represented as an enumeration of type \"ConnectionStatusType\"
+with possible values: \"Connected\", \"Reconnecting\", or \"Unrecoverable\".
 
 Calls the openDAQ C function daqStreaming_getConnectionStatus()."))
 (defmethod connection-status ((object streaming))
   "Retrieves the current status of the streaming connection.
-@param[out] connectionStatus The connection status, represented as an enumeration of type \"ConnectionStatusType\" with possible values: \"Connected\", \"Reconnecting\", or \"Unrecoverable\".
+@param[out] connectionStatus The connection status, represented as an enumeration of type \"ConnectionStatusType\"
+with possible values: \"Connected\", \"Reconnecting\", or \"Unrecoverable\".
 
 Calls the openDAQ C function daqStreaming_getConnectionStatus()."
   (wrap (opendaq.low-level:streaming/get-connection-status (%require-live-pointer object)) 'enumeration)
 )
 
 (defmethod connection-string ((object streaming))
-  "Gets the string representation of a connection address used to connect to the streaming service of the device.
+  "Gets the string representation of a connection address used to connect to the streaming
+service of the device.
 @param[out] connectionString The string used to connect to the streaming service.
 
 Calls the openDAQ C function daqStreaming_getConnectionString()."
@@ -22151,20 +25116,32 @@ Calls the openDAQ C function daqStreaming_getConnectionString()."
 )
 
 (defgeneric owner-device-remote-id (object)
-  (:documentation "Gets the global ID of the device (as it appears on the remote instance) to which this streaming object establishes a connection.
+  (:documentation "Gets the global ID of the device (as it appears on the remote instance)
+to which this streaming object establishes a connection.
 @param[out] deviceRemoteId The string representing the device's remote ID.
 
 Calls the openDAQ C function daqStreaming_getOwnerDeviceRemoteId()."))
 (defmethod owner-device-remote-id ((object streaming))
-  "Gets the global ID of the device (as it appears on the remote instance) to which this streaming object establishes a connection.
+  "Gets the global ID of the device (as it appears on the remote instance)
+to which this streaming object establishes a connection.
 @param[out] deviceRemoteId The string representing the device's remote ID.
 
 Calls the openDAQ C function daqStreaming_getOwnerDeviceRemoteId()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:streaming/get-owner-device-remote-id (%require-live-pointer object)))
 )
 
+(defmethod protocol-group-id ((object streaming))
+  "Gets the group identifier of the data transfer protocol (e.g., \"OpenDAQNativeStreamingGroup\", \"OpenDAQLTStreamingGroup\")
+used by this streaming object.
+@param[out] protocolId The string representing the protocol ID.
+
+Calls the openDAQ C function daqStreaming_getProtocolGroupId()."
+  (%daq-string-to-lisp-and-release (opendaq.low-level:streaming/get-protocol-group-id (%require-live-pointer object)))
+)
+
 (defmethod protocol-id ((object streaming))
-  "Gets the identifier of the data transfer protocol (e.g., \"OpenDAQNativeStreaming\", \"OpenDAQLTStreaming\") used by this streaming object.
+  "Gets the identifier of the data transfer protocol (e.g., \"OpenDAQNativeStreaming\", \"OpenDAQLTStreaming\")
+used by this streaming object.
 @param[out] protocolId The string representing the protocol ID.
 
 Calls the openDAQ C function daqStreaming_getProtocolId()."
@@ -22197,6 +25174,7 @@ Calls the openDAQ C function daqStreaming_removeAllSignals()."
   (:documentation "Removes input ports from the Streaming.
 @param inputPorts The list of input ports to be removed.
 @retval OPENDAQ_ERR_NOTFOUND if an input port on the list was not added to the Streaming.
+
 After an input port is removed from the Streaming, the Streaming is automatically excluded in the list of
 available streaming sources of an input port.
 
@@ -22205,6 +25183,7 @@ Calls the openDAQ C function daqStreaming_removeInputPorts()."))
   "Removes input ports from the Streaming.
 @param inputPorts The list of input ports to be removed.
 @retval OPENDAQ_ERR_NOTFOUND if an input port on the list was not added to the Streaming.
+
 After an input port is removed from the Streaming, the Streaming is automatically excluded in the list of
 available streaming sources of an input port.
 
@@ -22217,6 +25196,7 @@ Calls the openDAQ C function daqStreaming_removeInputPorts()."
   (:documentation "Removes signals from the Streaming.
 @param signals The list of signals to be removed.
 @retval OPENDAQ_ERR_NOTFOUND if a signal on the list was not added to the Streaming.
+
 After a signal is removed from the Streaming, the Streaming is automatically excluded in the list of
 available streaming sources of a signal.
 
@@ -22225,6 +25205,7 @@ Calls the openDAQ C function daqStreaming_removeSignals()."))
   "Removes signals from the Streaming.
 @param signals The list of signals to be removed.
 @retval OPENDAQ_ERR_NOTFOUND if a signal on the list was not added to the Streaming.
+
 After a signal is removed from the Streaming, the Streaming is automatically excluded in the list of
 available streaming sources of a signal.
 
@@ -22246,6 +25227,7 @@ Calls the openDAQ C function daqStreaming_setActive()."
   (:documentation "Gets a string value stored in the object.
 @param[out] value Stored string value.
 @return OPENDAQ_SUCCESS if succeeded, error code otherwise.
+
 Call this method to extract the string value that is stored in the object. Method extracts the
 value as a pointer to 8-bit char type.
 
@@ -22254,17 +25236,19 @@ Calls the openDAQ C function daqString_getCharPtr()."))
   "Gets a string value stored in the object.
 @param[out] value Stored string value.
 @return OPENDAQ_SUCCESS if succeeded, error code otherwise.
+
 Call this method to extract the string value that is stored in the object. Method extracts the
 value as a pointer to 8-bit char type.
 
 Calls the openDAQ C function daqString_getCharPtr()."
-  (wrap (opendaq.low-level:string/get-char-ptr (%require-live-pointer object)) 'const-char-ptr)
+  (wrap (opendaq.low-level:string/get-char-ptr (%require-live-pointer object)) 'c-const-char-ptr)
 )
 
 (defgeneric length (object)
   (:documentation "Gets length of string.
 @param[out] size The size of the string.
 @return OPENDAQ_SUCCESS if succeeded, error code otherwise.
+
 Call this method to get the length of the string. Null char terminator is not included in
 the size of the string.
 
@@ -22273,6 +25257,7 @@ Calls the openDAQ C function daqString_getLength()."))
   "Gets length of string.
 @param[out] size The size of the string.
 @return OPENDAQ_SUCCESS if succeeded, error code otherwise.
+
 Call this method to get the length of the string. Null char terminator is not included in
 the size of the string.
 
@@ -22318,6 +25303,7 @@ struct => daqStruct_getFieldNames()
 (defmethod field-names ((object struct-builder))
   "Gets a list of all Struct field names.
 @param[out] names The list of field names.
+
 The list of names will be of equal length to the list of values. Additionally, the name of a field at any given
 index corresponds to the value stored in the list of values.
 
@@ -22334,6 +25320,7 @@ struct => daqStruct_getFieldValues()
 (defmethod field-values ((object struct-builder))
   "Gets a list of all Struct field values.
 @param[out] values The list of field values.
+
 The list of names will be of equal length to the list of values. Additionally, the name of a field at any given
 index corresponds to the value stored in the list of values.
 
@@ -22379,6 +25366,7 @@ Calls the openDAQ C function daqStructBuilder_set()."
 (defgeneric (setf field-values) (new-value object)
   (:documentation "Gets a list of all Struct field values.
 @param[out] values The list of field values.
+
 The list of names will be of equal length to the list of values. Additionally, the name of a field at any given
 index corresponds to the value stored in the list of values.
 
@@ -22386,6 +25374,7 @@ Calls the openDAQ C function daqStructBuilder_setFieldValues()."))
 (defmethod (setf field-values) (new-value (object struct-builder))
   "Gets a list of all Struct field values.
 @param[out] values The list of field values.
+
 The list of names will be of equal length to the list of values. Additionally, the name of a field at any given
 index corresponds to the value stored in the list of values.
 
@@ -22449,6 +25438,7 @@ Calls the openDAQ C function daqStruct_getAsDictionary()."
 (defmethod field-names ((object struct))
   "Gets a list of all Struct field names.
 @param[out] names The list of field names.
+
 The list of names will be of equal length to the list of values. Additionally, the name of a field at any given
 index corresponds to the value stored in the list of values.
 
@@ -22459,6 +25449,7 @@ Calls the openDAQ C function daqStruct_getFieldNames()."
 (defmethod field-values ((object struct))
   "Gets a list of all Struct field values.
 @param[out] values The list of field values.
+
 The list of names will be of equal length to the list of values. Additionally, the name of a field at any given
 index corresponds to the value stored in the list of values.
 
@@ -22498,11 +25489,25 @@ Calls the openDAQ C function daqStruct_hasField()."
   (opendaq.low-level:subscription-event-args/get-subscription-event-type (%require-live-pointer object))
 )
 
-(defgeneric add-interface (object sync-interface)
-  (:documentation "Adds an interface to the synchronization component.
-@param interface The interface to be added.
+(defgeneric weak-ref (object)
+  (:documentation "Gets a weak reference to the object.
+@param[out] weakRef A weak reference to the object.
 
-Calls the openDAQ C function daqSyncComponentPrivate_addInterface()."))
+Calls the openDAQ C function daqSupportsWeakRef_getWeakRef()."))
+(defmethod weak-ref ((object supports-weak-ref))
+  "Gets a weak reference to the object.
+@param[out] weakRef A weak reference to the object.
+
+Calls the openDAQ C function daqSupportsWeakRef_getWeakRef()."
+  (wrap (opendaq.low-level:supports-weak-ref/get-weak-ref (%require-live-pointer object)) 'weak-ref)
+)
+
+(defgeneric add-interface (object sync-interface)
+  (:documentation "sync-component-private => daqSyncComponentPrivate_addInterface()
+    Adds an interface to the synchronization component.
+
+synchronization-private => daqSynchronizationPrivate_addInterface()
+    Adds an interface to the synchronization."))
 (defmethod add-interface ((object sync-component-private) sync-interface)
   "Adds an interface to the synchronization component.
 @param interface The interface to be added.
@@ -22541,13 +25546,15 @@ Calls the openDAQ C function daqSyncComponentPrivate_setSyncLocked()."
   new-value)
 
 (defgeneric interfaces (object)
-  (:documentation "Retrieves the list of interfaces associated with this synchronization component.
-@param[out] interfaces List of interfaces associated with this component.
+  (:documentation "sync-component => daqSyncComponent_getInterfaces()
+    Retrieves the list of interfaces associated with this synchronization component.
 
-Calls the openDAQ C function daqSyncComponent_getInterfaces()."))
+synchronization => daqSynchronization_getInterfaces()
+    Gets all synchronization interfaces registered with this synchronization."))
 (defmethod interfaces ((object sync-component))
   "Retrieves the list of interfaces associated with this synchronization component.
 @param[out] interfaces List of interfaces associated with this component.
+@deprecated ISyncComponent is deprecated and will be removed in a future release. Use ISynchronization through IDevice::getSynchronization instead.
 
 Calls the openDAQ C function daqSyncComponent_getInterfaces()."
   (%hashtable-of (wrap (opendaq.low-level:sync-component/get-interfaces (%require-live-pointer object)) 'dict) 'string-object 'property-object)
@@ -22556,11 +25563,13 @@ Calls the openDAQ C function daqSyncComponent_getInterfaces()."
 (defgeneric selected-source (object)
   (:documentation "Retrieves the selected sync source interface.
 @param[out] selectedSource The selected sync source interface.
+@deprecated ISyncComponent is deprecated and will be removed in a future release. Use ISynchronization through IDevice::getSynchronization instead.
 
 Calls the openDAQ C function daqSyncComponent_getSelectedSource()."))
 (defmethod selected-source ((object sync-component))
   "Retrieves the selected sync source interface.
 @param[out] selectedSource The selected sync source interface.
+@deprecated ISyncComponent is deprecated and will be removed in a future release. Use ISynchronization through IDevice::getSynchronization instead.
 
 Calls the openDAQ C function daqSyncComponent_getSelectedSource()."
   (opendaq.low-level:sync-component/get-selected-source (%require-live-pointer object))
@@ -22569,11 +25578,13 @@ Calls the openDAQ C function daqSyncComponent_getSelectedSource()."
 (defgeneric sync-locked (object)
   (:documentation "Retrieves the synchronization lock status.
 @param[out] synchronizationLocked True if synchronization is locked; false otherwise.
+@deprecated ISyncComponent is deprecated and will be removed in a future release. Use ISynchronization through IDevice::getSynchronization instead.
 
 Calls the openDAQ C function daqSyncComponent_getSyncLocked()."))
 (defmethod sync-locked ((object sync-component))
   "Retrieves the synchronization lock status.
 @param[out] synchronizationLocked True if synchronization is locked; false otherwise.
+@deprecated ISyncComponent is deprecated and will be removed in a future release. Use ISynchronization through IDevice::getSynchronization instead.
 
 Calls the openDAQ C function daqSyncComponent_getSyncLocked()."
   (not (zerop (opendaq.low-level:sync-component/get-sync-locked (%require-live-pointer object))))
@@ -22582,15 +25593,270 @@ Calls the openDAQ C function daqSyncComponent_getSyncLocked()."
 (defgeneric (setf selected-source) (new-value object)
   (:documentation "Sets the selected sync source interface.
 @param selectedSource The selected sync source interface.
+@deprecated ISyncComponent is deprecated and will be removed in a future release. Use ISynchronization through IDevice::getSynchronization instead.
 
 Calls the openDAQ C function daqSyncComponent_setSelectedSource()."))
 (defmethod (setf selected-source) (new-value (object sync-component))
   "Sets the selected sync source interface.
 @param selectedSource The selected sync source interface.
+@deprecated ISyncComponent is deprecated and will be removed in a future release. Use ISynchronization through IDevice::getSynchronization instead.
 
 Calls the openDAQ C function daqSyncComponent_setSelectedSource()."
   (with-daq-boxed-values ((coerced-new-value new-value nil))
     (opendaq.low-level:sync-component/set-selected-source (%require-live-pointer object) coerced-new-value))
+  new-value)
+
+(defgeneric (setf as-source) (new-value object)
+  (:documentation "Marks the synchronization interface as the currently selected synchronization source,
+or demotes it back to being an output-only interface.
+@param source True to select this interface as the synchronization source, False to demote it.
+
+True: the available modes become `Auto` and `Input`, and the mode is set to `Auto`, or to
+`Input` if `Auto` is unavailable. False: the available modes become `Off` and `Output`, and
+the mode is set to `Off`.
+
+Calls the openDAQ C function daqSyncInterfaceInternal_setAsSource()."))
+(defmethod (setf as-source) (new-value (object sync-interface-internal))
+  "Marks the synchronization interface as the currently selected synchronization source,
+or demotes it back to being an output-only interface.
+@param source True to select this interface as the synchronization source, False to demote it.
+
+True: the available modes become `Auto` and `Input`, and the mode is set to `Auto`, or to
+`Input` if `Auto` is unavailable. False: the available modes become `Off` and `Output`, and
+the mode is set to `Off`.
+
+Calls the openDAQ C function daqSyncInterfaceInternal_setAsSource()."
+  (with-daq-boxed-values ((coerced-new-value new-value :daq-bool))
+    (opendaq.low-level:sync-interface-internal/set-as-source (%require-live-pointer object) coerced-new-value))
+  new-value)
+
+(defgeneric source-changed (object source)
+  (:documentation "Notifies the synchronization interface that the currently selected
+synchronization source has changed.
+@param source The newly selected synchronization source.
+
+Called on every interface after a source change. The return value is ignored.
+
+Calls the openDAQ C function daqSyncInterfaceInternal_sourceChanged()."))
+(defmethod source-changed ((object sync-interface-internal) source)
+  "Notifies the synchronization interface that the currently selected
+synchronization source has changed.
+@param source The newly selected synchronization source.
+
+Called on every interface after a source change. The return value is ignored.
+
+Calls the openDAQ C function daqSyncInterfaceInternal_sourceChanged()."
+  (with-daq-boxed-values ((coerced-source source :managed-pointer))
+    (opendaq.low-level:sync-interface-internal/source-changed (%require-live-pointer object) coerced-source))
+)
+
+(defgeneric available-modes (object)
+  (:documentation "Gets the modes available to the synchronization interface, depending on whether
+it is currently selected as the synchronization source.
+@param[out] availableModes A dictionary mapping available `SyncMode` values to their names.
+
+`Auto` and `Input` while the interface is the source, `Off` and `Output` otherwise, limited
+to the modes the interface supports.
+
+Calls the openDAQ C function daqSyncInterface_getAvailableModes()."))
+(defmethod available-modes ((object sync-interface))
+  "Gets the modes available to the synchronization interface, depending on whether
+it is currently selected as the synchronization source.
+@param[out] availableModes A dictionary mapping available `SyncMode` values to their names.
+
+`Auto` and `Input` while the interface is the source, `Off` and `Output` otherwise, limited
+to the modes the interface supports.
+
+Calls the openDAQ C function daqSyncInterface_getAvailableModes()."
+  (%hashtable-of (wrap (opendaq.low-level:sync-interface/get-available-modes (%require-live-pointer object)) 'dict) 'integer-object 'string-object)
+)
+
+(defgeneric config (object)
+  (:documentation "Gets the interface-specific settings of the synchronization interface.
+@param[out] config The settings object. Created with the interface and never replaced.
+
+Calls the openDAQ C function daqSyncInterface_getConfig()."))
+(defmethod config ((object sync-interface))
+  "Gets the interface-specific settings of the synchronization interface.
+@param[out] config The settings object. Created with the interface and never replaced.
+
+Calls the openDAQ C function daqSyncInterface_getConfig()."
+  (wrap (opendaq.low-level:sync-interface/get-config (%require-live-pointer object)) 'property-object)
+)
+
+(defmethod id ((object sync-interface))
+  "Gets the ID of the synchronization interface.
+@param[out] id The ID of the synchronization interface.
+
+Unique and immutable. It is the key in ISynchronization::getInterfaces and the argument of
+ISynchronization::setSource.
+
+Calls the openDAQ C function daqSyncInterface_getId()."
+  (%daq-string-to-lisp-and-release (opendaq.low-level:sync-interface/get-id (%require-live-pointer object)))
+)
+
+(defgeneric mode (object)
+  (:documentation "Gets the current mode of the synchronization interface.
+@param[out] sourceMode The current mode of the synchronization interface.
+
+Calls the openDAQ C function daqSyncInterface_getMode()."))
+(defmethod mode ((object sync-interface))
+  "Gets the current mode of the synchronization interface.
+@param[out] sourceMode The current mode of the synchronization interface.
+
+Calls the openDAQ C function daqSyncInterface_getMode()."
+  (opendaq.low-level:sync-interface/get-mode (%require-live-pointer object))
+)
+
+(defmethod reference-domain-id ((object sync-interface))
+  "Gets the reference domain ID of the synchronization interface.
+@param[out] referenceDomainId The reference domain ID string.
+
+The ID observed in the input role, or produced in the output role. Empty when none is
+available, and always empty when the mode is `Off`.
+
+Calls the openDAQ C function daqSyncInterface_getReferenceDomainId()."
+  (%daq-string-to-lisp-and-release (opendaq.low-level:sync-interface/get-reference-domain-id (%require-live-pointer object)))
+)
+
+(defgeneric source-supported (object)
+  (:documentation "Gets whether the synchronization interface can be selected as the synchronization source.
+@param[out] canBeSource True if the interface supports `Input` or `Auto`; False otherwise.
+
+Calls the openDAQ C function daqSyncInterface_getSourceSupported()."))
+(defmethod source-supported ((object sync-interface))
+  "Gets whether the synchronization interface can be selected as the synchronization source.
+@param[out] canBeSource True if the interface supports `Input` or `Auto`; False otherwise.
+
+Calls the openDAQ C function daqSyncInterface_getSourceSupported()."
+  (not (zerop (opendaq.low-level:sync-interface/get-source-supported (%require-live-pointer object))))
+)
+
+(defmethod status-container ((object sync-interface))
+  "Gets the status container of the synchronization interface.
+@param[out] syncStatus The status container.
+
+Holds two standard statuses; implementations may add more.
+
+SyncSourceStatus: Off, Listening, Calibrating, Synced, Error, Unknown.
+- Off: the mode is `Off`.
+- Listening: waiting for a source or for role negotiation.
+- Calibrating: a source is found but not yet applied to the device clock.
+- Synced: the input is applied to the clock, or the output is actively distributing.
+- Error: a misconfiguration, or a protocol, network or device error; the message describes it.
+- Unknown: the state cannot be determined.
+
+SyncRoleStatus: Off, Input, Output, Unknown.
+Matches the mode for `Off`, `Input` and `Output`. For `Auto` it is the negotiated role, and
+`Unknown` while negotiating.
+
+Calls the openDAQ C function daqSyncInterface_getStatusContainer()."
+  (wrap (opendaq.low-level:sync-interface/get-status-container (%require-live-pointer object)) 'component-status-container)
+)
+
+(defgeneric sync-type (object)
+  (:documentation "Gets the reference type of the interface's reference domain ID.
+@param[out] syncType The synchronization type string.
+
+Lowercase. Known types are \"local\", \"ptp\", \"ntp\", \"gps\" and \"irig\"; others are allowed.
+The reference domain ID is this value, or starts with it followed by ':'.
+
+Calls the openDAQ C function daqSyncInterface_getSyncType()."))
+(defmethod sync-type ((object sync-interface))
+  "Gets the reference type of the interface's reference domain ID.
+@param[out] syncType The synchronization type string.
+
+Lowercase. Known types are \"local\", \"ptp\", \"ntp\", \"gps\" and \"irig\"; others are allowed.
+The reference domain ID is this value, or starts with it followed by ':'.
+
+Calls the openDAQ C function daqSyncInterface_getSyncType()."
+  (%daq-string-to-lisp-and-release (opendaq.low-level:sync-interface/get-sync-type (%require-live-pointer object)))
+)
+
+(defgeneric (setf mode) (new-value object)
+  (:documentation "Sets the mode of the synchronization interface.
+@param mode The mode to set the synchronization interface to. Must be one of the modes
+returned by `getAvailableModes`.
+
+Calls the openDAQ C function daqSyncInterface_setMode()."))
+(defmethod (setf mode) (new-value (object sync-interface))
+  "Sets the mode of the synchronization interface.
+@param mode The mode to set the synchronization interface to. Must be one of the modes
+returned by `getAvailableModes`.
+
+Calls the openDAQ C function daqSyncInterface_setMode()."
+  (with-daq-boxed-values ((coerced-new-value new-value nil))
+    (opendaq.low-level:sync-interface/set-mode (%require-live-pointer object) coerced-new-value))
+  new-value)
+
+(defmethod add-interface ((object synchronization-private) sync-interface)
+  "Adds an interface to the synchronization.
+@param syncInterface The sync interface to be added.
+
+Interface IDs must be unique. Allowed only before the synchronization object is set on the
+device; afterwards it fails with OPENDAQ_ERR_INVALID_OPERATION.
+
+Calls the openDAQ C function daqSynchronizationPrivate_addInterface()."
+  (with-daq-boxed-values ((coerced-sync-interface sync-interface :managed-pointer))
+    (opendaq.low-level:synchronization-private/add-interface (%require-live-pointer object) coerced-sync-interface))
+)
+
+(defgeneric available-sources (object)
+  (:documentation "Gets the registered synchronization interfaces that can be selected as the
+synchronization source, which are those whose `getSourceSupported` is true.
+@param[out] sources A dictionary mapping interface IDs to the sync interfaces that can be
+selected as the synchronization source.
+
+Calls the openDAQ C function daqSynchronization_getAvailableSources()."))
+(defmethod available-sources ((object synchronization))
+  "Gets the registered synchronization interfaces that can be selected as the
+synchronization source, which are those whose `getSourceSupported` is true.
+@param[out] sources A dictionary mapping interface IDs to the sync interfaces that can be
+selected as the synchronization source.
+
+Calls the openDAQ C function daqSynchronization_getAvailableSources()."
+  (%hashtable-of (wrap (opendaq.low-level:synchronization/get-available-sources (%require-live-pointer object)) 'dict) 'string-object 'sync-interface)
+)
+
+(defmethod interfaces ((object synchronization))
+  "Gets all synchronization interfaces registered with this synchronization.
+@param[out] interfaces A dictionary mapping interface IDs to the sync interfaces themselves.
+
+Calls the openDAQ C function daqSynchronization_getInterfaces()."
+  (%hashtable-of (wrap (opendaq.low-level:synchronization/get-interfaces (%require-live-pointer object)) 'dict) 'string-object 'sync-interface)
+)
+
+(defmethod reference-domain-ids ((object synchronization))
+  "Gets the reference domain IDs of all interfaces not in `Off`: the source and the
+active outputs.
+@param[out] ids The list of reference domain IDs.
+
+Interfaces without a reference domain ID are left out. Describes the synchronization
+service; for the state applied to data use IReferenceDomainInfo::getReferenceDomainIds.
+
+Calls the openDAQ C function daqSynchronization_getReferenceDomainIds()."
+  (%list-of (wrap (opendaq.low-level:synchronization/get-reference-domain-ids (%require-live-pointer object)) 'object-list) 'string-object)
+)
+
+(defmethod source ((object synchronization))
+  "Gets the currently selected synchronization source.
+@param[out] source The currently selected synchronization interface.
+
+Calls the openDAQ C function daqSynchronization_getSource()."
+  (wrap (opendaq.low-level:synchronization/get-source (%require-live-pointer object)) 'sync-interface)
+)
+
+(defmethod (setf source) (new-value (object synchronization))
+  "Selects the synchronization interface with the given ID as the synchronization source.
+@param sourceName The ID of the synchronization interface to select as the source.
+
+The new source is set to `Auto`, or to `Input` if `Auto` is unavailable, and the previous
+source is set to `Off`. Fails if `sourceName` is not the ID of an available source. On
+failure the previous source is restored.
+
+Calls the openDAQ C function daqSynchronization_setSource()."
+  (with-daq-boxed-values ((coerced-new-value new-value :daq-string))
+    (opendaq.low-level:synchronization/set-source (%require-live-pointer object) coerced-new-value))
   new-value)
 
 (defgeneric add (object name)
@@ -22669,13 +25935,15 @@ Calls the openDAQ C function daqTags_getList()."
 )
 
 (defgeneric query (object query)
-  (:documentation "Queries the list of tags, creating an EvalValue expression from the `query` string. Returns true if the list of tags matches the query, false otherwise.
+  (:documentation "Queries the list of tags, creating an EvalValue expression from the `query` string.
+Returns true if the list of tags matches the query, false otherwise.
 @param query The query string. I.e. \"tag1 || (tag2 && tag3)\"
 @param[out] value The result of the query
 
 Calls the openDAQ C function daqTags_query()."))
 (defmethod query ((object tags) query)
-  "Queries the list of tags, creating an EvalValue expression from the `query` string. Returns true if the list of tags matches the query, false otherwise.
+  "Queries the list of tags, creating an EvalValue expression from the `query` string.
+Returns true if the list of tags matches the query, false otherwise.
 @param query The query string. I.e. \"tag1 || (tag2 && tag3)\"
 @param[out] value The result of the query
 
@@ -22843,17 +26111,31 @@ Calls the openDAQ C function daqTailReader_getHistorySize()."
 )
 
 (defgeneric tail-reader-read (object values count)
-  (:documentation "Copies at maximum the next `count` unread samples to the values buffer. The amount actually read is returned through the `count` parameter.
-@param values The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples.
-@param count The maximum amount of samples to be read. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are returned. The rest of the buffer is not modified or cleared.
-@param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event - If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
+  (:documentation "Copies at maximum the next `count` unread samples to the values buffer.
+The amount actually read is returned through the `count` parameter.
+@param[in] values The buffer that the samples will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of samples.
+@param[in,out] count The maximum amount of samples to be read. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+samples are returned. The rest of the buffer is not modified or cleared.
+@param[out] status: Represents the status of the reader.
+- If the reader is invalid, IReaderStatus::getValid returns false.
+- If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event
+- If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
 
 Calls the openDAQ C function daqTailReader_read()."))
 (defmethod tail-reader-read ((object tail-reader) values count)
-  "Copies at maximum the next `count` unread samples to the values buffer. The amount actually read is returned through the `count` parameter.
-@param values The buffer that the samples will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples.
-@param count The maximum amount of samples to be read. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are returned. The rest of the buffer is not modified or cleared.
-@param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event - If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
+  "Copies at maximum the next `count` unread samples to the values buffer.
+The amount actually read is returned through the `count` parameter.
+@param[in] values The buffer that the samples will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of samples.
+@param[in,out] count The maximum amount of samples to be read. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+samples are returned. The rest of the buffer is not modified or cleared.
+@param[out] status: Represents the status of the reader.
+- If the reader is invalid, IReaderStatus::getValid returns false.
+- If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event
+- If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
 
 Calls the openDAQ C function daqTailReader_read()."
   (with-daq-boxed-values ((coerced-values values nil)
@@ -22866,19 +26148,35 @@ Calls the openDAQ C function daqTailReader_read()."
 )
 
 (defgeneric tail-reader-read-with-domain (object values domain count)
-  (:documentation "Copies at maximum the next `count` unread samples and clock-stamps to the `values` and `stamps` buffers. The amount actually read is returned through the `count` parameter.
-@param values The buffer that the data values will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples.
-@param domain The buffer that the domain values will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of clock-stamps.
-@param count The maximum amount of samples to be read. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are returned. The rest of the buffer is not modified or cleared.
-@param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event - If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
+  (:documentation "Copies at maximum the next `count` unread samples and clock-stamps to the `values` and `stamps` buffers.
+The amount actually read is returned through the `count` parameter.
+@param[in] values The buffer that the data values will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of samples.
+@param[in] domain The buffer that the domain values will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of clock-stamps.
+@param[in,out] count The maximum amount of samples to be read. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+samples are returned. The rest of the buffer is not modified or cleared.
+@param[out] status: Represents the status of the reader.
+- If the reader is invalid, IReaderStatus::getValid returns false.
+- If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event
+- If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
 
 Calls the openDAQ C function daqTailReader_readWithDomain()."))
 (defmethod tail-reader-read-with-domain ((object tail-reader) values domain count)
-  "Copies at maximum the next `count` unread samples and clock-stamps to the `values` and `stamps` buffers. The amount actually read is returned through the `count` parameter.
-@param values The buffer that the data values will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of samples.
-@param domain The buffer that the domain values will be copied to. The buffer must be a contiguous memory big enough to receive `count` amount of clock-stamps.
-@param count The maximum amount of samples to be read. If the `count` is less than available the parameter value is set to the actual amount and only the available samples are returned. The rest of the buffer is not modified or cleared.
-@param[out] status: Represents the status of the reader. - If the reader is invalid, IReaderStatus::getValid returns false. - If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event - If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
+  "Copies at maximum the next `count` unread samples and clock-stamps to the `values` and `stamps` buffers.
+The amount actually read is returned through the `count` parameter.
+@param[in] values The buffer that the data values will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of samples.
+@param[in] domain The buffer that the domain values will be copied to.
+The buffer must be a contiguous memory big enough to receive `count` amount of clock-stamps.
+@param[in,out] count The maximum amount of samples to be read. If the `count` is less than
+available the parameter value is set to the actual amount and only the available
+samples are returned. The rest of the buffer is not modified or cleared.
+@param[out] status: Represents the status of the reader.
+- If the reader is invalid, IReaderStatus::getValid returns false.
+- If an event packet was encountered during processing, IReaderStatus::getReadStatus returns ReadStatus::Event
+- If the reading process is successful, IReaderStatus::getReadStatu returns ReadStatus::Ok, indicating that IReaderStatus::getValid is true and there is no encountered events
 
 Calls the openDAQ C function daqTailReader_readWithDomain()."
   (with-daq-boxed-values ((coerced-values values nil)
@@ -22909,13 +26207,15 @@ Calls the openDAQ C function daqTask_setName()."
   new-value)
 
 (defgeneric then (object continuation)
-  (:documentation "Sets the continuation to only execute after this task completes. Be careful of forming cycles as tasks whose dependencies cannot be satisfied will never execute.
+  (:documentation "Sets the continuation to only execute after this task completes.
+Be careful of forming cycles as tasks whose dependencies cannot be satisfied will never execute.
 @param continuation The task that should wait for this one to complete.
 @retval OPENDAQ_ERR_NOT_SUPPORTED If the @p continuation implementation was not crated by the scheduler library.
 
 Calls the openDAQ C function daqTask_then()."))
 (defmethod then ((object task) continuation)
-  "Sets the continuation to only execute after this task completes. Be careful of forming cycles as tasks whose dependencies cannot be satisfied will never execute.
+  "Sets the continuation to only execute after this task completes.
+Be careful of forming cycles as tasks whose dependencies cannot be satisfied will never execute.
 @param continuation The task that should wait for this one to complete.
 @retval OPENDAQ_ERR_NOT_SUPPORTED If the @p continuation implementation was not crated by the scheduler library.
 
@@ -22937,6 +26237,7 @@ Calls the openDAQ C function daqTask_then()."
 @param type The Type to be added.
 @retval OPENDAQ_ERR_ALREADYEXISTS if a type with the same name is already added.
 @retval OPENDAQ_ERR_INVALIDPARAMETER if either the type name is an empty string.
+
 The type name must be unique and. If a Property object class specifies a parent class,
 then the parent class must be added before it.
 
@@ -22946,6 +26247,7 @@ Calls the openDAQ C function daqTypeManager_addType()."))
 @param type The Type to be added.
 @retval OPENDAQ_ERR_ALREADYEXISTS if a type with the same name is already added.
 @retval OPENDAQ_ERR_INVALIDPARAMETER if either the type name is an empty string.
+
 The type name must be unique and. If a Property object class specifies a parent class,
 then the parent class must be added before it.
 
@@ -23005,6 +26307,7 @@ Calls the openDAQ C function daqTypeManager_hasType()."
   (:documentation "Removes the type from the manager.
 @param typeName The type's name.
 @retval OPENDAQ_ERR_NOTFOUND if the class is not registered.
+
 The removed class must not be a parent of another added class. If it is, those classes must be removed
 before it.
 
@@ -23013,6 +26316,7 @@ Calls the openDAQ C function daqTypeManager_removeType()."))
   "Removes the type from the manager.
 @param typeName The type's name.
 @retval OPENDAQ_ERR_NOTFOUND if the class is not registered.
+
 The removed class must not be a parent of another added class. If it is, those classes must be removed
 before it.
 
@@ -23038,8 +26342,10 @@ Calls the openDAQ C function daqUnitBuilder_build()."
 )
 
 (defmethod id ((object unit-builder))
-  "Gets the unit ID as defined in <a href=\"https://unece.org/trade/cefact/UNLOCODE-Download\">Codes for Units of Measurement used in International Trade</a>.
+  "Gets the unit ID as defined in <a href=\"https://unece.org/trade/cefact/UNLOCODE-Download\">Codes for Units of Measurement used
+in International Trade</a>.
 @param[out] id The unit ID.
+
 Returns -1 if the unit id is not available.
 
 Calls the openDAQ C function daqUnitBuilder_getId()."
@@ -23049,6 +26355,7 @@ Calls the openDAQ C function daqUnitBuilder_getId()."
 (defmethod name ((object unit-builder))
   "Gets the full name of the unit, i.e. \"meters per second\".
 @param[out] name The unit's full name.
+
 `nullptr` if not set.
 
 Calls the openDAQ C function daqUnitBuilder_getName()."
@@ -23064,6 +26371,7 @@ unit => daqUnit_getQuantity()
 (defmethod quantity ((object unit-builder))
   "Gets the quantity represented by the unit, i.e. \"Velocity\"
 @param[out] quantity The unit's quantity.
+
 `nullptr` if not set.
 
 Calls the openDAQ C function daqUnitBuilder_getQuantity()."
@@ -23085,8 +26393,10 @@ Calls the openDAQ C function daqUnitBuilder_getSymbol()."
 )
 
 (defmethod (setf id) (new-value (object unit-builder))
-  "Sets the unit ID as defined in <a href=\"https://unece.org/trade/cefact/UNLOCODE-Download\">Codes for Units of Measurement used in International Trade</a>.
+  "Sets the unit ID as defined in <a href=\"https://unece.org/trade/cefact/UNLOCODE-Download\">Codes for Units of Measurement used
+in International Trade</a>.
 @param id The unit ID.
+
 The ID should be -1 if the unit is not available.
 
 Calls the openDAQ C function daqUnitBuilder_setId()."
@@ -23134,6 +26444,7 @@ Calls the openDAQ C function daqUnitBuilder_setSymbol()."
 (defmethod id ((object unit))
   "Gets the unit ID as defined in <a href=\"https://unece.org/trade/cefact/UNLOCODE-Download\">Codes for Units of Measurement used in International Trade</a>.
 @param[out] id The unit ID.
+
 Returns -1 if the unit id is not available.
 
 Calls the openDAQ C function daqUnit_getId()."
@@ -23143,6 +26454,7 @@ Calls the openDAQ C function daqUnit_getId()."
 (defmethod name ((object unit))
   "Gets the full name of the unit, i.e. \"meters per second\".
 @param[out] name The unit's full name.
+
 `nullptr` if not set.
 
 Calls the openDAQ C function daqUnit_getName()."
@@ -23152,6 +26464,7 @@ Calls the openDAQ C function daqUnit_getName()."
 (defmethod quantity ((object unit))
   "Gets the quantity represented by the unit, i.e. \"Velocity\"
 @param[out] quantity The unit's quantity.
+
 `nullptr` if not set.
 
 Calls the openDAQ C function daqUnit_getQuantity()."
@@ -23164,6 +26477,114 @@ Calls the openDAQ C function daqUnit_getQuantity()."
 
 Calls the openDAQ C function daqUnit_getSymbol()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:unit/get-symbol (%require-live-pointer object)))
+)
+
+(defgeneric add-ref (object)
+  (:documentation "Increments the reference count for an interface on an object.
+@return Reference count after the increment.
+
+You should call this method whenever you make a copy of an interface pointer.
+
+An object uses a per-interface reference-counting mechanism to ensure that the object does not outlive
+references to it. You use `addRef` to stabilize a copy of an interface pointer. You can also call it
+when the life of a cloned pointer must extend beyond the lifetime of the original pointer. The cloned
+pointer must be released by calling `releaseRef` on it.
+
+Calls the openDAQ C function daqUnknown_addRef()."))
+(defmethod add-ref ((object base-object))
+  "Increments the reference count for an interface on an object.
+@return Reference count after the increment.
+
+You should call this method whenever you make a copy of an interface pointer.
+
+An object uses a per-interface reference-counting mechanism to ensure that the object does not outlive
+references to it. You use `addRef` to stabilize a copy of an interface pointer. You can also call it
+when the life of a cloned pointer must extend beyond the lifetime of the original pointer. The cloned
+pointer must be released by calling `releaseRef` on it.
+
+Calls the openDAQ C function daqUnknown_addRef()."
+  (opendaq.low-level:unknown/add-ref (%require-live-pointer object))
+)
+
+(defgeneric query-interface (object intf-id)
+  (:documentation "Returns another interface which is supported by the object and increments the reference count.
+@param intfID Interface ID of requested interface.
+@param[out] obj Pointer to the new interface.
+@return OPENDAQ_SUCCESS if succeeded, error code otherwise.
+
+Provides a fundamental mechanism by which an object can express the functionality it provides.
+
+Every interface is derived from IUnknown, so every interface has an implementation of `queryInterface`.
+Regardless of the implementation, this method queries an object using the ID of the interface to which
+the caller wants a pointer. If the object supports that interface, `queryInterface` retrieves a pointer
+to the interface, while also calling `addRef`. Otherwise, it returns the OPENDAQ_ERR_NOINTERFACE error code.
+
+Example:
+@code
+IUnknown* obj = ...;
+
+IBaseObject* baseObj;
+auto errCode = obj->queryInterface(IBaseObject::Id, reinterpret_cast<void**>(&baseObj)), OPENDAQ_SUCCESS);
+if (OPENDAQ_FAILED(errCode))
+throw SomeException();
+// ... do something with baseObj
+baseObj->releaseRef();
+@endcode
+
+Calls the openDAQ C function daqUnknown_queryInterface()."))
+(defmethod query-interface ((object base-object) intf-id)
+  "Returns another interface which is supported by the object and increments the reference count.
+@param intfID Interface ID of requested interface.
+@param[out] obj Pointer to the new interface.
+@return OPENDAQ_SUCCESS if succeeded, error code otherwise.
+
+Provides a fundamental mechanism by which an object can express the functionality it provides.
+
+Every interface is derived from IUnknown, so every interface has an implementation of `queryInterface`.
+Regardless of the implementation, this method queries an object using the ID of the interface to which
+the caller wants a pointer. If the object supports that interface, `queryInterface` retrieves a pointer
+to the interface, while also calling `addRef`. Otherwise, it returns the OPENDAQ_ERR_NOINTERFACE error code.
+
+Example:
+@code
+IUnknown* obj = ...;
+
+IBaseObject* baseObj;
+auto errCode = obj->queryInterface(IBaseObject::Id, reinterpret_cast<void**>(&baseObj)), OPENDAQ_SUCCESS);
+if (OPENDAQ_FAILED(errCode))
+throw SomeException();
+// ... do something with baseObj
+baseObj->releaseRef();
+@endcode
+
+Calls the openDAQ C function daqUnknown_queryInterface()."
+  (with-daq-boxed-values ((coerced-intf-id intf-id nil))
+    (wrap (opendaq.low-level:unknown/query-interface (%require-live-pointer object) coerced-intf-id) 'base-object))
+)
+
+(defgeneric release-ref (object)
+  (:documentation "Decrements the reference count for an interface on an object.
+@return Reference count after the decrement.
+
+Call this method when you no longer need to use an interface pointer.
+
+When the reference count on an object reaches zero, `releaseRef` causes the interface pointer to free
+itself. When the released pointer is the only (formerly) outstanding reference to an object
+the implementation must free the object.
+
+Calls the openDAQ C function daqUnknown_releaseRef()."))
+(defmethod release-ref ((object base-object))
+  "Decrements the reference count for an interface on an object.
+@return Reference count after the decrement.
+
+Call this method when you no longer need to use an interface pointer.
+
+When the reference count on an object reaches zero, `releaseRef` causes the interface pointer to free
+itself. When the released pointer is the only (formerly) outstanding reference to an object
+the implementation must free the object.
+
+Calls the openDAQ C function daqUnknown_releaseRef()."
+  (opendaq.low-level:unknown/release-ref (%require-live-pointer object))
 )
 
 (defgeneric serialize-for-update (object serializer)
@@ -23255,12 +26676,14 @@ Calls the openDAQ C function daqUpdateParameters_setRemoveUnusedDevices()."
   new-value)
 
 (defgeneric password-hash (object)
-  (:documentation "Returns the user's password, which can either be in plain text or hashed using the Bcrypt algorithm. Hashed passwords should follow the Modular Crypt Format. For security purposes, hashed passwords are preferred.
+  (:documentation "Returns the user's password, which can either be in plain text or hashed using the Bcrypt algorithm.
+Hashed passwords should follow the Modular Crypt Format. For security purposes, hashed passwords are preferred.
 @param passwordHash[out] Returns the user's password, which can either be in plain text or hashed using the Bcrypt algorithm.
 
 Calls the openDAQ C function daqUserInternal_getPasswordHash()."))
 (defmethod password-hash ((object user-internal))
-  "Returns the user's password, which can either be in plain text or hashed using the Bcrypt algorithm. Hashed passwords should follow the Modular Crypt Format. For security purposes, hashed passwords are preferred.
+  "Returns the user's password, which can either be in plain text or hashed using the Bcrypt algorithm.
+Hashed passwords should follow the Modular Crypt Format. For security purposes, hashed passwords are preferred.
 @param passwordHash[out] Returns the user's password, which can either be in plain text or hashed using the Bcrypt algorithm.
 
 Calls the openDAQ C function daqUserInternal_getPasswordHash()."
@@ -23296,7 +26719,8 @@ Calls the openDAQ C function daqUserLock_isLocked()."
 )
 
 (defmethod lock ((object user-lock) &optional (user nil))
-  "Lock the object. Only the user who locked the object can unlock it. If the object was locked without a specific user, or with an anonymous user, any user can unlock it.
+  "Lock the object. Only the user who locked the object can unlock it. If the object was locked without a specific user,
+or with an anonymous user, any user can unlock it.
 @param user User performing the lock action.
 
 Calls the openDAQ C function daqUserLock_lock()."
@@ -23305,7 +26729,8 @@ Calls the openDAQ C function daqUserLock_lock()."
 )
 
 (defmethod unlock ((object user-lock) &optional (user nil))
-  "Unlock the object. Only the user who locked the object can unlock it. If the object was locked without a specific user, or with an anonymous user, any user can unlock it.
+  "Unlock the object. Only the user who locked the object can unlock it. If the object was locked without a specific user,
+or with an anonymous user, any user can unlock it.
 @param user User performing the unlock action.
 
 Calls the openDAQ C function daqUserLock_unlock()."
@@ -23377,11 +26802,6 @@ Calls the openDAQ C function daqValidator_validate()."
     (opendaq.low-level:validator/validate-no-lock (%require-live-pointer object) coerced-prop-obj coerced-value))
 )
 
-(defgeneric major (object)
-  (:documentation "The major version incremented at breaking changes.
-@param[out] major The major version component.
-
-Calls the openDAQ C function daqVersionInfo_getMajor()."))
 (defmethod major ((object version-info))
   "The major version incremented at breaking changes.
 @param[out] major The major version component.
@@ -23390,11 +26810,6 @@ Calls the openDAQ C function daqVersionInfo_getMajor()."
   (opendaq.low-level:version-info/get-major (%require-live-pointer object))
 )
 
-(defgeneric minor (object)
-  (:documentation "The minor version incremented at new features with full backwards compatibility.
-@param[out] minor The minor version component.
-
-Calls the openDAQ C function daqVersionInfo_getMinor()."))
 (defmethod minor ((object version-info))
   "The minor version incremented at new features with full backwards compatibility.
 @param[out] minor The minor version component.
@@ -23403,17 +26818,67 @@ Calls the openDAQ C function daqVersionInfo_getMinor()."
   (opendaq.low-level:version-info/get-minor (%require-live-pointer object))
 )
 
-(defgeneric patch (object)
-  (:documentation "The patch version incremented when only bug-fixes are added.
-@param[out] patch The patch version component.
-
-Calls the openDAQ C function daqVersionInfo_getPatch()."))
 (defmethod patch ((object version-info))
   "The patch version incremented when only bug-fixes are added.
 @param[out] patch The patch version component.
 
 Calls the openDAQ C function daqVersionInfo_getPatch()."
   (opendaq.low-level:version-info/get-patch (%require-live-pointer object))
+)
+
+(defgeneric ref (object)
+  (:documentation "Gets a true reference to the object as IBaseObject interface.
+@param[out] object A true reference to the object.
+
+After you get a true reference to the object, you need to call `releaseRef`.
+on `object` interface.
+
+Calls the openDAQ C function daqWeakRef_getRef()."))
+(defmethod ref ((object weak-ref))
+  "Gets a true reference to the object as IBaseObject interface.
+@param[out] object A true reference to the object.
+
+After you get a true reference to the object, you need to call `releaseRef`.
+on `object` interface.
+
+Calls the openDAQ C function daqWeakRef_getRef()."
+  (wrap (opendaq.low-level:weak-ref/get-ref (%require-live-pointer object)) 'base-object)
+)
+
+(defgeneric ref-as (object intf-id object)
+  (:documentation "Gets a true reference to the object with specified interface ID.
+@param intfID ID of the requested interface
+@param[out] object A true reference to the object.
+
+After you get a true reference to the object, you need to call `releaseRef`.
+on `object` interface.
+
+Calls the openDAQ C function daqWeakRef_getRefAs()."))
+(defmethod ref-as ((object weak-ref) intf-id object)
+  "Gets a true reference to the object with specified interface ID.
+@param intfID ID of the requested interface
+@param[out] object A true reference to the object.
+
+After you get a true reference to the object, you need to call `releaseRef`.
+on `object` interface.
+
+Calls the openDAQ C function daqWeakRef_getRefAs()."
+  (with-daq-boxed-values ((coerced-intf-id intf-id nil)
+                          (coerced-object object nil))
+    (opendaq.low-level:weak-ref/get-ref-as (%require-live-pointer object) coerced-intf-id coerced-object))
+)
+
+(defgeneric execute-repetitively (object)
+  (:documentation "Executes the repetitive task logic and determines whether it should be repeated.
+@param[out] repeatAfter Set to `true` to continue repeating the task, or `false` to stop.
+
+Calls the openDAQ C function daqWorkRepetitive_executeRepetitively()."))
+(defmethod execute-repetitively ((object work-repetitive))
+  "Executes the repetitive task logic and determines whether it should be repeated.
+@param[out] repeatAfter Set to `true` to continue repeating the task, or `false` to stop.
+
+Calls the openDAQ C function daqWorkRepetitive_executeRepetitively()."
+  (not (zerop (opendaq.low-level:work-repetitive/execute-repetitively (%require-live-pointer object))))
 )
 
 (defmethod execute ((object work))
@@ -23423,13 +26888,27 @@ Calls the openDAQ C function daqWork_execute()."
   (opendaq.low-level:work/execute (%require-live-pointer object))
 )
 
+(defgeneric source-packet (object)
+  (:documentation "Gets the wrapped source data packet.
+@param[out] sourcePacket The wrapped source data packet.
+
+Calls the openDAQ C function daqWrappedDataPacket_getSourcePacket()."))
+(defmethod source-packet ((object wrapped-data-packet))
+  "Gets the wrapped source data packet.
+@param[out] sourcePacket The wrapped source data packet.
+
+Calls the openDAQ C function daqWrappedDataPacket_getSourcePacket()."
+  (wrap (opendaq.low-level:wrapped-data-packet/get-source-packet (%require-live-pointer object)) 'data-packet)
+)
+
 ;;; Enum type aliases: prefix-free names for the low-level cenums, so the enum
 ;;; types themselves (not just their keywords) are usable from this package,
 ;;; e.g. (cffi:foreign-enum-keyword 'operation-mode-type code).
 (cffi:defctype address-reachability-status opendaq.low-level::daq-address-reachability-status)
+(cffi:defctype c-core-type opendaq.low-level::daq-c-core-type)
+(cffi:defctype component-status opendaq.low-level::daq-component-status)
 (cffi:defctype component-type-sort opendaq.low-level::daq-component-type-sort)
 (cffi:defctype core-event-id opendaq.low-level::daq-core-event-id)
-(cffi:defctype core-type opendaq.low-level::daq-core-type)
 (cffi:defctype data-rule-type opendaq.low-level::daq-data-rule-type)
 (cffi:defctype device-update-mode opendaq.low-level::daq-device-update-mode)
 (cffi:defctype dimension-rule-type opendaq.low-level::daq-dimension-rule-type)
@@ -23449,14 +26928,17 @@ Calls the openDAQ C function daqWork_execute()."
 (cffi:defctype scaled-sample-type opendaq.low-level::daq-scaled-sample-type)
 (cffi:defctype scaling-type opendaq.low-level::daq-scaling-type)
 (cffi:defctype subscription-event-type opendaq.low-level::daq-subscription-event-type)
+(cffi:defctype sync-mode opendaq.low-level::daq-sync-mode)
+(cffi:defctype sync-role-status opendaq.low-level::daq-sync-role-status)
+(cffi:defctype sync-source-status opendaq.low-level::daq-sync-source-status)
 (cffi:defctype time-protocol opendaq.low-level::daq-time-protocol)
-(cffi:defctype uses-offset opendaq.low-level::daq-uses-offset)
 
 (export '(
          accepts-object
          accepts-signals
          active
          active-streaming-source
+         active-streaming-source-object
          add
          add-address
          add-address-info
@@ -23507,6 +26989,7 @@ Calls the openDAQ C function daqWork_execute()."
          address-reachability-status
          addresses
          all-properties
+         all-properties-no-lock
          allocate
          allocator
          allocator/malloc
@@ -23519,11 +27002,13 @@ Calls the openDAQ C function daqWork_execute()."
          argument-info/list
          arguments
          as-dictionary
+         as-source
          asset-id
          assign
          assigned
          authenticate
          authenticate-anonymous
+         authenticate-module-binary
          authenticated-only
          authentication-provider
          authentication-provider/json-file
@@ -23533,13 +27018,15 @@ Calls the openDAQ C function daqWork_execute()."
          available-device-types
          available-devices
          available-function-block-types
+         available-modes
          available-operation-modes
+         available-sample-count
          available-samples
          available-server-types
+         available-sources
          available-streaming-types
          awaitable
          base-object
-         base-object-create
          begin-update
          binary-data
          binary-data-address
@@ -23553,7 +27040,11 @@ Calls the openDAQ C function daqWork_execute()."
          block-reader/from-port
          block-size
          boolean-object
+         branch-name
          build
+         c-char-ptr
+         c-const-char-ptr
+         c-core-type
          call
          call-custom-proc
          callable-info
@@ -23584,6 +27075,7 @@ Calls the openDAQ C function daqWork_execute()."
          clone-with-owner
          cloneable
          cloneable-clone
+         close-queue
          coerce
          coerce-no-lock
          coercer
@@ -23604,6 +27096,7 @@ Calls the openDAQ C function daqWork_execute()."
          component-holder/with-ids
          component-log-level
          component-private
+         component-status
          component-status-container
          component-status-container-private
          component-type
@@ -23618,6 +27111,7 @@ Calls the openDAQ C function daqWork_execute()."
          component-update-context-signal
          components
          components-log-level
+         config
          config-provider
          config-provider/env
          config-provider/json
@@ -23640,17 +27134,28 @@ Calls the openDAQ C function daqWork_execute()."
          connection-strings
          connection-type
          connections
-         const-char-ptr
          contains
          context
          context-internal
+         context-internal-root-device
          convertible
          core-event-args
+         core-event-args/attribute-changed
+         core-event-args/component-added
+         core-event-args/component-removed
+         core-event-args/component-update-end
+         core-event-args/data-descriptor-changed
+         core-event-args/device-domain-changed
+         core-event-args/device-lock-state-changed
+         core-event-args/device-operation-mode-changed
          core-event-args/property-added
          core-event-args/property-object-update-end
          core-event-args/property-order-changed
          core-event-args/property-removed
          core-event-args/property-value-changed
+         core-event-args/signal-connected
+         core-event-args/signal-disconnected
+         core-event-args/tags-changed
          core-event-args/type-added
          core-event-args/type-removed
          core-event-callback
@@ -23666,6 +27171,7 @@ Calls the openDAQ C function daqWork_execute()."
          create-devices
          create-end-iterator
          create-function-block
+         create-packet
          create-server
          create-start-iterator
          create-streaming
@@ -23679,9 +27185,12 @@ Calls the openDAQ C function daqWork_execute()."
          data-descriptor-builder
          data-descriptor-builder/from-existing
          data-packet
+         data-packet/binary
+         data-packet/binary-with-external-memory
          data-packet/constant-with-domain
          data-packet/with-domain
          data-packet/with-external-memory
+         data-packet/wrapped
          data-rule
          data-rule-builder
          data-rule-builder-type
@@ -23718,7 +27227,9 @@ Calls the openDAQ C function daqWork_execute()."
          deserialize-values
          deserialized-parameter
          deserializer
+         deserializer-unregister-serializer-factory
          deserializer-update
+         development-version-info
          device
          device-class
          device-config
@@ -23740,6 +27251,7 @@ Calls the openDAQ C function daqWork_execute()."
          dict
          dict-element-type
          dict-remove
+         dict/owning
          dimension
          dimension-builder
          dimension-builder/from-existing
@@ -23800,7 +27312,15 @@ Calls the openDAQ C function daqWork_execute()."
          enumerator-names
          equals
          equals-value
+         error-code
+         error-guard
          error-info
+         error-info-clear-error-info
+         error-info-error-info
+         error-info-error-info-list
+         error-info-error-info-message
+         error-info-extend-error-info
+         error-info-list
          eval
          eval-value
          eval-value/args
@@ -23815,6 +27335,7 @@ Calls the openDAQ C function daqWork_execute()."
          event-packet/implicit-domain-gap-detected
          event-packets
          execute
+         execute-repetitively
          extend
          external-listener
          field-default-values
@@ -23827,6 +27348,7 @@ Calls the openDAQ C function daqWork_execute()."
          find-properties
          find-user
          float-object
+         float-object/float-from-pool
          float-value
          flush
          flush-on-level
@@ -23834,6 +27356,7 @@ Calls the openDAQ C function daqWork_execute()."
          folder-config
          folder-config/io-folder
          force-unlock
+         formatted-message
          free
          freezable
          freeze
@@ -23860,11 +27383,12 @@ Calls the openDAQ C function daqWork_execute()."
          has-on-get-suggested-values-listeners
          has-on-read-listeners
          has-property
-         has-scaling-calc
+         has-property-no-lock
          has-server-capability
          has-type
          has-user-read-access
          hash-code
+         hash-digest
          high-value
          history-size
          host-name
@@ -23897,6 +27421,8 @@ Calls the openDAQ C function daqWork_execute()."
          instance-root-device
          int-value
          integer-object
+         integer-object/integer-from-pool
+         interface-ids
          interfaces
          internal-state
          intf-id
@@ -23940,10 +27466,12 @@ Calls the openDAQ C function daqWork_execute()."
          key-type-no-lock
          keys
          labels
+         last-error-info
          last-message
          last-message-logger-sink-private
          last-modified
          last-value
+         last-value-with-timestamp
          length
          level
          license-config
@@ -23974,13 +27502,13 @@ Calls the openDAQ C function daqWork_execute()."
          log-file-info-builder
          log-file-infos
          log-level
+         log-message
          logger
          logger-component
          logger-sink
          logger-sink/rotating-file
          logger-sink/std-err
          logger-sink/std-out
-         logger-sink/win-debug
          logger-sinks
          logger-thread-pool
          low-value
@@ -23991,6 +27519,7 @@ Calls the openDAQ C function daqWork_execute()."
          manufacturer
          manufacturer-uri
          mark-as-invalid
+         max-available-continous-sample-count
          max-value
          max-value-no-lock
          max-value-unresolved
@@ -24007,8 +27536,10 @@ Calls the openDAQ C function daqWork_execute()."
          mirrored-device-type
          mirrored-domain-signal
          mirrored-input-port-config
+         mirrored-input-port-private
          mirrored-signal-config
          mirrored-signal-private
+         mode
          model
          module
          module-authenticator
@@ -24050,6 +27581,7 @@ Calls the openDAQ C function daqWork_execute()."
          number-object
          numerator
          object-list
+         object-list/owning-list
          offset
          old-block-reader
          old-value
@@ -24082,6 +27614,8 @@ Calls the openDAQ C function daqWork_execute()."
          owner
          owner-device-remote-id
          packet
+         packet-buffer
+         packet-buffer-builder
          packet-count
          packet-destruct-callback
          packet-id
@@ -24120,6 +27654,7 @@ Calls the openDAQ C function daqWork_execute()."
          position
          post-scaling
          prefix
+         previous-error-code
          procedure
          product-code
          product-instance-uri
@@ -24143,14 +27678,21 @@ Calls the openDAQ C function daqWork_execute()."
          property-event-type
          property-internal
          property-internal-clone
+         property-metadata-read-args
+         property-no-lock
          property-object
          property-object-class
          property-object-class-builder
          property-object-class-builder/with-manager
          property-object-class-internal
          property-object-class-internal-clone
+         property-object-core
+         property-object-core-lock-guard
+         property-object-core-recursive-lock-guard
          property-object-internal
          property-object-internal-clone
+         property-object-internal-lock-guard
+         property-object-internal-recursive-lock-guard
          property-object-protected
          property-object/with-class-and-manager
          property-order
@@ -24178,8 +27720,10 @@ Calls the openDAQ C function daqWork_execute()."
          protected-property-selection-value
          protected-property-value
          protected-property-value-no-lock
+         protocol-group-id
          protocol-id
          protocol-name
+         protocol-security-level
          protocol-type
          protocol-version
          public
@@ -24187,6 +27731,7 @@ Calls the openDAQ C function daqWork_execute()."
          push-front
          quantity
          query
+         query-interface
          range
          ratio-object
          raw-data
@@ -24217,10 +27762,12 @@ Calls the openDAQ C function daqWork_execute()."
          reader-status
          real
          recorder
-         recursive-lock-guard
          recursive-search
+         ref
+         ref-as
          ref-count
          reference-domain-id
+         reference-domain-ids
          reference-domain-info
          reference-domain-info-builder
          reference-domain-info-builder/from-existing
@@ -24268,6 +27815,7 @@ Calls the openDAQ C function daqWork_execute()."
          required-common-sample-rate
          requires-signal
          reset
+         resize
          result
          result-no-lock
          retrieve-network-configuration
@@ -24292,13 +27840,10 @@ Calls the openDAQ C function daqWork_execute()."
          samples-until-next-event-packet
          samples-until-next-gap-packet
          save-configuration
-         scale-data
-         scale-data-output
          scaled-sample-type
          scaling
          scaling-builder
          scaling-builder/from-existing
-         scaling-calc-private
          scaling-type
          scaling/linear
          schedule-function
@@ -24315,11 +27860,14 @@ Calls the openDAQ C function daqWork_execute()."
          search-filter/custom
          search-filter/excluded-tags
          search-filter/local-id
+         search-filter/name-property-filter
          search-filter/not
          search-filter/or
+         search-filter/read-only-property-filter
          search-filter/recursive
          search-filter/required-tags
          search-filter/visible
+         search-filter/visible-property-filter
          selected-source
          selection-values
          selection-values-no-lock
@@ -24342,6 +27890,7 @@ Calls the openDAQ C function daqWork_execute()."
          serialized-object-read-object
          serialized-object-type
          serializer
+         serializer/json-with-version
          server
          server-capabilities
          server-capability
@@ -24364,11 +27913,15 @@ Calls the openDAQ C function daqWork_execute()."
          simplify
          sink-log-level
          size
+         size-in-bytes
          skip-events
          skip-samples
          software-revision
          source
+         source-changed
          source-components
+         source-packet
+         source-supported
          start-list
          start-object
          start-on-full-unit-of-domain
@@ -24393,6 +27946,7 @@ Calls the openDAQ C function daqWork_execute()."
          streamed
          streaming
          streaming-connection-string
+         streaming-source-objects
          streaming-sources
          streaming-type
          string-object
@@ -24416,10 +27970,19 @@ Calls the openDAQ C function daqWork_execute()."
          suggested-values
          suggested-values-no-lock
          suggested-values-unresolved
+         supports-weak-ref
          symbol
          sync-component
          sync-component-private
+         sync-interface
+         sync-interface-internal
          sync-locked
+         sync-mode
+         sync-role-status
+         sync-source-status
+         sync-type
+         synchronization
+         synchronization-private
          system-type
          system-uuid
          tags
@@ -24449,6 +28012,8 @@ Calls the openDAQ C function daqWork_execute()."
          trigger-component-core-event
          trigger-core-event
          trigger-event
+         try-lock
+         tweak
          type
          type-manager
          type-manager-private
@@ -24485,7 +28050,6 @@ Calls the openDAQ C function daqWork_execute()."
          user-lock
          user-name
          username
-         uses-offset
          using-scheduler-main-loop
          valid
          validate
@@ -24511,12 +28075,16 @@ Calls the openDAQ C function daqWork_execute()."
          visible
          visible-no-lock
          visible-properties
+         visible-properties-no-lock
          visible-unresolved
          visit-children
          wait
          wait-all
          wait-for-message
+         weak-ref
          work
+         work-repetitive
+         wrapped-data-packet
          write
          write-bool
          write-float
