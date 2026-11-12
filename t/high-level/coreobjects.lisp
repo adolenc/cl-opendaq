@@ -9,9 +9,9 @@
      (args opendaq.low-level::daq-base-object))
   (let ((properties (opendaq.low-level:end-update-event-args/get-properties args)))
     (setf *high-level-coreobjects-update-ended* t)
-    (opendaq.low-level:base-object/release-ref properties)
-    (opendaq.low-level:base-object/release-ref sender)
-    (opendaq.low-level:base-object/release-ref args)))
+    (opendaq.low-level:unknown/release-ref properties)
+    (opendaq.low-level:unknown/release-ref sender)
+    (opendaq.low-level:unknown/release-ref args)))
 
 (test high-level-coreobjects-argument-and-callable-info
   (let* ((argument-info (make-instance 'daq:argument-info :name "test_argument" :type :int))
@@ -31,7 +31,7 @@
   ;; End to end: a FUNC property whose value is a closure-backed Function reads
   ;; back through PROPERTY-VALUE's conversion as a plain Lisp function, and a
   ;; call round-trips Lisp -> openDAQ -> Lisp (args boxed by the caller, decoded
-  ;; by the trampoline; the result boxed by the closure side, unboxed by the
+  ;; for the closure; the result boxed by the closure side, unboxed by the
   ;; caller).
   (let ((arguments (make-instance 'daq:object-list))
         (object (make-instance 'daq:property-object)))

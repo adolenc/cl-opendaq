@@ -19,9 +19,9 @@
           (when (= 0 (opendaq.low-level:list/get-count properties))
             (setf *coreobjects-end-update-called* t)))
       (when (and properties (not (cffi:null-pointer-p properties)))
-        (opendaq.low-level:base-object/release-ref properties))
-      (opendaq.low-level:base-object/release-ref sender)
-      (opendaq.low-level:base-object/release-ref args))))
+        (opendaq.low-level:unknown/release-ref properties))
+      (opendaq.low-level:unknown/release-ref sender)
+      (opendaq.low-level:unknown/release-ref args))))
 
 (test coreobjects-argument-info
   (opendaq.low-level:with-daq-objects (arg-info name name-out)

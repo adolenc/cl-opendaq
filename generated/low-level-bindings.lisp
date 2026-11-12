@@ -16,10 +16,17 @@
 (cffi:defctype daq-block-reader :pointer)
 (cffi:defctype daq-block-reader-builder :pointer)
 (cffi:defctype daq-block-reader-status :pointer)
-(cffi:defctype daq-bool :uint8)
 (cffi:defctype daq-boolean :pointer)
+(cffi:defctype daq-c-bool :uint8)
+(cffi:defctype daq-c-char-ptr :pointer)
+(cffi:defctype daq-c-const-char-ptr :pointer)
+(cffi:defctype daq-c-enum-type :uint32)
+(cffi:defctype daq-c-float :double)
+(cffi:defctype daq-c-int :int64)
+(cffi:defctype daq-c-size-t :size)
+(cffi:defctype daq-c-void-ptr :pointer)
 (cffi:defctype daq-callable-info :pointer)
-(cffi:defctype daq-char-ptr :pointer)
+(cffi:defctype daq-channel :pointer)
 (cffi:defctype daq-cloneable :pointer)
 (cffi:defctype daq-coercer :pointer)
 (cffi:defctype daq-comparable :pointer)
@@ -39,12 +46,12 @@
 (cffi:defctype daq-connection :pointer)
 (cffi:defctype daq-connection-internal :pointer)
 (cffi:defctype daq-connection-status-container-private :pointer)
-(cffi:defctype daq-const-char-ptr :pointer)
 (cffi:defctype daq-context :pointer)
 (cffi:defctype daq-context-internal :pointer)
 (cffi:defctype daq-convertible :pointer)
 (cffi:defctype daq-core-event-args :pointer)
-(cffi:defctype daq-core-type-object :pointer)
+(cffi:defctype daq-core-type :pointer)
+(cffi:defctype daq-cu-int :uint64)
 (cffi:defctype daq-data-descriptor :pointer)
 (cffi:defctype daq-data-descriptor-builder :pointer)
 (cffi:defctype daq-data-packet :pointer)
@@ -53,6 +60,7 @@
 (cffi:defctype daq-deleter :pointer)
 (cffi:defctype daq-deserialize-component :pointer)
 (cffi:defctype daq-deserializer :pointer)
+(cffi:defctype daq-development-version-info :pointer)
 (cffi:defctype daq-device :pointer)
 (cffi:defctype daq-device-domain :pointer)
 (cffi:defctype daq-device-info :pointer)
@@ -70,23 +78,25 @@
 (cffi:defctype daq-dimension-rule-builder :pointer)
 (cffi:defctype daq-discovery-server :pointer)
 (cffi:defctype daq-end-update-event-args :pointer)
-(cffi:defctype daq-enum-type :uint32)
 (cffi:defctype daq-enumeration :pointer)
 (cffi:defctype daq-enumeration-type :pointer)
 (cffi:defctype daq-err-code :uint32)
+(cffi:defctype daq-error-guard :pointer)
 (cffi:defctype daq-error-info :pointer)
 (cffi:defctype daq-eval-value :pointer)
 (cffi:defctype daq-event :pointer)
 (cffi:defctype daq-event-args :pointer)
 (cffi:defctype daq-event-call :pointer)
+(cffi:defctype daq-event-call-with-data :pointer)
 (cffi:defctype daq-event-handler :pointer)
 (cffi:defctype daq-event-packet :pointer)
-(cffi:defctype daq-float :double)
-(cffi:defctype daq-float-object :pointer)
+(cffi:defctype daq-float :pointer)
 (cffi:defctype daq-folder :pointer)
 (cffi:defctype daq-folder-config :pointer)
+(cffi:defctype daq-free-user-data :pointer)
 (cffi:defctype daq-freezable :pointer)
 (cffi:defctype daq-func-call :pointer)
+(cffi:defctype daq-func-call-with-data :pointer)
 (cffi:defctype daq-function :pointer)
 (cffi:defctype daq-function-block :pointer)
 (cffi:defctype daq-function-block-type :pointer)
@@ -98,8 +108,8 @@
 (cffi:defctype daq-inspectable :pointer)
 (cffi:defctype daq-instance :pointer)
 (cffi:defctype daq-instance-builder :pointer)
-(cffi:defctype daq-int :int64)
 (cffi:defctype daq-integer :pointer)
+(cffi:defctype daq-io-folder-config :pointer)
 (cffi:defctype daq-iterable :pointer)
 (cffi:defctype daq-iterator :pointer)
 (cffi:defctype daq-last-message-logger-sink-private :pointer)
@@ -115,6 +125,7 @@
 (cffi:defctype daq-mirrored-device :pointer)
 (cffi:defctype daq-mirrored-device-config :pointer)
 (cffi:defctype daq-mirrored-input-port-config :pointer)
+(cffi:defctype daq-mirrored-input-port-private :pointer)
 (cffi:defctype daq-mirrored-signal-config :pointer)
 (cffi:defctype daq-mirrored-signal-private :pointer)
 (cffi:defctype daq-module :pointer)
@@ -130,6 +141,8 @@
 (cffi:defctype daq-number :pointer)
 (cffi:defctype daq-ownable :pointer)
 (cffi:defctype daq-packet :pointer)
+(cffi:defctype daq-packet-buffer :pointer)
+(cffi:defctype daq-packet-buffer-builder :pointer)
 (cffi:defctype daq-packet-destruct-callback :pointer)
 (cffi:defctype daq-packet-reader :pointer)
 (cffi:defctype daq-permission-manager :pointer)
@@ -139,14 +152,17 @@
 (cffi:defctype daq-permissions-builder :pointer)
 (cffi:defctype daq-permissions-internal :pointer)
 (cffi:defctype daq-proc-call :pointer)
+(cffi:defctype daq-proc-call-with-data :pointer)
 (cffi:defctype daq-procedure :pointer)
 (cffi:defctype daq-property :pointer)
 (cffi:defctype daq-property-builder :pointer)
 (cffi:defctype daq-property-internal :pointer)
+(cffi:defctype daq-property-metadata-read-args :pointer)
 (cffi:defctype daq-property-object :pointer)
 (cffi:defctype daq-property-object-class :pointer)
 (cffi:defctype daq-property-object-class-builder :pointer)
 (cffi:defctype daq-property-object-class-internal :pointer)
+(cffi:defctype daq-property-object-core :pointer)
 (cffi:defctype daq-property-object-internal :pointer)
 (cffi:defctype daq-property-object-protected :pointer)
 (cffi:defctype daq-property-value-event-args :pointer)
@@ -156,6 +172,7 @@
 (cffi:defctype daq-reader-config :pointer)
 (cffi:defctype daq-reader-status :pointer)
 (cffi:defctype daq-recorder :pointer)
+(cffi:defctype daq-recursive-search :pointer)
 (cffi:defctype daq-reference-domain-info :pointer)
 (cffi:defctype daq-reference-domain-info-builder :pointer)
 (cffi:defctype daq-removable :pointer)
@@ -164,7 +181,6 @@
 (cffi:defctype daq-sample-reader :pointer)
 (cffi:defctype daq-scaling :pointer)
 (cffi:defctype daq-scaling-builder :pointer)
-(cffi:defctype daq-scaling-calc-private :pointer)
 (cffi:defctype daq-scheduler :pointer)
 (cffi:defctype daq-search-filter :pointer)
 (cffi:defctype daq-serializable :pointer)
@@ -180,7 +196,6 @@
 (cffi:defctype daq-signal-events :pointer)
 (cffi:defctype daq-signal-private :pointer)
 (cffi:defctype daq-simple-type :pointer)
-(cffi:defctype daq-size-t :size)
 (cffi:defctype daq-stream-reader :pointer)
 (cffi:defctype daq-stream-reader-builder :pointer)
 (cffi:defctype daq-streaming :pointer)
@@ -190,8 +205,13 @@
 (cffi:defctype daq-struct-builder :pointer)
 (cffi:defctype daq-struct-type :pointer)
 (cffi:defctype daq-subscription-event-args :pointer)
+(cffi:defctype daq-supports-weak-ref :pointer)
 (cffi:defctype daq-sync-component :pointer)
 (cffi:defctype daq-sync-component-private :pointer)
+(cffi:defctype daq-sync-interface :pointer)
+(cffi:defctype daq-sync-interface-internal :pointer)
+(cffi:defctype daq-synchronization :pointer)
+(cffi:defctype daq-synchronization-private :pointer)
 (cffi:defctype daq-tags :pointer)
 (cffi:defctype daq-tags-private :pointer)
 (cffi:defctype daq-tail-reader :pointer)
@@ -202,9 +222,9 @@
 (cffi:defctype daq-type :pointer)
 (cffi:defctype daq-type-manager :pointer)
 (cffi:defctype daq-type-manager-private :pointer)
-(cffi:defctype daq-u-int :uint64)
 (cffi:defctype daq-unit :pointer)
 (cffi:defctype daq-unit-builder :pointer)
+(cffi:defctype daq-unknown :pointer)
 (cffi:defctype daq-updatable :pointer)
 (cffi:defctype daq-update-parameters :pointer)
 (cffi:defctype daq-user :pointer)
@@ -212,8 +232,16 @@
 (cffi:defctype daq-user-lock :pointer)
 (cffi:defctype daq-validator :pointer)
 (cffi:defctype daq-version-info :pointer)
-(cffi:defctype daq-void-ptr :pointer)
+(cffi:defctype daq-weak-ref :pointer)
 (cffi:defctype daq-work :pointer)
+(cffi:defctype daq-work-repetitive :pointer)
+(cffi:defctype daq-wrapped-data-packet :pointer)
+
+(cffi:defcstruct daq-complex-float-64
+  (real :double)
+  (imaginary :double)
+  )
+(cffi:defctype daq-complex-float-64 (:struct daq-complex-float-64))
 
 (cffi:defcstruct daq-intf-id
   (data-1 :uint32)
@@ -223,10 +251,41 @@
   )
 (cffi:defctype daq-intf-id (:struct daq-intf-id))
 
+(cffi:defcstruct daq-source-location
+  (file-name (:pointer :char))
+  (line :int64)
+  (func-name (:pointer :char))
+  )
+(cffi:defctype daq-source-location (:struct daq-source-location))
+
 (cffi:defcenum daq-address-reachability-status
   (:unknown 0)
   (:reachable 1)
   (:unreachable 2)
+  )
+
+(cffi:defcenum daq-c-core-type
+  (:bool 0)
+  (:int 1)
+  (:float 2)
+  (:string 3)
+  (:list 4)
+  (:dict 5)
+  (:ratio 6)
+  (:proc 7)
+  (:object 8)
+  (:binary-data 9)
+  (:func 10)
+  (:complex-number 11)
+  (:struct 12)
+  (:enumeration 13)
+  (:undefined 65535)
+  )
+
+(cffi:defcenum daq-component-status
+  (:ok 0)
+  (:warning 1)
+  (:error 2)
   )
 
 (cffi:defcenum daq-component-type-sort
@@ -258,24 +317,6 @@
   (:connection-status-changed 170)
   (:device-operation-mode-changed 180)
   (:property-order-changed 190)
-  )
-
-(cffi:defcenum daq-core-type
-  (:bool 0)
-  (:int 1)
-  (:float 2)
-  (:string 3)
-  (:list 4)
-  (:dict 5)
-  (:ratio 6)
-  (:proc 7)
-  (:object 8)
-  (:binary-data 9)
-  (:func 10)
-  (:complex-number 11)
-  (:struct 12)
-  (:enumeration 13)
-  (:undefined 65535)
   )
 
 (cffi:defcenum daq-data-rule-type
@@ -329,6 +370,7 @@
   (:same-thread 1)
   (:scheduler 2)
   (:scheduler-queue-was-empty 3)
+  (:unspecified 99)
   )
 
 (cffi:defcenum daq-packet-type
@@ -434,17 +476,34 @@
   (:unsubscribed 1)
   )
 
+(cffi:defcenum daq-sync-mode
+  (:off 0)
+  (:input 1)
+  (:output 2)
+  (:auto 3)
+  )
+
+(cffi:defcenum daq-sync-role-status
+  (:off 0)
+  (:input 1)
+  (:output 2)
+  (:unknown 3)
+  )
+
+(cffi:defcenum daq-sync-source-status
+  (:off 0)
+  (:listening 1)
+  (:calibrating 2)
+  (:synced 3)
+  (:error 4)
+  (:unknown 5)
+  )
+
 (cffi:defcenum daq-time-protocol
   (:unknown 0)
   (:tai 1)
   (:gps 2)
   (:utc 3)
-  )
-
-(cffi:defcenum daq-uses-offset
-  (:unknown 0)
-  (:true 1)
-  (:false 2)
   )
 
 ;;; Error codes
@@ -456,6 +515,13 @@
 ;;; daqGetErrorInfoMessage FFI call, so neither needs this table.
 (defparameter *known-error-codes*
   '((#x00000000 . "OPENDAQ_SUCCESS")
+    (#x00000002 . "OPENDAQ_LOWER")
+    (#x00000003 . "OPENDAQ_EQUAL")
+    (#x00000004 . "OPENDAQ_GREATER")
+    (#x00000005 . "OPENDAQ_NO_MORE_ITEMS")
+    (#x00000006 . "OPENDAQ_IGNORED")
+    (#x00000007 . "OPENDAQ_NOTFOUND")
+    (#x00000008 . "OPENDAQ_PARTIAL_SUCCESS")
     (#x80000000 . "OPENDAQ_ERR_NOMEMORY")
     (#x80000001 . "OPENDAQ_ERR_INVALIDPARAMETER")
     (#x80000003 . "OPENDAQ_ERR_SIZETOOSMALL")
@@ -504,11 +570,14 @@
     (#x80000050 . "OPENDAQ_ERR_NO_DATA")
     (#x80000051 . "OPENDAQ_ERR_INVALID_ARGUMENT")
     (#x80000052 . "OPENDAQ_ERR_DEVICE_LOCKED")
+    (#x80000053 . "OPENDAQ_ERR_RESERVED_TYPE_NAME")
+    (#x80000054 . "OPENDAQ_ERR_NOT_CLONEABLE")
     (#x80004002 . "OPENDAQ_ERR_NOINTERFACE")
     (#x80010001 . "OPENDAQ_ERR_CONNECTION_LOST")
     (#x80010002 . "OPENDAQ_ERR_CONNECTION_LIMIT_REACHED")
     (#x80010003 . "OPENDAQ_ERR_SERVER_VERSION_TOO_LOW")
     (#x80010004 . "OPENDAQ_ERR_CONTROL_CLIENT_REJECTED")
+    (#x80010005 . "OPENDAQ_ERR_CYCLIC_REFERENCE")
     (#x80030000 . "OPENDAQ_ERR_MODULE_MANAGER_UNKNOWN")
     (#x80030001 . "OPENDAQ_ERR_MODULE_LOAD_FAILED")
     (#x80030002 . "OPENDAQ_ERR_MODULE_NO_ENTRY_POINT")
@@ -758,8 +827,8 @@
 (cffi:defcfun ("daqAllocator_allocate" %daq-allocator-allocate) daq-err-code
   (self daq-allocator)
   (descriptor daq-data-descriptor)
-  (bytes daq-size-t)
-  (align daq-size-t)
+  (bytes daq-c-size-t)
+  (align daq-c-size-t)
   (address (:pointer :pointer))
   )
 
@@ -813,7 +882,7 @@
 (cffi:defcfun ("daqArgumentInfo_createArgumentInfo" %daq-argument-info-create-argument-info) daq-err-code
   (obj (:pointer daq-argument-info))
   (name daq-string)
-  (type daq-core-type)
+  (type daq-c-core-type)
   )
 
 (defun argument-info/create-argument-info (name type)
@@ -826,8 +895,8 @@
 (cffi:defcfun ("daqArgumentInfo_createDictArgumentInfo" %daq-argument-info-create-dict-argument-info) daq-err-code
   (obj (:pointer daq-argument-info))
   (name daq-string)
-  (key-type daq-core-type)
-  (item-type daq-core-type)
+  (key-type daq-c-core-type)
+  (item-type daq-c-core-type)
   )
 
 (defun argument-info/create-dict-argument-info (name key-type item-type)
@@ -840,7 +909,7 @@
 (cffi:defcfun ("daqArgumentInfo_createListArgumentInfo" %daq-argument-info-create-list-argument-info) daq-err-code
   (obj (:pointer daq-argument-info))
   (name daq-string)
-  (item-type daq-core-type)
+  (item-type daq-c-core-type)
   )
 
 (defun argument-info/create-list-argument-info (name item-type)
@@ -860,25 +929,25 @@
 
 (cffi:defcfun ("daqArgumentInfo_getItemType" %daq-argument-info-get-item-type) daq-err-code
   (self daq-argument-info)
-  (item-type (:pointer daq-core-type))
+  (item-type (:pointer daq-c-core-type))
   )
 
 (defun argument-info/get-item-type (self)
-  (cffi:with-foreign-object (item-type-slot 'daq-core-type)
+  (cffi:with-foreign-object (item-type-slot 'daq-c-core-type)
     (%check-error (%daq-argument-info-get-item-type self item-type-slot) "daqArgumentInfo_getItemType")
-    (cffi:mem-ref item-type-slot 'daq-core-type)
+    (cffi:mem-ref item-type-slot 'daq-c-core-type)
   )
 )
 
 (cffi:defcfun ("daqArgumentInfo_getKeyType" %daq-argument-info-get-key-type) daq-err-code
   (self daq-argument-info)
-  (key-type (:pointer daq-core-type))
+  (key-type (:pointer daq-c-core-type))
   )
 
 (defun argument-info/get-key-type (self)
-  (cffi:with-foreign-object (key-type-slot 'daq-core-type)
+  (cffi:with-foreign-object (key-type-slot 'daq-c-core-type)
     (%check-error (%daq-argument-info-get-key-type self key-type-slot) "daqArgumentInfo_getKeyType")
-    (cffi:mem-ref key-type-slot 'daq-core-type)
+    (cffi:mem-ref key-type-slot 'daq-c-core-type)
   )
 )
 
@@ -896,13 +965,13 @@
 
 (cffi:defcfun ("daqArgumentInfo_getType" %daq-argument-info-get-type) daq-err-code
   (self daq-argument-info)
-  (type (:pointer daq-core-type))
+  (type (:pointer daq-c-core-type))
   )
 
 (defun argument-info/get-type (self)
-  (cffi:with-foreign-object (type-slot 'daq-core-type)
+  (cffi:with-foreign-object (type-slot 'daq-c-core-type)
     (%check-error (%daq-argument-info-get-type self type-slot) "daqArgumentInfo_getType")
-    (cffi:mem-ref type-slot 'daq-core-type)
+    (cffi:mem-ref type-slot 'daq-c-core-type)
   )
 )
 
@@ -934,7 +1003,7 @@
 
 (cffi:defcfun ("daqAuthenticationProvider_createAuthenticationProvider" %daq-authentication-provider-create-authentication-provider) daq-err-code
   (obj (:pointer daq-authentication-provider))
-  (allow-anonymous daq-bool)
+  (allow-anonymous daq-c-bool)
   )
 
 (defun authentication-provider/create-authentication-provider (allow-anonymous)
@@ -970,7 +1039,7 @@
 
 (cffi:defcfun ("daqAuthenticationProvider_createStaticAuthenticationProvider" %daq-authentication-provider-create-static-authentication-provider) daq-err-code
   (obj (:pointer daq-authentication-provider))
-  (allow-anonymous daq-bool)
+  (allow-anonymous daq-c-bool)
   (user-list daq-list)
   )
 
@@ -1004,25 +1073,25 @@
 
 (cffi:defcfun ("daqAuthenticationProvider_isAnonymousAllowed" %daq-authentication-provider-is-anonymous-allowed) daq-err-code
   (self daq-authentication-provider)
-  (allowed-out (:pointer daq-bool))
+  (allowed-out (:pointer daq-c-bool))
   )
 
 (defun authentication-provider/is-anonymous-allowed (self)
-  (cffi:with-foreign-object (allowed-out-slot 'daq-bool)
+  (cffi:with-foreign-object (allowed-out-slot 'daq-c-bool)
     (%check-error (%daq-authentication-provider-is-anonymous-allowed self allowed-out-slot) "daqAuthenticationProvider_isAnonymousAllowed")
-    (cffi:mem-ref allowed-out-slot 'daq-bool)
+    (cffi:mem-ref allowed-out-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqAwaitable_cancel" %daq-awaitable-cancel) daq-err-code
   (self daq-awaitable)
-  (canceled (:pointer daq-bool))
+  (canceled (:pointer daq-c-bool))
   )
 
 (defun awaitable/cancel (self)
-  (cffi:with-foreign-object (canceled-slot 'daq-bool)
+  (cffi:with-foreign-object (canceled-slot 'daq-c-bool)
     (%check-error (%daq-awaitable-cancel self canceled-slot) "daqAwaitable_cancel")
-    (cffi:mem-ref canceled-slot 'daq-bool)
+    (cffi:mem-ref canceled-slot 'daq-c-bool)
   )
 )
 
@@ -1048,13 +1117,13 @@
 
 (cffi:defcfun ("daqAwaitable_hasCompleted" %daq-awaitable-has-completed) daq-err-code
   (self daq-awaitable)
-  (completed (:pointer daq-bool))
+  (completed (:pointer daq-c-bool))
   )
 
 (defun awaitable/has-completed (self)
-  (cffi:with-foreign-object (completed-slot 'daq-bool)
+  (cffi:with-foreign-object (completed-slot 'daq-c-bool)
     (%check-error (%daq-awaitable-has-completed self completed-slot) "daqAwaitable_hasCompleted")
-    (cffi:mem-ref completed-slot 'daq-bool)
+    (cffi:mem-ref completed-slot 'daq-c-bool)
   )
 )
 
@@ -1065,16 +1134,6 @@
 (defun awaitable/wait (self)
   (%check-error (%daq-awaitable-wait self) "daqAwaitable_wait")
   nil
-)
-
-(cffi:defcfun ("daqBaseObject_addRef" %daq-base-object-add-ref) :int
-  (self daq-base-object)
-  )
-
-(defun base-object/add-ref (self)
-  (let ((result (%daq-base-object-add-ref self)))
-    result
-  )
 )
 
 #-(or windows win32)
@@ -1099,14 +1158,14 @@
   )
 )
 
-(cffi:defcfun ("daqBaseObject_create" %daq-base-object-create) daq-err-code
-  (base-object (:pointer daq-base-object))
+(cffi:defcfun ("daqBaseObject_createBaseObject" %daq-base-object-create-base-object) daq-err-code
+  (obj (:pointer daq-base-object))
   )
 
-(defun base-object/create ()
-  (cffi:with-foreign-object (base-object-slot 'daq-base-object)
-    (%check-error (%daq-base-object-create base-object-slot) "daqBaseObject_create")
-    (cffi:mem-ref base-object-slot 'daq-base-object)
+(defun base-object/create-base-object ()
+  (cffi:with-foreign-object (obj-slot 'daq-base-object)
+    (%check-error (%daq-base-object-create-base-object obj-slot) "daqBaseObject_createBaseObject")
+    (cffi:mem-ref obj-slot 'daq-base-object)
   )
 )
 
@@ -1122,75 +1181,51 @@
 (cffi:defcfun ("daqBaseObject_equals" %daq-base-object-equals) daq-err-code
   (self daq-base-object)
   (other daq-base-object)
-  (equal (:pointer daq-bool))
+  (equal (:pointer daq-c-bool))
   )
 
 (defun base-object/equals (self other)
-  (cffi:with-foreign-object (equal-slot 'daq-bool)
+  (cffi:with-foreign-object (equal-slot 'daq-c-bool)
     (%check-error (%daq-base-object-equals self other equal-slot) "daqBaseObject_equals")
-    (cffi:mem-ref equal-slot 'daq-bool)
+    (cffi:mem-ref equal-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqBaseObject_getHashCode" %daq-base-object-get-hash-code) daq-err-code
   (self daq-base-object)
-  (hash-code (:pointer daq-size-t))
+  (hash-code (:pointer daq-c-size-t))
   )
 
 (defun base-object/get-hash-code (self)
-  (cffi:with-foreign-object (hash-code-slot 'daq-size-t)
+  (cffi:with-foreign-object (hash-code-slot 'daq-c-size-t)
     (%check-error (%daq-base-object-get-hash-code self hash-code-slot) "daqBaseObject_getHashCode")
-    (cffi:mem-ref hash-code-slot 'daq-size-t)
+    (cffi:mem-ref hash-code-slot 'daq-c-size-t)
   )
 )
 
-#-(or windows win32)
-(cffi:defcfun ("daqBaseObject_queryInterface" %daq-base-object-query-interface) daq-err-code
-  (self daq-base-object)
-  (intf-id-0 :uint64)
-  (intf-id-1 :uint64)
-  (interface-ptr (:pointer daq-base-object))
+(cffi:defcfun ("daqBaseObject_getInterfaceId" %daq-base-object-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
   )
 
-#+(or windows win32)
-(cffi:defcfun ("daqBaseObject_queryInterface" %daq-base-object-query-interface) daq-err-code
-  (self daq-base-object)
-  (intf-id (:pointer (:struct daq-intf-id)))
-  (interface-ptr (:pointer daq-base-object))
-  )
-
-(defun base-object/query-interface (self intf-id)
-  (cffi:with-foreign-object (interface-ptr-slot 'daq-base-object)
-    (%check-error #-(or windows win32) (%daq-base-object-query-interface self (cffi:mem-ref intf-id :uint64 0) (cffi:mem-ref intf-id :uint64 8) interface-ptr-slot) #+(or windows win32) (%daq-base-object-query-interface self intf-id interface-ptr-slot) "daqBaseObject_queryInterface")
-    (cffi:mem-ref interface-ptr-slot 'daq-base-object)
-  )
-)
-
-(cffi:defcfun ("daqBaseObject_releaseRef" %daq-base-object-release-ref) :int
-  (self daq-base-object)
-  )
-
-(defun base-object/release-ref (self)
-  (let ((result (%daq-base-object-release-ref self)))
-    result
-  )
-)
+(defun base-object/get-interface-id (intf-id)
+  (%daq-base-object-get-interface-id intf-id)
+  nil)
 
 (cffi:defcfun ("daqBaseObject_toString" %daq-base-object-to-string) daq-err-code
   (self daq-base-object)
-  (str daq-char-ptr)
+  (str daq-c-char-ptr)
   )
 
 (defun base-object/to-string (self)
-  (cffi:with-foreign-object (str-slot 'daq-char-ptr)
+  (cffi:with-foreign-object (str-slot 'daq-c-char-ptr)
     (%check-error (%daq-base-object-to-string self str-slot) "daqBaseObject_toString")
-    (cffi:mem-ref str-slot 'daq-char-ptr)
+    (cffi:mem-ref str-slot 'daq-c-char-ptr)
   )
 )
 
 (cffi:defcfun ("daqBinaryData_createBinaryData" %daq-binary-data-create-binary-data) daq-err-code
   (obj (:pointer daq-binary-data))
-  (size daq-size-t)
+  (size daq-c-size-t)
   )
 
 (defun binary-data/create-binary-data (size)
@@ -1220,13 +1255,13 @@
 
 (cffi:defcfun ("daqBinaryData_getSize" %daq-binary-data-get-size) daq-err-code
   (self daq-binary-data)
-  (size (:pointer daq-size-t))
+  (size (:pointer daq-c-size-t))
   )
 
 (defun binary-data/get-size (self)
-  (cffi:with-foreign-object (size-slot 'daq-size-t)
+  (cffi:with-foreign-object (size-slot 'daq-c-size-t)
     (%check-error (%daq-binary-data-get-size self size-slot) "daqBinaryData_getSize")
-    (cffi:mem-ref size-slot 'daq-size-t)
+    (cffi:mem-ref size-slot 'daq-c-size-t)
   )
 )
 
@@ -1255,13 +1290,13 @@
 
 (cffi:defcfun ("daqBlockReaderBuilder_getBlockSize" %daq-block-reader-builder-get-block-size) daq-err-code
   (self daq-block-reader-builder)
-  (size (:pointer daq-size-t))
+  (size (:pointer daq-c-size-t))
   )
 
 (defun block-reader-builder/get-block-size (self)
-  (cffi:with-foreign-object (size-slot 'daq-size-t)
+  (cffi:with-foreign-object (size-slot 'daq-c-size-t)
     (%check-error (%daq-block-reader-builder-get-block-size self size-slot) "daqBlockReaderBuilder_getBlockSize")
-    (cffi:mem-ref size-slot 'daq-size-t)
+    (cffi:mem-ref size-slot 'daq-c-size-t)
   )
 )
 
@@ -1311,13 +1346,13 @@
 
 (cffi:defcfun ("daqBlockReaderBuilder_getOverlap" %daq-block-reader-builder-get-overlap) daq-err-code
   (self daq-block-reader-builder)
-  (overlap (:pointer daq-size-t))
+  (overlap (:pointer daq-c-size-t))
   )
 
 (defun block-reader-builder/get-overlap (self)
-  (cffi:with-foreign-object (overlap-slot 'daq-size-t)
+  (cffi:with-foreign-object (overlap-slot 'daq-c-size-t)
     (%check-error (%daq-block-reader-builder-get-overlap self overlap-slot) "daqBlockReaderBuilder_getOverlap")
-    (cffi:mem-ref overlap-slot 'daq-size-t)
+    (cffi:mem-ref overlap-slot 'daq-c-size-t)
   )
 )
 
@@ -1347,13 +1382,13 @@
 
 (cffi:defcfun ("daqBlockReaderBuilder_getSkipEvents" %daq-block-reader-builder-get-skip-events) daq-err-code
   (self daq-block-reader-builder)
-  (skip-events (:pointer daq-bool))
+  (skip-events (:pointer daq-c-bool))
   )
 
 (defun block-reader-builder/get-skip-events (self)
-  (cffi:with-foreign-object (skip-events-slot 'daq-bool)
+  (cffi:with-foreign-object (skip-events-slot 'daq-c-bool)
     (%check-error (%daq-block-reader-builder-get-skip-events self skip-events-slot) "daqBlockReaderBuilder_getSkipEvents")
-    (cffi:mem-ref skip-events-slot 'daq-bool)
+    (cffi:mem-ref skip-events-slot 'daq-c-bool)
   )
 )
 
@@ -1371,7 +1406,7 @@
 
 (cffi:defcfun ("daqBlockReaderBuilder_setBlockSize" %daq-block-reader-builder-set-block-size) daq-err-code
   (self daq-block-reader-builder)
-  (size daq-size-t)
+  (size daq-c-size-t)
   )
 
 (defun block-reader-builder/set-block-size (self size)
@@ -1411,7 +1446,7 @@
 
 (cffi:defcfun ("daqBlockReaderBuilder_setOverlap" %daq-block-reader-builder-set-overlap) daq-err-code
   (self daq-block-reader-builder)
-  (overlap daq-size-t)
+  (overlap daq-c-size-t)
   )
 
 (defun block-reader-builder/set-overlap (self overlap)
@@ -1441,7 +1476,7 @@
 
 (cffi:defcfun ("daqBlockReaderBuilder_setSkipEvents" %daq-block-reader-builder-set-skip-events) daq-err-code
   (self daq-block-reader-builder)
-  (skip-events daq-bool)
+  (skip-events daq-c-bool)
   )
 
 (defun block-reader-builder/set-skip-events (self skip-events)
@@ -1462,9 +1497,9 @@
 (cffi:defcfun ("daqBlockReaderStatus_createBlockReaderStatus" %daq-block-reader-status-create-block-reader-status) daq-err-code
   (obj (:pointer daq-block-reader-status))
   (event-packet daq-event-packet)
-  (valid daq-bool)
+  (valid daq-c-bool)
   (offset daq-number)
-  (read-samples daq-size-t)
+  (read-samples daq-c-size-t)
   )
 
 (defun block-reader-status/create-block-reader-status (event-packet valid offset read-samples)
@@ -1484,20 +1519,20 @@
 
 (cffi:defcfun ("daqBlockReaderStatus_getReadSamples" %daq-block-reader-status-get-read-samples) daq-err-code
   (self daq-block-reader-status)
-  (read-samples (:pointer daq-size-t))
+  (read-samples (:pointer daq-c-size-t))
   )
 
 (defun block-reader-status/get-read-samples (self)
-  (cffi:with-foreign-object (read-samples-slot 'daq-size-t)
+  (cffi:with-foreign-object (read-samples-slot 'daq-c-size-t)
     (%check-error (%daq-block-reader-status-get-read-samples self read-samples-slot) "daqBlockReaderStatus_getReadSamples")
-    (cffi:mem-ref read-samples-slot 'daq-size-t)
+    (cffi:mem-ref read-samples-slot 'daq-c-size-t)
   )
 )
 
 (cffi:defcfun ("daqBlockReader_createBlockReader" %daq-block-reader-create-block-reader) daq-err-code
   (obj (:pointer daq-block-reader))
   (signal daq-signal)
-  (block-size daq-size-t)
+  (block-size daq-c-size-t)
   (value-read-type daq-sample-type)
   (domain-read-type daq-sample-type)
   (mode daq-read-mode)
@@ -1515,7 +1550,7 @@
   (invalidated-reader daq-block-reader)
   (value-read-type daq-sample-type)
   (domain-read-type daq-sample-type)
-  (block-size daq-size-t)
+  (block-size daq-c-size-t)
   )
 
 (defun block-reader/create-block-reader-from-existing (invalidated-reader value-read-type domain-read-type block-size)
@@ -1528,7 +1563,7 @@
 (cffi:defcfun ("daqBlockReader_createBlockReaderFromPort" %daq-block-reader-create-block-reader-from-port) daq-err-code
   (obj (:pointer daq-block-reader))
   (port daq-input-port-config)
-  (block-size daq-size-t)
+  (block-size daq-c-size-t)
   (value-read-type daq-sample-type)
   (domain-read-type daq-sample-type)
   (mode daq-read-mode)
@@ -1543,13 +1578,13 @@
 
 (cffi:defcfun ("daqBlockReader_getBlockSize" %daq-block-reader-get-block-size) daq-err-code
   (self daq-block-reader)
-  (size (:pointer daq-size-t))
+  (size (:pointer daq-c-size-t))
   )
 
 (defun block-reader/get-block-size (self)
-  (cffi:with-foreign-object (size-slot 'daq-size-t)
+  (cffi:with-foreign-object (size-slot 'daq-c-size-t)
     (%check-error (%daq-block-reader-get-block-size self size-slot) "daqBlockReader_getBlockSize")
-    (cffi:mem-ref size-slot 'daq-size-t)
+    (cffi:mem-ref size-slot 'daq-c-size-t)
   )
 )
 
@@ -1563,30 +1598,30 @@
 
 (cffi:defcfun ("daqBlockReader_getOverlap" %daq-block-reader-get-overlap) daq-err-code
   (self daq-block-reader)
-  (overlap (:pointer daq-size-t))
+  (overlap (:pointer daq-c-size-t))
   )
 
 (defun block-reader/get-overlap (self)
-  (cffi:with-foreign-object (overlap-slot 'daq-size-t)
+  (cffi:with-foreign-object (overlap-slot 'daq-c-size-t)
     (%check-error (%daq-block-reader-get-overlap self overlap-slot) "daqBlockReader_getOverlap")
-    (cffi:mem-ref overlap-slot 'daq-size-t)
+    (cffi:mem-ref overlap-slot 'daq-c-size-t)
   )
 )
 
 (cffi:defcfun ("daqBlockReader_read" %daq-block-reader-read) daq-err-code
   (self daq-block-reader)
   (blocks :pointer)
-  (count (:pointer daq-size-t))
-  (timeout-ms daq-size-t)
+  (count (:pointer daq-c-size-t))
+  (timeout-ms daq-c-size-t)
   (status (:pointer daq-block-reader-status))
   )
 
 (defun block-reader/read (self blocks count timeout-ms)
-  (cffi:with-foreign-object (count-slot 'daq-size-t)
+  (cffi:with-foreign-object (count-slot 'daq-c-size-t)
     (cffi:with-foreign-object (status-slot 'daq-block-reader-status)
-      (setf (cffi:mem-ref count-slot 'daq-size-t) count)
+      (setf (cffi:mem-ref count-slot 'daq-c-size-t) count)
       (%check-error (%daq-block-reader-read self blocks count-slot timeout-ms status-slot) "daqBlockReader_read")
-      (values (cffi:mem-ref count-slot 'daq-size-t) (cffi:mem-ref status-slot 'daq-block-reader-status))
+      (values (cffi:mem-ref count-slot 'daq-c-size-t) (cffi:mem-ref status-slot 'daq-block-reader-status))
     )
   )
 )
@@ -1595,24 +1630,24 @@
   (self daq-block-reader)
   (data-blocks :pointer)
   (domain-blocks :pointer)
-  (count (:pointer daq-size-t))
-  (timeout-ms daq-size-t)
+  (count (:pointer daq-c-size-t))
+  (timeout-ms daq-c-size-t)
   (status (:pointer daq-block-reader-status))
   )
 
 (defun block-reader/read-with-domain (self data-blocks domain-blocks count timeout-ms)
-  (cffi:with-foreign-object (count-slot 'daq-size-t)
+  (cffi:with-foreign-object (count-slot 'daq-c-size-t)
     (cffi:with-foreign-object (status-slot 'daq-block-reader-status)
-      (setf (cffi:mem-ref count-slot 'daq-size-t) count)
+      (setf (cffi:mem-ref count-slot 'daq-c-size-t) count)
       (%check-error (%daq-block-reader-read-with-domain self data-blocks domain-blocks count-slot timeout-ms status-slot) "daqBlockReader_readWithDomain")
-      (values (cffi:mem-ref count-slot 'daq-size-t) (cffi:mem-ref status-slot 'daq-block-reader-status))
+      (values (cffi:mem-ref count-slot 'daq-c-size-t) (cffi:mem-ref status-slot 'daq-block-reader-status))
     )
   )
 )
 
 (cffi:defcfun ("daqBoolean_createBoolObject" %daq-boolean-create-bool-object) daq-err-code
   (obj (:pointer daq-boolean))
-  (value daq-bool)
+  (value daq-c-bool)
   )
 
 (defun boolean/create-bool-object (value)
@@ -1624,7 +1659,7 @@
 
 (cffi:defcfun ("daqBoolean_createBoolean" %daq-boolean-create-boolean) daq-err-code
   (obj (:pointer daq-boolean))
-  (value daq-bool)
+  (value daq-c-bool)
   )
 
 (defun boolean/create-boolean (value)
@@ -1636,14 +1671,14 @@
 
 (cffi:defcfun ("daqBoolean_equalsValue" %daq-boolean-equals-value) daq-err-code
   (self daq-boolean)
-  (value daq-bool)
-  (equal (:pointer daq-bool))
+  (value daq-c-bool)
+  (equal (:pointer daq-c-bool))
   )
 
 (defun boolean/equals-value (self value)
-  (cffi:with-foreign-object (equal-slot 'daq-bool)
+  (cffi:with-foreign-object (equal-slot 'daq-c-bool)
     (%check-error (%daq-boolean-equals-value self value equal-slot) "daqBoolean_equalsValue")
-    (cffi:mem-ref equal-slot 'daq-bool)
+    (cffi:mem-ref equal-slot 'daq-c-bool)
   )
 )
 
@@ -1657,21 +1692,21 @@
 
 (cffi:defcfun ("daqBoolean_getValue" %daq-boolean-get-value) daq-err-code
   (self daq-boolean)
-  (value (:pointer daq-bool))
+  (value (:pointer daq-c-bool))
   )
 
 (defun boolean/get-value (self)
-  (cffi:with-foreign-object (value-slot 'daq-bool)
+  (cffi:with-foreign-object (value-slot 'daq-c-bool)
     (%check-error (%daq-boolean-get-value self value-slot) "daqBoolean_getValue")
-    (cffi:mem-ref value-slot 'daq-bool)
+    (cffi:mem-ref value-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqCallableInfo_createCallableInfo" %daq-callable-info-create-callable-info) daq-err-code
   (obj (:pointer daq-callable-info))
   (argument-info daq-list)
-  (return-type daq-core-type)
-  (const-flag daq-bool)
+  (return-type daq-c-core-type)
+  (const-flag daq-c-bool)
   )
 
 (defun callable-info/create-callable-info (argument-info return-type const-flag)
@@ -1703,25 +1738,25 @@
 
 (cffi:defcfun ("daqCallableInfo_getReturnType" %daq-callable-info-get-return-type) daq-err-code
   (self daq-callable-info)
-  (type (:pointer daq-core-type))
+  (type (:pointer daq-c-core-type))
   )
 
 (defun callable-info/get-return-type (self)
-  (cffi:with-foreign-object (type-slot 'daq-core-type)
+  (cffi:with-foreign-object (type-slot 'daq-c-core-type)
     (%check-error (%daq-callable-info-get-return-type self type-slot) "daqCallableInfo_getReturnType")
-    (cffi:mem-ref type-slot 'daq-core-type)
+    (cffi:mem-ref type-slot 'daq-c-core-type)
   )
 )
 
 (cffi:defcfun ("daqCallableInfo_isConst" %daq-callable-info-is-const) daq-err-code
   (self daq-callable-info)
-  (const-flag (:pointer daq-bool))
+  (const-flag (:pointer daq-c-bool))
   )
 
 (defun callable-info/is-const (self)
-  (cffi:with-foreign-object (const-flag-slot 'daq-bool)
+  (cffi:with-foreign-object (const-flag-slot 'daq-c-bool)
     (%check-error (%daq-callable-info-is-const self const-flag-slot) "daqCallableInfo_isConst")
-    (cffi:mem-ref const-flag-slot 'daq-bool)
+    (cffi:mem-ref const-flag-slot 'daq-c-bool)
   )
 )
 
@@ -1833,8 +1868,8 @@
 
 (cffi:defcfun ("daqComplexNumber_createComplexNumber" %daq-complex-number-create-complex-number) daq-err-code
   (obj (:pointer daq-complex-number))
-  (real daq-float)
-  (imaginary daq-float)
+  (real daq-c-float)
+  (imaginary daq-c-float)
   )
 
 (defun complex-number/create-complex-number (real imaginary)
@@ -1844,15 +1879,37 @@
   )
 )
 
+#-(or windows win32)
+(cffi:defcfun ("daqComplexNumber_equalsValue" %daq-complex-number-equals-value) daq-err-code
+  (self daq-complex-number)
+  (value-0 :uint64)
+  (value-1 :uint64)
+  (equal (:pointer daq-c-bool))
+  )
+
+#+(or windows win32)
+(cffi:defcfun ("daqComplexNumber_equalsValue" %daq-complex-number-equals-value) daq-err-code
+  (self daq-complex-number)
+  (value (:pointer (:struct daq-complex-float-64)))
+  (equal (:pointer daq-c-bool))
+  )
+
+(defun complex-number/equals-value (self value)
+  (cffi:with-foreign-object (equal-slot 'daq-c-bool)
+    (%check-error #-(or windows win32) (%daq-complex-number-equals-value self (cffi:mem-ref value :uint64 0) (cffi:mem-ref value :uint64 8) equal-slot) #+(or windows win32) (%daq-complex-number-equals-value self value equal-slot) "daqComplexNumber_equalsValue")
+    (cffi:mem-ref equal-slot 'daq-c-bool)
+  )
+)
+
 (cffi:defcfun ("daqComplexNumber_getImaginary" %daq-complex-number-get-imaginary) daq-err-code
   (self daq-complex-number)
-  (imaginary (:pointer daq-float))
+  (imaginary (:pointer daq-c-float))
   )
 
 (defun complex-number/get-imaginary (self)
-  (cffi:with-foreign-object (imaginary-slot 'daq-float)
+  (cffi:with-foreign-object (imaginary-slot 'daq-c-float)
     (%check-error (%daq-complex-number-get-imaginary self imaginary-slot) "daqComplexNumber_getImaginary")
-    (cffi:mem-ref imaginary-slot 'daq-float)
+    (cffi:mem-ref imaginary-slot 'daq-c-float)
   )
 )
 
@@ -1866,15 +1923,24 @@
 
 (cffi:defcfun ("daqComplexNumber_getReal" %daq-complex-number-get-real) daq-err-code
   (self daq-complex-number)
-  (real (:pointer daq-float))
+  (real (:pointer daq-c-float))
   )
 
 (defun complex-number/get-real (self)
-  (cffi:with-foreign-object (real-slot 'daq-float)
+  (cffi:with-foreign-object (real-slot 'daq-c-float)
     (%check-error (%daq-complex-number-get-real self real-slot) "daqComplexNumber_getReal")
-    (cffi:mem-ref real-slot 'daq-float)
+    (cffi:mem-ref real-slot 'daq-c-float)
   )
 )
+
+(cffi:defcfun ("daqComplexNumber_getValue" %daq-complex-number-get-value) daq-err-code
+  (self daq-complex-number)
+  (value (:pointer daq-complex-float-64))
+  )
+
+(defun complex-number/get-value (self value)
+  (%check-error (%daq-complex-number-get-value self value) "daqComplexNumber_getValue")
+  nil)
 
 (cffi:defcfun ("daqComponentDeserializeContext_clone" %daq-component-deserialize-context-clone) daq-err-code
   (self daq-component-deserialize-context)
@@ -2101,8 +2167,8 @@
 
 (cffi:defcfun ("daqComponentPrivate_setParentActive" %daq-component-private-set-parent-active) daq-err-code
   (self daq-component-private)
-  (parent-active daq-bool)
-  (on-update daq-bool)
+  (parent-active daq-c-bool)
+  (on-update daq-c-bool)
   )
 
 (defun component-private/set-parent-active (self parent-active on-update)
@@ -2691,11 +2757,11 @@
 
 (cffi:defcfun ("daqComponentUpdateContext_setRootComponent" %daq-component-update-context-set-root-component) daq-err-code
   (self daq-component-update-context)
-  (root-component daq-component)
+  (base-component daq-component)
   )
 
-(defun component-update-context/set-root-component (self root-component)
-  (%check-error (%daq-component-update-context-set-root-component self root-component) "daqComponentUpdateContext_setRootComponent")
+(defun component-update-context/set-root-component (self base-component)
+  (%check-error (%daq-component-update-context-set-root-component self base-component) "daqComponentUpdateContext_setRootComponent")
   nil
 )
 
@@ -2740,13 +2806,13 @@
 
 (cffi:defcfun ("daqComponent_getActive" %daq-component-get-active) daq-err-code
   (self daq-component)
-  (active (:pointer daq-bool))
+  (active (:pointer daq-c-bool))
   )
 
 (defun component/get-active (self)
-  (cffi:with-foreign-object (active-slot 'daq-bool)
+  (cffi:with-foreign-object (active-slot 'daq-c-bool)
     (%check-error (%daq-component-get-active self active-slot) "daqComponent_getActive")
-    (cffi:mem-ref active-slot 'daq-bool)
+    (cffi:mem-ref active-slot 'daq-c-bool)
   )
 )
 
@@ -2796,13 +2862,13 @@
 
 (cffi:defcfun ("daqComponent_getLocalActive" %daq-component-get-local-active) daq-err-code
   (self daq-component)
-  (local-active (:pointer daq-bool))
+  (local-active (:pointer daq-c-bool))
   )
 
 (defun component/get-local-active (self)
-  (cffi:with-foreign-object (local-active-slot 'daq-bool)
+  (cffi:with-foreign-object (local-active-slot 'daq-c-bool)
     (%check-error (%daq-component-get-local-active self local-active-slot) "daqComponent_getLocalActive")
-    (cffi:mem-ref local-active-slot 'daq-bool)
+    (cffi:mem-ref local-active-slot 'daq-c-bool)
   )
 )
 
@@ -2880,13 +2946,13 @@
 
 (cffi:defcfun ("daqComponent_getParentActive" %daq-component-get-parent-active) daq-err-code
   (self daq-component)
-  (parent-active (:pointer daq-bool))
+  (parent-active (:pointer daq-c-bool))
   )
 
 (defun component/get-parent-active (self)
-  (cffi:with-foreign-object (parent-active-slot 'daq-bool)
+  (cffi:with-foreign-object (parent-active-slot 'daq-c-bool)
     (%check-error (%daq-component-get-parent-active self parent-active-slot) "daqComponent_getParentActive")
-    (cffi:mem-ref parent-active-slot 'daq-bool)
+    (cffi:mem-ref parent-active-slot 'daq-c-bool)
   )
 )
 
@@ -2916,19 +2982,19 @@
 
 (cffi:defcfun ("daqComponent_getVisible" %daq-component-get-visible) daq-err-code
   (self daq-component)
-  (visible (:pointer daq-bool))
+  (visible (:pointer daq-c-bool))
   )
 
 (defun component/get-visible (self)
-  (cffi:with-foreign-object (visible-slot 'daq-bool)
+  (cffi:with-foreign-object (visible-slot 'daq-c-bool)
     (%check-error (%daq-component-get-visible self visible-slot) "daqComponent_getVisible")
-    (cffi:mem-ref visible-slot 'daq-bool)
+    (cffi:mem-ref visible-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqComponent_setActive" %daq-component-set-active) daq-err-code
   (self daq-component)
-  (active daq-bool)
+  (active daq-c-bool)
   )
 
 (defun component/set-active (self active)
@@ -2958,7 +3024,7 @@
 
 (cffi:defcfun ("daqComponent_setVisible" %daq-component-set-visible) daq-err-code
   (self daq-component)
-  (visible daq-bool)
+  (visible daq-c-bool)
   )
 
 (defun component/set-visible (self visible)
@@ -3114,18 +3180,27 @@
   )
 )
 
+(cffi:defcfun ("daqConnectionInternal_closeQueue" %daq-connection-internal-close-queue) daq-err-code
+  (self daq-connection-internal)
+  )
+
+(defun connection-internal/close-queue (self)
+  (%check-error (%daq-connection-internal-close-queue self) "daqConnectionInternal_closeQueue")
+  nil
+)
+
 (cffi:defcfun ("daqConnectionInternal_dequeueUpTo" %daq-connection-internal-dequeue-up-to) daq-err-code
   (self daq-connection-internal)
   (packet-ptr (:pointer daq-packet))
-  (count (:pointer daq-size-t))
+  (count (:pointer daq-c-size-t))
   )
 
 (defun connection-internal/dequeue-up-to (self count)
   (cffi:with-foreign-object (packet-ptr-slot 'daq-packet)
-    (cffi:with-foreign-object (count-slot 'daq-size-t)
-      (setf (cffi:mem-ref count-slot 'daq-size-t) count)
+    (cffi:with-foreign-object (count-slot 'daq-c-size-t)
+      (setf (cffi:mem-ref count-slot 'daq-c-size-t) count)
       (%check-error (%daq-connection-internal-dequeue-up-to self packet-ptr-slot count-slot) "daqConnectionInternal_dequeueUpTo")
-      (values (cffi:mem-ref packet-ptr-slot 'daq-packet) (cffi:mem-ref count-slot 'daq-size-t))
+      (values (cffi:mem-ref packet-ptr-slot 'daq-packet) (cffi:mem-ref count-slot 'daq-c-size-t))
     )
   )
 )
@@ -3313,13 +3388,13 @@
 
 (cffi:defcfun ("daqConnection_getAvailableSamples" %daq-connection-get-available-samples) daq-err-code
   (self daq-connection)
-  (samples (:pointer daq-size-t))
+  (samples (:pointer daq-c-size-t))
   )
 
 (defun connection/get-available-samples (self)
-  (cffi:with-foreign-object (samples-slot 'daq-size-t)
+  (cffi:with-foreign-object (samples-slot 'daq-c-size-t)
     (%check-error (%daq-connection-get-available-samples self samples-slot) "daqConnection_getAvailableSamples")
-    (cffi:mem-ref samples-slot 'daq-size-t)
+    (cffi:mem-ref samples-slot 'daq-c-size-t)
   )
 )
 
@@ -3345,49 +3420,49 @@
 
 (cffi:defcfun ("daqConnection_getPacketCount" %daq-connection-get-packet-count) daq-err-code
   (self daq-connection)
-  (packet-count (:pointer daq-size-t))
+  (packet-count (:pointer daq-c-size-t))
   )
 
 (defun connection/get-packet-count (self)
-  (cffi:with-foreign-object (packet-count-slot 'daq-size-t)
+  (cffi:with-foreign-object (packet-count-slot 'daq-c-size-t)
     (%check-error (%daq-connection-get-packet-count self packet-count-slot) "daqConnection_getPacketCount")
-    (cffi:mem-ref packet-count-slot 'daq-size-t)
+    (cffi:mem-ref packet-count-slot 'daq-c-size-t)
   )
 )
 
 (cffi:defcfun ("daqConnection_getSamplesUntilNextDescriptor" %daq-connection-get-samples-until-next-descriptor) daq-err-code
   (self daq-connection)
-  (samples (:pointer daq-size-t))
+  (samples (:pointer daq-c-size-t))
   )
 
 (defun connection/get-samples-until-next-descriptor (self)
-  (cffi:with-foreign-object (samples-slot 'daq-size-t)
+  (cffi:with-foreign-object (samples-slot 'daq-c-size-t)
     (%check-error (%daq-connection-get-samples-until-next-descriptor self samples-slot) "daqConnection_getSamplesUntilNextDescriptor")
-    (cffi:mem-ref samples-slot 'daq-size-t)
+    (cffi:mem-ref samples-slot 'daq-c-size-t)
   )
 )
 
 (cffi:defcfun ("daqConnection_getSamplesUntilNextEventPacket" %daq-connection-get-samples-until-next-event-packet) daq-err-code
   (self daq-connection)
-  (samples (:pointer daq-size-t))
+  (samples (:pointer daq-c-size-t))
   )
 
 (defun connection/get-samples-until-next-event-packet (self)
-  (cffi:with-foreign-object (samples-slot 'daq-size-t)
+  (cffi:with-foreign-object (samples-slot 'daq-c-size-t)
     (%check-error (%daq-connection-get-samples-until-next-event-packet self samples-slot) "daqConnection_getSamplesUntilNextEventPacket")
-    (cffi:mem-ref samples-slot 'daq-size-t)
+    (cffi:mem-ref samples-slot 'daq-c-size-t)
   )
 )
 
 (cffi:defcfun ("daqConnection_getSamplesUntilNextGapPacket" %daq-connection-get-samples-until-next-gap-packet) daq-err-code
   (self daq-connection)
-  (samples (:pointer daq-size-t))
+  (samples (:pointer daq-c-size-t))
   )
 
 (defun connection/get-samples-until-next-gap-packet (self)
-  (cffi:with-foreign-object (samples-slot 'daq-size-t)
+  (cffi:with-foreign-object (samples-slot 'daq-c-size-t)
     (%check-error (%daq-connection-get-samples-until-next-gap-packet self samples-slot) "daqConnection_getSamplesUntilNextGapPacket")
-    (cffi:mem-ref samples-slot 'daq-size-t)
+    (cffi:mem-ref samples-slot 'daq-c-size-t)
   )
 )
 
@@ -3405,37 +3480,37 @@
 
 (cffi:defcfun ("daqConnection_hasEventPacket" %daq-connection-has-event-packet) daq-err-code
   (self daq-connection)
-  (has-event-packet (:pointer daq-bool))
+  (has-event-packet (:pointer daq-c-bool))
   )
 
 (defun connection/has-event-packet (self)
-  (cffi:with-foreign-object (has-event-packet-slot 'daq-bool)
+  (cffi:with-foreign-object (has-event-packet-slot 'daq-c-bool)
     (%check-error (%daq-connection-has-event-packet self has-event-packet-slot) "daqConnection_hasEventPacket")
-    (cffi:mem-ref has-event-packet-slot 'daq-bool)
+    (cffi:mem-ref has-event-packet-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqConnection_hasGapPacket" %daq-connection-has-gap-packet) daq-err-code
   (self daq-connection)
-  (has-gap-packet (:pointer daq-bool))
+  (has-gap-packet (:pointer daq-c-bool))
   )
 
 (defun connection/has-gap-packet (self)
-  (cffi:with-foreign-object (has-gap-packet-slot 'daq-bool)
+  (cffi:with-foreign-object (has-gap-packet-slot 'daq-c-bool)
     (%check-error (%daq-connection-has-gap-packet self has-gap-packet-slot) "daqConnection_hasGapPacket")
-    (cffi:mem-ref has-gap-packet-slot 'daq-bool)
+    (cffi:mem-ref has-gap-packet-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqConnection_isRemote" %daq-connection-is-remote) daq-err-code
   (self daq-connection)
-  (remote (:pointer daq-bool))
+  (remote (:pointer daq-c-bool))
   )
 
 (defun connection/is-remote (self)
-  (cffi:with-foreign-object (remote-slot 'daq-bool)
+  (cffi:with-foreign-object (remote-slot 'daq-c-bool)
     (%check-error (%daq-connection-is-remote self remote-slot) "daqConnection_isRemote")
-    (cffi:mem-ref remote-slot 'daq-bool)
+    (cffi:mem-ref remote-slot 'daq-c-bool)
   )
 )
 
@@ -3469,6 +3544,16 @@
     (%check-error (%daq-context-internal-move-module-manager self manager-slot) "daqContextInternal_moveModuleManager")
     (cffi:mem-ref manager-slot 'daq-module-manager)
   )
+)
+
+(cffi:defcfun ("daqContextInternal_setRootDevice" %daq-context-internal-set-root-device) daq-err-code
+  (self daq-context-internal)
+  (device daq-base-object)
+  )
+
+(defun context-internal/set-root-device (self device)
+  (%check-error (%daq-context-internal-set-root-device self device) "daqContextInternal_setRootDevice")
+  nil
 )
 
 (cffi:defcfun ("daqContext_createContext" %daq-context-create-context) daq-err-code
@@ -3582,6 +3667,18 @@
   )
 )
 
+(cffi:defcfun ("daqContext_getRootDevice" %daq-context-get-root-device) daq-err-code
+  (self daq-context)
+  (device (:pointer daq-base-object))
+  )
+
+(defun context/get-root-device (self)
+  (cffi:with-foreign-object (device-slot 'daq-base-object)
+    (%check-error (%daq-context-get-root-device self device-slot) "daqContext_getRootDevice")
+    (cffi:mem-ref device-slot 'daq-base-object)
+  )
+)
+
 (cffi:defcfun ("daqContext_getScheduler" %daq-context-get-scheduler) daq-err-code
   (self daq-context)
   (scheduler (:pointer daq-scheduler))
@@ -3616,37 +3713,37 @@
 
 (cffi:defcfun ("daqConvertible_toBool" %daq-convertible-to-bool) daq-err-code
   (self daq-convertible)
-  (val (:pointer daq-bool))
+  (val (:pointer daq-c-bool))
   )
 
 (defun convertible/to-bool (self)
-  (cffi:with-foreign-object (val-slot 'daq-bool)
+  (cffi:with-foreign-object (val-slot 'daq-c-bool)
     (%check-error (%daq-convertible-to-bool self val-slot) "daqConvertible_toBool")
-    (cffi:mem-ref val-slot 'daq-bool)
+    (cffi:mem-ref val-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqConvertible_toFloat" %daq-convertible-to-float) daq-err-code
   (self daq-convertible)
-  (val (:pointer daq-float))
+  (val (:pointer daq-c-float))
   )
 
 (defun convertible/to-float (self)
-  (cffi:with-foreign-object (val-slot 'daq-float)
+  (cffi:with-foreign-object (val-slot 'daq-c-float)
     (%check-error (%daq-convertible-to-float self val-slot) "daqConvertible_toFloat")
-    (cffi:mem-ref val-slot 'daq-float)
+    (cffi:mem-ref val-slot 'daq-c-float)
   )
 )
 
 (cffi:defcfun ("daqConvertible_toInt" %daq-convertible-to-int) daq-err-code
   (self daq-convertible)
-  (val (:pointer daq-int))
+  (val (:pointer daq-c-int))
   )
 
 (defun convertible/to-int (self)
-  (cffi:with-foreign-object (val-slot 'daq-int)
+  (cffi:with-foreign-object (val-slot 'daq-c-int)
     (%check-error (%daq-convertible-to-int self val-slot) "daqConvertible_toInt")
-    (cffi:mem-ref val-slot 'daq-int)
+    (cffi:mem-ref val-slot 'daq-c-int)
   )
 )
 
@@ -3660,6 +3757,102 @@
 (defun core-event-args/create-core-event-args (event-id event-name parameters)
   (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
     (%check-error (%daq-core-event-args-create-core-event-args obj-slot event-id event-name parameters) "daqCoreEventArgs_createCoreEventArgs")
+    (cffi:mem-ref obj-slot 'daq-core-event-args)
+  )
+)
+
+(cffi:defcfun ("daqCoreEventArgs_createCoreEventArgsAttributeChanged" %daq-core-event-args-create-core-event-args-attribute-changed) daq-err-code
+  (obj (:pointer daq-core-event-args))
+  (attribute-name daq-string)
+  (attribute-value daq-base-object)
+  )
+
+(defun core-event-args/create-core-event-args-attribute-changed (attribute-name attribute-value)
+  (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
+    (%check-error (%daq-core-event-args-create-core-event-args-attribute-changed obj-slot attribute-name attribute-value) "daqCoreEventArgs_createCoreEventArgsAttributeChanged")
+    (cffi:mem-ref obj-slot 'daq-core-event-args)
+  )
+)
+
+(cffi:defcfun ("daqCoreEventArgs_createCoreEventArgsComponentAdded" %daq-core-event-args-create-core-event-args-component-added) daq-err-code
+  (obj (:pointer daq-core-event-args))
+  (component daq-component)
+  )
+
+(defun core-event-args/create-core-event-args-component-added (component)
+  (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
+    (%check-error (%daq-core-event-args-create-core-event-args-component-added obj-slot component) "daqCoreEventArgs_createCoreEventArgsComponentAdded")
+    (cffi:mem-ref obj-slot 'daq-core-event-args)
+  )
+)
+
+(cffi:defcfun ("daqCoreEventArgs_createCoreEventArgsComponentRemoved" %daq-core-event-args-create-core-event-args-component-removed) daq-err-code
+  (obj (:pointer daq-core-event-args))
+  (component-id daq-string)
+  )
+
+(defun core-event-args/create-core-event-args-component-removed (component-id)
+  (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
+    (%check-error (%daq-core-event-args-create-core-event-args-component-removed obj-slot component-id) "daqCoreEventArgs_createCoreEventArgsComponentRemoved")
+    (cffi:mem-ref obj-slot 'daq-core-event-args)
+  )
+)
+
+(cffi:defcfun ("daqCoreEventArgs_createCoreEventArgsComponentUpdateEnd" %daq-core-event-args-create-core-event-args-component-update-end) daq-err-code
+  (obj (:pointer daq-core-event-args))
+  )
+
+(defun core-event-args/create-core-event-args-component-update-end ()
+  (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
+    (%check-error (%daq-core-event-args-create-core-event-args-component-update-end obj-slot) "daqCoreEventArgs_createCoreEventArgsComponentUpdateEnd")
+    (cffi:mem-ref obj-slot 'daq-core-event-args)
+  )
+)
+
+(cffi:defcfun ("daqCoreEventArgs_createCoreEventArgsDataDescriptorChanged" %daq-core-event-args-create-core-event-args-data-descriptor-changed) daq-err-code
+  (obj (:pointer daq-core-event-args))
+  (descriptor daq-data-descriptor)
+  )
+
+(defun core-event-args/create-core-event-args-data-descriptor-changed (descriptor)
+  (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
+    (%check-error (%daq-core-event-args-create-core-event-args-data-descriptor-changed obj-slot descriptor) "daqCoreEventArgs_createCoreEventArgsDataDescriptorChanged")
+    (cffi:mem-ref obj-slot 'daq-core-event-args)
+  )
+)
+
+(cffi:defcfun ("daqCoreEventArgs_createCoreEventArgsDeviceDomainChanged" %daq-core-event-args-create-core-event-args-device-domain-changed) daq-err-code
+  (obj (:pointer daq-core-event-args))
+  (device-domain daq-device-domain)
+  )
+
+(defun core-event-args/create-core-event-args-device-domain-changed (device-domain)
+  (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
+    (%check-error (%daq-core-event-args-create-core-event-args-device-domain-changed obj-slot device-domain) "daqCoreEventArgs_createCoreEventArgsDeviceDomainChanged")
+    (cffi:mem-ref obj-slot 'daq-core-event-args)
+  )
+)
+
+(cffi:defcfun ("daqCoreEventArgs_createCoreEventArgsDeviceLockStateChanged" %daq-core-event-args-create-core-event-args-device-lock-state-changed) daq-err-code
+  (obj (:pointer daq-core-event-args))
+  (is-locked daq-c-bool)
+  )
+
+(defun core-event-args/create-core-event-args-device-lock-state-changed (is-locked)
+  (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
+    (%check-error (%daq-core-event-args-create-core-event-args-device-lock-state-changed obj-slot is-locked) "daqCoreEventArgs_createCoreEventArgsDeviceLockStateChanged")
+    (cffi:mem-ref obj-slot 'daq-core-event-args)
+  )
+)
+
+(cffi:defcfun ("daqCoreEventArgs_createCoreEventArgsDeviceOperationModeChanged" %daq-core-event-args-create-core-event-args-device-operation-mode-changed) daq-err-code
+  (obj (:pointer daq-core-event-args))
+  (operation-mode daq-c-int)
+  )
+
+(defun core-event-args/create-core-event-args-device-operation-mode-changed (operation-mode)
+  (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
+    (%check-error (%daq-core-event-args-create-core-event-args-device-operation-mode-changed obj-slot operation-mode) "daqCoreEventArgs_createCoreEventArgsDeviceOperationModeChanged")
     (cffi:mem-ref obj-slot 'daq-core-event-args)
   )
 )
@@ -3735,6 +3928,41 @@
   )
 )
 
+(cffi:defcfun ("daqCoreEventArgs_createCoreEventArgsSignalConnected" %daq-core-event-args-create-core-event-args-signal-connected) daq-err-code
+  (obj (:pointer daq-core-event-args))
+  (signal daq-signal)
+  )
+
+(defun core-event-args/create-core-event-args-signal-connected (signal)
+  (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
+    (%check-error (%daq-core-event-args-create-core-event-args-signal-connected obj-slot signal) "daqCoreEventArgs_createCoreEventArgsSignalConnected")
+    (cffi:mem-ref obj-slot 'daq-core-event-args)
+  )
+)
+
+(cffi:defcfun ("daqCoreEventArgs_createCoreEventArgsSignalDisconnected" %daq-core-event-args-create-core-event-args-signal-disconnected) daq-err-code
+  (obj (:pointer daq-core-event-args))
+  )
+
+(defun core-event-args/create-core-event-args-signal-disconnected ()
+  (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
+    (%check-error (%daq-core-event-args-create-core-event-args-signal-disconnected obj-slot) "daqCoreEventArgs_createCoreEventArgsSignalDisconnected")
+    (cffi:mem-ref obj-slot 'daq-core-event-args)
+  )
+)
+
+(cffi:defcfun ("daqCoreEventArgs_createCoreEventArgsTagsChanged" %daq-core-event-args-create-core-event-args-tags-changed) daq-err-code
+  (obj (:pointer daq-core-event-args))
+  (tags daq-list)
+  )
+
+(defun core-event-args/create-core-event-args-tags-changed (tags)
+  (cffi:with-foreign-object (obj-slot 'daq-core-event-args)
+    (%check-error (%daq-core-event-args-create-core-event-args-tags-changed obj-slot tags) "daqCoreEventArgs_createCoreEventArgsTagsChanged")
+    (cffi:mem-ref obj-slot 'daq-core-event-args)
+  )
+)
+
 (cffi:defcfun ("daqCoreEventArgs_createCoreEventArgsTypeAdded" %daq-core-event-args-create-core-event-args-type-added) daq-err-code
   (obj (:pointer daq-core-event-args))
   (type daq-type)
@@ -3780,16 +4008,24 @@
 )
 
 (cffi:defcfun ("daqCoreType_getCoreType" %daq-core-type-get-core-type) daq-err-code
-  (self daq-core-type-object)
-  (core-type (:pointer daq-core-type))
+  (self daq-core-type)
+  (core-type (:pointer daq-c-core-type))
   )
 
 (defun core-type/get-core-type (self)
-  (cffi:with-foreign-object (core-type-slot 'daq-core-type)
+  (cffi:with-foreign-object (core-type-slot 'daq-c-core-type)
     (%check-error (%daq-core-type-get-core-type self core-type-slot) "daqCoreType_getCoreType")
-    (cffi:mem-ref core-type-slot 'daq-core-type)
+    (cffi:mem-ref core-type-slot 'daq-c-core-type)
   )
 )
+
+(cffi:defcfun ("daqCoreType_getInterfaceId" %daq-core-type-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun core-type/get-interface-id (intf-id)
+  (%daq-core-type-get-interface-id intf-id)
+  nil)
 
 (cffi:defcfun ("daqDataDescriptorBuilder_build" %daq-data-descriptor-builder-build) daq-err-code
   (self daq-data-descriptor-builder)
@@ -4180,13 +4416,13 @@
 
 (cffi:defcfun ("daqDataDescriptor_getRawSampleSize" %daq-data-descriptor-get-raw-sample-size) daq-err-code
   (self daq-data-descriptor)
-  (raw-sample-size (:pointer daq-size-t))
+  (raw-sample-size (:pointer daq-c-size-t))
   )
 
 (defun data-descriptor/get-raw-sample-size (self)
-  (cffi:with-foreign-object (raw-sample-size-slot 'daq-size-t)
+  (cffi:with-foreign-object (raw-sample-size-slot 'daq-c-size-t)
     (%check-error (%daq-data-descriptor-get-raw-sample-size self raw-sample-size-slot) "daqDataDescriptor_getRawSampleSize")
-    (cffi:mem-ref raw-sample-size-slot 'daq-size-t)
+    (cffi:mem-ref raw-sample-size-slot 'daq-c-size-t)
   )
 )
 
@@ -4216,13 +4452,13 @@
 
 (cffi:defcfun ("daqDataDescriptor_getSampleSize" %daq-data-descriptor-get-sample-size) daq-err-code
   (self daq-data-descriptor)
-  (sample-size (:pointer daq-size-t))
+  (sample-size (:pointer daq-c-size-t))
   )
 
 (defun data-descriptor/get-sample-size (self)
-  (cffi:with-foreign-object (sample-size-slot 'daq-size-t)
+  (cffi:with-foreign-object (sample-size-slot 'daq-c-size-t)
     (%check-error (%daq-data-descriptor-get-sample-size self sample-size-slot) "daqDataDescriptor_getSampleSize")
-    (cffi:mem-ref sample-size-slot 'daq-size-t)
+    (cffi:mem-ref sample-size-slot 'daq-c-size-t)
   )
 )
 
@@ -4286,14 +4522,44 @@
   )
 )
 
+(cffi:defcfun ("daqDataPacket_createBinaryDataPacket" %daq-data-packet-create-binary-data-packet) daq-err-code
+  (obj (:pointer daq-data-packet))
+  (domain-packet daq-data-packet)
+  (descriptor daq-data-descriptor)
+  (sample-mem-size daq-c-size-t)
+  )
+
+(defun data-packet/create-binary-data-packet (domain-packet descriptor sample-mem-size)
+  (cffi:with-foreign-object (obj-slot 'daq-data-packet)
+    (%check-error (%daq-data-packet-create-binary-data-packet obj-slot domain-packet descriptor sample-mem-size) "daqDataPacket_createBinaryDataPacket")
+    (cffi:mem-ref obj-slot 'daq-data-packet)
+  )
+)
+
+(cffi:defcfun ("daqDataPacket_createBinaryDataPacketWithExternalMemory" %daq-data-packet-create-binary-data-packet-with-external-memory) daq-err-code
+  (obj (:pointer daq-data-packet))
+  (domain-packet daq-data-packet)
+  (descriptor daq-data-descriptor)
+  (sample-mem-size daq-c-size-t)
+  (data :pointer)
+  (deleter daq-deleter)
+  )
+
+(defun data-packet/create-binary-data-packet-with-external-memory (domain-packet descriptor sample-mem-size data deleter)
+  (cffi:with-foreign-object (obj-slot 'daq-data-packet)
+    (%check-error (%daq-data-packet-create-binary-data-packet-with-external-memory obj-slot domain-packet descriptor sample-mem-size data deleter) "daqDataPacket_createBinaryDataPacketWithExternalMemory")
+    (cffi:mem-ref obj-slot 'daq-data-packet)
+  )
+)
+
 (cffi:defcfun ("daqDataPacket_createConstantDataPacketWithDomain" %daq-data-packet-create-constant-data-packet-with-domain) daq-err-code
   (obj (:pointer daq-data-packet))
   (domain-packet daq-data-packet)
   (descriptor daq-data-descriptor)
-  (sample-count daq-size-t)
+  (sample-count daq-c-size-t)
   (initial-value :pointer)
   (other-values :pointer)
-  (other-value-count daq-size-t)
+  (other-value-count daq-c-size-t)
   )
 
 (defun data-packet/create-constant-data-packet-with-domain (domain-packet descriptor sample-count initial-value other-values other-value-count)
@@ -4306,7 +4572,7 @@
 (cffi:defcfun ("daqDataPacket_createDataPacket" %daq-data-packet-create-data-packet) daq-err-code
   (obj (:pointer daq-data-packet))
   (descriptor daq-data-descriptor)
-  (sample-count daq-size-t)
+  (sample-count daq-c-size-t)
   (offset daq-number)
   )
 
@@ -4321,7 +4587,7 @@
   (obj (:pointer daq-data-packet))
   (domain-packet daq-data-packet)
   (descriptor daq-data-descriptor)
-  (sample-count daq-size-t)
+  (sample-count daq-c-size-t)
   (offset daq-number)
   )
 
@@ -4336,16 +4602,29 @@
   (obj (:pointer daq-data-packet))
   (domain-packet daq-data-packet)
   (descriptor daq-data-descriptor)
-  (sample-count daq-size-t)
+  (sample-count daq-c-size-t)
   (offset daq-number)
   (external-memory :pointer)
   (deleter daq-deleter)
-  (buffer-size daq-size-t)
+  (buffer-size daq-c-size-t)
   )
 
 (defun data-packet/create-data-packet-with-external-memory (domain-packet descriptor sample-count offset external-memory deleter buffer-size)
   (cffi:with-foreign-object (obj-slot 'daq-data-packet)
     (%check-error (%daq-data-packet-create-data-packet-with-external-memory obj-slot domain-packet descriptor sample-count offset external-memory deleter buffer-size) "daqDataPacket_createDataPacketWithExternalMemory")
+    (cffi:mem-ref obj-slot 'daq-data-packet)
+  )
+)
+
+(cffi:defcfun ("daqDataPacket_createWrappedDataPacket" %daq-data-packet-create-wrapped-data-packet) daq-err-code
+  (obj (:pointer daq-data-packet))
+  (source-packet daq-data-packet)
+  (descriptor daq-data-descriptor)
+  )
+
+(defun data-packet/create-wrapped-data-packet (source-packet descriptor)
+  (cffi:with-foreign-object (obj-slot 'daq-data-packet)
+    (%check-error (%daq-data-packet-create-wrapped-data-packet obj-slot source-packet descriptor) "daqDataPacket_createWrappedDataPacket")
     (cffi:mem-ref obj-slot 'daq-data-packet)
   )
 )
@@ -4374,13 +4653,13 @@
 
 (cffi:defcfun ("daqDataPacket_getDataSize" %daq-data-packet-get-data-size) daq-err-code
   (self daq-data-packet)
-  (data-size (:pointer daq-size-t))
+  (data-size (:pointer daq-c-size-t))
   )
 
 (defun data-packet/get-data-size (self)
-  (cffi:with-foreign-object (data-size-slot 'daq-size-t)
+  (cffi:with-foreign-object (data-size-slot 'daq-c-size-t)
     (%check-error (%daq-data-packet-get-data-size self data-size-slot) "daqDataPacket_getDataSize")
-    (cffi:mem-ref data-size-slot 'daq-size-t)
+    (cffi:mem-ref data-size-slot 'daq-c-size-t)
   )
 )
 
@@ -4431,13 +4710,13 @@
 
 (cffi:defcfun ("daqDataPacket_getPacketId" %daq-data-packet-get-packet-id) daq-err-code
   (self daq-data-packet)
-  (packet-id (:pointer daq-int))
+  (packet-id (:pointer daq-c-int))
   )
 
 (defun data-packet/get-packet-id (self)
-  (cffi:with-foreign-object (packet-id-slot 'daq-int)
+  (cffi:with-foreign-object (packet-id-slot 'daq-c-int)
     (%check-error (%daq-data-packet-get-packet-id self packet-id-slot) "daqDataPacket_getPacketId")
-    (cffi:mem-ref packet-id-slot 'daq-int)
+    (cffi:mem-ref packet-id-slot 'daq-c-int)
   )
 )
 
@@ -4453,13 +4732,13 @@
 
 (cffi:defcfun ("daqDataPacket_getRawDataSize" %daq-data-packet-get-raw-data-size) daq-err-code
   (self daq-data-packet)
-  (raw-data-size (:pointer daq-size-t))
+  (raw-data-size (:pointer daq-c-size-t))
   )
 
 (defun data-packet/get-raw-data-size (self)
-  (cffi:with-foreign-object (raw-data-size-slot 'daq-size-t)
+  (cffi:with-foreign-object (raw-data-size-slot 'daq-c-size-t)
     (%check-error (%daq-data-packet-get-raw-data-size self raw-data-size-slot) "daqDataPacket_getRawDataSize")
-    (cffi:mem-ref raw-data-size-slot 'daq-size-t)
+    (cffi:mem-ref raw-data-size-slot 'daq-c-size-t)
   )
 )
 
@@ -4476,7 +4755,7 @@
 (cffi:defcfun ("daqDataPacket_getRawValueByIndex" %daq-data-packet-get-raw-value-by-index) daq-err-code
   (self daq-data-packet)
   (value (:pointer :pointer))
-  (index daq-size-t)
+  (index daq-c-size-t)
   )
 
 (defun data-packet/get-raw-value-by-index (self value index)
@@ -4486,20 +4765,20 @@
 
 (cffi:defcfun ("daqDataPacket_getSampleCount" %daq-data-packet-get-sample-count) daq-err-code
   (self daq-data-packet)
-  (sample-count (:pointer daq-size-t))
+  (sample-count (:pointer daq-c-size-t))
   )
 
 (defun data-packet/get-sample-count (self)
-  (cffi:with-foreign-object (sample-count-slot 'daq-size-t)
+  (cffi:with-foreign-object (sample-count-slot 'daq-c-size-t)
     (%check-error (%daq-data-packet-get-sample-count self sample-count-slot) "daqDataPacket_getSampleCount")
-    (cffi:mem-ref sample-count-slot 'daq-size-t)
+    (cffi:mem-ref sample-count-slot 'daq-c-size-t)
   )
 )
 
 (cffi:defcfun ("daqDataPacket_getValueByIndex" %daq-data-packet-get-value-by-index) daq-err-code
   (self daq-data-packet)
   (value (:pointer daq-base-object))
-  (index daq-size-t)
+  (index daq-c-size-t)
   (type-manager daq-type-manager)
   )
 
@@ -4794,6 +5073,17 @@
   nil
 )
 
+(cffi:defcfun ("daqDeserializer_createJsonDeserializer" %daq-deserializer-create-json-deserializer) daq-err-code
+  (obj (:pointer daq-deserializer))
+  )
+
+(defun deserializer/create-json-deserializer ()
+  (cffi:with-foreign-object (obj-slot 'daq-deserializer)
+    (%check-error (%daq-deserializer-create-json-deserializer obj-slot) "daqDeserializer_createJsonDeserializer")
+    (cffi:mem-ref obj-slot 'daq-deserializer)
+  )
+)
+
 (cffi:defcfun ("daqDeserializer_deserialize" %daq-deserializer-deserialize) daq-err-code
   (self daq-deserializer)
   (serialized daq-string)
@@ -4809,6 +5099,23 @@
   )
 )
 
+(cffi:defcfun ("daqDeserializer_getInterfaceId" %daq-deserializer-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun deserializer/get-interface-id (intf-id)
+  (%daq-deserializer-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqDeserializer_unregisterSerializerFactory" %daq-deserializer-unregister-serializer-factory) daq-err-code
+  (id daq-c-const-char-ptr)
+  )
+
+(defun deserializer/unregister-serializer-factory (id)
+  (%check-error (%daq-deserializer-unregister-serializer-factory id) "daqDeserializer_unregisterSerializerFactory")
+  nil
+)
+
 (cffi:defcfun ("daqDeserializer_update" %daq-deserializer-update) daq-err-code
   (self daq-deserializer)
   (updatable daq-updatable)
@@ -4819,6 +5126,103 @@
 (defun deserializer/update (self updatable serialized config)
   (%check-error (%daq-deserializer-update self updatable serialized config) "daqDeserializer_update")
   nil
+)
+
+(cffi:defcfun ("daqDevelopmentVersionInfo_createDevelopmentVersionInfo" %daq-development-version-info-create-development-version-info) daq-err-code
+  (obj (:pointer daq-development-version-info))
+  (major daq-c-size-t)
+  (minor daq-c-size-t)
+  (patch daq-c-size-t)
+  (tweak daq-c-size-t)
+  (branch daq-string)
+  (hash daq-string)
+  )
+
+(defun development-version-info/create-development-version-info (major minor patch tweak branch hash)
+  (cffi:with-foreign-object (obj-slot 'daq-development-version-info)
+    (%check-error (%daq-development-version-info-create-development-version-info obj-slot major minor patch tweak branch hash) "daqDevelopmentVersionInfo_createDevelopmentVersionInfo")
+    (cffi:mem-ref obj-slot 'daq-development-version-info)
+  )
+)
+
+(cffi:defcfun ("daqDevelopmentVersionInfo_getBranchName" %daq-development-version-info-get-branch-name) daq-err-code
+  (self daq-development-version-info)
+  (branch-name (:pointer daq-string))
+  )
+
+(defun development-version-info/get-branch-name (self)
+  (cffi:with-foreign-object (branch-name-slot 'daq-string)
+    (%check-error (%daq-development-version-info-get-branch-name self branch-name-slot) "daqDevelopmentVersionInfo_getBranchName")
+    (cffi:mem-ref branch-name-slot 'daq-string)
+  )
+)
+
+(cffi:defcfun ("daqDevelopmentVersionInfo_getHashDigest" %daq-development-version-info-get-hash-digest) daq-err-code
+  (self daq-development-version-info)
+  (hash (:pointer daq-string))
+  )
+
+(defun development-version-info/get-hash-digest (self)
+  (cffi:with-foreign-object (hash-slot 'daq-string)
+    (%check-error (%daq-development-version-info-get-hash-digest self hash-slot) "daqDevelopmentVersionInfo_getHashDigest")
+    (cffi:mem-ref hash-slot 'daq-string)
+  )
+)
+
+(cffi:defcfun ("daqDevelopmentVersionInfo_getInterfaceId" %daq-development-version-info-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun development-version-info/get-interface-id (intf-id)
+  (%daq-development-version-info-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqDevelopmentVersionInfo_getMajor" %daq-development-version-info-get-major) daq-err-code
+  (self daq-development-version-info)
+  (major (:pointer daq-c-size-t))
+  )
+
+(defun development-version-info/get-major (self)
+  (cffi:with-foreign-object (major-slot 'daq-c-size-t)
+    (%check-error (%daq-development-version-info-get-major self major-slot) "daqDevelopmentVersionInfo_getMajor")
+    (cffi:mem-ref major-slot 'daq-c-size-t)
+  )
+)
+
+(cffi:defcfun ("daqDevelopmentVersionInfo_getMinor" %daq-development-version-info-get-minor) daq-err-code
+  (self daq-development-version-info)
+  (minor (:pointer daq-c-size-t))
+  )
+
+(defun development-version-info/get-minor (self)
+  (cffi:with-foreign-object (minor-slot 'daq-c-size-t)
+    (%check-error (%daq-development-version-info-get-minor self minor-slot) "daqDevelopmentVersionInfo_getMinor")
+    (cffi:mem-ref minor-slot 'daq-c-size-t)
+  )
+)
+
+(cffi:defcfun ("daqDevelopmentVersionInfo_getPatch" %daq-development-version-info-get-patch) daq-err-code
+  (self daq-development-version-info)
+  (patch (:pointer daq-c-size-t))
+  )
+
+(defun development-version-info/get-patch (self)
+  (cffi:with-foreign-object (patch-slot 'daq-c-size-t)
+    (%check-error (%daq-development-version-info-get-patch self patch-slot) "daqDevelopmentVersionInfo_getPatch")
+    (cffi:mem-ref patch-slot 'daq-c-size-t)
+  )
+)
+
+(cffi:defcfun ("daqDevelopmentVersionInfo_getTweak" %daq-development-version-info-get-tweak) daq-err-code
+  (self daq-development-version-info)
+  (tweak (:pointer daq-c-size-t))
+  )
+
+(defun development-version-info/get-tweak (self)
+  (cffi:with-foreign-object (tweak-slot 'daq-c-size-t)
+    (%check-error (%daq-development-version-info-get-tweak self tweak-slot) "daqDevelopmentVersionInfo_getTweak")
+    (cffi:mem-ref tweak-slot 'daq-c-size-t)
+  )
 )
 
 (cffi:defcfun ("daqDeviceDomain_createDeviceDomain" %daq-device-domain-create-device-domain) daq-err-code
@@ -5093,7 +5497,7 @@
 
 (cffi:defcfun ("daqDeviceInfoConfig_setPosition" %daq-device-info-config-set-position) daq-err-code
   (self daq-device-info-config)
-  (position daq-int)
+  (position daq-c-int)
   )
 
 (defun device-info-config/set-position (self position)
@@ -5123,7 +5527,7 @@
 
 (cffi:defcfun ("daqDeviceInfoConfig_setRevisionCounter" %daq-device-info-config-set-revision-counter) daq-err-code
   (self daq-device-info-config)
-  (revision-counter daq-int)
+  (revision-counter daq-c-int)
   )
 
 (defun device-info-config/set-revision-counter (self revision-counter)
@@ -5183,14 +5587,14 @@
 
 (cffi:defcfun ("daqDeviceInfoInternal_addConnectedClient" %daq-device-info-internal-add-connected-client) daq-err-code
   (self daq-device-info-internal)
-  (client-number (:pointer daq-size-t))
+  (client-number (:pointer daq-c-size-t))
   (client-info daq-connected-client-info)
   )
 
 (defun device-info-internal/add-connected-client (self client-info)
-  (cffi:with-foreign-object (client-number-slot 'daq-size-t)
+  (cffi:with-foreign-object (client-number-slot 'daq-c-size-t)
     (%check-error (%daq-device-info-internal-add-connected-client self client-number-slot client-info) "daqDeviceInfoInternal_addConnectedClient")
-    (cffi:mem-ref client-number-slot 'daq-size-t)
+    (cffi:mem-ref client-number-slot 'daq-c-size-t)
   )
 )
 
@@ -5234,7 +5638,7 @@
 
 (cffi:defcfun ("daqDeviceInfoInternal_removeConnectedClient" %daq-device-info-internal-remove-connected-client) daq-err-code
   (self daq-device-info-internal)
-  (client-number daq-size-t)
+  (client-number daq-c-size-t)
   )
 
 (defun device-info-internal/remove-connected-client (self client-number)
@@ -5503,13 +5907,13 @@
 
 (cffi:defcfun ("daqDeviceInfo_getPosition" %daq-device-info-get-position) daq-err-code
   (self daq-device-info)
-  (position (:pointer daq-int))
+  (position (:pointer daq-c-int))
   )
 
 (defun device-info/get-position (self)
-  (cffi:with-foreign-object (position-slot 'daq-int)
+  (cffi:with-foreign-object (position-slot 'daq-c-int)
     (%check-error (%daq-device-info-get-position self position-slot) "daqDeviceInfo_getPosition")
-    (cffi:mem-ref position-slot 'daq-int)
+    (cffi:mem-ref position-slot 'daq-c-int)
   )
 )
 
@@ -5539,13 +5943,13 @@
 
 (cffi:defcfun ("daqDeviceInfo_getRevisionCounter" %daq-device-info-get-revision-counter) daq-err-code
   (self daq-device-info)
-  (revision-counter (:pointer daq-int))
+  (revision-counter (:pointer daq-c-int))
   )
 
 (defun device-info/get-revision-counter (self)
-  (cffi:with-foreign-object (revision-counter-slot 'daq-int)
+  (cffi:with-foreign-object (revision-counter-slot 'daq-c-int)
     (%check-error (%daq-device-info-get-revision-counter self revision-counter-slot) "daqDeviceInfo_getRevisionCounter")
-    (cffi:mem-ref revision-counter-slot 'daq-int)
+    (cffi:mem-ref revision-counter-slot 'daq-c-int)
   )
 )
 
@@ -5649,13 +6053,13 @@
 (cffi:defcfun ("daqDeviceInfo_hasServerCapability" %daq-device-info-has-server-capability) daq-err-code
   (self daq-device-info)
   (protocol-id daq-string)
-  (has-capability (:pointer daq-bool))
+  (has-capability (:pointer daq-c-bool))
   )
 
 (defun device-info/has-server-capability (self protocol-id)
-  (cffi:with-foreign-object (has-capability-slot 'daq-bool)
+  (cffi:with-foreign-object (has-capability-slot 'daq-c-bool)
     (%check-error (%daq-device-info-has-server-capability self protocol-id has-capability-slot) "daqDeviceInfo_hasServerCapability")
-    (cffi:mem-ref has-capability-slot 'daq-bool)
+    (cffi:mem-ref has-capability-slot 'daq-c-bool)
   )
 )
 
@@ -5669,13 +6073,13 @@
 
 (cffi:defcfun ("daqDeviceNetworkConfig_getNetworkConfigurationEnabled" %daq-device-network-config-get-network-configuration-enabled) daq-err-code
   (self daq-device-network-config)
-  (enabled (:pointer daq-bool))
+  (enabled (:pointer daq-c-bool))
   )
 
 (defun device-network-config/get-network-configuration-enabled (self)
-  (cffi:with-foreign-object (enabled-slot 'daq-bool)
+  (cffi:with-foreign-object (enabled-slot 'daq-c-bool)
     (%check-error (%daq-device-network-config-get-network-configuration-enabled self enabled-slot) "daqDeviceNetworkConfig_getNetworkConfigurationEnabled")
-    (cffi:mem-ref enabled-slot 'daq-bool)
+    (cffi:mem-ref enabled-slot 'daq-c-bool)
   )
 )
 
@@ -5746,13 +6150,13 @@
 
 (cffi:defcfun ("daqDevicePrivate_isLockedInternal" %daq-device-private-is-locked-internal) daq-err-code
   (self daq-device-private)
-  (locked (:pointer daq-bool))
+  (locked (:pointer daq-c-bool))
   )
 
 (defun device-private/is-locked-internal (self)
-  (cffi:with-foreign-object (locked-slot 'daq-bool)
+  (cffi:with-foreign-object (locked-slot 'daq-c-bool)
     (%check-error (%daq-device-private-is-locked-internal self locked-slot) "daqDevicePrivate_isLockedInternal")
-    (cffi:mem-ref locked-slot 'daq-bool)
+    (cffi:mem-ref locked-slot 'daq-c-bool)
   )
 )
 
@@ -6269,8 +6673,8 @@
   (self daq-device)
   (log (:pointer daq-string))
   (id daq-string)
-  (size daq-int)
-  (offset daq-int)
+  (size daq-c-int)
+  (offset daq-c-int)
   )
 
 (defun device/get-log (self id size offset)
@@ -6342,27 +6746,39 @@
   )
 )
 
+(cffi:defcfun ("daqDevice_getSynchronization" %daq-device-get-synchronization) daq-err-code
+  (self daq-device)
+  (sync (:pointer daq-synchronization))
+  )
+
+(defun device/get-synchronization (self)
+  (cffi:with-foreign-object (sync-slot 'daq-synchronization)
+    (%check-error (%daq-device-get-synchronization self sync-slot) "daqDevice_getSynchronization")
+    (cffi:mem-ref sync-slot 'daq-synchronization)
+  )
+)
+
 (cffi:defcfun ("daqDevice_getTicksSinceOrigin" %daq-device-get-ticks-since-origin) daq-err-code
   (self daq-device)
-  (ticks (:pointer daq-u-int))
+  (ticks (:pointer daq-cu-int))
   )
 
 (defun device/get-ticks-since-origin (self)
-  (cffi:with-foreign-object (ticks-slot 'daq-u-int)
+  (cffi:with-foreign-object (ticks-slot 'daq-cu-int)
     (%check-error (%daq-device-get-ticks-since-origin self ticks-slot) "daqDevice_getTicksSinceOrigin")
-    (cffi:mem-ref ticks-slot 'daq-u-int)
+    (cffi:mem-ref ticks-slot 'daq-cu-int)
   )
 )
 
 (cffi:defcfun ("daqDevice_isLocked" %daq-device-is-locked) daq-err-code
   (self daq-device)
-  (locked (:pointer daq-bool))
+  (locked (:pointer daq-c-bool))
   )
 
 (defun device/is-locked (self)
-  (cffi:with-foreign-object (locked-slot 'daq-bool)
+  (cffi:with-foreign-object (locked-slot 'daq-c-bool)
     (%check-error (%daq-device-is-locked self locked-slot) "daqDevice_isLocked")
-    (cffi:mem-ref locked-slot 'daq-bool)
+    (cffi:mem-ref locked-slot 'daq-c-bool)
   )
 )
 
@@ -6526,6 +6942,19 @@
   )
 )
 
+(cffi:defcfun ("daqDict_createOwningDict" %daq-dict-create-owning-dict) daq-err-code
+  (obj (:pointer daq-dict))
+  (owner daq-property-object)
+  (ref daq-string)
+  )
+
+(defun dict/create-owning-dict (owner ref)
+  (cffi:with-foreign-object (obj-slot 'daq-dict)
+    (%check-error (%daq-dict-create-owning-dict obj-slot owner ref) "daqDict_createOwningDict")
+    (cffi:mem-ref obj-slot 'daq-dict)
+  )
+)
+
 (cffi:defcfun ("daqDict_deleteItem" %daq-dict-delete-item) daq-err-code
   (self daq-dict)
   (key daq-base-object)
@@ -6551,13 +6980,13 @@
 
 (cffi:defcfun ("daqDict_getCount" %daq-dict-get-count) daq-err-code
   (self daq-dict)
-  (size (:pointer daq-size-t))
+  (size (:pointer daq-c-size-t))
   )
 
 (defun dict/get-count (self)
-  (cffi:with-foreign-object (size-slot 'daq-size-t)
+  (cffi:with-foreign-object (size-slot 'daq-c-size-t)
     (%check-error (%daq-dict-get-count self size-slot) "daqDict_getCount")
-    (cffi:mem-ref size-slot 'daq-size-t)
+    (cffi:mem-ref size-slot 'daq-c-size-t)
   )
 )
 
@@ -6620,13 +7049,13 @@
 (cffi:defcfun ("daqDict_hasKey" %daq-dict-has-key) daq-err-code
   (self daq-dict)
   (key daq-base-object)
-  (has-key (:pointer daq-bool))
+  (has-key (:pointer daq-c-bool))
   )
 
 (defun dict/has-key (self key)
-  (cffi:with-foreign-object (has-key-slot 'daq-bool)
+  (cffi:with-foreign-object (has-key-slot 'daq-c-bool)
     (%check-error (%daq-dict-has-key self key has-key-slot) "daqDict_hasKey")
-    (cffi:mem-ref has-key-slot 'daq-bool)
+    (cffi:mem-ref has-key-slot 'daq-c-bool)
   )
 )
 
@@ -6900,7 +7329,7 @@
   (obj (:pointer daq-dimension-rule))
   (delta daq-number)
   (start daq-number)
-  (size daq-size-t)
+  (size daq-c-size-t)
   )
 
 (defun dimension-rule/create-linear-dimension-rule (delta start size)
@@ -6927,7 +7356,7 @@
   (delta daq-number)
   (start daq-number)
   (base daq-number)
-  (size daq-size-t)
+  (size daq-c-size-t)
   )
 
 (defun dimension-rule/create-logarithmic-dimension-rule (delta start base size)
@@ -7041,13 +7470,13 @@
 
 (cffi:defcfun ("daqDimension_getSize" %daq-dimension-get-size) daq-err-code
   (self daq-dimension)
-  (size (:pointer daq-size-t))
+  (size (:pointer daq-c-size-t))
   )
 
 (defun dimension/get-size (self)
-  (cffi:with-foreign-object (size-slot 'daq-size-t)
+  (cffi:with-foreign-object (size-slot 'daq-c-size-t)
     (%check-error (%daq-dimension-get-size self size-slot) "daqDimension_getSize")
-    (cffi:mem-ref size-slot 'daq-size-t)
+    (cffi:mem-ref size-slot 'daq-c-size-t)
   )
 )
 
@@ -7131,7 +7560,7 @@
 (cffi:defcfun ("daqEndUpdateEventArgs_createEndUpdateEventArgs" %daq-end-update-event-args-create-end-update-event-args) daq-err-code
   (obj (:pointer daq-end-update-event-args))
   (properties daq-list)
-  (is-parent-updating daq-bool)
+  (is-parent-updating daq-c-bool)
   )
 
 (defun end-update-event-args/create-end-update-event-args (properties is-parent-updating)
@@ -7151,13 +7580,13 @@
 
 (cffi:defcfun ("daqEndUpdateEventArgs_getIsParentUpdating" %daq-end-update-event-args-get-is-parent-updating) daq-err-code
   (self daq-end-update-event-args)
-  (is-parent-updating (:pointer daq-bool))
+  (is-parent-updating (:pointer daq-c-bool))
   )
 
 (defun end-update-event-args/get-is-parent-updating (self)
-  (cffi:with-foreign-object (is-parent-updating-slot 'daq-bool)
+  (cffi:with-foreign-object (is-parent-updating-slot 'daq-c-bool)
     (%check-error (%daq-end-update-event-args-get-is-parent-updating self is-parent-updating-slot) "daqEndUpdateEventArgs_getIsParentUpdating")
-    (cffi:mem-ref is-parent-updating-slot 'daq-bool)
+    (cffi:mem-ref is-parent-updating-slot 'daq-c-bool)
   )
 )
 
@@ -7177,7 +7606,7 @@
   (obj (:pointer daq-enumeration-type))
   (type-name daq-string)
   (enumerator-names daq-list)
-  (first-enumerator-int-value daq-int)
+  (first-enumerator-int-value daq-c-int)
   )
 
 (defun enumeration-type/create-enumeration-type (type-name enumerator-names first-enumerator-int-value)
@@ -7214,26 +7643,26 @@
 
 (cffi:defcfun ("daqEnumerationType_getCount" %daq-enumeration-type-get-count) daq-err-code
   (self daq-enumeration-type)
-  (count (:pointer daq-size-t))
+  (count (:pointer daq-c-size-t))
   )
 
 (defun enumeration-type/get-count (self)
-  (cffi:with-foreign-object (count-slot 'daq-size-t)
+  (cffi:with-foreign-object (count-slot 'daq-c-size-t)
     (%check-error (%daq-enumeration-type-get-count self count-slot) "daqEnumerationType_getCount")
-    (cffi:mem-ref count-slot 'daq-size-t)
+    (cffi:mem-ref count-slot 'daq-c-size-t)
   )
 )
 
 (cffi:defcfun ("daqEnumerationType_getEnumeratorIntValue" %daq-enumeration-type-get-enumerator-int-value) daq-err-code
   (self daq-enumeration-type)
   (name daq-string)
-  (value (:pointer daq-int))
+  (value (:pointer daq-c-int))
   )
 
 (defun enumeration-type/get-enumerator-int-value (self name)
-  (cffi:with-foreign-object (value-slot 'daq-int)
+  (cffi:with-foreign-object (value-slot 'daq-c-int)
     (%check-error (%daq-enumeration-type-get-enumerator-int-value self name value-slot) "daqEnumerationType_getEnumeratorIntValue")
-    (cffi:mem-ref value-slot 'daq-int)
+    (cffi:mem-ref value-slot 'daq-c-int)
   )
 )
 
@@ -7325,13 +7754,13 @@
 
 (cffi:defcfun ("daqEnumeration_getIntValue" %daq-enumeration-get-int-value) daq-err-code
   (self daq-enumeration)
-  (value (:pointer daq-int))
+  (value (:pointer daq-c-int))
   )
 
 (defun enumeration/get-int-value (self)
-  (cffi:with-foreign-object (value-slot 'daq-int)
+  (cffi:with-foreign-object (value-slot 'daq-c-int)
     (%check-error (%daq-enumeration-get-int-value self value-slot) "daqEnumeration_getIntValue")
-    (cffi:mem-ref value-slot 'daq-int)
+    (cffi:mem-ref value-slot 'daq-c-int)
   )
 )
 
@@ -7355,6 +7784,71 @@
   )
 )
 
+(cffi:defcfun ("daqErrorGuard_createErrorGuard" %daq-error-guard-create-error-guard) daq-err-code
+  (obj (:pointer daq-error-guard))
+  (file-name daq-c-const-char-ptr)
+  (file-line daq-c-int)
+  )
+
+(defun error-guard/create-error-guard (file-name file-line)
+  (cffi:with-foreign-object (obj-slot 'daq-error-guard)
+    (%check-error (%daq-error-guard-create-error-guard obj-slot file-name file-line) "daqErrorGuard_createErrorGuard")
+    (cffi:mem-ref obj-slot 'daq-error-guard)
+  )
+)
+
+(cffi:defcfun ("daqErrorGuard_getErrorInfoList" %daq-error-guard-get-error-info-list) daq-err-code
+  (self daq-error-guard)
+  (error-infos (:pointer daq-list))
+  )
+
+(defun error-guard/get-error-info-list (self)
+  (cffi:with-foreign-object (error-infos-slot 'daq-list)
+    (%check-error (%daq-error-guard-get-error-info-list self error-infos-slot) "daqErrorGuard_getErrorInfoList")
+    (cffi:mem-ref error-infos-slot 'daq-list)
+  )
+)
+
+(cffi:defcfun ("daqErrorGuard_getFormattedMessage" %daq-error-guard-get-formatted-message) daq-err-code
+  (self daq-error-guard)
+  (message (:pointer daq-string))
+  )
+
+(defun error-guard/get-formatted-message (self)
+  (cffi:with-foreign-object (message-slot 'daq-string)
+    (%check-error (%daq-error-guard-get-formatted-message self message-slot) "daqErrorGuard_getFormattedMessage")
+    (cffi:mem-ref message-slot 'daq-string)
+  )
+)
+
+(cffi:defcfun ("daqErrorGuard_getInterfaceId" %daq-error-guard-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun error-guard/get-interface-id (intf-id)
+  (%daq-error-guard-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqErrorGuard_getLastErrorInfo" %daq-error-guard-get-last-error-info) daq-err-code
+  (self daq-error-guard)
+  (error-info (:pointer daq-error-info))
+  )
+
+(defun error-guard/get-last-error-info (self)
+  (cffi:with-foreign-object (error-info-slot 'daq-error-info)
+    (%check-error (%daq-error-guard-get-last-error-info self error-info-slot) "daqErrorGuard_getLastErrorInfo")
+    (cffi:mem-ref error-info-slot 'daq-error-info)
+  )
+)
+
+(cffi:defcfun ("daqErrorInfo_clearErrorInfo" %daq-error-info-clear-error-info) :void
+  )
+
+(defun error-info/clear-error-info ()
+  (%daq-error-info-clear-error-info)
+  nil
+)
+
 (cffi:defcfun ("daqErrorInfo_createErrorInfo" %daq-error-info-create-error-info) daq-err-code
   (obj (:pointer daq-error-info))
   )
@@ -7366,29 +7860,103 @@
   )
 )
 
+(cffi:defcfun ("daqErrorInfo_extendErrorInfo" %daq-error-info-extend-error-info) :void
+  (error-info daq-error-info)
+  )
+
+(defun error-info/extend-error-info (error-info)
+  (%daq-error-info-extend-error-info error-info)
+  nil
+)
+
+(cffi:defcfun ("daqErrorInfo_getErrorCode" %daq-error-info-get-error-code) daq-err-code
+  (self daq-error-info)
+  (error-code (:pointer daq-err-code))
+  )
+
+(defun error-info/get-error-code (self)
+  (cffi:with-foreign-object (error-code-slot 'daq-err-code)
+    (%check-error (%daq-error-info-get-error-code self error-code-slot) "daqErrorInfo_getErrorCode")
+    (cffi:mem-ref error-code-slot 'daq-err-code)
+  )
+)
+
+(cffi:defcfun ("daqErrorInfo_getErrorInfo" %daq-error-info-get-error-info) :void
+  (error-info (:pointer daq-error-info))
+  )
+
+(defun error-info/get-error-info ()
+  (cffi:with-foreign-object (error-info-slot 'daq-error-info)
+    (%daq-error-info-get-error-info error-info-slot)
+    (cffi:mem-ref error-info-slot 'daq-error-info)
+  )
+)
+
+(cffi:defcfun ("daqErrorInfo_getErrorInfoList" %daq-error-info-get-error-info-list) :void
+  (error-info-list (:pointer daq-list))
+  )
+
+(defun error-info/get-error-info-list ()
+  (cffi:with-foreign-object (error-info-list-slot 'daq-list)
+    (%daq-error-info-get-error-info-list error-info-list-slot)
+    (cffi:mem-ref error-info-list-slot 'daq-list)
+  )
+)
+
+(cffi:defcfun ("daqErrorInfo_getErrorInfoMessage" %daq-error-info-get-error-info-message) daq-err-code
+  (error-message (:pointer daq-string))
+  )
+
+(defun error-info/get-error-info-message ()
+  (cffi:with-foreign-object (error-message-slot 'daq-string)
+    (%check-error (%daq-error-info-get-error-info-message error-message-slot) "daqErrorInfo_getErrorInfoMessage")
+    (cffi:mem-ref error-message-slot 'daq-string)
+  )
+)
+
 (cffi:defcfun ("daqErrorInfo_getFileLine" %daq-error-info-get-file-line) daq-err-code
   (self daq-error-info)
-  (file-line (:pointer daq-int))
+  (file-line (:pointer daq-c-int))
   )
 
 (defun error-info/get-file-line (self)
-  (cffi:with-foreign-object (file-line-slot 'daq-int)
+  (cffi:with-foreign-object (file-line-slot 'daq-c-int)
     (%check-error (%daq-error-info-get-file-line self file-line-slot) "daqErrorInfo_getFileLine")
-    (cffi:mem-ref file-line-slot 'daq-int)
+    (cffi:mem-ref file-line-slot 'daq-c-int)
   )
 )
 
 (cffi:defcfun ("daqErrorInfo_getFileName" %daq-error-info-get-file-name) daq-err-code
   (self daq-error-info)
-  (file-name daq-const-char-ptr)
+  (file-name daq-c-const-char-ptr)
   )
 
 (defun error-info/get-file-name (self)
-  (cffi:with-foreign-object (file-name-slot 'daq-const-char-ptr)
+  (cffi:with-foreign-object (file-name-slot 'daq-c-const-char-ptr)
     (%check-error (%daq-error-info-get-file-name self file-name-slot) "daqErrorInfo_getFileName")
-    (cffi:mem-ref file-name-slot 'daq-const-char-ptr)
+    (cffi:mem-ref file-name-slot 'daq-c-const-char-ptr)
   )
 )
+
+(cffi:defcfun ("daqErrorInfo_getFormattedMessage" %daq-error-info-get-formatted-message) daq-err-code
+  (self daq-error-info)
+  (message (:pointer daq-string))
+  )
+
+(defun error-info/get-formatted-message (self)
+  (cffi:with-foreign-object (message-slot 'daq-string)
+    (%check-error (%daq-error-info-get-formatted-message self message-slot) "daqErrorInfo_getFormattedMessage")
+    (cffi:mem-ref message-slot 'daq-string)
+  )
+)
+
+(cffi:defcfun ("daqErrorInfo_getInterfaceId" %daq-error-info-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun error-info/get-interface-id (intf-id)
+  (%daq-error-info-get-interface-id intf-id)
+  nil)
 
 (cffi:defcfun ("daqErrorInfo_getMessage" %daq-error-info-get-message) daq-err-code
   (self daq-error-info)
@@ -7399,6 +7967,18 @@
   (cffi:with-foreign-object (message-slot 'daq-string)
     (%check-error (%daq-error-info-get-message self message-slot) "daqErrorInfo_getMessage")
     (cffi:mem-ref message-slot 'daq-string)
+  )
+)
+
+(cffi:defcfun ("daqErrorInfo_getPreviousErrorCode" %daq-error-info-get-previous-error-code) daq-err-code
+  (self daq-error-info)
+  (prev-err-code (:pointer daq-err-code))
+  )
+
+(defun error-info/get-previous-error-code (self)
+  (cffi:with-foreign-object (prev-err-code-slot 'daq-err-code)
+    (%check-error (%daq-error-info-get-previous-error-code self prev-err-code-slot) "daqErrorInfo_getPreviousErrorCode")
+    (cffi:mem-ref prev-err-code-slot 'daq-err-code)
   )
 )
 
@@ -7414,9 +7994,28 @@
   )
 )
 
+(cffi:defcfun ("daqErrorInfo_setErrorCode" %daq-error-info-set-error-code) daq-err-code
+  (self daq-error-info)
+  (error-code daq-err-code)
+  )
+
+(defun error-info/set-error-code (self error-code)
+  (%check-error (%daq-error-info-set-error-code self error-code) "daqErrorInfo_setErrorCode")
+  nil
+)
+
+(cffi:defcfun ("daqErrorInfo_setErrorInfo" %daq-error-info-set-error-info) :void
+  (error-info daq-error-info)
+  )
+
+(defun error-info/set-error-info (error-info)
+  (%daq-error-info-set-error-info error-info)
+  nil
+)
+
 (cffi:defcfun ("daqErrorInfo_setFileLine" %daq-error-info-set-file-line) daq-err-code
   (self daq-error-info)
-  (file-line daq-int)
+  (file-line daq-c-int)
   )
 
 (defun error-info/set-file-line (self file-line)
@@ -7426,7 +8025,7 @@
 
 (cffi:defcfun ("daqErrorInfo_setFileName" %daq-error-info-set-file-name) daq-err-code
   (self daq-error-info)
-  (file-name daq-const-char-ptr)
+  (file-name daq-c-const-char-ptr)
   )
 
 (defun error-info/set-file-name (self file-name)
@@ -7441,6 +8040,16 @@
 
 (defun error-info/set-message (self message)
   (%check-error (%daq-error-info-set-message self message) "daqErrorInfo_setMessage")
+  nil
+)
+
+(cffi:defcfun ("daqErrorInfo_setPreviousErrorCode" %daq-error-info-set-previous-error-code) daq-err-code
+  (self daq-error-info)
+  (prev-err-code daq-err-code)
+  )
+
+(defun error-info/set-previous-error-code (self prev-err-code)
+  (%check-error (%daq-error-info-set-previous-error-code self prev-err-code) "daqErrorInfo_setPreviousErrorCode")
   nil
 )
 
@@ -7572,7 +8181,7 @@
 
 (cffi:defcfun ("daqEventArgs_createEventArgs" %daq-event-args-create-event-args) daq-err-code
   (obj (:pointer daq-event-args))
-  (event-id daq-int)
+  (event-id daq-c-int)
   (event-name daq-string)
   )
 
@@ -7585,13 +8194,13 @@
 
 (cffi:defcfun ("daqEventArgs_getEventId" %daq-event-args-get-event-id) daq-err-code
   (self daq-event-args)
-  (id (:pointer daq-int))
+  (id (:pointer daq-c-int))
   )
 
 (defun event-args/get-event-id (self)
-  (cffi:with-foreign-object (id-slot 'daq-int)
+  (cffi:with-foreign-object (id-slot 'daq-c-int)
     (%check-error (%daq-event-args-get-event-id self id-slot) "daqEventArgs_getEventId")
-    (cffi:mem-ref id-slot 'daq-int)
+    (cffi:mem-ref id-slot 'daq-c-int)
   )
 )
 
@@ -7623,6 +8232,20 @@
 (defun event-handler/create-event-handler (call)
   (cffi:with-foreign-object (obj-slot 'daq-event-handler)
     (%check-error (%daq-event-handler-create-event-handler obj-slot call) "daqEventHandler_createEventHandler")
+    (cffi:mem-ref obj-slot 'daq-event-handler)
+  )
+)
+
+(cffi:defcfun ("daqEventHandler_createEventHandlerWithData" %daq-event-handler-create-event-handler-with-data) daq-err-code
+  (obj (:pointer daq-event-handler))
+  (call daq-event-call-with-data)
+  (user-data :pointer)
+  (free-user-data daq-free-user-data)
+  )
+
+(defun event-handler/create-event-handler-with-data (call user-data free-user-data)
+  (cffi:with-foreign-object (obj-slot 'daq-event-handler)
+    (%check-error (%daq-event-handler-create-event-handler-with-data obj-slot call user-data free-user-data) "daqEventHandler_createEventHandlerWithData")
     (cffi:mem-ref obj-slot 'daq-event-handler)
   )
 )
@@ -7756,13 +8379,13 @@
 
 (cffi:defcfun ("daqEvent_getSubscriberCount" %daq-event-get-subscriber-count) daq-err-code
   (self daq-event)
-  (count (:pointer daq-size-t))
+  (count (:pointer daq-c-size-t))
   )
 
 (defun event/get-subscriber-count (self)
-  (cffi:with-foreign-object (count-slot 'daq-size-t)
+  (cffi:with-foreign-object (count-slot 'daq-c-size-t)
     (%check-error (%daq-event-get-subscriber-count self count-slot) "daqEvent_getSubscriberCount")
-    (cffi:mem-ref count-slot 'daq-size-t)
+    (cffi:mem-ref count-slot 'daq-c-size-t)
   )
 )
 
@@ -7837,60 +8460,72 @@
   nil
 )
 
-(cffi:defcfun ("daqFloatObject_createFloat" %daq-float-object-create-float) daq-err-code
-  (obj (:pointer daq-float-object))
-  (value daq-float)
+(cffi:defcfun ("daqFloat_createFloat" %daq-float-create-float) daq-err-code
+  (obj (:pointer daq-float))
+  (value daq-c-float)
   )
 
-(defun float-object/create-float (value)
-  (cffi:with-foreign-object (obj-slot 'daq-float-object)
-    (%check-error (%daq-float-object-create-float obj-slot value) "daqFloatObject_createFloat")
-    (cffi:mem-ref obj-slot 'daq-float-object)
-  )
-)
-
-(cffi:defcfun ("daqFloatObject_createFloatObject" %daq-float-object-create-float-object) daq-err-code
-  (obj (:pointer daq-float-object))
-  (value daq-float)
-  )
-
-(defun float-object/create-float-object (value)
-  (cffi:with-foreign-object (obj-slot 'daq-float-object)
-    (%check-error (%daq-float-object-create-float-object obj-slot value) "daqFloatObject_createFloatObject")
-    (cffi:mem-ref obj-slot 'daq-float-object)
+(defun float/create-float (value)
+  (cffi:with-foreign-object (obj-slot 'daq-float)
+    (%check-error (%daq-float-create-float obj-slot value) "daqFloat_createFloat")
+    (cffi:mem-ref obj-slot 'daq-float)
   )
 )
 
-(cffi:defcfun ("daqFloatObject_equalsValue" %daq-float-object-equals-value) daq-err-code
-  (self daq-float-object)
-  (value daq-float)
-  (equals (:pointer daq-bool))
+(cffi:defcfun ("daqFloat_createFloatFromPool" %daq-float-create-float-from-pool) daq-err-code
+  (obj (:pointer daq-float))
+  (value daq-c-float)
   )
 
-(defun float-object/equals-value (self value)
-  (cffi:with-foreign-object (equals-slot 'daq-bool)
-    (%check-error (%daq-float-object-equals-value self value equals-slot) "daqFloatObject_equalsValue")
-    (cffi:mem-ref equals-slot 'daq-bool)
+(defun float/create-float-from-pool (value)
+  (cffi:with-foreign-object (obj-slot 'daq-float)
+    (%check-error (%daq-float-create-float-from-pool obj-slot value) "daqFloat_createFloatFromPool")
+    (cffi:mem-ref obj-slot 'daq-float)
   )
 )
 
-(cffi:defcfun ("daqFloatObject_getInterfaceId" %daq-float-object-get-interface-id) :void
+(cffi:defcfun ("daqFloat_createFloatObject" %daq-float-create-float-object) daq-err-code
+  (obj (:pointer daq-float))
+  (value daq-c-float)
+  )
+
+(defun float/create-float-object (value)
+  (cffi:with-foreign-object (obj-slot 'daq-float)
+    (%check-error (%daq-float-create-float-object obj-slot value) "daqFloat_createFloatObject")
+    (cffi:mem-ref obj-slot 'daq-float)
+  )
+)
+
+(cffi:defcfun ("daqFloat_equalsValue" %daq-float-equals-value) daq-err-code
+  (self daq-float)
+  (value daq-c-float)
+  (equals (:pointer daq-c-bool))
+  )
+
+(defun float/equals-value (self value)
+  (cffi:with-foreign-object (equals-slot 'daq-c-bool)
+    (%check-error (%daq-float-equals-value self value equals-slot) "daqFloat_equalsValue")
+    (cffi:mem-ref equals-slot 'daq-c-bool)
+  )
+)
+
+(cffi:defcfun ("daqFloat_getInterfaceId" %daq-float-get-interface-id) :void
   (intf-id (:pointer daq-intf-id))
   )
 
-(defun float-object/get-interface-id (intf-id)
-  (%daq-float-object-get-interface-id intf-id)
+(defun float/get-interface-id (intf-id)
+  (%daq-float-get-interface-id intf-id)
   nil)
 
-(cffi:defcfun ("daqFloatObject_getValue" %daq-float-object-get-value) daq-err-code
-  (self daq-float-object)
-  (value (:pointer daq-float))
+(cffi:defcfun ("daqFloat_getValue" %daq-float-get-value) daq-err-code
+  (self daq-float)
+  (value (:pointer daq-c-float))
   )
 
-(defun float-object/get-value (self)
-  (cffi:with-foreign-object (value-slot 'daq-float)
-    (%check-error (%daq-float-object-get-value self value-slot) "daqFloatObject_getValue")
-    (cffi:mem-ref value-slot 'daq-float)
+(defun float/get-value (self)
+  (cffi:with-foreign-object (value-slot 'daq-c-float)
+    (%check-error (%daq-float-get-value self value-slot) "daqFloat_getValue")
+    (cffi:mem-ref value-slot 'daq-c-float)
   )
 )
 
@@ -8032,25 +8667,25 @@
 (cffi:defcfun ("daqFolder_hasItem" %daq-folder-has-item) daq-err-code
   (self daq-folder)
   (local-id daq-string)
-  (value (:pointer daq-bool))
+  (value (:pointer daq-c-bool))
   )
 
 (defun folder/has-item (self local-id)
-  (cffi:with-foreign-object (value-slot 'daq-bool)
+  (cffi:with-foreign-object (value-slot 'daq-c-bool)
     (%check-error (%daq-folder-has-item self local-id value-slot) "daqFolder_hasItem")
-    (cffi:mem-ref value-slot 'daq-bool)
+    (cffi:mem-ref value-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqFolder_isEmpty" %daq-folder-is-empty) daq-err-code
   (self daq-folder)
-  (empty (:pointer daq-bool))
+  (empty (:pointer daq-c-bool))
   )
 
 (defun folder/is-empty (self)
-  (cffi:with-foreign-object (empty-slot 'daq-bool)
+  (cffi:with-foreign-object (empty-slot 'daq-c-bool)
     (%check-error (%daq-folder-is-empty self empty-slot) "daqFolder_isEmpty")
-    (cffi:mem-ref empty-slot 'daq-bool)
+    (cffi:mem-ref empty-slot 'daq-c-bool)
   )
 )
 
@@ -8073,13 +8708,13 @@
 
 (cffi:defcfun ("daqFreezable_isFrozen" %daq-freezable-is-frozen) daq-err-code
   (self daq-freezable)
-  (is-frozen (:pointer daq-bool))
+  (is-frozen (:pointer daq-c-bool))
   )
 
 (defun freezable/is-frozen (self)
-  (cffi:with-foreign-object (is-frozen-slot 'daq-bool)
+  (cffi:with-foreign-object (is-frozen-slot 'daq-c-bool)
     (%check-error (%daq-freezable-is-frozen self is-frozen-slot) "daqFreezable_isFrozen")
-    (cffi:mem-ref is-frozen-slot 'daq-bool)
+    (cffi:mem-ref is-frozen-slot 'daq-c-bool)
   )
 )
 
@@ -8252,6 +8887,28 @@
   )
 )
 
+(cffi:defcfun ("daqFunction_createFunctionWithData" %daq-function-create-function-with-data) daq-err-code
+  (obj (:pointer daq-function))
+  (call daq-func-call-with-data)
+  (user-data :pointer)
+  (free-user-data daq-free-user-data)
+  )
+
+(defun function/create-function-with-data (call user-data free-user-data)
+  (cffi:with-foreign-object (obj-slot 'daq-function)
+    (%check-error (%daq-function-create-function-with-data obj-slot call user-data free-user-data) "daqFunction_createFunctionWithData")
+    (cffi:mem-ref obj-slot 'daq-function)
+  )
+)
+
+(cffi:defcfun ("daqFunction_getInterfaceId" %daq-function-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun function/get-interface-id (intf-id)
+  (%daq-function-get-interface-id intf-id)
+  nil)
+
 (cffi:defcfun ("daqGraphVisualization_dump" %daq-graph-visualization-dump) daq-err-code
   (self daq-graph-visualization)
   (dot (:pointer daq-string))
@@ -8277,7 +8934,7 @@
   (context daq-context)
   (parent daq-component)
   (local-id daq-string)
-  (gap-checking daq-bool)
+  (gap-checking daq-c-bool)
   )
 
 (defun input-port-config/create-input-port (context parent local-id gap-checking)
@@ -8301,13 +8958,13 @@
 
 (cffi:defcfun ("daqInputPortConfig_getGapCheckingEnabled" %daq-input-port-config-get-gap-checking-enabled) daq-err-code
   (self daq-input-port-config)
-  (gap-checking-enabled (:pointer daq-bool))
+  (gap-checking-enabled (:pointer daq-c-bool))
   )
 
 (defun input-port-config/get-gap-checking-enabled (self)
-  (cffi:with-foreign-object (gap-checking-enabled-slot 'daq-bool)
+  (cffi:with-foreign-object (gap-checking-enabled-slot 'daq-c-bool)
     (%check-error (%daq-input-port-config-get-gap-checking-enabled self gap-checking-enabled-slot) "daqInputPortConfig_getGapCheckingEnabled")
-    (cffi:mem-ref gap-checking-enabled-slot 'daq-bool)
+    (cffi:mem-ref gap-checking-enabled-slot 'daq-c-bool)
   )
 )
 
@@ -8345,7 +9002,7 @@
 
 (cffi:defcfun ("daqInputPortConfig_notifyPacketEnqueued" %daq-input-port-config-notify-packet-enqueued) daq-err-code
   (self daq-input-port-config)
-  (queue-was-empty daq-bool)
+  (queue-was-empty daq-c-bool)
   )
 
 (defun input-port-config/notify-packet-enqueued (self queue-was-empty)
@@ -8403,7 +9060,7 @@
 
 (cffi:defcfun ("daqInputPortConfig_setRequiresSignal" %daq-input-port-config-set-requires-signal) daq-err-code
   (self daq-input-port-config)
-  (requires-signal daq-bool)
+  (requires-signal daq-c-bool)
   )
 
 (defun input-port-config/set-requires-signal (self requires-signal)
@@ -8415,13 +9072,13 @@
   (self daq-input-port-notifications)
   (port daq-input-port)
   (signal daq-signal)
-  (accept (:pointer daq-bool))
+  (accept (:pointer daq-c-bool))
   )
 
 (defun input-port-notifications/accepts-signal (self port signal)
-  (cffi:with-foreign-object (accept-slot 'daq-bool)
+  (cffi:with-foreign-object (accept-slot 'daq-c-bool)
     (%check-error (%daq-input-port-notifications-accepts-signal self port signal accept-slot) "daqInputPortNotifications_acceptsSignal")
-    (cffi:mem-ref accept-slot 'daq-bool)
+    (cffi:mem-ref accept-slot 'daq-c-bool)
   )
 )
 
@@ -8493,13 +9150,13 @@
 (cffi:defcfun ("daqInputPort_acceptsSignal" %daq-input-port-accepts-signal) daq-err-code
   (self daq-input-port)
   (signal daq-signal)
-  (accepts (:pointer daq-bool))
+  (accepts (:pointer daq-c-bool))
   )
 
 (defun input-port/accepts-signal (self signal)
-  (cffi:with-foreign-object (accepts-slot 'daq-bool)
+  (cffi:with-foreign-object (accepts-slot 'daq-c-bool)
     (%check-error (%daq-input-port-accepts-signal self signal accepts-slot) "daqInputPort_acceptsSignal")
-    (cffi:mem-ref accepts-slot 'daq-bool)
+    (cffi:mem-ref accepts-slot 'daq-c-bool)
   )
 )
 
@@ -8557,25 +9214,25 @@
 
 (cffi:defcfun ("daqInputPort_getPublic" %daq-input-port-get-public) daq-err-code
   (self daq-input-port)
-  (is-public (:pointer daq-bool))
+  (is-public (:pointer daq-c-bool))
   )
 
 (defun input-port/get-public (self)
-  (cffi:with-foreign-object (is-public-slot 'daq-bool)
+  (cffi:with-foreign-object (is-public-slot 'daq-c-bool)
     (%check-error (%daq-input-port-get-public self is-public-slot) "daqInputPort_getPublic")
-    (cffi:mem-ref is-public-slot 'daq-bool)
+    (cffi:mem-ref is-public-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqInputPort_getRequiresSignal" %daq-input-port-get-requires-signal) daq-err-code
   (self daq-input-port)
-  (requires-signal (:pointer daq-bool))
+  (requires-signal (:pointer daq-c-bool))
   )
 
 (defun input-port/get-requires-signal (self)
-  (cffi:with-foreign-object (requires-signal-slot 'daq-bool)
+  (cffi:with-foreign-object (requires-signal-slot 'daq-c-bool)
     (%check-error (%daq-input-port-get-requires-signal self requires-signal-slot) "daqInputPort_getRequiresSignal")
-    (cffi:mem-ref requires-signal-slot 'daq-bool)
+    (cffi:mem-ref requires-signal-slot 'daq-c-bool)
   )
 )
 
@@ -8593,13 +9250,31 @@
 
 (cffi:defcfun ("daqInputPort_setPublic" %daq-input-port-set-public) daq-err-code
   (self daq-input-port)
-  (is-public daq-bool)
+  (is-public daq-c-bool)
   )
 
 (defun input-port/set-public (self is-public)
   (%check-error (%daq-input-port-set-public self is-public) "daqInputPort_setPublic")
   nil
 )
+
+(cffi:defcfun ("daqInspectable_getInterfaceId" %daq-inspectable-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun inspectable/get-interface-id (intf-id)
+  (%daq-inspectable-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqInspectable_getInterfaceIds" %daq-inspectable-get-interface-ids) daq-err-code
+  (self daq-inspectable)
+  (id-count (:pointer daq-c-size-t))
+  (ids (:pointer (:pointer daq-intf-id)))
+  )
+
+(defun inspectable/get-interface-ids (self id-count ids)
+  (%check-error (%daq-inspectable-get-interface-ids self id-count ids) "daqInspectable_getInterfaceIds")
+  nil)
 
 (cffi:defcfun ("daqInspectable_getRuntimeClassName" %daq-inspectable-get-runtime-class-name) daq-err-code
   (self daq-inspectable)
@@ -8678,7 +9353,7 @@
 
 (cffi:defcfun ("daqInstanceBuilder_enableStandardProviders" %daq-instance-builder-enable-standard-providers) daq-err-code
   (self daq-instance-builder)
-  (flag daq-bool)
+  (flag daq-c-bool)
   )
 
 (defun instance-builder/enable-standard-providers (self flag)
@@ -8780,13 +9455,13 @@
 
 (cffi:defcfun ("daqInstanceBuilder_getLoadAuthenticatedModulesOnly" %daq-instance-builder-get-load-authenticated-modules-only) daq-err-code
   (self daq-instance-builder)
-  (auth-only (:pointer daq-bool))
+  (auth-only (:pointer daq-c-bool))
   )
 
 (defun instance-builder/get-load-authenticated-modules-only (self)
-  (cffi:with-foreign-object (auth-only-slot 'daq-bool)
+  (cffi:with-foreign-object (auth-only-slot 'daq-c-bool)
     (%check-error (%daq-instance-builder-get-load-authenticated-modules-only self auth-only-slot) "daqInstanceBuilder_getLoadAuthenticatedModulesOnly")
-    (cffi:mem-ref auth-only-slot 'daq-bool)
+    (cffi:mem-ref auth-only-slot 'daq-c-bool)
   )
 )
 
@@ -8912,25 +9587,25 @@
 
 (cffi:defcfun ("daqInstanceBuilder_getSchedulerWorkerNum" %daq-instance-builder-get-scheduler-worker-num) daq-err-code
   (self daq-instance-builder)
-  (num-workers (:pointer daq-size-t))
+  (num-workers (:pointer daq-c-size-t))
   )
 
 (defun instance-builder/get-scheduler-worker-num (self)
-  (cffi:with-foreign-object (num-workers-slot 'daq-size-t)
+  (cffi:with-foreign-object (num-workers-slot 'daq-c-size-t)
     (%check-error (%daq-instance-builder-get-scheduler-worker-num self num-workers-slot) "daqInstanceBuilder_getSchedulerWorkerNum")
-    (cffi:mem-ref num-workers-slot 'daq-size-t)
+    (cffi:mem-ref num-workers-slot 'daq-c-size-t)
   )
 )
 
 (cffi:defcfun ("daqInstanceBuilder_getUsingSchedulerMainLoop" %daq-instance-builder-get-using-scheduler-main-loop) daq-err-code
   (self daq-instance-builder)
-  (use-main-loop (:pointer daq-bool))
+  (use-main-loop (:pointer daq-c-bool))
   )
 
 (defun instance-builder/get-using-scheduler-main-loop (self)
-  (cffi:with-foreign-object (use-main-loop-slot 'daq-bool)
+  (cffi:with-foreign-object (use-main-loop-slot 'daq-c-bool)
     (%check-error (%daq-instance-builder-get-using-scheduler-main-loop self use-main-loop-slot) "daqInstanceBuilder_getUsingSchedulerMainLoop")
-    (cffi:mem-ref use-main-loop-slot 'daq-bool)
+    (cffi:mem-ref use-main-loop-slot 'daq-c-bool)
   )
 )
 
@@ -8997,7 +9672,7 @@
 
 (cffi:defcfun ("daqInstanceBuilder_setLoadAuthenticatedModulesOnly" %daq-instance-builder-set-load-authenticated-modules-only) daq-err-code
   (self daq-instance-builder)
-  (auth-only daq-bool)
+  (auth-only daq-c-bool)
   )
 
 (defun instance-builder/set-load-authenticated-modules-only (self auth-only)
@@ -9068,7 +9743,7 @@
 
 (cffi:defcfun ("daqInstanceBuilder_setSchedulerWorkerNum" %daq-instance-builder-set-scheduler-worker-num) daq-err-code
   (self daq-instance-builder)
-  (num-workers daq-size-t)
+  (num-workers daq-c-size-t)
   )
 
 (defun instance-builder/set-scheduler-worker-num (self num-workers)
@@ -9089,7 +9764,7 @@
 
 (cffi:defcfun ("daqInstanceBuilder_setUsingSchedulerMainLoop" %daq-instance-builder-set-using-scheduler-main-loop) daq-err-code
   (self daq-instance-builder)
-  (use-main-loop daq-bool)
+  (use-main-loop daq-c-bool)
   )
 
 (defun instance-builder/set-using-scheduler-main-loop (self use-main-loop)
@@ -9191,7 +9866,7 @@
 
 (cffi:defcfun ("daqInteger_createInteger" %daq-integer-create-integer) daq-err-code
   (obj (:pointer daq-integer))
-  (value daq-int)
+  (value daq-c-int)
   )
 
 (defun integer/create-integer (value)
@@ -9201,16 +9876,28 @@
   )
 )
 
+(cffi:defcfun ("daqInteger_createIntegerFromPool" %daq-integer-create-integer-from-pool) daq-err-code
+  (obj (:pointer daq-integer))
+  (value daq-c-int)
+  )
+
+(defun integer/create-integer-from-pool (value)
+  (cffi:with-foreign-object (obj-slot 'daq-integer)
+    (%check-error (%daq-integer-create-integer-from-pool obj-slot value) "daqInteger_createIntegerFromPool")
+    (cffi:mem-ref obj-slot 'daq-integer)
+  )
+)
+
 (cffi:defcfun ("daqInteger_equalsValue" %daq-integer-equals-value) daq-err-code
   (self daq-integer)
-  (value daq-int)
-  (equals (:pointer daq-bool))
+  (value daq-c-int)
+  (equals (:pointer daq-c-bool))
   )
 
 (defun integer/equals-value (self value)
-  (cffi:with-foreign-object (equals-slot 'daq-bool)
+  (cffi:with-foreign-object (equals-slot 'daq-c-bool)
     (%check-error (%daq-integer-equals-value self value equals-slot) "daqInteger_equalsValue")
-    (cffi:mem-ref equals-slot 'daq-bool)
+    (cffi:mem-ref equals-slot 'daq-c-bool)
   )
 )
 
@@ -9224,13 +9911,13 @@
 
 (cffi:defcfun ("daqInteger_getValue" %daq-integer-get-value) daq-err-code
   (self daq-integer)
-  (value (:pointer daq-int))
+  (value (:pointer daq-c-int))
   )
 
 (defun integer/get-value (self)
-  (cffi:with-foreign-object (value-slot 'daq-int)
+  (cffi:with-foreign-object (value-slot 'daq-c-int)
     (%check-error (%daq-integer-get-value self value-slot) "daqInteger_getValue")
-    (cffi:mem-ref value-slot 'daq-int)
+    (cffi:mem-ref value-slot 'daq-c-int)
   )
 )
 
@@ -9325,14 +10012,14 @@
 
 (cffi:defcfun ("daqLastMessageLoggerSinkPrivate_waitForMessage" %daq-last-message-logger-sink-private-wait-for-message) daq-err-code
   (self daq-last-message-logger-sink-private)
-  (timeout-ms daq-size-t)
-  (success (:pointer daq-bool))
+  (timeout-ms daq-c-size-t)
+  (success (:pointer daq-c-bool))
   )
 
 (defun last-message-logger-sink-private/wait-for-message (self timeout-ms)
-  (cffi:with-foreign-object (success-slot 'daq-bool)
+  (cffi:with-foreign-object (success-slot 'daq-c-bool)
     (%check-error (%daq-last-message-logger-sink-private-wait-for-message self timeout-ms success-slot) "daqLastMessageLoggerSinkPrivate_waitForMessage")
-    (cffi:mem-ref success-slot 'daq-bool)
+    (cffi:mem-ref success-slot 'daq-c-bool)
   )
 )
 
@@ -9405,6 +10092,19 @@
   )
 )
 
+(cffi:defcfun ("daqList_createOwningList" %daq-list-create-owning-list) daq-err-code
+  (obj (:pointer daq-list))
+  (owner daq-property-object)
+  (ref daq-string)
+  )
+
+(defun list/create-owning-list (owner ref)
+  (cffi:with-foreign-object (obj-slot 'daq-list)
+    (%check-error (%daq-list-create-owning-list obj-slot owner ref) "daqList_createOwningList")
+    (cffi:mem-ref obj-slot 'daq-list)
+  )
+)
+
 (cffi:defcfun ("daqList_createStartIterator" %daq-list-create-start-iterator) daq-err-code
   (self daq-list)
   (iterator (:pointer daq-iterator))
@@ -9419,7 +10119,7 @@
 
 (cffi:defcfun ("daqList_deleteAt" %daq-list-delete-at) daq-err-code
   (self daq-list)
-  (index daq-size-t)
+  (index daq-c-size-t)
   )
 
 (defun list/delete-at (self index)
@@ -9429,13 +10129,13 @@
 
 (cffi:defcfun ("daqList_getCount" %daq-list-get-count) daq-err-code
   (self daq-list)
-  (size (:pointer daq-size-t))
+  (size (:pointer daq-c-size-t))
   )
 
 (defun list/get-count (self)
-  (cffi:with-foreign-object (size-slot 'daq-size-t)
+  (cffi:with-foreign-object (size-slot 'daq-c-size-t)
     (%check-error (%daq-list-get-count self size-slot) "daqList_getCount")
-    (cffi:mem-ref size-slot 'daq-size-t)
+    (cffi:mem-ref size-slot 'daq-c-size-t)
   )
 )
 
@@ -9449,7 +10149,7 @@
 
 (cffi:defcfun ("daqList_getItemAt" %daq-list-get-item-at) daq-err-code
   (self daq-list)
-  (index daq-size-t)
+  (index daq-c-size-t)
   (obj (:pointer daq-base-object))
   )
 
@@ -9462,7 +10162,7 @@
 
 (cffi:defcfun ("daqList_insertAt" %daq-list-insert-at) daq-err-code
   (self daq-list)
-  (index daq-size-t)
+  (index daq-c-size-t)
   (obj daq-base-object)
   )
 
@@ -9537,7 +10237,7 @@
 
 (cffi:defcfun ("daqList_removeAt" %daq-list-remove-at) daq-err-code
   (self daq-list)
-  (index daq-size-t)
+  (index daq-c-size-t)
   (obj (:pointer daq-base-object))
   )
 
@@ -9550,7 +10250,7 @@
 
 (cffi:defcfun ("daqList_setItemAt" %daq-list-set-item-at) daq-err-code
   (self daq-list)
-  (index daq-size-t)
+  (index daq-c-size-t)
   (obj daq-base-object)
   )
 
@@ -9672,13 +10372,13 @@
 
 (cffi:defcfun ("daqLogFileInfoBuilder_getSize" %daq-log-file-info-builder-get-size) daq-err-code
   (self daq-log-file-info-builder)
-  (size (:pointer daq-size-t))
+  (size (:pointer daq-c-size-t))
   )
 
 (defun log-file-info-builder/get-size (self)
-  (cffi:with-foreign-object (size-slot 'daq-size-t)
+  (cffi:with-foreign-object (size-slot 'daq-c-size-t)
     (%check-error (%daq-log-file-info-builder-get-size self size-slot) "daqLogFileInfoBuilder_getSize")
-    (cffi:mem-ref size-slot 'daq-size-t)
+    (cffi:mem-ref size-slot 'daq-c-size-t)
   )
 )
 
@@ -9744,7 +10444,7 @@
 
 (cffi:defcfun ("daqLogFileInfoBuilder_setSize" %daq-log-file-info-builder-set-size) daq-err-code
   (self daq-log-file-info-builder)
-  (size daq-size-t)
+  (size daq-c-size-t)
   )
 
 (defun log-file-info-builder/set-size (self size)
@@ -9846,13 +10546,13 @@
 
 (cffi:defcfun ("daqLogFileInfo_getSize" %daq-log-file-info-get-size) daq-err-code
   (self daq-log-file-info)
-  (size (:pointer daq-size-t))
+  (size (:pointer daq-c-size-t))
   )
 
 (defun log-file-info/get-size (self)
-  (cffi:with-foreign-object (size-slot 'daq-size-t)
+  (cffi:with-foreign-object (size-slot 'daq-c-size-t)
     (%check-error (%daq-log-file-info-get-size self size-slot) "daqLogFileInfo_getSize")
-    (cffi:mem-ref size-slot 'daq-size-t)
+    (cffi:mem-ref size-slot 'daq-c-size-t)
   )
 )
 
@@ -9922,6 +10622,28 @@
   )
 )
 
+#-(or windows win32)
+(cffi:defcfun ("daqLoggerComponent_logMessage" %daq-logger-component-log-message) daq-err-code
+  (self daq-logger-component)
+  (location-0 :uint64)
+  (location-1 :uint64)
+  (msg daq-c-const-char-ptr)
+  (level daq-log-level)
+  )
+
+#+(or windows win32)
+(cffi:defcfun ("daqLoggerComponent_logMessage" %daq-logger-component-log-message) daq-err-code
+  (self daq-logger-component)
+  (location (:pointer (:struct daq-source-location)))
+  (msg daq-c-const-char-ptr)
+  (level daq-log-level)
+  )
+
+(defun logger-component/log-message (self location msg level)
+  (%check-error #-(or windows win32) (%daq-logger-component-log-message self (cffi:mem-ref location :uint64 0) (cffi:mem-ref location :uint64 8) msg level) #+(or windows win32) (%daq-logger-component-log-message self location msg level) "daqLoggerComponent_logMessage")
+  nil
+)
+
 (cffi:defcfun ("daqLoggerComponent_setLevel" %daq-logger-component-set-level) daq-err-code
   (self daq-logger-component)
   (level daq-log-level)
@@ -9945,13 +10667,13 @@
 (cffi:defcfun ("daqLoggerComponent_shouldLog" %daq-logger-component-should-log) daq-err-code
   (self daq-logger-component)
   (level daq-log-level)
-  (will-log (:pointer daq-bool))
+  (will-log (:pointer daq-c-bool))
   )
 
 (defun logger-component/should-log (self level)
-  (cffi:with-foreign-object (will-log-slot 'daq-bool)
+  (cffi:with-foreign-object (will-log-slot 'daq-c-bool)
     (%check-error (%daq-logger-component-should-log self level will-log-slot) "daqLoggerComponent_shouldLog")
-    (cffi:mem-ref will-log-slot 'daq-bool)
+    (cffi:mem-ref will-log-slot 'daq-c-bool)
   )
 )
 
@@ -9970,8 +10692,8 @@
 (cffi:defcfun ("daqLoggerSink_createRotatingFileLoggerSink" %daq-logger-sink-create-rotating-file-logger-sink) daq-err-code
   (obj (:pointer daq-logger-sink))
   (file-name daq-string)
-  (max-file-byte-size daq-size-t)
-  (max-files daq-size-t)
+  (max-file-byte-size daq-c-size-t)
+  (max-files daq-c-size-t)
   )
 
 (defun logger-sink/create-rotating-file-logger-sink (file-name max-file-byte-size max-files)
@@ -10003,17 +10725,6 @@
   )
 )
 
-(cffi:defcfun ("daqLoggerSink_createWinDebugLoggerSink" %daq-logger-sink-create-win-debug-logger-sink) daq-err-code
-  (obj (:pointer daq-logger-sink))
-  )
-
-(defun logger-sink/create-win-debug-logger-sink ()
-  (cffi:with-foreign-object (obj-slot 'daq-logger-sink)
-    (%check-error (%daq-logger-sink-create-win-debug-logger-sink obj-slot) "daqLoggerSink_createWinDebugLoggerSink")
-    (cffi:mem-ref obj-slot 'daq-logger-sink)
-  )
-)
-
 (cffi:defcfun ("daqLoggerSink_flush" %daq-logger-sink-flush) daq-err-code
   (self daq-logger-sink)
   )
@@ -10022,6 +10733,14 @@
   (%check-error (%daq-logger-sink-flush self) "daqLoggerSink_flush")
   nil
 )
+
+(cffi:defcfun ("daqLoggerSink_getInterfaceId" %daq-logger-sink-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun logger-sink/get-interface-id (intf-id)
+  (%daq-logger-sink-get-interface-id intf-id)
+  nil)
 
 (cffi:defcfun ("daqLoggerSink_getLevel" %daq-logger-sink-get-level) daq-err-code
   (self daq-logger-sink)
@@ -10058,13 +10777,13 @@
 (cffi:defcfun ("daqLoggerSink_shouldLog" %daq-logger-sink-should-log) daq-err-code
   (self daq-logger-sink)
   (level daq-log-level)
-  (will-log (:pointer daq-bool))
+  (will-log (:pointer daq-c-bool))
   )
 
 (defun logger-sink/should-log (self level)
-  (cffi:with-foreign-object (will-log-slot 'daq-bool)
+  (cffi:with-foreign-object (will-log-slot 'daq-c-bool)
     (%check-error (%daq-logger-sink-should-log self level will-log-slot) "daqLoggerSink_shouldLog")
-    (cffi:mem-ref will-log-slot 'daq-bool)
+    (cffi:mem-ref will-log-slot 'daq-c-bool)
   )
 )
 
@@ -10346,6 +11065,58 @@
   nil
 )
 
+(cffi:defcfun ("daqMirroredInputPortPrivate_addStreamingSource" %daq-mirrored-input-port-private-add-streaming-source) daq-err-code
+  (self daq-mirrored-input-port-private)
+  (streaming daq-streaming)
+  )
+
+(defun mirrored-input-port-private/add-streaming-source (self streaming)
+  (%check-error (%daq-mirrored-input-port-private-add-streaming-source self streaming) "daqMirroredInputPortPrivate_addStreamingSource")
+  nil
+)
+
+(cffi:defcfun ("daqMirroredInputPortPrivate_getActiveStreamingSourceObject" %daq-mirrored-input-port-private-get-active-streaming-source-object) daq-err-code
+  (self daq-mirrored-input-port-private)
+  (streaming (:pointer daq-streaming))
+  )
+
+(defun mirrored-input-port-private/get-active-streaming-source-object (self)
+  (cffi:with-foreign-object (streaming-slot 'daq-streaming)
+    (%check-error (%daq-mirrored-input-port-private-get-active-streaming-source-object self streaming-slot) "daqMirroredInputPortPrivate_getActiveStreamingSourceObject")
+    (cffi:mem-ref streaming-slot 'daq-streaming)
+  )
+)
+
+(cffi:defcfun ("daqMirroredInputPortPrivate_getInterfaceId" %daq-mirrored-input-port-private-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun mirrored-input-port-private/get-interface-id (intf-id)
+  (%daq-mirrored-input-port-private-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqMirroredInputPortPrivate_getStreamingSourceObjects" %daq-mirrored-input-port-private-get-streaming-source-objects) daq-err-code
+  (self daq-mirrored-input-port-private)
+  (objects (:pointer daq-list))
+  )
+
+(defun mirrored-input-port-private/get-streaming-source-objects (self)
+  (cffi:with-foreign-object (objects-slot 'daq-list)
+    (%check-error (%daq-mirrored-input-port-private-get-streaming-source-objects self objects-slot) "daqMirroredInputPortPrivate_getStreamingSourceObjects")
+    (cffi:mem-ref objects-slot 'daq-list)
+  )
+)
+
+(cffi:defcfun ("daqMirroredInputPortPrivate_removeStreamingSource" %daq-mirrored-input-port-private-remove-streaming-source) daq-err-code
+  (self daq-mirrored-input-port-private)
+  (streaming-connection-string daq-string)
+  )
+
+(defun mirrored-input-port-private/remove-streaming-source (self streaming-connection-string)
+  (%check-error (%daq-mirrored-input-port-private-remove-streaming-source self streaming-connection-string) "daqMirroredInputPortPrivate_removeStreamingSource")
+  nil
+)
+
 (cffi:defcfun ("daqMirroredSignalConfig_deactivateStreaming" %daq-mirrored-signal-config-deactivate-streaming) daq-err-code
   (self daq-mirrored-signal-config)
   )
@@ -10518,13 +11289,13 @@
 (cffi:defcfun ("daqMirroredSignalPrivate_triggerEvent" %daq-mirrored-signal-private-trigger-event) daq-err-code
   (self daq-mirrored-signal-private)
   (event-packet daq-event-packet)
-  (forward (:pointer daq-bool))
+  (forward (:pointer daq-c-bool))
   )
 
 (defun mirrored-signal-private/trigger-event (self event-packet)
-  (cffi:with-foreign-object (forward-slot 'daq-bool)
+  (cffi:with-foreign-object (forward-slot 'daq-c-bool)
     (%check-error (%daq-mirrored-signal-private-trigger-event self event-packet forward-slot) "daqMirroredSignalPrivate_triggerEvent")
-    (cffi:mem-ref forward-slot 'daq-bool)
+    (cffi:mem-ref forward-slot 'daq-c-bool)
   )
 )
 
@@ -10545,6 +11316,52 @@
 
 (defun mirrored-signal-private/unsubscribe-completed-no-lock (self streaming-connection-string)
   (%check-error (%daq-mirrored-signal-private-unsubscribe-completed-no-lock self streaming-connection-string) "daqMirroredSignalPrivate_unsubscribeCompletedNoLock")
+  nil
+)
+
+(cffi:defcfun ("daqModuleAuthenticator_authenticateModuleBinary" %daq-module-authenticator-authenticate-module-binary) daq-err-code
+  (self daq-module-authenticator)
+  (binary-valid (:pointer daq-c-bool))
+  (vendor-key (:pointer daq-string))
+  (binary-path daq-string)
+  )
+
+(defun module-authenticator/authenticate-module-binary (self binary-path)
+  (cffi:with-foreign-object (binary-valid-slot 'daq-c-bool)
+    (cffi:with-foreign-object (vendor-key-slot 'daq-string)
+      (%check-error (%daq-module-authenticator-authenticate-module-binary self binary-valid-slot vendor-key-slot binary-path) "daqModuleAuthenticator_authenticateModuleBinary")
+      (values (cffi:mem-ref binary-valid-slot 'daq-c-bool) (cffi:mem-ref vendor-key-slot 'daq-string))
+    )
+  )
+)
+
+(cffi:defcfun ("daqModuleAuthenticator_createFunctionModuleAuthenticator" %daq-module-authenticator-create-function-module-authenticator) daq-err-code
+  (obj (:pointer daq-module-authenticator))
+  (function daq-function)
+  )
+
+(defun module-authenticator/create-function-module-authenticator (function)
+  (cffi:with-foreign-object (obj-slot 'daq-module-authenticator)
+    (%check-error (%daq-module-authenticator-create-function-module-authenticator obj-slot function) "daqModuleAuthenticator_createFunctionModuleAuthenticator")
+    (cffi:mem-ref obj-slot 'daq-module-authenticator)
+  )
+)
+
+(cffi:defcfun ("daqModuleAuthenticator_getInterfaceId" %daq-module-authenticator-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun module-authenticator/get-interface-id (intf-id)
+  (%daq-module-authenticator-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqModuleAuthenticator_setLogger" %daq-module-authenticator-set-logger) daq-err-code
+  (self daq-module-authenticator)
+  (logger daq-logger)
+  )
+
+(defun module-authenticator/set-logger (self logger)
+  (%check-error (%daq-module-authenticator-set-logger self logger) "daqModuleAuthenticator_setLogger")
   nil
 )
 
@@ -10893,7 +11710,7 @@
 
 (cffi:defcfun ("daqModuleManager_setAuthenticatedOnly" %daq-module-manager-set-authenticated-only) daq-err-code
   (self daq-module-manager)
-  (authenticated-only daq-bool)
+  (authenticated-only daq-c-bool)
   )
 
 (defun module-manager/set-authenticated-only (self authenticated-only)
@@ -10913,15 +11730,15 @@
 
 (cffi:defcfun ("daqModule_completeServerCapability" %daq-module-complete-server-capability) daq-err-code
   (self daq-module)
-  (succeeded (:pointer daq-bool))
+  (succeeded (:pointer daq-c-bool))
   (source daq-server-capability)
   (target daq-server-capability-config)
   )
 
 (defun module/complete-server-capability (self source target)
-  (cffi:with-foreign-object (succeeded-slot 'daq-bool)
+  (cffi:with-foreign-object (succeeded-slot 'daq-c-bool)
     (%check-error (%daq-module-complete-server-capability self succeeded-slot source target) "daqModule_completeServerCapability")
-    (cffi:mem-ref succeeded-slot 'daq-bool)
+    (cffi:mem-ref succeeded-slot 'daq-c-bool)
   )
 )
 
@@ -11079,26 +11896,26 @@
 
 (cffi:defcfun ("daqModule_licenseLoaded" %daq-module-license-loaded) daq-err-code
   (self daq-module)
-  (loaded (:pointer daq-bool))
+  (loaded (:pointer daq-c-bool))
   )
 
 (defun module/license-loaded (self)
-  (cffi:with-foreign-object (loaded-slot 'daq-bool)
+  (cffi:with-foreign-object (loaded-slot 'daq-c-bool)
     (%check-error (%daq-module-license-loaded self loaded-slot) "daqModule_licenseLoaded")
-    (cffi:mem-ref loaded-slot 'daq-bool)
+    (cffi:mem-ref loaded-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqModule_loadLicense" %daq-module-load-license) daq-err-code
   (self daq-module)
-  (succeeded (:pointer daq-bool))
+  (succeeded (:pointer daq-c-bool))
   (license-config daq-dict)
   )
 
 (defun module/load-license (self license-config)
-  (cffi:with-foreign-object (succeeded-slot 'daq-bool)
+  (cffi:with-foreign-object (succeeded-slot 'daq-c-bool)
     (%check-error (%daq-module-load-license self succeeded-slot license-config) "daqModule_loadLicense")
-    (cffi:mem-ref succeeded-slot 'daq-bool)
+    (cffi:mem-ref succeeded-slot 'daq-c-bool)
   )
 )
 
@@ -11167,13 +11984,13 @@
 
 (cffi:defcfun ("daqMultiReaderBuilder_getAllowDifferentSamplingRates" %daq-multi-reader-builder-get-allow-different-sampling-rates) daq-err-code
   (self daq-multi-reader-builder)
-  (allow-different-rates (:pointer daq-bool))
+  (allow-different-rates (:pointer daq-c-bool))
   )
 
 (defun multi-reader-builder/get-allow-different-sampling-rates (self)
-  (cffi:with-foreign-object (allow-different-rates-slot 'daq-bool)
+  (cffi:with-foreign-object (allow-different-rates-slot 'daq-c-bool)
     (%check-error (%daq-multi-reader-builder-get-allow-different-sampling-rates self allow-different-rates-slot) "daqMultiReaderBuilder_getAllowDifferentSamplingRates")
-    (cffi:mem-ref allow-different-rates-slot 'daq-bool)
+    (cffi:mem-ref allow-different-rates-slot 'daq-c-bool)
   )
 )
 
@@ -11223,13 +12040,13 @@
 
 (cffi:defcfun ("daqMultiReaderBuilder_getMinReadCount" %daq-multi-reader-builder-get-min-read-count) daq-err-code
   (self daq-multi-reader-builder)
-  (min-read-count (:pointer daq-size-t))
+  (min-read-count (:pointer daq-c-size-t))
   )
 
 (defun multi-reader-builder/get-min-read-count (self)
-  (cffi:with-foreign-object (min-read-count-slot 'daq-size-t)
+  (cffi:with-foreign-object (min-read-count-slot 'daq-c-size-t)
     (%check-error (%daq-multi-reader-builder-get-min-read-count self min-read-count-slot) "daqMultiReaderBuilder_getMinReadCount")
-    (cffi:mem-ref min-read-count-slot 'daq-size-t)
+    (cffi:mem-ref min-read-count-slot 'daq-c-size-t)
   )
 )
 
@@ -11259,13 +12076,13 @@
 
 (cffi:defcfun ("daqMultiReaderBuilder_getRequiredCommonSampleRate" %daq-multi-reader-builder-get-required-common-sample-rate) daq-err-code
   (self daq-multi-reader-builder)
-  (sample-rate (:pointer daq-int))
+  (sample-rate (:pointer daq-c-int))
   )
 
 (defun multi-reader-builder/get-required-common-sample-rate (self)
-  (cffi:with-foreign-object (sample-rate-slot 'daq-int)
+  (cffi:with-foreign-object (sample-rate-slot 'daq-c-int)
     (%check-error (%daq-multi-reader-builder-get-required-common-sample-rate self sample-rate-slot) "daqMultiReaderBuilder_getRequiredCommonSampleRate")
-    (cffi:mem-ref sample-rate-slot 'daq-int)
+    (cffi:mem-ref sample-rate-slot 'daq-c-int)
   )
 )
 
@@ -11283,13 +12100,13 @@
 
 (cffi:defcfun ("daqMultiReaderBuilder_getStartOnFullUnitOfDomain" %daq-multi-reader-builder-get-start-on-full-unit-of-domain) daq-err-code
   (self daq-multi-reader-builder)
-  (enabled (:pointer daq-bool))
+  (enabled (:pointer daq-c-bool))
   )
 
 (defun multi-reader-builder/get-start-on-full-unit-of-domain (self)
-  (cffi:with-foreign-object (enabled-slot 'daq-bool)
+  (cffi:with-foreign-object (enabled-slot 'daq-c-bool)
     (%check-error (%daq-multi-reader-builder-get-start-on-full-unit-of-domain self enabled-slot) "daqMultiReaderBuilder_getStartOnFullUnitOfDomain")
-    (cffi:mem-ref enabled-slot 'daq-bool)
+    (cffi:mem-ref enabled-slot 'daq-c-bool)
   )
 )
 
@@ -11319,7 +12136,7 @@
 
 (cffi:defcfun ("daqMultiReaderBuilder_setAllowDifferentSamplingRates" %daq-multi-reader-builder-set-allow-different-sampling-rates) daq-err-code
   (self daq-multi-reader-builder)
-  (allow-different-rates daq-bool)
+  (allow-different-rates daq-c-bool)
   )
 
 (defun multi-reader-builder/set-allow-different-sampling-rates (self allow-different-rates)
@@ -11359,7 +12176,7 @@
 
 (cffi:defcfun ("daqMultiReaderBuilder_setMinReadCount" %daq-multi-reader-builder-set-min-read-count) daq-err-code
   (self daq-multi-reader-builder)
-  (min-read-count daq-size-t)
+  (min-read-count daq-c-size-t)
   )
 
 (defun multi-reader-builder/set-min-read-count (self min-read-count)
@@ -11389,7 +12206,7 @@
 
 (cffi:defcfun ("daqMultiReaderBuilder_setRequiredCommonSampleRate" %daq-multi-reader-builder-set-required-common-sample-rate) daq-err-code
   (self daq-multi-reader-builder)
-  (sample-rate daq-int)
+  (sample-rate daq-c-int)
   )
 
 (defun multi-reader-builder/set-required-common-sample-rate (self sample-rate)
@@ -11399,7 +12216,7 @@
 
 (cffi:defcfun ("daqMultiReaderBuilder_setStartOnFullUnitOfDomain" %daq-multi-reader-builder-set-start-on-full-unit-of-domain) daq-err-code
   (self daq-multi-reader-builder)
-  (enabled daq-bool)
+  (enabled daq-c-bool)
   )
 
 (defun multi-reader-builder/set-start-on-full-unit-of-domain (self enabled)
@@ -11431,7 +12248,7 @@
   (obj (:pointer daq-multi-reader-status))
   (main-descriptor daq-event-packet)
   (event-packets daq-dict)
-  (valid daq-bool)
+  (valid daq-c-bool)
   (offset daq-number)
   )
 
@@ -11507,9 +12324,9 @@
   (domain-read-type daq-sample-type)
   (mode daq-read-mode)
   (timeout-type daq-read-timeout-type)
-  (required-common-sample-rate daq-int)
-  (start-on-full-unit-of-domain daq-bool)
-  (min-read-count daq-size-t)
+  (required-common-sample-rate daq-c-int)
+  (start-on-full-unit-of-domain daq-c-bool)
+  (min-read-count daq-c-size-t)
   )
 
 (defun multi-reader/create-multi-reader-ex (signals value-read-type domain-read-type mode timeout-type required-common-sample-rate start-on-full-unit-of-domain min-read-count)
@@ -11535,38 +12352,38 @@
 
 (cffi:defcfun ("daqMultiReader_getActive" %daq-multi-reader-get-active) daq-err-code
   (self daq-multi-reader)
-  (is-active (:pointer daq-bool))
+  (is-active (:pointer daq-c-bool))
   )
 
 (defun multi-reader/get-active (self)
-  (cffi:with-foreign-object (is-active-slot 'daq-bool)
+  (cffi:with-foreign-object (is-active-slot 'daq-c-bool)
     (%check-error (%daq-multi-reader-get-active self is-active-slot) "daqMultiReader_getActive")
-    (cffi:mem-ref is-active-slot 'daq-bool)
+    (cffi:mem-ref is-active-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqMultiReader_getCommonSampleRate" %daq-multi-reader-get-common-sample-rate) daq-err-code
   (self daq-multi-reader)
-  (common-sample-rate (:pointer daq-int))
+  (common-sample-rate (:pointer daq-c-int))
   )
 
 (defun multi-reader/get-common-sample-rate (self)
-  (cffi:with-foreign-object (common-sample-rate-slot 'daq-int)
+  (cffi:with-foreign-object (common-sample-rate-slot 'daq-c-int)
     (%check-error (%daq-multi-reader-get-common-sample-rate self common-sample-rate-slot) "daqMultiReader_getCommonSampleRate")
-    (cffi:mem-ref common-sample-rate-slot 'daq-int)
+    (cffi:mem-ref common-sample-rate-slot 'daq-c-int)
   )
 )
 
 (cffi:defcfun ("daqMultiReader_getInputUsed" %daq-multi-reader-get-input-used) daq-err-code
   (self daq-multi-reader)
   (id daq-string)
-  (is-used (:pointer daq-bool))
+  (is-used (:pointer daq-c-bool))
   )
 
 (defun multi-reader/get-input-used (self id)
-  (cffi:with-foreign-object (is-used-slot 'daq-bool)
+  (cffi:with-foreign-object (is-used-slot 'daq-c-bool)
     (%check-error (%daq-multi-reader-get-input-used self id is-used-slot) "daqMultiReader_getInputUsed")
-    (cffi:mem-ref is-used-slot 'daq-bool)
+    (cffi:mem-ref is-used-slot 'daq-c-bool)
   )
 )
 
@@ -11580,13 +12397,13 @@
 
 (cffi:defcfun ("daqMultiReader_getIsSynchronized" %daq-multi-reader-get-is-synchronized) daq-err-code
   (self daq-multi-reader)
-  (is-synchronized (:pointer daq-bool))
+  (is-synchronized (:pointer daq-c-bool))
   )
 
 (defun multi-reader/get-is-synchronized (self)
-  (cffi:with-foreign-object (is-synchronized-slot 'daq-bool)
+  (cffi:with-foreign-object (is-synchronized-slot 'daq-c-bool)
     (%check-error (%daq-multi-reader-get-is-synchronized self is-synchronized-slot) "daqMultiReader_getIsSynchronized")
-    (cffi:mem-ref is-synchronized-slot 'daq-bool)
+    (cffi:mem-ref is-synchronized-slot 'daq-c-bool)
   )
 )
 
@@ -11627,17 +12444,17 @@
 (cffi:defcfun ("daqMultiReader_read" %daq-multi-reader-read) daq-err-code
   (self daq-multi-reader)
   (samples :pointer)
-  (count (:pointer daq-size-t))
-  (timeout-ms daq-size-t)
+  (count (:pointer daq-c-size-t))
+  (timeout-ms daq-c-size-t)
   (status (:pointer daq-multi-reader-status))
   )
 
 (defun multi-reader/read (self samples count timeout-ms)
-  (cffi:with-foreign-object (count-slot 'daq-size-t)
+  (cffi:with-foreign-object (count-slot 'daq-c-size-t)
     (cffi:with-foreign-object (status-slot 'daq-multi-reader-status)
-      (setf (cffi:mem-ref count-slot 'daq-size-t) count)
+      (setf (cffi:mem-ref count-slot 'daq-c-size-t) count)
       (%check-error (%daq-multi-reader-read self samples count-slot timeout-ms status-slot) "daqMultiReader_read")
-      (values (cffi:mem-ref count-slot 'daq-size-t) (cffi:mem-ref status-slot 'daq-multi-reader-status))
+      (values (cffi:mem-ref count-slot 'daq-c-size-t) (cffi:mem-ref status-slot 'daq-multi-reader-status))
     )
   )
 )
@@ -11646,17 +12463,17 @@
   (self daq-multi-reader)
   (samples :pointer)
   (domain :pointer)
-  (count (:pointer daq-size-t))
-  (timeout-ms daq-size-t)
+  (count (:pointer daq-c-size-t))
+  (timeout-ms daq-c-size-t)
   (status (:pointer daq-multi-reader-status))
   )
 
 (defun multi-reader/read-with-domain (self samples domain count timeout-ms)
-  (cffi:with-foreign-object (count-slot 'daq-size-t)
+  (cffi:with-foreign-object (count-slot 'daq-c-size-t)
     (cffi:with-foreign-object (status-slot 'daq-multi-reader-status)
-      (setf (cffi:mem-ref count-slot 'daq-size-t) count)
+      (setf (cffi:mem-ref count-slot 'daq-c-size-t) count)
       (%check-error (%daq-multi-reader-read-with-domain self samples domain count-slot timeout-ms status-slot) "daqMultiReader_readWithDomain")
-      (values (cffi:mem-ref count-slot 'daq-size-t) (cffi:mem-ref status-slot 'daq-multi-reader-status))
+      (values (cffi:mem-ref count-slot 'daq-c-size-t) (cffi:mem-ref status-slot 'daq-multi-reader-status))
     )
   )
 )
@@ -11673,7 +12490,7 @@
 
 (cffi:defcfun ("daqMultiReader_setActive" %daq-multi-reader-set-active) daq-err-code
   (self daq-multi-reader)
-  (is-active daq-bool)
+  (is-active daq-c-bool)
   )
 
 (defun multi-reader/set-active (self is-active)
@@ -11684,7 +12501,7 @@
 (cffi:defcfun ("daqMultiReader_setInputUsed" %daq-multi-reader-set-input-used) daq-err-code
   (self daq-multi-reader)
   (id daq-string)
-  (is-used daq-bool)
+  (is-used daq-c-bool)
   )
 
 (defun multi-reader/set-input-used (self id is-used)
@@ -11694,18 +12511,67 @@
 
 (cffi:defcfun ("daqMultiReader_skipSamples" %daq-multi-reader-skip-samples) daq-err-code
   (self daq-multi-reader)
-  (count (:pointer daq-size-t))
+  (count (:pointer daq-c-size-t))
   (status (:pointer daq-multi-reader-status))
   )
 
 (defun multi-reader/skip-samples (self count)
-  (cffi:with-foreign-object (count-slot 'daq-size-t)
+  (cffi:with-foreign-object (count-slot 'daq-c-size-t)
     (cffi:with-foreign-object (status-slot 'daq-multi-reader-status)
-      (setf (cffi:mem-ref count-slot 'daq-size-t) count)
+      (setf (cffi:mem-ref count-slot 'daq-c-size-t) count)
       (%check-error (%daq-multi-reader-skip-samples self count-slot status-slot) "daqMultiReader_skipSamples")
-      (values (cffi:mem-ref count-slot 'daq-size-t) (cffi:mem-ref status-slot 'daq-multi-reader-status))
+      (values (cffi:mem-ref count-slot 'daq-c-size-t) (cffi:mem-ref status-slot 'daq-multi-reader-status))
     )
   )
+)
+
+(cffi:defcfun ("daqMutex_createMutex" %daq-mutex-create-mutex) daq-err-code
+  (obj (:pointer daq-mutex))
+  )
+
+(defun mutex/create-mutex ()
+  (cffi:with-foreign-object (obj-slot 'daq-mutex)
+    (%check-error (%daq-mutex-create-mutex obj-slot) "daqMutex_createMutex")
+    (cffi:mem-ref obj-slot 'daq-mutex)
+  )
+)
+
+(cffi:defcfun ("daqMutex_getInterfaceId" %daq-mutex-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun mutex/get-interface-id (intf-id)
+  (%daq-mutex-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqMutex_lock" %daq-mutex-lock) daq-err-code
+  (self daq-mutex)
+  )
+
+(defun mutex/lock (self)
+  (%check-error (%daq-mutex-lock self) "daqMutex_lock")
+  nil
+)
+
+(cffi:defcfun ("daqMutex_tryLock" %daq-mutex-try-lock) daq-err-code
+  (self daq-mutex)
+  (succeeded (:pointer daq-c-bool))
+  )
+
+(defun mutex/try-lock (self)
+  (cffi:with-foreign-object (succeeded-slot 'daq-c-bool)
+    (%check-error (%daq-mutex-try-lock self succeeded-slot) "daqMutex_tryLock")
+    (cffi:mem-ref succeeded-slot 'daq-c-bool)
+  )
+)
+
+(cffi:defcfun ("daqMutex_unlock" %daq-mutex-unlock) daq-err-code
+  (self daq-mutex)
+  )
+
+(defun mutex/unlock (self)
+  (%check-error (%daq-mutex-unlock self) "daqMutex_unlock")
+  nil
 )
 
 (cffi:defcfun ("daqNetworkInterface_createDefaultConfiguration" %daq-network-interface-create-default-configuration) daq-err-code
@@ -11767,25 +12633,25 @@
 
 (cffi:defcfun ("daqNumber_getFloatValue" %daq-number-get-float-value) daq-err-code
   (self daq-number)
-  (value (:pointer daq-float))
+  (value (:pointer daq-c-float))
   )
 
 (defun number/get-float-value (self)
-  (cffi:with-foreign-object (value-slot 'daq-float)
+  (cffi:with-foreign-object (value-slot 'daq-c-float)
     (%check-error (%daq-number-get-float-value self value-slot) "daqNumber_getFloatValue")
-    (cffi:mem-ref value-slot 'daq-float)
+    (cffi:mem-ref value-slot 'daq-c-float)
   )
 )
 
 (cffi:defcfun ("daqNumber_getIntValue" %daq-number-get-int-value) daq-err-code
   (self daq-number)
-  (value (:pointer daq-int))
+  (value (:pointer daq-c-int))
   )
 
 (defun number/get-int-value (self)
-  (cffi:with-foreign-object (value-slot 'daq-int)
+  (cffi:with-foreign-object (value-slot 'daq-c-int)
     (%check-error (%daq-number-get-int-value self value-slot) "daqNumber_getIntValue")
-    (cffi:mem-ref value-slot 'daq-int)
+    (cffi:mem-ref value-slot 'daq-c-int)
   )
 )
 
@@ -11812,6 +12678,152 @@
 
 (defun ownable/set-owner (self owner)
   (%check-error (%daq-ownable-set-owner self owner) "daqOwnable_setOwner")
+  nil
+)
+
+(cffi:defcfun ("daqPacketBufferBuilder_build" %daq-packet-buffer-builder-build) daq-err-code
+  (self daq-packet-buffer-builder)
+  (buffer (:pointer daq-packet-buffer))
+  )
+
+(defun packet-buffer-builder/build (self)
+  (cffi:with-foreign-object (buffer-slot 'daq-packet-buffer)
+    (%check-error (%daq-packet-buffer-builder-build self buffer-slot) "daqPacketBufferBuilder_build")
+    (cffi:mem-ref buffer-slot 'daq-packet-buffer)
+  )
+)
+
+(cffi:defcfun ("daqPacketBufferBuilder_createPacketBufferBuilder" %daq-packet-buffer-builder-create-packet-buffer-builder) daq-err-code
+  (obj (:pointer daq-packet-buffer-builder))
+  )
+
+(defun packet-buffer-builder/create-packet-buffer-builder ()
+  (cffi:with-foreign-object (obj-slot 'daq-packet-buffer-builder)
+    (%check-error (%daq-packet-buffer-builder-create-packet-buffer-builder obj-slot) "daqPacketBufferBuilder_createPacketBufferBuilder")
+    (cffi:mem-ref obj-slot 'daq-packet-buffer-builder)
+  )
+)
+
+(cffi:defcfun ("daqPacketBufferBuilder_getContext" %daq-packet-buffer-builder-get-context) daq-err-code
+  (self daq-packet-buffer-builder)
+  (context (:pointer daq-context))
+  )
+
+(defun packet-buffer-builder/get-context (self)
+  (cffi:with-foreign-object (context-slot 'daq-context)
+    (%check-error (%daq-packet-buffer-builder-get-context self context-slot) "daqPacketBufferBuilder_getContext")
+    (cffi:mem-ref context-slot 'daq-context)
+  )
+)
+
+(cffi:defcfun ("daqPacketBufferBuilder_getInterfaceId" %daq-packet-buffer-builder-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun packet-buffer-builder/get-interface-id (intf-id)
+  (%daq-packet-buffer-builder-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqPacketBufferBuilder_getSizeInBytes" %daq-packet-buffer-builder-get-size-in-bytes) daq-err-code
+  (self daq-packet-buffer-builder)
+  (size-in-bytes (:pointer daq-c-size-t))
+  )
+
+(defun packet-buffer-builder/get-size-in-bytes (self)
+  (cffi:with-foreign-object (size-in-bytes-slot 'daq-c-size-t)
+    (%check-error (%daq-packet-buffer-builder-get-size-in-bytes self size-in-bytes-slot) "daqPacketBufferBuilder_getSizeInBytes")
+    (cffi:mem-ref size-in-bytes-slot 'daq-c-size-t)
+  )
+)
+
+(cffi:defcfun ("daqPacketBufferBuilder_setContext" %daq-packet-buffer-builder-set-context) daq-err-code
+  (self daq-packet-buffer-builder)
+  (context daq-context)
+  )
+
+(defun packet-buffer-builder/set-context (self context)
+  (%check-error (%daq-packet-buffer-builder-set-context self context) "daqPacketBufferBuilder_setContext")
+  nil
+)
+
+(cffi:defcfun ("daqPacketBufferBuilder_setSizeInBytes" %daq-packet-buffer-builder-set-size-in-bytes) daq-err-code
+  (self daq-packet-buffer-builder)
+  (size-in-bytes daq-c-size-t)
+  )
+
+(defun packet-buffer-builder/set-size-in-bytes (self size-in-bytes)
+  (%check-error (%daq-packet-buffer-builder-set-size-in-bytes self size-in-bytes) "daqPacketBufferBuilder_setSizeInBytes")
+  nil
+)
+
+(cffi:defcfun ("daqPacketBuffer_createPacket" %daq-packet-buffer-create-packet) daq-err-code
+  (self daq-packet-buffer)
+  (sample-count daq-c-size-t)
+  (desc daq-data-descriptor)
+  (domain-packet daq-packet)
+  (packet (:pointer daq-data-packet))
+  )
+
+(defun packet-buffer/create-packet (self sample-count desc domain-packet)
+  (cffi:with-foreign-object (packet-slot 'daq-data-packet)
+    (%check-error (%daq-packet-buffer-create-packet self sample-count desc domain-packet packet-slot) "daqPacketBuffer_createPacket")
+    (cffi:mem-ref packet-slot 'daq-data-packet)
+  )
+)
+
+(cffi:defcfun ("daqPacketBuffer_createPacketBuffer" %daq-packet-buffer-create-packet-buffer) daq-err-code
+  (obj (:pointer daq-packet-buffer))
+  (builder daq-packet-buffer-builder)
+  )
+
+(defun packet-buffer/create-packet-buffer (builder)
+  (cffi:with-foreign-object (obj-slot 'daq-packet-buffer)
+    (%check-error (%daq-packet-buffer-create-packet-buffer obj-slot builder) "daqPacketBuffer_createPacketBuffer")
+    (cffi:mem-ref obj-slot 'daq-packet-buffer)
+  )
+)
+
+(cffi:defcfun ("daqPacketBuffer_getAvailableSampleCount" %daq-packet-buffer-get-available-sample-count) daq-err-code
+  (self daq-packet-buffer)
+  (desc daq-data-descriptor)
+  (count (:pointer daq-c-size-t))
+  )
+
+(defun packet-buffer/get-available-sample-count (self desc)
+  (cffi:with-foreign-object (count-slot 'daq-c-size-t)
+    (%check-error (%daq-packet-buffer-get-available-sample-count self desc count-slot) "daqPacketBuffer_getAvailableSampleCount")
+    (cffi:mem-ref count-slot 'daq-c-size-t)
+  )
+)
+
+(cffi:defcfun ("daqPacketBuffer_getInterfaceId" %daq-packet-buffer-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun packet-buffer/get-interface-id (intf-id)
+  (%daq-packet-buffer-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqPacketBuffer_getMaxAvailableContinousSampleCount" %daq-packet-buffer-get-max-available-continous-sample-count) daq-err-code
+  (self daq-packet-buffer)
+  (desc daq-data-descriptor)
+  (count (:pointer daq-c-size-t))
+  )
+
+(defun packet-buffer/get-max-available-continous-sample-count (self desc)
+  (cffi:with-foreign-object (count-slot 'daq-c-size-t)
+    (%check-error (%daq-packet-buffer-get-max-available-continous-sample-count self desc count-slot) "daqPacketBuffer_getMaxAvailableContinousSampleCount")
+    (cffi:mem-ref count-slot 'daq-c-size-t)
+  )
+)
+
+(cffi:defcfun ("daqPacketBuffer_resize" %daq-packet-buffer-resize) daq-err-code
+  (self daq-packet-buffer)
+  (size-in-bytes daq-c-size-t)
+  )
+
+(defun packet-buffer/resize (self size-in-bytes)
+  (%check-error (%daq-packet-buffer-resize self size-in-bytes) "daqPacketBuffer_resize")
   nil
 )
 
@@ -11898,13 +12910,13 @@
 
 (cffi:defcfun ("daqPacket_getRefCount" %daq-packet-get-ref-count) daq-err-code
   (self daq-packet)
-  (ref-count (:pointer daq-size-t))
+  (ref-count (:pointer daq-c-size-t))
   )
 
 (defun packet/get-ref-count (self)
-  (cffi:with-foreign-object (ref-count-slot 'daq-size-t)
+  (cffi:with-foreign-object (ref-count-slot 'daq-c-size-t)
     (%check-error (%daq-packet-get-ref-count self ref-count-slot) "daqPacket_getRefCount")
-    (cffi:mem-ref ref-count-slot 'daq-size-t)
+    (cffi:mem-ref ref-count-slot 'daq-c-size-t)
   )
 )
 
@@ -12013,13 +13025,13 @@
   (self daq-permission-manager)
   (user daq-user)
   (permission daq-permission)
-  (authorized-out (:pointer daq-bool))
+  (authorized-out (:pointer daq-c-bool))
   )
 
 (defun permission-manager/is-authorized (self user permission)
-  (cffi:with-foreign-object (authorized-out-slot 'daq-bool)
+  (cffi:with-foreign-object (authorized-out-slot 'daq-c-bool)
     (%check-error (%daq-permission-manager-is-authorized self user permission authorized-out-slot) "daqPermissionManager_isAuthorized")
-    (cffi:mem-ref authorized-out-slot 'daq-bool)
+    (cffi:mem-ref authorized-out-slot 'daq-c-bool)
   )
 )
 
@@ -12035,13 +13047,13 @@
 
 (cffi:defcfun ("daqPermissionMaskBuilder_build" %daq-permission-mask-builder-build) daq-err-code
   (self daq-permission-mask-builder)
-  (permission-mask (:pointer daq-int))
+  (permission-mask (:pointer daq-c-int))
   )
 
 (defun permission-mask-builder/build (self)
-  (cffi:with-foreign-object (permission-mask-slot 'daq-int)
+  (cffi:with-foreign-object (permission-mask-slot 'daq-c-int)
     (%check-error (%daq-permission-mask-builder-build self permission-mask-slot) "daqPermissionMaskBuilder_build")
-    (cffi:mem-ref permission-mask-slot 'daq-int)
+    (cffi:mem-ref permission-mask-slot 'daq-c-int)
   )
 )
 
@@ -12067,7 +13079,7 @@
 
 (cffi:defcfun ("daqPermissionMaskBuilder_createPermissionMaskBuilderFromMask" %daq-permission-mask-builder-create-permission-mask-builder-from-mask) daq-err-code
   (obj (:pointer daq-permission-mask-builder))
-  (permission-mask daq-int)
+  (permission-mask daq-c-int)
   )
 
 (defun permission-mask-builder/create-permission-mask-builder-from-mask (permission-mask)
@@ -12188,7 +13200,7 @@
 
 (cffi:defcfun ("daqPermissionsBuilder_inherit" %daq-permissions-builder-inherit) daq-err-code
   (self daq-permissions-builder)
-  (inherit daq-bool)
+  (inherit daq-c-bool)
   )
 
 (defun permissions-builder/inherit (self inherit)
@@ -12242,13 +13254,13 @@
 
 (cffi:defcfun ("daqPermissions_getInherited" %daq-permissions-get-inherited) daq-err-code
   (self daq-permissions)
-  (is-inherited (:pointer daq-bool))
+  (is-inherited (:pointer daq-c-bool))
   )
 
 (defun permissions/get-inherited (self)
-  (cffi:with-foreign-object (is-inherited-slot 'daq-bool)
+  (cffi:with-foreign-object (is-inherited-slot 'daq-c-bool)
     (%check-error (%daq-permissions-get-inherited self is-inherited-slot) "daqPermissions_getInherited")
-    (cffi:mem-ref is-inherited-slot 'daq-bool)
+    (cffi:mem-ref is-inherited-slot 'daq-c-bool)
   )
 )
 
@@ -12272,6 +13284,20 @@
   )
 )
 
+(cffi:defcfun ("daqProcedure_createProcedureWithData" %daq-procedure-create-procedure-with-data) daq-err-code
+  (obj (:pointer daq-procedure))
+  (call daq-proc-call-with-data)
+  (user-data :pointer)
+  (free-user-data daq-free-user-data)
+  )
+
+(defun procedure/create-procedure-with-data (call user-data free-user-data)
+  (cffi:with-foreign-object (obj-slot 'daq-procedure)
+    (%check-error (%daq-procedure-create-procedure-with-data obj-slot call user-data free-user-data) "daqProcedure_createProcedureWithData")
+    (cffi:mem-ref obj-slot 'daq-procedure)
+  )
+)
+
 (cffi:defcfun ("daqProcedure_dispatch" %daq-procedure-dispatch) daq-err-code
   (self daq-procedure)
   (params daq-base-object)
@@ -12281,6 +13307,14 @@
   (%check-error (%daq-procedure-dispatch self params) "daqProcedure_dispatch")
   nil
 )
+
+(cffi:defcfun ("daqProcedure_getInterfaceId" %daq-procedure-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun procedure/get-interface-id (intf-id)
+  (%daq-procedure-get-interface-id intf-id)
+  nil)
 
 (cffi:defcfun ("daqPropertyBuilder_build" %daq-property-builder-build) daq-err-code
   (self daq-property-builder)
@@ -12336,7 +13370,7 @@
 (cffi:defcfun ("daqPropertyBuilder_createFloatPropertyBuilder" %daq-property-builder-create-float-property-builder) daq-err-code
   (obj (:pointer daq-property-builder))
   (name daq-string)
-  (default-value daq-float-object)
+  (default-value daq-float)
   )
 
 (defun property-builder/create-float-property-builder (name default-value)
@@ -12548,13 +13582,13 @@
 
 (cffi:defcfun ("daqPropertyBuilder_getIsIntegerValueSelection" %daq-property-builder-get-is-integer-value-selection) daq-err-code
   (self daq-property-builder)
-  (is-integer-value-selection (:pointer daq-bool))
+  (is-integer-value-selection (:pointer daq-c-bool))
   )
 
 (defun property-builder/get-is-integer-value-selection (self)
-  (cffi:with-foreign-object (is-integer-value-selection-slot 'daq-bool)
+  (cffi:with-foreign-object (is-integer-value-selection-slot 'daq-c-bool)
     (%check-error (%daq-property-builder-get-is-integer-value-selection self is-integer-value-selection-slot) "daqPropertyBuilder_getIsIntegerValueSelection")
-    (cffi:mem-ref is-integer-value-selection-slot 'daq-bool)
+    (cffi:mem-ref is-integer-value-selection-slot 'daq-c-bool)
   )
 )
 
@@ -12716,13 +13750,13 @@
 
 (cffi:defcfun ("daqPropertyBuilder_getValueType" %daq-property-builder-get-value-type) daq-err-code
   (self daq-property-builder)
-  (type (:pointer daq-core-type))
+  (type (:pointer daq-c-core-type))
   )
 
 (defun property-builder/get-value-type (self)
-  (cffi:with-foreign-object (type-slot 'daq-core-type)
+  (cffi:with-foreign-object (type-slot 'daq-c-core-type)
     (%check-error (%daq-property-builder-get-value-type self type-slot) "daqPropertyBuilder_getValueType")
-    (cffi:mem-ref type-slot 'daq-core-type)
+    (cffi:mem-ref type-slot 'daq-c-core-type)
   )
 )
 
@@ -12780,7 +13814,7 @@
 
 (cffi:defcfun ("daqPropertyBuilder_setIsIntegerValueSelection" %daq-property-builder-set-is-integer-value-selection) daq-err-code
   (self daq-property-builder)
-  (is-integer-value-selection daq-bool)
+  (is-integer-value-selection daq-c-bool)
   )
 
 (defun property-builder/set-is-integer-value-selection (self is-integer-value-selection)
@@ -12920,7 +13954,7 @@
 
 (cffi:defcfun ("daqPropertyBuilder_setValueType" %daq-property-builder-set-value-type) daq-err-code
   (self daq-property-builder)
-  (type daq-core-type)
+  (type daq-c-core-type)
   )
 
 (defun property-builder/set-value-type (self type)
@@ -13061,37 +14095,37 @@
 
 (cffi:defcfun ("daqPropertyInternal_getHasOnGetSelectionValuesListeners" %daq-property-internal-get-has-on-get-selection-values-listeners) daq-err-code
   (self daq-property-internal)
-  (has-listeners (:pointer daq-bool))
+  (has-listeners (:pointer daq-c-bool))
   )
 
 (defun property-internal/get-has-on-get-selection-values-listeners (self)
-  (cffi:with-foreign-object (has-listeners-slot 'daq-bool)
+  (cffi:with-foreign-object (has-listeners-slot 'daq-c-bool)
     (%check-error (%daq-property-internal-get-has-on-get-selection-values-listeners self has-listeners-slot) "daqPropertyInternal_getHasOnGetSelectionValuesListeners")
-    (cffi:mem-ref has-listeners-slot 'daq-bool)
+    (cffi:mem-ref has-listeners-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqPropertyInternal_getHasOnGetSuggestedValuesListeners" %daq-property-internal-get-has-on-get-suggested-values-listeners) daq-err-code
   (self daq-property-internal)
-  (has-listeners (:pointer daq-bool))
+  (has-listeners (:pointer daq-c-bool))
   )
 
 (defun property-internal/get-has-on-get-suggested-values-listeners (self)
-  (cffi:with-foreign-object (has-listeners-slot 'daq-bool)
+  (cffi:with-foreign-object (has-listeners-slot 'daq-c-bool)
     (%check-error (%daq-property-internal-get-has-on-get-suggested-values-listeners self has-listeners-slot) "daqPropertyInternal_getHasOnGetSuggestedValuesListeners")
-    (cffi:mem-ref has-listeners-slot 'daq-bool)
+    (cffi:mem-ref has-listeners-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqPropertyInternal_getHasOnReadListeners" %daq-property-internal-get-has-on-read-listeners) daq-err-code
   (self daq-property-internal)
-  (has-listeners (:pointer daq-bool))
+  (has-listeners (:pointer daq-c-bool))
   )
 
 (defun property-internal/get-has-on-read-listeners (self)
-  (cffi:with-foreign-object (has-listeners-slot 'daq-bool)
+  (cffi:with-foreign-object (has-listeners-slot 'daq-c-bool)
     (%check-error (%daq-property-internal-get-has-on-read-listeners self has-listeners-slot) "daqPropertyInternal_getHasOnReadListeners")
-    (cffi:mem-ref has-listeners-slot 'daq-bool)
+    (cffi:mem-ref has-listeners-slot 'daq-c-bool)
   )
 )
 
@@ -13105,37 +14139,37 @@
 
 (cffi:defcfun ("daqPropertyInternal_getIsReferencedNoLock" %daq-property-internal-get-is-referenced-no-lock) daq-err-code
   (self daq-property-internal)
-  (is-referenced (:pointer daq-bool))
+  (is-referenced (:pointer daq-c-bool))
   )
 
 (defun property-internal/get-is-referenced-no-lock (self)
-  (cffi:with-foreign-object (is-referenced-slot 'daq-bool)
+  (cffi:with-foreign-object (is-referenced-slot 'daq-c-bool)
     (%check-error (%daq-property-internal-get-is-referenced-no-lock self is-referenced-slot) "daqPropertyInternal_getIsReferencedNoLock")
-    (cffi:mem-ref is-referenced-slot 'daq-bool)
+    (cffi:mem-ref is-referenced-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqPropertyInternal_getItemTypeNoLock" %daq-property-internal-get-item-type-no-lock) daq-err-code
   (self daq-property-internal)
-  (type (:pointer daq-core-type))
+  (type (:pointer daq-c-core-type))
   )
 
 (defun property-internal/get-item-type-no-lock (self)
-  (cffi:with-foreign-object (type-slot 'daq-core-type)
+  (cffi:with-foreign-object (type-slot 'daq-c-core-type)
     (%check-error (%daq-property-internal-get-item-type-no-lock self type-slot) "daqPropertyInternal_getItemTypeNoLock")
-    (cffi:mem-ref type-slot 'daq-core-type)
+    (cffi:mem-ref type-slot 'daq-c-core-type)
   )
 )
 
 (cffi:defcfun ("daqPropertyInternal_getKeyTypeNoLock" %daq-property-internal-get-key-type-no-lock) daq-err-code
   (self daq-property-internal)
-  (type (:pointer daq-core-type))
+  (type (:pointer daq-c-core-type))
   )
 
 (defun property-internal/get-key-type-no-lock (self)
-  (cffi:with-foreign-object (type-slot 'daq-core-type)
+  (cffi:with-foreign-object (type-slot 'daq-c-core-type)
     (%check-error (%daq-property-internal-get-key-type-no-lock self type-slot) "daqPropertyInternal_getKeyTypeNoLock")
-    (cffi:mem-ref type-slot 'daq-core-type)
+    (cffi:mem-ref type-slot 'daq-c-core-type)
   )
 )
 
@@ -13189,13 +14223,13 @@
 
 (cffi:defcfun ("daqPropertyInternal_getReadOnlyNoLock" %daq-property-internal-get-read-only-no-lock) daq-err-code
   (self daq-property-internal)
-  (read-only (:pointer daq-bool))
+  (read-only (:pointer daq-c-bool))
   )
 
 (defun property-internal/get-read-only-no-lock (self)
-  (cffi:with-foreign-object (read-only-slot 'daq-bool)
+  (cffi:with-foreign-object (read-only-slot 'daq-c-bool)
     (%check-error (%daq-property-internal-get-read-only-no-lock self read-only-slot) "daqPropertyInternal_getReadOnlyNoLock")
-    (cffi:mem-ref read-only-slot 'daq-bool)
+    (cffi:mem-ref read-only-slot 'daq-c-bool)
   )
 )
 
@@ -13333,37 +14367,37 @@
 
 (cffi:defcfun ("daqPropertyInternal_getValueTypeNoLock" %daq-property-internal-get-value-type-no-lock) daq-err-code
   (self daq-property-internal)
-  (type (:pointer daq-core-type))
+  (type (:pointer daq-c-core-type))
   )
 
 (defun property-internal/get-value-type-no-lock (self)
-  (cffi:with-foreign-object (type-slot 'daq-core-type)
+  (cffi:with-foreign-object (type-slot 'daq-c-core-type)
     (%check-error (%daq-property-internal-get-value-type-no-lock self type-slot) "daqPropertyInternal_getValueTypeNoLock")
-    (cffi:mem-ref type-slot 'daq-core-type)
+    (cffi:mem-ref type-slot 'daq-c-core-type)
   )
 )
 
 (cffi:defcfun ("daqPropertyInternal_getValueTypeUnresolved" %daq-property-internal-get-value-type-unresolved) daq-err-code
   (self daq-property-internal)
-  (core-type (:pointer daq-core-type))
+  (core-type (:pointer daq-c-core-type))
   )
 
 (defun property-internal/get-value-type-unresolved (self)
-  (cffi:with-foreign-object (core-type-slot 'daq-core-type)
+  (cffi:with-foreign-object (core-type-slot 'daq-c-core-type)
     (%check-error (%daq-property-internal-get-value-type-unresolved self core-type-slot) "daqPropertyInternal_getValueTypeUnresolved")
-    (cffi:mem-ref core-type-slot 'daq-core-type)
+    (cffi:mem-ref core-type-slot 'daq-c-core-type)
   )
 )
 
 (cffi:defcfun ("daqPropertyInternal_getVisibleNoLock" %daq-property-internal-get-visible-no-lock) daq-err-code
   (self daq-property-internal)
-  (visible (:pointer daq-bool))
+  (visible (:pointer daq-c-bool))
   )
 
 (defun property-internal/get-visible-no-lock (self)
-  (cffi:with-foreign-object (visible-slot 'daq-bool)
+  (cffi:with-foreign-object (visible-slot 'daq-c-bool)
     (%check-error (%daq-property-internal-get-visible-no-lock self visible-slot) "daqPropertyInternal_getVisibleNoLock")
-    (cffi:mem-ref visible-slot 'daq-bool)
+    (cffi:mem-ref visible-slot 'daq-c-bool)
   )
 )
 
@@ -13396,6 +14430,60 @@
 
 (defun property-internal/set-value-protected (self new-value)
   (%check-error (%daq-property-internal-set-value-protected self new-value) "daqPropertyInternal_setValueProtected")
+  nil
+)
+
+(cffi:defcfun ("daqPropertyMetadataReadArgs_createPropertyMetadataReadArgs" %daq-property-metadata-read-args-create-property-metadata-read-args) daq-err-code
+  (obj (:pointer daq-property-metadata-read-args))
+  (prop daq-property)
+  )
+
+(defun property-metadata-read-args/create-property-metadata-read-args (prop)
+  (cffi:with-foreign-object (obj-slot 'daq-property-metadata-read-args)
+    (%check-error (%daq-property-metadata-read-args-create-property-metadata-read-args obj-slot prop) "daqPropertyMetadataReadArgs_createPropertyMetadataReadArgs")
+    (cffi:mem-ref obj-slot 'daq-property-metadata-read-args)
+  )
+)
+
+(cffi:defcfun ("daqPropertyMetadataReadArgs_getInterfaceId" %daq-property-metadata-read-args-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun property-metadata-read-args/get-interface-id (intf-id)
+  (%daq-property-metadata-read-args-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqPropertyMetadataReadArgs_getProperty" %daq-property-metadata-read-args-get-property) daq-err-code
+  (self daq-property-metadata-read-args)
+  (property (:pointer daq-property))
+  )
+
+(defun property-metadata-read-args/get-property (self)
+  (cffi:with-foreign-object (property-slot 'daq-property)
+    (%check-error (%daq-property-metadata-read-args-get-property self property-slot) "daqPropertyMetadataReadArgs_getProperty")
+    (cffi:mem-ref property-slot 'daq-property)
+  )
+)
+
+(cffi:defcfun ("daqPropertyMetadataReadArgs_getValue" %daq-property-metadata-read-args-get-value) daq-err-code
+  (self daq-property-metadata-read-args)
+  (value (:pointer daq-base-object))
+  )
+
+(defun property-metadata-read-args/get-value (self)
+  (cffi:with-foreign-object (value-slot 'daq-base-object)
+    (%check-error (%daq-property-metadata-read-args-get-value self value-slot) "daqPropertyMetadataReadArgs_getValue")
+    (cffi:mem-ref value-slot 'daq-base-object)
+  )
+)
+
+(cffi:defcfun ("daqPropertyMetadataReadArgs_setValue" %daq-property-metadata-read-args-set-value) daq-err-code
+  (self daq-property-metadata-read-args)
+  (value daq-base-object)
+  )
+
+(defun property-metadata-read-args/set-value (self value)
+  (%check-error (%daq-property-metadata-read-args-set-value self value) "daqPropertyMetadataReadArgs_setValue")
   nil
 )
 
@@ -13609,7 +14697,7 @@
 
 (cffi:defcfun ("daqPropertyObjectClass_getProperties" %daq-property-object-class-get-properties) daq-err-code
   (self daq-property-object-class)
-  (include-inherited daq-bool)
+  (include-inherited daq-c-bool)
   (properties (:pointer daq-list))
   )
 
@@ -13636,39 +14724,84 @@
 (cffi:defcfun ("daqPropertyObjectClass_hasProperty" %daq-property-object-class-has-property) daq-err-code
   (self daq-property-object-class)
   (property-name daq-string)
-  (has-property (:pointer daq-bool))
+  (has-property (:pointer daq-c-bool))
   )
 
 (defun property-object-class/has-property (self property-name)
-  (cffi:with-foreign-object (has-property-slot 'daq-bool)
+  (cffi:with-foreign-object (has-property-slot 'daq-c-bool)
     (%check-error (%daq-property-object-class-has-property self property-name has-property-slot) "daqPropertyObjectClass_hasProperty")
-    (cffi:mem-ref has-property-slot 'daq-bool)
+    (cffi:mem-ref has-property-slot 'daq-c-bool)
+  )
+)
+
+(cffi:defcfun ("daqPropertyObjectCore_createPropertyObjectCore" %daq-property-object-core-create-property-object-core) daq-err-code
+  (obj (:pointer daq-property-object-core))
+  )
+
+(defun property-object-core/create-property-object-core ()
+  (cffi:with-foreign-object (obj-slot 'daq-property-object-core)
+    (%check-error (%daq-property-object-core-create-property-object-core obj-slot) "daqPropertyObjectCore_createPropertyObjectCore")
+    (cffi:mem-ref obj-slot 'daq-property-object-core)
+  )
+)
+
+(cffi:defcfun ("daqPropertyObjectCore_getInterfaceId" %daq-property-object-core-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun property-object-core/get-interface-id (intf-id)
+  (%daq-property-object-core-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqPropertyObjectCore_getLockGuard" %daq-property-object-core-get-lock-guard) daq-err-code
+  (self daq-property-object-core)
+  (lock-guard (:pointer daq-lock-guard))
+  (sync daq-mutex)
+  )
+
+(defun property-object-core/get-lock-guard (self sync)
+  (cffi:with-foreign-object (lock-guard-slot 'daq-lock-guard)
+    (%check-error (%daq-property-object-core-get-lock-guard self lock-guard-slot sync) "daqPropertyObjectCore_getLockGuard")
+    (cffi:mem-ref lock-guard-slot 'daq-lock-guard)
+  )
+)
+
+(cffi:defcfun ("daqPropertyObjectCore_getRecursiveLockGuard" %daq-property-object-core-get-recursive-lock-guard) daq-err-code
+  (self daq-property-object-core)
+  (lock-guard (:pointer daq-lock-guard))
+  (sync daq-mutex)
+  )
+
+(defun property-object-core/get-recursive-lock-guard (self sync)
+  (cffi:with-foreign-object (lock-guard-slot 'daq-lock-guard)
+    (%check-error (%daq-property-object-core-get-recursive-lock-guard self lock-guard-slot sync) "daqPropertyObjectCore_getRecursiveLockGuard")
+    (cffi:mem-ref lock-guard-slot 'daq-lock-guard)
   )
 )
 
 (cffi:defcfun ("daqPropertyObjectInternal_checkForReferences" %daq-property-object-internal-check-for-references) daq-err-code
   (self daq-property-object-internal)
   (property daq-property)
-  (is-referenced (:pointer daq-bool))
+  (is-referenced (:pointer daq-c-bool))
   )
 
 (defun property-object-internal/check-for-references (self property)
-  (cffi:with-foreign-object (is-referenced-slot 'daq-bool)
+  (cffi:with-foreign-object (is-referenced-slot 'daq-c-bool)
     (%check-error (%daq-property-object-internal-check-for-references self property is-referenced-slot) "daqPropertyObjectInternal_checkForReferences")
-    (cffi:mem-ref is-referenced-slot 'daq-bool)
+    (cffi:mem-ref is-referenced-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqPropertyObjectInternal_checkForReferencesNoLock" %daq-property-object-internal-check-for-references-no-lock) daq-err-code
   (self daq-property-object-internal)
   (property daq-property)
-  (is-referenced (:pointer daq-bool))
+  (is-referenced (:pointer daq-c-bool))
   )
 
 (defun property-object-internal/check-for-references-no-lock (self property)
-  (cffi:with-foreign-object (is-referenced-slot 'daq-bool)
+  (cffi:with-foreign-object (is-referenced-slot 'daq-c-bool)
     (%check-error (%daq-property-object-internal-check-for-references-no-lock self property is-referenced-slot) "daqPropertyObjectInternal_checkForReferencesNoLock")
-    (cffi:mem-ref is-referenced-slot 'daq-bool)
+    (cffi:mem-ref is-referenced-slot 'daq-c-bool)
   )
 )
 
@@ -13710,6 +14843,18 @@
 (defun property-object-internal/enable-core-event-trigger (self)
   (%check-error (%daq-property-object-internal-enable-core-event-trigger self) "daqPropertyObjectInternal_enableCoreEventTrigger")
   nil
+)
+
+(cffi:defcfun ("daqPropertyObjectInternal_getAllPropertiesNoLock" %daq-property-object-internal-get-all-properties-no-lock) daq-err-code
+  (self daq-property-object-internal)
+  (properties (:pointer daq-list))
+  )
+
+(defun property-object-internal/get-all-properties-no-lock (self)
+  (cffi:with-foreign-object (properties-slot 'daq-list)
+    (%check-error (%daq-property-object-internal-get-all-properties-no-lock self properties-slot) "daqPropertyObjectInternal_getAllPropertiesNoLock")
+    (cffi:mem-ref properties-slot 'daq-list)
+  )
 )
 
 (cffi:defcfun ("daqPropertyObjectInternal_getCoreEventTrigger" %daq-property-object-internal-get-core-event-trigger) daq-err-code
@@ -13792,6 +14937,19 @@
   )
 )
 
+(cffi:defcfun ("daqPropertyObjectInternal_getPropertyNoLock" %daq-property-object-internal-get-property-no-lock) daq-err-code
+  (self daq-property-object-internal)
+  (property-name daq-string)
+  (property (:pointer daq-property))
+  )
+
+(defun property-object-internal/get-property-no-lock (self property-name)
+  (cffi:with-foreign-object (property-slot 'daq-property)
+    (%check-error (%daq-property-object-internal-get-property-no-lock self property-name property-slot) "daqPropertyObjectInternal_getPropertyNoLock")
+    (cffi:mem-ref property-slot 'daq-property)
+  )
+)
+
 (cffi:defcfun ("daqPropertyObjectInternal_getPropertySelectionValueNoLock" %daq-property-object-internal-get-property-selection-value-no-lock) daq-err-code
   (self daq-property-object-internal)
   (name daq-string)
@@ -13830,28 +14988,53 @@
   )
 )
 
+(cffi:defcfun ("daqPropertyObjectInternal_getVisiblePropertiesNoLock" %daq-property-object-internal-get-visible-properties-no-lock) daq-err-code
+  (self daq-property-object-internal)
+  (properties (:pointer daq-list))
+  )
+
+(defun property-object-internal/get-visible-properties-no-lock (self)
+  (cffi:with-foreign-object (properties-slot 'daq-list)
+    (%check-error (%daq-property-object-internal-get-visible-properties-no-lock self properties-slot) "daqPropertyObjectInternal_getVisiblePropertiesNoLock")
+    (cffi:mem-ref properties-slot 'daq-list)
+  )
+)
+
+(cffi:defcfun ("daqPropertyObjectInternal_hasPropertyNoLock" %daq-property-object-internal-has-property-no-lock) daq-err-code
+  (self daq-property-object-internal)
+  (property-name daq-string)
+  (has-property (:pointer daq-c-bool))
+  )
+
+(defun property-object-internal/has-property-no-lock (self property-name)
+  (cffi:with-foreign-object (has-property-slot 'daq-c-bool)
+    (%check-error (%daq-property-object-internal-has-property-no-lock self property-name has-property-slot) "daqPropertyObjectInternal_hasPropertyNoLock")
+    (cffi:mem-ref has-property-slot 'daq-c-bool)
+  )
+)
+
 (cffi:defcfun ("daqPropertyObjectInternal_hasUserReadAccess" %daq-property-object-internal-has-user-read-access) daq-err-code
   (self daq-property-object-internal)
   (user-context daq-base-object)
-  (has-access-out (:pointer daq-bool))
+  (has-access-out (:pointer daq-c-bool))
   )
 
 (defun property-object-internal/has-user-read-access (self user-context)
-  (cffi:with-foreign-object (has-access-out-slot 'daq-bool)
+  (cffi:with-foreign-object (has-access-out-slot 'daq-c-bool)
     (%check-error (%daq-property-object-internal-has-user-read-access self user-context has-access-out-slot) "daqPropertyObjectInternal_hasUserReadAccess")
-    (cffi:mem-ref has-access-out-slot 'daq-bool)
+    (cffi:mem-ref has-access-out-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqPropertyObjectInternal_isUpdating" %daq-property-object-internal-is-updating) daq-err-code
   (self daq-property-object-internal)
-  (updating (:pointer daq-bool))
+  (updating (:pointer daq-c-bool))
   )
 
 (defun property-object-internal/is-updating (self)
-  (cffi:with-foreign-object (updating-slot 'daq-bool)
+  (cffi:with-foreign-object (updating-slot 'daq-c-bool)
     (%check-error (%daq-property-object-internal-is-updating self updating-slot) "daqPropertyObjectInternal_isUpdating")
-    (cffi:mem-ref updating-slot 'daq-bool)
+    (cffi:mem-ref updating-slot 'daq-c-bool)
   )
 )
 
@@ -14188,13 +15371,13 @@
 
 (cffi:defcfun ("daqPropertyObject_getUpdating" %daq-property-object-get-updating) daq-err-code
   (self daq-property-object)
-  (updating (:pointer daq-bool))
+  (updating (:pointer daq-c-bool))
   )
 
 (defun property-object/get-updating (self)
-  (cffi:with-foreign-object (updating-slot 'daq-bool)
+  (cffi:with-foreign-object (updating-slot 'daq-c-bool)
     (%check-error (%daq-property-object-get-updating self updating-slot) "daqPropertyObject_getUpdating")
-    (cffi:mem-ref updating-slot 'daq-bool)
+    (cffi:mem-ref updating-slot 'daq-c-bool)
   )
 )
 
@@ -14213,13 +15396,13 @@
 (cffi:defcfun ("daqPropertyObject_hasProperty" %daq-property-object-has-property) daq-err-code
   (self daq-property-object)
   (property-name daq-string)
-  (has-property (:pointer daq-bool))
+  (has-property (:pointer daq-c-bool))
   )
 
 (defun property-object/has-property (self property-name)
-  (cffi:with-foreign-object (has-property-slot 'daq-bool)
+  (cffi:with-foreign-object (has-property-slot 'daq-c-bool)
     (%check-error (%daq-property-object-has-property self property-name has-property-slot) "daqPropertyObject_hasProperty")
-    (cffi:mem-ref has-property-slot 'daq-bool)
+    (cffi:mem-ref has-property-slot 'daq-c-bool)
   )
 )
 
@@ -14271,7 +15454,7 @@
   (value daq-base-object)
   (old-value daq-base-object)
   (type daq-property-event-type)
-  (is-updating daq-bool)
+  (is-updating daq-c-bool)
   )
 
 (defun property-value-event-args/create-property-value-event-args (prop value old-value type is-updating)
@@ -14281,15 +15464,23 @@
   )
 )
 
+(cffi:defcfun ("daqPropertyValueEventArgs_getInterfaceId" %daq-property-value-event-args-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun property-value-event-args/get-interface-id (intf-id)
+  (%daq-property-value-event-args-get-interface-id intf-id)
+  nil)
+
 (cffi:defcfun ("daqPropertyValueEventArgs_getIsUpdating" %daq-property-value-event-args-get-is-updating) daq-err-code
   (self daq-property-value-event-args)
-  (is-updating (:pointer daq-bool))
+  (is-updating (:pointer daq-c-bool))
   )
 
 (defun property-value-event-args/get-is-updating (self)
-  (cffi:with-foreign-object (is-updating-slot 'daq-bool)
+  (cffi:with-foreign-object (is-updating-slot 'daq-c-bool)
     (%check-error (%daq-property-value-event-args-get-is-updating self is-updating-slot) "daqPropertyValueEventArgs_getIsUpdating")
-    (cffi:mem-ref is-updating-slot 'daq-bool)
+    (cffi:mem-ref is-updating-slot 'daq-c-bool)
   )
 )
 
@@ -14396,7 +15587,7 @@
 (cffi:defcfun ("daqProperty_createFloatProperty" %daq-property-create-float-property) daq-err-code
   (obj (:pointer daq-property))
   (name daq-string)
-  (default-value daq-float-object)
+  (default-value daq-float)
   (visible daq-boolean)
   )
 
@@ -14605,37 +15796,37 @@
 
 (cffi:defcfun ("daqProperty_getIsReferenced" %daq-property-get-is-referenced) daq-err-code
   (self daq-property)
-  (is-referenced (:pointer daq-bool))
+  (is-referenced (:pointer daq-c-bool))
   )
 
 (defun property/get-is-referenced (self)
-  (cffi:with-foreign-object (is-referenced-slot 'daq-bool)
+  (cffi:with-foreign-object (is-referenced-slot 'daq-c-bool)
     (%check-error (%daq-property-get-is-referenced self is-referenced-slot) "daqProperty_getIsReferenced")
-    (cffi:mem-ref is-referenced-slot 'daq-bool)
+    (cffi:mem-ref is-referenced-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqProperty_getItemType" %daq-property-get-item-type) daq-err-code
   (self daq-property)
-  (type (:pointer daq-core-type))
+  (type (:pointer daq-c-core-type))
   )
 
 (defun property/get-item-type (self)
-  (cffi:with-foreign-object (type-slot 'daq-core-type)
+  (cffi:with-foreign-object (type-slot 'daq-c-core-type)
     (%check-error (%daq-property-get-item-type self type-slot) "daqProperty_getItemType")
-    (cffi:mem-ref type-slot 'daq-core-type)
+    (cffi:mem-ref type-slot 'daq-c-core-type)
   )
 )
 
 (cffi:defcfun ("daqProperty_getKeyType" %daq-property-get-key-type) daq-err-code
   (self daq-property)
-  (type (:pointer daq-core-type))
+  (type (:pointer daq-c-core-type))
   )
 
 (defun property/get-key-type (self)
-  (cffi:with-foreign-object (type-slot 'daq-core-type)
+  (cffi:with-foreign-object (type-slot 'daq-c-core-type)
     (%check-error (%daq-property-get-key-type self type-slot) "daqProperty_getKeyType")
-    (cffi:mem-ref type-slot 'daq-core-type)
+    (cffi:mem-ref type-slot 'daq-c-core-type)
   )
 )
 
@@ -14737,13 +15928,13 @@
 
 (cffi:defcfun ("daqProperty_getReadOnly" %daq-property-get-read-only) daq-err-code
   (self daq-property)
-  (read-only (:pointer daq-bool))
+  (read-only (:pointer daq-c-bool))
   )
 
 (defun property/get-read-only (self)
-  (cffi:with-foreign-object (read-only-slot 'daq-bool)
+  (cffi:with-foreign-object (read-only-slot 'daq-c-bool)
     (%check-error (%daq-property-get-read-only self read-only-slot) "daqProperty_getReadOnly")
-    (cffi:mem-ref read-only-slot 'daq-bool)
+    (cffi:mem-ref read-only-slot 'daq-c-bool)
   )
 )
 
@@ -14833,25 +16024,25 @@
 
 (cffi:defcfun ("daqProperty_getValueType" %daq-property-get-value-type) daq-err-code
   (self daq-property)
-  (type (:pointer daq-core-type))
+  (type (:pointer daq-c-core-type))
   )
 
 (defun property/get-value-type (self)
-  (cffi:with-foreign-object (type-slot 'daq-core-type)
+  (cffi:with-foreign-object (type-slot 'daq-c-core-type)
     (%check-error (%daq-property-get-value-type self type-slot) "daqProperty_getValueType")
-    (cffi:mem-ref type-slot 'daq-core-type)
+    (cffi:mem-ref type-slot 'daq-c-core-type)
   )
 )
 
 (cffi:defcfun ("daqProperty_getVisible" %daq-property-get-visible) daq-err-code
   (self daq-property)
-  (visible (:pointer daq-bool))
+  (visible (:pointer daq-c-bool))
   )
 
 (defun property/get-visible (self)
-  (cffi:with-foreign-object (visible-slot 'daq-bool)
+  (cffi:with-foreign-object (visible-slot 'daq-c-bool)
     (%check-error (%daq-property-get-visible self visible-slot) "daqProperty_getVisible")
-    (cffi:mem-ref visible-slot 'daq-bool)
+    (cffi:mem-ref visible-slot 'daq-c-bool)
   )
 )
 
@@ -14912,8 +16103,8 @@
 
 (cffi:defcfun ("daqRatio_createRatio" %daq-ratio-create-ratio) daq-err-code
   (obj (:pointer daq-ratio))
-  (numerator daq-int)
-  (denominator daq-int)
+  (numerator daq-c-int)
+  (denominator daq-c-int)
   )
 
 (defun ratio/create-ratio (numerator denominator)
@@ -14925,13 +16116,13 @@
 
 (cffi:defcfun ("daqRatio_getDenominator" %daq-ratio-get-denominator) daq-err-code
   (self daq-ratio)
-  (denominator (:pointer daq-int))
+  (denominator (:pointer daq-c-int))
   )
 
 (defun ratio/get-denominator (self)
-  (cffi:with-foreign-object (denominator-slot 'daq-int)
+  (cffi:with-foreign-object (denominator-slot 'daq-c-int)
     (%check-error (%daq-ratio-get-denominator self denominator-slot) "daqRatio_getDenominator")
-    (cffi:mem-ref denominator-slot 'daq-int)
+    (cffi:mem-ref denominator-slot 'daq-c-int)
   )
 )
 
@@ -14945,13 +16136,13 @@
 
 (cffi:defcfun ("daqRatio_getNumerator" %daq-ratio-get-numerator) daq-err-code
   (self daq-ratio)
-  (numerator (:pointer daq-int))
+  (numerator (:pointer daq-c-int))
   )
 
 (defun ratio/get-numerator (self)
-  (cffi:with-foreign-object (numerator-slot 'daq-int)
+  (cffi:with-foreign-object (numerator-slot 'daq-c-int)
     (%check-error (%daq-ratio-get-numerator self numerator-slot) "daqRatio_getNumerator")
-    (cffi:mem-ref numerator-slot 'daq-int)
+    (cffi:mem-ref numerator-slot 'daq-c-int)
   )
 )
 
@@ -15001,13 +16192,13 @@
 
 (cffi:defcfun ("daqReaderConfig_getIsValid" %daq-reader-config-get-is-valid) daq-err-code
   (self daq-reader-config)
-  (is-valid (:pointer daq-bool))
+  (is-valid (:pointer daq-c-bool))
   )
 
 (defun reader-config/get-is-valid (self)
-  (cffi:with-foreign-object (is-valid-slot 'daq-bool)
+  (cffi:with-foreign-object (is-valid-slot 'daq-c-bool)
     (%check-error (%daq-reader-config-get-is-valid self is-valid-slot) "daqReaderConfig_getIsValid")
-    (cffi:mem-ref is-valid-slot 'daq-bool)
+    (cffi:mem-ref is-valid-slot 'daq-c-bool)
   )
 )
 
@@ -15047,7 +16238,7 @@
 (cffi:defcfun ("daqReaderStatus_createReaderStatus" %daq-reader-status-create-reader-status) daq-err-code
   (obj (:pointer daq-reader-status))
   (event-packet daq-event-packet)
-  (valid daq-bool)
+  (valid daq-c-bool)
   (offset daq-number)
   )
 
@@ -15104,37 +16295,37 @@
 
 (cffi:defcfun ("daqReaderStatus_getValid" %daq-reader-status-get-valid) daq-err-code
   (self daq-reader-status)
-  (valid (:pointer daq-bool))
+  (valid (:pointer daq-c-bool))
   )
 
 (defun reader-status/get-valid (self)
-  (cffi:with-foreign-object (valid-slot 'daq-bool)
+  (cffi:with-foreign-object (valid-slot 'daq-c-bool)
     (%check-error (%daq-reader-status-get-valid self valid-slot) "daqReaderStatus_getValid")
-    (cffi:mem-ref valid-slot 'daq-bool)
+    (cffi:mem-ref valid-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqReader_getAvailableCount" %daq-reader-get-available-count) daq-err-code
   (self daq-reader)
-  (count (:pointer daq-size-t))
+  (count (:pointer daq-c-size-t))
   )
 
 (defun reader/get-available-count (self)
-  (cffi:with-foreign-object (count-slot 'daq-size-t)
+  (cffi:with-foreign-object (count-slot 'daq-c-size-t)
     (%check-error (%daq-reader-get-available-count self count-slot) "daqReader_getAvailableCount")
-    (cffi:mem-ref count-slot 'daq-size-t)
+    (cffi:mem-ref count-slot 'daq-c-size-t)
   )
 )
 
 (cffi:defcfun ("daqReader_getEmpty" %daq-reader-get-empty) daq-err-code
   (self daq-reader)
-  (empty (:pointer daq-bool))
+  (empty (:pointer daq-c-bool))
   )
 
 (defun reader/get-empty (self)
-  (cffi:with-foreign-object (empty-slot 'daq-bool)
+  (cffi:with-foreign-object (empty-slot 'daq-c-bool)
     (%check-error (%daq-reader-get-empty self empty-slot) "daqReader_getEmpty")
-    (cffi:mem-ref empty-slot 'daq-bool)
+    (cffi:mem-ref empty-slot 'daq-c-bool)
   )
 )
 
@@ -15176,13 +16367,13 @@
 
 (cffi:defcfun ("daqRecorder_getIsRecording" %daq-recorder-get-is-recording) daq-err-code
   (self daq-recorder)
-  (is-recording (:pointer daq-bool))
+  (is-recording (:pointer daq-c-bool))
   )
 
 (defun recorder/get-is-recording (self)
-  (cffi:with-foreign-object (is-recording-slot 'daq-bool)
+  (cffi:with-foreign-object (is-recording-slot 'daq-c-bool)
     (%check-error (%daq-recorder-get-is-recording self is-recording-slot) "daqRecorder_getIsRecording")
-    (cffi:mem-ref is-recording-slot 'daq-bool)
+    (cffi:mem-ref is-recording-slot 'daq-c-bool)
   )
 )
 
@@ -15267,6 +16458,18 @@
   )
 )
 
+(cffi:defcfun ("daqReferenceDomainInfoBuilder_getReferenceDomainIds" %daq-reference-domain-info-builder-get-reference-domain-ids) daq-err-code
+  (self daq-reference-domain-info-builder)
+  (reference-domain-ids (:pointer daq-list))
+  )
+
+(defun reference-domain-info-builder/get-reference-domain-ids (self)
+  (cffi:with-foreign-object (reference-domain-ids-slot 'daq-list)
+    (%check-error (%daq-reference-domain-info-builder-get-reference-domain-ids self reference-domain-ids-slot) "daqReferenceDomainInfoBuilder_getReferenceDomainIds")
+    (cffi:mem-ref reference-domain-ids-slot 'daq-list)
+  )
+)
+
 (cffi:defcfun ("daqReferenceDomainInfoBuilder_getReferenceDomainOffset" %daq-reference-domain-info-builder-get-reference-domain-offset) daq-err-code
   (self daq-reference-domain-info-builder)
   (reference-domain-offset (:pointer daq-integer))
@@ -15291,18 +16494,6 @@
   )
 )
 
-(cffi:defcfun ("daqReferenceDomainInfoBuilder_getUsesOffset" %daq-reference-domain-info-builder-get-uses-offset) daq-err-code
-  (self daq-reference-domain-info-builder)
-  (uses-offset (:pointer daq-uses-offset))
-  )
-
-(defun reference-domain-info-builder/get-uses-offset (self)
-  (cffi:with-foreign-object (uses-offset-slot 'daq-uses-offset)
-    (%check-error (%daq-reference-domain-info-builder-get-uses-offset self uses-offset-slot) "daqReferenceDomainInfoBuilder_getUsesOffset")
-    (cffi:mem-ref uses-offset-slot 'daq-uses-offset)
-  )
-)
-
 (cffi:defcfun ("daqReferenceDomainInfoBuilder_setReferenceDomainId" %daq-reference-domain-info-builder-set-reference-domain-id) daq-err-code
   (self daq-reference-domain-info-builder)
   (reference-domain-id daq-string)
@@ -15310,6 +16501,16 @@
 
 (defun reference-domain-info-builder/set-reference-domain-id (self reference-domain-id)
   (%check-error (%daq-reference-domain-info-builder-set-reference-domain-id self reference-domain-id) "daqReferenceDomainInfoBuilder_setReferenceDomainId")
+  nil
+)
+
+(cffi:defcfun ("daqReferenceDomainInfoBuilder_setReferenceDomainIds" %daq-reference-domain-info-builder-set-reference-domain-ids) daq-err-code
+  (self daq-reference-domain-info-builder)
+  (reference-domain-ids daq-list)
+  )
+
+(defun reference-domain-info-builder/set-reference-domain-ids (self reference-domain-ids)
+  (%check-error (%daq-reference-domain-info-builder-set-reference-domain-ids self reference-domain-ids) "daqReferenceDomainInfoBuilder_setReferenceDomainIds")
   nil
 )
 
@@ -15330,16 +16531,6 @@
 
 (defun reference-domain-info-builder/set-reference-time-protocol (self reference-time-protocol)
   (%check-error (%daq-reference-domain-info-builder-set-reference-time-protocol self reference-time-protocol) "daqReferenceDomainInfoBuilder_setReferenceTimeProtocol")
-  nil
-)
-
-(cffi:defcfun ("daqReferenceDomainInfoBuilder_setUsesOffset" %daq-reference-domain-info-builder-set-uses-offset) daq-err-code
-  (self daq-reference-domain-info-builder)
-  (uses-offset daq-uses-offset)
-  )
-
-(defun reference-domain-info-builder/set-uses-offset (self uses-offset)
-  (%check-error (%daq-reference-domain-info-builder-set-uses-offset self uses-offset) "daqReferenceDomainInfoBuilder_setUsesOffset")
   nil
 )
 
@@ -15375,6 +16566,18 @@
   )
 )
 
+(cffi:defcfun ("daqReferenceDomainInfo_getReferenceDomainIds" %daq-reference-domain-info-get-reference-domain-ids) daq-err-code
+  (self daq-reference-domain-info)
+  (reference-domain-ids (:pointer daq-list))
+  )
+
+(defun reference-domain-info/get-reference-domain-ids (self)
+  (cffi:with-foreign-object (reference-domain-ids-slot 'daq-list)
+    (%check-error (%daq-reference-domain-info-get-reference-domain-ids self reference-domain-ids-slot) "daqReferenceDomainInfo_getReferenceDomainIds")
+    (cffi:mem-ref reference-domain-ids-slot 'daq-list)
+  )
+)
+
 (cffi:defcfun ("daqReferenceDomainInfo_getReferenceDomainOffset" %daq-reference-domain-info-get-reference-domain-offset) daq-err-code
   (self daq-reference-domain-info)
   (reference-domain-offset (:pointer daq-integer))
@@ -15399,18 +16602,6 @@
   )
 )
 
-(cffi:defcfun ("daqReferenceDomainInfo_getUsesOffset" %daq-reference-domain-info-get-uses-offset) daq-err-code
-  (self daq-reference-domain-info)
-  (uses-offset (:pointer daq-uses-offset))
-  )
-
-(defun reference-domain-info/get-uses-offset (self)
-  (cffi:with-foreign-object (uses-offset-slot 'daq-uses-offset)
-    (%check-error (%daq-reference-domain-info-get-uses-offset self uses-offset-slot) "daqReferenceDomainInfo_getUsesOffset")
-    (cffi:mem-ref uses-offset-slot 'daq-uses-offset)
-  )
-)
-
 (cffi:defcfun ("daqRemovable_getInterfaceId" %daq-removable-get-interface-id) :void
   (intf-id (:pointer daq-intf-id))
   )
@@ -15421,13 +16612,13 @@
 
 (cffi:defcfun ("daqRemovable_isRemoved" %daq-removable-is-removed) daq-err-code
   (self daq-removable)
-  (removed (:pointer daq-bool))
+  (removed (:pointer daq-c-bool))
   )
 
 (defun removable/is-removed (self)
-  (cffi:with-foreign-object (removed-slot 'daq-bool)
+  (cffi:with-foreign-object (removed-slot 'daq-c-bool)
     (%check-error (%daq-removable-is-removed self removed-slot) "daqRemovable_isRemoved")
-    (cffi:mem-ref removed-slot 'daq-bool)
+    (cffi:mem-ref removed-slot 'daq-c-bool)
   )
 )
 
@@ -15451,17 +16642,17 @@
 (cffi:defcfun ("daqReusableDataPacket_reuse" %daq-reusable-data-packet-reuse) daq-err-code
   (self daq-reusable-data-packet)
   (new-descriptor daq-data-descriptor)
-  (new-sample-count daq-size-t)
+  (new-sample-count daq-c-size-t)
   (new-offset daq-number)
   (new-domain-packet daq-data-packet)
-  (can-realloc-memory daq-bool)
-  (success (:pointer daq-bool))
+  (can-realloc-memory daq-c-bool)
+  (success (:pointer daq-c-bool))
   )
 
 (defun reusable-data-packet/reuse (self new-descriptor new-sample-count new-offset new-domain-packet can-realloc-memory)
-  (cffi:with-foreign-object (success-slot 'daq-bool)
+  (cffi:with-foreign-object (success-slot 'daq-c-bool)
     (%check-error (%daq-reusable-data-packet-reuse self new-descriptor new-sample-count new-offset new-domain-packet can-realloc-memory success-slot) "daqReusableDataPacket_reuse")
-    (cffi:mem-ref success-slot 'daq-bool)
+    (cffi:mem-ref success-slot 'daq-c-bool)
   )
 )
 
@@ -15698,47 +16889,6 @@
   nil
 )
 
-(cffi:defcfun ("daqScalingCalcPrivate_getInterfaceId" %daq-scaling-calc-private-get-interface-id) :void
-  (intf-id (:pointer daq-intf-id))
-  )
-
-(defun scaling-calc-private/get-interface-id (intf-id)
-  (%daq-scaling-calc-private-get-interface-id intf-id)
-  nil)
-
-(cffi:defcfun ("daqScalingCalcPrivate_hasScalingCalc" %daq-scaling-calc-private-has-scaling-calc) daq-bool
-  (self daq-scaling-calc-private)
-  )
-
-(defun scaling-calc-private/has-scaling-calc (self)
-  (let ((result (%daq-scaling-calc-private-has-scaling-calc self)))
-    result
-  )
-)
-
-(cffi:defcfun ("daqScalingCalcPrivate_scaleData" %daq-scaling-calc-private-scale-data) :void
-  (self daq-scaling-calc-private)
-  (data :pointer)
-  (sample-count daq-size-t)
-  )
-
-(defun scaling-calc-private/scale-data (self data sample-count)
-  (%daq-scaling-calc-private-scale-data self data sample-count)
-  nil
-)
-
-(cffi:defcfun ("daqScalingCalcPrivate_scaleDataOutput" %daq-scaling-calc-private-scale-data-output) :void
-  (self daq-scaling-calc-private)
-  (data :pointer)
-  (sample-count daq-size-t)
-  (output (:pointer :pointer))
-  )
-
-(defun scaling-calc-private/scale-data-output (self data sample-count output)
-  (%daq-scaling-calc-private-scale-data-output self data sample-count output)
-  nil
-)
-
 (cffi:defcfun ("daqScaling_createLinearScaling" %daq-scaling-create-linear-scaling) daq-err-code
   (obj (:pointer daq-scaling))
   (scale daq-number)
@@ -15840,7 +16990,7 @@
 (cffi:defcfun ("daqScheduler_createScheduler" %daq-scheduler-create-scheduler) daq-err-code
   (obj (:pointer daq-scheduler))
   (logger daq-logger)
-  (num-workers daq-size-t)
+  (num-workers daq-c-size-t)
   )
 
 (defun scheduler/create-scheduler (logger num-workers)
@@ -15853,8 +17003,8 @@
 (cffi:defcfun ("daqScheduler_createSchedulerWithMainLoop" %daq-scheduler-create-scheduler-with-main-loop) daq-err-code
   (obj (:pointer daq-scheduler))
   (logger daq-logger)
-  (num-workers daq-size-t)
-  (use-main-loop daq-bool)
+  (num-workers daq-c-size-t)
+  (use-main-loop daq-c-bool)
   )
 
 (defun scheduler/create-scheduler-with-main-loop (logger num-workers use-main-loop)
@@ -15874,31 +17024,31 @@
 
 (cffi:defcfun ("daqScheduler_isMainLoopSet" %daq-scheduler-is-main-loop-set) daq-err-code
   (self daq-scheduler)
-  (is-set (:pointer daq-bool))
+  (is-set (:pointer daq-c-bool))
   )
 
 (defun scheduler/is-main-loop-set (self)
-  (cffi:with-foreign-object (is-set-slot 'daq-bool)
+  (cffi:with-foreign-object (is-set-slot 'daq-c-bool)
     (%check-error (%daq-scheduler-is-main-loop-set self is-set-slot) "daqScheduler_isMainLoopSet")
-    (cffi:mem-ref is-set-slot 'daq-bool)
+    (cffi:mem-ref is-set-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqScheduler_isMultiThreaded" %daq-scheduler-is-multi-threaded) daq-err-code
   (self daq-scheduler)
-  (multi-threaded (:pointer daq-bool))
+  (multi-threaded (:pointer daq-c-bool))
   )
 
 (defun scheduler/is-multi-threaded (self)
-  (cffi:with-foreign-object (multi-threaded-slot 'daq-bool)
+  (cffi:with-foreign-object (multi-threaded-slot 'daq-c-bool)
     (%check-error (%daq-scheduler-is-multi-threaded self multi-threaded-slot) "daqScheduler_isMultiThreaded")
-    (cffi:mem-ref multi-threaded-slot 'daq-bool)
+    (cffi:mem-ref multi-threaded-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqScheduler_runMainLoop" %daq-scheduler-run-main-loop) daq-err-code
   (self daq-scheduler)
-  (loop-time daq-size-t)
+  (loop-time daq-c-size-t)
   )
 
 (defun scheduler/run-main-loop (self loop-time)
@@ -15991,13 +17141,13 @@
 (cffi:defcfun ("daqSearchFilter_acceptsObject" %daq-search-filter-accepts-object) daq-err-code
   (self daq-search-filter)
   (obj daq-base-object)
-  (accepts (:pointer daq-bool))
+  (accepts (:pointer daq-c-bool))
   )
 
 (defun search-filter/accepts-object (self obj)
-  (cffi:with-foreign-object (accepts-slot 'daq-bool)
+  (cffi:with-foreign-object (accepts-slot 'daq-c-bool)
     (%check-error (%daq-search-filter-accepts-object self obj accepts-slot) "daqSearchFilter_acceptsObject")
-    (cffi:mem-ref accepts-slot 'daq-bool)
+    (cffi:mem-ref accepts-slot 'daq-c-bool)
   )
 )
 
@@ -16082,6 +17232,18 @@
   )
 )
 
+(cffi:defcfun ("daqSearchFilter_createNamePropertyFilter" %daq-search-filter-create-name-property-filter) daq-err-code
+  (obj (:pointer daq-search-filter))
+  (regex daq-string)
+  )
+
+(defun search-filter/create-name-property-filter (regex)
+  (cffi:with-foreign-object (obj-slot 'daq-search-filter)
+    (%check-error (%daq-search-filter-create-name-property-filter obj-slot regex) "daqSearchFilter_createNamePropertyFilter")
+    (cffi:mem-ref obj-slot 'daq-search-filter)
+  )
+)
+
 (cffi:defcfun ("daqSearchFilter_createNotSearchFilter" %daq-search-filter-create-not-search-filter) daq-err-code
   (obj (:pointer daq-search-filter))
   (filter daq-search-filter)
@@ -16103,6 +17265,17 @@
 (defun search-filter/create-or-search-filter (left right)
   (cffi:with-foreign-object (obj-slot 'daq-search-filter)
     (%check-error (%daq-search-filter-create-or-search-filter obj-slot left right) "daqSearchFilter_createOrSearchFilter")
+    (cffi:mem-ref obj-slot 'daq-search-filter)
+  )
+)
+
+(cffi:defcfun ("daqSearchFilter_createReadOnlyPropertyFilter" %daq-search-filter-create-read-only-property-filter) daq-err-code
+  (obj (:pointer daq-search-filter))
+  )
+
+(defun search-filter/create-read-only-property-filter ()
+  (cffi:with-foreign-object (obj-slot 'daq-search-filter)
+    (%check-error (%daq-search-filter-create-read-only-property-filter obj-slot) "daqSearchFilter_createReadOnlyPropertyFilter")
     (cffi:mem-ref obj-slot 'daq-search-filter)
   )
 )
@@ -16131,6 +17304,17 @@
   )
 )
 
+(cffi:defcfun ("daqSearchFilter_createVisiblePropertyFilter" %daq-search-filter-create-visible-property-filter) daq-err-code
+  (obj (:pointer daq-search-filter))
+  )
+
+(defun search-filter/create-visible-property-filter ()
+  (cffi:with-foreign-object (obj-slot 'daq-search-filter)
+    (%check-error (%daq-search-filter-create-visible-property-filter obj-slot) "daqSearchFilter_createVisiblePropertyFilter")
+    (cffi:mem-ref obj-slot 'daq-search-filter)
+  )
+)
+
 (cffi:defcfun ("daqSearchFilter_createVisibleSearchFilter" %daq-search-filter-create-visible-search-filter) daq-err-code
   (obj (:pointer daq-search-filter))
   )
@@ -16153,13 +17337,13 @@
 (cffi:defcfun ("daqSearchFilter_visitChildren" %daq-search-filter-visit-children) daq-err-code
   (self daq-search-filter)
   (obj daq-base-object)
-  (visit (:pointer daq-bool))
+  (visit (:pointer daq-c-bool))
   )
 
 (defun search-filter/visit-children (self obj)
-  (cffi:with-foreign-object (visit-slot 'daq-bool)
+  (cffi:with-foreign-object (visit-slot 'daq-c-bool)
     (%check-error (%daq-search-filter-visit-children self obj visit-slot) "daqSearchFilter_visitChildren")
-    (cffi:mem-ref visit-slot 'daq-bool)
+    (cffi:mem-ref visit-slot 'daq-c-bool)
   )
 )
 
@@ -16173,13 +17357,13 @@
 
 (cffi:defcfun ("daqSerializable_getSerializeId" %daq-serializable-get-serialize-id) daq-err-code
   (self daq-serializable)
-  (id daq-const-char-ptr)
+  (id daq-c-const-char-ptr)
   )
 
 (defun serializable/get-serialize-id (self)
-  (cffi:with-foreign-object (id-slot 'daq-const-char-ptr)
+  (cffi:with-foreign-object (id-slot 'daq-c-const-char-ptr)
     (%check-error (%daq-serializable-get-serialize-id self id-slot) "daqSerializable_getSerializeId")
-    (cffi:mem-ref id-slot 'daq-const-char-ptr)
+    (cffi:mem-ref id-slot 'daq-c-const-char-ptr)
   )
 )
 
@@ -16195,25 +17379,25 @@
 
 (cffi:defcfun ("daqSerializedList_getCount" %daq-serialized-list-get-count) daq-err-code
   (self daq-serialized-list)
-  (size (:pointer daq-size-t))
+  (size (:pointer daq-c-size-t))
   )
 
 (defun serialized-list/get-count (self)
-  (cffi:with-foreign-object (size-slot 'daq-size-t)
+  (cffi:with-foreign-object (size-slot 'daq-c-size-t)
     (%check-error (%daq-serialized-list-get-count self size-slot) "daqSerializedList_getCount")
-    (cffi:mem-ref size-slot 'daq-size-t)
+    (cffi:mem-ref size-slot 'daq-c-size-t)
   )
 )
 
 (cffi:defcfun ("daqSerializedList_getCurrentItemType" %daq-serialized-list-get-current-item-type) daq-err-code
   (self daq-serialized-list)
-  (size (:pointer daq-core-type))
+  (size (:pointer daq-c-core-type))
   )
 
 (defun serialized-list/get-current-item-type (self)
-  (cffi:with-foreign-object (size-slot 'daq-core-type)
+  (cffi:with-foreign-object (size-slot 'daq-c-core-type)
     (%check-error (%daq-serialized-list-get-current-item-type self size-slot) "daqSerializedList_getCurrentItemType")
-    (cffi:mem-ref size-slot 'daq-core-type)
+    (cffi:mem-ref size-slot 'daq-c-core-type)
   )
 )
 
@@ -16227,37 +17411,37 @@
 
 (cffi:defcfun ("daqSerializedList_readBool" %daq-serialized-list-read-bool) daq-err-code
   (self daq-serialized-list)
-  (boolean (:pointer daq-bool))
+  (boolean (:pointer daq-c-bool))
   )
 
 (defun serialized-list/read-bool (self)
-  (cffi:with-foreign-object (boolean-slot 'daq-bool)
+  (cffi:with-foreign-object (boolean-slot 'daq-c-bool)
     (%check-error (%daq-serialized-list-read-bool self boolean-slot) "daqSerializedList_readBool")
-    (cffi:mem-ref boolean-slot 'daq-bool)
+    (cffi:mem-ref boolean-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqSerializedList_readFloat" %daq-serialized-list-read-float) daq-err-code
   (self daq-serialized-list)
-  (real (:pointer daq-float))
+  (real (:pointer daq-c-float))
   )
 
 (defun serialized-list/read-float (self)
-  (cffi:with-foreign-object (real-slot 'daq-float)
+  (cffi:with-foreign-object (real-slot 'daq-c-float)
     (%check-error (%daq-serialized-list-read-float self real-slot) "daqSerializedList_readFloat")
-    (cffi:mem-ref real-slot 'daq-float)
+    (cffi:mem-ref real-slot 'daq-c-float)
   )
 )
 
 (cffi:defcfun ("daqSerializedList_readInt" %daq-serialized-list-read-int) daq-err-code
   (self daq-serialized-list)
-  (integer (:pointer daq-int))
+  (integer (:pointer daq-c-int))
   )
 
 (defun serialized-list/read-int (self)
-  (cffi:with-foreign-object (integer-slot 'daq-int)
+  (cffi:with-foreign-object (integer-slot 'daq-c-int)
     (%check-error (%daq-serialized-list-read-int self integer-slot) "daqSerializedList_readInt")
-    (cffi:mem-ref integer-slot 'daq-int)
+    (cffi:mem-ref integer-slot 'daq-c-int)
   )
 )
 
@@ -16348,77 +17532,77 @@
 (cffi:defcfun ("daqSerializedObject_getType" %daq-serialized-object-get-type) daq-err-code
   (self daq-serialized-object)
   (key daq-string)
-  (type (:pointer daq-core-type))
+  (type (:pointer daq-c-core-type))
   )
 
 (defun serialized-object/get-type (self key)
-  (cffi:with-foreign-object (type-slot 'daq-core-type)
+  (cffi:with-foreign-object (type-slot 'daq-c-core-type)
     (%check-error (%daq-serialized-object-get-type self key type-slot) "daqSerializedObject_getType")
-    (cffi:mem-ref type-slot 'daq-core-type)
+    (cffi:mem-ref type-slot 'daq-c-core-type)
   )
 )
 
 (cffi:defcfun ("daqSerializedObject_hasKey" %daq-serialized-object-has-key) daq-err-code
   (self daq-serialized-object)
   (key daq-string)
-  (has-key (:pointer daq-bool))
+  (has-key (:pointer daq-c-bool))
   )
 
 (defun serialized-object/has-key (self key)
-  (cffi:with-foreign-object (has-key-slot 'daq-bool)
+  (cffi:with-foreign-object (has-key-slot 'daq-c-bool)
     (%check-error (%daq-serialized-object-has-key self key has-key-slot) "daqSerializedObject_hasKey")
-    (cffi:mem-ref has-key-slot 'daq-bool)
+    (cffi:mem-ref has-key-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqSerializedObject_isRoot" %daq-serialized-object-is-root) daq-err-code
   (self daq-serialized-object)
-  (is-root (:pointer daq-bool))
+  (is-root (:pointer daq-c-bool))
   )
 
 (defun serialized-object/is-root (self)
-  (cffi:with-foreign-object (is-root-slot 'daq-bool)
+  (cffi:with-foreign-object (is-root-slot 'daq-c-bool)
     (%check-error (%daq-serialized-object-is-root self is-root-slot) "daqSerializedObject_isRoot")
-    (cffi:mem-ref is-root-slot 'daq-bool)
+    (cffi:mem-ref is-root-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqSerializedObject_readBool" %daq-serialized-object-read-bool) daq-err-code
   (self daq-serialized-object)
   (key daq-string)
-  (boolean (:pointer daq-bool))
+  (boolean (:pointer daq-c-bool))
   )
 
 (defun serialized-object/read-bool (self key)
-  (cffi:with-foreign-object (boolean-slot 'daq-bool)
+  (cffi:with-foreign-object (boolean-slot 'daq-c-bool)
     (%check-error (%daq-serialized-object-read-bool self key boolean-slot) "daqSerializedObject_readBool")
-    (cffi:mem-ref boolean-slot 'daq-bool)
+    (cffi:mem-ref boolean-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqSerializedObject_readFloat" %daq-serialized-object-read-float) daq-err-code
   (self daq-serialized-object)
   (key daq-string)
-  (real (:pointer daq-float))
+  (real (:pointer daq-c-float))
   )
 
 (defun serialized-object/read-float (self key)
-  (cffi:with-foreign-object (real-slot 'daq-float)
+  (cffi:with-foreign-object (real-slot 'daq-c-float)
     (%check-error (%daq-serialized-object-read-float self key real-slot) "daqSerializedObject_readFloat")
-    (cffi:mem-ref real-slot 'daq-float)
+    (cffi:mem-ref real-slot 'daq-c-float)
   )
 )
 
 (cffi:defcfun ("daqSerializedObject_readInt" %daq-serialized-object-read-int) daq-err-code
   (self daq-serialized-object)
   (key daq-string)
-  (integer (:pointer daq-int))
+  (integer (:pointer daq-c-int))
   )
 
 (defun serialized-object/read-int (self key)
-  (cffi:with-foreign-object (integer-slot 'daq-int)
+  (cffi:with-foreign-object (integer-slot 'daq-c-int)
     (%check-error (%daq-serialized-object-read-int self key integer-slot) "daqSerializedObject_readInt")
-    (cffi:mem-ref integer-slot 'daq-int)
+    (cffi:mem-ref integer-slot 'daq-c-int)
   )
 )
 
@@ -16505,12 +17689,25 @@
 
 (cffi:defcfun ("daqSerializer_createJsonSerializer" %daq-serializer-create-json-serializer) daq-err-code
   (obj (:pointer daq-serializer))
-  (pretty daq-bool)
+  (pretty daq-c-bool)
   )
 
 (defun serializer/create-json-serializer (pretty)
   (cffi:with-foreign-object (obj-slot 'daq-serializer)
     (%check-error (%daq-serializer-create-json-serializer obj-slot pretty) "daqSerializer_createJsonSerializer")
+    (cffi:mem-ref obj-slot 'daq-serializer)
+  )
+)
+
+(cffi:defcfun ("daqSerializer_createJsonSerializerWithVersion" %daq-serializer-create-json-serializer-with-version) daq-err-code
+  (obj (:pointer daq-serializer))
+  (version daq-c-int)
+  (pretty daq-c-bool)
+  )
+
+(defun serializer/create-json-serializer-with-version (version pretty)
+  (cffi:with-foreign-object (obj-slot 'daq-serializer)
+    (%check-error (%daq-serializer-create-json-serializer-with-version obj-slot version pretty) "daqSerializer_createJsonSerializerWithVersion")
     (cffi:mem-ref obj-slot 'daq-serializer)
   )
 )
@@ -16532,6 +17729,14 @@
   (%check-error (%daq-serializer-end-object self) "daqSerializer_endObject")
   nil
 )
+
+(cffi:defcfun ("daqSerializer_getInterfaceId" %daq-serializer-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun serializer/get-interface-id (intf-id)
+  (%daq-serializer-get-interface-id intf-id)
+  nil)
 
 (cffi:defcfun ("daqSerializer_getOutput" %daq-serializer-get-output) daq-err-code
   (self daq-serializer)
@@ -16559,31 +17764,31 @@
 
 (cffi:defcfun ("daqSerializer_getVersion" %daq-serializer-get-version) daq-err-code
   (self daq-serializer)
-  (version (:pointer daq-int))
+  (version (:pointer daq-c-int))
   )
 
 (defun serializer/get-version (self)
-  (cffi:with-foreign-object (version-slot 'daq-int)
+  (cffi:with-foreign-object (version-slot 'daq-c-int)
     (%check-error (%daq-serializer-get-version self version-slot) "daqSerializer_getVersion")
-    (cffi:mem-ref version-slot 'daq-int)
+    (cffi:mem-ref version-slot 'daq-c-int)
   )
 )
 
 (cffi:defcfun ("daqSerializer_isComplete" %daq-serializer-is-complete) daq-err-code
   (self daq-serializer)
-  (complete (:pointer daq-bool))
+  (complete (:pointer daq-c-bool))
   )
 
 (defun serializer/is-complete (self)
-  (cffi:with-foreign-object (complete-slot 'daq-bool)
+  (cffi:with-foreign-object (complete-slot 'daq-c-bool)
     (%check-error (%daq-serializer-is-complete self complete-slot) "daqSerializer_isComplete")
-    (cffi:mem-ref complete-slot 'daq-bool)
+    (cffi:mem-ref complete-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqSerializer_key" %daq-serializer-key) daq-err-code
   (self daq-serializer)
-  (string daq-const-char-ptr)
+  (string daq-c-const-char-ptr)
   )
 
 (defun serializer/key (self string)
@@ -16593,8 +17798,8 @@
 
 (cffi:defcfun ("daqSerializer_keyRaw" %daq-serializer-key-raw) daq-err-code
   (self daq-serializer)
-  (string daq-const-char-ptr)
-  (length daq-size-t)
+  (string daq-c-const-char-ptr)
+  (length daq-c-size-t)
   )
 
 (defun serializer/key-raw (self string length)
@@ -16661,7 +17866,7 @@
 
 (cffi:defcfun ("daqSerializer_writeBool" %daq-serializer-write-bool) daq-err-code
   (self daq-serializer)
-  (boolean daq-bool)
+  (boolean daq-c-bool)
   )
 
 (defun serializer/write-bool (self boolean)
@@ -16671,7 +17876,7 @@
 
 (cffi:defcfun ("daqSerializer_writeFloat" %daq-serializer-write-float) daq-err-code
   (self daq-serializer)
-  (real daq-float)
+  (real daq-c-float)
   )
 
 (defun serializer/write-float (self real)
@@ -16681,7 +17886,7 @@
 
 (cffi:defcfun ("daqSerializer_writeInt" %daq-serializer-write-int) daq-err-code
   (self daq-serializer)
-  (integer daq-int)
+  (integer daq-c-int)
   )
 
 (defun serializer/write-int (self integer)
@@ -16700,8 +17905,8 @@
 
 (cffi:defcfun ("daqSerializer_writeString" %daq-serializer-write-string) daq-err-code
   (self daq-serializer)
-  (string daq-const-char-ptr)
-  (length daq-size-t)
+  (string daq-c-const-char-ptr)
+  (length daq-c-size-t)
   )
 
 (defun serializer/write-string (self string length)
@@ -16783,7 +17988,7 @@
 
 (cffi:defcfun ("daqServerCapabilityConfig_setCoreEventsEnabled" %daq-server-capability-config-set-core-events-enabled) daq-err-code
   (self daq-server-capability-config)
-  (enabled daq-bool)
+  (enabled daq-c-bool)
   )
 
 (defun server-capability-config/set-core-events-enabled (self enabled)
@@ -16811,6 +18016,16 @@
   nil
 )
 
+(cffi:defcfun ("daqServerCapabilityConfig_setProtocolGroupId" %daq-server-capability-config-set-protocol-group-id) daq-err-code
+  (self daq-server-capability-config)
+  (protocol-group-id daq-string)
+  )
+
+(defun server-capability-config/set-protocol-group-id (self protocol-group-id)
+  (%check-error (%daq-server-capability-config-set-protocol-group-id self protocol-group-id) "daqServerCapabilityConfig_setProtocolGroupId")
+  nil
+)
+
 (cffi:defcfun ("daqServerCapabilityConfig_setProtocolId" %daq-server-capability-config-set-protocol-id) daq-err-code
   (self daq-server-capability-config)
   (protocol-id daq-string)
@@ -16828,6 +18043,16 @@
 
 (defun server-capability-config/set-protocol-name (self protocol-name)
   (%check-error (%daq-server-capability-config-set-protocol-name self protocol-name) "daqServerCapabilityConfig_setProtocolName")
+  nil
+)
+
+(cffi:defcfun ("daqServerCapabilityConfig_setProtocolSecurityLevel" %daq-server-capability-config-set-protocol-security-level) daq-err-code
+  (self daq-server-capability-config)
+  (security-level daq-integer)
+  )
+
+(defun server-capability-config/set-protocol-security-level (self security-level)
+  (%check-error (%daq-server-capability-config-set-protocol-security-level self security-level) "daqServerCapabilityConfig_setProtocolSecurityLevel")
   nil
 )
 
@@ -16913,13 +18138,13 @@
 
 (cffi:defcfun ("daqServerCapability_getCoreEventsEnabled" %daq-server-capability-get-core-events-enabled) daq-err-code
   (self daq-server-capability)
-  (enabled (:pointer daq-bool))
+  (enabled (:pointer daq-c-bool))
   )
 
 (defun server-capability/get-core-events-enabled (self)
-  (cffi:with-foreign-object (enabled-slot 'daq-bool)
+  (cffi:with-foreign-object (enabled-slot 'daq-c-bool)
     (%check-error (%daq-server-capability-get-core-events-enabled self enabled-slot) "daqServerCapability_getCoreEventsEnabled")
-    (cffi:mem-ref enabled-slot 'daq-bool)
+    (cffi:mem-ref enabled-slot 'daq-c-bool)
   )
 )
 
@@ -16955,6 +18180,18 @@
   )
 )
 
+(cffi:defcfun ("daqServerCapability_getProtocolGroupId" %daq-server-capability-get-protocol-group-id) daq-err-code
+  (self daq-server-capability)
+  (protocol-group-id (:pointer daq-string))
+  )
+
+(defun server-capability/get-protocol-group-id (self)
+  (cffi:with-foreign-object (protocol-group-id-slot 'daq-string)
+    (%check-error (%daq-server-capability-get-protocol-group-id self protocol-group-id-slot) "daqServerCapability_getProtocolGroupId")
+    (cffi:mem-ref protocol-group-id-slot 'daq-string)
+  )
+)
+
 (cffi:defcfun ("daqServerCapability_getProtocolId" %daq-server-capability-get-protocol-id) daq-err-code
   (self daq-server-capability)
   (protocol-id (:pointer daq-string))
@@ -16976,6 +18213,18 @@
   (cffi:with-foreign-object (protocol-name-slot 'daq-string)
     (%check-error (%daq-server-capability-get-protocol-name self protocol-name-slot) "daqServerCapability_getProtocolName")
     (cffi:mem-ref protocol-name-slot 'daq-string)
+  )
+)
+
+(cffi:defcfun ("daqServerCapability_getProtocolSecurityLevel" %daq-server-capability-get-protocol-security-level) daq-err-code
+  (self daq-server-capability)
+  (security-level (:pointer daq-integer))
+  )
+
+(defun server-capability/get-protocol-security-level (self)
+  (cffi:with-foreign-object (security-level-slot 'daq-integer)
+    (%check-error (%daq-server-capability-get-protocol-security-level self security-level-slot) "daqServerCapability_getProtocolSecurityLevel")
+    (cffi:mem-ref security-level-slot 'daq-integer)
   )
 )
 
@@ -17315,7 +18564,7 @@
 
 (cffi:defcfun ("daqSignalPrivate_enableKeepLastValue" %daq-signal-private-enable-keep-last-value) daq-err-code
   (self daq-signal-private)
-  (enabled daq-bool)
+  (enabled daq-c-bool)
   )
 
 (defun signal-private/enable-keep-last-value (self enabled)
@@ -17333,13 +18582,13 @@
 
 (cffi:defcfun ("daqSignalPrivate_getKeepLastValue" %daq-signal-private-get-keep-last-value) daq-err-code
   (self daq-signal-private)
-  (keep-last-value (:pointer daq-bool))
+  (keep-last-value (:pointer daq-c-bool))
   )
 
 (defun signal-private/get-keep-last-value (self)
-  (cffi:with-foreign-object (keep-last-value-slot 'daq-bool)
+  (cffi:with-foreign-object (keep-last-value-slot 'daq-c-bool)
     (%check-error (%daq-signal-private-get-keep-last-value self keep-last-value-slot) "daqSignalPrivate_getKeepLastValue")
-    (cffi:mem-ref keep-last-value-slot 'daq-bool)
+    (cffi:mem-ref keep-last-value-slot 'daq-c-bool)
   )
 )
 
@@ -17421,15 +18670,30 @@
   )
 )
 
+(cffi:defcfun ("daqSignal_getLastValueWithTimestamp" %daq-signal-get-last-value-with-timestamp) daq-err-code
+  (self daq-signal)
+  (value (:pointer daq-base-object))
+  (timestamp (:pointer daq-base-object))
+  )
+
+(defun signal/get-last-value-with-timestamp (self)
+  (cffi:with-foreign-object (value-slot 'daq-base-object)
+    (cffi:with-foreign-object (timestamp-slot 'daq-base-object)
+      (%check-error (%daq-signal-get-last-value-with-timestamp self value-slot timestamp-slot) "daqSignal_getLastValueWithTimestamp")
+      (values (cffi:mem-ref value-slot 'daq-base-object) (cffi:mem-ref timestamp-slot 'daq-base-object))
+    )
+  )
+)
+
 (cffi:defcfun ("daqSignal_getPublic" %daq-signal-get-public) daq-err-code
   (self daq-signal)
-  (is-public (:pointer daq-bool))
+  (is-public (:pointer daq-c-bool))
   )
 
 (defun signal/get-public (self)
-  (cffi:with-foreign-object (is-public-slot 'daq-bool)
+  (cffi:with-foreign-object (is-public-slot 'daq-c-bool)
     (%check-error (%daq-signal-get-public self is-public-slot) "daqSignal_getPublic")
-    (cffi:mem-ref is-public-slot 'daq-bool)
+    (cffi:mem-ref is-public-slot 'daq-c-bool)
   )
 )
 
@@ -17447,19 +18711,19 @@
 
 (cffi:defcfun ("daqSignal_getStreamed" %daq-signal-get-streamed) daq-err-code
   (self daq-signal)
-  (streamed (:pointer daq-bool))
+  (streamed (:pointer daq-c-bool))
   )
 
 (defun signal/get-streamed (self)
-  (cffi:with-foreign-object (streamed-slot 'daq-bool)
+  (cffi:with-foreign-object (streamed-slot 'daq-c-bool)
     (%check-error (%daq-signal-get-streamed self streamed-slot) "daqSignal_getStreamed")
-    (cffi:mem-ref streamed-slot 'daq-bool)
+    (cffi:mem-ref streamed-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqSignal_setPublic" %daq-signal-set-public) daq-err-code
   (self daq-signal)
-  (is-public daq-bool)
+  (is-public daq-c-bool)
   )
 
 (defun signal/set-public (self is-public)
@@ -17469,7 +18733,7 @@
 
 (cffi:defcfun ("daqSignal_setStreamed" %daq-signal-set-streamed) daq-err-code
   (self daq-signal)
-  (streamed daq-bool)
+  (streamed daq-c-bool)
   )
 
 (defun signal/set-streamed (self streamed)
@@ -17479,7 +18743,7 @@
 
 (cffi:defcfun ("daqSimpleType_createSimpleType" %daq-simple-type-create-simple-type) daq-err-code
   (obj (:pointer daq-simple-type))
-  (core-type daq-core-type)
+  (core-type daq-c-core-type)
   )
 
 (defun simple-type/create-simple-type (core-type)
@@ -17602,13 +18866,13 @@
 
 (cffi:defcfun ("daqStreamReaderBuilder_getSkipEvents" %daq-stream-reader-builder-get-skip-events) daq-err-code
   (self daq-stream-reader-builder)
-  (skip-events (:pointer daq-bool))
+  (skip-events (:pointer daq-c-bool))
   )
 
 (defun stream-reader-builder/get-skip-events (self)
-  (cffi:with-foreign-object (skip-events-slot 'daq-bool)
+  (cffi:with-foreign-object (skip-events-slot 'daq-c-bool)
     (%check-error (%daq-stream-reader-builder-get-skip-events self skip-events-slot) "daqStreamReaderBuilder_getSkipEvents")
-    (cffi:mem-ref skip-events-slot 'daq-bool)
+    (cffi:mem-ref skip-events-slot 'daq-c-bool)
   )
 )
 
@@ -17686,7 +18950,7 @@
 
 (cffi:defcfun ("daqStreamReaderBuilder_setSkipEvents" %daq-stream-reader-builder-set-skip-events) daq-err-code
   (self daq-stream-reader-builder)
-  (skip-events daq-bool)
+  (skip-events daq-c-bool)
   )
 
 (defun stream-reader-builder/set-skip-events (self skip-events)
@@ -17761,17 +19025,17 @@
 (cffi:defcfun ("daqStreamReader_read" %daq-stream-reader-read) daq-err-code
   (self daq-stream-reader)
   (samples :pointer)
-  (count (:pointer daq-size-t))
-  (timeout-ms daq-size-t)
+  (count (:pointer daq-c-size-t))
+  (timeout-ms daq-c-size-t)
   (status (:pointer daq-reader-status))
   )
 
 (defun stream-reader/read (self samples count timeout-ms)
-  (cffi:with-foreign-object (count-slot 'daq-size-t)
+  (cffi:with-foreign-object (count-slot 'daq-c-size-t)
     (cffi:with-foreign-object (status-slot 'daq-reader-status)
-      (setf (cffi:mem-ref count-slot 'daq-size-t) count)
+      (setf (cffi:mem-ref count-slot 'daq-c-size-t) count)
       (%check-error (%daq-stream-reader-read self samples count-slot timeout-ms status-slot) "daqStreamReader_read")
-      (values (cffi:mem-ref count-slot 'daq-size-t) (cffi:mem-ref status-slot 'daq-reader-status))
+      (values (cffi:mem-ref count-slot 'daq-c-size-t) (cffi:mem-ref status-slot 'daq-reader-status))
     )
   )
 )
@@ -17780,33 +19044,33 @@
   (self daq-stream-reader)
   (samples :pointer)
   (domain :pointer)
-  (count (:pointer daq-size-t))
-  (timeout-ms daq-size-t)
+  (count (:pointer daq-c-size-t))
+  (timeout-ms daq-c-size-t)
   (status (:pointer daq-reader-status))
   )
 
 (defun stream-reader/read-with-domain (self samples domain count timeout-ms)
-  (cffi:with-foreign-object (count-slot 'daq-size-t)
+  (cffi:with-foreign-object (count-slot 'daq-c-size-t)
     (cffi:with-foreign-object (status-slot 'daq-reader-status)
-      (setf (cffi:mem-ref count-slot 'daq-size-t) count)
+      (setf (cffi:mem-ref count-slot 'daq-c-size-t) count)
       (%check-error (%daq-stream-reader-read-with-domain self samples domain count-slot timeout-ms status-slot) "daqStreamReader_readWithDomain")
-      (values (cffi:mem-ref count-slot 'daq-size-t) (cffi:mem-ref status-slot 'daq-reader-status))
+      (values (cffi:mem-ref count-slot 'daq-c-size-t) (cffi:mem-ref status-slot 'daq-reader-status))
     )
   )
 )
 
 (cffi:defcfun ("daqStreamReader_skipSamples" %daq-stream-reader-skip-samples) daq-err-code
   (self daq-stream-reader)
-  (count (:pointer daq-size-t))
+  (count (:pointer daq-c-size-t))
   (status (:pointer daq-reader-status))
   )
 
 (defun stream-reader/skip-samples (self count)
-  (cffi:with-foreign-object (count-slot 'daq-size-t)
+  (cffi:with-foreign-object (count-slot 'daq-c-size-t)
     (cffi:with-foreign-object (status-slot 'daq-reader-status)
-      (setf (cffi:mem-ref count-slot 'daq-size-t) count)
+      (setf (cffi:mem-ref count-slot 'daq-c-size-t) count)
       (%check-error (%daq-stream-reader-skip-samples self count-slot status-slot) "daqStreamReader_skipSamples")
-      (values (cffi:mem-ref count-slot 'daq-size-t) (cffi:mem-ref status-slot 'daq-reader-status))
+      (values (cffi:mem-ref count-slot 'daq-c-size-t) (cffi:mem-ref status-slot 'daq-reader-status))
     )
   )
 )
@@ -17869,25 +19133,25 @@
 
 (cffi:defcfun ("daqStreaming_getActive" %daq-streaming-get-active) daq-err-code
   (self daq-streaming)
-  (active (:pointer daq-bool))
+  (active (:pointer daq-c-bool))
   )
 
 (defun streaming/get-active (self)
-  (cffi:with-foreign-object (active-slot 'daq-bool)
+  (cffi:with-foreign-object (active-slot 'daq-c-bool)
     (%check-error (%daq-streaming-get-active self active-slot) "daqStreaming_getActive")
-    (cffi:mem-ref active-slot 'daq-bool)
+    (cffi:mem-ref active-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqStreaming_getClientToDeviceStreamingEnabled" %daq-streaming-get-client-to-device-streaming-enabled) daq-err-code
   (self daq-streaming)
-  (enabled (:pointer daq-bool))
+  (enabled (:pointer daq-c-bool))
   )
 
 (defun streaming/get-client-to-device-streaming-enabled (self)
-  (cffi:with-foreign-object (enabled-slot 'daq-bool)
+  (cffi:with-foreign-object (enabled-slot 'daq-c-bool)
     (%check-error (%daq-streaming-get-client-to-device-streaming-enabled self enabled-slot) "daqStreaming_getClientToDeviceStreamingEnabled")
-    (cffi:mem-ref enabled-slot 'daq-bool)
+    (cffi:mem-ref enabled-slot 'daq-c-bool)
   )
 )
 
@@ -17932,6 +19196,18 @@
   (cffi:with-foreign-object (device-remote-id-slot 'daq-string)
     (%check-error (%daq-streaming-get-owner-device-remote-id self device-remote-id-slot) "daqStreaming_getOwnerDeviceRemoteId")
     (cffi:mem-ref device-remote-id-slot 'daq-string)
+  )
+)
+
+(cffi:defcfun ("daqStreaming_getProtocolGroupId" %daq-streaming-get-protocol-group-id) daq-err-code
+  (self daq-streaming)
+  (protocol-group-id (:pointer daq-string))
+  )
+
+(defun streaming/get-protocol-group-id (self)
+  (cffi:with-foreign-object (protocol-group-id-slot 'daq-string)
+    (%check-error (%daq-streaming-get-protocol-group-id self protocol-group-id-slot) "daqStreaming_getProtocolGroupId")
+    (cffi:mem-ref protocol-group-id-slot 'daq-string)
   )
 )
 
@@ -17987,7 +19263,7 @@
 
 (cffi:defcfun ("daqStreaming_setActive" %daq-streaming-set-active) daq-err-code
   (self daq-streaming)
-  (active daq-bool)
+  (active daq-c-bool)
   )
 
 (defun streaming/set-active (self active)
@@ -17997,7 +19273,7 @@
 
 (cffi:defcfun ("daqString_createString" %daq-string-create-string) daq-err-code
   (obj (:pointer daq-string))
-  (str daq-const-char-ptr)
+  (str daq-c-const-char-ptr)
   )
 
 (defun string/create-string (str)
@@ -18009,8 +19285,8 @@
 
 (cffi:defcfun ("daqString_createStringN" %daq-string-create-string-n) daq-err-code
   (obj (:pointer daq-string))
-  (str daq-const-char-ptr)
-  (length daq-size-t)
+  (str daq-c-const-char-ptr)
+  (length daq-c-size-t)
   )
 
 (defun string/create-string-n (str length)
@@ -18022,13 +19298,13 @@
 
 (cffi:defcfun ("daqString_getCharPtr" %daq-string-get-char-ptr) daq-err-code
   (self daq-string)
-  (value daq-const-char-ptr)
+  (value daq-c-const-char-ptr)
   )
 
 (defun string/get-char-ptr (self)
-  (cffi:with-foreign-object (value-slot 'daq-const-char-ptr)
+  (cffi:with-foreign-object (value-slot 'daq-c-const-char-ptr)
     (%check-error (%daq-string-get-char-ptr self value-slot) "daqString_getCharPtr")
-    (cffi:mem-ref value-slot 'daq-const-char-ptr)
+    (cffi:mem-ref value-slot 'daq-c-const-char-ptr)
   )
 )
 
@@ -18042,13 +19318,13 @@
 
 (cffi:defcfun ("daqString_getLength" %daq-string-get-length) daq-err-code
   (self daq-string)
-  (size (:pointer daq-size-t))
+  (size (:pointer daq-c-size-t))
   )
 
 (defun string/get-length (self)
-  (cffi:with-foreign-object (size-slot 'daq-size-t)
+  (cffi:with-foreign-object (size-slot 'daq-c-size-t)
     (%check-error (%daq-string-get-length self size-slot) "daqString_getLength")
-    (cffi:mem-ref size-slot 'daq-size-t)
+    (cffi:mem-ref size-slot 'daq-c-size-t)
   )
 )
 
@@ -18161,13 +19437,13 @@
 (cffi:defcfun ("daqStructBuilder_hasField" %daq-struct-builder-has-field) daq-err-code
   (self daq-struct-builder)
   (name daq-string)
-  (contains (:pointer daq-bool))
+  (contains (:pointer daq-c-bool))
   )
 
 (defun struct-builder/has-field (self name)
-  (cffi:with-foreign-object (contains-slot 'daq-bool)
+  (cffi:with-foreign-object (contains-slot 'daq-c-bool)
     (%check-error (%daq-struct-builder-has-field self name contains-slot) "daqStructBuilder_hasField")
-    (cffi:mem-ref contains-slot 'daq-bool)
+    (cffi:mem-ref contains-slot 'daq-c-bool)
   )
 )
 
@@ -18363,13 +19639,13 @@
 (cffi:defcfun ("daqStruct_hasField" %daq-struct-has-field) daq-err-code
   (self daq-struct)
   (name daq-string)
-  (contains (:pointer daq-bool))
+  (contains (:pointer daq-c-bool))
   )
 
 (defun struct/has-field (self name)
-  (cffi:with-foreign-object (contains-slot 'daq-bool)
+  (cffi:with-foreign-object (contains-slot 'daq-c-bool)
     (%check-error (%daq-struct-has-field self name contains-slot) "daqStruct_hasField")
-    (cffi:mem-ref contains-slot 'daq-bool)
+    (cffi:mem-ref contains-slot 'daq-c-bool)
   )
 )
 
@@ -18418,6 +19694,26 @@
   )
 )
 
+(cffi:defcfun ("daqSupportsWeakRef_getInterfaceId" %daq-supports-weak-ref-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun supports-weak-ref/get-interface-id (intf-id)
+  (%daq-supports-weak-ref-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqSupportsWeakRef_getWeakRef" %daq-supports-weak-ref-get-weak-ref) daq-err-code
+  (self daq-supports-weak-ref)
+  (weak-ref (:pointer daq-weak-ref))
+  )
+
+(defun supports-weak-ref/get-weak-ref (self)
+  (cffi:with-foreign-object (weak-ref-slot 'daq-weak-ref)
+    (%check-error (%daq-supports-weak-ref-get-weak-ref self weak-ref-slot) "daqSupportsWeakRef_getWeakRef")
+    (cffi:mem-ref weak-ref-slot 'daq-weak-ref)
+  )
+)
+
 (cffi:defcfun ("daqSyncComponentPrivate_addInterface" %daq-sync-component-private-add-interface) daq-err-code
   (self daq-sync-component-private)
   (sync-interface daq-property-object)
@@ -18448,7 +19744,7 @@
 
 (cffi:defcfun ("daqSyncComponentPrivate_setSyncLocked" %daq-sync-component-private-set-sync-locked) daq-err-code
   (self daq-sync-component-private)
-  (synchronization-locked daq-bool)
+  (synchronization-locked daq-c-bool)
   )
 
 (defun sync-component-private/set-sync-locked (self synchronization-locked)
@@ -18459,13 +19755,13 @@
 (cffi:defcfun ("daqSyncComponent_createSyncComponent" %daq-sync-component-create-sync-component) daq-err-code
   (obj (:pointer daq-sync-component))
   (context daq-context)
-  (parse-failed-exception daq-component)
+  (parent daq-component)
   (local-id daq-string)
   )
 
-(defun sync-component/create-sync-component (context parse-failed-exception local-id)
+(defun sync-component/create-sync-component (context parent local-id)
   (cffi:with-foreign-object (obj-slot 'daq-sync-component)
-    (%check-error (%daq-sync-component-create-sync-component obj-slot context parse-failed-exception local-id) "daqSyncComponent_createSyncComponent")
+    (%check-error (%daq-sync-component-create-sync-component obj-slot context parent local-id) "daqSyncComponent_createSyncComponent")
     (cffi:mem-ref obj-slot 'daq-sync-component)
   )
 )
@@ -18492,35 +19788,274 @@
 
 (cffi:defcfun ("daqSyncComponent_getSelectedSource" %daq-sync-component-get-selected-source) daq-err-code
   (self daq-sync-component)
-  (selected-source (:pointer daq-int))
+  (selected-source (:pointer daq-c-int))
   )
 
 (defun sync-component/get-selected-source (self)
-  (cffi:with-foreign-object (selected-source-slot 'daq-int)
+  (cffi:with-foreign-object (selected-source-slot 'daq-c-int)
     (%check-error (%daq-sync-component-get-selected-source self selected-source-slot) "daqSyncComponent_getSelectedSource")
-    (cffi:mem-ref selected-source-slot 'daq-int)
+    (cffi:mem-ref selected-source-slot 'daq-c-int)
   )
 )
 
 (cffi:defcfun ("daqSyncComponent_getSyncLocked" %daq-sync-component-get-sync-locked) daq-err-code
   (self daq-sync-component)
-  (synchronization-locked (:pointer daq-bool))
+  (synchronization-locked (:pointer daq-c-bool))
   )
 
 (defun sync-component/get-sync-locked (self)
-  (cffi:with-foreign-object (synchronization-locked-slot 'daq-bool)
+  (cffi:with-foreign-object (synchronization-locked-slot 'daq-c-bool)
     (%check-error (%daq-sync-component-get-sync-locked self synchronization-locked-slot) "daqSyncComponent_getSyncLocked")
-    (cffi:mem-ref synchronization-locked-slot 'daq-bool)
+    (cffi:mem-ref synchronization-locked-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqSyncComponent_setSelectedSource" %daq-sync-component-set-selected-source) daq-err-code
   (self daq-sync-component)
-  (selected-source daq-int)
+  (selected-source daq-c-int)
   )
 
 (defun sync-component/set-selected-source (self selected-source)
   (%check-error (%daq-sync-component-set-selected-source self selected-source) "daqSyncComponent_setSelectedSource")
+  nil
+)
+
+(cffi:defcfun ("daqSyncInterfaceInternal_getInterfaceId" %daq-sync-interface-internal-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun sync-interface-internal/get-interface-id (intf-id)
+  (%daq-sync-interface-internal-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqSyncInterfaceInternal_setAsSource" %daq-sync-interface-internal-set-as-source) daq-err-code
+  (self daq-sync-interface-internal)
+  (source daq-c-bool)
+  )
+
+(defun sync-interface-internal/set-as-source (self source)
+  (%check-error (%daq-sync-interface-internal-set-as-source self source) "daqSyncInterfaceInternal_setAsSource")
+  nil
+)
+
+(cffi:defcfun ("daqSyncInterfaceInternal_sourceChanged" %daq-sync-interface-internal-source-changed) daq-err-code
+  (self daq-sync-interface-internal)
+  (source daq-sync-interface)
+  )
+
+(defun sync-interface-internal/source-changed (self source)
+  (%check-error (%daq-sync-interface-internal-source-changed self source) "daqSyncInterfaceInternal_sourceChanged")
+  nil
+)
+
+(cffi:defcfun ("daqSyncInterface_getAvailableModes" %daq-sync-interface-get-available-modes) daq-err-code
+  (self daq-sync-interface)
+  (available-modes (:pointer daq-dict))
+  )
+
+(defun sync-interface/get-available-modes (self)
+  (cffi:with-foreign-object (available-modes-slot 'daq-dict)
+    (%check-error (%daq-sync-interface-get-available-modes self available-modes-slot) "daqSyncInterface_getAvailableModes")
+    (cffi:mem-ref available-modes-slot 'daq-dict)
+  )
+)
+
+(cffi:defcfun ("daqSyncInterface_getConfig" %daq-sync-interface-get-config) daq-err-code
+  (self daq-sync-interface)
+  (config (:pointer daq-property-object))
+  )
+
+(defun sync-interface/get-config (self)
+  (cffi:with-foreign-object (config-slot 'daq-property-object)
+    (%check-error (%daq-sync-interface-get-config self config-slot) "daqSyncInterface_getConfig")
+    (cffi:mem-ref config-slot 'daq-property-object)
+  )
+)
+
+(cffi:defcfun ("daqSyncInterface_getId" %daq-sync-interface-get-id) daq-err-code
+  (self daq-sync-interface)
+  (id (:pointer daq-string))
+  )
+
+(defun sync-interface/get-id (self)
+  (cffi:with-foreign-object (id-slot 'daq-string)
+    (%check-error (%daq-sync-interface-get-id self id-slot) "daqSyncInterface_getId")
+    (cffi:mem-ref id-slot 'daq-string)
+  )
+)
+
+(cffi:defcfun ("daqSyncInterface_getInterfaceId" %daq-sync-interface-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun sync-interface/get-interface-id (intf-id)
+  (%daq-sync-interface-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqSyncInterface_getMode" %daq-sync-interface-get-mode) daq-err-code
+  (self daq-sync-interface)
+  (source-mode (:pointer daq-sync-mode))
+  )
+
+(defun sync-interface/get-mode (self)
+  (cffi:with-foreign-object (source-mode-slot 'daq-sync-mode)
+    (%check-error (%daq-sync-interface-get-mode self source-mode-slot) "daqSyncInterface_getMode")
+    (cffi:mem-ref source-mode-slot 'daq-sync-mode)
+  )
+)
+
+(cffi:defcfun ("daqSyncInterface_getReferenceDomainId" %daq-sync-interface-get-reference-domain-id) daq-err-code
+  (self daq-sync-interface)
+  (reference-domain-id (:pointer daq-string))
+  )
+
+(defun sync-interface/get-reference-domain-id (self)
+  (cffi:with-foreign-object (reference-domain-id-slot 'daq-string)
+    (%check-error (%daq-sync-interface-get-reference-domain-id self reference-domain-id-slot) "daqSyncInterface_getReferenceDomainId")
+    (cffi:mem-ref reference-domain-id-slot 'daq-string)
+  )
+)
+
+(cffi:defcfun ("daqSyncInterface_getSourceSupported" %daq-sync-interface-get-source-supported) daq-err-code
+  (self daq-sync-interface)
+  (can-be-source (:pointer daq-c-bool))
+  )
+
+(defun sync-interface/get-source-supported (self)
+  (cffi:with-foreign-object (can-be-source-slot 'daq-c-bool)
+    (%check-error (%daq-sync-interface-get-source-supported self can-be-source-slot) "daqSyncInterface_getSourceSupported")
+    (cffi:mem-ref can-be-source-slot 'daq-c-bool)
+  )
+)
+
+(cffi:defcfun ("daqSyncInterface_getStatusContainer" %daq-sync-interface-get-status-container) daq-err-code
+  (self daq-sync-interface)
+  (sync-status (:pointer daq-component-status-container))
+  )
+
+(defun sync-interface/get-status-container (self)
+  (cffi:with-foreign-object (sync-status-slot 'daq-component-status-container)
+    (%check-error (%daq-sync-interface-get-status-container self sync-status-slot) "daqSyncInterface_getStatusContainer")
+    (cffi:mem-ref sync-status-slot 'daq-component-status-container)
+  )
+)
+
+(cffi:defcfun ("daqSyncInterface_getSyncType" %daq-sync-interface-get-sync-type) daq-err-code
+  (self daq-sync-interface)
+  (sync-type (:pointer daq-string))
+  )
+
+(defun sync-interface/get-sync-type (self)
+  (cffi:with-foreign-object (sync-type-slot 'daq-string)
+    (%check-error (%daq-sync-interface-get-sync-type self sync-type-slot) "daqSyncInterface_getSyncType")
+    (cffi:mem-ref sync-type-slot 'daq-string)
+  )
+)
+
+(cffi:defcfun ("daqSyncInterface_setMode" %daq-sync-interface-set-mode) daq-err-code
+  (self daq-sync-interface)
+  (mode daq-sync-mode)
+  )
+
+(defun sync-interface/set-mode (self mode)
+  (%check-error (%daq-sync-interface-set-mode self mode) "daqSyncInterface_setMode")
+  nil
+)
+
+(cffi:defcfun ("daqSynchronizationPrivate_addInterface" %daq-synchronization-private-add-interface) daq-err-code
+  (self daq-synchronization-private)
+  (sync-interface daq-sync-interface)
+  )
+
+(defun synchronization-private/add-interface (self sync-interface)
+  (%check-error (%daq-synchronization-private-add-interface self sync-interface) "daqSynchronizationPrivate_addInterface")
+  nil
+)
+
+(cffi:defcfun ("daqSynchronizationPrivate_getInterfaceId" %daq-synchronization-private-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun synchronization-private/get-interface-id (intf-id)
+  (%daq-synchronization-private-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqSynchronization_createSynchronization" %daq-synchronization-create-synchronization) daq-err-code
+  (obj (:pointer daq-synchronization))
+  (manager daq-type-manager)
+  (device-id daq-string)
+  )
+
+(defun synchronization/create-synchronization (manager device-id)
+  (cffi:with-foreign-object (obj-slot 'daq-synchronization)
+    (%check-error (%daq-synchronization-create-synchronization obj-slot manager device-id) "daqSynchronization_createSynchronization")
+    (cffi:mem-ref obj-slot 'daq-synchronization)
+  )
+)
+
+(cffi:defcfun ("daqSynchronization_getAvailableSources" %daq-synchronization-get-available-sources) daq-err-code
+  (self daq-synchronization)
+  (sources (:pointer daq-dict))
+  )
+
+(defun synchronization/get-available-sources (self)
+  (cffi:with-foreign-object (sources-slot 'daq-dict)
+    (%check-error (%daq-synchronization-get-available-sources self sources-slot) "daqSynchronization_getAvailableSources")
+    (cffi:mem-ref sources-slot 'daq-dict)
+  )
+)
+
+(cffi:defcfun ("daqSynchronization_getInterfaceId" %daq-synchronization-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun synchronization/get-interface-id (intf-id)
+  (%daq-synchronization-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqSynchronization_getInterfaces" %daq-synchronization-get-interfaces) daq-err-code
+  (self daq-synchronization)
+  (interfaces (:pointer daq-dict))
+  )
+
+(defun synchronization/get-interfaces (self)
+  (cffi:with-foreign-object (interfaces-slot 'daq-dict)
+    (%check-error (%daq-synchronization-get-interfaces self interfaces-slot) "daqSynchronization_getInterfaces")
+    (cffi:mem-ref interfaces-slot 'daq-dict)
+  )
+)
+
+(cffi:defcfun ("daqSynchronization_getReferenceDomainIds" %daq-synchronization-get-reference-domain-ids) daq-err-code
+  (self daq-synchronization)
+  (ids (:pointer daq-list))
+  )
+
+(defun synchronization/get-reference-domain-ids (self)
+  (cffi:with-foreign-object (ids-slot 'daq-list)
+    (%check-error (%daq-synchronization-get-reference-domain-ids self ids-slot) "daqSynchronization_getReferenceDomainIds")
+    (cffi:mem-ref ids-slot 'daq-list)
+  )
+)
+
+(cffi:defcfun ("daqSynchronization_getSource" %daq-synchronization-get-source) daq-err-code
+  (self daq-synchronization)
+  (source (:pointer daq-sync-interface))
+  )
+
+(defun synchronization/get-source (self)
+  (cffi:with-foreign-object (source-slot 'daq-sync-interface)
+    (%check-error (%daq-synchronization-get-source self source-slot) "daqSynchronization_getSource")
+    (cffi:mem-ref source-slot 'daq-sync-interface)
+  )
+)
+
+(cffi:defcfun ("daqSynchronization_setSource" %daq-synchronization-set-source) daq-err-code
+  (self daq-synchronization)
+  (source-name daq-string)
+  )
+
+(defun synchronization/set-source (self source-name)
+  (%check-error (%daq-synchronization-set-source self source-name) "daqSynchronization_setSource")
   nil
 )
 
@@ -18565,13 +20100,13 @@
 (cffi:defcfun ("daqTags_contains" %daq-tags-contains) daq-err-code
   (self daq-tags)
   (name daq-string)
-  (value (:pointer daq-bool))
+  (value (:pointer daq-c-bool))
   )
 
 (defun tags/contains (self name)
-  (cffi:with-foreign-object (value-slot 'daq-bool)
+  (cffi:with-foreign-object (value-slot 'daq-c-bool)
     (%check-error (%daq-tags-contains self name value-slot) "daqTags_contains")
-    (cffi:mem-ref value-slot 'daq-bool)
+    (cffi:mem-ref value-slot 'daq-c-bool)
   )
 )
 
@@ -18609,13 +20144,13 @@
 (cffi:defcfun ("daqTags_query" %daq-tags-query) daq-err-code
   (self daq-tags)
   (query daq-string)
-  (value (:pointer daq-bool))
+  (value (:pointer daq-c-bool))
   )
 
 (defun tags/query (self query)
-  (cffi:with-foreign-object (value-slot 'daq-bool)
+  (cffi:with-foreign-object (value-slot 'daq-c-bool)
     (%check-error (%daq-tags-query self query value-slot) "daqTags_query")
-    (cffi:mem-ref value-slot 'daq-bool)
+    (cffi:mem-ref value-slot 'daq-c-bool)
   )
 )
 
@@ -18656,13 +20191,13 @@
 
 (cffi:defcfun ("daqTailReaderBuilder_getHistorySize" %daq-tail-reader-builder-get-history-size) daq-err-code
   (self daq-tail-reader-builder)
-  (history-size (:pointer daq-size-t))
+  (history-size (:pointer daq-c-size-t))
   )
 
 (defun tail-reader-builder/get-history-size (self)
-  (cffi:with-foreign-object (history-size-slot 'daq-size-t)
+  (cffi:with-foreign-object (history-size-slot 'daq-c-size-t)
     (%check-error (%daq-tail-reader-builder-get-history-size self history-size-slot) "daqTailReaderBuilder_getHistorySize")
-    (cffi:mem-ref history-size-slot 'daq-size-t)
+    (cffi:mem-ref history-size-slot 'daq-c-size-t)
   )
 )
 
@@ -18712,13 +20247,13 @@
 
 (cffi:defcfun ("daqTailReaderBuilder_getSkipEvents" %daq-tail-reader-builder-get-skip-events) daq-err-code
   (self daq-tail-reader-builder)
-  (skip-events (:pointer daq-bool))
+  (skip-events (:pointer daq-c-bool))
   )
 
 (defun tail-reader-builder/get-skip-events (self)
-  (cffi:with-foreign-object (skip-events-slot 'daq-bool)
+  (cffi:with-foreign-object (skip-events-slot 'daq-c-bool)
     (%check-error (%daq-tail-reader-builder-get-skip-events self skip-events-slot) "daqTailReaderBuilder_getSkipEvents")
-    (cffi:mem-ref skip-events-slot 'daq-bool)
+    (cffi:mem-ref skip-events-slot 'daq-c-bool)
   )
 )
 
@@ -18746,7 +20281,7 @@
 
 (cffi:defcfun ("daqTailReaderBuilder_setHistorySize" %daq-tail-reader-builder-set-history-size) daq-err-code
   (self daq-tail-reader-builder)
-  (history-size daq-size-t)
+  (history-size daq-c-size-t)
   )
 
 (defun tail-reader-builder/set-history-size (self history-size)
@@ -18786,7 +20321,7 @@
 
 (cffi:defcfun ("daqTailReaderBuilder_setSkipEvents" %daq-tail-reader-builder-set-skip-events) daq-err-code
   (self daq-tail-reader-builder)
-  (skip-events daq-bool)
+  (skip-events daq-c-bool)
   )
 
 (defun tail-reader-builder/set-skip-events (self skip-events)
@@ -18807,9 +20342,9 @@
 (cffi:defcfun ("daqTailReaderStatus_createTailReaderStatus" %daq-tail-reader-status-create-tail-reader-status) daq-err-code
   (obj (:pointer daq-tail-reader-status))
   (event-packet daq-event-packet)
-  (valid daq-bool)
+  (valid daq-c-bool)
   (offset daq-number)
-  (sufficient-history daq-bool)
+  (sufficient-history daq-c-bool)
   )
 
 (defun tail-reader-status/create-tail-reader-status (event-packet valid offset sufficient-history)
@@ -18829,20 +20364,20 @@
 
 (cffi:defcfun ("daqTailReaderStatus_getSufficientHistory" %daq-tail-reader-status-get-sufficient-history) daq-err-code
   (self daq-tail-reader-status)
-  (status (:pointer daq-bool))
+  (status (:pointer daq-c-bool))
   )
 
 (defun tail-reader-status/get-sufficient-history (self)
-  (cffi:with-foreign-object (status-slot 'daq-bool)
+  (cffi:with-foreign-object (status-slot 'daq-c-bool)
     (%check-error (%daq-tail-reader-status-get-sufficient-history self status-slot) "daqTailReaderStatus_getSufficientHistory")
-    (cffi:mem-ref status-slot 'daq-bool)
+    (cffi:mem-ref status-slot 'daq-c-bool)
   )
 )
 
 (cffi:defcfun ("daqTailReader_createTailReader" %daq-tail-reader-create-tail-reader) daq-err-code
   (obj (:pointer daq-tail-reader))
   (signal daq-signal)
-  (history-size daq-size-t)
+  (history-size daq-c-size-t)
   (value-read-type daq-sample-type)
   (domain-read-type daq-sample-type)
   (mode daq-read-mode)
@@ -18858,7 +20393,7 @@
 (cffi:defcfun ("daqTailReader_createTailReaderFromExisting" %daq-tail-reader-create-tail-reader-from-existing) daq-err-code
   (obj (:pointer daq-tail-reader))
   (invalidated-reader daq-tail-reader)
-  (history-size daq-size-t)
+  (history-size daq-c-size-t)
   (value-read-type daq-sample-type)
   (domain-read-type daq-sample-type)
   )
@@ -18873,7 +20408,7 @@
 (cffi:defcfun ("daqTailReader_createTailReaderFromPort" %daq-tail-reader-create-tail-reader-from-port) daq-err-code
   (obj (:pointer daq-tail-reader))
   (port daq-input-port-config)
-  (history-size daq-size-t)
+  (history-size daq-c-size-t)
   (value-read-type daq-sample-type)
   (domain-read-type daq-sample-type)
   (mode daq-read-mode)
@@ -18888,13 +20423,13 @@
 
 (cffi:defcfun ("daqTailReader_getHistorySize" %daq-tail-reader-get-history-size) daq-err-code
   (self daq-tail-reader)
-  (size (:pointer daq-size-t))
+  (size (:pointer daq-c-size-t))
   )
 
 (defun tail-reader/get-history-size (self)
-  (cffi:with-foreign-object (size-slot 'daq-size-t)
+  (cffi:with-foreign-object (size-slot 'daq-c-size-t)
     (%check-error (%daq-tail-reader-get-history-size self size-slot) "daqTailReader_getHistorySize")
-    (cffi:mem-ref size-slot 'daq-size-t)
+    (cffi:mem-ref size-slot 'daq-c-size-t)
   )
 )
 
@@ -18909,16 +20444,16 @@
 (cffi:defcfun ("daqTailReader_read" %daq-tail-reader-read) daq-err-code
   (self daq-tail-reader)
   (values :pointer)
-  (count (:pointer daq-size-t))
+  (count (:pointer daq-c-size-t))
   (status (:pointer daq-tail-reader-status))
   )
 
 (defun tail-reader/read (self values count)
-  (cffi:with-foreign-object (count-slot 'daq-size-t)
+  (cffi:with-foreign-object (count-slot 'daq-c-size-t)
     (cffi:with-foreign-object (status-slot 'daq-tail-reader-status)
-      (setf (cffi:mem-ref count-slot 'daq-size-t) count)
+      (setf (cffi:mem-ref count-slot 'daq-c-size-t) count)
       (%check-error (%daq-tail-reader-read self values count-slot status-slot) "daqTailReader_read")
-      (values (cffi:mem-ref count-slot 'daq-size-t) (cffi:mem-ref status-slot 'daq-tail-reader-status))
+      (values (cffi:mem-ref count-slot 'daq-c-size-t) (cffi:mem-ref status-slot 'daq-tail-reader-status))
     )
   )
 )
@@ -18927,16 +20462,16 @@
   (self daq-tail-reader)
   (values :pointer)
   (domain :pointer)
-  (count (:pointer daq-size-t))
+  (count (:pointer daq-c-size-t))
   (status (:pointer daq-tail-reader-status))
   )
 
 (defun tail-reader/read-with-domain (self values domain count)
-  (cffi:with-foreign-object (count-slot 'daq-size-t)
+  (cffi:with-foreign-object (count-slot 'daq-c-size-t)
     (cffi:with-foreign-object (status-slot 'daq-tail-reader-status)
-      (setf (cffi:mem-ref count-slot 'daq-size-t) count)
+      (setf (cffi:mem-ref count-slot 'daq-c-size-t) count)
       (%check-error (%daq-tail-reader-read-with-domain self values domain count-slot status-slot) "daqTailReader_readWithDomain")
-      (values (cffi:mem-ref count-slot 'daq-size-t) (cffi:mem-ref status-slot 'daq-tail-reader-status))
+      (values (cffi:mem-ref count-slot 'daq-c-size-t) (cffi:mem-ref status-slot 'daq-tail-reader-status))
     )
   )
 )
@@ -19090,13 +20625,13 @@
 (cffi:defcfun ("daqTypeManager_hasType" %daq-type-manager-has-type) daq-err-code
   (self daq-type-manager)
   (type-name daq-string)
-  (has-type (:pointer daq-bool))
+  (has-type (:pointer daq-c-bool))
   )
 
 (defun type-manager/has-type (self type-name)
-  (cffi:with-foreign-object (has-type-slot 'daq-bool)
+  (cffi:with-foreign-object (has-type-slot 'daq-c-bool)
     (%check-error (%daq-type-manager-has-type self type-name has-type-slot) "daqTypeManager_hasType")
-    (cffi:mem-ref has-type-slot 'daq-bool)
+    (cffi:mem-ref has-type-slot 'daq-c-bool)
   )
 )
 
@@ -19167,13 +20702,13 @@
 
 (cffi:defcfun ("daqUnitBuilder_getId" %daq-unit-builder-get-id) daq-err-code
   (self daq-unit-builder)
-  (id (:pointer daq-int))
+  (id (:pointer daq-c-int))
   )
 
 (defun unit-builder/get-id (self)
-  (cffi:with-foreign-object (id-slot 'daq-int)
+  (cffi:with-foreign-object (id-slot 'daq-c-int)
     (%check-error (%daq-unit-builder-get-id self id-slot) "daqUnitBuilder_getId")
-    (cffi:mem-ref id-slot 'daq-int)
+    (cffi:mem-ref id-slot 'daq-c-int)
   )
 )
 
@@ -19223,7 +20758,7 @@
 
 (cffi:defcfun ("daqUnitBuilder_setId" %daq-unit-builder-set-id) daq-err-code
   (self daq-unit-builder)
-  (id daq-int)
+  (id daq-c-int)
   )
 
 (defun unit-builder/set-id (self id)
@@ -19263,7 +20798,7 @@
 
 (cffi:defcfun ("daqUnit_createUnit" %daq-unit-create-unit) daq-err-code
   (obj (:pointer daq-unit))
-  (id daq-int)
+  (id daq-c-int)
   (symbol daq-string)
   (name daq-string)
   (quantity daq-string)
@@ -19278,13 +20813,13 @@
 
 (cffi:defcfun ("daqUnit_getId" %daq-unit-get-id) daq-err-code
   (self daq-unit)
-  (id (:pointer daq-int))
+  (id (:pointer daq-c-int))
   )
 
 (defun unit/get-id (self)
-  (cffi:with-foreign-object (id-slot 'daq-int)
+  (cffi:with-foreign-object (id-slot 'daq-c-int)
     (%check-error (%daq-unit-get-id self id-slot) "daqUnit_getId")
-    (cffi:mem-ref id-slot 'daq-int)
+    (cffi:mem-ref id-slot 'daq-c-int)
   )
 )
 
@@ -19329,6 +20864,56 @@
   (cffi:with-foreign-object (symbol-slot 'daq-string)
     (%check-error (%daq-unit-get-symbol self symbol-slot) "daqUnit_getSymbol")
     (cffi:mem-ref symbol-slot 'daq-string)
+  )
+)
+
+(cffi:defcfun ("daqUnknown_addRef" %daq-unknown-add-ref) :int
+  (self daq-unknown)
+  )
+
+(defun unknown/add-ref (self)
+  (let ((result (%daq-unknown-add-ref self)))
+    result
+  )
+)
+
+(cffi:defcfun ("daqUnknown_getInterfaceId" %daq-unknown-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun unknown/get-interface-id (intf-id)
+  (%daq-unknown-get-interface-id intf-id)
+  nil)
+
+#-(or windows win32)
+(cffi:defcfun ("daqUnknown_queryInterface" %daq-unknown-query-interface) daq-err-code
+  (self daq-unknown)
+  (intf-id-0 :uint64)
+  (intf-id-1 :uint64)
+  (interface-ptr (:pointer daq-base-object))
+  )
+
+#+(or windows win32)
+(cffi:defcfun ("daqUnknown_queryInterface" %daq-unknown-query-interface) daq-err-code
+  (self daq-unknown)
+  (intf-id (:pointer (:struct daq-intf-id)))
+  (interface-ptr (:pointer daq-base-object))
+  )
+
+(defun unknown/query-interface (self intf-id)
+  (cffi:with-foreign-object (interface-ptr-slot 'daq-base-object)
+    (%check-error #-(or windows win32) (%daq-unknown-query-interface self (cffi:mem-ref intf-id :uint64 0) (cffi:mem-ref intf-id :uint64 8) interface-ptr-slot) #+(or windows win32) (%daq-unknown-query-interface self intf-id interface-ptr-slot) "daqUnknown_queryInterface")
+    (cffi:mem-ref interface-ptr-slot 'daq-base-object)
+  )
+)
+
+(cffi:defcfun ("daqUnknown_releaseRef" %daq-unknown-release-ref) :int
+  (self daq-unknown)
+  )
+
+(defun unknown/release-ref (self)
+  (let ((result (%daq-unknown-release-ref self)))
+    result
   )
 )
 
@@ -19415,13 +21000,13 @@
 
 (cffi:defcfun ("daqUpdateParameters_getRemoveUnusedDevices" %daq-update-parameters-get-remove-unused-devices) daq-err-code
   (self daq-update-parameters)
-  (remove (:pointer daq-bool))
+  (remove (:pointer daq-c-bool))
   )
 
 (defun update-parameters/get-remove-unused-devices (self)
-  (cffi:with-foreign-object (remove-slot 'daq-bool)
+  (cffi:with-foreign-object (remove-slot 'daq-c-bool)
     (%check-error (%daq-update-parameters-get-remove-unused-devices self remove-slot) "daqUpdateParameters_getRemoveUnusedDevices")
-    (cffi:mem-ref remove-slot 'daq-bool)
+    (cffi:mem-ref remove-slot 'daq-c-bool)
   )
 )
 
@@ -19437,7 +21022,7 @@
 
 (cffi:defcfun ("daqUpdateParameters_setRemoveUnusedDevices" %daq-update-parameters-set-remove-unused-devices) daq-err-code
   (self daq-update-parameters)
-  (remove daq-bool)
+  (remove daq-c-bool)
   )
 
 (defun update-parameters/set-remove-unused-devices (self remove)
@@ -19467,13 +21052,13 @@
 
 (cffi:defcfun ("daqUserInternal_isAnonymous" %daq-user-internal-is-anonymous) daq-err-code
   (self daq-user-internal)
-  (anonymous (:pointer daq-bool))
+  (anonymous (:pointer daq-c-bool))
   )
 
 (defun user-internal/is-anonymous (self)
-  (cffi:with-foreign-object (anonymous-slot 'daq-bool)
+  (cffi:with-foreign-object (anonymous-slot 'daq-c-bool)
     (%check-error (%daq-user-internal-is-anonymous self anonymous-slot) "daqUserInternal_isAnonymous")
-    (cffi:mem-ref anonymous-slot 'daq-bool)
+    (cffi:mem-ref anonymous-slot 'daq-c-bool)
   )
 )
 
@@ -19507,13 +21092,13 @@
 
 (cffi:defcfun ("daqUserLock_isLocked" %daq-user-lock-is-locked) daq-err-code
   (self daq-user-lock)
-  (is-locked-out (:pointer daq-bool))
+  (is-locked-out (:pointer daq-c-bool))
   )
 
 (defun user-lock/is-locked (self)
-  (cffi:with-foreign-object (is-locked-out-slot 'daq-bool)
+  (cffi:with-foreign-object (is-locked-out-slot 'daq-c-bool)
     (%check-error (%daq-user-lock-is-locked self is-locked-out-slot) "daqUserLock_isLocked")
-    (cffi:mem-ref is-locked-out-slot 'daq-bool)
+    (cffi:mem-ref is-locked-out-slot 'daq-c-bool)
   )
 )
 
@@ -19639,9 +21224,9 @@
 
 (cffi:defcfun ("daqVersionInfo_createVersionInfo" %daq-version-info-create-version-info) daq-err-code
   (obj (:pointer daq-version-info))
-  (major daq-size-t)
-  (minor daq-size-t)
-  (patch daq-size-t)
+  (major daq-c-size-t)
+  (minor daq-c-size-t)
+  (patch daq-c-size-t)
   )
 
 (defun version-info/create-version-info (major minor patch)
@@ -19661,39 +21246,101 @@
 
 (cffi:defcfun ("daqVersionInfo_getMajor" %daq-version-info-get-major) daq-err-code
   (self daq-version-info)
-  (major (:pointer daq-size-t))
+  (major (:pointer daq-c-size-t))
   )
 
 (defun version-info/get-major (self)
-  (cffi:with-foreign-object (major-slot 'daq-size-t)
+  (cffi:with-foreign-object (major-slot 'daq-c-size-t)
     (%check-error (%daq-version-info-get-major self major-slot) "daqVersionInfo_getMajor")
-    (cffi:mem-ref major-slot 'daq-size-t)
+    (cffi:mem-ref major-slot 'daq-c-size-t)
   )
 )
 
 (cffi:defcfun ("daqVersionInfo_getMinor" %daq-version-info-get-minor) daq-err-code
   (self daq-version-info)
-  (minor (:pointer daq-size-t))
+  (minor (:pointer daq-c-size-t))
   )
 
 (defun version-info/get-minor (self)
-  (cffi:with-foreign-object (minor-slot 'daq-size-t)
+  (cffi:with-foreign-object (minor-slot 'daq-c-size-t)
     (%check-error (%daq-version-info-get-minor self minor-slot) "daqVersionInfo_getMinor")
-    (cffi:mem-ref minor-slot 'daq-size-t)
+    (cffi:mem-ref minor-slot 'daq-c-size-t)
   )
 )
 
 (cffi:defcfun ("daqVersionInfo_getPatch" %daq-version-info-get-patch) daq-err-code
   (self daq-version-info)
-  (patch (:pointer daq-size-t))
+  (patch (:pointer daq-c-size-t))
   )
 
 (defun version-info/get-patch (self)
-  (cffi:with-foreign-object (patch-slot 'daq-size-t)
+  (cffi:with-foreign-object (patch-slot 'daq-c-size-t)
     (%check-error (%daq-version-info-get-patch self patch-slot) "daqVersionInfo_getPatch")
-    (cffi:mem-ref patch-slot 'daq-size-t)
+    (cffi:mem-ref patch-slot 'daq-c-size-t)
   )
 )
+
+(cffi:defcfun ("daqWeakRef_getInterfaceId" %daq-weak-ref-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun weak-ref/get-interface-id (intf-id)
+  (%daq-weak-ref-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqWeakRef_getRef" %daq-weak-ref-get-ref) daq-err-code
+  (self daq-weak-ref)
+  (object (:pointer daq-base-object))
+  )
+
+(defun weak-ref/get-ref (self)
+  (cffi:with-foreign-object (object-slot 'daq-base-object)
+    (%check-error (%daq-weak-ref-get-ref self object-slot) "daqWeakRef_getRef")
+    (cffi:mem-ref object-slot 'daq-base-object)
+  )
+)
+
+#-(or windows win32)
+(cffi:defcfun ("daqWeakRef_getRefAs" %daq-weak-ref-get-ref-as) daq-err-code
+  (self daq-weak-ref)
+  (intf-id-0 :uint64)
+  (intf-id-1 :uint64)
+  (object (:pointer :pointer))
+  )
+
+#+(or windows win32)
+(cffi:defcfun ("daqWeakRef_getRefAs" %daq-weak-ref-get-ref-as) daq-err-code
+  (self daq-weak-ref)
+  (intf-id (:pointer (:struct daq-intf-id)))
+  (object (:pointer :pointer))
+  )
+
+(defun weak-ref/get-ref-as (self intf-id)
+  (cffi:with-foreign-object (object-slot ':pointer)
+    (%check-error #-(or windows win32) (%daq-weak-ref-get-ref-as self (cffi:mem-ref intf-id :uint64 0) (cffi:mem-ref intf-id :uint64 8) object-slot) #+(or windows win32) (%daq-weak-ref-get-ref-as self intf-id object-slot) "daqWeakRef_getRefAs")
+    (cffi:mem-ref object-slot ':pointer)
+  )
+)
+
+(cffi:defcfun ("daqWorkRepetitive_executeRepetitively" %daq-work-repetitive-execute-repetitively) daq-err-code
+  (self daq-work-repetitive)
+  (repeat-after (:pointer daq-c-bool))
+  )
+
+(defun work-repetitive/execute-repetitively (self)
+  (cffi:with-foreign-object (repeat-after-slot 'daq-c-bool)
+    (%check-error (%daq-work-repetitive-execute-repetitively self repeat-after-slot) "daqWorkRepetitive_executeRepetitively")
+    (cffi:mem-ref repeat-after-slot 'daq-c-bool)
+  )
+)
+
+(cffi:defcfun ("daqWorkRepetitive_getInterfaceId" %daq-work-repetitive-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun work-repetitive/get-interface-id (intf-id)
+  (%daq-work-repetitive-get-interface-id intf-id)
+  nil)
 
 (cffi:defcfun ("daqWork_execute" %daq-work-execute) daq-err-code
   (self daq-work)
@@ -19711,6 +21358,26 @@
 (defun work/get-interface-id (intf-id)
   (%daq-work-get-interface-id intf-id)
   nil)
+
+(cffi:defcfun ("daqWrappedDataPacket_getInterfaceId" %daq-wrapped-data-packet-get-interface-id) :void
+  (intf-id (:pointer daq-intf-id))
+  )
+
+(defun wrapped-data-packet/get-interface-id (intf-id)
+  (%daq-wrapped-data-packet-get-interface-id intf-id)
+  nil)
+
+(cffi:defcfun ("daqWrappedDataPacket_getSourcePacket" %daq-wrapped-data-packet-get-source-packet) daq-err-code
+  (self daq-wrapped-data-packet)
+  (source-packet (:pointer daq-data-packet))
+  )
+
+(defun wrapped-data-packet/get-source-packet (self)
+  (cffi:with-foreign-object (source-packet-slot 'daq-data-packet)
+    (%check-error (%daq-wrapped-data-packet-get-source-packet self source-packet-slot) "daqWrappedDataPacket_getSourcePacket")
+    (cffi:mem-ref source-packet-slot 'daq-data-packet)
+  )
+)
 
 ;;; Public wrapper exports
 (export '(
@@ -19761,14 +21428,12 @@
   awaitable/get-result
   awaitable/has-completed
   awaitable/wait
-  base-object/add-ref
   base-object/borrow-interface
-  base-object/create
+  base-object/create-base-object
   base-object/dispose
   base-object/equals
   base-object/get-hash-code
-  base-object/query-interface
-  base-object/release-ref
+  base-object/get-interface-id
   base-object/to-string
   binary-data/create-binary-data
   binary-data/get-address
@@ -19827,9 +21492,11 @@
   comparable/compare-to
   comparable/get-interface-id
   complex-number/create-complex-number
+  complex-number/equals-value
   complex-number/get-imaginary
   complex-number/get-interface-id
   complex-number/get-real
+  complex-number/get-value
   component-deserialize-context/clone
   component-deserialize-context/create-component-deserialize-context
   component-deserialize-context/get-context
@@ -19941,6 +21608,7 @@
   connected-client-info/get-interface-id
   connected-client-info/get-protocol-name
   connected-client-info/get-protocol-type
+  connection-internal/close-queue
   connection-internal/dequeue-up-to
   connection-internal/enqueue-last-descriptor
   connection-internal/get-interface-id
@@ -19973,6 +21641,7 @@
   connection/peek
   context-internal/get-interface-id
   context-internal/move-module-manager
+  context-internal/set-root-device
   context/create-context
   context/get-authentication-provider
   context/get-discovery-servers
@@ -19982,6 +21651,7 @@
   context/get-module-options
   context/get-on-core-event
   context/get-options
+  context/get-root-device
   context/get-scheduler
   context/get-type-manager
   convertible/get-interface-id
@@ -19989,16 +21659,28 @@
   convertible/to-float
   convertible/to-int
   core-event-args/create-core-event-args
+  core-event-args/create-core-event-args-attribute-changed
+  core-event-args/create-core-event-args-component-added
+  core-event-args/create-core-event-args-component-removed
+  core-event-args/create-core-event-args-component-update-end
+  core-event-args/create-core-event-args-data-descriptor-changed
+  core-event-args/create-core-event-args-device-domain-changed
+  core-event-args/create-core-event-args-device-lock-state-changed
+  core-event-args/create-core-event-args-device-operation-mode-changed
   core-event-args/create-core-event-args-property-added
   core-event-args/create-core-event-args-property-object-update-end
   core-event-args/create-core-event-args-property-order-changed
   core-event-args/create-core-event-args-property-removed
   core-event-args/create-core-event-args-property-value-changed
+  core-event-args/create-core-event-args-signal-connected
+  core-event-args/create-core-event-args-signal-disconnected
+  core-event-args/create-core-event-args-tags-changed
   core-event-args/create-core-event-args-type-added
   core-event-args/create-core-event-args-type-removed
   core-event-args/get-interface-id
   core-event-args/get-parameters
   core-type/get-core-type
+  core-type/get-interface-id
   data-descriptor-builder/build
   data-descriptor-builder/create-data-descriptor-builder
   data-descriptor-builder/create-data-descriptor-builder-from-existing
@@ -20043,10 +21725,13 @@
   data-descriptor/get-tick-resolution
   data-descriptor/get-unit
   data-descriptor/get-value-range
+  data-packet/create-binary-data-packet
+  data-packet/create-binary-data-packet-with-external-memory
   data-packet/create-constant-data-packet-with-domain
   data-packet/create-data-packet
   data-packet/create-data-packet-with-domain
   data-packet/create-data-packet-with-external-memory
+  data-packet/create-wrapped-data-packet
   data-packet/get-data
   data-packet/get-data-descriptor
   data-packet/get-data-size
@@ -20087,8 +21772,19 @@
   deserialize-component/get-deserialized-parameter
   deserialize-component/get-interface-id
   deserializer/call-custom-proc
+  deserializer/create-json-deserializer
   deserializer/deserialize
+  deserializer/get-interface-id
+  deserializer/unregister-serializer-factory
   deserializer/update
+  development-version-info/create-development-version-info
+  development-version-info/get-branch-name
+  development-version-info/get-hash-digest
+  development-version-info/get-interface-id
+  development-version-info/get-major
+  development-version-info/get-minor
+  development-version-info/get-patch
+  development-version-info/get-tweak
   device-domain/create-device-domain
   device-domain/create-device-domain-with-reference-domain-info
   device-domain/get-interface-id
@@ -20222,6 +21918,7 @@
   device/get-signals
   device/get-signals-recursive
   device/get-sync-component
+  device/get-synchronization
   device/get-ticks-since-origin
   device/is-locked
   device/load-configuration
@@ -20239,6 +21936,7 @@
   dict/clear
   dict/create-dict
   dict/create-dict-with-expected-types
+  dict/create-owning-dict
   dict/delete-item
   dict/get
   dict/get-count
@@ -20311,14 +22009,31 @@
   enumeration/get-int-value
   enumeration/get-interface-id
   enumeration/get-value
+  error-guard/create-error-guard
+  error-guard/get-error-info-list
+  error-guard/get-formatted-message
+  error-guard/get-interface-id
+  error-guard/get-last-error-info
+  error-info/clear-error-info
   error-info/create-error-info
+  error-info/extend-error-info
+  error-info/get-error-code
+  error-info/get-error-info
+  error-info/get-error-info-list
+  error-info/get-error-info-message
   error-info/get-file-line
   error-info/get-file-name
+  error-info/get-formatted-message
+  error-info/get-interface-id
   error-info/get-message
+  error-info/get-previous-error-code
   error-info/get-source
+  error-info/set-error-code
+  error-info/set-error-info
   error-info/set-file-line
   error-info/set-file-name
   error-info/set-message
+  error-info/set-previous-error-code
   error-info/set-source
   eval-value/clone-with-owner
   eval-value/create-eval-value
@@ -20335,6 +22050,7 @@
   event-args/get-event-name
   event-args/get-interface-id
   event-handler/create-event-handler
+  event-handler/create-event-handler-with-data
   event-handler/get-interface-id
   event-handler/handle-event
   event-packet/create-data-descriptor-changed-event-packet
@@ -20355,11 +22071,12 @@
   event/trigger
   event/unmute
   event/unmute-listener
-  float-object/create-float
-  float-object/create-float-object
-  float-object/equals-value
-  float-object/get-interface-id
-  float-object/get-value
+  float/create-float
+  float/create-float-from-pool
+  float/create-float-object
+  float/equals-value
+  float/get-interface-id
+  float/get-value
   folder-config/add-item
   folder-config/clear
   folder-config/create-folder
@@ -20390,6 +22107,8 @@
   function-block/remove-function-block
   function/call
   function/create-function
+  function/create-function-with-data
+  function/get-interface-id
   graph-visualization/dump
   graph-visualization/get-interface-id
   input-port-config/create-input-port
@@ -20423,6 +22142,8 @@
   input-port/get-requires-signal
   input-port/get-signal
   input-port/set-public
+  inspectable/get-interface-id
+  inspectable/get-interface-ids
   inspectable/get-runtime-class-name
   instance-builder/add-config-provider
   instance-builder/add-discovery-server
@@ -20477,6 +22198,7 @@
   instance/get-root-device
   instance/set-root-device
   integer/create-integer
+  integer/create-integer-from-pool
   integer/equals-value
   integer/get-interface-id
   integer/get-value
@@ -20496,6 +22218,7 @@
   list/create-end-iterator
   list/create-list
   list/create-list-with-element-type
+  list/create-owning-list
   list/create-start-iterator
   list/delete-at
   list/get-count
@@ -20543,6 +22266,7 @@
   logger-component/get-interface-id
   logger-component/get-level
   logger-component/get-name
+  logger-component/log-message
   logger-component/set-level
   logger-component/set-pattern
   logger-component/should-log
@@ -20550,8 +22274,8 @@
   logger-sink/create-rotating-file-logger-sink
   logger-sink/create-std-err-logger-sink
   logger-sink/create-std-out-logger-sink
-  logger-sink/create-win-debug-logger-sink
   logger-sink/flush
+  logger-sink/get-interface-id
   logger-sink/get-level
   logger-sink/set-level
   logger-sink/set-pattern
@@ -20582,6 +22306,11 @@
   mirrored-input-port-config/get-remote-id
   mirrored-input-port-config/get-streaming-sources
   mirrored-input-port-config/set-active-streaming-source
+  mirrored-input-port-private/add-streaming-source
+  mirrored-input-port-private/get-active-streaming-source-object
+  mirrored-input-port-private/get-interface-id
+  mirrored-input-port-private/get-streaming-source-objects
+  mirrored-input-port-private/remove-streaming-source
   mirrored-signal-config/deactivate-streaming
   mirrored-signal-config/get-active-streaming-source
   mirrored-signal-config/get-interface-id
@@ -20601,6 +22330,10 @@
   mirrored-signal-private/trigger-event
   mirrored-signal-private/unsubscribe-completed
   mirrored-signal-private/unsubscribe-completed-no-lock
+  module-authenticator/authenticate-module-binary
+  module-authenticator/create-function-module-authenticator
+  module-authenticator/get-interface-id
+  module-authenticator/set-logger
   module-info/create-module-info
   module-info/get-id
   module-info/get-interface-id
@@ -20698,6 +22431,11 @@
   multi-reader/set-active
   multi-reader/set-input-used
   multi-reader/skip-samples
+  mutex/create-mutex
+  mutex/get-interface-id
+  mutex/lock
+  mutex/try-lock
+  mutex/unlock
   network-interface/create-default-configuration
   network-interface/create-network-interface
   network-interface/get-interface-id
@@ -20708,6 +22446,19 @@
   number/get-interface-id
   ownable/get-interface-id
   ownable/set-owner
+  packet-buffer-builder/build
+  packet-buffer-builder/create-packet-buffer-builder
+  packet-buffer-builder/get-context
+  packet-buffer-builder/get-interface-id
+  packet-buffer-builder/get-size-in-bytes
+  packet-buffer-builder/set-context
+  packet-buffer-builder/set-size-in-bytes
+  packet-buffer/create-packet
+  packet-buffer/create-packet-buffer
+  packet-buffer/get-available-sample-count
+  packet-buffer/get-interface-id
+  packet-buffer/get-max-available-continous-sample-count
+  packet-buffer/resize
   packet-destruct-callback/get-interface-id
   packet-destruct-callback/on-packet-destroyed
   packet-reader/create-packet-reader
@@ -20752,7 +22503,9 @@
   permissions/get-inherited
   permissions/get-interface-id
   procedure/create-procedure
+  procedure/create-procedure-with-data
   procedure/dispatch
+  procedure/get-interface-id
   property-builder/build
   property-builder/create-bool-property-builder
   property-builder/create-dict-property-builder
@@ -20849,6 +22602,11 @@
   property-internal/get-visible-unresolved
   property-internal/override-default-value
   property-internal/set-value-protected
+  property-metadata-read-args/create-property-metadata-read-args
+  property-metadata-read-args/get-interface-id
+  property-metadata-read-args/get-property
+  property-metadata-read-args/get-value
+  property-metadata-read-args/set-value
   property-object-class-builder/add-property
   property-object-class-builder/build
   property-object-class-builder/create-property-object-class-builder
@@ -20871,12 +22629,17 @@
   property-object-class/get-properties
   property-object-class/get-property
   property-object-class/has-property
+  property-object-core/create-property-object-core
+  property-object-core/get-interface-id
+  property-object-core/get-lock-guard
+  property-object-core/get-recursive-lock-guard
   property-object-internal/check-for-references
   property-object-internal/check-for-references-no-lock
   property-object-internal/clear-property-value-no-lock
   property-object-internal/clone
   property-object-internal/disable-core-event-trigger
   property-object-internal/enable-core-event-trigger
+  property-object-internal/get-all-properties-no-lock
   property-object-internal/get-core-event-trigger
   property-object-internal/get-interface-id
   property-object-internal/get-lock-guard
@@ -20884,9 +22647,12 @@
   property-object-internal/get-mutex
   property-object-internal/get-mutex-owner
   property-object-internal/get-path
+  property-object-internal/get-property-no-lock
   property-object-internal/get-property-selection-value-no-lock
   property-object-internal/get-property-value-no-lock
   property-object-internal/get-recursive-lock-guard
+  property-object-internal/get-visible-properties-no-lock
+  property-object-internal/has-property-no-lock
   property-object-internal/has-user-read-access
   property-object-internal/is-updating
   property-object-internal/set-core-event-trigger
@@ -20927,6 +22693,7 @@
   property-object/set-property-selection-value
   property-object/set-property-value
   property-value-event-args/create-property-value-event-args
+  property-value-event-args/get-interface-id
   property-value-event-args/get-is-updating
   property-value-event-args/get-old-value
   property-value-event-args/get-property
@@ -21011,19 +22778,19 @@
   reference-domain-info-builder/create-reference-domain-info-builder-from-existing
   reference-domain-info-builder/get-interface-id
   reference-domain-info-builder/get-reference-domain-id
+  reference-domain-info-builder/get-reference-domain-ids
   reference-domain-info-builder/get-reference-domain-offset
   reference-domain-info-builder/get-reference-time-protocol
-  reference-domain-info-builder/get-uses-offset
   reference-domain-info-builder/set-reference-domain-id
+  reference-domain-info-builder/set-reference-domain-ids
   reference-domain-info-builder/set-reference-domain-offset
   reference-domain-info-builder/set-reference-time-protocol
-  reference-domain-info-builder/set-uses-offset
   reference-domain-info/create-reference-domain-info-from-builder
   reference-domain-info/get-interface-id
   reference-domain-info/get-reference-domain-id
+  reference-domain-info/get-reference-domain-ids
   reference-domain-info/get-reference-domain-offset
   reference-domain-info/get-reference-time-protocol
-  reference-domain-info/get-uses-offset
   removable/get-interface-id
   removable/is-removed
   removable/remove
@@ -21051,10 +22818,6 @@
   scaling-builder/set-output-data-type
   scaling-builder/set-parameters
   scaling-builder/set-scaling-type
-  scaling-calc-private/get-interface-id
-  scaling-calc-private/has-scaling-calc
-  scaling-calc-private/scale-data
-  scaling-calc-private/scale-data-output
   scaling/create-linear-scaling
   scaling/create-scaling
   scaling/create-scaling-from-builder
@@ -21084,10 +22847,13 @@
   search-filter/create-excluded-tags-search-filter
   search-filter/create-interface-id-search-filter
   search-filter/create-local-id-search-filter
+  search-filter/create-name-property-filter
   search-filter/create-not-search-filter
   search-filter/create-or-search-filter
+  search-filter/create-read-only-property-filter
   search-filter/create-recursive-search-filter
   search-filter/create-required-tags-search-filter
+  search-filter/create-visible-property-filter
   search-filter/create-visible-search-filter
   search-filter/get-interface-id
   search-filter/visit-children
@@ -21120,8 +22886,10 @@
   serialized-object/read-string
   serialized-object/to-json
   serializer/create-json-serializer
+  serializer/create-json-serializer-with-version
   serializer/end-list
   serializer/end-object
+  serializer/get-interface-id
   serializer/get-output
   serializer/get-user
   serializer/get-version
@@ -21149,8 +22917,10 @@
   server-capability-config/set-core-events-enabled
   server-capability-config/set-port
   server-capability-config/set-prefix
+  server-capability-config/set-protocol-group-id
   server-capability-config/set-protocol-id
   server-capability-config/set-protocol-name
+  server-capability-config/set-protocol-security-level
   server-capability-config/set-protocol-type
   server-capability-config/set-protocol-version
   server-capability/get-address-info
@@ -21162,8 +22932,10 @@
   server-capability/get-interface-id
   server-capability/get-port
   server-capability/get-prefix
+  server-capability/get-protocol-group-id
   server-capability/get-protocol-id
   server-capability/get-protocol-name
+  server-capability/get-protocol-security-level
   server-capability/get-protocol-type
   server-capability/get-protocol-version
   server-type/create-server-type
@@ -21206,6 +22978,7 @@
   signal/get-domain-signal
   signal/get-interface-id
   signal/get-last-value
+  signal/get-last-value-with-timestamp
   signal/get-public
   signal/get-related-signals
   signal/get-streamed
@@ -21250,6 +23023,7 @@
   streaming/get-connection-string
   streaming/get-interface-id
   streaming/get-owner-device-remote-id
+  streaming/get-protocol-group-id
   streaming/get-protocol-id
   streaming/remove-all-input-ports
   streaming/remove-all-signals
@@ -21292,6 +23066,8 @@
   subscription-event-args/get-interface-id
   subscription-event-args/get-streaming-connection-string
   subscription-event-args/get-subscription-event-type
+  supports-weak-ref/get-interface-id
+  supports-weak-ref/get-weak-ref
   sync-component-private/add-interface
   sync-component-private/get-interface-id
   sync-component-private/remove-interface
@@ -21302,6 +23078,28 @@
   sync-component/get-selected-source
   sync-component/get-sync-locked
   sync-component/set-selected-source
+  sync-interface-internal/get-interface-id
+  sync-interface-internal/set-as-source
+  sync-interface-internal/source-changed
+  sync-interface/get-available-modes
+  sync-interface/get-config
+  sync-interface/get-id
+  sync-interface/get-interface-id
+  sync-interface/get-mode
+  sync-interface/get-reference-domain-id
+  sync-interface/get-source-supported
+  sync-interface/get-status-container
+  sync-interface/get-sync-type
+  sync-interface/set-mode
+  synchronization-private/add-interface
+  synchronization-private/get-interface-id
+  synchronization/create-synchronization
+  synchronization/get-available-sources
+  synchronization/get-interface-id
+  synchronization/get-interfaces
+  synchronization/get-reference-domain-ids
+  synchronization/get-source
+  synchronization/set-source
   tags-private/add
   tags-private/get-interface-id
   tags-private/remove
@@ -21374,6 +23172,10 @@
   unit/get-name
   unit/get-quantity
   unit/get-symbol
+  unknown/add-ref
+  unknown/get-interface-id
+  unknown/query-interface
+  unknown/release-ref
   updatable/get-interface-id
   updatable/serialize-for-update
   updatable/update
@@ -21408,6 +23210,13 @@
   version-info/get-major
   version-info/get-minor
   version-info/get-patch
+  weak-ref/get-interface-id
+  weak-ref/get-ref
+  weak-ref/get-ref-as
+  work-repetitive/execute-repetitively
+  work-repetitive/get-interface-id
   work/execute
   work/get-interface-id
+  wrapped-data-packet/get-interface-id
+  wrapped-data-packet/get-source-packet
   ))
