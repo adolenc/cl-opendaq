@@ -40,6 +40,9 @@ IN_OUT_PARAMETER_OVERRIDES = {
     "daqStreamReader_skipSamples": {"count": "in-out"},
     "daqTailReader_read": {"count": "in-out"},
     "daqTailReader_readWithDomain": {"count": "in-out"},
+    # A void** is otherwise a caller-allocated buffer passed through; this one
+    # returns the requested interface (with a reference), like getRef does.
+    "daqWeakRef_getRefAs": {"object": "out"},
 }
 
 # Enums (by lisp name) whose cenum keywords drop the hyphens the default naming

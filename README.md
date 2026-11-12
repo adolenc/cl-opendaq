@@ -131,7 +131,7 @@ Wherever openDAQ expects a `Procedure` or `Function` object (a `func`/`proc` pro
                :visit-function (make-instance 'daq:function-object :value (constantly nil)))
 ```
 
-openDAQ invokes the closure - from Lisp or from native code - with the params decoded to natural Lisp values (scalars and containers unboxed, anything else wrapped for `daq:as`); a `daq:function-object`'s return value is boxed back for the caller the same way. A condition signalled inside the closure is reported to the caller as an openDAQ error rather than unwinding across the C boundary. Since openDAQ has no destruction hook for callables, each closure-backed procedure/function keeps its closure (and a small compiled trampoline) alive for the rest of the session.
+openDAQ invokes the closure - from Lisp or from native code - with the params decoded to natural Lisp values (scalars and containers unboxed, anything else wrapped for `daq:as`); a `daq:function-object`'s return value is boxed back for the caller the same way. A condition signalled inside the closure is reported to the caller as an openDAQ error rather than unwinding across the C boundary. The closure is kept alive for as long as openDAQ holds the procedure or function (which can outlive the Lisp wrapper, e.g. as a property value) and released after that.
 
 ## Development
 

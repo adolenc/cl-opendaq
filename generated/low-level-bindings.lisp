@@ -87,13 +87,16 @@
 (cffi:defctype daq-event :pointer)
 (cffi:defctype daq-event-args :pointer)
 (cffi:defctype daq-event-call :pointer)
+(cffi:defctype daq-event-call-with-data :pointer)
 (cffi:defctype daq-event-handler :pointer)
 (cffi:defctype daq-event-packet :pointer)
 (cffi:defctype daq-float :pointer)
 (cffi:defctype daq-folder :pointer)
 (cffi:defctype daq-folder-config :pointer)
+(cffi:defctype daq-free-user-data :pointer)
 (cffi:defctype daq-freezable :pointer)
 (cffi:defctype daq-func-call :pointer)
+(cffi:defctype daq-func-call-with-data :pointer)
 (cffi:defctype daq-function :pointer)
 (cffi:defctype daq-function-block :pointer)
 (cffi:defctype daq-function-block-type :pointer)
@@ -149,6 +152,7 @@
 (cffi:defctype daq-permissions-builder :pointer)
 (cffi:defctype daq-permissions-internal :pointer)
 (cffi:defctype daq-proc-call :pointer)
+(cffi:defctype daq-proc-call-with-data :pointer)
 (cffi:defctype daq-procedure :pointer)
 (cffi:defctype daq-property :pointer)
 (cffi:defctype daq-property-builder :pointer)
@@ -8232,6 +8236,20 @@
   )
 )
 
+(cffi:defcfun ("daqEventHandler_createEventHandlerWithData" %daq-event-handler-create-event-handler-with-data) daq-err-code
+  (obj (:pointer daq-event-handler))
+  (call daq-event-call-with-data)
+  (user-data :pointer)
+  (free-user-data daq-free-user-data)
+  )
+
+(defun event-handler/create-event-handler-with-data (call user-data free-user-data)
+  (cffi:with-foreign-object (obj-slot 'daq-event-handler)
+    (%check-error (%daq-event-handler-create-event-handler-with-data obj-slot call user-data free-user-data) "daqEventHandler_createEventHandlerWithData")
+    (cffi:mem-ref obj-slot 'daq-event-handler)
+  )
+)
+
 (cffi:defcfun ("daqEventHandler_getInterfaceId" %daq-event-handler-get-interface-id) :void
   (intf-id (:pointer daq-intf-id))
   )
@@ -8865,6 +8883,20 @@
 (defun function/create-function (value)
   (cffi:with-foreign-object (obj-slot 'daq-function)
     (%check-error (%daq-function-create-function obj-slot value) "daqFunction_createFunction")
+    (cffi:mem-ref obj-slot 'daq-function)
+  )
+)
+
+(cffi:defcfun ("daqFunction_createFunctionWithData" %daq-function-create-function-with-data) daq-err-code
+  (obj (:pointer daq-function))
+  (call daq-func-call-with-data)
+  (user-data :pointer)
+  (free-user-data daq-free-user-data)
+  )
+
+(defun function/create-function-with-data (call user-data free-user-data)
+  (cffi:with-foreign-object (obj-slot 'daq-function)
+    (%check-error (%daq-function-create-function-with-data obj-slot call user-data free-user-data) "daqFunction_createFunctionWithData")
     (cffi:mem-ref obj-slot 'daq-function)
   )
 )
@@ -13248,6 +13280,20 @@
 (defun procedure/create-procedure (value)
   (cffi:with-foreign-object (obj-slot 'daq-procedure)
     (%check-error (%daq-procedure-create-procedure obj-slot value) "daqProcedure_createProcedure")
+    (cffi:mem-ref obj-slot 'daq-procedure)
+  )
+)
+
+(cffi:defcfun ("daqProcedure_createProcedureWithData" %daq-procedure-create-procedure-with-data) daq-err-code
+  (obj (:pointer daq-procedure))
+  (call daq-proc-call-with-data)
+  (user-data :pointer)
+  (free-user-data daq-free-user-data)
+  )
+
+(defun procedure/create-procedure-with-data (call user-data free-user-data)
+  (cffi:with-foreign-object (obj-slot 'daq-procedure)
+    (%check-error (%daq-procedure-create-procedure-with-data obj-slot call user-data free-user-data) "daqProcedure_createProcedureWithData")
     (cffi:mem-ref obj-slot 'daq-procedure)
   )
 )
@@ -21269,9 +21315,11 @@
   (object (:pointer :pointer))
   )
 
-(defun weak-ref/get-ref-as (self intf-id object)
-  (%check-error #-(or windows win32) (%daq-weak-ref-get-ref-as self (cffi:mem-ref intf-id :uint64 0) (cffi:mem-ref intf-id :uint64 8) object) #+(or windows win32) (%daq-weak-ref-get-ref-as self intf-id object) "daqWeakRef_getRefAs")
-  nil
+(defun weak-ref/get-ref-as (self intf-id)
+  (cffi:with-foreign-object (object-slot ':pointer)
+    (%check-error #-(or windows win32) (%daq-weak-ref-get-ref-as self (cffi:mem-ref intf-id :uint64 0) (cffi:mem-ref intf-id :uint64 8) object-slot) #+(or windows win32) (%daq-weak-ref-get-ref-as self intf-id object-slot) "daqWeakRef_getRefAs")
+    (cffi:mem-ref object-slot ':pointer)
+  )
 )
 
 (cffi:defcfun ("daqWorkRepetitive_executeRepetitively" %daq-work-repetitive-execute-repetitively) daq-err-code
@@ -22002,6 +22050,7 @@
   event-args/get-event-name
   event-args/get-interface-id
   event-handler/create-event-handler
+  event-handler/create-event-handler-with-data
   event-handler/get-interface-id
   event-handler/handle-event
   event-packet/create-data-descriptor-changed-event-packet
@@ -22058,6 +22107,7 @@
   function-block/remove-function-block
   function/call
   function/create-function
+  function/create-function-with-data
   function/get-interface-id
   graph-visualization/dump
   graph-visualization/get-interface-id
@@ -22453,6 +22503,7 @@
   permissions/get-inherited
   permissions/get-interface-id
   procedure/create-procedure
+  procedure/create-procedure-with-data
   procedure/dispatch
   procedure/get-interface-id
   property-builder/build

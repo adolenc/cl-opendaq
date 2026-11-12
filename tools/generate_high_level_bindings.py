@@ -479,7 +479,10 @@ def factory_function_name(function: dict, kind: str) -> str:
     stem = exposed_name(function, kind)
     if stem.startswith("create-"):
         return stem
-    return qualified_name(function, kind)
+    # Without a receiver, a getter and a setter are plain functions rather than
+    # an accessor and its SETF, so they keep GET-/SET- to stay distinct
+    # (ERROR-INFO-GET-ERROR-INFO, ERROR-INFO-SET-ERROR-INFO).
+    return f"{receiver_name(function)}-{method_name(function)}"
 
 
 def _strip_token_run(body: str, tokens: str) -> str:
@@ -941,7 +944,9 @@ def value_expression(parameter: dict, value_form: str) -> str:
 
 
 def _type_spec_ref(type_name: str) -> str:
-    return type_name if type_name.startswith(":") or type_name.startswith("(") else f"opendaq.low-level::{type_name}"
+    """TYPE-NAME, a CFFI type spec of the low-level package, readable from this one:
+    its symbols qualified, its keywords and list structure left alone."""
+    return re.sub(r"(?<![\w:-])(?!:)([a-z][\w-]*)", r"opendaq.low-level::\1", type_name)
 
 
 def _raw_output_slot_value(parameter: dict, slot_name: str) -> str:

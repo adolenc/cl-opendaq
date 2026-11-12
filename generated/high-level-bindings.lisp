@@ -387,11 +387,12 @@
             error-guard
             error-info
             error-info-clear-error-info
-            error-info-error-info
-            error-info-error-info-list
-            error-info-error-info-message
             error-info-extend-error-info
+            error-info-get-error-info
+            error-info-get-error-info-list
+            error-info-get-error-info-message
             error-info-list
+            error-info-set-error-info
             eval
             eval-value
             eval-value/args
@@ -399,6 +400,7 @@
             event
             event-args
             event-handler
+            event-handler/with-data
             event-id
             event-name
             event-packet
@@ -435,6 +437,7 @@
             function-block-type
             function-blocks
             function-object
+            function-object/function-with-data
             gap-checking-enabled
             get
             get-read-samples
@@ -727,6 +730,7 @@
             prefix
             previous-error-code
             procedure
+            procedure/with-data
             product-code
             product-instance-uri
             properties
@@ -3859,6 +3863,36 @@ Constructs the instance via the openDAQ C function daqEventHandler_createEventHa
     (%adopt-pointer object (opendaq.low-level:event-handler/create-event-handler coerced-call)))
     ))
 
+(defclass event-handler/with-data (event-handler)
+  (
+   (%call-initarg :initarg :call :initform nil)
+   (%user-data-initarg :initarg :user-data :initform nil)
+   (%free-user-data-initarg :initarg :free-user-data :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object event-handler/with-data)
+                                       &key (pointer nil pointer-p)
+                                            (call nil call-p)
+                                            (user-data nil user-data-p)
+                                            (free-user-data nil free-user-data-p)
+                                       &allow-other-keys)
+  "Creates an event handler that calls a C function with data of the caller's own.
+@param call The function to call with the sender and the arguments of the event, and userData.
+@param userData Passed to every call; owned by the created object.
+@param freeUserData Called with userData once the object is destroyed, or if creating it fails; may be null.
+
+Provided by the C bindings, so that a callback can carry state.
+
+Constructs the instance via the openDAQ C function daqEventHandler_createEventHandlerWithData()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) call-p user-data-p free-user-data-p)
+  (with-daq-boxed-values ((coerced-call call nil)
+                          (coerced-user-data user-data nil)
+                          (coerced-free-user-data free-user-data nil))
+    (%adopt-pointer object (opendaq.low-level:event-handler/create-event-handler-with-data coerced-call coerced-user-data coerced-free-user-data)))
+    ))
+
 (defclass event-packet (packet)
   (
    (%id-initarg :initarg :id :initform nil)
@@ -4091,6 +4125,36 @@ Constructs the instance via the openDAQ C function daqFunctionBlockType_createFu
   (when (and (not pointer-p) value-p)
   (with-daq-boxed-values ((coerced-value value nil))
     (%adopt-pointer object (opendaq.low-level:function/create-function coerced-value)))
+    ))
+
+(defclass function-object/function-with-data (function-object)
+  (
+   (%call-initarg :initarg :call :initform nil)
+   (%user-data-initarg :initarg :user-data :initform nil)
+   (%free-user-data-initarg :initarg :free-user-data :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object function-object/function-with-data)
+                                       &key (pointer nil pointer-p)
+                                            (call nil call-p)
+                                            (user-data nil user-data-p)
+                                            (free-user-data nil free-user-data-p)
+                                       &allow-other-keys)
+  "Creates a function that calls a C function with data of the caller's own.
+@param call The function to call with the arguments and the result, and userData.
+@param userData Passed to every call; owned by the created object.
+@param freeUserData Called with userData once the object is destroyed, or if creating it fails; may be null.
+
+Provided by the C bindings, so that a callback can carry state.
+
+Constructs the instance via the openDAQ C function daqFunction_createFunctionWithData()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) call-p user-data-p free-user-data-p)
+  (with-daq-boxed-values ((coerced-call call nil)
+                          (coerced-user-data user-data nil)
+                          (coerced-free-user-data free-user-data nil))
+    (%adopt-pointer object (opendaq.low-level:function/create-function-with-data coerced-call coerced-user-data coerced-free-user-data)))
     ))
 
 (defclass graph-visualization (base-object)
@@ -4966,6 +5030,36 @@ Constructs the instance via the openDAQ C function daqPermissionsBuilder_createP
   (when (and (not pointer-p) value-p)
   (with-daq-boxed-values ((coerced-value value nil))
     (%adopt-pointer object (opendaq.low-level:procedure/create-procedure coerced-value)))
+    ))
+
+(defclass procedure/with-data (procedure)
+  (
+   (%call-initarg :initarg :call :initform nil)
+   (%user-data-initarg :initarg :user-data :initform nil)
+   (%free-user-data-initarg :initarg :free-user-data :initform nil)
+   ))
+
+
+(defmethod initialize-instance :after ((object procedure/with-data)
+                                       &key (pointer nil pointer-p)
+                                            (call nil call-p)
+                                            (user-data nil user-data-p)
+                                            (free-user-data nil free-user-data-p)
+                                       &allow-other-keys)
+  "Creates a procedure that calls a C function with data of the caller's own.
+@param call The function to call with the arguments, and userData.
+@param userData Passed to every call; owned by the created object.
+@param freeUserData Called with userData once the object is destroyed, or if creating it fails; may be null.
+
+Provided by the C bindings, so that a callback can carry state.
+
+Constructs the instance via the openDAQ C function daqProcedure_createProcedureWithData()."
+  (declare (ignore pointer))
+  (when (and (not pointer-p) call-p user-data-p free-user-data-p)
+  (with-daq-boxed-values ((coerced-call call nil)
+                          (coerced-user-data user-data nil)
+                          (coerced-free-user-data free-user-data nil))
+    (%adopt-pointer object (opendaq.low-level:procedure/create-procedure-with-data coerced-call coerced-user-data coerced-free-user-data)))
     ))
 
 (defclass property (base-object)
@@ -14734,17 +14828,17 @@ Calls the openDAQ C function daqErrorInfo_getErrorCode()."
   (opendaq.low-level:error-info/get-error-code (%require-live-pointer object))
 )
 
-(defun error-info-error-info ()
+(defun error-info-get-error-info ()
   "Calls the openDAQ C function daqErrorInfo_getErrorInfo()."
   (wrap (opendaq.low-level:error-info/get-error-info) 'error-info)
 )
 
-(defun error-info-error-info-list ()
+(defun error-info-get-error-info-list ()
   "Calls the openDAQ C function daqErrorInfo_getErrorInfoList()."
   (wrap (opendaq.low-level:error-info/get-error-info-list) 'object-list)
 )
 
-(defun error-info-error-info-message ()
+(defun error-info-get-error-info-message ()
   "Calls the openDAQ C function daqErrorInfo_getErrorInfoMessage()."
   (%daq-string-to-lisp-and-release (opendaq.low-level:error-info/get-error-info-message))
 )
@@ -14837,7 +14931,7 @@ Calls the openDAQ C function daqErrorInfo_setErrorCode()."
     (opendaq.low-level:error-info/set-error-code (%require-live-pointer object) coerced-new-value))
   new-value)
 
-(defun error-info-error-info (error-info)
+(defun error-info-set-error-info (error-info)
   "Calls the openDAQ C function daqErrorInfo_setErrorInfo()."
   (with-daq-boxed-values ((coerced-error-info error-info :managed-pointer))
     (opendaq.low-level:error-info/set-error-info coerced-error-info))
@@ -15834,11 +15928,11 @@ the function with the @p ids as @c nullptr which will then only return the size 
 
 Calls the openDAQ C function daqInspectable_getInterfaceIds()."
   (cffi:with-foreign-object (id-count-slot 'opendaq.low-level::daq-c-size-t)
-    (cffi:with-foreign-object (ids-slot '(:pointer daq-intf-id))
+    (cffi:with-foreign-object (ids-slot '(:pointer opendaq.low-level::daq-intf-id))
       (opendaq.low-level:inspectable/get-interface-ids (%require-live-pointer object) id-count-slot ids-slot)
       (cl:values
         (cffi:mem-ref id-count-slot 'opendaq.low-level::daq-c-size-t)
-        (cffi:mem-ref ids-slot '(:pointer daq-intf-id)))
+        (cffi:mem-ref ids-slot '(:pointer opendaq.low-level::daq-intf-id)))
     )
   )
 )
@@ -26845,7 +26939,7 @@ Calls the openDAQ C function daqWeakRef_getRef()."
   (wrap (opendaq.low-level:weak-ref/get-ref (%require-live-pointer object)) 'base-object)
 )
 
-(defgeneric ref-as (object intf-id object)
+(defgeneric ref-as (object intf-id)
   (:documentation "Gets a true reference to the object with specified interface ID.
 @param intfID ID of the requested interface
 @param[out] object A true reference to the object.
@@ -26854,7 +26948,7 @@ After you get a true reference to the object, you need to call `releaseRef`.
 on `object` interface.
 
 Calls the openDAQ C function daqWeakRef_getRefAs()."))
-(defmethod ref-as ((object weak-ref) intf-id object)
+(defmethod ref-as ((object weak-ref) intf-id)
   "Gets a true reference to the object with specified interface ID.
 @param intfID ID of the requested interface
 @param[out] object A true reference to the object.
@@ -26863,9 +26957,8 @@ After you get a true reference to the object, you need to call `releaseRef`.
 on `object` interface.
 
 Calls the openDAQ C function daqWeakRef_getRefAs()."
-  (with-daq-boxed-values ((coerced-intf-id intf-id nil)
-                          (coerced-object object nil))
-    (opendaq.low-level:weak-ref/get-ref-as (%require-live-pointer object) coerced-intf-id coerced-object))
+  (with-daq-boxed-values ((coerced-intf-id intf-id nil))
+    (opendaq.low-level:weak-ref/get-ref-as (%require-live-pointer object) coerced-intf-id))
 )
 
 (defgeneric execute-repetitively (object)
@@ -27316,11 +27409,12 @@ Calls the openDAQ C function daqWrappedDataPacket_getSourcePacket()."
          error-guard
          error-info
          error-info-clear-error-info
-         error-info-error-info
-         error-info-error-info-list
-         error-info-error-info-message
          error-info-extend-error-info
+         error-info-get-error-info
+         error-info-get-error-info-list
+         error-info-get-error-info-message
          error-info-list
+         error-info-set-error-info
          eval
          eval-value
          eval-value/args
@@ -27328,6 +27422,7 @@ Calls the openDAQ C function daqWrappedDataPacket_getSourcePacket()."
          event
          event-args
          event-handler
+         event-handler/with-data
          event-id
          event-name
          event-packet
@@ -27364,6 +27459,7 @@ Calls the openDAQ C function daqWrappedDataPacket_getSourcePacket()."
          function-block-type
          function-blocks
          function-object
+         function-object/function-with-data
          gap-checking-enabled
          get
          get-read-samples
@@ -27656,6 +27752,7 @@ Calls the openDAQ C function daqWrappedDataPacket_getSourcePacket()."
          prefix
          previous-error-code
          procedure
+         procedure/with-data
          product-code
          product-instance-uri
          properties
