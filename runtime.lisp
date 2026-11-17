@@ -250,15 +250,15 @@ Uses direct FFI calls to avoid re-entering %check-error during error reporting."
         (let ((msg-ptr (cffi:mem-ref message-slot 'daq-string)))
           (unless (cffi:null-pointer-p msg-ptr)
             (unwind-protect
-                 (cffi:with-foreign-object (char-ptr-slot 'daq-const-char-ptr)
+                 (cffi:with-foreign-object (char-ptr-slot 'daq-c-const-char-ptr)
                    (let ((err (%daq-string-get-char-ptr msg-ptr char-ptr-slot)))
                      (if (%failure-code-p err)
                          nil
-                         (let ((c-str (cffi:mem-ref char-ptr-slot 'daq-const-char-ptr)))
+                         (let ((c-str (cffi:mem-ref char-ptr-slot 'daq-c-const-char-ptr)))
                            (if (cffi:null-pointer-p c-str)
                                nil
                                (cffi:foreign-string-to-lisp c-str))))))
-              (base-object/release-ref msg-ptr))))))))
+              (unknown/release-ref msg-ptr))))))))
 
 ;;; --- Condition and checking -------------------------------------------------
 
@@ -297,7 +297,7 @@ Uses direct FFI calls to avoid re-entering %check-error during error reporting."
 
 (defun %release-object (pointer)
   (when (and pointer (not (cffi:null-pointer-p pointer)))
-    (base-object/release-ref pointer))
+    (unknown/release-ref pointer))
   nil)
 
 (defmacro with-daq-objects ((&rest objects) &body body)
@@ -381,7 +381,7 @@ INTERFACE-ID-GETTER writes into a daqIntfID buffer (a low-level
 
 (defun %release-pointer (pointer)
   (when (and pointer (not (cffi:null-pointer-p pointer)))
-    (opendaq.low-level:base-object/release-ref pointer))
+    (opendaq.low-level:unknown/release-ref pointer))
   nil)
 
 (defun %consume-release-state (release-state)
@@ -476,7 +476,7 @@ openDAQ error when the object does not implement the interface.  Adds a
 reference; the caller owns the returned pointer."
   (cffi:with-foreign-object (interface-id :uint64 2)   ; daqIntfID is 16 bytes
     (funcall interface-id-getter interface-id)
-    (opendaq.low-level:base-object/query-interface pointer interface-id)))
+    (opendaq.low-level:unknown/query-interface pointer interface-id)))
 
 (defun %query-number-interface (pointer)
   "Return the INumber interface pointer of POINTER, a daq object that implements
@@ -536,7 +536,7 @@ returned pointer."
                 (let ((pointer (opendaq.low-level:make-daq-string (namestring value))))
                   (values pointer (make-cleanup pointer))))
                ((floatp value)
-                (let ((pointer (opendaq.low-level:float-object/create-float
+                (let ((pointer (opendaq.low-level:float/create-float
                                 (coerce value 'double-float))))
                   (values pointer (make-cleanup pointer))))
                ((integerp value)
@@ -575,7 +575,7 @@ returned pointer."
                         (cond ((integerp value)
                                (opendaq.low-level:integer/create-integer value))
                               ((realp value)
-                               (opendaq.low-level:float-object/create-float
+                               (opendaq.low-level:float/create-float
                                 (coerce value 'double-float)))
                               (t
                                (error "Cannot coerce ~S to an openDAQ Number." value)))))
@@ -613,7 +613,7 @@ a full managed-object class like DEVICE or SIGNAL."
 interface TARGET-TYPE names (a primitive class symbol, e.g. INTEGER-OBJECT)."
   (ecase target-type
     (boolean-object        (not (zerop (opendaq.low-level:boolean/get-value ptr))))
-    (float-object          (opendaq.low-level:float-object/get-value ptr))
+    (float-object          (opendaq.low-level:float/get-value ptr))
     (integer-object        (opendaq.low-level:integer/get-value ptr))
     (number-object         (opendaq.low-level:number/get-float-value ptr))
     (ratio-object          (/ (opendaq.low-level:ratio/get-numerator ptr)

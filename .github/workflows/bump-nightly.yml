@@ -1,0 +1,55 @@
+name: Bump openDAQ nightly
+
+# Moves the bindings to another release of the opendaq-bindings-nightly repository:
+# rewrites opendaq-nightly.lock, regenerates generated/ from that release's API spec and
+# native-binaries.sexp from its manifest, and commits the result to the dispatched branch.
+#
+# The bump is deliberate: it is only ever run by hand, with the release to move to. Nothing
+# here builds openDAQ; the native libraries are the ones the nightly release already holds.
+
+'on':
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Nightly release to pin (e.g. nightly-20261110-0e29cce-10aaf38)."
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    name: Pin ${{ inputs.tag }} and regenerate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Pin the release and regenerate the bindings
+        shell: bash
+        env:
+          TAG: ${{ inputs.tag }}
+        run: make bump-nightly TAG="$TAG"
+
+      - name: Commit
+        shell: bash
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add opendaq-nightly.lock native-binaries.sexp generated
+          if git diff --cached --quiet; then
+            echo "Already at $TAG -- nothing to commit."
+            exit 0
+          fi
+          git commit -m "Bump openDAQ nightly to $TAG"
+          git push origin "HEAD:${{ github.ref_name }}"

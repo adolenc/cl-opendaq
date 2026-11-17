@@ -9,9 +9,9 @@
      (args opendaq.low-level::daq-base-object))
   (let ((properties (opendaq.low-level:end-update-event-args/get-properties args)))
     (setf *high-level-coreobjects-update-ended* t)
-    (opendaq.low-level:base-object/release-ref properties)
-    (opendaq.low-level:base-object/release-ref sender)
-    (opendaq.low-level:base-object/release-ref args)))
+    (opendaq.low-level:unknown/release-ref properties)
+    (opendaq.low-level:unknown/release-ref sender)
+    (opendaq.low-level:unknown/release-ref args)))
 
 (test high-level-coreobjects-argument-and-callable-info
   (let* ((argument-info (make-instance 'daq:argument-info :name "test_argument" :type :int))
