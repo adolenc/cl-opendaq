@@ -15,8 +15,8 @@
     ((sender opendaq.low-level::daq-base-object)
      (args opendaq.low-level::daq-base-object))
   (setf *coretypes-event-called* t)
-  (opendaq.low-level:base-object/release-ref sender)
-  (opendaq.low-level:base-object/release-ref args))
+  (opendaq.low-level:unknown/release-ref sender)
+  (opendaq.low-level:unknown/release-ref args))
 
 (cffi:defcallback %coretypes-func-call opendaq.low-level::daq-err-code
     ((params opendaq.low-level::daq-base-object)
@@ -33,9 +33,9 @@
 
 (test coretypes-base-object
   (opendaq.low-level:with-daq-objects (obj)
-    (setf obj (opendaq.low-level:base-object/create))
+    (setf obj (opendaq.low-level:base-object/create-base-object))
     (is (not (cffi:null-pointer-p obj)) "coretypes/BaseObject returned a null object")
-    (is (= 0 (opendaq.low-level:base-object/release-ref obj)) "coretypes/BaseObject release refcount mismatch")
+    (is (= 0 (opendaq.low-level:unknown/release-ref obj)) "coretypes/BaseObject release refcount mismatch")
     (setf obj nil)))
 
 (test coretypes-binary-data
@@ -101,23 +101,23 @@
 (test coretypes-event-handler
   (opendaq.low-level:with-daq-objects (event-sender event-handler-args event-handler)
     (setf *coretypes-event-called* nil)
-    (setf event-sender (opendaq.low-level:base-object/create))
-    (setf event-handler-args (opendaq.low-level:base-object/create))
+    (setf event-sender (opendaq.low-level:base-object/create-base-object))
+    (setf event-handler-args (opendaq.low-level:base-object/create-base-object))
     (setf event-handler (opendaq.low-level:event-handler/create-event-handler (cffi:callback %coretypes-on-event)))
     (opendaq.low-level:event-handler/handle-event event-handler event-sender event-handler-args)
     (is (not (null *coretypes-event-called*)) "coretypes/EventHandler callback was not invoked")))
 
 (test coretypes-float
   (opendaq.low-level:with-daq-objects (float-object)
-    (setf float-object (opendaq.low-level:float-object/create-float 1.0d0))
-    (is (= 1.0d0 (opendaq.low-level:float-object/get-value float-object)) "coretypes/Float value mismatch")))
+    (setf float-object (opendaq.low-level:float/create-float 1.0d0))
+    (is (= 1.0d0 (opendaq.low-level:float/get-value float-object)) "coretypes/Float value mismatch")))
 
 (test coretypes-function
   (opendaq.low-level:with-daq-objects (function-object function-params function-result)
     (setf *coretypes-function-called* nil)
     (setf function-object (opendaq.low-level:function/create-function (cffi:callback %coretypes-func-call)))
-    (setf function-params (opendaq.low-level:base-object/create))
-    (setf function-result (opendaq.low-level:base-object/create))
+    (setf function-params (opendaq.low-level:base-object/create-base-object))
+    (setf function-result (opendaq.low-level:base-object/create-base-object))
     (setf function-result (opendaq.low-level:function/call function-object function-params function-result))
     (is (not (null *coretypes-function-called*)) "coretypes/Function callback was not invoked")))
 

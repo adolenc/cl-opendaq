@@ -47,7 +47,7 @@
 \"linux-x64\".  The OS and architecture are selected from *FEATURES* at read
 time rather than sniffed from SOFTWARE-TYPE / MACHINE-TYPE strings."
   (let ((os #+linux "linux"
-            #+darwin "darwin"
+            #+darwin "macos"
             #+(or windows win32) "windows"
             #-(or linux darwin windows win32)
             (error "Unsupported OS for openDAQ native libraries: ~A"

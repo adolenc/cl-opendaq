@@ -116,7 +116,7 @@
 
 (defun %release-daq-object (object)
   (when (and object (not (cffi:null-pointer-p object)))
-    (opendaq.low-level:base-object/release-ref object))
+    (opendaq.low-level:unknown/release-ref object))
   nil)
 
 (defun %boxed-string-value (object)
