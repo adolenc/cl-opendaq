@@ -194,8 +194,8 @@
     (is (string= "fn_event" (first captured)) "A function passed to add-handler should run with the wrapped event args.")))
 
 (test high-level-coretypes-event-handler-routing
-  ;; Distinct function handlers must get distinct trampolines that route to their
-  ;; own closures, and a slot freed by remove-handler must be reusable.
+  ;; Distinct function handlers must route to their own closures, and removing
+  ;; one must not disturb the others.
   (let* ((event (make-instance 'daq:event))
          (a nil) (b nil)
          (handler-a (daq:add-handler event (lambda (s args) (declare (ignore s args)) (setf a t))))
@@ -209,11 +209,29 @@
     (setf a nil)
     (let ((handler-c (daq:add-handler event (lambda (s args) (declare (ignore s args)) (setf a 42)))))
       (daq:handle-event handler-c sender event-args)
-      (is (eql 42 a) "A handler subscribed after a removal (reusing a freed slot) should still work."))))
+      (is (eql 42 a) "A handler subscribed after a removal should still work."))))
+
+(test high-level-coretypes-callback-released-with-object
+  ;; openDAQ hands the closure back for release once the native object is
+  ;; destroyed, here when the only reference is released.
+  (flet ((registered-p (function)
+           (bt:with-recursive-lock-held (daq::*callback-lock*)
+             (loop for registered being the hash-values of daq::*callbacks*
+                   thereis (eq registered function)))))
+    (let* ((procedure-function (lambda () nil))
+           (handler-function (lambda (s args) (declare (ignore s args))))
+           (procedure (make-instance 'daq:procedure :value procedure-function))
+           (handler (make-instance 'daq:event-handler :function handler-function)))
+      (is (and (registered-p procedure-function) (registered-p handler-function))
+          "Each closure-backed object should register its closure.")
+      (daq:release procedure)
+      (daq:release handler)
+      (is (not (or (registered-p procedure-function) (registered-p handler-function)))
+          "Destroying the native object should release its closure."))))
 
 (test high-level-coretypes-procedure-from-lisp-function
   ;; A Lisp closure can back an openDAQ Procedure directly: openDAQ invokes it
-  ;; through a compiled trampoline with the params decoded to Lisp values.
+  ;; with the params decoded to Lisp values.
   (let* ((seen '())
          (procedure (make-instance 'daq:procedure :value (lambda (x) (push x seen)))))
     (daq:dispatch procedure 5)
